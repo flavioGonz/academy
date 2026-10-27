@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>IP directa, NAT del módem o CGNAT</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">MIKROTIK · PASO 3</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">IP directa, NAT del módem o CGNAT</text>
+<rect x="48" y="140" width="352" height="470" rx="18" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="2"/>
+<text x="68.0" y="176.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">IP pública directa</text>
+<rect x="99" y="200.0" width="250" height="40" rx="10" fill="#F7FAFD" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="224.0" y="226.0" font-family="Instrument Sans" font-size="14" font-weight="600" fill="#41627F" text-anchor="middle">Internet</text>
+<rect x="99" y="356.0" width="250" height="40" rx="10" fill="#011E38" stroke="#011E38" stroke-width="1.5"/>
+<text x="224.0" y="382.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">MikroTik · WAN 203.0.113.10</text>
+<path d="M224 240.0L224 356.0" stroke="#C2D4E6" stroke-width="3" fill="none" stroke-linecap="round"/>
+<text x="68.0" y="430.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="start">public-address</text>
+<text x="68.0" y="456.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">203.0.113.10</text>
+<text x="224.0" y="456.0" font-family="JetBrains Mono" font-size="26" font-weight="700" fill="#0E8F5E" text-anchor="middle">=</text>
+<text x="380.0" y="430.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="end">IP del WAN</text>
+<text x="380.0" y="456.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="end">203.0.113.10</text>
+<rect x="64" y="486" width="320" height="104" rx="12" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="0"/>
+<text x="80.0" y="518.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#0E8F5E" text-anchor="start"><tspan x="80.0" dy="0.0">Se puede publicar con cuidado</tspan><tspan x="80.0" dy="21.6">(lección 10).</tspan></text>
+<rect x="424" y="140" width="352" height="470" rx="18" fill="#FFFFFF" stroke="#B45309" stroke-width="2"/>
+<text x="444.0" y="176.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">NAT del módem</text>
+<rect x="475" y="200.0" width="250" height="40" rx="10" fill="#F7FAFD" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="600.0" y="226.0" font-family="Instrument Sans" font-size="14" font-weight="600" fill="#41627F" text-anchor="middle">Internet</text>
+<rect x="475" y="278.0" width="250" height="40" rx="10" fill="#F7FAFD" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="600.0" y="304.0" font-family="Instrument Sans" font-size="14" font-weight="600" fill="#41627F" text-anchor="middle">Módem · 203.0.113.10</text>
+<path d="M600 240.0L600 278.0" stroke="#C2D4E6" stroke-width="3" fill="none" stroke-linecap="round"/>
+<rect x="475" y="356.0" width="250" height="40" rx="10" fill="#011E38" stroke="#011E38" stroke-width="1.5"/>
+<text x="600.0" y="382.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">MikroTik · WAN 192.168.1.2</text>
+<path d="M600 318.0L600 356.0" stroke="#C2D4E6" stroke-width="3" fill="none" stroke-linecap="round"/>
+<text x="444.0" y="430.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="start">public-address</text>
+<text x="444.0" y="456.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">203.0.113.10</text>
+<text x="600.0" y="456.0" font-family="JetBrains Mono" font-size="26" font-weight="700" fill="#B45309" text-anchor="middle">≠</text>
+<text x="756.0" y="430.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="end">IP del WAN</text>
+<text x="756.0" y="456.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="end">192.168.1.2</text>
+<rect x="440" y="486" width="320" height="104" rx="12" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="0"/>
+<text x="456.0" y="518.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#B45309" text-anchor="start"><tspan x="456.0" dy="0.0">Módem en modo bridge, o reenvío</tspan><tspan x="456.0" dy="21.6">también en el módem.</tspan></text>
+<rect x="800" y="140" width="352" height="470" rx="18" fill="#FFFFFF" stroke="#D2492F" stroke-width="2"/>
+<text x="820.0" y="176.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">CGNAT del proveedor</text>
+<rect x="851" y="200.0" width="250" height="40" rx="10" fill="#F7FAFD" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="976.0" y="226.0" font-family="Instrument Sans" font-size="14" font-weight="600" fill="#41627F" text-anchor="middle">Internet</text>
+<rect x="851" y="278.0" width="250" height="40" rx="10" fill="#F7FAFD" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="976.0" y="304.0" font-family="Instrument Sans" font-size="14" font-weight="600" fill="#41627F" text-anchor="middle">NAT del proveedor</text>
+<path d="M976 240.0L976 278.0" stroke="#C2D4E6" stroke-width="3" fill="none" stroke-linecap="round"/>
+<rect x="851" y="356.0" width="250" height="40" rx="10" fill="#011E38" stroke="#011E38" stroke-width="1.5"/>
+<text x="976.0" y="382.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">MikroTik · WAN 100.64.12.34</text>
+<path d="M976 318.0L976 356.0" stroke="#C2D4E6" stroke-width="3" fill="none" stroke-linecap="round"/>
+<text x="820.0" y="430.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="start">public-address</text>
+<text x="820.0" y="456.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">otra IP</text>
+<text x="976.0" y="456.0" font-family="JetBrains Mono" font-size="26" font-weight="700" fill="#D2492F" text-anchor="middle">≠</text>
+<text x="1132.0" y="430.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="end">IP del WAN</text>
+<text x="1132.0" y="456.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="end">100.64.12.34</text>
+<rect x="816" y="486" width="320" height="104" rx="12" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="0"/>
+<text x="832.0" y="518.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#D2492F" text-anchor="start"><tspan x="832.0" dy="0.0">Sin port forwarding: túnel</tspan><tspan x="832.0" dy="21.6">saliente o Back To Home.</tspan></text>
+<text x="832.0" y="572.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="start">CGNAT: 100.64.0.0/10</text>
+</svg>

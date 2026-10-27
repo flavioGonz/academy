@@ -1,0 +1,21 @@
+A: Lección veintiuno. Seguimos en la serie S, pero con los Linux: el S535 y el S532.
+B: ¿Linux los dos?
+A: El S535 seguro: la guía de selección lo da como Linux, pantalla de cinco pulgadas, aluminio, IP66 y Wiegand. Del S532 no hay fila en esa guía, así que lo describimos con lo que dicen las tablas.
+B: Dale. ¿Qué tiene de especial el S535?
+A: Que se arma por módulos. El menú de Akuvox lo lista con unidad de huella, de LTE, de lector QR y de lazo de inducción para audífonos. O sea, el mismo frente y le sumás lo que pide la obra.
+B: Ah, entonces el pedido lleva cada módulo aparte.
+A: Exacto. Y en credenciales: PIN, tarjetas de las dos frecuencias, rostro, Bluetooth, QR, y huella como opción. El relé, treinta voltios dos amperes.
+B: ¿Alimentación?
+A: PoE+ at, o fuente de doce voltios hasta cuatro amperes. Si querés sacar doce voltios para la cerradura, da hasta un ampere por el relé, con PoE+ o fuente de doce voltios dos amperes.
+B: ¿Y el S532?
+A: Pantalla de dos coma ocho pulgadas. El menú lo muestra en versión estándar, versión IP y versión con lazo de inducción. PIN, tarjetas y Bluetooth, pero ni rostro ni QR. Relé de treinta voltios tres amperes.
+B: ¿Y la alimentación?
+A: PoE+ o fuente de doce voltios dos amperes. Pero ojo: si querés usar su salida de doce voltios, la tabla pide fuente de doce voltios dos amperes y medio. Con PoE solo, no.
+B: Detalle fino.
+A: Muy. Y para entrar, son distintos. El S535 va como el R29: nueve nueve nueve nueve y tres ocho ocho ocho. El S532 va como el R28: asterisco dos tres nueve seis numeral y después el uno.
+B: ¿Cuántas fuentes?
+A: Cinco de diez coinciden en revisar alimentación por modelo, y la tabla de métodos de acceso es la que marca qué credencial acepta cada uno.
+B: ¿Laboratorio?
+A: Diez minutos de escritorio: armás el pedido de un S535 con los módulos que pida la obra y la fuente que corresponde.
+B: Y del S532, si va con cerradura, fuente sí o sí.
+A: Eso.

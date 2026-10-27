@@ -1,0 +1,23 @@
+A: Martín, pregunta de obra. Un local con cuatro access points Omada. ¿Dónde ponés el controlador?
+B: Y, en un OC200 y listo. Es lo que hay en la camioneta.
+A: Puede ser. Pero hay tres familias, y conviene elegir con criterio.
+B: Dale, ¿cuáles?
+A: Primera, controlador local: el software en un servidor tuyo, o un hardware, OC200, OC220, OC300 u OC400. Segunda, en la nube: Omada Central, con Essentials gratis y Standard con licencia por equipo. Tercera, gateways que traen el controlador adentro, como los Fusion o el ER7212PC.
+B: ¿Y el Cloud Access que activo en el OC200? ¿Eso no es nube?
+A: Esa es la trampa. La documentación oficial lo aclara: con Cloud Access entrás desde la nube, pero el controlador sigue corriendo en tu aparato. En Central, el servicio vive en la nube de TP-Link.
+B: Ah, mirá. ¿Y qué cambia en la práctica?
+A: Que el local sigue gestionando la red aunque se caiga internet. El de nube no.
+B: ¿Las fuentes coinciden en esto?
+A: Cinco de nueve que leímos sobre controladores van por ahí. Una comparativa discrepa en precios, dice que la nube es gratis para un sitio, y eso no cierra con lo oficial.
+B: ¿Y lo de la licencia en la nube cómo es?
+A: Según la FAQ de TP-Link, si la licencia vence la red sigue andando con la última configuración, pero se apagan el portal, el fast roaming y los horarios.
+B: [suspiro] O sea, un hotel con portal y licencia vencida es un lunes complicado.
+A: Exacto. Y otro número: la tabla oficial recomienda el OC200 hasta veinticinco equipos. El OC400, hasta quinientos.
+B: Veinticinco. Yo tenía en la cabeza cien.
+A: Eso se decía en dos mil veintidós. Hoy la recomendada es esa.
+B: Entonces, el local de cuatro access points, más un switch y un gateway...
+A: OC200 sobra, y sigue gestionando sin internet. Una cadena de diez locales con un técnico remoto ya pide software propio o Central Standard.
+B: ¿Y el laboratorio?
+A: Una tabla con tres obras tipo: dónde vive el controlador, cuántos equipos, si hay portal y quién paga licencias. Diez minutos.
+B: Me gusta. La decisión queda escrita antes de comprar.
+A: Y deja de ser costumbre para ser criterio.

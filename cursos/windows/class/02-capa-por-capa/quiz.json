@@ -1,0 +1,5 @@
+[
+  {"q": "Una cámara en tu misma subred no responde ping, pero después del ping su MAC aparece en arp -a. ¿Qué concluís?", "options": ["La cámara está apagada", "La cámara está en otra VLAN", "La cámara está viva y probablemente bloquea ICMP", "El switch está fallando"], "answer": 2, "why": "Si respondió a ARP, el equipo está encendido y en la red; el ping puede estar bloqueado por su firewall."},
+  {"q": "Un sitio remoto tiene cortes intermitentes y querés saber en qué salto se pierden paquetes. ¿Qué herramienta te da eso?", "options": ["pathping", "ipconfig /all", "arp -a", "nslookup"], "answer": 0, "why": "pathping traza la ruta y después mide pérdida y latencia en cada salto; tracert solo muestra la ruta."},
+  {"q": "pathping tarda varios minutos en un vínculo con muchos saltos. ¿Qué opciones lo aceleran?", "options": ["-t y -a", "-n, -q 10 y -h 5", "-4 y -6", "/all y /flushdns"], "answer": 1, "why": "-n evita resolver nombres, -q baja las consultas por salto (por defecto 100) y -h limita la cantidad de saltos."}
+]

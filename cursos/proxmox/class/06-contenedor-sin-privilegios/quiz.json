@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un cliente quiere correr un stack Docker expuesto a Internet en su Proxmox. ¿Dónde lo ponés?",
+    "options": [
+      "En una VM QEMU",
+      "Directo en el host Proxmox",
+      "En un contenedor LXC privilegiado",
+      "En un contenedor LXC sin red"
+    ],
+    "answer": 0,
+    "why": "La guía oficial no recomienda Docker en el host y aconseja una VM para tener kernel propio y mejor aislamiento; lo expuesto conviene aislarlo al máximo."
+  },
+  {
+    "q": "En un contenedor no privilegiado, ¿qué es el usuario root de adentro visto desde el host?",
+    "options": [
+      "El root del host",
+      "El usuario www-data",
+      "Un usuario sin privilegios del host (por ejemplo UID 100000)",
+      "No existe en el host"
+    ],
+    "answer": 2,
+    "why": "Los contenedores no privilegiados usan user namespaces: el UID 0 interno se mapea a un usuario sin privilegios del host."
+  },
+  {
+    "q": "Un tutorial te pide crear el contenedor como privilegiado. Según la guía oficial, ¿cuándo es aceptable?",
+    "options": [
+      "Siempre, es más rápido",
+      "Nunca se puede crear",
+      "Solo si el contenedor tiene más de 4 GB de RAM",
+      "Solo en entornos de confianza"
+    ],
+    "answer": 3,
+    "why": "El equipo de LXC no considera los escapes de contenedores privilegiados como fallas de seguridad dignas de CVE; la guía los limita a entornos de confianza."
+  }
+]

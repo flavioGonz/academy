@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un portero muestra firmware 111.30.10.x. ¿Qué modelo es según la tabla de Akuvox?",
+  "options": [
+   "R29",
+   "E11",
+   "E18",
+   "X915"
+  ],
+  "answer": 1,
+  "why": "En la guía de firmware, el bloque A 111 corresponde al E11."
+ },
+ {
+  "q": "Un cliente te pide la ficha del C317 y en lo leído no aparece. ¿Qué hacés?",
+  "options": [
+   "Decís que no está en las páginas leídas y buscás su guía en la Knowledge Base o con el distribuidor",
+   "Le pasás los datos del C316",
+   "Inventás los datos más probables",
+   "Decís que nunca existió"
+  ],
+  "answer": 0,
+  "why": "Sin una página leída no se afirma nada; se busca la documentación del modelo antes de responder."
+ },
+ {
+  "q": "Una librería de Home Assistant no logra abrir un IT83 con la API JSON. ¿Por qué?",
+  "options": [
+   "El IT83 no tiene relé",
+   "Falta SmartPlus",
+   "Es de 2 hilos",
+   "Los equipos tipo IT83 usan Open Relay via HTTP, no la API /api/relay/trig"
+  ],
+  "answer": 3,
+  "why": "pylocal-akuvox documenta que los equipos clase IT83 abren por Open Relay Via HTTP con sus propias credenciales."
+ }
+]

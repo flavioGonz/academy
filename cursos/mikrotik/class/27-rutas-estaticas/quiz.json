@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un router tiene una ruta 0.0.0.0/0 por el ISP y otra 192.168.20.0/24 por el túnel a la central. Un equipo de la LAN manda un paquete a 192.168.20.15. ¿Por dónde sale?",
+    "options": [
+      "Por el ISP, porque la ruta por defecto siempre tiene prioridad",
+      "Por el túnel, porque la /24 es más específica que la ruta por defecto",
+      "Por la que tenga menor distancia, sin importar la máscara",
+      "Se reparte entre las dos (ECMP)"
+    ],
+    "answer": 1,
+    "why": "El router usa primero la ruta más específica, la de máscara más larga. La distancia solo decide entre rutas al mismo destino."
+  },
+  {
+    "q": "Tenés dos rutas por defecto: ISP1 con distancia 1 y ISP2 con distancia 2. Se corta la fibra aguas arriba del módem de ISP1, pero el módem sigue prendido y contesta el ping. La principal tiene check-gateway=ping. ¿Qué pasa?",
+    "options": [
+      "A los 20 segundos conmuta a ISP2",
+      "Conmuta enseguida, porque check-gateway mira internet",
+      "No conmuta: check-gateway mira el próximo salto, y el módem contesta",
+      "Se desactivan las dos rutas"
+    ],
+    "answer": 2,
+    "why": "check-gateway prueba solo el gateway. Si el módem contesta, la ruta sigue activa. Para detectar internet caída con el módem vivo están las rutas recursivas a hosts testigo."
+  },
+  {
+    "q": "Configuraste un túnel con la ruta por defecto por el túnel y a los pocos segundos el túnel se cae y vuelve una y otra vez. ¿Qué falta, típicamente?",
+    "options": [
+      "Una ruta por defecto con distancia 0",
+      "Subir el MTU del túnel",
+      "Un servidor DHCP en la interfaz del túnel",
+      "Una ruta /32 a la IP pública del servidor VPN por el gateway del ISP"
+    ],
+    "answer": 3,
+    "why": "Con la ruta por defecto por el túnel, los paquetes del propio túnel hacia el servidor también intentan entrar al túnel. La ruta /32 a la IP pública del servidor por el ISP rompe el círculo; en un caso del foro se ve que el cliente L2TP de RouterOS la agregó solo al usar add-default-route."
+  }
+]

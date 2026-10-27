@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Configurás el WiFi de invitados de un bar solo con contraseña (tipo Standard), en una red en zona Hotspot. Los clientes ven un portal de bienvenida que nadie pidió. ¿Qué cambiás?",
+    "options": [
+      "Sacar la red de la zona Hotspot",
+      "Desmarcar Show Landing Page en el Hotspot Portal",
+      "Pasar el WiFi a tipo IoT",
+      "Borrar las Post-Authorization Restrictions"
+    ],
+    "answer": 1,
+    "why": "WunderTech advierte que la zona Hotspot activa la landing page por defecto; se desactiva desde el Hotspot Portal."
+  },
+  {
+    "q": "¿Qué impide por defecto que un invitado autenticado entre a la impresora en 10.10.10.50?",
+    "options": [
+      "Band steering",
+      "El voucher",
+      "Las Post-Authorization Restrictions con las redes privadas",
+      "BSS Transition"
+    ],
+    "answer": 2,
+    "why": "Vienen cargadas con 10.0.0.0/8, 172.16.0.0/12 y 192.168.0.0/16, así que el invitado no alcanza direcciones privadas."
+  },
+  {
+    "q": "En la Zone Matrix, ¿qué esperás en la fila Hotspot hacia Internal?",
+    "options": [
+      "Allow Return",
+      "Allow All",
+      "Block Return",
+      "No aparece"
+    ],
+    "answer": 0,
+    "why": "Allow Return deja responder a conexiones iniciadas desde la red interna, pero el invitado no puede iniciar conexiones hacia adentro."
+  }
+]

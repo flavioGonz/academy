@@ -1,0 +1,20 @@
+A: Lección once. Un cliente con central y sucursal quiere ver las cámaras de la sucursal desde la central.
+B: Túnel entre los dos ER y listo.
+A: Sí, pero Omada te da dos sabores. Auto IPsec y Manual IPsec.
+B: ¿Cuál es la diferencia?
+A: El automático lo arma el controlador solo, en dos clics. Pero tiene condiciones, según la guía oficial: los dos gateways adoptados en sitios distintos del mismo controlador, los dos con IP pública en la WAN, sin NAT adelante, y las redes LAN de cada sede sin solaparse.
+B: Lo de no solaparse es lo que siempre olvidamos. Las dos sedes en ciento noventa y dos ciento sesenta y ocho cero.
+A: [risas] La configuración de fábrica. Por eso, antes del túnel, una subred distinta por sede.
+B: ¿Y si la sucursal tiene el router del proveedor adelante?
+A: Ahí vas por Manual IPsec. Otra guía oficial pide abrir UDP quinientos y cuatro mil quinientos en el equipo que hace NAT, y usar el tipo de identificador Name en los dos extremos.
+B: ¿Y cómo sé si levantó?
+A: En el controlador: Network Config, VPN Status, Site to Site, IPsec. Si aparecen las entradas, el túnel está arriba. Y un ping de una PC de una sede a un equipo de la otra.
+B: ¿Coinciden las fuentes?
+A: Dos de tres. El que matiza es Evan McCann, un practicante: dice que el sitio a sitio de Omada está bien, pero que para VPN de usuarios remotos se queda corto, y que para routing avanzado conviene otro firewall.
+B: Tiene sentido. Para unir sedes alcanza.
+A: Y hay un bonus que ya vimos: con el túnel arriba, los APs de la sucursal pueden encontrar al controlador por la opción ciento treinta y ocho apuntando a su IP privada, sin abrir puertos a internet.
+B: Eso es más prolijo que el port forwarding.
+A: Mucho más. En obra: central en la diez diez diez, sucursal en la diez diez veinte, Auto IPsec, y el grabador de la sucursal visible desde la central.
+B: ¿Laboratorio?
+A: Dos ER en laboratorio con IP en la WAN, sitios distintos, Auto IPsec, y ping de lado a lado. Veinte minutos.
+B: Y sabés exactamente qué pedirle al proveedor antes de ir.

@@ -1,0 +1,18 @@
+A: Lección seis: cada zona, su tipo. Donde se ganan o se pierden las falsas alarmas.
+B: Esto lo veo mal programado todo el tiempo. ¿Cómo se arma?
+A: En SP y MG, las zonas van de la sección cero cero uno a la cero treinta y dos. Primero dos dígitos de definición, después un dígito de partición, y después las opciones.
+B: ¿Y cuáles definiciones se usan de verdad?
+A: Cuatro o cinco. Cero uno, retardo de entrada, para la puerta por donde entra el cliente. Cero cinco, seguimiento. Cero ocho, instantánea, para ventanas y perímetro. Once, fuego. Y dieciséis, robo veinticuatro horas.
+B: El seguimiento es el que todos confunden.
+A: Es para el sensor que mira el teclado. La guía lo explica así: si primero se abre la puerta con retardo, el seguimiento espera ese retardo. Si el sensor se activa solo, dispara directo.
+B: O sea, si lo ponés instantáneo, el cliente entra, el sensor lo ve antes del teclado y suena.
+A: [risas] La llamada de las once de la noche. Exacto.
+B: ¿Y los tiempos?
+A: De fábrica, cuarenta y cinco segundos de entrada y sesenta de salida, según la guía de las SP plus.
+B: ¿Cuánto coinciden las fuentes?
+A: Acá es una sola: la guía de las SP plus. No encontré practicantes que lo discutan. Es la regla del fabricante, y la tarjeta lo aclara.
+B: ¿Hay algo contra las falsas alarmas que no sea rezar?
+A: Dos opciones. Intellizone: cuando la zona abre, la central espera, cuarenta y ocho segundos de fábrica, y solo dispara si abre otra zona, si la misma vuelve a abrir o si queda abierta todo el tiempo. Y el retardo de transmisión: la sirena suena, pero el reporte a monitoreo espera. Si el cliente desarma a tiempo, no se manda nada.
+B: Eso para usuarios nuevos es oro.
+A: El laboratorio es una casa tipo: puerta con retardo, sensor del living en seguimiento, ventanas instantáneas y una zona de veinticuatro horas. Programás las cuatro y probás entrar como el cliente. Veinte minutos.
+B: Y el tipo sale del recorrido, no de la costumbre.

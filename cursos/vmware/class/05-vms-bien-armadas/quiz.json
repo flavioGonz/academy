@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un fabricante te manda su servidor de video como un único archivo .ova. ¿Cómo lo instalás en vSphere?",
+  "options": [
+   "Lo cargo en Lifecycle Manager",
+   "Con el asistente Deploy OVF Template, eligiendo el .ova",
+   "Lo descomprimo con 7-Zip y copio el .vmdk",
+   "Lo subo al datastore y lo registro como VM"
+  ],
+  "answer": 1,
+  "why": "Los paquetes OVA/OVF se despliegan con Deploy OVF Template, que valida el paquete y pide red, disco y propiedades."
+ },
+ {
+  "q": "Un datastore tiene 2 TB y le asignaste cuatro VMs con discos thin de 1 TB cada una. ¿Cuál es el riesgo?",
+  "options": [
+   "Que se pierdan los snapshots",
+   "Ninguno, thin nunca ocupa más de lo que hay",
+   "Que los discos crezcan, llenen el datastore y las VMs se detengan",
+   "Que las VMs arranquen más lento"
+  ],
+  "answer": 2,
+  "why": "La documentación de Broadcom advierte que los discos thin pueden crecer hasta su máximo; si el datastore se queda sin espacio con la VM corriendo, la VM puede dejar de funcionar."
+ },
+ {
+  "q": "En esxtop ves que una VM no tiene driver de balloon (MCTL? = N). ¿Qué falta?",
+  "options": [
+   "Instalar VMware Tools en la VM",
+   "Agregar RAM al host",
+   "Activar DRS",
+   "Pasar el disco a thick"
+  ],
+  "answer": 0,
+  "why": "La KB de esxtop indica que el driver de balloon viene con VMware Tools; si no está, hay que instalar Tools."
+ }
+]

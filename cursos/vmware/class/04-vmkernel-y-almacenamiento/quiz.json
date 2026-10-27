@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un ESXi tiene datastores NFS y cortes intermitentes. vmkping normal al NAS responde, pero vmkping -d -s 8972 no. ¿Qué pasa?",
+  "options": [
+   "El vmk de gestión está caído",
+   "Falta licencia de NFS",
+   "El NAS está apagado",
+   "Algún tramo del camino (switch, vSwitch o NAS) tiene MTU 1500 y los jumbo frames no pasan enteros"
+  ],
+  "answer": 3,
+  "why": "-d impide fragmentar y 8972 bytes más 28 de encabezados son 9000: si no pasa, hay un salto con MTU menor en el camino."
+ },
+ {
+  "q": "¿Por qué la documentación de Broadcom pide una red aislada para vMotion?",
+  "options": [
+   "Porque el tráfico de vMotion no va cifrado y lleva el contenido de la memoria de la VM",
+   "Porque vMotion usa multicast",
+   "Porque necesita 10 Gb sí o sí",
+   "Porque vMotion solo funciona en la VLAN 1"
+  ],
+  "answer": 0,
+  "why": "La documentación de VMkernel aclara que el tráfico de vMotion no está cifrado y recomienda redes privadas solo para vMotion."
+ },
+ {
+  "q": "Estás armando un host nuevo con almacenamiento iSCSI. ¿Cuál es la configuración recomendada?",
+  "options": [
+   "Poner el iSCSI en el mismo port group que las cámaras",
+   "Usar la IP de una VM como iniciador",
+   "Un vmk dedicado al almacenamiento, en su VLAN y subred, separado de gestión y de las VMs",
+   "Usar el vmk0 de gestión para todo, así hay menos IPs"
+  ],
+  "answer": 2,
+  "why": "Las fuentes coinciden en dedicar un adaptador VMkernel por tipo de tráfico, con su segmento propio."
+ }
+]

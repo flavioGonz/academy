@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>El PIN vale solo dentro de su horario</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">AKUVOX · PASO 6</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">El PIN vale solo dentro de su horario</text>
+<rect x="120" y="300" width="960" height="40" rx="10" fill="#E5F0FB" stroke="#C2D4E6"/>
+<rect x="440" y="300" width="400" height="40" rx="6" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="640.0" y="327.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#0E8F5E" text-anchor="middle">Lun a Vie 08 a 18</text>
+<text x="120.0" y="370.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">00:00</text>
+<text x="440.0" y="370.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">08:00</text>
+<text x="600.0" y="370.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">12:00</text>
+<text x="840.0" y="370.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">18:00</text>
+<text x="1080.0" y="370.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">24:00</text>
+<path d="M420 240V296" stroke="#D2492F" stroke-width="3"/>
+<circle cx="420.0" cy="216" r="18" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/><g transform="translate(408.0 204)" fill="none" stroke="#D2492F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></g>
+<text x="420.0" y="184.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">PIN 07:30</text>
+<path d="M520 240V296" stroke="#0E8F5E" stroke-width="3"/>
+<circle cx="520.0" cy="216" r="18" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><g transform="translate(508.0 204)" fill="none" stroke="#0E8F5E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g>
+<text x="520.0" y="184.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">PIN 10:00</text>
+<path d="M900 240V296" stroke="#D2492F" stroke-width="3"/>
+<circle cx="900.0" cy="216" r="18" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/><g transform="translate(888.0 204)" fill="none" stroke="#D2492F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></g>
+<text x="900.0" y="184.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">PIN 19:30</text>
+<rect x="490.2" y="389" width="59.6" height="30" rx="15" fill="#E3F5EC"/><text x="520.0" y="410.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">abre</text>
+<rect x="377.6" y="389" width="84.8" height="30" rx="15" fill="#FCEAE6"/><text x="420.0" y="410.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">rechaza</text>
+<rect x="857.6" y="389" width="84.8" height="30" rx="15" fill="#FCEAE6"/><text x="900.0" y="410.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">rechaza</text>
+<rect x="120" y="480" width="960" height="75" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="120" y="492" width="5" height="51" rx="2.5" fill="#0A63B8"/><text x="146.0" y="514.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="146.0" dy="0.0">Para probar sin esperar a la noche, cambiá la hora del equipo y repetí el PIN. Un usuario en “Always” entra</tspan><tspan x="146.0" dy="21.6">siempre: dejalo solo para quien de verdad lo necesita.</tspan></text>
+<circle cx="120" cy="180" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="120.0" y="186.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text>
+</svg>

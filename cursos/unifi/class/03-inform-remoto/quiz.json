@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Adoptaste por set-inform tres AP en un local cuyo router es del proveedor de internet. Una semana después, tras actualizar firmware, quedan desconectados. ¿Qué pasó probablemente?",
+    "options": [
+      "Se vencieron las licencias de los AP",
+      "Volvieron a la URL de inform por defecto (http://unifi:8080/inform) al reiniciar",
+      "El controlador los borró por inactividad",
+      "El firmware nuevo no soporta adopción remota"
+    ],
+    "answer": 1,
+    "why": "El hilo del foro de Lawrence Systems describe justo eso, y el soporte de Ubiquiti advierte que lo hecho por SSH puede perderse al reiniciar."
+  },
+  {
+    "q": "El router del sitio es tuyo (un MikroTik). ¿Qué método de adopción L3 conviene?",
+    "options": [
+      "set-inform en cada AP",
+      "Abrir el puerto 8443 del sitio a internet",
+      "DHCP option 43 con la IP del controlador",
+      "Adoptarlos primero en un CloudKey local"
+    ],
+    "answer": 2,
+    "why": "Si controlás el DHCP, option 43 entrega el inform en cada renovación y sobrevive reinicios; es lo que recomienda Ubiquiti."
+  },
+  {
+    "q": "¿Cuál de estas URL de inform es correcta?",
+    "options": [
+      "https://unifi.example.com:8443/inform",
+      "http://unifi.example.com/inform",
+      "https://10.10.10.5:443/manage",
+      "http://unifi.example.com:8080/inform"
+    ],
+    "answer": 3,
+    "why": "HostiFi indica que empieza con http:// y termina en :8080/inform, y recomienda usar el nombre DNS antes que la IP."
+  }
+]

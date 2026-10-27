@@ -1,0 +1,19 @@
+A: Pregunta de examen. ¿Cuándo existe un backup?
+B: Cuando el script corre todas las noches sin errores.
+A: [risas] Casi. Existe cuando restauraste un archivo de él. Y no lo digo yo. La documentación de Ubuntu Server lo dice clarito: listar el contenido del archivo sirve, pero la mejor prueba es restaurar un archivo. Y muestran cómo: tar con guion C a barra tmp, así no pisás nada.
+B: ¿Y qué herramienta usás?
+A: Para una configuración, tar alcanza. Un tar comprimido de barra etc, con el nombre del equipo y la fecha. Para datos que cambian, rsync, que copia solo lo que cambió.
+B: ¿Las fuentes coinciden?
+A: Dos de tres sobre backups, y ninguna discrepa. El Debian Handbook tiene una historia que me encanta: una empresa ficticia, Falcot, hace rsync todos los días con un truco de enlaces duros, así cada día parece una copia completa pero solo ocupa lo que cambió.
+B: Ingenioso.
+A: Y ponen el servidor de backup en otra sala, por si hay un incendio en la sala de servidores.
+B: Claro, un backup al lado del original se quema junto con el original.
+A: Exacto. Y un detalle que se olvida: las bases de datos no se respaldan copiando sus archivos en caliente. Se hace un volcado, un dump, y se respalda eso.
+B: ¿Y cómo lo programás? ¿cron o timer?
+A: Acá hay una discusión entre fuentes. Thomas Stringer prefiere los timers de systemd por los logs y la sintaxis. La Arch Wiki reconoce la ventaja, pero avisa que son dos archivos en vez de una línea, y que no hay aviso por mail nativo.
+B: ¿Y vos?
+A: Para un backup, timer, por la opción Persistent. Si el equipo estaba apagado a la hora del backup, lo corre apenas arranca. Con cron se pierde. Y el log queda en el journal.
+B: Me convenciste. ¿Laboratorio?
+A: Veinte minutos: armás el tar de barra etc, lo programás con un timer, forzás una ejecución, y restaurás un archivo a barra tmp para compararlo con el original.
+B: Lo que cambia es que cuando el cliente pregunta si hay backup, contestás que sí y que lo probaste.
+A: No hay backup hasta que restauraste un archivo.

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>¿admin o Admin321? Depende del firmware</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">AKUVOX · LECCIÓN 27 · PASO 1</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">¿admin o Admin321? Depende del firmware</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'liga' 0,'calt' 0}</style>
+<rect x="80.0" y="140.0" width="108.0" height="187.2" rx="13.0" fill="#26323F" stroke="#011E38" stroke-width="2"/><circle cx="134.0" cy="161.6" r="8.6" fill="#0B1A28" stroke="#5B6F84" stroke-width="2"/><circle cx="134.0" cy="161.6" r="3.2" fill="#17A8D4"/><rect x="94.4" y="180.3" width="79.2" height="86.4" rx="5.8" fill="#0B1A28" stroke="#5B6F84" stroke-width="1.5"/><rect x="113.1" y="281.1" width="41.8" height="24.5" rx="4.3" fill="#1E2A36" stroke="#5B6F84" stroke-width="1.5"/>
+<circle cx="134" cy="230" r="34" fill="none" stroke="#B45309" stroke-width="3" stroke-dasharray="6 5"/>
+<rect x="48.3" y="362.0" width="203.4" height="28" rx="14.0" fill="#FFFFFF" stroke="#0A63B8" stroke-width="1.5"/><text x="150.0" y="382.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">mantené la pantalla 5 s</text>
+<text x="300.0" y="180.0" font-family="Familjen Grotesk" font-size="22" font-weight="700" fill="#04223D" text-anchor="start">E16</text>
+<rect x="380" y="150" width="360" height="56" rx="12" fill="#E5F0FB" stroke="#C2D4E6"/>
+<text x="400.0" y="174.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">hasta 216.30.10.121</text>
+<text x="400.0" y="196.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#04223D" text-anchor="start">PIN: admin</text>
+<rect x="752" y="150" width="400" height="56" rx="12" fill="#E3F5EC" stroke="#0E8F5E"/>
+<text x="772.0" y="174.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">después</text>
+<text x="772.0" y="196.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0E8F5E" text-anchor="start">PIN: Admin321</text>
+<text x="300.0" y="310.0" font-family="Familjen Grotesk" font-size="22" font-weight="700" fill="#04223D" text-anchor="start">E18</text>
+<rect x="380" y="280" width="360" height="56" rx="12" fill="#E5F0FB" stroke="#C2D4E6"/>
+<text x="400.0" y="304.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">hasta 18.30.10.211</text>
+<text x="400.0" y="326.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#04223D" text-anchor="start">PIN: admin</text>
+<rect x="752" y="280" width="400" height="56" rx="12" fill="#E3F5EC" stroke="#0E8F5E"/>
+<text x="772.0" y="304.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">después</text>
+<text x="772.0" y="326.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0E8F5E" text-anchor="start">PIN: Admin321</text>
+<rect x="300" y="430" width="852" height="72" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="300" y="442" width="5" height="48" rx="2.5" fill="#0A63B8"/><text x="326.0" y="464.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="326.0" dy="0.0">Paso 2: el firmware empieza con 18. (E18) o 116. / 216. / 416. (los tres hardware del E16). Paso 5:</tspan><tspan x="326.0" dy="20.2">cambiá el PIN de sistema por uno propio el primer día.</tspan></text>
+</svg>

@@ -1,0 +1,896 @@
+{
+  "curso": {
+    "objetivo": "Al terminar el curso vas a poder instalar, integrar, asegurar y dar soporte a un sistema de portería IP Akuvox completo, y elegir y presupuestar el equipo justo para cada lugar de la obra, del portero de calle al ascensor.",
+    "recorrido": "Arrancás con un portero y un monitor en la mesa: entrar, saber qué son, hacerlos hablar, mover una cerradura y ubicarlos en el mapa de la línea. Después los llevás a obra: central y DTMF, usuarios, video, nube con plan B, seguridad, diagnóstico y apertura por HTTP desde cualquier sistema. Con eso aprendido recorrés el edificio de afuera hacia adentro (porteros de calle, monitores, puertas internas y ascensor) y cerrás con el pedido, el software, las licencias y el parque que ya está instalado."
+  },
+  "modulos": [
+    {
+      "title": "El equipo en la mano",
+      "why": "Antes de integrar nada, el técnico necesita entrar al equipo, saber exactamente qué es, hacer la primera llamada y mover una cerradura de verdad. Cierra con el mapa de la línea, para que cada modelo que nombre el curso tenga su lugar desde el principio.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder sacar la IP de cualquier familia Akuvox, entrar por web y dejar el equipo con clave propia.",
+        "Al terminar el módulo vas a poder leer el firmware A.B.C.D y actualizar con el archivo de la versión de hardware real.",
+        "Al terminar el módulo vas a poder hacer andar portero y monitor por IP directa con una cerradura cableada según lo que pase al cortarse la luz.",
+        "Al terminar el módulo vas a poder ubicar cualquier modelo en una planilla de catálogo que separa lo vigente del parque instalado."
+      ],
+      "lessons": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "19"
+      ]
+    },
+    {
+      "title": "La puerta que abre",
+      "why": "Es el trabajo diario de una obra con central telefónica y varios accesos. Termina con portero y monitor registrados, apertura por DTMF confiable, usuarios con horario y dos puertas desde un solo monitor.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder registrar portero y monitor como extensiones y verificar el registro en la central.",
+        "Al terminar el módulo vas a poder abrir por DTMF con el mismo tipo y código en las tres puntas y una lista blanca.",
+        "Al terminar el módulo vas a poder cargar usuarios con PIN, tarjeta, rostro y horario, uno por uno o por CSV.",
+        "Al terminar el módulo vas a poder abrir dos puertas desde un monitor, con dos relés por DTMF o con dos porteros por HTTP."
+      ],
+      "lessons": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ]
+    },
+    {
+      "title": "Video, nube y seguridad",
+      "why": "Lo que separa una instalación que anda de una que se sostiene. Con la puerta ya abriendo se suma el video al NVR, la app sin depender de internet, el portero encerrado en su VLAN y un método para diagnosticar con evidencia.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder agregar el portero al NVR por RTSP u ONVIF con credenciales propias.",
+        "Al terminar el módulo vas a poder entregar SmartPlus con una tabla probada de qué sigue andando sin internet.",
+        "Al terminar el módulo vas a poder aislar el portero en su VLAN y cerrar lo que responde de más.",
+        "Al terminar el módulo vas a poder armar el paquete de evidencia (firmware, configuración, log y PCAP) que pide soporte."
+      ],
+      "lessons": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ]
+    },
+    {
+      "title": "Relés por HTTP",
+      "why": "El DTMF solo llega al portero que está en llamada; el HTTP abre cualquier relé desde cualquier sistema, y por eso va recién después de blindar el portero. Termina con un portero que abre por URL con usuario propio, avisa sus eventos y recibe órdenes de los sistemas del cliente.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder elegir la URL de apertura según firmware y alta seguridad, con un usuario por integración.",
+        "Al terminar el módulo vas a poder abrir desde el monitor un portero que no está en llamada y mover la cerradura importante a un relé de adentro.",
+        "Al terminar el módulo vas a poder recibir los eventos del portero por Action URL y abrir desde MikroTik, Home Assistant o Asterisk."
+      ],
+      "lessons": [
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ]
+    },
+    {
+      "title": "La calle: series S y X",
+      "why": "Todo lo que el portero sabe hacer ya lo probaste en uno genérico; ahora toca elegir el modelo para cada acceso. Arranca por los porteros grandes, donde la fuente, la salida de 12 V para la cerradura y el grado IP e IK deciden el pedido.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder elegir alimentación y fuente de cerradura para S539, S538, S535, S532, X916, X915, X912 y X910.",
+        "Al terminar el módulo vas a poder armar el pedido de un S535 por módulos y citar el grado IP e IK de la ficha de la versión exacta.",
+        "Al terminar el módulo vas a poder medir con carga la salida de 12 V antes de confiarle una cerradura."
+      ],
+      "lessons": [
+        "20",
+        "21",
+        "22",
+        "23"
+      ]
+    },
+    {
+      "title": "La calle: series R y E",
+      "why": "Son los porteros que más se encuentran en obra y en soporte: el R29, los R compactos, la serie E de rostro y de un botón, y los de emergencia. Cada familia aplica a un caso concreto lo visto en relé y cerradura, firmware, SR01 y central.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder identificar versión y hardware real de R29, R28, R25, R20, E18, E16, E13S y E12, y qué credenciales y alimentación trae cada uno.",
+        "Al terminar el módulo vas a poder decidir cuándo un portero alimenta la cerradura y cuándo conviene uno con RS485 y SR01.",
+        "Al terminar el módulo vas a poder instalar un punto de emergencia E21 con destino de respaldo y cámara en el NVR."
+      ],
+      "lessons": [
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29"
+      ]
+    },
+    {
+      "title": "Adentro: monitores y 2 hilos",
+      "why": "El monitor decide qué puede abrir y manejar el residente, y ya lo usaste como botonera DTMF y HTTP. Acá se elige por sistema, relés, RS485 y carga, y se cierra con la línea de 2 hilos para edificios sin UTP.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder elegir un monitor de las series S, C, IT o X por relés, RS485, carga y alimentación.",
+        "Al terminar el módulo vas a poder verificar el firmware mínimo para sumar relés externos por RS485.",
+        "Al terminar el módulo vas a poder relevar un edificio de 2 hilos y armar una lista preliminar con alimentación de 48 V."
+      ],
+      "lessons": [
+        "30",
+        "31",
+        "32",
+        "37"
+      ]
+    },
+    {
+      "title": "Puertas internas y ascensor",
+      "why": "La misma obra que lleva porteros suele sumar puertas internas, cargas lejos del portero y ascensores. Aplica los usuarios y horarios de La puerta que abre y el HTTP con usuario propio de Relés por HTTP a terminales, relés de borde, controladoras y el EC33.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder elegir el terminal por la credencial de cada puerta y cargar sus usuarios con horario.",
+        "Al terminar el módulo vas a poder elegir entre A15, WR01, A094 y A095 según marco, distancia y energía por salida.",
+        "Al terminar el módulo vas a poder integrar un EC33 por HTTP y acordar con el ascensorista el cableado en paralelo o en serie."
+      ],
+      "lessons": [
+        "33",
+        "34",
+        "35",
+        "36"
+      ]
+    },
+    {
+      "title": "Cerrar la obra",
+      "why": "Con cada lugar del edificio resuelto falta lo que hace que la obra se entregue y se sostenga: el escritorio de guardia, el pedido completo, el software que administra, la nube que se cobra y el parque viejo que sigue en las paredes. Termina con un caso que junta todo el curso.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder armar el pedido completo de un portero con caja, cubierta, fuente y módulos.",
+        "Al terminar el módulo vas a poder elegir el software que administra cada equipo y presupuestar equipo y nube por separado.",
+        "Al terminar el módulo vas a poder identificar un equipo fuera de catálogo, dejarlo seguro y proponer su reemplazo vigente."
+      ],
+      "lessons": [
+        "38",
+        "39",
+        "40",
+        "42",
+        "41"
+      ]
+    }
+  ],
+  "lecciones": {
+    "1": {
+      "objetivos": [
+        "Al terminar vas a poder sacar la IP de un portero y de un monitor por el método de su familia: voz, código, pantalla o IP Scanner.",
+        "Al terminar vas a poder entrar a la web con admin / admin y dejar una clave propia anotada en la ficha del equipo.",
+        "Al terminar vas a poder saber qué PIN de sistema pide un E16 o un E18 según su firmware."
+      ],
+      "sigue": "Ya estás adentro de la web, pero todavía no sabés con certeza qué equipo tenés. En la próxima, el número de firmware te dice modelo, versión de hardware y rama, y eso decide qué archivo se baja.",
+      "requisitos": []
+    },
+    "2": {
+      "objetivos": [
+        "Al terminar vas a poder decodificar un firmware A.B.C.D: modelo, OEM, rama y versión.",
+        "Al terminar vas a poder reconocer la versión de hardware real aunque la etiqueta diga otra cosa, como el R20A V3.0 que es hardware 2.",
+        "Al terminar vas a poder hacer backup y actualizar con el .rom o el .zip correcto sin cortar el proceso."
+      ],
+      "conecta": "En Primer acceso entraste a la web y cambiaste la clave. En Status > Product Information está el dato que faltaba para saber qué tenés en la mano: el firmware.",
+      "sigue": "Con el equipo identificado y al día, toca hacerlo trabajar. La próxima conecta portero y monitor por IP directa, la llamada más simple que existe, sin central en el medio.",
+      "requisitos": []
+    },
+    "3": {
+      "objetivos": [
+        "Al terminar vas a poder configurar una llamada IP directa portero a monitor en Intercom > Basic > Direct IP, con IP fija en los dos.",
+        "Al terminar vas a poder atender y abrir desde la pantalla del monitor.",
+        "Al terminar vas a poder decidir cuándo alcanza la IP directa y cuándo suma una central."
+      ],
+      "conecta": "Ya sabés entrar a cada equipo y qué firmware tiene. Ahora los hacés hablar entre ellos, con IP fija y el puerto 5060 igual en las dos puntas.",
+      "sigue": "La tecla de apertura del monitor dispara un relé del portero, pero un relé solo no abre nada. La próxima baja al borne: NO o NC, fuente aparte y botón de salida.",
+      "requisitos": [
+        "1"
+      ]
+    },
+    "4": {
+      "objetivos": [
+        "Al terminar vas a poder elegir NO o NC según la cerradura sea fail-safe o fail-secure, y alimentarla con su propia fuente.",
+        "Al terminar vas a poder fijar el tiempo de apertura en Access Control > Relay y el botón de salida en Access Control > Input.",
+        "Al terminar vas a poder activar y probar la alarma de puerta abierta (Door Opened Timeout)."
+      ],
+      "conecta": "En Llamada directa abriste desde el monitor: esa tecla cierra un contacto del relé del portero. Acá se decide qué hay del otro lado de ese contacto.",
+      "sigue": "Con portero, monitor y cerradura andando en la mesa, levantamos la vista. La próxima arma el mapa de toda la línea Akuvox, para que cada modelo que aparezca en el curso tenga su lugar.",
+      "requisitos": []
+    },
+    "19": {
+      "objetivos": [
+        "Al terminar vas a poder distinguir lo vigente (menú de productos de akuvox.com) del parque instalado (tablas de la Knowledge Base).",
+        "Al terminar vas a poder leer los sufijos de versión, como R29S, R29C-L o E16P, y saber qué función cambia cada uno.",
+        "Al terminar vas a poder armar una planilla de catálogo con tipo, serie, sistema, PoE, carga del relé y estado, con \"sin dato\" donde no hay dato publicado."
+      ],
+      "conecta": "En Leer el firmware viste que el primer bloque dice el modelo, y en Relé y cerradura que la carga del relé y la fuente importan. Esta lección junta esos datos de toda la línea en una sola planilla.",
+      "sigue": "Casi todo lo que está en la planilla habla SIP, así que el próximo módulo arranca registrando portero y monitor en una central. La planilla queda guardada: la vas a completar cuando recorramos las familias de equipos.",
+      "requisitos": [
+        "2"
+      ]
+    },
+    "5": {
+      "objetivos": [
+        "Al terminar vas a poder crear una extensión por equipo en la central y registrar portero y monitor en Account > Basic.",
+        "Al terminar vas a poder verificar el registro en la central y llamar a la extensión sin prefijos.",
+        "Al terminar vas a poder resolver un \"Failed to authenticate\" y un registro que cambia de puerto por SIP ALG."
+      ],
+      "conecta": "En Llamada directa portero y monitor se hablaban por IP, sin nadie en el medio. Ahora entra la central: cada equipo se registra como un interno más.",
+      "sigue": "Registrados en la central, ya se llaman; falta que la tecla de apertura funcione a través de ella. La próxima ajusta el DTMF, el detalle que más \"no abre\" genera.",
+      "requisitos": [
+        "3"
+      ]
+    },
+    "6": {
+      "objetivos": [
+        "Al terminar vas a poder configurar el mismo tipo de DTMF (RFC 2833) y el mismo código en portero, central y monitor.",
+        "Al terminar vas a poder crear la tecla de apertura en la pantalla de llamada del monitor.",
+        "Al terminar vas a poder limitar quién abre con la lista blanca DTMF y reconocer la falla de un SIP INFO desparejo."
+      ],
+      "conecta": "Con portero y monitor registrados en Cuenta SIP, la llamada pasa por la central, y el tono que abre también. Acá se alinean las tres puntas.",
+      "sigue": "La puerta ya abre desde el monitor, pero en un edificio la mayoría entra sin que nadie atienda. La próxima carga usuarios con PIN, tarjeta, rostro y horario directo en el portero.",
+      "requisitos": [
+        "4"
+      ]
+    },
+    "7": {
+      "objetivos": [
+        "Al terminar vas a poder cambiar o deshabilitar el PIN público de fábrica, 33333333.",
+        "Al terminar vas a poder crear horarios y usuarios con PIN, tarjeta, relé y horario, y sumar varios por el CSV dentro del .tgz.",
+        "Al terminar vas a poder revisar que el antisuplantación facial no quede en Close."
+      ],
+      "conecta": "En DTMF que abre la puerta se abría desde una llamada. Ahora la apertura la decide el portero solo, con la credencial de cada persona.",
+      "sigue": "Cada usuario quedó atado a un relé; ¿y cuando hay dos puertas? La próxima resuelve portón y hall desde un mismo monitor, con dos relés o con dos porteros.",
+      "requisitos": [
+        "4"
+      ]
+    },
+    "8": {
+      "objetivos": [
+        "Al terminar vas a poder asignar un código DTMF por relé y una tecla por puerta en el monitor.",
+        "Al terminar vas a poder abrir con curl, por HTTP y con usuario propio, un segundo portero que no está en llamada.",
+        "Al terminar vas a poder explicar por qué el mismo código en dos relés abre las dos puertas a la vez."
+      ],
+      "conecta": "En DTMF que abre configuraste un código para un relé, y en Usuarios y horarios cada persona quedó en el relé A. Acá aparece el relé B y, con él, el pedido de \"portón y hall desde el monitor\".",
+      "sigue": "Con esto el portero ya abre de todas las formas básicas. El próximo módulo suma lo que hace que la instalación se sostenga, empezando por grabar el portero en el NVR del cliente.",
+      "requisitos": [
+        "6",
+        "2"
+      ]
+    },
+    "9": {
+      "objetivos": [
+        "Al terminar vas a poder probar los dos streams RTSP, ch00_0 y ch00_1, con ffprobe o VLC.",
+        "Al terminar vas a poder poner credencial propia a RTSP, ONVIF y MJPEG y agregar el portero al NVR con el stream secundario.",
+        "Al terminar vas a poder actualizar la credencial RTSP en el monitor que mira ese portero."
+      ],
+      "conecta": "El módulo anterior terminó con la puerta abriendo de todas las formas básicas. Pero el portero también es una cámara en la calle, y el cliente casi siempre quiere verla en su NVR.",
+      "sigue": "El NVR queda en la red local; el residente, en cambio, quiere ver y abrir desde el celular. La próxima suma SmartPlus sin que la entrada dependa de internet.",
+      "requisitos": [
+        "1"
+      ]
+    },
+    "10": {
+      "objetivos": [
+        "Al terminar vas a poder explicar qué agrega SmartPlus (app, llaves temporales, Bluetooth) y por qué ocupa la cuenta SIP 1.",
+        "Al terminar vas a poder armar y probar, con el WAN desconectado, la tabla de qué funciona local y qué necesita internet.",
+        "Al terminar vas a poder dejar esa tabla en la ficha de entrega del cliente."
+      ],
+      "conecta": "En RTSP al NVR el video quedó dentro de la red del cliente. SmartPlus lo saca a la nube, y en Cuenta SIP ya viste que se queda con la cuenta 1.",
+      "sigue": "Una app que pide internet trae la pregunta de seguridad: ¿qué ve el mundo de este portero? La próxima lo encierra en su VLAN y cierra todo lo que responde de más.",
+      "requisitos": [
+        "5"
+      ]
+    },
+    "11": {
+      "objetivos": [
+        "Al terminar vas a poder diseñar la VLAN de porteros con reglas que solo dejen pasar central, NVR y gestión, sin reenvío de puertos desde internet.",
+        "Al terminar vas a poder escanear el portero con nmap desde la red de usuarios y cerrar lo que responda.",
+        "Al terminar vas a poder dejar claves propias en web, RTSP, ONVIF y MJPEG y activar Prevent SIP Hacking."
+      ],
+      "conecta": "SmartPlus necesita salida a internet, pero eso no obliga a abrir puertos hacia el portero. Con central, NVR y app ya configurados, sabés exactamente con quién necesita hablar.",
+      "sigue": "Blindado y en su VLAN, el portero igual puede fallar: un registro que se cae, un DTMF que no abre. La próxima arma el método para diagnosticar con evidencia en vez de probar a ciegas.",
+      "requisitos": [
+        "5",
+        "9"
+      ]
+    },
+    "12": {
+      "objetivos": [
+        "Al terminar vas a poder encontrar una falla de registro en el log de la central y en una PCAP del portero filtrada en Wireshark.",
+        "Al terminar vas a poder arrancar la captura justo antes de reproducir la falla, sabiendo que guarda solo 1 MB.",
+        "Al terminar vas a poder armar el paquete para soporte de Akuvox: firmware, configuración, log en nivel 7, PCAP y topología."
+      ],
+      "conecta": "En Portero blindado cerraste lo que sobraba. Si algo deja de andar, conviene mirar evidencia antes de abrir puertos o reiniciar.",
+      "sigue": "Con el portero estable, seguro y con método de diagnóstico, el próximo módulo vuelve a la apertura: el HTTP que asomó en Dos puertas, ahora en serio, empezando por la URL exacta que acepta cada firmware.",
+      "requisitos": [
+        "5",
+        "2"
+      ]
+    },
+    "13": {
+      "objetivos": [
+        "Al terminar vas a poder elegir el formato de URL, /fcgi/OpenDoor o /fcgi/do, leyendo la rama del firmware y el interruptor de alta seguridad.",
+        "Al terminar vas a poder habilitar Open Relay via HTTP con usuario propio y Session Check apagado, y abrir el relé A o el B con DoorNum.",
+        "Al terminar vas a poder probar con curl y anotar en la ficha qué formato abrió y con qué firmware."
+      ],
+      "conecta": "En Dos puertas abriste un segundo portero con un curl sin entrar en detalles, y el módulo anterior dejó el portero en su VLAN. Desde esa VLAN se le habla por HTTP.",
+      "sigue": "Ya sabés qué URL abre. La pregunta incómoda es quién más la conoce: la próxima elige el modo de la HTTP API y un usuario por integración.",
+      "requisitos": [
+        "8",
+        "2",
+        "11"
+      ]
+    },
+    "14": {
+      "objetivos": [
+        "Al terminar vas a poder elegir entre los modos None, Allowlist, Basic y Digest de la HTTP API, y saber cuál queda solo para el laboratorio.",
+        "Al terminar vas a poder probar una autenticación Digest desde una PC de la VLAN y reconocer el error con una clave mala.",
+        "Al terminar vas a poder armar la tabla de credenciales del sitio: integración, usuario, mecanismo y origen permitido."
+      ],
+      "conecta": "En La URL que abre usaste un usuario de laboratorio para disparar el relé. Antes de repartir esa URL a otros sistemas, se define cómo se autentica y desde dónde.",
+      "sigue": "Con la credencial resuelta, el primer cliente HTTP es el propio monitor. La próxima le pone una tecla que abre un portero que no está en llamada.",
+      "requisitos": [
+        "11"
+      ]
+    },
+    "15": {
+      "objetivos": [
+        "Al terminar vas a poder configurar Remote Relay By HTTP or HTTPS en el monitor apuntando a un segundo portero con el formato de URL que le corresponde.",
+        "Al terminar vas a poder crear teclas con el nombre de la puerta en las pantallas de llamada, monitoreo y vista previa.",
+        "Al terminar vas a poder ubicar el monitor teniendo en cuenta que una tecla que abre sin llamada es una llave más."
+      ],
+      "conecta": "En Dos puertas quedó planteado que el DTMF no llega al portero que no está en llamada. Con la URL y el usuario propio de las dos lecciones anteriores, el monitor lo resuelve solo.",
+      "sigue": "Hasta acá el HTTP disparaba el relé del portero, que está en la calle. La próxima lleva la cerradura importante adentro: SR01, Web Relay, relés del monitor y WR01.",
+      "requisitos": [
+        "8",
+        "13"
+      ]
+    },
+    "16": {
+      "objetivos": [
+        "Al terminar vas a poder cablear un SR01 por RS485 y dispararlo por HTTP con DoorNum=SB.",
+        "Al terminar vas a poder decidir cuándo conviene un Web Relay de terceros, un MK485 o RSAC-C1-R8 en el monitor, o un WR01 de borde.",
+        "Al terminar vas a poder ajustar Trigger Delay y Hold Delay y documentar qué relé maneja cada carga."
+      ],
+      "conecta": "En Botón del monitor la tecla abría el relé de otro portero. Acá el relé deja de estar en la calle y se muda adentro, junto a la carga.",
+      "sigue": "Hasta ahora le mandábamos órdenes al portero. La próxima invierte el sentido: el portero avisa por HTTP cada apertura, tarjeta o entrada.",
+      "requisitos": [
+        "4",
+        "13"
+      ]
+    },
+    "17": {
+      "objetivos": [
+        "Al terminar vas a poder configurar Action URL para los eventos de relé, entradas y tarjeta válida.",
+        "Al terminar vas a poder usar variables como $relay1status, $card_sn y $mac y verlas llegar a un servidor de prueba.",
+        "Al terminar vas a poder ubicar el servidor que recibe esos datos dentro de la VLAN de porteros."
+      ],
+      "conecta": "En Relés de afuera el portero recibía órdenes y las pasaba a otros relés. Ahora el mismo canal HTTP va al revés: del portero hacia un servidor.",
+      "sigue": "Ya hablás HTTP con el portero en las dos direcciones. La última del módulo lleva esa URL a los sistemas que el cliente ya tiene: MikroTik, Home Assistant, Asterisk y cámaras de patentes.",
+      "requisitos": [
+        "13",
+        "11"
+      ]
+    },
+    "18": {
+      "objetivos": [
+        "Al terminar vas a poder llevar una apertura probada con curl a MikroTik (/tool/fetch), Home Assistant (rest_command) y Asterisk (CURL).",
+        "Al terminar vas a poder igualar el método de autenticación, basic o digest, entre el cliente y el portero.",
+        "Al terminar vas a poder resolver los sistemas sin acción HTTP documentada, como UCM o HikCentral, con DTMF o un intermediario."
+      ],
+      "conecta": "Ya tenés la URL (La URL que abre), una credencial por integración (Quién puede abrir) y los avisos del portero (El portero avisa). Falta que otros sistemas den la orden.",
+      "sigue": "Hasta acá trabajaste con un portero genérico, y la lectura de patentes ya mostró funciones que dependen del modelo y su firmware. El próximo módulo sale a la calle y recorre los porteros familia por familia, empezando por los grandes de la serie S.",
+      "requisitos": [
+        "13",
+        "14",
+        "6"
+      ]
+    },
+    "20": {
+      "objetivos": [
+        "Al terminar vas a poder elegir la alimentación de un S539 o un S538, PoE+ o fuente, antes de ir a la obra.",
+        "Al terminar vas a poder decidir si la cerradura puede salir de la salida de 12 V del portero o lleva fuente propia.",
+        "Al terminar vas a poder reconocer el firmware 539. o 538. y si el equipo está en la rama de alta seguridad."
+      ],
+      "conecta": "En Relé y cerradura la regla fue que la cerradura lleva su propia fuente; los porteros grandes a veces pueden alimentarla. Y la planilla del Mapa del catálogo empieza a llenarse con datos reales.",
+      "sigue": "La serie S también tiene porteros Linux, más chicos y modulares. La próxima sigue con el S535, que se cotiza por módulos, y el S532.",
+      "requisitos": [
+        "19",
+        "4",
+        "2"
+      ]
+    },
+    "21": {
+      "objetivos": [
+        "Al terminar vas a poder armar el pedido de un S535 con sus módulos: huella, LTE, QR o lazo de inducción.",
+        "Al terminar vas a poder dimensionar la fuente de un S532 cuando la cerradura sale del portero.",
+        "Al terminar vas a poder sacar la IP de cada uno: 9999 y 3888 en el S535, *2396# y 1 en el S532."
+      ],
+      "conecta": "En S539 y S538 viste los Android de la serie S. Seguimos en la misma serie con los Linux, más chicos y con otra lógica de pedido.",
+      "sigue": "De la serie S pasamos a la X, la de frente de acero. La próxima empieza por los Android X916 y X915, donde el grado IP e IK pesa en el pliego.",
+      "requisitos": [
+        "4"
+      ]
+    },
+    "22": {
+      "objetivos": [
+        "Al terminar vas a poder citar el grado IP e IK de la ficha de la versión exacta cuando la guía de selección dice otra cosa.",
+        "Al terminar vas a poder identificar la versión de hardware de un X915 y su firmware, 915. o 2915.",
+        "Al terminar vas a poder decidir la alimentación según la cerradura salga o no del portero, incluida la excepción del X915 V2."
+      ],
+      "conecta": "Con el S535 y el S532 se cerró la serie S. La serie X suma acero y antivandalismo, y con eso una pregunta nueva: qué grado de protección va en la propuesta.",
+      "sigue": "La serie X también tiene Linux. La próxima ve el X912 antivandálico y el X910 de un botón, y mide la salida de 12 V con la cerradura conectada.",
+      "requisitos": [
+        "2",
+        "19"
+      ]
+    },
+    "23": {
+      "objetivos": [
+        "Al terminar vas a poder elegir la alimentación del X912 y del X910 según la salida de 12 V que vas a usar.",
+        "Al terminar vas a poder medir con tester la tensión de la salida durante una apertura, con la cerradura conectada.",
+        "Al terminar vas a poder sacar la IP del X912 con 2396 y la del X910 por voz."
+      ],
+      "conecta": "En X916 y X915 viste los Android de acero. Seguimos en la serie X de calle con los Linux, y lo que antes era un dato de tabla acá se mide con tester.",
+      "sigue": "Con las series S y X completas, el próximo módulo pasa a la serie R, empezando por el R29: un solo modelo con cuatro versiones que cambian fuente y credenciales.",
+      "requisitos": [
+        "4",
+        "1"
+      ]
+    },
+    "24": {
+      "objetivos": [
+        "Al terminar vas a poder identificar la versión de un R29 (S, C, C-L o C-T) y qué credenciales y alimentación trae cada una.",
+        "Al terminar vas a poder evitar el error del R29C-L, que no arranca por PoE.",
+        "Al terminar vas a poder armar la lista de obra con cubierta de lluvia y soporte según montaje y color."
+      ],
+      "conecta": "El módulo anterior cerró la serie X midiendo la salida de 12 V. La serie R arranca con el R29, el Android que más aparece en obra y uno de los que en Abrir desde sistemas leía patentes con el firmware adecuado.",
+      "sigue": "Del R29 bajamos a la serie R sin pantalla táctil. La próxima ve el R28, con borne de 12 V propio, y el R25, al que no se le promete PIN.",
+      "requisitos": [
+        "19",
+        "18"
+      ]
+    },
+    "25": {
+      "objetivos": [
+        "Al terminar vas a poder distinguir el R28, con borne de 12 V propio, del R25, sin PIN según la tabla de métodos.",
+        "Al terminar vas a poder medir cómo cambia con el volumen la salida de 12 V de un R25 alimentado por PoE.",
+        "Al terminar vas a poder sacar la IP de un R28, un R25A y un R25K."
+      ],
+      "conecta": "En R29 la versión exacta decidía fuente y credenciales. En la serie R chica pasa lo mismo, con equipos sin pantalla táctil.",
+      "sigue": "El R25K se consulta con el mismo código que el R20K, y los R20 son seguramente el portero que más vas a encontrar. La próxima los ve con sus tres versiones de hardware.",
+      "requisitos": [
+        "4"
+      ]
+    },
+    "26": {
+      "objetivos": [
+        "Al terminar vas a poder identificar la versión de hardware real de un R20 (20., 220. o 320.) aunque la etiqueta diga otra cosa.",
+        "Al terminar vas a poder decidir si la cerradura sale por el relé con 12 V según hardware, fuente y firmware.",
+        "Al terminar vas a poder bajar el firmware de la versión de hardware real y no el de la etiqueta."
+      ],
+      "conecta": "En R28 y R25 la salida de 12 V dependía del volumen. Los R20 repiten ese detalle y suman el caso de la etiqueta que engaña, que ya apareció en Leer el firmware.",
+      "sigue": "Con la serie R completa, la próxima pasa a la serie E, empezando por los de reconocimiento facial: E18 y E16.",
+      "requisitos": [
+        "2"
+      ]
+    },
+    "27": {
+      "objetivos": [
+        "Al terminar vas a poder entrar al menú de un E16 o un E18 con el PIN de sistema que corresponde a su firmware, y cambiarlo.",
+        "Al terminar vas a poder elegir la fuente de cada versión y prever fuente propia para la cerradura.",
+        "Al terminar vas a poder consultar por HTTP el estado de la puerta de un E18 con DoorStatus."
+      ],
+      "conecta": "Los R20 cerraron la serie R. La serie E arranca por los de rostro en plástico, y el PIN de sistema del E16 que asomó en Primer acceso acá se explica completo.",
+      "sigue": "La serie E también tiene los más chicos. La próxima ve el E13S y el E12 de un botón, y por qué el E12 no conviene cuando la cerradura necesita SR01.",
+      "requisitos": [
+        "1",
+        "7",
+        "13"
+      ]
+    },
+    "28": {
+      "objetivos": [
+        "Al terminar vas a poder reconocer qué credenciales acepta un E13S y un E12: tarjeta de 13,56 MHz, sin PIN ni rostro.",
+        "Al terminar vas a poder decidir entre un E12 y un portero con RS485 cuando la cerradura necesita SR01.",
+        "Al terminar vas a poder dejar en la ficha el camino para recuperar la clave web perdida."
+      ],
+      "conecta": "En E18 y E16 la cerradura ya iba con fuente propia. Los de un botón repiten esa regla y suman una limitación que pega con Relés de afuera: el E12 no tiene RS485.",
+      "sigue": "La última familia de calle no abre puertas: atiende emergencias. La próxima ve el E21 y el E20S, registrados en la central y con respaldo si nadie atiende.",
+      "requisitos": [
+        "16"
+      ]
+    },
+    "29": {
+      "objetivos": [
+        "Al terminar vas a poder registrar un E21 como extensión y configurar su botón hacia el interno de guardia.",
+        "Al terminar vas a poder armar en la central el respaldo para cuando nadie atiende en 20 segundos.",
+        "Al terminar vas a poder sumar la cámara del E21 al NVR con credenciales propias."
+      ],
+      "conecta": "Con el E13S y el E12 se cerraron los porteros de acceso. El E21 y el E20S usan lo que ya sabés de Cuenta SIP y RTSP al NVR para otro fin: un punto de emergencia.",
+      "sigue": "Con todos los porteros de calle vistos, el próximo módulo pasa adentro de la casa: los monitores, empezando por la serie S.",
+      "requisitos": [
+        "5",
+        "9"
+      ]
+    },
+    "30": {
+      "objetivos": [
+        "Al terminar vas a poder elegir un monitor de la serie S por sistema, relé, RS485 y entrada de timbre.",
+        "Al terminar vas a poder probar el relé del monitor dentro de la carga del modelo, como el 1 A del S562.",
+        "Al terminar vas a poder verificar el firmware mínimo antes de sumar un MK485 o un RSAC-C1-R8."
+      ],
+      "conecta": "En Botón del monitor y Relés de afuera usaste el monitor como botonera y le colgaste relés externos. Ahora lo elegís sabiendo qué trae cada modelo.",
+      "sigue": "Seguimos con monitores. La próxima ve la serie C y el IT88, donde aparecen modelos con dos relés y cargas distintas.",
+      "requisitos": [
+        "15",
+        "16"
+      ]
+    },
+    "31": {
+      "objetivos": [
+        "Al terminar vas a poder identificar cuántos relés trae cada monitor C e IT88 y su carga máxima.",
+        "Al terminar vas a poder probar los dos relés de un C319 o un IT88 con carga de banco y nombrarlos por lo que manejan.",
+        "Al terminar vas a poder comparar el firmware con el mínimo para relés externos por RS485."
+      ],
+      "conecta": "En Monitores serie S el criterio fue relé, RS485 y carga. Con la serie C y el IT88 se aplica igual, y aparece el segundo relé.",
+      "sigue": "Cerramos monitores con la serie X. La próxima ve el X933 y el X937, el grande que pide PoE+.",
+      "requisitos": [
+        "16"
+      ]
+    },
+    "32": {
+      "objetivos": [
+        "Al terminar vas a poder prever el puerto PoE+ o la fuente de 12 V 2 A de un X937.",
+        "Al terminar vas a poder repartir las cargas en los dos relés del X933 sin pasar de 24 V 1 A.",
+        "Al terminar vas a poder verificar el firmware mínimo de X933 y X937 para relés externos."
+      ],
+      "conecta": "En Monitores C e IT el segundo relé ya era común. La serie X lo mantiene y suma el monitor más grande de la línea.",
+      "sigue": "Todos estos monitores van por UTP. La próxima resuelve el edificio que solo tiene el par del portero viejo, con la línea de 2 hilos.",
+      "requisitos": [
+        "16"
+      ]
+    },
+    "37": {
+      "objetivos": [
+        "Al terminar vas a poder relevar un edificio de 2 hilos (apartamentos, par disponible y accesos) para cotizar la reforma.",
+        "Al terminar vas a poder armar una lista preliminar con porteros R20A-2 o R20K-2, monitores C313W-2 o S562W-2 y su alimentación de 48 V.",
+        "Al terminar vas a poder marcar lo que no está confirmado, como el rol de NC-2 y NX-2, y pedirlo por escrito antes de cotizar."
+      ],
+      "conecta": "En las tres lecciones anteriores elegiste monitores IP con PoE. Varios de ellos, igual que el R20 de la calle, tienen versión de 2 hilos para edificios sin UTP.",
+      "sigue": "Calle y apartamento resueltos. El próximo módulo pasa a las puertas internas, empezando por los terminales de control de acceso A0x.",
+      "requisitos": [
+        "26",
+        "30",
+        "31"
+      ]
+    },
+    "33": {
+      "objetivos": [
+        "Al terminar vas a poder elegir el terminal A0x por la credencial que pide la puerta: tarjeta, PIN, Bluetooth, rostro o QR.",
+        "Al terminar vas a poder sacar la IP con Reset y crear un usuario con PIN, tarjeta y horario.",
+        "Al terminar vas a poder decidir si la cerradura sale por el relé del terminal o lleva fuente propia."
+      ],
+      "conecta": "El módulo anterior cerró la calle y el apartamento. Las puertas internas usan los mismos usuarios y horarios de Usuarios y horarios, ahora en terminales que no llaman a nadie.",
+      "sigue": "No todas las puertas admiten un terminal ancho ni todas las cargas están cerca de uno. La próxima ve el A15 para marco angosto y el WR01 como relé de borde.",
+      "requisitos": [
+        "7",
+        "4"
+      ]
+    },
+    "34": {
+      "objetivos": [
+        "Al terminar vas a poder elegir un A15 para marco angosto y sacar su IP con el PIN de administrador.",
+        "Al terminar vas a poder montar y alimentar un WR01, conectar relé y entrada y probarlos desde la web.",
+        "Al terminar vas a poder documentar ubicación, relés, entradas y alimentación del WR01 dentro de la VLAN de porteros."
+      ],
+      "conecta": "En Terminales A0x cada puerta llevaba su terminal. El A15 cubre el marco angosto, y el WR01 ya apareció en Relés de afuera como relé de borde.",
+      "sigue": "Cuando las puertas son varias conviene una controladora en el tablero. La próxima compara el A094 y el A095 por la energía disponible en cada salida.",
+      "requisitos": [
+        "16",
+        "11"
+      ]
+    },
+    "35": {
+      "objetivos": [
+        "Al terminar vas a poder sumar el consumo de lector y cerradura por puerta y compararlo con los límites del A094 y el A095.",
+        "Al terminar vas a poder decidir qué cerraduras llevan fuente propia.",
+        "Al terminar vas a poder descartar el A094 cuando la obra integra ascensor con EC33."
+      ],
+      "conecta": "En A15 y WR01 cada carga tenía su relé cerca. Con cuatro puertas o más, la lógica se muda a una controladora en el tablero.",
+      "sigue": "Esta lección dejó planteado que el A094 no se integra con el ascensor. La próxima ve el EC33, que habla por HTTP con el terminal y libera solo el piso de cada usuario.",
+      "requisitos": [
+        "33",
+        "4"
+      ]
+    },
+    "36": {
+      "objetivos": [
+        "Al terminar vas a poder configurar el EC33 y el terminal por HTTP (Open Relay via HTTP y Lift Control) con usuario propio.",
+        "Al terminar vas a poder dar permiso a un usuario para un piso y verificar que solo actúe ese relé.",
+        "Al terminar vas a poder dibujar para el ascensorista si el cableado va en paralelo (directo al piso) o en serie (liberar botones)."
+      ],
+      "conecta": "En A094 y A095 quedó claro qué controladora sirve con ascensor. El EC33 usa el mismo Open Relay via HTTP con usuario propio de La URL que abre y Quién puede abrir.",
+      "sigue": "Con calle, apartamento, puertas internas y ascensor resueltos, el último módulo cierra la obra, empezando por el escritorio de guardia y lo que no es portero ni monitor.",
+      "requisitos": [
+        "13",
+        "14",
+        "33",
+        "7"
+      ]
+    },
+    "38": {
+      "objetivos": [
+        "Al terminar vas a poder conectar un R49G con la PC del guardia en su segundo puerto y registrarlo como extensión.",
+        "Al terminar vas a poder listar teléfonos, cámaras y radares del menú, separando lo que se sabe de lo que se pide al distribuidor.",
+        "Al terminar vas a poder prever respaldo de PoE cuando la PC del guardia cuelga del teléfono."
+      ],
+      "conecta": "El módulo anterior cerró el edificio por dentro. El E21 de los porteros de emergencia llamaba al interno de guardia; acá ese escritorio se resuelve con un equipo de la misma marca.",
+      "sigue": "La lista de pedidos al distribuidor de esta lección se completa en la próxima: cajas, cubiertas, fuentes y módulos del modelo exacto, para no volver a la obra.",
+      "requisitos": [
+        "5",
+        "29"
+      ]
+    },
+    "39": {
+      "objetivos": [
+        "Al terminar vas a poder armar el pedido completo de un X915 o un R29: frente, montaje, cubierta, alimentación, cerradura y módulos.",
+        "Al terminar vas a poder cablear la cerradura desde el portero en NC con la salida en Always, o en NO con Triggered by Open Relay.",
+        "Al terminar vas a poder marcar \"a confirmar\" cada línea que no esté en una ficha o una tabla."
+      ],
+      "conecta": "En Teléfonos y otros armaste la lista de lo que falta pedir. Acá esa lista se vuelve pedido, con la salida de 12 V de cada portero que viste en los módulos de calle.",
+      "sigue": "El hardware ya está pedido; falta decidir qué lo administra. La próxima ordena SmartPlus, My MobileKey, ACMS, ACMS Pro y SDMC.",
+      "requisitos": [
+        "4",
+        "16",
+        "22",
+        "24"
+      ]
+    },
+    "40": {
+      "objetivos": [
+        "Al terminar vas a poder elegir el software para una casa, un edificio sin internet confiable y una oficina, con una línea de justificación.",
+        "Al terminar vas a poder leer el bloque B del firmware para saber si el equipo admite nube, SDMC y descubrimiento.",
+        "Al terminar vas a poder definir un solo administrador por equipo y anotarlo en la ficha."
+      ],
+      "conecta": "En Accesorios y módulos cerraste el hardware. SmartPlus ya lo conocés de SmartPlus con plan B; acá se ubica junto al resto del software de Akuvox.",
+      "sigue": "Elegido el software, queda la pregunta que hace todo cliente: cuánto cuesta y cada cuánto se paga. La próxima separa lo que se cobra una vez de lo que se cobra por servicio.",
+      "requisitos": [
+        "10",
+        "2",
+        "12"
+      ]
+    },
+    "42": {
+      "objetivos": [
+        "Al terminar vas a poder listar qué funciona sin licencia en la red local y qué servicios de nube se cobran.",
+        "Al terminar vas a poder leer en el portero la cuenta de nube y el tipo de conexión, Cloud o SDMC.",
+        "Al terminar vas a poder armar un presupuesto de dos renglones, equipo una vez y nube recurrente, a partir de la cotización escrita del distribuidor."
+      ],
+      "conecta": "En Software y nube elegiste quién administra cada equipo. Acá se le pone precio a esa elección, y la tabla local contra internet de SmartPlus con plan B vuelve como base.",
+      "sigue": "Con la obra nueva presupuestada, queda el caso que más llega a soporte: equipos que ya no están en el menú pero siguen en las paredes. La última lección junta todo el curso para resolverlo.",
+      "requisitos": [
+        "10",
+        "5"
+      ]
+    },
+    "41": {
+      "objetivos": [
+        "Al terminar vas a poder identificar un equipo fuera de catálogo por el primer bloque de su firmware y saber si está en rama de alta seguridad.",
+        "Al terminar vas a poder detectar qué le falta (SR01, patentes, HTTP nuevo) y dejarlo seguro mientras siga instalado.",
+        "Al terminar vas a poder proponer un reemplazo vigente del mismo tipo, verificando credenciales y alimentación."
+      ],
+      "conecta": "En Licencias Akuvox cerraste el presupuesto de una obra nueva. Esta lección usa todo lo anterior sobre lo que ya está instalado: firmware, mapa del catálogo, VLAN, HTTP y familias.",
+      "cierre": "Con esto recorriste el sistema completo: de sacar la IP de un portero a presupuestar la nube y reemplazar un E11. La planilla del catálogo, la ficha de cada equipo y la tabla de credenciales que fuiste armando son tu kit de obra y de soporte para la próxima instalación.",
+      "requisitos": [
+        "2",
+        "11",
+        "13",
+        "16",
+        "18",
+        "19"
+      ]
+    }
+  },
+  "avisos": [
+    {
+      "id": "19,5,6,7,8,9,10,11,12,13,14,15,16,17,18,37,33,34,35,36,42,41",
+      "archivo": "card.md y script.txt",
+      "texto": "El título \"# Lección N.\" de la tarjeta y la primera línea del guion (\"Lección N...\") usan el número de carpeta.",
+      "sugerencia": "Si el portal muestra la posición y no el id, renumerar: 19→5, 5→6, 6→7, 7→8, 8→9, 9→10, 10→11, 11→12, 12→13, 13→14, 14→15, 15→16, 16→17, 17→18, 18→19, 37→33, 33→34, 34→35, 35→36, 36→37, 42→41, 41→42. El resto (1 a 4, 20 a 32, 38 a 40) conserva su número."
+    },
+    {
+      "id": "14",
+      "archivo": "card.md",
+      "texto": "Todo dentro de la VLAN de porteros (lección 11)",
+      "sugerencia": "Todo dentro de la VLAN de porteros (lección Portero blindado)"
+    },
+    {
+      "id": "15",
+      "archivo": "card.md",
+      "texto": "clave `Ejemplo-Mon-2026` (lección 13).",
+      "sugerencia": "clave `Ejemplo-Mon-2026` (lección La URL que abre)."
+    },
+    {
+      "id": "16",
+      "archivo": "card.md",
+      "texto": "4. Desde la PC, con el usuario HTTP de la lección 13:",
+      "sugerencia": "4. Desde la PC, con el usuario HTTP de La URL que abre:"
+    },
+    {
+      "id": "18",
+      "archivo": "card.md",
+      "texto": "5. Actualizá la tabla de credenciales de la lección 14.",
+      "sugerencia": "5. Actualizá la tabla de credenciales de Quién puede abrir."
+    },
+    {
+      "id": "20",
+      "archivo": "card.md",
+      "texto": "5. Anotá en la planilla de la lección 19.",
+      "sugerencia": "5. Anotá en la planilla del Mapa del catálogo (lección 5 en el orden nuevo)."
+    },
+    {
+      "id": "29",
+      "archivo": "card.md",
+      "texto": "en la central de laboratorio (lección 5)",
+      "sugerencia": "en la central de laboratorio (lección Cuenta SIP)"
+    },
+    {
+      "id": "29",
+      "archivo": "card.md",
+      "texto": "con credenciales propias (lección 9).",
+      "sugerencia": "con credenciales propias (lección RTSP al NVR)."
+    },
+    {
+      "id": "33",
+      "archivo": "card.md",
+      "texto": "(como en la lección 7)",
+      "sugerencia": "(como en Usuarios y horarios)"
+    },
+    {
+      "id": "38",
+      "archivo": "card.md",
+      "texto": "en la central de laboratorio (lección 5) y llamá al portero.",
+      "sugerencia": "en la central de laboratorio (lección Cuenta SIP) y llamá al portero."
+    },
+    {
+      "id": "39",
+      "archivo": "card.md",
+      "texto": "(lecciones 20 a 29)",
+      "sugerencia": "Sigue siendo correcto (las posiciones 20 a 29 no cambian); opcional: \"(módulos La calle: series S y X y La calle: series R y E)\"."
+    },
+    {
+      "id": "40",
+      "archivo": "card.md",
+      "texto": "llaves virtuales; lección 10)",
+      "sugerencia": "llaves virtuales; lección SmartPlus con plan B)"
+    },
+    {
+      "id": "40",
+      "archivo": "card.md",
+      "texto": "(y plan B local, lección 10)",
+      "sugerencia": "(y plan B local, como en SmartPlus con plan B)"
+    },
+    {
+      "id": "41",
+      "archivo": "card.md",
+      "texto": "clave propia y VLAN de porteros (lección 11).",
+      "sugerencia": "clave propia y VLAN de porteros (lección Portero blindado)."
+    },
+    {
+      "id": "41",
+      "archivo": "card.md",
+      "texto": "publicadas en 2023 (lección 11)",
+      "sugerencia": "publicadas en 2023 (lección Portero blindado)"
+    },
+    {
+      "id": "42",
+      "archivo": "quiz.json",
+      "texto": "trabajan en la LAN (lección 10).",
+      "sugerencia": "trabajan en la LAN (lección SmartPlus con plan B)."
+    },
+    {
+      "id": "12",
+      "archivo": "script.txt",
+      "texto": "A: Última lección. Diagnóstico con evidencia.",
+      "sugerencia": "A: Lección trece, cierre del módulo. Diagnóstico con evidencia."
+    },
+    {
+      "id": "14",
+      "archivo": "script.txt",
+      "texto": "la VLAN de porteros que armamos en la lección once",
+      "sugerencia": "la VLAN de porteros que armamos en Portero blindado"
+    },
+    {
+      "id": "15",
+      "archivo": "script.txt",
+      "texto": "¿Te acordás del pedido de la lección ocho?",
+      "sugerencia": "¿Te acordás del pedido de Dos puertas?"
+    },
+    {
+      "id": "15",
+      "archivo": "script.txt",
+      "texto": "B: El mismo usuario de la lección trece.",
+      "sugerencia": "B: El mismo usuario de La URL que abre."
+    },
+    {
+      "id": "18",
+      "archivo": "script.txt",
+      "texto": "el DTMF de las lecciones cinco y seis",
+      "sugerencia": "el DTMF de Cuenta SIP y DTMF que abre"
+    },
+    {
+      "id": "19",
+      "archivo": "script.txt",
+      "texto": "A: Lección diecinueve, arrancamos el catálogo.",
+      "sugerencia": "A: Lección cinco, cerramos el primer módulo con el mapa de la línea."
+    },
+    {
+      "id": "19",
+      "archivo": "script.txt",
+      "texto": "Tres de las siete fuentes de esta parte del catálogo van en esa línea.",
+      "sugerencia": "Tres de las siete fuentes del catálogo van en esa línea."
+    },
+    {
+      "id": "29",
+      "archivo": "script.txt",
+      "texto": "Lo de la lección cinco:",
+      "sugerencia": "Lo de Cuenta SIP:"
+    },
+    {
+      "id": "29",
+      "archivo": "script.txt",
+      "texto": "se suma al NVR como en la lección nueve.",
+      "sugerencia": "se suma al NVR como en RTSP al NVR."
+    },
+    {
+      "id": "30",
+      "archivo": "script.txt",
+      "texto": "Para los relés externos de la lección dieciséis,",
+      "sugerencia": "Para los relés externos de Relés de afuera,"
+    },
+    {
+      "id": "33",
+      "archivo": "script.txt",
+      "texto": "como en la lección siete",
+      "sugerencia": "como en Usuarios y horarios"
+    },
+    {
+      "id": "40",
+      "archivo": "script.txt",
+      "texto": "B: SmartPlus ya lo vimos en la lección diez.",
+      "sugerencia": "B: SmartPlus ya lo vimos en SmartPlus con plan B."
+    },
+    {
+      "id": "40",
+      "archivo": "script.txt",
+      "texto": "El resto ya lo traíamos de las lecciones uno, diez y doce.",
+      "sugerencia": "El resto ya lo traíamos de Primer acceso, SmartPlus con plan B y Diagnóstico con evidencia."
+    },
+    {
+      "id": "40",
+      "archivo": "script.txt",
+      "texto": "A: Siempre, como en la lección diez.",
+      "sugerencia": "A: Siempre, como en SmartPlus con plan B."
+    },
+    {
+      "id": "41",
+      "archivo": "script.txt",
+      "texto": "A: Lección cuarenta y uno, la última del catálogo:",
+      "sugerencia": "A: Lección cuarenta y dos, la última del curso:"
+    },
+    {
+      "id": "41",
+      "archivo": "script.txt",
+      "texto": "en dos mil veintitrés, la lección once.",
+      "sugerencia": "en dos mil veintitrés, lo de Portero blindado."
+    },
+    {
+      "id": "42",
+      "archivo": "script.txt",
+      "texto": "A: Lección cuarenta y dos.",
+      "sugerencia": "A: Lección cuarenta y uno."
+    },
+    {
+      "id": "42",
+      "archivo": "script.txt",
+      "texto": "como en la lección diez.",
+      "sugerencia": "como en SmartPlus con plan B."
+    }
+  ]
+}

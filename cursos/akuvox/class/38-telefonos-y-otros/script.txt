@@ -1,0 +1,19 @@
+A: Lección treinta y ocho. Lo que no es portero ni monitor: teléfonos, cámara y sensores.
+B: ¿Akuvox hace teléfonos?
+A: Hace. El que tiene ficha leída es el R49G, que Akuvox llama teléfono de video IP Android. Pantalla táctil de siete pulgadas, una cámara, Android nueve, y de escritorio.
+B: ¿Dónde va?
+A: Akuvox lo presenta para la oficina: un teléfono SIP Android que junta voz, mensajes, video y control de acceso. En un edificio, el escritorio de guardia es el lugar natural: atiende el portero, ve la cámara y abre.
+B: ¿Y la red?
+A: Eso es lo interesante en obra: dos puertos Gigabit conmutados, así que la PC del guardia cuelga del teléfono. Además Bluetooth, USB, Wi-Fi y PoE.
+B: ¿Los otros teléfonos?
+A: En el menú hay dos teléfonos IP más: el SP-R50P y el HCP-R15P, que también aparece en la línea de cuidado de mayores. De esos no leímos ficha.
+B: ¿Y la cámara?
+A: La VC50B y la VC50T, en la categoría de cámara IP. En la tabla de firmware tienen su código, seiscientos cincuenta. Ficha, no leímos, así que resolución y lente no te digo.
+B: ¿Y lo de cuidado de mayores?
+A: Dos radares, el MR01 y el MR03, junto con el HCP-R15P. El MR01 tiene código de firmware trescientos uno. Más no sabemos con lo leído.
+B: Mucha honestidad en esta lección.
+A: [risas] Es que esta es la parte del catálogo con menos páginas. Dos de siete fuentes: el menú y la ficha del R49G. Lo que sí podés hacer es saber que existen y no ofrecer algo de otra marca cuando el cliente ya tiene Akuvox.
+B: ¿Laboratorio?
+A: Diez minutos. Si tenés un R49G, lo registrás como extensión en la central de laboratorio, conectás tu PC al segundo puerto y probás que la PC navegue.
+B: ¿Y si no tenés?
+A: Armás la lista de lo que sí y lo que no sabés de cada uno, para pedir fichas al distribuidor.

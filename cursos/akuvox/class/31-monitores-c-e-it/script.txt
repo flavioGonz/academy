@@ -1,0 +1,23 @@
+A: Lección treinta y uno. Seguimos con monitores: la serie C y el IT88.
+B: El C313 y el C316 los vemos por todos lados.
+A: Y los dos siguen en el menú vigente. El C313 es de siete pulgadas con Linux. El C316, siete pulgadas con Android. Después está el C319, de diez pulgadas con Android, y el IT88, diez pulgadas con Android en aluminio.
+B: ¿Qué los diferencia en obra?
+A: Los relés. El C313 y el C316 tienen un RS485, una salida de relé y una entrada de timbre. El C319 y el IT88 traen dos relés.
+B: ¿Y la carga?
+A: Acá viene el detalle. El IT88 y el C313 dan treinta voltios dos amperes. El C319, veinticuatro voltios un ampere. Y el C316 directamente no aparece en la tabla de carga de relés.
+B: ¿Y entonces?
+A: Entonces el dato no lo tenemos, y no lo inventamos. Si vas a colgar algo del relé de un C316, lo confirmás antes con el distribuidor o con la ficha.
+B: Bien. ¿Y la IP?
+A: El C313: More, Status, Network. El C316, C319 e IT88: Settings, System Info, Network.
+B: ¿Algo más del C313?
+A: Es el monitor del ejemplo oficial de apertura por HTTP, con teclas que abren un segundo portero. Y en la tabla de firmware aparece con tres códigos: ciento trece, doscientos trece y trescientos trece, uno por versión.
+B: ¿Y relés externos?
+A: Los cuatro admiten el MK485 o el RSAC-C1-R8 desde cierto firmware: el C316 desde trescientos dieciséis punto treinta punto trece punto ciento dos, por ejemplo.
+B: ¿Alimentación?
+A: La tabla da fuente de doce voltios un ampere para este grupo, y la guía de selección marca PoE en todos.
+B: ¿Cuántas fuentes?
+A: Las mismas cuatro de siete que en la lección anterior: guía de selección y tablas de interfaces, relé y alimentación.
+B: ¿Laboratorio?
+A: Quince minutos. Con un C319 o un IT88, identificás los dos relés en la web, probás cada uno con una carga dentro de su límite y les ponés nombre en la pantalla.
+B: Con el del C319 a veinticuatro voltios máximo.
+A: Exacto. Ese número es el que más se olvida.

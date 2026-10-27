@@ -1,0 +1,18 @@
+A: Lección siete. Dónde graba.
+B: En el NVR, ¿dónde va a grabar?
+A: [risas] Esa es la respuesta automática. Pero HikCentral te pregunta, al dar de alta cada equipo, dónde se guarda el video. Y hay varias opciones.
+B: Contame.
+A: Una: en el propio equipo, el NVR o la tarjeta de la cámara, con su calendario. Las otras son centrales. pStor, que es un servicio de Hikvision que administra discos locales o lógicos en un servidor. pStor Cluster, para manejar varios pStor. Hybrid SAN, que es un equipo de almacenamiento de Hikvision. Y Cloud Storage Server.
+B: ¿Y cuál es mejor?
+A: Depende, y ahí está la gracia. Cada una tiene límites que el FAQ enumera. Por ejemplo: equipos agregados por dominio o por Hik-Connect no pueden grabar en Hybrid SAN ni en Cloud Storage. Por dominio, solo graban en el propio equipo.
+B: Eso no lo sabía.
+A: Y el pStor Cluster no hace grabación por detección de movimiento, ni miniaturas. Además pide que el clúster, los pStor y el SYS estén en el mismo dominio de red y la misma zona horaria.
+B: ¿Cuántas fuentes?
+A: Las tres páginas de grabación coinciden en que la decisión se toma por cámara al dar de alta, todas de Hikvision. No hay quien discrepe en eso. La discusión es de criterio: en sitio o central.
+B: ¿Y cómo decidís?
+A: Por el enlace. Una sucursal con un enlace chico al centro: graba en su NVR, y el centro reproduce cuando hace falta. Si el cliente quiere retención larga y redundancia, y hay ancho de banda, central.
+B: ¿Hay un atajo al dar de alta?
+A: Sí. La opción obtener la configuración de grabación del equipo toma el calendario que ya tiene el NVR. Si el NVR ya graba bien, no lo pisás.
+B: ¿Laboratorio?
+A: Una tabla por obra: cada cámara, cómo se dio de alta, dónde graba y por qué. Y después verificar en el estado de grabación que todas estén grabando. Quince minutos.
+B: Y nadie descubre el día del robo que esa cámara no grababa.

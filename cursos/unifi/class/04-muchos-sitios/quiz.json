@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Instalaste un UCG en un cliente y no aparece en Site Manager. El firewall del edificio solo deja salir HTTP y HTTPS. ¿Qué falta?",
+    "options": [
+      "Abrir el puerto 8443 de entrada hacia el UCG",
+      "Hacer set-inform del UCG a unifi.ui.com",
+      "Permitir salida TCP 8883 (además de 443), DNS y NTP",
+      "Nada, Site Manager solo funciona con IP pública"
+    ],
+    "answer": 2,
+    "why": "Según el artículo de Ubiquiti citado por UniHosted, la consola necesita salida TCP 443 y 8883, DNS y NTP; no hace falta abrir puertos de entrada."
+  },
+  {
+    "q": "Se cae internet en un sitio gestionado por Site Manager. ¿Qué podés hacer?",
+    "options": [
+      "Nada, la configuración está en la nube",
+      "Gestionar el sitio en local, porque la configuración vive en el controlador del sitio",
+      "Restaurar el sitio desde Site Manager",
+      "Esperar a que Site Manager sincronice"
+    ],
+    "answer": 1,
+    "why": "Site Manager conecta con el controlador de cada sitio; sin internet, el controlador sigue disponible en la red local."
+  },
+  {
+    "q": "Un técnico deja la empresa y varias consolas de clientes estaban en su cuenta personal. ¿Qué práctica lo hubiera evitado?",
+    "options": [
+      "Usar contraseñas más largas",
+      "Desactivar Remote Management",
+      "Tener un CloudKey por técnico",
+      "Asociar las consolas a la cuenta de la empresa e invitar a los técnicos como administradores con rol"
+    ],
+    "answer": 3,
+    "why": "En Site Manager solo aparecen los sitios que la cuenta posee o administra; con la cuenta de la empresa como dueña, sacar a un técnico no hace perder sitios."
+  }
+]

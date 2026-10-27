@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Vas a integrar una cámara de patentes que siempre tiene la misma IP en la VLAN de porteros. ¿Qué modo de la HTTP API encaja mejor?",
+  "options": [
+   "None",
+   "Normal",
+   "Allowlist con la IP de la cámara",
+   "Basic con admin"
+  ],
+  "answer": 2,
+  "why": "Akuvox describe Allowlist para redes locales y su guía de LPR lo usa con la IP de la cámara; Normal es interno y None es solo para pruebas."
+ },
+ {
+  "q": "¿Por qué Basic no alcanza si el tráfico puede pasar por equipos que no controlás?",
+  "options": [
+   "Porque no funciona con curl",
+   "Porque la credencial va en Base64, que viaja en claro",
+   "Porque solo admite un usuario",
+   "Porque requiere SmartPlus"
+  ],
+  "answer": 1,
+  "why": "La guía de la HTTP API aclara que en Basic los datos viajan en texto claro; Digest protege la credencial."
+ },
+ {
+  "q": "Tres integraciones abren el mismo portero por HTTP. ¿Cómo repartís las credenciales?",
+  "options": [
+   "Un usuario propio por integración, distinto de admin",
+   "Todas con admin para simplificar",
+   "Un usuario compartido para las tres",
+   "Sin usuario, filtrando por MAC"
+  ],
+  "answer": 0,
+  "why": "Con un usuario por integración, si una credencial se filtra o alguien deja la obra se cambia solo esa; la clave en la URL además puede quedar en logs."
+ }
+]

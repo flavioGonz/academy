@@ -1,0 +1,19 @@
+A: Lección veintitrés, y es una que ya asomó en la primera: Safe Mode. Hoy a fondo, porque es el seguro que más viajes ahorra.
+B: Lo uso siempre y nunca supe qué hace por dentro.
+A: Es simple. Al activarlo, el router marca un punto de vuelta. Todo lo que cambiás desde ahí queda en el historial del sistema con una letra efe. Si tu sesión se corta, deshace todo eso solo.
+B: ¿Y cómo lo activo?
+A: En WinBox o en WebFig, el botón Safe Mode de la barra de arriba. En la terminal, control equis o efe cuatro, y el prompt suma la palabra SAFE.
+B: ¿Y para salir?
+A: Ahí está el detalle. Control equis otra vez, o soltar el botón, confirma los cambios. Control de, en cambio, los descarta.
+B: Al revés de lo que pensaba.
+A: Bastante. Cinco de las seis fuentes que lo describen coinciden en eso. Donde no coinciden es en el tiempo: la documentación toma el timeout de nueve minutos, y en el foro hay gente que lo ve volver en segundos, o al minuto con WebFig.
+B: ¿Y si se corta la luz con el modo seguro puesto?
+A: En el foro, uno sacó una IP en Safe Mode, cortó la energía y el cambio quedó. La página de la consola sugiere otra cosa, y en la versión siete no está confirmado. Así que el corte de luz no es un plan.
+B: Anotado. ¿Algún límite más?
+A: Dos. El historial guarda cien acciones: si pegás un script largo, sale solo y no deshace nada. Y si otro técnico lo tiene tomado, el router te pregunta si deshacés lo suyo, si lo tomás conservando sus cambios o si lo dejás.
+B: ¿Y en obra, cuándo?
+A: Firewall, bridge y VLAN, la IP de gestión, la ruta por defecto. Y en remoto, siempre. Export antes, Safe Mode, un cambio, verificás y confirmás.
+B: ¿El laboratorio?
+A: En un router de banco deshabilitás a propósito el puerto por donde entrás y esperás a que vuelva solo. Después hacés un cambio bueno y lo confirmás con control equis.
+B: Quince minutos.
+A: Y un error en remoto deja de ser una visita al sitio para ser un par de minutos de espera.

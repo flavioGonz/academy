@@ -1,0 +1,16 @@
+A: Última lección: el parque instalado y la línea M. Qué hacemos con lo que ya está, y qué viene.
+B: La M25. ¿Qué cambia de verdad?
+A: Según la ficha de Paradox, es una consola que se alimenta por PoE, con batería de litio adentro, Wi-Fi, Ethernet y LTE en el modelo LTE. Doscientas zonas, diez particiones, todo inalámbrico o por Ethernet, sin bus de cuatro hilos. Y se programa desde BlueEye o un software web.
+B: ¿Y el monitoreo depende de la nube?
+A: La ficha dice que reporta directo a la receptora, hasta cuatro canales, sin depender de la nube. Pero los servicios de app van con Swan 4G, con suscripción, y el alta la hace un instalador registrado con un ID de empresa.
+B: ¿Cuánto coinciden las fuentes?
+A: Ojo: de la M25 leímos solo la ficha de producto. Una fuente, y del fabricante. Hay que verla en banco antes de recomendarla a ciegas.
+B: ¿Y el parque viejo?
+A: Ahí está la discusión de esta lección. La guía de BlueEye cuenta que desde el firmware siete cincuenta, empezando por EVO, el puerto serie solo trabaja con dispositivos Paradox. Para conectar algo de terceros, se compra un código de desbloqueo en BlueEye, cinco dólares por central, y se carga en la sección trescientos o tres mil.
+B: ¿Y quién discrepa?
+A: PAI, el software libre de integración. Su documentación dice directamente: no actualices EVO a siete cincuenta o superior si usás conexión serie.
+B: [risas] O sea, el fabricante cierra y la comunidad dice no actualices.
+A: Y los dos tienen su punto. Una central sin actualizar tiene sus riesgos, y una integración que se corta en la casa de un cliente también. La salida honesta es decidir por sitio, sabiendo qué se corta, y presupuestar el desbloqueo oficial si hace falta.
+B: ¿Qué probamos?
+A: Una matriz. Para tres sitios de la cartera anotás central, firmware, generación del módulo, si hay integración por serie y qué receptora usan. Y escribís la decisión: actualizar, desbloquear, migrar a M, o dejar como está. Quince minutos.
+B: Actualizar, sabiendo qué se corta.

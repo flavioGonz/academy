@@ -1,0 +1,35 @@
+[
+ {
+  "q": "El log de Asterisk muestra 'Failed to authenticate' para el portero. ¿Qué revisás primero?",
+  "options": [
+   "El codec de video",
+   "La contraseña de la extensión cargada en el portero",
+   "El RTSP del portero",
+   "El PIN público"
+  ],
+  "answer": 1,
+  "why": "En el caso de FreePBX con el R20A, la causa más simple y real fue la contraseña; el error de autenticación apunta directo a credenciales."
+ },
+ {
+  "q": "El cliente quiere SmartPlus y además que el portero suene en la central de la oficina. ¿Cómo repartís las cuentas SIP?",
+  "options": [
+   "SmartPlus en la cuenta 1 y la central en la cuenta 2",
+   "Las dos en la cuenta 1",
+   "La central en la 1 y SmartPlus en la 2",
+   "No se puede combinar"
+  ],
+  "answer": 0,
+  "why": "Akuvox documenta que la cuenta 1 es la que usa SmartPlus cuando se activa; la cuenta 2 queda libre para un servidor independiente."
+ },
+ {
+  "q": "El portero registra pero en la central aparece con un puerto distinto a cada refresco y se pierde. ¿Qué sospechás?",
+  "options": [
+   "Firmware del monitor",
+   "La cerradura consume mucho",
+   "SIP ALG del router reescribiendo la señalización",
+   "El DTMF en inband"
+  ],
+  "answer": 2,
+  "why": "En el hilo de FreePBX, ante registros que cambian de puerto, la recomendación fue desactivar SIP ALG en el router."
+ }
+]

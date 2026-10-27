@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Instalás Proxmox VE 9.2 en un cliente sin suscripción y el primer apt update falla con 401 Unauthorized. ¿Qué pasó?",
+    "options": [
+      "Está habilitado el repositorio enterprise, que requiere una clave de suscripción válida",
+      "La placa de red no tiene gateway configurado",
+      "El ISO de instalación está corrupto",
+      "Debian 13 no permite apt update como root"
+    ],
+    "answer": 0,
+    "why": "El repositorio pve-enterprise viene habilitado por defecto y solo es accesible con suscripción. Sin clave, se deshabilita con Enabled: no y se configura el que corresponda."
+  },
+  {
+    "q": "¿Qué comando conviene usar para aplicar actualizaciones en un nodo Proxmox?",
+    "options": [
+      "apt upgrade",
+      "apt-get install proxmox-ve",
+      "apt full-upgrade",
+      "dpkg -i *.deb"
+    ],
+    "answer": 2,
+    "why": "La guía oficial indica apt full-upgrade porque apt upgrade no puede quitar paquetes para resolver dependencias y puede dejar el sistema a medio actualizar."
+  },
+  {
+    "q": "En octubre de 2026 visitás un cliente que tiene Proxmox VE 8.4. ¿Qué le decís?",
+    "options": [
+      "Que 8.4 es la versión con soporte extendido hasta 2030",
+      "Que no hay diferencia de soporte entre 8 y 9",
+      "Que alcanza con cambiar al repositorio test",
+      "Que está sin parches de seguridad desde agosto de 2026 y conviene planificar el upgrade a 9.x"
+    ],
+    "answer": 3,
+    "why": "Según el anuncio oficial de 9.0, la 8.4 recibió actualizaciones de seguridad y correcciones críticas hasta agosto de 2026."
+  }
+]

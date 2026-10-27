@@ -1,0 +1,20 @@
+A: Segundo arco, operación diaria. Lección cinco: tres formas de dar de alta un equipo.
+B: Por IP, y después ya no sé.
+A: [risas] Por IP es la primera. Si el NVR o la cámara tiene IP fija y la ves desde el servidor, la agregás con protocolo privado Hikvision al puerto ocho mil. Si marcás agregado cifrado, el puerto pasa a ocho mil cuatrocientos cuarenta y tres.
+B: ¿Y antes de agregar?
+A: El manual avisa si no configuraste NTP. Conviene hacerlo primero, porque la hora después te persigue en grabaciones y en acceso.
+B: Bien. ¿La segunda?
+A: ISUP, que antes se llamaba EHome. Acá el equipo es el que llama al servidor. No necesita IP fija ni puertos abiertos en el sitio. El manual de Hikvision lo presenta como la opción costo efectiva para equipos sin IP fija.
+B: ¿Cómo se arma?
+A: En la plataforma habilitás el registro ISUP, en Sistema, Red, protocolo de acceso de dispositivos. En el equipo cargás la IP del servidor, un Device ID y la clave. Y en HikCentral lo agregás por Device ID. El servidor escucha el registro en el puerto siete mil seiscientos sesenta, según la matriz de comunicación.
+B: ¿Y la tercera?
+A: Hik-Connect DDNS. Con número de serie y código de verificación. Cómodo, pero el FAQ avisa que esos equipos no pueden grabar en Hybrid SAN ni en Cloud Storage.
+B: ¿Coinciden las fuentes?
+A: Dos o tres de siete páginas por cada método, todas oficiales. El que discrepa es un blog de instaladores que enseña a abrir puertos en el router y entrar directo.
+B: Que funciona, pero expone el equipo.
+A: Exacto. Ejemplo: una sucursal con fibra hogareña, IP dinámica. Ahí ISUP. La casa central con IP fija y VPN: por IP sobre la VPN.
+B: ¿Y un detalle que se olvida?
+A: Importar los canales a un área al agregar. Si no, el equipo queda online pero sin vivo ni reproducción. Lo vemos en la próxima.
+B: ¿Laboratorio?
+A: Habilitá el registro ISUP, configurá una cámara de laboratorio con Device ID y clave, y agregala por Device ID. Veinte minutos.
+B: Y ya tenés el método para cualquier sucursal.

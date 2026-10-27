@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Cuatro canales: de lo más probado a lo más nuevo</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">MIKROTIK</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Cuatro canales: de lo más probado a lo más nuevo</text>
+<path d="M60.0 150.0L1140.0 150.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<text x="60.0" y="136.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">más probado, sale poco</text>
+<text x="1140.0" y="136.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="end">más nuevo, sale seguido</text>
+<rect x="48" y="180" width="258" height="360" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<rect x="66" y="198" width="222" height="46" rx="12" fill="#0E8F5E"/><text x="177.0" y="227.1" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#FFFFFF" text-anchor="middle">long-term</text>
+<text x="68.0" y="284.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Sale poco</text>
+<text x="68.0" y="314.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="68.0" dy="0.0">Solo arreglos críticos,</tspan><tspan x="68.0" dy="21.6">sin funciones nuevas en su</tspan><tspan x="68.0" dy="21.6">rama.</tspan></text>
+<path d="M68 404L286 404" stroke="#DDE8F2" stroke-width="1.5" fill="none"/>
+<text x="68.0" y="434.0" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.2">EN CLIENTES</text>
+<text x="68.0" y="462.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#0E8F5E" text-anchor="start"><tspan x="68.0" dy="0.0">Sitios de clientes, por</tspan><tspan x="68.0" dy="21.6">defecto.</tspan></text>
+<rect x="330" y="180" width="258" height="360" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<rect x="348" y="198" width="222" height="46" rx="12" fill="#B45309"/><text x="459.0" y="227.1" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#FFFFFF" text-anchor="middle">stable</text>
+<text x="350.0" y="284.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Cada pocos meses</text>
+<text x="350.0" y="314.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="350.0" dy="0.0">Funciones nuevas ya</tspan><tspan x="350.0" dy="21.6">probadas.</tspan></text>
+<path d="M350 404L568 404" stroke="#DDE8F2" stroke-width="1.5" fill="none"/>
+<text x="350.0" y="434.0" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.2">EN CLIENTES</text>
+<text x="350.0" y="462.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#B45309" text-anchor="start"><tspan x="350.0" dy="0.0">Solo si necesitás una</tspan><tspan x="350.0" dy="21.6">función nueva y la</tspan><tspan x="350.0" dy="21.6">probaste en el banco.</tspan></text>
+<rect x="612" y="180" width="258" height="360" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<rect x="630" y="198" width="222" height="46" rx="12" fill="#D2492F"/><text x="741.0" y="227.1" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#FFFFFF" text-anchor="middle">testing</text>
+<text x="632.0" y="284.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Cada pocas semanas</text>
+<text x="632.0" y="314.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="632.0" dy="0.0">Prueba interna básica.</tspan></text>
+<path d="M632 404L850 404" stroke="#DDE8F2" stroke-width="1.5" fill="none"/>
+<text x="632.0" y="434.0" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.2">EN CLIENTES</text>
+<text x="632.0" y="462.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#D2492F" text-anchor="start"><tspan x="632.0" dy="0.0">No va en producción. Solo</tspan><tspan x="632.0" dy="21.6">tu banco.</tspan></text>
+<rect x="894" y="180" width="258" height="360" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<rect x="912" y="198" width="222" height="46" rx="12" fill="#D2492F"/><text x="1023.0" y="227.1" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#FFFFFF" text-anchor="middle">development</text>
+<text x="914.0" y="284.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Lo último</text>
+<text x="914.0" y="314.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="914.0" dy="0.0">Para probar lo que viene.</tspan></text>
+<path d="M914 404L1132 404" stroke="#DDE8F2" stroke-width="1.5" fill="none"/>
+<text x="914.0" y="434.0" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.2">EN CLIENTES</text>
+<text x="914.0" y="462.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#D2492F" text-anchor="start"><tspan x="914.0" dy="0.0">Solo tu banco.</tspan></text>
+<text x="48.0" y="590.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">Se cambia en Check for Updates o con /system/package/update/set channel=long-term</text>
+</svg>

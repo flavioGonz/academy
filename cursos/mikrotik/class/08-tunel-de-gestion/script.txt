@@ -1,0 +1,17 @@
+A: Lección ocho: el túnel de gestión. Cómo entrar a un cliente sin abrir WinBox a internet.
+B: Que es lo que dijimos en la lección tres. Bueno, ¿entonces cómo entro?
+A: Con una VPN. Cuatro de las siete fuentes que tocan acceso remoto van por ahí con WireGuard como primera opción, que es lo que nombra la guía de seguridad de MikroTik. Hay matices: una guía práctica defiende L2TP con IPsec porque el cliente ya viene en Windows, Mac y celulares, y el aviso de MikroTik sobre Mēris nombra IPsec.
+B: ¿Y PPTP?
+A: Ese no. Tiene fallas conocidas y las fuentes lo descartan.
+B: Bien. ¿Cómo es WireGuard en RouterOS 7?
+A: Creás la interfaz, que escucha por defecto en el puerto UDP trece dos tres uno, le das una IP de un rango propio, y agregás un peer por técnico con su clave pública y allowed-address barra treinta y dos, o sea, solo la IP de ese técnico.
+B: ¿Un peer por técnico? Siempre compartimos uno.
+A: Igual que con los usuarios: si alguien se va, borrás su peer. Y la trampa que avisa la documentación: el firewall por defecto bloquea el túnel hasta que aceptás ese puerto UDP en input, arriba del drop.
+B: Lo de la lección cuatro otra vez. El orden.
+A: Todo vuelve. Otro detalle: si el router o la notebook están detrás de NAT, persistent keepalive en veinticinco segundos mantiene vivo el túnel. Y desde la siete punto veintiuno el router te genera la configuración del cliente con un código QR.
+B: Eso para el celular es una maravilla.
+A: Caso de obra: un cliente con cuatro sucursales. En cada router, una interfaz de gestión WireGuard; cada técnico con su peer. En la notebook, allowed IPs solo con las redes de gestión, no todo el tráfico.
+B: Así navegás normal y solo lo de gestión va por el túnel.
+A: El laboratorio: creás la interfaz, el peer de tu notebook, la regla de input con place-before, y probás entrar por WinBox a la IP del túnel.
+B: Veinte minutos.
+A: Y desde ese momento, a un cliente se entra por túnel, nunca por un puerto abierto.

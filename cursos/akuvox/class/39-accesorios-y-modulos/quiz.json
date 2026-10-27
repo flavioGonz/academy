@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Cableás una cerradura que abre al cortarle la energía desde la salida de 12 V del portero. ¿Qué modo usás?",
+  "options": [
+   "Triggered by Open Relay, con GND y NO",
+   "Sin salida",
+   "DTMF",
+   "Always, con GND y NC"
+  ],
+  "answer": 3,
+  "why": "La tabla de 12 V indica para cerraduras NC conectar GND y NC con la salida en modo Always: al disparar, el relé corta y la cerradura abre."
+ },
+ {
+  "q": "¿Qué es el Bkey según el menú de Akuvox?",
+  "options": [
+   "Un lector UHF",
+   "Una fuente",
+   "Una tarjeta de acceso Bluetooth",
+   "Un monitor"
+  ],
+  "answer": 2,
+  "why": "Akuvox lo lista como Bluetooth Access Card."
+ },
+ {
+  "q": "Vas a instalar un R29C-L en pared. ¿De dónde sacás el soporte?",
+  "options": [
+   "Cualquier soporte del R29 sirve",
+   "De la ficha del R29: el R29C-L tiene soporte de pared propio",
+   "Del X915",
+   "No lleva soporte"
+  ],
+  "answer": 1,
+  "why": "La ficha del R29 lista un R29C-L On-Wall Mounting Bracket separado del de R29C."
+ }
+]

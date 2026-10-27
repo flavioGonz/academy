@@ -1,0 +1,35 @@
+[
+ {
+  "q": "¿Cuál es la tensión mínima que el manual de Bosch admite en el último elemento de un lazo LSN?",
+  "options": [
+   "15 V",
+   "5 V",
+   "12 V",
+   "24 V"
+  ],
+  "answer": 0,
+  "why": "El System manual fija 30 V en bornes y 15 V como tensión final mínima del bus, que no puede bajar de ese límite."
+ },
+ {
+  "q": "Un lazo tiene 700 m de cable entre las entradas de varios FLM y los indicadores remotos (cable sin aislador). ¿Qué pasa?",
+  "options": [
+   "Está bien, el límite es el del lazo",
+   "Hay que pasar a LSN classic",
+   "Solo importa si son sirenas",
+   "Supera los 500 m de cable no aislado que permite el manual"
+  ],
+  "answer": 3,
+  "why": "El manual limita a 500 m la suma de cable no aislado (entradas de FLM, línea NAC del FLM-420-NAC e indicadores remotos)."
+ },
+ {
+  "q": "Tu cuenta de banco da que un lazo de 900 m queda en 16 V al final. ¿Qué hacés?",
+  "options": [
+   "Lo instalás, pasa",
+   "Subís la tensión del módulo",
+   "Lo corrés en Safety Systems Designer antes de tirar cable, porque está en el límite",
+   "Cambiás a cable de 0,6 mm"
+  ],
+  "answer": 2,
+  "why": "La cuenta a mano es una alerta temprana; el cálculo oficial que usa Bosch, con todos los datos del proyecto, es el de Safety Systems Designer."
+ }
+]

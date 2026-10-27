@@ -1,0 +1,21 @@
+A: Tercera. Llegaste a la obra, el controlador anda. Enchufás un access point y... no aparece nada.
+B: [suspiro] El momento más largo del día.
+A: Vamos a entender qué pasa por abajo. El equipo no sabe dónde está el controlador. Entonces grita: manda un broadcast al puerto UDP veintinueve mil ochocientos diez en su subred.
+B: Y el controlador, que está escuchando ese puerto, le contesta.
+A: Exacto. Por eso, si no aparece en Pending, lo primero es: ¿están en la misma VLAN?
+B: ¿Eso dicen las fuentes?
+A: Tres de cuatro que hablan de adopción. Una guía de Docker lo dice directo: si nada aparece, casi siempre el equipo está en otra VLAN o subred.
+B: ¿Y cuando aparece pero falla?
+A: Ahí se lee el mensaje. La guía oficial de adopción fallida separa los casos. Si dice usuario o contraseña incorrectos, es que el equipo ya tiene credenciales. Probás las de su web local, o si estaba en otro controlador, las buscás en el dispositivo account de ese sitio.
+B: Me pasó con un gateway que configuré a mano para darle internet primero.
+A: Justamente, un hosting de controladores lo cuenta: salta adopt failed, te pide usuario y clave, ponés los de la GUI local y adopta normal.
+B: ¿Y si no responde?
+A: Si dice que el equipo no responde a los comandos, revisás tags de VLAN en todos los puertos hasta el DHCP, loops, y el firewall o el antivirus de la PC donde corre el controlador software.
+B: ¿Y los equipos usados?
+A: Reset de fábrica antes. Un switch sin botón se resetea por consola, a treinta y ocho mil cuatrocientos baudios, entrando a BootUtil.
+B: Mirá vos, eso no lo tenía.
+A: Y un detalle: una vez adoptado, la GUI local deja de servir. El equipo usa las credenciales que define el sitio.
+B: Laboratorio.
+A: Adoptá un AP en la misma VLAN que el controlador. Después, cambiale la clave en su web local, olvidalo del controlador y adoptalo otra vez, para ver el adopt failed y resolverlo.
+B: Quince minutos.
+A: Y la próxima vez que no aparezca nada, ya sabés por dónde empezar.

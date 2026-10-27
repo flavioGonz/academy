@@ -1,0 +1,22 @@
+A: Lección ocho. Grupo o cola. Cliente: "quiero que cuando llamen suene en todos lados".
+B: Grupo de llamada y listo.
+A: Muchas veces sí. El grupo de llamada en la UCM puede sonar en todos a la vez o en orden, cada miembro sesenta segundos por defecto, y tiene una opción para saltear a los que están hablando.
+B: ¿Y cuándo uso cola?
+A: Cuando hay espera. Si a veces entran más llamadas que gente para atender, la cola las retiene con música, en orden, y las reparte a agentes según una estrategia.
+B: ¿Qué estrategias hay?
+A: Seis. Ring All, que es la de fábrica, Linear, Least Recent, Fewest Calls, Random y Round Robin. Para un equipo que quiere repartir parejo, Least Recent o Fewest Calls andan bien.
+B: ¿Y los tiempos?
+A: Según el manual: treinta segundos sonando por agente, cinco de reintento antes del siguiente, y diez de descanso después de cortar.
+B: Ese descanso me gusta, que el agente respire.
+A: Y lo clave: largo máximo de cola y destino de desborde. Si se llena, el que llama va a otro lado en vez de escuchar música para siempre.
+B: Claro. ¿Y si nadie atiende nunca?
+A: Desborde a un grupo o al buzón. El buzón se entra con asterisco noventa y siete desde la propia interna. El PIN es numérico, de cuatro o más, y el manual rechaza uno dos tres cuatro o uno uno uno uno.
+B: [risas] Los dos favoritos.
+A: Y conviene mandarlo al correo, que necesita el SMTP configurado.
+B: ¿Hay algo de call center más fino?
+A: El blog de Grandstream destaca la devolución de llamada: después de un rato en espera, el que llama deja su número y la central lo llama cuando le toca, sin perder el lugar.
+B: ¿Cuántas fuentes?
+A: Dos: el manual y el blog, sin contradicciones.
+B: ¿Laboratorio?
+A: Quince minutos: un grupo de dos internas y una cola con tres agentes, Least Recent y desborde al grupo.
+B: Y la próxima vez el cliente elige con la diferencia clara, no por el nombre más lindo.

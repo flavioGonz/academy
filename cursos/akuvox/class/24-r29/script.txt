@@ -1,0 +1,21 @@
+A: Lección veinticuatro, una sola estrella: el R29.
+B: El que aparece en todos los ejemplos de Akuvox.
+A: Exacto, la mitad de las guías lo usan de modelo. Y es de los pocos con ficha propia leída. Android, pantalla táctil de siete pulgadas, frente de aluminio, montaje de superficie o embutido, IP65 e IK06.
+B: IK06 no es mucho para la calle.
+A: Es un dato para tener en cuenta. Si el pliego pide más impacto, la serie X de acero tiene fichas con IK más alto.
+B: ¿Versiones?
+A: Cuatro. R29S con una cámara. R29C con doble cámara y Bluetooth. R29C-L con módulo LTE. Y R29C-T con lector de huella. Todos con tarjetas de las dos frecuencias.
+B: ¿Y en credenciales cambian?
+A: Sí. La tabla de métodos: el R29C hace PIN, tarjeta, rostro, Bluetooth y QR. El R29CT cambia el QR por huella. El R29S no tiene Bluetooth.
+B: ¿Alimentación?
+A: Acá la historia de la lección. El R29 en general va con PoE at o fuente de doce voltios dos amperes y medio. Pero el R29C-L, el de LTE, no tiene PoE. Fuente de doce voltios uno y medio. Si lo instalás contando con el switch, no arranca.
+B: [risas] Y ahí te volvés a buscar una fuente.
+A: Tal cual. El relé aguanta treinta voltios tres amperes, y la versión uno punto uno da doce voltios quinientos miliamperes por el relé.
+B: ¿Y entrar?
+A: Nueve nueve nueve nueve, tres ocho ocho ocho, System Info. Y en la parte HTTP lo vimos: Intercom, Relay, Open Relay via HTTP, y Setting, HTTP API.
+B: ¿Algo más?
+A: Desde el firmware veintinueve punto treinta punto diez punto setecientos cuarenta y cinco lee patentes de cámaras Hikvision y Dahua. Y tiene accesorios propios: cubiertas de lluvia y soportes para pared y embutir.
+B: ¿Laboratorio?
+A: Quince minutos. Identificás la versión por la etiqueta y la ficha, sacás IP y firmware, y armás la lista: versión, alimentación, cubierta de lluvia y soporte.
+B: Y si es C-L, fuente.
+A: Siempre fuente.

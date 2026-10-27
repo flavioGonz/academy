@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-labelledby="t d">
+  <title id="t">Input y forward en el firewall de RouterOS</title>
+  <desc id="d">El tráfico que va al router pasa por la cadena input; el que atraviesa el router hacia otra red pasa por forward. Las reglas se leen de arriba abajo y manda la primera que coincide.</desc>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#0A63B8"/></marker>
+    <marker id="ahc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#17A8D4"/></marker>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="1200" height="675" fill="#F7FAFD"/>
+  <rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+
+  <!-- encabezado -->
+  <text x="48" y="58" font-family="JetBrains Mono" font-size="15" letter-spacing="2.4" fill="#17A8D4">MIKROTIK</text>
+  <text x="48" y="96" font-family="Familjen Grotesk" font-weight="600" font-size="34" fill="#04223D">¿Va al router o pasa por el router?</text>
+
+  <!-- internet / WAN -->
+  <g transform="translate(48 250)">
+    <rect width="190" height="120" rx="18" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+    <circle cx="44" cy="60" r="22" fill="none" stroke="#0A63B8" stroke-width="2"/>
+    <path d="M22 60h44M44 38c-8 7-8 37 0 44M44 38c8 7 8 37 0 44" fill="none" stroke="#0A63B8" stroke-width="2"/>
+    <text x="80" y="54" font-family="Instrument Sans" font-weight="600" font-size="19" fill="#04223D">Internet</text>
+    <text x="80" y="78" font-family="JetBrains Mono" font-size="15" fill="#6E88A1">ether1 · WAN</text>
+  </g>
+
+  <!-- router -->
+  <g transform="translate(430 190)">
+    <rect width="340" height="240" rx="22" fill="#011E38"/>
+    <text x="28" y="44" font-family="JetBrains Mono" font-size="14" letter-spacing="2" fill="#17A8D4">ROUTER</text>
+    <text x="28" y="74" font-family="Familjen Grotesk" font-weight="600" font-size="22" fill="#FFFFFF">RouterOS 7</text>
+    <!-- servicio del router -->
+    <rect x="28" y="100" width="284" height="56" rx="12" fill="#0B3A66" stroke="#17A8D4" stroke-width="1.5"/>
+    <text x="48" y="126" font-family="Instrument Sans" font-weight="600" font-size="17" fill="#FFFFFF">WinBox · SSH · DNS · API</text>
+    <text x="48" y="146" font-family="Instrument Sans" font-size="14" fill="#9FC3E3">servicios del propio router</text>
+    <!-- puertos -->
+    <g font-family="JetBrains Mono" font-size="12" fill="#9FC3E3">
+      <rect x="28" y="186" width="44" height="28" rx="6" fill="none" stroke="#4E7396"/><text x="37" y="205">e1</text>
+      <rect x="80" y="186" width="44" height="28" rx="6" fill="none" stroke="#4E7396"/><text x="89" y="205">e2</text>
+      <rect x="132" y="186" width="44" height="28" rx="6" fill="none" stroke="#4E7396"/><text x="141" y="205">e3</text>
+      <rect x="184" y="186" width="44" height="28" rx="6" fill="none" stroke="#4E7396"/><text x="193" y="205">e4</text>
+    </g>
+  </g>
+
+  <!-- LAN -->
+  <g transform="translate(962 250)">
+    <rect width="190" height="120" rx="18" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+    <rect x="22" y="38" width="44" height="30" rx="4" fill="none" stroke="#0A63B8" stroke-width="2"/>
+    <path d="M34 80h20M44 68v12" stroke="#0A63B8" stroke-width="2"/>
+    <text x="80" y="54" font-family="Instrument Sans" font-weight="600" font-size="19" fill="#04223D">LAN</text>
+    <text x="80" y="78" font-family="JetBrains Mono" font-size="15" fill="#6E88A1">NVR · PCs</text>
+  </g>
+
+  <!-- flecha input: internet -> servicios del router -->
+  <path d="M238 290 C 330 290, 360 318, 452 318" fill="none" stroke="#0A63B8" stroke-width="3" marker-end="url(#ah)"/>
+  <rect x="268" y="236" width="118" height="34" rx="17" fill="#0A63B8"/>
+  <text x="327" y="259" text-anchor="middle" font-family="JetBrains Mono" font-weight="600" font-size="16" fill="#FFFFFF">input</text>
+
+  <!-- flecha forward: internet -> a traves -> LAN -->
+  <path d="M238 340 C 330 340, 360 470, 600 470 S 870 340, 962 340" fill="none" stroke="#17A8D4" stroke-width="3" marker-end="url(#ahc)"/>
+  <rect x="540" y="452" width="132" height="34" rx="17" fill="#17A8D4"/>
+  <text x="606" y="475" text-anchor="middle" font-family="JetBrains Mono" font-weight="600" font-size="16" fill="#FFFFFF">forward</text>
+
+  <!-- explicaciones -->
+  <g font-family="Instrument Sans" font-size="17" fill="#41627F">
+    <text x="48" y="146"><tspan font-weight="600" fill="#0A63B8">input</tspan>: el destino es una IP del router (también la de la LAN).</text>
+    <text x="48" y="172"><tspan font-weight="600" fill="#0B6E8E">forward</tspan>: el router solo lo deja pasar hacia otra red.</text>
+  </g>
+
+  <!-- orden de reglas -->
+  <g transform="translate(48 530)">
+    <text x="0" y="0" font-family="JetBrains Mono" font-size="14" letter-spacing="2" fill="#6E88A1">SE LEE DE ARRIBA ABAJO · MANDA LA PRIMERA QUE COINCIDE</text>
+    <g font-family="JetBrains Mono" font-size="15">
+      <rect x="0" y="18" width="1104" height="34" rx="8" fill="#E3F5EC"/>
+      <text x="16" y="41" fill="#0E8F5E">1  accept  src-address-list=admins  dst-port=8291   ← lo permitido, arriba</text>
+      <rect x="0" y="58" width="1104" height="34" rx="8" fill="#FFFFFF" stroke="#DDE8F2"/>
+      <text x="16" y="81" fill="#41627F">2  accept  connection-state=established,related</text>
+      <rect x="0" y="98" width="1104" height="34" rx="8" fill="#FCEAE6"/>
+      <text x="16" y="121" fill="#D2492F">3  drop    in-interface-list=!LAN                  ← el drop, abajo (place-before)</text>
+    </g>
+  </g>
+</svg>

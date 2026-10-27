@@ -1,0 +1,19 @@
+A: Lección ocho: Proxmox Backup Server, el PBS. ¿Por qué no alcanza con vzdump a un disco?
+B: Porque cada backup es completo y en una semana te comés el disco.
+A: Ese es uno. PBS deduplica: guarda los bloques en pedacitos y si se repiten no los vuelve a guardar. Pero trae tres tareas que mucha gente no entiende: prune, garbage collection y verify.
+B: A ver, despacio.
+A: Prune decide qué backups se quedan según la retención. Pero según la documentación oficial, prune solo borra los índices. El espacio no se libera.
+B: ¿Entonces?
+A: Lo libera garbage collection, que pasa después y borra los pedazos que nadie usa. Y espera un día de gracia por seguridad. La doc sugiere arrancar con una vez por semana.
+B: Ah, por eso el disco no baja cuando achicás la retención.
+A: Exacto. Y verify vuelve a leer los backups y compara los checksums. La doc recomienda reverificar todo al menos una vez por mes, por la degradación de los discos. Y acá viene lo interesante: si un ransomware empieza a cifrar los backups, los verify empiezan a fallar. Te sirven de alarma.
+B: Buenísimo. ¿Y quién conecta el Proxmox al PBS?
+A: Ahí hay discusión. La wiki de Thomas Krenn conecta con root. La guía de Hake Hardware crea un usuario dedicado con el rol DatastoreBackup, que puede crear backups pero no borrarlos. Si alguien toma el Proxmox, no puede borrar tus copias.
+B: Me quedo con la segunda, obvio.
+A: Cinco de siete fuentes sobre PBS coinciden en prune, GC y verify. Otro detalle de la doc: retené de más al principio. Siempre podés achicar, pero no podés recrear backups del pasado.
+B: ¿Y la copia fuera del sitio?
+A: La regla tres dos uno: tres copias, dos medios, una afuera. PBS lo hace con un sync job a otro PBS remoto.
+B: ¿Laboratorio?
+A: En el PBS, en el datastore, Prune and GC: un prune job con retención, garbage collection los domingos, y un verify job diario. Después creás el usuario de backup con su token y el rol DatastoreBackup.
+B: Veinte minutos.
+A: Y ese datastore queda cuidándose solo desde el primer día.

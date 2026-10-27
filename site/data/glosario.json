@@ -1,0 +1,4364 @@
+{
+ "version": "2026-10-27",
+ "terms": [
+  {
+   "id": "rfc",
+   "term": "RFC",
+   "aliases": [
+    "Request for Comments"
+   ],
+   "cat": "Normas",
+   "short": "Request for Comments: los documentos numerados donde el IETF publica los protocolos de internet.",
+   "long": "La primera RFC se publicó en 1969, cuando internet era ARPANET. Cada RFC tiene un número fijo que nunca se reutiliza: si un protocolo cambia, sale una RFC nueva que reemplaza (obsoletes) a la anterior. Por eso un equipo puede mostrar el nombre de una RFC vieja, como RFC 2833, aunque la vigente sea otra.",
+   "case": true
+  },
+  {
+   "id": "ietf",
+   "term": "IETF",
+   "aliases": [
+    "Internet Engineering Task Force"
+   ],
+   "cat": "Normas",
+   "short": "Internet Engineering Task Force: el grupo abierto que desarrolla los estándares de internet y los publica como RFC.",
+   "long": "No es un organismo de gobierno: trabaja con grupos de voluntarios de empresas y universidades. De ahí salieron IP, TCP, DNS, HTTP, SIP, IPsec y casi todos los protocolos del curso.",
+   "case": true
+  },
+  {
+   "id": "ieee",
+   "term": "IEEE",
+   "aliases": [
+    "Institute of Electrical and Electronics Engineers"
+   ],
+   "cat": "Normas",
+   "short": "Institute of Electrical and Electronics Engineers: la asociación que publica, entre otras, las normas 802 de redes locales.",
+   "long": "De la familia IEEE 802 salen Ethernet (802.3), las VLAN (802.1Q), el PoE (802.3af, 802.3at, 802.3bt) y el WiFi (802.11). Cuando una ficha dice 802.3at, está citando una norma del IEEE.",
+   "case": true
+  },
+  {
+   "id": "iana",
+   "term": "IANA",
+   "aliases": [
+    "Internet Assigned Numbers Authority"
+   ],
+   "cat": "Normas",
+   "short": "Internet Assigned Numbers Authority: el organismo que administra los números únicos de internet, como bloques de IP y puertos.",
+   "long": "Reparte bloques IPv4 e IPv6 a los registros regionales (en nuestra región, LACNIC) y mantiene la lista de puertos conocidos. Su stock central de IPv4 se agotó en 2011, lo que empujó a los proveedores al CGNAT.",
+   "case": true
+  },
+  {
+   "id": "iso-iec",
+   "term": "ISO/IEC",
+   "aliases": [
+    "ISO",
+    "IEC"
+   ],
+   "cat": "Normas",
+   "short": "ISO e IEC: los organismos internacionales de normalización; IEC se ocupa de lo eléctrico y electrónico.",
+   "long": "Muchas normas que aparecen en fichas son de ellos o conjuntas: ISO/IEC 14443 para tarjetas de 13,56 MHz, IEC 60529 para el grado IP, IEC 62262 para el grado IK e IEC 60118-4 para lazos de inducción.",
+   "case": true
+  },
+  {
+   "id": "tia-eia",
+   "term": "TIA/EIA",
+   "aliases": [
+    "TIA",
+    "EIA"
+   ],
+   "cat": "Normas",
+   "short": "Asociaciones de la industria electrónica y de telecomunicaciones de Estados Unidos que publican normas de cableado y comunicación.",
+   "long": "De ellas viene RS485 (TIA/EIA-485) y también las normas de cableado estructurado que definen categorías de UTP y cómo se ponchan los RJ45 (T568A y T568B).",
+   "case": true
+  },
+  {
+   "id": "3gpp",
+   "term": "3GPP",
+   "aliases": [],
+   "cat": "Normas",
+   "short": "3rd Generation Partnership Project: el consorcio que define los estándares de telefonía celular, de 3G a 5G.",
+   "long": "Publica sus normas en Releases numerados; LTE quedó definido en el Release 8, de 2008.",
+   "case": true
+  },
+  {
+   "id": "nist",
+   "term": "NIST",
+   "aliases": [
+    "NIST SP 800-63B"
+   ],
+   "cat": "Normas",
+   "short": "Instituto Nacional de Estándares y Tecnología de Estados Unidos, que publica guías de seguridad muy citadas.",
+   "long": "Su guía SP 800-63B, sobre autenticación, cambió el consejo clásico de claves cortas con símbolos raros: hoy pone el peso en el largo de la clave y en no reutilizarla.",
+   "case": true
+  },
+  {
+   "id": "cisa",
+   "term": "CISA",
+   "aliases": [],
+   "cat": "Seguridad",
+   "short": "Cybersecurity and Infrastructure Security Agency: la agencia de ciberseguridad de Estados Unidos que publica avisos de vulnerabilidades.",
+   "long": "Sus avisos para sistemas industriales llevan un código ICSA. En 2023 publicó el ICSA-23-068-01 sobre el Akuvox E11, con la recomendación de desconectarlo de internet.",
+   "case": true
+  },
+  {
+   "id": "icsa",
+   "term": "ICSA",
+   "aliases": [],
+   "cat": "Seguridad",
+   "short": "Prefijo de los avisos de CISA sobre sistemas de control industrial, como ICSA-23-068-01.",
+   "long": "El número indica año y día de publicación. Cada aviso lista los equipos y versiones afectados, la gravedad (CVSS) y las medidas recomendadas.",
+   "case": true
+  },
+  {
+   "id": "cve",
+   "term": "CVE",
+   "aliases": [
+    "CVE-2018-14847"
+   ],
+   "cat": "Seguridad",
+   "short": "Common Vulnerabilities and Exposures: el identificador público y único de cada vulnerabilidad conocida.",
+   "long": "Tiene la forma CVE-año-número y sirve para que fabricantes, avisos y escáneres hablen de la misma falla. Por ejemplo, CVE-2018-14847 es la falla de WinBox que permitía leer credenciales en RouterOS 6.42 y anteriores.",
+   "case": true
+  },
+  {
+   "id": "cvss",
+   "term": "CVSS",
+   "aliases": [],
+   "cat": "Seguridad",
+   "short": "Common Vulnerability Scoring System: la escala de 0 a 10 con la que se mide la gravedad de una vulnerabilidad.",
+   "long": "De 9 a 10 es crítica. Un 9,8 como el del E11 suele indicar una falla explotable por red, sin credenciales y con control total del equipo.",
+   "case": true
+  },
+  {
+   "id": "claroty",
+   "term": "Claroty",
+   "aliases": [
+    "Team82",
+    "Claroty Team82"
+   ],
+   "cat": "Seguridad",
+   "short": "Empresa de seguridad para sistemas industriales y de edificios; Team82 es su equipo de investigación.",
+   "long": "En marzo de 2023 publicó 13 vulnerabilidades del portero Akuvox E11 y contó unos 5.000 Akuvox visibles desde internet con buscadores como Censys.",
+   "case": false
+  },
+  {
+   "id": "minimo-privilegio",
+   "term": "mínimo privilegio",
+   "aliases": [
+    "principio de mínimo privilegio"
+   ],
+   "cat": "Seguridad",
+   "short": "Dar a cada usuario, técnico o integración solo los permisos que necesita para su tarea, y nada más.",
+   "long": "Lo formularon Saltzer y Schroeder en 1975. En obra se traduce en un usuario por técnico y por sistema, ninguno con admin: si una credencial se filtra, el daño queda acotado y el log dice quién fue.",
+   "case": false
+  },
+  {
+   "id": "botnet",
+   "term": "botnet",
+   "aliases": [
+    "botnets"
+   ],
+   "cat": "Seguridad",
+   "short": "Red de equipos infectados que un atacante controla a distancia para usarlos todos juntos.",
+   "long": "Suelen armarse con equipos de red, cámaras y porteros expuestos a internet con claves de fábrica o firmware sin parches. Se usan para ataques de denegación de servicio, proxys o minería.",
+   "case": false
+  },
+  {
+   "id": "mirai",
+   "term": "Mirai",
+   "aliases": [],
+   "cat": "Seguridad",
+   "short": "Botnet de 2016 armada con cámaras IP, DVR y routers que tenían usuario y clave de fábrica.",
+   "long": "Probaba una lista corta de claves conocidas contra telnet en todo internet y en pocos meses juntó cientos de miles de equipos. Marcó un antes y un después: desde entonces la recomendación es cambiar la clave de fábrica y no exponer equipos de seguridad.",
+   "case": true
+  },
+  {
+   "id": "meris",
+   "term": "Mēris",
+   "aliases": [
+    "Meris"
+   ],
+   "cat": "Seguridad",
+   "short": "Botnet de 2021 formada en su mayoría por routers MikroTik tomados años antes.",
+   "long": "Llegó a 21,8 millones de pedidos por segundo contra Yandex. MikroTik explicó que no había falla nueva: eran equipos comprometidos en 2018 por CVE-2018-14847, actualizados después, pero con la clave filtrada sin cambiar y la configuración del atacante adentro (scheduler, fetch, proxy SOCKS).",
+   "case": true
+  },
+  {
+   "id": "honeypot",
+   "term": "honeypot",
+   "aliases": [
+    "honeypots"
+   ],
+   "cat": "Seguridad",
+   "short": "Equipo trampa expuesto a propósito para observar cómo lo atacan.",
+   "long": "Sirve para medir qué pasa con un equipo real en internet. Un honeypot con un RouterOS viejo fue tomado en minutos por la falla del firmware, aunque la clave era fuerte.",
+   "case": false
+  },
+  {
+   "id": "censys",
+   "term": "Censys",
+   "aliases": [],
+   "cat": "Seguridad",
+   "short": "Buscador que recorre internet y registra qué equipos y servicios responden en cada IP.",
+   "long": "Igual que Shodan, permite encontrar porteros, cámaras o routers expuestos por modelo o versión. Si un equipo de un cliente aparece ahí, cualquiera puede encontrarlo.",
+   "case": true
+  },
+  {
+   "id": "nmap",
+   "term": "nmap",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "Escáner de puertos de código abierto, publicado en 1997, para ver qué servicios responden en un equipo.",
+   "long": "Con -sS manda un SYN a cada puerto TCP: SYN-ACK es abierto, RST cerrado y silencio filtrado. Con -sU prueba UDP. Se usa para verificar que una VLAN o un firewall dejan pasar solo lo que tienen que dejar.",
+   "case": false
+  },
+  {
+   "id": "lista-blanca",
+   "term": "lista blanca",
+   "aliases": [
+    "listas blancas",
+    "whitelist"
+   ],
+   "cat": "Seguridad",
+   "short": "Lista de lo único que está permitido; todo lo que no figura se rechaza.",
+   "long": "Es el criterio inverso de una lista negra y el más seguro para equipos de acceso. En un portero puede ser la lista de números que pueden abrir por DTMF, o de IP que pueden usar la API.",
+   "case": false
+  },
+  {
+   "id": "hash",
+   "term": "hash",
+   "aliases": [
+    "resumen criptográfico"
+   ],
+   "cat": "Seguridad",
+   "short": "Resumen de largo fijo que se calcula a partir de un dato; no se puede volver atrás para obtener el original.",
+   "long": "Sirve para comprobar que alguien conoce una clave sin mandarla: los dos extremos calculan el hash y comparan. MD5 y SHA-1 se consideran débiles; SHA-256 es el reemplazo habitual.",
+   "case": false
+  },
+  {
+   "id": "md5",
+   "term": "MD5",
+   "aliases": [],
+   "cat": "Seguridad",
+   "short": "Algoritmo de hash de 128 bits, publicado en 1992 y hoy considerado débil.",
+   "long": "Fue el hash original de la autenticación HTTP Digest y de muchos equipos. Se pueden fabricar colisiones, por eso las normas nuevas prefieren SHA-256, aunque en Digest todavía se ve mucho.",
+   "case": true
+  },
+  {
+   "id": "sha256",
+   "term": "SHA-256",
+   "aliases": [
+    "SHA",
+    "SHA-2"
+   ],
+   "cat": "Seguridad",
+   "short": "Algoritmo de hash de 256 bits de la familia SHA-2, el reemplazo habitual de MD5 y SHA-1.",
+   "long": "Lo usan HTTP Digest moderno (RFC 7616), IPsec, certificados y firmas de firmware. En una propuesta IPsec aparece como algoritmo de integridad (sha256).",
+   "case": true
+  },
+  {
+   "id": "aes",
+   "term": "AES",
+   "aliases": [
+    "AES-256",
+    "AES256",
+    "aes-256-cbc"
+   ],
+   "cat": "Seguridad",
+   "short": "Advanced Encryption Standard: el algoritmo de cifrado simétrico estándar, con claves de 128, 192 o 256 bits.",
+   "long": "Lo eligió el NIST en 2001 para reemplazar a DES. Es el cifrado típico de IPsec, de WiFi WPA2 y de tarjetas como DESFire. En una propuesta IPsec, aes-256-cbc o aes-256-gcm son elecciones habituales.",
+   "case": true
+  },
+  {
+   "id": "base64",
+   "term": "Base64",
+   "aliases": [],
+   "cat": "Seguridad",
+   "short": "Forma de escribir datos binarios con letras y números; es una codificación, no un cifrado.",
+   "long": "La usa la autenticación HTTP Basic para mandar usuario:clave. Cualquiera que capture el pedido lo decodifica en un segundo, por eso Basic sin HTTPS deja la clave a la vista.",
+   "case": false
+  },
+  {
+   "id": "tls",
+   "term": "TLS",
+   "aliases": [
+    "SSL"
+   ],
+   "cat": "Seguridad",
+   "short": "Transport Layer Security: la capa que cifra y autentica una conexión, como en HTTPS.",
+   "long": "Es el sucesor de SSL, que creó Netscape en los noventa; TLS 1.0 se publicó en 1999. Cifra todo lo que viaja y, con certificados, confirma con quién estás hablando. En SIP se usa por el puerto 5061 para cifrar la señalización.",
+   "case": true
+  },
+  {
+   "id": "clave-publica",
+   "term": "clave pública",
+   "aliases": [
+    "clave privada",
+    "public-key",
+    "PublicKey",
+    "PrivateKey"
+   ],
+   "cat": "VPN",
+   "short": "Par de claves de la criptografía asimétrica: la privada se queda en el equipo y la pública se comparte.",
+   "long": "Lo que se cifra con una solo se abre con la otra. En WireGuard cada punta genera su par y le pasa la pública al otro extremo; la privada nunca sale del equipo. Borrar la clave pública de un peer es darlo de baja.",
+   "case": false
+  },
+  {
+   "id": "lan",
+   "term": "LAN",
+   "aliases": [
+    "red local"
+   ],
+   "cat": "Redes",
+   "short": "Local Area Network: la red local de un sitio, detrás del router.",
+   "long": "En RouterOS la defconf agrupa las interfaces internas en la lista LAN, y muchas reglas del firewall confían en esa lista. Si sumás una red interna nueva y no la agregás a LAN, quedan reglas que no la cubren.",
+   "case": true
+  },
+  {
+   "id": "wan",
+   "term": "WAN",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Wide Area Network: el lado del router que da a internet o al proveedor.",
+   "long": "En RouterOS la defconf pone ether1 en la lista WAN, y el firewall y el masquerade se apoyan en esa lista. Si la WAN pasa a PPPoE o sumás un segundo proveedor, esa interfaz también tiene que estar en WAN.",
+   "case": true
+  },
+  {
+   "id": "isp",
+   "term": "ISP",
+   "aliases": [
+    "proveedor de internet"
+   ],
+   "cat": "Redes",
+   "short": "Internet Service Provider: el proveedor que da la conexión a internet, como Antel.",
+   "long": "En configuraciones con dos salidas se suele nombrar ISP1 a la principal e ISP2 al respaldo.",
+   "case": true
+  },
+  {
+   "id": "ont",
+   "term": "ONT",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Optical Network Terminal: el equipo de fibra que el proveedor instala en el cliente.",
+   "long": "Convierte la fibra en Ethernet. Puede trabajar en modo router (hace NAT y entrega IP privada) o en modo puente (bridge), donde el router propio levanta la conexión, por ejemplo con PPPoE. Con Antel, el cambio de modo se pide al proveedor.",
+   "case": true
+  },
+  {
+   "id": "adsl",
+   "term": "ADSL",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Asymmetric Digital Subscriber Line: internet por el par telefónico de cobre, con más bajada que subida.",
+   "long": "Fue la banda ancha masiva antes de la fibra. Con ADSL se popularizó PPPoE para autenticar al cliente con usuario y clave.",
+   "case": true
+  },
+  {
+   "id": "ipv4",
+   "term": "IPv4",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "La versión 4 del protocolo IP, con direcciones de 32 bits como 192.168.88.1.",
+   "long": "Quedó definida en la RFC 791 de 1981. Tiene unos 4.300 millones de direcciones, que se agotaron; de ahí vienen las IP privadas, el NAT y el CGNAT.",
+   "case": true
+  },
+  {
+   "id": "ipv6",
+   "term": "IPv6",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "La versión 6 del protocolo IP, con direcciones de 128 bits.",
+   "long": "Se diseñó en los noventa para resolver el agotamiento de IPv4. Con tantas direcciones no necesita NAT, aunque su adopción todavía es parcial.",
+   "case": true
+  },
+  {
+   "id": "mascara",
+   "term": "máscara de red",
+   "aliases": [
+    "máscara",
+    "máscara de subred"
+   ],
+   "cat": "Redes",
+   "short": "El número que indica qué parte de una IP es la red y qué parte es el equipo, como /24 o 255.255.255.0.",
+   "long": "Define qué direcciones son vecinas directas. Con la máscara mal puesta, el gateway queda afuera de la red y el equipo no sale, aunque la IP esté bien.",
+   "case": false
+  },
+  {
+   "id": "cidr",
+   "term": "CIDR",
+   "aliases": [
+    "notación CIDR"
+   ],
+   "cat": "Redes",
+   "short": "Classless Inter-Domain Routing: la notación de prefijo, como /24 o /29, que dice cuántos bits son de red.",
+   "long": "Llegó en 1993 (RFC 1519) para reemplazar las clases A, B y C. Un /29 tiene 8 direcciones (6 usables), un /24 tiene 256. Es la forma en que los proveedores entregan bloques de IP fijas.",
+   "case": true
+  },
+  {
+   "id": "gateway",
+   "term": "gateway",
+   "aliases": [
+    "puerta de enlace",
+    "gateways"
+   ],
+   "cat": "Redes",
+   "short": "El router al que un equipo le manda todo lo que no es de su propia red.",
+   "long": "Tiene que estar dentro de la misma subred que el equipo. En un portero, sin gateway la llamada local anda pero la nube, el NTP y las actualizaciones no.",
+   "case": false
+  },
+  {
+   "id": "broadcast",
+   "term": "broadcast",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Mensaje que se manda a todos los equipos de la red local a la vez.",
+   "long": "Lo usan DHCP (el Discover), ARP y los descubrimientos de equipos. No cruza routers, por eso esas herramientas solo ven lo que está en el mismo segmento. También se llama así a la última dirección de una subred.",
+   "case": false
+  },
+  {
+   "id": "ruta-defecto",
+   "term": "ruta por defecto",
+   "aliases": [
+    "default route",
+    "rutas por defecto"
+   ],
+   "cat": "Redes",
+   "short": "La ruta 0.0.0.0/0: el camino que toma un paquete cuando no hay otra ruta más específica.",
+   "long": "Apunta al gateway del proveedor. Sin ella el router llega a sus vecinos pero no a internet. Con dos proveedores hay dos rutas por defecto con distinta distance.",
+   "case": false
+  },
+  {
+   "id": "mac",
+   "term": "MAC",
+   "aliases": [
+    "dirección MAC",
+    "MAC address"
+   ],
+   "cat": "Redes",
+   "short": "La dirección física de una placa de red: 6 bytes que la identifican dentro de la red local.",
+   "long": "Viene grabada de fábrica y figura en la etiqueta del equipo. Solo tiene sentido dentro del mismo segmento Ethernet: no cruza routers. Las nubes como SmartPlus la usan para identificar cada equipo.",
+   "case": true
+  },
+  {
+   "id": "arp",
+   "term": "ARP",
+   "aliases": [
+    "Address Resolution Protocol",
+    "arp-ping"
+   ],
+   "cat": "Redes",
+   "short": "Address Resolution Protocol: el mecanismo que averigua qué MAC tiene una IP dentro de la red local.",
+   "long": "Antes de mandar un paquete a un vecino, el equipo pregunta por broadcast quién tiene esa IP y guarda la respuesta en su tabla ARP. Dos equipos con la misma IP generan conflictos que se ven en esa tabla.",
+   "case": true
+  },
+  {
+   "id": "tcp",
+   "term": "TCP",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Transmission Control Protocol: transporte con conexión, que confirma la entrega y reenvía lo perdido.",
+   "long": "Lo usan HTTP, SSH, WinBox (8291) y RTSP (554). Arranca con el saludo SYN, SYN-ACK y ACK. Es confiable pero agrega demora, por eso la voz y el video en vivo prefieren UDP.",
+   "case": true
+  },
+  {
+   "id": "udp",
+   "term": "UDP",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "User Datagram Protocol: transporte sin conexión ni confirmación, rápido y liviano.",
+   "long": "Lo usan DNS, DHCP, NTP, SIP, RTP, WireGuard e IPsec con NAT-T. Si un paquete se pierde no se reenvía, lo que en voz es mejor que llegar tarde. Un escaneo UDP es lento porque un puerto abierto muchas veces no contesta.",
+   "case": true
+  },
+  {
+   "id": "syn",
+   "term": "SYN",
+   "aliases": [
+    "SYN-ACK"
+   ],
+   "cat": "Redes",
+   "short": "El primer paquete de una conexión TCP; el servidor responde SYN-ACK si el puerto está abierto.",
+   "long": "En el SYN cada punta anuncia también su MSS. Por eso el ajuste de MSS (change-mss) actúa sobre los SYN, y los escáneres como nmap -sS mandan solo SYN para ver qué contesta.",
+   "case": true
+  },
+  {
+   "id": "ack",
+   "term": "ACK",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Acknowledgement: la confirmación de que algo llegó.",
+   "long": "En TCP confirma los datos recibidos; en SIP es el mensaje con el que quien llamó confirma el 200 OK y la llamada queda establecida; en DHCP el Ack cierra la entrega de la IP.",
+   "case": true
+  },
+  {
+   "id": "rst",
+   "term": "RST",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Paquete TCP de reset: corta una conexión o indica que el puerto está cerrado.",
+   "long": "En un escaneo, un RST es la respuesta de un puerto cerrado; el silencio, en cambio, indica que un firewall está descartando.",
+   "case": true
+  },
+  {
+   "id": "icmp",
+   "term": "ICMP",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Internet Control Message Protocol: los mensajes de control y error de IP.",
+   "long": "Definido en la RFC 792. Ping usa echo, traceroute usa el aviso de TTL vencido y el descubrimiento de MTU usa el aviso de paquete demasiado grande. Bloquearlo entero rompe cosas que no parecen relacionadas.",
+   "case": true
+  },
+  {
+   "id": "ttl",
+   "term": "TTL",
+   "aliases": [
+    "Time To Live"
+   ],
+   "cat": "Redes",
+   "short": "Time To Live: un contador de vida. En IP limita los saltos de un paquete; en DNS, cuánto tiempo se guarda una respuesta.",
+   "long": "En IP cada router le resta 1 y descarta el paquete al llegar a 0, avisando por ICMP; traceroute aprovecha eso. En DNS el TTL está en segundos: con 60, como en IP Cloud, un cambio de IP se nota en un minuto.",
+   "case": true
+  },
+  {
+   "id": "ping",
+   "term": "ping",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "Herramienta que manda un ICMP echo y espera la respuesta para saber si un equipo es alcanzable.",
+   "long": "La escribió Mike Muuss en 1983. Dice si hay camino y cuánto tarda, no si un servicio anda. En RouterOS también la usa check-gateway para vigilar rutas.",
+   "case": true
+  },
+  {
+   "id": "traceroute",
+   "term": "traceroute",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "Herramienta que muestra por qué routers pasa un paquete hasta su destino.",
+   "long": "Manda paquetes con TTL creciente y anota quién avisa que se le terminó. Apareció a fines de los ochenta, de la mano de Van Jacobson. Sirve para ver hasta dónde llega el tráfico antes de cortarse.",
+   "case": true
+  },
+  {
+   "id": "dhcp",
+   "term": "DHCP",
+   "aliases": [
+    "Dynamic Host Configuration Protocol",
+    "servidor DHCP",
+    "cliente DHCP",
+    "reserva DHCP"
+   ],
+   "cat": "Redes",
+   "short": "Dynamic Host Configuration Protocol: entrega IP, máscara, gateway y DNS a los equipos de forma automática.",
+   "long": "Apareció en 1993 y su versión vigente es la RFC 2131. El intercambio es Discover, Offer, Request y Ack, y la IP se presta por un tiempo (lease). Para equipos de seguridad conviene IP fija o una reserva DHCP, así la dirección no cambia.",
+   "case": true
+  },
+  {
+   "id": "dhcpdiscover",
+   "term": "DHCPDISCOVER",
+   "aliases": [
+    "Discover"
+   ],
+   "cat": "Redes",
+   "short": "El primer mensaje de DHCP: el equipo pregunta por broadcast si hay un servidor que le dé IP.",
+   "long": "Le siguen Offer (el servidor ofrece), Request (el equipo la pide) y Ack (el servidor confirma). Si un equipo no pasa del Discover, no hay servidor DHCP alcanzable en ese segmento o VLAN.",
+   "case": true
+  },
+  {
+   "id": "lease",
+   "term": "lease",
+   "aliases": [
+    "leases"
+   ],
+   "cat": "Redes",
+   "short": "El préstamo de una IP por DHCP, por un tiempo determinado.",
+   "long": "A mitad del tiempo el cliente pide renovarlo; si vence sin renovación, la dirección vuelve al pool. Fue la gran novedad de DHCP frente a BOOTP, donde la asignación era fija.",
+   "case": false
+  },
+  {
+   "id": "bootp",
+   "term": "BOOTP",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Bootstrap Protocol: el antecesor de DHCP, para que equipos sin disco pidieran IP y arranque por red.",
+   "long": "Definido en la RFC 951 de 1985. La tabla MAC a IP se cargaba a mano. DHCP lo extendió con el lease y sigue usando sus mismos puertos.",
+   "case": true
+  },
+  {
+   "id": "opcion-121",
+   "term": "opción 121",
+   "aliases": [
+    "option 121"
+   ],
+   "cat": "Redes",
+   "short": "Opción de DHCP que manda rutas estáticas completas al cliente (RFC 3442).",
+   "long": "Cuando el servidor la manda, el cliente ignora el gateway de la opción 3. Es una causa poco conocida de equipos que reciben IP pero no la ruta por defecto que esperabas.",
+   "case": false
+  },
+  {
+   "id": "dns",
+   "term": "DNS",
+   "aliases": [
+    "Domain Name System"
+   ],
+   "cat": "Redes",
+   "short": "Domain Name System: el sistema que traduce nombres como ies.com.uy a direcciones IP.",
+   "long": "Es de 1987 (RFC 1034 y 1035) y reemplazó una lista de nombres que se copiaba a mano. Usa el puerto 53. Si los ping a IP andan pero a nombres no, el problema es de DNS.",
+   "case": true
+  },
+  {
+   "id": "ddns",
+   "term": "DDNS",
+   "aliases": [
+    "DNS dinámico",
+    "Dynamic DNS"
+   ],
+   "cat": "Redes",
+   "short": "DNS dinámico: un nombre que se actualiza solo cuando cambia la IP pública de un sitio.",
+   "long": "Nació cuando las conexiones hogareñas empezaron a recibir IP cambiantes. El equipo avisa a un servicio, que actualiza el nombre con TTL corto. Ojo: el nombre solo apunta; no abre puertos ni sirve detrás de CGNAT.",
+   "case": true
+  },
+  {
+   "id": "ntp",
+   "term": "NTP",
+   "aliases": [
+    "Network Time Protocol"
+   ],
+   "cat": "Redes",
+   "short": "Network Time Protocol: sincroniza el reloj de los equipos con servidores de hora, por UDP 123.",
+   "long": "Lo creó David Mills; la versión vigente es la RFC 5905. Con la hora bien, los logs de distintos equipos se pueden comparar, los horarios de acceso se cumplen y las SA de IPsec no vencen antes de tiempo.",
+   "case": true
+  },
+  {
+   "id": "snmp",
+   "term": "SNMP",
+   "aliases": [
+    "Simple Network Management Protocol"
+   ],
+   "cat": "Redes",
+   "short": "Simple Network Management Protocol: el protocolo clásico para consultar el estado de equipos de red desde un sistema de monitoreo.",
+   "long": "Permite leer tráfico, temperatura o estado de interfaces, por UDP 161. Las versiones 1 y 2c usan una comunidad que viaja en texto plano; la v3 agrega usuario y cifrado.",
+   "case": true
+  },
+  {
+   "id": "lldp",
+   "term": "LLDP",
+   "aliases": [
+    "Link Layer Discovery Protocol"
+   ],
+   "cat": "Redes",
+   "short": "Link Layer Discovery Protocol: protocolo estándar (IEEE 802.1AB) con el que cada equipo anuncia a sus vecinos quién es y por qué puerto está.",
+   "long": "Sirve para documentar qué hay conectado en cada boca de un switch. RouterOS lo entiende junto con su propio MNDP y con CDP de Cisco. Hacia el proveedor conviene no anunciar nada.",
+   "case": true
+  },
+  {
+   "id": "cdp",
+   "term": "CDP",
+   "aliases": [
+    "Cisco Discovery Protocol"
+   ],
+   "cat": "Redes",
+   "short": "Cisco Discovery Protocol: el protocolo propietario de Cisco para anunciarse a los equipos vecinos.",
+   "long": "Cumple el mismo papel que LLDP y MNDP. RouterOS lo entiende para convivir en redes con equipos Cisco.",
+   "case": true
+  },
+  {
+   "id": "mndp",
+   "term": "MNDP",
+   "aliases": [
+    "MikroTik Neighbor Discovery Protocol"
+   ],
+   "cat": "MikroTik",
+   "short": "MikroTik Neighbor Discovery Protocol: el anuncio con el que cada MikroTik informa su MAC, identidad y versión en la red local.",
+   "long": "Es lo que hace aparecer los equipos en la pestaña Neighbors de WinBox aunque no tengan IP. Viaja por capa 2, así que se limita a la lista LAN para no regalarle información al proveedor.",
+   "case": true
+  },
+  {
+   "id": "vlan",
+   "term": "VLAN",
+   "aliases": [
+    "VLANs",
+    "red virtual"
+   ],
+   "cat": "Redes",
+   "short": "Virtual LAN: una red lógica separada dentro del mismo switch o cable, identificada por un número.",
+   "long": "Se estandarizó con IEEE 802.1Q en 1998. Antes, separar redes era separar cables y switches. En seguridad electrónica es la forma de aislar porteros, cámaras y gestión del resto, con un router o firewall que decide qué pasa entre ellas.",
+   "case": true
+  },
+  {
+   "id": "8021q",
+   "term": "802.1Q",
+   "aliases": [
+    "IEEE 802.1Q"
+   ],
+   "cat": "Redes",
+   "short": "La norma IEEE que agrega a la trama Ethernet una etiqueta de 4 bytes con el número de VLAN.",
+   "long": "Es de 1998. El identificador tiene 12 bits: 4094 VLAN útiles, porque la 0 y la 4095 están reservadas. Gracias a la etiqueta, un mismo cable (trunk) lleva varias redes separadas.",
+   "case": true
+  },
+  {
+   "id": "trunk",
+   "term": "trunk",
+   "aliases": [
+    "trunks",
+    "puerto trunk",
+    "troncal de VLAN"
+   ],
+   "cat": "Redes",
+   "short": "Puerto o enlace que lleva varias VLAN a la vez, con sus tramas etiquetadas.",
+   "long": "Se usa entre switches, o entre el switch y el router. En la tabla de VLAN de RouterOS figura como tagged en cada VLAN que transporta. Lo que llega sin etiqueta a un trunk con ingress-filtering se descarta.",
+   "case": false
+  },
+  {
+   "id": "puerto-access",
+   "term": "puerto access",
+   "aliases": [
+    "puertos access"
+   ],
+   "cat": "Redes",
+   "short": "Puerto de switch para un equipo final, que pertenece a una sola VLAN y maneja tramas sin etiqueta.",
+   "long": "Lo que entra se asigna a la VLAN del PVID y lo que sale se entrega sin etiqueta. Cámaras, porteros y PC van en puertos access.",
+   "case": false
+  },
+  {
+   "id": "pvid",
+   "term": "PVID",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Port VLAN ID: la VLAN que un puerto le asigna a las tramas que llegan sin etiqueta.",
+   "long": "En un puerto access define a qué VLAN pertenece el equipo conectado. En RouterOS se configura en cada puerto del bridge.",
+   "case": true
+  },
+  {
+   "id": "tagged",
+   "term": "tagged",
+   "aliases": [
+    "untagged"
+   ],
+   "cat": "Redes",
+   "short": "Tagged: la trama sale con la etiqueta 802.1Q. Untagged: sale sin etiqueta, como la espera un equipo final.",
+   "long": "En la tabla de VLAN del bridge de RouterOS, cada VLAN lista sus puertos tagged y untagged. El propio bridge tiene que figurar tagged en la VLAN para que el router vea esa red.",
+   "case": true
+  },
+  {
+   "id": "ecmp",
+   "term": "ECMP",
+   "aliases": [
+    "Equal-Cost Multi-Path"
+   ],
+   "cat": "Redes",
+   "short": "Equal-Cost Multi-Path: dos o más rutas al mismo destino con la misma distancia, que se reparten el tráfico.",
+   "long": "Pasa sin querer cuando dos rutas por defecto quedan con igual distance. Para un esquema principal y respaldo, la del respaldo tiene que tener distancia mayor.",
+   "case": true
+  },
+  {
+   "id": "bgp",
+   "term": "BGP",
+   "aliases": [
+    "Border Gateway Protocol"
+   ],
+   "cat": "Redes",
+   "short": "Border Gateway Protocol: el protocolo de ruteo entre proveedores y grandes redes de internet.",
+   "long": "Permite redundancia real entre proveedores, pero pide IP propias y acuerdos con cada proveedor. En una oficina se resuelve con rutas por defecto y vigilancia de enlace.",
+   "case": true
+  },
+  {
+   "id": "failover",
+   "term": "failover",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Pasar automáticamente a un recurso de respaldo cuando el principal falla, por ejemplo de fibra a 4G.",
+   "long": "En RouterOS se arma con dos rutas por defecto de distinta distance y check-gateway, idealmente con rutas recursivas hacia hosts testigo para detectar fallas más allá del módem.",
+   "case": false
+  },
+  {
+   "id": "nat",
+   "term": "NAT",
+   "aliases": [
+    "Network Address Translation"
+   ],
+   "cat": "Redes",
+   "short": "Network Address Translation: el router reescribe direcciones de los paquetes, típicamente para que toda una red salga con una IP pública.",
+   "long": "Se describió en 1994 (RFC 1631) como parche temporal hasta IPv6 y quedó para siempre. Trabaja sobre el seguimiento de conexiones: solo el primer paquete pasa por las reglas. Tiene dos caras: cambiar el origen (src-nat, masquerade) o el destino (dst-nat).",
+   "case": true
+  },
+  {
+   "id": "dst-nat",
+   "term": "dst-nat",
+   "aliases": [
+    "dstnat",
+    "port forwarding",
+    "reenvío de puertos"
+   ],
+   "cat": "Redes",
+   "short": "Regla de NAT que cambia el destino de un paquete: lo que llega a la IP pública en un puerto se manda a un equipo interno.",
+   "long": "Es lo que se conoce como abrir o reenviar un puerto. Cada puerto publicado es una puerta que alguien en internet puede probar, por eso se filtra por origen (src-address-list) o se reemplaza por una VPN.",
+   "case": false
+  },
+  {
+   "id": "src-nat",
+   "term": "src-nat",
+   "aliases": [
+    "srcnat"
+   ],
+   "cat": "Redes",
+   "short": "Regla de NAT que cambia el origen de un paquete, normalmente por la IP pública del router.",
+   "long": "Con una IP fija conviene src-nat con to-addresses: las conexiones sobreviven a un corte de la interfaz. En RouterOS, srcnat es también la cadena de NAT donde viven estas reglas y el masquerade.",
+   "case": false
+  },
+  {
+   "id": "masquerade",
+   "term": "masquerade",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Tipo de src-nat que usa automáticamente la IP que tenga la interfaz de salida en ese momento.",
+   "long": "Está pensado para IP dinámicas: si la interfaz cae, borra sus conexiones. Es lo que hace que la LAN salga a internet; tiene que apuntar a todas las salidas (ether1, la interfaz PPPoE o el segundo proveedor).",
+   "case": false
+  },
+  {
+   "id": "hairpin",
+   "term": "hairpin NAT",
+   "aliases": [
+    "hairpin",
+    "NAT loopback",
+    "hairpinning"
+   ],
+   "cat": "Redes",
+   "short": "Que un equipo de la LAN llegue a otro de la misma LAN usando la IP pública del sitio.",
+   "long": "Sin un masquerade extra, el equipo interno contesta directo sin pasar por el router y la conexión falla. La RFC 4787 lo pide como comportamiento de un NAT correcto.",
+   "case": false
+  },
+  {
+   "id": "cgnat",
+   "term": "CGNAT",
+   "aliases": [
+    "Carrier-Grade NAT",
+    "CG-NAT"
+   ],
+   "cat": "Redes",
+   "short": "Carrier-Grade NAT: el proveedor hace NAT y comparte una misma IP pública entre muchos clientes.",
+   "long": "Se generalizó al agotarse IPv4; la WAN recibe una IP del rango 100.64.0.0/10 (RFC 6598). Detrás de CGNAT no se puede publicar nada: solo funcionan las conexiones que el sitio abre hacia afuera, como una VPN a un concentrador o Back To Home.",
+   "case": true
+  },
+  {
+   "id": "doble-nat",
+   "term": "doble NAT",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Dos equipos haciendo NAT en serie, por ejemplo el módem del proveedor y el router propio.",
+   "long": "Se detecta porque la IP de la WAN del router es privada. Un reenvío en el router no alcanza si el módem no reenvía también. Se resuelve pasando el módem a modo bridge o usando una VPN saliente.",
+   "case": false
+  },
+  {
+   "id": "upnp",
+   "term": "UPnP",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Universal Plug and Play: permite que un equipo de la LAN abra puertos en el router por su cuenta.",
+   "long": "Es cómodo para consolas y apps, pero significa que cualquier equipo, incluido uno comprometido, puede publicarse en internet sin que nadie lo decida. En redes de seguridad se deja apagado.",
+   "case": false
+  },
+  {
+   "id": "dmz",
+   "term": "DMZ",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Zona desmilitarizada: una red o un equipo expuesto a internet, separado del resto. En módems hogareños, mandar todo lo que entra a una IP interna.",
+   "long": "La opción DMZ de un módem es la forma más amplia de reenvío: publica todos los puertos del equipo elegido. Sirve para pasarle todo al router propio, nunca para un portero o un NVR.",
+   "case": true
+  },
+  {
+   "id": "public-address",
+   "term": "public-address",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "En IP Cloud de MikroTik, la IP con la que el router sale a internet, vista desde la nube.",
+   "long": "Comparada con la IP de la WAN dice dónde está el NAT: si coinciden, el router tiene la IP pública; si la WAN es privada, hay un módem adelante; si es 100.64.x.x, es CGNAT.",
+   "case": false
+  },
+  {
+   "id": "mtu",
+   "term": "MTU",
+   "aliases": [
+    "max-mtu"
+   ],
+   "cat": "Redes",
+   "short": "Maximum Transmission Unit: el paquete más grande que entra en un enlace sin partirse.",
+   "long": "En Ethernet son 1500 bytes. PPPoE usa 8 bytes, así que quedan 1492; los túneles también restan. Si nadie avisa del límite, las conexiones grandes se cuelgan aunque el ping ande.",
+   "case": true
+  },
+  {
+   "id": "mru",
+   "term": "MRU",
+   "aliases": [
+    "max-mru"
+   ],
+   "cat": "Redes",
+   "short": "Maximum Receive Unit: el paquete más grande que un extremo PPP acepta recibir.",
+   "long": "Se negocia en LCP junto con la MTU. En PPPoE con el proveedor lo habitual es 1492 en los dos sentidos.",
+   "case": true
+  },
+  {
+   "id": "mss",
+   "term": "MSS",
+   "aliases": [
+    "change-mss",
+    "clamp-to-pmtu"
+   ],
+   "cat": "Redes",
+   "short": "Maximum Segment Size: el tamaño máximo de datos que una punta TCP acepta por paquete, anunciado en el SYN.",
+   "long": "Con MTU 1492 el MSS correcto es 1452 (menos 40 de cabeceras IP y TCP). Si el aviso por ICMP se pierde, las páginas quedan a medio cargar. El ajuste change-mss con clamp-to-pmtu corrige el valor en el SYN.",
+   "case": true
+  },
+  {
+   "id": "ppp",
+   "term": "PPP",
+   "aliases": [
+    "Point-to-Point Protocol"
+   ],
+   "cat": "Redes",
+   "short": "Point-to-Point Protocol: el protocolo de enlace que autentica usuario y clave y entrega una IP.",
+   "long": "Nació para módems telefónicos (RFC 1661). Hoy vive dentro de PPPoE y L2TP. En RouterOS, los usuarios de una VPN L2TP son secrets de PPP.",
+   "case": true
+  },
+  {
+   "id": "pppoe",
+   "term": "PPPoE",
+   "aliases": [
+    "PPP over Ethernet",
+    "pppoe-client"
+   ],
+   "cat": "Redes",
+   "short": "PPP sobre Ethernet: conexión a internet con usuario y clave del proveedor sobre un enlace Ethernet.",
+   "long": "Definido en la RFC 2516 de 1999. La IP queda en una interfaz lógica (por ejemplo pppoe-out1), no en ether1, así que masquerade y la lista WAN tienen que apuntar a ella. Por la cabecera extra, la MTU baja a 1492 y conviene ajustar el MSS.",
+   "case": true
+  },
+  {
+   "id": "padi",
+   "term": "PADI",
+   "aliases": [
+    "PADO",
+    "PADR",
+    "PADS"
+   ],
+   "cat": "Redes",
+   "short": "Los cuatro mensajes del descubrimiento PPPoE: PADI (busco), PADO (ofrezco), PADR (pido) y PADS (sesión confirmada).",
+   "long": "El cliente manda PADI por broadcast y el concentrador del proveedor responde PADO con su nombre (ac-name). Si un scan no muestra ningún ac-name, nadie respondió el PADI: puede faltar la VLAN del servicio o el ONT no estar en puente.",
+   "case": true
+  },
+  {
+   "id": "lcp",
+   "term": "LCP",
+   "aliases": [
+    "Link Control Protocol"
+   ],
+   "cat": "Redes",
+   "short": "Link Control Protocol: la parte de PPP que negocia el enlace (tamaños, autenticación, mantenimiento).",
+   "long": "Es lo primero que se habla dentro de una sesión PPP. Si falla LCP, no se llega a autenticar.",
+   "case": true
+  },
+  {
+   "id": "ipcp",
+   "term": "IPCP",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "IP Control Protocol: la parte de PPP que asigna la IP y, opcionalmente, los DNS.",
+   "long": "Viene después de la autenticación. Cuando termina, la interfaz PPPoE o L2TP queda con su dirección.",
+   "case": true
+  },
+  {
+   "id": "soho",
+   "term": "SOHO",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Small Office, Home Office: equipos pensados para casas y oficinas chicas.",
+   "long": "En MikroTik son los modelos que traen defconf con firewall, DHCP y NAT listos, a diferencia de los equipos para operadores.",
+   "case": true
+  },
+  {
+   "id": "dscp",
+   "term": "DSCP",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Differentiated Services Code Point: marca de prioridad en la cabecera IP para calidad de servicio.",
+   "long": "Permite que switches y routers den prioridad a voz o video. Los equipos SIP suelen marcar su tráfico; sirve si la red respeta esas marcas.",
+   "case": true
+  },
+  {
+   "id": "socks",
+   "term": "SOCKS",
+   "aliases": [
+    "proxy SOCKS"
+   ],
+   "cat": "Redes",
+   "short": "Protocolo de proxy genérico: un equipo reenvía conexiones de otros como si fueran propias.",
+   "long": "RouterOS trae un servidor SOCKS. Si aparece habilitado en un equipo que no lo necesita, es señal de compromiso: la botnet Mēris lo usaba para pasar tráfico ajeno.",
+   "case": true
+  },
+  {
+   "id": "connection-tracking",
+   "term": "connection tracking",
+   "aliases": [
+    "conntrack",
+    "seguimiento de conexiones"
+   ],
+   "cat": "Redes",
+   "short": "La tabla donde el router recuerda cada conexión que pasa por él y su estado.",
+   "long": "Viene de netfilter, en Linux. Permite reglas como accept established,related y es la base del NAT: solo el primer paquete pasa por las reglas. Por eso, después de cambiar NAT, se borran las conexiones viejas para probar.",
+   "case": false
+  },
+  {
+   "id": "established",
+   "term": "established",
+   "aliases": [
+    "related",
+    "untracked",
+    "connection-state"
+   ],
+   "cat": "Redes",
+   "short": "Estados de conexión del firewall: established es una conexión ya aceptada; related, una relacionada con otra; untracked, sin seguimiento.",
+   "long": "La defconf de RouterOS acepta established, related y untracked arriba de todo, así solo se evalúa en detalle el primer paquete de cada conexión. Es lo que hace eficiente al firewall.",
+   "case": true
+  },
+  {
+   "id": "netfilter",
+   "term": "netfilter",
+   "aliases": [
+    "iptables"
+   ],
+   "cat": "Redes",
+   "short": "El sistema de filtrado de paquetes del núcleo Linux; iptables es su herramienta clásica.",
+   "long": "Se popularizó con Linux 2.4, en 2001. De ahí heredó RouterOS las cadenas input, forward y output y el seguimiento de conexiones.",
+   "case": false
+  },
+  {
+   "id": "routeros",
+   "term": "RouterOS",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "El sistema operativo de MikroTik, basado en Linux, que corre en sus RouterBOARD y en CHR.",
+   "long": "La rama 7 salió estable en 2021, con núcleo Linux nuevo y WireGuard. Se configura por WinBox, WebFig, terminal o API, y se distribuye en paquetes .npk.",
+   "case": true
+  },
+  {
+   "id": "routerboard",
+   "term": "RouterBOARD",
+   "aliases": [
+    "RouterBOARDs"
+   ],
+   "cat": "MikroTik",
+   "short": "El hardware propio de MikroTik: routers, switches y equipos inalámbricos que corren RouterOS.",
+   "long": "Cada modelo tiene una arquitectura de CPU (ARM, ARM64, MIPS, TILE) que define qué paquetes y funciones admite, por ejemplo Back To Home.",
+   "case": true
+  },
+  {
+   "id": "routerboot",
+   "term": "RouterBOOT",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "El cargador de arranque de los RouterBOARD: arranca la placa antes que RouterOS.",
+   "long": "Cada versión de RouterOS trae una de RouterBOOT, pero no la graba sola: hay que correr /system/routerboard/upgrade y reiniciar. La placa guarda un RouterBOOT de respaldo que nunca se actualiza y sirve para recuperar el equipo.",
+   "case": true
+  },
+  {
+   "id": "winbox",
+   "term": "WinBox",
+   "aliases": [
+    "MAC-WinBox"
+   ],
+   "cat": "MikroTik",
+   "short": "La aplicación de gestión de MikroTik, que se conecta por IP (TCP 8291) o por MAC.",
+   "long": "Por MAC entra a un equipo sin IP o con una desconocida, siempre que esté en el mismo segmento. Nunca se publica a internet: la falla CVE-2018-14847 del servicio WinBox fue la puerta de entrada de miles de routers.",
+   "case": true
+  },
+  {
+   "id": "webfig",
+   "term": "WebFig",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "La interfaz web de RouterOS, equivalente a WinBox desde el navegador.",
+   "long": "Usa el servicio www (TCP 80) o www-ssl. También tiene botón de Safe Mode.",
+   "case": true
+  },
+  {
+   "id": "quickset",
+   "term": "QuickSet",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "La pantalla de configuración rápida de RouterOS para equipos hogareños.",
+   "long": "Resuelve lo básico en un formulario, pero puede pisar configuraciones hechas a mano. En instalaciones profesionales se trabaja desde los menús o la terminal.",
+   "case": true
+  },
+  {
+   "id": "defconf",
+   "term": "defconf",
+   "aliases": [
+    "configuración por defecto"
+   ],
+   "cat": "MikroTik",
+   "short": "La configuración de fábrica de RouterOS: WAN en ether1, LAN en el bridge, DHCP, NAT y un firewall básico.",
+   "long": "Deja un equipo hogareño usable y razonablemente seguro apenas se enchufa. Sus reglas llevan comentarios que empiezan con defconf, útiles para ubicar reglas nuevas con place-before.",
+   "case": false
+  },
+  {
+   "id": "mac-server",
+   "term": "MAC server",
+   "aliases": [
+    "mac-server",
+    "MAC Telnet"
+   ],
+   "cat": "MikroTik",
+   "short": "El servicio de RouterOS que permite entrar por MAC (WinBox o terminal) sin IP.",
+   "long": "Es una salvación en el banco y un riesgo hacia el proveedor. Se limita con allowed-interface-list=LAN.",
+   "case": false
+  },
+  {
+   "id": "netinstall",
+   "term": "Netinstall",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Herramienta de MikroTik que reinstala RouterOS por red desde una PC conectada por cable.",
+   "long": "Es la salida cuando el equipo no arranca o se perdió la contraseña. Borra la configuración, salvo que se elija conservarla.",
+   "case": true
+  },
+  {
+   "id": "npk",
+   "term": ".npk",
+   "aliases": [
+    "npk",
+    "paquete npk",
+    "paquetes npk"
+   ],
+   "cat": "MikroTik",
+   "short": "Formato de los paquetes de software de RouterOS.",
+   "long": "Cada .npk está compilado para una arquitectura de CPU. Se instalan en el arranque siguiente: un .npk soltado en la raíz de Files se toma al reiniciar.",
+   "case": false
+  },
+  {
+   "id": "canal-long-term",
+   "term": "long-term",
+   "aliases": [
+    "canal long-term"
+   ],
+   "cat": "MikroTik",
+   "short": "Canal de actualización de RouterOS que solo recibe arreglos críticos, sin funciones nuevas.",
+   "long": "Es la regla para routers de clientes: cambia poco y está más probado. Antes se llamaba bugfix only.",
+   "case": false
+  },
+  {
+   "id": "canal-stable",
+   "term": "stable",
+   "aliases": [
+    "canal stable"
+   ],
+   "cat": "MikroTik",
+   "short": "Canal de RouterOS con versiones nuevas cada pocos meses, con funciones ya probadas.",
+   "long": "Se usa cuando hace falta una función que long-term todavía no tiene, después de probarla en el banco. Antes se llamaba current.",
+   "case": true
+  },
+  {
+   "id": "canal-testing",
+   "term": "testing",
+   "aliases": [
+    "canal testing"
+   ],
+   "cat": "MikroTik",
+   "short": "Canal de RouterOS con versiones candidatas cada pocas semanas, con prueba interna básica.",
+   "long": "No va en producción. Sirve para probar en el banco lo que va a llegar a stable. Antes se llamaba release candidate.",
+   "case": true
+  },
+  {
+   "id": "canal-development",
+   "term": "development",
+   "aliases": [
+    "canal development"
+   ],
+   "cat": "MikroTik",
+   "short": "Canal de RouterOS para versiones en desarrollo.",
+   "long": "Solo para pruebas de laboratorio; nunca en un cliente.",
+   "case": true
+  },
+  {
+   "id": "downgrade",
+   "term": "downgrade",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Volver a una versión de software más vieja que la instalada.",
+   "long": "En RouterOS se hace subiendo los .npk anteriores y ejecutando /system/package/downgrade, o eligiendo un canal que ofrezca una versión menor. Siempre con backup antes.",
+   "case": false
+  },
+  {
+   "id": "safe-mode",
+   "term": "Safe Mode",
+   "aliases": [
+    "modo seguro"
+   ],
+   "cat": "MikroTik",
+   "short": "Modo de RouterOS que deshace automáticamente los cambios si la sesión que lo activó se corta.",
+   "long": "Se activa con Ctrl+X o el botón de WinBox o WebFig. Los cambios se aplican en el acto, pero si perdés la conexión, el router los revierte; Ctrl+X otra vez los confirma. Guarda hasta 100 acciones y no protege ante un corte de energía.",
+   "case": true
+  },
+  {
+   "id": "export",
+   "term": "export",
+   "aliases": [
+    ".rsc"
+   ],
+   "cat": "MikroTik",
+   "short": "Comando de RouterOS que escribe la configuración como texto de comandos, en un archivo .rsc.",
+   "long": "Por defecto incluye solo lo distinto de fábrica y oculta datos sensibles (show-sensitive para verlos). Sirve para leer, comparar con diff y migrar entre equipos. No reemplaza al .backup.",
+   "case": true
+  },
+  {
+   "id": "backup-binario",
+   "term": "backup binario",
+   "aliases": [
+    ".backup"
+   ],
+   "cat": "MikroTik",
+   "short": "La copia completa del estado de un MikroTik, en un archivo .backup, para restaurar el mismo equipo.",
+   "long": "Incluye usuarios y claves, y puede cifrarse con password=. Tiene referencias al hardware, así que en otro modelo puede no encajar; para eso está el export.",
+   "case": false
+  },
+  {
+   "id": "show-sensitive",
+   "term": "show-sensitive",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Opción del export de RouterOS 7 que incluye claves de WiFi, PPPoE y VPN.",
+   "long": "Sin ella el export las oculta. Un archivo exportado con show-sensitive se trata como una credencial.",
+   "case": false
+  },
+  {
+   "id": "place-before",
+   "term": "place-before",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Parámetro de RouterOS para insertar una regla antes de otra, en lugar de al final.",
+   "long": "Una regla agregada sin place-before queda debajo del drop final y nunca coincide: su contador queda en cero.",
+   "case": false
+  },
+  {
+   "id": "chain-input",
+   "term": "input",
+   "aliases": [
+    "cadena input",
+    "chain=input"
+   ],
+   "cat": "MikroTik",
+   "short": "La cadena del firewall para los paquetes dirigidos al propio router (WinBox, SSH, DNS, VPN).",
+   "long": "Protege al equipo. Incluye cualquier IP del router, también la de la LAN. La cadena output, en cambio, es lo que el router genera.",
+   "case": true
+  },
+  {
+   "id": "chain-forward",
+   "term": "forward",
+   "aliases": [
+    "cadena forward",
+    "chain=forward"
+   ],
+   "cat": "MikroTik",
+   "short": "La cadena del firewall para los paquetes que atraviesan el router de una red a otra.",
+   "long": "Protege a la LAN y separa VLAN. Lo publicado con dst-nat pasa por forward ya con el destino interno.",
+   "case": true
+  },
+  {
+   "id": "drop",
+   "term": "drop",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Acción del firewall que descarta el paquete sin avisar al que lo mandó.",
+   "long": "Desde afuera, un puerto con drop se ve filtrado, como si no hubiera nada. Las reglas de la defconf terminan con un drop en input y otro en forward.",
+   "case": true
+  },
+  {
+   "id": "address-list",
+   "term": "address-list",
+   "aliases": [
+    "address-lists",
+    "src-address-list",
+    "dst-address-list"
+   ],
+   "cat": "MikroTik",
+   "short": "Lista de direcciones con nombre que las reglas del firewall usan como condición.",
+   "long": "Se cambia el contenido sin tocar las reglas: sumar una IP de un técnico o del monitoreo es agregar una entrada. Muy útil para filtrar por origen un dst-nat.",
+   "case": false
+  },
+  {
+   "id": "interface-list",
+   "term": "interface list",
+   "aliases": [
+    "interface lists",
+    "in-interface-list",
+    "out-interface-list"
+   ],
+   "cat": "MikroTik",
+   "short": "Grupo de interfaces con nombre, como WAN y LAN, que las reglas usan como condición.",
+   "long": "Si la WAN pasa a PPPoE o sumás un segundo proveedor, alcanza con agregar la interfaz a la lista para que todas las reglas la cubran.",
+   "case": false
+  },
+  {
+   "id": "available-from",
+   "term": "available-from",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Propiedad de los servicios de RouterOS que acepta conexiones solo desde ciertas direcciones.",
+   "long": "El puerto igual responde y se ve abierto en un escaneo. Por eso MikroTik prefiere un drop en input y deja available-from como capa extra.",
+   "case": false
+  },
+  {
+   "id": "bridge",
+   "term": "bridge",
+   "aliases": [
+    "modo bridge",
+    "modo puente"
+   ],
+   "cat": "Redes",
+   "short": "Puente de capa 2 que une varias interfaces como si fueran un switch. En un módem, modo bridge es dejar de rutear y de hacer NAT.",
+   "long": "En RouterOS el bridge agrupa los puertos de la LAN y, con vlan-filtering, maneja las VLAN. Un módem en modo bridge le pasa la conexión al router propio y elimina el doble NAT.",
+   "case": false
+  },
+  {
+   "id": "vlan-filtering",
+   "term": "vlan-filtering",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Opción del bridge de RouterOS que hace cumplir la tabla de VLAN.",
+   "long": "Mientras está en no, el bridge ignora la tabla. Al ponerla en yes, la tabla manda de golpe: si la gestión no está en su VLAN, perdés el acceso. Se activa al final y desde un puerto fuera del bridge.",
+   "case": false
+  },
+  {
+   "id": "frame-types",
+   "term": "frame-types",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Propiedad de cada puerto del bridge que dice qué tramas acepta: solo sin etiqueta, solo etiquetadas o todas.",
+   "long": "En access va admit-only-untagged-and-priority-tagged y en trunk admit-only-vlan-tagged. Funciona junto con ingress-filtering.",
+   "case": false
+  },
+  {
+   "id": "ingress-filtering",
+   "term": "ingress-filtering",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Opción del puerto del bridge que descarta lo que entra en una VLAN no permitida para ese puerto.",
+   "long": "Sin ella, una tabla de VLAN bien armada igual deja pasar tramas que no debería.",
+   "case": false
+  },
+  {
+   "id": "fasttrack",
+   "term": "FastTrack",
+   "aliases": [
+    "fasttrack-connection",
+    "fast path"
+   ],
+   "cat": "MikroTik",
+   "short": "Atajo de RouterOS que acelera las conexiones establecidas salteando gran parte del firewall.",
+   "long": "Baja mucho el uso de CPU, pero el tráfico acelerado no pasa por las políticas IPsec ni lo ve Torch del todo. Por eso el tráfico de un túnel IPsec se acepta arriba de la regla de FastTrack.",
+   "case": false
+  },
+  {
+   "id": "torch",
+   "term": "Torch",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Herramienta de RouterOS que muestra en vivo los flujos que pasan por una interfaz.",
+   "long": "Agrupa por origen, destino, protocolo, puerto y tasa, y ve los paquetes antes del firewall. Mientras corre desactiva FastTrack, por eso a veces un problema de FastTrack desaparece con Torch abierto.",
+   "case": true
+  },
+  {
+   "id": "sniffer",
+   "term": "packet sniffer",
+   "aliases": [
+    "sniffer"
+   ],
+   "cat": "MikroTik",
+   "short": "Herramienta de RouterOS que copia paquetes enteros a un archivo .pcap para abrirlo en Wireshark.",
+   "long": "Se filtra por IP o interfaz y se limita con file-limit para no llenar el disco. A diferencia de Torch, guarda el contenido para analizarlo después.",
+   "case": false
+  },
+  {
+   "id": "scheduler",
+   "term": "scheduler",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "El programador de tareas de RouterOS: ejecuta scripts a una hora o cada cierto tiempo.",
+   "long": "Sirve para backups automáticos o para una restauración de seguridad antes de un cambio riesgoso. En una auditoría se revisa: los atacantes lo usan para volver a bajar su configuración.",
+   "case": false
+  },
+  {
+   "id": "fetch",
+   "term": "fetch",
+   "aliases": [
+    "/tool/fetch"
+   ],
+   "cat": "MikroTik",
+   "short": "Herramienta de RouterOS para hacer pedidos HTTP, HTTPS o FTP desde el router.",
+   "long": "Permite, por ejemplo, abrir un portero con un GET a su URL. En una auditoría, un script que llama a fetch hacia un sitio desconocido es señal de compromiso.",
+   "case": true
+  },
+  {
+   "id": "check-gateway",
+   "term": "check-gateway",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Opción de una ruta que vigila su gateway con ping y la desactiva si deja de contestar.",
+   "long": "Hace ping cada unos 10 segundos y, tras dos fallas, la ruta queda inactiva. Solo detecta un gateway caído; con rutas recursivas vigila algo más lejano.",
+   "case": false
+  },
+  {
+   "id": "distance",
+   "term": "distance",
+   "aliases": [
+    "default-route-distance"
+   ],
+   "cat": "MikroTik",
+   "short": "La prioridad de una ruta en RouterOS: entre dos rutas al mismo destino gana la de distance menor.",
+   "long": "Con dos proveedores, la principal va con 1 y el respaldo con 2. Con distancias iguales se reparten el tráfico (ECMP).",
+   "case": false
+  },
+  {
+   "id": "ruta-recursiva",
+   "term": "ruta recursiva",
+   "aliases": [
+    "rutas recursivas"
+   ],
+   "cat": "MikroTik",
+   "short": "Ruta cuyo gateway no está conectado directo y se resuelve a través de otra ruta.",
+   "long": "Se usa para vigilar un host testigo lejano (como 1.1.1.1) en lugar del módem: si se corta la fibra en la calle, el testigo no contesta y la ruta cae. La resolución la controlan scope y target-scope.",
+   "case": false
+  },
+  {
+   "id": "target-scope",
+   "term": "target-scope",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Parámetros de las rutas de RouterOS que controlan qué rutas pueden resolver el gateway de otra.",
+   "long": "Una ruta solo resuelve su gateway con rutas cuyo scope sea menor o igual a su target-scope. En el esquema clásico, scope=10 en las rutas a los testigos y target-scope=11 en las rutas por defecto.",
+   "case": false
+  },
+  {
+   "id": "host-testigo",
+   "term": "host testigo",
+   "aliases": [
+    "testigo",
+    "testigos",
+    "hosts testigo"
+   ],
+   "cat": "MikroTik",
+   "short": "Una dirección pública confiable que se usa para comprobar que un enlace realmente llega a internet.",
+   "long": "Se rutea por un solo proveedor con una /32. Si deja de contestar, el enlace se considera caído. Con dos testigos por enlace se evita conmutar por la falla de un solo servidor.",
+   "case": false
+  },
+  {
+   "id": "ip-cloud",
+   "term": "IP Cloud",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Servicio de MikroTik que da a cada router un nombre DDNS propio y le dice cuál es su IP pública.",
+   "long": "El nombre tiene la forma número-de-serie.sn.mynetname.net, con TTL de 60 segundos, y se actualiza por UDP 15252. En CHR pide licencia paga. Un nombre no abre puertos: el firewall sigue decidiendo.",
+   "case": true
+  },
+  {
+   "id": "back-to-home",
+   "term": "Back To Home",
+   "aliases": [
+    "BTH"
+   ],
+   "cat": "MikroTik",
+   "short": "VPN de MikroTik basada en WireGuard que llega al router aunque esté detrás de CGNAT, usando relays de MikroTik.",
+   "long": "Si el router no es alcanzable, mantiene una conexión saliente a un relay y el celular entra por ahí; el relay no puede leer el tráfico. Pide RouterOS 7.12 o posterior y CPU ARM, ARM64 o TILE. Se crea un usuario por dispositivo para poder dar de baja uno solo.",
+   "case": true
+  },
+  {
+   "id": "chr",
+   "term": "CHR",
+   "aliases": [
+    "Cloud Hosted Router"
+   ],
+   "cat": "MikroTik",
+   "short": "Cloud Hosted Router: RouterOS para máquinas virtuales, en un hipervisor propio o un VPS.",
+   "long": "Tiene la misma configuración que un RouterBOARD, pero su licencia limita la velocidad: Free sube a 1 Mbps por interfaz, y los niveles pagos P1, P10 y P-Unlimited liberan más. Se usa como concentrador de túneles con IP pública.",
+   "case": true
+  },
+  {
+   "id": "vps",
+   "term": "VPS",
+   "aliases": [
+    "Virtual Private Server"
+   ],
+   "cat": "Redes",
+   "short": "Virtual Private Server: una máquina virtual alquilada en un proveedor de nube, con IP pública.",
+   "long": "Es una forma barata de tener un punto fijo en internet, por ejemplo un CHR que concentre los túneles de los clientes.",
+   "case": true
+  },
+  {
+   "id": "vm",
+   "term": "VM",
+   "aliases": [
+    "máquina virtual",
+    "máquinas virtuales"
+   ],
+   "cat": "Redes",
+   "short": "Máquina virtual: una computadora simulada por software dentro de un servidor físico.",
+   "long": "Un hipervisor reparte CPU, memoria y disco entre varias VM. CHR es RouterOS hecho para correr en una VM.",
+   "case": true
+  },
+  {
+   "id": "hipervisor",
+   "term": "hipervisor",
+   "aliases": [
+    "hipervisores"
+   ],
+   "cat": "Redes",
+   "short": "El software que crea y corre máquinas virtuales sobre un servidor físico.",
+   "long": "Ejemplos: Proxmox, VMware ESXi, Hyper-V. Sobre él puede correr un CHR.",
+   "case": false
+  },
+  {
+   "id": "hub-spoke",
+   "term": "hub and spoke",
+   "aliases": [],
+   "cat": "VPN",
+   "short": "Topología con un punto central (hub) al que se conectan todas las sucursales (spokes).",
+   "long": "Con CGNAT es casi obligatoria: cada sitio abre el túnel hacia el hub con IP pública, y desde el hub se llega a todos.",
+   "case": false
+  },
+  {
+   "id": "keepalive",
+   "term": "keepalive",
+   "aliases": [
+    "persistent-keepalive",
+    "PersistentKeepalive"
+   ],
+   "cat": "VPN",
+   "short": "Un paquete chico que se manda cada cierto tiempo para mantener viva una conexión a través de un NAT.",
+   "long": "Los NAT olvidan una asociación a los pocos minutos sin tráfico. En WireGuard, PersistentKeepalive = 25 manda un paquete cada 25 segundos desde el sitio detrás de NAT, así el hub puede llegar cuando quiera.",
+   "case": false
+  },
+  {
+   "id": "ccr",
+   "term": "CCR",
+   "aliases": [
+    "Cloud Core Router"
+   ],
+   "cat": "MikroTik",
+   "short": "Cloud Core Router: la línea de routers de MikroTik para operadores y redes grandes.",
+   "long": "Muchos modelos vienen sin defconf, porque se asume que el instalador arma todo a mano.",
+   "case": true
+  },
+  {
+   "id": "crs",
+   "term": "CRS",
+   "aliases": [
+    "Cloud Router Switch"
+   ],
+   "cat": "MikroTik",
+   "short": "Cloud Router Switch: la línea de switches administrables de MikroTik.",
+   "long": "Corren RouterOS (algunos también SwOS) y manejan VLAN en hardware con el bridge.",
+   "case": true
+  },
+  {
+   "id": "hap",
+   "term": "hAP",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Línea de routers hogareños y de oficina chica de MikroTik, con WiFi.",
+   "long": "Vienen con defconf SOHO: WAN en ether1, LAN en el bridge, DHCP y firewall.",
+   "case": true
+  },
+  {
+   "id": "arm",
+   "term": "ARM",
+   "aliases": [
+    "ARM64",
+    "arm",
+    "arm64"
+   ],
+   "cat": "MikroTik",
+   "short": "Arquitectura de procesador de la mayoría de los MikroTik actuales; ARM64 es su versión de 64 bits.",
+   "long": "Define qué .npk sirven y qué funciones hay: Back To Home, por ejemplo, funciona en ARM, ARM64 y TILE. Se ve en System > Resources, campo architecture-name.",
+   "case": true
+  },
+  {
+   "id": "mips",
+   "term": "MIPS",
+   "aliases": [
+    "mipsbe",
+    "mmips",
+    "MMIPS"
+   ],
+   "cat": "MikroTik",
+   "short": "Arquitectura de procesador de muchos MikroTik más viejos o económicos.",
+   "long": "Tiene variantes (mipsbe, mmips) con paquetes distintos. Algunas funciones nuevas, como Back To Home, no están disponibles en MIPS.",
+   "case": true
+  },
+  {
+   "id": "tile",
+   "term": "TILE",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Arquitectura de procesador de varios CCR de MikroTik de muchos núcleos.",
+   "long": "Lleva sus propios .npk. Está entre las soportadas por Back To Home.",
+   "case": true
+  },
+  {
+   "id": "ppc",
+   "term": "PPC",
+   "aliases": [
+    "PowerPC"
+   ],
+   "cat": "MikroTik",
+   "short": "PowerPC: arquitectura de procesador de algunos RouterBOARD antiguos.",
+   "long": "Varias funciones nuevas no la soportan, como Back To Home.",
+   "case": true
+  },
+  {
+   "id": "x86",
+   "term": "x86",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "La arquitectura de las PC y servidores comunes.",
+   "long": "RouterOS x86 y la mayoría de las instalaciones de CHR corren sobre ella; un .npk de x86 no sirve en un RouterBOARD ARM ni al revés.",
+   "case": true
+  },
+  {
+   "id": "vpn",
+   "term": "VPN",
+   "aliases": [
+    "VPNs",
+    "red privada virtual"
+   ],
+   "cat": "VPN",
+   "short": "Virtual Private Network: un túnel cifrado que une un equipo o una red con otra a través de internet.",
+   "long": "Es la forma correcta de gestionar un cliente a distancia: solo quien tiene la clave entra, en lugar de dejar puertos abiertos que cualquiera puede probar.",
+   "case": true
+  },
+  {
+   "id": "wireguard",
+   "term": "WireGuard",
+   "aliases": [],
+   "cat": "VPN",
+   "short": "VPN moderna de pocas líneas de código, criptografía fija y configuración mínima, por UDP.",
+   "long": "La creó Jason A. Donenfeld; entró al núcleo Linux 5.6 en 2020 y a RouterOS 7. No hay usuarios: cada punta tiene un par de claves y un paquete con una clave desconocida se ignora sin respuesta. En RouterOS el puerto por defecto es UDP 13231.",
+   "case": true
+  },
+  {
+   "id": "peer",
+   "term": "peer",
+   "aliases": [
+    "peers"
+   ],
+   "cat": "VPN",
+   "short": "Cada extremo de un túnel VPN visto desde el otro lado.",
+   "long": "En WireGuard cada peer es una clave pública con sus direcciones permitidas; en IPsec el peer es el equipo remoto con el que se negocia. Un peer por técnico o por sitio permite dar de baja uno sin tocar el resto.",
+   "case": false
+  },
+  {
+   "id": "allowed-address",
+   "term": "allowed-address",
+   "aliases": [
+    "AllowedIPs",
+    "client-allowed-address"
+   ],
+   "cat": "VPN",
+   "short": "En WireGuard, las direcciones que se aceptan de un peer y las que se mandan por él.",
+   "long": "Funciona como tabla de ruteo y filtro a la vez. En el router, un /32 por técnico lo ata a su IP; en la notebook, AllowedIPs decide qué destinos van por el túnel (solo la red de gestión, o todo con 0.0.0.0/0).",
+   "case": false
+  },
+  {
+   "id": "pptp",
+   "term": "PPTP",
+   "aliases": [],
+   "cat": "VPN",
+   "short": "Point-to-Point Tunneling Protocol: VPN que Microsoft impulsó en los noventa y cuyo cifrado está roto.",
+   "long": "Fue muy usada por venir en Windows. Hoy se considera insegura y no se usa: en su lugar, WireGuard o L2TP/IPsec.",
+   "case": true
+  },
+  {
+   "id": "l2tp",
+   "term": "L2TP",
+   "aliases": [
+    "Layer 2 Tunneling Protocol"
+   ],
+   "cat": "VPN",
+   "short": "Layer 2 Tunneling Protocol: túnel que lleva sesiones PPP sobre IP, por UDP 1701, sin cifrado propio.",
+   "long": "Definido en la RFC 2661 de 1999. Solo se usa combinado con IPsec (L2TP/IPsec). En RouterOS, use-ipsec=required rechaza conexiones L2TP sin IPsec.",
+   "case": true
+  },
+  {
+   "id": "l2tp-ipsec",
+   "term": "L2TP/IPsec",
+   "aliases": [],
+   "cat": "VPN",
+   "short": "VPN de L2TP dentro de IPsec: IPsec cifra, L2TP arma el túnel y PPP autentica al usuario y le da IP.",
+   "long": "Su ventaja es que Windows, macOS, iOS y Android traen el cliente incorporado. Pide abrir UDP 500, 4500 y 1701 y el protocolo ESP. Es más compleja de diagnosticar que WireGuard.",
+   "case": true
+  },
+  {
+   "id": "openvpn",
+   "term": "OpenVPN",
+   "aliases": [],
+   "cat": "VPN",
+   "short": "VPN de código abierto basada en TLS, que necesita un cliente instalado aparte.",
+   "long": "Ocupó el espacio entre PPTP y L2TP/IPsec durante años. RouterOS la soporta, pero en el curso la gestión se resuelve con WireGuard.",
+   "case": true
+  },
+  {
+   "id": "ipsec",
+   "term": "IPsec",
+   "aliases": [
+    "IP Security"
+   ],
+   "cat": "VPN",
+   "short": "El conjunto estándar de protocolos para cifrar y autenticar tráfico IP entre dos equipos o redes.",
+   "long": "Nació en el IETF a mediados de los noventa; su arquitectura vigente es la RFC 4301. Es lo que hablan casi todas las marcas (MikroTik, pfSense, Fortinet, Cisco), por eso es la opción para túneles entre equipos de fabricantes distintos.",
+   "case": true
+  },
+  {
+   "id": "ike",
+   "term": "IKE",
+   "aliases": [
+    "IKEv1"
+   ],
+   "cat": "VPN",
+   "short": "Internet Key Exchange: el protocolo con el que dos equipos IPsec se autentican y acuerdan claves, por UDP 500.",
+   "long": "La versión 1 es de 1998 (RFC 2409) y trabaja en dos fases. En RouterOS la fase 1 vive en profile, peer e identity. Si hay NAT en el medio, pasa a UDP 4500.",
+   "case": true
+  },
+  {
+   "id": "ikev2",
+   "term": "IKEv2",
+   "aliases": [],
+   "cat": "VPN",
+   "short": "La segunda versión de IKE: menos mensajes, NAT-T y detección de peer caído incorporados.",
+   "long": "Apareció en 2005 y su texto vigente es la RFC 7296. Es la opción preferida para túneles nuevos; las dos puntas tienen que usar la misma versión.",
+   "case": true
+  },
+  {
+   "id": "fase-1",
+   "term": "fase 1",
+   "aliases": [
+    "phase 1"
+   ],
+   "cat": "VPN",
+   "short": "La primera etapa de IPsec: los dos equipos se autentican y arman un canal seguro para seguir negociando.",
+   "long": "Acuerdan cifrado, hash y grupo DH. Si no se arma, falla la clave, la identidad o la propuesta. En RouterOS se ve en active-peers.",
+   "case": false
+  },
+  {
+   "id": "fase-2",
+   "term": "fase 2",
+   "aliases": [
+    "phase 2"
+   ],
+   "cat": "VPN",
+   "short": "La segunda etapa de IPsec: se acuerdan las SA que cifran el tráfico real entre las redes.",
+   "long": "Usa la proposal (cifrado, hash, PFS, lifetime) y las policies. Las redes tienen que ser espejo exacto en los dos extremos, si no la fase 2 no se arma.",
+   "case": false
+  },
+  {
+   "id": "esp",
+   "term": "ESP",
+   "aliases": [
+    "ipsec-esp"
+   ],
+   "cat": "VPN",
+   "short": "Encapsulating Security Payload: el protocolo de IPsec que cifra los datos; es el protocolo IP número 50.",
+   "long": "No es TCP ni UDP, por eso en el firewall se abre como protocol=ipsec-esp y un NAT no lo traduce bien. Con NAT-T viaja dentro de UDP 4500.",
+   "case": true
+  },
+  {
+   "id": "nat-t",
+   "term": "NAT-T",
+   "aliases": [
+    "NAT Traversal"
+   ],
+   "cat": "VPN",
+   "short": "NAT Traversal: mete IPsec dentro de UDP 4500 para que atraviese routers con NAT.",
+   "long": "Definido en 2005 (RFC 3947 y 3948). Los equipos lo activan solos si detectan NAT. Windows no lo usa por defecto hacia servidores detrás de NAT, de ahí la clave de registro AssumeUDPEncapsulationContextOnSendRule.",
+   "case": true
+  },
+  {
+   "id": "assumeudp",
+   "term": "AssumeUDPEncapsulationContextOnSendRule",
+   "aliases": [],
+   "cat": "VPN",
+   "short": "Clave del registro de Windows que habilita NAT-T hacia servidores L2TP/IPsec detrás de NAT.",
+   "long": "Valor 0 por defecto (no), 1 si el servidor está detrás de NAT, 2 si servidor y cliente lo están. Se crea en HKLM y pide reiniciar.",
+   "case": true
+  },
+  {
+   "id": "hklm",
+   "term": "HKLM",
+   "aliases": [
+    "HKEY_LOCAL_MACHINE"
+   ],
+   "cat": "Herramientas",
+   "short": "HKEY_LOCAL_MACHINE: la rama del registro de Windows con la configuración que vale para todo el equipo.",
+   "long": "Cambiarla pide permisos de administrador. Ahí va, por ejemplo, la clave de NAT-T para L2TP/IPsec.",
+   "case": true
+  },
+  {
+   "id": "sa",
+   "term": "SA",
+   "aliases": [
+    "SAs",
+    "installed-sa"
+   ],
+   "cat": "VPN",
+   "short": "Security Association: en IPsec, el acuerdo de un solo sentido con las claves y algoritmos para cifrar un tráfico.",
+   "long": "Un túnel sano tiene dos por equipo, una de ida y otra de vuelta, cada una con su SPI. Vencen según el lifetime y se renuevan solas. En los porteros Akuvox, DoorNum=SA no tiene nada que ver: es el relé de seguridad A del SR01.",
+   "case": true
+  },
+  {
+   "id": "spi",
+   "term": "SPI",
+   "aliases": [
+    "Security Parameter Index"
+   ],
+   "cat": "VPN",
+   "short": "Security Parameter Index: el número que identifica cada SA de IPsec dentro de los paquetes ESP.",
+   "long": "Permite al receptor saber con qué claves descifrar cada paquete. Al renovarse una SA cambia el SPI.",
+   "case": true
+  },
+  {
+   "id": "policy",
+   "term": "policy de IPsec",
+   "aliases": [
+    "policies",
+    "ipsec-policy",
+    "SPD"
+   ],
+   "cat": "VPN",
+   "short": "En IPsec, la regla que dice qué tráfico se cifra y con qué SA, por ejemplo de 192.168.88.0/24 hacia 10.10.10.0/24.",
+   "long": "Las policies de los dos extremos tienen que ser espejo. El router las evalúa después del srcnat, por eso el tráfico del túnel se excluye del masquerade con una regla accept arriba.",
+   "case": false
+  },
+  {
+   "id": "proposal",
+   "term": "proposal",
+   "aliases": [],
+   "cat": "VPN",
+   "short": "En IPsec, la propuesta de algoritmos para la fase 2: cifrado, hash, grupo PFS y lifetime.",
+   "long": "Las dos puntas tienen que coincidir. Cada marca nombra distinto los mismos parámetros, por eso conviene una tabla de equivalencias antes de armar un túnel entre marcas.",
+   "case": false
+  },
+  {
+   "id": "psk",
+   "term": "PSK",
+   "aliases": [
+    "pre-shared key",
+    "clave precompartida",
+    "ipsec-secret"
+   ],
+   "cat": "VPN",
+   "short": "Pre-Shared Key: la clave secreta que los dos extremos de un túnel IPsec conocen de antemano para autenticarse.",
+   "long": "Es la forma más simple de autenticar la fase 1. Tiene que ser larga y distinta por túnel; la alternativa más robusta son los certificados.",
+   "case": true
+  },
+  {
+   "id": "diffie-hellman",
+   "term": "Diffie-Hellman",
+   "aliases": [
+    "DH",
+    "grupo DH",
+    "grupos DH",
+    "dh-group"
+   ],
+   "cat": "VPN",
+   "short": "Método para que dos equipos acuerden un secreto común sobre una red que cualquiera puede escuchar.",
+   "long": "Lo publicaron Diffie y Hellman en 1976. El grupo DH es el tamaño del intercambio: el 14 es de 2048 bits (modp2048). Las dos puntas de un túnel tienen que elegir el mismo grupo.",
+   "case": true
+  },
+  {
+   "id": "modp",
+   "term": "modp2048",
+   "aliases": [
+    "modp",
+    "MODP"
+   ],
+   "cat": "VPN",
+   "short": "Nombre técnico del grupo Diffie-Hellman 14, de 2048 bits, definido en la RFC 3526.",
+   "long": "RouterOS y otras marcas lo nombran así en profile y proposal. Es el mínimo razonable hoy y un punto de acuerdo habitual entre marcas.",
+   "case": true
+  },
+  {
+   "id": "pfs",
+   "term": "PFS",
+   "aliases": [
+    "Perfect Forward Secrecy",
+    "pfs-group"
+   ],
+   "cat": "VPN",
+   "short": "Perfect Forward Secrecy: cada renovación de claves hace un intercambio Diffie-Hellman nuevo.",
+   "long": "Así, si alguien obtiene una clave, no puede descifrar el tráfico de períodos anteriores. Tiene que estar igual en las dos puntas de la fase 2.",
+   "case": true
+  },
+  {
+   "id": "lifetime",
+   "term": "lifetime",
+   "aliases": [],
+   "cat": "VPN",
+   "short": "Cuánto dura una clave o SA de IPsec antes de renovarse.",
+   "long": "Suele ser de horas en fase 1 y menos en fase 2. Con relojes desfasados o lifetimes muy distintos entre marcas, el túnel se corta en las renovaciones.",
+   "case": false
+  },
+  {
+   "id": "dpd",
+   "term": "DPD",
+   "aliases": [
+    "Dead Peer Detection"
+   ],
+   "cat": "VPN",
+   "short": "Dead Peer Detection: mecanismo de IPsec que detecta si el otro extremo dejó de responder.",
+   "long": "Si el peer no contesta, se borran sus SA y el túnel se vuelve a negociar en lugar de quedar colgado.",
+   "case": true
+  },
+  {
+   "id": "sip",
+   "term": "SIP",
+   "aliases": [
+    "Session Initiation Protocol"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Session Initiation Protocol: el protocolo de señalización que inicia, modifica y corta llamadas de voz y video sobre IP.",
+   "long": "Se publicó como RFC 2543 en 1999 y su versión vigente es la RFC 3261 de 2002. Usa el puerto 5060. No lleva el audio: acuerda codecs y puertos con SDP y la voz viaja por RTP. Un portero IP es, para la red, un teléfono SIP con cámara y relé.",
+   "case": true
+  },
+  {
+   "id": "sdp",
+   "term": "SDP",
+   "aliases": [
+    "Session Description Protocol"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Session Description Protocol: la descripción que viaja dentro de SIP con codecs, IP y puertos para el audio y el video.",
+   "long": "Va en el INVITE y en la respuesta. Si lo que dice el SDP no coincide con lo que se puede alcanzar, por un NAT por ejemplo, la llamada se establece pero sin audio o sin video.",
+   "case": true
+  },
+  {
+   "id": "invite",
+   "term": "INVITE",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "El mensaje SIP que inicia una llamada.",
+   "long": "Lleva el destino y, adentro, el SDP con lo que ofrece quien llama. La respuesta 200 OK indica que atendieron y el ACK la confirma.",
+   "case": true
+  },
+  {
+   "id": "register",
+   "term": "REGISTER",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "El mensaje SIP con el que un equipo le avisa a la central en qué IP y puerto está su extensión.",
+   "long": "La central responde 401 con un desafío, el equipo repite con un resumen de su clave (digest) y, si coincide, recibe 200 OK. El registro vence y se renueva solo.",
+   "case": true
+  },
+  {
+   "id": "401",
+   "term": "401 Unauthorized",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "Respuesta de SIP y de HTTP que pide credenciales: trae un desafío con un nonce.",
+   "long": "En un intercambio sano es normal ver un 401 seguido de un nuevo pedido con credenciales. Si después del segundo pedido llega otro 401 o un 403, la clave o el usuario están mal.",
+   "case": true
+  },
+  {
+   "id": "extension-sip",
+   "term": "extensión SIP",
+   "aliases": [
+    "extensiones SIP"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Un número interno de la central telefónica, con su usuario y clave, que un teléfono o portero registra.",
+   "long": "Para la central, el portero es una extensión más: se le pueden aplicar grupos, desvíos y colas como a cualquier interno.",
+   "case": false
+  },
+  {
+   "id": "pbx",
+   "term": "PBX",
+   "aliases": [
+    "IP PBX",
+    "IPPBX",
+    "central telefónica",
+    "central IP"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Private Branch Exchange: la central telefónica de un edificio u oficina, que registra extensiones y decide a dónde va cada llamada.",
+   "long": "Con central, el portero llama a un número y la central lo enruta, con desvíos, grupos y horarios. Sin central, el portero llama directo a la IP del monitor.",
+   "case": true
+  },
+  {
+   "id": "asterisk",
+   "term": "Asterisk",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "Central telefónica de código abierto, nacida en 1999, que popularizó la telefonía IP en pymes.",
+   "long": "La creó Mark Spencer. Es el motor de FreePBX y de muchas centrales comerciales. Su función CURL() permite que una extensión abra un portero por HTTP.",
+   "case": true
+  },
+  {
+   "id": "freepbx",
+   "term": "FreePBX",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "Interfaz web de administración para Asterisk, la forma más común de instalar una central de código abierto.",
+   "long": "Sus foros son una fuente frecuente de casos reales de porteros SIP: registros que fallan, DTMF que no abre o dos puertas con un solo botón.",
+   "case": true
+  },
+  {
+   "id": "pjsip",
+   "term": "PJSIP",
+   "aliases": [
+    "chan_pjsip"
+   ],
+   "cat": "Telefonía IP",
+   "short": "El canal SIP moderno de Asterisk, basado en la biblioteca PJSIP.",
+   "long": "Reemplazó al viejo chan_sip. Por eso los comandos de diagnóstico de Asterisk empiezan con pjsip, como pjsip show endpoints o pjsip set logger on.",
+   "case": true
+  },
+  {
+   "id": "3cx",
+   "term": "3CX",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "Central telefónica por software de la empresa 3CX, muy usada en pymes.",
+   "long": "Trata al portero como una extensión con video. En DTMF recomienda RFC 2833 y desaconseja SIP INFO.",
+   "case": true
+  },
+  {
+   "id": "ucm",
+   "term": "UCM",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "La línea de centrales telefónicas IP de Grandstream.",
+   "long": "Registra porteros como extensiones y suele aparecer en obras junto con los videoporteros GDS de la misma marca.",
+   "case": true
+  },
+  {
+   "id": "yeastar",
+   "term": "Yeastar",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "Fabricante de centrales telefónicas IP para pymes.",
+   "long": "Akuvox publica guías para registrar sus porteros en las centrales Yeastar de la serie P.",
+   "case": true
+  },
+  {
+   "id": "troncal",
+   "term": "troncal",
+   "aliases": [
+    "troncal SIP",
+    "troncales"
+   ],
+   "cat": "Telefonía IP",
+   "short": "La línea que conecta la central con un proveedor de telefonía para llamar hacia afuera.",
+   "long": "Con una troncal, un portero o poste de emergencia puede desviar la llamada a un celular si nadie atiende adentro.",
+   "case": false
+  },
+  {
+   "id": "sip-alg",
+   "term": "SIP ALG",
+   "aliases": [
+    "ALG"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Función de muchos routers que reescribe los mensajes SIP al pasar por NAT, para corregir direcciones.",
+   "long": "La idea es buena, pero muchas implementaciones lo hacen mal y aparecen registros que cambian de puerto o llamadas sin audio. La recomendación general es apagarlo y resolver el NAT en la central o el equipo.",
+   "case": true
+  },
+  {
+   "id": "rtp",
+   "term": "RTP",
+   "aliases": [
+    "Real-time Transport Protocol"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Real-time Transport Protocol: el que lleva el audio y el video de la llamada, en paquetes UDP.",
+   "long": "Se definió en 1996 y su texto vigente es de 2003. Cada paquete lleva número de secuencia y marca de tiempo para reordenar y sincronizar. También lo usa RTSP para el video hacia el NVR.",
+   "case": true
+  },
+  {
+   "id": "srtp",
+   "term": "SRTP",
+   "aliases": [
+    "Secure RTP"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Secure RTP: RTP con el audio y el video cifrados.",
+   "long": "Se usa junto con SIP sobre TLS para que ni la señalización ni la voz se puedan escuchar. Las dos puntas tienen que soportarlo.",
+   "case": true
+  },
+  {
+   "id": "dtmf",
+   "term": "DTMF",
+   "aliases": [
+    "tonos DTMF",
+    "Dual-Tone Multi-Frequency",
+    "Touch-Tone"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Dual-Tone Multi-Frequency: los tonos del teclado telefónico; cada tecla es la suma de dos frecuencias.",
+   "long": "Lo desarrolló Bell Labs y llegó a los teléfonos en 1963 con el nombre Touch-Tone, para reemplazar el disco. En portería es la forma clásica de abrir: quien atiende marca un código y el portero dispara el relé. Hay tres formas de mandarlo por IP (RFC 2833, SIP INFO, inband) y las dos puntas tienen que usar la misma.",
+   "case": true
+  },
+  {
+   "id": "sip-info",
+   "term": "SIP INFO",
+   "aliases": [
+    "INFO"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Forma de mandar DTMF como un mensaje INFO por la señalización SIP, no por el audio.",
+   "long": "No depende del codec, pero cada central decide si lo reenvía y cómo, y el formato no está estandarizado. Por eso falla más entre marcas que RFC 2833.",
+   "case": true
+  },
+  {
+   "id": "inband",
+   "term": "inband",
+   "aliases": [
+    "in-band"
+   ],
+   "cat": "Telefonía IP",
+   "short": "DTMF mandado como sonido dentro del audio, igual que en una línea analógica.",
+   "long": "Funciona con G.711, pero se rompe con codecs comprimidos como G.729 o con pérdida de paquetes, porque deforman los tonos.",
+   "case": false
+  },
+  {
+   "id": "codec",
+   "term": "códec",
+   "aliases": [
+    "codec",
+    "codecs",
+    "códecs"
+   ],
+   "cat": "Telefonía IP",
+   "short": "El algoritmo que comprime y descomprime audio o video para mandarlo por la red.",
+   "long": "Las dos puntas acuerdan uno común en el SDP. Más compresión ahorra ancho de banda pero cuesta calidad, y en audio puede deformar los tonos DTMF.",
+   "case": false
+  },
+  {
+   "id": "g711",
+   "term": "G.711",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "Codec de audio sin compresión de 64 kbps, el estándar de la telefonía digital desde 1972.",
+   "long": "Es el de mejor calidad y el más compatible en una LAN. Con G.711 incluso el DTMF inband funciona.",
+   "case": true
+  },
+  {
+   "id": "g729",
+   "term": "G.729",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "Codec de audio comprimido a 8 kbps, de 1996, pensado para enlaces con poco ancho de banda.",
+   "long": "Ahorra mucho ancho de banda, pero deforma los tonos DTMF. Fue una de las razones para crear la RFC 2833.",
+   "case": true
+  },
+  {
+   "id": "payload",
+   "term": "payload",
+   "aliases": [
+    "tipo de carga",
+    "payload type"
+   ],
+   "cat": "Telefonía IP",
+   "short": "En RTP, el número que indica qué tipo de contenido lleva el paquete (un codec o eventos DTMF).",
+   "long": "Los eventos de RFC 2833 usan un tipo dinámico, entre 96 y 127, que se acuerda en el SDP; 101 es un valor muy común. Si las puntas no coinciden, el DTMF no se reconoce.",
+   "case": false
+  },
+  {
+   "id": "rtsp",
+   "term": "RTSP",
+   "aliases": [
+    "Real Time Streaming Protocol"
+   ],
+   "cat": "Video",
+   "short": "Real Time Streaming Protocol: el protocolo con el que un NVR o un reproductor pide el video de una cámara o portero.",
+   "long": "Se publicó en 1998 (RFC 2326) y su puerto es el 554. Funciona como un control remoto: DESCRIBE, SETUP y PLAY; el video llega por RTP. Cada acceso RTSP debería tener su propio usuario.",
+   "case": true
+  },
+  {
+   "id": "rtsp-metodos",
+   "term": "DESCRIBE",
+   "aliases": [
+    "SETUP",
+    "PLAY",
+    "TEARDOWN"
+   ],
+   "cat": "Video",
+   "short": "Los pedidos de RTSP: DESCRIBE (qué streams hay), SETUP (cómo enviarlo), PLAY (empezar) y TEARDOWN (cortar).",
+   "long": "Ver estos mensajes en una captura muestra en qué paso falla un NVR: si no pasa de DESCRIBE con un 401, es la credencial; si no llega a PLAY, suele ser la ruta o el transporte.",
+   "case": true
+  },
+  {
+   "id": "onvif",
+   "term": "ONVIF",
+   "aliases": [],
+   "cat": "Video",
+   "short": "Estándar para que cámaras, porteros y grabadores de distintas marcas se descubran y configuren entre sí.",
+   "long": "Lo fundaron Axis, Bosch y Sony en 2008. Por ONVIF, el NVR encuentra el equipo, consulta sus perfiles de video y obtiene las URL RTSP sin escribirlas a mano. El usuario ONVIF también tiene que ser propio.",
+   "case": true
+  },
+  {
+   "id": "nvr",
+   "term": "NVR",
+   "aliases": [
+    "Network Video Recorder"
+   ],
+   "cat": "Video",
+   "short": "Network Video Recorder: grabador de video de cámaras IP.",
+   "long": "Toma el video por RTSP u ONVIF. Puede grabar el stream principal o el secundario de cada equipo según el ancho de banda y el detalle que haga falta.",
+   "case": true
+  },
+  {
+   "id": "dvr",
+   "term": "DVR",
+   "aliases": [
+    "Digital Video Recorder"
+   ],
+   "cat": "Video",
+   "short": "Digital Video Recorder: grabador de cámaras analógicas (coaxial), antecesor del NVR.",
+   "long": "Muchos DVR y NVR expuestos a internet con clave de fábrica formaron la botnet Mirai.",
+   "case": true
+  },
+  {
+   "id": "stream",
+   "term": "stream",
+   "aliases": [
+    "streams",
+    "stream principal",
+    "stream secundario",
+    "substream"
+   ],
+   "cat": "Video",
+   "short": "Flujo continuo de audio y video por la red. Los equipos suelen dar un stream principal (alta calidad) y uno secundario (liviano).",
+   "long": "El principal sirve para detalle; el secundario, para vistas en vivo y grabaciones con poco ancho de banda. En un portero, el principal ronda los 2 Mbps y el secundario unos 512 kbps.",
+   "case": false
+  },
+  {
+   "id": "h264",
+   "term": "H.264",
+   "aliases": [
+    "AVC"
+   ],
+   "cat": "Video",
+   "short": "Codec de video estandarizado en 2003, el más usado en cámaras, porteros y grabadores.",
+   "long": "Comprime mucho aprovechando que entre una imagen y la siguiente cambia poco. Es el formato habitual del stream RTSP de un portero.",
+   "case": true
+  },
+  {
+   "id": "mjpeg",
+   "term": "MJPEG",
+   "aliases": [
+    "Motion JPEG"
+   ],
+   "cat": "Video",
+   "short": "Motion JPEG: video hecho de imágenes JPEG sucesivas, normalmente por HTTP.",
+   "long": "Es más viejo y simple que H.264 y consume mucho más ancho de banda, pero casi cualquier sistema lo muestra. Si el equipo lo ofrece, también lleva su credencial propia.",
+   "case": true
+  },
+  {
+   "id": "jpeg",
+   "term": "JPEG",
+   "aliases": [
+    "JPG"
+   ],
+   "cat": "Video",
+   "short": "Formato de imagen comprimida, el estándar de las fotos.",
+   "long": "Los equipos lo usan para capturas de eventos y como base de MJPEG.",
+   "case": true
+  },
+  {
+   "id": "fps",
+   "term": "fps",
+   "aliases": [],
+   "cat": "Video",
+   "short": "Frames per second: cuadros por segundo de un video.",
+   "long": "25 o 30 fps se ven fluidos; bajar los fps reduce ancho de banda y espacio de grabación.",
+   "case": true
+  },
+  {
+   "id": "lpr",
+   "term": "LPR",
+   "aliases": [
+    "License Plate Recognition",
+    "lectura de patentes"
+   ],
+   "cat": "Video",
+   "short": "License Plate Recognition: cámaras que leen patentes de vehículos.",
+   "long": "Integradas con un portero o controlador, abren el portón cuando la patente está autorizada, por ejemplo con la HTTP API de Akuvox.",
+   "case": true
+  },
+  {
+   "id": "vlc",
+   "term": "VLC",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "Reproductor multimedia gratuito que abre streams RTSP.",
+   "long": "Es la forma rápida de probar una URL RTSP y su credencial desde una PC antes de cargarla en el NVR.",
+   "case": true
+  },
+  {
+   "id": "starlight",
+   "term": "Starlight",
+   "aliases": [],
+   "cat": "Video",
+   "short": "Nombre comercial que usan varios fabricantes para cámaras de muy buena sensibilidad con poca luz.",
+   "long": "Dan imagen a color o con poco ruido en condiciones donde una cámara común ya pasa a blanco y negro. No es una norma: se compara con la ficha.",
+   "case": true
+  },
+  {
+   "id": "http",
+   "term": "HTTP",
+   "aliases": [
+    "HyperText Transfer Protocol"
+   ],
+   "cat": "Web e integración",
+   "short": "HyperText Transfer Protocol: el protocolo de la web, de pedidos y respuestas en texto.",
+   "long": "Un pedido tiene un método (GET, POST), una ruta y encabezados; la respuesta, un código (200, 401, 404). Por su simpleza es el idioma común entre equipos: porteros, centrales, NVR y routers se integran con pedidos HTTP. Sin TLS todo viaja en claro.",
+   "case": true
+  },
+  {
+   "id": "https",
+   "term": "HTTPS",
+   "aliases": [],
+   "cat": "Web e integración",
+   "short": "HTTP dentro de TLS: la misma web, pero cifrada y con certificado.",
+   "long": "Protege usuario, clave y datos en el camino. Por defecto usa el puerto 443. Desde RouterOS 7.23 la búsqueda de actualizaciones va por HTTPS, así que el router tiene que poder salir por TCP 443.",
+   "case": true
+  },
+  {
+   "id": "get",
+   "term": "GET",
+   "aliases": [
+    "POST"
+   ],
+   "cat": "Web e integración",
+   "short": "Métodos de HTTP: GET pide un recurso con los datos en la URL; POST manda datos en el cuerpo del pedido.",
+   "long": "Los comandos de apertura de porteros suelen ser GET, así que todo lo que va en la URL queda en logs. Por eso la clave no se pone como parámetro.",
+   "case": true
+  },
+  {
+   "id": "url",
+   "term": "URL",
+   "aliases": [
+    "URLs"
+   ],
+   "cat": "Web e integración",
+   "short": "Uniform Resource Locator: una dirección completa, con protocolo, equipo, puerto, ruta y parámetros.",
+   "long": "Su sintaxis está en la RFC 3986. En integraciones, una URL dispara una acción: abrir un relé, avisar un evento o pedir video por RTSP.",
+   "case": true
+  },
+  {
+   "id": "api",
+   "term": "API",
+   "aliases": [
+    "APIs"
+   ],
+   "cat": "Web e integración",
+   "short": "Application Programming Interface: la forma documentada de que un programa le pida cosas a otro.",
+   "long": "En equipos de red y seguridad suele ser HTTP con respuestas JSON. Cada sistema que usa la API debería tener su propio usuario con los permisos justos.",
+   "case": true
+  },
+  {
+   "id": "http-api",
+   "term": "HTTP API",
+   "aliases": [],
+   "cat": "Akuvox",
+   "short": "La API de Akuvox por HTTP para consultar y operar el equipo, con respuestas JSON.",
+   "long": "Admite autenticación None, AllowList, Basic o Digest. None es solo para pruebas; en obra, un usuario por integración y, si el equipo es fijo, Allowlist por IP.",
+   "case": true
+  },
+  {
+   "id": "json",
+   "term": "JSON",
+   "aliases": [],
+   "cat": "Web e integración",
+   "short": "JavaScript Object Notation: formato de texto para datos estructurados, como {\"clave\": \"valor\"}.",
+   "long": "Es el formato habitual de las respuestas de APIs HTTP.",
+   "case": true
+  },
+  {
+   "id": "csv",
+   "term": "CSV",
+   "aliases": [],
+   "cat": "Web e integración",
+   "short": "Comma-Separated Values: tabla en texto plano, una fila por línea y columnas separadas por comas o punto y coma.",
+   "long": "Se edita en cualquier planilla. Sirve para cargar o exportar usuarios en masa sin escribirlos uno por uno.",
+   "case": true
+  },
+  {
+   "id": "curl",
+   "term": "curl",
+   "aliases": [
+    "CURL()"
+   ],
+   "cat": "Herramientas",
+   "short": "Cliente HTTP de línea de comandos, disponible desde 1998, para probar URLs y APIs.",
+   "long": "Con curl se prueba un comando de apertura antes de integrarlo: -u pasa usuario y clave, --digest fuerza Digest. Asterisk tiene una función CURL() que hace lo mismo desde la central.",
+   "case": false
+  },
+  {
+   "id": "digest",
+   "term": "Digest",
+   "aliases": [
+    "autenticación digest",
+    "HTTP Digest"
+   ],
+   "cat": "Web e integración",
+   "short": "Autenticación HTTP en la que la clave no viaja: el cliente manda un resumen calculado con un nonce del servidor.",
+   "long": "Se definió en 1999 (RFC 2617) y se actualizó en 2015 (RFC 7616). El síntoma clásico de un desacuerdo entre Basic y Digest es un 401 que no se va.",
+   "case": false
+  },
+  {
+   "id": "basic",
+   "term": "autenticación Basic",
+   "aliases": [
+    "HTTP Basic",
+    "Basic auth"
+   ],
+   "cat": "Web e integración",
+   "short": "Autenticación HTTP que manda usuario:clave en Base64 en cada pedido.",
+   "long": "Base64 no cifra: quien capture el tráfico lee la clave. Solo es aceptable dentro de HTTPS o de una red aislada. Su texto vigente es la RFC 7617.",
+   "case": true
+  },
+  {
+   "id": "nonce",
+   "term": "nonce",
+   "aliases": [],
+   "cat": "Web e integración",
+   "short": "Número al azar que el servidor manda en un desafío para que la respuesta sirva una sola vez.",
+   "long": "En Digest y en el registro SIP, el cliente calcula su resumen con la clave y el nonce. Así, capturar una respuesta no permite reutilizarla.",
+   "case": false
+  },
+  {
+   "id": "webhook",
+   "term": "webhook",
+   "aliases": [
+    "webhooks"
+   ],
+   "cat": "Web e integración",
+   "short": "Pedido HTTP que un sistema le manda a otro automáticamente cuando ocurre un evento.",
+   "long": "Es lo contrario del polling: en lugar de preguntar cada tanto, el equipo avisa. En Akuvox esta función se llama Action URL.",
+   "case": false
+  },
+  {
+   "id": "polling",
+   "term": "polling",
+   "aliases": [],
+   "cat": "Web e integración",
+   "short": "Consultar a un equipo cada cierto tiempo para ver si cambió algo.",
+   "long": "Es simple pero agrega tráfico y demora. Cuando el equipo puede avisar solo (webhook, Action URL), se prefiere eso.",
+   "case": false
+  },
+  {
+   "id": "endpoint",
+   "term": "endpoint",
+   "aliases": [
+    "endpoints",
+    "endpoint-address"
+   ],
+   "cat": "Web e integración",
+   "short": "En una API, la ruta a la que se hacen los pedidos; en una VPN, la IP y el puerto del otro extremo.",
+   "long": "Ejemplo de API: /fcgi/OpenDoor en Akuvox. En WireGuard, el sitio que inicia el túnel tiene el endpoint del hub; el hub no necesita el de cada sitio.",
+   "case": false
+  },
+  {
+   "id": "fastcgi",
+   "term": "FastCGI",
+   "aliases": [
+    "fcgi"
+   ],
+   "cat": "Web e integración",
+   "short": "Forma de conectar un servidor web con programas que responden pedidos, de mediados de los noventa.",
+   "long": "Muchos equipos embebidos la usan para sus comandos; de ahí las URL de Akuvox que empiezan con /fcgi/.",
+   "case": true
+  },
+  {
+   "id": "home-assistant",
+   "term": "Home Assistant",
+   "aliases": [],
+   "cat": "Web e integración",
+   "short": "Plataforma de domótica de código abierto, iniciada en 2013.",
+   "long": "Puede abrir porteros con rest_command (un pedido HTTP) y recibir sus eventos. Como cualquier integración, usa un usuario propio en el portero.",
+   "case": true
+  },
+  {
+   "id": "cli",
+   "term": "CLI",
+   "aliases": [
+    "línea de comandos"
+   ],
+   "cat": "Herramientas",
+   "short": "Command Line Interface: manejar un equipo escribiendo comandos en una terminal.",
+   "long": "En RouterOS la CLI es también un lenguaje de scripting; por eso caracteres como $ y ? tienen significado especial y se escapan con barra invertida.",
+   "case": true
+  },
+  {
+   "id": "ssh",
+   "term": "SSH",
+   "aliases": [
+    "Secure Shell"
+   ],
+   "cat": "Redes",
+   "short": "Secure Shell: terminal remota cifrada, por TCP 22.",
+   "long": "Apareció en 1995 para reemplazar a telnet. Aun cifrado, no se deja expuesto a internet: se entra por VPN. En el Akuvox E11, CISA señaló un SSH habilitado con usuario root y clave fija.",
+   "case": true
+  },
+  {
+   "id": "telnet",
+   "term": "Telnet",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Terminal remota sin cifrar, por TCP 23 (RFC 854).",
+   "long": "Manda usuario y clave en texto plano. Mirai se propagaba probando claves de fábrica por telnet. En RouterOS se apaga.",
+   "case": false
+  },
+  {
+   "id": "ftp",
+   "term": "FTP",
+   "aliases": [
+    "File Transfer Protocol"
+   ],
+   "cat": "Redes",
+   "short": "File Transfer Protocol: transferencia de archivos por TCP 21, sin cifrar (RFC 959).",
+   "long": "Usuario y clave viajan en claro. En routers se apaga si no se usa; en porteros, un FTP compartido para subir fotos fue una de las fallas del E11.",
+   "case": true
+  },
+  {
+   "id": "pcap",
+   "term": "PCAP",
+   "aliases": [
+    ".pcap",
+    "pcap",
+    "libpcap"
+   ],
+   "cat": "Herramientas",
+   "short": "Formato de archivo de captura de paquetes, el que abren Wireshark y tcpdump.",
+   "long": "El formato viene de tcpdump y su biblioteca libpcap, del Lawrence Berkeley Laboratory. Un .pcap guarda cada paquete con su hora: es la evidencia que piden los soportes. Uno vacío pesa 24 bytes, solo la cabecera.",
+   "case": true
+  },
+  {
+   "id": "wireshark",
+   "term": "Wireshark",
+   "aliases": [
+    "Ethereal"
+   ],
+   "cat": "Herramientas",
+   "short": "Analizador gráfico de paquetes de código abierto que entiende SIP, RTP, RTSP y casi cualquier protocolo.",
+   "long": "Empezó en 1998 como Ethereal, creado por Gerald Combs, y cambió de nombre en 2006. Sus filtros (como sip.Method == \"REGISTER\") muestran solo lo que interesa de una captura.",
+   "case": true
+  },
+  {
+   "id": "tcpdump",
+   "term": "tcpdump",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "Capturador de paquetes de línea de comandos, nacido junto con libpcap a fines de los ochenta.",
+   "long": "Es la herramienta de captura en servidores y equipos Linux; guarda archivos .pcap que después se abren en Wireshark.",
+   "case": false
+  },
+  {
+   "id": "syslog",
+   "term": "syslog",
+   "aliases": [
+    "log nivel 7",
+    "log level 7"
+   ],
+   "cat": "Herramientas",
+   "short": "El estándar de mensajes de log, con severidades del 0 (emergencia) al 7 (depuración).",
+   "long": "Nació en los ochenta y se formalizó en la RFC 5424 de 2009. Cuando un soporte pide log nivel 7, pide el máximo detalle. Los equipos pueden mandar su log a un servidor syslog central.",
+   "case": false
+  },
+  {
+   "id": "rele",
+   "term": "relé",
+   "aliases": [
+    "relés"
+   ],
+   "cat": "Electricidad",
+   "short": "Interruptor movido por un electroimán: una corriente chica en la bobina mueve un contacto que maneja otra corriente, aislada.",
+   "long": "Es de los componentes más viejos de la electricidad aplicada, usado en el telégrafo y las centrales telefónicas. En un portero, el relé conmuta el circuito de la cerradura cuando se valida una credencial.",
+   "case": false
+  },
+  {
+   "id": "com",
+   "term": "COM",
+   "aliases": [
+    "común"
+   ],
+   "cat": "Electricidad",
+   "short": "Borne común de un relé: el contacto móvil, que se une a NC en reposo y a NO cuando el relé actúa.",
+   "long": "Ahí entra el positivo de la fuente de la cerradura. Lo que sale hacia la cerradura va por NO o por NC según el tipo de cerradura y cómo tiene que quedar sin energía.",
+   "case": true
+  },
+  {
+   "id": "no",
+   "term": "NO",
+   "aliases": [
+    "normal abierto",
+    "normalmente abierto"
+   ],
+   "cat": "Electricidad",
+   "short": "Normally Open: el contacto del relé que está abierto en reposo y se cierra al activarse.",
+   "long": "Con COM y NO, la cerradura recibe energía solo durante la apertura. Si se corta la luz, queda trabada: es el cableado fail-secure. Para contactos de alarma, NO es el que se cierra al detectar.",
+   "case": true
+  },
+  {
+   "id": "nc",
+   "term": "NC",
+   "aliases": [
+    "normal cerrado",
+    "normalmente cerrado"
+   ],
+   "cat": "Electricidad",
+   "short": "Normally Closed: el contacto del relé que está cerrado en reposo y se abre al activarse.",
+   "long": "Con COM y NC, la carga recibe energía todo el tiempo y se le corta al abrir. Un electroimán así cableado libera al abrir y también si se corta la luz: es fail-safe.",
+   "case": true
+  },
+  {
+   "id": "forma-c",
+   "term": "forma C",
+   "aliases": [
+    "contacto conmutado",
+    "contacto inversor"
+   ],
+   "cat": "Electricidad",
+   "short": "Relé de un polo y dos posiciones, con tres bornes: COM, NO y NC.",
+   "long": "Es el formato que traen porteros y controladoras. La ventaja es que el mismo relé sirve para cerraduras que abren con energía y para las que abren sin ella.",
+   "case": false
+  },
+  {
+   "id": "contacto-seco",
+   "term": "contacto seco",
+   "aliases": [
+    "contactos secos",
+    "libre de potencial"
+   ],
+   "cat": "Electricidad",
+   "short": "Contacto de relé que solo abre o cierra un circuito, sin aportar tensión propia.",
+   "long": "La energía la pone una fuente aparte, que pasa por COM y NO o NC hasta la carga. Es la forma más segura de manejar una cerradura: el portero no carga con su consumo ni con sus picos.",
+   "case": false
+  },
+  {
+   "id": "fail-safe",
+   "term": "fail-safe",
+   "aliases": [
+    "fail safe"
+   ],
+   "cat": "Electricidad",
+   "short": "Cerradura que queda libre si se corta la energía.",
+   "long": "Típica de electroimanes y salidas de emergencia, donde un corte no puede dejar gente encerrada. Con relé se cablea por NC: la cerradura recibe energía en reposo y el relé se la corta para abrir.",
+   "case": false
+  },
+  {
+   "id": "fail-secure",
+   "term": "fail-secure",
+   "aliases": [
+    "fail secure"
+   ],
+   "cat": "Electricidad",
+   "short": "Cerradura que queda trabada si se corta la energía.",
+   "long": "Típica de cerraderos eléctricos de apertura (contrachapas) en accesos donde un corte no puede dejar la puerta abierta. Con relé se cablea por NO: recibe energía solo mientras abre.",
+   "case": false
+  },
+  {
+   "id": "electroiman",
+   "term": "electroimán",
+   "aliases": [
+    "electroimanes",
+    "cerradura electromagnética"
+   ],
+   "cat": "Electricidad",
+   "short": "Cerradura que sostiene la puerta con un imán mientras recibe tensión y la suelta al cortarse.",
+   "long": "Es fail-safe por naturaleza. Como es una bobina, al cortarse genera un pico de tensión: lleva diodo en antiparalelo y conviene que la maneje un relé con margen.",
+   "case": false
+  },
+  {
+   "id": "contrachapa",
+   "term": "contrachapa",
+   "aliases": [
+    "cerradero eléctrico",
+    "cerradura eléctrica"
+   ],
+   "cat": "Electricidad",
+   "short": "Cerradura que libera el pestillo cuando recibe tensión.",
+   "long": "Normalmente fail-secure: sin energía queda trabada. Se cablea por COM y NO para que reciba tensión solo durante la apertura.",
+   "case": false
+  },
+  {
+   "id": "diodo",
+   "term": "diodo en antiparalelo",
+   "aliases": [
+    "diodo de rueda libre",
+    "diodo"
+   ],
+   "cat": "Electricidad",
+   "short": "Diodo conectado en paralelo con una bobina, al revés de la alimentación, para absorber el pico de tensión al cortarla.",
+   "long": "La corriente de una bobina no puede cortarse de golpe; sin camino, salta un arco en el contacto del relé y lo gasta. El cátodo va al positivo. Se usa en electroimanes y cerraduras de corriente continua.",
+   "case": false
+  },
+  {
+   "id": "carga-resistiva",
+   "term": "carga resistiva",
+   "aliases": [
+    "cargas resistivas"
+   ],
+   "cat": "Electricidad",
+   "short": "Carga que consume corriente sin picos al prender o apagar, como una lámpara incandescente o una resistencia.",
+   "long": "La capacidad de un relé se publica para carga resistiva, que es el caso más fácil. Con cargas inductivas el valor real que aguanta es menor.",
+   "case": false
+  },
+  {
+   "id": "carga-inductiva",
+   "term": "carga inductiva",
+   "aliases": [
+    "cargas inductivas"
+   ],
+   "cat": "Electricidad",
+   "short": "Carga con bobina, como un motor, un electroimán o un relé, que guarda energía y genera picos al cortarse.",
+   "long": "Ese pico produce arco en el contacto y lo desgasta o lo pega. Con estas cargas se deja margen, se pone diodo o se usa un relé auxiliar.",
+   "case": false
+  },
+  {
+   "id": "rele-auxiliar",
+   "term": "relé auxiliar",
+   "aliases": [
+    "relés auxiliares"
+   ],
+   "cat": "Electricidad",
+   "short": "Un relé externo más robusto que maneja la carga, mientras el relé del equipo solo maneja su bobina.",
+   "long": "Se usa cuando la carga supera lo que aguanta el relé del portero o monitor, o cuando es inductiva. El equipo queda aislado de la corriente y los picos de la carga.",
+   "case": false
+  },
+  {
+   "id": "boton-salida",
+   "term": "botón de salida",
+   "aliases": [
+    "pulsador de salida",
+    "botón de egreso"
+   ],
+   "cat": "Control de acceso",
+   "short": "Pulsador del lado de adentro que abre la puerta sin credencial.",
+   "long": "Se conecta a una entrada del portero o controlador, que dispara el relé configurado. Así la apertura queda registrada y respeta los tiempos de la cerradura.",
+   "case": false
+  },
+  {
+   "id": "gnd",
+   "term": "GND",
+   "aliases": [
+    "masa"
+   ],
+   "cat": "Electricidad",
+   "short": "Ground: el negativo o referencia de un circuito de continua.",
+   "long": "En las salidas de 12 V de los porteros, la cerradura se conecta entre GND y el borne del relé o de la salida.",
+   "case": true
+  },
+  {
+   "id": "dc",
+   "term": "DC",
+   "aliases": [
+    "VDC"
+   ],
+   "cat": "Electricidad",
+   "short": "Direct Current: corriente continua, como la de las fuentes de 12 V o 24 V y el PoE.",
+   "long": "En español también se escribe CC. Polaridad importa: invertir positivo y negativo puede dañar un equipo o dejar sin efecto un diodo de protección.",
+   "case": true
+  },
+  {
+   "id": "ac",
+   "term": "AC",
+   "aliases": [
+    "VAC"
+   ],
+   "cat": "Electricidad",
+   "short": "Alternating Current: corriente alterna, como la red de 220 V.",
+   "long": "Un equipo que se alimenta de 100 a 240 VAC se conecta directo a la red: esa conexión la hace alguien habilitado.",
+   "case": true
+  },
+  {
+   "id": "ups",
+   "term": "UPS",
+   "aliases": [],
+   "cat": "Electricidad",
+   "short": "Uninterruptible Power Supply: fuente con baterías que mantiene los equipos encendidos durante un corte.",
+   "long": "En seguridad electrónica se pone en el rack para switch PoE, router y central: si cae el switch, caen porteros, cámaras y teléfonos que se alimentan por PoE.",
+   "case": true
+  },
+  {
+   "id": "riel-din",
+   "term": "DIN",
+   "aliases": [
+    "riel DIN"
+   ],
+   "cat": "Electricidad",
+   "short": "Riel metálico normalizado de 35 mm para montar equipos en tableros.",
+   "long": "Muchos relés, fuentes y controladoras traen soporte para riel DIN, lo que ordena el tablero.",
+   "case": true
+  },
+  {
+   "id": "dip",
+   "term": "DIP",
+   "aliases": [
+    "DIP switch",
+    "llavecita DIP"
+   ],
+   "cat": "Electricidad",
+   "short": "Pequeños interruptores en una placa para fijar configuraciones, como dirección o modo.",
+   "long": "Algunos módulos por RS485 necesitan un DIP en una posición determinada para que el equipo principal los reconozca.",
+   "case": true
+  },
+  {
+   "id": "poe",
+   "term": "PoE",
+   "aliases": [
+    "Power over Ethernet"
+   ],
+   "cat": "Cableado y energía",
+   "short": "Power over Ethernet: el mismo cable de red lleva datos y energía al equipo.",
+   "long": "Se estandarizó en 2003 con IEEE 802.3af. El switch (PSE) primero detecta si del otro lado hay un equipo compatible (PD) y qué clase pide, y recién ahí entrega unos 48 V. No todo puerto que dice PoE alcanza: hay que ver la norma y el presupuesto total del switch.",
+   "case": true
+  },
+  {
+   "id": "8023af",
+   "term": "802.3af",
+   "aliases": [
+    "IEEE 802.3af",
+    "PoE af"
+   ],
+   "cat": "Cableado y energía",
+   "short": "La primera norma PoE, de 2003: hasta 15,4 W en el puerto del switch y unos 12,95 W en el equipo.",
+   "long": "Alcanza para teléfonos, cámaras y porteros chicos. Con un equipo que pide más, puede no arrancar o reiniciarse cuando sube el consumo.",
+   "case": true
+  },
+  {
+   "id": "8023at",
+   "term": "802.3at",
+   "aliases": [
+    "IEEE 802.3at",
+    "PoE+"
+   ],
+   "cat": "Cableado y energía",
+   "short": "PoE+, de 2009: hasta 30 W en el puerto del switch y 25,5 W en el equipo.",
+   "long": "Lo piden porteros Android con pantalla grande, monitores de 10 pulgadas o más y equipos con calefactor. Un puerto af no lo reemplaza.",
+   "case": true
+  },
+  {
+   "id": "8023bt",
+   "term": "802.3bt",
+   "aliases": [
+    "IEEE 802.3bt",
+    "PoE++"
+   ],
+   "cat": "Cableado y energía",
+   "short": "La norma PoE de 2018 que usa los cuatro pares del cable y sube mucho la potencia disponible.",
+   "long": "Se usa en equipos de alto consumo como cámaras PTZ con calefactor o puntos de acceso grandes.",
+   "case": true
+  },
+  {
+   "id": "pse",
+   "term": "PSE",
+   "aliases": [
+    "Power Sourcing Equipment"
+   ],
+   "cat": "Cableado y energía",
+   "short": "Power Sourcing Equipment: el equipo que entrega PoE, normalmente el switch o un inyector.",
+   "long": "Antes de dar energía detecta y clasifica al PD. Su presupuesto total limita cuántos equipos puede alimentar a la vez.",
+   "case": true
+  },
+  {
+   "id": "pd",
+   "term": "PD",
+   "aliases": [
+    "Powered Device"
+   ],
+   "cat": "Cableado y energía",
+   "short": "Powered Device: el equipo que recibe energía por PoE, como un portero o una cámara.",
+   "long": "Le anuncia al switch su clase de potencia. Si pide más de lo que el puerto entrega, no arranca o se reinicia.",
+   "case": true
+  },
+  {
+   "id": "presupuesto-poe",
+   "term": "presupuesto de potencia",
+   "aliases": [
+    "presupuesto PoE",
+    "presupuesto de energía"
+   ],
+   "cat": "Cableado y energía",
+   "short": "La potencia total que un switch PoE puede repartir entre todos sus puertos a la vez.",
+   "long": "Un switch con 8 puertos PoE+ puede no alcanzar para dar 30 W en todos. Se suma el consumo de lo que se conecta y se compara con la ficha del switch.",
+   "case": false
+  },
+  {
+   "id": "utp",
+   "term": "UTP",
+   "aliases": [
+    "cable UTP"
+   ],
+   "cat": "Cableado y energía",
+   "short": "Unshielded Twisted Pair: el cable de red de cuatro pares trenzados sin blindaje.",
+   "long": "Lleva datos y PoE. La categoría (5e, 6) define velocidades y la calidad del ponchado define si anda.",
+   "case": true
+  },
+  {
+   "id": "rj45",
+   "term": "RJ45",
+   "aliases": [
+    "RJ-45"
+   ],
+   "cat": "Cableado y energía",
+   "short": "El conector de 8 contactos de los cables de red.",
+   "long": "Algunos equipos traen un segundo RJ45 con switch interno para conectar otro equipo detrás.",
+   "case": true
+  },
+  {
+   "id": "gigabit",
+   "term": "Gigabit",
+   "aliases": [
+    "Gigabit Ethernet",
+    "IEEE 802.3ab"
+   ],
+   "cat": "Cableado y energía",
+   "short": "Ethernet a 1 Gbps; sobre cobre lo define IEEE 802.3ab, de 1999.",
+   "long": "Usa los cuatro pares del UTP. En un teléfono con puerto para la PC, Gigabit evita que el teléfono sea un cuello de botella.",
+   "case": false
+  },
+  {
+   "id": "2-hilos",
+   "term": "2 hilos",
+   "aliases": [
+    "dos hilos"
+   ],
+   "cat": "Cableado y energía",
+   "short": "Sistemas de portería que llevan alimentación, audio, datos y video por un solo par de cables.",
+   "long": "Permiten modernizar edificios sin pasar UTP nuevo. No tienen PoE: se alimentan con su propia tensión (por ejemplo 48 V). Antes de reutilizar el par se mide continuidad y aislación.",
+   "case": false
+  },
+  {
+   "id": "rs485",
+   "term": "RS485",
+   "aliases": [
+    "RS-485",
+    "EIA-485",
+    "TIA/EIA-485"
+   ],
+   "cat": "Cableado y energía",
+   "short": "Estándar de comunicación serie de 1983 por un par trenzado diferencial, para distancias largas y ambientes con ruido.",
+   "long": "Admite varios equipos sobre el mismo bus. En portería conecta el portero con relés de seguridad como el SR01 o el monitor con módulos de relés: por el bus viajan órdenes, no la energía de la cerradura.",
+   "case": true
+  },
+  {
+   "id": "wiegand",
+   "term": "Wiegand",
+   "aliases": [
+    "Wiegand 26",
+    "Wiegand 34",
+    "Wiegand 26/34"
+   ],
+   "cat": "Control de acceso",
+   "short": "Interfaz de dos líneas de datos que conecta lectores de tarjetas con controladoras de acceso.",
+   "long": "Toma el nombre del efecto Wiegand, descubierto por John Wiegand, usado en las primeras tarjetas. Se volvió el estándar de hecho; el formato de 26 bits es el más común. Un portero con Wiegand puede entregar lo que lee a otra controladora o recibir un lector externo. No cifra nada.",
+   "case": true
+  },
+  {
+   "id": "pin",
+   "term": "PIN",
+   "aliases": [],
+   "cat": "Control de acceso",
+   "short": "Personal Identification Number: un código numérico que se marca en un teclado para identificarse.",
+   "long": "Es algo que se sabe y se puede pasar a otro, por eso en accesos sensibles se combina con tarjeta o rostro. En Akuvox hay PIN privado (de un usuario, con horario) y PIN público (de nadie, abre a cualquier hora).",
+   "case": true
+  },
+  {
+   "id": "125khz",
+   "term": "125 kHz",
+   "aliases": [
+    "tarjetas de 125 kHz",
+    "proximidad de 125 kHz"
+   ],
+   "cat": "Control de acceso",
+   "short": "Tarjetas de proximidad de la generación vieja, que solo transmiten un número fijo, como EM4100 o HID Prox.",
+   "long": "No tienen intercambio cifrado: se copian con un duplicador barato. Siguen en muchísimos edificios, por eso importa qué frecuencias lee cada lector.",
+   "case": true
+  },
+  {
+   "id": "1356mhz",
+   "term": "13,56 MHz",
+   "aliases": [
+    "tarjetas de 13,56 MHz"
+   ],
+   "cat": "Control de acceso",
+   "short": "Tarjetas sin contacto con memoria y autenticación por claves, de la norma ISO/IEC 14443, como MIFARE.",
+   "long": "Aparecieron en los noventa. Cuánta seguridad dan depende del tipo: MIFARE Classic está quebrada, DESFire con AES no. Un lector que lee solo el UID pierde esa ventaja.",
+   "case": true
+  },
+  {
+   "id": "em4100",
+   "term": "EM4100",
+   "aliases": [
+    "tipo EM",
+    "EM4102"
+   ],
+   "cat": "Control de acceso",
+   "short": "Chip clásico de tarjetas y llaveros de 125 kHz, de solo lectura, con un número fijo.",
+   "long": "Es de los más comunes en edificios. Se clona fácil porque no tiene ninguna protección.",
+   "case": true
+  },
+  {
+   "id": "hid",
+   "term": "HID",
+   "aliases": [
+    "HID Prox",
+    "HID Global"
+   ],
+   "cat": "Control de acceso",
+   "short": "Fabricante de tarjetas y lectores de acceso; HID Prox es su tarjeta de 125 kHz.",
+   "long": "Muchas obras corporativas usan sus credenciales; por eso hay porteros con versión HID que leen sus formatos.",
+   "case": true
+  },
+  {
+   "id": "iclass",
+   "term": "iClass",
+   "aliases": [
+    "HID iClass"
+   ],
+   "cat": "Control de acceso",
+   "short": "Familia de tarjetas de 13,56 MHz de HID, con autenticación por claves.",
+   "long": "Es la evolución de HID Prox en 13,56 MHz. Las generaciones viejas tienen debilidades conocidas; las más nuevas, como iClass SE, son más robustas.",
+   "case": true
+  },
+  {
+   "id": "iso14443",
+   "term": "ISO/IEC 14443",
+   "aliases": [
+    "ISO 14443"
+   ],
+   "cat": "Control de acceso",
+   "short": "La norma internacional de las tarjetas sin contacto de 13,56 MHz.",
+   "long": "La cumplen MIFARE, DESFire e iClass, y también las tarjetas bancarias y los celulares con NFC.",
+   "case": true
+  },
+  {
+   "id": "mifare",
+   "term": "MIFARE",
+   "aliases": [
+    "Mifare",
+    "MIFARE Classic"
+   ],
+   "cat": "Control de acceso",
+   "short": "Familia de tarjetas de 13,56 MHz de NXP, lanzada en 1994, la más difundida en control de acceso.",
+   "long": "El cifrado de MIFARE Classic fue roto públicamente en 2008, y muchos lectores ni lo usan: leen solo el UID, que se copia. Para seguridad real se usan DESFire o la lectura de sectores con clave.",
+   "case": true
+  },
+  {
+   "id": "desfire",
+   "term": "DESFire",
+   "aliases": [
+    "MIFARE DESFire"
+   ],
+   "cat": "Control de acceso",
+   "short": "Familia de tarjetas MIFARE de mayor seguridad, con cifrado AES en las versiones actuales.",
+   "long": "Es la respuesta a la rotura de MIFARE Classic. Para aprovecharla, el lector tiene que autenticar con la clave, no leer solo el número.",
+   "case": true
+  },
+  {
+   "id": "uid",
+   "term": "UID",
+   "aliases": [],
+   "cat": "Control de acceso",
+   "short": "Unique Identifier: el número de serie de una tarjeta sin contacto.",
+   "long": "Se lee sin clave. Un lector que abre solo por UID se engaña con una copia; por eso se prefiere la lectura de sectores o aplicaciones con clave.",
+   "case": true
+  },
+  {
+   "id": "nfc",
+   "term": "NFC",
+   "aliases": [
+    "Near Field Communication"
+   ],
+   "cat": "Control de acceso",
+   "short": "Near Field Communication: comunicación sin contacto a pocos centímetros, en 13,56 MHz, compatible con ISO/IEC 14443.",
+   "long": "Es lo que permite que un celular se use como tarjeta o lea tarjetas.",
+   "case": true
+  },
+  {
+   "id": "ble",
+   "term": "BLE",
+   "aliases": [
+    "Bluetooth Low Energy"
+   ],
+   "cat": "Control de acceso",
+   "short": "Bluetooth Low Energy: la variante de bajo consumo de Bluetooth, llegada con Bluetooth 4.0 en 2010.",
+   "long": "Convirtió al celular en credencial: la app presenta una llave al acercarse al lector, sin tarjeta.",
+   "case": true
+  },
+  {
+   "id": "qr",
+   "term": "QR",
+   "aliases": [
+    "código QR",
+    "códigos QR"
+   ],
+   "cat": "Control de acceso",
+   "short": "Código de barras de dos dimensiones, creado en 1994 por Denso Wave para seguir piezas en fábricas.",
+   "long": "En acceso se usa sobre todo para visitas: un código temporal que se manda por mensaje y vence.",
+   "case": true
+  },
+  {
+   "id": "uhf",
+   "term": "UHF",
+   "aliases": [],
+   "cat": "Control de acceso",
+   "short": "Ultra High Frequency: en acceso, lectores y etiquetas que leen a varios metros, típicos para vehículos.",
+   "long": "Se usan en portones de estacionamiento con una etiqueta pegada en el parabrisas.",
+   "case": true
+  },
+  {
+   "id": "rf",
+   "term": "RF",
+   "aliases": [
+    "RF Card"
+   ],
+   "cat": "Control de acceso",
+   "short": "Radiofrecuencia. En los menús de Akuvox, RF Card es la tarjeta de proximidad.",
+   "long": "Por ejemplo, RF Card+PIN exige tarjeta y PIN en ese orden.",
+   "case": true
+  },
+  {
+   "id": "antisuplantacion",
+   "term": "antisuplantación",
+   "aliases": [
+    "detección de vida",
+    "anti-spoofing"
+   ],
+   "cat": "Control de acceso",
+   "short": "Función del reconocimiento facial que distingue una cara real de una foto, un video o una máscara.",
+   "long": "Sin ella, una foto del residente podría abrir. Se ajusta con un nivel: más alto rechaza más intentos falsos, pero también algún intento legítimo.",
+   "case": false
+  },
+  {
+   "id": "lazo-induccion",
+   "term": "lazo de inducción",
+   "aliases": [
+    "lazos de inducción",
+    "telebobina",
+    "telebobinas",
+    "IEC 60118-4"
+   ],
+   "cat": "Control de acceso",
+   "short": "Sistema que manda el audio como campo magnético para que llegue directo a audífonos con telebobina.",
+   "long": "Está normalizado por IEC 60118-4. En un portero hace que una persona con audífono escuche sin el ruido de la calle.",
+   "case": false
+  },
+  {
+   "id": "grado-ip",
+   "term": "grado IP",
+   "aliases": [
+    "código IP",
+    "IP65",
+    "IP66",
+    "IP54",
+    "Ingress Protection",
+    "IEC 60529"
+   ],
+   "cat": "Normas",
+   "short": "Código de protección de un gabinete contra sólidos (primer dígito) y agua (segundo dígito), según IEC 60529.",
+   "long": "6 en el primero es hermético al polvo. En el segundo, 4 resiste salpicaduras, 5 chorros de agua y 6 chorros potentes. IP65 e IP66 son los habituales en porteros de calle; se cita la ficha de la versión exacta.",
+   "case": true
+  },
+  {
+   "id": "grado-ik",
+   "term": "grado IK",
+   "aliases": [
+    "código IK",
+    "IK",
+    "IK06",
+    "IK08",
+    "IK09",
+    "IK10",
+    "IEC 62262"
+   ],
+   "cat": "Normas",
+   "short": "Código de resistencia a impactos de un gabinete, de IK00 a IK10, según IEC 62262 de 2002.",
+   "long": "IK06 aguanta 1 joule; IK10, 20 joules, el máximo de la escala. Es el dato que piden los pliegos para equipos antivandálicos; antes de esta norma se daba como un tercer dígito del IP, lo que confundía.",
+   "case": true
+  },
+  {
+   "id": "lte",
+   "term": "LTE",
+   "aliases": [
+    "4G"
+   ],
+   "cat": "Redes",
+   "short": "Long Term Evolution: la tecnología celular 4G, definida por 3GPP en su Release 8 de 2008.",
+   "long": "En porteros y routers da conectividad donde no llega cable, o sirve de respaldo de la fibra. Las versiones LTE de algunos equipos no aceptan PoE.",
+   "case": true
+  },
+  {
+   "id": "oem",
+   "term": "OEM",
+   "aliases": [],
+   "cat": "Akuvox",
+   "short": "Original Equipment Manufacturer: equipo fabricado por una marca para venderse con el logo de otra o sin logo.",
+   "long": "En el firmware de Akuvox, el segundo bloque indica la variante OEM: 30 con logo Akuvox y soporte de nube, 31 sin logo; otros valores son versiones a medida.",
+   "case": true
+  },
+  {
+   "id": "smartplus",
+   "term": "SmartPlus",
+   "aliases": [],
+   "cat": "Akuvox",
+   "short": "La nube y la app de Akuvox para atender el portero desde el celular y administrar edificios a distancia.",
+   "long": "El equipo se registra en la nube con su cuenta SIP 1 y la app recibe la llamada por notificación. Depende de internet en el edificio, en el celular y del servicio; se cobra de forma recurrente. Por eso se entrega con un plan B local que funciona sin ella.",
+   "case": true
+  },
+  {
+   "id": "sdmc",
+   "term": "SDMC",
+   "aliases": [],
+   "cat": "Akuvox",
+   "short": "Software local de Akuvox para administrar comunidades (edificios) sin depender de la nube.",
+   "long": "Corre en un servidor o PC del sitio y sigue funcionando sin internet. A cambio, alguien tiene que mantener ese servidor.",
+   "case": true
+  },
+  {
+   "id": "acms",
+   "term": "ACMS",
+   "aliases": [
+    "ACMS Pro"
+   ],
+   "cat": "Akuvox",
+   "short": "Software local de Akuvox para control de acceso en empresas.",
+   "long": "Administra usuarios, permisos y registros de terminales y porteros desde un servidor propio. ACMS Pro tiene licencia con vencimiento.",
+   "case": true
+  },
+  {
+   "id": "mobilekey",
+   "term": "MobileKey",
+   "aliases": [
+    "My MobileKey"
+   ],
+   "cat": "Akuvox",
+   "short": "Solución de Akuvox para usar el celular como credencial Bluetooth.",
+   "long": "Complementa al software local de acceso: la app presenta la llave al acercarse al lector.",
+   "case": true
+  },
+  {
+   "id": "pin-sistema",
+   "term": "PIN de sistema",
+   "aliases": [],
+   "cat": "Akuvox",
+   "short": "Clave que protege el menú de instalador en la pantalla de los porteros Akuvox.",
+   "long": "Según el firmware puede ser admin o Admin321 de fábrica. Ese menú está en la calle, al alcance de cualquiera: se cambia el primer día.",
+   "case": false
+  },
+  {
+   "id": "ip-scanner",
+   "term": "IP Scanner",
+   "aliases": [],
+   "cat": "Akuvox",
+   "short": "Herramienta de Akuvox para Windows que encuentra sus equipos en la red local y muestra modelo, IP y MAC.",
+   "long": "Funciona por descubrimiento en el mismo segmento: la PC tiene que estar en la misma subred y su firewall no tiene que bloquear las respuestas.",
+   "case": true
+  },
+  {
+   "id": "alta-seguridad",
+   "term": "alta seguridad",
+   "aliases": [
+    "modo de alta seguridad",
+    "rama de alta seguridad"
+   ],
+   "cat": "Akuvox",
+   "short": "Rama de firmware de Akuvox (tercer bloque 10 o más) que cifra comunicaciones, comandos de apertura y contraseñas guardadas.",
+   "long": "Con el modo encendido, la URL vieja /fcgi/do deja de responder y solo vale /fcgi/OpenDoor. Por eso un \"no abre por HTTP\" después de actualizar se resuelve mirando el firmware.",
+   "case": false
+  },
+  {
+   "id": "doornum",
+   "term": "DoorNum",
+   "aliases": [],
+   "cat": "Akuvox",
+   "short": "Parámetro de la URL de apertura de Akuvox que elige qué relé disparar.",
+   "long": "1 es el relé A y 2 el relé B del portero; SA y SB son los relés de seguridad del SR01. Algunos monitores viejos usaban 0.",
+   "case": true
+  },
+  {
+   "id": "sb",
+   "term": "SB",
+   "aliases": [
+    "Security Relay B",
+    "Security Relay A"
+   ],
+   "cat": "Akuvox",
+   "short": "En Akuvox, SA y SB son los relés de seguridad A y B del SR01, usados en DoorNum.",
+   "long": "Security Relay A se maneja por la salida de 12 V del portero; Security Relay B, por RS485. No tienen relación con las SA de IPsec.",
+   "case": true
+  },
+  {
+   "id": "sr01",
+   "term": "SR01",
+   "aliases": [],
+   "cat": "Akuvox",
+   "short": "Relé de seguridad de Akuvox que se instala del lado de adentro y es el que maneja la cerradura.",
+   "long": "Si arrancan el frente del portero y puentean cables, solo encuentran un bus de datos: nada alimenta la cerradura. Se conecta por RS485 o por la salida de 12 V y pide un firmware mínimo en el portero.",
+   "case": true
+  },
+  {
+   "id": "open-relay-http",
+   "term": "Open Relay via HTTP",
+   "aliases": [
+    "Open Relay Via HTTP"
+   ],
+   "cat": "Akuvox",
+   "short": "Función de los equipos Akuvox que acepta pedidos HTTP de apertura con usuario y clave propios.",
+   "long": "Es lo que usan monitores, centrales e integraciones para abrir sin llamada. El usuario sirve solo para abrir y nunca es el admin.",
+   "case": true
+  },
+  {
+   "id": "remote-relay",
+   "term": "Remote Relay",
+   "aliases": [
+    "Remote Relay By HTTP or HTTPS"
+   ],
+   "cat": "Akuvox",
+   "short": "Configuración del monitor Akuvox que guarda a qué portero pedirle la apertura y con qué credenciales.",
+   "long": "Permite abrir por HTTP o por DTMF desde una tecla de la pantalla, incluso un portero con el que no se está hablando.",
+   "case": true
+  },
+  {
+   "id": "action-url",
+   "term": "Action URL",
+   "aliases": [],
+   "cat": "Akuvox",
+   "short": "Función de Akuvox que manda un pedido HTTP a una URL cuando ocurre un evento (llamada, relé, tarjeta, código).",
+   "long": "Es el webhook del portero: avisa en lugar de esperar que le pregunten. Completa variables como $mac o $card_sn. Los datos viajan en claro si es HTTP, por eso el receptor va en la VLAN de porteros.",
+   "case": true
+  },
+  {
+   "id": "allowlist",
+   "term": "Allowlist",
+   "aliases": [
+    "AllowList"
+   ],
+   "cat": "Akuvox",
+   "short": "Modo de autenticación de la HTTP API de Akuvox que acepta pedidos solo desde IP cargadas en una lista, sin usuario.",
+   "long": "Sirve para equipos fijos, como un servidor de integración. Si la IP de origen puede cambiar o compartirse, conviene un usuario con Digest.",
+   "case": true
+  },
+  {
+   "id": "prevent-sip-hacking",
+   "term": "Prevent SIP Hacking",
+   "aliases": [],
+   "cat": "Akuvox",
+   "short": "Opción de Akuvox que hace que el equipo responda solo a llamadas de contactos conocidos.",
+   "long": "Evita que cualquier equipo que llegue por la red le mande llamadas o intente abrir. Es una capa más junto con la VLAN y las credenciales propias.",
+   "case": true
+  },
+  {
+   "id": "hold-delay",
+   "term": "Hold Delay",
+   "aliases": [],
+   "cat": "Akuvox",
+   "short": "En Akuvox, cuánto tiempo queda activado un relé después de dispararse.",
+   "long": "Con Hold Delay 5 el relé vuelve al reposo a los 5 segundos. Se ajusta al tiempo que necesita la cerradura o el portón.",
+   "case": true
+  },
+  {
+   "id": "trigger-delay",
+   "term": "Trigger Delay",
+   "aliases": [],
+   "cat": "Akuvox",
+   "short": "En Akuvox, la espera entre la orden y la activación del relé.",
+   "long": "En 0, el relé actúa en el acto. Un valor mayor sirve para coordinar, por ejemplo, un aviso antes de abrir.",
+   "case": true
+  },
+  {
+   "id": "web-relay",
+   "term": "Web Relay",
+   "aliases": [],
+   "cat": "Akuvox",
+   "short": "Relé externo que se acciona por un pedido HTTP; Akuvox permite configurar uno de terceros desde el portero.",
+   "long": "Sirve para abrir algo que está lejos del portero, pasando la orden por la red en lugar de por cable.",
+   "case": true
+  },
+  {
+   "id": "mk485",
+   "term": "MK485",
+   "aliases": [
+    "RSAC-C1-R8"
+   ],
+   "cat": "Akuvox",
+   "short": "Módulos de relés que se conectan por RS485 a monitores Akuvox para sumar salidas.",
+   "long": "El monitor no conmuta nada: manda órdenes por el bus y el módulo mueve sus relés. Piden un firmware mínimo en el monitor.",
+   "case": true
+  },
+  {
+   "id": "cctv",
+   "term": "CCTV",
+   "aliases": [
+    "circuito cerrado de televisión"
+   ],
+   "cat": "Video",
+   "short": "Closed-Circuit Television: el sistema de cámaras de un sitio, con su grabador.",
+   "long": "El nombre viene de la época analógica, cuando las cámaras iban por coaxial a un monitor y un grabador. En redes, la VLAN de CCTV agrupa cámaras y NVR.",
+   "case": true
+  },
+  {
+   "id": "cap",
+   "term": "CAP",
+   "aliases": [
+    "CAPsMAN"
+   ],
+   "cat": "MikroTik",
+   "short": "Controlled Access Point: un equipo inalámbrico MikroTik que se administra desde un controlador central (CAPsMAN).",
+   "long": "Algunos equipos pueden arrancar en modo CAP manteniendo el botón de reset, para que el controlador les mande la configuración WiFi.",
+   "case": true
+  },
+  {
+   "id": "clave-fabrica",
+   "term": "clave de fábrica",
+   "aliases": [
+    "claves de fábrica",
+    "contraseña de fábrica"
+   ],
+   "cat": "Seguridad",
+   "short": "La clave con la que sale un equipo de fábrica, igual en todas las unidades y publicada en los manuales.",
+   "long": "Facilita la primera instalación, pero cualquiera la conoce: botnets como Mirai se armaron probando listas de claves de fábrica. Se cambia en la primera visita y la nueva se anota en la ficha del equipo.",
+   "case": false
+  },
+  {
+   "id": "napt",
+   "term": "NAPT",
+   "aliases": [
+    "PAT",
+    "Network Address Port Translation"
+   ],
+   "cat": "Redes",
+   "short": "Network Address and Port Translation: NAT que traduce dirección y puerto, para que muchos equipos salgan con una sola IP pública.",
+   "long": "Lo describe la RFC 3022 de 2001. El router anota cada conexión con su puerto de salida y así sabe a qué equipo devolver cada respuesta. Es lo que hace el masquerade de cualquier router hogareño.",
+   "case": true
+  },
+  {
+   "id": "connection-nat-state",
+   "term": "connection-nat-state",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Condición del firewall de RouterOS que dice si una conexión pasó por dst-nat o src-nat.",
+   "long": "La defconf la usa en forward para descartar lo nuevo que entra por WAN sin dst-nat (connection-nat-state=!dstnat). Por eso un port forwarding no necesita una regla de forward extra.",
+   "case": false
+  },
+  {
+   "id": "dst-address-type",
+   "term": "dst-address-type",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Condición de RouterOS por tipo de dirección de destino; local quiere decir cualquier IP del propio router.",
+   "long": "Sirve para reglas que no dependen de una IP fija, como el hairpin con IP pública dinámica o la redirección de DNS (dst-address-type=!local, todo lo que no va al router).",
+   "case": false
+  },
+  {
+   "id": "redirect",
+   "term": "redirect",
+   "aliases": [
+    "action=redirect"
+   ],
+   "cat": "MikroTik",
+   "short": "Acción de NAT de RouterOS que manda el paquete al propio router, en el puerto que se indique.",
+   "long": "Es un dst-nat hacia el router. Se usa para forzar que todos los equipos usen el DNS del MikroTik aunque tengan otro configurado.",
+   "case": true
+  },
+  {
+   "id": "invalid",
+   "term": "invalid",
+   "aliases": [
+    "drop invalid"
+   ],
+   "cat": "MikroTik",
+   "short": "Estado de conexión del firewall para paquetes que no pertenecen a ninguna conexión conocida o vienen mal formados.",
+   "long": "La defconf los descarta en input y en forward. Con dos WAN y ruteo asimétrico, una conexión legítima puede verse invalid: es una causa de cortes difícil de ver.",
+   "case": true
+  },
+  {
+   "id": "fuerza-bruta",
+   "term": "fuerza bruta",
+   "aliases": [
+    "ataque de fuerza bruta",
+    "ataques de fuerza bruta"
+   ],
+   "cat": "Seguridad",
+   "short": "Probar claves una tras otra hasta acertar.",
+   "long": "En RouterOS se frena con listas escalonadas que meten en una address-list a quien abre muchas conexiones seguidas. Cuentan conexiones, no logins fallidos, así que la lista de admins va primero. La mejor defensa es no exponer la gestión.",
+   "case": false
+  },
+  {
+   "id": "switch-chip",
+   "term": "switch chip",
+   "aliases": [
+    "hardware offload"
+   ],
+   "cat": "MikroTik",
+   "short": "El chip de switch de un RouterBOARD, que conmuta entre puertos sin pasar por la CPU.",
+   "long": "Los puertos con la marca H en /interface/bridge/port están en el chip y trabajan a velocidad de cable. En la mayoría de los equipos solo un bridge por chip tiene esa ayuda: el segundo bridge va por la CPU. Para separar redes, VLAN.",
+   "case": false
+  },
+  {
+   "id": "l2mtu",
+   "term": "L2MTU",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "En RouterOS, el tamaño máximo de trama que una interfaz maneja en capa 2, con etiquetas VLAN incluidas.",
+   "long": "Por encima de la MTU de IP deja lugar para etiquetas y encapsulados. Cambiarlo puede reiniciar el switch chip y cortar un momento todos los puertos.",
+   "case": true
+  },
+  {
+   "id": "igmp",
+   "term": "IGMP",
+   "aliases": [
+    "IGMP snooping",
+    "multicast"
+   ],
+   "cat": "Redes",
+   "short": "Internet Group Management Protocol: con él un equipo pide sumarse a un grupo multicast. El snooping hace que el switch mande ese tráfico solo a quien lo pidió.",
+   "long": "Multicast es un envío de uno a muchos, típico de IPTV y de algunas cámaras. Sin IGMP snooping, el switch lo reparte por todos los puertos como si fuera broadcast.",
+   "case": true
+  },
+  {
+   "id": "sfp",
+   "term": "SFP",
+   "aliases": [
+    "SFP+"
+   ],
+   "cat": "Redes",
+   "short": "Small Form-factor Pluggable: el zócalo donde se enchufa un módulo de fibra o de cobre.",
+   "long": "Permite elegir el tipo de enlace (fibra monomodo, multimodo, cobre) poniendo el módulo que corresponda.",
+   "case": true
+  },
+  {
+   "id": "iptv",
+   "term": "IPTV",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Televisión por IP: los canales llegan por la red de datos, muchas veces por multicast y en una VLAN propia del proveedor.",
+   "long": "Cuando el decodificador cuelga del router del cliente, suele necesitar su VLAN o su puerto dedicado.",
+   "case": true
+  },
+  {
+   "id": "ap",
+   "term": "AP",
+   "aliases": [
+    "access point",
+    "punto de acceso",
+    "puntos de acceso"
+   ],
+   "cat": "Redes",
+   "short": "Access Point: el equipo que da cobertura WiFi y conecta los clientes inalámbricos a la red cableada.",
+   "long": "En MikroTik también es el nombre de una configuración por defecto (AP Router) de los equipos con WiFi.",
+   "case": true
+  },
+  {
+   "id": "hex",
+   "term": "hEX",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Línea de routers cableados de MikroTik, sin WiFi, para oficinas y comercios.",
+   "long": "Vienen con la defconf SOHO: ether1 como WAN y el resto en el bridge.",
+   "case": true
+  },
+  {
+   "id": "ruta-conectada",
+   "term": "ruta conectada",
+   "aliases": [
+    "rutas conectadas"
+   ],
+   "cat": "Redes",
+   "short": "La ruta que el router crea solo al poner una IP en una interfaz: la red de esa IP se alcanza directo por ahí.",
+   "long": "En RouterOS aparece con las marcas DAc y distancia 0. No se borra a mano: desaparece al quitar la IP o si la interfaz cae.",
+   "case": false
+  },
+  {
+   "id": "ruta-especifica",
+   "term": "ruta más específica",
+   "aliases": [
+    "máscara más larga",
+    "longest prefix match"
+   ],
+   "cat": "Redes",
+   "short": "La regla de oro del ruteo: entre varias rutas que sirven, gana la de prefijo más largo, por ejemplo una /24 antes que la 0.0.0.0/0.",
+   "long": "Recién entre rutas al mismo destino se mira la distance. Por eso una ruta puntual a una red remota le gana a la ruta por defecto sin tocarla.",
+   "case": false
+  },
+  {
+   "id": "pool",
+   "term": "pool de direcciones",
+   "aliases": [
+    "address-pool",
+    "pools de direcciones"
+   ],
+   "cat": "Redes",
+   "short": "El rango de IP que un servidor DHCP o una VPN reparte entre sus clientes.",
+   "long": "No tiene que incluir la IP del router y conviene dejar fuera del pool un tramo para equipos con IP fija.",
+   "case": false
+  },
+  {
+   "id": "ospf",
+   "term": "OSPF",
+   "aliases": [
+    "Open Shortest Path First"
+   ],
+   "cat": "Redes",
+   "short": "Open Shortest Path First: protocolo de ruteo dinámico que los routers usan para aprender rutas entre sí dentro de una organización.",
+   "long": "Cada router conoce el mapa completo de enlaces y calcula el mejor camino. En RouterOS sus rutas tienen distance 110, así que una estática (1) les gana.",
+   "case": true
+  },
+  {
+   "id": "df",
+   "term": "DF",
+   "aliases": [
+    "Don't Fragment",
+    "do-not-fragment"
+   ],
+   "cat": "Redes",
+   "short": "Don't Fragment: la marca de un paquete IP que prohíbe partirlo en el camino.",
+   "long": "Si el paquete no entra, el router lo descarta y avisa por ICMP (fragmentation needed and DF set). Haciendo ping con DF y distintos tamaños se encuentra la MTU real del camino.",
+   "case": true
+  },
+  {
+   "id": "mtr",
+   "term": "mtr",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "Herramienta que combina ping y traceroute: repite rondas y muestra la pérdida y la demora de cada salto.",
+   "long": "La pérdida real empieza en un salto y sigue en todos los siguientes; un salto intermedio que pierde mientras el destino contesta solo está limitando ICMP. El traceroute de RouterOS 7 trabaja igual, por rondas.",
+   "case": true
+  },
+  {
+   "id": "netwatch",
+   "term": "Netwatch",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Herramienta de RouterOS que vigila un equipo o servicio y corre un script cuando cae o cuando vuelve.",
+   "long": "Tiene sondas simple, icmp, tcp-conn, http-get, https-get y dns. Para un NVR conviene tcp-conn al puerto del servicio. No puede avisar si se cae el propio router: para eso hace falta un monitor de afuera.",
+   "case": true
+  },
+  {
+   "id": "power-cycle-ping",
+   "term": "power-cycle-ping",
+   "aliases": [],
+   "cat": "MikroTik",
+   "short": "Opción de los puertos PoE de RouterOS que hace ping a un equipo y le corta y devuelve la energía si deja de contestar.",
+   "long": "Sirve para revivir solo una cámara o un equipo PoE colgado, sin ir al sitio.",
+   "case": false
+  },
+  {
+   "id": "dns-resolver-abierto",
+   "term": "resolver abierto",
+   "aliases": [
+    "resolvers abiertos",
+    "open resolver",
+    "ataques de amplificación",
+    "ataque de amplificación"
+   ],
+   "cat": "Seguridad",
+   "short": "Un servidor DNS que contesta consultas de cualquiera en internet.",
+   "long": "Los atacantes lo usan para amplificación: mandan consultas chicas con la IP de la víctima como origen y el resolver le dispara respuestas grandes. En RouterOS pasa si allow-remote-requests=yes y nada frena el puerto 53 desde la WAN.",
+   "case": false
+  },
+  {
+   "id": "doh",
+   "term": "DoH",
+   "aliases": [
+    "DNS over HTTPS",
+    "use-doh-server"
+   ],
+   "cat": "Redes",
+   "short": "DNS over HTTPS: consultas DNS cifradas dentro de HTTPS, por el puerto 443.",
+   "long": "Se estandarizó en 2018. Protege las consultas de miradas en el camino, pero no se puede redirigir como el DNS común: un equipo con DoH propio saltea los bloqueos del router. En RouterOS, con DoH activo no hay respaldo: si el servidor no responde, la LAN recibe SERVFAIL.",
+   "case": true
+  },
+  {
+   "id": "dot",
+   "term": "DoT",
+   "aliases": [
+    "DNS over TLS"
+   ],
+   "cat": "Redes",
+   "short": "DNS over TLS: consultas DNS cifradas con TLS, por el puerto 853.",
+   "long": "A diferencia de DoH, usa un puerto propio, así que se puede cortar en el firewall.",
+   "case": true
+  },
+  {
+   "id": "nxdomain",
+   "term": "NXDOMAIN",
+   "aliases": [
+    "SERVFAIL",
+    "NOERROR"
+   ],
+   "cat": "Redes",
+   "short": "Códigos de respuesta del DNS: NOERROR (hay respuesta), NXDOMAIN (el nombre no existe) y SERVFAIL (el servidor no pudo resolver).",
+   "long": "Leerlos ahorra tiempo: NXDOMAIN es un nombre mal escrito o bloqueado a propósito; SERVFAIL apunta a un problema del servidor o de su camino hacia arriba. RouterOS permite estáticas de tipo NXDOMAIN para bloquear un dominio entero.",
+   "case": true
+  },
+  {
+   "id": "fwd",
+   "term": "FWD",
+   "aliases": [
+    "type=FWD"
+   ],
+   "cat": "MikroTik",
+   "short": "Tipo de entrada estática del DNS de RouterOS que, en lugar de contestar una IP, reenvía la consulta de ese nombre y deja que se resuelva normalmente.",
+   "long": "Sirve para sacar un nombre de una adlist o para mandar un dominio a un servidor puntual. Con address-list, además carga en la lista las IP que se les contestaron a los equipos.",
+   "case": true
+  },
+  {
+   "id": "adlist",
+   "term": "adlist",
+   "aliases": [
+    "adlists"
+   ],
+   "cat": "MikroTik",
+   "short": "Función del DNS de RouterOS (desde 7.15) que carga una lista de dominios y les contesta 0.0.0.0, para bloquear publicidad o sitios.",
+   "long": "Vive en la caché DNS, así que se agranda cache-size antes. Bloquea el nombre exacto, no sus subdominios, y solo para los equipos que usan el DNS del router.",
+   "case": false
+  },
+  {
+   "id": "pi-hole",
+   "term": "Pi-hole",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "Servidor DNS de código abierto que bloquea publicidad y rastreo, pensado para correr en una Raspberry Pi o equipo chico.",
+   "long": "Es la alternativa a bloquear en el router: el MikroTik puede mandarle todas las consultas DNS de la LAN con un dst-nat.",
+   "case": true
+  },
+  {
+   "id": "cdn",
+   "term": "CDN",
+   "aliases": [
+    "Content Delivery Network"
+   ],
+   "cat": "Redes",
+   "short": "Content Delivery Network: red de servidores repartidos por el mundo que entrega el contenido de muchos sitios desde el punto más cercano.",
+   "long": "Como varias marcas comparten direcciones de la misma CDN, bloquear por IP puede cortar servicios que nadie quería cortar. Por eso para sitios se bloquea por nombre.",
+   "case": true
+  },
+  {
+   "id": "lacnic",
+   "term": "LACNIC",
+   "aliases": [],
+   "cat": "Normas",
+   "short": "El registro regional de direcciones de internet para América Latina y el Caribe, con sede en Montevideo.",
+   "long": "Asigna bloques IPv4, IPv6 y números de sistema autónomo a proveedores de la región. Su equipo de respuesta a incidentes (CSIRT) publica avisos, por ejemplo sobre resolvers DNS abiertos.",
+   "case": true
+  },
+  {
+   "id": "apnic",
+   "term": "APNIC",
+   "aliases": [],
+   "cat": "Normas",
+   "short": "El registro regional de direcciones de internet para Asia y el Pacífico.",
+   "long": "Su blog técnico es una referencia frecuente sobre DNS, ruteo y diagnóstico de red.",
+   "case": true
+  },
+  {
+   "id": "csirt",
+   "term": "CSIRT",
+   "aliases": [
+    "CERT"
+   ],
+   "cat": "Seguridad",
+   "short": "Computer Security Incident Response Team: equipo que recibe, analiza y coordina la respuesta a incidentes de seguridad.",
+   "long": "Los hay nacionales, como el CERTuy en Uruguay, y de organizaciones como LACNIC. Avisan a los proveedores cuando ven equipos de sus clientes usados en ataques.",
+   "case": true
+  },
+  {
+   "id": "vms",
+   "term": "VMS",
+   "aliases": [
+    "Video Management Software"
+   ],
+   "cat": "Video",
+   "short": "Video Management Software: software que administra cámaras y grabadores de varias marcas desde un solo lugar.",
+   "long": "Toma el video por RTSP u ONVIF. A diferencia de la app del fabricante, no usa los puertos propietarios del NVR.",
+   "case": true
+  },
+  {
+   "id": "sdk-port",
+   "term": "SDK",
+   "aliases": [
+    "puerto SDK",
+    "puerto de servidor"
+   ],
+   "cat": "Video",
+   "short": "En equipos Hikvision, el puerto de servidor (8000 por defecto) por el que hablan la app y el software cliente.",
+   "long": "Da login, video, grabaciones y configuración, así que publicarlo equivale a publicar el equipo: solo para orígenes fijos y con firmware al día.",
+   "case": true
+  },
+  {
+   "id": "ivms",
+   "term": "iVMS-4200",
+   "aliases": [
+    "iVMS"
+   ],
+   "cat": "Video",
+   "short": "El software cliente de Hikvision para PC, para ver y administrar cámaras y grabadores.",
+   "long": "Se conecta al equipo por el puerto de servidor (SDK), 8000 por defecto.",
+   "case": true
+  },
+  {
+   "id": "sadp",
+   "term": "SADP",
+   "aliases": [],
+   "cat": "Video",
+   "short": "Herramienta de Hikvision que encuentra sus equipos en la red local y permite cambiar IP, puertos y activar la clave.",
+   "long": "Funciona por descubrimiento en el mismo segmento, igual que el IP Scanner de Akuvox.",
+   "case": true
+  },
+  {
+   "id": "smartpss",
+   "term": "SmartPSS",
+   "aliases": [
+    "DMSS"
+   ],
+   "cat": "Video",
+   "short": "SmartPSS es el software de Dahua para PC; DMSS, su app para celular.",
+   "long": "Se conectan al grabador por el puerto 37777 TCP; para el video a veces también hace falta el 37778 UDP.",
+   "case": true
+  },
+  {
+   "id": "rfc791",
+   "term": "RFC 791",
+   "aliases": [
+    "RFC791"
+   ],
+   "cat": "RFC",
+   "short": "Internet Protocol: la RFC que define IPv4, el protocolo que lleva cada paquete de una red a otra.",
+   "long": "Se publicó en 1981 para el internet de DARPA y fijó la cabecera IPv4, las direcciones de 32 bits, el TTL y la fragmentación. Resolvió cómo mover datos entre redes distintas sin que importe qué hay debajo (Ethernet, radio, línea serie). Sigue vigente, con actualizaciones puntuales en RFC posteriores.",
+   "year": 1981,
+   "case": true
+  },
+  {
+   "id": "rfc792",
+   "term": "RFC 792",
+   "aliases": [
+    "RFC792"
+   ],
+   "cat": "RFC",
+   "short": "ICMP: los mensajes de control y error de IP, como el echo que usa ping.",
+   "long": "Se publicó junto con la RFC 791 para que los routers y equipos pudieran avisar problemas: destino inalcanzable, TTL vencido o paquete demasiado grande. Ping usa el echo request y echo reply, y traceroute aprovecha el aviso de TTL vencido. Sigue vigente.",
+   "year": 1981,
+   "case": true
+  },
+  {
+   "id": "rfc854",
+   "term": "RFC 854",
+   "aliases": [
+    "RFC854"
+   ],
+   "cat": "RFC",
+   "short": "Telnet: el protocolo de terminal remota en texto plano, por TCP 23.",
+   "long": "Se escribió para usar a distancia la consola de otro equipo en una red donde todos se conocían. Manda usuario, clave y comandos sin cifrar, así que cualquiera que capture el tráfico los lee. SSH lo reemplazó en la práctica desde mediados de los noventa; en un MikroTik se deja apagado.",
+   "year": 1983,
+   "case": true
+  },
+  {
+   "id": "rfc951",
+   "term": "RFC 951",
+   "aliases": [
+    "RFC951"
+   ],
+   "cat": "RFC",
+   "short": "BOOTP: el protocolo para que un equipo sin disco pida su IP y su archivo de arranque por la red.",
+   "long": "Se creó para estaciones sin disco que tenían que arrancar desde un servidor. El administrador cargaba a mano una tabla con cada MAC y su IP, sin préstamo ni vencimiento. DHCP (RFC 2131) se construyó sobre BOOTP, usa los mismos puertos UDP 67 y 68 y agregó el lease.",
+   "year": 1985,
+   "case": true
+  },
+  {
+   "id": "rfc959",
+   "term": "RFC 959",
+   "aliases": [
+    "RFC959"
+   ],
+   "cat": "RFC",
+   "short": "FTP: el protocolo clásico de transferencia de archivos, por TCP 21.",
+   "long": "Reemplazó a especificaciones FTP anteriores (como la RFC 765) y ordenó cómo subir, bajar y listar archivos entre equipos distintos. Igual que telnet, manda usuario y clave en texto plano. En routers y porteros conviene apagarlo o usar alternativas cifradas.",
+   "year": 1985,
+   "case": true
+  },
+  {
+   "id": "rfc1034",
+   "term": "RFC 1034",
+   "aliases": [
+    "RFC1034"
+   ],
+   "cat": "RFC",
+   "short": "DNS, conceptos: la RFC que describe el sistema de nombres de dominio. Va en par con la RFC 1035.",
+   "long": "Se publicó en 1987 para reemplazar el archivo HOSTS.TXT, una lista central de nombres que se copiaba a mano y ya no escalaba. Define la jerarquía de dominios, las zonas, los servidores autoritativos y las caches. Junto con la RFC 1035 reemplazó a las RFC 882 y 883 de 1983.",
+   "year": 1987,
+   "case": true
+  },
+  {
+   "id": "rfc1035",
+   "term": "RFC 1035",
+   "aliases": [
+    "RFC1035"
+   ],
+   "cat": "RFC",
+   "short": "DNS, implementación: el formato de los mensajes y registros del DNS (A, MX, CNAME, TTL), por el puerto 53.",
+   "long": "Es la pareja técnica de la RFC 1034: dice cómo se arma una consulta, cómo se responde y qué tipos de registro existen. De acá viene el TTL de cada respuesta, que indica cuánto tiempo se puede guardar en cache. Sigue siendo la base del DNS actual, con muchas extensiones posteriores.",
+   "year": 1987,
+   "case": true
+  },
+  {
+   "id": "rfc1519",
+   "term": "RFC 1519",
+   "aliases": [
+    "RFC1519"
+   ],
+   "cat": "RFC",
+   "short": "CIDR: la RFC que eliminó las clases A, B y C e introdujo la notación de prefijo, como /24 o /29.",
+   "long": "Resolvió dos problemas de comienzos de los noventa: las direcciones clase B se agotaban y las tablas de ruteo de internet crecían sin control. Con CIDR se reparten bloques del tamaño justo y se agrupan rutas. Fue reemplazada por la RFC 4632 de 2006, que mantiene la misma idea.",
+   "year": 1993,
+   "case": true
+  },
+  {
+   "id": "rfc1631",
+   "term": "RFC 1631",
+   "aliases": [
+    "RFC1631"
+   ],
+   "cat": "RFC",
+   "short": "La primera descripción de NAT: traducir direcciones privadas a una IP pública compartida.",
+   "long": "Se propuso como solución de corto plazo para estirar las direcciones IPv4 mientras llegaba IPv6, y terminó siendo permanente en casi todas las redes. La reemplazó la RFC 3022 de 2001, que describe el NAT tradicional que usan hoy los routers.",
+   "year": 1994,
+   "case": true
+  },
+  {
+   "id": "rfc1661",
+   "term": "RFC 1661",
+   "aliases": [
+    "RFC1661"
+   ],
+   "cat": "RFC",
+   "short": "PPP: el protocolo punto a punto que autentica al usuario y le asigna una IP.",
+   "long": "Nació para enlaces de dos puntas como los módems telefónicos, y define LCP para negociar el enlace y la base para autenticar y configurar IP (IPCP). Reemplazó a la RFC 1548. Sigue vivo dentro de PPPoE y de L2TP, por eso el usuario y la clave del proveedor son de PPP.",
+   "year": 1994,
+   "case": true
+  },
+  {
+   "id": "rfc1918",
+   "term": "RFC 1918",
+   "aliases": [
+    "RFC1918"
+   ],
+   "cat": "RFC",
+   "short": "Los rangos de IP privadas: 10.0.0.0/8, 172.16.0.0/12 y 192.168.0.0/16.",
+   "long": "Reservó bloques que cualquiera puede usar dentro de su red sin pedirlos, sabiendo que nunca se rutean en internet. Junto con NAT resolvió la falta de IPv4 públicas para cada equipo. Reemplazó a las RFC 1597 y 1627 y sigue vigente.",
+   "year": 1996,
+   "case": true
+  },
+  {
+   "id": "rfc2068",
+   "term": "RFC 2068",
+   "aliases": [
+    "RFC2068"
+   ],
+   "cat": "RFC",
+   "short": "La primera especificación de HTTP/1.1.",
+   "long": "Sumó a HTTP conexiones persistentes, el encabezado Host (varios sitios en una misma IP) y mejor manejo de cache. La reemplazó en 1999 la RFC 2616, que corrigió y ordenó el texto.",
+   "year": 1997,
+   "case": true
+  },
+  {
+   "id": "rfc2131",
+   "term": "RFC 2131",
+   "aliases": [
+    "RFC2131"
+   ],
+   "cat": "RFC",
+   "short": "DHCP: el protocolo que entrega IP, máscara, gateway y DNS de forma automática.",
+   "long": "Es la versión vigente de DHCP, que había aparecido en 1993 sobre la base de BOOTP. Su aporte central es el lease: la dirección se presta por un tiempo y vuelve al pool si nadie la renueva. El intercambio es Discover, Offer, Request y Ack, por UDP 67 y 68.",
+   "year": 1997,
+   "case": true
+  },
+  {
+   "id": "rfc2136",
+   "term": "RFC 2136",
+   "aliases": [
+    "RFC2136",
+    "DNS UPDATE"
+   ],
+   "cat": "RFC",
+   "short": "DNS UPDATE: el estándar para modificar registros DNS en el momento, sin editar la zona a mano.",
+   "long": "Se creó porque el DNS original suponía datos casi fijos. Permite que un equipo o un servidor DHCP cambien un registro cuando cambia una IP. Es la idea de fondo de los servicios de DNS dinámico, aunque muchos (como IP Cloud de MikroTik) usan su propio protocolo.",
+   "year": 1997,
+   "case": true
+  },
+  {
+   "id": "rfc2326",
+   "term": "RFC 2326",
+   "aliases": [
+    "RFC2326"
+   ],
+   "cat": "RFC",
+   "short": "RTSP 1.0: el protocolo para pedir, pausar y cortar flujos de audio y video, por TCP 554.",
+   "long": "Funciona como un control remoto de red: el cliente pide DESCRIBE, SETUP y PLAY, y el video viaja aparte por RTP. Es lo que usan los NVR para tomar el video de cámaras y porteros. La RFC 7826 de 2016 publicó RTSP 2.0, pero los equipos siguen usando mayormente la 1.0.",
+   "year": 1998,
+   "case": true
+  },
+  {
+   "id": "rfc2409",
+   "term": "RFC 2409",
+   "aliases": [
+    "RFC2409"
+   ],
+   "cat": "RFC",
+   "short": "IKE versión 1: el protocolo con el que dos equipos IPsec acuerdan claves y parámetros.",
+   "long": "Resolvió cómo generar y renovar las claves de IPsec sin cargarlas a mano, en dos fases (fase 1 para el canal seguro, fase 2 para las SA). Era complejo y con muchas variantes. Lo reemplazó IKEv2 (RFC 4306 de 2005, hoy RFC 7296).",
+   "year": 1998,
+   "case": true
+  },
+  {
+   "id": "rfc2516",
+   "term": "RFC 2516",
+   "aliases": [
+    "RFC2516"
+   ],
+   "cat": "RFC",
+   "short": "PPPoE: PPP dentro de tramas Ethernet, el método con usuario y clave que usan muchos proveedores.",
+   "long": "Se creó para que los proveedores de banda ancha siguieran autenticando y controlando por usuario como en el acceso telefónico, pero sobre Ethernet. Agrega una fase de descubrimiento (PADI, PADO, PADR, PADS) y 8 bytes de cabecera, por eso la MTU queda en 1492.",
+   "year": 1999,
+   "case": true
+  },
+  {
+   "id": "rfc2543",
+   "term": "RFC 2543",
+   "aliases": [
+    "RFC2543"
+   ],
+   "cat": "RFC",
+   "short": "La primera versión estándar de SIP.",
+   "long": "Definió el protocolo de señalización para iniciar, modificar y terminar sesiones de voz y video entre agentes de usuario. La reemplazó la RFC 3261 de 2002, que es la que siguen los equipos actuales.",
+   "year": 1999,
+   "case": true
+  },
+  {
+   "id": "rfc2616",
+   "term": "RFC 2616",
+   "aliases": [
+    "RFC2616"
+   ],
+   "cat": "RFC",
+   "short": "HTTP/1.1, la versión que se usó como referencia durante quince años.",
+   "long": "Reemplazó a la RFC 2068 y fue la base de la web y de las APIs de equipos. En 2014 se dividió en las RFC 7230 a 7235, y en 2022 todo quedó reemplazado por las RFC 9110 a 9112.",
+   "year": 1999,
+   "case": true
+  },
+  {
+   "id": "rfc2617",
+   "term": "RFC 2617",
+   "aliases": [
+    "RFC2617"
+   ],
+   "cat": "RFC",
+   "short": "Autenticación HTTP Basic y Digest, definidas juntas.",
+   "long": "Ordenó las dos formas clásicas de pedir usuario y clave en HTTP: Basic, que manda la clave apenas codificada en Base64, y Digest, que manda un resumen calculado con un nonce para que la clave no viaje. La reemplazaron en 2015 la RFC 7617 (Basic) y la RFC 7616 (Digest).",
+   "year": 1999,
+   "case": true
+  },
+  {
+   "id": "rfc2661",
+   "term": "RFC 2661",
+   "aliases": [
+    "RFC2661"
+   ],
+   "cat": "RFC",
+   "short": "L2TP: el protocolo que lleva sesiones PPP por una red IP, por UDP 1701.",
+   "long": "Se creó para extender una sesión PPP a través de internet, juntando ideas de L2F de Cisco y PPTP de Microsoft. No cifra nada, por eso en la práctica se usa dentro de IPsec (RFC 3193), la combinación L2TP/IPsec.",
+   "year": 1999,
+   "case": true
+  },
+  {
+   "id": "rfc2833",
+   "term": "RFC 2833",
+   "aliases": [
+    "RFC2833"
+   ],
+   "cat": "RFC",
+   "short": "El método para mandar las teclas DTMF como eventos dentro del flujo RTP, en lugar de como sonido.",
+   "long": "Se creó porque los codecs comprimidos como G.729 deforman los tonos y la central o el portero dejaban de reconocerlos. Cada tecla viaja como un paquete RTP con un tipo de carga acordado (dinámico, de 96 a 127). La reemplazó la RFC 4733 de 2006, pero los equipos siguen mostrando la opción como RFC 2833.",
+   "year": 2000,
+   "case": true
+  },
+  {
+   "id": "rfc2976",
+   "term": "RFC 2976",
+   "aliases": [
+    "RFC2976"
+   ],
+   "cat": "RFC",
+   "short": "El método SIP INFO: un mensaje de señalización para mandar información durante una llamada en curso.",
+   "long": "Se definió como un mecanismo genérico, sin decir qué formato lleva adentro; mandar DTMF por INFO es una costumbre de fabricantes, y por eso no todas las centrales lo reenvían igual. La reemplazó la RFC 6086 de 2011.",
+   "year": 2000,
+   "case": true
+  },
+  {
+   "id": "rfc3193",
+   "term": "RFC 3193",
+   "aliases": [
+    "RFC3193"
+   ],
+   "cat": "RFC",
+   "short": "Cómo proteger L2TP con IPsec: la base de las VPN L2TP/IPsec.",
+   "long": "Resolvió que L2TP no cifra: define meter el túnel L2TP dentro de IPsec en modo transporte. Gracias a eso Windows, macOS, iOS y Android traen un cliente L2TP/IPsec incorporado.",
+   "year": 2001,
+   "case": true
+  },
+  {
+   "id": "rfc3261",
+   "term": "RFC 3261",
+   "aliases": [
+    "RFC3261"
+   ],
+   "cat": "RFC",
+   "short": "SIP: el protocolo de señalización que establece, modifica y corta llamadas de voz y video sobre IP.",
+   "long": "Reemplazó a la RFC 2543 y es la versión que siguen centrales, teléfonos y porteros. Define métodos como REGISTER, INVITE, ACK y BYE, el puerto 5060 y la autenticación por desafío. El audio y el video no viajan por SIP sino por RTP, según lo acordado en el SDP.",
+   "year": 2002,
+   "case": true
+  },
+  {
+   "id": "rfc3442",
+   "term": "RFC 3442",
+   "aliases": [
+    "RFC3442"
+   ],
+   "cat": "RFC",
+   "short": "La opción 121 de DHCP: mandar rutas estáticas completas, con su prefijo, al cliente.",
+   "long": "Resolvió que la opción de rutas original solo aceptaba redes con clase. Si el servidor manda la opción 121, el cliente tiene que ignorar el gateway de la opción 3, un detalle que explica más de una ruta por defecto que no aparece.",
+   "year": 2002,
+   "case": true
+  },
+  {
+   "id": "rfc3526",
+   "term": "RFC 3526",
+   "aliases": [
+    "RFC3526"
+   ],
+   "cat": "RFC",
+   "short": "Los grupos Diffie-Hellman MODP de 2048 bits en adelante para IKE, entre ellos el grupo 14 (modp2048).",
+   "long": "Se publicó porque los grupos más chicos ya no daban margen de seguridad. Define los grupos 14 a 18, de 2048 a 8192 bits. El grupo 14 es hoy el mínimo razonable y suele ser el punto de acuerdo entre marcas distintas.",
+   "year": 2003,
+   "case": true
+  },
+  {
+   "id": "rfc3947",
+   "term": "RFC 3947",
+   "aliases": [
+    "RFC3947"
+   ],
+   "cat": "RFC",
+   "short": "Negociación de NAT Traversal en IKE: cómo dos equipos IPsec detectan que hay un NAT en el medio.",
+   "long": "IPsec original no atravesaba bien los routers con NAT, porque ESP no tiene puertos que traducir. Esta RFC define cómo detectarlo durante IKE y pasar a UDP 4500. Va en par con la RFC 3948, que define el encapsulado.",
+   "year": 2005,
+   "case": true
+  },
+  {
+   "id": "rfc3948",
+   "term": "RFC 3948",
+   "aliases": [
+    "RFC3948"
+   ],
+   "cat": "RFC",
+   "short": "Encapsulado de ESP dentro de UDP 4500, la otra mitad de NAT-T.",
+   "long": "Mete los paquetes ESP de IPsec dentro de UDP para que un NAT pueda traducirlos como cualquier otro tráfico. Es lo que permite usar IPsec detrás de un módem o un CGNAT.",
+   "year": 2005,
+   "case": true
+  },
+  {
+   "id": "rfc3986",
+   "term": "RFC 3986",
+   "aliases": [
+    "RFC3986"
+   ],
+   "cat": "RFC",
+   "short": "La sintaxis de las URL y URI: esquema, usuario, host, puerto, ruta y parámetros.",
+   "long": "Ordenó cómo se escribe y se interpreta una dirección como http://usuario@host:puerto/ruta?parámetros. Ya desaconseja poner usuario:clave dentro de la dirección, porque queda en historiales y logs. Reemplazó a la RFC 2396.",
+   "year": 2005,
+   "case": true
+  },
+  {
+   "id": "rfc4301",
+   "term": "RFC 4301",
+   "aliases": [
+    "RFC4301"
+   ],
+   "cat": "RFC",
+   "short": "La arquitectura de seguridad de IPsec: políticas, asociaciones de seguridad y bases que las guardan.",
+   "long": "Define cómo un equipo decide qué tráfico cifrar (la base de políticas, SPD) y con qué parámetros (las SA). Reemplazó a la RFC 2401 de 1998, que a su vez había reemplazado a la RFC 1825 de 1995.",
+   "year": 2005,
+   "case": true
+  },
+  {
+   "id": "rfc4733",
+   "term": "RFC 4733",
+   "aliases": [
+    "RFC4733"
+   ],
+   "cat": "RFC",
+   "short": "La versión vigente del DTMF como eventos RTP, sucesora de la RFC 2833.",
+   "long": "Corrigió y aclaró la RFC 2833, que quedó reemplazada, y separó en la RFC 4734 la lista de eventos. En la práctica es lo mismo que los equipos llaman RFC 2833: las teclas viajan como eventos dentro del audio RTP.",
+   "year": 2006,
+   "case": true
+  },
+  {
+   "id": "rfc4787",
+   "term": "RFC 4787",
+   "aliases": [
+    "RFC4787"
+   ],
+   "cat": "RFC",
+   "short": "Requisitos de comportamiento de NAT para UDP, entre ellos el hairpin.",
+   "long": "Se escribió porque cada router hacía NAT a su manera y las aplicaciones (voz, juegos, VPN) fallaban según la marca. Fija reglas como mantener el mismo mapeo de puertos y soportar hairpinning: que un equipo de la LAN llegue a otro de la LAN usando la IP pública.",
+   "year": 2007,
+   "case": true
+  },
+  {
+   "id": "rfc5424",
+   "term": "RFC 5424",
+   "aliases": [
+    "RFC5424"
+   ],
+   "cat": "RFC",
+   "short": "Syslog: el formato estándar para mandar mensajes de log, con severidades del 0 al 7.",
+   "long": "Syslog existía desde los ochenta sin norma formal; la RFC 3164 de 2001 describió esa práctica y esta RFC la reemplazó con un formato estricto. El nivel 7 es depuración (debug), el que registra todo y el que piden los soportes.",
+   "year": 2009,
+   "case": true
+  },
+  {
+   "id": "rfc5737",
+   "term": "RFC 5737",
+   "aliases": [
+    "RFC5737"
+   ],
+   "cat": "RFC",
+   "short": "Rangos IPv4 reservados para documentación: 192.0.2.0/24, 198.51.100.0/24 y 203.0.113.0/24.",
+   "long": "Se reservaron para que manuales y cursos usen ejemplos sin apuntar a direcciones reales de nadie. Nunca se rutean en internet. Por eso los ejemplos de IP pública del curso usan 203.0.113.x.",
+   "year": 2010,
+   "case": true
+  },
+  {
+   "id": "rfc5905",
+   "term": "RFC 5905",
+   "aliases": [
+    "RFC5905"
+   ],
+   "cat": "RFC",
+   "short": "NTP versión 4: el protocolo para sincronizar relojes por la red, por UDP 123.",
+   "long": "NTP lo diseñó David Mills en los ochenta; esta RFC es la versión vigente y reemplazó a la RFC 1305 (NTPv3). Mide la demora de ida y vuelta para corregir el reloj con precisión. Importa en logs, certificados y en IPsec, donde los relojes desfasados hacen vencer las SA.",
+   "year": 2010,
+   "case": true
+  },
+  {
+   "id": "rfc6598",
+   "term": "RFC 6598",
+   "aliases": [
+    "RFC6598"
+   ],
+   "cat": "RFC",
+   "short": "El rango 100.64.0.0/10, reservado para el NAT de los proveedores (CGNAT).",
+   "long": "Se reservó cuando se agotaron las IPv4 públicas y los proveedores empezaron a compartir una IP entre muchos clientes. Si la WAN de un router recibe una IP de ese rango, hay un NAT del proveedor adelante y no se puede publicar nada hacia adentro.",
+   "year": 2012,
+   "case": true
+  },
+  {
+   "id": "rfc7296",
+   "term": "RFC 7296",
+   "aliases": [
+    "RFC7296"
+   ],
+   "cat": "RFC",
+   "short": "IKEv2: la versión actual del intercambio de claves de IPsec.",
+   "long": "IKEv2 apareció en 2005 (RFC 4306) para simplificar IKEv1: menos mensajes, NAT-T y detección de peer caído incluidos. Esta RFC es su texto vigente y reemplazó a la RFC 5996. Es la opción preferida para túneles IPsec nuevos entre marcas.",
+   "year": 2014,
+   "case": true
+  },
+  {
+   "id": "rfc7616",
+   "term": "RFC 7616",
+   "aliases": [
+    "RFC7616"
+   ],
+   "cat": "RFC",
+   "short": "Autenticación HTTP Digest actualizada, con SHA-256.",
+   "long": "Reemplazó la parte Digest de la RFC 2617 y sumó algoritmos más fuertes que MD5, como SHA-256. El mecanismo es el mismo: el servidor manda un nonce y el cliente responde con un resumen, sin mandar la clave.",
+   "year": 2015,
+   "case": true
+  },
+  {
+   "id": "rfc7617",
+   "term": "RFC 7617",
+   "aliases": [
+    "RFC7617"
+   ],
+   "cat": "RFC",
+   "short": "Autenticación HTTP Basic, en su texto vigente.",
+   "long": "Reemplazó la parte Basic de la RFC 2617 y aclaró la codificación de caracteres. No cambió lo esencial: usuario y clave viajan en Base64, que no es cifrado, así que solo es seguro dentro de HTTPS o de una red cerrada.",
+   "year": 2015,
+   "case": true
+  },
+  {
+   "id": "rfc7826",
+   "term": "RFC 7826",
+   "aliases": [
+    "RFC7826"
+   ],
+   "cat": "RFC",
+   "short": "RTSP 2.0, la versión nueva del protocolo de control de streaming.",
+   "long": "Reemplazó formalmente a la RFC 2326 y ordenó muchos puntos ambiguos de la 1.0. No es compatible hacia atrás, y por eso cámaras, porteros y NVR siguen usando casi siempre RTSP 1.0.",
+   "year": 2016,
+   "case": true
+  },
+  {
+   "id": "rfc9110",
+   "term": "RFC 9110",
+   "aliases": [
+    "RFC9110"
+   ],
+   "cat": "RFC",
+   "short": "HTTP Semantics: métodos, códigos de estado y encabezados de HTTP, comunes a todas sus versiones.",
+   "long": "En 2022 el IETF reordenó HTTP: la RFC 9110 define lo que significa un GET, un 401 o un encabezado Authorization; la 9111 el cache; la 9112 el formato de HTTP/1.1. Reemplazaron a las RFC 7230 a 7235, que a su vez venían de la RFC 2616.",
+   "year": 2022,
+   "case": true
+  },
+  {
+   "id": "rfc9111",
+   "term": "RFC 9111",
+   "aliases": [
+    "RFC9111"
+   ],
+   "cat": "RFC",
+   "short": "HTTP Caching: las reglas de cache de HTTP.",
+   "long": "Es parte del reordenamiento de HTTP de 2022, junto con las RFC 9110 y 9112. Define cuándo una respuesta se puede guardar y reutilizar.",
+   "year": 2022,
+   "case": true
+  },
+  {
+   "id": "rfc9112",
+   "term": "RFC 9112",
+   "aliases": [
+    "RFC9112"
+   ],
+   "cat": "RFC",
+   "short": "HTTP/1.1: el formato de los mensajes en la versión 1.1 de HTTP, la que hablan porteros y equipos embebidos.",
+   "long": "Describe cómo se escribe un pedido y una respuesta en texto sobre TCP. Junto con la RFC 9110 reemplazó lo que había empezado con las RFC 2068 y 2616.",
+   "year": 2022,
+   "case": true
+  },
+  {
+   "id": "rfc3022",
+   "term": "RFC 3022",
+   "aliases": [
+    "RFC3022"
+   ],
+   "cat": "RFC",
+   "short": "NAT tradicional: la RFC que describe el NAT básico y el NAPT, el que traduce dirección y puerto.",
+   "long": "Reemplazó a la RFC 1631 de 1994 y ordenó lo que los routers ya hacían: con NAPT, muchos equipos de la LAN salen por una sola IP pública y el router distingue cada conexión por el puerto. Es el NAT que hace un masquerade, y por eso para entrar desde afuera hace falta un dst-nat.",
+   "year": 2001,
+   "case": true
+  }
+ ]
+}

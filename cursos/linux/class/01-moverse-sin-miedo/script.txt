@@ -1,0 +1,19 @@
+A: Martín, pregunta de camioneta. Te pasan la consola de un servidor Linux que nunca viste. ¿Qué es lo primero que tocás?
+B: [risas] Nada. Primero miro dónde estoy parado.
+A: Exacto, y esa es la lección de hoy. En Linux todo cuelga de un solo árbol que arranca en la barra. No hay disco C ni disco D. Todo es barra algo.
+B: Y barra root es otra cosa, ¿no? Eso confunde mucho al principio.
+A: Totalmente. Barra root es la carpeta personal del administrador, no la raíz del sistema.
+B: ¿Y las fuentes coinciden en cómo arrancar?
+A: Las dos que leímos sobre navegación dicen lo mismo. Y la Debian Reference va más lejos: propone recorrer el sistema con su tabla de comandos básicos, como entrenamiento, desde un usuario sin privilegios.
+B: Me gusta lo de sin privilegios. Así no rompés nada mientras aprendés.
+A: Claro. Y los comandos son pocos. pwd te dice dónde estás. ls guion l a te lista todo, con permisos y dueños. cd para moverte, y cd guion te vuelve a la carpeta anterior.
+B: Y less para leer sin editar.
+A: less es oro. Abrís un archivo, apretás barra, escribís lo que buscás y te lleva. Con q salís. Y no modificaste nada.
+B: Ponele que estoy en un contenedor LXC con una herramienta de monitoreo y no sé dónde guarda la configuración.
+A: find barra etc guion name, y un pedazo del nombre entre asteriscos. Y si sabés una palabra que está adentro, grep guion r esa palabra en barra etc.
+B: Y si la salida es enorme, la mandás por tubería a less.
+A: Eso. La tubería es la barra vertical: un comando le pasa su salida al siguiente. Hay un truco lindo en la Debian Reference: cuando buscás un proceso con grep, ponés la primera letra entre corchetes y grep deja de encontrarse a sí mismo.
+B: ¿En serio? Siempre me aparecía esa línea de más.
+A: A todos. Laboratorio, diez minutos en cualquier VM: encontrás la configuración de SSH con find, buscás la palabra Port con grep y la leés con less. Sin sudo.
+B: Solo mirar.
+A: Solo mirar. Lo que cambia es el hábito: en un equipo nuevo, primero leés, después tocás.

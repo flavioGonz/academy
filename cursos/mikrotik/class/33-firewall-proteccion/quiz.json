@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un cliente con IP fija reclama que el router sube tráfico todo el día aunque no hay nadie. Tiene allow-remote-requests=yes y otro instalador agregó arriba en input un accept de todo lo que entra por WAN. ¿Qué es lo más probable?",
+    "options": [
+      "Una PC de la LAN con un virus descargando actualizaciones",
+      "El router responde DNS a internet y lo usan para ataques de amplificación",
+      "FastTrack está duplicando paquetes en la WAN",
+      "El cliente DHCP de la WAN renueva la IP cada minuto"
+    ],
+    "answer": 1,
+    "why": "Con consultas remotas permitidas y el puerto 53 aceptado desde WAN, el router es un resolver abierto. En el foro, un caso así llegó a 409 GB de subida en una semana; se corta con drop de UDP y TCP 53 desde WAN y, si no hace falta, allow-remote-requests=no."
+  },
+  {
+    "q": "Armaste las listas por etapas contra fuerza bruta de SSH. Al día siguiente, desde la oficina, vos mismo no podés entrar. ¿Qué pasó?",
+    "options": [
+      "RouterOS bloquea solo tras tres contraseñas mal escritas",
+      "La contraseña del usuario venció",
+      "El timeout de un día se cuenta por cada login fallido",
+      "Las reglas cuentan conexiones nuevas, también las exitosas, y la oficina no estaba exceptuada con una lista de admins arriba"
+    ],
+    "answer": 3,
+    "why": "La documentación lo advierte: se cuentan conexiones, no logins fallidos, y un login exitoso no te saca de las listas. Las direcciones de gestión van en una lista con accept arriba de las reglas de conteo."
+  },
+  {
+    "q": "En un sitio con dos WAN, algunas conexiones se cortan y el contador de 'drop invalid' sube. El tráfico sale por un ISP y vuelve por el otro. ¿Qué indica?",
+    "options": [
+      "Con ruteo asimétrico, paquetes que vuelven por otro camino pueden verse como invalid y la regla los descarta",
+      "Un ataque desde internet que hay que bloquear con una address-list",
+      "FastTrack está apagado y hay que reiniciar",
+      "El masquerade falta en la segunda WAN y no tiene relación con invalid"
+    ],
+    "answer": 0,
+    "why": "La documentación de connection tracking advierte que el juego de reglas con drop invalid no se aplica tal cual en routers con ruteo asimétrico. La solución es que cada conexión entre y salga por el mismo ISP (lección de dos WAN), no borrar la protección a ciegas."
+  }
+]

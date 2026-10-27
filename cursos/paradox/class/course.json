@@ -1,0 +1,192 @@
+{
+ "slug": "paradox",
+ "title": "Alarmas Paradox: de la central al monitoreo",
+ "vendor": "Paradox Security Systems",
+ "tagline": "De la placa al operador de monitoreo: centrales Paradox cableadas, programadas y reportando sin sorpresas.",
+ "description": "Al terminar vas a poder identificar y cablear centrales Spectra SP, Magellan MG y EVO (bus, EOL, ATZ, energía), programarlas por teclado con método (zonas, particiones, usuarios y PGM) y conectarlas a BabyWare, a internet y a la receptora con Contact ID. También vas a elegir el comunicador correcto entre legado y MQTT, explicar Swan y BlueEye al cliente, diagnosticar con la pantalla de fallas y no dejar ninguna llave de fábrica.",
+ "level": "Inicial a intermedio",
+ "audience": "Técnicos instaladores y de soporte que ya manejan redes IP y empiezan a instalar, programar y mantener alarmas Paradox conectadas a monitoreo.",
+ "prerequisites": [
+  "Electricidad básica: tensión, corriente, resistencia y uso del tester",
+  "Direccionamiento IP, máscara, gateway y salida a internet",
+  "Haber visto una central de alarma con teclado y sensores",
+  "Una central Paradox de banco (SP o MG) con teclado y, si es posible, un módulo IP y un cable 307USB"
+ ],
+ "outcomes": [
+  "Identificar familia y versión de una central Paradox y armar el bus y las zonas con la resistencia correcta",
+  "Calcular el consumo del auxiliar y la autonomía de batería",
+  "Programar por teclado zonas, particiones, usuarios y PGM en SP/MG, y conectarse con BabyWare",
+  "Elegir comunicador y receptora (IPR512 o IPC10) según la generación del módulo y dejar el reporte Contact ID registrado",
+  "Configurar BlueEye con Swan o IP estática explicando la suscripción al cliente",
+  "Diagnosticar con la pantalla de fallas y la tabla de estados IP, y entregar la central con todas las llaves cambiadas"
+ ],
+ "version_note": "Escrito en octubre de 2026. La programación por secciones sigue las guías SP5500+/SP6000+/SP7000+ (2022) y la guía de instalación EVOHD+ (2026); vale para Spectra SP y Magellan MG con el mismo mapa de secciones, y EVO usa secciones de cuatro dígitos. Comunicadores: IP180 V1.00.063 (septiembre 2026), IP150M V6.50, IPC10 V1.02.011 (enero 2026), guía del menú instalador de BlueEye V2.0 (marzo 2025). La línea M (M25) se describe solo por su ficha de producto. Las rutas de BlueEye cambian entre versiones de la app.",
+ "arcs": [
+  {
+   "title": "La central bien parada",
+   "why": "Antes de programar, la central tiene que estar identificada, con el bus armado, las zonas bien cableadas y la energía calculada.",
+   "lessons": [
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  {
+   "title": "Programar con método",
+   "why": "Es el trabajo de cada obra: entrar sin romper, definir zonas, particiones y usuarios, y sacar salidas útiles.",
+   "lessons": [
+    5,
+    6,
+    7,
+    8
+   ]
+  },
+  {
+   "title": "Comunicación y monitoreo",
+   "why": "Una alarma que no avisa no sirve: PC, internet, receptora y app, sabiendo qué generación de módulo hay.",
+   "lessons": [
+    9,
+    10,
+    11,
+    12
+   ]
+  },
+  {
+   "title": "Diagnóstico y cuidado",
+   "why": "Fallas y comunicación caída son las llamadas de todos los días, y los códigos de fábrica el riesgo más grande.",
+   "lessons": [
+    13,
+    14,
+    15,
+    16
+   ]
+  }
+ ],
+ "splits": [
+  {
+   "topic": "Acceso de la app: Swan o IP estática",
+   "sides": "Paradox empuja Swan (IP150M V6.50 lo vuelve obligatorio y pago, IP180 solo BlueEye por Swan); su propio soporte sigue documentando IP estática con port forward para módulos legado; el proyecto PAI desaconseja Swan por una vulnerabilidad documentada.",
+   "decide": "Con módulo MQTT la app va por Swan. Con legado y sin suscripción, IP estática por VPN o port forward acotado y nunca con la contraseña de fábrica del módulo. El monitoreo siempre por un canal independiente de la app."
+  },
+  {
+   "topic": "Contact ID o SIA",
+   "sides": "La guía de instalación SP+ y el IPR512 admiten SIA; la guía de programación aclara que SIA no va por GPRS/IP, y los módulos MQTT e IPC10 solo usan Contact ID.",
+   "decide": "Preguntar qué receptora tiene la empresa de monitoreo: por IP o celular, Contact ID; SIA solo por línea telefónica o con IPR512 legado."
+  },
+  {
+   "topic": "Puerto serie bloqueado desde firmware 7.50",
+   "sides": "Paradox reserva el serie a sus dispositivos y vende un código de desbloqueo oficial (5 USD por central); PAI recomienda no actualizar EVO a 7.50 o más si se usa conexión serie.",
+   "decide": "Por sitio: si hay integración serie que el cliente usa, presupuestar el desbloqueo oficial antes de actualizar; no dejar centrales sin actualizar sin evaluar el riesgo."
+  },
+  {
+   "topic": "Contraseña de PC de fábrica",
+   "sides": "La guía SP+ dice que BabyWare obliga a cambiar 0000 en la primera conexión; los manuales de IP180, IP150M y BlueEye siguen citando 0000 como valor de fábrica.",
+   "decide": "Tratarla siempre como cambiada: cambiarla al instalar y anotarla en la ficha de la obra."
+  },
+  {
+   "topic": "Dónde se configura el módulo IP",
+   "sides": "IP150+ desde firmware 5.3.0 e IP180 se configuran desde el menú instalador de BlueEye; el IP150 por debajo de V6 y el IP180 en red cerrada todavía tienen web.",
+   "decide": "Mirar el firmware del módulo: BlueEye por defecto, web solo en legado viejo o red cerrada."
+  }
+ ],
+ "sources_count": 25,
+ "lessons": [
+  {
+   "n": 1,
+   "dir": "01-leer-la-central",
+   "handle": "Leer la central",
+   "summary": "Identificar familia (SP, MG, EVO, M) y versión antes de programar."
+  },
+  {
+   "n": 2,
+   "dir": "02-bus-de-a-grupos",
+   "handle": "Bus de a grupos",
+   "summary": "Armar el bus de 4 hilos sin energía y de a grupos, con zona de teclado."
+  },
+  {
+   "n": 3,
+   "dir": "03-resistencia-al-final",
+   "handle": "Resistencia al final",
+   "summary": "EOL de 1 kΩ, ATZ con 1 y 2,2 kΩ, tamper y zonas de fuego."
+  },
+  {
+   "n": 4,
+   "dir": "04-cuentas-de-energia",
+   "handle": "Cuentas de energía",
+   "summary": "Transformador, consumo del auxiliar, batería y campana sin fallas tontas."
+  },
+  {
+   "n": 5,
+   "dir": "05-entrar-con-metodo",
+   "handle": "Entrar con método",
+   "summary": "Modo instalador, tipos de dato, visualización y códigos de fábrica cambiados."
+  },
+  {
+   "n": 6,
+   "dir": "06-cada-zona-su-tipo",
+   "handle": "Cada zona su tipo",
+   "summary": "Retardo, seguimiento, instantánea, 24 h y fuego, con herramientas contra falsas alarmas."
+  },
+  {
+   "n": 7,
+   "dir": "07-particion-y-usuarios",
+   "handle": "Partición y usuarios",
+   "summary": "Particionado, opciones de usuario, coacción y largo de código."
+  },
+  {
+   "n": 8,
+   "dir": "08-salida-con-evento",
+   "handle": "Salida con evento",
+   "summary": "PGM con eventos y tiempos, relé externo, portón y luz de falla de AC."
+  },
+  {
+   "n": 9,
+   "dir": "09-babyware-primero",
+   "handle": "BabyWare primero",
+   "summary": "307USB, ID de panel y contraseña de PC, y copia de la central antes de cambiar."
+  },
+  {
+   "n": 10,
+   "dir": "10-comunicador-por-generacion",
+   "handle": "Comunicador por generación",
+   "summary": "Legado (TURN) contra MQTT: IP150, IP180, PCS, puertos y qué no mezclar."
+  },
+  {
+   "n": 11,
+   "dir": "11-abonado-y-receptora",
+   "handle": "Abonado y receptora",
+   "summary": "Contact ID, abonado por partición, IPR512 o IPC10, perfiles y prueba diaria."
+  },
+  {
+   "n": 12,
+   "dir": "12-la-app-y-la-nube",
+   "handle": "La app y la nube",
+   "summary": "BlueEye, Swan con suscripción o IP estática en legado, y quién paga."
+  },
+  {
+   "n": 13,
+   "dir": "13-primero-el-tbl",
+   "handle": "Primero el TBL",
+   "summary": "Leer la pantalla de fallas: AC, batería, reloj, campana, tamper y módulos."
+  },
+  {
+   "n": 14,
+   "dir": "14-cuando-no-reporta",
+   "handle": "Cuando no reporta",
+   "summary": "Tabla de estados de registro IP, MAC anterior, reinicio de módulo y sondeo."
+  },
+  {
+   "n": 15,
+   "dir": "15-llaves-de-la-central",
+   "handle": "Llaves de la central",
+   "summary": "Todas las contraseñas de fábrica, bloqueo de instalador y de teclado."
+  },
+  {
+   "n": 16,
+   "dir": "16-parque-y-linea-m",
+   "handle": "Parque y línea M",
+   "summary": "M25 frente al parque SP/MG/EVO y el puerto serie bloqueado desde 7.50."
+  }
+ ]
+}

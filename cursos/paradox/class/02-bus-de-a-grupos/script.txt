@@ -1,0 +1,19 @@
+A: Lección dos: el bus. Esos cuatro hilos que unen teclados y expansores con la central.
+B: El famoso bus. ¿Cuántas cosas le colgás?
+A: Depende de la familia. Según la guía de las SP plus, hasta quince módulos cableados en el bus. En una EVOHD+, la guía habla de doscientos cincuenta y cuatro módulos y hasta novecientos catorce metros de cable en total.
+B: ¿Novecientos metros? Eso es un edificio entero.
+A: Por eso la EVO va en bancos, barrios cerrados, edificios. Teclados K641 o K656 en EVO; K32, K35, K636 o las táctiles TM50 y TM70 en SP y MG. Y expansores: el ZX8 para zonas cableadas, el RTX3 para inalámbricos.
+B: ¿Y cómo se conecta sin sorpresas?
+A: Hay una regla que el manual de la EVOHD+ dice clarito: antes de conectar un módulo al bus, sacás la alimentación de red y la batería.
+B: ¿Y cuánta gente lo hace en caliente?
+A: [suspiro] Más de uno. Y después persigue fallas fantasma.
+B: ¿Cuánto coinciden las fuentes?
+A: Acá ojo: el procedimiento de puesta en marcha sale de una sola fuente, la guía de la EVOHD+. Las otras dos páginas del tema no lo contradicen, simplemente no lo cuentan.
+B: ¿Y qué propone esa guía?
+A: Conectás un grupo chico de módulos con un teclado, das energía y mirás las fallas. Según el manual, solo deberían aparecer dos: pérdida de reloj y campana ausente. Cualquier otra cosa es cableado. Recién ahí sumás el grupo siguiente.
+B: Me encanta. Si algo falla, sabés en qué grupo está.
+A: Exacto. Y dos detalles más. Cada teclado tiene una entrada de zona. Y si aprendés un inalámbrico en el mismo número que una zona cableada, el inalámbrico la pisa.
+B: Uf, ese error lo pagué.
+A: El laboratorio: central de banco, un teclado y un ZX8. Conectás sin energía, de a uno, y después de cada módulo mirás las fallas. Veinte minutos.
+B: ¿Y la zona del teclado?
+A: También la asignás en el laboratorio. Y desde hoy, el bus se arma de a grupos.

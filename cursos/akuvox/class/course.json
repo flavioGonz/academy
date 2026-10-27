@@ -1,0 +1,406 @@
+{
+  "slug": "akuvox",
+  "title": "Porteros IP Akuvox: de la caja a la puerta abierta",
+  "vendor": "Akuvox",
+  "tagline": "Del portero recién sacado de la caja a una puerta que abre siempre, solo para quien corresponde.",
+  "description": "Al terminar vas a poder poner en marcha porteros, monitores y terminales Akuvox, integrarlos por IP directa o en una central SIP y abrir puertas por DTMF, PIN, tarjeta o HTTP, incluido el relé remoto, el SR01 y el aviso de eventos por Action URL. También vas a reconocer cada equipo del catálogo vigente y del parque instalado, mandar su video al NVR, ofrecer SmartPlus sin depender de ella y dejar todo aislado y diagnosticable.",
+  "level": "Inicial a intermedio",
+  "audience": "Técnicos instaladores y de soporte de seguridad electrónica con base de redes IP.",
+  "prerequisites": [
+    "Direccionamiento IP, máscara, gateway y DHCP",
+    "Qué es una VLAN y una regla de firewall",
+    "Nociones de SIP y extensiones de una central telefónica",
+    "Cableado de baja tensión con fuente de 12 V"
+  ],
+  "outcomes": [
+    "Encontrar la IP de cualquier portero o monitor Akuvox, entrar por web y leer su firmware y versión de hardware",
+    "Elegir entre llamada IP directa y central, y registrar portero y monitor como extensiones SIP",
+    "Cablear cerradura, botón de salida y alarmas de puerta según fail-safe o fail-secure",
+    "Configurar apertura por DTMF (RFC 2833) en portero, central y monitor, incluido abrir dos puertas",
+    "Mandar el video del portero al NVR por RTSP u ONVIF y dejar SmartPlus como extra",
+    "Aislar el portero en su VLAN y armar el paquete de evidencia (log, PCAP, firmware) para soporte",
+    "Abrir relés locales, remotos y de seguridad por HTTP con el formato de URL que corresponde al firmware, con usuario propio y autenticación Digest o Allowlist",
+    "Integrar la apertura con Home Assistant, MikroTik, Asterisk o una cámara de patentes, y recibir los eventos del portero por Action URL",
+    "Ubicar cualquier equipo del catálogo Akuvox vigente a octubre de 2026 por tipo y serie, con su alimentación, credenciales, relé y acceso al menú",
+    "Reconocer modelos fuera de catálogo por su código de firmware y proponer un reemplazo vigente equivalente"
+  ],
+  "version_note": "Basado en la Knowledge Base de Akuvox y en akuvox.com consultados el 27 de octubre de 2026 (guías de administrador del E16 V2/V3 y del C316, firmware Linux y Android con numeración A.B.C.D y rama de alta seguridad con C igual a 10 o más). La apertura por HTTP sigue las guías vigentes de Open Relay via HTTP, HTTP API y Action URL; las acciones extra aplican a E18 desde 18.30.11.27 y R20V5 desde 320.30.12.28. El catálogo es el menú de productos de akuvox.com al 27 de octubre de 2026; las fichas leídas son X915, R29, R49G, EC33, A08 y WR01, y el resto de los datos sale de la guía de selección y de las tablas de la Knowledge Base. Los modelos fuera de catálogo se marcan como tales por no figurar en el menú; no hay lista oficial de discontinuados en las fuentes. Integraciones ilustradas con Yeastar P-Series, Grandstream UCM63xx, 3CX, FreePBX/Asterisk con PJSIP, Home Assistant, MikroTik RouterOS 7 y cámaras LPR. Las vulnerabilidades citadas son las del E11 publicadas en marzo de 2023.",
+  "arcs": [
+    {
+      "title": "De la caja a la red",
+      "why": "Antes de integrar nada hay que entrar al equipo, saber qué es, hacer la primera llamada y mover una cerradura de verdad.",
+      "lessons": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "title": "La puerta que abre",
+      "why": "El trabajo diario de una obra con central y varios accesos: registro SIP, DTMF confiable, usuarios y dos puertas.",
+      "lessons": [
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "title": "Video, nube y seguridad",
+      "why": "Lo que separa una instalación que anda de una que se sostiene: NVR, app sin dependencia, aislamiento y diagnóstico.",
+      "lessons": [
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "title": "Relés por HTTP",
+      "why": "El DTMF solo llega al portero en llamada; el HTTP abre cualquier relé desde cualquier sistema, y por eso es lo primero que se asegura.",
+      "lessons": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "title": "Catálogo: porteros de calle",
+      "why": "En obra aparece cualquier modelo de la línea; esta parte da, por familia, qué hace, cómo se alimenta, qué credenciales acepta y cómo se entra.",
+      "lessons": [
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ]
+    },
+    {
+      "title": "Catálogo: monitores interiores",
+      "why": "El monitor decide qué puede abrir y manejar el residente; se elige por sistema, relés e interfaces.",
+      "lessons": [
+        30,
+        31,
+        32
+      ]
+    },
+    {
+      "title": "Catálogo: control de acceso, ascensores y 2 hilos",
+      "why": "La misma obra suele sumar puertas internas, ascensores y edificios sin UTP; cada pieza tiene su lugar.",
+      "lessons": [
+        33,
+        34,
+        35,
+        36,
+        37
+      ]
+    },
+    {
+      "title": "Catálogo: teléfonos, accesorios, software y parque instalado",
+      "why": "Completa el sistema con lo que no es portero ni monitor y con lo que ya no se vende pero sigue en las paredes.",
+      "lessons": [
+        38,
+        39,
+        40,
+        42,
+        41
+      ]
+    }
+  ],
+  "splits": [
+    {
+      "topic": "DTMF por SIP INFO",
+      "sides": "Akuvox lo ofrece como método confiable separado del audio; 3CX lo desaconseja porque no viaja sincronizado y muchos servicios no lo soportan.",
+      "decide": "Con una central en el medio, RFC 2833 en portero, central y monitor; SIP INFO solo si un extremo no soporta otra cosa y se prueba con la central real."
+    },
+    {
+      "topic": "Nube y acceso remoto contra aislamiento",
+      "sides": "Claroty y CISA piden no exponer el portero a internet; Yeastar documenta registro remoto con reenvío de puertos y SmartPlus necesita salida a internet.",
+      "decide": "Tráfico saliente hacia una nube o una VPN, sí; puertos entrantes reenviados al portero, no."
+    },
+    {
+      "topic": "Dos puertas por DTMF o por HTTP",
+      "sides": "Grandstream propone el mismo código DTMF en ambas puertas; un integrador de FreePBX lo resolvió con comandos HTTP desde la central.",
+      "decide": "Un portero con dos relés, DTMF; dos porteros distintos, HTTP con usuario propio y origen restringido."
+    },
+    {
+      "topic": "IP directa o central",
+      "sides": "La central suma desvíos, colas y apps; la IP directa conserva funciones como la vista previa de video y tiene menos piezas.",
+      "decide": "Si nadie fuera de la casa atiende el portero, IP directa con IPs fijas; si hay oficina, celulares o colas, central."
+    },
+    {
+      "topic": "Alta seguridad encendida o apagada para el HTTP",
+      "sides": "Akuvox la deja encendida y recomienda /fcgi/OpenDoor; un integrador de LogicMachine la apaga para seguir con /fcgi/do y admin.",
+      "decide": "Si el cliente HTTP no acepta el formato nuevo, se cambia el cliente o se pone un intermediario; la alta seguridad queda encendida."
+    },
+    {
+      "topic": "Credenciales dentro de la URL",
+      "sides": "Akuvox publica ejemplos con usuario y clave en la URL; pylocal-akuvox advierte que quedan en logs de proxies y del equipo.",
+      "decide": "Usuario dedicado que solo abre, tráfico encerrado en la VLAN de porteros y, donde se pueda, HTTP API en Digest o Allowlist."
+    },
+    {
+      "topic": "Grado de protección del X915",
+      "sides": "La guía de selección dice IP65; la ficha del X915 V2.0 dice IP66 e IK10.",
+      "decide": "Vale la ficha de la versión que se compra; en equipos instalados, la etiqueta."
+    }
+  ],
+  "sources_count": 55,
+  "lessons": [
+    {
+      "n": 1,
+      "dir": "01-primer-acceso",
+      "handle": "Primer acceso",
+      "summary": "Sacar la IP de cada familia Akuvox, entrar por web y cambiar la clave de fábrica el primer día."
+    },
+    {
+      "n": 2,
+      "dir": "02-leer-firmware",
+      "handle": "Leer el firmware",
+      "summary": "Decodificar A.B.C.D, distinguir versiones de hardware y actualizar sin brickear."
+    },
+    {
+      "n": 3,
+      "dir": "03-llamada-directa",
+      "handle": "Llamada directa",
+      "summary": "Portero a monitor por IP sin servidor: cuándo alcanza y por qué es más robusta."
+    },
+    {
+      "n": 4,
+      "dir": "04-rele-cerradura",
+      "handle": "Relé y cerradura",
+      "summary": "Fail-safe o fail-secure, NO o NC, fuente aparte, botón de salida y alarmas de puerta."
+    },
+    {
+      "n": 5,
+      "dir": "05-cuenta-sip",
+      "handle": "Cuenta SIP",
+      "summary": "Registrar portero y monitor como extensiones en UCM, Asterisk, Yeastar o 3CX, y los errores típicos."
+    },
+    {
+      "n": 6,
+      "dir": "06-dtmf-que-abre",
+      "handle": "DTMF que abre",
+      "summary": "Mismo tipo y mismo código en las tres puntas: RFC 2833, SIP INFO, inband y lista blanca."
+    },
+    {
+      "n": 7,
+      "dir": "07-usuarios-horarios",
+      "handle": "Usuarios y horarios",
+      "summary": "PIN, tarjetas, rostro y horarios por usuario, carga masiva por CSV y ajustes que dejan pasar de más."
+    },
+    {
+      "n": 8,
+      "dir": "08-dos-puertas",
+      "handle": "Dos puertas",
+      "summary": "Abrir dos accesos desde un monitor: dos relés por DTMF o dos porteros por comando HTTP."
+    },
+    {
+      "n": 9,
+      "dir": "09-rtsp-al-nvr",
+      "handle": "RTSP al NVR",
+      "summary": "Los dos streams RTSP y ONVIF del portero hacia el NVR, con credenciales propias."
+    },
+    {
+      "n": 10,
+      "dir": "10-smartplus-plan-b",
+      "handle": "SmartPlus con plan B",
+      "summary": "La app del residente como extra, con monitor, PIN y tarjeta andando sin internet."
+    },
+    {
+      "n": 11,
+      "dir": "11-portero-blindado",
+      "handle": "Portero blindado",
+      "summary": "VLAN propia, nada expuesto a internet, claves propias y lista blanca SIP, a partir del caso E11."
+    },
+    {
+      "n": 12,
+      "dir": "12-diagnostico-evidencia",
+      "handle": "Diagnóstico con evidencia",
+      "summary": "Log, PCAP y firmware para resolver registro, DTMF y video, y el paquete que pide soporte."
+    },
+    {
+      "n": 13,
+      "dir": "13-url-que-abre",
+      "handle": "La URL que abre",
+      "summary": "Open Relay via HTTP, formato nuevo /fcgi/OpenDoor contra el viejo /fcgi/do según la rama de alta seguridad, y DoorNum por relé."
+    },
+    {
+      "n": 14,
+      "dir": "14-quien-puede-abrir",
+      "handle": "Quién puede abrir",
+      "summary": "HTTP API en None, Allowlist, Basic o Digest, un usuario por integración, la clave en la URL y la VLAN de porteros."
+    },
+    {
+      "n": 15,
+      "dir": "15-boton-del-monitor",
+      "handle": "Botón del monitor",
+      "summary": "Teclas Remote Relay By HTTP en el monitor para abrir un segundo portero desde la llamada, el monitoreo o la vista previa."
+    },
+    {
+      "n": 16,
+      "dir": "16-reles-de-afuera",
+      "handle": "Relés de afuera",
+      "summary": "Web Relay de terceros, SR01 adentro, relés externos del monitor (MK485, RSAC-C1-R8), WR01 y tiempos de disparo."
+    },
+    {
+      "n": 17,
+      "dir": "17-el-portero-avisa",
+      "handle": "El portero avisa",
+      "summary": "Action URL: el portero avisa aperturas, tarjetas, códigos y entradas a un servidor, con variables."
+    },
+    {
+      "n": 18,
+      "dir": "18-abrir-desde-sistemas",
+      "handle": "Abrir desde sistemas",
+      "summary": "La misma apertura desde curl, Home Assistant, MikroTik, Asterisk y cámaras de patentes; UCM y HikCentral sin acción HTTP documentada."
+    },
+    {
+      "n": 19,
+      "dir": "19-mapa-del-catalogo",
+      "handle": "Mapa del catálogo",
+      "summary": "Menú de akuvox.com como fuente de lo vigente, tablas de la Knowledge Base para los datos y sufijos de versión."
+    },
+    {
+      "n": 20,
+      "dir": "20-s539-y-s538",
+      "handle": "S539 y S538",
+      "summary": "Los Android S539 y S538: credenciales, PoE+ o 24 V y salida de 12 V para la cerradura."
+    },
+    {
+      "n": 21,
+      "dir": "21-s535-y-s532",
+      "handle": "S535 y S532",
+      "summary": "S535 por módulos (huella, LTE, QR, lazo) y S532 de 2,8\" que pide fuente para su salida de 12 V."
+    },
+    {
+      "n": 22,
+      "dir": "22-x916-y-x915",
+      "handle": "X916 y X915",
+      "summary": "X916 con relé de 5 A y X915 con versiones HID y palma; IP65 contra IP66 e IK10 según la página."
+    },
+    {
+      "n": 23,
+      "dir": "23-x912-y-x910",
+      "handle": "X912 y X910",
+      "summary": "X912 antivandálico y X910 de un botón: credenciales, acceso al menú y salida de 12 V con la alimentación correcta."
+    },
+    {
+      "n": 24,
+      "dir": "24-r29",
+      "handle": "R29",
+      "summary": "Las cuatro versiones del R29, IP65 e IK06, accesorios y el R29C-L con LTE que no toma PoE."
+    },
+    {
+      "n": 25,
+      "dir": "25-r28-y-r25",
+      "handle": "R28 y R25",
+      "summary": "R28 con borne de 12 V propio y serie R25 sin PIN, con la salida de 12 V que depende del volumen."
+    },
+    {
+      "n": 26,
+      "dir": "26-los-r20",
+      "handle": "Los R20",
+      "summary": "R20A, R20K, R20K-L y R20B: credenciales, tres versiones de hardware y la etiqueta que engaña."
+    },
+    {
+      "n": 27,
+      "dir": "27-e18-y-e16",
+      "handle": "E18 y E16",
+      "summary": "E18 y E16 de rostro: PIN de sistema según firmware, palma en el E16P y cerradura siempre con fuente propia."
+    },
+    {
+      "n": 28,
+      "dir": "28-e13s-y-e12",
+      "handle": "E13S y E12",
+      "summary": "E13S y E12 de un botón: IP por voz, sin PIN, sin salida de 12 V y sin RS485 para el SR01."
+    },
+    {
+      "n": 29,
+      "dir": "29-e21-y-e20s",
+      "handle": "E21 y E20S",
+      "summary": "E21 y E20S de emergencia: sin credenciales, registro SIP y destino de respaldo."
+    },
+    {
+      "n": 30,
+      "dir": "30-monitores-serie-s",
+      "handle": "Monitores serie S",
+      "summary": "S560, S562, S563, S565 y S567: interfaces, carga del relé y rutas de menú."
+    },
+    {
+      "n": 31,
+      "dir": "31-monitores-c-e-it",
+      "handle": "Monitores C e IT",
+      "summary": "C313, C316, C319 e IT88: uno o dos relés, 24 V 1 A en el C319 y el C316 sin dato de carga."
+    },
+    {
+      "n": 32,
+      "dir": "32-monitores-serie-x",
+      "handle": "Monitores serie X",
+      "summary": "X933 y X937: PoE+ para el grande, 24 V 1 A en el chico; AKClaw Panel como línea aparte."
+    },
+    {
+      "n": 33,
+      "dir": "33-terminales-a0x",
+      "handle": "Terminales A0x",
+      "summary": "A01, A02, A03, A05 y A08 por credencial, IP anunciada con Reset y salida de 12 V."
+    },
+    {
+      "n": 34,
+      "dir": "34-a15-y-wr01",
+      "handle": "A15 y WR01",
+      "summary": "A15 para marco de puerta y WR01 como relé de borde con 2 relés, 2 entradas y API."
+    },
+    {
+      "n": 35,
+      "dir": "35-a094-y-a095",
+      "handle": "A094 y A095",
+      "summary": "Controladoras de 4 puertas A094 (220 V) y A095 (PoE+ o 12 V 5 A) y su energía por salida."
+    },
+    {
+      "n": 36,
+      "dir": "36-ascensor-ec33",
+      "handle": "Ascensor EC33",
+      "summary": "EC33: 32 relés, paralelo o serie con la botonera, y configuración por HTTP desde el terminal."
+    },
+    {
+      "n": 37,
+      "dir": "37-dos-hilos",
+      "handle": "Dos hilos",
+      "summary": "La línea de 2 hilos: porteros a 48 V, monitores desde el NS-2 y lo que falta confirmar."
+    },
+    {
+      "n": 38,
+      "dir": "38-telefonos-y-otros",
+      "handle": "Teléfonos y otros",
+      "summary": "R49G de video con dos puertos Gigabit, y teléfonos, cámara y radares que solo figuran en el menú."
+    },
+    {
+      "n": 39,
+      "dir": "39-accesorios-y-modulos",
+      "handle": "Accesorios y módulos",
+      "summary": "Cajas, cubiertas y soportes por modelo, módulos y lectores, y el cableado de cerraduras con la salida de 12 V."
+    },
+    {
+      "n": 40,
+      "dir": "40-software-y-nube",
+      "handle": "Software y nube",
+      "summary": "SmartPlus, My MobileKey, ACMS, ACMS Pro, SDMC e Installer Kit Tool, y el bloque B del firmware."
+    },
+    {
+      "n": 41,
+      "dir": "41-parque-instalado",
+      "handle": "Parque instalado",
+      "summary": "Modelos fuera del menú (E11, R27, C315, IT83, C310...), cómo reconocerlos por el firmware y cómo reemplazarlos."
+    }
+  ]
+}

@@ -1,0 +1,649 @@
+{
+  "1": {
+    "fig": {
+      "file": "1.svg",
+      "alt": "Tres pasos en fila: pedirle la IP al equipo (botón, teclado, pantalla o IP Scanner), entrar por navegador con admin / admin marcado en rojo como clave de fábrica publicada, y cambiarla por una clave propia marcada en verde.",
+      "caption": "Mirá el orden: primero la IP, después la web y la clave de fábrica no pasa de la primera visita."
+    },
+    "steps": [
+      {
+        "file": "1-paso1.svg",
+        "step": 1,
+        "alt": "Portero, monitor y notebook conectados a los puertos de un switch PoE de laboratorio en la red 192.168.88.0/24, con un router que da DHCP y gateway 192.168.88.1. El cable del portero lleva datos y PoE.",
+        "caption": "Los tres equipos van al mismo switch; con PoE, el cable del portero también lo alimenta.",
+        "after": "Conectá un portero y un monitor"
+      },
+      {
+        "file": "1-paso2.svg",
+        "step": 2,
+        "alt": "Tabla con el método para pedir la IP según el modelo: botón 5 segundos en R20A, E12, E13 y X910; *3258* en R20K y R25K; pantalla y PIN de sistema en E16 y E18; 9999 y 3888 en R29 y X915. Aviso sobre el PIN admin o Admin321 del E16.",
+        "caption": "Buscá tu modelo en la tabla; en el E16 el PIN de sistema depende del firmware.",
+        "after": "Sacá la IP del portero por el método"
+      },
+      {
+        "file": "1-paso5.svg",
+        "step": 5,
+        "alt": "Ventana del navegador en http://192.168.88.X con usuario y clave admin, y al lado la pantalla de cambio de clave con la clave nueva Lab-Portero-2026!, más la ficha del equipo para anotar modelo, IP, MAC y clave.",
+        "caption": "Entrás con admin / admin una sola vez y salís con clave propia anotada en la ficha.",
+        "after": "entrá con admin / admin y cambiá"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Pedirle la IP al equipo",
+        "para_que": "Los porteros Akuvox salen de fábrica con DHCP y muchos no tienen pantalla ni teclado, así que no hay dónde leer qué IP tomaron. Cada familia trae un truco para decirla: la voz, un código en el teclado o un menú en pantalla.",
+        "como": "Apenas el equipo enciende en la red, usá el método de su modelo y confirmá con el IP Scanner de Akuvox desde una PC con Windows de 64 bits. Si el escáner no ve nada, pausá el firewall de la PC solo mientras escanea y volvé a activarlo enseguida.",
+        "ejemplo": "En un edificio en Cordón con un R20A en el hall y nadie en la portería: mantenés el botón de llamada unos 5 segundos, el portero dice la IP en voz alta y en un minuto ya estás en la web, sin tener que entrar al router del cliente."
+      },
+      {
+        "name": "Clave de fábrica admin / admin",
+        "para_que": "La clave de fábrica existe para que el instalador pueda entrar la primera vez. El problema es que es igual en toda la línea y está publicada en la documentación, así que cualquiera que llegue a la IP del equipo puede entrar.",
+        "como": "Cambiala en la misma visita en la que configurás la red, con una clave propia por obra, y anotala en la ficha del equipo junto con modelo, IP y MAC. La de fábrica no debería llegar al día de la entrega.",
+        "ejemplo": "Claroty encontró unos 5.000 Akuvox expuestos a internet y la clave descifrada era admin / admin. Un portero de casa en Carrasco que queda con la clave de fábrica le deja la cámara y el relé a cualquiera que lo encuentre."
+      },
+      {
+        "name": "PIN de sistema del E16",
+        "para_que": "En los porteros con pantalla, el PIN de sistema protege el menú local donde se ve la IP y se cambia la red, para que un visitante no pueda tocar la configuración desde la calle.",
+        "como": "Si el firmware del E16 es 216.30.10.121 o anterior, el PIN es admin; en las versiones nuevas es Admin321. Probá los dos antes de pensar en un reseteo.",
+        "ejemplo": "Llegás a un E16 instalado hace años en un consultorio de Pocitos: admin no entra, probás Admin321 y entrás. Te ahorraste resetear y perder la configuración del cliente."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nLos porteros IP heredaron de las cámaras IP una costumbre de los equipos embebidos: salir de fábrica con una IP por DHCP y una clave genérica igual para todos. Esa clave facilita la primera instalación, pero en 2016 la botnet Mirai mostró el costo: tomó cientos de miles de cámaras y grabadores probando listas de claves de fábrica.\n\nCon Akuvox pasó algo parecido a menor escala. En marzo de 2023, el equipo Team82 de Claroty publicó 13 vulnerabilidades en el portero E11 y contó unos 5.000 Akuvox visibles desde internet; la clave web descifrada era `admin / admin`, la misma que figura en la documentación oficial como paso normal de instalación.\n\nAkuvox fue resolviendo el primer acceso según la forma de cada equipo: los de un botón anuncian la IP por voz, los de teclado usan un código (`*3258*` en R20K y R25K), los de pantalla muestran un menú protegido por PIN de sistema y, para todos, el IP Scanner de Windows.\n\n### Cómo funciona\n\nAl encender, el portero pide IP por DHCP: manda un DHCPDISCOVER por broadcast, el router le ofrece una dirección del rango (por ejemplo 192.168.88.0/24) y el equipo la toma con su gateway, en este caso 192.168.88.1. Como no tiene pantalla para mostrarla, la anuncia de otra forma.\n\nEl IP Scanner funciona por descubrimiento en la red local: manda una consulta que los equipos Akuvox contestan con modelo, IP y MAC. Por eso pide que la PC esté en la misma subred y que su firewall no bloquee las respuestas.\n\nCon la IP, entrás por navegador al servidor web del equipo. La primera sesión con `admin / admin` solo sirve para una cosa urgente: poner una clave propia. Desde ese momento, la ficha del equipo (modelo, IP, MAC, clave) es lo que permite volver a entrar sin resetear.\n\nSi el switch es PoE, el mismo cable de red lleva datos y alimentación (802.3af en R20, E12 y E16), así que el portero queda andando con un solo cable."
+  },
+  "2": {
+    "fig": {
+      "file": "2.svg",
+      "alt": "El número de firmware 216.30.10.121 en grande, separado en cuatro partes con colores: A 216 es el modelo E16 V2, B 30 es logo Akuvox, C 10 es la rama con alta seguridad y D 121 es la versión dentro de la rama.",
+      "caption": "Cada bloque del firmware dice algo distinto: modelo, OEM, rama y versión."
+    },
+    "steps": [
+      {
+        "file": "2-paso1.svg",
+        "step": 1,
+        "alt": "Ventana de la web en Status > Basic > Product Information con modelo E16, firmware 216.30.10.121 resaltado y versión de hardware; al lado, la etiqueta trasera del R20A donde V3.0 es hardware 2 y V5.0 es hardware 3.",
+        "caption": "Copiá firmware y hardware desde la web; en el R20A la etiqueta no coincide con el hardware real.",
+        "after": "y anotá firmware y hardware"
+      },
+      {
+        "file": "2-paso5.svg",
+        "step": 5,
+        "alt": "Cuatro tarjetas en orden: backup de la configuración, archivo correcto (.rom Linux, .zip Android), subir en System > Basic > Upgrade y verificar la versión. Abajo, la ventana de upgrade y un aviso de no cerrar ni refrescar la pestaña.",
+        "caption": "Backup primero, archivo del hardware correcto y manos quietas mientras sube.",
+        "after": "esperá sin cerrar ni refrescar"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Número de firmware A.B.C.D",
+        "para_que": "Akuvox fabrica decenas de modelos con varias versiones de hardware y con o sin logo. Numerar el firmware en cuatro partes permite saber, solo leyendo la versión, para qué equipo es un archivo y si es más nuevo que otro.",
+        "como": "Leé el número en Status > Basic > Product Information. A es el modelo (216 es E16 V2, 29 es R29), B el OEM (30 con logo Akuvox), C la rama y D la versión: mayor es más nueva solo si A, B y C coinciden.",
+        "ejemplo": "Un cliente manda una foto con 29.30.10.x de su R29 y otro 216.30.10.121 de su E16: sin abrir ningún manual ya sabés qué modelo es cada uno y que los dos están en la rama de alta seguridad."
+      },
+      {
+        "name": "Versión de hardware",
+        "para_que": "Un mismo nombre comercial puede tener placas distintas a lo largo de los años. Cada versión de hardware necesita su propio archivo de firmware, y subir el de otra puede dejar el equipo sin arrancar.",
+        "como": "Antes de bajar un archivo, anotá la versión de hardware desde la web, no desde el sticker. En el R20A la etiqueta engaña: V3.0 es hardware 2 y V5.0 es hardware 3.",
+        "ejemplo": "Tenés tres R20A en un mismo edificio comprados en años distintos: puede que necesites dos archivos diferentes. La ficha por equipo evita mezclarlos."
+      },
+      {
+        "name": "Backup antes de actualizar",
+        "para_que": "Una actualización puede cambiar valores por defecto o fallar a mitad de camino. El backup de configuración es lo que permite volver al estado anterior sin cargar todo a mano.",
+        "como": "Exportá la configuración, guardala con el nombre del cliente y la fecha, y recién ahí subí el firmware en System > Basic > Select File > Upgrade. En obra, fuera de horario y con alguien del lado de la puerta.",
+        "ejemplo": "Actualizás el portero de una cooperativa de vivienda un sábado a la mañana con el backup en la notebook: si algo queda raro, reimportás la configuración y el lunes nadie se enteró."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nLos equipos de portería IP son computadoras chicas: algunos corren Linux embebido y otros Android. Por eso Akuvox publica dos tipos de archivo en su Knowledge Base, sección Firmware & Tool: `.rom` para los equipos Linux y `.zip` para los Android. Para versiones especiales o compatibles con terceros, el archivo se pide a soporte.\n\nCon los años, la línea fue sumando modelos y revisiones de placa. E12, R28, X915 y C313 tienen dos versiones de hardware; la serie R20, E16 y E21 tienen tres. Para no confundirse, Akuvox adoptó una numeración de cuatro partes y, más adelante, abrió una rama de firmware con modo de alta seguridad, que cifra la comunicación, los comandos de apertura y el almacenamiento de contraseñas.\n\n### Cómo funciona\n\nEl número se lee A.B.C.D:\n\n- **A, modelo**: 29 es R29, 915 es X915, 216 es E16 V2, 416 es E16 V3, 220 es R20 V2.\n- **B, OEM**: 30 lleva logo Akuvox, 31 sale sin logo.\n- **C, rama**: 10 o más indica la rama con modo de alta seguridad.\n- **D, versión**: dentro de un mismo A, B y C, el número mayor es el más nuevo.\n\n`216.30.10.121` es entonces un E16 V2, con logo, en la rama de alta seguridad. Ese dato cambia cosas prácticas: en la rama 10 o más, algunos comandos viejos (por ejemplo la URL `/fcgi/do` de la lección 13) dejan de responder con el modo encendido.\n\nLa actualización por web sube el archivo al equipo, que lo verifica y lo graba en su memoria. Mientras tanto, la pestaña del navegador mantiene la transferencia: por eso la guía pide no cerrarla ni refrescarla. Al terminar, el equipo reinicia y la versión nueva aparece en Product Information, que es donde se confirma y se anota en la ficha.\n\nSoporte de Akuvox pide estar en el último firmware antes de abrir un ticket, así que leer y actualizar bien es también el primer paso de cualquier diagnóstico."
+  },
+  "3": {
+    "fig": {
+      "file": "3.svg",
+      "alt": "Arriba, llamada IP directa: portero 192.168.88.21 llama al monitor 192.168.88.31 por SIP en el puerto 5060, dos equipos y ningún servidor. Abajo, con central: portero 201 y monitor 202 pasan por una central que además desvía a celulares o internos.",
+      "caption": "La llamada directa usa menos piezas; la central entra cuando suma desvíos, colas o apps."
+    },
+    "steps": [
+      {
+        "file": "3-paso1.svg",
+        "step": 1,
+        "alt": "Zona 192.168.88.0/24 con el router gateway 192.168.88.1, el portero en 192.168.88.21/24 y el monitor en 192.168.88.31/24 llamándose directo. Afuera, un monitor en 192.168.1.31 marcado en rojo porque está en otra subred.",
+        "caption": "Los dos equipos con IP fija y en la misma subred; en otra subred la llamada directa no entra.",
+        "after": "Poné IP fija (o reserva DHCP)"
+      },
+      {
+        "file": "3-paso4.svg",
+        "step": 4,
+        "alt": "Diagrama de secuencia entre portero y monitor: llamada SIP a 192.168.88.31:5060, suena y el residente atiende, audio y video en los dos sentidos, tecla de apertura con código DTMF y el relé A abre.",
+        "caption": "Seguí la llamada de arriba abajo: sale del portero y llega derecho al monitor, sin central.",
+        "after": "Apretá el botón, atendé en el monitor"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Llamada IP directa",
+        "para_que": "SIP nació pensando en servidores, pero también permite que un equipo llame a otro directamente por su IP. Para una casa con un portero y un monitor, eso evita comprar, configurar y mantener una central.",
+        "como": "En los dos equipos se habilita Intercom > Basic > Direct IP con el mismo puerto (5060 por defecto) y en el portero el botón marca la IP del monitor. Los dos tienen que estar en la misma red.",
+        "ejemplo": "Casa en Shangrilá con un R20A en el portón y un C316 en la cocina: con IP directa queda andando en una tarde y no hay servidor que se cuelgue en vacaciones."
+      },
+      {
+        "name": "IP fija o reserva DHCP",
+        "para_que": "En llamada directa el portero marca una IP, no un nombre. Si el monitor cambia de IP después de un corte de luz, el botón sigue marcando la vieja y nadie atiende.",
+        "como": "Poné IP fija en los dos equipos o una reserva DHCP en el router con la MAC de cada uno. Anotalas en la ficha. Probá desenchufar el monitor 30 segundos y repetir la llamada.",
+        "ejemplo": "Un cliente cambia el router de la casa y el nuevo reparte otro rango: con IP fija en 192.168.88.x los equipos quedan fuera de la red nueva, así que en esa visita conviene acordar el rango con quien instala el router."
+      },
+      {
+        "name": "Cuándo sí poner central",
+        "para_que": "La central existe para sumar funciones que la llamada directa no tiene: grupos de timbrado, desvíos a celular, colas, atención desde una portería o desde otra sede.",
+        "como": "Regla práctica: un portero y monitores en la misma red, llamada directa. Si alguien tiene que atender desde afuera o hay muchos destinos, central (lección 5). Cada equipo en el medio es algo más que puede fallar.",
+        "ejemplo": "Un edificio de 40 unidades con portería 24 horas y vecinos que quieren atender en el celular necesita central; una casa con un monitor no."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nSIP (Session Initiation Protocol) se publicó como RFC 2543 en 1999 y su versión vigente es la RFC 3261 de 2002. Se pensó para que dos \"agentes de usuario\" pudieran establecer una sesión de voz o video, con o sin servidores en el medio. El puerto estándar es el 5060.\n\nEn telefonía de oficina casi siempre hay una central que registra a los teléfonos, pero el protocolo nunca la exigió: un agente puede mandarle una invitación a otro usando su IP como dirección, por ejemplo `sip:192.168.88.31`. Los fabricantes de porteros aprovecharon esa posibilidad para el caso más común, la casa con un portero y uno o dos monitores.\n\n### Cómo funciona\n\nCuando el visitante aprieta el botón, el portero arma un mensaje SIP `INVITE` dirigido a la IP del monitor, puerto 5060. Adentro va una descripción SDP con los codecs de audio y video que ofrece y los puertos donde espera recibir el medio.\n\nEl monitor contesta que está sonando y, cuando el residente atiende, responde `200 OK` con sus propios codecs y puertos. El portero confirma con `ACK` y desde ese momento el audio y el video viajan por RTP, en paquetes UDP, directamente entre las dos IP.\n\nPara abrir, el monitor manda el código DTMF dentro de la llamada (lección 6) y el portero dispara el relé configurado.\n\nTodo esto requiere que cada equipo llegue al otro por IP. En la misma subred no hay routers ni NAT en el medio, así que no hay nada que reescriba direcciones o bloquee el 5060. Si la llamada no entra, lo primero es revisar subred, máscara y que ningún firewall filtre el puerto.\n\nLa diferencia con una central es quién decide a dónde va la llamada: en directa la decide el botón del portero; con central, la central."
+  },
+  "4": {
+    "fig": {
+      "file": "4.svg",
+      "alt": "Dos esquemas de cableado lado a lado. Fail-safe: fuente de 12 V al COM del relé, NC al más del electroimán y menos a la fuente; sin energía queda libre, uso típico salida de emergencia. Fail-secure: igual pero por NO a una cerradura de apertura; sin energía queda trabada, uso típico portón de calle.",
+      "caption": "Elegí el borne según qué tiene que pasar con la puerta cuando se corta la luz."
+    },
+    "steps": [
+      {
+        "file": "4-paso2.svg",
+        "step": 2,
+        "alt": "Esquema de cableado del laboratorio: más 12 V de una fuente aparte al COM del relé A del portero, NO al más de la cerradura de prueba y menos de la cerradura al menos de la fuente. Diodo en antiparalelo sobre la bobina con el cátodo al más. El NC queda libre.",
+        "caption": "Seguí los colores: rojo positivo, cian el tramo que conmuta el relé, negro el negativo; el diodo va sobre la bobina.",
+        "after": "Cableado en NO (fail-secure):"
+      },
+      {
+        "file": "4-paso5.svg",
+        "step": 5,
+        "alt": "Pulsador de salida normal abierto cableado a la entrada y al común de la bornera del portero, con nombres de borne según el modelo. Al lado, la web en Access Control > Input con Enabled, nivel de disparo, Execute Relay en Relay A, Door Opened Timeout y Break-in Intrusion.",
+        "caption": "El botón de salida va a una entrada y la entrada dispara el relé; de paso tenés alarma de puerta abierta.",
+        "after": "Conectá el pulsador a la entrada"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Fail-safe y fail-secure",
+        "para_que": "Antes de elegir un borne hay que decidir qué hace la puerta cuando se corta la energía. Fail-safe libera (pensado para evacuación); fail-secure queda trabada (pensado para seguridad del bien).",
+        "como": "Con el contacto NC y COM, la cerradura recibe energía en reposo y se libera al abrir o al cortarse la luz. Con NO y COM, recibe energía solo mientras el relé actúa y sin luz queda trabada.",
+        "ejemplo": "La salida de emergencia de un local en 18 de Julio con electroimán se cablea fail-safe para que un corte no encierre a nadie; el portón de un depósito en La Teja con cerradura de apertura, fail-secure."
+      },
+      {
+        "name": "Relé de contacto seco",
+        "para_que": "El relé del portero es un interruptor: cierra o abre un contacto, pero no entrega la corriente que mueve la cerradura. Así el portero no carga con el consumo de la cerradura ni con sus picos.",
+        "como": "La cerradura va con su propia fuente: positivo de la fuente al COM, NO o NC al positivo de la cerradura y el negativo directo. Respetá la carga del contacto: 30 V 2 A en E16 y R20, según la tabla de Akuvox.",
+        "ejemplo": "Una cerradura de 12 V que consume más de lo que aguanta el contacto termina pegando el relé; con una fuente aparte de la potencia correcta y el relé solo conmutando, el portero dura años."
+      },
+      {
+        "name": "Diodo en la bobina",
+        "para_que": "Una bobina (electroimán o cerradura) guarda energía en su campo magnético. Al cortarle la corriente, devuelve un pico de tensión que hace chispa en el contacto del relé y lo desgasta.",
+        "como": "Se pone un diodo en antiparalelo sobre los bornes de la bobina, con el cátodo hacia el positivo. En funcionamiento normal no conduce; cuando aparece el pico, lo descarga por la propia bobina.",
+        "ejemplo": "En una obra con electroimán en la puerta del hall, el relé del portero empezó a fallar a los meses; con el diodo puesto en los bornes del electroimán, el contacto deja de quemarse."
+      },
+      {
+        "name": "Entrada para botón de salida",
+        "para_que": "El botón de salida de adentro no se cablea en paralelo al relé: va a una entrada del portero, que decide qué relé disparar. Así queda registrado y se pueden sumar alarmas de puerta.",
+        "como": "En Access Control > Input habilitás la entrada, elegís el nivel de disparo y el relé a ejecutar. En la misma pantalla están Door Opened Timeout (puerta abierta demasiado tiempo) y Break-in Intrusion (apertura forzada).",
+        "ejemplo": "En una oficina de Ciudad Vieja, Door Opened Timeout avisa cuando la puerta queda trabada con una cuña a la hora del almuerzo, algo que el cliente no sabía que podía tener."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nEl relé electromecánico es de los componentes más viejos de la electrónica: una bobina que, al energizarse, mueve un contacto. El formato que traen los porteros, con tres bornes COM, NO y NC, se conoce como contacto conmutado o \"forma C\" (un polo, dos posiciones). Su ventaja es que el mismo relé sirve para cerraduras que se abren con energía y para las que se abren sin ella.\n\nDel lado de la puerta conviven dos familias. La cerradura eléctrica de apertura (o contrachapa) libera el pestillo cuando recibe tensión. El electroimán sostiene la puerta mientras recibe tensión y la suelta al cortarse. De ahí salen los términos fail-safe (sin energía, libre) y fail-secure (sin energía, trabada), que la guía de dos puertas de Grandstream explica con el mismo principio de bornes COM, NO y NC.\n\n### Cómo funciona\n\nEn reposo, el COM está unido al NC. Cuando el portero activa el relé (por PIN, tarjeta, DTMF, HTTP o botón de salida), el COM pasa al NO durante el tiempo configurado en `Access Control > Relay` y después vuelve.\n\n- **COM + NO**: la cerradura solo recibe 12 V mientras el relé actúa. Si se corta la fuente, queda como está: trabada. Es fail-secure.\n- **COM + NC**: la carga recibe 12 V todo el tiempo y se le corta al abrir. Un electroimán así cableado libera al abrir y también al cortarse la luz. Es fail-safe.\n\nEl relé es un contacto seco: no aporta tensión. La corriente sale de la fuente de la cerradura, pasa por COM y NO (o NC) y vuelve por el negativo. Akuvox publica la carga resistiva que aguanta cada modelo, por ejemplo 30 V 2 A en E16 y R20.\n\nCuando una bobina se corta, la tensión en sus bornes salta de golpe (la corriente en un inductor no puede cambiar instantáneamente). El diodo en antiparalelo, con el cátodo al positivo, le da un camino a esa corriente y evita el arco en el contacto.\n\nLas entradas funcionan al revés: el portero mira si un contacto externo, como el pulsador de salida, cambia de nivel, y ejecuta la acción configurada."
+  },
+  "5": {
+    "fig": {
+      "file": "5.svg",
+      "alt": "Central SIP en 192.168.88.10 puerto 5060 arriba; abajo el portero extensión 201 y el monitor extensión 202 registrándose con flechas punteadas, y un celular o interno que recibe desvíos. Debajo, las dos cuentas del equipo: la 1 la toma SmartPlus si se activa, la 2 queda para la central local.",
+      "caption": "Cada equipo es una extensión registrada; la central reparte las llamadas."
+    },
+    "steps": [
+      {
+        "file": "5-paso3.svg",
+        "step": 3,
+        "alt": "A la izquierda, los datos de la extensión en la central: 201 y la contraseña Ejemplo-201-Lab!. A la derecha, la web del portero en Account > Basic con Account Enabled, Register Name 201, Username 201, Password resaltada, Server Address 192.168.88.10 y Port 5060.",
+        "caption": "Los mismos datos de la central van a los campos del portero; Server Address es la IP de la central.",
+        "after": "En el portero: `Account > Basic`"
+      },
+      {
+        "file": "5-paso7.svg",
+        "step": 7,
+        "alt": "Tres filas de síntoma, causa y arreglo: Failed to authenticate por contraseña mal; registro que cambia de puerto por el SIP ALG del router; registra pero no llama por marcar *202 en vez de 202.",
+        "caption": "Leé el síntoma y andá directo a la causa probable antes de tocar otra cosa.",
+        "after": "revisá la contraseña; si el registro"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Extensión SIP y registro",
+        "para_que": "Una central necesita saber dónde está cada equipo para mandarle las llamadas. El registro es el aviso periódico con el que el portero le dice a la central: soy la 201 y estoy en esta IP.",
+        "como": "Creás una extensión por equipo en la central y cargás en Account > Basic: Register Name y Username con el número, Password y Server Address con la IP de la central. Después verificás en la central que la extensión figure en línea.",
+        "ejemplo": "En un edificio con FreePBX, `asterisk -rx \"pjsip show endpoints\"` muestra la 201 del portero disponible antes de irte; si no aparece, no te vas."
+      },
+      {
+        "name": "Dos cuentas SIP",
+        "para_que": "Akuvox trae dos cuentas para que el equipo pueda estar en dos servidores a la vez, por ejemplo la nube de SmartPlus y la central del edificio, o una central principal y otra de respaldo.",
+        "como": "La cuenta 1 es la principal y es la que toma SmartPlus si se activa; si la 1 no registra, el equipo pasa a la 2. Por eso, con SmartPlus, conviene poner la central local en la cuenta 2.",
+        "ejemplo": "Un edificio en Malvín quiere app SmartPlus y además que la portería atienda por la central: la cuenta 1 queda para la nube y la 2 para la central de la portería."
+      },
+      {
+        "name": "SIP ALG",
+        "para_que": "El SIP ALG es una función de algunos routers que intenta ayudar a SIP a cruzar NAT reescribiendo direcciones y puertos dentro de los mensajes. Muchas veces los reescribe mal.",
+        "como": "Si el registro aparece y desaparece o cambia de puerto a cada refresco, desactivá SIP ALG en el router y volvé a mirar el registro con el logger de pjsip.",
+        "ejemplo": "Un R20A registra en FreePBX pero cada minuto cambia de puerto y las llamadas se cortan: apagando SIP ALG en el router del cliente queda estable."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nAsterisk, la central de código abierto que está debajo de FreePBX, nació en 1999 y popularizó la telefonía IP en pymes. Con los años aparecieron centrales comerciales como Grandstream UCM, Yeastar y 3CX, y todas tratan al portero igual que a un teléfono: una extensión más. 3CX lo explica así: el visitante aprieta, suena la extensión, se ve el video, se atiende y se abre, con los desvíos y colas de la central funcionando como en cualquier llamada.\n\nEn Asterisk el canal SIP moderno es PJSIP, por eso el comando de verificación de la lección es `pjsip show endpoints`.\n\n### Cómo funciona\n\nEl registro usa el método `REGISTER` de SIP (RFC 3261). El portero manda a la central un mensaje que dice \"la extensión 201 está en mi IP y puerto\". La central contesta `401 Unauthorized` con un desafío; el portero responde calculando un resumen con su contraseña (autenticación digest) y, si coincide, la central contesta `200 OK`. El registro vence y se renueva cada cierto tiempo (el período de registro).\n\nLos campos de `Account > Basic` corresponden a esas piezas:\n\n- **Register Name / Username**: la extensión (201).\n- **Password**: la clave de la extensión en la central.\n- **Server Address y Port**: dónde está el registrador (192.168.88.10:5060).\n\nCuando alguien aprieta el botón, el portero manda el `INVITE` a la central, que busca dónde está registrada la 202 y la hace sonar. Por eso basta con marcar 202: un asterisco o prefijo de más (como en el caso real de FreePBX con `*110`) hace que la central no encuentre destino.\n\nSi entre el portero y la central hay un router con NAT, la IP y el puerto que el portero escribe dentro del mensaje pueden no coincidir con los que ve la central. El SIP ALG intenta corregirlo reescribiendo el mensaje, y cuando lo hace mal aparecen registros que cambian de puerto o llamadas sin audio."
+  },
+  "6": {
+    "fig": {
+      "file": "6.svg",
+      "alt": "Tres carriles entre monitor y portero. Inband: el 731 va mezclado en la voz, se degrada con G.729. RFC 2833: el 731 viaja como evento dentro de los paquetes RTP, la más compatible, resaltado en verde. SIP INFO: el 731 viaja en la señalización, la central no siempre lo pasa.",
+      "caption": "El mismo código puede viajar de tres maneras; RFC 2833 es la más compatible."
+    },
+    "steps": [
+      {
+        "file": "6-paso4.svg",
+        "step": 4,
+        "alt": "Tres ventanas: portero con DTMF Type RFC2833, DTMF Mode de 3 dígitos y Relay A 731; central con las extensiones 201 y 202 en RFC 2833; monitor con DTMF Type RFC2833, Remote Relay 731 y SoftKey Remote Relay DTMF. Abajo, el flujo: tecla, 731 por RFC 2833, el portero compara y el relé A abre.",
+        "caption": "Tipo y código iguales en las tres puntas; si una cambia, atienden y no abre.",
+        "after": "Llamá, atendé y abrí con la tecla"
+      },
+      {
+        "file": "6-paso6.svg",
+        "step": 6,
+        "alt": "El monitor 202, que está en contactos, manda 731 y el portero abre el relé A; un número desconocido manda 731 y el código se ignora. Ventana de Access Control > Relay con Open Relay Via DTMF en Only Contacts List.",
+        "caption": "Con la lista blanca, el código solo vale si quien llama está en contactos del portero.",
+        "after": "número que no esté en contactos"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "DTMF",
+        "para_que": "DTMF son los tonos del teclado telefónico. En portería se usan para que quien atiende abra la puerta marcando un código durante la llamada, sin otro cable ni otro sistema.",
+        "como": "En el portero, Access Control > Relay define cuántos dígitos y qué código abre cada relé. En el monitor, el mismo código va en Remote Relay y en una tecla de la pantalla de llamada (SoftKey In Talking Page).",
+        "ejemplo": "En un edificio en Parque Rodó, el vecino atiende en el monitor, ve al delivery y toca la tecla: el monitor manda 731 y el relé A abre el hall."
+      },
+      {
+        "name": "RFC 2833, SIP INFO e inband",
+        "para_que": "Hay tres formas de llevar el código: inband dentro del audio, RFC 2833 como evento en los paquetes RTP y SIP INFO como mensaje de señalización. Cada equipo y central soporta distintas combinaciones.",
+        "como": "Elegí RFC 2833 en portero, central y monitor (Account > Advanced > DTMF). Inband se rompe con codecs comprimidos como G.729 y SIP INFO no siempre lo pasa la central: 3CX, por ejemplo, lo reenvía como SIP INFO y el otro extremo tiene que soportarlo.",
+        "ejemplo": "Soporte típico: \"atiendo, veo a la persona y no abre\". Revisás y el monitor quedó en SIP INFO y el portero en RFC 2833; los ponés iguales y abre."
+      },
+      {
+        "name": "Lista blanca DTMF",
+        "para_que": "Si cualquier número que llama al portero puede marcar el código, alguien que lo conozca podría abrir desde afuera. La lista blanca limita quién puede usarlo.",
+        "como": "En Access Control > Relay > Open Relay Via DTMF elegís None, Only Contacts List o All Numbers. Con Only Contacts List, solo abren los números cargados en contactos del portero. Además, cambiá el código de fábrica por uno propio.",
+        "ejemplo": "Un portero con salida a la central del edificio recibe llamadas de afuera; con Only Contacts List, aunque alguien marque 731 desde un celular desconocido, no abre."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nDTMF (Dual-Tone Multi-Frequency) lo desarrolló Bell Labs y llegó a los teléfonos de teclado en 1963, con el nombre comercial Touch-Tone. Cada tecla es la suma de dos tonos, uno de un grupo de frecuencias bajas y otro de altas, para que la central no los confunda con la voz.\n\nCon la telefonía IP apareció un problema: los codecs que comprimen la voz, como G.729, están pensados para la voz humana y deforman los tonos. Para resolverlo, la IETF publicó en 2000 la RFC 2833, que manda las teclas como eventos dentro del flujo RTP en lugar de como sonido; hoy su versión vigente es la RFC 4733 de 2006, aunque los equipos siguen mostrando el nombre RFC 2833. En paralelo se usó el método SIP INFO (RFC 2976, del año 2000), que manda la tecla por la señalización.\n\n### Cómo funciona\n\n- **Inband**: el monitor genera los dos tonos y los mete en el audio. El portero tiene que reconocerlos escuchando. Funciona con G.711, falla con codecs comprimidos o pérdida de paquetes.\n- **RFC 2833**: el monitor manda paquetes RTP especiales, con un tipo de carga acordado (rango 96 a 127, el payload que configura Akuvox), que dicen \"tecla 7, duración tal\". Viajan por el mismo camino que el audio y llegan sincronizados.\n- **SIP INFO**: la tecla viaja en un mensaje `INFO` por la señalización SIP. No depende del audio, pero cada central decide si lo reenvía y cómo.\n\nAkuvox ofrece también combinaciones como Info+RFC2833. La regla es que emisor y receptor usen el mismo tipo: si el monitor manda SIP INFO y el portero solo escucha RFC 2833, el código nunca llega aunque la llamada se vea perfecta.\n\nDel lado del portero, el DTMF Mode fija cuántos dígitos espera. Cuando recibe la cantidad completa, compara con el código de cada relé y, si coincide y quien llama pasa la lista blanca, dispara ese relé."
+  },
+  "7": {
+    "fig": {
+      "file": "7.svg",
+      "alt": "A la izquierda, en rojo, el PIN público 33333333 de fábrica compartido por todos los vecinos, con los problemas: si se muda alguien hay que cambiarlo para todos, no se sabe quién abrió, no tiene horario. A la derecha, en verde, un usuario con PIN privado, hasta 5 tarjetas, rostro, relé A y horario Lun a Vie 08 a 18.",
+      "caption": "Pasar de un código para todos a credenciales por persona permite dar de baja de a uno."
+    },
+    "steps": [
+      {
+        "file": "7-paso5.svg",
+        "step": 5,
+        "alt": "Cinco pasos en fila: Export desde Directory > User como .tgz, descomprimir con 7-Zip, editar el .csv, volver a comprimir en .tgz e importar con Select File > Import. Abajo, el contenido del CSV con UserID, Name, PIN Code y Card Code de tres usuarios de prueba.",
+        "caption": "La carga masiva es un viaje de ida y vuelta: exportar, editar el CSV y reimportar.",
+        "after": "Volvé a comprimir en"
+      },
+      {
+        "file": "7-paso6.svg",
+        "step": 6,
+        "alt": "Línea de tiempo de 00 a 24 horas con la franja verde Lun a Vie 08 a 18. Un PIN a las 07:30 y otro a las 19:30 se rechazan; uno a las 10:00 abre.",
+        "caption": "Fuera de la franja el PIN se rechaza; cambiá la hora del equipo para probar.",
+        "after": "Probá un PIN dentro y otro fuera"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "PIN público y PIN privado",
+        "para_que": "El PIN público es un código único para todo el edificio, cómodo pero imposible de revocar para una sola persona. El PIN privado es uno por usuario: se da de baja sin tocar a nadie más.",
+        "como": "Cambiá o deshabilitá el público de fábrica (33333333) en Access Control > PIN Setting > Public PIN. Los privados se cargan por usuario en Directory > User, de 2 a 8 caracteres, en modelos con teclado.",
+        "ejemplo": "En un edificio en Tres Cruces se va un inquilino: con PIN privado borrás su usuario y listo; con PIN público tendrías que avisarle a 30 familias un código nuevo."
+      },
+      {
+        "name": "Horarios de acceso",
+        "para_que": "No todo el que entra necesita entrar siempre. El horario limita cuándo vale una credencial, para personal de limpieza, proveedores o empleados.",
+        "como": "Creás el horario (por ejemplo Lun a Vie 08 a 18) y se lo asignás a cada usuario. Always deja entrar siempre y Never bloquea. Probá cambiando la hora del equipo.",
+        "ejemplo": "La empresa de limpieza de una oficina en el Centro entra de lunes a viernes de 8 a 18; si alguien prueba el PIN un domingo, el portero lo rechaza."
+      },
+      {
+        "name": "Carga masiva por CSV",
+        "para_que": "Cargar 200 usuarios uno por uno en la web lleva una tarde y se presta a errores. La exportación e importación por archivo permite trabajar en una planilla.",
+        "como": "Exportá en Directory > User > Export, descomprimí el .tgz, editá el .csv respetando las columnas, comprimí de nuevo en .tgz (7-Zip en Windows) e importá con Select File > Import.",
+        "ejemplo": "La administración de un complejo en Pocitos te manda la lista de propietarios en Excel; la pasás al CSV exportado del E16 y la importás en minutos."
+      },
+      {
+        "name": "Tarjetas y rostro seguros",
+        "para_que": "No todas las credenciales protegen igual. Una tarjeta leída solo por su número de serie (UID) se puede copiar; un rostro sin antisuplantación acepta una foto.",
+        "como": "Preferí Mifare con lectura cifrada de sector y bloque, o DESFire, en lugar de solo UID. En Access Control > Face Setting revisá que el antisuplantación no esté en Close. E12 y E16 leen solo tarjetas de 13,56 MHz.",
+        "ejemplo": "En un barrio privado, un llavero copiado en una feria abre si el portero lee solo UID; con sector cifrado, la copia no sirve."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nEl control de acceso empezó con llaves y siguió con códigos compartidos en teclados: un número para todo el edificio. Era fácil de administrar y difícil de revocar. Las tarjetas de proximidad de 125 kHz trajeron identidad por persona, y después llegaron las de 13,56 MHz (norma ISO/IEC 14443), entre ellas la familia MIFARE, lanzada a mediados de los noventa.\n\nLa seguridad de esas tarjetas también evolucionó. El cifrado de la MIFARE Classic fue roto públicamente en 2008, y muchos lectores baratos ni siquiera lo usan: leen solo el UID, un número que se copia con un duplicador. Por eso aparecieron la lectura de sectores con clave y las familias como DESFire con AES.\n\nLos porteros con cámara sumaron reconocimiento facial, y con él otro problema: distinguir una cara real de una foto. La respuesta es la detección de vida o antisuplantación.\n\n### Cómo funciona\n\nEn Akuvox, cada usuario es un registro en `Directory > User` con sus credenciales y permisos:\n\n- **PIN privado**: de 2 a 8 caracteres, solo en modelos con teclado.\n- **Tarjetas**: hasta 5 por usuario; se cargan con Obtain acercando la tarjeta.\n- **Rostro**: foto jpg, png o bmp de hasta 2 MB, con nivel de coincidencia y de antisuplantación.\n- **Relé y horario**: qué puerta abre y cuándo. Always, Never o un horario propio.\n\nCuando alguien presenta una credencial, el portero busca el usuario, revisa que la hora actual caiga dentro de su horario y, si todo cierra, dispara el relé asignado. El PIN público, en cambio, no está atado a nadie: cualquiera que lo sepa abre a cualquier hora.\n\nPara la carga masiva, el equipo exporta un `.tgz` con un `.csv` adentro (columnas como `UserID,Name,PIN Code,Card Code`). Lo editás en una planilla, lo volvés a comprimir y el equipo lo importa con la misma estructura. El E16 admite hasta 20.000 usuarios, así que el CSV es la forma razonable de trabajar con edificios grandes.\n\nLa autenticación doble (Face+PIN, RF Card+PIN) exige dos métodos en orden fijo, para accesos sensibles."
+  },
+  "8": {
+    "fig": {
+      "file": "8.svg",
+      "alt": "Dos paneles. Un portero con dos relés: el monitor manda DTMF 731 o 732 y el portero abre portón por Relay A o hall por Relay B. Dos porteros: el monitor está en llamada con el portero 1 y su DTMF llega solo a ese; al portero 2 el DTMF no llega y se abre por HTTP desde una PC o la central.",
+      "caption": "Con dos relés alcanza un código por relé; con dos porteros, la segunda puerta va por HTTP."
+    },
+    "steps": [
+      {
+        "file": "8-paso2.svg",
+        "step": 2,
+        "alt": "Pantalla del monitor en llamada con dos teclas, Portón con DTMF 731 y Hall con DTMF 732, configuradas en Device > Relay > SoftKey In Talking Page. Cada código llega al relé correspondiente del portero, Relay A al portón y Relay B al hall, cada cerradura con su fuente.",
+        "caption": "Una tecla por puerta: el portero dispara solo el relé cuyo código llegó.",
+        "after": "= Remote Relay DTMF 731"
+      },
+      {
+        "file": "8-paso5.svg",
+        "step": 5,
+        "alt": "Terminal de la PC de laboratorio con curl -u abre-lab:Ejemplo-Http-2026 a /fcgi/OpenDoor?action=OpenDoor&DoorNum=1 hacia el portero 192.168.88.21, que abre el relay A. Debajo, Open Relay Via HTTP con su usuario y clave, y un aviso de que por HTTP la clave viaja en claro.",
+        "caption": "El comando HTTP usa un usuario propio y solo vive dentro de la red de porteros.",
+        "after": "Desde la PC de laboratorio:"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Un código por relé",
+        "para_que": "Un portero con dos relés puede manejar dos puertas, pero el monitor necesita una forma de decir cuál abrir. La solución es un código DTMF distinto por relé.",
+        "como": "En el portero, Access Control > Relay: Relay A con 731 y Relay B con 732. En el monitor, una tecla por puerta en SoftKey In Talking Page con su código. Si ponés el mismo código en los dos relés, abren juntos.",
+        "ejemplo": "Casa en Carrasco con portón de autos y puerta peatonal en el mismo portero: tecla Portón para el auto del cliente y tecla Hall para el cartero."
+      },
+      {
+        "name": "Por qué el DTMF no alcanza con dos porteros",
+        "para_que": "El DTMF viaja dentro de una llamada. Si el monitor está hablando con el portero 1, el código solo llega a ese equipo; el portero 2 no está en la conversación y nunca lo recibe.",
+        "como": "Para la puerta del otro portero se usa un comando HTTP desde el monitor, la central o un sistema, que llega directo al equipo por la red sin necesidad de llamada.",
+        "ejemplo": "Un edificio con portero en la calle y otro en el garaje: el vecino atiende al de la calle y además quiere abrir el garaje; esa tecla tiene que mandar HTTP al portero del garaje."
+      },
+      {
+        "name": "Apertura HTTP con usuario propio",
+        "para_que": "La apertura por HTTP existe para que otros sistemas (una central, una alarma, un script) puedan abrir sin estar en llamada. Como cualquiera que tenga la URL y la clave puede abrir, la credencial importa.",
+        "como": "Se habilita en Access Control > Relay > Open Relay Via HTTP con un usuario y clave propios, distintos del admin. Por HTTP la clave viaja en claro: el comando queda dentro de la red de porteros y, si se puede, se acepta solo desde IPs conocidas.",
+        "ejemplo": "El integrador de FreePBX que abrió dos porteros con un botón mandando dos curl desde la central advirtió él mismo que, así como estaba, podía tener problemas de seguridad: usuario propio y red cerrada lo resuelven."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nAntes de la portería IP, abrir dos puertas desde un mismo interno implicaba cablear un pulsador por puerta. Con SIP, el canal natural para abrir pasó a ser el DTMF dentro de la llamada, y los porteros con más de un relé asignaron un código a cada uno. Grandstream lo documenta para su GDS3710: códigos distintos abren cada puerta por separado y el mismo código en las dos las abre juntas.\n\nEl otro camino es HTTP. La web de los equipos ya existía para configurarlos, y los fabricantes sumaron URLs que disparan el relé, pensadas para integraciones. La herramienta más usada para probarlas es `curl`, un cliente de línea de comandos que existe desde 1998. En la comunidad de FreePBX hay un caso típico: dos porteros, portón y oficina, abiertos con un solo botón mediante dos comandos HTTP desde la central.\n\n### Cómo funciona\n\n**Con DTMF**: durante la llamada, el monitor manda el código como evento RFC 2833. El portero compara con los códigos de sus relés y dispara solo el que coincide. Todo pasa dentro de la sesión SIP entre esos dos equipos, por eso un tercer portero no se entera.\n\n**Con HTTP**: un cliente (PC, central, monitor) abre una conexión TCP al puerto web del portero y manda un pedido `GET`:\n\n```\nhttp://192.168.88.21/fcgi/OpenDoor?action=OpenDoor&DoorNum=1\n```\n\ncon el usuario y la clave de Open Relay Via HTTP. Con `curl -u` la credencial viaja en el encabezado de autenticación. `DoorNum=1` elige el relé A y `DoorNum=2` el relé B. El portero valida la credencial y dispara el relé, sin que haya ninguna llamada.\n\nLa diferencia de seguridad es importante: en HTTP sin TLS, todo lo que viaja (incluida la credencial) puede leerse en la red. Por eso el comando se usa solo dentro de la red de porteros, con un usuario que sirve únicamente para abrir y nunca con el admin, que daría acceso a toda la configuración."
+  },
+  "9": {
+    "fig": {
+      "file": "9.svg",
+      "alt": "El portero con cuatro salidas de video: rtsp://IP/live/ch00_0 principal de 2048 kbps para grabar con detalle; rtsp://IP/live/ch00_1 secundario de 512 kbps, resaltado en verde, para grilla y grabación; ONVIF en /onvif/device_service para que el NVR lo descubra; MJPEG por el puerto 8080 que conviene proteger con autorización.",
+      "caption": "Cada acceso al video tiene su uso y su credencial; el NVR suele grabar el secundario."
+    },
+    "steps": [
+      {
+        "file": "9-paso2.svg",
+        "step": 2,
+        "alt": "Web del portero en Surveillance > RTSP > RTSP Basic con RTSP Authorization activada, modo Digest resaltado, usuario nvr-lab y clave Ejemplo-Rtsp-2026. Al lado, dos comandos ffprobe: antes sin credencial y después con nvr-lab en la URL.",
+        "caption": "Después de activar Digest, el stream pide usuario y clave; probalo con ffprobe.",
+        "after": "RTSP Authorization activado, modo Digest"
+      },
+      {
+        "file": "9-paso5.svg",
+        "step": 5,
+        "alt": "Dos opciones para sumar el portero al NVR: ONVIF con la URL http://192.168.88.21/onvif/device_service y usuario propio, o RTSP manual con la ruta live/ch00_1. A la derecha, la grilla del NVR con el portero en el primer cuadro.",
+        "caption": "Por ONVIF o por RTSP manual, el portero entra al NVR como una cámara más.",
+        "after": "En el NVR, agregá el portero por ONVIF"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "RTSP principal y secundario",
+        "para_que": "El portero tiene una cámara y la entrega en dos calidades para no cargar la red: un stream principal con más bits para ver detalle y uno secundario liviano para grillas y monitores.",
+        "como": "Las rutas son rtsp://IP/live/ch00_0 (2048 kbps por defecto) y rtsp://IP/live/ch00_1 (512 kbps), H.264 a 25 fps. Probalas con VLC o ffprobe antes de tocar el NVR.",
+        "ejemplo": "En un NVR de 16 cámaras de un edificio en Pocitos, el portero en el secundario ocupa una fracción del ancho de banda y se ve igual de bien en la grilla."
+      },
+      {
+        "name": "ONVIF",
+        "para_que": "ONVIF es un estándar para que cámaras y grabadores de distintas marcas se entiendan sin configurar rutas a mano. El NVR descubre el equipo y le pregunta qué streams tiene.",
+        "como": "En Surveillance > ONVIF activás Discoverable y ponés usuario y clave propios. De fábrica es admin / admin. El NVR lo encuentra y lo agrega con esa credencial.",
+        "ejemplo": "Al sumar el portero al NVR de un local en Punta Carretas, aparece solo en la búsqueda ONVIF y lo agregás con el usuario nvr-lab en lugar de admin."
+      },
+      {
+        "name": "Credencial propia en cada acceso",
+        "para_que": "RTSP, ONVIF y MJPEG son tres puertas al mismo video y cada una tiene su propia autenticación. Dejar una abierta es dejar la cámara a la vista de cualquiera en la red.",
+        "como": "RTSP con Digest en Surveillance > RTSP, ONVIF con usuario propio y MJPEG Authorization activada si no se usa el puerto 8080. Si un monitor mira el portero por RTSP, actualizale la credencial en Device > Monitor.",
+        "ejemplo": "Cambiás la clave RTSP de un portero y el monitor del living deja de mostrar la imagen: le faltaba la misma credencial en Device > Monitor."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nRTSP (Real Time Streaming Protocol) se publicó como RFC 2326 en 1998 para controlar flujos de audio y video, como un control remoto de red: pedir, pausar y cortar un stream. Su puerto estándar es el 554 y en 2016 salió RTSP 2.0 (RFC 7826), aunque cámaras y porteros siguen usando mayormente la versión 1.0.\n\nCon la llegada de las cámaras IP, cada marca usaba rutas y comandos propios, y sumar una cámara a un grabador de otra marca era prueba y error. En 2008 Axis, Bosch y Sony fundaron ONVIF para estandarizar el descubrimiento y la configuración. El códec que se impuso es H.264, estandarizado en 2003. MJPEG, más viejo y simple, manda imágenes JPEG sucesivas por HTTP.\n\n### Cómo funciona\n\nUn NVR que graba por RTSP hace más o menos esto:\n\n1. Abre una conexión TCP al puerto 554 del portero y pide `DESCRIBE rtsp://192.168.88.21/live/ch00_1`.\n2. Si está activada la autorización, el portero responde `401` con un desafío Digest; el NVR repite el pedido con un resumen calculado a partir de la clave, sin mandarla en claro.\n3. El portero describe el stream (H.264, 25 fps) y el NVR pide `SETUP` y `PLAY`.\n4. El video llega en paquetes RTP, por UDP o intercalado en la misma conexión TCP.\n\nONVIF trabaja un nivel más arriba: el NVR manda consultas web al servicio `http://IP/onvif/device_service`, descubre el equipo en la red, le pregunta qué perfiles de video tiene y obtiene las URLs RTSP. Por eso con ONVIF no hace falta escribir la ruta, pero el usuario ONVIF también tiene que ser propio.\n\nLa elección del stream es de ancho de banda: el principal pesa unos 2048 kbps y el secundario 512. En un grabador con muchas cámaras, grabar el secundario del portero alcanza salvo que haga falta detalle, por ejemplo para leer una cara de cerca."
+  },
+  "10": {
+    "fig": {
+      "file": "10.svg",
+      "alt": "Red local del edificio en verde con portero, monitor y router: la llamada y la apertura entre portero y monitor y el PIN y la tarjeta funcionan locales. Del otro lado, en rojo, internet con la nube SmartPlus y la app del celular; el cable WAN está cortado con una cruz.",
+      "caption": "Sin internet se pierde la app; el monitor, el PIN y la tarjeta siguen andando."
+    },
+    "steps": [
+      {
+        "file": "10-paso2.svg",
+        "step": 2,
+        "alt": "Dos ventanas de Account > Basic: la cuenta 1 usada por SmartPlus con el número SIP de la nube, y la cuenta 2 para la central local con Register Name 201 y Server Address 192.168.88.10.",
+        "caption": "Con SmartPlus, la cuenta 1 es de la nube y la central va en la 2.",
+        "after": "qué cuenta quedó para SmartPlus"
+      },
+      {
+        "file": "10-paso4.svg",
+        "step": 4,
+        "alt": "Tabla con las funciones del laboratorio y lo esperado: llamada portero a monitor, apertura desde el monitor y PIN o tarjeta son locales; llamada a la app SmartPlus y llave temporal nueva necesitan internet. Aviso de anotar lo que realmente pase.",
+        "caption": "Compará lo esperado con lo que pase en tu banco y pasalo a la ficha de entrega.",
+        "after": "Probá cada fila y completá la tabla"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "SmartPlus",
+        "para_que": "SmartPlus es la nube de Akuvox: le da al residente una app para ver y hablar con la visita, abrir, generar llaves temporales y abrir por Bluetooth. Resuelve que el residente atienda fuera de la red del edificio.",
+        "como": "Al activarlo, el equipo se vincula a la nube y su cuenta SIP 1 queda tomada por SmartPlus. La app depende de internet en el edificio y en el celular, y de la propia nube.",
+        "ejemplo": "Un vecino de un edificio en Buceo atiende el portero desde la oficina con la app y le abre al técnico del aire acondicionado."
+      },
+      {
+        "name": "Plan B local",
+        "para_que": "Las reseñas públicas de la app reportan llamadas que fallan y notificaciones tardías. Si la app fuera el único camino, cada falla de la nube sería \"el portero no anda\".",
+        "como": "Diseñá la obra para que el monitor, el PIN y la tarjeta funcionen solo con la red local. Probalo desconectando el WAN del router y anotando qué sigue andando.",
+        "ejemplo": "Se corta la fibra en un barrio de Montevideo un viernes de noche: el monitor sigue atendiendo y los vecinos entran con su tarjeta; lo único que falta es la app hasta que vuelve internet."
+      },
+      {
+        "name": "Entrega honesta al cliente",
+        "para_que": "El cliente suele percibir la app como el sistema. Explicar en la entrega qué depende de internet evita reclamos y deja claro que la app es un extra.",
+        "como": "Pasá la tabla del laboratorio a la ficha de entrega: qué es local, qué necesita internet. Claroty recomienda no exponer el equipo a internet aunque se pierda la app; esa decisión también va en la ficha.",
+        "ejemplo": "En la entrega de una casa en Solymar dejás escrito: \"si se corta internet, el monitor atiende y el portón abre; la app vuelve cuando vuelve la conexión\". El primer corte no genera un llamado de urgencia."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nDurante décadas, atender el portero era cosa del interior de la casa: un auricular o un monitor colgado en la pared. Los porteros IP permitieron llevar esa llamada a cualquier dispositivo SIP, pero un celular fuera de casa está detrás de otras redes, cambia de IP y no puede recibir conexiones entrantes de forma directa.\n\nLos fabricantes resolvieron eso con nubes propias. Akuvox lanzó SmartPlus: el equipo se registra en la nube, la nube sabe dónde está cada residente y le avisa al celular. La app tiene más de 100 mil descargas en Google Play; las reseñas visibles mencionan llamadas que fallan al azar y notificaciones tardías, y Akuvox responde pidiendo actualizar la app y el sistema.\n\nDel lado de la seguridad, Claroty y CISA recomendaron no exponer los porteros a internet aunque se pierda la app, después de las vulnerabilidades del E11 publicadas en 2023.\n\n### Cómo funciona\n\nCon SmartPlus activo, el portero usa su cuenta SIP 1 para registrarse en la nube. Cuando alguien aprieta el botón:\n\n1. El portero llama al número SIP de SmartPlus del departamento.\n2. La nube busca los dispositivos de ese residente y manda una notificación al celular.\n3. La app se despierta, se conecta a la nube y se arma la llamada de audio y video a través de ella.\n\nCada uno de esos pasos depende de internet: la del edificio, la del celular y el servicio de la nube. Si se corta el WAN, el paso 1 ya falla.\n\nLo local no pasa por ningún servidor externo. La llamada al monitor viaja dentro de la red del edificio (directa o por la central en la cuenta 2), el PIN y la tarjeta se validan contra los usuarios guardados en el propio portero, y el relé lo dispara el equipo. Por eso, con el WAN desconectado, esas funciones siguen andando. Las llaves temporales nuevas, en cambio, se generan desde la app y la nube, así que necesitan conexión."
+  },
+  "11": {
+    "fig": {
+      "file": "11.svg",
+      "alt": "El portero 10.10.10.21 dentro de la VLAN de porteros 10.10.10.0/24 con flechas verdes permitidas a la central 10.10.20.10 por UDP 5060 y RTP, al NVR 10.10.30.10 por TCP 554 y a la gestión 10.10.40.0/28 por TCP 80/443. Desde internet y desde la red de usuarios, flechas rojas bloqueadas.",
+      "caption": "El portero habla solo con central, NVR y gestión; todo lo demás queda denegado."
+    },
+    "steps": [
+      {
+        "file": "11-paso2.svg",
+        "step": 2,
+        "alt": "Comando nmap desde una PC de la red de usuarios hacia 10.10.10.21, pasando por el firewall de la VLAN. Debajo, los puertos TCP 22, 23, 80, 443, 554, 5060, 8080 y UDP 5060 y 8500 en rojo: desde la red de usuarios ninguno debería responder.",
+        "caption": "Lo que responda desde la red de usuarios es un hueco que hay que cerrar en el firewall.",
+        "after": "Desde una PC de la red de usuarios"
+      },
+      {
+        "file": "11-paso5.svg",
+        "step": 5,
+        "alt": "La central 10.10.20.10, que está en contactos, llama al portero y atiende; una IP desconocida intenta una llamada SIP directa y se rechaza. Ventana de Account > Advanced > Call con Prevent SIP Hacking activado.",
+        "caption": "Con Prevent SIP Hacking, el portero solo acepta llamadas de contactos; verificá que la central esté en la lista.",
+        "after": "que la central esté en contactos"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "VLAN de porteros",
+        "para_que": "Un portero es cámara, micrófono y relé instalados en la calle. Si comparte red con las PCs del cliente, una falla en el portero es una puerta a toda la red, y una PC infectada puede llegar al portero.",
+        "como": "Armá una VLAN propia (ejemplo 10.10.10.0/24) y en el firewall permití solo lo necesario: central por UDP 5060 y RTP, NVR por TCP 554 y gestión por TCP 80/443. Todo lo demás, denegado.",
+        "ejemplo": "En un edificio en Pocitos, el MikroTik del cliente separa porteros, cámaras y Wi-Fi de vecinos en VLANs distintas: el Wi-Fi del salón comunal no ve el portero."
+      },
+      {
+        "name": "Nada expuesto a internet",
+        "para_que": "Claroty encontró 13 vulnerabilidades en el E11, incluida ejecución remota de código, y unos 5.000 equipos visibles en internet. CISA puntuó el peor caso en CVSS 9,8 y recomendó desconectarlos de internet.",
+        "como": "Ningún reenvío de puertos desde el WAN hacia el portero. Si hace falta acceso remoto, por VPN a la gestión. Bloqueá UDP 8500 (descubrimiento) de entrada y mantené el firmware al día.",
+        "ejemplo": "Un cliente pide \"ver el portero desde afuera\" y el instalador anterior había abierto el 80 en el router: lo cerrás y le das acceso por la VPN que ya usa para las cámaras."
+      },
+      {
+        "name": "Prevent SIP Hacking",
+        "para_que": "Cualquier equipo que llegue al puerto SIP del portero puede intentar llamarlo directo. CISA describe llamadas SIP directas sin control de acceso entre los problemas del E11.",
+        "como": "En Account > Advanced > Call activás Prevent SIP Hacking y el equipo solo acepta llamadas de contactos de su lista blanca. Antes, verificá que la central esté en contactos o deja de recibir sus llamadas.",
+        "ejemplo": "Después de activarlo en un portero de oficina, una PC de la red que escaneaba SIP deja de hacerlo sonar; la central, que está en contactos, sigue llamando normal."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nLas VLAN se estandarizaron con IEEE 802.1Q en 1998: una etiqueta en la trama Ethernet que permite dividir un mismo switch en redes separadas. Lo que antes requería cableado independiente pasó a ser configuración, y separar equipos de seguridad del resto de la red se volvió práctica habitual.\n\nLos porteros tardaron en entrar en esa lógica. En marzo de 2023, Claroty Team82 publicó 13 vulnerabilidades del Akuvox E11: ejecución remota de código en la red local, cámara y micrófono activables sin autenticación y fotos de aperturas subidas a un FTP con un solo usuario para todos los equipos. Habían intentado avisar desde enero de 2022 sin respuesta. CISA emitió el aviso ICSA-23-068-01, con SSH habilitado por defecto con usuario root y contraseña fija, y recomendó desconectar los E11 de internet.\n\nPara verificar, la herramienta clásica es nmap, publicada en 1997.\n\n### Cómo funciona\n\nLa defensa tiene capas:\n\n1. **Segmentación**: el portero va en su VLAN. El router o firewall que une las VLAN decide qué tráfico pasa. La regla útil es permitir lo mínimo y denegar el resto: SIP y RTP hacia la central, RTSP hacia el NVR, web hacia la gestión.\n2. **Sin exposición**: ningún reenvío de puertos desde internet. Un portero visible desde afuera puede ser encontrado por buscadores de equipos como Censys, que es como Claroty contó los 5.000.\n3. **Credenciales propias**: web, RTSP, ONVIF, MJPEG y HTTP, cada uno con su usuario, ninguno con admin.\n4. **Control de llamadas**: Prevent SIP Hacking hace que el equipo responda solo a contactos.\n\nEl escaneo valida las capas. `nmap -sS` manda un SYN a cada puerto TCP y mira la respuesta: SYN-ACK es abierto, RST cerrado y silencio filtrado. `-sU` prueba UDP, más lento porque no hay respuesta en puertos abiertos. Desde la red de usuarios, el resultado esperado es que nada aparezca abierto; si algo contesta, la regla del firewall está incompleta.\n\nLas reglas de la central también importan: clave fuerte, lista blanca de IP para la web, SRTP y TLS donde los equipos lo soportan."
+  },
+  "12": {
+    "fig": {
+      "file": "12.svg",
+      "alt": "Tabla de la carpeta del ticket: firmware.txt desde Status > Product Information responde qué versión corre; config-export.tgz cómo está configurado; syslog-nivel7.log qué dice el equipo; captura.pcap qué pasó en la red; topologia.png por dónde pasa todo. Al lado, el resultado: un ticket que soporte no rebota.",
+      "caption": "Cinco archivos, cinco preguntas respondidas antes de tocar nada."
+    },
+    "steps": [
+      {
+        "file": "12-paso4.svg",
+        "step": 4,
+        "alt": "Dos líneas de tiempo de la captura de 1 MB. Arrancada temprano: el buffer se llena antes de la falla, marcada en rojo. Arrancada justo antes: la falla queda dentro del megabyte capturado, en verde, seguida de Stop y Export.",
+        "caption": "La PCAP guarda solo 1 MB: arrancala justo antes de reproducir la falla.",
+        "after": "Reproducí la falla (reiniciá la cuenta"
+      },
+      {
+        "file": "12-paso5.svg",
+        "step": 5,
+        "alt": "Diagrama de secuencia entre portero y central: REGISTER, 401 que pide credencial, REGISTER con la clave mal y 401 o 403 de rechazo, con Failed to authenticate en el log de la central. Abajo, el filtro de Wireshark del paso 5.",
+        "caption": "El primer 401 es normal; el segundo rechazo es la falla que buscás.",
+        "after": "Abrí la captura en Wireshark"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Evidencia antes de tocar",
+        "para_que": "Cuando algo no registra, no abre o no se ve, la tentación es cambiar cosas hasta que ande. Así se pierde la pista de qué estaba mal y la falla vuelve.",
+        "como": "Primero log de la central, captura del portero y versión de firmware; después el arreglo. La lección arma la falla a propósito para practicar el orden.",
+        "ejemplo": "Un portero de un edificio en el Prado registra a veces sí y a veces no: con la captura ves si el REGISTER sale y qué le contesta la central; sin captura, hubieras cambiado la contraseña tres veces."
+      },
+      {
+        "name": "Log nivel 7",
+        "para_que": "El log del sistema tiene niveles de detalle; el 7 es el más verboso (depuración). Soporte de Akuvox lo pide porque los niveles bajos no muestran por qué falló algo.",
+        "como": "En la sección de diagnóstico o upgrade avanzado de la web, subís el nivel a 7, reproducís la falla y exportás el log. Después conviene volverlo al nivel habitual.",
+        "ejemplo": "Una cerradura que abre a veces sí y a veces no: el log en nivel 7 muestra qué método de apertura llegó y si el relé se disparó."
+      },
+      {
+        "name": "Captura PCAP de 1 MB",
+        "para_que": "La captura de paquetes muestra lo que realmente viajó por la red, no lo que cada equipo cree que mandó. El portero la guarda en memoria y solo tiene 1 MB.",
+        "como": "PCAP Start justo antes de reproducir, reproducís (por ejemplo reiniciando la cuenta SIP), PCAP Stop y Export. En Wireshark filtrás por REGISTER y por los códigos 401 y 403.",
+        "ejemplo": "Arrancaste la captura, fuiste a tomar un café y volviste: el megabyte se llenó con tráfico de fondo y la falla no está. Se repite, arrancando justo antes."
+      },
+      {
+        "name": "Qué pide soporte",
+        "para_que": "Soporte de Akuvox no puede adivinar la obra. Con la información completa el ticket avanza; sin ella vuelve pidiendo datos y pasan días.",
+        "como": "Firmware, configuración exportada, log en nivel 7, PCAP si es de red o llamadas, topología y diagrama eléctrico si es de relé, más una descripción reproducible. Antes, actualizar al último firmware.",
+        "ejemplo": "Mandás la carpeta ticket-portero completa el martes y el miércoles tenés respuesta; el mismo problema sin captura llevaba dos semanas de idas y vueltas."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nLa captura de paquetes viene de tcpdump y su biblioteca libpcap, creadas a fines de los años ochenta en el Lawrence Berkeley Laboratory; de ahí el formato `.pcap`. En 1998 Gerald Combs creó Ethereal, un analizador gráfico que en 2006 pasó a llamarse Wireshark y que hoy entiende SIP, RTP, RTSP y casi cualquier protocolo de la obra.\n\nLos niveles de log también tienen historia: syslog nació en los ochenta y se estandarizó en la RFC 5424 de 2009, con ocho niveles de severidad, del 0 (emergencia) al 7 (depuración). Cuando Akuvox pide \"log level 7\", pide el nivel de depuración, el que registra todo.\n\nEn los foros de centrales hay ejemplos de por qué conviene este método. En FreePBX, un R20A que no registraba mostraba \"Failed to authenticate\": la contraseña estaba mal. En otro caso, la vista previa de video andaba por IP directa y no por la central; la causa era una sola letra en las opciones del Dial de Asterisk.\n\n### Cómo funciona\n\nEn un registro SIP sano, la captura muestra:\n\n1. `REGISTER` del portero.\n2. `401 Unauthorized` de la central con un desafío (un número al azar llamado nonce).\n3. `REGISTER` de nuevo, con un resumen calculado con usuario, clave y nonce.\n4. `200 OK`.\n\nCon la clave mal, en el paso 4 llega otro 401 o un 403, y en la central `pjsip set logger on` muestra el intercambio mientras el log dice \"Failed to authenticate\". El filtro de la lección deja solo esos mensajes:\n\n```\nsip.Method == \"REGISTER\" || sip.Status-Code == 401 || sip.Status-Code == 403\n```\n\nLa captura del portero se guarda en un buffer de 1 MB dentro del equipo, por eso el momento de arrancarla importa. Un REGISTER pesa poco, pero el tráfico de fondo llena el buffer en minutos.\n\nLa carpeta del ticket junta todo lo que soporte necesita para reproducir el caso sin estar en la obra: versión, configuración, lo que dijo el equipo (log), lo que pasó por la red (PCAP) y cómo está armada la instalación (topología)."
+  },
+  "13": {
+    "fig": {
+      "file": "13.svg",
+      "alt": "A la izquierda, la web en Status > Basic > Product Information con firmware 29.30.10.x: tercer bloque 10, rama de alta seguridad. A la derecha, tres casos: tercer bloque menor a 10 usa /fcgi/do; 10 o más con High Security Mode encendido usa solo /fcgi/OpenDoor; 10 o más con el modo apagado acepta los dos.",
+      "caption": "El tercer bloque del firmware y el interruptor de alta seguridad deciden qué URL abre."
+    },
+    "steps": [
+      {
+        "file": "13-paso3.svg",
+        "step": 3,
+        "alt": "Web del portero en Intercom > Relay del R29 o Access Control > Relay del E18 con Open Relay via HTTP en Enabled, usuario abre-lab, clave Ejemplo-Http-2026 y Session Check apagado resaltado. Notas: Session Check activado puede hacer fallar la apertura y el usuario es solo para abrir.",
+        "caption": "Habilitalo con usuario propio y Session Check apagado; probalo en una lámpara de banco.",
+        "after": "Habilitá `Open Relay via HTTP`"
+      },
+      {
+        "file": "13-paso4.svg",
+        "step": 4,
+        "alt": "La URL nueva separada por colores: usuario y clave, IP del portero, endpoint /fcgi/OpenDoor, acción OpenDoor y DoorNum=1 para el relé A. Debajo, la URL vieja /fcgi/do con usuario y clave como parámetros, válida solo sin alta seguridad o con el modo apagado.",
+        "caption": "Cada parte de la URL tiene una función; DoorNum elige el relé.",
+        "after": "Desde la PC de laboratorio:"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Open Relay via HTTP",
+        "para_que": "Permite que una central, un sistema de alarmas, una domótica o un script abran la puerta con un pedido web, sin estar en llamada. Akuvox dice que todos sus equipos de intercom lo soportan.",
+        "como": "Se habilita en Intercom > Relay (R29) o Access Control > Relay (E18) con usuario y clave propios y Session Check apagado, porque activado puede hacer fallar la apertura. Después se prueba con curl desde la misma red.",
+        "ejemplo": "En un estacionamiento en Pocitos, la central abre la barrera con un pedido HTTP cuando el guardia aprieta una tecla de su teléfono."
+      },
+      {
+        "name": "Rama y modo de alta seguridad",
+        "para_que": "Akuvox abrió una rama de firmware que cifra comunicaciones, comandos de apertura y contraseñas. Con el modo encendido, deja de aceptar la URL vieja que llevaba usuario y clave como parámetros.",
+        "como": "Mirá el tercer bloque del firmware en Product Information: 10 o más es la rama de alta seguridad. El interruptor está en Security > Basic > High Security Mode (en el E18, System > Security, encendido de fábrica).",
+        "ejemplo": "Después de actualizar el portero de una oficina, la domótica deja de abrir: el firmware nuevo es rama 10 y la integración usaba /fcgi/do. Cambiás la URL al formato nuevo y vuelve a abrir."
+      },
+      {
+        "name": "DoorNum",
+        "para_que": "Un mismo portero puede tener varios relés y la URL necesita decir cuál disparar.",
+        "como": "DoorNum=1 es el relé A y DoorNum=2 el relé B; para el relé de seguridad SR01 se usa SA o SB. En el E18 y el R20V5 con firmware reciente, el endpoint también acepta CloseDoor, OpenDoorForever y DoorStatus.",
+        "ejemplo": "Casa con portón en el relé A y puerta peatonal en el B: la tecla de la domótica para el portón usa DoorNum=1 y la de la peatonal DoorNum=2."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nLas URLs que terminan en `/fcgi/` delatan de dónde vienen: FastCGI, una forma de conectar el servidor web con programas que se publicó a mediados de los noventa y que muchos equipos embebidos usan para sus comandos. El primer formato de Akuvox era el más simple posible: todo en la URL, incluida la clave.\n\n```\nhttp://IP/fcgi/do?action=OpenDoor&UserName=usuario&Password=clave&DoorNum=1\n```\n\nMandar la clave como parámetro tiene un problema conocido: queda en historiales, logs de proxies y del propio equipo. La RFC 3986 de 2005, que define la sintaxis de las URL, ya marcaba como desaconsejado poner `usuario:clave` en la dirección. Con la rama de alta seguridad, Akuvox introdujo `/fcgi/OpenDoor` con autenticación aparte y, con el modo encendido, dejó de aceptar el formato viejo.\n\nNo todos acompañaron: en el foro de LogicMachine un integrador recomienda apagar la alta seguridad para seguir usando la URL vieja con admin. Akuvox, en cambio, llama \"recomendado\" al formato nuevo.\n\n### Cómo funciona\n\nEl pedido es un `GET` HTTP al portero:\n\n```\nhttp://abre-lab:Ejemplo-Http-2026@192.168.88.21/fcgi/OpenDoor?action=OpenDoor&DoorNum=1\n```\n\n- `abre-lab:Ejemplo-Http-2026@` son las credenciales de Open Relay via HTTP; el cliente las saca de la URL y las manda en el encabezado de autenticación. `curl -u` hace lo mismo.\n- `/fcgi/OpenDoor` es el endpoint nuevo.\n- `action=OpenDoor` es la acción y `DoorNum=1` el relé A.\n\nEl portero valida la credencial y dispara el relé el tiempo configurado. Algunos firmwares devuelven 0 si salió bien y -1 si falló la credencial, según la librería pylocal-akuvox.\n\nLa decisión práctica es leer antes de probar:\n\n- Tercer bloque menor a 10: formato viejo.\n- 10 o más con el modo encendido: solo `/fcgi/OpenDoor`.\n- 10 o más con el modo apagado: valen los dos.\n\nAsí el \"no abre por HTTP\" después de una actualización se resuelve mirando el firmware."
+  },
+  "14": {
+    "fig": {
+      "file": "14.svg",
+      "alt": "Los cinco modos de Setting > HTTP API: None en rojo, nadie se autentica, solo laboratorio; Allowlist en verde, solo las IP de la lista, para red local; Basic en ámbar, usuario y clave en Base64 que viajan en claro; Digest en verde, la clave no viaja en claro; Normal en gris, reservado al uso interno de Akuvox.",
+      "caption": "Allowlist y Digest para producción; None solo en el banco y Basic mejor evitarlo."
+    },
+    "steps": [
+      {
+        "file": "14-paso1.svg",
+        "step": 1,
+        "alt": "Web del portero en Setting > HTTP API con HTTP API habilitada, Authorization Mode Digest resaltado, usuario api-lab y clave Ejemplo-Api-2026. Al lado, el fragmento del script de prueba con AuthConfig en modo DIGEST y esas credenciales.",
+        "caption": "La HTTP API en Digest con un usuario propio; el script de prueba usa los mismos datos.",
+        "after": "En el portero de laboratorio:"
+      },
+      {
+        "file": "14-paso4.svg",
+        "step": 4,
+        "alt": "Tres integraciones hacia el portero, cada una con su usuario: Home Assistant 10.10.40.5 con ha-porton, central 10.10.20.10 con pbx-porton y cámara LPR 10.10.30.21 con lpr-porton por Allowlist. La de Home Assistant aparece revocada en rojo y las otras dos siguen en verde.",
+        "caption": "Un usuario por integración: cuando alguien se va, cambiás solo su credencial.",
+        "after": "Armá la tabla de credenciales del sitio"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Modos de la HTTP API",
+        "para_que": "La HTTP API deja que otros sistemas consulten y manejen el portero. Cada modo de autorización es un compromiso entre comodidad y seguridad, pensado para un uso distinto.",
+        "como": "En Setting > HTTP API: None solo para pruebas, Allowlist para equipos de la red local con IP fija, Basic manda usuario y clave en Base64 (en claro), Digest protege la credencial y Normal es interno de Akuvox.",
+        "ejemplo": "En la mesa de IES probás con None para descartar problemas de credencial; en la obra el mismo portero queda en Digest o Allowlist."
+      },
+      {
+        "name": "Un usuario por integración",
+        "para_que": "Si todas las integraciones usan la misma credencial, cuando un integrador o un empleado deja la obra hay que cambiarla en todos lados. Peor si es el admin, que además da acceso a toda la configuración.",
+        "como": "Creá un usuario propio por cada sistema que abre (Home Assistant, central, cámara LPR) y anotalo en la tabla de credenciales con su mecanismo y su IP de origen. Ninguno es admin.",
+        "ejemplo": "Se termina el contrato con quien instaló la domótica de un edificio en Malvín: cambiás solo ha-porton y la central y la cámara de patentes siguen abriendo."
+      },
+      {
+        "name": "Allowlist para equipos fijos",
+        "para_que": "Algunos equipos, como las cámaras de lectura de patentes, mandan un POST al portero y no siempre manejan bien usuario y clave. Allowlist autentica por la IP de origen.",
+        "como": "Cargás en la lista la IP fija de la cámara; solo ese equipo puede usar la API. Funciona dentro de la VLAN de porteros, donde las IP están controladas y nadie de afuera puede hacerse pasar por ellas.",
+        "ejemplo": "Una cámara LPR en la entrada de un barrio cerrado lee la patente y abre la barrera por la HTTP API del portero, con su IP 10.10.30.21 en la Allowlist."
+      },
+      {
+        "name": "La clave en la URL queda en logs",
+        "para_que": "Cuando la credencial va dentro de la URL, queda escrita en historiales y en logs de proxies o del propio equipo, según advierte la librería pylocal-akuvox.",
+        "como": "Preferí mecanismos que manden la credencial en encabezados (Digest), HTTPS donde el equipo lo soporte y todo dentro de la VLAN de porteros, nada publicado a internet.",
+        "ejemplo": "Revisás los logs de un proxy de la red y aparecen URLs con usuario y clave de apertura en texto: es momento de rotar esa credencial y pasar a Digest."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nLa autenticación HTTP Basic y Digest se definió en la RFC 2617 de 1999. Basic manda `usuario:clave` codificado en Base64, que no es cifrado: cualquiera que vea el tráfico lo decodifica. Digest se pensó para evitarlo: el cliente demuestra que conoce la clave mandando un resumen (hash, originalmente MD5) calculado junto con un número que propone el servidor. En 2015 la RFC 7616 actualizó Digest para admitir SHA-256.\n\nLa idea de dar a cada integración solo lo que necesita es el principio de mínimo privilegio, formulado por Saltzer y Schroeder en 1975 y vigente en cualquier sistema de acceso. En portería se traduce en credenciales separadas por sistema, ninguna con permisos de administrador.\n\nLas fuentes del curso no coinciden del todo: la guía de la HTTP API de Akuvox reserva None para pruebas, pero la guía de apertura permite dejar usuario y clave en blanco, y en el foro de LogicMachine se usa admin. La lección toma el camino más seguro.\n\n### Cómo funciona\n\nUn pedido con Digest, simplificado:\n\n1. El cliente pide el recurso sin credencial.\n2. El portero responde `401` con un desafío que incluye un nonce.\n3. El cliente calcula el hash de usuario, clave, nonce y pedido, y repite el pedido con ese resumen.\n4. El portero hace la misma cuenta con la clave que tiene guardada; si coincide, responde.\n\nLa clave nunca viaja tal cual. Con Basic, en cambio, viaja en cada pedido. Con Allowlist no hay usuario: el portero mira la IP de origen del paquete y la compara con la lista.\n\nLa librería pylocal-akuvox, pensada para Home Assistant, distingue dos caminos: los porteros con API JSON reciben `/api/relay/trig` con la autenticación de la HTTP API (None, AllowList, Basic o Digest), y otros equipos usan Open Relay via HTTP con sus propias credenciales. En el laboratorio, el script en modo `AuthMethod.DIGEST` pide modelo y firmware; con una clave mala, el paso 3 del intercambio falla y aparece el error de autenticación.\n\nTodo esto se apoya en la lección 11: la API solo se habla desde la VLAN de porteros."
+  }
+}

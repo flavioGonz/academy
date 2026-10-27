@@ -1,0 +1,19 @@
+A: Lección treinta y seis: el ascensor. El EC33.
+B: El que deja que cada vecino vaya solo a su piso.
+A: Ese. La ficha lo presenta como controlador IP de ascensor: treinta y dos relés, ampliables a sesenta y cuatro, lectores Wiegand de veintiséis y treinta y cuatro bits, veinte mil tarjetas y cien mil registros, TCP IP y RS485. Va con PoE at o con alterna de cien a doscientos cuarenta, y sus relés aguantan treinta voltios tres amperes.
+B: ¿Con qué se integra?
+A: Con todos los porteros y terminales de Akuvox, menos el A094 y el E20. El vecino se identifica en un terminal dentro de la cabina o en el portero, y el EC33 hace el resto.
+B: ¿Y cómo se cablea? Con el ascensorista hay que hablar el mismo idioma.
+A: Exacto, y esta es la parte clave. Hay dos escenarios. Uno: el vecino se identifica y el ascensor lo lleva directo a su piso, sin tocar botones. Ahí el relé del EC33 va en paralelo con el botón del piso.
+B: Como si alguien apretara el botón.
+A: Tal cual. El otro: el vecino se identifica y se le habilitan los botones de sus pisos, y elige. Ahí el relé va en serie con el común de los botones o con la línea de autorización.
+B: ¿Y la configuración?
+A: Del lado del EC33, Device, Relay, habilitás Open Relay via HTTP con usuario y clave propios. Del lado del terminal, Device, Lift Control, elegís Akuvox, cargás la IP y el puerto del EC33 y esas credenciales. Es el mismo HTTP de la parte cuatro.
+B: Mirá vos.
+A: Si el edificio separa el llamado del ascensor del desbloqueo de pisos, se pueden configurar dos EC33: uno desbloquea, el otro llama. Con Floor Starts From y Ground Floor acomodás subsuelos y planta baja.
+B: ¿Cuántas fuentes?
+A: Una de once explica el cableado, la guía de Akuvox. La ficha agrega los números.
+B: ¿Laboratorio?
+A: Veinte minutos. Un EC33 en la mesa, un terminal apuntando a él por HTTP, un usuario con permiso a un piso y una lámpara en el relé de ese piso.
+B: Y antes de la obra, la charla con el ascensorista.
+A: Siempre.

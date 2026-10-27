@@ -1,0 +1,15 @@
+A: Lección seis: backup primero. Antes de actualizar, backup. Siempre. Y antes de tocar el firewall de un cliente, también.
+B: Pero ojo que en MikroTik hay dos cosas que se llaman distinto. Backup y export.
+A: Esa es la idea de hoy. El backup del sistema es un archivo binario que clona la configuración completa. Sirve para restaurar el mismo equipo, o uno idéntico. El export es texto, un archivo punto rsc, que podés leer, comparar y pegar en otro equipo.
+B: ¿Y las fuentes coinciden?
+A: Las tres que lo tratan, sí. La documentación agrega dos detalles que en soporte importan mucho. El export no lleva las contraseñas de los usuarios ni los certificados. Y por defecto oculta las claves, como la del WiFi o la del PPPoE, salvo que le pidas show-sensitive.
+B: Y si le pedís show-sensitive, ese archivo ya es un secreto.
+A: Exacto, se guarda como tal. Otra cosa: si importás un export en otro modelo, se rompe con interfaces renombradas o con otra cantidad de puertos. Para eso está import con verbose y dry-run, que te marca la línea que falla.
+B: Te cuento algo que vi en un blog de un practicante. El tipo tiene un script en un Linux que entra por SSH a todos sus MikroTik todas las noches, saca el export y lo guarda en git. Solo hace commit si algo cambió.
+A: ¿Y le sirvió?
+B: Un día el proveedor de internet le cambió las credenciales del PPPoE. Ni se enteró en el momento, pero el cambio quedó registrado solo, con fecha.
+A: Eso es lo que buscamos. En obra, el caso es simple: llegás a un cliente, sacás un export antes de tocar, hacés el trabajo, y sacás otro después. Si a la semana alguien llama diciendo que algo dejó de andar, comparás los dos archivos.
+B: Y tenés la respuesta en un diff, no en la memoria de nadie.
+A: El laboratorio: export normal, export con show-sensitive, un backup con contraseña, los bajás a la notebook y comparás dos exports con un cambio en el medio.
+B: Diez minutos.
+A: Y desde ahí, ningún cambio queda sin foto de antes y después.

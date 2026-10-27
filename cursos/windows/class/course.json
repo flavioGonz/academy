@@ -1,0 +1,156 @@
+{
+ "slug": "windows",
+ "title": "Windows para técnicos de campo: cliente y Server",
+ "vendor": "Microsoft",
+ "tagline": "El servidor del VMS no tiene que dormirse, ni exponerse, ni reiniciarse cuando quiera.",
+ "description": "Doce lecciones prácticas para dejar en marcha y sostener los Windows que corren VMS, controladoras y puestos de monitoreo. Al terminar vas a diagnosticar red y puertos por consola, configurar IP, firewall, servicios y energía para equipos 24/7, publicar escritorio remoto sin exponerlo, leer eventos para explicar una falla y actualizar con un backup que se puede restaurar.",
+ "level": "Inicial a intermedio",
+ "audience": "Técnicos instaladores y de soporte que montan servidores de VMS, controladoras de acceso y puestos de monitoreo sobre Windows.",
+ "prerequisites": [
+  "Base de redes: IP, máscara, gateway, DNS y VLAN",
+  "Haber usado Windows como administrador y abierto una consola de PowerShell",
+  "Una VM o PC de banco con Windows 11 o Windows Server 2025 para los laboratorios"
+ ],
+ "outcomes": [
+  "Diagnosticar por capas con ipconfig, ARP, pathping, Test-NetConnection, Get-NetTCPConnection y Resolve-DnsName",
+  "Configurar IP fija, reglas de firewall por perfil y escritorio remoto con NLA solo por VPN",
+  "Dejar servicios con recuperación, tareas al inicio y energía y BIOS listos para funcionar 24/7",
+  "Explicar reinicios y fallas con el Monitor de confiabilidad y Get-WinEvent, y medir el disco de grabación",
+  "Planificar actualizaciones con backup restaurable y guardar las llaves (LAPS, BitLocker, DSRM) fuera del equipo"
+ ],
+ "version_note": "Windows 11 24H2 y posteriores, y Windows Server 2025, vigentes a octubre de 2026. La mayoría de los comandos funcionan también en Windows 10 y Server 2019/2022; la firma SMB obligatoria, el fin del acceso invitado en Pro y las novedades de LAPS son de 24H2 y Server 2025.",
+ "arcs": [
+  {
+   "title": "Red y punto de partida",
+   "why": "Antes de tocar un servidor hay que saber qué Windows es y si la red llega; la mayoría de los \"no veo las cámaras\" se resuelven acá.",
+   "lessons": [
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  {
+   "title": "Un servidor que no se cae solo",
+   "why": "Un VMS o una controladora viven años encendidos; firewall, acceso remoto, servicios y energía bien puestos evitan la visita de madrugada.",
+   "lessons": [
+    5,
+    6,
+    7,
+    8
+   ]
+  },
+  {
+   "title": "Cuando algo falla",
+   "why": "Con la base en su lugar toca diagnosticar, actualizar sin romper y cuidar las llaves; es lo que separa al que cambia piezas del que encuentra la causa.",
+   "lessons": [
+    9,
+    10,
+    11,
+    12
+   ]
+  }
+ ],
+ "splits": [
+  {
+   "topic": "Actualizaciones automáticas o controladas en servidores de VMS",
+   "sides": "TechTarget pide actualizaciones automáticas; Microsoft sugiere para servidores avisar antes de instalar y de reiniciar; Bosch pide un ciclo máximo de 6 meses.",
+   "decide": "Con ventana de mantenimiento y backup, controladas con calendario; si nadie va a mirar el equipo, automáticas con horas activas bien puestas. Siempre validando con el fabricante del VMS."
+  },
+  {
+   "topic": "Cambiar el puerto 3389",
+   "sides": "V2 Cloud y TechTarget lo suman como capa extra; woshub prefiere limitar el origen en el puerto por defecto.",
+   "decide": "Si hay VPN no cambia nada; si no hay VPN, el problema es la falta de VPN, no el número de puerto."
+  },
+  {
+   "topic": "BIOS: Last State o Power On tras un corte",
+   "sides": "Last State respeta lo que estaba apagado; Power On arranca siempre, incluso si la UPS apagó el equipo en orden.",
+   "decide": "Con UPS que apaga ordenadamente, Power On; sin UPS, cualquiera de los dos, sabiendo que Power On también enciende lo apagado a propósito."
+  },
+  {
+   "topic": "nslookup o Resolve-DnsName",
+   "sides": "Resolve-DnsName reproduce lo que ve una aplicación de Windows; nslookup consulta solo al servidor DNS.",
+   "decide": "Empezar con Resolve-DnsName y usar nslookup para comparar y aislar fallas del resolvedor."
+  },
+  {
+   "topic": "pathping o tracert",
+   "sides": "tracert es rápido y muestra la ruta; pathping agrega pérdida y latencia por salto.",
+   "decide": "tracert para ver el camino, pathping cuando hay pérdida intermitente."
+  }
+ ],
+ "sources_count": 30,
+ "lessons": [
+  {
+   "n": 1,
+   "dir": "01-version-primero",
+   "handle": "Versión primero",
+   "summary": "Anotar edición, versión y build antes de tocar nada; 24H2 y Server 2025 exigen firma SMB y cortan el acceso invitado."
+  },
+  {
+   "n": 2,
+   "dir": "02-capa-por-capa",
+   "handle": "Capa por capa",
+   "summary": "ipconfig, gateway, ARP y pathping en orden; un ping que falla no prueba que el equipo esté apagado."
+  },
+  {
+   "n": 3,
+   "dir": "03-proba-el-puerto",
+   "handle": "Probá el puerto",
+   "summary": "Test-NetConnection al puerto del servicio, Get-NetTCPConnection para ver quién escucha y Resolve-DnsName para ver lo que ve la aplicación."
+  },
+  {
+   "n": 4,
+   "dir": "04-ip-por-consola",
+   "handle": "IP por consola",
+   "summary": "IP fija del servidor por PowerShell en cuatro pasos y nociones de DHCP en Windows Server: autorización, ámbito y reservas."
+  },
+  {
+   "n": 5,
+   "dir": "05-perfil-y-regla",
+   "handle": "Perfil y regla",
+   "summary": "Perfiles del Firewall de Windows, reglas por puerto o programa con origen limitado y respaldo antes de tocar."
+  },
+  {
+   "n": 6,
+   "dir": "06-rdp-sin-exponer",
+   "handle": "RDP sin exponer",
+   "summary": "Escritorio remoto por VPN, con NLA activa y limitado a la subred de gestión; el 3389 nunca a internet."
+  },
+  {
+   "n": 7,
+   "dir": "07-que-se-levante",
+   "handle": "Que se levante",
+   "summary": "Servicios en automático retrasado con recuperación ante fallas y tareas programadas al inicio sin sesión."
+  },
+  {
+   "n": 8,
+   "dir": "08-nunca-dormir",
+   "handle": "Nunca dormir",
+   "summary": "Energía para equipos 24/7 con powercfg y encendido tras corte en el BIOS, con o sin UPS."
+  },
+  {
+   "n": 9,
+   "dir": "09-que-cambio",
+   "handle": "Qué cambió",
+   "summary": "Monitor de confiabilidad, Get-WinEvent filtrado y los eventos 1074 y 6008 para explicar reinicios."
+  },
+  {
+   "n": 10,
+   "dir": "10-disco-que-graba",
+   "handle": "Disco que graba",
+   "summary": "Latencia, IOPS y cola del disco de grabación con perfmon, y exclusiones de antivirus del VMS."
+  },
+  {
+   "n": 11,
+   "dir": "11-actualizar-con-red",
+   "handle": "Actualizar con red",
+   "summary": "Windows Update con ciclo, aviso y horas activas en servidores, y backup con wbadmin antes de cada cambio grande."
+  },
+  {
+   "n": 12,
+   "dir": "12-llaves-en-orden",
+   "handle": "Llaves en orden",
+   "summary": "Administrador local único y recuperable (LAPS), clave de BitLocker fuera del equipo y contraseña DSRM protegida."
+  }
+ ]
+}

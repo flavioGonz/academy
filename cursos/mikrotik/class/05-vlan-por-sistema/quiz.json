@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Para ahorrar líneas cargaste una sola entrada: untagged=ether2,ether3 vlan-ids=20,30. ¿Qué pasa?",
+    "options": [
+      "El bridge deja pasar las VLAN 20 y 30 por ambos puertos access",
+      "Funciona igual que dos entradas separadas",
+      "El router rechaza la entrada",
+      "Solo pasa la primera VLAN de la lista"
+    ],
+    "answer": 0,
+    "why": "La documentación avisa que varias VLAN en una entrada con puertos access permiten ambas VLAN en ambos puertos y generan fugas entre VLANs. Varias VLAN por entrada, solo para trunks."
+  },
+  {
+    "q": "Configurás VLANs en un switch remoto por el mismo puerto trunk que usás para gestionarlo. ¿Cuándo activás vlan-filtering?",
+    "options": [
+      "Al principio, para que los PVID tomen efecto mientras configurás",
+      "Nunca, alcanza con los PVID",
+      "Antes de crear el bridge",
+      "Al final, con la VLAN de gestión ya cargada y un camino de rescate"
+    ],
+    "answer": 3,
+    "why": "Según la documentación, activar el filtrado antes de configurar el acceso de gestión puede dejarte afuera; recomienda hacerlo al final, por consola serial o por un puerto fuera del bridge."
+  },
+  {
+    "q": "El trunk ether4 y el bridge quedaron con PVID 1 y sin frame-types. ¿Qué riesgo hay?",
+    "options": [
+      "Ninguno, el PVID 1 se ignora en trunks",
+      "Las cámaras pierden el DHCP",
+      "Se puede llegar al router con tráfico sin etiqueta por el trunk",
+      "El trunk deja de pasar la VLAN 20"
+    ],
+    "answer": 2,
+    "why": "El bridge es también un puerto (CPU). Con PVID coincidente se agrega como untagged y queda acceso sin etiqueta. ingress-filtering con admit-only-vlan-tagged en el trunk lo cierra."
+  }
+]

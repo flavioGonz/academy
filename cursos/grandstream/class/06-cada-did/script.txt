@@ -1,0 +1,20 @@
+A: Lección seis. Cada DID a su lugar. El cliente compró diez números directos y quiere que cada uno suene en su escritorio.
+B: Y yo hago diez rutas entrantes, una por número.
+A: Podrías. Pero hay una forma más limpia, que es el ejemplo de la guía de troncales de Grandstream. Una sola ruta entrante con un patrón que agarre todos los DIDs y destino ByDID.
+B: ¿ByDID? ¿Qué hace?
+A: Manda la llamada a la extensión que coincide con el número que llegó, después de recortarlo. En el ejemplo, los DIDs son cero seis cinco cinco cuatro cuatro uno y tres dígitos. Patrón guion bajo, cero seis cinco cinco cuatro cuatro uno, X X X. Strip seis.
+B: A ver. Llega el cero seis cinco cinco cuatro cuatro uno cero cero siete.
+A: Saca los primeros seis, cero seis cinco cinco cuatro cuatro, y queda uno cero cero siete. Suena la interna mil siete.
+B: Uh, qué bueno. Diez números, una ruta.
+A: Ahora, el detalle que te come una tarde. El proveedor puede mandar el número llamado en la Request-line o en el encabezado To. En el troncal hay una opción, DID Mode, para elegir de dónde lo lee la UCM.
+B: Y si está mal, la ruta no matchea nunca.
+A: Nunca. Y lo otro: el Strip se calcula con el número exacto que manda el proveedor. A veces llega con código de país adelante, a veces sin el cero.
+B: ¿Cómo lo sé?
+A: Mirando el registro de llamadas o una captura de la primera llamada de prueba. Ahí ves el número tal cual llega.
+B: ¿Y fuera de hora?
+A: En la misma ruta podés usar horario de oficina y feriados, que se definen en System Settings, Time Settings. Y hay una lista negra global de entrantes, que acepta la palabra Anonymous.
+B: ¿Cuántas fuentes?
+A: Dos, las dos de Grandstream, y dicen lo mismo. Poca cantidad pero es la fuente primaria.
+B: ¿Laboratorio?
+A: Diez minutos: armás la ruta ByDID y calculás el Strip para tres formatos distintos del mismo número.
+B: Y cuando el cliente compre diez números más, cambiás un patrón y listo.

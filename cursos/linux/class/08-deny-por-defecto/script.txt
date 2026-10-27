@@ -1,0 +1,19 @@
+A: Lección ocho. Deny por defecto, como en cualquier firewall de borde, pero en el propio servidor.
+B: La pregunta que me hacen siempre: ¿ufw o nftables?
+A: Depende de la distro. En Ubuntu la herramienta oficial es ufw, que viene instalada pero deshabilitada. En Debian, el Handbook enseña nftables directo, con las reglas en barra etc barra nftables punto conf.
+B: ¿Y la idea de fondo es la misma?
+A: La misma. Cuatro de siete fuentes coinciden: entrante denegado por defecto, saliente permitido, y abrís solo lo que el equipo sirve. Y una regla de oro: SSH se permite antes de activar.
+B: [risas] Porque si no, te cerrás la puerta con vos afuera.
+A: Exacto. Y mejor todavía, SSH solo desde la red de gestión. ufw allow desde diez punto diez punto diez punto cero barra veinticuatro al puerto veintidós. La doc de Ubuntu tiene ese ejemplo con una subred.
+B: ¿Y para un gateway que hace NAT?
+A: Ahí ufw se queda corto en sus comandos. Se puede, editando el archivo before rules con una regla de masquerade, pero para un gateway en Debian nftables es más directo.
+B: Algo que me gustó del Debian Handbook.
+A: Contá.
+B: Dicen que antes de filtrar un puerto, es mejor que el servicio no escuche en esa interfaz, o que directamente no esté instalado.
+A: Totalmente. El firewall es la segunda capa. Por eso el primer paso del laboratorio es ss guion t l n p: ver qué escucha y en qué dirección. Si algo escucha en cero punto cero punto cero punto cero y no hace falta, lo apagás o lo atás a una IP.
+B: ¿Y cómo verificás que el firewall hace lo que creés?
+A: Desde otra máquina. Nunca desde el propio servidor. Un nmap o un nc desde la red de al lado. La lección doce vuelve sobre esto con Docker, que tiene su propia trampa.
+B: Laboratorio.
+A: Quince minutos: listás lo que escucha, permitís SSH desde la red de gestión, activás ufw o cargás un nftables mínimo, y probás desde otra VM que lo demás está cerrado.
+B: Lo que cambia es que el servidor deja de contestar a todo el mundo.
+A: Y que sabés exactamente qué contesta.

@@ -1,0 +1,17 @@
+A: Última lección de esta parte: IPsec puro, el que usás cuando del otro lado hay un Fortinet, un pfSense o un Cisco.
+B: El túnel con la sucursal que tiene el firewall de otra marca. Mi pesadilla.
+A: [suspiro] La de todos. Primero el mapa: MikroTik lo reparte en cinco menús. Fase uno: profile, con hash, cifrado, grupo Diffie Hellman y lifetime, y peer, con la IP del otro lado y el modo, IKEv2 si se puede. La identity lleva la clave. Fase dos: proposal, con cifrado y PFS, y policy, qué red local va con qué red remota.
+B: ¿Y qué tiene que coincidir?
+A: Todo eso, en las dos puntas. Tres de seis fuentes coinciden en lo mismo: antes de tocar nada, una tabla en papel con los valores de las dos fases, y la mandás al técnico de la otra marca.
+B: ¿Y cuando no levanta?
+A: Por capas. Active peers te dice si la fase uno está establecida. Policy print muestra ph2 state: established es fase dos arriba. Installed sa, las asociaciones con contadores. Y el log con topics ipsec: según la documentación, cada algoritmo rechazado aparece como local dos puntos remoto.
+B: ¿Y si dice time up?
+A: Eso es comunicación, no parámetros: puertos quinientos y cuatro mil quinientos bloqueados, una IP mal puesta, o un NAT en el medio.
+B: Me pasó que el túnel levantaba pero no pasaba nada.
+A: El clásico número uno. El masquerade cambia el origen antes de cifrar y la policy ya no coincide; por eso va una regla de NAT que acepta ese tráfico arriba de todo. Y el número dos, FastTrack: la documentación cuenta que el túnel anda lento y se arregla solo cuando prendés Torch. Es que Torch apaga FastTrack.
+B: [risas] Diabólico.
+A: Por eso, regla de bypass en forward. Y antes de empezar: relojes con NTP y subredes que no se pisen.
+B: ¿Laboratorio?
+A: Veinte minutos entre dos MikroTik, o uno y un pfSense: la tabla, las cinco piezas, el bypass, y los tres comandos de diagnóstico.
+B: Y si falla, el log.
+A: Siempre. Primero la tabla, después el túnel, y el log para no adivinar.

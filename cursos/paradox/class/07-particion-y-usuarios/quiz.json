@@ -1,0 +1,5 @@
+[
+  {"q": "Un cliente con usuarios cargados pide pasar los códigos a seis dígitos. El suyo es 1234. ¿Qué código queda?", "options": ["001234", "123400", "Se borran todos los códigos", "123412"], "answer": 3, "why": "La guía SP+ indica que al pasar de 4 a 6 dígitos la central agrega los dos primeros dígitos al final: 1234 pasa a 123412."},
+  {"q": "Alguien apaga el particionado ([700] opción 1) en una central donde el taller estaba en la partición 2. ¿Qué pasa con esas zonas?", "options": ["Pasan solas a la partición 1", "Dejan de funcionar", "Quedan como zonas 24 h", "Siguen igual"], "answer": 1, "why": "Sin particionado todo pertenece a la partición 1, y la guía advierte que las zonas asignadas manualmente a la partición 2 dejan de funcionar."},
+  {"q": "¿Para qué sirve la opción 8 de un usuario?", "options": ["Para que solo pueda armar", "Para activar solo una PGM", "Para anular zonas de fuego", "Código de coacción: arma o desarma y manda una alerta silenciosa a monitoreo"], "answer": 3, "why": "La opción 8 habilita la coacción: el código funciona normalmente y además transmite un aviso silencioso a la receptora."}
+]

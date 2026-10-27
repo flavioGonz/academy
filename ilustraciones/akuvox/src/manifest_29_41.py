@@ -1,0 +1,709 @@
+"""Genera /home/claude/ies-training/ilustraciones/akuvox/manifest-29-41.json y valida:
+- que cada 'after' exista tal cual, una sola vez, en el laboratorio de card.md y fuera de bloques de código;
+- que teoria_md tenga 250 a 450 palabras y los dos subtítulos exactos;
+- que no haya guiones largos; que existan los SVG; de 2 a 4 conceptos."""
+import json, glob, re, sys
+from pathlib import Path
+
+D = Path("/home/claude/ies-training/ilustraciones/akuvox")
+CLASS = Path("/home/claude/claudemy/akuvox/class")
+
+M = {}
+
+# ===================================================================== 29
+M["29"] = {
+    "fig": {"file": "29.svg",
+            "alt": "Un portero de emergencia E21 conectado por PoE a un switch; el switch lleva la voz por SIP a la central IP (interno 200 de guardia) y el video por ONVIF o RTSP al NVR. Abajo, lo que trae y lo que no trae el E21.",
+            "caption": "El E21 hace dos trabajos a la vez: llamada a la central y cámara para el NVR."},
+    "steps": [
+        {"file": "29-paso1.svg", "step": 1,
+         "alt": "El E21 conectado con cable de red al puerto 2 de un switch PoE 802.3af; un globo indica que al mantener el pulsador 5 segundos dice su IP. Al costado, cómo encontrar la IP del E20S y el aviso de que el E21 no da 12 V.",
+         "caption": "Mantené el pulsador 5 s y anotá la IP que dice; el E20S se busca en el DHCP.",
+         "after": "Conectá el E21 a PoE 802.3af"},
+        {"file": "29-paso4.svg", "step": 4,
+         "alt": "Flujo de la llamada: el botón del E21 (extensión 801) llama a la central; primero suena el interno 200 de guardia; si nadie atiende en 20 segundos, pasa a una cola o al celular de guardia.",
+         "caption": "Probá los dos caminos: atendido y sin respuesta.",
+         "after": "armá el respaldo si nadie atiende"},
+    ],
+    "concepts": [
+        {"name": "Intercomunicador de emergencia SIP",
+         "para_que": "Existe para los lugares donde alguien necesita pedir ayuda sin saber a quién llamar: un estacionamiento, un pasillo técnico, un acceso sin guardia. Es un botón con micrófono, parlante y, en el E21, cámara; no tiene teclado ni pantalla porque cualquiera tiene que poder usarlo apretando una sola cosa.",
+         "como": "Se registra en la central como una extensión más (Account > Basic) y el botón marca un único destino. Al no tener PIN, tarjeta ni Wiegand, no sirve como control de acceso. Si además maneja una puerta, su relé de 30 V 3 A lo permite, pero la cerradura va con fuente propia porque el E21 no tiene salida de 12 V.",
+         "ejemplo": "Estacionamiento subterráneo de un edificio en Pocitos: un E21 por subsuelo, extensiones 801 y 802, que llaman al interno 200 de la portería. La cámara de cada E21 graba en el mismo NVR que las cámaras del garaje."},
+        {"name": "Destino de respaldo (desvío por no respuesta)",
+         "para_que": "Un botón de emergencia que suena en un teléfono vacío da una falsa sensación de seguridad. El desvío por no respuesta asegura que la llamada siempre termine en alguien, aunque el guardia esté haciendo la ronda.",
+         "como": "Se arma en la central, no en el portero: una regla sobre el interno de destino o un grupo de llamada, con un tiempo (20 s en el laboratorio) y un destino siguiente, que puede ser una cola, otro interno o el celular de guardia por una troncal. Probá siempre el caso sin respuesta, además del atendido.",
+         "ejemplo": "Oficinas en Ciudad Vieja: el E21 del garaje llama al 200 de recepción; después de las 19 h no hay nadie, así que a los 20 s la central desvía la llamada al celular del sereno."},
+        {"name": "PoE 802.3af sin salida de 12 V",
+         "para_que": "El PoE lleva datos y energía por el mismo UTP para no instalar una fuente al lado de cada equipo. El E21 y el E20S se alimentan con 802.3af, la clase más común en cualquier switch PoE.",
+         "como": "El E21 también acepta 12 V 1 A; el E20S, según la tabla, solo PoE. Ninguno entrega 12 V hacia afuera: una cerradura o una baliza asociada llevan su propia fuente, y el relé solo abre y cierra ese circuito.",
+         "ejemplo": "El cliente pide que el E21 del portón peatonal también abra la cerradura: fuente de 12 V al COM del relé, y NO o NC hacia la cerradura según lo que tenga que pasar en un corte de luz (lección 4)."},
+        {"name": "La cámara del E21 en el NVR",
+         "para_que": "El video de un punto de emergencia sirve después: quién apretó, a qué hora y qué pasaba. Grabarlo en el NVR lo deja junto al resto de la evidencia del edificio.",
+         "como": "Se agrega por ONVIF o por RTSP con un usuario propio, nunca con admin/admin (lección 9). Conviene el stream secundario para la grilla y el principal si se necesita detalle.",
+         "ejemplo": "Un sábado alguien aprieta el E21 del subsuelo y corta; el lunes el administrador pregunta qué pasó. Con la grabación en el NVR se ve que era un chico jugando y el tema se cierra en cinco minutos."},
+    ],
+    "teoria_md": """### Un poco de historia
+Los postes de auxilio existen desde mucho antes que las redes IP: en rutas, estaciones y estacionamientos se instalaban teléfonos de línea directa que, al descolgar o apretar el botón, llamaban siempre al mismo número. El problema era el cableado propio de cada punto y la falta de supervisión: nadie sabía si el teléfono andaba hasta que alguien lo necesitaba.
+
+Con SIP (RFC 3261, publicado en 2002) el punto de emergencia pasó a ser una extensión más de la central telefónica, y heredó todo lo que la central sabe hacer: grupos de llamada, desvíos por no respuesta, registro de llamadas y control del registro. El PoE (IEEE 802.3af, de 2003) completó la idea: un solo UTP lleva voz, video y energía.
+
+El E21 y el E20S son la versión Akuvox de esa familia. El E21, de acero inoxidable, con cámara, ONVIF e IP65 según la guía de selección; el E20S, alimentado solo por PoE y sin ficha leída sobre cámara o protección.
+
+### Cómo funciona
+Cuando apretás el botón, el equipo manda un `INVITE` SIP a la central con el destino configurado, por ejemplo el interno 200. La central hace sonar ese interno; si nadie contesta dentro del tiempo de la regla, cancela ese intento y abre otro hacia el respaldo (una cola, otro interno o un celular por troncal). El portero no se entera: para él es una sola llamada.
+
+El registro es la clave del mantenimiento. Si el E21 pierde el registro, la central lo muestra como no disponible, y eso se puede revisar o monitorear antes de que alguien lo necesite de verdad.
+
+El video viaja por otro camino. El NVR pide el stream al E21 por RTSP, o lo encuentra por ONVIF, y lo graba como a cualquier cámara. Voz a la central y video al NVR: dos sistemas sobre el mismo cable.
+
+La energía llega por el par PoE: 802.3af entrega hasta 15,4 W en el puerto del switch, suficiente para el equipo. Lo que el E21 no hace es repartir 12 V hacia afuera: si maneja una cerradura, su relé de 30 V 3 A solo conmuta el circuito de una fuente aparte.
+"""}
+
+# ===================================================================== 30
+M["30"] = {
+    "fig": {"file": "30.svg",
+            "alt": "Tabla de los monitores S562, S563, S565, S567 y S560 con tildes y cruces para RS485, relé con su carga, entrada de timbre y RJ45 extra. El S562 está marcado por su relé de 1 A y el S560 no trae ninguna de esas interfaces.",
+            "caption": "Antes de prometer qué abre un monitor, mirá su fila: relé, carga y RS485."},
+    "steps": [
+        {"file": "30-paso4.svg", "step": 4,
+         "alt": "La salida de relé del monitor S562 con dos bornes genéricos: al borne 1 llega el +12 V de una fuente de banco, del borne 2 sale un cable a una lámpara de 12 V, y la lámpara vuelve al negativo de la fuente.",
+         "caption": "El relé del monitor es un contacto: la energía la pone la fuente de banco.",
+         "after": "Probá el relé con una lámpara de 12 V"},
+        {"file": "30-paso5.svg", "step": 5,
+         "alt": "Un monitor de la serie S conectado por RS485 a un MK485 de 8 salidas que maneja luces y cortinas. Abajo, la tabla de firmware mínimo por modelo para usar relés externos desde la web.",
+         "caption": "Antes de cablear el MK485, compará tu firmware con el mínimo de la tabla.",
+         "after": "Si vas a usar MK485 o RSAC-C1-R8"},
+    ],
+    "concepts": [
+        {"name": "El relé del monitor y su carga",
+         "para_que": "Está para que el residente maneje algo cercano desde la pantalla: la cerradura de la puerta de servicio, una luz, la orden de un portón. Es un contacto que abre y cierra, no una fuente de energía.",
+         "como": "La tabla de carga resistiva da el techo: 30 V 2 A en S563, S565 y S567, y 30 V 1 A en el S562. Se cablea con una fuente propia en serie y se prueba con una lámpara de banco antes de conectar la carga real. Si la carga pasa el límite, va un relé auxiliar.",
+         "ejemplo": "En un dúplex en Carrasco piden abrir el portón del garaje desde el S562. El motor no va al relé: el S562 solo da el pulso a la entrada de comando de la placa del portón, que es una señal de poca corriente."},
+        {"name": "RS485 y relés externos (MK485 y RSAC-C1-R8)",
+         "para_que": "Un monitor trae uno o dos relés y una casa con domótica necesita más. Por RS485 se cuelga del monitor un módulo con 8 relés para manejar luces o cortinas desde la pantalla o desde SmartPlus.",
+         "como": "El MK485 va al puerto RS485 del monitor; cada salida en C y B es normal abierto y en C y A normal cerrado. Se configura en Device > External Relay: tipo de módulo, función de cada relé y Hold Delay. Primero el firmware: la web lo soporta desde el mínimo de cada modelo.",
+         "ejemplo": "Casa en un barrio privado de Canelones con un S567 en el living: un MK485 maneja, a través de contactores, la luz del jardín y la bomba de la piscina, y el residente las prende desde el monitor."},
+        {"name": "S560, el monitor de auricular",
+         "para_que": "Es para el apartamento que solo necesita atender y abrir el portero de abajo, como el citófono de siempre, al menor costo de la serie.",
+         "como": "No tiene RS485, relé ni entrada de timbre: lo que abre es el relé del portero, que el S560 dispara durante la llamada. La IP la anuncia manteniendo `#` 5 s. Si el cliente pide manejar algo desde el apartamento, el S560 no es el modelo.",
+         "ejemplo": "Reforma de un edificio de 24 apartamentos en el Cordón: S560 en casi todos, y el único propietario que pidió abrir su puerta de servicio recibe un S562."},
+        {"name": "Entrada de timbre",
+         "para_que": "Permite que el pulsador del palier, el timbre de la puerta del apartamento, suene en el monitor sin instalar una campanilla aparte.",
+         "como": "La traen S562, S563, S565 y S567, una por monitor; el S560 no. El cableado exacto de esa entrada está en la guía rápida de cada modelo, que es la referencia que indica Akuvox para el detalle de bornes.",
+         "ejemplo": "En un edificio en Punta Carretas, la vecina de enfrente toca el timbre del palier y suena el S563 del apartamento, con el mismo monitor que atiende la calle."},
+    ],
+    "teoria_md": """### Un poco de historia
+El monitor interior es el heredero del citófono: un auricular en la pared conectado por varios hilos al frente de calle. Los primeros video porteros sumaron una pantalla chica y más hilos; los IP reemplazaron todo eso por un UTP con PoE y una extensión SIP. La serie S de Akuvox muestra las dos puntas de esa historia en la misma línea: el S560 todavía con auricular, y los S562 a S567 con pantalla táctil, en Linux (S562) o Android (S563 y S567).
+
+Los relés y el RS485 vienen del mundo de la automatización. RS485 es un estándar de comunicación serie (TIA/EIA-485, de 1983) pensado para ambientes con ruido eléctrico: usa un par diferencial y admite varios equipos sobre el mismo bus. Por eso es el puerto elegido para colgar módulos como el MK485 o el RSAC-C1-R8.
+
+### Cómo funciona
+Un relé es un interruptor movido por un electroimán. El monitor alimenta la bobina y los contactos, aislados del circuito interno, abren o cierran lo que vos conectes. La tabla de Akuvox habla de carga resistiva: el máximo para una carga que no genera picos, como una lámpara. Un motor, una bobina o un electroimán producen picos al conectar y desconectar, así que con esas cargas conviene quedarse bien por debajo del valor o usar un relé auxiliar.
+
+Por eso el laboratorio prueba con una lámpara de 12 V de banco: es resistiva, se ve enseguida si prende y no castiga el contacto. El circuito es siempre el mismo:
+
+- positivo de la fuente a un borne del relé;
+- del otro borne a la carga;
+- de la carga al negativo de la fuente.
+
+El RS485 funciona distinto. El monitor no conmuta nada: manda órdenes por el bus al módulo, y el módulo mueve sus 8 relés. Para eso el monitor necesita un firmware que conozca el módulo, y ese es el motivo de la tabla de mínimos por modelo.
+
+Las rutas de menú para ver la IP cambian según el modelo (`Settings > System Info > Network` o `More > Settings > System Info > Network`), y el S560, sin pantalla táctil, la anuncia al mantener `#` 5 s.
+"""}
+
+# ===================================================================== 31
+M["31"] = {
+    "fig": {"file": "31.svg",
+            "alt": "Cuatro monitores: C313 (7 pulgadas, Linux, 1 relé de 30 V 2 A), C316 (7 pulgadas, Android, 1 relé sin dato de carga), C319 (10 pulgadas, Android, 2 relés de 24 V 1 A) e IT88 (10 pulgadas, aluminio, 2 relés de 30 V 2 A). Una nota explica que la tabla da un solo valor de carga por modelo.",
+            "caption": "Mismo tamaño no es misma carga: el C319 aguanta menos que el C313."},
+    "steps": [
+        {"file": "31-paso3.svg", "step": 3,
+         "alt": "Dos circuitos de prueba del C319: cada relé en serie entre el +12 V de una fuente y una lámpara de banco que vuelve al negativo. El relé 1 está cerrado y su lámpara prendida; el relé 2 abierto y su lámpara apagada.",
+         "caption": "Cada relé maneja solo su lámpara, y siempre por debajo de 24 V 1 A.",
+         "after": "ubicá los dos relés y probalos"},
+        {"file": "31-paso4.svg", "step": 4,
+         "alt": "Comparación del firmware mínimo del C319 (119.30.12.902) con lo que se lee en Status, bloque por bloque: modelo, OEM, rama y número. Al lado, la tabla de mínimos para C316, C319 e IT88.",
+         "caption": "Mismo A y B; con la misma rama, el número tiene que llegar al mínimo.",
+         "after": "Si vas a sumar MK485 o RSAC-C1-R8"},
+    ],
+    "concepts": [
+        {"name": "Carga resistiva del relé",
+         "para_que": "El fabricante necesita dar un número comparable entre modelos y lo da con la carga más fácil: una resistiva, como una lámpara. Es el techo del contacto, no un valor de trabajo cómodo.",
+         "como": "Leé la tabla antes de prometer: C313 e IT88 30 V 2 A, C319 24 V 1 A. Con cargas inductivas (motores, bobinas, electroimanes) conviene trabajar con margen y con la protección que pida la carga. Si no hay dato, como en el C316, no se cuelga nada crítico hasta confirmarlo.",
+         "ejemplo": "En un consultorio en Tres Cruces quieren que el C319 libere un electroimán de 12 V 500 mA: entra en 24 V 1 A, se cablea con diodo y fuente propia y antes se prueba el relé con una lámpara de banco."},
+        {"name": "Dos relés en C319S e IT88S",
+         "para_que": "Un segundo relé deja manejar dos cosas distintas desde el mismo monitor, por ejemplo la puerta de servicio y una luz, sin agregar módulos.",
+         "como": "La tabla de interfaces dice cuántos hay; la de carga da un solo valor por modelo, así que aplicalo a los dos y, si uno maneja algo crítico, confirmalo con el distribuidor. Poné a cada relé el nombre de lo que maneja, en la web y en la ficha de la obra.",
+         "ejemplo": "Casa en Malvín con un IT88: relé 1 a la cerradura de la puerta del fondo, relé 2 a la luz del garaje. En la ficha queda escrito `IT88 relé 1 = puerta fondo, relé 2 = luz garaje`."},
+        {"name": "Firmware mínimo para relés externos",
+         "para_que": "El monitor solo sabe manejar un MK485 o un RSAC-C1-R8 desde la web si su firmware incluye esa función. Akuvox publica el mínimo por modelo para que no se descubra en obra.",
+         "como": "Leé el firmware en Status y comparalo bloque por bloque: C316 316.30.13.102, C319 119.30.12.902, IT88 88.30.12.904. Si es menor, actualizá con el archivo exacto de ese modelo y hardware (lección 2) antes de cablear el bus.",
+         "ejemplo": "Llegás a una casa con un C319 en un firmware anterior al mínimo y un MK485 recién comprado. Primero la actualización y después el cableado: así no perdés la tarde buscando una falla de RS485 que en realidad es de firmware."},
+    ],
+    "teoria_md": """### Un poco de historia
+El relé es uno de los componentes más viejos de la electricidad aplicada: en el siglo XIX se usó en el telégrafo para repetir señales a distancia, y después en las centrales telefónicas electromecánicas. La idea no cambió: una corriente chica en una bobina mueve un contacto que maneja otra corriente, aislada de la primera.
+
+En los monitores interiores, el relé llegó para resolver pedidos domésticos (abrir una puerta de servicio, prender una luz) sin otro equipo. Con el tiempo, modelos como el C319S y el IT88S sumaron un segundo relé, y la familia entera, un bus RS485 para crecer con módulos externos.
+
+Los fabricantes de relés especifican la capacidad de los contactos según el tipo de carga, y la resistiva es la más alta de todas. Akuvox publica una tabla con ese valor por modelo de monitor.
+
+### Cómo funciona
+Cuando un contacto se abre con corriente circulando, se forma un pequeño arco. Con una carga resistiva el arco es corto y el contacto dura. Con una carga inductiva (bobina, motor, electroimán) la energía guardada en el campo magnético se descarga en ese momento y el arco es mayor: el contacto se gasta más rápido o se pega. Por eso:
+
+- el valor de la tabla es un techo pensado para cargas resistivas;
+- con cargas inductivas conviene margen y la protección de la carga (diodo en electroimanes de corriente continua, lección 4);
+- si la carga supera el valor, el relé del monitor solo maneja la bobina de un relé auxiliar.
+
+En el C319 el techo es 24 V 1 A, menos que en el C313 (30 V 2 A), aunque tenga la pantalla más grande. El tamaño de la pantalla no dice nada del relé.
+
+El firmware se lee en cuatro bloques A.B.C.D: A es el modelo (119 es el C319, 88 el IT88, 316 el C316), B el OEM (30 con logo Akuvox), C la rama y D la versión dentro de la rama. Para comparar con un mínimo, A y B tienen que coincidir; dentro de la misma rama, el número D tiene que ser igual o mayor. Si la rama es otra, la nota de versión o el distribuidor dicen si la función está incluida.
+"""}
+
+# ===================================================================== 32
+M["32"] = {
+    "fig": {"file": "32.svg",
+            "alt": "Dos monitores de la serie X. X937: 15,6 pulgadas, Android 14, PoE+ 802.3at o 12 V 2 A, 2 relés de 30 V 2 A, 2 RJ45 extra, aluminio. X933: 7 pulgadas, Android, PoE o 12 V 1 A, 2 relés de 24 V 1 A, plástico. Los dos con 1 RS485 y 1 entrada de timbre.",
+            "caption": "El X937 pide PoE+; el X933 tiene relés de 24 V 1 A como techo."},
+    "steps": [
+        {"file": "32-paso1.svg", "step": 1,
+         "alt": "Un switch con un puerto 802.3at en verde y uno 802.3af en ámbar. El X937 conectado al puerto 802.3at tiene tilde verde; el conectado al 802.3af tiene cruz roja porque no le alcanza la energía. Al costado, el plan B con fuente de 12 V 2 A.",
+         "caption": "X937 al puerto 802.3at, o con fuente de 12 V 2 A.",
+         "after": "Para una obra con X937, revisá el puerto"},
+        {"file": "32-paso2.svg", "step": 2,
+         "alt": "Dos circuitos: arriba, el relé del X933 maneja solo la bobina de un relé auxiliar con 12 V; abajo, el contacto del relé auxiliar maneja una carga de más de 24 V o 1 A con su propia fuente.",
+         "caption": "El X933 mueve la bobina; el relé auxiliar carga con la corriente.",
+         "after": "Completá qué maneja cada relé:"},
+    ],
+    "concepts": [
+        {"name": "PoE y PoE+ (802.3af y 802.3at)",
+         "para_que": "PoE nació para no instalar una fuente al lado de cada teléfono IP o cámara. Cuando aparecieron equipos que consumen más, como pantallas grandes, el estándar sumó 802.3at, conocido como PoE+.",
+         "como": "El switch y el equipo negocian la clase al conectarse; si el puerto solo da 802.3af, un equipo que pide PoE+ puede no encender o quedar inestable. Revisá el puerto y el presupuesto total del switch antes de colgar un X937; si no hay PoE+, va con fuente de 12 V 2 A.",
+         "ejemplo": "Penthouse en Punta del Este con un X937 en el living y el switch 802.3af que dejó el electricista. O se cambia por uno PoE+, o el X937 va con su fuente de 12 V 2 A."},
+        {"name": "Relé auxiliar",
+         "para_que": "Sirve para que un relé chico mande sobre una carga grande. El relé del monitor solo mueve la bobina del auxiliar, que pide poca corriente, y el contacto del auxiliar, elegido para la carga, se lleva el esfuerzo.",
+         "como": "Elegí un auxiliar con bobina de una tensión que tengas a mano (12 V es lo más común) y contactos dimensionados para la carga real. El relé del monitor queda dentro de su techo y, si algo se quema, se cambia una pieza barata del tablero y no el monitor.",
+         "ejemplo": "Desde un X933 piden encender un reflector exterior de 220 V. El relé del X933 maneja la bobina de 12 V de un relé auxiliar en el tablero; el contacto del auxiliar conmuta los 220 V, cableado por un electricista habilitado."},
+        {"name": "Más relés por RS485 en la serie X",
+         "para_que": "Dos relés no alcanzan para una casa con domótica; el RS485 permite sumar módulos de 8 relés sin cambiar de monitor.",
+         "como": "Primero el firmware mínimo: X933 933.30.13.702 y X937 937.30.13.122. Después se cablea el módulo al RS485 y se configura en `Device > External Relay`, con nombre y función para cada relé.",
+         "ejemplo": "Casa en Carrasco con un X937 en la cocina: un MK485 maneja las luces del jardín y el portón de servicio pasa por un relé auxiliar en el tablero."},
+    ],
+    "teoria_md": """### Un poco de historia
+PoE se estandarizó en 2003 con IEEE 802.3af: hasta 15,4 W en el puerto del switch, pensado para teléfonos IP, puntos de acceso y cámaras. En 2009 llegó IEEE 802.3at, conocido como PoE+, que sube a 30 W por puerto para equipos más exigentes. En 2018, IEEE 802.3bt amplió todavía más la potencia usando los cuatro pares del cable.
+
+Los monitores interiores siguieron esa curva: de pantallas chicas con poco consumo a paneles de 10 y 15,6 pulgadas con Android. El X937, con Android 14, es de los que ya no entran en 802.3af: la tabla de alimentación de Akuvox le pide PoE+ 802.3at o una fuente de 12 V 2 A. El X933, de 7 pulgadas, figura con PoE o fuente de 12 V 1 A.
+
+### Cómo funciona
+Antes de dar energía, el switch detecta si del otro lado hay un equipo PoE (mide una resistencia de firma en el par) y lee su clase, que indica cuánta potencia va a pedir. Recién entonces aplica la tensión, alrededor de 48 V. Si el puerto es 802.3af y el equipo necesita más, puede no encender o quedar inestable cuando la pantalla y el procesador trabajan a fondo.
+
+También cuenta el presupuesto total. Un switch puede tener 8 puertos PoE+ y no alcanzar para dar 30 W en todos a la vez: revisá la potencia total en la ficha del switch y sumá los consumos de lo que vas a conectar.
+
+Del lado de los relés, X933 y X937 tienen dos cada uno, pero distintos: 24 V 1 A en el X933 y 30 V 2 A en el X937. Cuando la carga pasa el techo, entra el relé auxiliar:
+
+- el relé del monitor alimenta solo la bobina del auxiliar, que consume poco;
+- los contactos del auxiliar manejan la carga con su propia fuente;
+- el monitor queda aislado de la corriente y de los picos de la carga.
+
+Para más relés, los dos aceptan módulos por RS485 desde un firmware mínimo (933.30.13.702 y 937.30.13.122). El X937 suma además dos RJ45 extra, útiles para otro equipo de red en el mismo punto.
+"""}
+
+# ===================================================================== 33
+M["33"] = {
+    "fig": {"file": "33.svg",
+            "alt": "Tabla de los terminales A01S, A02S, A03S, A05C y A08S con las credenciales que acepta cada uno: tarjeta (13,56 y 125 kHz, o solo 13,56 MHz en el A05C), PIN, Bluetooth, QR y rostro. Al costado, la carga del relé y qué modelos dan 12 V por el relé.",
+            "caption": "Leé la fila de la puerta: qué credencial necesita y si el terminal da 12 V."},
+    "steps": [
+        {"file": "33-paso4.svg", "step": 4,
+         "alt": "Dos casos. A08 con fuente de 12 V 1 A o PoE con hardware 108.2.0.0.0 o superior: su relé entrega 12 V 500 mA a una cerradura de hasta 500 mA. A05: su relé es solo contacto, así que la cerradura se alimenta con una fuente propia a través del relé.",
+         "caption": "El A08 puede alimentar una cerradura chica; con el A05 la fuente va aparte.",
+         "after": "Alimentación de la cerradura:"},
+    ],
+    "concepts": [
+        {"name": "Credencial según la puerta",
+         "para_que": "Cada puerta tiene su riesgo y su tipo de usuario. La familia A0x existe para pagar solo la credencial que hace falta: tarjeta en un depósito, PIN y tarjeta en una oficina, QR para visitas, rostro donde no se quiere que la tarjeta se preste.",
+         "como": "Mirá la tabla de métodos: A01S solo tarjeta, A02S suma PIN, A03S suma Bluetooth, A08S PIN, tarjetas, Bluetooth y QR, y A05C rostro, PIN, 13,56 MHz, Bluetooth y QR. Después cargás cada usuario con su credencial, relé y horario (lección 7).",
+         "ejemplo": "Oficina en Ciudad Vieja: A08 en la entrada principal con PIN y tarjeta, A01S en el depósito de archivo solo con tarjeta y A05C en la sala de servidores con rostro."},
+        {"name": "Tarjetas de 125 kHz y de 13,56 MHz",
+         "para_que": "Son dos generaciones de tarjetas de proximidad. Las de 125 kHz son las más antiguas y siguen en muchos edificios; las de 13,56 MHz permiten autenticación con claves y usos como NFC.",
+         "como": "Si el cliente ya tiene tarjetas, fijate la frecuencia antes de elegir el terminal: A01 a A03 y A08 leen las dos, el A05C solo 13,56 MHz. En obra nueva conviene 13,56 MHz, porque las de 125 kHz solo transmiten un número y son las más fáciles de copiar.",
+         "ejemplo": "Edificio en Buceo con 200 llaveros de 125 kHz: un A08 permite seguir usándolos mientras se migra a 13,56 MHz por etapas, sin dejar a nadie afuera."},
+        {"name": "12 V por el relé",
+         "para_que": "Ahorra una fuente en puertas con cerraduras chicas: el terminal entrega 12 V a través de su propio relé.",
+         "como": "A01, A02, A03 y A08 dan 12 V 500 mA. El A08 lo hace con fuente de 12 V 1 A o más, o con PoE desde el hardware 108.2.0.0.0. El A05 no da 12 V. Si la cerradura consume más de 500 mA, va con fuente propia.",
+         "ejemplo": "Puerta de un consultorio con cerradura de 12 V 300 mA y un A08 alimentado por PoE en hardware 108.2.0.0.0: alcanza la salida del relé. En la entrada del edificio, con un electroimán grande, va fuente propia."},
+        {"name": "IP65 e IK09",
+         "para_que": "Son dos códigos que dicen cuánto aguanta un frente: el IP habla de polvo y agua, el IK de golpes. Sirven para elegir sin adivinar dónde se puede instalar.",
+         "como": "IP65 es hermético al polvo y protegido contra chorros de agua; IK09 resiste un impacto de 10 joules. El A08 tiene los dos según su ficha, así que puede ir en un exterior o en un lugar de mucho tránsito.",
+         "ejemplo": "Portón peatonal de un complejo en Ciudad de la Costa, con lluvia de costado y mucho uso: A08 en lugar de un terminal sin dato de protección leído."},
+    ],
+    "teoria_md": """### Un poco de historia
+El control de acceso electrónico empezó con tarjetas de banda magnética y de efecto Wiegand. La interfaz Wiegand, que todavía conecta muchos lectores con sus controladoras, toma el nombre de ese tipo de tarjeta, y su formato de 26 bits sigue siendo el más usado.
+
+Después llegaron las tarjetas de proximidad de 125 kHz, que se leen sin contacto pero solo transmiten un número fijo. En los años noventa aparecieron las de 13,56 MHz bajo la norma ISO/IEC 14443, con memoria y la posibilidad de autenticar con claves; la familia MIFARE salió en 1994. El código QR también es de 1994, creado por Denso Wave para seguir piezas en fábricas, y hoy se usa para visitas. Bluetooth Low Energy llegó con Bluetooth 4.0 en 2010 y convirtió al celular en credencial.
+
+La serie A de Akuvox junta esas generaciones: terminales que solo leen tarjetas (A01S) y otros que suman PIN, Bluetooth, QR y rostro (A05C y A08).
+
+### Cómo funciona
+Un terminal como el A08 es lector y controlador en el mismo equipo: lee la credencial, la busca en su lista de usuarios, revisa el horario y, si corresponde, activa su relé. Todo pasa en la puerta, sin servidor de por medio.
+
+- Tarjeta de 125 kHz: el lector solo lee un número; como no hay intercambio cifrado, copiarla es fácil.
+- Tarjeta de 13,56 MHz: lector y tarjeta pueden autenticarse con claves; cuánta seguridad da depende del tipo de tarjeta.
+- PIN: algo que se sabe y se puede pasar a otro, por eso suele combinarse con tarjeta.
+- QR: un código, muchas veces temporal, ideal para visitas.
+- Bluetooth: el celular presenta la credencial al acercarse.
+
+El relé tiene dos maneras de usarse. Como contacto, con la cerradura alimentada por su propia fuente. O entregando 12 V por el mismo relé en los modelos que lo permiten: 500 mA en A01, A02, A03 y A08 (el A08 con PoE solo desde el hardware 108.2.0.0.0). El A05 no tiene esa salida y su cerradura siempre se alimenta aparte.
+
+La IP también cambia por familia: A01, A02, A03 y A08 la anuncian al apretar Reset; el A05 se busca con IP Scanner.
+"""}
+
+# ===================================================================== 34
+M["34"] = {
+    "fig": {"file": "34.svg",
+            "alt": "Un WR01 dentro de un gabinete cerrado, conectado por red a un switch PoE+ en la VLAN de porteros. Lo activan una cámara LPR que lee la patente y un celular por Bluetooth; su relé 1 maneja un portón o barrera y su entrada 1 recibe un pulsador.",
+            "caption": "El WR01 va al lado de la carga y recibe las órdenes por la red."},
+    "steps": [
+        {"file": "34-paso2.svg", "step": 2,
+         "alt": "Bornes genéricos del WR01: un puente lleva los 12 V al relé 1; el otro lado del relé va a una lámpara de 12 V que vuelve a GND. El pulsador de banco va entre la entrada 1 y GND. Un aviso marca el máximo de 500 mA de la salida de 12 V.",
+         "caption": "Bornes dibujados genéricos: ubicá cada uno en la guía del WR01.",
+         "after": "Relé 1 a una lámpara de 12 V de banco"},
+        {"file": "34-paso6.svg", "step": 6,
+         "alt": "Tres pasos para ver la IP del A15: mantener la pantalla 5 segundos, validar con PIN o tarjeta de administrador y entrar a Setting > System Info > Network. Abajo, la corriente del borne de 12 V según se alimente con PoE 802.3at o con fuente de 12 V 2 A.",
+         "caption": "Pantalla, administrador y menú de red; con fuente, el borne da hasta 1 A.",
+         "after": "Si tenés un A15: pantalla 5 s"},
+    ],
+    "concepts": [
+        {"name": "Relé de borde (WR01)",
+         "para_que": "Resuelve la carga que está lejos del portero o del terminal: un portón al fondo del terreno, una barrera de estacionamiento. En vez de tender un cable de relé de cien metros, se lleva la red hasta ahí y el WR01 conmuta en el lugar.",
+         "como": "Se alimenta por PoE 802.3at o con 12 a 24 V en alterna o continua, va en pared o riel DIN y tiene 2 relés y 2 entradas. Se abre por la web, por su API abierta, por Bluetooth o por patente desde cámaras LPR compatibles (firmware 1401.30.11.221 o más). No tiene lector propio.",
+         "ejemplo": "Barrio privado en Canelones: la barrera de la entrada de servicio está lejos de la guardia. Un WR01 en el gabinete de la barrera, con la red llevada hasta ahí, abre por la patente de los camiones de proveedores."},
+        {"name": "Las entradas del WR01",
+         "para_que": "Las entradas permiten que el lugar le avise algo al WR01: un pulsador para abrir a mano, un contacto, una señal de otro sistema.",
+         "como": "En el laboratorio, la entrada 1 va a un pulsador de banco. Cómo actúa cada entrada se define en la configuración del equipo, según su guía; anotá en la ficha qué está conectado a cada entrada, igual que con los relés.",
+         "ejemplo": "En la barrera, la entrada 1 recibe el pulsador del guardia para abrir a mano cuando un vehículo no tiene patente cargada."},
+        {"name": "A15 para marco de puerta",
+         "para_que": "Muchas puertas de vidrio o aluminio tienen un marco angosto donde un terminal ancho no entra. Akuvox describe al A15 como terminal para parante (mullion), pensado para ese montaje.",
+         "como": "Pantalla de 4,59 pulgadas con PIN, 13,56 MHz, rostro, Bluetooth y QR. PoE 802.3at o fuente de 12 V 2 A; su borne de 12 V da 500 mA con PoE+ y 1 A con fuente. La IP se ve manteniendo la pantalla 5 s, validando como administrador y entrando a `Setting > System Info > Network`.",
+         "ejemplo": "Entrada de vidrio de una clínica en Cordón: el A15 va en el parante, abre con rostro al personal y con QR a los proveedores, y alimenta una cerradura chica desde su borne."},
+        {"name": "Un WR01 donde nadie mira",
+         "para_que": "El WR01 suele quedar en un gabinete en la vereda o en el poste de una barrera. Si alguien llega a sus bornes, puede activar la carga sin credencial; si llega a su red, puede intentar entrar a su web.",
+         "como": "Gabinete cerrado con llave, cables por dentro, clave web propia desde el primer día y el equipo en la VLAN de porteros (lección 11), sin puertos abiertos hacia internet.",
+         "ejemplo": "En un estacionamiento de Tres Cruces, el WR01 de la barrera va en un gabinete con cerradura y su puerto del switch queda en la VLAN de porteros, así un cable enchufado en el poste no llega a la red administrativa."},
+    ],
+    "teoria_md": """### Un poco de historia
+Durante años, abrir una barrera lejana significaba tender un par de cables desde la guardia hasta el motor: un pulsador de un lado y la entrada de la placa del portón del otro. Cada metro de cable era una oportunidad de corte, humedad o empalme mal hecho.
+
+Con las redes IP apareció otra opción: llevar la red hasta el lugar y poner ahí un equipo chico que reciba órdenes y mueva un relé. Es lo que la industria llama un equipo de borde: la decisión y la acción ocurren al lado de la carga. El WR01 de Akuvox es eso: 2 relés, 2 entradas, 20.000 usuarios y 100.000 registros, con web y API abierta, y una versión WR01-L con LTE para lugares sin cable.
+
+En paralelo, los terminales se achicaron para los marcos de puertas de vidrio y aluminio. El A15, que Akuvox presenta como terminal para parante, suma rostro, PIN, tarjeta de 13,56 MHz, Bluetooth y QR en una pantalla de 4,59 pulgadas.
+
+### Cómo funciona
+El WR01 recibe órdenes por varios caminos:
+
+- Web y API: un pedido HTTP con usuario y clave hace actuar el relé, igual que en los porteros (lecciones 13 y 14).
+- Bluetooth: un celular con la credencial se acerca y el WR01 decide con su lista de usuarios.
+- Patente: una cámara LPR compatible envía la lectura y el WR01 abre si la patente está autorizada (desde el firmware 1401.30.11.221).
+
+Cada apertura queda en su registro. Las entradas hacen el camino inverso: el lugar le avisa algo al WR01, por ejemplo un pulsador.
+
+La salida de 12 V tiene un límite de 500 mA. En el laboratorio ese borne se puentea al relé 1 para encender una lámpara de banco; con una carga real que pida más, va una fuente propia y el relé solo conmuta. La alimentación del propio WR01 es flexible: PoE 802.3at, o 12 a 24 V en alterna o continua.
+
+El A15 tiene su propio borne de 12 V, independiente del relé: hasta 500 mA si se alimenta por PoE+, y hasta 1 A con una fuente de 12 V 2 A.
+
+Que el WR01 esté lejos tiene un costo: queda en lugares sin vigilancia. Por eso va en gabinete cerrado y en la VLAN de porteros.
+"""}
+
+# ===================================================================== 35
+M["35"] = {
+    "fig": {"file": "35.svg",
+            "alt": "Una controladora A094 o A095 dentro del tablero, con cables a cuatro puertas, cada una con lector y cerradura. Notas: relé de 30 V 2 A en las dos, A094 a 220 V sin PoE, A095 con PoE+ o 12 V 5 A, y solo el A095 se integra con el ascensor EC33.",
+            "caption": "La controladora queda en el tablero; en la puerta solo quedan lector y cerradura."},
+    "steps": [
+        {"file": "35-paso2.svg", "step": 2,
+         "alt": "Barras con la corriente máxima por salida de 12 V: A094 800 mA en 4 salidas; A095 con fuente de 12 V 5 A, 500 mA; A095 con PoE+ y 4 lectores o menos, entre 0,2 y 0,4 A; A095 con PoE+ y 8 lectores, 0,2 A.",
+         "caption": "Con PoE+, el A095 reparte menos corriente por salida que con fuente.",
+         "after": "Compará con los límites:"},
+        {"file": "35-paso3.svg", "step": 3,
+         "alt": "Dos circuitos: el lector sigue alimentado desde la salida de 12 V de la controladora; la cerradura se alimenta de una fuente propia y el relé de la puerta 1 solo abre y cierra ese circuito.",
+         "caption": "Lo que no entra en la salida de 12 V va con fuente propia.",
+         "after": "Si alguna puerta supera el límite"},
+    ],
+    "concepts": [
+        {"name": "Controladora en el tablero",
+         "para_que": "Separa la decisión de la puerta: afuera queda el lector, y lo que decide y el relé que abre quedan en el tablero, del lado seguro. Romper el lector no abre nada.",
+         "como": "Una A094 o A095 maneja 4 puertas desde un gabinete; cada puerta lleva su lector y su cerradura cableados hasta ahí. Se elige por la energía disponible por salida y por la integración que pida la obra (con el EC33, solo la A095).",
+         "ejemplo": "Oficinas de una empresa con cuatro puertas internas en un mismo piso: una A095 en el rack, un lector en cada puerta y las cerraduras grandes con su fuente en el mismo tablero."},
+        {"name": "Presupuesto de energía por salida",
+         "para_que": "Cada salida de 12 V tiene un máximo. Si lector y cerradura juntos lo pasan, la salida queda corta y la puerta falla justo cuando más se usa.",
+         "como": "Por puerta, sumá el consumo del lector y el de la cerradura (de sus fichas) y comparalo con el límite: A094 800 mA, A095 con fuente 500 mA, A095 con PoE+ entre 0,2 y 0,4 A según cuántos lectores tenga. Lo que no entra va con fuente propia.",
+         "ejemplo": "Un lector de 120 mA y un electroimán de 500 mA en una A095 con fuente suman 620 mA y pasan los 500 mA. El lector queda en la salida y el electroimán va con su propia fuente."},
+        {"name": "PoE+ en la A095",
+         "para_que": "Permite instalar la controladora con un solo cable de red, sin fuente en el tablero, cuando las cargas son chicas.",
+         "como": "Con PoE+ la energía total es menor que con la fuente de 12 V 5 A, y se reparte: 0,2 A por salida con los 8 lectores conectados, o entre 0,2 y 0,4 A con 4 o menos. Alcanza para lectores; para cerraduras casi siempre hace falta fuente.",
+         "ejemplo": "Cuatro puertas de oficinas con lectores y cerraderos chicos: la A095 por PoE+ alimenta los lectores, y los cerraderos van con una fuente de 12 V en el mismo gabinete."},
+        {"name": "220 V en el gabinete (A094)",
+         "para_que": "La A094 se alimenta directo de la red (100 a 240 VAC 1,5 A), y esa entrada alimenta sus 4 salidas de 12 V. Simplifica el tablero, pero mete tensión de red en el gabinete de control de acceso.",
+         "como": "La conexión a la red la hace o la revisa alguien habilitado para baja tensión de red, con su protección en el tablero. El resto (lectores y cerraduras) es de 12 V. Si la obra lleva ascensor con EC33, la A094 no sirve para esa integración.",
+         "ejemplo": "Depósito en la zona de Carrasco Norte sin switch PoE: A094 en el tablero del depósito, con la línea de 220 V hecha por el electricista de la obra y los cuatro lectores alimentados desde sus salidas."},
+    ],
+    "teoria_md": """### Un poco de historia
+Los primeros sistemas de control de acceso para empresas se armaban con un panel central: una controladora en el tablero o en el cuarto técnico, y en cada puerta solo un lector, una cerradura y algún contacto. La conexión entre lector y panel se estandarizó de hecho con la interfaz Wiegand, y la controladora era la que guardaba los usuarios y decidía.
+
+Ese diseño tiene una ventaja que no cambió: lo que decide y lo que abre queda del lado de adentro. Cuando aparecieron los terminales que hacen todo en la puerta, como la serie A0x, el panel centralizado siguió vigente para obras de varias puertas. Akuvox lo ofrece con la A094 y la A095, las dos para 4 puertas.
+
+### Cómo funciona
+La controladora recibe la lectura de cada lector, busca al usuario, revisa permisos y horario, y activa el relé de esa puerta. Los relés son de 30 V 2 A en los dos modelos. La diferencia está en la energía:
+
+- A094: se alimenta de 100 a 240 VAC 1,5 A y tiene 4 salidas de 12 V de 800 mA; esa entrada alimenta las 4 salidas a la vez.
+- A095 con fuente de 12 V 5 A: 8 salidas de 12 V de 500 mA.
+- A095 con PoE+: la potencia que llega por el cable es menor (802.3at entrega hasta 30 W en el puerto del switch), así que cada salida da 0,2 A con 8 lectores conectados, o entre 0,2 y 0,4 A con 4 o menos.
+
+Por eso el cálculo se hace por puerta: consumo del lector más consumo de la cerradura, comparado con la salida que los alimenta. Si no entra, la cerradura va con su propia fuente y el relé de la controladora solo abre y cierra ese circuito; la corriente de la cerradura no pasa por la controladora.
+
+El otro criterio es la integración. Según la guía de ascensores de Akuvox, el EC33 se integra con todos sus porteros y terminales salvo la A094 y el E20. Si la obra tiene ascensor con control por pisos, la controladora es la A095.
+
+Y un detalle de seguridad eléctrica: la A094 trabaja con 220 V dentro del gabinete, así que esa conexión la hace alguien habilitado.
+"""}
+
+# ===================================================================== 36
+M["36"] = {
+    "fig": {"file": "36.svg",
+            "alt": "Un terminal (A08 o portero) le habla por HTTP al EC33. El EC33 activa solo el relé del piso 3, que habilita ese botón en la botonera; los botones 4, 2, 1, PB y -1 quedan bloqueados.",
+            "caption": "La credencial del usuario habilita solo su piso; los demás relés no se mueven."},
+    "steps": [
+        {"file": "36-paso2.svg", "step": 2,
+         "alt": "Dos ventanas web. En el EC33, Device > Relay con Open Relay via HTTP habilitado, usuario ec33-lab y clave Ejemplo-Lift-2026. En el terminal, Device > Lift Control con Lift Control List en Akuvox, Server 1 (Unlock) 192.168.88.40, el mismo usuario y clave, Floor Starts From -1 y Device Location planta baja.",
+         "caption": "Primero el EC33 (paso 1), después el terminal con el mismo usuario (paso 2).",
+         "after": "Terminal (A08 o portero)"},
+        {"file": "36-paso5.svg", "step": 5,
+         "alt": "Dos esquemas. Paralelo: el relé del EC33 y el botón del piso conectados en paralelo, cualquiera de los dos marca el piso. Serie: el relé del EC33 en serie con el común del botón, que solo funciona mientras el relé está cerrado.",
+         "caption": "Paralelo lleva directo al piso; serie libera el botón para que el usuario elija.",
+         "after": "Dibujá para el ascensorista"},
+    ],
+    "concepts": [
+        {"name": "Control de ascensor por pisos",
+         "para_que": "En un edificio con acceso controlado, el ascensor es una puerta más: sin control, cualquiera que entra al hall llega a cualquier piso. El EC33 hace que cada credencial habilite solo los pisos autorizados.",
+         "como": "El EC33 tiene 32 relés (ampliables a 64), uno por piso. El terminal valida al usuario y le pide al EC33 por HTTP que active el relé de su piso. Los pisos de cada usuario se cargan en `Directory > User` o, en proyectos en la nube, desde SmartPlus.",
+         "ejemplo": "Torre de oficinas en Ciudad Vieja: el estudio contable del piso 3 solo llega al 3 con su tarjeta, y el personal de limpieza tiene una tarjeta con todos los pisos."},
+        {"name": "Paralelo o serie",
+         "para_que": "Son las dos maneras de meter el relé del EC33 en la botonera, según lo que se quiera que pase después de validar la credencial.",
+         "como": "En paralelo con el botón del piso, el relé hace lo mismo que apretar ese botón: el ascensor va directo. En serie con el común o la línea de autorización, el relé habilita los botones y el usuario elige. La decisión y el cableado se acuerdan con la empresa de mantenimiento del ascensor, que conoce su tablero.",
+         "ejemplo": "Edificio de viviendas en Pocitos: se elige paralelo, el residente pasa la tarjeta y el ascensor lo lleva a su piso. En un edificio de oficinas con usuarios de varios pisos se elige serie, para que cada uno elija entre los que tiene habilitados."},
+        {"name": "Open Relay via HTTP con usuario propio",
+         "para_que": "Es el idioma entre el terminal y el EC33: el terminal manda un pedido HTTP y el EC33 activa el relé. El usuario propio evita que cualquiera en la red pueda mandar ese pedido.",
+         "como": "En el EC33: `Device > Relay`, habilitá Open Relay via HTTP y creá usuario y clave; opcionalmente ajustá Trigger Delay y Hold Delay. En el terminal: `Device > Lift Control`, tipo Akuvox, IP, puerto y las mismas credenciales.",
+         "ejemplo": "En el laboratorio: usuario `ec33-lab`, clave `Ejemplo-Lift-2026`, EC33 en 192.168.88.40. En obra, usuario y clave propios por edificio, anotados en la ficha."},
+        {"name": "Floor Starts From y Ground Floor",
+         "para_que": "Los relés del EC33 se cuentan de abajo hacia arriba; estos ajustes le dicen al sistema a qué piso real corresponde el primero, para edificios con subsuelos o con planta baja.",
+         "como": "Con un subsuelo, Floor Starts From = -1 y el subsuelo pasa a ser el primero. Si hay planta baja entre el -1 y el 1, se configura en Ground Floor. Device Location indica dónde está el terminal, para llamar al ascensor a ese piso.",
+         "ejemplo": "Edificio en Punta Carretas con dos subsuelos de cocheras: Floor Starts From = -2, Ground Floor configurado y el terminal del hall con Device Location en planta baja."},
+    ],
+    "teoria_md": """### Un poco de historia
+Los ascensores con pisos restringidos son anteriores a la electrónica: durante mucho tiempo se resolvieron con una llave en la botonera que habilitaba el botón de un piso, típica de hoteles y oficinas. Con las tarjetas de proximidad, la llave pasó a ser un lector en la cabina o en el hall, conectado a un panel de relés que habilita botones según la credencial.
+
+El principio eléctrico es el de cualquier botonera: cada botón cierra un contacto que el control del ascensor interpreta como "quiero ir a este piso". Lo que cambió es quién cierra ese contacto. El EC33 de Akuvox es un controlador IP de ascensor con 32 relés ampliables a 64, lectores Wiegand 26/34, 20.000 tarjetas y 100.000 registros, que recibe órdenes por la red desde los porteros y terminales de la marca.
+
+### Cómo funciona
+En un proyecto local, el flujo es este:
+
+1. El usuario se valida en el terminal (tarjeta, PIN o rostro).
+2. El terminal busca los pisos permitidos de ese usuario.
+3. Manda un pedido HTTP al EC33 configurado como Server 1 (Unlock), con el usuario y la clave de Open Relay via HTTP.
+4. El EC33 activa el relé de cada piso autorizado durante el tiempo configurado (Hold Delay).
+
+El terminal también envía el piso donde está instalado (Device Location) para llamar al ascensor. Si el edificio separa el llamado y la habilitación de pisos en dos controladores, se configura un segundo EC33 como Server 2 (Execute): recibe el llamado y, cuando el usuario tiene un solo piso, también ese piso; con varios pisos, la habilitación queda solo en el Server 1.
+
+El cableado define el resultado. En paralelo con el botón, el relé lo aprieta por el usuario: el ascensor va directo. En serie con el común o la línea de autorización, el relé habilita la botonera y el usuario elige entre los pisos liberados.
+
+La numeración arranca abajo: Floor Starts From dice cuál es el primer piso (por ejemplo -1) y Ground Floor ubica la planta baja entre el -1 y el 1.
+
+Todo esto toca un sistema de transporte de personas: en el ascensor real, el cableado lo hace o lo autoriza la empresa de mantenimiento.
+"""}
+
+# ===================================================================== 37
+M["37"] = {
+    "fig": {"file": "37.svg",
+            "alt": "Comparación. Izquierda: sistema IP con switch PoE y un UTP por equipo hasta portero y monitor. Derecha: sistema de 2 hilos con fuente de 48 V DC para el portero R20A-2 o R20K-2, el NS-2 que alimenta al C313-2 y un monitor C313W-2 o S562W-2, todos sobre el par existente del edificio. Una nota aclara que el rol de NC-2 y NX-2 no está confirmado.",
+            "caption": "En 2 hilos se reutiliza el par del edificio, pero el portero va con fuente de 48 V."},
+    "steps": [
+        {"file": "37-paso1.svg", "step": 1,
+         "alt": "Corte de un edificio de tres pisos con un portero viejo abajo y un par que sube por el montante hasta el monitor viejo de cada apartamento. Al lado, una planilla de relevamiento con apartamentos, par disponible y accesos, y el aviso de medir aislación y continuidad.",
+         "caption": "Antes de reutilizar el par, relevalo y medilo.",
+         "after": "En un edificio con portero viejo"},
+        {"file": "37-paso3.svg", "step": 3,
+         "alt": "Dos listas. En verde, lo que sale de una página leída: 48 V DC 1,25 A de los porteros, credenciales de R20A-2 y R20K-2, alimentación del C313-2, interfaces del C313W-2 y relé de 30 V 2 A. En rojo, lo que hay que confirmar por escrito: rol y cantidades de NC-2 y NX-2, fichas, largo máximo del par y datos de S562W-2 y E12S-2.",
+         "caption": "Lo que está en rojo se pide por escrito al distribuidor antes de cotizar.",
+         "after": "Marcá en rojo todo lo que no sale"},
+    ],
+    "concepts": [
+        {"name": "Portero de 2 hilos",
+         "para_que": "Existe para reformar edificios que ya tienen un par de cables del portero viejo a cada apartamento y donde pasar UTP nuevo es caro o imposible: ductos llenos, fachadas protegidas, copropietarios que no quieren obra.",
+         "como": "La línea de 2 hilos de Akuvox (R20K-2, R20A-2, E12S-2, S562W-2, C313W-2, con NS-2, NC-2 y NX-2) usa el par existente. Se releva, se mide el par y recién ahí se cotiza, con el rol de cada equipo de red confirmado por el distribuidor.",
+         "ejemplo": "Edificio de los años sesenta en el Centro con portero de audio de 2 hilos y 20 apartamentos: pasa a video portero IP sin abrir paredes, reutilizando el par del montante."},
+        {"name": "Alimentación de 48 V en lugar de PoE",
+         "para_que": "En 2 hilos no hay un switch PoE junto a cada portero: la energía del portero viene de una fuente propia, y hay que preverla desde la cotización.",
+         "como": "R20A-2 y R20K-2 piden 48 V DC 1,25 A cada uno; el C313-2 se alimenta desde el NS-2, o con 48 V si no hay NS-2. Esas fuentes van en la lista de materiales con su lugar en el tablero.",
+         "ejemplo": "Dos accesos en un edificio del Cordón, puerta principal y garaje: dos porteros de 2 hilos y la alimentación de 48 V DC prevista con 1,25 A por portero."},
+        {"name": "Medir el par existente",
+         "para_que": "El equipo nuevo depende del cable viejo. Un par con humedad, empalmes oxidados o aislación baja da fallas intermitentes que parecen del equipo.",
+         "como": "Con el par desconectado en las dos puntas, medí continuidad (que cada conductor llegue entero) y aislación entre conductores y hacia tierra, con el instrumento adecuado. Anotá los valores por apartamento en el relevamiento.",
+         "ejemplo": "En el relevamiento aparece un apartamento con continuidad bien pero aislación baja: hay un empalme húmedo en la caja del palier. Se rehace antes de instalar el monitor."},
+        {"name": "Confirmar por escrito antes de cotizar",
+         "para_que": "La línea de 2 hilos tiene poca documentación leída; lo que no está en una página no se promete al cliente.",
+         "como": "Separá la lista en dos: lo que sale de una página leída y lo que falta (rol y cantidades de NC-2 y NX-2, fichas, largos máximos). Lo segundo se pide al distribuidor por escrito y la cotización sale con esa respuesta.",
+         "ejemplo": "La respuesta del distribuidor sobre cuántos equipos de red lleva un edificio de 20 apartamentos queda adjunta a la cotización, y si cambia algo en obra, hay un papel que lo respalda."},
+    ],
+    "teoria_md": """### Un poco de historia
+Los porteros eléctricos clásicos usaban varios hilos por apartamento: audio de ida, audio de vuelta, llamada y apertura. Para simplificar, los fabricantes desarrollaron sistemas de bus que llevan todo por un solo par: alimentación, audio, datos y, más tarde, video. Por eso en muchos edificios hay un único par entre el portero de calle y cada apartamento.
+
+Cuando llegó el video portero IP, la propuesta natural fue UTP y PoE hasta cada equipo. Pero en un edificio habitado pasar cable nuevo es caro: ductos llenos, fachadas, obra en cada apartamento. La línea de 2 hilos de Akuvox apunta a ese caso: reutilizar el par y llegar igual a un video portero IP. En el menú de productos figura con los porteros R20K-2, R20A-2 y E12S-2, los monitores S562W-2 y C313W-2, los equipos NS-2, NC-2 y NX-2, y un kit de video portero IP de 2 hilos.
+
+### Cómo funciona
+En un sistema de 2 hilos, el par hace el trabajo que en IP hacen el UTP y el switch: transporta la comunicación entre equipos. En la energía está la diferencia práctica: los porteros de 2 hilos no tienen PoE, y la tabla de alimentación de Akuvox pide 48 V DC 1,25 A para R20A-2 y R20K-2. El monitor C313-2 toma energía del NS-2, o de 48 V si no hay NS-2.
+
+Cómo se reparten las funciones entre NS-2, NC-2 y NX-2 no está en las páginas leídas, y por eso en este curso no se afirma: se pide al distribuidor.
+
+Lo que sí es universal es el cable. Antes de reutilizarlo se mide:
+
+- Continuidad: que cada conductor llegue entero de punta a punta.
+- Aislación: que no haya fuga entre los dos conductores ni hacia tierra o la cañería.
+
+Un par en mal estado da fallas intermitentes que ningún equipo corrige. Los equipos de 2 hilos mantienen funciones conocidas de la línea IP: relé de 30 V 2 A en R20-2 y C313-2, R20A-2 con tarjetas de 13,56 y 125 kHz sin PIN, R20K-2 con PIN y tarjetas, y el C313W-2 con RS485, relé, timbre y un RJ45, sin PoE.
+"""}
+
+# ===================================================================== 38
+M["38"] = {
+    "fig": {"file": "38.svg",
+            "alt": "Un portero y un R49G conectados a un switch PoE; el switch habla SIP con la central IP. La PC del guardia se conecta al puerto 2 del R49G. Abajo, características del R49G: Android 9, 2 puertos Gigabit conmutados, PoE, Wi-Fi, Bluetooth y USB.",
+            "caption": "El R49G es una extensión más de la central y le presta la red a la PC."},
+    "steps": [
+        {"file": "38-paso1.svg", "step": 1,
+         "alt": "Un switch PoE con respaldo de energía conectado al puerto 1 del R49G; del puerto 2 sale un cable a la PC del guardia. Un aviso dice que si se corta el PoE del R49G, la PC también queda sin red.",
+         "caption": "PoE al puerto 1, la PC al puerto 2, y el switch con respaldo.",
+         "after": "Con un R49G: PoE en el puerto 1"},
+        {"file": "38-paso3.svg", "step": 3,
+         "alt": "Tabla con R49G, SP-R50P, HCP-R15P, VC50B/VC50T y MR01/MR03: lo que se sabe por páginas leídas y lo que falta pedir al distribuidor, como la ficha completa o la resolución, el lente y el grado IP de la cámara.",
+         "caption": "Lo que no está en una página leída se pide, no se supone.",
+         "after": "Sin R49G, armá la lista de pedidos"},
+    ],
+    "concepts": [
+        {"name": "Teléfono de video en el escritorio de guardia",
+         "para_que": "La guardia necesita atender porteros con imagen sin depender de una PC con software ni de un celular. El R49G es un teléfono de escritorio con pantalla de 7 pulgadas y cámara que Akuvox ubica en la oficina: voz, mensajes, video y control de acceso.",
+         "como": "Se registra como extensión en la central (lección 5) y recibe las llamadas de los porteros como cualquier interno, con el video. La apertura se hace con el método de la obra, por ejemplo DTMF hacia el portero en llamada.",
+         "ejemplo": "Portería de un complejo de viviendas en Malvín Norte: un R49G en el mostrador atiende los tres porteros de acceso y el E21 del estacionamiento."},
+        {"name": "Puertos Gigabit conmutados",
+         "para_que": "Permiten poner la PC del puesto detrás del teléfono y usar un solo cable desde el rack, como se hace con los teléfonos IP de oficina.",
+         "como": "El cable del switch, con PoE, va al puerto 1; la PC al puerto 2. El costo es la dependencia: si el R49G pierde energía o se reinicia, la PC pierde la red. Conviene que el switch tenga respaldo de energía y, si el puesto es crítico, darle a la PC su propio cable.",
+         "ejemplo": "Durante un corte de luz en la portería, la UPS mantiene el switch: el R49G sigue atendiendo y la PC del guardia sigue grabando el registro de visitas."},
+        {"name": "No inventar datos de equipos sin ficha",
+         "para_que": "Un dato supuesto en una cotización (la resolución de una cámara, la protección de un radar) termina en un reclamo cuando el equipo llega y no lo cumple.",
+         "como": "Del R49G hay ficha leída; de SP-R50P, HCP-R15P, VC50B/VC50T y MR01/MR03 solo el menú de productos y algún código de firmware (650 la cámara, 301 el MR01). Para esos se arma la lista de pedidos y se cotiza con la ficha en la mano.",
+         "ejemplo": "Un cliente pide la cámara VC50B porque es de la misma marca que los porteros. Antes de prometer que va a la intemperie o qué resolución tiene, se pide la ficha al distribuidor."},
+    ],
+    "teoria_md": """### Un poco de historia
+El teléfono IP de escritorio se popularizó en las oficinas a principios de los años 2000, de la mano de SIP (RFC 3261, de 2002) y de PoE (IEEE 802.3af, de 2003). Para no duplicar el cableado, casi todos los modelos sumaron un segundo puerto Ethernet con un switch interno: el cable del rack entra al teléfono y la PC se conecta detrás. Con Gigabit Ethernet sobre cobre (IEEE 802.3ab, de 1999), ese puerto dejó de ser un cuello de botella para la PC.
+
+Los teléfonos con video y Android son la evolución de esa idea: pantalla táctil, cámara, aplicaciones y la posibilidad de ver al visitante al atender. El R49G de Akuvox es de esa familia: 7 pulgadas, una cámara, Android 9, dos puertos Gigabit conmutados, Bluetooth, USB, Wi-Fi y PoE, pensado para escritorio.
+
+### Cómo funciona
+Para la central, el R49G es una extensión SIP más. Cuando el portero llama, la central hace sonar esa extensión, y el video viaja junto con la llamada cuando los dos extremos acuerdan un códec de video común. La apertura se hace con el método que use la obra: DTMF hacia el portero que está en llamada, o un comando HTTP si se configuró (lecciones 6 y 8).
+
+El switch interno funciona así:
+
+- el puerto 1 recibe la red y la energía del switch;
+- el teléfono toma lo que necesita y reenvía el tráfico de la PC por el puerto 2;
+- mientras el R49G esté encendido, la PC navega como si estuviera conectada directo al switch.
+
+Si el teléfono pierde energía o se reinicia, por ejemplo durante una actualización, el switch interno deja de funcionar y la PC queda sin red hasta que vuelva. Esa dependencia se resuelve en el diseño: switch con respaldo de energía y, en puestos críticos, un cable propio para la PC.
+
+El resto de la línea (SP-R50P, HCP-R15P, la cámara VC50B/VC50T y los radares MR01 y MR03) aparece en el menú de productos sin ficha leída en este curso. Se nombra lo que existe, se pide la ficha y se cotiza con ella.
+"""}
+
+# ===================================================================== 39
+M["39"] = {
+    "fig": {"file": "39.svg",
+            "alt": "Un portero de ejemplo (R29C) y seis tarjetas con lo que lleva el pedido: frente en su versión exacta, montaje de embutir o superficie, cubierta de lluvia y color, alimentación PoE o fuente de la tabla, cerradura desde el portero o con fuente propia, y módulos como SR01, lector o Bkey.",
+            "caption": "Seis renglones del pedido, todos sacados de la ficha del modelo exacto."},
+    "steps": [
+        {"file": "39-paso1.svg", "step": 1,
+         "alt": "Una pared separa la calle de adentro. Afuera, el portero; adentro, el SR01 conectado al portero por la salida de 12 V o por RS485, y la cerradura manejada por el SR01. Nota: si rompen el portero, la puerta no se abre.",
+         "caption": "El SR01 deja del lado de adentro el contacto que abre.",
+         "after": "Elegí un portero con ficha (X915 o R29)"},
+        {"file": "39-paso2.svg", "step": 2,
+         "alt": "Dos esquemas con la salida de 12 V del relé A del portero. Cerradura NC entre GND y NC, con la salida en Always: con 12 V queda trabada y abre al cortar. Cerradura NO entre GND y NO, con la salida en Triggered by Open Relay: abre al recibir 12 V.",
+         "caption": "NC con Always, NO con Triggered by Open Relay.",
+         "after": "Cableado de la cerradura"},
+    ],
+    "concepts": [
+        {"name": "Accesorios del modelo exacto",
+         "para_que": "Cada frente tiene su caja, su soporte y su cubierta; uno de otro modelo no entra o deja pasar el agua. Pedirlos juntos evita la segunda visita.",
+         "como": "Arrancá por la versión exacta (R29C, no solo R29) y sacá de su ficha el montaje de embutir o de superficie, la cubierta de lluvia y su color. El R29C-L con LTE tiene su propio soporte y no admite PoE. Lo que no figure en la ficha va en la lista como a confirmar.",
+         "ejemplo": "Casa en Carrasco con muro de ladrillo visto: R29C de embutir con su soporte, cubierta de lluvia plata y PoE 802.3at desde el rack, todo en el mismo pedido."},
+        {"name": "SR01, relé de seguridad",
+         "para_que": "Si el relé que abre está dentro del portero, quien arranque el frente de la pared puede llegar a sus bornes. El SR01 lleva ese relé del lado de adentro: según la guía de Akuvox, aunque destruyan el portero, la puerta no se abre.",
+         "como": "Se conecta por la salida de 12 V del portero (Security Relay A) o por RS485 (Security Relay B, en `Device > RS485`). Tiene Trigger Delay y Hold Delay, y por HTTP se abre con `DoorNum=SA` o `SB`. Revisá en la guía qué modelos y firmwares lo soportan.",
+         "ejemplo": "Portero en la vereda de un edificio en Pocitos, sin reja delante: el SR01 va en el hall, arriba de la puerta, y maneja el electroimán. Si rompen el frente, la puerta sigue cerrada."},
+        {"name": "Salida de 12 V: Always o Triggered by Open Relay",
+         "para_que": "Algunos porteros alimentan la cerradura por su propio relé. Hay dos modos porque hay cerraduras que abren al cortarles la energía y otras que abren al recibirla.",
+         "como": "Cerradura NC (abre al cortar): GND y NC, modo Always; queda alimentada y el relé corta al abrir. Cerradura NO (abre al dar 12 V): GND y NO, modo Triggered by Open Relay; recibe 12 V solo al abrir. Siempre dentro del límite del modelo; si pide más, fuente propia.",
+         "ejemplo": "Un electroimán de 12 V se comporta como NC: con Always queda pegado y suelta al abrir. Un cerradero eléctrico que libera al recibir tensión es NO: Triggered by Open Relay."},
+    ],
+    "teoria_md": """### Un poco de historia
+En los porteros de calle, el problema de la seguridad física es viejo: el frente está afuera, al alcance de cualquiera. Por eso las instalaciones bien hechas siempre separaron la botonera de calle del relé de apertura, que quedaba en el tablero del lado de adentro. El SR01 de Akuvox es esa idea en un módulo: según la guía del fabricante, aunque destruyan el portero, la puerta no se puede abrir.
+
+Las cerraduras también vienen en dos familias. Las que abren sin energía (fail-safe) se usan en salidas de emergencia y lugares donde un corte de luz no puede dejar gente encerrada; las que quedan trabadas sin energía (fail-secure), donde un corte no puede dejar la puerta abierta. Akuvox las nombra por el borne al que se conectan: NC y NO.
+
+Los accesorios de montaje y las cubiertas de lluvia completan el frente. El grado de protección que dice la ficha, como IP65 e IK06 en el R29, supone el equipo instalado con lo que el fabricante prevé.
+
+### Cómo funciona
+Cuando el portero da 12 V por el relé, la cerradura se conecta entre GND y el borne que corresponda, y el modo de la salida se elige en la web:
+
+- Always, cerradura NC (entre GND y NC): en reposo la cerradura recibe 12 V y queda trabada. Al abrir, el relé conmuta, corta la energía y la cerradura se libera. Cuando el relé vuelve, vuelve la energía.
+- Triggered by Open Relay, cerradura NO (entre GND y NO): en reposo no hay tensión y queda trabada. Al abrir, el relé da 12 V durante el tiempo configurado y la cerradura se libera.
+
+El límite de corriente es por modelo: por ejemplo, 500 mA en el R29 V1.1 y 1 A en el X915S. Si la cerradura pide más, va con fuente propia y el relé solo conmuta.
+
+El SR01 cambia dónde está ese relé. El portero le manda la orden por la salida de 12 V (Security Relay A) o por RS485 (Security Relay B), y el SR01, adentro, mueve la cerradura.
+
+El pedido completo sale de la ficha del modelo exacto: versión, montaje, cubierta, alimentación, cerradura y módulos.
+"""}
+
+# ===================================================================== 40
+M["40"] = {
+    "fig": {"file": "40.svg",
+            "alt": "Mapa del software de Akuvox en dos zonas. Nube y celular: SmartPlus App para el residente y My MobileKey como credencial Bluetooth. PC o servidor local: ACMS para pymes, ACMS Pro para empresas y SDMC para comunidades. Abajo, la Installer Kit Tool, que junta la red de los equipos y sube el proyecto a la nube.",
+            "caption": "Primero decidí dónde vive la administración: en la nube o en un servidor local."},
+    "steps": [
+        {"file": "40-paso2.svg", "step": 2,
+         "alt": "El firmware 567.30.12.802 separado en sus cuatro bloques, con el bloque B (30) resaltado. Abajo: B igual a 30 es versión Akuvox con nube, SDMC y descubrimiento; B igual a 31 es sin logo con las mismas funciones; otro valor es una versión a medida.",
+         "caption": "Si el bloque B no es 30 ni 31, consultá antes de integrar.",
+         "after": "En un equipo de laboratorio"},
+        {"file": "40-paso3.svg", "step": 3,
+         "alt": "Izquierda, en rojo: un monitor administrado a la vez por la nube SmartPlus y por SDMC, con la pregunta de quién manda. Derecha, en verde: el mismo monitor administrado solo por SDMC, anotado en la ficha.",
+         "caption": "Un equipo, un administrador, y anotado en la ficha.",
+         "after": "Anotá en la ficha qué software"},
+    ],
+    "concepts": [
+        {"name": "SmartPlus y la nube",
+         "para_que": "Le da al residente el portero en el celular (ver, hablar, abrir y dar llaves virtuales) sin que el instalador abra puertos en el router del edificio.",
+         "como": "Los equipos y la app se conectan hacia la nube de Akuvox; el instalador configura el proyecto en la plataforma y el administrador carga residentes y accesos. Depende de internet, así que conviene un plan B local (lección 10).",
+         "ejemplo": "Casa en un barrio privado con portero y monitor: SmartPlus para atender desde la oficina, y la llamada directa al monitor como respaldo si se cae internet."},
+        {"name": "SDMC, gestión local de comunidades",
+         "para_que": "Es para edificios o complejos donde la gestión no puede depender de internet, o donde se quiere todo en un servidor propio.",
+         "como": "Corre en un servidor del sitio y administra la comunidad completa: despliegue por lotes, video, acceso y mensajes. Los firmwares con bloque B en 30 o 31 lo soportan.",
+         "ejemplo": "Complejo de viviendas en la Costa de Oro con internet inestable: el SDMC en un servidor de la portería administra porteros y monitores aunque se corte la conexión."},
+        {"name": "ACMS, ACMS Pro y My MobileKey",
+         "para_que": "Son el software de control de acceso en PC: ACMS para pymes y ACMS Pro para empresas, con estado de puertas, grupos y varios puestos. My MobileKey pone la credencial en el celular por Bluetooth con cifrado AES256 y se integra con ACMS.",
+         "como": "Se elige por tamaño y por quién opera: una pyme con un administrativo, ACMS; una empresa con seguridad propia y varias recepciones, ACMS Pro (arquitecturas B/S y C/S). La credencial en el celular se suma con My MobileKey, que abre acercando la mano o con un botón.",
+         "ejemplo": "Oficina de 40 personas con 6 puertas en el Prado: ACMS en la PC de administración y My MobileKey para quienes prefieren no cargar tarjeta."},
+        {"name": "El bloque B del firmware",
+         "para_que": "Akuvox también fabrica versiones sin logo o a medida, y no todas se integran igual. El bloque B lo dice antes de prometer nube o SDMC.",
+         "como": "En `Status > Basic > Product Information`, el firmware A.B.C.D: B = 30, versión Akuvox con nube, SDMC y modo descubrimiento; B = 31, sin logo con las mismas funciones; otro valor, versión a medida que se consulta antes de integrar.",
+         "ejemplo": "Un monitor comprado fuera del canal llega con un B distinto de 30 y 31: antes de sumarlo al proyecto en SmartPlus, se consulta al distribuidor."},
+    ],
+    "teoria_md": """### Un poco de historia
+Los primeros video porteros IP se administraban equipo por equipo, entrando a la web de cada uno. En una casa alcanzaba, pero en un edificio de 100 apartamentos eran 100 configuraciones manuales. De ahí salieron dos caminos que hoy conviven.
+
+El primero es la nube: los equipos se conectan hacia un servidor del fabricante y la gestión se hace desde una plataforma web y una app. Es el modelo de SmartPlus, que además lleva el portero al celular del residente. El segundo es el software local, que corre en un servidor o una PC del sitio: SDMC para comunidades, y ACMS y ACMS Pro para control de acceso en empresas. My MobileKey suma la credencial Bluetooth, y la Installer Kit Tool, sobre hardware S563W, ayuda en la puesta en marcha juntando la red de los equipos y subiendo el proyecto a la nube.
+
+### Cómo funciona
+La diferencia de fondo es dónde vive la base de datos de usuarios, accesos y configuración:
+
+- En la nube: los equipos inician la conexión hacia afuera, así que no hace falta abrir puertos en el router del edificio. La gestión es remota y la app del residente anda desde cualquier lugar, pero sin internet las funciones de nube se detienen; por eso existe el plan B local de la lección 10.
+- En local: el servidor está en el edificio y sigue funcionando sin internet. A cambio, alguien mantiene ese servidor: energía, respaldos y actualizaciones.
+
+Si un equipo recibe configuración de dos lados, cada uno puede pisar lo que hizo el otro y deja de estar claro cuál es la versión buena. Por eso se define un administrador por equipo y se anota en la ficha.
+
+El firmware dice si el equipo puede ir a cualquiera de los dos mundos. En A.B.C.D, el bloque B identifica el OEM: 30 es la versión con logo Akuvox que soporta a la vez nube, SDMC y modo descubrimiento; 31 es la misma sin logo; otros valores son versiones a medida, que conviene consultar antes de integrar. El bloque C, de paso, dice si el equipo está en la rama de alta seguridad (10 o más).
+"""}
+
+# ===================================================================== 41
+M["41"] = {
+    "fig": {"file": "41.svg",
+            "alt": "Tres pasos para un equipo viejo: identificar (IP y bloque A del firmware), asegurar (firmware al día, clave propia, VLAN de porteros) y reemplazar (mismo tipo vigente, verificando credenciales y alimentación). Abajo, los modelos del parque instalado y un aviso rojo sobre las vulnerabilidades del E11 publicadas en 2023.",
+            "caption": "Con un equipo viejo: primero se identifica, después se asegura y recién ahí se reemplaza."},
+    "steps": [
+        {"file": "41-paso2.svg", "step": 2,
+         "alt": "Tabla de códigos del bloque A: 111 E11, 120 E20, 27 R27, 83 IT83, 115 C315, 310 C310 y 92 A092 o A094, con su tipo. Notas: el 92 es compartido entre un modelo viejo y uno vigente, y un bloque C de 10 o más indica la rama de alta seguridad.",
+         "caption": "El primer número del firmware identifica el modelo en un minuto.",
+         "after": "identificá el modelo por el bloque A"},
+        {"file": "41-paso5.svg", "step": 5,
+         "alt": "Un E11R y un C315S dentro de la VLAN de porteros 10.10.10.0/24, con firmware al día y clave propia. Solo salen hacia la central 10.10.20.10 por SIP y hacia el NVR 10.10.30.10 por RTSP 554; desde internet no hay reenvío de puertos.",
+         "caption": "El equipo viejo sigue andando, pero encerrado en su VLAN.",
+         "after": "Mientras siga instalado: firmware al día"},
+    ],
+    "concepts": [
+        {"name": "Vigente o parque instalado",
+         "para_que": "Separa lo que se puede comprar hoy de lo que solo se mantiene. Sin lista oficial de discontinuados, el criterio del curso es el menú de productos de akuvox.com de octubre de 2026.",
+         "como": "Si el modelo aparece en tablas de la Knowledge Base pero no en el menú (E11, R27, R26, DB01, E20, C315, C310, IT83, A092), se trata como parque instalado: se mantiene y se planifica el reemplazo. Del C317 no hay ninguna página leída y no se afirma nada.",
+         "ejemplo": "Llamado de soporte por un R27 que no abre: se arregla, y en el informe se agrega que el modelo ya no está en el menú, con un reemplazo propuesto del mismo tipo."},
+        {"name": "El bloque A identifica el modelo",
+         "para_que": "En un equipo viejo la etiqueta suele estar borrada o el frente cambiado. El firmware dice el modelo sin depender de la etiqueta.",
+         "como": "Sacá la IP con el método del modelo (E11, botón 5 s; C315, `More > System Info > Network`; C310, `Settings > Status > Network`; R27, `*2396#` y `1`), entrá a la web y leé A.B.C.D: 111 E11, 120 E20, 27 R27, 83 IT83, 115 C315, 310 C310, 92 A092 o A094.",
+         "ejemplo": "Un monitor sin etiqueta muestra un firmware que empieza con `115.`: es un C315. Ya sabés que su relé es de 30 V 2 A y cómo se abría por HTTP."},
+        {"name": "HTTP viejo y funciones que piden firmware",
+         "para_que": "Los equipos viejos pueden no tener la rama de alta seguridad ni funciones nuevas como SR01 o patentes. Saberlo evita integrarlos con un método que no entienden.",
+         "como": "Si el bloque C es menor que 10, el equipo no está en la rama de alta seguridad. Los equipos tipo IT83 abren por Open Relay via HTTP con sus propias credenciales y no por la API JSON. En el C315S, el relé del propio monitor se abría con la URL vieja y `DoorNum=0`.",
+         "ejemplo": "Integración de domótica en una casa con E11R y C315S: el ejemplo documentado por ComfortClick usa HTTP en las dos direcciones y el video por RTSP en `/live/ch00_0`."},
+        {"name": "El E11, primero en la lista",
+         "para_que": "El E11 tuvo 13 vulnerabilidades publicadas por Claroty Team82 en marzo de 2023, con un aviso de CISA (ICSA-23-068-01) de peor caso CVSS 9,8. Expuesto a internet, es una puerta de entrada a la red del cliente.",
+         "como": "Firmware al día, clave web propia, fuera de internet, en la VLAN de porteros con salida solo a central y NVR, y UDP 8500 bloqueado de entrada. En el informe, el reemplazo propuesto.",
+         "ejemplo": "Relevamiento de un edificio en Punta Carretas: el E11 de la entrada tenía un reenvío de puertos para verlo desde afuera. Se quita el reenvío, se lo pasa a la VLAN de porteros y se cotiza un portero vigente."},
+    ],
+    "teoria_md": """### Un poco de historia
+Todo fabricante renueva su catálogo cada pocos años, pero los equipos instalados duran mucho más que eso. Por eso el técnico de soporte convive con dos catálogos: el que se vende y el que se mantiene.
+
+Akuvox no publica una lista de discontinuados en las páginas leídas. Lo que sí se ve es que modelos como E11, R27, R26, DB01, E20, C315, C310, IT83 y A092 siguen en tablas de la Knowledge Base (acceso a la web, relés, firmware) y ya no aparecen en el menú de productos de octubre de 2026. La pareja E11R con C315S, documentada por ComfortClick en una integración por HTTP, es un buen ejemplo de ese parque.
+
+El E11 tiene además su propia historia. En marzo de 2023, Claroty Team82 publicó 13 vulnerabilidades, entre ellas ejecución remota de código en la red local y activación de cámara y micrófono sin autenticación, después de intentar avisar al fabricante desde enero de 2022. CISA publicó el aviso ICSA-23-068-01, con un peor caso de CVSS 9,8, y recomendó desconectar los E11 de internet.
+
+### Cómo funciona
+El método para un equipo viejo tiene tres tiempos:
+
+1. **Identificar.** El firmware A.B.C.D lo dice: A es el modelo (111 E11, 120 E20, 27 R27, 83 IT83, 115 C315, 310 C310, 92 A092 o A094), B el OEM y C la rama. Con C de 10 o más, el equipo está en la rama de alta seguridad, que cifra la comunicación, los comandos de apertura y el guardado de contraseñas.
+2. **Asegurar.** Mientras siga instalado: firmware al día, clave propia y la VLAN de porteros (lección 11), con salida solo a central y NVR y sin reenvío de puertos desde la WAN.
+3. **Reemplazar.** Buscar en el menú vigente un equipo del mismo tipo y verificar dos tablas: la de métodos de acceso, para que acepte las credenciales que el edificio ya usa, y la de alimentación, para que le sirvan el PoE o la fuente existentes.
+
+En soporte hay diferencias que conviene recordar: los equipos tipo IT83 abren por Open Relay via HTTP y no por la API JSON, y en el C315S el relé del monitor se abría con la URL vieja y `DoorNum=0`. SR01, lectura de patentes y otras funciones piden firmwares mínimos que un equipo viejo puede no tener.
+"""}
+
+# ===================================================================== validación
+errors = []
+for lid, ent in M.items():
+    card = next(CLASS.glob(f"{int(lid):02d}-*/card.md")).read_text(encoding="utf-8")
+    lab = card.split("**Laboratorio**", 1)[1].split("**Regla para quedarse**", 1)[0]
+    # quitar bloques de código
+    lab_nc = re.sub(r"```.*?```", "", lab, flags=re.S)
+    for st in ent["steps"]:
+        a = st["after"]
+        if not (15 <= len(a) <= 40):
+            errors.append(f"{lid} after largo {len(a)}: {a}")
+        if lab_nc.count(a) != 1 or lab.count(a) != 1:
+            errors.append(f"{lid} after no único o ausente: {a} ({lab_nc.count(a)}/{lab.count(a)})")
+        # el paso debe ser el número correcto
+        line = next((l for l in lab_nc.splitlines() if a in l), "")
+        if not line.strip().startswith(f"{st['step']}."):
+            errors.append(f"{lid} after no está en el paso {st['step']}: {line[:60]}")
+        if not (D / st["file"]).exists():
+            errors.append(f"falta {st['file']}")
+    if not (D / ent["fig"]["file"]).exists():
+        errors.append(f"falta {ent['fig']['file']}")
+    if not 2 <= len(ent["concepts"]) <= 4:
+        errors.append(f"{lid} conceptos {len(ent['concepts'])}")
+    t = ent["teoria_md"]
+    wc = len(re.findall(r"\S+", t.replace("### Un poco de historia", "").replace("### Cómo funciona", "")))
+    if not (250 <= wc <= 450):
+        errors.append(f"{lid} teoria {wc} palabras")
+    if "### Un poco de historia" not in t or "### Cómo funciona" not in t:
+        errors.append(f"{lid} faltan subtítulos")
+    print(lid, "teoria", wc, "palabras")
+    blob = json.dumps(ent, ensure_ascii=False)
+    if "—" in blob or "–" in blob:
+        errors.append(f"{lid} guion largo")
+
+if errors:
+    print("\n".join(errors))
+    sys.exit(1)
+(D / "manifest-29-41.json").write_text(json.dumps(M, ensure_ascii=False, indent=2), encoding="utf-8")
+print("ok manifest-29-41.json")

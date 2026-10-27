@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Creaste la VLAN 30 para cámaras y las cámaras no toman IP. El puerto del switch está bien. ¿Qué falta más probablemente?",
+    "options": [
+      "Un servidor DHCP para la VLAN 30",
+      "Bajar la potencia del AP",
+      "Activar Fast Roaming",
+      "Un voucher para cada cámara"
+    ],
+    "answer": 0,
+    "why": "UniHosted lista el DHCP por VLAN entre los errores típicos: cada VLAN necesita su propio alcance."
+  },
+  {
+    "q": "Actualizás un sitio de 2024 a UniFi Network 11. ¿Qué cambia en la segmentación?",
+    "options": [
+      "Nada, las reglas clásicas siguen igual",
+      "Se borran todas las VLANs",
+      "Se desactiva el DHCP",
+      "El sitio se migra al firewall por zonas y conviene revisar la Zone Matrix"
+    ],
+    "answer": 3,
+    "why": "Las notas de Network 11.0.97 indican que todos los sitios se migran automáticamente a Zone-Based Firewall."
+  },
+  {
+    "q": "Un integrador deja las cámaras en la misma red que el NVR. ¿Qué argumento usa The Hook Up para eso?",
+    "options": [
+      "Las cámaras no soportan VLAN",
+      "Evitar que el router enrute muchos streams de video entre VLANs, compensando con reglas y MAC fija por puerto",
+      "Ahorrar direcciones IP",
+      "El NVR no admite trunk"
+    ],
+    "answer": 1,
+    "why": "Es su decisión práctica: menos carga en el router, a cambio de reforzar la seguridad del puerto."
+  }
+]

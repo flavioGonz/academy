@@ -1,0 +1,20 @@
+A: Última lección. Una frase para tatuarse: antes de actualizar, backup. Siempre.
+B: [risas] La escuchamos en todos los cursos.
+A: Porque en todos es verdad. Cuatro de siete fuentes sobre firmware lo repiten, oficiales y practicantes. Y agregan otra: en saltos de versión mayor, de a una por vez. De la cinco a la seis, sin saltear.
+B: ¿Y si sale mal y quiero volver?
+A: Acá está lo que pocos saben. La guía oficial de firmware dice que bajar de versión el controlador software es desinstalar sin guardar datos e instalar la vieja. Y un backup de la versión nueva no entra en la vieja.
+B: Uf. Entonces guardo un backup por versión.
+A: Eso recomienda TP-Link, literal. Y en los OC, la actualización tarda seis a ocho minutos con el controlador offline.
+B: ¿Y el backup automático?
+A: Settings, Maintenance, Backup Schedule. Una guía de practicante sugiere semanal para redes chicas, y guardarlo en un servidor de archivos por SFTP, no solo dentro del controlador. Si se muere el equipo, el backup se muere con él.
+B: Tiene lógica. ¿Y para mudar de controlador? Pasar un cliente de OC200 a OC300, por ejemplo.
+A: Desde la seis punto dos punto diez hay un asistente de migración, por sitio o controlador entero. Tres pasos: exportar, importar en el destino, y migrar los equipos cargando la IP o inform URL nueva.
+B: ¿Y el orden importa?
+A: Muchísimo. La guía avisa: si salteás la importación y migrás los equipos directo, el destino no los adopta solo. Y otra: el archivo tiene que venir de la misma versión, mayor, menor y parche.
+B: ¿Y cuándo borro los equipos del viejo?
+A: Recién cuando todos figuren Connected en el nuevo. Ahí, Forget en el viejo.
+B: Sobre el ritmo de firmware hay quejas, ¿no?
+A: Un usuario del foro de Lawrence Systems vio una sola actualización de switch en un año. TP-Link, por su lado, tiene canales Beta y RC. Esos, solo en laboratorio.
+B: ¿Laboratorio?
+A: Programar el backup semanal, exportar uno a mano y restaurarlo en un controlador nuevo en Docker. Veinte minutos.
+B: Y el día que se queme un OC, en vez de rehacer la obra, restaurás.

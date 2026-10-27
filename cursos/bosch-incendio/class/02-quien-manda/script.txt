@@ -1,0 +1,18 @@
+A: Hoy una que no es de cables, pero es la que más pesa. En un sistema de incendio, ¿quién manda?
+B: El manual de Bosch, supongo.
+A: No. El propio manual dice que mandan las normas del país y lo que pida la autoridad, que acá es Bomberos. El manual es el piso, no el techo.
+B: ¿Y en Uruguay qué hay, concreto?
+A: El decreto trescientos setenta y dos de dos mil veintitrés. La habilitación la gestiona un técnico registrado ante la Dirección Nacional de Bomberos, bajo declaración jurada. Y los sistemas de detección y alarma los suministran, instalan, ponen en marcha y mantienen empresas registradas.
+B: O sea que nosotros respondemos por instalación y mantenimiento.
+A: Exacto. El técnico registrado responde por el proyecto, el propietario por mantener, y la empresa por lo que instaló. El decreto prevé multas a empresas de diez a doscientas unidades reajustables.
+B: Uf. ¿Y la parte técnica de la detección?
+A: La instrucción técnica once de Bomberos. La que pude leer es de dos mil diez y remite a la norma UNIT novecientos sesenta y dos. Pide, por ejemplo, veinticuatro horas de batería en reposo, quince minutos en alarma y un pulsador a no más de treinta metros.
+B: ¿Y eso va a cambiar?
+A: Sí. El treinta y uno de julio Bomberos abrió consulta pública de la nueva IT once, para que rija en dos mil veintisiete. Y aclararon algo clave: el borrador no autoriza a usarlo en proyectos hasta que entre en vigencia.
+B: ¿Y EN cincuenta y cuatro, NFPA setenta y dos?
+A: Referencias. EN cincuenta y cuatro es la serie europea de producto, se usa también en Latinoamérica, y con ella se certifican los equipos Bosch. NFPA setenta y dos es la estadounidense. Explican por qué el panel hace lo que hace, pero no reemplazan lo que firmó el técnico.
+B: ¿Alguna fuente dice otra cosa?
+A: Ninguna. Las cuatro que lo tocan ponen a la autoridad arriba del fabricante.
+B: ¿Y el laboratorio?
+A: Elegí una obra en curso y armá su ficha normativa: técnico registrado, expediente, instructivo, norma citada y empresa instaladora. Quince minutos.
+B: Y si el proyecto y el manual no coinciden, se para y se pregunta.

@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Desde el MikroTik de un cliente, el ping a 1.1.1.1 contesta, pero el ping a mikrotik.com da \"resolve failed\". ¿Dónde mirás?",
+    "options": [
+      "En el cable de la WAN",
+      "En la configuración de DNS del router (/ip/dns)",
+      "En el masquerade",
+      "En el gateway del proveedor"
+    ],
+    "answer": 1,
+    "why": "Si la dirección contesta y el nombre no, la conexión anda y lo que falla es la resolución de nombres, como dice la documentación de Ping."
+  },
+  {
+    "q": "Un traceroute muestra 90% de pérdida en el salto 2, pero los saltos 3 a 8 y el destino tienen 0%. El cliente dice que el proveedor le corta. ¿Qué le decís?",
+    "options": [
+      "Que el router del salto 2 limita sus respuestas ICMP: el tráfico pasa, porque el destino contesta",
+      "Que el salto 2 es el problema y hay que llamar al proveedor",
+      "Que el traceroute de MikroTik no funciona con proveedores uruguayos",
+      "Que cambie la MTU a 1492"
+    ],
+    "answer": 0,
+    "why": "La pérdida real empieza en un salto y sigue en todos los siguientes. Si el destino contesta, el tráfico atraviesa ese router; solo responde poco a las sondas."
+  },
+  {
+    "q": "Armaste un túnel entre la oficina (192.168.88.0/24) y una sucursal (192.168.2.0/24). Desde el router, /ping 192.168.2.10 no contesta. ¿Cuál es la prueba correcta antes de tocar nada?",
+    "options": [
+      "Reiniciar el túnel",
+      "Ping con size=1500 do-not-fragment",
+      "Ping con arp-ping=yes",
+      "/ping 192.168.2.10 src-address=192.168.88.1, porque el túnel solo lleva tráfico entre las dos LAN"
+    ],
+    "answer": 3,
+    "why": "Por defecto el router sale con la IP de la interfaz de salida (la WAN), que no entra en la política del túnel. La documentación de Ping propone probar desde la IP de la LAN."
+  }
+]

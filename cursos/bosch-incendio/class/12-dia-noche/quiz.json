@@ -1,0 +1,35 @@
+[
+ {
+  "q": "En un modo día con alarma demorada para investigar, alguien acciona un pulsador. ¿Qué tiene que pasar según la práctica que describe la FIA?",
+  "options": [
+   "Se respeta la demora igual",
+   "Se espera a un segundo pulsador",
+   "Se pasa a modo noche",
+   "El pulsador anula la demora y da alarma inmediata"
+  ],
+  "answer": 3,
+  "why": "La FIA recuerda que BS 5839-1 limita la demora a 6 minutos y que la señal de un pulsador la anula de inmediato."
+ },
+ {
+  "q": "Según la nota sobre NFPA 72 de 2013, ¿cuándo puede el monitoreo verificar una alarma antes de despachar?",
+  "options": [
+   "Siempre que quiera",
+   "Solo si el departamento de bomberos lo requiere, en no más de 90 s y avisando al despacho que hay verificación en curso",
+   "Solo de noche",
+   "Nunca"
+  ],
+  "answer": 1,
+  "why": "Las secciones 26.2.2 y 26.2.3 citadas exigen pedido de bomberos (opt-in), máximo 90 s y notificación simultánea al centro de despacho."
+ },
+ {
+  "q": "Un cliente de residencial para adultos mayores pide alarma demorada para evitar molestias. ¿Qué advierte la FIA?",
+  "options": [
+   "Es lo ideal",
+   "Solo se puede con multisensores",
+   "Cualquier demora probablemente no es adecuada en residencias de cuidado; se consulta con el proyecto",
+   "Depende del firmware"
+  ],
+  "answer": 2,
+  "why": "La FIA advierte que todo filtrado demora la respuesta a un fuego real y pone como ejemplo que una demora difícilmente sea adecuada en residencias de cuidado."
+ }
+]

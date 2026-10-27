@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un cliente con un hEX viejo (MMIPS) detrás de CGNAT quiere Back To Home. ¿Qué le decís?",
+    "options": [
+      "Que actualice a stable y aparece",
+      "Que active el DDNS primero",
+      "Que Back To Home necesita CPU ARM, ARM64 o TILE; con ese equipo hace falta otro camino, como un túnel saliente a un concentrador",
+      "Que abra el puerto UDP en el router del proveedor"
+    ],
+    "answer": 2,
+    "why": "La documentación y el distribuidor citado coinciden: Back To Home funciona en ARM, ARM64 y TILE con 7.12 o posterior; los MIPS no están soportados."
+  },
+  {
+    "q": "Creaste un usuario de Back To Home para el encargado, pero desde el túnel no ve el NVR de la LAN. Navega bien. ¿Qué revisás?",
+    "options": [
+      "Que el usuario tenga allow-lan=yes, que por defecto está en no",
+      "El MTU del túnel",
+      "La licencia del router",
+      "El canal de actualización"
+    ],
+    "answer": 0,
+    "why": "Con allow-lan=no, el valor por defecto, el usuario solo usa internet a través del router. Para la LAN hay que crearlo con allow-lan=yes."
+  },
+  {
+    "q": "Un técnico se fue de la empresa y tenía un usuario de Back To Home en tres clientes. ¿Qué hacés?",
+    "options": [
+      "Revocar Back To Home en los tres routers",
+      "Cambiar la contraseña de admin",
+      "Nada, vence solo",
+      "Borrar su usuario en /ip/cloud/back-to-home-user de cada router"
+    ],
+    "answer": 3,
+    "why": "Cada usuario es un cliente WireGuard con sus claves. Revocar borra a todos y obliga a reconfigurar cada teléfono; borrar el usuario da de baja solo a esa persona."
+  }
+]

@@ -1,0 +1,18 @@
+# Secretos y datos de producción
+site/api/config.php
+*.sqlite
+*.sqlite3
+*.db
+site/capturas/
+site/logos/
+EDITOR_KEY*
+.env
+# Generados
+*.png
+__pycache__/
+*.pyc
+*.tgz
+cursos/*/raw/
+cursos/*/audio/
+*.mp3
+*.wav

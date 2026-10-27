@@ -1,0 +1,19 @@
+A: Lección treinta y nueve. Lo que se olvida en el pedido: accesorios y módulos.
+B: La cubierta de lluvia que nadie pidió.
+A: [risas] Esa. Akuvox los ordena en el menú como accesorios de porteros, de monitores y de control de acceso, y en cada ficha lista los del modelo. En el X915, por ejemplo: caja de embutir, caja de superficie, caja de superficie gruesa, cubiertas de lluvia para embutir y para superficie, y un kit de ángulo para pared.
+B: ¿Y en el R29?
+A: Cubiertas de lluvia para embutir y superficie, en negro y en plata, y soportes de pared y de embutir, con uno propio para el R29C-L.
+B: O sea que el soporte depende de la versión.
+A: Exacto, por eso el pedido sale de la ficha del modelo exacto. Dos de siete fuentes van por ese lado.
+B: ¿Y módulos?
+A: Los que vimos en la parte de HTTP. El SR01, que Akuvox llama relé de seguridad, con relé de treinta voltios dos amperes. El MK485 y el RSAC-C1-R8, los relés externos del monitor por RS485.
+B: ¿Lectores?
+A: En el menú de acceso: el ACR-CRP12, lector UHF; el ACR-CID12 y el ACR-CID01, lectores de escritorio; la tarjeta UHF-TAG11; y el Bkey, una tarjeta Bluetooth. Hay también KF01, KF02 y KF03, sin descripción en lo que leímos.
+B: ¿Y las fuentes?
+A: La tabla de alimentación da la fuente recomendada para cada modelo, y la de doce voltios explica cómo cablear la cerradura desde el portero: cerradura normal cerrada entre masa y NC, con la salida en modo Always; normal abierta entre masa y NO, con la salida en modo Triggered by Open Relay.
+B: Eso conviene tenerlo impreso.
+A: En la tarjeta está. Y una regla de oro: cada fuente con su carga, y lo que pasa la salida del portero va con fuente propia.
+B: ¿Laboratorio?
+A: Quince minutos de escritorio. Armás el pedido completo de un portero con su ficha: frente, caja o soporte, cubierta de lluvia, fuente o PoE, y si va, SR01.
+B: Sin que falte el tornillo.
+A: [risas] Sin que falte nada de la ficha.

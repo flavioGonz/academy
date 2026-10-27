@@ -1,0 +1,21 @@
+A: Lección siete. Dejamos la llamada y vamos a quién entra solo: PIN, tarjeta, cara y horarios.
+B: Lo que el administrador del edificio te pide la semana siguiente.
+A: Tal cual. Aviso de entrada: acá la evidencia es escasa, todo sale de una sola fuente, la guía del E16 de Akuvox. Pero es el manual del equipo, así que es la referencia.
+B: Dale.
+A: Hay dos tipos de PIN. El público, que comparte todo el edificio, de cuatro a ocho dígitos. Y el privado, uno por usuario.
+B: ¿Y el público de fábrica cuál es?
+A: Tres tres tres tres tres tres tres tres. Ocho treses.
+B: [risas] O sea que hay edificios abriendo con ocho treses.
+A: Seguro que sí. Se cambia o se desactiva. Después, en Directory, User, cada usuario lleva su PIN, hasta cinco tarjetas de trece coma cincuenta y seis megahercios, su cara si el modelo tiene, qué relé abre y un horario.
+B: ¿Cuántos usuarios entran?
+A: Según la guía, veinte mil en el E16. Y para cargar muchos, exportás la lista, te baja un tgz, adentro hay un CSV, lo completás y lo volvés a importar.
+B: ¿Y la cara?
+A: Foto de frente hasta dos megas. Y ojo con un ajuste: el nivel antisuplantación. Si lo dejás en Close, la guía dice que una foto de la persona pasa.
+B: Uf. Eso no lo sabe nadie.
+A: Por eso lo cuento. Y para tarjetas, si el sistema lo permite, Mifare cifrada, que lee un sector con clave en vez del número de serie.
+B: ¿Los horarios?
+A: Por usuario: Always, Never o uno propio, por ejemplo lunes a viernes de ocho a dieciocho para el personal de limpieza.
+B: ¿Laboratorio?
+A: Creá un horario de lunes a viernes, dos usuarios con PIN privado y tarjeta, exportá, sumá tres usuarios en el CSV e importá. Probá un PIN fuera de horario. Quince minutos.
+B: Y cambiá los ocho treses antes que nada.
+A: Antes que nada. Con esto, cada persona entra cuando le toca y con lo suyo.

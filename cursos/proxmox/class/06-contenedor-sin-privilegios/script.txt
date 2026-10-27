@@ -1,0 +1,17 @@
+A: Lección seis: contenedores. Proxmox tiene dos formas de correr cosas. Máquinas virtuales, y contenedores LXC.
+B: ¿Y la diferencia en criollo?
+A: La VM tiene su propio kernel, es una computadora entera. El contenedor comparte el kernel del host. Por eso arranca en un segundo y casi no gasta memoria.
+B: Suena ideal para un servidor de DNS o un Unifi chiquito.
+A: Para servicios Linux livianos, sí. Pero hay un detalle clave: privilegiado o no privilegiado. En el no privilegiado, el root de adentro del contenedor, afuera es un usuario común, sin poder. La guía oficial dice que el equipo de LXC los considera seguros por diseño, y es lo que Proxmox crea por defecto.
+B: ¿Y el privilegiado?
+A: Ahí el root de adentro está mucho más cerca del root del host. El equipo de LXC ni siquiera trata los escapes como fallas de seguridad. La guía dice: solo en entornos de confianza.
+B: Bueno, pero la pregunta del millón. ¿Docker en un contenedor?
+A: [risas] La pelea eterna. La documentación oficial dice que para Docker conviene una VM. WunderTech, que tiene un clúster de dos nodos con la nueve punto uno, arranca diciendo: la respuesta corta es una VM. Y admite que en LXC le anduvo sin problemas.
+B: ¿Y del otro lado?
+A: En el foro oficial, un usuario con un i5 y veinte gigas quería un contenedor por cada Docker para ahorrar recursos. La lista que arma es honesta: LXC gasta menos y te deja recuperar archivos sueltos, pero aísla menos, algunos contenedores piden modo privilegiado y los backups tardan más.
+B: O sea, tres de cinco fuentes dicen VM, y el foro dice que depende.
+A: Eso. En obra, lo que esté expuesto o sea de producción, VM. Un servicio interno chico, LXC no privilegiado.
+B: ¿Laboratorio?
+A: pveam update para refrescar la lista de plantillas, bajás la de Debian, y creás un contenedor no privilegiado. Entrás con pct enter, y mirás el archivo uid map del proceso. Vas a ver que el cero de adentro es el cien mil de afuera.
+B: Diez minutos y lo entendés para siempre.
+A: Y ya no vas a crear un privilegiado solo porque un tutorial lo dijo.

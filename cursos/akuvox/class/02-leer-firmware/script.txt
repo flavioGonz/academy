@@ -1,0 +1,19 @@
+A: Lección dos, y esta evita el peor susto del oficio: un portero que no arranca después de actualizar.
+B: Uf, el ladrillo. Lo viví.
+A: Lo que propone la documentación de Akuvox es leer bien tres cosas antes de bajar nada: modelo, versión de hardware y rama del firmware.
+B: ¿El número de versión dice todo eso?
+A: Casi todo. Tiene cuatro partes, A punto B punto C punto D. La A es el modelo: veintinueve es el R29, doscientos dieciséis el E16 versión dos, cuatrocientos dieciséis el E16 versión tres, trescientos dieciséis el C316.
+B: Ah, o sea que el E16 cambia de número según el hardware.
+A: Exacto. La B es el OEM, treinta si tiene logo Akuvox. La C es la rama: si es diez o más, el equipo está en la rama de alta seguridad, que cifra comandos de apertura y contraseñas. Y la D es la versión dentro de esa rama.
+B: ¿Y el hardware dónde lo veo?
+A: En la etiqueta de atrás o en la web, Status, Product Information. E12, R28, X915 y C313 tienen dos versiones de hardware; R20, E16 y E21 tienen tres. Y cada una lleva su propio archivo.
+B: ¿Alguna trampa?
+A: Una linda. Según Akuvox, un R20A que dice V3.0 en la etiqueta es en realidad hardware dos, y el que dice V5.0 es hardware tres.
+B: [suspiro] Eso es para equivocarse seguro.
+A: Por eso se chequea en la web y no solo en la etiqueta. Las dos páginas de soporte de Akuvox coinciden, y el portal de tickets agrega que antes de reportar una falla conviene estar en el último firmware.
+B: ¿Y el archivo dónde se baja?
+A: Base de conocimiento, Firmware and Tool. Punto zip es para equipos Android, punto rom para Linux. Se sube en System, Basic, Upgrade, y no se cierra ni se refresca la ventana hasta que termine.
+B: ¿Laboratorio?
+A: Tomá dos equipos, anotá su firmware completo y decodificalo en sus cuatro partes. Exportá la configuración como backup, bajá el archivo correcto y actualizá uno. Quince minutos.
+B: Antes de actualizar, backup. Siempre.
+A: Siempre. Y con eso, actualizar pasa de ruleta a trámite.

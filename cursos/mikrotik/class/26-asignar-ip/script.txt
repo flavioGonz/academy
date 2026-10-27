@@ -1,0 +1,19 @@
+A: Martín, una pregunta de examen: ¿dónde va la IP de la LAN en un hAP?
+B: En ether2, que es donde enchufo la notebook.
+A: Es el error típico. Hoy, asignar IP.
+B: A ver.
+A: Barra ip barra address, dirección con máscara e interfaz. Diez punto diez punto veinte punto uno barra veinticuatro en ether5, por ejemplo. El router calcula la red y el broadcast, y crea solo la ruta conectada: la ves con las letras de, a, ce en la tabla de rutas.
+B: ¿Y lo de ether2?
+A: Si ether2 está dentro del bridge, es esclavo. La documentación lo dice clarito: una IP puesta en un puerto del bridge en realidad termina en el bridge. Así que la IP va en el bridge o en una interfaz VLAN, nunca en un puerto de adentro.
+B: ¿Y se pueden poner dos IP en la misma interfaz?
+A: Sí. Es el truco para llegar a un equipo que viene de fábrica en otra red: sumás una IP en esa red, lo configurás y la borrás.
+B: Eso lo hacía cambiándole la IP a la notebook.
+A: También sirve. Ahora, el servidor DHCP. Las cuatro fuentes oficiales coinciden en las cuatro piezas: la IP en la interfaz, un pool, la red con gateway y DNS, y el servidor que une interfaz y pool.
+B: ¿Alguna trampa?
+A: Dos que marca la documentación. El pool no incluye la IP del router. Y en un bridge sin puertos el servidor no anda: necesita una interfaz real que reciba los paquetes.
+B: ¿Y las cámaras con IP fija?
+A: El pool del cien al ciento noventa y nueve, y del dos al noventa y nueve queda para fijas. O hacés reserva con make static sobre el lease. El servidor, además, prueba cada dirección con ARP y ping antes de darla, para no pisar a nadie.
+B: ¿Laboratorio?
+A: En un hAP de banco: una segunda IP temporal en el bridge, después ether5 fuera del bridge con su red de cámaras, sumado a la lista LAN, y su servidor DHCP pieza por pieza. Conectás una cámara y la dejás reservada.
+B: Quince minutos.
+A: Y cuando un equipo no toma dirección, sabés cuál de las cuatro piezas mirar.

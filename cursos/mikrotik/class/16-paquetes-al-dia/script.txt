@@ -1,0 +1,17 @@
+A: Lección dieciséis. En la siete vimos el orden para actualizar. Hoy entramos a la ventana de paquetes: System, Packages.
+B: La que abro, aprieto Check for Updates y rezo.
+A: [risas] Vamos a sacarle el rezo. Check for Updates consulta el canal elegido y te muestra el changelog. Después tenés dos botones: Download, que baja y espera que reinicies vos, y Download and Install, que reinicia solo apenas termina.
+B: En un sitio remoto prefiero Download, así elijo el momento.
+A: Bien pensado. Ahora, lo que poca gente mira: los paquetes extra. Casi todo viene en el paquete routeros, pero cosas como container, zerotier o user manager van aparte. Después de Check for Updates aparecen en la lista como disponibles; los habilitás, Apply Changes, y reinicia.
+B: ¿Y si el router no tiene internet? Me pasa en obras con la red de cámaras aislada.
+A: Bajás el punto npk de la arquitectura correcta, que ves en System, Resources, y lo arrastrás a Files, en la raíz, no dentro de una carpeta. Reiniciás y listo. Las dos páginas oficiales coinciden en todo esto y ninguna fuente discrepa.
+B: ¿Y para volver atrás?
+A: Subís los npk de la versión anterior y ejecutás barra system barra package barra downgrade, que reinicia. O cambiás a un canal con una versión más vieja y usás Check for Updates.
+B: Una trampa de equipos con WiFi.
+A: Desde la siete punto trece, los equipos ax necesitan el paquete wifi qcom, y la documentación avisa que no puede estar activo junto con el paquete wireless viejo. Si actualizás a mano y te olvidás uno, te quedás sin radio.
+B: Uf. ¿Y después de todo esto?
+A: Lo de siempre: RouterBOOT. barra system barra routerboard barra upgrade y otro reinicio. El firmware viene dentro del paquete, por eso se hace después.
+B: ¿Laboratorio?
+A: Veinte minutos: backup, Check for Updates, mirás qué paquetes extra hay, habilitás uno que no uses, lo desinstalás, y practicás subir un npk a mano.
+B: Así el día que el sitio no tiene internet, ya lo hiciste una vez.
+A: Esa es la idea. Ninguna actualización a ciegas: changelog, backup, paquetes, RouterBOOT.

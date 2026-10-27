@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Vas a deshabilitar el login por contraseña en un servidor remoto. ¿Cuál es el orden seguro?",
+  "options": [
+   "Poner PasswordAuthentication no, reiniciar y después copiar la llave",
+   "Copiar la llave, entrar con ella, cambiar la config en un snippet, validar con sshd -t, recargar y probar desde otra sesión",
+   "Borrar authorized_keys y reiniciar",
+   "Cambiar el puerto a 2222 y listo"
+  ],
+  "answer": 1,
+  "why": "Si apagás la contraseña antes de confirmar que la llave funciona, quedás afuera. La sesión abierta es tu red de seguridad mientras probás la nueva."
+ },
+ {
+  "q": "¿Qué pasa con la frase de paso (passphrase) de tu llave privada cuando te conectás?",
+  "options": [
+   "Se envía cifrada al servidor",
+   "Se guarda en authorized_keys",
+   "Reemplaza a la contraseña del usuario remoto",
+   "Solo descifra la llave en tu equipo; no viaja por la red"
+  ],
+  "answer": 3,
+  "why": "La passphrase protege la llave privada en tu disco. El servidor nunca la ve; solo verifica la respuesta al desafío."
+ },
+ {
+  "q": "Un servidor solo tiene SSH con llave y un firewall que permite el 22 desde la red de gestión. ¿Qué dicen las fuentes sobre fail2ban?",
+  "options": [
+   "Está discutido: con solo llaves aporta poco, y suma si hay contraseñas o servicios web con login expuestos",
+   "Es obligatorio en cualquier servidor",
+   "Reemplaza al firewall",
+   "Solo funciona con contraseñas"
+  ],
+  "answer": 0,
+  "why": "Es una división real entre fuentes. Con solo llaves y origen restringido, PerSourcePenalties y el firewall cubren lo principal; fail2ban suma donde hay logins por contraseña."
+ }
+]

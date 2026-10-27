@@ -1,0 +1,1550 @@
+{
+  "curso": {
+    "objetivo": "Al terminar vas a poder poner en marcha un MikroTik de un cliente de punta a punta: entrar sin perder el acceso, armar la LAN y la salida a internet, protegerlo, darle DNS, entrar de afuera por túnel, publicar solo lo justo, vigilarlo y mantenerlo al día.",
+    "recorrido": "El curso sigue el orden de una obra real: primero entrás al equipo con una red de seguridad (Safe Mode, export y usuario propio), después armás el bridge, las IP y la salida a internet con sus rutas, y aprendés a ver qué pasa en la red antes de separar los sistemas en VLAN. Con el sitio andando lo protegés con firewall y le das un DNS bajo tu control; recién ahí pasás a entrar de afuera por túnel y, como excepción, a abrirle la puerta a terceros. Cierra con lo que viene después de entregar: actualizar, manejar paquetes y elegir qué versión vive en cada cliente."
+  },
+  "modulos": [
+    {
+      "title": "Entrar sin perder el acceso",
+      "why": "Antes de configurar nada, tres redes de seguridad y un usuario propio: si algo sale mal, se deshace o se restaura, y queda registrado quién entró.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder entrar a un MikroTik nuevo o heredado por IP o por MAC sin cortarte el acceso.",
+        "Al terminar el módulo vas a poder hacer cualquier cambio riesgoso en Safe Mode, con un export antes y otro después.",
+        "Al terminar el módulo vas a poder dejar el equipo con un usuario por técnico y admin deshabilitado."
+      ],
+      "lessons": [
+        "1",
+        "23",
+        "6",
+        "2"
+      ]
+    },
+    {
+      "title": "Bridge, IP e internet",
+      "why": "Es el armado de base de cualquier sitio: qué puertos son LAN, qué direcciones tiene el router, cómo reparte IP y cómo sale a internet con las tres conexiones que aparecen en Uruguay.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder decidir qué puertos van al bridge y dejar ether1 como WAN.",
+        "Al terminar el módulo vas a poder asignar IP y montar un servidor DHCP para la LAN.",
+        "Al terminar el módulo vas a poder conectar el router a internet por DHCP, IP fija o PPPoE con Antel, y verificar cada capa."
+      ],
+      "lessons": [
+        "25",
+        "26",
+        "14",
+        "13",
+        "15"
+      ]
+    },
+    {
+      "title": "Rutas, failover y vigilancia",
+      "why": "Con una salida andando, toca entender las rutas que la sostienen, sumar una segunda salida y saber dónde falla cuando algo se corta, a mano y de forma automática.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder leer y armar la tabla de rutas con distance y check-gateway.",
+        "Al terminar el módulo vas a poder montar y probar un failover con dos WAN.",
+        "Al terminar el módulo vas a poder ubicar una falla con ping y traceroute y dejar a Netwatch vigilando y avisando."
+      ],
+      "lessons": [
+        "27",
+        "11",
+        "29",
+        "35"
+      ]
+    },
+    {
+      "title": "La LAN de los sistemas",
+      "why": "En una obra de seguridad electrónica la LAN está llena de cámaras, NVR, switches y controladoras: primero los descubrís, después mirás su tráfico y recién ahí los separás por sistema.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder listar qué equipos hay conectados y por qué puerto, con LLDP, CDP y MNDP.",
+        "Al terminar el módulo vas a poder ver en vivo el tráfico de una cámara con Torch y capturarlo para Wireshark.",
+        "Al terminar el módulo vas a poder separar CCTV, accesos y datos en VLANs sin quedarte afuera."
+      ],
+      "lessons": [
+        "34",
+        "12",
+        "5"
+      ]
+    },
+    {
+      "title": "Proteger el router",
+      "why": "Con la red armada y conectada, ya sabés qué es LAN y qué es WAN: es el momento de cerrar servicios, entender el firewall y dejar el juego de reglas que va en cada cliente.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder apagar los servicios que no se usan y auditar un equipo heredado.",
+        "Al terminar el módulo vas a poder ubicar una regla en la cadena y la posición correctas, con address-lists.",
+        "Al terminar el módulo vas a poder dejar un firewall de input y forward completo, con bloqueo por intentos fallidos."
+      ],
+      "lessons": [
+        "3",
+        "4",
+        "33"
+      ]
+    },
+    {
+      "title": "DNS del sitio",
+      "why": "El DNS es lo primero que falla y lo primero que se abusa: este módulo lo pone bajo tu control para resolver nombres de la LAN, forzar que todos lo usen y bloquear lo que el cliente pida.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder configurar el DNS del router como servidor de la LAN sin dejar un resolver abierto en la WAN.",
+        "Al terminar el módulo vas a poder redirigir todo el DNS de la LAN al router y conocer qué lo esquiva.",
+        "Al terminar el módulo vas a poder bloquear sitios por DNS y por address-list de dominio, sabiendo sus límites."
+      ],
+      "lessons": [
+        "30",
+        "31",
+        "32"
+      ]
+    },
+    {
+      "title": "Entrar de afuera",
+      "why": "El pedido de acceso remoto se resuelve primero con un túnel, no con un puerto abierto: este módulo arranca por saber qué IP pública tiene el sitio y recorre las tres formas de entrar según el caso.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder saber si un sitio tiene IP pública directa, doble NAT o CGNAT, y qué camino le corresponde.",
+        "Al terminar el módulo vas a poder entrar a un cliente por WireGuard con un peer por técnico.",
+        "Al terminar el módulo vas a poder llegar a sitios detrás de CGNAT con Back To Home o con un concentrador CHR."
+      ],
+      "lessons": [
+        "9",
+        "18",
+        "8",
+        "19",
+        "20"
+      ]
+    },
+    {
+      "title": "Abrir a terceros",
+      "why": "A veces quien entra no es el técnico: una central de monitoreo, el encargado con su notebook o el firewall de otra marca. Acá abrís lo justo, con criterio y por el camino que el otro puede usar.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder publicar un NVR por un puerto, para una lista de orígenes, y probarlo desde afuera.",
+        "Al terminar el módulo vas a poder armar L2TP con IPsec como servidor y como cliente.",
+        "Al terminar el módulo vas a poder levantar un túnel IPsec con un equipo de otra marca y diagnosticarlo por fases."
+      ],
+      "lessons": [
+        "10",
+        "24",
+        "21",
+        "28",
+        "22"
+      ]
+    },
+    {
+      "title": "Mantener al día",
+      "why": "Lo que pasa después de entregar: un equipo con software viejo es el que aparece comprometido. Cierra el curso con el método para actualizar, las herramientas para casos difíciles y el criterio de versión por cliente.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder actualizar RouterOS y RouterBOOT en orden, con backup antes.",
+        "Al terminar el módulo vas a poder actualizar sin internet, manejar paquetes extra y volver a una versión anterior.",
+        "Al terminar el módulo vas a poder elegir y documentar el canal de cada cliente."
+      ],
+      "lessons": [
+        "7",
+        "16",
+        "17"
+      ]
+    }
+  ],
+  "lecciones": {
+    "1": {
+      "objetivos": [
+        "Al terminar vas a poder entrar por WinBox desde un puerto LAN, por IP o por MAC desde Neighbors.",
+        "Al terminar vas a poder revisar listas, firewall y direcciones de fábrica y guardar un export inicial.",
+        "Al terminar vas a poder entrar y salir de Safe Mode con Ctrl+X y Ctrl+D y comprobar en /system/history que el cambio se deshizo."
+      ],
+      "sigue": "Safe Mode apareció de pasada; en la próxima lo usás a fondo, cortándote el acceso a propósito para ver cómo el router te devuelve la conexión.",
+      "requisitos": []
+    },
+    "23": {
+      "objetivos": [
+        "Al terminar vas a poder activar Safe Mode en WinBox o en la terminal y comprobar que un cambio que te corta se deshace solo.",
+        "Al terminar vas a poder confirmar un cambio bueno con Ctrl+X y descartar otro con Ctrl+D.",
+        "Al terminar vas a poder decir qué no cubre Safe Mode: más de 100 acciones, un cambio que corta la sesión a propósito o un corte de energía."
+      ],
+      "conecta": "En la lección anterior entraste por WinBox y probaste Safe Mode con una regla inocua; ahora lo llevás al caso real: deshabilitar el puerto por donde entrás y esperar la reversión.",
+      "sigue": "La regla que te llevás arranca con un export. En la próxima ves export y backup a fondo: cuándo usar cada uno y cómo comparar el antes y el después.",
+      "requisitos": []
+    },
+    "6": {
+      "objetivos": [
+        "Al terminar vas a poder sacar un export, un export con show-sensitive y un backup con contraseña, y bajarlos a la notebook.",
+        "Al terminar vas a poder comparar dos exports con diff y probar un import con dry-run.",
+        "Al terminar vas a poder elegir entre backup binario (restaurar el mismo equipo) y export en texto (leer, comparar y migrar)."
+      ],
+      "conecta": "Safe Mode cubre el error que te corta en el momento; el export que sacaste antes de probarlo es la otra mitad de la red de seguridad, la que sirve días después.",
+      "sigue": "Con la foto del equipo guardada, toca decidir quién entra: en la próxima creás tu usuario, armás un grupo de solo lectura y deshabilitás admin.",
+      "requisitos": []
+    },
+    "2": {
+      "objetivos": [
+        "Al terminar vas a poder crear un usuario full propio, probarlo en otra sesión y recién ahí deshabilitar admin.",
+        "Al terminar vas a poder armar un grupo de monitoreo sin reboot ni write y comprobar que no puede reiniciar.",
+        "Al terminar vas a poder limitar una cuenta a una red de origen con la propiedad address."
+      ],
+      "conecta": "Ya tenés export antes y después de cada cambio; con usuarios propios, además, el historial dice quién hizo cada cosa.",
+      "sigue": "El equipo ya es tuyo y tiene red de seguridad. Arranca el armado: en la próxima ves el bridge que trae de fábrica, qué puertos lo forman y cómo dejar ether1 afuera como WAN.",
+      "requisitos": [
+        "23"
+      ]
+    },
+    "25": {
+      "objetivos": [
+        "Al terminar vas a poder agregar y quitar puertos del bridge y dejar ether1 fuera de él como WAN.",
+        "Al terminar vas a poder explicar por qué conviene un solo bridge y no varios, y comprobar el hardware offload de cada puerto.",
+        "Al terminar vas a poder reconocer el bridge de la configuración por defecto y qué cambia si lo armás de cero."
+      ],
+      "conecta": "El módulo anterior te dejó un equipo con red de seguridad y usuario propio; ahora empezás a armar la red, desde la capa más baja: qué puertos forman la LAN.",
+      "sigue": "El bridge junta los puertos pero todavía no tiene dirección. En la próxima le asignás IP, aprendés red y máscara en RouterOS y montás el DHCP que reparte direcciones en la LAN.",
+      "requisitos": [
+        "1",
+        "23"
+      ]
+    },
+    "26": {
+      "objetivos": [
+        "Al terminar vas a poder asignar una o varias IP con su máscara a una interfaz, al bridge o a una VLAN con /ip/address.",
+        "Al terminar vas a poder montar un servidor DHCP básico para la LAN y ver qué equipos tomaron dirección.",
+        "Al terminar vas a poder leer en /ip/address la red y la interfaz de cada dirección y detectar una IP en la interfaz equivocada."
+      ],
+      "conecta": "En la lección anterior dejaste los puertos LAN en el bridge y ether1 aparte; ahora el bridge recibe su IP y reparte direcciones con DHCP.",
+      "sigue": "La LAN ya tiene direcciones; falta que el router salga a internet. La próxima arranca por el caso de fábrica: el cliente DHCP que viene andando en ether1.",
+      "requisitos": []
+    },
+    "14": {
+      "objetivos": [
+        "Al terminar vas a poder leer con print detail qué instaló el cliente DHCP: dirección, ruta por defecto, DNS, NTP y estado bound.",
+        "Al terminar vas a poder subir default-route-distance para que un enlace quede de respaldo y ver el cambio en la tabla de rutas.",
+        "Al terminar vas a poder detectar doble NAT o CGNAT comparando la IP de ether1 con public-address."
+      ],
+      "conecta": "Con la LAN repartiendo direcciones por DHCP, mirás el mismo protocolo desde el otro lado: el router como cliente, pidiendo su IP al módem o al proveedor.",
+      "sigue": "DHCP anda solo porque otro decide los datos. En la próxima los cargás vos: dirección, gateway y DNS a mano cuando el proveedor entrega IP fija.",
+      "requisitos": []
+    },
+    "13": {
+      "objetivos": [
+        "Al terminar vas a poder deshabilitar el cliente DHCP de ether1 y cargar dirección, ruta por defecto y DNS a mano.",
+        "Al terminar vas a poder verificar por capas: ping al gateway, ping a una IP de internet y resolución de nombres.",
+        "Al terminar vas a poder dejar en el legajo del cliente los datos de la WAN y quién los entregó."
+      ],
+      "conecta": "En la lección anterior viste todo lo que el cliente DHCP instala solo; ahora apagás ese cliente y cargás vos lo mismo, con los datos fijos que da el proveedor.",
+      "sigue": "IP fija y DHCP son los casos simples. En la próxima el más consultado en Uruguay: fibra de Antel con el ONT en puente y el MikroTik marcando PPPoE.",
+      "requisitos": [
+        "26"
+      ]
+    },
+    "15": {
+      "objetivos": [
+        "Al terminar vas a poder buscar el concentrador con pppoe-client/scan y crear el cliente PPPoE con MTU y MRU 1492.",
+        "Al terminar vas a poder pasar la WAN a la interfaz PPPoE en la lista WAN y ajustar el MSS.",
+        "Al terminar vas a poder decir qué confirmar con Antel antes de ir (modo puente y VLAN) y comprobar si la IP cambia al reconectar."
+      ],
+      "conecta": "Con IP fija cargaste dirección, ruta y DNS a mano; con PPPoE los tres llegan solos, pero la WAN deja de ser ether1 y pasa a ser la interfaz PPPoE.",
+      "sigue": "Las tres formas de salir dejan una ruta por defecto, a veces sin que la mires. El módulo siguiente arranca por ahí: la tabla de rutas, gateway, distance y check-gateway.",
+      "requisitos": [
+        "14"
+      ]
+    },
+    "27": {
+      "objetivos": [
+        "Al terminar vas a poder crear una ruta por defecto con gateway, distance y check-gateway y leer cuál está activa.",
+        "Al terminar vas a poder agregar rutas hacia redes remotas por un túnel y una ruta a la IP pública del VPN por el ISP.",
+        "Al terminar vas a poder explicar qué ruta gana cuando hay dos hacia el mismo destino."
+      ],
+      "conecta": "El módulo anterior te dejó con internet por DHCP, IP fija o PPPoE, y cada uno instaló una ruta por defecto; ahora abrís la tabla de rutas y la armás a conciencia.",
+      "sigue": "Con distance y check-gateway entendidos, en la próxima los combinás para dos salidas: fibra y 4G, con un failover que detecta la caída aguas arriba del módem.",
+      "requisitos": [
+        "13",
+        "14"
+      ]
+    },
+    "11": {
+      "objetivos": [
+        "Al terminar vas a poder crear rutas /32 a hosts testigo por cada ISP y defaults recursivas con check-gateway y distancias 1 y 2.",
+        "Al terminar vas a poder sumar la segunda salida a la lista WAN para que el masquerade cubra las dos.",
+        "Al terminar vas a poder probar el failover cortando internet aguas arriba y contar los pings perdidos al conmutar y al volver."
+      ],
+      "conecta": "En la lección anterior armaste rutas con distance y check-gateway; ahora las encadenás en rutas recursivas para que el router vea cuándo se cae internet y no solo el módem.",
+      "sigue": "En el laboratorio contaste pings perdidos a ojo. En la próxima el diagnóstico se vuelve método: ping y traceroute desde el router, con src-address para probar por cada salida.",
+      "requisitos": [
+        "13",
+        "14",
+        "6",
+        "23"
+      ]
+    },
+    "29": {
+      "objetivos": [
+        "Al terminar vas a poder ubicar dónde falla una conexión (LAN, gateway, ISP o destino) con ping y /tool/traceroute.",
+        "Al terminar vas a poder hacer ping con src-address para probar por una salida o por un túnel determinados.",
+        "Al terminar vas a poder medir el MTU de un enlace con ping de tamaño fijo y do-not-fragment."
+      ],
+      "conecta": "Con dos salidas armadas, la pregunta de soporte cambia de \"¿anda?\" a \"¿por dónde anda y dónde se corta?\": ping y traceroute desde el router lo contestan.",
+      "sigue": "Hacer ping a mano sirve cuando estás mirando. En la próxima Netwatch lo hace solo, las 24 horas, y ejecuta un script cuando un host cae o vuelve.",
+      "requisitos": [
+        "15"
+      ]
+    },
+    "35": {
+      "objetivos": [
+        "Al terminar vas a poder crear un Netwatch con prueba icmp, tcp-conn, http-get o dns y ver su estado.",
+        "Al terminar vas a poder asociar un up-script y un down-script, por ejemplo para avisar si cae el NVR o reiniciar un puerto PoE.",
+        "Al terminar vas a poder decidir entre Netwatch y rutas recursivas para un failover."
+      ],
+      "conecta": "En la lección anterior ubicaste fallas con ping a mano; Netwatch automatiza esa misma prueba y le suma una acción cuando el host cambia de estado.",
+      "sigue": "Ya vigilás la salida y los equipos clave. El módulo siguiente mira para adentro: en la próxima descubrís qué hay conectado en la LAN con LLDP, CDP y MNDP.",
+      "requisitos": [
+        "11"
+      ]
+    },
+    "34": {
+      "objetivos": [
+        "Al terminar vas a poder listar con /ip/neighbor los vecinos que anuncian LLDP, CDP o MNDP y saber por qué puerto están.",
+        "Al terminar vas a poder identificar switches, cámaras y otros MikroTik de la LAN por su identidad, modelo y versión.",
+        "Al terminar vas a poder ajustar discovery settings para anunciar y escuchar solo en las interfaces que conviene."
+      ],
+      "conecta": "El módulo anterior te dejó vigilando la salida a internet; ahora mirás la LAN, y lo primero es saber qué hay enchufado: la misma pestaña Neighbors por la que entraste en la primera lección.",
+      "sigue": "Saber qué equipo está en cada puerto no dice qué hace. En la próxima Torch te muestra en vivo el tráfico de una cámara y el sniffer lo guarda para Wireshark.",
+      "requisitos": [
+        "1",
+        "25"
+      ]
+    },
+    "12": {
+      "objetivos": [
+        "Al terminar vas a poder usar Torch en la interfaz LAN filtrando por la IP o el puerto de una cámara.",
+        "Al terminar vas a poder capturar el tráfico de un equipo a un archivo .pcap y abrirlo en Wireshark.",
+        "Al terminar vas a poder poner log temporal en una regla de drop y apagarlo al terminar."
+      ],
+      "conecta": "Con los vecinos identificados sabés qué cámara está en qué puerto; Torch te muestra qué está haciendo ahora, y el sniffer guarda la prueba.",
+      "sigue": "En el laboratorio viste el tráfico de las cámaras mezclado con el resto en el mismo bridge. En la próxima lo separás: una VLAN por sistema, verificada con Torch.",
+      "requisitos": [
+        "29"
+      ]
+    },
+    "5": {
+      "objetivos": [
+        "Al terminar vas a poder configurar bridge vlan-filtering con puertos access y trunk, PVID, frame-types e ingress-filtering.",
+        "Al terminar vas a poder dejar la gestión en una VLAN propia y un puerto de rescate fuera del bridge antes de activar el filtrado.",
+        "Al terminar vas a poder comprobar con Torch que el tráfico de una cámara queda en su VLAN."
+      ],
+      "conecta": "En la lección anterior viste con Torch el tráfico de una cámara compartiendo bridge con la oficina; ahora lo separás en su VLAN y usás Torch para comprobarlo.",
+      "sigue": "La red quedó armada, conectada y separada. El módulo siguiente la protege: en la próxima apagás los servicios que el router trae prendidos y auditás un equipo heredado.",
+      "requisitos": [
+        "25",
+        "26",
+        "23"
+      ]
+    },
+    "3": {
+      "objetivos": [
+        "Al terminar vas a poder revisar /ip/service, apagar telnet, ftp, www y api, y limitar WinBox y SSH con available-from.",
+        "Al terminar vas a poder dejar MAC server y descubrimiento solo hacia la lista LAN.",
+        "Al terminar vas a poder auditar un equipo heredado: scheduler, scripts, SOCKS y clientes L2TP que nadie reconoce."
+      ],
+      "conecta": "El módulo anterior dejó la LAN separada por sistema y con el descubrimiento de vecinos a la vista; ahora cerrás lo que el router ofrece hacia afuera, empezando por sus propios servicios.",
+      "sigue": "available-from rechaza la conexión pero el puerto sigue visible. Para esconderlo hace falta el firewall: en la próxima ves input y forward, y por qué el orden de las reglas manda.",
+      "requisitos": [
+        "2",
+        "34"
+      ]
+    },
+    "4": {
+      "objetivos": [
+        "Al terminar vas a poder decir si una regla va en input (tráfico al router) o en forward (tráfico que pasa por él).",
+        "Al terminar vas a poder crear una address-list de administradores y una regla con place-before arriba del drop de fábrica.",
+        "Al terminar vas a poder comprobar con los contadores si una regla coincide o quedó debajo del drop."
+      ],
+      "conecta": "En la lección anterior limitaste los servicios desde /ip/service; ahora hacés lo mismo desde el firewall, que además los oculta, y aprendés a ubicar la regla en su lugar.",
+      "sigue": "Con input, forward y el orden claros, en la próxima armás el juego completo de reglas que conviene en cada cliente, con bloqueo de quien prueba contraseñas.",
+      "requisitos": [
+        "23"
+      ]
+    },
+    "33": {
+      "objetivos": [
+        "Al terminar vas a poder armar el input típico: established y related, invalid, ICMP limitado, admins por address-list y drop final.",
+        "Al terminar vas a poder armar el forward típico: fasttrack, invalid y drop de lo que entra por WAN sin dst-nat.",
+        "Al terminar vas a poder bloquear por un tiempo a quien prueba SSH o WinBox, y cerrar el DNS del router hacia la WAN."
+      ],
+      "conecta": "En la lección anterior agregaste una regla en su lugar; ahora juntás todas las que protegen al router y a la LAN en un juego ordenado que podés repetir en cada sitio.",
+      "sigue": "Una de las reglas cerró el DNS del router hacia la WAN. El módulo siguiente entra en ese servicio: en la próxima configurás el DNS del router para la LAN, con cache y entradas estáticas.",
+      "requisitos": []
+    },
+    "30": {
+      "objetivos": [
+        "Al terminar vas a poder configurar servidores DNS y allow-remote-requests para que el router resuelva para la LAN.",
+        "Al terminar vas a poder crear entradas estáticas (por ejemplo el NVR por nombre) y revisar la cache.",
+        "Al terminar vas a poder activar DoH en RouterOS 7 y comprobar que el puerto 53 no responde desde la WAN."
+      ],
+      "conecta": "El módulo anterior cerró el puerto 53 desde la WAN; con esa puerta cuidada, ya podés hacer del router el DNS de toda la LAN sin convertirlo en un resolver abierto.",
+      "sigue": "El router ya resuelve, pero un equipo con DNS fijo lo saltea. En la próxima redirigís todo el puerto 53 de la LAN al router, y ves qué lo esquiva igual.",
+      "requisitos": [
+        "13"
+      ]
+    },
+    "31": {
+      "objetivos": [
+        "Al terminar vas a poder redirigir con una regla dstnat todo el DNS que sale de la LAN hacia el router.",
+        "Al terminar vas a poder dejar excepciones para equipos que necesitan su propio DNS.",
+        "Al terminar vas a poder explicar por qué DoH en el navegador o en el equipo esquiva la redirección."
+      ],
+      "conecta": "En la lección anterior el router quedó como DNS de la LAN, pero solo para quien le pregunta; ahora lo hacés obligatorio para todos, también para la cámara con 8.8.8.8 de fábrica.",
+      "sigue": "Con todo el DNS pasando por el router, en la próxima lo usás para bloquear: listas de dominios, entradas NXDOMAIN y address-lists por nombre en el firewall.",
+      "requisitos": [
+        "4"
+      ]
+    },
+    "32": {
+      "objetivos": [
+        "Al terminar vas a poder bloquear dominios con una adlist o con entradas estáticas NXDOMAIN o FWD.",
+        "Al terminar vas a poder crear una address-list a partir de un nombre de dominio y usarla en una regla de firewall.",
+        "Al terminar vas a poder explicar los límites del bloqueo por DNS y por address-list de dominio."
+      ],
+      "conecta": "En la lección anterior forzaste a toda la LAN a usar el DNS del router; con eso, un bloqueo por DNS ya no se saltea cambiando el servidor a mano.",
+      "sigue": "Con la red protegida y el DNS bajo control, llega el pedido de siempre: entrar de afuera. El módulo siguiente arranca por saber qué IP pública tiene el sitio de verdad.",
+      "requisitos": [
+        "4"
+      ]
+    },
+    "9": {
+      "objetivos": [
+        "Al terminar vas a poder activar el DDNS de IP Cloud y leer dns-name, public-address y status.",
+        "Al terminar vas a poder clasificar un sitio en IP pública directa, NAT del módem o CGNAT comparando public-address con la IP del WAN.",
+        "Al terminar vas a poder decidir el camino de acceso remoto antes de prometerlo."
+      ],
+      "conecta": "El módulo anterior dejó el DNS del sitio en orden; ahora el nombre que importa es el del router en internet, y la pregunta es qué IP hay detrás de ese nombre.",
+      "sigue": "Si el sitio tiene IP dinámica, el nombre sigue a la IP. En la próxima ves cuánto tarda, cómo forzarlo, qué pasa con dos WAN y por qué la hora va por NTP.",
+      "requisitos": [
+        "14",
+        "15"
+      ]
+    },
+    "18": {
+      "objetivos": [
+        "Al terminar vas a poder forzar la actualización del DDNS y comprobar que el nombre resuelve a public-address.",
+        "Al terminar vas a poder poner la hora por NTP en vez de la hora aproximada de la nube.",
+        "Al terminar vas a poder revisar detect-internet y ver cómo cambia public-address cuando cae la WAN principal."
+      ],
+      "conecta": "En la lección anterior viste que el nombre no abre puertas; ahora ves cómo se comporta con PPPoE que reconecta, con dos WAN y con la hora del equipo.",
+      "sigue": "El nombre ya apunta bien, pero sigue sin ser un camino. En la próxima armás el camino: un túnel WireGuard con un peer por técnico.",
+      "requisitos": [
+        "11",
+        "15"
+      ]
+    },
+    "8": {
+      "objetivos": [
+        "Al terminar vas a poder crear la interfaz WireGuard del router y un peer por técnico con allowed-address /32.",
+        "Al terminar vas a poder abrir el puerto UDP del túnel y WinBox por el túnel con reglas arriba del drop.",
+        "Al terminar vas a poder configurar la notebook para que solo la red de gestión vaya por el túnel y entrar por WinBox."
+      ],
+      "conecta": "En la lección anterior dejaste el nombre del router siguiendo a su IP; ahora ese nombre o esa IP son el extremo de un túnel, y WinBox deja de mirar a internet.",
+      "sigue": "WireGuard a mano pide IP pública en el router. En la próxima, Back To Home: el mismo WireGuard gestionado por MikroTik, que llega por relay a sitios con CGNAT.",
+      "requisitos": [
+        "4",
+        "9"
+      ]
+    },
+    "19": {
+      "objetivos": [
+        "Al terminar vas a poder comprobar la arquitectura del equipo y activar Back To Home.",
+        "Al terminar vas a poder crear un usuario con acceso a la LAN y vencimiento, y otro de solo internet, y conectar desde el celular con el QR.",
+        "Al terminar vas a poder dar de baja a una persona sin revocar a todos."
+      ],
+      "conecta": "En la lección anterior armaste WireGuard a mano, con IP pública; Back To Home hace lo mismo detrás de CGNAT, a cambio de pasar por los relays de MikroTik.",
+      "sigue": "Back To Home queda afuera en los RouterBOARD MIPS y no escala a una flota. En la próxima, el concentrador propio: un CHR en un VPS al que cada sitio llama.",
+      "requisitos": [
+        "9"
+      ]
+    },
+    "20": {
+      "objetivos": [
+        "Al terminar vas a poder endurecer un CHR recién instalado: usuario, servicios, descubrimiento y firewall de input.",
+        "Al terminar vas a poder elegir la licencia del CHR según lo que va a transportar.",
+        "Al terminar vas a poder conectar un sitio detrás de NAT al hub con un peer WireGuard saliente y persistent-keepalive."
+      ],
+      "conecta": "En la lección anterior Back To Home resolvió el CGNAT para equipos ARM; el concentrador CHR lo resuelve para cualquier MikroTik, con un punto fijo que vos controlás.",
+      "sigue": "Hasta acá entraba el técnico. El módulo siguiente abre a terceros, y arranca por el pedido más común: publicar un NVR para una central de monitoreo, con criterio.",
+      "requisitos": [
+        "2",
+        "3",
+        "33",
+        "8"
+      ]
+    },
+    "10": {
+      "objetivos": [
+        "Al terminar vas a poder decidir si un NVR se publica o va por VPN según quién mira y desde dónde.",
+        "Al terminar vas a poder publicar un NVR con un dst-nat que entra por la WAN, filtrado por address-list y con fecha de revisión.",
+        "Al terminar vas a poder limpiar conexiones viejas y probar desde datos móviles con y sin permiso."
+      ],
+      "conecta": "El módulo anterior dejó el túnel como primera opción para entrar; cuando el que mira es una central con IP fija, a veces publicar es más práctico, y este es el criterio para hacerlo.",
+      "sigue": "El criterio está; falta la práctica con equipos reales. En la próxima, port forwarding con los puertos de Hikvision y Dahua, puertos externos distintos y hairpin.",
+      "requisitos": [
+        "4",
+        "8",
+        "9"
+      ]
+    },
+    "24": {
+      "objetivos": [
+        "Al terminar vas a poder publicar un NVR Hikvision o Dahua con dst-nat atado a la WAN y a una address-list, con puerto externo distinto del interno.",
+        "Al terminar vas a poder probar el acceso desde afuera y leer los contadores para saber si el problema es el MikroTik, el doble NAT o el CGNAT.",
+        "Al terminar vas a poder armar hairpin NAT o un DNS local para entrar desde la LAN por la IP pública."
+      ],
+      "conecta": "En la lección anterior quedó el criterio: un puerto, una lista de orígenes y fecha de revisión. Ahora lo llevás a NVR reales: 8000 y 554 de Hikvision, 37777 de Dahua y dos NVR detrás de la misma IP.",
+      "sigue": "Publicar sirve para orígenes fijos. Cuando el que entra es el encargado con su notebook y no puede instalar nada, la próxima ofrece L2TP con IPsec, con el cliente nativo del sistema.",
+      "requisitos": [
+        "9",
+        "30"
+      ]
+    },
+    "21": {
+      "objetivos": [
+        "Al terminar vas a poder montar un servidor L2TP con use-ipsec=required, pool, perfil y un secret por persona.",
+        "Al terminar vas a poder abrir UDP 500, 4500 y 1701 y ESP en input y sacar el tráfico IPsec de FastTrack.",
+        "Al terminar vas a poder conectar una notebook Windows y resolver el caso de NAT-T con la clave de registro."
+      ],
+      "conecta": "En la lección anterior abriste un puerto para la app de un NVR; ahora el tercero necesita entrar a la LAN entera sin instalar nada, y L2TP con IPsec usa el cliente que ya trae su sistema.",
+      "sigue": "El router hizo de servidor. En la próxima se da vuelta: el MikroTik es el cliente L2TP que se conecta a un servidor remoto y decide qué tráfico manda por el túnel.",
+      "requisitos": [
+        "8",
+        "33"
+      ]
+    },
+    "28": {
+      "objetivos": [
+        "Al terminar vas a poder crear un cliente L2TP con use-ipsec e ipsec-secret hacia un servidor remoto.",
+        "Al terminar vas a poder decidir add-default-route y cargar rutas solo hacia las redes remotas por el túnel.",
+        "Al terminar vas a poder aplicar NAT por el túnel cuando el otro extremo no conoce tu LAN."
+      ],
+      "conecta": "En la lección anterior armaste el servidor L2TP; ahora el MikroTik del sitio es el que llama, con las mismas piezas del otro lado y las rutas por túnel que viste en el módulo de rutas.",
+      "sigue": "L2TP sirve cuando el otro lado es un servidor de acceso. Cuando el otro extremo es un firewall de otra marca, en la próxima armás IPsec puro con una tabla acordada entre las dos puntas.",
+      "requisitos": [
+        "27",
+        "29"
+      ]
+    },
+    "22": {
+      "objetivos": [
+        "Al terminar vas a poder acordar la tabla de fase 1 y fase 2 y cargar las cinco piezas: profile, peer, identity, proposal y policy.",
+        "Al terminar vas a poder agregar el bypass de NAT y de FastTrack para el tráfico del túnel.",
+        "Al terminar vas a poder diagnosticar con active-peers, ph2-state, installed-sa y el log de ipsec."
+      ],
+      "conecta": "En la lección anterior el MikroTik se conectó como cliente L2TP; ahora el otro extremo es un Fortinet o un pfSense, y el túnel es IPsec puro con parámetros que coinciden en las dos puntas.",
+      "sigue": "Con el sitio armado, protegido y conectado, queda lo que viene después de entregar. El último módulo arranca por actualizar RouterOS y RouterBOOT en orden.",
+      "requisitos": [
+        "18",
+        "21",
+        "12"
+      ]
+    },
+    "7": {
+      "objetivos": [
+        "Al terminar vas a poder actualizar en orden: backup, RouterOS, reinicio, RouterBOOT y reinicio.",
+        "Al terminar vas a poder comprobar que current-firmware coincide con upgrade-firmware después de actualizar.",
+        "Al terminar vas a poder dejar en el legajo versión, RouterBOOT, canal y fecha."
+      ],
+      "conecta": "El módulo anterior cerró los túneles con terceros, y ese sitio ahora queda por mantener: la mayoría de los MikroTik comprometidos tenían el parche disponible hace años.",
+      "sigue": "La actualización estándar pide internet y una versión que ande. En la próxima, los casos difíciles: sitios sin salida, paquetes extra y volver a la versión anterior.",
+      "requisitos": [
+        "6"
+      ]
+    },
+    "16": {
+      "objetivos": [
+        "Al terminar vas a poder habilitar y desinstalar un paquete extra con apply-changes.",
+        "Al terminar vas a poder actualizar sin internet subiendo el .npk de la arquitectura correcta a la raíz de Files.",
+        "Al terminar vas a poder volver a una versión anterior con /system/package/downgrade y cerrar con RouterBOOT."
+      ],
+      "conecta": "En la lección anterior actualizaste con check-for-updates; ahora hacés lo mismo en una red de cámaras aislada, con el .npk a mano, y aprendés a deshacerlo.",
+      "sigue": "Ya sabés instalar cualquier versión; falta decidir cuál. En la última lección elegís el canal de cada cliente.",
+      "requisitos": []
+    },
+    "17": {
+      "objetivos": [
+        "Al terminar vas a poder comparar lo que ofrece cada canal sin instalar nada.",
+        "Al terminar vas a poder elegir el canal de un cliente y dejarlo anotado en el legajo, igual en todos sus equipos.",
+        "Al terminar vas a poder pasar un equipo de stable a long-term con backup antes."
+      ],
+      "conecta": "En la lección anterior viste cómo instalar y deshacer cualquier versión; ahora decidís cuál vive en cada cliente, para que la próxima actualización no traiga sorpresas.",
+      "requisitos": [
+        "7"
+      ],
+      "cierre": "Con esta lección termina el curso: arrancaste entrando a un equipo sin perder el acceso y terminás sabiendo armarlo, protegerlo, conectarlo, abrirlo con criterio y mantenerlo. Para seguir, conviene volver a los laboratorios en un equipo de banco y armar tu propia plantilla con lo que te sirvió en obra."
+    }
+  },
+  "orden": [
+    {
+      "posicion": 1,
+      "id": "1",
+      "titulo": "Entrar sin romper"
+    },
+    {
+      "posicion": 2,
+      "id": "23",
+      "titulo": "Safe Mode"
+    },
+    {
+      "posicion": 3,
+      "id": "6",
+      "titulo": "Backup primero"
+    },
+    {
+      "posicion": 4,
+      "id": "2",
+      "titulo": "Usuarios propios"
+    },
+    {
+      "posicion": 5,
+      "id": "25",
+      "titulo": "Bridges"
+    },
+    {
+      "posicion": 6,
+      "id": "26",
+      "titulo": "Asignar IP"
+    },
+    {
+      "posicion": 7,
+      "id": "14",
+      "titulo": "Cliente DHCP"
+    },
+    {
+      "posicion": 8,
+      "id": "13",
+      "titulo": "IP fija"
+    },
+    {
+      "posicion": 9,
+      "id": "15",
+      "titulo": "PPPoE con Antel"
+    },
+    {
+      "posicion": 10,
+      "id": "27",
+      "titulo": "Rutas estáticas"
+    },
+    {
+      "posicion": 11,
+      "id": "11",
+      "titulo": "Dos WAN"
+    },
+    {
+      "posicion": 12,
+      "id": "29",
+      "titulo": "Diagnóstico por terminal"
+    },
+    {
+      "posicion": 13,
+      "id": "35",
+      "titulo": "Netwatch"
+    },
+    {
+      "posicion": 14,
+      "id": "34",
+      "titulo": "IP Neighbors"
+    },
+    {
+      "posicion": 15,
+      "id": "12",
+      "titulo": "Torch y sniffer"
+    },
+    {
+      "posicion": 16,
+      "id": "5",
+      "titulo": "VLAN por sistema"
+    },
+    {
+      "posicion": 17,
+      "id": "3",
+      "titulo": "Cerrar puertas"
+    },
+    {
+      "posicion": 18,
+      "id": "4",
+      "titulo": "Input y forward"
+    },
+    {
+      "posicion": 19,
+      "id": "33",
+      "titulo": "Firewall de protección"
+    },
+    {
+      "posicion": 20,
+      "id": "30",
+      "titulo": "DNS en MikroTik"
+    },
+    {
+      "posicion": 21,
+      "id": "31",
+      "titulo": "DNS transparente"
+    },
+    {
+      "posicion": 22,
+      "id": "32",
+      "titulo": "Bloqueo por DNS"
+    },
+    {
+      "posicion": 23,
+      "id": "9",
+      "titulo": "Nombre, no puerta"
+    },
+    {
+      "posicion": 24,
+      "id": "18",
+      "titulo": "Cloud a fondo"
+    },
+    {
+      "posicion": 25,
+      "id": "8",
+      "titulo": "Túnel de gestión"
+    },
+    {
+      "posicion": 26,
+      "id": "19",
+      "titulo": "Back To Home"
+    },
+    {
+      "posicion": 27,
+      "id": "20",
+      "titulo": "Concentrador CHR"
+    },
+    {
+      "posicion": 28,
+      "id": "10",
+      "titulo": "NVR con criterio"
+    },
+    {
+      "posicion": 29,
+      "id": "24",
+      "titulo": "Port forwarding"
+    },
+    {
+      "posicion": 30,
+      "id": "21",
+      "titulo": "L2TP con IPsec"
+    },
+    {
+      "posicion": 31,
+      "id": "28",
+      "titulo": "L2TP cliente"
+    },
+    {
+      "posicion": 32,
+      "id": "22",
+      "titulo": "IPsec entre marcas"
+    },
+    {
+      "posicion": 33,
+      "id": "7",
+      "titulo": "Actualizar en orden"
+    },
+    {
+      "posicion": 34,
+      "id": "16",
+      "titulo": "Paquetes al día"
+    },
+    {
+      "posicion": 35,
+      "id": "17",
+      "titulo": "Elegir el canal"
+    }
+  ],
+  "avisos": [
+    {
+      "id": "3",
+      "archivo": "card.md",
+      "texto": "drop en la cadena input (lección 4).",
+      "referencia_a": [
+        {
+          "id": "4",
+          "posicion_nueva": 18,
+          "lección": "Input y forward",
+          "antes_o_despues": "después"
+        }
+      ],
+      "sugerencia": "drop en la cadena input (lo ves en la próxima lección, Input y forward)."
+    },
+    {
+      "id": "4",
+      "archivo": "card.md",
+      "texto": "hacelo en Safe Mode (lección 1).",
+      "referencia_a": [
+        {
+          "id": "23",
+          "posicion_nueva": 2,
+          "lección": "Safe Mode",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "hacelo en Safe Mode (lección Safe Mode)."
+    },
+    {
+      "id": "7",
+      "archivo": "card.md",
+      "texto": "con un plan de rescate (Netinstall, lección 1).",
+      "referencia_a": [],
+      "sugerencia": "con un plan de rescate (Netinstall). Ninguna lección enseña Netinstall: conviene quitar el número."
+    },
+    {
+      "id": "9",
+      "archivo": "card.md",
+      "texto": "se puede publicar con cuidado (lección 10)",
+      "referencia_a": [
+        {
+          "id": "10",
+          "posicion_nueva": 28,
+          "lección": "NVR con criterio",
+          "antes_o_despues": "después"
+        }
+      ],
+      "sugerencia": "se puede publicar con cuidado (lo ves en NVR con criterio, en el módulo Abrir a terceros)"
+    },
+    {
+      "id": "10",
+      "archivo": "card.md",
+      "texto": "Primera opción, VPN (lección 8).",
+      "referencia_a": [
+        {
+          "id": "8",
+          "posicion_nueva": 25,
+          "lección": "Túnel de gestión",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "Primera opción, VPN (lección Túnel de gestión)."
+    },
+    {
+      "id": "10",
+      "archivo": "card.md",
+      "texto": "los escaneos automáticos llegan en minutos (lección 3).",
+      "referencia_a": [
+        {
+          "id": "3",
+          "posicion_nueva": 17,
+          "lección": "Cerrar puertas",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "los escaneos automáticos llegan en minutos (lección Cerrar puertas)."
+    },
+    {
+      "id": "11",
+      "archivo": "card.md",
+      "texto": "export (lección 6) y Safe Mode (lección 1).",
+      "referencia_a": [
+        {
+          "id": "6",
+          "posicion_nueva": 3,
+          "lección": "Backup primero",
+          "antes_o_despues": "antes"
+        },
+        {
+          "id": "23",
+          "posicion_nueva": 2,
+          "lección": "Safe Mode",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "export (lección Backup primero) y Safe Mode (lección Safe Mode)."
+    },
+    {
+      "id": "13",
+      "archivo": "card.md",
+      "texto": "un failover con rutas recursivas (lección 11).",
+      "referencia_a": [
+        {
+          "id": "11",
+          "posicion_nueva": 11,
+          "lección": "Dos WAN",
+          "antes_o_despues": "después"
+        }
+      ],
+      "sugerencia": "un failover con rutas recursivas (lo ves en Dos WAN, en el módulo siguiente)."
+    },
+    {
+      "id": "13",
+      "archivo": "card.md",
+      "texto": "export (lección 6) y Safe Mode (lección 1).",
+      "referencia_a": [
+        {
+          "id": "6",
+          "posicion_nueva": 3,
+          "lección": "Backup primero",
+          "antes_o_despues": "antes"
+        },
+        {
+          "id": "23",
+          "posicion_nueva": 2,
+          "lección": "Safe Mode",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "export (lección Backup primero) y Safe Mode (lección Safe Mode)."
+    },
+    {
+      "id": "13",
+      "archivo": "card.md",
+      "texto": "compará `public-address` con 203.0.113.10 (lección 9).",
+      "referencia_a": [
+        {
+          "id": "9",
+          "posicion_nueva": 23,
+          "lección": "Nombre, no puerta",
+          "antes_o_despues": "después"
+        }
+      ],
+      "sugerencia": "compará `public-address` con 203.0.113.10 (a fondo en Nombre, no puerta, en el módulo Entrar de afuera)."
+    },
+    {
+      "id": "14",
+      "archivo": "card.md",
+      "texto": "En 100.64.0.0/10: CGNAT (lección 9).",
+      "referencia_a": [
+        {
+          "id": "9",
+          "posicion_nueva": 23,
+          "lección": "Nombre, no puerta",
+          "antes_o_despues": "después"
+        }
+      ],
+      "sugerencia": "En 100.64.0.0/10: CGNAT (a fondo en Nombre, no puerta, en el módulo Entrar de afuera)."
+    },
+    {
+      "id": "15",
+      "archivo": "card.md",
+      "texto": "1. Export (lección 6).",
+      "referencia_a": [
+        {
+          "id": "6",
+          "posicion_nueva": 3,
+          "lección": "Backup primero",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "1. Export (lección Backup primero)."
+    },
+    {
+      "id": "15",
+      "archivo": "card.md",
+      "texto": "el acceso remoto va por DDNS o túnel (lecciones 18 a 20).",
+      "referencia_a": [
+        {
+          "id": "18",
+          "posicion_nueva": 24,
+          "lección": "Cloud a fondo",
+          "antes_o_despues": "después"
+        },
+        {
+          "id": "19",
+          "posicion_nueva": 26,
+          "lección": "Back To Home",
+          "antes_o_despues": "después"
+        },
+        {
+          "id": "20",
+          "posicion_nueva": 27,
+          "lección": "Concentrador CHR",
+          "antes_o_despues": "después"
+        }
+      ],
+      "sugerencia": "el acceso remoto va por DDNS o túnel (módulo Entrar de afuera)."
+    },
+    {
+      "id": "16",
+      "archivo": "card.md",
+      "texto": "solo opina sobre canales (lección 17).",
+      "referencia_a": [
+        {
+          "id": "17",
+          "posicion_nueva": 35,
+          "lección": "Elegir el canal",
+          "antes_o_despues": "después"
+        }
+      ],
+      "sugerencia": "solo opina sobre canales (próxima lección, Elegir el canal)."
+    },
+    {
+      "id": "17",
+      "archivo": "card.md",
+      "texto": "con backup antes (lección 16)",
+      "referencia_a": [
+        {
+          "id": "6",
+          "posicion_nueva": 3,
+          "lección": "Backup primero",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "con backup antes (lección Backup primero)"
+    },
+    {
+      "id": "18",
+      "archivo": "card.md",
+      "texto": "Back To Home (lección 19) o un concentrador (lección 20).",
+      "referencia_a": [
+        {
+          "id": "19",
+          "posicion_nueva": 26,
+          "lección": "Back To Home",
+          "antes_o_despues": "después"
+        },
+        {
+          "id": "20",
+          "posicion_nueva": 27,
+          "lección": "Concentrador CHR",
+          "antes_o_despues": "después"
+        }
+      ],
+      "sugerencia": "Back To Home o un concentrador CHR, que vienen en este mismo módulo."
+    },
+    {
+      "id": "18",
+      "archivo": "card.md",
+      "texto": "Publicar servicios detrás del nombre es la lección 10, con sus reglas.",
+      "referencia_a": [
+        {
+          "id": "10",
+          "posicion_nueva": 28,
+          "lección": "NVR con criterio",
+          "antes_o_despues": "después"
+        }
+      ],
+      "sugerencia": "Publicar servicios detrás del nombre se ve en el módulo Abrir a terceros, con sus reglas."
+    },
+    {
+      "id": "19",
+      "archivo": "card.md",
+      "texto": "recomienda WireGuard a mano (lección 8)",
+      "referencia_a": [
+        {
+          "id": "8",
+          "posicion_nueva": 25,
+          "lección": "Túnel de gestión",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "recomienda WireGuard a mano (lección Túnel de gestión)"
+    },
+    {
+      "id": "20",
+      "archivo": "card.md",
+      "texto": "(peer propio, lección 8)",
+      "referencia_a": [
+        {
+          "id": "8",
+          "posicion_nueva": 25,
+          "lección": "Túnel de gestión",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "(peer propio, como en Túnel de gestión)"
+    },
+    {
+      "id": "22",
+      "archivo": "card.md",
+      "texto": "Relojes con NTP en los dos (lección 18).",
+      "referencia_a": [
+        {
+          "id": "18",
+          "posicion_nueva": 24,
+          "lección": "Cloud a fondo",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "Relojes con NTP en los dos (lección Cloud a fondo)."
+    },
+    {
+      "id": "24",
+      "archivo": "card.md",
+      "texto": "export (lección 6), Safe Mode (lección 23) y la prueba de la lección 9",
+      "referencia_a": [
+        {
+          "id": "6",
+          "posicion_nueva": 3,
+          "lección": "Backup primero",
+          "antes_o_despues": "antes"
+        },
+        {
+          "id": "23",
+          "posicion_nueva": 2,
+          "lección": "Safe Mode",
+          "antes_o_despues": "antes"
+        },
+        {
+          "id": "9",
+          "posicion_nueva": 23,
+          "lección": "Nombre, no puerta",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "export, Safe Mode y la prueba de Nombre, no puerta"
+    },
+    {
+      "id": "24",
+      "archivo": "card.md",
+      "texto": "módem u ONT en bridge (lección 15)",
+      "referencia_a": [
+        {
+          "id": "15",
+          "posicion_nueva": 9,
+          "lección": "PPPoE con Antel",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "módem u ONT en bridge (lección PPPoE con Antel)"
+    },
+    {
+      "id": "24",
+      "archivo": "card.md",
+      "texto": "Back To Home (lección 19), concentrador (lección 20)",
+      "referencia_a": [
+        {
+          "id": "19",
+          "posicion_nueva": 26,
+          "lección": "Back To Home",
+          "antes_o_despues": "antes"
+        },
+        {
+          "id": "20",
+          "posicion_nueva": 27,
+          "lección": "Concentrador CHR",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "Back To Home, concentrador CHR (módulo Entrar de afuera)"
+    },
+    {
+      "id": "24",
+      "archivo": "card.md",
+      "texto": "una sola regla arriba de ese drop (lección 4)",
+      "referencia_a": [
+        {
+          "id": "4",
+          "posicion_nueva": 18,
+          "lección": "Input y forward",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "una sola regla arriba de ese drop (lección Input y forward)"
+    },
+    {
+      "id": "24",
+      "archivo": "card.md",
+      "texto": "Primera opción, VPN (lecciones 8 y 19)",
+      "referencia_a": [
+        {
+          "id": "8",
+          "posicion_nueva": 25,
+          "lección": "Túnel de gestión",
+          "antes_o_despues": "antes"
+        },
+        {
+          "id": "19",
+          "posicion_nueva": 26,
+          "lección": "Back To Home",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "Primera opción, VPN (Túnel de gestión o Back To Home)"
+    },
+    {
+      "id": "2",
+      "archivo": "script.txt",
+      "texto": "A: Segunda lección: usuarios propios.",
+      "referencia_a": [
+        {
+          "id": "2",
+          "posicion_nueva": 4,
+          "lección": "Usuarios propios",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: Usuarios propios. (pasa a ser la cuarta lección)"
+    },
+    {
+      "id": "3",
+      "archivo": "script.txt",
+      "texto": "A: Lección tres, cerrar puertas.",
+      "referencia_a": [
+        {
+          "id": "3",
+          "posicion_nueva": 17,
+          "lección": "Cerrar puertas",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: Cerrar puertas."
+    },
+    {
+      "id": "4",
+      "archivo": "script.txt",
+      "texto": "A: Lección cuatro: input y forward.",
+      "referencia_a": [
+        {
+          "id": "4",
+          "posicion_nueva": 18,
+          "lección": "Input y forward",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: Input y forward."
+    },
+    {
+      "id": "5",
+      "archivo": "script.txt",
+      "texto": "A: Lección cinco, una VLAN por sistema.",
+      "referencia_a": [
+        {
+          "id": "5",
+          "posicion_nueva": 16,
+          "lección": "VLAN por sistema",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: Una VLAN por sistema."
+    },
+    {
+      "id": "6",
+      "archivo": "script.txt",
+      "texto": "A: Lección seis: backup primero.",
+      "referencia_a": [
+        {
+          "id": "6",
+          "posicion_nueva": 3,
+          "lección": "Backup primero",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: Backup primero."
+    },
+    {
+      "id": "7",
+      "archivo": "script.txt",
+      "texto": "A: Lección siete: actualizar en orden.",
+      "referencia_a": [
+        {
+          "id": "7",
+          "posicion_nueva": 33,
+          "lección": "Actualizar en orden",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: Actualizar en orden."
+    },
+    {
+      "id": "8",
+      "archivo": "script.txt",
+      "texto": "A: Lección ocho: el túnel de gestión.",
+      "referencia_a": [
+        {
+          "id": "8",
+          "posicion_nueva": 25,
+          "lección": "Túnel de gestión",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: El túnel de gestión."
+    },
+    {
+      "id": "8",
+      "archivo": "script.txt",
+      "texto": "B: Que es lo que dijimos en la lección tres.",
+      "referencia_a": [
+        {
+          "id": "3",
+          "posicion_nueva": 17,
+          "lección": "Cerrar puertas",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "B: Que es lo que dijimos cuando cerramos puertas."
+    },
+    {
+      "id": "8",
+      "archivo": "script.txt",
+      "texto": "B: Lo de la lección cuatro otra vez.",
+      "referencia_a": [
+        {
+          "id": "4",
+          "posicion_nueva": 18,
+          "lección": "Input y forward",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "B: Lo de input y forward otra vez."
+    },
+    {
+      "id": "9",
+      "archivo": "script.txt",
+      "texto": "A: Lección nueve: nombre, no puerta.",
+      "referencia_a": [
+        {
+          "id": "9",
+          "posicion_nueva": 23,
+          "lección": "Nombre, no puerta",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: Nombre, no puerta."
+    },
+    {
+      "id": "10",
+      "archivo": "script.txt",
+      "texto": "A: Lección diez: NVR con criterio.",
+      "referencia_a": [
+        {
+          "id": "10",
+          "posicion_nueva": 28,
+          "lección": "NVR con criterio",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: NVR con criterio."
+    },
+    {
+      "id": "11",
+      "archivo": "script.txt",
+      "texto": "A: Lección once: dos WAN.",
+      "referencia_a": [
+        {
+          "id": "11",
+          "posicion_nueva": 11,
+          "lección": "Dos WAN",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: Dos WAN."
+    },
+    {
+      "id": "12",
+      "archivo": "script.txt",
+      "texto": "A: Última lección: Torch y sniffer.",
+      "referencia_a": [
+        {
+          "id": "12",
+          "posicion_nueva": 15,
+          "lección": "Torch y sniffer",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: Torch y sniffer. (ya no es la última)"
+    },
+    {
+      "id": "13",
+      "archivo": "script.txt",
+      "texto": "Es el caso ideal para las rutas recursivas de la lección once.",
+      "referencia_a": [
+        {
+          "id": "11",
+          "posicion_nueva": 11,
+          "lección": "Dos WAN",
+          "antes_o_despues": "después"
+        }
+      ],
+      "sugerencia": "Es el caso ideal para las rutas recursivas, que vemos con dos WAN."
+    },
+    {
+      "id": "14",
+      "archivo": "script.txt",
+      "texto": "A: Lección catorce: el cliente DHCP en la WAN.",
+      "referencia_a": [
+        {
+          "id": "14",
+          "posicion_nueva": 7,
+          "lección": "Cliente DHCP",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: El cliente DHCP en la WAN."
+    },
+    {
+      "id": "14",
+      "archivo": "script.txt",
+      "texto": "B: ¿Y las rutas recursivas de la lección once?",
+      "referencia_a": [
+        {
+          "id": "11",
+          "posicion_nueva": 11,
+          "lección": "Dos WAN",
+          "antes_o_despues": "después"
+        }
+      ],
+      "sugerencia": "B: ¿Y las rutas recursivas, las de dos WAN?"
+    },
+    {
+      "id": "15",
+      "archivo": "script.txt",
+      "texto": "A: Lección quince, la que más nos piden: PPPoE con Antel.",
+      "referencia_a": [
+        {
+          "id": "15",
+          "posicion_nueva": 9,
+          "lección": "PPPoE con Antel",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: La que más nos piden: PPPoE con Antel."
+    },
+    {
+      "id": "16",
+      "archivo": "script.txt",
+      "texto": "A: Lección dieciséis. En la siete vimos el orden para actualizar.",
+      "referencia_a": [
+        {
+          "id": "16",
+          "posicion_nueva": 34,
+          "lección": "Paquetes al día",
+          "antes_o_despues": "propia"
+        },
+        {
+          "id": "7",
+          "posicion_nueva": 33,
+          "lección": "Actualizar en orden",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "A: En la lección anterior vimos el orden para actualizar."
+    },
+    {
+      "id": "17",
+      "archivo": "script.txt",
+      "texto": "A: Lección diecisiete: los canales.",
+      "referencia_a": [
+        {
+          "id": "17",
+          "posicion_nueva": 35,
+          "lección": "Elegir el canal",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: Última lección: los canales."
+    },
+    {
+      "id": "18",
+      "archivo": "script.txt",
+      "texto": "A: Lección dieciocho: IP Cloud a fondo. En la nueve vimos que el nombre no abre puertas.",
+      "referencia_a": [
+        {
+          "id": "18",
+          "posicion_nueva": 24,
+          "lección": "Cloud a fondo",
+          "antes_o_despues": "propia"
+        },
+        {
+          "id": "9",
+          "posicion_nueva": 23,
+          "lección": "Nombre, no puerta",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "A: IP Cloud a fondo. En la lección anterior vimos que el nombre no abre puertas."
+    },
+    {
+      "id": "19",
+      "archivo": "script.txt",
+      "texto": "A: Lección diecinueve: Back To Home,",
+      "referencia_a": [
+        {
+          "id": "19",
+          "posicion_nueva": 26,
+          "lección": "Back To Home",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: Back To Home,"
+    },
+    {
+      "id": "19",
+      "archivo": "script.txt",
+      "texto": "Por lo mismo que los peers de la lección ocho:",
+      "referencia_a": [
+        {
+          "id": "8",
+          "posicion_nueva": 25,
+          "lección": "Túnel de gestión",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "Por lo mismo que los peers del túnel de gestión:"
+    },
+    {
+      "id": "20",
+      "archivo": "script.txt",
+      "texto": "A: Lección veinte.",
+      "referencia_a": [
+        {
+          "id": "20",
+          "posicion_nueva": 27,
+          "lección": "Concentrador CHR",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: (quitar el número; arrancar directo con la frase siguiente)"
+    },
+    {
+      "id": "21",
+      "archivo": "script.txt",
+      "texto": "A: Lección veintiuno: L2TP con IPsec. En la ocho dijimos que WireGuard va primero.",
+      "referencia_a": [
+        {
+          "id": "21",
+          "posicion_nueva": 30,
+          "lección": "L2TP con IPsec",
+          "antes_o_despues": "propia"
+        },
+        {
+          "id": "8",
+          "posicion_nueva": 25,
+          "lección": "Túnel de gestión",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "A: L2TP con IPsec. Con el túnel de gestión dijimos que WireGuard va primero."
+    },
+    {
+      "id": "22",
+      "archivo": "script.txt",
+      "texto": "A: Última lección de esta parte: IPsec puro,",
+      "referencia_a": [
+        {
+          "id": "22",
+          "posicion_nueva": 32,
+          "lección": "IPsec entre marcas",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: Cerramos los túneles con IPsec puro,"
+    },
+    {
+      "id": "23",
+      "archivo": "script.txt",
+      "texto": "A: Lección veintitrés, y es una que ya asomó en la primera: Safe Mode.",
+      "referencia_a": [
+        {
+          "id": "23",
+          "posicion_nueva": 2,
+          "lección": "Safe Mode",
+          "antes_o_despues": "propia"
+        }
+      ],
+      "sugerencia": "A: Segunda lección, y es una que ya asomó en la primera: Safe Mode."
+    },
+    {
+      "id": "24",
+      "archivo": "script.txt",
+      "texto": "A: Lección veinticuatro: port forwarding, la práctica de la lección diez.",
+      "referencia_a": [
+        {
+          "id": "24",
+          "posicion_nueva": 29,
+          "lección": "Port forwarding",
+          "antes_o_despues": "propia"
+        },
+        {
+          "id": "10",
+          "posicion_nueva": 28,
+          "lección": "NVR con criterio",
+          "antes_o_despues": "antes"
+        }
+      ],
+      "sugerencia": "A: Port forwarding, la práctica de la lección anterior, NVR con criterio."
+    }
+  ],
+  "nota_avisos": "Además de estas referencias, todas las cards abren con '# Lección <id>.' y el número ya no coincide con la posición; conviene mostrar la posición desde el portal o quitar el número del título."
+}

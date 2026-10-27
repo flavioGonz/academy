@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Hiciste varias pruebas fallidas de registro desde la oficina técnica y ahora no podés ni entrar a la web de la UCM del cliente. ¿Qué pasó y cómo se previene?",
+  "options": [
+   "La central se colgó; hay que reiniciarla",
+   "El certificado HTTPS venció",
+   "Fail2ban baneó tu IP; se previene agregando las IPs de soporte a la Allowlist",
+   "El modo de red cambió a Dual"
+  ],
+  "answer": 2,
+  "why": "Fail2ban banea la IP que acumula fallos; las IPs en la Allowlist no se banean aunque superen el umbral."
+ },
+ {
+  "q": "¿Qué combinación sigue el manual de seguridad para la web de administración?",
+  "options": [
+   "Puerto 80 con redirección y sin lista blanca",
+   "Web apagada y solo SSH",
+   "Puerto 443 abierto a internet con contraseña fuerte",
+   "HTTPS en puerto no estándar, sin redirección del 80 y lista blanca de IPs"
+  ],
+  "answer": 3,
+  "why": "Recomienda desactivar Redirect From Port 80, evitar 80 y 443, y usar la lista blanca de hasta 10 IPs."
+ },
+ {
+  "q": "Un cliente tiene 15 sucursales con IP fija que se conectan a una UCM central. Según la discusión del foro de FreePBX, ¿qué es razonable empezar a usar?",
+  "options": [
+   "VPN en cada teléfono",
+   "Lista blanca por IP de las sucursales en el firewall",
+   "Puertos abiertos a todo internet",
+   "SIP ALG en todos los routers"
+  ],
+  "answer": 1,
+  "why": "Con sedes de IP fija, la lista blanca por IP es más simple que mantener VPN en cada equipo; la VPN suma complejidad y carga."
+ }
+]

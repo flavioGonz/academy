@@ -1,0 +1,17 @@
+A: Lección treinta y cuatro: descubrir vecinos. ¿Te pasó llegar a un rack y no saber qué switch va a qué puerto?
+B: Todas las semanas. Termino siguiendo el cable con la linterna.
+A: El router te lo puede decir. Barra ip barra neighbor muestra cada equipo que se anuncia en tu red de capa dos: otro MikroTik, un switch administrable, un teléfono IP. Y en qué puerto físico lo ve, aunque esté dentro del bridge.
+B: ¿Cómo se entera?
+A: Por tres protocolos. MNDP es el de MikroTik, el de la pestaña Neighbors de WinBox. CDP es el de Cisco, de mil novecientos noventa y cuatro. Y LLDP es el estándar de la IEEE, que habla casi cualquier marca.
+B: Y cada equipo cuenta su nombre, su modelo, su versión...
+A: Y sus IP. Esa es la otra cara. Las fuentes coinciden: herramienta buenísima dentro de la LAN, fuga de información hacia afuera. Un usuario del foro puso el sniffer en su puerto de internet y vio salir su propio LLDP.
+B: Regalándole nombre y versión al que escanea.
+A: Exacto. Se controla con una lista de interfaces, discover interface list. Con la configuración por defecto queda en LAN. Sin ella, el valor de fábrica abarca todas las interfaces estáticas, WAN incluida.
+B: ¿Alguien discute algo?
+A: Cómo esconderlo. Un practicante propone filtrar el puerto cinco seis siete ocho en el firewall, y otro usuario no logra así que el router desaparezca. Lo que funciona es sacar la interfaz de la lista: deja de anunciarse y de escuchar por ahí.
+B: Como el puerto que va a la red de la administración de un edificio.
+A: Ese es el caso. Y si no hay Cisco, podés dejar solo LLDP y MNDP, y te ahorrás vecinos repetidos.
+B: ¿Laboratorio?
+A: Quince minutos: switch en ether tres, mirás los vecinos y la tabla de LLDP, armás una lista con el puerto de la notebook y el del switch, y desde la WAN verificás que el router ya no aparece.
+B: Y el plano del rack te lo empieza a armar el router.
+A: Así encontrás equipos en minutos y no le contás nada a quien no corresponde.

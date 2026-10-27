@@ -1,0 +1,15 @@
+A: Lección cuatro: input y forward. Si entendés esto, la mitad de los tickets de "no anda" se resuelven solos.
+B: Bueno, prometés mucho. A ver.
+A: El firewall de MikroTik tiene cadenas. Input es lo que va dirigido al router mismo: WinBox, el DNS del router, un ping a su IP. Forward es lo que pasa a través del router: la cámara que habla con el NVR, la PC que sale a internet.
+B: Y la IP de LAN del router también cuenta como input.
+A: Sí, input es todo lo que tiene como destino alguna IP del router. Las tres fuentes que analizan el firewall por defecto coinciden en este reparto: la regla que descarta lo que no viene de LAN protege al router, y la que descarta lo que entra por WAN sin dst-nat protege a la LAN.
+B: ¿Y nadie discute?
+A: En el concepto no. Sí hay dos escuelas en el foro: una dice que el firewall por defecto está bien pensado y solo abrís agujeros puntuales; la otra lo reescribe con un drop final explícito. Eso lo dejamos como decisión.
+B: Bien. ¿Y el error más común?
+A: El orden. Las reglas se leen de arriba abajo y la primera que coincide manda. La documentación lo avisa con un caso concreto: si en un router con configuración por defecto agregás una regla para permitir algo desde WAN con un add común, queda abajo del drop y nunca coincide.
+B: [risas] Y uno mirando la regla perfecta, sin entender por qué no anda.
+A: Para eso está place-before, que la mete arriba de la regla que elijas. Y otra herramienta: las address-lists. En lugar de poner IPs sueltas en cada regla, armás una lista que se llame admins y la regla apunta a la lista.
+B: Así, cuando cambia la IP de la oficina, tocás la lista y no diez reglas.
+A: Exacto. El laboratorio: creás la lista admins, una regla que acepta WinBox solo desde esa lista, ubicada con place-before arriba del drop, y mirás los contadores de paquetes.
+B: Quince minutos.
+A: Y después de esto, antes de escribir cualquier regla, te preguntás en qué cadena va y qué tiene arriba.

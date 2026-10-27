@@ -1,0 +1,19 @@
+A: Te llaman: el servidor está sin memoria, miren, free dice que quedan doscientos megas.
+B: Y vos respondés...
+A: Que miren la columna de al lado. Esa es la lección: available, no free.
+B: Explicalo, que esto genera muchos llamados.
+A: Linux usa la RAM que sobra como caché de disco. Eso aparece como usado. Free es la memoria que no hace nada. Available es lo que el sistema puede darle a un programa sin tener que ir a swap, contando la caché que se puede liberar.
+B: O sea que free bajo es normal.
+A: Normal y deseable. El autor de linuxblog piensa en la memoria libre como desperdiciada. Y cuenta el caso de dos servidores de sesenta gigas: uno con menos del uno por ciento libre y trece gigas disponibles, perfecto. El otro, con ciento cincuenta y tres días encendido y treinta gigas libres sin usar.
+B: [risas] El que parecía sano era el que desperdiciaba.
+A: Tal cual. La Debian Reference dice lo mismo con otras palabras: no te preocupes por el usado alto. Dos de tres fuentes de procesos y memoria coinciden. Y el mismo blog avisa que muchas herramientas de monitoreo alertan mirando free, así que te pueden marcar un falso problema.
+B: ¿Y cuándo sí falta memoria?
+A: Cuando available es bajo y además el swap se mueve todo el tiempo. Ahí abrís top o htop, ordenás por memoria con M mayúscula o por CPU con P mayúscula, y ves quién come.
+B: ¿Y si un proceso está colgado?
+A: kill con el número de proceso. Eso manda la señal quince, que le pide terminar prolijo. Solo si no responde, kill guion nueve, que no se puede ignorar pero no le da tiempo de guardar nada.
+B: ¿Y si es un servicio?
+A: Mejor systemctl restart del servicio, así systemd lo vuelve a levantar bien. kill es para lo que no es servicio.
+B: Laboratorio.
+A: Diez minutos: free guion h, comparás free con available, abrís top, buscás el proceso que más consume, y practicás un kill normal sobre un sleep que lanzás vos.
+B: Lo que cambia es que no pedís más RAM por una columna mal leída.
+A: Available y la carga, antes de decir que falta memoria.

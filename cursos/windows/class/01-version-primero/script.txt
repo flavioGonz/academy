@@ -1,0 +1,21 @@
+A: Martín, arranquemos por algo que parece obvio y no lo es. ¿Qué es lo primero que mirás cuando llegás a un servidor nuevo?
+B: Y... la IP, supongo. Si llega a la red.
+A: Ese es el segundo paso. El primero es saber qué Windows tenés adelante. Edición, versión y build.
+B: ¿Tanto importa? Windows es Windows.
+A: Ya no. Fijate esto: desde Windows 11 veinticuatro H dos, y en Windows Server dos mil veinticinco, la firma SMB pasó a ser obligatoria.
+B: Uf. ¿Y eso qué rompe?
+A: Los NAS viejos, algunos grabadores, el pendrive enchufado al router. Encima, en la edición Pro se cortó el acceso como invitado, ese que entra sin usuario ni contraseña.
+B: Claro, la carpeta compartida "pública" donde el grabador exporta los clips.
+A: Exacto. Y el técnico pasa una hora revisando cables cuando el problema es una política de seguridad.
+B: ¿Esto lo dicen varias fuentes o es una queja suelta?
+A: Pocas, dos, pero de peso. La documentación de Microsoft sobre Server dos mil veinticinco lo confirma, y The Register publicó el aviso de Ned Pyle, de Microsoft. Nadie lo discute.
+B: Me acuerdo de esa nota. El NAS debajo de la escalera.
+A: [risas] Esa. Y lo interesante es lo que recomienda: actualizar el firmware del equipo o reemplazarlo, antes que bajar la seguridad de Windows.
+B: O sea, se puede volver atrás, pero no conviene.
+A: Se puede, y quedás más expuesto. Pyle lo explica: Windows no tiene forma de saber si del otro lado hay un NAS viejo o un servidor malicioso.
+B: Bien. Entonces en obra, ¿cómo lo veo rápido?
+A: Escribís winver y ves versión y build. Después, en PowerShell, Get guion SmbClientConfiguration, y mirás dos valores: si exige firma y si permite invitados inseguros.
+B: Y lo anoto en la planilla del cliente.
+A: Eso. El laboratorio es justo eso: diez minutos en tu notebook o en una máquina virtual. Sacás edición, versión, build y el estado de SMB.
+B: Y si un grabador no abre la carpeta compartida, ya sé por dónde empezar.
+A: Primero la versión, después la red. Te ahorra la hora de cables.

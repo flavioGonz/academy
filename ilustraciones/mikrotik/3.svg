@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>La gestión no mira a internet</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">MIKROTIK</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">La gestión no mira a internet</text>
+<rect x="48" y="170" width="250" height="84" rx="16" fill="#FFFFFF" stroke="#D2492F" stroke-width="3"/><g transform="translate(68 196.0) scale(1.35)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-3 3-3 15 0 18M12 3c3 3 3 15 0 18"/></g><text x="112.0" y="208.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Internet</text><text x="112.0" y="231.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">escaneos automáticos</text>
+<rect x="48" y="420" width="250" height="84" rx="16" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="3"/><g transform="translate(68 446.0) scale(1.35)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></g><text x="112.0" y="458.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Técnico afuera</text><text x="112.0" y="481.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">con VPN</text>
+<rect x="400" y="140" width="420" height="380" rx="22" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="424.0" y="180.0" font-family="Familjen Grotesk" font-size="21" font-weight="600" fill="#FFFFFF" text-anchor="start">Router del cliente</text>
+<text x="424.0" y="206.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#17A8D4" text-anchor="start">/ip/service</text>
+<rect x="420" y="232" width="380" height="36" rx="8" fill="#0B3A66" stroke="#0B3A66" stroke-width="0"/>
+<text x="436.0" y="256.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="start">winbox</text>
+<text x="550.0" y="256.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#9FC3E3" text-anchor="start">8291</text>
+
+<rect x="675.2" y="235" width="108.8" height="30" rx="15" fill="#E3F5EC"/><text x="729.6" y="256.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">LAN o VPN</text>
+<rect x="420" y="276" width="380" height="36" rx="8" fill="#0B3A66" stroke="#0B3A66" stroke-width="0"/>
+<text x="436.0" y="300.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="start">ssh</text>
+<text x="550.0" y="300.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#9FC3E3" text-anchor="start">22</text>
+
+<rect x="675.2" y="279" width="108.8" height="30" rx="15" fill="#E3F5EC"/><text x="729.6" y="300.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">LAN o VPN</text>
+<rect x="420" y="320" width="380" height="36" rx="8" fill="#0B3A66" stroke="#0B3A66" stroke-width="0"/>
+<text x="436.0" y="344.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#6E88A1" text-anchor="start">telnet</text>
+<text x="550.0" y="344.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">23</text>
+
+<rect x="693.6" y="323" width="90.4" height="30" rx="15" fill="#011E38"/><text x="738.8" y="344.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">apagado</text>
+<path d="M434 338L600 338" stroke="#6E88A1" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<rect x="420" y="364" width="380" height="36" rx="8" fill="#0B3A66" stroke="#0B3A66" stroke-width="0"/>
+<text x="436.0" y="388.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#6E88A1" text-anchor="start">ftp</text>
+<text x="550.0" y="388.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">21</text>
+
+<rect x="693.6" y="367" width="90.4" height="30" rx="15" fill="#011E38"/><text x="738.8" y="388.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">apagado</text>
+<path d="M434 382L600 382" stroke="#6E88A1" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<rect x="420" y="408" width="380" height="36" rx="8" fill="#0B3A66" stroke="#0B3A66" stroke-width="0"/>
+<text x="436.0" y="432.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#6E88A1" text-anchor="start">www</text>
+<text x="550.0" y="432.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">80</text>
+
+<rect x="693.6" y="411" width="90.4" height="30" rx="15" fill="#011E38"/><text x="738.8" y="432.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">apagado</text>
+<path d="M434 426L600 426" stroke="#6E88A1" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<rect x="420" y="452" width="380" height="36" rx="8" fill="#0B3A66" stroke="#0B3A66" stroke-width="0"/>
+<text x="436.0" y="476.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#6E88A1" text-anchor="start">api</text>
+<text x="550.0" y="476.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">8728</text>
+
+<rect x="693.6" y="455" width="90.4" height="30" rx="15" fill="#011E38"/><text x="738.8" y="476.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">apagado</text>
+<path d="M434 470L600 470" stroke="#6E88A1" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<path d="M298.0 212.0C346.0 212.0,346.0 270.0,394.0 270.0" fill="none" stroke="#D2492F" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 6" marker-end="url(#a-alert)"/>
+<circle cx="350" cy="228" r="18" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/><g transform="translate(338 216)" fill="none" stroke="#D2492F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></g>
+<text x="48.0" y="284.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#D2492F" text-anchor="start">WinBox o SSH desde internet: no</text>
+<path d="M298.0 462.0C346.0 462.0,346.0 470.0,394.0 470.0" fill="none" stroke="#6E88A1" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 8" marker-end="url(#a-gray)"/><rect x="296.3" y="483.0" width="99.4" height="28" rx="14" fill="#FFFFFF" stroke="#6E88A1" stroke-width="1.5"/><text x="346.0" y="502.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="middle">túnel VPN</text>
+<circle cx="346" cy="436" r="18" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><g transform="translate(334 424)" fill="none" stroke="#0E8F5E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g>
+<rect x="902" y="240" width="250" height="84" rx="16" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="3"/><g transform="translate(922 266.0) scale(1.35)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></g><text x="966.0" y="278.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Notebook en la LAN</text><text x="966.0" y="301.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">192.168.88.0/24</text>
+<path d="M826.0 260.0C864.0 260.0,864.0 282.0,902.0 282.0" fill="none" stroke="#0E8F5E" stroke-width="3" stroke-linecap="round" marker-end="url(#a-ok)"/>
+<rect x="870" y="380" width="282" height="113" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="870" y="392" width="5" height="89" rx="2.5" fill="#B45309"/><text x="896.0" y="414.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="896.0" dy="0.0">available-from corta la</tspan><tspan x="896.0" dy="20.2">conexión, pero el puerto se</tspan><tspan x="896.0" dy="20.2">sigue viendo. Para esconderlo:</tspan><tspan x="896.0" dy="20.2">drop en input (lección 4).</tspan></text>
+<rect x="48" y="560" width="1104" height="54" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="572" width="5" height="30" rx="2.5" fill="#0A63B8"/><text x="74.0" y="594.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Cada servicio que escucha es una puerta más. Lo que no usás, se apaga; lo que usás, solo desde la LAN o el túnel.</tspan></text>
+</svg>

@@ -1,0 +1,19 @@
+A: Arrancamos. Primera pregunta antes de tocar cualquier servidor con VMware: ¿qué licencia tiene el cliente?
+B: Uf, la pregunta que nadie hace.
+A: Desde que Broadcom compró VMware cambió todo. Hoy se vende solo por suscripción, nada de licencias perpetuas nuevas.
+B: ¿Y qué se compra ahora?
+A: Básicamente dos paquetes: vSphere Foundation, que le dicen VVF, y Cloud Foundation, VCF. Standard y Enterprise Plus llegan hasta la ocho update tres. Y se cobra por núcleo físico, con un mínimo de dieciséis núcleos por procesador.
+B: Pará. ¿Aunque el procesador tenga ocho?
+A: Aunque tenga ocho. Introserv cita un ejemplo de la propia base de conocimiento de Broadcom: tres hosts con una CPU de ocho núcleos son veinticuatro núcleos reales, pero se licencian cuarenta y ocho.
+B: [suspiro] El doble. Con razón los clientes chicos andan con cara larga.
+A: Exacto. En ese cuadro coinciden seis de las nueve fuentes que leímos sobre licencias. Donde no coinciden es en el ESXi gratuito.
+B: ¿No lo habían matado?
+A: Lo cortaron en dos mil veinticuatro y volvió en abril de dos mil veinticinco, con la ocho cero update tres e. La KB de Broadcom lo confirma, pero con límites: no se conecta a vCenter, no tiene vMotion ni HA, no deja hacer backups por API y no tiene soporte.
+B: O sea, para laboratorio bárbaro. Para un cliente en producción, ojo.
+A: Esa es. Y una fecha para anotar: vSphere ocho deja de recibir soporte y parches el once de octubre de dos mil veintisiete.
+B: Falta un año. Pensá en el servidor de grabación de una obra, con ESXi y una licencia perpetua vieja. Dentro de un año ya no le llegan parches.
+A: Por eso el laboratorio de hoy es administrativo. Entrás al Host Client, Manage, Licensing, y anotás qué licencia tiene y cuándo vence. Por SSH, vmware guion ve ele te da la versión exacta.
+B: ¿Y los núcleos?
+A: esxcli hardware cpu global get. Por cada procesador contás el mayor entre sus núcleos y dieciséis. Ese es el número que mira Broadcom.
+B: Diez minutos, y panorama honesto para el cliente.
+A: Y no prometés funciones que su licencia no tiene. Eso cambia toda la conversación.

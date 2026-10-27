@@ -1,0 +1,19 @@
+A: Lección tres. Pregunta de camioneta: casa con un portero y un monitor. ¿Necesitás central?
+B: Mmm, yo de instinto pondría una.
+A: Y muchas veces no hace falta. Akuvox soporta llamada IP directa: el portero llama al monitor por su IP, sin servidor ni central, siempre que estén en la misma red.
+B: ¿Y qué se configura?
+A: Muy poco. En la web, Intercom, Basic, Direct IP. El puerto por defecto es el cinco mil sesenta, y si lo cambiás en uno lo cambiás en el otro. Después, en el portero, el botón de llamada apunta a la IP del monitor.
+B: ¿Cuántas fuentes lo respaldan?
+A: Pocas, honestamente. Dos páginas: la guía de llamadas del E16 y un hilo de la comunidad de FreePBX. Pero el hilo es buenísimo.
+B: Contá.
+A: Un integrador tenía un R20 llamando a un videoteléfono Grandstream. Por IP directa, la vista previa andaba: tocaban timbre y el teléfono mostraba la cara antes de atender.
+B: Bien.
+A: Lo pasó por FreePBX y la vista previa desapareció. Terminó siendo una opción del marcado de Asterisk, pero el aprendizaje es otro: cada cosa que ponés en el medio es algo más que puede romper una función.
+B: O sea, la central se justifica cuando suma.
+A: Exacto. Si alguien atiende desde otra oficina, desde un celular o en una cola, la central suma. Si es una casa, con portero y monitor en el mismo switch, la directa es más simple y más robusta.
+B: ¿Y la IP fija?
+A: Para llamada directa, IP fija o reserva en el DHCP sí o sí, porque si el monitor cambia de IP, el portero llama al vacío.
+B: Buen punto. ¿Laboratorio?
+A: Portero y monitor en el mismo switch, con IPs fijas del rango ciento noventa y dos ciento sesenta y ocho ochenta y ocho. Configurá el botón del portero para llamar a la IP del monitor, atendé y abrí desde la pantalla. Diez minutos.
+B: Y probá desenchufar y volver a enchufar el monitor para ver que la IP se mantiene.
+A: Con eso, la próxima casa sale sin central y sin dramas.

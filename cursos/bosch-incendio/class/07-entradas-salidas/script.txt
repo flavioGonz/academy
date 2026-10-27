@@ -1,0 +1,18 @@
+A: Hoy, todo lo que no es detector pero cuelga del lazo. Pulsadores, sirenas, balizas y módulos.
+B: Lo que mueve cosas.
+A: Y lo que avisa. Los pulsadores son la serie FMC cuatrocientos veinte. Las sirenas y balizas, las FNM cuatrocientos veinte y la FNX cuatrocientos veinticinco U, que es sirena y baliza en uno. De esa entran hasta ochenta y cuatro por lazo si hay detectores, ciento veintisiete sin detectores.
+B: ¿Y los módulos?
+A: La familia FLM. El FLM cuatrocientos veinte barra cuatro CON te cuelga dos zonas convencionales del lazo. El FLM cuatrocientos treinta I dos M uno trae dos entradas y una salida supervisada. El I cuatro R dos, cuatro entradas y dos relés. Y el RLE S es el de extinción.
+B: ¿Algo que se cuente distinto?
+A: Sí, y acá se equivoca mucha gente: cada entrada que puede dar alarma cuenta como un punto. Un módulo de ocho entradas puede sumar ocho. Hay que contarlos para los límites del panel.
+B: ¿Y las salidas a sirenas tienen algún truco?
+A: Uno de norma. Bosch avisa que un temporizador que apague solo las sirenas sirve únicamente para señales que no son de EN cincuenta y cuatro, porque la norma pide que silenciar o reponer sea una acción manual de un operador.
+B: Bien. ¿Y una historia?
+A: La del RLE S. Las versiones cinco punto catorce punto diecisiete y cinco punto quince punto veintisiete del programa RPS borraban sin aviso una entrada de realimentación del módulo de extinción al abrir configuraciones viejas. Bosch sacó la cinco punto quince punto veintiocho para corregirlo.
+B: Uf. Con extinción, eso no es un detalle.
+A: Para nada. Y el manual y la hoja técnica coinciden en todo lo demás.
+B: ¿Y en Uruguay algo sobre pulsadores?
+A: La IT once de dos mil diez pide un pulsador a no más de treinta metros de recorrido y al menos uno por piso. Pero lo que vale es lo que diga el proyecto.
+B: ¿Laboratorio?
+A: Agarrá el plano de una obra chica e inventariá pulsadores, entradas y salidas, con sus puntos y qué mueven. Quince minutos.
+B: Y cada salida que mueve algo físico queda con nombre y forma de aislarla.

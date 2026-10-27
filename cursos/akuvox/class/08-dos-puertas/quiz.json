@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Portón con un portero y hall con otro portero distinto. Atendés al del portón. ¿Por qué el DTMF no abre el hall?",
+  "options": [
+   "El DTMF viaja dentro de la llamada y solo lo recibe el portero con el que hablás",
+   "Porque el hall está en NC",
+   "Porque falta el RTSP",
+   "Porque el código tiene que ser de 4 dígitos"
+  ],
+  "answer": 0,
+  "why": "El DTMF va en la llamada activa; para el otro portero hace falta otro canal, como un comando HTTP."
+ },
+ {
+  "q": "Un solo portero con dos relés y el cliente quiere que un botón abra las dos puertas juntas. ¿Qué configuración lo logra?",
+  "options": [
+   "Dos centrales",
+   "Poner el mismo código DTMF en ambos relés",
+   "Usar SIP INFO",
+   "Activar ONVIF"
+  ],
+  "answer": 1,
+  "why": "Grandstream documenta que para abrir ambas puertas con un solo DTMF, las dos tienen que tener exactamente el mismo código; el principio vale para Akuvox con dos relés."
+ },
+ {
+  "q": "Vas a abrir un portero por HTTP desde la central. ¿Qué credencial usás?",
+  "options": [
+   "admin / admin, para no complicar",
+   "La clave del Wi-Fi",
+   "Un usuario propio para apertura HTTP, distinto del admin, y la central como origen permitido",
+   "Ninguna, sin autenticación es más rápido"
+  ],
+  "answer": 2,
+  "why": "Akuvox permite usuario y clave propios para Open Relay Via HTTP; el autor del caso FreePBX advierte que sin cuidado la solución tiene riesgo de seguridad."
+ }
+]

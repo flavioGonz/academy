@@ -1,0 +1,20 @@
+A: Lección dos. Servidor a medida.
+B: La parte que todos quieren saltear para ir rápido a las cámaras.
+A: [risas] Y después la pagan. Mirá, la guía de requisitos y rendimiento de Hikvision tiene dos perfiles para el SYS. El bajo: un i5 de octava generación, ocho gigas de RAM, placa de red gigabit y seiscientos cincuenta gigas de disco.
+B: ¿Y el alto?
+A: Xeon de la línea E dos mil trescientos, dieciséis gigas, y recomiendan treinta y dos para que vaya fluido. Con Windows Server y la base PostgreSQL que viene en el instalador.
+B: ¿Se puede virtualizar?
+A: El SYS sí, en VMware o Hyper-V. El Control Client no. Eso lo repiten la guía y el FAQ.
+B: ¿Y cuántas fuentes están de acuerdo con estos números?
+A: Dos de cuatro dan cifras concretas, y son del fabricante. La que discrepa es un competidor que vende video en la nube: dice que el costo real no es el fierro, es mantener el servidor. Backups, parches, seguridad.
+B: Bueno, en eso no se equivoca.
+A: No. Por eso conviene presupuestarlo. Ahora la instalación: el paquete se llama HikCentral Professional punto exe. Modo típico instala todo menos el Streaming Server. Modo personalizado elige qué módulos y en qué carpetas.
+B: ¿Algún error clásico?
+A: Dos del FAQ. Uno: el instalador no arranca. O no lo corriste como administrador, o el archivo está incompleto. Ahí se compara el hash MD5 con el que publica la página de descarga.
+B: ¿Y el otro?
+A: En el Service Manager aparece un servicio en estado excepcional con el puerto en rojo. Otro programa agarró ese puerto. Con netstat buscás el proceso, con tasklist ves quién es.
+B: Típico el IIS o un Skype viejo ocupando el ochenta.
+A: Exacto. Y si cambiás el ochenta o el cuatrocientos cuarenta y tres, después entrás al Web Client con el puerto en la dirección.
+B: ¿Laboratorio?
+A: Una VM de laboratorio con Windows Server. Verificás el hash del instalador, instalás en modo típico, abrís el Service Manager y revisás que ningún puerto esté tomado. Veinte minutos.
+B: Y la obra arranca con el servidor sano.

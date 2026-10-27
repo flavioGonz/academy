@@ -1,0 +1,35 @@
+[
+ {
+  "q": "En el diagnóstico, un FAP-425 muestra un valor óptico de 470. ¿Qué indica la guía de Bosch?",
+  "options": [
+   "Detector nuevo",
+   "Rango normal",
+   "Sensor desactivado",
+   "Contaminación fuerte: cambiarlo ya"
+  ],
+  "answer": 3,
+  "why": "La guía ubica de 450 a 510 la contaminación fuerte con reemplazo inmediato; por encima de 511 el sensor óptico se desactiva."
+ },
+ {
+  "q": "¿Qué frecuencia mínima de inspección recomienda Bosch para un AVENAR?",
+  "options": [
+   "Cada cinco años",
+   "Una inspección visual y funcional por año como mínimo",
+   "Solo cuando hay falla",
+   "Mensual obligatoria"
+  ],
+  "answer": 1,
+  "why": "El System manual recomienda al menos una inspección visual y funcional por año, además de recalibrar la pantalla táctil anualmente; la norma local o el proyecto pueden pedir más."
+ },
+ {
+  "q": "Llegás al mantenimiento y el reloj del panel está 25 minutos atrasado. ¿Qué hacés?",
+  "options": [
+   "Nada, no importa",
+   "Reiniciás el panel cortando la energía",
+   "Lo corregís con Set Panel Time desde RPS y lo anotás en el informe",
+   "Cambiás el controlador"
+  ],
+  "answer": 2,
+  "why": "Bosch recomienda verificar y corregir la hora en cada mantenimiento con Set Panel Time; todos los registros dependen de ella."
+ }
+]

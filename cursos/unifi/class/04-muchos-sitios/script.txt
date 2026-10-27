@@ -1,0 +1,19 @@
+A: Lección cuatro. Martín, ¿cuántos sitios UniFi tenemos?
+B: [suspiro] Si te digo la verdad, no sé. Cada uno en su consola, alguno con la cuenta de un técnico que ya no está...
+A: Bueno, para eso está Site Manager. Unifi punto ui punto com. Ves todas las consolas y servidores que tu cuenta administra.
+B: Pero ya dijimos que la configuración no vive ahí.
+A: No vive ahí. UniHosted, citando a Ubiquiti, lo describe como un portal que arma una conexión directa entre vos y el controlador de cada sitio. Tres de cuatro fuentes lo explican igual.
+B: ¿Y qué pasa si un sitio no aparece?
+A: Cuatro cosas. Remote Management apagado en la consola. Salida bloqueada a los puertos cuatrocientos cuarenta y tres y ocho mil ochocientos ochenta y tres. DNS o NTP bloqueados. O entraste con otra cuenta.
+B: ¿Y puertos de entrada?
+A: Ninguno. Todo es salida. Eso sale de una sola fuente, que cita el artículo oficial, así que vale la pena confirmarlo en el sitio.
+B: ¿Y para un integrador con muchos clientes?
+A: Ahí aparecen los Fabrics, que agrupan sitios bajo los mismos administradores y roles, disponibles desde abril de este año. Y los MSP Groups, para darle acceso a tu equipo. Además, en las notas de Network diez punto seis punto ciento uno aparecen los Blueprints con Drift Inspector: empujás una plantilla y te muestra qué sitio se desvió.
+B: ¿Gateway en cada sitio o un servidor central?
+A: Según Ubiquiti, en Site Manager son equivalentes. Lo que decide es costo de hardware, actualizaciones y quién mantiene el controlador.
+B: Y lo de la cuenta del técnico que se fue...
+A: Esa es la lección práctica. Las consolas de clientes van a una cuenta de la empresa, y los técnicos entran como administradores con su rol. Cuando alguien se va, le sacás el acceso y no perdés nada.
+B: ¿Laboratorio?
+A: Diez minutos. Entrás a tu consola de prueba, chequeás Remote Management, la ves en Site Manager e invitás a un compañero con rol limitado.
+B: Y armamos de una vez la planilla de sitios.
+A: Que es lo que vas a buscar a las tres de la mañana.

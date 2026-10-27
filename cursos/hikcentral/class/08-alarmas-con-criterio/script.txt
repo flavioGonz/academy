@@ -1,0 +1,18 @@
+A: Lección ocho, cierre del segundo arco. Alarmas con criterio.
+B: El monitor que suena todo el día y nadie mira.
+A: Ese. En HikCentral hay que distinguir evento de alarma. Un evento es un disparador, por ejemplo cámara offline o entrada de alarma, con una fuente, un horario de recepción y acciones vinculadas. Si activás disparar alarma, pasa a ser alarma, con prioridad y con destinatarios.
+B: ¿Destinatarios?
+A: Los usuarios que la reciben en los clientes y en el móvil. Y la regla que me gusta: si nadie la va a atender, no es alarma. Es evento.
+B: ¿Cuántas fuentes respaldan esto?
+A: Dos de dos, el manual de eventos y el FAQ, ambos de Hikvision. Evidencia fina, pero muy concreta.
+B: Bueno. ¿Cómo se baja el ruido?
+A: Dos perillas del manual. Ignorar repetidos: si ponés treinta segundos, los eventos iguales de la misma cámara dentro de ese lapso cuentan como uno. Y demorar la alarma de cámara offline: si la cámara vuelve dentro de la demora, no avisa.
+B: Ah, para las que parpadean por un microcorte.
+A: Exacto. El manual lo dice así: que mantenimiento se concentre en las cámaras realmente desconectadas.
+B: ¿Y cuando sí es alarma?
+A: Vinculás grabación con pre y post evento. Por ejemplo, alguien abre una puerta forzada: ves los segundos antes y los de después. Y podés bloquear ese archivo unos días para que no se sobrescriba. Ojo, la cámara tiene que tener calendario de grabación.
+B: ¿Algún límite?
+A: El FAQ dice que más de veinte eventos con imagen por segundo hacia el Web Client generan lag. Y en el centro de alarmas se reconocen hasta cien de una vez.
+B: ¿Laboratorio?
+A: Dos reglas. Cámara offline con demora de dos minutos, como evento para mantenimiento. Y una entrada de alarma como alarma real, con grabación de diez segundos antes, treinta después, bloqueo de siete días y un destinatario. Veinte minutos.
+B: Y el monitor vuelve a significar algo.

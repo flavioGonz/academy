@@ -1,0 +1,17 @@
+A: Lección nueve. Arranco con una frase que escuché mil veces: "tenemos HA, no se cae nunca".
+B: [risas] Y se cae.
+A: Se cae. Lo que hace HA es otra cosa. Cuando un host del clúster muere, HA arranca sus VMs en otro host. Hay un corte, de minutos, mientras las VMs bootean.
+B: ¿Y vMotion? Ese sí mueve sin cortar.
+A: Ese sí. La documentación de Broadcom lo explica bien: copia la memoria, los registros y las conexiones de la VM encendida a otro host, y la VM sigue corriendo. Si algo falla en el medio, vuelve sola a su lugar.
+B: ¿Y el disco?
+A: Si cambiás solo de host, el disco tiene que estar en almacenamiento compartido, que vean los dos. Si no, se puede mover host y disco a la vez, pero tarda más.
+B: ¿Y DRS?
+A: DRS reparte la carga entre los hosts mirando CPU y memoria. Y acá hay una diferencia que marcan las dos fuentes que leímos: HA sigue funcionando aunque vCenter esté caído. DRS no, necesita vCenter.
+B: ¿Las dos fuentes? Medio poco.
+A: Medio poco, y una es un artículo de TechTarget de dos mil once. Vale por los conceptos, no por las pantallas. La otra es una KB de Broadcom, con un dato que sirve mucho: crear el clúster no requiere licencia especial, pero activar HA o DRS sí.
+B: Ahí se conecta con la lección uno. Según la tabla de Thomas-Krenn, vSphere Standard no trae DRS.
+A: Tal cual. Y un consejo del artículo: cuando activás DRS, dejalo en manual o parcial unos días, mirá qué recomienda, y recién después lo pasás a automático.
+B: Para ver si no anda moviendo el servidor de grabación a cada rato.
+A: Exacto. El laboratorio necesita vCenter: puede ser uno de laboratorio o los Hands-On Labs gratuitos de Broadcom. Creás un clúster, activás HA, y hacés un vMotion de una VM de prueba mirando la tarea.
+B: Veinte minutos.
+A: Y la regla, para el cliente: HA reinicia en otro host. Nunca decir "no se cae".

@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Vas a importar VMs de un ESXi a Proxmox con el importador integrado. El cliente tiene vCenter. ¿Contra qué conviene conectar el importador?",
+  "options": [
+   "Contra cada host ESXi directamente, porque por vCenter el rendimiento baja mucho",
+   "Contra vCenter, que ve todo",
+   "Contra el NAS",
+   "No importa"
+  ],
+  "answer": 0,
+  "why": "El wiki de Proxmox advierte que importar a través de vCenter reduce drásticamente el rendimiento; conviene apuntar al host."
+ },
+ {
+  "q": "Antes de migrar una VM Windows de VMware a Proxmox, ¿qué conviene hacer?",
+  "options": [
+   "Nada, el importador resuelve todo",
+   "Desinstalar VMware Tools, anotar la configuración de red y preparar los drivers VirtIO; tener las claves de BitLocker si usa vTPM",
+   "Convertir los discos a thick",
+   "Activar DRS"
+  ],
+  "answer": 1,
+  "why": "El wiki recomienda quitar las herramientas del hipervisor anterior, anotar la red (cambia el adaptador) y preparar VirtIO; el vTPM no se migra."
+ },
+ {
+  "q": "Un cliente con dos servidores de 8 núcleos, sin vSAN ni NSX, pregunta si renovar VMware o migrar. ¿Cuál es el enfoque más honesto?",
+  "options": [
+   "Renovar siempre, es lo que recomienda el fabricante",
+   "Migrar siempre, VMware es caro",
+   "Contar núcleos licenciables (32 contra 16 reales), listar las funciones que usa, y hacer un piloto antes de decidir",
+   "Instalar ESXi gratuito en producción y no pagar nada"
+  ],
+  "answer": 2,
+  "why": "Las fuentes coinciden en decidir con números: con CPUs de menos de 16 núcleos se pagan núcleos que no existen, pero la decisión se apoya en un inventario y un piloto."
+ }
+]

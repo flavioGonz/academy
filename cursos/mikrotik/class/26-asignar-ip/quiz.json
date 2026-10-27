@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Armaste un servidor DHCP en ether5 para las cámaras, pero el servidor aparece inválido y ninguna cámara toma dirección. ¿Qué es lo primero que revisás?",
+    "options": [
+      "Que ether5 tenga una IP de esa red cargada en /ip/address",
+      "Que las cámaras tengan IP fija",
+      "Que el pool incluya la IP del router",
+      "Que el DNS del router tenga allow-remote-requests"
+    ],
+    "answer": 0,
+    "why": "Según la documentación de DHCP Server, sin una IP en la interfaz el servidor queda inválido. Las cuatro piezas son la IP en la interfaz, el pool, la red y el servidor."
+  },
+  {
+    "q": "Tenés que configurar un NVR que viene de fábrica en 192.168.1.0/24, y la LAN del sitio es 192.168.88.0/24 sobre el bridge. ¿Cuál es la forma más prolija desde el MikroTik?",
+    "options": [
+      "Cambiar la IP del bridge a 192.168.1.1/24 y volverla después",
+      "Poner 192.168.1.254/24 en el puerto ether3, que está dentro del bridge",
+      "Agregar una segunda IP 192.168.1.254/24 en el bridge, configurar el NVR y borrarla",
+      "Crear un segundo bridge solo para el NVR"
+    ],
+    "answer": 2,
+    "why": "Una interfaz admite varias IP. La segunda va en el bridge, no en un puerto esclavo, y cambiar la IP principal te deja afuera a vos y a toda la LAN."
+  },
+  {
+    "q": "Creaste el pool 10.10.20.1-10.10.20.254 para la red 10.10.20.0/24, y el router es 10.10.20.1. ¿Qué cambiarías?",
+    "options": [
+      "Nada: el servidor se salta solo la IP del router",
+      "Pasar la red a /16 para tener más direcciones",
+      "Poner el gateway del DHCP en 10.10.20.254",
+      "Sacar la IP del router del pool, y de paso dejar un rango libre para las IP fijas"
+    ],
+    "answer": 3,
+    "why": "La documentación de DHCP Server pide no incluir la IP del router en el pool. Dejar, por ejemplo, del .2 al .99 fuera del pool da lugar a cámaras y NVR con IP fija sin choques."
+  }
+]

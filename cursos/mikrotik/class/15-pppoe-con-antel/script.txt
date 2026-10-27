@@ -1,0 +1,17 @@
+A: Lección quince, la que más nos piden: PPPoE con Antel. El MikroTik marcando directo, con el módem de Antel en modo puente.
+B: Para que el router del cliente sea el nuestro y no el de Antel.
+A: Exacto. Primero lo confirmado. La página de preguntas frecuentes de Antel dice que sus equipos pueden funcionar en modo puente o router WiFi, y que el cambio se pide por MiAntel o al ciento veintiuno. En un foro uruguayo lo resumen así: en fibra, el cambio lo hacen ellos, de forma remota.
+B: ¿Y la VLAN? En España cada operador usa una.
+A: Honestidad: ninguna fuente que leímos confirma si Antel pide VLAN con el ONT en puente. Lo que funciona es preguntarle a Antel y probar primero sin VLAN, con el escáner pppoe client scan, que muestra si aparece el concentrador.
+B: Bien. ¿Y el MikroTik cómo queda?
+A: Creás un cliente PPPoE sobre ether1 con el usuario y la contraseña del servicio, add default route y use peer DNS. Y ojo, desde ese momento la WAN es la interfaz PPPoE, no ether1: el NAT y la lista WAN apuntan ahí.
+B: Clásico: conecta, pero la LAN no navega.
+A: Ese mismo. Después, MTU. Según la documentación, PPPoE se come ocho bytes, así que MTU y MRU no pasan de mil cuatrocientos noventa y dos, y se ajusta el MSS. El síntoma típico: páginas que cargan a medias.
+B: ¿Cuántas fuentes coinciden?
+A: En lo de MikroTik, dos de ocho; en que el puente se pide a Antel, tres. Y hay una voz en contra: usuarios de un foro uruguayo, en dos mil diecisiete, tuvieron cortes con el ONT en puente y volvieron a modo router.
+B: O sea, si hay cortes, tener plan B.
+A: Y algo más: con PPPoE la IP pública puede cambiar en cada reconexión. Para seguirla está el DDNS de IP Cloud, que vemos en la dieciocho.
+B: ¿Laboratorio?
+A: Veinte minutos: escaneás, creás el cliente, lo sumás a la lista WAN, mirás con monitor el MTU y la IP, y reconectás para ver si cambia.
+B: Y lo que no esté claro, se pregunta.
+A: Esa es la regla: con Antel, confirmar antes y anotar lo que te dijeron.

@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Llegás a una obra con un R20A recién conectado y sin pantalla. ¿Cuál es la forma más rápida de saber su IP?",
+  "options": [
+   "Escanear toda la red con nmap",
+   "Mantener apretado el botón de llamada unos cinco segundos para que la diga en voz alta",
+   "Entrar a 192.168.1.100, que es la IP fija de fábrica",
+   "Marcar 9999 y después 3888 en el teclado"
+  ],
+  "answer": 1,
+  "why": "Según la documentación de Akuvox, los porteros sin teclado como R20A, E12 o E13 anuncian su IP por voz al mantener el botón de llamada unos cinco segundos. El 9999/3888 es para R29 y X915."
+ },
+ {
+  "q": "Un E16 con firmware reciente no acepta el PIN de sistema 'admin'. ¿Qué es lo más probable?",
+  "options": [
+   "El equipo está dañado",
+   "Hay que resetearlo de fábrica",
+   "En versiones posteriores a 216.30.10.121 el PIN por defecto es Admin321",
+   "El PIN de sistema es el mismo que el PIN público 33333333"
+  ],
+  "answer": 2,
+  "why": "Akuvox documenta que el PIN de sistema del E16 es 'admin' hasta 216.30.10.121 y 'Admin321' en versiones posteriores."
+ },
+ {
+  "q": "Ya entraste a la web de un portero con admin / admin. ¿Qué conviene hacer antes de irte de la primera visita?",
+  "options": [
+   "Cambiar la clave web y anotarla en la ficha del equipo",
+   "Nada, la clave de fábrica es segura si el equipo está en la LAN",
+   "Dejarla igual para que soporte pueda entrar",
+   "Desactivar la web para que nadie entre"
+  ],
+  "answer": 0,
+  "why": "La clave por defecto está publicada en la documentación pública; Claroty la señala como una de las debilidades que permiten tomar el equipo."
+ }
+]

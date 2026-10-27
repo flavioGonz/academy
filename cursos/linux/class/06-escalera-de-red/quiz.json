@@ -1,0 +1,35 @@
+[
+ {
+  "q": "El servidor responde a ping 1.1.1.1 pero ping debian.org falla. ¿En qué escalón está el problema?",
+  "options": [
+   "Cable o VLAN",
+   "El servicio web de debian.org",
+   "Gateway caído",
+   "DNS: nameservers mal configurados o inalcanzables"
+  ],
+  "answer": 3,
+  "why": "Si llegás a una IP pública, la interfaz, el gateway y la salida funcionan. Lo que falla es la resolución de nombres."
+ },
+ {
+  "q": "Tenés que cambiar la IP de un Ubuntu Server al que entrás por SSH desde la oficina. ¿Qué comando te protege si te equivocás?",
+  "options": [
+   "netplan apply",
+   "ip addr flush",
+   "netplan try",
+   "systemctl restart networking"
+  ],
+  "answer": 2,
+  "why": "netplan try aplica la configuración y, si no confirmás con Enter en 120 segundos (porque perdiste la conexión), vuelve sola a la anterior."
+ },
+ {
+  "q": "Hacés curl a un puerto del servidor y la conexión queda colgada hasta el timeout. ¿Qué te sugiere?",
+  "options": [
+   "Un firewall está descartando los paquetes (DROP)",
+   "No hay ningún servicio escuchando",
+   "El DNS está mal",
+   "La interfaz no tiene IP"
+  ],
+  "answer": 0,
+  "why": "Un puerto sin servicio responde rechazando la conexión al instante. El timeout es la firma de un filtro que tira los paquetes en silencio."
+ }
+]

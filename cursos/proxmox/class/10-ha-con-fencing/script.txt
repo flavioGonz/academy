@@ -1,0 +1,19 @@
+A: Lección diez. Ya tenemos tres votos. Ahora, alta disponibilidad. ¿Qué te imaginás que hace?
+B: Que si se muere un nodo, la VM arranca sola en otro.
+A: Eso. Pero la parte que nadie cuenta es cómo se asegura de que la VM no siga viva en el nodo viejo.
+B: ¿Puede pasar eso?
+A: La guía oficial lo explica con un ejemplo que da miedo. Imaginá que se cortan todas las redes de un nodo menos la del almacenamiento. La VM sigue corriendo y escribiendo en el disco compartido. Si otro nodo la arranca, quedan dos escribiendo el mismo disco. Y la guía dice que eso puede destruir todos los datos de la VM.
+B: [suspiro] Eso es pesadilla.
+A: Por eso existe el fencing. Cada nodo tiene un watchdog, un temporizador. Si el nodo pierde quórum y no lo recupera en unos sesenta segundos, se reinicia a sí mismo. Recién ahí los otros arrancan la VM.
+B: O sea, el nodo se apaga solo para no hacer daño.
+A: Exacto. Y por eso los requisitos: tres votos, almacenamiento compartido o replicación, y hardware redundante.
+B: ¿Y si tengo que tocar la red del clúster? Se me reinician todos.
+A: Para eso vino algo nuevo en la nueve punto dos: desarmar la HA. Un comando libera los watchdogs en todo el clúster, hacés el mantenimiento, y volvés a armar. Mientras está desarmada no te protege, así que la ventana, cortita.
+B: ¿Y la migración en vivo?
+A: Con el mismo fabricante de CPU, Intel con Intel o AMD con AMD. Entre fabricantes, la guía dice que no está garantizada. Y en un upgrade, de versión vieja a nueva siempre funciona; al revés, no.
+B: ¿Fuentes?
+A: Dos, la guía oficial y la wiki del upgrade. Coinciden.
+B: ¿Laboratorio?
+A: En el clúster de la lección anterior: migrá una VM en vivo con qm migrate y la opción online. Después ha manager add para la VM, y ha manager status. Probá el desarme con freeze, mirá el estado, y volvé a armar.
+B: Quince minutos.
+A: Y la próxima vez que toques la red de un clúster, vas a desarmar la HA antes.

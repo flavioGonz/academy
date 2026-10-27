@@ -1,0 +1,16 @@
+A: Lección diez. Audio de un lado. El clásico: "yo lo escucho, él no me escucha".
+B: El ticket que más odio. ¿Por dónde arranco?
+A: Por lo que dice el propio manual de la UCM, repetido en extensiones y troncales: el audio de un lado casi siempre es configuración de NAT o puertos SIP y RTP en el firewall. Seis de siete fuentes que leímos van por ahí.
+B: Ok, primero NAT y puertos. ¿Después?
+A: Después el SIP ALG del router. Las cinco fuentes que hablan del tema dicen apagarlo. Didlogic cuenta un síntoma muy fino: si la llamada se corta siempre entre los treinta y los treinta y cinco segundos, es casi seguro un ACK que no llega.
+B: ¿Por qué treinta y dos segundos?
+A: Es un temporizador de SIP: sesenta y cuatro veces medio segundo esperando la confirmación. Si el ALG rompió la dirección, la confirmación no vuelve y la central corta.
+B: Mirá vos. ¿Y nadie defiende el ALG?
+A: Plexatalk y SureVoIP admiten casos raros con servidores viejos que no manejan NAT. Con UCM y teléfonos Grandstream no es el caso. Y algo importante: después de apagarlo, reiniciá el router, porque las sesiones viejas siguen.
+B: ¿Y si ya apagué todo y sigue?
+A: Captura. La UCM tiene captura de paquetes propia, en Maintenance, Network Troubleshooting, Ethernet Capture. Abrís el archivo en Wireshark, buscás el INVITE y mirás la línea c igual del SDP.
+B: La dirección a la que el otro manda el audio.
+A: Exacto. Si dice una IP privada hacia afuera, ahí está el problema. Y ojo con apurarte a culpar al router: en un hilo de 3CX, unos GXP oían pero no eran oídos, ya habían revisado el ALG, sacado el teléfono afuera del firewall, reseteado todo, y el problema estaba solo contra un servidor.
+B: [suspiro] O sea que la captura te ahorra la tarde.
+A: Te ahorra la tarde. Laboratorio de veinte minutos: hacés una captura de una llamada y encontrás la línea c igual en el INVITE y en la respuesta.
+B: Y el próximo ticket de audio de un lado lo resolvés con datos, no con fe.

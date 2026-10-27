@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Tenés que actualizar un router de una red de cámaras aislada, sin salida a internet. ¿Qué hacés?",
+    "options": [
+      "Check for Updates hasta que aparezca algo",
+      "Netinstall siempre",
+      "Bajás el .npk de la arquitectura del equipo, lo subís a la raíz de Files y reiniciás",
+      "Subís el .npk dentro de la carpeta flash/hotspot"
+    ],
+    "answer": 2,
+    "why": "La documentación describe la actualización manual: paquete de la arquitectura correcta (System, Resources) en la raíz de Files y reinicio. Dentro de otra carpeta no se instala."
+  },
+  {
+    "q": "Actualizaste a mano un hAP ax subiendo solo el paquete routeros. Arranca bien pero sin WiFi. ¿Qué pasó probablemente?",
+    "options": [
+      "Faltó subir el paquete de radio de la misma versión (wifi-qcom)",
+      "Se borró la configuración",
+      "Falta actualizar el DDNS",
+      "El canal era long-term"
+    ],
+    "answer": 0,
+    "why": "Desde 7.13 los drivers de radio son paquetes aparte: wifi-qcom para 802.11ax. En una actualización manual van todos los paquetes instalados, en la misma versión."
+  },
+  {
+    "q": "Una versión nueva rompió algo en un cliente y querés volver a la anterior sin Netinstall. ¿Qué camino da la documentación?",
+    "options": [
+      "Restaurar el backup binario en la versión nueva",
+      "Apretar el botón de reset 5 segundos",
+      "Cambiar el canal a development",
+      "Subir los .npk de la versión anterior y ejecutar /system/package/downgrade"
+    ],
+    "answer": 3,
+    "why": "El comando downgrade reinicia e instala la versión más vieja que encuentre entre los paquetes subidos. También se puede pasar a un canal que ofrezca una versión anterior."
+  }
+]

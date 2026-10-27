@@ -1,0 +1,19 @@
+A: Lección siete. Pregunta incómoda: ¿cuándo fue la última vez que restauraste un backup de un cliente, solo para probar?
+B: [suspiro] Mejor no contesto.
+A: Somos dos. La herramienta de Proxmox se llama vzdump, y según la guía oficial los backups son siempre completos: configuración y todos los discos.
+B: ¿Y la VM se apaga para el backup?
+A: Depende del modo. Stop apaga la VM un momento y da la máxima consistencia. Snapshot la deja corriendo y copia los bloques en vivo, con un pequeño riesgo de inconsistencia. Y ahí vuelve el guest agent de la lección cuatro: con el agente activo, Proxmox congela el sistema de archivos justo antes y lo descongela después.
+B: O sea, snapshot más agente, y casi no hay riesgo.
+A: Para la mayoría de los servidores, sí. Ojo con una confusión: el modo snapshot del backup no es lo mismo que el botón Snapshot de la VM.
+B: ¿Cómo es eso?
+A: El snapshot de la VM queda en el mismo disco, en el mismo servidor. Sirve para volver atrás antes de un update. Si se muere el disco, se muere el snapshot con todo. Eso no es backup.
+B: Claro. Es un deshacer, no una copia.
+A: Exacto. Y la parte que menos se hace: probar. La documentación de Proxmox Backup Server es clarita. Restaurá a una VM nueva, nunca encima de la que está andando. Y si tenés muchas, restaurá muestras al azar cada semana o cada mes.
+B: ¿Cuántas fuentes dicen lo de probar?
+A: Las tres que hablan de restaurar coinciden. Ninguna discrepa.
+B: Y si el backup está en un PBS, ¿hay algo más rápido?
+A: Live restore. La VM arranca apenas empieza la restauración y los datos se copian por detrás. Anda lenta un rato, pero el cliente vuelve a trabajar.
+B: En una caída de un NVR virtual, eso es oro.
+A: Laboratorio: hacé un vzdump de una VM de prueba a local, en modo snapshot con zstd. Después qmrestore con otro número, desconectale la red para que no choque la IP, y arrancala.
+B: Quince minutos, y por fin podés decir que tu backup funciona.
+A: Y a partir de ahí, cada backup nuevo de un cliente tiene su restore de prueba anotado.

@@ -1,0 +1,19 @@
+A: Lección treinta y cinco: Netwatch. Pregunta incómoda: ¿quién se entera primero cuando se cae el NVR de un cliente?
+B: [suspiro] El cliente. Cuando quiere ver una grabación y no hay nada.
+A: Eso cambia hoy. Netwatch vigila un equipo desde el router y, cuando cambia de estado, corre un script: uno cuando cae y otro cuando vuelve.
+B: ¿Solo con ping?
+A: En RouterOS siete, no. Tiene el ping simple, una sonda ICMP que manda diez paquetes y mira pérdida y latencia, conexión TCP a un puerto, pedido HTTP o HTTPS, y consulta DNS.
+B: Entonces al NVR le puedo vigilar el puerto del video, no solo si contesta el ping.
+A: Exacto, porque un NVR puede contestar ping con el servicio colgado. Las fuentes coinciden en cómo funciona; donde discrepan es en dos decisiones: si para el failover conviene Netwatch o las rutas recursivas, y si una cámara colgada se reinicia con un script o con el vigilante de ping que trae el propio puerto PoE.
+B: ¿Alguna historia del foro?
+A: Dos. Un usuario vigilaba con un ping por minuto y recibía avisos por cada paquete perdido. La sonda ICMP de diez paquetes con umbral de pérdida lo resuelve.
+B: ¿Y la otra?
+A: Con la versión siete punto trece, los avisos a Telegram desde Netwatch dejaron de llegar. Fetch quería guardar la respuesta en un archivo, y Netwatch no tiene ese permiso. Soporte de MikroTik respondió: agregar output igual a none.
+B: Un detalle chiquito que te deja ciego meses.
+A: Por eso, después de cada actualización, conviene probar el aviso desenchufando.
+B: ¿Y en obra cómo queda?
+A: Un local con NVR y una cámara PoE que a veces se cuelga. Una sonda TCP al puerto quinientos cincuenta y cuatro del NVR avisa por mail o Telegram. Otra a la cámara, si cae, le corta el PoE diez segundos.
+B: ¿Laboratorio?
+A: Veinte minutos: la sonda al NVR con log, desenchufás y mirás el log, después el mail, el Telegram con output none, y el reinicio del PoE.
+B: Ojo con una cosa: si se cae el router entero, no te puede avisar él.
+A: Para eso, un monitor de afuera. Para todo lo demás, te enterás vos antes que el cliente.

@@ -1,0 +1,35 @@
+[
+ {
+  "q": "El cliente dice: 'tenemos backup, sacamos un snapshot por semana y lo dejamos'. ¿Qué le explicás?",
+  "options": [
+   "Que conviene pasarlo a thick",
+   "Que alcanza si el snapshot incluye memoria",
+   "Que el snapshot depende del disco base y no es backup; además no conviene mantenerlo más de 72 horas",
+   "Que está bien si son menos de 32"
+  ],
+  "answer": 2,
+  "why": "La KB de Broadcom dice que los snapshots no son backups (si se pierde el disco base no se puede restaurar) y recomienda no mantener uno más de 72 horas."
+ },
+ {
+  "q": "Hay que agrandar el disco de una VM que tiene un snapshot de ayer. ¿Qué hacés?",
+  "options": [
+   "Primero borro o consolido el snapshot y después agrando el disco",
+   "Saco otro snapshot y agrando",
+   "Lo agrando igual desde el cliente",
+   "Lo agrando por línea de comandos con vmkfstools"
+  ],
+  "answer": 0,
+  "why": "La KB advierte no agrandar discos con snapshots existentes, ni por CLI, porque puede corromper el snapshot y perder datos."
+ },
+ {
+  "q": "Varias VMs muestran 'Virtual machine disks consolidation is needed' y el datastore se llena. El backup corre de noche. ¿Cuál es la causa más probable?",
+  "options": [
+   "El MTU del switch",
+   "Falta de licencia de vCenter",
+   "VMware Tools desactualizado",
+   "Jobs de backup que crearon snapshots y fallaron antes de borrarlos, dejando deltas"
+  ],
+  "answer": 3,
+  "why": "Es el escenario típico: el backup crea un snapshot, falla, y quedan deltas que hay que consolidar tras liberar el proxy."
+ }
+]

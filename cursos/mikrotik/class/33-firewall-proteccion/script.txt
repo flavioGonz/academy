@@ -1,0 +1,19 @@
+A: Lección treinta y tres: las reglas típicas de protección. Arranco con una historia del foro de MikroTik.
+B: Dale.
+A: Un usuario nota que su router sube cinco megas por segundo, todo el día, sin que nadie use internet. El proveedor le avisa: cuatrocientos nueve gigas en una semana.
+B: Uf. ¿Qué era?
+A: El DNS del router abierto a internet: consultas remotas permitidas y nada que frenara el puerto cincuenta y tres desde la WAN. Lo usaban para ataques de amplificación.
+B: El router atacando a otros con el ancho de banda del cliente.
+A: Exacto. Hoy vemos la protección completa, en las dos cadenas. En input, lo que va al router: aceptar lo establecido y relacionado, descartar lo inválido, ICMP, los administradores por address-list, y al final un drop para todo lo que no viene de la LAN.
+B: Y en forward, lo que pasa a través.
+A: FastTrack para lo establecido, drop de inválidos, y drop de lo que entra por la WAN sin un dst-nat. Eso cuida a la LAN aunque alguien conozca tu red interna.
+B: ¿Y las listas contra fuerza bruta?
+A: Ahí hay discusión. La documentación de MikroTik las da como capa extra: cada conexión nueva por SSH sube un escalón y a la cuarta, lista negra por un día. Aclara que con el firewall por defecto no hacen falta. Y un veterano del foro dice que son casi inútiles: cuentan conexiones, no logins fallidos, y te podés bloquear vos mismo.
+B: [risas] Con un script de backup que abre otra sesión, por ejemplo.
+A: Ese caso lo cita la documentación. Por eso la lista de admins va exceptuada, arriba de todo. En el fondo coinciden: primero no exponer.
+B: ¿Y el ping desde afuera? ¿Lo limito?
+A: Podés, a cinco por segundo. MikroTik aclara que el kernel ya frena el ICMP a cien por segundo, así que es opcional.
+B: ¿El laboratorio?
+A: Veinte minutos: ubicás cada regla del firewall por defecto, limitás el ping desde la WAN, cerrás el cincuenta y tres desde afuera y probás las listas con cuatro SSH seguidos.
+B: Y mirás cómo cae tu IP en la lista negra.
+A: Así cada regla tiene un porqué, y el router deja de trabajar para otros.

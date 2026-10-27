@@ -1,0 +1,18 @@
+A: Hoy, un número para tatuarse: quince voltios.
+B: ¿Quince? El lazo sale con treinta.
+A: Treinta en los bornes del módulo, sí. Pero el manual de Bosch dice que al último elemento tienen que llegarle al menos quince voltios, y lo escribe con signo de exclamación: no puede bajar de ahí.
+B: Y la diferencia se la come el cable.
+A: El cable y los propios equipos. Cada elemento tiene una pequeña resistencia interna, cero coma treinta y cinco ohm en LSN improved. Y la fórmula del manual supone el peor caso: todos los elementos amontonados al final del cable.
+B: O sea, conservadora.
+A: A propósito. El manual da ejemplos con sus gráficos. Con un LSN mil quinientos A, ciento veinte elementos de medio miliamper llegan a unos mil novecientos cincuenta metros. Pero si cada elemento consume dos miliamperes, en mil metros entran unos setenta y tres.
+B: Uf, la diferencia es enorme.
+A: Por eso las sirenas y los módulos pesan tanto. Y hay otro límite que se olvida: el cable que no pasa por aisladores, como las entradas de los módulos FLM o la línea de un FLM NAC, no puede sumar más de quinientos metros.
+B: ¿Y el cable?
+A: Bosch recomienda par trenzado de cero coma ocho milímetros, rojo, el clásico de detección. Con sección cero coma cinco cero tres milímetros cuadrados.
+B: ¿Alguien discute esto?
+A: Acá la evidencia es escasa: es una sola fuente, el System manual, y es la primaria. Para el cálculo oficial Bosch usa el Safety Systems Designer, que hace lo mismo con todos los datos del proyecto.
+B: Entonces, ¿para qué la cuenta a mano?
+A: Para darte cuenta en obra, antes de tirar cable, si un lazo está en el límite. Si la cuenta a mano da justa, vas al SSD y lo corrés en serio.
+B: ¿Y el laboratorio?
+A: Una planilla. Ponés largo del lazo, cantidad de elementos y consumo promedio, sacás la resistencia del par, sumás la de los equipos, multiplicás por la corriente y ves cuánto queda de los treinta. Veinte minutos.
+B: Y si te queda menos de quince, ni lo pienses: otro lazo o un mil quinientos.

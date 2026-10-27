@@ -1,0 +1,35 @@
+[
+  {
+    "q": "En el historial de un teléfono IP ves, al caminar por el pasillo, desconexión y reconexión en lugar de roams. ¿Qué indica según Purple?",
+    "options": [
+      "Que Fast Roaming funciona bien",
+      "Un hueco de cobertura o un mínimo RSSI demasiado alto",
+      "Que el teléfono tiene la batería baja",
+      "Que hay que subir el ancho de canal"
+    ],
+    "answer": 1,
+    "why": "Purple distingue: un roam limpio es un paso de AP; una desconexión seguida de reconexión significa que el cliente perdió la red."
+  },
+  {
+    "q": "Llaman por 'WiFi lento desde ayer'. ¿Qué mirás primero?",
+    "options": [
+      "Cambiar todos los canales a mano",
+      "Reiniciar el controlador",
+      "Actualizar el firmware de todos los AP",
+      "El Time Machine de la radio del AP y el historial del cliente, para ver qué cambió en las últimas 24 horas"
+    ],
+    "answer": 3,
+    "why": "Time Machine de radios (10.6.101) muestra cambios de configuración y eventos de las últimas 24 horas; mirar antes de tocar evita cambios a ciegas."
+  },
+  {
+    "q": "Ajustaste tres cosas a la vez y ahora una impresora no conecta. ¿Qué enseña WunderTech?",
+    "options": [
+      "Hacer un cambio, probar y recién después el siguiente",
+      "Agregar un cuarto cambio que lo compense",
+      "Resetear la impresora de fábrica",
+      "Pasar todo a WPA3"
+    ],
+    "answer": 0,
+    "why": "Con un cambio por vez se sabe cuál rompió qué; WunderTech señala a Fast Roaming, WPA3 de MLO y mínimo RSSI como sospechosos con equipos viejos."
+  }
+]

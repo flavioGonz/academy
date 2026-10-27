@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Querés que el servidor sepa si el relé A abrió o cerró. ¿Qué variable usás en la URL?",
+  "options": [
+   "$card_sn",
+   "$relay1status",
+   "$remote",
+   "$model"
+  ],
+  "answer": 1,
+  "why": "$relay1status llega con 1 si el relé A está abierto y 0 si está cerrado."
+ },
+ {
+  "q": "Apagaste el interruptor de Action URL pero el servidor sigue recibiendo un pedido cada vez que el portero arranca. ¿Por qué?",
+  "options": [
+   "Setup Completed no depende del interruptor; hay que dejar ese campo vacío",
+   "El firmware está roto",
+   "El servidor reenvía pedidos viejos",
+   "Es SmartPlus"
+  ],
+  "answer": 0,
+  "why": "Akuvox aclara que la URL de arranque no la controla el interruptor general; si no se usa, el campo queda en blanco."
+ },
+ {
+  "q": "El servidor que recibe las Action URL pide digest y la URL también trae usuario y clave. ¿Cuál usa el portero?",
+  "options": [
+   "Los de la pantalla Action URL",
+   "Ninguno",
+   "Los de la cuenta SIP",
+   "Los de la URL"
+  ],
+  "answer": 3,
+  "why": "Según la guía, si la URL contiene usuario y clave, esa autenticación tiene prioridad."
+ }
+]

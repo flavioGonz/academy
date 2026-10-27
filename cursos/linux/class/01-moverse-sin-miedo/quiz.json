@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Te piden ver en qué puerto escucha SSH en un servidor que no conocés. ¿Qué opción te da la respuesta sin riesgo de modificar nada?",
+  "options": [
+   "sudo nano /etc/ssh/sshd_config y buscar Port",
+   "grep -rn Port /etc/ssh",
+   "sudo vi /root/sshd_config",
+   "cd / y ls -la"
+  ],
+  "answer": 1,
+  "why": "grep solo lee y te muestra la línea con su número. Abrir un editor con sudo arriesga guardar un cambio sin querer, y la configuración de SSH vive en /etc/ssh, no en /root."
+ },
+ {
+  "q": "Un compañero dice que la configuración está \"en root\", busca en /root y no encuentra nada. ¿Cuál es la confusión?",
+  "options": [
+   "/root es la carpeta personal del administrador; la raíz del sistema es /",
+   "/root es un disco aparte que hay que montar",
+   "/root solo existe en Ubuntu",
+   "La configuración siempre está en /home"
+  ],
+  "answer": 0,
+  "why": "En Linux todo cuelga de /. /root es solo el home del superusuario; la configuración del sistema está en /etc."
+ },
+ {
+  "q": "Corrés ps aux | grep sshd y siempre aparece una línea extra que es el propio grep. ¿Qué truco de la Debian Reference lo evita?",
+  "options": [
+   "ps aux | grep -v sshd",
+   "ps sshd",
+   "killall grep antes de buscar",
+   "ps aux | grep \"[s]shd\""
+  ],
+  "answer": 3,
+  "why": "Con la primera letra entre corchetes, el patrón sigue encontrando sshd pero la línea del grep (que contiene [s]shd literal) ya no coincide consigo misma."
+ }
+]

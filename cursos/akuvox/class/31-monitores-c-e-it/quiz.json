@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un integrador quiere manejar un equipo de 30 V desde el relé de un C319. ¿Qué le decís?",
+  "options": [
+   "Anda sin problema",
+   "El C319 no tiene relés",
+   "Depende de SmartPlus",
+   "La tabla da 24 V 1 A para el C319: con 30 V se pasa"
+  ],
+  "answer": 3,
+  "why": "Según la tabla de carga resistiva, el relé del C319 es de 24 V 1 A."
+ },
+ {
+  "q": "¿Qué monitores de esta lección traen dos relés según la tabla de interfaces?",
+  "options": [
+   "C313 y C316",
+   "Solo el C313",
+   "C319S e IT88S",
+   "Ninguno"
+  ],
+  "answer": 2,
+  "why": "La tabla de interfaces da 2 salidas de relé para IT88S y C319S."
+ },
+ {
+  "q": "Te preguntan la carga del relé del C316. ¿Qué respondés?",
+  "options": [
+   "30 V 2 A",
+   "No figura en la tabla leída; se confirma antes",
+   "24 V 1 A",
+   "No tiene relé"
+  ],
+  "answer": 1,
+  "why": "El C316 no aparece en la tabla de carga de relés; tiene un relé según la tabla de interfaces, pero su carga no está en lo leído."
+ }
+]

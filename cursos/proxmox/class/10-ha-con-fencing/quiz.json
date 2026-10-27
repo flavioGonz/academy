@@ -1,0 +1,35 @@
+[
+  {
+    "q": "En un clúster con HA, un nodo pierde la red del clúster y alrededor de un minuto después se reinicia solo. ¿Qué pasó?",
+    "options": [
+      "Un bug del kernel",
+      "Se terminó la suscripción",
+      "Fencing por watchdog: el nodo sin quórum se reinicia para que sus VMs puedan arrancar en otro sin riesgo",
+      "El firewall bloqueó el puerto 8006"
+    ],
+    "answer": 2,
+    "why": "El watchdog reinicia al nodo que no recupera quórum, así se garantiza que la VM no siga escribiendo en el disco mientras otro nodo la arranca."
+  },
+  {
+    "q": "Vas a cambiar la configuración de corosync en un clúster Proxmox VE 9.2 con HA. ¿Qué hacés antes?",
+    "options": [
+      "ha-manager crm-command disarm-ha freeze",
+      "Apagar todas las VMs",
+      "Borrar los recursos de HA",
+      "Reinstalar un nodo"
+    ],
+    "answer": 0,
+    "why": "El disarm libera los watchdogs en todo el clúster para que una pérdida temporal de quórum no dispare fencing; después se vuelve a armar con arm-ha."
+  },
+  {
+    "q": "Un clúster tiene un nodo Intel y otro AMD. ¿Qué esperás de la migración en vivo?",
+    "options": [
+      "Que funcione siempre",
+      "Que es más rápida",
+      "Que solo funciona con contenedores",
+      "Que no está garantizada; la guía recomienda CPUs del mismo fabricante"
+    ],
+    "answer": 3,
+    "why": "La guía oficial dice que la migración en vivo entre Intel y AMD no tiene garantía de funcionar."
+  }
+]

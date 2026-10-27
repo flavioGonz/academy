@@ -1,0 +1,19 @@
+A: Lección diez, parches. Martín, ¿cómo actualizabas un ESXi antes?
+B: Bajaba el ISO, booteaba el servidor un domingo y rezaba.
+A: [risas] Con vCenter hay algo mejor: vSphere Lifecycle Manager. La documentación de Broadcom dice que corre dentro de vCenter, sin instalar nada aparte, y que reemplaza al viejo Update Manager.
+B: ¿Y cómo trabaja?
+A: En cuatro pasos. Primero el chequeo de cumplimiento, que compara cada host con la imagen o la baseline y no toca nada. Después el pre chequeo, que mira la salud del clúster. Después el staging, que baja los paquetes al host sin aplicarlos. Y al final la remediación, que instala.
+B: ¿Para qué separar el staging?
+A: Para que el host pase menos tiempo en modo mantenimiento. Los paquetes ya están ahí cuando arrancás la ventana. Lo dice la propia documentación.
+B: Y el modo mantenimiento saca las VMs del host primero.
+A: Exacto. En un clúster con DRS, las mueve con vMotion; TechTarget cuenta que es una recomendación de prioridad máxima. Sin DRS, las movés vos o las apagás.
+B: ¿Cambia algo con vSphere nueve?
+A: Sí. StarWind cuenta que en la nueve se retiran las baselines y queda solo el modelo de imágenes. En eso coinciden tres de las cuatro fuentes que leímos sobre parches: el ciclo por pasos, con imágenes como camino.
+B: ¿Y si es un host suelto, sin vCenter?
+A: Modo mantenimiento y esxcli, con el paquete zip del parche en un datastore. Y antes de aplicar, listás qué perfiles y paquetes trae el zip y lo comparás con lo que tiene instalado el host. Y podés simularla con dry run, sin aplicar nada.
+B: ¿Y la vuelta atrás?
+A: La documentación avisa que volver de ocho a siete se puede si no se tocaron las particiones de arranque, pero a versiones anteriores a siete no. Así que antes de actualizar, backup. Siempre. Del vCenter, de la configuración del host y de las VMs críticas.
+B: El laboratorio, entonces.
+A: En un host de prueba: lo ponés en mantenimiento por esxcli, listás los perfiles del zip, comparás, actualizás, reiniciás y sacás el host de mantenimiento.
+B: Quince minutos.
+A: Y ningún host se parchea sin modo mantenimiento y sin backup.

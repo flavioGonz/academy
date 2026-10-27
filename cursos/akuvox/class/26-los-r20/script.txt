@@ -1,0 +1,19 @@
+A: Lección veintiséis: los R20, los compactos. Seguramente el portero Akuvox que más vas a encontrar.
+B: El R20A, el R20K...
+A: Y el R20K-L y el R20B. Akuvox los presenta como porteros SIP compactos, y el R20K-L como la versión con LTE. Linux, aluminio, sin pantalla, IP65 y Wiegand.
+B: ¿Qué cambia entre ellos?
+A: Cómo se entra a la puerta. El R20A es de un botón y acepta tarjetas de las dos frecuencias, sin PIN; con firmware trescientos veinte punto treinta punto doce punto diecinueve o más suma QR. El R20K tiene teclado: PIN y tarjetas. El R20K-L, PIN y tarjeta solo de trece coma cincuenta y seis. Y el R20B, botones y tarjetas, sin PIN.
+B: ¿Y para sacarles la IP?
+A: R20A, mantenés el botón cinco segundos y la dice. R20K, asterisco tres dos cinco ocho asterisco. R20B, mantenés el primer botón cinco segundos.
+B: ¿Alimentación?
+A: PoE af o doce voltios un ampere. Relé de treinta voltios dos amperes.
+B: ¿Y la salida de doce voltios?
+A: Acá entra la historia de la familia: tres versiones de hardware. Las nuevas, R20K versión tres, R20A versión cinco y R20B versión dos, dan doce voltios quinientos miliamperes por el relé. Las viejas no tienen salida. Y con PoE, solo desde el firmware trescientos veinte punto treinta punto once punto cuarenta y dos, afectada por el volumen.
+B: ¿Y la etiqueta no alcanza?
+A: No siempre. Akuvox avisa que un R20A con etiqueta V3.0 es hardware dos, y el V5.0 es hardware tres. En la web, el número empieza con veinte, doscientos veinte o trescientos veinte.
+B: ¿Y los MD06 y MD12?
+A: Akuvox los presenta como módulos de nombres para portero. No leímos su ficha, así que hasta ahí llegamos.
+B: Honesto. ¿Laboratorio?
+A: Diez minutos. Con un R20 en la mesa, sacás la IP por su método, leés la versión de hardware en la web y decidís si la cerradura puede salir del portero o va con fuente propia.
+B: Y lo anotás junto con el número de serie.
+A: Eso. El R20 parece simple, pero la versión de hardware cambia todo.

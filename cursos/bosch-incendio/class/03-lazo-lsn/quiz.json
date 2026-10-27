@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Ampliás un lazo LSN improved con 180 elementos agregando un viejo detector LSN classic. ¿Qué pasa?",
+  "options": [
+   "Nada, conviven sin límite",
+   "El classic queda sin dirección",
+   "El lazo pasa a admitir solo 127 elementos y ya no hay T-tap",
+   "El lazo sube a 300 elementos"
+  ],
+  "answer": 2,
+  "why": "Según el System manual, con al menos un elemento classic en el lazo el máximo es 127 y los T-tap dejan de ser posibles."
+ },
+ {
+  "q": "Necesitás una derivación en T en un lazo nuevo. ¿Cómo direccionás?",
+  "options": [
+   "Todos en 000 y el panel resuelve",
+   "Todos en manual entre 001 y 254 y T-tap marcado en RPS",
+   "Mitad en 000 y mitad manual",
+   "En CL 0 0"
+  ],
+  "answer": 1,
+  "why": "El T-tap solo es posible con dirección manual, y el manual pide marcar T-tap en FSP-5000-RPS siempre que se use dirección manual."
+ },
+ {
+  "q": "Un lazo largo con muchas sirenas pide más corriente que la que da un LSN 0300 A. ¿Qué módulo se usa?",
+  "options": [
+   "LSN 1500 A, que entrega hasta 1500 mA con elementos improved",
+   "CZM 0004 A",
+   "Dos LSN 0300 A en paralelo sobre el mismo lazo",
+   "IOP 0008 A"
+  ],
+  "answer": 0,
+  "why": "El LSN 1500 A entrega hasta 1500 mA con elementos improved y admite hasta 3000 m de cable."
+ }
+]

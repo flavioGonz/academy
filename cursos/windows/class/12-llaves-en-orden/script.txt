@@ -1,0 +1,21 @@
+A: Última lección. Las llaves. Y no hablo del manojo de la camioneta.
+B: Contraseñas.
+A: Contraseñas, claves de recuperación, todo lo que te deja entrar cuando las cosas se ponen feas. Tres llaves.
+B: Primera.
+A: El administrador local. En muchas obras es la misma contraseña en todos los equipos del cliente. Si alguien la saca de uno, entra a todos.
+B: Movimiento lateral, le dicen.
+A: Eso. Para eso está Windows LAPS: cada equipo unido al dominio con su contraseña de administrador local única, aleatoria, guardada en Active Directory o en Entra ID, y rotada sola. Viene integrado en Windows once y en Server dos mil diecinueve a dos mil veinticinco, sin instalar nada.
+B: ¿Y en un sitio sin dominio?
+A: Contraseña distinta por equipo, en el gestor de contraseñas de la empresa. Y fijate por qué importa: TheITBros dice que cuando el dominio no responde y NLA falla, la salida es entrar con el administrador local o por la consola. Si no sabés esa contraseña, no entrás.
+B: Segunda.
+A: BitLocker. Pide la clave de recuperación si cambiás BIOS, firmware o hardware, o tocás el arranque. Y LazyAdmin lo dice sin vueltas: sin la clave, los datos no se recuperan. Ni el soporte de Microsoft puede.
+B: Uf. ¿Entonces?
+A: Antes de actualizar el BIOS, suspendés BitLocker, hacés el cambio y lo reanudás. Y la clave se guarda fuera del equipo: en Active Directory, en Entra ID o en el gestor de la empresa. Nunca solo adentro.
+B: Tercera.
+A: Si montás un controlador de dominio, la contraseña de modo de restauración, la DSRM. La documentación de Microsoft avisa: no la escribas en texto plano en un script. Quien la ve puede hacerse pasar por el controlador.
+B: ¿Cuántas fuentes?
+A: Cuatro de cuatro coinciden en un administrador local único y recuperable, y el mínimo privilegio para el resto. Ninguna en contra. Lo de BitLocker y DSRM tiene una fuente cada uno.
+B: ¿Laboratorio?
+A: Quince minutos. Ver el estado de BitLocker y sus protectores, y respaldar la clave. Y listar quién es administrador local en tu equipo.
+B: Ninguna llave adentro del equipo que protege.
+A: Esa es la regla. Y con eso cerramos el curso.

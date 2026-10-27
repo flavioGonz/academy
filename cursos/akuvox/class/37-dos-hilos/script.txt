@@ -1,0 +1,19 @@
+A: Lección treinta y siete: dos hilos. La línea para edificios viejos.
+B: Donde no hay forma de pasar UTP a cada apartamento.
+A: Exacto. Akuvox la presenta así: intercom de dos hilos para reformar edificios aprovechando el cableado que ya existe. En el menú vigente hay tres porteros, el R20K-2, el R20A-2 y el E12S-2; dos monitores, el S562W-2 y el C313W-2; y tres equipos de red, el NS-2, el NC-2 y el NX-2. También un kit de video portero IP de dos hilos.
+B: ¿Qué cambia respecto a los IP de siempre?
+A: La alimentación, sobre todo. El R20A-2 y el R20K-2 no tienen PoE: van con cuarenta y ocho voltios en continua, uno coma veinticinco amperes. Y el monitor C313-2 tampoco: se alimenta desde el NS-2, o con cuarenta y ocho voltios si no usás NS-2.
+B: O sea que el NS-2 es el que da energía por el par.
+A: Según la tabla, al monitor sí. Del NC-2 y el NX-2 no leímos ficha, así que su rol exacto lo confirmás con el distribuidor.
+B: Bien. ¿Credenciales en los porteros?
+A: El R20A-2, tarjetas de las dos frecuencias, sin PIN. El R20K-2, PIN y tarjetas. Como sus hermanos IP.
+B: ¿Relés?
+A: Treinta voltios dos amperes en el R20 de dos hilos y en el C313-2. El C313W-2 tiene RS485, un relé, entrada de timbre y un RJ45, sin PoE.
+B: ¿Y el S562W-2?
+A: Aparece en la guía de relés externos como S562-2, con firmware mínimo para el MK485. Del resto, sin ficha.
+B: ¿Cuántas fuentes?
+A: Dos de once: el menú de productos y la tabla de alimentación. Evidencia escasa; la lección te da el mapa, no el manual.
+B: ¿Laboratorio?
+A: Diez minutos de relevamiento. En un edificio con portero viejo de dos hilos, contás apartamentos, medís dónde llega el par, y armás la lista de equipos y fuentes de cuarenta y ocho voltios.
+B: Y lo que no sepas, preguntás antes de cotizar.
+A: Eso. En dos hilos, la fuente es la mitad del proyecto.

@@ -1,0 +1,18 @@
+A: Bueno, arrancamos. Abrís un gabinete de incendio Bosch en una obra. ¿Qué tenés adelante?
+B: Una pantalla táctil grande, módulos enchufados en un riel y dos baterías abajo.
+A: Bien. Si es de los últimos años, es un AVENAR panel. Hay dos: el dos mil, que admite seis módulos y hasta cuatro lazos, y el ocho mil, que llega a cuarenta y seis módulos y treinta y dos lazos.
+B: ¿Y los FPA cinco mil que vemos en las obras viejas?
+A: Son la generación anterior, igual que el FPA mil doscientos para obras chicas. Usan el mismo lazo LSN y conviven en red con los AVENAR. Un FPA cinco mil incluso se actualiza cambiando solo el controlador.
+B: Pará, ¿y quién es Bosch hoy? Porque leí que vendieron todo.
+A: Vendieron video, acceso, intrusión y comunicaciones a Triton, que hoy se llama Keenfinity. Incendio se lo quedaron. Sigue siendo Bosch Building Technologies.
+B: Bien. ¿Y qué es eso de standard y premium?
+A: Es la licencia, y es lo que más se olvida. Viene grabada en el controlador de fábrica. El manual dice que no se puede modificar, revocar ni trasladar.
+B: Uf. O sea que si compraste standard...
+A: Te quedás con standard. Premium suma la integración con BMS, el panel jerárquico y la evacuación por voz. Y en el dos mil, para ponerlo en red, cada panel necesita premium.
+B: ¿Y el firmware?
+A: Dos ramas. La tres es para redes mezcladas con FPA, y todos los paneles corren la misma. La cuatro es solo para redes cien por ciento AVENAR. La vigente es la cuatro punto ocho punto uno, de junio, y Bosch anunció la cuatro punto nueve para diciembre.
+B: Y la tres ya no recibe mejoras, ¿no?
+A: Su mantenimiento terminó a fines de dos mil veinticinco. Si el panel está en Ethernet, Bosch pide evaluar el riesgo y pasar a AVENAR con la cuatro. En esto las tres fuentes que lo tocan coinciden, sin grieta.
+B: Entonces el laboratorio es relevar.
+A: Eso. Agarrá el panel del laboratorio, o el próximo de mantenimiento, y anotá modelo, licencia, firmware y módulos. Diez minutos.
+B: Y con eso cotizás una ampliación sin sorpresas en obra.

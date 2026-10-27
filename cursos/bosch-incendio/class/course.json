@@ -1,0 +1,187 @@
+{
+ "slug": "bosch-incendio",
+ "title": "Detección de incendio Bosch: AVENAR y paneles modulares",
+ "vendor": "Bosch Building Technologies",
+ "tagline": "Del lazo LSN a la prueba anual: AVENAR bien diseñado, bien programado y con la norma local arriba de todo.",
+ "description": "Al terminar vas a poder identificar y relevar paneles AVENAR 2000 y 8000 y sus antecesores FPA, diseñar y calcular lazos LSN improved, elegir y programar detectores AVENAR 4000, y configurar zonas, reglas, retardos y redes con FSP-5000-RPS. También vas a poner en marcha, probar y mantener el sistema con seguridad y registros, sabiendo cuándo manda la norma local y el proyecto firmado por el técnico registrado.",
+ "level": "Inicial a intermedio",
+ "audience": "Técnicos instaladores y de soporte de sistemas de detección de incendio con base de electricidad y redes IP.",
+ "prerequisites": [
+  "Electricidad básica de baja tensión: ley de Ohm, caída de tensión, baterías de 12 V",
+  "Nociones de detección de incendio: detector, pulsador, sirena, central",
+  "Direccionamiento IP, máscara y gateway",
+  "Uso de una laptop con Windows 11"
+ ],
+ "outcomes": [
+  "Relevar un panel AVENAR o FPA: modelo, licencia, firmware y módulos, y saber qué permite ampliar",
+  "Diseñar un lazo LSN improved con direccionamiento, topología y cálculo de caída defendibles",
+  "Elegir y programar el modo de detectores AVENAR 4000 según riesgo y fenómenos engañosos",
+  "Configurar con FSP-5000-RPS zonas lógicas, reglas, retardos, día y noche y redes de paneles",
+  "Probar el sistema aislando salidas y avisando al monitoreo, y documentar el mantenimiento",
+  "Reconocer cuándo manda la normativa uruguaya (Decreto 372/023, IT de la DNB) y el proyecto firmado"
+ ],
+ "version_note": "Basado en documentación Bosch vigente a octubre de 2026: firmware de panel AVENAR 4.8.1 (junio 2026, la 4.9 anunciada para diciembre 2026), FSP-5000-RPS 5.15.28, cuenta de configuración 4.8 (incluye Uruguay como país), concepto de zonas de energía con FPE-8000-BCM obligatorio en obra nueva desde el 02/05/2026, AVENAR detector 4000 (no existe un 'AVENAR detector 5000' en las fuentes). Las redes con FPA-5000 corren firmware 3.x, fuera de mantenimiento desde 2026. Normativa uruguaya: Decreto 372/023 e IT-11 de 2010, con una nueva IT11 en consulta pública para 2027. EN 54 y NFPA 72 se usan como referencia; el proyecto firmado y la autoridad mandan.",
+ "arcs": [
+  {
+   "title": "Conocer el sistema",
+   "why": "Antes de tocar una central: qué familia es, quién manda en el diseño y cómo se comporta el lazo ante una falla.",
+   "lessons": [
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  {
+   "title": "Diseñar el campo",
+   "why": "Qué va en cada lugar, con tensión suficiente en el lazo y una batería que aguante lo que pide el proyecto.",
+   "lessons": [
+    5,
+    6,
+    7,
+    8
+   ]
+  },
+  {
+   "title": "Programar con FSP-5000-RPS",
+   "why": "El panel hace lo que dice la configuración: proyecto, zonas, reglas, modos y retardos que se puedan defender.",
+   "lessons": [
+    9,
+    10,
+    11,
+    12
+   ]
+  },
+  {
+   "title": "Conectar, probar y mantener",
+   "why": "Lo que separa un sistema habilitado de uno que funciona a los cinco años: red, pruebas seguras y registros.",
+   "lessons": [
+    13,
+    14,
+    15,
+    16
+   ]
+  }
+ ],
+ "splits": [
+  {
+   "topic": "Multisensor u óptico",
+   "sides": "BRE y pbctoday: el multisensor rechaza mejor las falsas alarmas y detecta fuegos igual que el óptico. FIA: todo filtrado demora la respuesta a un fuego real. Columna sobre BS 5839-1: con vapor y aerosoles, el de CO es mejor opción.",
+   "decide": "Primero el riesgo de fuego, después los fenómenos del lugar; la demora aceptable la fija el proyecto, y el modo elegido se documenta."
+  },
+  {
+   "topic": "Lazo (clase A) o ramal (clase B)",
+   "sides": "Bosch recomienda lazo siempre que se pueda porque sobrevive a cortes y cortos; la guía sobre NFPA 72 aclara que la norma no impone clase y que la B sigue siendo la más común.",
+   "decide": "Lo que pida el proyecto y la autoridad; con LSN el lazo cuesta poco cable extra y evita perder todo lo que está detrás de una falla."
+  },
+  {
+   "topic": "Cálculo de baterías: factor y tiempo de alarma",
+   "sides": "Guía NFPA 72: 24 h, 5 min y factor 1,20. Security Sales: factor de envejecimiento 1,25. IT-11 uruguaya de 2010: 15 min de alarma. RPS trae 30 h por defecto.",
+   "decide": "La norma que adopte el proyecto firmado; ante la duda, la variante más exigente."
+  },
+  {
+   "topic": "Retardos y verificación de alarma",
+   "sides": "FIA y NFPA 72 (2013) admiten demoras y preverificación con límites (6 min en BS 5839-1, 90 s en el monitoreo) para reducir evacuaciones y despachos inútiles; sus críticos temen demoras ante un fuego real.",
+   "decide": "Solo con acuerdo de la autoridad y firma del técnico registrado, nunca sobre pulsadores y no en ocupaciones vulnerables como residencias de cuidado."
+  }
+ ],
+ "sources_count": 28,
+ "lessons": [
+  {
+   "n": 1,
+   "dir": "01-mapa-avenar",
+   "handle": "Mapa AVENAR",
+   "summary": "Paneles 2000 y 8000, generación FPA, licencias standard y premium, ramas de firmware 3.x y 4.x."
+  },
+  {
+   "n": 2,
+   "dir": "02-quien-manda",
+   "handle": "Quién manda",
+   "summary": "Decreto 372/023, técnico y empresas registradas, IT-11 y su revisión, EN 54 y NFPA 72 como referencia."
+  },
+  {
+   "n": 3,
+   "dir": "03-lazo-lsn",
+   "handle": "Lazo LSN",
+   "summary": "254 elementos improved, 127 con un classic, LSN 0300 A y 1500 A, dirección automática o manual y T-tap."
+  },
+  {
+   "n": 4,
+   "dir": "04-lazo-cerrado",
+   "handle": "Lazo cerrado",
+   "summary": "Aisladores en cada elemento, lazo contra ramal, clases A, B y X, y el límite de 512 puntos por falla."
+  },
+  {
+   "n": 5,
+   "dir": "05-quince-voltios",
+   "handle": "Quince voltios",
+   "summary": "Cálculo de caída y consumo del lazo, largos máximos, 500 m no aislados y Safety Systems Designer."
+  },
+  {
+   "n": 6,
+   "dir": "06-elegir-detector",
+   "handle": "Elegir detector",
+   "summary": "Las nueve variantes AVENAR detector 4000, selección en dos pasos y fin de soporte de la serie 400."
+  },
+  {
+   "n": 7,
+   "dir": "07-entradas-salidas",
+   "handle": "Entradas y salidas",
+   "summary": "Pulsadores, sirenas y balizas, módulos FLM, puntos de alarma y silenciado manual en EN 54-2."
+  },
+  {
+   "n": 8,
+   "dir": "08-zona-energia",
+   "handle": "Zona de energía",
+   "summary": "FPE-8000-BCM y zonas de energía, cálculo de baterías con sus divisiones y la falla de validación de RPS."
+  },
+  {
+   "n": 9,
+   "dir": "09-primer-proyecto",
+   "handle": "Primer proyecto",
+   "summary": "FSP-5000-RPS 5.15.28, cuenta 4.8 con país Uruguay, secuencia de puesta en marcha y Set Panel Time."
+  },
+  {
+   "n": 10,
+   "dir": "10-zonas-reglas",
+   "handle": "Zonas y reglas",
+   "summary": "Dirección lógica, puntos de alarma y lógicos, reglas y contadores a partir de una matriz de causa y efecto."
+  },
+  {
+   "n": 11,
+   "dir": "11-modo-detector",
+   "handle": "Modo del detector",
+   "summary": "Lugar de instalación en RPS, sensores desactivables y la división multisensor contra óptico."
+  },
+  {
+   "n": 12,
+   "dir": "12-dia-noche",
+   "handle": "Día y noche",
+   "summary": "Retardos, dependencias, alarma demorada, preverificación del monitoreo y modo día y noche."
+  },
+  {
+   "n": 13,
+   "dir": "13-paneles-red",
+   "handle": "Paneles en red",
+   "summary": "Ethernet con RSTP o CAN, número de nodo e IP, red dedicada, BMS y acceso remoto seguro."
+  },
+  {
+   "n": 14,
+   "dir": "14-aislar-avisar",
+   "handle": "Aislar y avisar",
+   "summary": "Aviso al monitoreo y ocupantes, aislamiento de salidas, extinción y reaceptación tras cambios."
+  },
+  {
+   "n": 15,
+   "dir": "15-probar-detectores",
+   "handle": "Probar detectores",
+   "summary": "Modo revisión, walk test secuencial y simultáneo, tiempos de respuesta y herramienta de lazo LSN."
+  },
+  {
+   "n": 16,
+   "dir": "16-mantener-registrar",
+   "handle": "Mantener y registrar",
+   "summary": "Frecuencias, sensibilidad, valores de contaminación, reloj del panel e informe de mantenimiento."
+  }
+ ]
+}

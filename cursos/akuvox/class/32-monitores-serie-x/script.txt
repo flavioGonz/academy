@@ -1,0 +1,25 @@
+A: Lección treinta y dos, cerramos monitores con la serie X: el X933 y el X937.
+B: Los lindos.
+A: Los de gama alta. El X933, siete pulgadas, Android, carcasa de plástico. El X937, quince coma seis pulgadas, aluminio y Android catorce, según la guía de selección.
+B: Quince pulgadas es casi una tele.
+A: [risas] Casi. Y en obra se nota en la alimentación. El X937 va con PoE+ at o fuente de doce voltios dos amperes. Si el switch es af, no alcanza.
+B: ¿Y el X933?
+A: La tabla lo agrupa con los que van con fuente de doce voltios un ampere, y la guía marca PoE.
+B: ¿Relés?
+A: Los dos traen dos relés, un RS485 y una entrada de timbre. Pero ojo con la carga: el X937 da treinta voltios dos amperes y el X933 veinticuatro voltios un ampere, igual que el C319.
+B: Otra vez el veinticuatro.
+A: Otra vez. Y el X937 tiene, además del PoE, dos RJ45 extra.
+B: ¿Para qué?
+A: La tabla solo lo lista. Para qué usarlos lo definís con la documentación del modelo; no lo leímos.
+B: ¿Y el AKClaw?
+A: En el menú aparece como una categoría aparte, "Agentic Panel", con el AKClaw Panel. No leímos su ficha, así que no podemos decir más que eso: existe y es otra línea.
+B: Bien. ¿Y la IP de los X?
+A: Settings, System Info, Network, como el C316. Firmware novecientos treinta y tres o novecientos treinta y siete.
+B: ¿Relés externos?
+A: Sí, el X933 desde novecientos treinta y tres punto treinta punto trece punto setecientos dos, y el X937 desde novecientos treinta y siete punto treinta punto trece punto ciento veintidós.
+B: ¿Cuántas fuentes?
+A: Cuatro de siete, las de siempre en monitores. Sin ficha propia.
+B: ¿Laboratorio?
+A: Diez minutos de escritorio: para una obra con un X937, revisás que el switch tenga PoE+ en ese puerto o que haya fuente de doce voltios dos amperes, y anotás qué maneja cada relé.
+B: Y si alguno de los relés del X933 va a algo de treinta voltios...
+A: Relé auxiliar. Veinticuatro voltios un ampere es el techo.

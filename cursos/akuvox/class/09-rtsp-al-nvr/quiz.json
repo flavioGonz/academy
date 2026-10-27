@@ -1,0 +1,35 @@
+[
+ {
+  "q": "¿Qué ruta RTSP usás para que el NVR grabe el stream secundario de un portero Akuvox en 192.168.88.21?",
+  "options": [
+   "rtsp://192.168.88.21/Streaming/Channels/102",
+   "rtsp://192.168.88.21/live/ch00_1",
+   "rtsp://192.168.88.21:8080/video.cgi",
+   "rtsp://192.168.88.21/onvif/device_service"
+  ],
+  "answer": 1,
+  "why": "La guía de Akuvox define ch00_0 como primer stream y ch00_1 como segundo; las otras rutas son de otra marca, de MJPEG o de ONVIF."
+ },
+ {
+  "q": "Activaste ONVIF en el portero para el NVR. ¿Qué cambiás antes de irte?",
+  "options": [
+   "El usuario y la clave de ONVIF, que vienen en admin / admin",
+   "El puerto SIP",
+   "El PIN público",
+   "Nada, ONVIF no tiene credenciales"
+  ],
+  "answer": 0,
+  "why": "Según la guía del E16, el usuario y la clave de ONVIF son admin por defecto."
+ },
+ {
+  "q": "Después de poner clave al RTSP del portero, el monitor interior dejó de mostrar su video en Monitor. ¿Por qué?",
+  "options": [
+   "El monitor no soporta H.264",
+   "El RTSP solo funciona con el NVR",
+   "Hay que reiniciar de fábrica el portero",
+   "El monitor necesita la misma credencial RTSP cargada en su configuración"
+  ],
+  "answer": 3,
+  "why": "Akuvox indica que si el usuario y la clave RTSP cambian, tienen que ser consistentes entre los equipos; el monitor guarda la credencial en Device > Monitor."
+ }
+]

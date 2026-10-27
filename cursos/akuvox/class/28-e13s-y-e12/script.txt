@@ -1,0 +1,23 @@
+A: Lección veintiocho. Los chiquitos de plástico de la serie E: el E13S y el E12.
+B: Los de casa.
+A: Los de casa o de una oficina chica. Akuvox presenta al E13S como portero SIP de un botón y al E12 como portero SIP compacto. Los dos Linux y con Wiegand; el E13S, IP65 según la guía.
+B: ¿Credenciales?
+A: Pocas. Tarjeta de trece coma cincuenta y seis, sin PIN y sin rostro. El E12, además, Bluetooth. La tabla separa el E12S y el E12W, y la guía de selección marca Wi-Fi para el E12.
+B: O sea, el W es el de Wi-Fi.
+A: Es lo que sugieren las dos tablas juntas. Lo confirmás en la etiqueta antes de prometerlo.
+B: ¿Y la IP?
+A: Como todos los de un botón: mantenés el botón de llamada cinco segundos y la dice en voz alta.
+B: ¿Alimentación?
+A: El E12, PoE af o fuente de doce voltios un ampere. Del E13 la tabla de alimentación no dice nada; la guía de selección solo marca que tiene PoE. Relé de treinta voltios dos amperes en los dos.
+B: ¿Salida de doce voltios?
+A: El E12 no tiene. Y acá va la historia: el E12 tampoco tiene RS485, así que el SR01 se le conecta de una forma especial que el propio Akuvox no recomienda por seguridad.
+B: Entonces, si el cliente quiere la cerradura protegida...
+A: Mejor otro portero. Y otra cosa del E12: tiene dos versiones de hardware. El firmware empieza con doce o con trescientos doce.
+B: ¿Y si perdés la clave web?
+A: Para los de un botón, el soporte de Akuvox documenta tres caminos: SmartPlus, PC Manager en la misma red, o exportar la llave del equipo y mandarla a soporte, que devuelve un archivo para desbloquear.
+B: ¿Cuántas fuentes en esta lección?
+A: Dos de diez en sacar IP y leer firmware, y las tablas de métodos, alimentación y doce voltios. Sin ficha propia del E13S ni del E12.
+B: ¿Laboratorio?
+A: Diez minutos. Sacás la IP por voz, leés el firmware, cambiás la clave web y la anotás, y dejás escrito que la cerradura va con fuente propia.
+B: Y que no tiene RS485.
+A: Eso.

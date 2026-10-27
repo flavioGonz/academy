@@ -1,0 +1,35 @@
+[
+  {
+    "q": "El log del MikroTik muestra \"no suitable proposal found\" y \"phase1 negotiation failed\" contra el Fortinet de la sucursal. ¿Qué hacés?",
+    "options": [
+      "Abrir más puertos en input",
+      "Activar el log ipsec, ver qué algoritmo rechaza (local:remoto) y alinear el profile con el otro extremo",
+      "Desactivar FastTrack",
+      "Cambiar la LAN de rango"
+    ],
+    "answer": 1,
+    "why": "Ese mensaje indica que las fases no coinciden en parámetros. Según la documentación, con topics=ipsec el log muestra cada algoritmo rechazado con el valor local y el remoto."
+  },
+  {
+    "q": "active-peers muestra established y ph2-state también, pero un ping de LAN a LAN no llega. El router tiene la configuración por defecto. ¿Qué falta casi seguro?",
+    "options": [
+      "Cambiar a IKEv1",
+      "Reiniciar los dos routers",
+      "Una regla srcnat accept para el tráfico entre las dos LAN, arriba del masquerade",
+      "Subir el lifetime"
+    ],
+    "answer": 2,
+    "why": "El masquerade cambia el origen antes de cifrar y el paquete ya no coincide con la policy. La documentación pone una regla de NAT accept arriba de todo y pide limpiar conexiones viejas."
+  },
+  {
+    "q": "Un túnel IPsec anda lento y con cortes, pero mejora apenas abrís Torch para mirarlo. ¿Qué es?",
+    "options": [
+      "FastTrack: Torch lo apaga mientras corre; falta el bypass en forward",
+      "El ISP prioriza tráfico cuando hay Torch",
+      "Un problema de DNS",
+      "La licencia del router"
+    ],
+    "answer": 0,
+    "why": "La FAQ de IPsec lo describe: los paquetes fasttrackeados saltean las políticas, y Torch o el sniffer apagan FastTrack. La solución es una regla de accept para ese tráfico antes del fasttrack."
+  }
+]

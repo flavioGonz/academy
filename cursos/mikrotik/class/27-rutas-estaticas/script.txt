@@ -1,0 +1,21 @@
+A: Martín, ¿cuántas rutas tiene un hAP recién sacado de la caja?
+B: Una, la de internet.
+A: Y un par que no ves. Hoy, rutas estáticas.
+B: Arranquemos por la de internet.
+A: La ruta por defecto: destino cero punto cero punto cero punto cero barra cero, gateway el router del proveedor. Se usa cuando ninguna otra coincide. Además, cada red que tenés cargada en barra ip barra address crea sola su ruta conectada.
+B: ¿Y si hay dos rutas al mismo lugar?
+A: Dos reglas, en orden. Primero gana la más específica, la de máscara más larga: una barra veinticuatro le gana a la por defecto. Entre rutas al mismo destino, gana la de menor distancia. Conectada cero, estática uno, OSPF ciento diez.
+B: ¿Y el respaldo?
+A: Segunda ruta igual con distancia dos y, en la principal, check gateway igual a ping. Según la documentación, el router prueba el gateway cada diez segundos y con dos respuestas perdidas lo da por caído. Ahí entra el respaldo.
+B: ¿Eso detecta que se cayó internet?
+A: No. Mira solo el próximo salto. Si el módem sigue vivo y la fibra no, para eso están las rutas recursivas de la lección de dos WAN.
+B: ¿Y los túneles?
+A: Destino la LAN de la otra punta, gateway la interfaz del túnel. Y la trampa clásica: si mandás la ruta por defecto por el túnel, la IP pública del servidor VPN necesita su propia ruta barra treinta y dos por el proveedor. Si no, el túnel intenta salir por adentro de sí mismo.
+B: [risas] Se muerde la cola.
+A: En el foro hay un caso de tres MikroTik con L2TP: las sucursales llegaban a la central, pero no entre ellas. Faltaban rutas en las dos puntas. Toda ruta hacia allá necesita su ruta de vuelta.
+B: ¿Cuántas fuentes coinciden?
+A: Tres de tres en cómo se elige. El foro suma lo de la vuelta.
+B: ¿Laboratorio?
+A: En un hAP de banco: una ruta por un gateway que no existe, le prendés check gateway y ves cómo pierde la a de activa. Después un respaldo con distancia dos que toma el lugar.
+B: Quince minutos.
+A: Y la tabla de rutas pasa a ser una lista que sabés leer.

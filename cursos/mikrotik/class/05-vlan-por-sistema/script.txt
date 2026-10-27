@@ -1,0 +1,17 @@
+A: Lección cinco, una VLAN por sistema. Este es el pan de cada día del integrador: cámaras por un lado, control de acceso por otro, la oficina por otro.
+B: Y todo en el mismo switch MikroTik.
+A: Exacto. En RouterOS 7 se hace con un solo bridge y vlan-filtering. La guía más citada del foro, la de pcunite, lo resume así: puerto access, entra sin etiqueta y el bridge le pone la VLAN; trunk, entra y sale etiquetado; y una VLAN propia para gestión, por ejemplo la noventa y nueve, evitando la VLAN uno.
+B: ¿La documentación oficial dice lo mismo?
+A: Coinciden, dos de las tres fuentes que entran en detalle, sin discrepancias de fondo. Y la oficial agrega dos trampas que vale la pena contar.
+B: A ver.
+A: Primera: si en la tabla de VLAN ponés una sola entrada con dos VLANs y dos puertos access como untagged, el bridge deja pasar las dos VLANs por los dos puertos. Tu red de cámaras se filtra a la de oficina.
+B: Uf.
+A: Segunda: el bridge también es un puerto, el que habla con la CPU. Si el trunk y el bridge quedan con PVID uno, queda una puerta sin etiqueta al router por el trunk. Por eso piden ingress-filtering en todos los puertos y frame-types: el trunk solo acepta etiquetado, el access solo sin etiqueta.
+B: ¿Y el famoso quedarse afuera?
+A: La documentación lo dice clarito: vlan-filtering se activa al final, cuando la gestión ya está resuelta, y conviene hacerlo desde un puerto que no esté en el bridge o por consola serial.
+B: Caso de obra: un local con quince cámaras, el NVR y las PCs de caja. Cámaras en la veinte, caja en la diez, gestión en la noventa y nueve. Si una cámara se infecta, no ve las cajas.
+A: Exacto. ¿Laboratorio?
+B: Dale, te escucho.
+A: Dejás ether5 fuera del bridge como puerto de rescate, armás la VLAN veinte de CCTV en dos puertos access y un trunk, configurás frame-types, activás vlan-filtering, y verificás con Torch que la cámara llega en la VLAN correcta.
+B: Veinte minutos.
+A: Y desde ahí, cada sistema queda en su carril.

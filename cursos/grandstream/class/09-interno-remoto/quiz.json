@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Configuraste External Host con la IP pública y ahora los teléfonos internos tienen audio cortado. ¿Qué falta casi seguro?",
+  "options": [
+   "Local Network Address con las redes internas",
+   "Cambiar el codec a G.729",
+   "Activar Direct Media",
+   "Desactivar NAT en las extensiones"
+  ],
+  "answer": 0,
+  "why": "Sin Local Network Address la UCM no distingue redes internas y externas, y la guía oficial advierte que la dirección externa no se arma bien."
+ },
+ {
+  "q": "Querés que los remotos usen el puerto 5555 en vez de 5060. ¿Qué hacés?",
+  "options": [
+   "Reenviar 5555 externo a 5060 interno en el router",
+   "Cambiar solo el teléfono",
+   "Cambiar el puerto SIP en la central y en los teléfonos, y reenviar 5555 a 5555",
+   "Usar el puerto 8089"
+  ],
+  "answer": 2,
+  "why": "SIP lleva el puerto dentro de los mensajes, así que traducir 5555 a 5060 en el router no funciona; el cambio va en la central."
+ },
+ {
+  "q": "El teléfono remoto está detrás de un NAT simétrico y STUN no resuelve. ¿Qué indica la guía?",
+  "options": [
+   "Activar SIP ALG",
+   "Poner la central en modo Dual",
+   "Bajar el firmware del teléfono",
+   "Usar keep alive o UPnP y abrir los puertos SIP y RTP"
+  ],
+  "answer": 3,
+  "why": "La guía dice que con NAT simétrico STUN no funciona; propone UPnP, o keep alive con los puertos abiertos."
+ }
+]

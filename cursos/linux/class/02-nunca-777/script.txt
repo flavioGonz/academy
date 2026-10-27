@@ -1,0 +1,19 @@
+A: Tengo una confesión de obra. La primera vez que un software de grabación no podía escribir en una carpeta, le puse chmod siete siete siete.
+B: [suspiro] Clásico. Y anduvo, ¿no?
+A: Anduvo. Ese es el problema. Anduvo y quedó la carpeta abierta para cualquier usuario del equipo.
+B: Bueno, vamos por partes. ¿Qué significan esos números?
+A: Cada archivo tiene tres grupos de permisos: el dueño, el grupo y el resto. Y tres derechos: leer vale cuatro, escribir vale dos, ejecutar vale uno. Sumás y te da el número.
+B: Entonces siete es leer, escribir y ejecutar.
+A: Exacto. Y las combinaciones de todos los días son pocas. Siete cinco cinco para directorios y programas, seis cuatro cuatro para archivos de datos, seis cero cero para secretos, como una llave privada.
+B: ¿Y las fuentes coinciden?
+A: Tres de las cinco páginas que hablan de permisos dicen lo mismo, ninguna discrepa. El blog de linuxblog punto io lo dice sin vueltas: el siete siete siete aparece en los tutoriales como arreglo rápido, y casi nunca corresponde en un servidor.
+B: ¿Y qué hacés en vez de eso?
+A: Arreglás dueño y grupo. Creás un grupo, por ejemplo técnicos, lo ponés como grupo de la carpeta, le das permiso al grupo, y sumás a cada persona con usermod guion a mayúscula G.
+B: Ojo con ese guion a, que sin él le borrás los otros grupos al usuario.
+A: Uf, sí, eso pasa. Y un detalle lindo: si a la carpeta le ponés el bit setgid, todo lo que se cree adentro hereda el grupo. Así te ahorrás andar corrigiendo dueños.
+B: ¿Y cuando hay que cambiar una carpeta entera, con chmod recursivo?
+A: Ahí está la otra trampa. Un chmod guion R siete cinco cinco vuelve ejecutables todos los archivos. Lo prolijo es find con tipo d para carpetas y tipo f para archivos, cada uno con su número.
+B: Laboratorio entonces.
+A: Quince minutos: armás una carpeta compartida para un grupo de técnicos con dos siete siete cero, probás con dos usuarios y ves cómo hereda el grupo.
+B: Y la próxima vez que pienses en siete siete siete...
+A: Pienso en quién es el dueño y en qué grupo falta.

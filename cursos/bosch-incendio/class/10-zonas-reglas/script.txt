@@ -1,0 +1,17 @@
+A: Hoy, la parte que más se improvisa: las zonas lógicas y las reglas.
+B: La famosa matriz de causa y efecto.
+A: Esa. En Bosch, cada elemento del lazo tiene dos direcciones. La física, que es su lugar en el cable, y la lógica, que es grupo y subdirección. El panel muestra la lógica en cada mensaje: tipo de evento, tipo de equipo, ubicación y zona.
+B: O sea que el nombre lógico es lo que ve el guardia.
+A: Y lo que ve todo lo que viene después. Una pasarela de integración por RS dos treinta y dos, por ejemplo, recibe los eventos como línea, grupo y subdirección. Si la zona lógica está mal pensada, el error se arrastra hasta el BMS.
+B: ¿Y los límites?
+A: Desde la cuenta cuatro punto cinco, Bosch habla de puntos de alarma, que deciden si hace falta controlador redundante, y puntos lógicos, que limitan el panel: cuatro mil noventa y seis solo, dos mil cuarenta y ocho en red.
+B: ¿Y cómo se arma lo que hace cada cosa?
+A: Con reglas. Hay reglas disparadas por evento y reglas que dependen de un estado, más contadores y estados combinados. Por ejemplo: alarma confirmada en el grupo tres, activá las sirenas del piso y liberá la retención de puertas.
+B: ¿Algún consejo práctico?
+A: Dos de la hoja técnica del firmware. Uno bueno: si copiás y pegás detectores, RPS les da la siguiente subdirección del mismo grupo. Uno de cuidado: si una tecla de función y un grupo de entradas comparten dirección, RPS puede no avisar. Así que direcciones únicas.
+B: Las fuentes coinciden, ¿no?
+A: Las tres. El manual, la hoja técnica y la integración muestran la misma idea: la dirección lógica es la llave de todo.
+B: ¿Y el laboratorio?
+A: Papel primero. Elegí un piso de oficinas y escribí la matriz: filas con lo que dispara, detectores, pulsadores, flujo de rociadores, y columnas con lo que pasa, sirenas, puertas, ventilación, transmisión al monitoreo. Después traducís cada cruce a una regla. Veinte minutos.
+B: Y la matriz firmada va con el proyecto.
+A: Exacto. Si no está escrita, la regla es una opinión.

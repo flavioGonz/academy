@@ -1,0 +1,21 @@
+A: Lección veintidós: la serie X de calle, los de acero. Hoy el X916 y el X915.
+B: Los de edificio de categoría.
+A: Esos. Los dos son Android, con frente de acero inoxidable y apps de terceros. El X916 tiene pantalla de trece pulgadas y Akuvox lo presenta con cámara Starlight, para poca luz. El X915, pantalla de ocho.
+B: ¿Credenciales?
+A: Los dos: PIN, tarjetas de las dos frecuencias, rostro, Bluetooth y QR. Y el X915 tiene versiones con lector HID iClass, HID Prox, y una con venas de la palma, el X915P.
+B: ¿Y el relé?
+A: El X916 tiene el relé más fuerte de toda la línea: treinta voltios cinco amperes. El X915, treinta voltios tres.
+B: ¿Y lo de la protección? Porque estos van en la calle.
+A: Acá está la historia de la lección. La guía de selección de Akuvox dice IP65 para el X915. La ficha del X915 versión dos punto cero dice IP66 e IK10. Dos páginas del mismo fabricante, dos números.
+B: ¿Y cuál vale?
+A: La ficha de la versión exacta que comprás. Tres de las diez fuentes del catálogo van en esa línea, y esta es la discrepancia que lo muestra.
+B: ¿Alimentación?
+A: PoE+ en los dos. El X916 también con fuente de doce voltios cuatro amperes o veinticuatro voltios dos. El X915, veinticuatro voltios dos amperes. Si querés sacar doce voltios para la cerradura, los dos piden fuente de veinticuatro voltios dos amperes y medio. Con una excepción: el X915 versión dos con cierto hardware y firmware reciente la da con PoE. El detalle va en la tarjeta.
+B: Qué nivel de detalle.
+A: [suspiro] El X915 además tiene dos versiones de hardware, así que el firmware se baja para la tuya.
+B: ¿Y entrar?
+A: Nueve nueve nueve nueve, tres ocho ocho ocho, System Info, y en el X915 tocás Network.
+B: ¿Laboratorio?
+A: Quince minutos. En el X915 leés la versión de hardware y de firmware, buscás la etiqueta de protección en la ficha de esa versión y decidís la alimentación según si la cerradura sale del portero.
+B: Y lo anotás en la planilla.
+A: Con eso, el grado IP del pliego sale de la ficha correcta.

@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un Windows Server 2025 con SQL Server en Proxmox muestra errores de lectura bajo carga. Tiene virtio-win 0.1.285. ¿Qué probás primero?",
+    "options": [
+      "Volver a virtio-win 0.1.271, que la wiki de Proxmox marca sin problemas conocidos",
+      "Cambiar el disco a IDE",
+      "Desactivar el guest agent",
+      "Pasar la VM a CPU kvm64"
+    ],
+    "answer": 0,
+    "why": "La wiki de Proxmox reporta errores de lectura con 0.1.285 en Windows Server 2025 con cargas pesadas y sugiere 0.1.271 como alternativa."
+  },
+  {
+    "q": "¿Para qué usa Proxmox el QEMU guest agent durante un backup en modo snapshot?",
+    "options": [
+      "Para comprimir el backup",
+      "Para cifrar el disco",
+      "Para migrar la VM a otro nodo",
+      "Para congelar el sistema de archivos del invitado y mejorar la consistencia"
+    ],
+    "answer": 3,
+    "why": "Con el agente activo, Proxmox llama a fsfreeze (o VSS en Windows) antes y después del backup para que los datos queden consistentes."
+  },
+  {
+    "q": "Vas a armar un clúster con un nodo Intel nuevo y uno Intel de tres generaciones atrás, con migración en vivo. ¿Qué tipo de CPU ponés en las VMs?",
+    "options": [
+      "host",
+      "El modelo del nodo más nuevo",
+      "El modelo de CPU de la generación más vieja del clúster",
+      "No importa, la migración siempre funciona"
+    ],
+    "answer": 2,
+    "why": "La guía oficial recomienda, si importa la migración en vivo, el modelo de la generación más vieja del clúster; host solo si no migrás o el clúster es homogéneo."
+  }
+]

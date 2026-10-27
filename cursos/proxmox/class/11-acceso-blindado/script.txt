@@ -1,0 +1,17 @@
+A: Lección once: quién entra y cómo. Martín, en las obras, ¿con qué usuario entra todo el mundo al Proxmox?
+B: Root. El técnico, el cliente, el de sistemas. Todos root.
+A: Y el día que algo se borra, no sabés quién fue. La guía oficial tiene todo para no hacer eso. Usuarios del realm de Proxmox, que se manejan solos sin tocar Linux, y roles ya armados. Por ejemplo PVEAuditor, que solo mira, o PVEVMUser, que prende, apaga y abre consola.
+B: Ah, el de sistemas del cliente con PVEVMUser y listo.
+A: Exacto. Y encima, segundo factor. TOTP con la app del celular, o llaves físicas. Y un consejo de la propia guía: cargá más de un segundo factor, y generá las claves de recuperación, que son de un solo uso, para no quedar afuera si perdés el celular.
+B: ¿Y si igual alguien queda bloqueado?
+A: Un admin lo desbloquea con pveum user tfa unlock. Ahora, el firewall. Viene apagado. Y cuando lo prendés a nivel datacenter, bloquea el tráfico a los hosts salvo algunas excepciones desde la red local.
+B: Y ahí es donde uno queda afuera.
+A: Tal cual. Hay una historia buena de Diego Carrasco. Prendió el firewall con una regla mal hecha en un servidor alquilado y quedó sin web ni SSH. Para volver tuvo que arrancar en modo rescate, montar el disco y editar a mano la base de datos donde Proxmox guarda la configuración, cambiando enable uno por enable cero.
+B: [risas] Una tarde perdida.
+A: Y la guía tiene la receta para evitarlo: antes de habilitar, dejá abierta una sesión SSH. Y creá un grupo de IPs llamado management con las direcciones desde donde administrás. Proxmox les abre la web y el SSH automáticamente.
+B: ¿Cuántas fuentes?
+A: Firewall, dos de cuatro. Usuarios y dos factores, solo la guía oficial.
+B: ¿Laboratorio?
+A: Creá un usuario técnico en el realm pve con rol PVEAuditor, activale TOTP y generá las claves de recuperación. Después el IPSet management con tu IP, sesión SSH abierta, y habilitá el firewall en el datacenter. Probá entrar desde otra IP.
+B: Quince minutos.
+A: Y nunca más vas a habilitar un firewall a ciegas.

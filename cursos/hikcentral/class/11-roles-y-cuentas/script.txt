@@ -1,0 +1,20 @@
+A: Lección once. Roles y cuentas.
+B: El clásico usuario admin compartido por todo el monitoreo.
+A: [suspiro] Con la contraseña escrita en un post it. Bueno, HikCentral trae dos roles fijos, que no se editan ni se borran: Administrator, con todos los permisos, y Operator, con acceso a recursos y aplicaciones.
+B: ¿Y lo demás?
+A: Roles a medida. El manual los describe con varias perillas. Vigencia: desde y hasta cuándo vale. Plantilla horaria de permisos: por ejemplo, el rol de guardia nocturno vale de diecinueve a siete. Áreas visibles: un área oculta no la ve ni accede. Y permisos de recursos y de configuración.
+B: ¿Y si el rol vence?
+A: El usuario es expulsado y no puede volver a entrar. Útil para contratistas.
+B: ¿Cuántas fuentes?
+A: Dos de cinco páginas de usuarios y seguridad describen roles así, y cuatro de cinco coinciden en endurecer el acceso. Y acá aparece la voz crítica: un blog de instaladores recuerda el historial de fallas de seguridad de Hikvision y que en proyectos grandes los evaluadores lo miran.
+B: Razón de más para hacerlo bien.
+A: Exacto. Tres cosas. Uno: la fuerza mínima de contraseña viene en media por defecto, según el FAQ. Se puede subir a fuerte. Las reglas: ocho caracteres o más con tres tipos, sin uno dos tres, sin la palabra admin.
+B: ¿Dos?
+A: HTTPS. El soporte de Hikvision explica que con el certificado embebido el navegador muestra no seguro. Para sacarlo, se sube un archivo pem con el certificado y la clave privada firmado por una autoridad.
+B: ¿Y tres?
+A: No exponer nada sin necesidad. Ni el SYS ni los equipos abiertos a internet porque sí.
+B: ¿Ejemplo?
+A: Un shopping. Rol Guardia con las áreas de pasillos y estacionamiento, horario de su turno, solo vivo y reproducción. Rol Mantenimiento con estado de equipos. Cada uno su usuario.
+B: ¿Laboratorio?
+A: Crear el rol Guardia con un área y un horario, un usuario de prueba con ese rol, y subir la fuerza de contraseña a fuerte. Quince minutos.
+B: Y se acabó el post it.

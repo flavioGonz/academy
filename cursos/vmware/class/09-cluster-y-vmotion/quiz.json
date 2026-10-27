@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un host de un clúster con HA se apaga de golpe. ¿Qué pasa con sus VMs?",
+  "options": [
+   "Siguen corriendo sin corte en otro host",
+   "Se pierden hasta que vuelva el host",
+   "DRS las mueve con vMotion antes de que se apague",
+   "HA las reinicia en otros hosts del clúster; hay un corte mientras arrancan"
+  ],
+  "answer": 3,
+  "why": "HA no evita el corte: detecta la falla y reinicia las VMs en otros hosts con capacidad."
+ },
+ {
+  "q": "vCenter está caído por mantenimiento. ¿Qué sigue funcionando en el clúster?",
+  "options": [
+   "HA, que puede reiniciar VMs si cae un host",
+   "DRS, que sigue balanceando",
+   "vMotion manual",
+   "Nada, el clúster se detiene"
+  ],
+  "answer": 0,
+  "why": "Según TechTarget, HA sigue operando sin vCenter, mientras que DRS requiere vCenter para funcionar."
+ },
+ {
+  "q": "Querés hacer vMotion cambiando solo de host. ¿Qué requisito de almacenamiento hay?",
+  "options": [
+   "Que el disco sea thin",
+   "Que la VM esté apagada",
+   "Que el disco esté en un datastore compartido que vean ambos hosts",
+   "Ninguno"
+  ],
+  "answer": 2,
+  "why": "La documentación indica que al cambiar solo el host, el disco queda en almacenamiento compartido entre los dos hosts."
+ }
+]

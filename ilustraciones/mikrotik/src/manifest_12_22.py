@@ -1,0 +1,410 @@
+"""Genera manifest-12-22.json (lecciones 12 a 22 del curso MikroTik) y valida los anclajes 'after'."""
+import json, re, glob, os
+from teoria_12_23 import T
+
+OUT = "/home/claude/ies-training/ilustraciones/mikrotik/manifest-12-22.json"
+CLASS = "/home/claude/claudemy/mikrotik/class"
+
+M = {
+    "12": {
+        "fig": {"file": "12.svg",
+                "alt": "Una cámara 192.168.88.50 conectada al bridge del router y el router saliendo a internet por ether1. Torch en el bridge muestra la IP de la cámara; Torch en ether1 muestra todo con la IP del router.",
+                "caption": "Torch y sniffer van en la interfaz LAN: del lado de la WAN, después del NAT, no sabés quién es quién."},
+        "steps": [
+            {"file": "12-paso1.svg", "step": 1,
+             "alt": "Cuatro escalones: preguntar con ping y traceroute, mirar con Torch, capturar con el sniffer a un archivo pcap y registrar con log=yes en una regla.",
+             "caption": "Subís de escalón solo cuando el anterior no alcanza para explicar la falla.",
+             "after": "Preguntar: ¿hay camino?"},
+            {"file": "12-paso2.svg", "step": 2,
+             "alt": "Dos gráficos de tasa de la cámara en Torch: uno que cae a cero a ratos (mirar cámara y cable) y otro parejo (mirar el NVR).",
+             "caption": "La forma de la tasa en Torch te dice si mirar la cámara o el NVR.",
+             "after": "Si el tráfico de la cámara cae a cero"},
+            {"file": "12-paso3.svg", "step": 3,
+             "alt": "El router captura con el sniffer en el bridge filtrando la IP de la cámara, guarda camara.pcap y la notebook lo abre en Wireshark con filtro dns o rtsp. Si el archivo pesa 24 bytes, no capturó nada.",
+             "caption": "Del router al archivo y del archivo a Wireshark; 24 bytes quiere decir captura vacía.",
+             "after": "Si el archivo pesa 24 bytes"},
+        ],
+        "concepts": [
+            {"name": "Torch",
+             "para_que": "Ping y traceroute generan tráfico de prueba y te dicen si hay camino, pero no qué está haciendo un equipo en este momento. Torch se creó para observar en vivo los flujos que pasan por una interfaz (direcciones, puertos, protocolo y tasas) sin generar ni un paquete.",
+             "como": "Se corre en la interfaz LAN (el bridge), filtrando por la IP del equipo con src-address=IP/32 o por puerto. En la WAN no sirve para identificar equipos: después del NAT todo sale con la IP del router. Ve los paquetes antes del firewall, así que también muestra lo que después se descarta. Mientras corre apaga FastTrack y sube la CPU: prendelo, mirá y cortalo.",
+             "ejemplo": "Un comercio en Carrasco reclama que la cámara de la entrada se corta en la app. Con `/tool/torch bridge src-address=192.168.88.50/32 duration=20s` ves que la tasa cae a cero cada tanto: antes de tocar el router, revisás la cámara y su cable."},
+            {"name": "Packet sniffer y archivo .pcap",
+             "para_que": "Torch muestra cuánto y hacia dónde, pero no qué dicen los paquetes. El sniffer guarda los paquetes en un archivo .pcap para abrirlo en Wireshark y leer el contenido: qué nombre pregunta un equipo, si el RTSP arranca, qué responde el otro lado.",
+             "como": "Configurás nombre de archivo y file-limit, arrancás con interface=bridge e ip-address=IP/32, esperás unos 30 segundos y lo parás. Mirá el tamaño en Files: si pesa 24 bytes no capturó nada. Bajalo y filtrá en Wireshark (dns, rtsp). Una captura llena el disco rápido: siempre con filtro y límite.",
+             "ejemplo": "En un portal cautivo que mostraba la página en blanco, la captura filtrada por DNS mostró unos 20 dominios que había que permitir y que el proveedor no listaba. Con una cámara que no registra en la nube del fabricante, el mismo filtro te muestra a qué nombre intenta llegar."},
+            {"name": "log=yes en una regla de drop",
+             "para_que": "Torch ve los paquetes antes del firewall, así que no te dice si una regla los descarta. Activar el log en una regla que sospechás deja un renglón por cada paquete que coincide, con un prefijo para encontrarlo.",
+             "como": "En la regla ponés log=yes y un log-prefix corto, y mirás con /log/print follow filtrando por ese prefijo. Cuando terminás, Ctrl+C y volvés a log=no: una regla de drop con log en un router de producción llena el registro enseguida.",
+             "ejemplo": "La cámara aparece en Torch pero el NVR remoto no la ve. Activás log en `defconf: drop invalid` con prefijo DROP-INV: si aparece la IP de la cámara, ya sabés qué regla mirar y lo dejás anotado en el ticket."},
+        ],
+    },
+    "13": {
+        "fig": {"file": "13.svg",
+                "alt": "El equipo del proveedor con gateway 203.0.113.9 conectado a ether1 del MikroTik con 203.0.113.10/29. Debajo, cada dato del proveedor (dirección y máscara, gateway, DNS) con su comando de RouterOS 7.",
+                "caption": "Cada dato que entrega el proveedor va a un lugar distinto: /ip/address, /ip/route y /ip/dns."},
+        "steps": [
+            {"file": "13-paso2.svg", "step": 2,
+             "alt": "Comparación: ether1 con el cliente DHCP activo y la IP fija a la vez (mal) contra ether1 con el cliente DHCP deshabilitado y solo la IP fija (bien).",
+             "caption": "Primero se deshabilita el cliente DHCP de ether1, después se carga la IP fija.",
+             "after": "y cargá la IP fija"},
+            {"file": "13-paso3.svg", "step": 3,
+             "alt": "Tres pruebas en orden desde el MikroTik: ping al gateway, ping a 1.1.1.1 y resolver mikrotik.com. Si falla la primera, cable, máscara o VLAN; la segunda, ruta o proveedor; la tercera, DNS.",
+             "caption": "Cada prueba que falla señala una capa distinta.",
+             "after": "Gateway sin respuesta: cable"},
+        ],
+        "concepts": [
+            {"name": "IP fija: dirección, ruta por defecto y DNS",
+             "para_que": "Con DHCP el router recibe todo solo; con IP fija nadie se lo entrega y hay que cargar cada pieza. Existe para enlaces empresariales donde el proveedor asigna una dirección pública que no cambia, útil para publicar servicios y para failover con rutas recursivas.",
+             "como": "Son cuatro datos y tres comandos: la dirección con su máscara en ether1 (/ip/address), una ruta 0.0.0.0/0 hacia el gateway (/ip/route) y los DNS (/ip/dns). Poné comment en cada uno para encontrarlos después y anotá en el legajo quién te dio los datos.",
+             "ejemplo": "Una pyme con Internet pyme de Antel tiene una IP pública fija. Cargás `/ip/address/add address=203.0.113.10/29 interface=ether1 comment=\"WAN fija\"`, la ruta al gateway 203.0.113.9 y los DNS, y el legajo queda con los cuatro datos."},
+            {"name": "Un solo origen de dirección en la WAN",
+             "para_que": "La configuración por defecto deja un cliente DHCP en ether1. Si le cargás la IP fija encima, los dos compiten por la misma interfaz y podés terminar con dos direcciones y dos rutas por defecto.",
+             "como": "Antes de cargar la fija, mirás /ip/dhcp-client/print y lo deshabilitás con /ip/dhcp-client/disable [find interface=ether1]. Hacelo con export previo y en Safe Mode si estás entrando de forma remota: un gateway mal escrito te deja afuera.",
+             "ejemplo": "Cambiás un hAP de un cliente que antes estaba detrás del módem a una fibra con IP fija: primero deshabilitás el DHCP de ether1, después cargás la IP, y recién ahí sacás el Safe Mode."},
+            {"name": "Verificación por capas",
+             "para_que": "\"No hay internet\" puede ser un cable, una máscara mal puesta, una ruta que falta o un DNS caído. Probar por capas separa el problema en minutos en vez de tocar todo a la vez.",
+             "como": "Primero ping al gateway (si falla: cable, máscara o VLAN), después ping a una IP de internet como 1.1.1.1 (si falla: ruta o proveedor) y al final resolver un nombre (si falla: DNS). Cerrás mirando que la ruta por defecto esté activa y comparando public-address de IP Cloud con tu IP.",
+             "ejemplo": "En una instalación nueva el ping a 203.0.113.9 responde pero a 1.1.1.1 no: no es el cable ni la máscara, te falta la ruta por defecto o el proveedor no activó el servicio. Llamás al proveedor con ese dato concreto."},
+        ],
+    },
+    "14": {
+        "fig": {"file": "14.svg",
+                "alt": "Un módem que entrega DHCP conectado a ether1 del MikroTik en estado bound. Del router salen cuatro cosas que instala el cliente DHCP: dirección dinámica, ruta por defecto con distancia 1, DNS y NTP.",
+                "caption": "Cuando el cliente queda bound instala dirección, ruta, DNS y NTP; al perder el lease los saca."},
+        "steps": [
+            {"file": "14-paso2.svg", "step": 2,
+             "alt": "Dos casos de dos WAN: con distancias 1 y 1 las dos rutas quedan activas y reparten tráfico; con distancias 1 y 2 gana la de 1 y la otra queda en espera como respaldo.",
+             "caption": "Con distancias iguales el tráfico se reparte; el respaldo va con distancia mayor.",
+             "after": "subile la distancia y mirá la ruta"},
+            {"file": "14-paso4.svg", "step": 4,
+             "alt": "Cadena Internet, módem en modo router (NAT 1), MikroTik (NAT 2) y LAN, con una tabla que compara la address del cliente DHCP con public-address: igual es IP directa, privada es doble NAT, 100.64.0.0/10 es CGNAT.",
+             "caption": "Comparando dos direcciones sabés si hay otro NAT adelante antes de prometer acceso remoto.",
+             "after": "hay otro NAT adelante"},
+        ],
+        "concepts": [
+            {"name": "Lo que instala el cliente DHCP",
+             "para_que": "Para que el router se conecte solo a cualquier módem u otro router sin cargar datos a mano. Es la forma más común de conectar una WAN y la que trae la configuración por defecto en ether1.",
+             "como": "Con /ip/dhcp-client/print detail ves status (tiene que decir bound), address, gateway, DNS y NTP recibidos. use-peer-dns y use-peer-ntp deciden si se usan los DNS y NTP del proveedor. Todo lo que instala es dinámico: si el lease se pierde o deshabilitás el cliente, desaparece.",
+             "ejemplo": "Llegás a un local con un RouterBOARD detrás del módem del proveedor: antes de irte anotás en el legajo address, gateway y primary-dns de `print detail`, así el próximo técnico sabe qué recibía el sitio."},
+            {"name": "default-route-distance",
+             "para_que": "Cuando hay dos salidas a internet, el router necesita saber cuál usar. La distancia de la ruta por defecto decide: gana la menor, y con distancias iguales las dos quedan activas y el tráfico se reparte (ECMP).",
+             "como": "En el cliente DHCP del enlace de respaldo subís default-route-distance (por ejemplo a 2) y mirás /ip/route/print where dst-address=0.0.0.0/0. Para un failover fino con gateway dinámico hace falta un script de lease, porque las rutas recursivas piden un gateway estable.",
+             "ejemplo": "Un depósito tiene fibra y un módem 4G de respaldo, los dos por DHCP. Si los dos quedan en distancia 1, las cámaras salen a veces por el 4G y se consume el plan; con el 4G en distancia 2 solo se usa cuando la fibra cae."},
+            {"name": "Doble NAT y CGNAT",
+             "para_que": "Si el módem del proveedor también hace de router, tu MikroTik recibe una IP privada y queda detrás de otro NAT. Detectarlo a tiempo evita prometer acceso remoto por una IP que no llega a tu equipo.",
+             "como": "Comparás la address del cliente DHCP con public-address de /ip/cloud/print. Si son iguales, la IP pública está en ether1. Si la address es 10.x, 172.16.x a 172.31.x o 192.168.x hay otro NAT adelante; si está en 100.64.0.0/10 es CGNAT del proveedor.",
+             "ejemplo": "Un cliente pide ver el NVR desde el celular. ether1 tiene 192.168.1.x y public-address es otra: hay doble NAT. Le ofrecés Back To Home o un túnel a un concentrador en vez de abrir puertos que no van a llegar."},
+        ],
+    },
+    "15": {
+        "fig": {"file": "15.svg",
+                "alt": "Antel y el ONT en modo puente conectados por cable a ether1 del MikroTik. Dentro del router, en capas: ether1 físico, una VLAN marcada como a confirmar con Antel, la interfaz pppoe-antel y arriba la lista WAN y el masquerade que apuntan a pppoe-antel.",
+                "caption": "Con PPPoE la WAN es pppoe-antel; la VLAN queda a confirmar con Antel."},
+        "steps": [
+            {"file": "15-paso1.svg", "step": 1,
+             "alt": "El puerto LAN del ONT de Antel en modo puente va con cable a ether1 del RouterBOARD; la notebook con WinBox va a ether2. Debajo, los comandos para deshabilitar el cliente DHCP y escanear PPPoE, y los dos resultados posibles.",
+             "caption": "ONT a ether1, notebook a otro puerto, y el scan dice si el PPPoE responde sin VLAN.",
+             "after": "el PPPoE responde sin VLAN"},
+            {"file": "15-paso5.svg", "step": 5,
+             "alt": "Una trama Ethernet de 1500 bytes de carga: 8 bytes de PPPoE y PPP y hasta 1492 para el paquete IP. Debajo, qué pasa sin ajustar el MSS (páginas que cargan a medias) y con change-mss.",
+             "caption": "PPPoE ocupa 8 bytes: por eso MTU 1492 y el MSS ajustado.",
+             "after": "mirá si el perfil PPP que usa el cliente"},
+        ],
+        "concepts": [
+            {"name": "ONT en modo puente",
+             "para_que": "En modo router, el ONT de Antel hace NAT y tu MikroTik queda detrás, con doble NAT y sin control del firewall, las VLAN ni la VPN. En modo puente el ONT solo pasa el tráfico y el MikroTik es el router del cliente.",
+             "como": "El cambio se pide a Antel por MiAntel o al 121, y en fibra lo hace el proveedor de forma remota. Mientras el ONT pasa a puente el sitio queda sin internet hasta que el MikroTik marque, así que conviene coordinar la ventana con el cliente y llevar el usuario y la contraseña del servicio.",
+             "ejemplo": "En una oficina en el Centro, el cliente pide el puente por MiAntel para el martes a primera hora; vos llegás con el RouterBOARD preconfigurado, conectás el ONT a ether1 y anotás en el legajo quién en Antel hizo el cambio. Hay usuarios que en 2017 tuvieron cortes con el ONT en puente y volvieron a modo router: si pasa, documentalo."},
+            {"name": "Cliente PPPoE e interfaz pppoe-antel",
+             "para_que": "PPPoE autentica la conexión con usuario y contraseña y entrega la IP pública. En RouterOS crea una interfaz lógica sobre ether1, y esa interfaz pasa a ser la WAN de verdad.",
+             "como": "Deshabilitás el cliente DHCP de ether1, probás /interface/pppoe-client/scan y creás el cliente con add-default-route=yes y use-peer-dns=yes. Después agregás pppoe-antel a la lista WAN: masquerade y reglas tienen que apuntar ahí. No pongas IP estática ni DHCP en la misma interfaz del PPPoE.",
+             "ejemplo": "Un técnico deja el masquerade con out-interface=ether1 después de pasar a PPPoE: el router navega pero la LAN no. Cambiando la regla a la lista WAN con pppoe-antel adentro, vuelve todo."},
+            {"name": "MTU 1492 y ajuste de MSS",
+             "para_que": "PPPoE suma 8 bytes por paquete (6 de PPPoE y 2 de PPP), así que el paquete IP no puede pasar de 1492. Como muchos routers no avisan por ICMP y muchos firewalls lo bloquean, sin ajuste aparecen páginas que cargan a medias.",
+             "como": "En el cliente PPPoE, max-mtu y max-mru en 1492. Después mirás si el perfil PPP ya trae change-tcp-mss; si no, una regla de mangle en forward con action=change-mss new-mss=clamp-to-pmtu para los SYN que salen por pppoe-antel.",
+             "ejemplo": "Después de pasar un cliente a PPPoE, el portal del banco carga hasta la mitad y la plataforma del NVR en la nube no termina de abrir. Con la regla de MSS agregada, cargan bien."},
+            {"name": "VLAN de la WAN: a confirmar",
+             "para_que": "Algunas fibras piden etiquetar la WAN con una VLAN antes del PPPoE. Ninguna fuente leída para este curso confirma si Antel la pide con el ONT en puente, así que no la des por hecha.",
+             "como": "Probá primero sin VLAN con pppoe-client/scan: si aparece un ac-name, el PPPoE responde sin VLAN. Si no aparece nada, pedile a Antel el dato antes de seguir. Si te confirman una VLAN, se crea sobre ether1 y el PPPoE va sobre esa VLAN, no sobre ether1.",
+             "ejemplo": "El scan no devuelve nada y el usuario y la contraseña están bien: llamás a Antel, preguntás si el servicio lleva VLAN y anotás la respuesta y el nombre de quien te atendió en el legajo antes de crear `vlan-wan`."},
+        ],
+    },
+    "16": {
+        "fig": {"file": "16.svg",
+                "alt": "El paquete principal routeros, donde viene casi todo, y los paquetes extra container, zerotier, user-manager, wifi-qcom y wireless, con wifi-qcom y wireless marcados como incompatibles a la vez. Abajo, la diferencia entre Download y Download&Install.",
+                "caption": "Casi todo está en routeros; los extras se habilitan con reinicio, y wifi-qcom y wireless no van juntos."},
+        "steps": [
+            {"file": "16-paso4.svg", "step": 4,
+             "alt": "Una PC con internet baja de mikrotik.com el .npk de la misma arquitectura (arm64 de ejemplo) y se arrastra a la raíz de Files en WinBox, no dentro de una carpeta. Después se verifica y se reinicia.",
+             "caption": "Sin internet: el .npk de la arquitectura del equipo, en la raíz de Files, y reinicio.",
+             "after": "Actualización sin internet"},
+            {"file": "16-paso6.svg", "step": 6,
+             "alt": "Cinco pasos en orden: backup, actualizar RouterOS, comparar versiones con routerboard print, routerboard upgrade y reiniciar. Una ventana muestra current-firmware y upgrade-firmware.",
+             "caption": "Cerrá siempre con RouterBOOT: current-firmware tiene que alcanzar a upgrade-firmware.",
+             "after": "Cerrá con RouterBOOT"},
+        ],
+        "concepts": [
+            {"name": "Paquete routeros y paquetes extra",
+             "para_que": "MikroTik separa en paquetes .npk lo que no todos usan, para que el equipo cargue solo lo necesario. Casi todo está en routeros; container, zerotier, user-manager, wifi-qcom o wireless son extras.",
+             "como": "En System > Packages > Check for Updates aparecen los extras disponibles con flags X A. Se habilitan con /system/package/enable y se aplican con apply-changes, que reinicia; se revierten con uninstall. Desde 7.13 wifi-qcom y wireless no pueden estar activos a la vez, y en equipos WiFi el paquete de radio tiene que ser de la misma versión.",
+             "ejemplo": "Un hAP ax de un cliente queda sin WiFi después de una actualización manual: subiste routeros pero no wifi-qcom de la misma versión. Lo subís a Files, reiniciás y la radio vuelve."},
+            {"name": "Download y Download&Install",
+             "para_que": "Actualizar implica reiniciar, y en un cliente el reinicio corta cámaras, porteros y el acceso. Las dos opciones existen para que elijas cuándo se corta.",
+             "como": "Download baja la versión y espera a que reinicies vos; Download&Install reinicia sola al terminar. Antes de cualquiera: changelog del canal, backup y export. Nunca cortes la energía durante la instalación.",
+             "ejemplo": "En una farmacia que abre a las 8, usás Download a media tarde y reiniciás a las 7:30 del día siguiente desde el túnel de gestión, con el encargado avisado."},
+            {"name": "Actualización y downgrade sin internet",
+             "para_que": "Hay sitios sin salida a internet (redes de CCTV aisladas) o versiones que fallan y hay que deshacer. Subir el .npk a mano resuelve los dos casos sin Netinstall.",
+             "como": "Mirás architecture-name en System > Resources, bajás desde la PC el .npk de esa arquitectura y lo arrastrás a la raíz de Files (no dentro de una carpeta). Reiniciás y revisás el log. Para volver atrás, subís los .npk de la versión anterior y ejecutás /system/package/downgrade.",
+             "ejemplo": "La red de cámaras de un edificio no tiene internet a propósito: llevás en la notebook el .npk arm64 de la versión que ya probaste, lo soltás en Files del router de CCTV y reiniciás."},
+            {"name": "RouterBOOT después de RouterOS",
+             "para_que": "RouterBOOT es el cargador de arranque del RouterBOARD y cada versión de RouterOS trae el suyo. Si no lo actualizás, el equipo queda con un arranque de otra versión.",
+             "como": "Después de actualizar RouterOS, /system/routerboard/print compara current-firmware con upgrade-firmware. Si difieren, /system/routerboard/upgrade y un reinicio más. Solo se actualiza el RouterBOOT principal; el de respaldo queda para recuperar.",
+             "ejemplo": "Terminás de actualizar diez routers de una cadena de locales y en el legajo anotás versión de RouterOS y de RouterBOOT de cada uno; los que muestran versiones distintas reciben su segundo reinicio esa misma noche."},
+        ],
+    },
+    "17": {
+        "fig": {"file": "17.svg",
+                "alt": "Cuatro canales de RouterOS de más probado a más nuevo: long-term (sitios de clientes), stable (solo si hace falta una función nueva probada en el banco), testing y development (solo en el banco propio).",
+                "caption": "Long-term en clientes; stable con prueba previa; testing y development, solo en tu banco."},
+        "steps": [
+            {"file": "17-paso3.svg", "step": 3,
+             "alt": "Diagrama de decisión: si es el banco de pruebas, testing o development; si es de un cliente y no necesita una función de stable, long-term; si la necesita, stable probado antes en el banco. Notas: todos los equipos del cliente en el mismo canal y anotarlo en el legajo.",
+             "caption": "Dos preguntas alcanzan para elegir el canal de cada equipo.",
+             "after": "Decidí con esta tabla"},
+        ],
+        "concepts": [
+            {"name": "Canales de RouterOS",
+             "para_que": "No todos los routers necesitan lo último. MikroTik publica cuatro canales con distinto ritmo y riesgo: long-term (solo arreglos críticos), stable (funciones nuevas probadas, cada pocos meses), testing (cada pocas semanas, no para producción) y development (para probar lo que viene).",
+             "como": "El canal se elige en Check for Updates o con /system/package/update/set channel=. Con check-for-updates y print ves qué versión ofrece cada canal sin instalar nada.",
+             "ejemplo": "Antes de una visita, comparás en el banco qué ofrece long-term y qué ofrece stable para el modelo del cliente, y decidís con el changelog en la mano."},
+            {"name": "Long-term como regla en clientes",
+             "para_que": "Un sitio que se visita poco necesita, sobre todo, no romperse. Long-term trae solo arreglos críticos, así que hay menos sorpresas después de actualizar y la flota se comporta igual en todos los clientes.",
+             "como": "Dejás long-term por defecto, todos los equipos de un mismo cliente en el mismo canal, y anotás canal, versión y fecha en el legajo. Stable solo si necesitás una función que no está en long-term y la probaste antes en el banco.",
+             "ejemplo": "Un barrio privado tiene cinco MikroTik entre portería, cámaras y oficina: los cinco en long-term y con la misma versión. Cuando falla uno, sabés que no es por una versión distinta."},
+            {"name": "Cambiar de canal para bajar de versión",
+             "para_que": "Si un equipo quedó en stable o testing y lo querés de vuelta en una rama conservadora, el canal también sirve para bajar: cuando el canal ofrece una versión más vieja, check-for-updates la instala.",
+             "como": "Backup primero, después cambiás a long-term, check-for-updates e instalás lo que ofrezca. El script de actualización automática de la documentación instala lo que salga en el canal sin que lo pruebes: en clientes, mejor no.",
+             "ejemplo": "Encontrás el router de un cliente en testing porque alguien probó algo: backup, canal long-term, check-for-updates, instalás y lo dejás anotado."},
+        ],
+    },
+    "18": {
+        "fig": {"file": "18.svg",
+                "alt": "El MikroTik con DDNS activo habla con cloud2.mikrotik.com por UDP 15252; la nube registra el nombre serie.sn.mynetname.net con la public-address y TTL de 60 segundos. Un técnico resuelve el nombre e intenta entrar, pero el firewall por defecto lo descarta.",
+                "caption": "El nombre sigue a la IP, pero no abre ningún acceso: para entrar hace falta un túnel o reglas explícitas."},
+        "steps": [
+            {"file": "18-paso5.svg", "step": 5,
+             "alt": "Dos casos de un router con dos WAN: con WAN 1 arriba el nombre apunta a 203.0.113.10; con WAN 1 cortada el nombre pasa a apuntar a 198.51.100.7, la IP de WAN 2.",
+             "caption": "public-address es la IP del enlace por donde sale la ruta a la nube, y el nombre la sigue.",
+             "after": "cortá la principal y mirá cómo cambia"},
+        ],
+        "concepts": [
+            {"name": "DDNS de IP Cloud",
+             "para_que": "Muchas conexiones tienen IP pública dinámica (PPPoE que reconecta, DHCP). IP Cloud le da al router un nombre <serie>.sn.mynetname.net que sigue su IP pública, para no tener que averiguarla cada vez.",
+             "como": "Se activa con /ip/cloud/set ddns-enabled=yes. El router habla con cloud2.mikrotik.com por UDP 15252; detrás de NAT manda una actualización por minuto y force-update la manda ya. El TTL es de 60 segundos. No funciona en RouterOS x86 y en CHR pide licencia paga.",
+             "ejemplo": "Un local con PPPoE de Antel cambia de IP cada vez que reconecta: en el legajo anotás el dns-name y no la IP, y el monitoreo apunta al nombre."},
+            {"name": "El nombre no es un camino",
+             "para_que": "Es fácil confundir tener un nombre con poder entrar. El DDNS solo hace que el router sea fácil de encontrar: el firewall por defecto sigue descartando lo que llega de internet, y detrás de CGNAT el nombre apunta a una IP compartida del proveedor.",
+             "como": "Antes de prometer acceso, comparás public-address con la IP de la WAN. Para entrar sin IP pública usás Back To Home (lección 19) o un concentrador (lección 20); publicar un servicio detrás del nombre es otra decisión, con sus reglas (lección 10).",
+             "ejemplo": "El cliente te pasa el nombre mynetname.net de su router y te pide entrar al NVR desde la oficina: el nombre resuelve, pero detrás hay CGNAT. Le proponés Back To Home en lugar de abrir puertos."},
+            {"name": "update-time y NTP",
+             "para_que": "Un router sin hora correcta deja logs que no sirven y, con IPsec, puede hacer vencer las SA antes de tiempo. La nube puede poner una hora aproximada al arrancar, pero no reemplaza a NTP.",
+             "como": "update-time solo actúa si el cliente NTP está apagado y la hora es aproximada. Lo recomendable: /system/ntp/client/set enabled=yes con servidores, y update-time=no.",
+             "ejemplo": "Investigás un corte en un depósito y los logs del router dicen 1970: el NTP estaba apagado. Lo activás con pool.ntp.org y desde ahí la línea de tiempo coincide con la del NVR."},
+            {"name": "detect-internet y las listas LAN y WAN",
+             "para_que": "detect-internet clasifica interfaces según si tienen salida a internet y puede moverlas entre listas por su cuenta. Sirve para registrar caídas, pero si tus reglas dependen de las listas LAN y WAN, te las puede cambiar sin aviso.",
+             "como": "Mirás /interface/detect-internet/print y /interface/list/member/print. Si detect-interface-list no es none y tu firewall usa las listas, lo apagás con detect-interface-list=none.",
+             "ejemplo": "Un router con PPPoE pierde el acceso de gestión cada tanto y nadie sabe por qué: detect-internet estaba moviendo interfaces de lista. Con detect-interface-list=none se termina."},
+        ],
+    },
+    "19": {
+        "fig": {"file": "19.svg",
+                "alt": "Un celular con datos móviles entra al MikroTik (ARM o ARM64, RouterOS 7.12 o posterior) directo si el sitio tiene IP pública, o por un relay de MikroTik si no la tiene; el router abre y mantiene la conexión con el relay. Del router se llega a la LAN 192.168.88.0/24.",
+                "caption": "Con o sin IP pública, el celular llega a la LAN: directo o por el relay, cifrado de punta a punta."},
+        "steps": [
+            {"file": "19-paso3.svg", "step": 3,
+             "alt": "El comando show-client-config genera un QR para tecnico-lucia; el celular con datos móviles lo escanea en la app WireGuard, queda conectado y prueba entrar a WinBox en 192.168.88.1 y al NVR en 192.168.88.50.",
+             "caption": "El QR configura el celular; la prueba se hace con datos móviles, desde afuera.",
+             "after": "En el celular, con datos móviles"},
+            {"file": "19-paso4.svg", "step": 4,
+             "alt": "Dos usuarios: tecnico-lucia con allow-lan=yes, red permitida 192.168.88.0/24 y vencimiento de 30 días llega a internet y a la LAN; invitado con allow-lan=no y vencimiento de 1 día solo llega a internet.",
+             "caption": "La LAN solo para quien la necesita; el resto, solo internet a través del router.",
+             "after": "la LAN no tiene que responder"},
+        ],
+        "concepts": [
+            {"name": "Back To Home",
+             "para_que": "Entrar a un sitio con CGNAT o doble NAT normalmente pide un VPS o abrir puertos en otro equipo. Back To Home convierte al router en servidor WireGuard: con IP pública el cliente entra directo, y sin ella entra por un relay de MikroTik, siempre cifrado de punta a punta.",
+             "como": "Se activa con /ip/cloud/set back-to-home-vpn=enabled y se espera vpn-status: running. vpn-relay-ipv4-status dice si entran directo o por relay; por relay puede ir más lento. Funciona solo en CPU ARM, ARM64 o TILE con RouterOS 7.12 o posterior: los RouterBOARD MIPS quedan afuera.",
+             "ejemplo": "Un local en una galería tiene fibra con CGNAT y un hAP ax: activás Back To Home y el técnico de guardia entra al NVR desde el celular sin VPS ni puertos abiertos."},
+            {"name": "Un usuario por dispositivo: allow-lan, client-allowed-address y expires",
+             "para_que": "Si todos comparten una misma configuración, no podés dar de baja a una sola persona cuando pierde el celular o deja la empresa. Cada usuario tiene su clave y sus permisos.",
+             "como": "Con /ip/cloud/back-to-home-user/add creás un usuario por equipo. allow-lan=no (por defecto) da solo internet a través del router; allow-lan=yes con client-allowed-address acotado da la LAN. expires lo hace vencer (no se puede cambiar después). La restricción depende de que tus redes locales estén en la lista LAN.",
+             "ejemplo": "Al técnico de turno le das `allow-lan=yes client-allowed-address=192.168.88.0/24 expires=30d`; al proveedor que viene un día a revisar el aire acondicionado, un usuario de 1 día sin LAN."},
+            {"name": "Borrar un usuario, no revocar todo",
+             "para_que": "Hay una opción que borra de golpe todos los usuarios y claves. Existe para emergencias, pero para una baja individual es un error caro.",
+             "como": "Para dar de baja: /ip/cloud/back-to-home-user/remove [find name=...]. back-to-home-vpn=revoked-and-disabled borra todo; al reactivarlo hay claves y puerto nuevos y hay que reconfigurar cada teléfono y computadora.",
+             "ejemplo": "Un técnico pierde el celular un viernes: borrás su usuario en un minuto y el resto del equipo sigue entrando sin enterarse."},
+        ],
+    },
+    "20": {
+        "fig": {"file": "20.svg",
+                "alt": "Un CHR en un VPS con IP pública 198.51.100.20, interfaz wg-hub 10.10.10.1 en UDP 13231. Dos sitios detrás de NAT o CGNAT (sitio-lab 10.10.10.2 y otro) abren túneles salientes hacia el hub, y la notebook del técnico también es un peer.",
+                "caption": "Cada sitio abre su túnel hacia el VPS: el CGNAT del cliente deja de importar."},
+        "steps": [
+            {"file": "20-paso1.svg", "step": 1,
+             "alt": "Seis pasos en orden para endurecer el CHR: crear el usuario propio, entrar con él y probar, deshabilitar admin, apagar servicios que no se usan, limitar WinBox y SSH a la oficina y al túnel, y apagar MAC server, discovery y DNS remoto.",
+             "caption": "Primero tu usuario y la prueba; recién después se deshabilita admin.",
+             "after": "Entrá con el usuario nuevo"},
+            {"file": "20-paso5.svg", "step": 5,
+             "alt": "El router del sitio, detrás del NAT o CGNAT del proveedor, abre el túnel hacia 198.51.100.20 puerto 13231 y manda keepalive cada 25 segundos. Una tabla compara endpoint-address, persistent-keepalive y allowed-address en el sitio y en el CHR.",
+             "caption": "El sitio lleva endpoint y keepalive; el hub solo lo espera.",
+             "after": "En el router del sitio"},
+        ],
+        "concepts": [
+            {"name": "CHR (Cloud Hosted Router)",
+             "para_que": "Hace falta un punto fijo con IP pública al que lleguen todos los sitios, y que se administre igual que el resto del parque. CHR es RouterOS hecho para máquinas virtuales, así que un VPS o una VM en Proxmox se vuelve un MikroTik más.",
+             "como": "En un VPS se escribe la imagen raw del CHR con dd desde el modo rescate. Licencias según MikroTik: Free sin vencimiento con 1 Mbps de subida por interfaz; P1 1 Gbps (45 dólares), P10 10 Gbps (95), P-Unlimited (250); prueba de 60 días con /system/license/renew. Las copias no reinician la prueba e IP Cloud pide licencia paga.",
+             "ejemplo": "Para gestionar por WinBox treinta sitios con CGNAT alcanza con la licencia Free; si después querés ver video de las cámaras a través del hub, pasás a P1."},
+            {"name": "Concentrador con túneles salientes",
+             "para_que": "Un sitio detrás de CGNAT no puede recibir conexiones, pero sí puede abrirlas. Si cada sitio abre su túnel hacia el VPS, el NAT del cliente deja de importar y tenés un solo lugar para entrar a todos.",
+             "como": "En el CHR, una interfaz WireGuard (wg-hub) con su rango de túnel y un peer por sitio con allowed-address /32. En cada sitio, el peer del hub con endpoint-address, endpoint-port y persistent-keepalive=25s. Tu notebook se conecta al hub como un peer más y desde ahí entra a cada sitio por su IP de túnel.",
+             "ejemplo": "Una cadena de cinco locales con fibra residencial y CGNAT, algunos con RouterBOARD MIPS sin Back To Home: todos llaman al CHR y entrás a cada uno por 10.10.10.x desde la oficina."},
+            {"name": "Endurecer el día uno",
+             "para_que": "El CHR arranca con admin sin contraseña en una IP pública: está expuesto desde el primer minuto. Endurecerlo es el primer paso, no el último.",
+             "como": "Creás tu usuario, entrás con él y recién ahí deshabilitás admin. Apagás servicios que no usás, limitás WinBox y SSH a la IP de la oficina y al rango del túnel, ponés MAC server y discovery en none y DNS remoto apagado. Después el firewall de input: el CHR no trae la lista WAN, se crea a mano, y el drop del resto va al final.",
+             "ejemplo": "Levantás un CHR de prueba un viernes a la tarde y lo dejás para el lunes con admin: el lunes ya tiene intentos de login en el log. Por eso el endurecimiento va antes de cualquier otra cosa."},
+            {"name": "persistent-keepalive",
+             "para_que": "El NAT del proveedor olvida una conexión si no pasa tráfico por un rato. Sin keepalive, el hub ya no puede llegar al sitio hasta que el sitio vuelva a hablar.",
+             "como": "Solo del lado del sitio (el que no tiene IP pública): persistent-keepalive=25s junto con endpoint-address y endpoint-port del CHR. El hub no lleva endpoint ni keepalive: espera.",
+             "ejemplo": "Un sitio responde por el túnel a la mañana y a la tarde no, hasta que alguien navega desde el local: le faltaba el keepalive en el peer del sitio."},
+        ],
+    },
+    "21": {
+        "fig": {"file": "21.svg",
+                "alt": "Una notebook con cliente nativo conectada al MikroTik 203.0.113.10 por tres capas anidadas: IPsec por fuera (cifra; UDP 500, ESP o UDP 4500 con NAT-T), L2TP en el medio (UDP 1701) y PPP adentro (usuario y clave, IP del pool 192.168.89.x). El router da acceso a la LAN 192.168.88.0/24.",
+                "caption": "IPsec cifra, L2TP hace el túnel y PPP identifica a la persona."},
+        "steps": [
+            {"file": "21-paso3.svg", "step": 3,
+             "alt": "Tabla de las cuatro aperturas en input (UDP 500, UDP 4500, UDP 1701 y ESP) y la lista de reglas de input con las nuevas reglas accept ubicadas arriba del drop de la configuración por defecto.",
+             "caption": "Las cuatro aperturas van arriba del drop; debajo no sirven.",
+             "after": "Input, arriba del drop"},
+            {"file": "21-paso5.svg", "step": 5,
+             "alt": "Una notebook Windows detrás del router de la casa (NAT) conecta por internet al MikroTik 203.0.113.10. Tabla de valores de AssumeUDPEncapsulationContextOnSendRule: 0 por defecto, 1 servidor detrás de NAT, 2 servidor y cliente detrás de NAT, y el comando de PowerShell.",
+             "caption": "Si Windows no conecta y el celular sí, casi siempre es NAT-T: valor 2 y reinicio.",
+             "after": "VPN nueva de tipo L2TP/IPsec"},
+        ],
+        "concepts": [
+            {"name": "L2TP con IPsec obligatorio",
+             "para_que": "Hay personas que no pueden instalar nada: el encargado con su notebook de la empresa, una central de monitoreo. L2TP/IPsec viene incorporado en Windows, macOS, iOS y Android. L2TP arma el túnel pero no cifra; por eso va siempre dentro de IPsec.",
+             "como": "En el servidor, use-ipsec=required con un ipsec-secret largo: así solo acepta L2TP encapsulado en IPsec. Nunca use-ipsec=no en un servidor expuesto, y PPTP, nunca.",
+             "ejemplo": "La administradora de un edificio necesita ver el NVR desde la notebook de la oficina sin instalar software: le configurás la VPN L2TP/IPsec nativa de Windows."},
+            {"name": "Pool, perfil PPP y un secret por persona",
+             "para_que": "Cada conexión necesita una IP de túnel y una identidad propia, para saber quién entró y dar de baja a una sola persona sin tocar a las demás.",
+             "como": "Un pool (ej. 192.168.89.10 a 50), un perfil PPP con local-address y remote-address=pool y el DNS que quieras darle, y un /ppp/secret por persona con service=l2tp. Para ver quién está conectado: /ppp/active/print.",
+             "ejemplo": "El encargado tiene su usuario `encargado` y la central de monitoreo el suyo; si la central cambia de proveedor, borrás su secret y el encargado ni se entera."},
+            {"name": "Puertos en input y NAT-T",
+             "para_que": "IPsec usa varios puertos y un protocolo propio, y el firewall por defecto descarta todo lo que entra por la WAN. Si falta uno, la conexión no termina de armarse.",
+             "como": "En input, arriba del drop: UDP 500 (IKE), UDP 4500 (NAT-T, cuando alguien está detrás de NAT), UDP 1701 (L2TP) y protocolo ESP. Para que el tráfico del túnel hacia la LAN no se pierda, en forward una regla accept con ipsec-policy=in,ipsec arriba del FastTrack.",
+             "ejemplo": "La VPN conecta pero no se llega a ninguna cámara: faltaba la regla de forward con ipsec-policy arriba del fasttrack-connection."},
+            {"name": "La clave de Windows para NAT-T",
+             "para_que": "Por defecto Windows no arma IPsec con NAT-T cuando hay NAT en el camino. Por eso el celular conecta y la notebook no.",
+             "como": "La clave AssumeUDPEncapsulationContextOnSendRule en HKLM\\SYSTEM\\CurrentControlSet\\Services\\PolicyAgent: 0 por defecto, 1 si el servidor está detrás de NAT, 2 si servidor y cliente lo están. Se carga con PowerShell como administrador y se reinicia.",
+             "ejemplo": "El encargado conecta desde el celular pero no desde la notebook de su casa: cargás el valor 2, reinicia, y conecta."},
+        ],
+    },
+    "22": {
+        "fig": {"file": "22.svg",
+                "alt": "Sitio A MikroTik 203.0.113.10 y sitio B de otra marca 198.51.100.20 unidos por un túnel con dos capas: fase 1 IKE (profile, peer, identity; UDP 500 y 4500) y fase 2 SA ESP (proposal, policy). Abajo, la policy de A (origen 192.168.88.0/24, destino 10.10.10.0/24) y la de B con las redes al revés.",
+                "caption": "Las dos fases tienen que coincidir, y las policies son espejo una de la otra."},
+        "steps": [
+            {"file": "22-paso1.svg", "step": 1,
+             "alt": "Tabla de parámetros acordados por fase: IKEv2, clave precompartida, AES-256 y SHA-256, DH 14 y lifetime 1d en fase 1; AES-256-CBC, SHA-256, PFS grupo 14 y lifetime 1h en fase 2; redes 192.168.88.0/24 y 10.10.10.0/24, con la pieza de RouterOS donde va cada uno.",
+             "caption": "Primero la tabla firmada por los dos técnicos, después la configuración.",
+             "after": "para mandar al técnico del otro lado"},
+            {"file": "22-paso4.svg", "step": 4,
+             "alt": "Tres recorridos de un paquete de 192.168.88.x a 10.10.10.x: sin bypass, el masquerade cambia el origen y la policy no coincide; con accept arriba de todo en srcnat, la policy coincide y entra al túnel; con FastTrack sin bypass en forward, el tráfico saltea las policies y va lento.",
+             "caption": "El masquerade y FastTrack son los dos clásicos: los dos necesitan su regla de bypass.",
+             "after": "Bypass de NAT y de FastTrack"},
+            {"file": "22-paso6.svg", "step": 6,
+             "alt": "A la izquierda, dónde mirar en orden: active-peers (fase 1), policy print detail con ph2-state (fase 2), installed-sa (contadores) y el log. A la derecha, cada síntoma con su causa: parámetros distintos, comunicación, falta de bypass de NAT, FastTrack y firewall.",
+             "caption": "Mirá por capas y leé el síntoma: el log dice en qué fase está la falla.",
+             "after": "Qué significa cada síntoma"},
+        ],
+        "concepts": [
+            {"name": "Fase 1: IKE (profile, peer e identity)",
+             "para_que": "Antes de cifrar datos, los dos equipos tienen que reconocerse y acordar cómo protegen la negociación. La fase 1 arma ese canal seguro entre las dos IP públicas.",
+             "como": "En RouterOS se reparte en tres piezas: profile (hash, cifrado, grupo DH, lifetime), peer (IP remota y exchange-mode=ike2) e identity (clave precompartida o certificado). Va por UDP 500, y por 4500 si hay NAT. Si está bien, aparece en /ip/ipsec/active-peers/print. La documentación aconseja evitar la clave precompartida cuando se pueda usar certificado.",
+             "ejemplo": "Con el técnico del pfSense de la sucursal comparan la línea de fase 1 de la tabla; él pone DH 14 y vos modp2048, que es lo mismo con otro nombre. Si alguno pone otro grupo, el log lo muestra como local:remoto."},
+            {"name": "Fase 2: SA, proposal y policy",
+             "para_que": "La fase 2 define cómo se cifra el tráfico de verdad y qué tráfico entra al túnel. Cada SA es un acuerdo de cifrado en un sentido, por eso un túnel sano tiene dos por router.",
+             "como": "proposal lleva cifrado, hash, PFS y lifetime; policy dice red local, red remota, tunnel=yes y action=encrypt. La policy de un lado es espejo de la del otro. Se verifica con ph2-state=established en /ip/ipsec/policy/print y con contadores en /ip/ipsec/installed-sa/print.",
+             "ejemplo": "La oficina central (192.168.88.0/24) y el depósito (10.10.10.0/24): en tu policy src es 192.168.88.0/24 y dst 10.10.10.0/24; en el firewall del depósito, local 10.10.10.0/24 y remota 192.168.88.0/24."},
+            {"name": "Bypass de NAT y de FastTrack",
+             "para_que": "El masquerade cambia el origen antes de cifrar, y entonces la policy ya no coincide. FastTrack hace que las conexiones establecidas salteen las policies. Las dos cosas rompen un túnel que en apariencia está arriba.",
+             "como": "Una regla srcnat accept de la LAN local a la remota arriba de todo (place-before=0) y reglas accept en forward entre las dos redes antes del fasttrack-connection. Si probaste antes, borrá las conexiones viejas. Si el túnel \"se arregla\" al prender Torch, es FastTrack, porque Torch lo apaga mientras corre.",
+             "ejemplo": "Las fases están arriba pero no pasa un ping a la cámara del depósito: faltaba la regla `no NAT al tunel`. La agregás, limpiás las conexiones a 10.10.10.x y el ping responde."},
+            {"name": "Diagnóstico por capas",
+             "para_que": "Un túnel IPsec falla en lugares muy distintos: parámetros, comunicación, NAT o firewall. Mirar por capas te dice en qué fase está la falla en vez de cambiar valores a ciegas.",
+             "como": "En orden: active-peers (fase 1), ph2-state de las policies (fase 2), installed-sa (contadores) y el log con /system/logging/add topics=ipsec,!debug. \"no suitable proposal\" o NO-PROPOSAL-CHOSEN es parámetros distintos; \"phase1 negotiation failed due to time up\" es comunicación; ping en un solo sentido es firewall. Las dos LAN no pueden tener el mismo rango.",
+             "ejemplo": "Llegás al cliente con el log abierto: aparece time up, así que no tocás la tabla; revisás que UDP 500 y 4500 lleguen desde 198.51.100.20 y encontrás la regla de input faltante."},
+        ],
+    },
+}
+
+
+def lab_lines(card):
+    """Devuelve {n_paso: [líneas fuera de bloques de código]} del laboratorio."""
+    txt = open(card, encoding="utf-8").read()
+    lab = txt.split("**Laboratorio**", 1)[1].split("**Regla para quedarse**", 1)[0]
+    steps, cur, incode = {}, None, False
+    for ln in lab.splitlines():
+        if ln.startswith("```"):
+            incode = not incode
+            continue
+        if incode:
+            continue
+        m = re.match(r"^(\d+)\. ", ln)
+        if m:
+            cur = int(m.group(1))
+        if cur:
+            steps.setdefault(cur, []).append(ln)
+    return steps, lab
+
+
+for _lid in M:
+    M[_lid]["teoria_md"] = T[_lid]
+
+errors = []
+for lid, ent in M.items():
+    card = glob.glob(f"{CLASS}/{int(lid):02d}-*/card.md")[0]
+    steps, lab = lab_lines(card)
+    for f in [ent["fig"]["file"]] + [s["file"] for s in ent["steps"]]:
+        if not os.path.exists("/home/claude/ies-training/ilustraciones/mikrotik/" + f):
+            errors.append(f"{lid}: falta {f}")
+    for s in ent["steps"]:
+        a, n = s["after"], s["step"]
+        if not (15 <= len(a) <= 40):
+            errors.append(f"{lid} paso {n}: largo {len(a)} de '{a}'")
+        if lab.count(a) != 1:
+            errors.append(f"{lid} paso {n}: '{a}' aparece {lab.count(a)} veces en el laboratorio")
+        if not any(a in ln for ln in steps.get(n, [])):
+            errors.append(f"{lid} paso {n}: '{a}' no está en una línea del paso {n} fuera de código")
+        if s["file"] != f"{lid}-paso{n}.svg":
+            errors.append(f"{lid}: nombre {s['file']} no coincide con paso {n}")
+    if not (2 <= len(ent["concepts"]) <= 4):
+        errors.append(f"{lid}: {len(ent['concepts'])} conceptos")
+    nw = len(ent["teoria_md"].split())
+    if not (250 <= nw <= 450) or "### Un poco de historia" not in ent["teoria_md"] or "### Cómo funciona" not in ent["teoria_md"]:
+        errors.append(f"{lid}: teoria_md inválido ({nw} palabras)")
+    blob = json.dumps(ent, ensure_ascii=False)
+    if "—" in blob or "–" in blob:
+        errors.append(f"{lid}: guion largo")
+
+if errors:
+    print("\n".join(errors))
+    raise SystemExit(1)
+json.dump(M, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+print("ok", OUT, sum(1 + len(v["steps"]) for v in M.values()), "imágenes,", sum(len(v["concepts"]) for v in M.values()), "conceptos")
+T23 = "/home/claude/ies-training/ilustraciones/mikrotik/manifest-23-teoria.json"
+json.dump({"23": {"teoria_md": T["23"]}}, open(T23, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+print("ok", T23)

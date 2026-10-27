@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Diagnosticá por capas y leé el síntoma</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">MIKROTIK · PASO 6</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Diagnosticá por capas y leé el síntoma</text>
+<text x="48.0" y="140.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="start">DÓNDE MIRAR, EN ORDEN</text>
+<rect x="48" y="156" width="470" height="58" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="80" cy="185" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="80.0" y="191.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="110.0" y="181.0" font-family="Familjen Grotesk" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">Fase 1</text>
+<text x="110.0" y="203.0" font-family="JetBrains Mono" font-size="13" font-weight="500" fill="#41627F" text-anchor="start">/ip/ipsec/active-peers/print</text>
+<rect x="48" y="226" width="470" height="58" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="80" cy="255" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="80.0" y="261.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="110.0" y="251.0" font-family="Familjen Grotesk" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">Fase 2</text>
+<text x="110.0" y="273.0" font-family="JetBrains Mono" font-size="13" font-weight="500" fill="#41627F" text-anchor="start">/ip/ipsec/policy/print detail  (ph2-state)</text>
+<rect x="48" y="296" width="470" height="58" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="80" cy="325" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="80.0" y="331.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="110.0" y="321.0" font-family="Familjen Grotesk" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">Contadores</text>
+<text x="110.0" y="343.0" font-family="JetBrains Mono" font-size="13" font-weight="500" fill="#41627F" text-anchor="start">/ip/ipsec/installed-sa/print</text>
+<rect x="48" y="366" width="470" height="58" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="80" cy="395" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="80.0" y="401.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="110.0" y="391.0" font-family="Familjen Grotesk" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">Mensajes</text>
+<text x="110.0" y="413.0" font-family="JetBrains Mono" font-size="13" font-weight="500" fill="#41627F" text-anchor="start">/log/print where topics~&quot;ipsec&quot;</text>
+<text x="560.0" y="140.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="start">QUÉ SIGNIFICA CADA SÍNTOMA</text>
+<rect x="560" y="156" width="592" height="58" rx="12" fill="#FCEAE6"/>
+<text x="578.0" y="181.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="start">no suitable proposal / NO-PROPOSAL-CHOSEN</text>
+<text x="578.0" y="203.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#04223D" text-anchor="start">→ parámetros distintos: tabla vs log (local:remoto)</text>
+<rect x="560" y="226" width="592" height="58" rx="12" fill="#FCEAE6"/>
+<text x="578.0" y="251.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="start">phase1 negotiation failed due to time up</text>
+<text x="578.0" y="273.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#04223D" text-anchor="start">→ comunicación: UDP 500/4500, IP del peer, NAT</text>
+<rect x="560" y="296" width="592" height="58" rx="12" fill="#FFF4DE"/>
+<text x="578.0" y="321.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#B45309" text-anchor="start">fases arriba, sin tráfico</text>
+<text x="578.0" y="343.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#04223D" text-anchor="start">→ falta el bypass de NAT o está mal ubicado</text>
+<rect x="560" y="366" width="592" height="58" rx="12" fill="#FFF4DE"/>
+<text x="578.0" y="391.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#B45309" text-anchor="start">se arregla con Torch</text>
+<text x="578.0" y="413.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#04223D" text-anchor="start">→ FastTrack</text>
+<rect x="560" y="436" width="592" height="58" rx="12" fill="#FFF4DE"/>
+<text x="578.0" y="461.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#B45309" text-anchor="start">ping en un solo sentido</text>
+<text x="578.0" y="483.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#04223D" text-anchor="start">→ firewall de alguno de los dos lados</text>
+<rect x="48" y="530" width="470" height="72" rx="14" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/><rect x="48" y="542" width="5" height="48" rx="2.5" fill="#0E8F5E"/><text x="74.0" y="564.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Túnel sano: un peer activo, ph2-state established y</tspan><tspan x="74.0" dy="20.2">dos SA por router.</tspan></text>
+<rect x="560" y="530" width="592" height="72" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="560" y="542" width="5" height="48" rx="2.5" fill="#0A63B8"/><text x="586.0" y="564.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="586.0" dy="0.0">Para ver cada algoritmo rechazado en el log: /system/logging/add</tspan><tspan x="586.0" dy="20.2">topics=ipsec,!debug</tspan></text>
+</svg>

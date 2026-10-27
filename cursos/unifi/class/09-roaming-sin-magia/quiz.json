@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Activaste Fast Roaming en el SSID principal de un supermercado y los lectores de código de barras viejos dejaron de conectar. ¿Qué hacés?",
+    "options": [
+      "Desactivar BSS Transition",
+      "Subir la potencia de los AP",
+      "Activar mínimo RSSI en -60 dBm",
+      "Volver atrás Fast Roaming en ese SSID y crear un SSID aparte sin Fast Roaming para los lectores"
+    ],
+    "answer": 3,
+    "why": "Algunos drivers viejos no se asocian a un SSID que anuncia 802.11r. Purple propone separarlos en un SSID sin Fast Roaming, idealmente en su VLAN."
+  },
+  {
+    "q": "¿Qué función de roaming recomiendan dejar activada casi todas las fuentes porque los clientes que no la entienden simplemente la ignoran?",
+    "options": [
+      "BSS Transition (802.11v)",
+      "Fast Roaming (802.11r)",
+      "Mínimo RSSI",
+      "Ocultar el SSID"
+    ],
+    "answer": 0,
+    "why": "BSS Transition solo sugiere un AP mejor; el cliente puede ignorarlo. Es de bajo riesgo."
+  },
+  {
+    "q": "Un depósito tiene un solo AP y los empleados se quejan de cortes en la punta. Alguien propone mínimo RSSI en -70 dBm. ¿Qué pasa?",
+    "options": [
+      "Los clientes se pasan a otro AP más cercano",
+      "Mejora la velocidad en la punta",
+      "Los clientes de la punta quedan desconectados, porque no hay otro AP al que ir",
+      "No tiene efecto con un solo AP"
+    ],
+    "answer": 2,
+    "why": "Mínimo RSSI expulsa al cliente; sin solape de cobertura no tiene a dónde ir. Purple lo reserva para sitios con solape comprobado."
+  }
+]

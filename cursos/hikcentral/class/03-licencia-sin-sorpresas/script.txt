@@ -1,0 +1,21 @@
+A: Lección tres. Licencia sin sorpresas.
+B: El tema que más llamadas me genera, te soy sincero.
+A: Por eso va temprano. Recién instalado, HikCentral trae una licencia temporal con pocos equipos y funciones limitadas. Para trabajar en serio se activa.
+B: ¿Y qué se compra?
+A: Dos tipos. Una licencia base, que es obligatoria, y expansiones, que suman cámaras, puertas o módulos. Primero la base. Siempre.
+B: ¿Y si activás una expansión sin base?
+A: Error mil ciento trece, según el FAQ. Ahí lo dice clarito: activaste expansión sin base.
+B: [risas] Me pasó. ¿Cuántas fuentes coinciden?
+A: Dos de cinco páginas de licencias lo explican así, la Quick Start y el FAQ, y no hay quien lo contradiga. Son del fabricante.
+B: ¿Online u offline?
+A: Si el servidor tiene internet, online: pegás el código, aceptás y listo. Si no tiene, offline. Generás un archivo de pedido en el Web Client, lo llevás en un pendrive a una PC con internet, lo subís al sitio de licencias de Hikvision, bajás el archivo de respuesta y lo importás.
+B: Ahí es donde se tranca.
+A: Por dos cosas. Una, la hora. El FAQ dice que si el reloj del servidor está corrido más de veinticuatro horas, la activación offline falla. Y otro error, el mil ciento catorce, aparece si tocaron la hora del servidor.
+B: ¿Y la otra?
+A: La respuesta tiene que corresponder al último pedido, y dentro de las veinticuatro horas. Si hacés doble clic en generar pedido, el primero queda inválido. Error mil ciento cinco.
+B: Uf, el doble clic. Clásico.
+A: Y al final te pide un email del admin. Conviene ponerlo, porque sirve para recuperar el código si se pierden la contraseña y el código a la vez.
+B: ¿Qué probamos?
+A: En el laboratorio: verificar la hora del servidor, entrar al panel de activación offline y recorrer los pasos sin apretar dos veces. Y armar una ficha de licencia para la carpeta de la obra: códigos, fecha, servidor, quién activó.
+B: Quince minutos.
+A: Y la próxima licencia se activa a la primera.

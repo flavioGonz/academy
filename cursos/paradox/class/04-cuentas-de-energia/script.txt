@@ -1,0 +1,20 @@
+A: Lección cuatro: las cuentas de energía. La parte aburrida que te salva la obra.
+B: [risas] Arrancamos fuerte. ¿Qué cuentas?
+A: Primero el transformador. La guía de las SP plus pide dieciséis coma cinco voltios de alterna y cuarenta voltamperes como mínimo. Y nada de enchufes con llave, que el cliente apaga la central sin darse cuenta.
+B: Clásico. ¿Y después?
+A: La salida auxiliar. En la SP cinco mil quinientos plus, el manual dice que todo lo que cuelga de ahí sumado no pase de setecientos miliamperes. Teclados, detectores, módulo IP, y hasta las PGM si las alimentás de ahí.
+B: Setecientos parece un montón.
+A: Hasta que mirás la tabla de consumos. Un TM setenta, el táctil, figura con doscientos cincuenta miliamperes más ochenta del zumbador. Dos táctiles y ya estás cerca del límite sin un solo sensor.
+B: Uf. ¿Y si te pasás?
+A: La salida corta sola, sin fusible. Y el manual pide sacar todas las cargas por lo menos diez segundos antes de reconectar.
+B: ¿Cuánto coinciden las fuentes?
+A: Las dos guías que tocan energía coinciden, la de SP plus y la de EVOHD+. Es evidencia fina, pero del fabricante y con números.
+B: ¿Y la batería?
+A: Doce voltios, siete amperes hora. En la SP plus, a diez coma cinco voltios marca batería baja, y a ocho coma cinco se apaga. La guía de la EVOHD+ trae una tabla: con siete amperes hora y ciento treinta miliamperes de accesorios, treinta horas de respaldo.
+B: Y eso cierra si le sumás lo que consume la propia central.
+A: Exacto, cien miliamperes en esa placa. Siete dividido doscientos treinta miliamperes, unas treinta horas.
+B: ¿Algo más que dé falla tonta?
+A: La salida de campana. Si no hay sirena, una resistencia de un kilohm entre los bornes evita la falla de campana desconectada.
+B: ¿Qué probamos?
+A: Una planilla. Listás todo lo que va al auxiliar con su consumo, sumás, y calculás la autonomía. Quince minutos.
+B: Y si no sumaste, no energizás.

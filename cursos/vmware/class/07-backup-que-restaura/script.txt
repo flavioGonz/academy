@@ -1,0 +1,17 @@
+A: Lección siete. Pregunta incómoda: ¿cuándo fue la última vez que restauraste un backup de un cliente?
+B: Mmm. ¿Restaurar de verdad? Hace bastante.
+A: Bueno, de eso va hoy. Cinco de las ocho fuentes que leímos sobre backups coinciden en lo básico: un producto que use las APIs de vSphere, la famosa VADP, con seguimiento de bloques cambiados, y la regla tres dos uno.
+B: Tres copias, dos medios distintos, una fuera del sitio.
+A: Esa. Y por dentro, Veeam, o el que sea, saca un snapshot de la VM, copia los discos y después borra el snapshot.
+B: Ahí se conecta con lo de los snapshots huérfanos de la lección pasada.
+A: Exacto. Y para copiar hay tres caminos, que la documentación de Broadcom llama modos de transporte. Por la red de gestión, que es NBD, el más simple. HotAdd, donde un proxy que es una VM monta el disco. Y SAN, con un proxy físico que lee directo de la LUN.
+B: ¿Y cuál conviene?
+A: Depende. La guía de buenas prácticas de Veeam dice que el modo red es el más fácil, pero que en un enlace de un giga puede rendir entre diez y veinte megas por segundo. Ojo, es una guía vieja, de la versión nueve, pero la idea vale.
+B: [suspiro] Restaurar dos teras a veinte megas por segundo. Son más de un día.
+A: Por eso conviene saber qué modo usa tu job antes del día del problema. Y un dato que conecta con la lección uno: el ESXi gratuito no expone VADP. No podés hacer backup a nivel host con esas herramientas.
+B: O sea que el servidor del cliente con licencia gratis no tiene backup de verdad aunque crea que sí.
+A: Puede tenerlo, pero dentro del sistema operativo, con un agente. Ahora, el laboratorio. Elegís una VM respaldada y la restaurás con otro nombre, conectada a un port group sin uplink, para que no choque con la original.
+B: Y la prendés, entrás y verificás que los datos están.
+A: Y anotás cuánto tardó. Ese número es lo que vas a tardar el día que se rompa.
+B: Veinte minutos. ¿La regla?
+A: Un backup cuenta cuando lo restauré al menos una vez.

@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Creaste la VLAN 30 solo en el switch Omada y pusiste una cámara en un puerto con esa VLAN nativa. La cámara no recibe IP. ¿Qué falta?",
+    "options": [
+      "Reiniciar la cámara",
+      "Un firmware nuevo en el switch",
+      "Poner el puerto de la cámara en trunk",
+      "La red con interfaz y DHCP en el gateway, y el uplink llevándola tagueada"
+    ],
+    "answer": 3,
+    "why": "La guía oficial aclara que configurar la VLAN solo en el switch no le da IP ni gateway al cliente; hacen falta el DHCP del gateway y el uplink tagueado."
+  },
+  {
+    "q": "El router del cliente es de otra marca y hace el DHCP de cada VLAN. ¿Cómo creás la red en el controlador Omada?",
+    "options": [
+      "Con DHCP Server Device en None",
+      "Con el DHCP activado en el switch",
+      "Como red WAN",
+      "No se puede, hace falta gateway Omada"
+    ],
+    "answer": 0,
+    "why": "Para un router de terceros, la guía indica crear la VLAN con DHCP Server Device en None y dejar el DHCP en ese router."
+  },
+  {
+    "q": "¿Qué pasa con un puerto del switch que queda en el perfil All (trunk) cuando creás una red nueva?",
+    "options": [
+      "No transporta la red nueva hasta editarlo",
+      "La transporta como nativa",
+      "La transporta tagueada automáticamente",
+      "Se bloquea por seguridad"
+    ],
+    "answer": 2,
+    "why": "La guía de VLAN indica que los puertos no seleccionados que siguen en trunk llevan la VLAN nueva tagueada."
+  }
+]

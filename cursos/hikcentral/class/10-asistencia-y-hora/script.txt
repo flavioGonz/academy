@@ -1,0 +1,18 @@
+A: Lección diez. Asistencia y hora.
+B: Recursos humanos llamando el día uno de cada mes.
+A: [risas] Exacto. HikCentral tiene tiempo y asistencia, y usa las mismas lectoras de acceso como relojes. El soporte de Hikvision en Estados Unidos tiene una receta clara, y la seguimos.
+B: Dale.
+A: Paso uno: la controladora agregada y las personas con credenciales. Paso dos: puntos de marca. Elegís qué lectoras cuentan, y si son de entrada, de salida o de las dos.
+B: ¿Y después?
+A: Regla general. Qué días son fin de semana, cuándo una persona queda ausente si no marca, y qué métodos de autenticación valen, tarjeta, huella o rostro. Paso cuatro: plantilla de turno.
+B: ¿Qué tipos hay?
+A: Dos. Turno normal, con ventanas de entrada y salida. Y turno por horas, Man-Hour, que es más flexible y no exige ventana válida. El ejemplo del artículo es un Man-Hour de ocho a diecisiete, calculando con la primera entrada y la última salida, que dicen que es lo más usado.
+B: ¿Y se asigna directo?
+A: No. Con la plantilla armás un turno, que se repite por semana, por ejemplo de lunes a viernes, y ese turno se asigna a personas con un rango de fechas. Recién ahí salen los reportes.
+B: ¿Y lo de la hora del título?
+A: El FAQ tiene dos avisos. La plataforma no maneja varias zonas horarias: los turnos se calculan con la hora del servidor. Y si la controladora tiene otra zona horaria que el SYS, las pasadas no aparecen en tiempo real aunque estén en el histórico.
+B: Eso pasa con controladoras que vienen de fábrica en otra zona.
+A: Tal cual. ¿Cuánto respaldo? Una de dos fuentes para la receta, una de tres para la hora. Evidencia fina, ambas de Hikvision.
+B: ¿Laboratorio?
+A: Configurar asistencia para un grupo de prueba: un punto de marca, regla de fin de semana, turno Man-Hour, asignar y mirar el registro al día siguiente. Antes, revisá la zona horaria de la controladora y del servidor. Veinte minutos.
+B: Primero la hora, después los turnos.

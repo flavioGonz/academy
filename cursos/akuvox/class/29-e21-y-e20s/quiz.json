@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un cliente quiere que el E21 del estacionamiento también abra con tarjeta. ¿Qué le decís?",
+  "options": [
+   "Sí, tiene lector de 13,56 MHz",
+   "La tabla de métodos marca al E21 sin PIN ni tarjeta; para acceso hace falta otro equipo",
+   "Solo con firmware nuevo",
+   "Con SmartPlus"
+  ],
+  "answer": 1,
+  "why": "Según la tabla de métodos y la guía de selección, el E21 no tiene PIN, tarjeta ni Wiegand."
+ },
+ {
+  "q": "Llevás una fuente de 12 V para un E20S. ¿Te sirve?",
+  "options": [
+   "No: la tabla lo da solo con PoE 802.3af, sin fuente opcional",
+   "Sí, 12 V 1 A",
+   "Solo con 24 V",
+   "Solo con 48 V"
+  ],
+  "answer": 0,
+  "why": "La tabla de alimentación lista al E20S con PoE 802.3af y sin adaptador."
+ },
+ {
+  "q": "¿Qué conviene probar además de la llamada normal en un E21?",
+  "options": [
+   "El QR",
+   "El Bluetooth",
+   "La huella",
+   "El caso en que nadie atiende, con desvío o cola"
+  ],
+  "answer": 3,
+  "why": "Un punto de emergencia necesita un destino de respaldo; la prueba incluye la llamada sin respuesta."
+ }
+]

@@ -1,0 +1,16 @@
+A: Lección treinta: el DNS del MikroTik. Ese servicio que nadie mira hasta que algo deja de resolver.
+B: Con la configuración por defecto ya anda, ¿no?
+A: Sí. El router trae un resolver con caché, la opción allow remote requests prendida, y el DHCP le da a la LAN la IP del router como DNS. Los servidores del proveedor aparecen como dinámicos, y si cargás los tuyos en servers, los prueba primero.
+B: ¿Y dónde está el riesgo?
+A: En esa opción. Con allow remote requests, el router contesta en el puerto cincuenta y tres en todas sus direcciones, también la pública. El firewall por defecto lo frena, pero si alguien armó un firewall propio sin esas reglas, el router queda como resolver abierto.
+B: Y eso se usa para ataques.
+A: De amplificación: la respuesta es mucho más grande que la pregunta, y el golpe le llega a otro. En el foro hay un hilo de dos mil trece con routers con la CPU al cien por ciento y el enlace lleno. Y el CSIRT de LACNIC, que tiene sede en Montevideo, busca resolvers abiertos en la región y avisa a los dueños.
+B: ¿La cura?
+A: Dos reglas de drop en input, UDP y TCP cincuenta y tres, desde la WAN. La documentación las da tal cual, y coinciden el foro, LACNIC y la guía de Quad9.
+B: ¿Y lo útil del DNS en obra?
+A: Entradas estáticas. nvr punto lan apunta al grabador, y entrás por nombre. Y la caché: si cambiaste algo y no lo ves, cache flush.
+B: ¿Y DoH? Lo veo en todos lados.
+A: Desde la siete, el router puede preguntar cifrado, por HTTPS. Pero con DoH configurado no hay respaldo: si ese servidor no responde, toda la LAN recibe SERVFAIL. Un practicante dejaba los servidores comunes de respaldo, y la documentación actual dice que no se usan.
+B: Anotado. ¿Laboratorio?
+A: Ver el estado, poner servidores, comprobar el cincuenta y tres cerrado desde otra red, una estática para el NVR, la caché, y DoH con el log abierto. Veinte minutos.
+B: Y el DNS deja de ser una caja negra.

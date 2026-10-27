@@ -1,0 +1,19 @@
+A: Lección cuarenta y dos. Licencias Akuvox: qué se paga, quién paga y qué pasa cuando vence.
+B: Lo que pregunta el administrador antes de firmar.
+A: Primero lo que no se paga: SIP directo, llamada por IP al monitor, relés, RTSP al NVR y apertura por HTTP en la red local. En lo que leímos no hay licencias por función dentro del equipo, como tiene 2N.
+B: ¿Y qué se cobra?
+A: La nube. SmartPlus para viviendas y Smart Access para oficinas, que según Akuvox son la misma plataforma. En un edificio se cobra por servicio: la app maestra de cada apartamento, la del administrador, familiares por encima de los gratis, que la guía de la app pone en tres, y extras como desvío a teléfono o video guardado en la nube.
+B: ¿Y en oficinas?
+A: Por puerta, con la primera gratis.
+B: ¿Quién paga?
+A: El distribuidor, o el instalador si el distribuidor le da permiso. Se renueva en automático cada treinta días o a mano.
+B: ¿Cuánto sale?
+A: Ninguna página oficial publica precios. Lo curioso: un distribuidor canadiense lo vende como licencia única de por vida, un revendedor inglés dice que con monitor no se paga, y en un foro alemán de dos mil veinticuatro discutían si seguía sin abono.
+B: [risas] Tres países, tres modelos.
+A: Por eso vale lo que te ponga por escrito tu distribuidor, con fecha y período. Su portal tiene una calculadora con cargo único y mensual; el ejemplo oficial es un edificio de ciento veinte unidades.
+B: ¿Y si no renuevan?
+A: La guía de la app dice que si no llama o no ve video, revises que la cuenta esté activa y paga. Monitor, PIN y tarjeta siguen en la red local, como en la lección diez. Ojo con el software de PC: ACMS Pro hoy es una prueba de ciento ochenta días y al vencer deja afuera a todos.
+B: ¿Laboratorio?
+A: Quince minutos. Mirás la cuenta y el tipo de conexión del portero, armás la planilla de qué depende de la nube y cortás el WAN para comprobarla.
+B: Y en el presupuesto, equipo y nube separados.
+A: Así el cliente sabe qué compra una vez y qué paga cada mes.

@@ -1,0 +1,23 @@
+A: Lección diez. Red de invitados. Parece la más fácil y es la que más reclamos genera.
+B: ¿Por?
+A: Porque cambió de lugar. Las guías viejas decían: tipo de red Guest Network. Ahora, con el firewall por zonas, una red es de invitados cuando la ponés en la zona Hotspot.
+B: ¿Y el Guest Network desapareció?
+A: Según WunderTech, en sitios con zonas no lo vas a encontrar. En sitios con firewall clásico todavía está. Y el WiFi tiene ahora tres tipos: Standard, Hotspot e IoT.
+B: ¿Cuál uso?
+A: Si querés que entren solo con contraseña, Standard. Si querés portal cautivo, con vouchers o términos y condiciones, Hotspot.
+B: ¿Y dónde está la trampa?
+A: En que la zona Hotspot trae la página de bienvenida activada por defecto. Le das una contraseña al bar y de repente aparece un portal que nadie pidió.
+B: [risas] Y te llaman a las nueve de la noche.
+A: Exacto. Se desmarca Show Landing Page en el Hotspot Portal y listo.
+B: ¿Y si quiero el portal?
+A: Ahí está bueno. Cloud UniFi lista los métodos: contraseña, vouchers con vencimiento, límite de ancho de banda y cuota, pago con Stripe, Facebook, RADIUS o un portal externo.
+B: ¿Y qué ve el invitado una vez que entra?
+A: Las restricciones post autorización vienen cargadas con las tres redes privadas. Diez, ciento setenta y dos dieciséis, ciento noventa y dos ciento sesenta y ocho. El invitado sale a internet y no toca nada interno.
+B: ¿Hay acuerdo?
+A: Tres de cuatro fuentes lo explican igual. Y WunderTech da la prueba que más me gusta: celular en el WiFi de invitados, intentás abrir la página de la impresora o del NAS. Tiene que vencer el tiempo.
+B: ¿Y la matriz de zonas?
+A: Fila Hotspot: hacia interna, Allow Return. Hacia el resto, Block All.
+B: ¿Laboratorio?
+A: Veinte minutos. Red de invitados en zona Hotspot, SSID Hotspot con vouchers, generás un voucher de un día y probás desde el celular que no llegás a nada interno.
+B: Y eso se repite en cada entrega.
+A: En cada entrega, sí.

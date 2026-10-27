@@ -1,0 +1,19 @@
+A: Esta es corta y es la que más plata salva. El puerto tres mil trescientos ochenta y nueve.
+B: El escritorio remoto.
+A: Ese. La regla: nunca abierto a internet. Ni con contraseña larga, ni con otro puerto.
+B: Pero el cliente quiere entrar al servidor del VMS desde la casa.
+A: Que entre. Por VPN, o por un gateway de escritorio remoto. Y adentro, la regla de RDP limitada a la subred de gestión.
+B: ¿Por qué tan tajante?
+A: TechTarget lo resume bien. Expuesto a internet, recibís fuerza bruta todo el día, bloqueos de cuenta y hasta denegación de servicio. Y cuentan que los ataques de ransomware contra las ciudades de Baltimore y Atlanta entraron por RDP.
+B: Uf. ¿Y cambiar el puerto? Muchos lo hacen.
+A: Ahí hay discusión. V2 Cloud lo recomienda como una capa más, y aclara que no frena todo. TechTarget lo lista, pero dice que igual RDP nunca va abierto a internet. Cambiar el puerto baja el ruido de los escaneos. No es seguridad.
+B: Entendido. ¿Y NLA?
+A: Network Level Authentication. Te autentica antes de abrir la sesión, así un atacante no llega ni a la pantalla de inicio. En todas las versiones soportadas viene activada.
+B: Pero a veces da ese error de que el equipo requiere NLA y no te deja entrar.
+A: TheITBros lo explica: ese error casi nunca es de RDP. Es DNS, un controlador de dominio que no responde, el equipo que perdió la relación con el dominio o la hora desfasada. Y hay otro: si entrás por IP en vez de por nombre, Kerberos no funciona.
+B: ¿Y la salida rápida?
+A: Entrar con el administrador local o por la consola, tipo iLO o iDRAC, arreglar la causa, y si apagaste NLA, volver a prenderla.
+B: ¿Cuántas fuentes?
+A: Dos de cuatro en lo central, ninguna a favor de exponerlo. El laboratorio: quince minutos, ver si NLA está activa y dejar la regla de RDP solo para la subred de gestión.
+B: RDP solo por VPN.
+A: Con NLA y desde la subred de gestión.

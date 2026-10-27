@@ -1,0 +1,35 @@
+[
+ {
+  "q": "En esxtop, una VM muestra GAVG alto, DAVG alto y KAVG cerca de cero. ¿Dónde está el problema más probable?",
+  "options": [
+   "En la CPU del host",
+   "En el almacenamiento (NAS, cabina o el camino hacia ella)",
+   "En VMware Tools",
+   "En la cola interna del host"
+  ],
+  "answer": 1,
+  "why": "Según la KB de esxtop, GAVG = DAVG + KAVG; un DAVG alto indica latencia del almacenamiento, mientras que KAVG bajo descarta encolamiento en el host."
+ },
+ {
+  "q": "Una VM lenta tiene %RDY alto en esxtop. El cliente propone duplicarle las vCPU. ¿Qué le decís?",
+  "options": [
+   "Que es la solución correcta",
+   "Que hay que pasar el disco a thick",
+   "Que hay que agregar RAM",
+   "Que %RDY alto significa que la VM espera procesador físico; agregar vCPU puede empeorar la espera, conviene revisar la carga del host"
+  ],
+  "answer": 3,
+  "why": "%RDY mide el tiempo en que la VM estuvo lista esperando CPU física; es contención en el host, no falta de vCPU."
+ },
+ {
+  "q": "¿Dónde están los logs principales de un host ESXi 8?",
+  "options": [
+   "En /var/run/log, por ejemplo vmkernel.log y vmkwarning.log",
+   "En la tarjeta SD de arranque, sin acceso",
+   "En C:\\ProgramData\\VMware",
+   "Solo en vCenter"
+  ],
+  "answer": 0,
+  "why": "Los logs del sistema ESXi están en /var/run/log; vmkernel.log y vmkwarning.log son los primeros a revisar."
+ }
+]

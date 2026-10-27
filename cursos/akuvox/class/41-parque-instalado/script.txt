@@ -1,0 +1,19 @@
+A: Lección cuarenta y uno, la última del catálogo: lo que ya no está en el menú pero sigue en las paredes.
+B: El parque instalado.
+A: Una aclaración: ninguna página que leímos publica una lista oficial de discontinuados. Lo que sí podemos ver es qué modelos aparecen en las tablas de Akuvox y no en el menú de octubre de dos mil veintiséis.
+B: ¿Cuáles son?
+A: Porteros: el E11, el R27, el R26, el DB01 y el E20. Monitores: el C315, el C310 y el IT83. Y en acceso, el A092.
+B: ¿Y el C317? Que lo vemos bastante.
+A: No aparece en ninguna de las páginas que leímos. Así que no te digo nada de él; si lo encontrás, buscás su guía en la base de conocimiento.
+B: Honesto. ¿Y cómo los reconocés en obra?
+A: Por el primer número del firmware. Según Akuvox: ciento once es el E11, ciento veinte el E20, veintisiete el R27, ochenta y tres el IT83, ciento quince el C315, trescientos diez el C310.
+B: ¿Y la historia?
+A: La del ejemplo de ComfortClick: un E11R con un monitor C315S, integrados por HTTP con la URL vieja. Esa pareja es exactamente lo que te vas a encontrar. Y el E11 es el modelo en el que Claroty encontró trece vulnerabilidades en dos mil veintitrés, la lección once.
+B: Uf. ¿Qué cambia al darles soporte?
+A: Tres cosas. Uno, el HTTP: la librería pylocal avisa que los equipos tipo IT83 no usan la API nueva sino Open Relay via HTTP, y en el C315 el relé del monitor se abría con DoorNum cero. Dos, las funciones nuevas, como SR01 o patentes, tienen firmware mínimo y los viejos no siempre llegan. Tres, el acceso: cada uno tiene su camino para la IP, en la tarjeta.
+B: ¿Cuántas fuentes?
+A: Tres de siete: el menú, la guía de firmware y el ejemplo de ComfortClick.
+B: ¿Laboratorio?
+A: Veinte minutos con un equipo viejo: sacás IP y firmware, lo identificás por el código, anotás qué funciones no tiene y buscás en el menú un vigente del mismo tipo, mismas credenciales y misma alimentación.
+B: Y el firmware al día mientras siga.
+A: Eso primero.

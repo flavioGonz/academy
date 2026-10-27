@@ -1,0 +1,19 @@
+A: Lección cinco. Martín, ¿cuál es la red más común que encontramos en un cliente chico?
+B: Una sola red plana. Cámaras, PCs, el WiFi de los clientes del café, todo junto en la ciento noventa y dos ciento sesenta y ocho uno.
+A: Y el día que entra algo raro por un celular de invitado, llega a todo.
+B: ¿Cuántas VLANs proponen las fuentes?
+A: Una por función. UniHosted da un ejemplo que es casi una plantilla: staff en la diez, invitados en la veinte, CCTV en la treinta. El AP recibe un trunk con las tres y el NVR va en un puerto de la treinta.
+B: ¿Y cada una con su DHCP?
+A: Cada una con su DHCP. Es de los errores típicos que listan: la VLAN creada y sin direcciones, y el cliente que no conecta.
+B: ¿Hay acuerdo?
+A: Cuatro de cinco lo enseñan así. El que se aparta es The Hook Up: deja las cámaras en la red principal porque no quiere pasar once streams cuatro K por el router entre VLANs. Lo compensa con reglas y fijando la MAC en cada puerto.
+B: Tiene sentido si el NVR está en la misma red que las cámaras.
+A: Claro, es un caso. Pero ojo con un dato que cambió. LazyAdmin explica que con el firewall clásico UniFi deja pasar tráfico entre VLANs por defecto. Había que escribir reglas.
+B: ¿Y ahora?
+A: Ahora es por zonas. Las notas oficiales de Network once dicen que todos los sitios se migran automáticamente al firewall por zonas. Cada red va a una zona: interna, hotspot, DMZ o una que crees vos, y la matriz de zonas te muestra qué habla con qué.
+B: O sea que cuando actualizamos un cliente viejo a once, sus reglas cambian de forma.
+A: Exacto. Conviene mirar la matriz después.
+B: ¿Laboratorio?
+A: Quince minutos. Creás tres redes, staff, invitados y CCTV, cada una con su VLAN y su zona, y abrís la matriz de zonas para ver qué está permitido.
+B: Y le ponés nombre que se entienda.
+A: Nombre, DHCP y zona. Las tres cosas, siempre juntas.

@@ -1,0 +1,35 @@
+[
+ {
+  "q": "El residente atiende, ve a la visita, marca el código y no abre. Portero en RFC 2833, monitor en SIP INFO. ¿Qué pasa?",
+  "options": [
+   "El relé está quemado",
+   "El tipo de DTMF no coincide entre los extremos",
+   "Falta el RTSP",
+   "El código tiene que tener 4 dígitos"
+  ],
+  "answer": 1,
+  "why": "Akuvox indica que emisor y receptor tienen que usar el mismo modo y código; con tipos distintos la apertura falla."
+ },
+ {
+  "q": "Hay una central en el medio y querés el tipo de DTMF más compatible. ¿Cuál elegís?",
+  "options": [
+   "Inband con G.729",
+   "SIP INFO, porque la central siempre lo traduce",
+   "Ninguno, se abre por RTSP",
+   "RFC 2833 en portero, central y monitor"
+  ],
+  "answer": 3,
+  "why": "RFC 2833 viaja como evento en el RTP y no depende del codec; 3CX advierte que SIP INFO se reenvía tal cual y muchos servicios no lo soportan."
+ },
+ {
+  "q": "Un portero quedó con el código DTMF de fábrica y cualquiera puede llamarlo. ¿Qué dos cosas cambiás?",
+  "options": [
+   "El codec y la resolución",
+   "El puerto 5060 y el RTSP",
+   "El código por uno propio y la lista blanca DTMF a Only Contacts List",
+   "El PIN público y el horario"
+  ],
+  "answer": 2,
+  "why": "La guía del E16 ofrece la lista blanca DTMF para que solo los contactos cargados abran; sumado a un código propio, cierra la puerta a llamadas ajenas."
+ }
+]

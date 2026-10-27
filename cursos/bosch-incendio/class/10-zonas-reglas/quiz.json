@@ -1,0 +1,35 @@
+[
+ {
+  "q": "¿Qué identifica la dirección lógica de un elemento en un AVENAR?",
+  "options": [
+   "Su posición física en el cable",
+   "Grupo y subdirección, que es lo que muestra el panel y heredan las integraciones",
+   "La dirección IP del panel",
+   "El número de serie"
+  ],
+  "answer": 1,
+  "why": "El panel muestra zona lógica y subdirección en cada mensaje; una integración externa recibe los eventos como línea, grupo y subdirección."
+ },
+ {
+  "q": "Un AVENAR panel 8000 va a trabajar en red. ¿Cuántos puntos lógicos admite ese panel?",
+  "options": [
+   "512",
+   "4096",
+   "32768",
+   "2048"
+  ],
+  "answer": 3,
+  "why": "Según la Networking guide y la TI 2715, un panel en red admite hasta 2048 puntos lógicos; 4096 es el límite del panel solo."
+ },
+ {
+  "q": "Asignaste a una tecla de función la misma dirección que un grupo de entradas. ¿Qué riesgo hay?",
+  "options": [
+   "RPS puede no mostrar la advertencia de consistencia, así que el conflicto pasa sin aviso",
+   "Ninguno, RPS siempre lo marca",
+   "El panel se apaga",
+   "Se pierde la licencia"
+  ],
+  "answer": 0,
+  "why": "La TI 2715 lista como tema conocido que RPS puede no advertir ese conflicto y pide direcciones únicas."
+ }
+]

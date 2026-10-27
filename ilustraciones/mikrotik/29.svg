@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Escalera de pings: ¿en qué escalón falla?</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">MIKROTIK · LECCIÓN 29</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Escalera de pings: ¿en qué escalón falla?</text>
+<rect x="48" y="540" width="560" height="76" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="82" cy="578" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="82.0" y="584.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="114.0" y="572.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">LAN</text>
+<text x="114.0" y="598.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#0A63B8" text-anchor="start">/ping 192.168.88.254</text>
+<path d="M622.0 578.0C645.0 578.0,645.0 578.0,668.0 578.0" fill="none" stroke="#D2492F" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 6" marker-end="url(#a-alert)"/>
+<rect x="678" y="548" width="474" height="60" rx="12" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="0"/>
+<text x="694.0" y="572.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#D2492F" text-anchor="start">si falla acá</text>
+<text x="694.0" y="595.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">cable, puerto, bridge o firewall del equipo</text>
+<rect x="108" y="440" width="560" height="76" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="142" cy="478" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="142.0" y="484.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="174.0" y="472.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Gateway del ISP</text>
+<text x="174.0" y="498.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#0A63B8" text-anchor="start">/ping 203.0.113.1</text>
+<path d="M682.0 478.0C705.0 478.0,705.0 478.0,728.0 478.0" fill="none" stroke="#D2492F" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 6" marker-end="url(#a-alert)"/>
+<rect x="738" y="448" width="414" height="60" rx="12" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="0"/>
+<text x="754.0" y="472.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#D2492F" text-anchor="start">si falla acá</text>
+<text x="754.0" y="495.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">WAN: cable al módem, IP o VLAN, PPPoE</text>
+<rect x="168" y="340" width="560" height="76" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="202" cy="378" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="202.0" y="384.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="234.0" y="372.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">IP de internet</text>
+<text x="234.0" y="398.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#0A63B8" text-anchor="start">/ping 1.1.1.1</text>
+<path d="M742.0 378.0C765.0 378.0,765.0 378.0,788.0 378.0" fill="none" stroke="#D2492F" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 6" marker-end="url(#a-alert)"/>
+<rect x="798" y="348" width="354" height="60" rx="12" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="0"/>
+<text x="814.0" y="372.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#D2492F" text-anchor="start">si falla acá</text>
+<text x="814.0" y="395.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">ruta por defecto o el proveedor</text>
+<rect x="228" y="240" width="560" height="76" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="262" cy="278" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="262.0" y="284.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="294.0" y="272.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Un nombre</text>
+<text x="294.0" y="298.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#0A63B8" text-anchor="start">/ping mikrotik.com</text>
+<path d="M802.0 278.0C825.0 278.0,825.0 278.0,848.0 278.0" fill="none" stroke="#D2492F" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 6" marker-end="url(#a-alert)"/>
+<rect x="858" y="248" width="294" height="60" rx="12" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="0"/>
+<text x="874.0" y="272.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#D2492F" text-anchor="start">si falla acá</text>
+<text x="874.0" y="295.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">DNS: &quot;resolve failed&quot;</text>
+<text x="48.0" y="150.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#41627F" text-anchor="start">De adentro hacia afuera:</text>
+<text x="48.0" y="174.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start">el primer escalón que no contesta dice dónde mirar.</text>
+<rect x="48.0" y="201" width="286.4" height="30" rx="15" fill="#E3F5EC"/><text x="191.2" y="222.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">anda la IP y no el nombre = DNS</text>
+</svg>

@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un cliente pregunta si el E16 está discontinuado. ¿Qué respondés con lo leído?",
+  "options": [
+   "Sí, lo reemplazó el E18",
+   "Solo existe para 2 hilos",
+   "No se puede saber nada",
+   "Sigue en el menú de productos de akuvox.com a octubre de 2026"
+  ],
+  "answer": 3,
+  "why": "El E16 figura en el menú de porteros vigente al 27 de octubre de 2026."
+ },
+ {
+  "q": "¿Qué fuente usás para saber la carga máxima del relé de un modelo?",
+  "options": [
+   "La guía de selección de akuvox.com",
+   "La app SmartPlus",
+   "La tabla de carga resistiva de la Knowledge Base",
+   "El menú de productos"
+  ],
+  "answer": 2,
+  "why": "La Knowledge Base tiene una tabla de carga resistiva por modelo para porteros, monitores y acceso."
+ },
+ {
+  "q": "En la planilla, a un modelo le falta el dato de PoE en las tablas. ¿Qué escribís?",
+  "options": [
+   "802.3af, que es lo más común",
+   "Sin dato, hasta verlo en una ficha",
+   "PoE+ por las dudas",
+   "No tiene PoE"
+  ],
+  "answer": 1,
+  "why": "Si el dato no está en una página leída no se supone: se marca sin dato y se busca la ficha."
+ }
+]

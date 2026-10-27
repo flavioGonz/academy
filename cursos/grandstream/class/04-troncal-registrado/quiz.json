@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Tu proveedor te dio servidor, usuario y contraseña para la telefonía de un cliente. ¿Qué tipo de troncal creás en la UCM?",
+  "options": [
+   "Peer SIP Trunk",
+   "Account SIP Trunk",
+   "Register SIP Trunk",
+   "Analog Trunk"
+  ],
+  "answer": 2,
+  "why": "Con credenciales del proveedor se usa Register SIP Trunk; Peer es por IP y Account es para que otros equipos se registren en la UCM."
+ },
+ {
+  "q": "El Dashboard muestra el troncal como Rejected. ¿Qué revisás primero?",
+  "options": [
+   "El codec de las extensiones",
+   "Que la UCM llegue al servidor del proveedor y que las credenciales estén bien",
+   "El modo de red Switch o Route",
+   "La lista blanca de la web"
+  ],
+  "answer": 1,
+  "why": "La guía oficial indica que Rejected significa que no registró: alcance al servidor o credenciales incorrectas."
+ },
+ {
+  "q": "Para que la UCM detecte rápido un troncal caído y pase al de respaldo, ¿qué activás en el troncal?",
+  "options": [
+   "Heartbeat Detection (SIP OPTIONS periódicos)",
+   "Direct Media",
+   "Auto Record",
+   "Send Anonymous"
+  ],
+  "answer": 0,
+  "why": "El heartbeat manda SIP OPTIONS cada 60 segundos por defecto y permite ver si el troncal sigue vivo."
+ }
+]

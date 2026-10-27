@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un sitio tiene fibra y un 4G, los dos por DHCP, y los dos clientes con default-route-distance=1. ¿Qué pasa?",
+    "options": [
+      "Solo se usa el primero que se configuró",
+      "El 4G queda apagado hasta que caiga la fibra",
+      "El router rechaza la segunda ruta",
+      "Las dos rutas quedan activas y el tráfico se reparte entre ambas"
+    ],
+    "answer": 3,
+    "why": "La documentación del cliente DHCP lo dice: con distancias iguales las dos rutas están activas y se reparte el tráfico (ECMP). Para principal y respaldo, el respaldo lleva distancia mayor."
+  },
+  {
+    "q": "El cliente DHCP de ether1 está bound con 192.168.1.35 y public-address en IP Cloud es 203.0.113.77. ¿Qué concluís?",
+    "options": [
+      "Que hay un NAT adelante, el módem del proveedor en modo router",
+      "Que el DDNS está mal",
+      "Que el router tiene IP pública directa",
+      "Que es CGNAT seguro"
+    ],
+    "answer": 0,
+    "why": "Una dirección privada en la WAN y otra pública vista desde la nube indican un NAT intermedio. CGNAT se reconoce por direcciones en 100.64.0.0/10."
+  },
+  {
+    "q": "Querés armar rutas recursivas a hosts testigo, pero la WAN principal es DHCP y el gateway cambia. ¿Qué alternativa propone la documentación?",
+    "options": [
+      "Poner el gateway a mano y olvidarse",
+      "Desactivar add-default-route",
+      "Un script de lease que crea o corrige la ruta con el gateway recibido y la borra cuando se pierde el lease",
+      "Usar distancia 0"
+    ],
+    "answer": 2,
+    "why": "El cliente DHCP acepta un script con variables como bound y gateway-address; el ejemplo oficial mantiene la ruta al día cuando cambia el gateway."
+  }
+]

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Cada parte de la URL hace una cosa</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">AKUVOX · LECCIÓN 13 · PASO 4</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Cada parte de la URL hace una cosa</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<rect x="48" y="170" width="875" height="56" rx="10" fill="#03213C"/><text x="68.0" y="203.6" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#7FA6C9" text-anchor="start">http://</text><text x="135.2" y="203.6" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#F3B562" text-anchor="start">abre-lab:Ejemplo-Http-2026</text><text x="384.8" y="203.6" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#7FD3F0" text-anchor="start">@192.168.88.21</text><text x="519.2" y="203.6" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#8FE3B5" text-anchor="start">/fcgi/OpenDoor</text><text x="653.6" y="203.6" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#D9E9F8" text-anchor="start">?action=OpenDoor</text><text x="807.2" y="203.6" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#FF9F8A" text-anchor="start">&amp;DoorNum=1</text>
+<path d="M260 232V262H180V290" fill="none" stroke="#C2D4E6" stroke-width="2"/>
+<text x="120.0" y="316.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">usuario:clave</text>
+<text x="120.0" y="340.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">los de Open Relay via HTTP</text>
+<path d="M452 232V262H440V290" fill="none" stroke="#C2D4E6" stroke-width="2"/>
+<text x="380.0" y="316.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">IP del portero</text>
+<path d="M586 232V262H620V290" fill="none" stroke="#C2D4E6" stroke-width="2"/>
+<text x="560.0" y="316.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">endpoint nuevo</text>
+<text x="560.0" y="340.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">vale con alta seguridad</text>
+<path d="M730 232V262H820V290" fill="none" stroke="#C2D4E6" stroke-width="2"/>
+<text x="760.0" y="316.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">acción</text>
+<text x="760.0" y="340.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">abrir</text>
+<path d="M855 232V262H1020V290" fill="none" stroke="#C2D4E6" stroke-width="2"/>
+<text x="960.0" y="316.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">relé</text>
+<text x="960.0" y="340.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">1 = A · 2 = B</text>
+<circle cx="48" cy="170" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="176.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="48.0" y="410.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#B45309" text-anchor="start" letter-spacing="1.2">FORMATO VIEJO · solo sin alta seguridad o con el modo apagado</text>
+<rect x="48" y="424" width="1104" height="46" rx="10" fill="#03213C"/><text x="64.0" y="452.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#F3D9A8" text-anchor="start">http://192.168.88.21/fcgi/do?action=OpenDoor&amp;UserName=abre-lab&amp;Password=Ejemplo-Http-2026&amp;DoorNum=1</text>
+<rect x="48" y="510" width="1104" height="75" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="522" width="5" height="51" rx="2.5" fill="#0A63B8"/><text x="74.0" y="544.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Con curl, -u &#x27;abre-lab:Ejemplo-Http-2026&#x27; manda lo mismo que usuario:clave@ y sin http:// usa HTTP por defecto. Anotá en la</tspan><tspan x="74.0" dy="21.6">ficha qué formato abrió y con qué firmware (paso 5).</tspan></text>
+</svg>

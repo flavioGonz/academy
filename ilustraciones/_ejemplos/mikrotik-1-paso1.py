@@ -1,0 +1,13 @@
+import sys; sys.path.insert(0, "/home/claude/ies-training/tools")
+from ilus import *
+c = Canvas("MikroTik · Lección 1 · Paso 1", "Conectá la notebook a ether2 y entrá por la MAC")
+r = c.add(Router(330, 150, "hAP ax²", "RouterOS 7 · config de fábrica", ports=["ether1", "ether2", "ether3", "ether4", "ether5"], hl={"ether2": CYAN, "ether1": None}))
+c.add(Chip(r.port("ether1")[0], r.y + 196, "WAN", "warn", anchor="middle"))
+c.add(Chip(r.port("ether3")[0] + 42, r.y + 196, "LAN · bridge", "gray", anchor="middle"))
+n = c.add(Laptop(330, 470, "Notebook", "WinBox"))
+c.add(Cable(n.top(40), r.port("ether2"), kind="data", label="cable de red", label_at=0.45, label_dy=0))
+c.add(Step(r.port("ether2")[0] + 30, r.port("ether2")[1] + 24, 1))
+w = c.add(Window(800, 150, 360, 250, "WinBox · Neighbors", rows=[("MAC Address", "48:A9:8A:xx:xx:xx"), ("IP Address", "0.0.0.0"), ("Identity", "MikroTik"), ("Login", "admin")], hl=0))
+c.add(Arrow((w.x - 10, w.y + 130), (r.x + r.w + 12, r.y + 60), kind="logical", label="sin IP: por MAC", label_dy=-10))
+c.add(Note(800, 430, 360, "Conectate por la MAC: funciona aunque el router no tenga IP o la tenga en otra red. ether1 queda para internet; la protege el firewall de fábrica.", title="Por qué la MAC", kind="info"))
+c.save("/home/claude/ies-training/ilustraciones/_ejemplos/mikrotik-1-paso1.svg")

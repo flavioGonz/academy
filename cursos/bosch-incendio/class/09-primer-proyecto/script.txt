@@ -1,0 +1,18 @@
+A: Hoy abrimos el programa. El panel AVENAR se configura con FSP cinco mil RPS, desde una laptop por USB.
+B: ¿Y de dónde se saca?
+A: De la extranet de Bosch, con usuario habilitado. No es de descarga libre. Y conviene la versión vigente: la cinco punto quince punto veintiocho, que es la que figura en la hoja técnica de septiembre.
+B: ¿Por qué no la anterior?
+A: Porque la cinco punto quince punto veintisiete y la cinco punto catorce punto diecisiete tenían un problema con un módulo de extinción. Además, la quince pide Windows once, versión veinticuatro H dos, de sesenta y cuatro bits. Y Bosch avisa que el driver USB puede no ser de confianza para Windows once.
+B: Bien. ¿Y adentro?
+A: Creás una configuración nueva con la versión de cuenta cuatro punto ocho, que es la del firmware cuatro punto ocho. Y un detalle lindo: desde la cuatro punto ocho, Uruguay aparece en la lista de países.
+B: ¿En serio? ¿Antes no estaba?
+A: No estaba. Después agregás el nodo, AVENAR panel dos mil u ocho mil, y los módulos. Y en obra, el manual da la secuencia: alimentar, calibrar la pantalla, cargar fecha, hora, número de nodo y red, reiniciar, conectar la laptop, autodetectar, editar, descargar, walk test y pruebas.
+B: ¿Y al final?
+A: Leer el archivo de diagnóstico y guardarlo como acta de prueba.
+B: ¿Alguna trampa conocida?
+A: Una que vuelve loco a cualquiera. Si la hora del panel no coincide con la de la laptop, RPS puede pedir una descarga completa aunque no cambiaste nada. Se arregla usando Set Panel Time antes de descargar.
+B: ¿Y las fuentes coinciden?
+A: Las dos hojas técnicas y el manual van en la misma línea. Solo agregan un consejo: el firmware y el programa se pasan siempre como el zip completo de Bosch, sin renombrar ni sacar archivos.
+B: ¿Qué probamos hoy?
+A: Sin panel, en la oficina. Creás una configuración de un AVENAR dos mil con cuenta cuatro punto ocho, país Uruguay, un LSN cero trescientos A y diez detectores. Corrés el chequeo de consistencia y leés cada aviso. Veinte minutos.
+B: Y antes y después de cada descarga en obra, copia de la configuración.

@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un cliente tiene dos nodos Proxmox en clúster con HA. Se apaga uno y las VMs no arrancan en el otro. ¿Qué falta?",
+    "options": [
+      "Un tercer voto, por ejemplo un QDevice",
+      "Más RAM en el nodo que quedó",
+      "Cambiar el repositorio",
+      "Usar LVM-thin"
+    ],
+    "answer": 0,
+    "why": "Con dos nodos, el que queda tiene un voto de dos y no hay mayoría; sin quórum, el clúster pasa a solo lectura. Un QDevice aporta el tercer voto."
+  },
+  {
+    "q": "¿Por qué la red de corosync no conviene compartirla con el tráfico de almacenamiento?",
+    "options": [
+      "Porque corosync usa mucho ancho de banda",
+      "Porque corosync necesita IPv6",
+      "Porque está prohibido por licencia",
+      "Porque corosync es sensible a la latencia y al jitter, y el storage puede saturar el enlace"
+    ],
+    "answer": 3,
+    "why": "La guía pide latencias menores a 5 ms y estables; corosync usa poco ancho de banda pero el tráfico de storage le agrega latencia."
+  },
+  {
+    "q": "¿Dónde puede estar el QDevice de un clúster de dos nodos?",
+    "options": [
+      "Obligatoriamente en el mismo switch",
+      "Dentro de una VM de uno de los dos nodos",
+      "En un equipo independiente, incluso fuera de la LAN, porque va por TCP",
+      "Solo en un tercer nodo Proxmox completo"
+    ],
+    "answer": 2,
+    "why": "La guía indica que el QDevice se conecta por TCP/IP y no tiene la exigencia de baja latencia de corosync; ponerlo dentro de uno de los nodos no sirve porque cae con él."
+  }
+]

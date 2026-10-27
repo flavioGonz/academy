@@ -1,0 +1,17 @@
+A: Última lección. Upgrade y rescate. Te toca pasar un cliente de la ocho a la nueve. ¿Por dónde arrancás?
+B: Backup, ¿no?
+A: Backup probado, como vimos en la siete. La wiki oficial del upgrade lo pone primero. Después, un script que se llama pve ocho to nueve, con la opción full. Revisa todo y te avisa lo que va a romper. Lo corrés antes, durante y después.
+B: ¿Y lo hago desde la consola de la web?
+A: Justo eso la wiki dice que no, porque se corta en el medio. Por SSH con tmux, o mejor, con IPMI o consola física, porque con el kernel nuevo los nombres de las placas de red pueden cambiar y el nodo queda sin red.
+B: Uf. ¿Y en clúster?
+A: Un nodo por vez. Vaciás el nodo migrando las VMs, lo actualizás, verificás, y seguís. De versión vieja a nueva la migración siempre anda; al revés, no está soportado.
+B: ¿Alguna trampa rara?
+A: Una buenísima. En la nueve, el sistema ya no lee el archivo sysctl punto conf. Si alguien puso ahí el reenvío de IP o un ajuste de red, después de reiniciar desaparece. Hay que pasarlo a la carpeta sysctl punto d.
+B: [risas] Eso te come una mañana entera buscándolo.
+A: Cinco de siete fuentes coinciden en el procedimiento. Ahora el rescate. Hay un curso de partner para la nueve que entrena siete fallas a propósito: repositorios mezclados, VLAN mal puesta, pérdida de quórum, firmware equivocado después de importar.
+B: Las mismas que vemos en soporte.
+A: Por eso el orden. Uno, quórum: pvecm status. Dos, logs: journalctl del servicio que falla, por ejemplo corosync. Tres, locks: si una VM quedó trabada después de un corte de luz, qm unlock. Cuatro, almacenamiento: pvesm status. Y si sospechás del firewall, pve firewall status.
+B: Quórum, logs, locks, storage.
+A: Exacto. Laboratorio: armá una hoja con esos comandos y corrélos en tu nodo de prueba. Anotá cómo se ve cuando todo está sano, así la próxima vez notás lo que está mal.
+B: Quince minutos, y la hoja va pegada en la camioneta.
+A: Y con eso cerramos. Cada Proxmox que toques ahora tiene un orden para actualizarse y otro para arreglarse.

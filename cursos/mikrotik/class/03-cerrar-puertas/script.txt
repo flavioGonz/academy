@@ -1,0 +1,17 @@
+A: Lección tres, cerrar puertas. Te cuento un experimento real primero.
+B: Dale.
+A: Un investigador de Gen Digital puso un MikroTik virtual en internet, con una versión vieja de RouterOS, a modo de trampa. Le había puesto usuario y contraseña fuertes. ¿Cuánto tardaron en entrar?
+B: No sé, ¿un par de días?
+A: Quince minutos. Entraron por la falla vieja de WinBox, sin necesitar la contraseña.
+B: Uf. Quince minutos.
+A: Y eso es lo que más coincide en todo el curso: las siete fuentes que tocan el tema dicen lo mismo. WinBox, SSH y la API no miran a internet. La única matización viene de la propia guía de MikroTik, que explica cómo abrirlo cuando es inevitable, por ejemplo un ISP, y siempre filtrado por origen.
+B: ¿Y qué es cerrar puertas en concreto?
+A: Barra ip barra service: apagás telnet, ftp, www y api si no los usás, y limitás WinBox y SSH a la red de gestión. El MAC server y el descubrimiento de vecinos, solo hacia la LAN. Y SOCKS, proxy y UPnP apagados.
+B: Che, y si el equipo ya estuvo expuesto, ¿con actualizar alcanza?
+A: No, y esa es la segunda mitad. Con la botnet Mēris, MikroTik explicó que muchos routers se habían parchado, pero la contraseña ya estaba robada desde dos mil dieciocho. Actualizar no los salvó.
+B: Entonces, ¿qué mirás en un equipo que heredás?
+A: Lo que dice el aviso: tareas en el scheduler que vos no creaste, SOCKS prendido, clientes L2TP que no reconocés, una regla que abre el puerto cinco seis siete ocho. Si aparece algo de eso, contraseña nueva y revisión completa.
+B: Pensá en un cliente que te llega con un router que configuró otro instalador hace años. Ese es el caso.
+A: Exacto. El laboratorio es una auditoría de quince minutos: imprimís los servicios, restringís WinBox y SSH, cerrás el MAC server hacia afuera, y revisás scheduler, SOCKS y clientes PPP.
+B: Y lo hacés en cada equipo que heredás.
+A: Así un router deja de ser una puerta abierta que nadie mira.

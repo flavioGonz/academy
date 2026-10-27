@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Activaste ddns-enabled=yes y el cliente dice que igual no puede entrar a WinBox con el nombre. ¿Qué le explicás?",
+    "options": [
+      "Que el nombre solo apunta a la IP; el firewall sigue bloqueando el acceso desde internet",
+      "Que el DDNS tarda 24 horas en propagarse",
+      "Que falta reiniciar el router",
+      "Que el nombre solo funciona desde la LAN"
+    ],
+    "answer": 0,
+    "why": "La documentación de Cloud lo dice explícitamente: el nombre hace más fácil encontrar el router, pero no abre ningún acceso. Para entrar, VPN o Back To Home."
+  },
+  {
+    "q": "En /ip cloud, public-address es 203.0.113.40 y la WAN del router tiene 100.70.12.5. ¿Qué implica?",
+    "options": [
+      "Que hay un error de DDNS",
+      "Que alcanza con un dst-nat en el router",
+      "Que el módem está en modo bridge",
+      "Que el router está detrás de CGNAT y no se puede hacer port forwarding"
+    ],
+    "answer": 3,
+    "why": "100.64.0.0/10 es el rango de CGNAT. La documentación de NAT dice que con CGNAT es imposible el port forwarding; queda túnel saliente o Back To Home."
+  },
+  {
+    "q": "La WAN del MikroTik es 192.168.1.10 y el módem del proveedor tiene la IP pública. Hacés un dst-nat en el MikroTik y no llega nada. ¿Qué falta?",
+    "options": [
+      "Nada, debería andar",
+      "Reenviar el puerto también en el módem, o ponerlo en modo bridge",
+      "Cambiar a masquerade",
+      "Activar UPnP en el MikroTik"
+    ],
+    "answer": 1,
+    "why": "Hay doble NAT: el tráfico de internet llega primero al módem. Sin reenvío allí o sin modo bridge, nunca alcanza al MikroTik."
+  }
+]

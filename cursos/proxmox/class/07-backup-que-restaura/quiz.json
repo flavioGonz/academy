@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un cliente dice que tiene backup porque saca un snapshot de la VM todas las noches. ¿Qué le explicás?",
+    "options": [
+      "Que está perfecto, el snapshot es un backup completo",
+      "Que los snapshots se copian solos a otro servidor",
+      "Que el snapshot vive en el mismo almacenamiento; si falla el disco o el servidor, se pierde junto con la VM",
+      "Que el snapshot solo guarda la configuración"
+    ],
+    "answer": 2,
+    "why": "El snapshot sirve para volver atrás un cambio, pero queda en el mismo storage. Un backup es una copia en otro lugar, hecha con vzdump o PBS."
+  },
+  {
+    "q": "Querés probar un backup de la VM 105 sin afectar la que está en producción. ¿Qué hacés?",
+    "options": [
+      "qmrestore a un ID nuevo, con la placa de red desconectada, y arrancás",
+      "qmrestore sobre el ID 105",
+      "Borrás la 105 y restaurás",
+      "Solo mirás que el archivo exista"
+    ],
+    "answer": 0,
+    "why": "La documentación de PBS recomienda restaurar a un invitado nuevo y nunca sobre el actual; desconectar la red evita choques de IP."
+  },
+  {
+    "q": "¿Qué aporta el guest agent cuando el backup corre en modo snapshot?",
+    "options": [
+      "Comprime el backup",
+      "Apaga la VM durante el backup",
+      "Envía el backup por mail",
+      "Congela el sistema de archivos para mejorar la consistencia"
+    ],
+    "answer": 3,
+    "why": "Con agent activo, vzdump llama a guest-fsfreeze-freeze y guest-fsfreeze-thaw alrededor del backup."
+  }
+]

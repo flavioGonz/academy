@@ -1,0 +1,19 @@
+A: Lección cinco. Ahora sí, central en el medio. Grandstream UCM, Asterisk, FreePBX, Yeastar o tres CX, da igual.
+B: ¿Da igual en serio?
+A: En lo esencial, sí. Seis de las ocho fuentes que tocan el tema dicen lo mismo: el portero y el monitor se registran como extensiones comunes. Una extensión por equipo.
+B: ¿Y dónde se carga en el Akuvox?
+A: Account, Basic. Activás la cuenta, Register Name y Username con el número de extensión, la contraseña de la extensión, y en Server Address la IP de la central. Submit, y en la central tiene que aparecer en línea.
+B: ¿Hay una o dos cuentas?
+A: Dos. Y acá va un detalle: la cuenta uno es la principal y es la que toma SmartPlus si lo activás. Así que si el cliente usa la nube, la central va en la cuenta dos.
+B: Ah, mirá. ¿Y la historia?
+A: Un hilo de la comunidad FreePBX. Un tipo con un R20A que no registraba. El log de Asterisk decía failed to authenticate.
+B: Contraseña.
+A: [risas] Eso le dijeron: la causa más simple es la contraseña mal. La arregló y registró. Después no podía llamar al portero, y era porque marcaba asterisco ciento diez en vez de ciento diez.
+B: Clásico. Dos errores tontos y una tarde perdida.
+A: Y en el medio le sugirieron otra cosa que vale oro: si el registro cambia de puerto a cada rato, desactivar el SIP ALG del router.
+B: Ese SIP ALG es un enemigo histórico.
+A: Lo es. Yeastar agrega algo práctico: si el equipo ya estuvo instalado en otro lado, se resetea antes de registrarlo.
+B: ¿Laboratorio?
+A: En una central de laboratorio creá dos extensiones, por ejemplo la doscientos uno para el portero y la doscientos dos para el monitor. Registrá cada equipo, verificá que la central los vea en línea, y llamá del portero al monitor marcando la extensión. Veinte minutos.
+B: Y anotás en la ficha qué extensión es cada equipo.
+A: Con eso, el portero pasa a ser un teléfono más de la central, con desvíos y colas incluidos.

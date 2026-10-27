@@ -1,0 +1,59 @@
+{
+  "24": {
+    "fig": {
+      "file": "24.svg",
+      "alt": "A la izquierda, en Internet, la app o iVMS y VLC desde 198.51.100.20 llegan con flechas verdes al MikroTik por los puertos 18000 y 18554. En el router, la tabla dstnat traduce 18000 a 192.168.88.50:8000 y 18554 a 192.168.88.50:554 si el origen está en nvr-permitidos, y el filtro forward deja pasar lo dst-nateado. A la derecha, el NVR 192.168.88.50 con 8000 SDK y 554 RTSP; la web 80/443 no se publica. Una IP fuera de la lista termina en una cruz roja.",
+      "caption": "El dst-nat cambia destino y puerto; el forward deja pasar solo lo que pasó por esa regla."
+    },
+    "steps": [
+      {
+        "file": "24-paso1.svg",
+        "step": 1,
+        "alt": "Tres columnas. IP pública directa, en verde: Internet, MikroTik con WAN 203.0.113.10 y el NVR; la WAN es igual a public-address y se publica en el MikroTik. Doble NAT, en ámbar: Internet, módem del ISP con 203.0.113.10 y MikroTik con WAN privada 192.168.1.2; módem en bridge o reenvío también en el módem. CGNAT, en rojo: Internet, NAT del proveedor con IP compartida y MikroTik con WAN 100.72.15.4; sin port forwarding.",
+        "caption": "La IP del WAN dice si el reenvío puede llegar al MikroTik.",
+        "after": "Antes de tocar: export (lección 6)"
+      },
+      {
+        "file": "24-paso3.svg",
+        "step": 3,
+        "alt": "A la izquierda, tabla de puertos de fábrica: Hikvision 8000 TCP para la app e iVMS-4200, 554 o 10554 RTSP, 80/443 web mejor no; Dahua 37777 TCP para SmartPSS y DMSS, 37778 UDP si no hay video, 554 RTSP, 80/443 web mejor no. A la derecha, la IP pública 203.0.113.10 con tres puertos externos: 18000 va a NVR1 192.168.88.50 puerto 8000, 18554 a NVR1 puerto 554 y 18001 a NVR2 192.168.88.51 puerto 8000.",
+        "caption": "dst-port es el puerto de afuera; to-ports, el del NVR.",
+        "after": "cada NVR se carga con la IP pública"
+      },
+      {
+        "file": "24-paso7.svg",
+        "step": 7,
+        "alt": "La PC 192.168.88.20 llama a 203.0.113.10:18000. Tres tarjetas de ida: sale de la PC; después del dst-nat el destino es 192.168.88.50:8000; después del masquerade el origen es 192.168.88.1. De vuelta, el NVR contesta a 192.168.88.1 y el router deshace los dos cambios: la PC recibe desde 203.0.113.10:18000. Abajo, la alternativa de DNS local, que solo sirve si el puerto de afuera es igual al de adentro.",
+        "caption": "El masquerade hace que la respuesta vuelva por el router, que deshace los dos cambios.",
+        "after": "Hairpin, solo si en la oficina entran"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "dst-nat con puerto distinto (to-ports)",
+        "para_que": "Una IP pública tiene un solo puerto 8000. Si en el sitio hay dos NVR, o preferís no anunciar el puerto de fábrica, el router puede recibir en un puerto y entregar en otro. Así conviven varios equipos detrás de la misma IP sin tocar su configuración.",
+        "como": "En la regla, `dst-port` es el puerto que llega de afuera y `to-ports` el del equipo. Una regla por servicio y por NVR, con un comentario que diga el mapeo (\"NVR2 SDK 18001>8000\"). En la app se carga la IP pública o el nombre DDNS con el puerto de afuera. Cambiar el puerto reduce ruido de escaneos, pero no esconde nada: lo que protege es la lista de orígenes.",
+        "ejemplo": "Un local en Tres Cruces con dos NVR detrás de una fibra con IP fija: 18000 va al NVR de salón (`192.168.88.50:8000`) y 18001 al de depósito (`192.168.88.51:8000`). La central de monitoreo carga los dos con la misma IP y puertos distintos."
+      },
+      {
+        "name": "Los puertos propios del NVR",
+        "para_que": "RTSP (554) es el estándar para pedir video y lo entienden VLC y cualquier VMS, pero no sirve para loguearse, ver grabaciones o configurar. Por eso cada fabricante tiene un protocolo propio en un puerto propio: 8000 en Hikvision, 37777 en Dahua. Es el puerto que usa la app.",
+        "como": "Para la app del fabricante, publicás el puerto propio; RTSP solo si un tercero necesita el flujo; la web (80/443) mejor por VPN. Si la app entra pero no muestra video, falta un puerto de datos: en Dahua, el 37778 UDP o el 554. Los puertos se cambian en la web del NVR (sección de red) o con SADP en Hikvision; en algunos Hikvision el RTSP ya viene en 10554 porque hay operadoras móviles que bloquean el 554.",
+        "ejemplo": "Un Dahua en una clínica: la DMSS hace login desde 4G pero queda en negro. El dst-nat del 37777 está bien; sumás el 37778 UDP, limpiás conexiones y aparece la imagen. Antes de sumar más, mirás el contador para confirmar que la app realmente usa ese puerto."
+      },
+      {
+        "name": "Doble NAT y CGNAT",
+        "para_que": "El port forwarding solo sirve si el paquete llega al MikroTik. Con un módem del proveedor haciendo NAT adelante (doble NAT) el reenvío tiene que estar en los dos equipos; con CGNAT, la IP pública es del proveedor y la comparten muchos clientes, así que no hay forma de pedirle que reenvíe un puerto a tu router.",
+        "como": "Mirá la IP de ether1 y compará con `public-address` de `/ip/cloud/print`. Iguales: IP directa. WAN privada (192.168.x, 10.x): doble NAT, pedí el ONT en bridge o reenviá también en el módem hacia la WAN del MikroTik. WAN en 100.64.0.0/10: CGNAT, el camino es Back To Home, un concentrador en un VPS o una IP pública contratada.",
+        "ejemplo": "Una casa en Carrasco con el router de Antel en modo router: ether1 tiene 192.168.1.2. Publicás el NVR en el MikroTik, el contador no sube nunca. Con el ONT en bridge, el MikroTik recibe la IP pública, el contador empieza a subir y la app entra."
+      },
+      {
+        "name": "Hairpin NAT o DNS local",
+        "para_que": "Desde la LAN, entrar al NVR por la IP pública falla: el NVR contesta directo a la PC desde su IP interna y la PC descarta esa respuesta. Hay dos formas de arreglarlo: que el router también cambie el origen (hairpin) o que adentro el nombre apunte directo a la IP interna (DNS local).",
+        "como": "Hairpin: un dst-nat para la LAN con `dst-address-type=local dst-address=!192.168.88.1` y un masquerade en srcnat desde la LAN hacia el NVR, con el puerto interno. DNS local: `/ip/dns/static/add name=nvr.ejemplo.com address=192.168.88.50`, que deja al NVR ver la IP real de cada PC, pero solo funciona si el puerto de afuera es igual al de adentro y las PC usan el router como DNS.",
+        "ejemplo": "En la oficina, los celulares tienen la app cargada con `203.0.113.10:18000` y el wifi corporativo no ve las cámaras. Como el puerto externo es distinto del interno, el DNS no alcanza: agregás las dos reglas de hairpin y la app anda adentro y afuera sin reconfigurar cada celular."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nEn mayo de 1994, la RFC 1631 de Kjeld Egevang y Paul Francis propuso el NAT como un parche de corto plazo: las direcciones IPv4 se estaban acabando y la idea era reusar direcciones privadas adentro de cada red, con una caja en el borde que tuviera una tabla de pares \"dirección local, dirección global\". El parche se quedó para siempre.\n\nEn enero de 2001, la RFC 3022 reemplazó a la 1631 y describió NAPT: traducir dirección y puerto, para que muchos equipos salgan con una sola IP pública. Ahí aparece lo que hoy llamamos port forwarding: el documento dice que el modelo se puede extender para permitir acceso entrante mapeando de forma fija un equipo local por cada puerto de servicio. Lo demás que llega de afuera se considera dirigido al propio router. En abril de 2012, la RFC 6598 reservó 100.64.0.0/10 para el NAT de los proveedores (CGNAT), y con eso el mapeo fijo en el router del cliente dejó de servir en muchas conexiones.\n\nLos NVR suman su propia capa. RTSP, el estándar para pedir y controlar un flujo de video (RFC 2326, de 1998), usa el 554 y es lo que hablan VLC y los VMS de terceros. Pero la app del fabricante necesita más que video: login, reproducción de grabaciones, configuración. Cada marca lo resolvió con un protocolo propio en un puerto propio: el 8000 de Hikvision para iVMS-4200 y la app, el 37777 de Dahua para SmartPSS y DMSS.\n\n### Cómo funciona\n\nCuando llega un paquete a `203.0.113.10:18000`, RouterOS lo pasa por la cadena `dstnat` antes de decidir la ruta. Si coincide con la regla, cambia el destino a `192.168.88.50:8000`, y recién ahí el router busca por dónde mandarlo: ya no es para él, así que va por `forward` hacia la LAN. En `forward`, la regla por defecto descarta lo nuevo que entra por WAN salvo que tenga `connection-nat-state=dstnat`, la marca que deja el paso anterior.\n\nSolo el primer paquete de cada conexión recorre las reglas de NAT. Connection tracking guarda la traducción y la aplica al resto, y a la respuesta del NVR le hace el cambio inverso: la app ve que le contesta `203.0.113.10:18000`. Por eso los contadores de `/ip/firewall/nat/print stats` suben por conexión, no por cada paquete de video, y por eso una regla nueva no se aplica a conexiones viejas hasta que se limpian.\n\nEl `srcnat` se evalúa después de la ruta, cuando el destino ya fue traducido. Por eso el masquerade de hairpin se escribe con el puerto interno (8000) y no con el de afuera."
+  }
+}

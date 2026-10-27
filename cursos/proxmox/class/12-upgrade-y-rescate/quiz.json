@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Vas a hacer el upgrade de Proxmox VE 8.4 a 9 en un nodo remoto. ¿Desde dónde lo corrés?",
+    "options": [
+      "Por SSH dentro de tmux, o mejor por IPMI o consola física",
+      "Desde la consola web (Shell) de la GUI",
+      "Desde una VM del mismo nodo",
+      "Desde el celular con la app móvil"
+    ],
+    "answer": 0,
+    "why": "La wiki de upgrade indica no usar la consola virtual de la GUI porque se interrumpe; recomienda consola o SSH con un multiplexor como tmux, y acceso fuera de banda por si cambia la red."
+  },
+  {
+    "q": "Después de actualizar a Proxmox VE 9, un nodo que hacía de router para una red interna dejó de reenviar paquetes tras reiniciar. ¿Qué revisás?",
+    "options": [
+      "El repositorio enterprise",
+      "El ARC de ZFS",
+      "El rol PVEAuditor",
+      "Si el ip_forward estaba en /etc/sysctl.conf, que en PVE 9 ya no se lee"
+    ],
+    "answer": 3,
+    "why": "Según la wiki de upgrade, systemd-sysctl en PVE 9 ignora /etc/sysctl.conf; los ajustes van en /etc/sysctl.d/NN-nombre.conf."
+  },
+  {
+    "q": "Después de un corte de luz, una VM no deja hacer backup y dice que está bloqueada. No hay tareas corriendo. ¿Qué hacés?",
+    "options": [
+      "Borrar la VM y restaurar",
+      "Reinstalar el nodo",
+      "qm unlock con el ID de la VM",
+      "pvecm expected 1"
+    ],
+    "answer": 2,
+    "why": "Backups, snapshots y migraciones ponen un lock; si quedó colgado tras un corte, la guía indica sacarlo a mano con qm unlock."
+  }
+]

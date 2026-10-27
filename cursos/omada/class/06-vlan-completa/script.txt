@@ -1,0 +1,21 @@
+A: Lección seis. Te llaman: las cámaras nuevas no agarran IP. Las pusiste en la VLAN veinte.
+B: [suspiro] Y en el switch está todo bien configurado, te juro.
+A: Te creo. El problema es que una VLAN en Omada tiene tres patas, y el switch es una sola.
+B: A ver.
+A: Pata uno: en el gateway, la red con su interfaz, su IP y su DHCP. Pata dos: el uplink entre gateway y switch llevando la VLAN tagueada. Pata tres: el puerto de la cámara con la VLAN veinte como nativa, sin tag.
+B: ¿Eso lo dice TP-Link?
+A: Literal. En la guía de VLAN para switches, la pregunta frecuente es por qué un cliente pierde la red al pasarlo a una VLAN. La respuesta: configurar la VLAN solo en el switch no le da IP, ni gateway, ni internet.
+B: Uf, cuántas veces.
+A: Tres de cuatro fuentes sobre VLAN van por ahí. Un practicante agrega que mover la VLAN de gestión es más engorroso de lo que debería.
+B: ¿Y cómo se arma en el controlador?
+A: Network Config, Network Settings, LAN, Add. Le ponés nombre, VLAN veinte, subred, DHCP. El controlador crea solo el perfil de puerto de esa red.
+B: Y después en el switch le asignás ese perfil al puerto.
+A: Exacto. Y un detalle útil: los puertos que quedan en trunk llevan la VLAN nueva tagueada sin que hagas nada.
+B: ¿Y la gestión de los equipos?
+A: La documentación de puertos del gateway recomienda dejar la red por defecto como VLAN de gestión. Los APs y switches hablan con el controlador por ahí.
+B: Si el router es de otra marca, ¿cambia algo?
+A: Que en Omada la creás con el servidor DHCP en None, y las otras dos patas las hacés vos en ese router.
+B: ¿Laboratorio?
+A: Crear la VLAN veinte de cámaras con DHCP en un ER, perfil en un puerto del switch, enchufar una notebook y ver que agarre IP del rango correcto. Quince minutos.
+B: Y si no agarra...
+A: Revisás las tres patas, en orden. Ya no es misterio, es una lista.

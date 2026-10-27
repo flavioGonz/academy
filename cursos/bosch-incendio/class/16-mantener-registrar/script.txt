@@ -1,0 +1,18 @@
+A: Última lección. El sistema pasó la habilitación. ¿Ya está?
+B: Ahí empieza el trabajo, en realidad.
+A: Eso. Y en Uruguay el decreto lo reparte claro: el propietario mantiene, y el mantenimiento lo hace una empresa registrada. Las frecuencias las fija el proyecto y la norma que adopte.
+B: ¿Bosch qué pide?
+A: Como mínimo, una inspección visual y funcional por año. Recalibrar la pantalla táctil una vez por año y limpiar las ventilaciones, que si se tapan, el panel se recalienta.
+B: ¿Y NFPA, como referencia?
+A: Según la guía de Minnesota: inspección visual semestral, prueba completa anual, y un registro de terminación guardado junto a la central que se actualiza con cada cambio. Y la sensibilidad de los detectores, según Security Sales: dentro del primer año, a los dos años y después hasta cada cinco, siempre que se registren las falsas alarmas.
+B: ¿Y cómo veo la suciedad de un detector Bosch?
+A: En el diagnóstico del panel, el valor del sistema óptico. Según la guía: de cero a ciento setenta es un detector nuevo, hasta trescientos cincuenta normal, de trescientos cincuenta a cuatrocientos cincuenta conviene cambiarlo pronto, de cuatrocientos cincuenta a quinientos diez cambiarlo ya, y arriba de quinientos once el sensor óptico se desactiva.
+B: Buenísimo eso para el informe.
+A: Y una historia del firmware cuatro punto ocho: el reloj del panel se podía correr hasta ochenta minutos por año. Ahora, diez como máximo. Igual Bosch recomienda revisar la hora en cada mantenimiento, porque todos los registros dependen de ella.
+B: ¿Y si algo falla raro?
+A: Archivos de traza en una tarjeta de memoria, para soporte. Y se apaga con el botón antes de sacar la tarjeta.
+B: ¿Coinciden las fuentes?
+A: Las cuatro: manual, Minnesota, Security Sales y la hoja técnica. Cambian las frecuencias según la norma, no la idea de registrar todo.
+B: ¿Laboratorio?
+A: Tu plantilla de informe: fecha, hora del panel corregida, baterías con tensión, detectores con valor de contaminación, pruebas con resultado, salidas rehabilitadas y firma. Quince minutos.
+B: Porque lo que no está registrado, no se hizo.

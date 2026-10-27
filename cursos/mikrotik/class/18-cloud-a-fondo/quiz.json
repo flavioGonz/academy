@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Cambiaste el PPPoE de un cliente a otro proveedor y el nombre sn.mynetname.net sigue apuntando a la IP vieja. ¿Qué hacés?",
+    "options": [
+      "Esperar 24 horas de propagación",
+      "Reiniciar el router",
+      "/ip/cloud/force-update para mandar la actualización en el momento",
+      "Pedir un nombre nuevo a MikroTik"
+    ],
+    "answer": 2,
+    "why": "force-update envía la actualización de DDNS en el momento. El nombre tiene un TTL de 60 segundos, así que no hay días de propagación."
+  },
+  {
+    "q": "Los logs de un router muestran horas que no coinciden con la realidad y un túnel IPsec se cae cada tanto. El NTP está apagado. ¿Qué cambiás?",
+    "options": [
+      "Activar el cliente NTP; la hora de la nube es aproximada y solo se toma al arrancar",
+      "Activar ddns-enabled=yes",
+      "Poner update-time=yes y listo",
+      "Nada, la hora no afecta IPsec"
+    ],
+    "answer": 0,
+    "why": "Según la documentación, la hora de la nube es aproximada y solo se pone al arrancar. Con NTP la hora es exacta, y los túneles IPsec son sensibles a diferencias de reloj."
+  },
+  {
+    "q": "Un sitio tiene la WAN en 100.70.4.2 (CGNAT). El cliente quiere entrar con el nombre de IP Cloud. ¿Qué le decís?",
+    "options": [
+      "Que con el nombre alcanza, solo falta un dst-nat",
+      "Que el nombre apunta a una IP compartida del proveedor; para entrar hace falta Back To Home o un túnel saliente",
+      "Que hay que usar use-local-address=yes",
+      "Que hay que bajar el TTL"
+    ],
+    "answer": 1,
+    "why": "Detrás de CGNAT, public-address es una dirección del proveedor compartida con otros clientes. El nombre resuelve ahí y no llega al router; el acceso va por un túnel que abre el propio router."
+  }
+]

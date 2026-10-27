@@ -1,0 +1,15 @@
+A: Arrancamos con MikroTik. Y la primera lección es casi una vacuna: cómo entrar a un equipo sin dejarte afuera vos mismo.
+B: [risas] Eso me pasó. Router en un depósito a cuarenta kilómetros, toqué una regla y chau, se cortó WinBox.
+A: Clásico. Mirá, la documentación oficial lo plantea así: conectás la notebook a cualquier puerto menos el ether1, que viene como WAN, abrís WinBox, pestaña Neighbors, y si la IP no responde o aparece cero punto cero punto cero punto cero, te conectás por la MAC.
+B: Por MAC entra aunque no haya ninguna IP configurada.
+A: Exacto. Y la segunda pieza es el Safe Mode. En WinBox es un botón; en la terminal, control equis. Mientras está activo, si la sesión se corta, el router deshace todo lo que hiciste.
+B: Eso es oro. ¿Lo dicen todas las fuentes?
+A: Las tres que hablan de acceso inicial coinciden, sin discrepancias. Donde sí hay discusión es en la configuración por defecto: MikroTik recomienda conservarla si estás empezando, porque trae firewall y DHCP, y la guía de VLAN más citada del foro arranca de cero.
+B: Y ojo que los CCR vienen pelados, sin configuración por defecto.
+A: Sí, eso también lo aclara la documentación. Ahora, un detalle del Safe Mode que poca gente sabe: el historial guarda cien acciones. Si te pasás, sale solo del modo seguro y ya no deshace nada.
+B: Uf. O sea que si estás pegando un script enorme, el seguro no te cubre.
+A: Por eso conviene trabajar en pasos chicos. Caso típico en obra: llegás a un local, el cliente tiene un hAP con la configuración de fábrica. Entrás por MAC, activás Safe Mode, cambiás una cosa, verificás, soltás el modo seguro, y seguís con la siguiente.
+B: Y antes de todo eso, un export para saber cómo estaba.
+A: Claro. El laboratorio es justamente ese: entrar por MAC, mirar qué trae la configuración por defecto, sacar un export, y probar el Safe Mode a propósito. Hacés un cambio, cerrás con control de, y ves que se deshace.
+B: Diez minutos.
+A: Y a partir de ahí, perder el acceso deja de ser una posibilidad y pasa a ser un descuido.

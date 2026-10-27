@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un edificio con monitores en todos los apartamentos dejó de renovar SmartPlus. ¿Qué esperás que siga funcionando si la instalación está bien hecha?",
+  "options": [
+   "Nada: sin licencia el portero se bloquea",
+   "Llamada al monitor, apertura desde el monitor, PIN, tarjeta y relés en la red local; lo que depende de la cuenta activa es la app",
+   "Solo la app, porque la licencia vive en el celular",
+   "Solo el RTSP al NVR"
+  ],
+  "answer": 1,
+  "why": "Lo pago en Akuvox es la nube: la FAQ de la app manda a revisar la cuenta activa y paga cuando no llama; monitor, PIN y tarjeta trabajan en la LAN (lección 10)."
+ },
+ {
+  "q": "El administrador pide el costo de SmartPlus a cinco años para 24 apartamentos. ¿Qué hacés?",
+  "options": [
+   "Usar el precio que publica un revendedor inglés",
+   "Prometer licencia de por vida porque así la vende un distribuidor canadiense",
+   "Incluirla gratis porque los monitores ya la cubren",
+   "Pedir cotización escrita al distribuidor con servicios, período y fecha, y presupuestarla aparte del equipo"
+  ],
+  "answer": 3,
+  "why": "Akuvox no publica precios y el modelo cambia según el distribuidor; la documentación oficial muestra cobro por servicio con vencimiento y renovación."
+ },
+ {
+  "q": "Una oficina instaló ACMS Pro 1.0.0.4 hace unos seis meses y hoy nadie puede entrar al software. ¿Qué revisás primero?",
+  "options": [
+   "La validez de la licencia: esa versión es una prueba de 180 días contada con el reloj del servidor",
+   "El firmware de los lectores",
+   "La cuenta SIP 1 de los porteros",
+   "El PoE del switch"
+  ],
+  "answer": 0,
+  "why": "La guía de ACMS Pro dice que al vencer la prueba de 180 días todos los usuarios quedan afuera hasta renovar la licencia."
+ }
+]

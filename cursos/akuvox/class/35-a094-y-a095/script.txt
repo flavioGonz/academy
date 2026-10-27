@@ -1,0 +1,21 @@
+A: Lección treinta y cinco. Las controladoras: el A094 y el A095. Akuvox presenta a las dos como controladora de cuatro puertas.
+B: Las que van en el tablero, no en la puerta.
+A: Exacto. En la puerta ponés el lector o el terminal, y la controladora decide y abre. ¿La diferencia principal? Cómo se alimentan.
+B: Contame.
+A: El A094 no tiene PoE. Va a la red de doscientos veinte, cien a doscientos cuarenta en alterna, uno y medio amperes. Y adentro tiene cuatro salidas de doce voltios de ochocientos miliamperes, compartidas con esa entrada. El menú lo lista también en una versión sin el adaptador de alterna a continua.
+B: ¿Y el A095?
+A: El A095 va con PoE at o con fuente de doce voltios cinco amperes. Y tiene ocho salidas de doce voltios. Con la fuente, quinientos miliamperes por salida. Con PoE+, depende de cuántos lectores cuelgues: con los ocho conectados, máximo dos décimas de ampere por salida; con cuatro o menos, entre dos y cuatro décimas.
+B: O sea que con PoE+ y muchos lectores, la cerradura va con fuente aparte.
+A: Esa es la lectura. El relé, en las dos, treinta voltios dos amperes.
+B: ¿Y credenciales en el A095?
+A: La tabla de métodos le marca PIN y tarjetas de las dos frecuencias, sin rostro ni Bluetooth.
+B: ¿Cómo sacás la IP?
+A: Al A095 con el botón Reset, que anuncia la IP. Al A094, con el IP Scanner.
+B: ¿Algo que no hagan?
+A: Uno: el A094 es de los dos equipos que no se integran con el ascensor EC33, junto con el E20. El A095 sí.
+B: ¿Fuentes?
+A: Ocho de once coinciden en este reparto de equipos, y la tabla de doce voltios es la que trae el detalle de las salidas.
+B: ¿Laboratorio?
+A: Quince minutos de cálculo. Para una controladora con cuatro puertas, sumás lectores y cerraduras y decidís: A094 con red, o A095 con PoE+ o con fuente de doce voltios cinco amperes.
+B: Y lo dejás escrito en la memoria técnica.
+A: Eso.

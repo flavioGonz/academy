@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Instalaste un R29C-L en un puerto PoE y no enciende. ¿Por qué?",
+  "options": [
+   "El R29C-L con LTE no admite PoE; va con fuente de 12 V 1,5 A",
+   "El switch es 802.3af",
+   "Falta firmware",
+   "Falta el módulo LTE"
+  ],
+  "answer": 0,
+  "why": "La tabla de alimentación marca al R29C-L con LTE sin PoE y con fuente de 12 V/1,5 A."
+ },
+ {
+  "q": "El cliente quiere huella en el R29. ¿Qué versión pedís?",
+  "options": [
+   "R29S",
+   "R29C",
+   "R29C-L",
+   "R29C-T"
+  ],
+  "answer": 3,
+  "why": "La ficha lista al R29C-T con lector de huella; la tabla de métodos marca huella en el R29CT."
+ },
+ {
+  "q": "¿Qué grado de impacto publica la ficha del R29?",
+  "options": [
+   "IK10",
+   "IK08",
+   "IK06",
+   "No publica"
+  ],
+  "answer": 2,
+  "why": "La ficha del R29 indica IP65 / IK06 en todas sus versiones."
+ }
+]

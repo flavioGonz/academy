@@ -1,0 +1,17 @@
+A: Lección tres, y esta se decide una sola vez: el disco. En la instalación, Proxmox te pregunta ext cuatro, xfs o ZFS.
+B: Y uno le da siguiente, siguiente.
+A: Y queda ext cuatro con LVM thin, que aparece como local lvm. Que no está mal, ojo. Thin quiere decir que reserva espacio recién cuando se escribe. Según la guía oficial, un disco de treinta y dos gigas con tres de datos ocupa tres.
+B: Bien. ¿Y ZFS qué agrega?
+A: Un montón. Detecta corrupción, comprime, hace snapshots, RAID por software y replicación entre nodos. Pero pide condiciones. La guía dice: mínimo ocho gigas de RAM para arrancar, memoria ECC recomendada, y acceso directo a los discos.
+B: O sea, nada de controladora RAID con caché abajo.
+A: Exacto, esa es la regla dura. ZFS sobre RAID por hardware, nunca. Placa HBA o controladora en modo IT.
+B: ¿Y con los SSD baratos?
+A: Ahí aparece la discusión. La guía oficial desaconseja SSD de consumo y recomienda SSD con protección contra cortes de energía. En el foro, un miembro veterano dice que ZFS gasta más rápido esos discos y escribe más, pero que la regla vieja de un giga de RAM por tera es falsa. Y él igual usa ZFS siempre que puede.
+B: [risas] Lo defiende pero te avisa.
+A: Literal, firma diciendo que no te sientas obligado a usarlo. Las dos fuentes que miramos coinciden en lo básico; donde discrepan es en cuánta RAM pedir.
+B: ¿Y cómo sé cuánta RAM se come ZFS?
+A: Desde la ocho punto uno, el instalador limita la caché, el ARC, al diez por ciento de la RAM con tope de dieciséis gigas. La regla oficial para ajustarlo: dos gigas base más uno por cada tera.
+B: Entonces, en un servidor de cliente con RAID por hardware y poca RAM, LVM thin.
+A: Y en uno con HBA, discos de datacenter y RAM de sobra, ZFS. Laboratorio: en la consola corré pvesm status, para ver qué almacenamientos tenés, y lvs o zpool status según el caso. Si es ZFS, mirá el límite del ARC.
+B: Diez minutos y ya sabés en qué piso estás parado.
+A: Y la próxima instalación la elegís vos, no el botón siguiente.

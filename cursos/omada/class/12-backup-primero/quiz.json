@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Actualizaste el controlador software de 6.1 a 6.2 y algo no anda. Tenés solo el backup hecho en 6.2. ¿Podés volver a 6.1 con tu configuración?",
+    "options": [
+      "Sí, instalando 6.1 y restaurando ese backup",
+      "Sí, desde el menú de downgrade automático",
+      "No: el downgrade es reinstalar limpio y un backup de 6.2 no entra en 6.1",
+      "Sí, si el backup es de menos de 7 días"
+    ],
+    "answer": 2,
+    "why": "La guía oficial indica que bajar de versión implica desinstalar sin datos y que un backup de versión más nueva no se restaura en una más vieja; por eso conviene guardar un backup por versión."
+  },
+  {
+    "q": "Estás migrando un cliente de OC200 a OC300 con el asistente de migración. ¿Cuándo hacés Forget de los equipos en el OC200?",
+    "options": [
+      "Cuando todos figuran Connected en el OC300",
+      "Apenas exportás el archivo",
+      "Al principio, para liberarlos",
+      "Nunca, se borran solos"
+    ],
+    "answer": 0,
+    "why": "La guía de migración indica verificar que todos los equipos estén Connected en el destino y recién ahí hacer Forget en el controlador anterior."
+  },
+  {
+    "q": "En la migración, ¿qué pasa si salteás la importación del backup en el destino y vas directo a migrar equipos (controlador 5.15.24 o posterior)?",
+    "options": [
+      "Nada, el destino importa solo",
+      "La migración es más rápida",
+      "Los equipos se resetean de fábrica",
+      "El destino no adopta los equipos automáticamente"
+    ],
+    "answer": 3,
+    "why": "La guía oficial advierte que saltear la importación hace que el destino no adopte los equipos automáticamente; el orden de pasos importa."
+  }
+]

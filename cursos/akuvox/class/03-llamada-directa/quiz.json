@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Casa con un E12 y un C316 en el mismo switch, nadie atiende desde afuera. ¿Qué arquitectura conviene?",
+  "options": [
+   "Central Asterisk con dos extensiones",
+   "SmartPlus obligatoriamente",
+   "Llamada IP directa con IPs fijas",
+   "Una troncal SIP hacia el celular"
+  ],
+  "answer": 2,
+  "why": "La llamada directa funciona en la misma red sin servidor; con IPs fijas es la opción más simple y con menos puntos de falla."
+ },
+ {
+  "q": "Cambiaste el puerto de Direct IP del portero a 5070 y ahora el monitor no recibe llamadas. ¿Por qué?",
+  "options": [
+   "El puerto tiene que coincidir en ambos equipos",
+   "Direct IP solo funciona en el 80",
+   "Hace falta un servidor SIP",
+   "El monitor necesita reiniciarse de fábrica"
+  ],
+  "answer": 0,
+  "why": "La guía de Akuvox indica que si se cambia el puerto por defecto 5060, tiene que ser el mismo en el equipo del otro lado."
+ },
+ {
+  "q": "La vista previa de video anda por IP directa pero desaparece al pasar la llamada por la central. ¿Qué te dice eso?",
+  "options": [
+   "El portero tiene una falla de cámara",
+   "Algo de la central está afectando esa función y es ahí donde se busca",
+   "El monitor no soporta H.264",
+   "Hay que bajar la resolución del portero"
+  ],
+  "answer": 1,
+  "why": "En el caso de la comunidad FreePBX, la vista previa funcionaba directo y fallaba por una opción de marcado de Asterisk: la diferencia aísla el problema en la central."
+ }
+]

@@ -1,0 +1,21 @@
+A: Arco dos. Ya tenemos red. Ahora, el firewall de Windows. ¿Qué es lo primero que hace la mayoría cuando algo no conecta?
+B: [suspiro] Lo apaga.
+A: Lo apaga. Y queda apagado cinco años. Hagamos lo contrario: entender cómo decide.
+B: Dale.
+A: Tiene tres perfiles: Dominio, Privado y Público. Cada placa de red cae en uno. Por defecto deja salir todo y bloquea todo lo que entra, salvo lo que tenga regla.
+B: Hasta ahí, conocido.
+A: Lo que no se conoce tanto: una regla solo actúa cuando su perfil está activo. Si creaste la regla para Privado y la placa quedó como Pública, la regla no existe para esa placa.
+B: Ah, eso explica las veces que "puse la regla y no anda".
+A: Exacto. Por eso primero Get-NetConnectionProfile, a ver qué perfil tiene cada placa. Si una red de cámaras aislada aparece como Pública, la pasás a Privada.
+B: ¿Y en un controlador de dominio?
+A: Tiene que decir DomainAuthenticated. TheITBros cuenta casos donde quedó en Pública y falló la autenticación de escritorio remoto. Deshabilitar y habilitar la placa suele alcanzar.
+B: Bien. ¿Y las reglas?
+A: Por puerto o por programa. Por programa, con la ruta completa del ejecutable del VMS, abre solo lo que ese programa escucha. Y siempre con origen limitado: LocalSubnet o la IP de los puestos.
+B: ¿Esto lo comparten las fuentes?
+A: Tres de cinco: la documentación de Microsoft, woshub y TheITBros. Ninguna en contra. woshub agrega dos detalles de oro.
+B: A ver.
+A: Uno, antes de tocar nada exportás la configuración con netsh advfirewall export. Si rompés algo, importás y volvés. Dos, Get-NetFirewallRule no muestra puertos ni direcciones. Para eso hay que pedir los filtros.
+B: O sea, que el listado que siempre miro no me dice qué abre cada regla.
+A: No te lo dice. El laboratorio, quince minutos: perfil de cada placa, exportar, una regla por puerto limitada a la subred, ver sus filtros y borrarla.
+B: Y el firewall prendido.
+A: Prendido. Perfil primero, regla después.

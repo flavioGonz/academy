@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Vas a capturar una falla de llamada con la PCAP del portero, que guarda solo 1 MB. ¿Cuándo la arrancás?",
+  "options": [
+   "Al llegar a la obra, para tener todo",
+   "Justo antes de reproducir la falla",
+   "Después de que la falla pasó",
+   "No hace falta, alcanza con el log"
+  ],
+  "answer": 1,
+  "why": "Soporte de Akuvox aclara que la captura está limitada a 1 MB, así que conviene iniciarla justo antes de reproducir el problema."
+ },
+ {
+  "q": "La vista previa de video anda por IP directa pero no a través de FreePBX, y la captura muestra el video llegando a la central sin salir al teléfono. ¿Dónde buscás?",
+  "options": [
+   "En la cerradura",
+   "En el PIN público",
+   "En la configuración de marcado de la central (opciones del Dial)",
+   "En el RTSP del NVR"
+  ],
+  "answer": 2,
+  "why": "En el caso de la comunidad, la opción 'r' del Dial de Asterisk forzaba tono de llamada y descartaba el early media; la 'R' lo resolvió."
+ },
+ {
+  "q": "¿Qué paquete mandás a soporte de Akuvox para una falla de llamadas?",
+  "options": [
+   "Solo una foto del equipo",
+   "El número de serie y nada más",
+   "La contraseña de admin",
+   "Firmware, configuración exportada, log en nivel 7, PCAP y topología"
+  ],
+  "answer": 3,
+  "why": "El artículo de soporte de Akuvox pide versión, archivo de configuración, log del sistema en nivel 7, PCAP y descripción de la red para reproducir el problema."
+ }
+]

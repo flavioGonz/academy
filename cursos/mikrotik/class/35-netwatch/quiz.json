@@ -1,0 +1,35 @@
+[
+  {
+    "q": "El NVR de un local contesta ping, pero la app no muestra video. Tu Netwatch con ping dice que está up. ¿Qué cambiarías?",
+    "options": [
+      "Bajar el interval a 1 segundo",
+      "Una sonda tcp-conn al puerto del servicio de video (por ejemplo 554)",
+      "Poner thr-avg=10ms en la sonda",
+      "Reiniciar el NVR todos los días con el scheduler"
+    ],
+    "answer": 1,
+    "why": "Un ping dice que el equipo está prendido, no que el servicio atiende. tcp-conn prueba que el puerto complete el saludo TCP, que es lo que necesita la app."
+  },
+  {
+    "q": "Actualizaste a RouterOS 7.13 o posterior y los avisos a Telegram desde Netwatch dejaron de llegar. El mismo fetch desde la terminal anda. ¿Qué pasa?",
+    "options": [
+      "Telegram bloqueó a los routers MikroTik",
+      "Falta configurar DNS en el router",
+      "Netwatch necesita un reinicio después de actualizar",
+      "fetch intenta guardar la respuesta en un archivo y Netwatch no tiene ese permiso: se agrega output=none"
+    ],
+    "answer": 3,
+    "why": "Netwatch solo tiene las políticas read, write, test y reboot. Desde 7.13, guardar el archivo de fetch pide otra política; soporte de MikroTik indicó output=none."
+  },
+  {
+    "q": "Te llega un mail de 'cámara caída' cada pocos minutos aunque la cámara anda bien. La sonda es simple, con un ping por prueba. ¿Qué ajustás?",
+    "options": [
+      "Sonda icmp, que manda varios paquetes por prueba y cae recién con un umbral de pérdida",
+      "startup-delay más largo",
+      "ignore-initial-up=yes",
+      "Un power-cycle del PoE en el down-script"
+    ],
+    "answer": 0,
+    "why": "Con un solo ping, un paquete perdido alcanza para marcar down. La sonda icmp manda 10 paquetes por prueba y por defecto cae con 85% de pérdida, sin scripts extra."
+  }
+]

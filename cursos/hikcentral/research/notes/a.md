@@ -1,0 +1,406 @@
+# Notes: batch a
+Pages read: 23. With notes: 22. Skipped: 1 (benchmarkmagazine Hikvision Academy: describe la oferta de cursos HCSA y "Hikvision VMS (HikCentral)", sin contenido técnico; se usa solo para ubicar cómo se enseña el producto en T01).
+
+Nota de versión: las páginas oficiales leídas corresponden al Web Client V2.x (doc set 2023 y V2.6.1 de 2024), Quick Start Guide 2023, FAQ V2.5.500, Communication Matrix V2.4.1 y System Requirements V2.4.510. La versión actual a octubre 2026 es la línea V3.x; no se pudo leer documentación V3 (las páginas de hikvision.com devuelven un desafío JavaScript anti-bot).
+
+## T01 Familia HikCentral y dónde encaja Professional
+- a:N1. HikCentral Access Control es la versión liviana orientada a acceso y asistencia: gratis hasta 4 puertas y 50 empleados que marcan, con i3 y 4 GB de RAM como mínimo, y se puede subir a HikCentral Professional cuando hace falta video, acceso y alarmas integrados.
+  - Source: https://www.securityinformed.com/hikvision-hikcentral-access-control-software-technical-details.html  Quote: "free of charge to Hikvision customers with up to 4 access doors, and up to 50 employees"
+  - Kind: number
+  - Level: foundation
+  - Also: T10
+  - Bias: ficha de producto republicada de un anuncio del fabricante.
+- a:N2. Professional se define como plataforma on-premises centrada en video que suma acceso, alarmas, asistencia y mapas; la mejor experiencia es con hardware Hikvision, terceros entran por ONVIF con funciones que varían.
+  - Source: https://www.videoexpertsgroup.com/glossary/hikcentral-professional  Quote: "HikCentral is engineered around Hikvision hardware"
+  - Kind: definition
+  - Level: foundation
+  - Also: T06
+  - Bias: lo escribe un competidor (VXG vende un VMS en la nube).
+
+## T02 Arquitectura
+- a:N3. Componentes: SYS (servicio de gestión del sistema: autenticación, usuarios, roles, dispositivos, APIs de configuración), Streaming Service opcional, Web Client (B/S, configuración), Control Client (C/S, operación: vivo, PTZ, reproducción, alarmas) y Mobile Client.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20230911113416_60121_doc/pdf.pdf  Quote: "It contains all the modules to build the system, including System Management Service, Streaming Service, Control Client, and Database Service"
+  - Kind: definition
+  - Level: foundation
+  - Bias: none
+- a:N4. El SYS trae incluido un Streaming Gateway; por eso el Streaming Server no se instala en la misma PC que el SYS. El gateway sirve hasta 200 cámaras reenviadas; por encima conviene un Streaming Server aparte (their claim).
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "the Streaming Gateway can serve for 200 cameras at maximum"
+  - Kind: number
+  - Level: foundation
+  - Also: T04
+  - Bias: none
+- a:N5. El Control Client no corre en máquina virtual; el SYS sí (VMware ESXi 6.x/7.x, Hyper-V).
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20230911113613_29615_doc/HikCentral%20Professional_System%20Requirements%20and%20Performance_V2.4.510_20230907.pdf  Quote: "The Control Client cannot run on the virtual machine"
+  - Kind: rule of thumb
+  - Level: foundation
+  - Also: T03
+  - Bias: none
+- a:N6. El Control Client tiene que ser exactamente de la misma versión que el SYS; si no, el login falla con el error VSM217.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "The Control Client version is inconsistent with the HikCentral SYS server"
+  - Kind: mistake
+  - Level: core
+  - Also: T16
+  - Bias: none
+- a:N7. Despliegue en dos servidores (dual-server): SYS y base de datos en máquinas distintas para proteger los datos ante la caída del servidor y tener espacio para mucho volumen.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "installing the SYS and the database on two different PCs"
+  - Kind: technique
+  - Level: advanced
+  - Also: T14
+  - Bias: none
+- a:N8. Remote Site Management (RSM): un HikCentral central suma otros HikCentral como sitios remotos, ve sus cámaras y alarmas y puede grabar en el central. Hasta 100.000 cámaras importadas en un Central System (their claim).
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "up to 100,000 cameras can be imported from Remote Sites"
+  - Kind: definition
+  - Level: advanced
+  - Bias: none
+
+## T03 Requisitos de servidor
+- a:N9. Perfil bajo del SYS según la guía de requisitos V2.4.510: i5-8500, 8 GB de RAM, NIC gigabit, disco de 650 GB como mínimo; para alto rendimiento Xeon E-2314 o E-2378 con 16 GB (recomienda 32 GB). Base de datos PostgreSQL 11.8.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20230911113613_29615_doc/HikCentral%20Professional_System%20Requirements%20and%20Performance_V2.4.510_20230907.pdf  Quote: "For a smoother and faster running, 32 GB is recommended"
+  - Kind: number
+  - Level: foundation
+  - Bias: none
+- a:N10. Capacidad por sitio: hasta 2.048 dispositivos de codificación y 10.000 cámaras; el perfil bajo de hardware maneja 256 encoders y 256 controladoras de acceso (their claim).
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "Up to 2,048 encoding devices and 10,000 cameras can be added to one site"
+  - Kind: number
+  - Level: core
+  - Also: T06
+  - Bias: none
+- a:N11. Migrar la VM del SYS (vMotion y similares) rompe la verificación de licencia; tampoco se soporta VM en modo clúster.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20230911113613_29615_doc/HikCentral%20Professional_System%20Requirements%20and%20Performance_V2.4.510_20230907.pdf  Quote: "The migration of virtual machine will cause the failure of License verification"
+  - Kind: mistake
+  - Level: core
+  - Also: T05
+  - Bias: none
+- a:N12. Un CPU de servidor "no mainstream" puede causar "Invalid token" en el login por error de cifrado; la solución que da el FAQ es usar CPUs de línea como Xeon.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "Change the HikCentral server's CPU to mainstream models such as Xeon"
+  - Kind: mistake
+  - Level: advanced
+  - Also: T16
+  - Bias: none
+- a:N13. La crítica de un competidor: el costo real de Professional está en la infraestructura propia (servidor, base, backups, seguridad, escalado) que queda a cargo del integrador o del cliente.
+  - Source: https://www.videoexpertsgroup.com/glossary/hikcentral-professional  Quote: "maintenance, updates, backups, security, and scaling of HikCentral Professional will fall to the integrators/clients team"
+  - Kind: rule of thumb
+  - Level: foundation
+  - Also: T14
+  - Bias: competidor que vende nube.
+
+## T04 Instalación
+- a:N14. Instalador "HikCentral Professional.exe": modo típico instala todo salvo el Streaming Service; modo personalizado elige módulos y carpetas. Hot spare se decide al instalar (modo Mirror Hot Spare).
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20230911113416_60121_doc/pdf.pdf  Quote: "Install all the service modules (except the Streaming Service) and client"
+  - Kind: technique
+  - Level: foundation
+  - Bias: none
+- a:N15. Instalar con derechos de administrador; si el paquete no arranca, verificar el MD5 contra el publicado en la web de descarga.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "make sure the MD5 is same as the value on Hikvision software download page"
+  - Kind: test
+  - Level: foundation
+  - Also: T16
+  - Bias: none
+- a:N16. Service Manager: arrancar, parar y reiniciar servicios; puerto en rojo = ocupado por otro proceso. Tiene "Auto Recover Database Exception" para cortes de luz, con ruta de archivo que necesita el doble del tamaño de la base libre.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20230911113416_60121_doc/pdf.pdf  Quote: "The remaining disk space of the archive path should be twice as the size of database data"
+  - Kind: technique
+  - Level: core
+  - Also: T14, T16
+  - Bias: none
+- a:N17. Primer ingreso: se navega a la IP del servidor SYS (http o https) y el sistema obliga a crear la contraseña del usuario admin.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20230911113416_60121_doc/pdf.pdf  Quote: "you are required to create a password for the admin user"
+  - Kind: technique
+  - Level: foundation
+  - Also: T13
+  - Bias: none
+
+## T05 Licenciamiento
+- a:N18. Dos tipos de licencia: Base (al menos una para activar) y Expansión (suma capacidad o funciones). Recién instalado trae una licencia temporal limitada. Solo el usuario admin activa, actualiza o desactiva.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20230911113416_60121_doc/pdf.pdf  Quote: "You need to purchase at least one basic License to activate"
+  - Kind: definition
+  - Level: foundation
+  - Bias: none
+- a:N19. Activación offline: en el Web Client se genera ActivationRequestFile.bin, se sube desde una PC con internet a kms.hikvision.com, se baja ActivationResponseFile.bin y se importa. El código tiene 16 o 32 caracteres sin guiones.
+  - Source: https://enpinfo.hikvision.com/hkwsen/unzip/20230830144955_12918_doc/GUID-5B61A8EA-30BC-45DB-9102-A17602B8E976.html  Quote: "A request file named \"ActivationRequestFile.bin\" will be downloaded"
+  - Kind: technique
+  - Level: core
+  - Bias: none
+- a:N20. Errores típicos de activación: 1103 (SYS sin salida a internet o servidor de licencias caído), 1105 (respuesta que no corresponde al pedido, o pasaron más de 24 h), 1108 (código ya usado en otro SYS), 1113 (expansión sin base), 1114 (hora del servidor modificada), 1116 (más recursos que los licenciados). Offline falla si la hora del SYS difiere más de 24 h.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "You activated the expansion license without a base license"
+  - Kind: mistake
+  - Level: core
+  - Also: T16
+  - Bias: none
+- a:N21. En máquina física la licencia queda atada al hardware: si cambia el hardware, la licencia se invalida. Se elige entorno Physical, AWS o Azure al activar; en nube no se conectan pStor ni Streaming Server externos.
+  - Source: https://enpinfo.hikvision.com/hkwsen/unzip/20230830144955_12918_doc/GUID-5B61A8EA-30BC-45DB-9102-A17602B8E976.html  Quote: "If the hardware changed, the License will be invalid"
+  - Kind: rule of thumb
+  - Level: core
+  - Also: T03
+  - Bias: none
+- a:N22. Historia de soporte: el SYS que alterna entre "Starting" y "Stopped" en Service Manager suele ser un cambio de hardware que rompió la detección de licencia; el FAQ indica parar servicios, limpiar y volver a actualizar la licencia. Y el error 1108 (código usado en otro SYS) se resuelve desactivando primero en el servidor viejo. Moraleja: desactivar antes de mover o cambiar hardware.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "The SYS server's hardware has changed, causing the license detection failure"
+  - Kind: story
+  - Level: core
+  - Also: T16
+  - Bias: none
+- a:N23. Hay que registrar un email del admin al activar: sirve para recuperar el código de activación si se pierde la contraseña y el código a la vez.
+  - Source: https://enpinfo.hikvision.com/hkwsen/unzip/20230830144955_12918_doc/GUID-5B61A8EA-30BC-45DB-9102-A17602B8E976.html  Quote: "used to receive the License activation code when the admin user forgets the password"
+  - Kind: technique
+  - Level: foundation
+  - Bias: none
+
+## T06 Alta de dispositivos
+- a:N24. Por IP o dominio con protocolo privado Hikvision: puerto 8000 por defecto, 8443 si se marca "Encrypted Add"; ONVIF y Dahua también como protocolos para terceros. Conviene configurar NTP antes (el sistema avisa).
+  - Source: https://enpinfo.hikvision.com/hkwsen/unzip/20230830144955_12918_doc/GUID-76D11646-EA40-4EDA-88DD-38821CB5826E.html  Quote: "The default device port No. is 8000. If you check Encrypted Add , the default port No. is 8443"
+  - Kind: number
+  - Level: foundation
+  - Also: T15
+  - Bias: none
+- a:N25. Sin "Add Resource to Area" el dispositivo queda agregado pero sus cámaras no tienen vivo, reproducción ni eventos.
+  - Source: https://enpinfo.hikvision.com/hkwsen/unzip/20230830144955_12918_doc/GUID-76D11646-EA40-4EDA-88DD-38821CB5826E.html  Quote: "If you do not import channels to area, you cannot perform operations such as live view, playback, event settings"
+  - Kind: mistake
+  - Level: foundation
+  - Also: T07
+  - Bias: none
+- a:N26. ISUP (antes EHome) por Device ID: para equipos sin IP fija; primero se habilita "Allow ISUP Registration" en Sistema > Red > Device Access Protocol; ISUP 5.0 pide clave de login ISUP. Es la opción "costo efectiva" para sitios sin IP pública.
+  - Source: https://enpinfo.hikvision.com/hkwsen/unzip/20230830144955_12918_doc/GUID-5A97A28D-C1DB-4653-B440-FAAC67F3FDE2.html  Quote: "This is a cost-effective choice when you need to manage an encoding device without fixed IP address"
+  - Kind: technique
+  - Level: core
+  - Also: T15
+  - Bias: none
+- a:N27. Hik-Connect DDNS: con número de serie y código de verificación, o en lote desde la cuenta Hik-Connect; requiere el servicio Hik-Connect habilitado en el equipo.
+  - Source: https://enpinfo.hikvision.com/hkwsen/unzip/20230830144955_12918_doc/GUID-8F21FBEB-1F47-4246-A13A-0804154D9DFE.html  Quote: "add encoding devices with dynamic IP addresses to the system by domain name solutions of Hik-Connect"
+  - Kind: technique
+  - Level: core
+  - Bias: none
+- a:N28. Limitación: equipos agregados por dominio o por Hik-Connect no pueden grabar en Hybrid SAN ni Cloud Storage Server; por dominio solo graban en el propio equipo.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "Storing video files of devices added by domain name and devices added by Hik-Connect"
+  - Kind: rule of thumb
+  - Level: core
+  - Also: T08
+  - Bias: none
+- a:N29. Cámaras ONVIF que quedan offline: HikCentral usa el puerto 80 para ONVIF y algunas cámaras usan otro; se corrige el puerto en la vista física.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "HikCentral uses the default port 80 to access the ONVIF devices"
+  - Kind: mistake
+  - Level: core
+  - Also: T16
+  - Bias: none
+- a:N30. Cámaras con funciones especiales (reconocimiento facial, LPR, térmicas) hay que marcarlas en Detalles de licencia > Configuración, o esas funciones no andan.
+  - Source: https://enpinfo.hikvision.com/hkwsen/unzip/20230830144955_12918_doc/GUID-5A97A28D-C1DB-4653-B440-FAAC67F3FDE2.html  Quote: "Otherwise, these cameras' functions cannot be performed normally on the platform"
+  - Kind: mistake
+  - Level: core
+  - Also: T05
+  - Bias: none
+
+## T07 Áreas y vistas
+- a:N31. Las cámaras tienen que estar directamente en el área; las de un área hija no aparecen al abrir la madre ("There is no camera in this area").
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "The cameras added to a child area are not available for the parent area"
+  - Kind: mistake
+  - Level: foundation
+  - Bias: none
+- a:N32. Vista pública: la ve cualquier usuario; vista privada: solo quien la creó. Los grupos de vistas permiten rotación automática en el Control Client.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "Only the user who created the view can see the views in Private View"
+  - Kind: definition
+  - Level: foundation
+  - Also: T13
+  - Bias: none
+
+## T08 Grabación
+- a:N33. Al agregar el dispositivo se elige dónde graba: en el propio equipo (NVR/tarjeta), Hybrid SAN, Cloud Storage Server, pStor o pStor Cluster. "Get Device's Recording Settings" toma el calendario que ya tiene el equipo.
+  - Source: https://enpinfo.hikvision.com/hkwsen/unzip/20230830144955_12918_doc/GUID-76D11646-EA40-4EDA-88DD-38821CB5826E.html  Quote: "The video files will be stored in the encoding device according to the configured recording schedule"
+  - Kind: technique
+  - Level: core
+  - Bias: none
+- a:N34. pStor Cluster no soporta grabación por detección de movimiento ni miniaturas, entre otras; pStor, clúster y SYS en el mismo dominio de red y misma zona horaria.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "Motion detection recording"
+  - Kind: rule of thumb
+  - Level: advanced
+  - Bias: none
+- a:N35. Si un Recording Server está en LAN, para buscar video desde la WAN hay que habilitarle "WAN Access" aunque el SYS ya tenga WAN configurado.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "you should enable its WAN Access function"
+  - Kind: mistake
+  - Level: advanced
+  - Also: T15
+  - Bias: none
+
+## T09 Eventos y alarmas
+- a:N36. Un evento se define con disparador, fuente, horario de recepción y acciones; "Trigger Alarm" lo convierte en alarma con prioridad y destinatarios (usuarios que la reciben en clientes y móvil).
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240822164538_35347_doc/GUID-7C8C6C1B-5438-4C6B-8C71-B042A25AE1BB.html  Quote: "Switch on Trigger Alarm to trigger the configured event as an alarm"
+  - Kind: definition
+  - Level: core
+  - Bias: none
+- a:N37. "Ignore Repetitive Events": con 30 s, eventos iguales de la misma cámara dentro de 30 s cuentan como uno. "Delay Alarm" para cámara offline evita alarmas si vuelve dentro del plazo.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240822164538_35347_doc/GUID-7C8C6C1B-5438-4C6B-8C71-B042A25AE1BB.html  Quote: "the maintainers can focus on the cameras which are truly disconnected"
+  - Kind: technique
+  - Level: core
+  - Also: T16
+  - Bias: none
+- a:N38. Acción "Trigger Recording" con pre y post evento, y bloqueo del archivo por N días para que no se sobrescriba; la cámara tiene que tener calendario de grabación configurado.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240822164538_35347_doc/GUID-7C8C6C1B-5438-4C6B-8C71-B042A25AE1BB.html  Quote: "Set the days for protecting the video file from being overwritten"
+  - Kind: technique
+  - Level: core
+  - Also: T08
+  - Bias: none
+- a:N39. Más de 20 eventos con imagen por segundo hacia el Web Client generan lag; el FAQ sugiere cortar la suscripción y guardar imágenes en pStor. Reconocer en lote hasta 100 alarmas.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "No more than 20 events or alarms with pictures can be sent to the Web Client per second"
+  - Kind: number
+  - Level: advanced
+  - Bias: none
+
+## T10 Control de acceso
+- a:N41. Después de asignar niveles de acceso hay que aplicarlos a los dispositivos (Apply Access Level Settings). "Apply (Initial)" borra todo y reescribe; durante el proceso los dispositivos quedan offline y nadie pasa. Sin marcar, aplica solo los cambios.
+  - Source: https://enpinfo.hikvision.com/hkwsen/unzip/20230830144955_12918_doc/GUID-3F50D8C7-95C9-478B-B4D5-189A09C3D708.html  Quote: "During the initialization process, the devices will be offline, and persons cannot access these access points"
+  - Kind: mistake
+  - Level: core
+  - Bias: none
+- a:N42. Un ícono de pendiente aparece si hay cambios sin aplicar o falló el aplicado; se revisa con "Access Control Test".
+  - Source: https://enpinfo.hikvision.com/hkwsen/unzip/20230830144955_12918_doc/GUID-3F50D8C7-95C9-478B-B4D5-189A09C3D708.html  Quote: "indicating some access level settings are pending to be applied to the devices"
+  - Kind: test
+  - Level: core
+  - Also: T16
+  - Bias: none
+- a:N43. Elegir un solo lugar de verdad para las personas: dar de alta en el equipo o en la plataforma y sincronizar en un sentido, no los dos.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "you are not suggested to use both the two methods"
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: none
+- a:N44. Las reglas de ID de persona solo se configuran con la lista vacía, antes de la primera alta.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "You can configure the person ID rules only when the person list is empty"
+  - Kind: mistake
+  - Level: core
+  - Bias: none
+- a:N45. Si el Control Client no muestra pasadas en tiempo real pero sí el histórico, la zona horaria de la controladora no coincide con la del SYS. Los registros de acceso se guardan cada minuto: si el servicio cae, se pierde ese minuto.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "The time zone of the access control device is inconsistent with SYS service"
+  - Kind: mistake
+  - Level: core
+  - Also: T16
+  - Bias: none
+- a:N46. Credenciales soportadas en la línea de acceso: huella, tarjeta, rostro, QR y PIN; funciones de interbloqueo, antipassback y multifactor.
+  - Source: https://www.securityinformed.com/hikvision-hikcentral-access-control-software-technical-details.html  Quote: "fingerprints, cards, facial recognition, QR codes and PIN codes"
+  - Kind: definition
+  - Level: foundation
+  - Bias: material de producto.
+
+## T11 Tiempo y asistencia
+- a:N47. Receta del soporte de Hikvision USA: agregar controladora, dar de alta personas con credenciales, definir puntos de marca (entrada, salida o ambos), regla general (fin de semana, ausencias), plantilla de turno (Normal o Man-Hour), turno, asignar turno a personas, ver registros.
+  - Source: https://supportusa.hikvision.com/support/solutions/articles/17000120924-time-and-attendance-setup-on-hikcentral  Quote: "select the readers taht will act as checkpoints, create work schedules and assign them to persons"
+  - Kind: template
+  - Level: core
+  - Bias: none
+- a:N48. El turno Man-Hour es más flexible: no exige ventana válida de entrada y salida; el modo de cálculo más usado es primera entrada y última salida.
+  - Source: https://supportusa.hikvision.com/support/solutions/articles/17000120924-time-and-attendance-setup-on-hikcentral  Quote: "the Man-Hour Shift is more relaxed"
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: none
+- a:N49. La plataforma no maneja múltiples zonas horarias: los turnos se calculan con la hora del servidor; los datos de asistencia solo se filtran por un modo de autenticación simple.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "the platform does not support multiple time zones"
+  - Kind: rule of thumb
+  - Level: advanced
+  - Also: T16
+  - Bias: none
+
+## T12 Mapas
+- a:N50. E-map: imagen estática (plano) para datos que no cambian; GIS: datos en tiempo real. Una cámara entra una sola vez por mapa y en hasta 6 mapas como punto caliente.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "one camera can be added as a hot spot on up to 6 maps"
+  - Kind: rule of thumb
+  - Level: foundation
+  - Bias: none
+
+## T13 Roles, usuarios y seguridad
+- a:N51. Dos roles predefinidos que no se editan ni borran: Administrator y Operator. Un rol nuevo define vigencia, plantilla horaria de permisos, áreas visibles, acceso a recursos y permisos de usuario. Si el rol vence, el usuario es expulsado.
+  - Source: https://enpinfo.hikvision.com/hkwsen/unzip/20230830144955_12918_doc/GUID-6C43765F-0DD8-43CF-ADF0-5918B47787D1.html  Quote: "users assigned with the role will be forced to log out and not able to log in"
+  - Kind: definition
+  - Level: foundation
+  - Bias: none
+- a:N52. Fuerza mínima de contraseña por defecto: Medium; reglas: 8+ caracteres con 3 tipos, sin "123" ni "admin", sin más de 3 iguales seguidos.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "By default, the minimum password strength is Medium"
+  - Kind: rule of thumb
+  - Level: foundation
+  - Bias: none
+- a:N53. HTTPS: el certificado embebido da "No seguro"; para evitarlo se sube un .pem con certificado y clave privada firmado por una CA en Sistema > Avanzado > Transferencia.
+  - Source: https://supportusa.hikvision.com/support/solutions/articles/17000110020-how-to-generate-and-install-https-certificate-for-hikcentral  Quote: "the file format must be \".pem\""
+  - Kind: technique
+  - Level: advanced
+  - Also: T15
+  - Bias: none
+- a:N54. Voz crítica: historial de fallas de seguridad de Hikvision y restricciones en EE. UU.; en proyectos grandes los evaluadores lo pesan. Base para endurecer el sistema (contraseñas, HTTPS, no exponer puertos).
+  - Source: https://learncctv.com/hikvision-cameras-removed-us-army-base-security-issues/  Quote: "Hikvision IP cameras have a history of security issues"
+  - Kind: story
+  - Level: foundation
+  - Also: T15
+  - Bias: nota de opinión de 2018.
+
+## T14 Backup y restauración
+- a:N55. Backup de datos del sistema desde Mantenimiento > Back Up and Restore System Data: configuración, imágenes, eventos, pasadas, mantenimiento. Manual o programado, máximo de 1 a 5 copias; los backups quedan en el propio servidor SYS.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240822164538_35347_doc/GUID-1AF31681-DD4C-4819-B85A-74A0178F87E8.html  Quote: "The backups are stored in the SYS server"
+  - Kind: technique
+  - Level: core
+  - Bias: none
+- a:N56. Algunas imágenes (registros de inspección del módulo educación) se pierden en backup y restauración; el FAQ recomienda guardarlas antes.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "The pictures are lost after backup and restoration"
+  - Kind: mistake
+  - Level: advanced
+  - Bias: none
+
+## T15 Puertos y acceso remoto
+- a:N57. Puertos del SYS según la Communication Matrix V2.4.1: 80 y 443 para los clientes; 7660 registro ISUP; 7332 alarmas ISUP; 8555 archivos ISUP; 14200 sitios remotos; 15300 eventos genéricos de terceros; 6011 imágenes. Streaming Gateway: 554 (RTSP), 559 (vivo en Chrome/Firefox), 16000 y 16001 stream ISUP.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20230511205434_28997_doc/HikCentral%20Professional_Communication%20Matrix_V2.4.1_20230511.pdf  Quote: "Used for receiving registration from ISUP devices"
+  - Kind: number
+  - Level: core
+  - Also: T06, T16
+  - Bias: none
+- a:N58. Vivo que anda en IE pero no en Chrome o Firefox: el Web Client usa el puerto 559 del gateway; abrirlo en el firewall o mapearlo.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "the Web Client adopts port number 559 for live view"
+  - Kind: mistake
+  - Level: core
+  - Also: T16
+  - Bias: none
+- a:N59. Puertos de los equipos Hikvision: 80 HTTP, 443 HTTPS, 554 RTSP, 8000 SDK (software cliente); port forwarding en el router hacia cada servicio.
+  - Source: https://learncctv.com/default-ports-for-hikvision-dvr/  Quote: "Software like the Hikvision iVMS-4200 uses port 8000"
+  - Kind: number
+  - Level: foundation
+  - Bias: blog que vende guías.
+- a:N60. Port forwarding paso a paso en el router (HTTP, RTSP, puerto de servidor) como forma de acceso remoto directo.
+  - Source: https://learncctv.com/hikvision-port-forwarding/  Quote: "the router redirects the traffic to the DVR that is located in the internal network"
+  - Kind: technique
+  - Level: foundation
+  - Bias: blog que vende guías.
+- a:N61. Si se cambian los puertos 80 o 443 del SYS, hay que agregar el puerto en la URL (http://IP:81).
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "add the new port number after the IP address"
+  - Kind: technique
+  - Level: foundation
+  - Also: T16
+  - Bias: none
+
+## T16 Troubleshooting
+- a:N62. Plataforma Hik-Connect offline en el equipo: verificar casilla habilitada, servidor (dev.hik-connect.com o variante), DNS 8.8.8.8, salida a internet, gateway en la misma subred, y puertos STUN 6002, 6800, 8555, 9010, 9020 sin bloquear.
+  - Source: https://supportusa.hikvision.com/support/solutions/articles/17000146654-troubleshooting-platform-access-offline-on-device  Quote: "Verify that the STUN ports are not closed by the firewall"
+  - Kind: test
+  - Level: core
+  - Also: T06
+  - Bias: none
+- a:N63. Receta corta: cable, Platform Access habilitado, alternar DHCP para ver si cambia la IP, DNS 8.8.8.8 y 8.8.4.4.
+  - Source: https://supportusa.hikvision.com/support/solutions/articles/17000128685-why-is-my-platform-access-offline-  Quote: "change your Preferred DNS to 8.8.8.8 and Alternate DNS to 8.8.4.4"
+  - Kind: test
+  - Level: foundation
+  - Bias: none
+- a:N64. "Maximum number of streams": se superó el límite de conexiones remotas del equipo (128 en ese NVR); no es lo mismo que ancho de banda. Un Streaming Server reduce conexiones contra el NVR.
+  - Source: https://supportusa.hikvision.com/support/solutions/articles/17000135582-how-to-see-the-number-of-streams-from-an-nvr-error-maximum-number-of-streams  Quote: "remote connections and bandwidth are not the same concept"
+  - Kind: story
+  - Level: core
+  - Also: T02
+  - Bias: none
+- a:N65. Servicio "Exceptional" con puerto en rojo en Service Manager: puerto tomado por otro proceso; netstat -ano | findstr puerto, tasklist | findstr PID; terminar el proceso con autorización o cambiar el puerto.
+  - Source: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf  Quote: "The port has been occupied by other program in the server"
+  - Kind: test
+  - Level: core
+  - Also: T04
+  - Bias: none
+
+## Disagreements seen
+- Acceso remoto: learncctv (https://learncctv.com/hikvision-port-forwarding/) enseña port forwarding directo de 80/554/8000; la documentación oficial ofrece ISUP y Hik-Connect para equipos sin IP fija (https://enpinfo.hikvision.com/hkwsen/unzip/20230830144955_12918_doc/GUID-5A97A28D-C1DB-4653-B440-FAAC67F3FDE2.html) y el artículo de seguridad (https://learncctv.com/hikvision-cameras-removed-us-army-base-security-issues/) invita a no exponer equipos.
+- On-premises vs. nube: VXG (https://www.videoexpertsgroup.com/glossary/hikcentral-professional) sostiene que la carga de infraestructura es la gran desventaja; la documentación de Hikvision trata el servidor propio como la base (y permite AWS/Azure con limitaciones).
+- Hik-Connect como vía de alta: práctico para IP dinámica (doc oficial) pero los equipos así agregados no graban en Hybrid SAN ni Cloud Storage (FAQ).
+- Personas: el FAQ pide una sola fuente de verdad (plataforma o equipo), mientras el flujo de asistencia del KB arranca dando de alta en plataforma; no es contradicción, pero sí elección de diseño.
+
+## Best stories
+- SYS en loop arrancando y deteniéndose tras cambiar hardware sin desactivar la licencia: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf
+- "Apply (Initial)" deja las puertas offline mientras reescribe todo: https://enpinfo.hikvision.com/hkwsen/unzip/20230830144955_12918_doc/GUID-3F50D8C7-95C9-478B-B4D5-189A09C3D708.html
+- Vivo que anda en IE y no en Chrome por el puerto 559: https://pinfo.hikvision.com/hkwsen/unzip/20240603152919_44907_doc/UD38113B_HikCentral%20Professional%20V2.5.500_FAQ_V2.5.500_20240603.pdf
+- NVR con tope de 128 conexiones remotas que no es ancho de banda: https://supportusa.hikvision.com/support/solutions/articles/17000135582-how-to-see-the-number-of-streams-from-an-nvr-error-maximum-number-of-streams
+- Delay Alarm para cámaras que parpadean offline: https://pinfo.hikvision.com/hkwsen/unzip/20240822164538_35347_doc/GUID-7C8C6C1B-5438-4C6B-8C71-B042A25AE1BB.html

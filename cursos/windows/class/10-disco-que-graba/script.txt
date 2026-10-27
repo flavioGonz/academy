@@ -1,0 +1,21 @@
+A: Hoy, el disco. En un servidor de video el disco trabaja más que nadie y es el que menos se mira.
+B: Hasta que las cámaras empiezan a perder cuadros.
+A: Ahí. Y el técnico dice "el disco anda lento", a ojo. Hagámoslo con números.
+B: ¿Qué números?
+A: Tres. Latencia, que es cuánto tarda cada operación. IOPS, operaciones por segundo. Y la cola, cuántas están esperando. Los tres están en Windows.
+B: ¿Dónde?
+A: Lo rápido: Administrador de tareas, pestaña Rendimiento, el disco, y mirás el tiempo medio de respuesta. Un poco más: el Monitor de recursos, pestaña Disco, la longitud de cola. Y lo serio: perfmon con contadores de PhysicalDisk.
+B: ¿Hay valores de referencia?
+A: Woshub da los suyos. Más de veinticinco milisegundos de latencia sostenida es un disco que no da abasto. En sistemas exigidos, no pasar de diez. Y la cola de un disco solo, no más de dos.
+B: ¿Y eso lo dicen otros?
+A: Es una sola fuente en números, así que tomalo como regla del autor, no como norma. Para grabación, el que manda es el fabricante del VMS.
+B: Bien. ¿Y lo segundo?
+A: El antivirus. Milestone, en su documentación, es clarísimo: no escanear las carpetas de la base de grabación, por defecto C dos puntos barra mediadatabase, ni sus archivos punto blk, punto idx y punto pic.
+B: ¿Por qué tan grave?
+A: Porque el escaneo consume recursos y puede bloquear archivos. Dicen que eso puede cortar la grabación o hasta corromper la base.
+B: Uf. Y Defender viene prendido de fábrica.
+A: Por eso. Cada fabricante tiene su lista; Milestone es el ejemplo que leímos. Usás la lista del fabricante que instalaste.
+B: ¿Laboratorio?
+A: Quince minutos. Medís el disco con contadores durante un minuto, en reposo y copiando un archivo grande. Y revisás las exclusiones de Defender, agregando una carpeta de laboratorio.
+B: Medir y excluir.
+A: Medir, excluir y anotar. Con eso, la próxima vez que digan "el disco anda lento", tenés números.

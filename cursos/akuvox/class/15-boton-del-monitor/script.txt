@@ -1,0 +1,19 @@
+A: Lección quince. ¿Te acordás del pedido de la lección ocho? Portón con un portero, hall con otro, y el cliente quiere abrir los dos desde el monitor.
+B: Y el DTMF solo llega al portero con el que estás hablando.
+A: Exacto. Hoy lo resolvemos del lado del monitor, sin tocar la central.
+B: ¿Cómo?
+A: En el monitor hay una sección que se llama Remote Relay By HTTP or HTTPS. En el ejemplo oficial, con un C313, está en Phone, Relay. Ahí cargás la IP o el número SIP del portero, elegís el formato de URL según la alta seguridad de ese portero y ponés el usuario y la clave que habilitaste en él.
+B: El mismo usuario de la lección trece.
+A: El mismo, pero mejor uno propio para el monitor. Y después creás las teclas. En Key Setting tenés tres lugares: la pantalla de llamada, la de monitoreo y la de vista previa de la llamada.
+B: ¿Cuál conviene?
+A: Para el segundo portero, la de monitoreo. El residente abre la cámara del portón, ve quién está y toca "Portón". No necesita que nadie llame.
+B: Ah, mirá. ¿Y la de vista previa?
+A: Sirve para abrir antes de atender. Para monitoreo y vista previa, Akuvox avisa que primero tiene que estar configurado el video del portero en el monitor.
+B: ¿Esto lo dice mucha gente?
+A: No. Es una sola página oficial, con un R29 y un C313 de ejemplo. Así que la evidencia es una, y conviene probarlo en el modelo que tengas antes de prometerlo.
+B: ¿En otros monitores el menú cambia?
+A: Puede cambiar. En la guía de relés externos, por ejemplo, los monitores usan el menú Device. Buscás la palabra Relay y aparece.
+B: ¿Y el laboratorio?
+A: Quince minutos. Un segundo portero con el HTTP habilitado, el monitor apuntando a él, una tecla que diga "Portón" en la pantalla de monitoreo, y probás abrir mirando la cámara.
+B: Y ponés el nombre de la puerta en la tecla, no "Relay dos".
+A: [risas] Siempre. Con esto, el pedido de las dos puertas se cierra en el monitor y la central queda tranquila.

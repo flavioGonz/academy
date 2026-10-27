@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Obra nueva con AVENAR panel 8000 en noviembre de 2026. ¿Qué módulo de baterías corresponde según Bosch?",
+  "options": [
+   "BCM-0000-A",
+   "Una mezcla de BCM-0000-B y FPE-8000-BCM",
+   "Ninguno, alcanza la UPS",
+   "FPE-8000-BCM con el concepto de zonas de energía"
+  ],
+  "answer": 3,
+  "why": "La TI 2716 indica que desde el 02/05/2026 las instalaciones nuevas usan FPE-8000-BCM y que no se mezcla con BCM-0000-B en un panel."
+ },
+ {
+  "q": "Con 0,6 A en reposo y 2,5 A en alarma, 24 h, 5 min y factor 1,20, ¿cuántos Ah salen aproximadamente?",
+  "options": [
+   "Unos 7 Ah",
+   "Unos 17,5 Ah",
+   "Unos 30 Ah",
+   "Unos 60 Ah"
+  ],
+  "answer": 1,
+  "why": "(0,6 x 24 + 2,5 x 0,083) x 1,20 = (14,4 + 0,21) x 1,20, cerca de 17,5 Ah; se elige la capacidad comercial siguiente."
+ },
+ {
+  "q": "RPS marca sobrecorriente en una zona de energía con muchas sirenas aunque SSD dio bien. ¿Qué indica Bosch?",
+  "options": [
+   "Agregar baterías hasta que desaparezca",
+   "Quitar las sirenas",
+   "Es una falla conocida de la validación: truco temporal de 1 h y 26 Ah para descargar, documentado, y volver a los valores reales con la versión corregida",
+   "Ignorar el error y no descargar nunca"
+  ],
+  "answer": 2,
+  "why": "La TI 2739 explica que RPS usa la corriente de alarma de los elementos LSN para validar autonomía y propone ese ajuste temporal hasta la corrección prevista para fin de 2026."
+ }
+]

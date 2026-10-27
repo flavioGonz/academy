@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un X937 no enciende en un switch 802.3af. ¿Qué pasa?",
+  "options": [
+   "El X937 pide PoE+ 802.3at o fuente de 12 V 2 A",
+   "Está fallado",
+   "Falta firmware",
+   "Necesita 2 hilos"
+  ],
+  "answer": 0,
+  "why": "La tabla de alimentación lista al X937 con PoE+ 802.3at y fuente de 12 V 2 A."
+ },
+ {
+  "q": "¿Cuál es la carga máxima del relé del X933 según la tabla?",
+  "options": [
+   "30 V 2 A",
+   "30 V 5 A",
+   "No tiene relé",
+   "24 V 1 A"
+  ],
+  "answer": 3,
+  "why": "La tabla de carga resistiva da 24 V 1 A para X933 y C319."
+ },
+ {
+  "q": "Te preguntan especificaciones del AKClaw Panel. ¿Qué respondés con lo leído?",
+  "options": [
+   "15,6\" con Android 14",
+   "Es un portero",
+   "Figura en el menú como Agentic Panel; sin ficha leída no doy datos",
+   "Es un lector de tarjetas"
+  ],
+  "answer": 2,
+  "why": "En las páginas leídas el AKClaw Panel solo aparece en el menú de productos, sin especificaciones."
+ }
+]

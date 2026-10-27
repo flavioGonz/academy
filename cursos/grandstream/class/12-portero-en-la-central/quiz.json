@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un edificio tiene dos porteros GDS3710 y cinco teléfonos que tienen que atender. ¿Cómo lo armás?",
+  "options": [
+   "Modo peer: cada GDS apuntando a la IP de un teléfono",
+   "Un IVR que pregunte qué portero",
+   "Conectarlos por Wiegand a la UCM",
+   "Registrar los GDS como extensiones en la UCM y que el timbre llame a un grupo de llamada"
+  ],
+  "answer": 3,
+  "why": "Con varios porteros y teléfonos, el peer no escala; registrar los GDS en la central y llamar a un grupo resuelve todos los casos."
+ },
+ {
+  "q": "El cliente atiende el portero desde un GRP2602 y pregunta por qué no ve la imagen. ¿Qué le decís?",
+  "options": [
+   "Falta activar el video en la UCM",
+   "El GDS3710 no tiene cámara",
+   "El GRP2602 es solo audio con GDS; hace falta un GRP2614 o superior, o un GXV",
+   "Hay que cambiar el codec a G.722"
+  ],
+  "answer": 2,
+  "why": "La guía oficial indica que GRP2601 a 2604, 2612 y 2613 son solo audio; del GRP2614 en adelante muestran imagen JPEG."
+ },
+ {
+  "q": "Atendés la llamada del portero y marcás el PIN, pero la puerta no abre. ¿Qué revisás en el GDS?",
+  "options": [
+   "Que esté activo Enable DTMF Open Door y que el PIN sea el de Remote PIN to Open the Door",
+   "El modo de red de la UCM",
+   "Fail2ban",
+   "El buzón de voz de la extensión"
+  ],
+  "answer": 0,
+  "why": "La apertura por DTMF requiere Enable DTMF Open Door activo y que el PIN marcado coincida con el Remote PIN configurado."
+ }
+]

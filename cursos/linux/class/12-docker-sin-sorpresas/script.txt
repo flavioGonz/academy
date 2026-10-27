@@ -1,0 +1,19 @@
+A: Última lección, la que más me sorprendió. Docker sin sorpresas.
+B: Antes, el panorama, que hay gente que nunca lo usó.
+A: Dale. Una imagen es el software empaquetado. Un contenedor es esa imagen corriendo. Los datos que sobreviven van en un volumen. Y los contenedores se hablan por redes de Docker.
+B: Ahora sí, la sorpresa.
+A: Armás un servidor con ufw en deny por defecto. Solo SSH abierto. Levantás un contenedor publicando un panel en el cinco seis siete ocho. ufw status dice que está todo cerrado.
+B: Y el puerto responde desde internet.
+A: [suspiro] Exacto. Findstack cuenta justo ese caso con n8n. Y no es un bug: la documentación de Docker lo dice. Docker redirige el tráfico en la tabla nat antes de que llegue a las reglas de ufw.
+B: ¿Cuántas fuentes lo confirman?
+A: Cuatro de seis sobre Docker, incluida la propia doc oficial. Y el mismo artículo cita una investigación de Intruder de mayo de este año: de más de cinco mil doscientos servidores Ollama expuestos, el treinta y uno por ciento respondía sin credenciales. Es su cifra.
+B: Uf. ¿Y cómo se arregla?
+A: Lo mejor es no exponer. Publicás en ciento veintisiete punto cero punto cero punto uno, y solo el propio servidor llega. Si tiene que ser público, un proxy inverso en ochenta y cuatrocientos cuarenta y tres. Y para abrirlo solo a ciertas IPs, se filtra en la cadena DOCKER guion USER.
+B: ¿Y desactivar el iptables de Docker?
+A: No. Docker documenta que eso rompe la red de los contenedores y encima deja los puertos accesibles desde la red local.
+B: ¿Y cómo verificás?
+A: Desde otra máquina, siempre. ss te dice dónde escucha, y nmap desde afuera te dice la verdad.
+B: Laboratorio.
+A: Veinte minutos: publicás un nginx de prueba de las dos formas, lo escaneás desde otra VM y ves la diferencia.
+B: Lo que cambia es que ya no confiás en ufw status cuando hay Docker.
+A: Todo puerto de contenedor a ciento veintisiete, salvo que haya un motivo.

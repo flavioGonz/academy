@@ -1,0 +1,157 @@
+{
+ "slug": "vmware",
+ "title": "VMware vSphere: ESXi y vCenter en la práctica",
+ "vendor": "Broadcom (VMware)",
+ "tagline": "Del primer ESXi al plan de salida: lo que un técnico necesita para trabajar con VMware en 2026 sin sustos.",
+ "description": "Al terminar vas a poder instalar y dejar bien configurado un host ESXi 8 (red, VMkernel y almacenamiento), operar VMs, snapshots y backups con criterio, y moverte en vCenter con clúster, vMotion, HA y parches. También vas a poder explicarle a un cliente, con números y sin vueltas, qué licencia tiene después de la compra de Broadcom y qué opciones tiene si quiere irse de VMware.",
+ "level": "Inicial a intermedio",
+ "audience": "Técnicos instaladores y de soporte que atienden servidores virtualizados de clientes (grabación de video, control de acceso, telefonía, servidores de aplicaciones).",
+ "prerequisites": [
+  "Redes IP básicas: dirección, máscara, gateway, DNS",
+  "Qué es una VLAN y un puerto troncal en un switch administrable",
+  "Uso básico de SSH y de la línea de comandos"
+ ],
+ "outcomes": [
+  "Identificar qué licencia y versión tiene un cliente (VVF, VCF, Standard, ESXi gratuito) y calcular núcleos licenciables con el mínimo de 16 por CPU",
+  "Validar hardware contra la Broadcom Compatibility Guide e instalar ESXi 8 con red de gestión, vSwitch, VLAN y VMkernel separados por tráfico",
+  "Crear y operar VMs con VMware Tools, elegir thin o thick y usar snapshots sin convertirlos en backups",
+  "Verificar un backup con una restauración aislada y entender los modos de transporte de VADP",
+  "Usar vCenter con usuarios y roles nominales, clúster, vMotion, HA y Lifecycle Manager",
+  "Diagnosticar lentitud con esxtop y logs, y plantear una migración piloto a Proxmox VE"
+ ],
+ "version_note": "Basado en vSphere 8.0 Update 3 (ESXi 8 y vCenter 8), con notas sobre vSphere 9 / VCF 9.x, vigentes a octubre de 2026. vSphere 8 tiene fin de soporte general el 11 de octubre de 2027. La parte de migración usa Proxmox VE 8/9.",
+ "arcs": [
+  {
+   "title": "Fundamentos",
+   "why": "Antes de tocar un ESXi hay que saber qué licencia tiene el cliente, si el hardware sirve y cómo queda la red del host, que es donde se cometen los errores que dejan un sitio sin gestión.",
+   "lessons": [
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  {
+   "title": "Operación diaria",
+   "why": "VMs, snapshots, backups y acceso a vCenter son lo que soporte toca todas las semanas; el arco cierra con un circuito seguro de cambio.",
+   "lessons": [
+    5,
+    6,
+    7,
+    8
+   ]
+  },
+  {
+   "title": "Avanzado y troubleshooting",
+   "why": "Con varios hosts aparecen el clúster, los parches coordinados, el diagnóstico de rendimiento y, en 2026, la pregunta del cliente sobre irse de VMware.",
+   "lessons": [
+    9,
+    10,
+    11,
+    12
+   ]
+  }
+ ],
+ "splits": [
+  {
+   "topic": "Renovar VMware o migrar",
+   "sides": "Broadcom recomienda pasar a VCF 9 o VVF 9; Introserv y Redress sostienen que en 2 a 10 hosts con CPUs de menos de 16 núcleos se pagan núcleos inexistentes y conviene cotizar alternativa.",
+   "decide": "Contar núcleos físicos contra licenciables, listar qué funciones se usan de verdad (vSAN, NSX, DRS) y hacer un piloto; si la relación es cercana a 1 a 1 y se usa el stack, renovar tiene sentido."
+  },
+  {
+   "topic": "ESXi gratuito en un cliente",
+   "sides": "La KB de Broadcom lo ofrece como versión apta para producción pero sin soporte; sin VADP no hay backup a nivel host y Broadcom ya cambió esta política una vez.",
+   "decide": "Laboratorio y pruebas sí; producción solo si el cliente acepta no tener soporte y hay backup con agente dentro de cada VM."
+  },
+  {
+   "topic": "Hardware fuera de la Compatibility Guide",
+   "sides": "William Lam documenta parámetros como allowLegacyCPU para instalar en CPUs viejas; la documentación oficial exige hardware de la lista.",
+   "decide": "Laboratorio sí, cliente nunca."
+  },
+  {
+   "topic": "Importación en vivo o en frío a Proxmox",
+   "sides": "El wiki de Proxmox ofrece live-import para cortar menos; Thomas-Krenn prefiere apagar e importar en frío porque si falla se pierde lo escrito.",
+   "decide": "En frío por defecto; en vivo solo con buena red y después de probar con una VM de prueba."
+  },
+  {
+   "topic": "Edad máxima de un snapshot",
+   "sides": "La KB de Broadcom dice no más de 72 horas; CloudBolt recomienda 24 a 72.",
+   "decide": "72 horas como tope duro y borrarlo apenas se valida el cambio."
+  }
+ ],
+ "sources_count": 30,
+ "lessons": [
+  {
+   "n": 1,
+   "dir": "01-que-licencia-hay",
+   "handle": "Qué licencia hay",
+   "summary": "Suscripción por núcleo (mínimo 16 por CPU), VVF y VCF, el ESXi gratuito 8.0 U3e y el fin de soporte de vSphere 8."
+  },
+  {
+   "n": 2,
+   "dir": "02-esxi-bien-instalado",
+   "handle": "ESXi bien instalado",
+   "summary": "Compatibility Guide, requisitos de ESXi 8, disco de arranque persistente y red de gestión desde la DCUI."
+  },
+  {
+   "n": 3,
+   "dir": "03-red-del-host",
+   "handle": "Red del host",
+   "summary": "vSwitch estándar, port groups con VLAN, dos uplinks y cuidado con la red de gestión."
+  },
+  {
+   "n": 4,
+   "dir": "04-vmkernel-y-almacenamiento",
+   "handle": "VMkernel y almacenamiento",
+   "summary": "Un vmk por tipo de tráfico, vMotion aislado, NFS e iSCSI con MTU 9000 probado con vmkping."
+  },
+  {
+   "n": 5,
+   "dir": "05-vms-bien-armadas",
+   "handle": "VMs bien armadas",
+   "summary": "Deploy OVF Template, VMware Tools siempre, y discos thin o thick sin llenar el datastore."
+  },
+  {
+   "n": 6,
+   "dir": "06-snapshots-con-fecha",
+   "handle": "Snapshots con fecha",
+   "summary": "Un snapshot no es backup: 2 o 3 por VM, nunca más de 72 horas, y cómo buscar los huérfanos."
+  },
+  {
+   "n": 7,
+   "dir": "07-backup-que-restaura",
+   "handle": "Backup que restaura",
+   "summary": "VADP, CBT, modos de transporte NBD, HotAdd y SAN, regla 3-2-1 y la prueba de restauración aislada."
+  },
+  {
+   "n": 8,
+   "dir": "08-vcenter-y-permisos",
+   "handle": "vCenter y permisos",
+   "summary": "La VCSA, vCenter SSO, administrator@vsphere.local guardado y roles acotados por técnico."
+  },
+  {
+   "n": 9,
+   "dir": "09-cluster-y-vmotion",
+   "handle": "Clúster y vMotion",
+   "summary": "vMotion, HA que reinicia (no evita el corte), DRS que necesita vCenter y qué depende de la licencia."
+  },
+  {
+   "n": 10,
+   "dir": "10-parches-sin-sustos",
+   "handle": "Parches sin sustos",
+   "summary": "Lifecycle Manager en cuatro pasos, imágenes en vSphere 9, modo mantenimiento y backup antes de actualizar."
+  },
+  {
+   "n": 11,
+   "dir": "11-diagnostico-con-esxtop",
+   "handle": "Diagnóstico con esxtop",
+   "summary": "%RDY, DAVG contra KAVG, modo batch y los logs del host en /var/run/log."
+  },
+  {
+   "n": 12,
+   "dir": "12-plan-de-salida",
+   "handle": "Plan de salida",
+   "summary": "Renovar o migrar con números, y el importador ESXi de Proxmox VE en frío con piloto y vuelta atrás."
+  }
+ ]
+}

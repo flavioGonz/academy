@@ -1,0 +1,53 @@
+{
+ "42": {
+  "fig": {
+   "file": "42.svg",
+   "alt": "A la izquierda, la red local sin licencia: portero y monitor con llamada SIP o IP directa, apertura desde el monitor, PIN, tarjeta, relés, RTSP al NVR y apertura HTTP en la LAN. A la derecha, la nube SmartPlus a la que se sale por internet, con los servicios que se cobran: app maestra por apartamento, app del administrador, familiares extra, desvío a teléfono, video en la nube, cámaras de terceros y, en oficinas, por puerta con la primera gratis. Abajo, el software de PC (ACMS Pro prueba de 180 días, SDMC con licencia USB por encima de 500 equipos) y la aclaración de que Akuvox no publica precios.",
+   "caption": "Lo verde anda siempre en la red local; lo ámbar es la nube y es lo que va a la cotización del distribuidor."
+  },
+  "steps": [
+   {
+    "file": "42-paso1.svg",
+    "step": 1,
+    "alt": "Dos ventanas de Account > Basic del portero, cuenta 1 usada por SmartPlus con el número SIP de la nube: una con estado registrada y tilde verde, otra con estado Failed y cruz roja.",
+    "caption": "Si la cuenta 1 dice Failed, el portero no está hablando con la nube y la app no va a sonar.",
+    "after": "En el portero de laboratorio"
+   },
+   {
+    "file": "42-paso3.svg",
+    "step": 3,
+    "alt": "Tabla del edificio de 24 apartamentos: llamada al monitor, apertura con monitor, PIN o tarjeta, RTSP, HTTP local y relés andan sin licencia; llamada a la app (app maestra por 24), familiares extra, desvío a teléfono (Landline por 6) y app de la administración dependen de la nube y se cobran.",
+    "caption": "Cada fila roja es un servicio de nube que entra en la cotización; las verdes no cuestan nada.",
+    "after": "Armá la planilla de un edificio de ejemplo"
+   },
+   {
+    "file": "42-paso5.svg",
+    "step": 5,
+    "alt": "Dos columnas del presupuesto: una vez (portero, monitores, fuente o PoE, mano de obra) y recurrente (servicios de la planilla, período y vencimiento, renovación automática cada 30 días o manual, quién paga). Abajo, qué pasa si no se renueva.",
+    "caption": "El equipo se compra una vez; la nube vence, y en la entrega queda escrito quién la renueva.",
+    "after": "Pedile al distribuidor la cotización"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Cobro por servicio en SmartPlus",
+    "para_que": "Un edificio con monitor en cada apartamento no necesita lo mismo que uno donde la gente atiende solo con el celular. Akuvox pasó de planes armados a servicios sueltos para que se pague solo lo que la obra usa: app maestra, app del administrador, familiares extra, desvío a teléfono, video en la nube, cámaras de terceros, cerraduras de otras marcas.",
+    "como": "Los servicios se prenden al crear o editar la comunidad en el portal, y algunos (con monitor, desvío a teléfono, video) se pueden ajustar por apartamento si Akuvox lo habilitó para tu distribuidor. Lo que prendés es lo que se cobra, así que la planilla de la obra y la configuración del proyecto conviene que coincidan línea por línea.",
+    "ejemplo": "Un edificio de 24 apartamentos en Pocitos: todos con monitor, 6 vecinos quieren que la llamada les llegue al celular cuando están afuera y la administración quiere su app. Se cotizan 24 apps maestras, 6 con desvío a teléfono y una PM App; la llamada al monitor, el PIN y la tarjeta no entran en la cotización."
+   },
+   {
+    "name": "Quién paga y cuándo vence",
+    "para_que": "La nube tiene costo mensual y alguien tiene que hacerse cargo. Akuvox lo resuelve con dos niveles: el distribuidor siempre puede activar y renovar, y decide si el instalador también puede pagar (campo Pay by Installer).",
+    "como": "Desde Subscription se elige instalador, tipo de proyecto, Activate o Renew, el sitio y los servicios. La renovación puede ser automática (cada 30 días corre el vencimiento 30 días) o manual con fecha elegida. Cada cuenta muestra su fecha de vencimiento: conviene anotarla en la ficha de la obra y acordar por escrito si renueva IES, el distribuidor o el cliente.",
+    "ejemplo": "Una casa en Carrasco con portero y app para la familia: en la entrega queda escrito que la app vence en tal fecha, que la renueva la administración del cliente con el distribuidor y que, si no se renueva, el monitor y la tarjeta siguen abriendo."
+   },
+   {
+    "name": "Licencia de software local",
+    "para_que": "No todo lo de Akuvox es nube: ACMS Pro y SDMC corren en una PC o servidor del cliente. También tienen límites de licencia, y suelen sorprender porque nadie los mira hasta que fallan.",
+    "como": "ACMS Pro 1.0.0.4 es una prueba gratuita de 180 días contada con el reloj del servidor; al vencer, saca a todos los usuarios hasta que se renueva la licencia. SDMC no deja importar equipos por archivo si el total pasaría de 500 sin licencia USB. Anotá la fecha de instalación y mantené el reloj del servidor en hora.",
+    "ejemplo": "Una oficina en Ciudad Vieja con ACMS Pro instalado en marzo: en septiembre nadie puede entrar al software. No es el firmware de los lectores ni la red: venció la prueba de 180 días."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\nLos porteros IP de Akuvox nacieron como teléfonos SIP con cámara y relé. SIP es el estándar de señalización de voz sobre IP (RFC 3261, de 2002): el portero llama a un monitor, a una central o a otro equipo por su IP, y eso no necesita a nadie más en el medio. Por eso todo lo de la red local (llamada directa, relés, DTMF, RTSP, HTTP) anda sin licencias.\n\nEl problema llegó con el celular. Que la visita suene en un teléfono detrás de otro NAT, con la app cerrada, pide servidores siempre prendidos: registro SIP, envío de notificaciones, relevo de audio y video, guardado de video. Akuvox armó para eso la nube SmartPlus, y marcó en el firmware qué equipos la soportan (el bloque B en `30` indica versión con nube, SDMC y descubrimiento, lección 40). Un servidor que corre todos los días tiene un costo que también corre todos los días: de ahí que la nube se cobre de forma recurrente y el equipo, una sola vez.\n\nEl cobro fue cambiando. En un foro alemán de 2024 se recordaba una activación única de la app; la documentación de 2025 y 2026 muestra cuentas con vencimiento y renovación, los proyectos comerciales creados desde el 1 de junio de 2025 pagan con créditos, y la nota de agosto de 2026 reemplaza los planes armados por servicios que se prenden uno por uno. Hoy va por la versión 7.5.2, y residencial (SmartPlus) y comercial (Smart Access) comparten la misma nube.\n\n### Cómo funciona\n**El equipo.** Cuando el portero se vincula a la nube, su tipo de conexión pasa a `Cloud` (en `Network > Advanced`) y la cuenta SIP 1 queda tomada por SmartPlus; la 2 queda libre para una central local. Sale a la nube por puertos salientes (443, 5070, 8501, 9999, RTP): no hace falta abrir nada entrante.\n\n**La nube.** El distribuidor carga los MAC en su biblioteca y crea las cuentas de instalador. El instalador arma el proyecto (comunidad, casa u oficina), los apartamentos con su cuenta maestra, y ata cada equipo por su MAC.\n\n**La licencia.** Cada cuenta de app tiene estado y fecha de vencimiento. Los servicios (app maestra, familiares extra, desvío a teléfono, video en la nube) se activan y se pagan desde `Subscription`, por el distribuidor o por el instalador que tenga permiso. Si la cuenta no está activa, la app no llama; el portero y el monitor siguen hablando por SIP en la LAN como antes.\n\n**El software de PC.** Va aparte: ACMS Pro 1.0.0.4 cuenta 180 días con el reloj del servidor y, al vencer, deja afuera a todos."
+ }
+}

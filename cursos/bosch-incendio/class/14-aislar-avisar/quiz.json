@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Vas a hacer el walk test anual en un edificio monitoreado. ¿Qué va primero?",
+  "options": [
+   "Disparar un detector para ver si el monitoreo llama",
+   "Avisar al monitoreo y a los ocupantes, y deshabilitar las salidas de control",
+   "Cortar la alimentación del panel",
+   "Desconectar las baterías"
+  ],
+  "answer": 1,
+  "why": "La guía basada en NFPA 72 pide notificar a ocupantes y monitoreo antes de toda prueba; aislar salidas evita acciones reales sobre puertas, ascensores o extinción."
+ },
+ {
+  "q": "Cambiaste reglas en RPS que afectan a un piso. ¿Cuánto se prueba según la guía de Minnesota?",
+  "options": [
+   "Nada, el software no se rompe",
+   "Solo un detector",
+   "Todo el edificio dos veces",
+   "El 100 % de lo afectado y un 10 % de los iniciadores no afectados, hasta 50"
+  ],
+  "answer": 3,
+  "why": "Tras cambios de software del sitio, la guía pide probar al 100 % las funciones afectadas y un 10 % de los dispositivos no afectados, con un máximo de 50."
+ },
+ {
+  "q": "Terminaste la prueba y todo anduvo. ¿Qué paso es el que más se olvida?",
+  "options": [
+   "Rehabilitar las salidas, verificar en el panel que nada quede deshabilitado y avisar el fin al monitoreo",
+   "Guardar la caja de herramientas",
+   "Cambiar las baterías",
+   "Actualizar el firmware"
+  ],
+  "answer": 0,
+  "why": "Una salida deshabilitada después de la prueba deja al edificio sin esa función; el cierre incluye verificar el panel y avisar al monitoreo."
+ }
+]

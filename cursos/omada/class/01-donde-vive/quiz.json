@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un cliente tiene un OC300 con Cloud Access activado y se le corta internet una tarde. ¿Qué pasa con la gestión de la red local?",
+    "options": [
+      "Se pierde toda la gestión hasta que vuelva internet",
+      "Sigue gestionándose localmente, porque el controlador corre en el OC300",
+      "Los equipos se resetean a standalone",
+      "Solo se pierde el WiFi, el cableado sigue"
+    ],
+    "answer": 1,
+    "why": "Cloud Access es solo una puerta de entrada remota; el servicio del controlador vive en el OC300 y la red local se sigue gestionando sin internet."
+  },
+  {
+    "q": "En Omada Central Standard la licencia de un AP de un hotel vence y no se renueva. ¿Qué es lo más probable?",
+    "options": [
+      "El AP deja de emitir WiFi",
+      "El AP vuelve a valores de fábrica",
+      "El AP sigue con la última configuración, pero se apagan funciones como Portal y Fast Roaming",
+      "No pasa nada, la licencia es solo para soporte"
+    ],
+    "answer": 2,
+    "why": "Según la FAQ de TP-Link, el equipo sigue operando con lo último aplicado, pero pierde gestión y funciones que dependen del controlador, como Portal, Fast Roaming y Schedule."
+  },
+  {
+    "q": "Una obra va a tener 1 gateway, 3 switches y 30 APs, y el cliente quiere controlador local sin licencias. ¿Qué opción respeta la capacidad recomendada?",
+    "options": [
+      "OC200",
+      "OC220",
+      "Fusion Gateway",
+      "OC300"
+    ],
+    "answer": 3,
+    "why": "Son 34 equipos: el OC200 recomienda hasta 25 y el OC220 hasta 40 (justo, sin margen). El OC300, recomendado hasta 160, deja lugar para crecer."
+  }
+]

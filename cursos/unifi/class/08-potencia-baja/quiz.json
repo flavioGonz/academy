@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Tres AP en potencia High. Un usuario con 'señal llena' tiene WiFi lento junto al AP 2, pero sigue conectado al AP 1 del otro lado. ¿Qué probás primero?",
+    "options": [
+      "Subir el AP 2 a High también",
+      "Bajar la potencia de los AP (2.4 Low, 5 Medium) y volver a medir",
+      "Cambiar el SSID",
+      "Activar mínimo RSSI en -50 dBm"
+    ],
+    "answer": 1,
+    "why": "Con potencia alta el cliente ve fuerte al AP lejano y no se mueve. Bajarla achica las celdas y lo empuja al AP cercano; todas las fuentes coinciden."
+  },
+  {
+    "q": "Un local con un solo AP en el centro. ¿Qué potencia conviene?",
+    "options": [
+      "Alta, para sostener la conexión lo más lejos posible",
+      "Baja, siempre",
+      "Apagada en 5 GHz",
+      "Media en 2.4 y apagada en 5"
+    ],
+    "answer": 0,
+    "why": "WunderTech aclara que con un solo AP no hay a dónde roamear, así que conviene alta."
+  },
+  {
+    "q": "Después de bajar la potencia queda un depósito a -75 dBm. ¿Qué recomienda LazyAdmin?",
+    "options": [
+      "Volver todo a High",
+      "Activar band steering",
+      "Instalar un AP adicional o subir un nivel solo el AP más cercano",
+      "Pasar todo a 2.4 GHz"
+    ],
+    "answer": 2,
+    "why": "LazyAdmin propone un AP extra como mejor opción, o subir un nivel solo uno, no volver a la potencia máxima en todos."
+  }
+]

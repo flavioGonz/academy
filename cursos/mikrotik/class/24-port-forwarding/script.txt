@@ -1,0 +1,21 @@
+A: Lección veinticuatro: port forwarding, la práctica de la lección diez.
+B: O sea, cómo se abre de verdad el ocho mil del NVR.
+A: Es una regla en barra ip barra firewall barra nat, cadena dstnat, acción dst-nat: to-addresses dice a qué IP va y to-ports, a qué puerto.
+B: ¿Y en el firewall no hay que abrir nada?
+A: Con la configuración por defecto, no. La regla que descarta lo que entra por WAN deja pasar lo que ya pasó por dst-nat. Un veterano del foro lo resume: agregás el dst-nat y los filtros ya están bien.
+B: ¿Y el error clásico?
+A: La regla demasiado general. Un caso del foro: alguien puso solo el puerto ochenta y la oficina se quedó sin navegar, porque la regla agarraba también lo que salía de la LAN.
+B: [risas] Mandó internet entero a su servidor.
+A: Literal. Por eso la regla se ata a la entrada, con la lista WAN, y al origen, con una address-list. Cinco de seis fuentes coinciden; solo el ejemplo de primera configuración no filtra.
+B: ¿Y qué puertos?
+A: Hikvision: ocho mil para iVMS y la app, y quinientos cincuenta y cuatro o diez mil quinientos cincuenta y cuatro para RTSP. Dahua: treinta y siete mil setecientos setenta y siete.
+B: Y si publicás solo la web, entrás pero no ves video.
+A: Pasó en el foro con un Dahua. Otra cosa: afuera podés usar otro puerto, dieciocho mil hacia el ocho mil, y así dos NVR conviven en la misma IP.
+B: ¿Y eso lo esconde?
+A: No. Un análisis de este año contó casi un millón de servicios RTSP expuestos, casi la mitad fuera del quinientos cincuenta y cuatro. Lo que protege es la lista.
+B: ¿Y si desde la oficina no anda?
+A: Hairpin, o un DNS local si el puerto es el mismo. Y si la IP del WAN es privada, hay doble NAT; si empieza con cien punto sesenta y cuatro, CGNAT, y no hay forwarding.
+B: ¿Laboratorio?
+A: Veinte minutos: dos reglas con puerto externo distinto, la lista, pruebas desde afuera, contadores y hairpin.
+B: Y si el contador no sube, el problema está antes del MikroTik.
+A: Esa pista sola te ahorra media tarde.

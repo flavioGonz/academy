@@ -1,0 +1,16 @@
+A: Lección treinta y uno: DNS transparente. Cómo hacer que toda la LAN use el DNS del router, aunque el equipo diga otra cosa.
+B: ¿Para qué? Si el DHCP ya les da el router.
+A: Porque hay equipos con el DNS clavado. Un celular con ocho ocho ocho ocho, una tele, un DVR con el DNS de fábrica. Y la documentación lo avisa: las estáticas y los bloqueos del router valen solo para quien le pregunta al router.
+B: O sea, el nvr punto lan que cargaste no le sirve a esa tele.
+A: Ni el bloqueo de la lección que viene. La solución es una regla de NAT: lo que sale de la LAN al puerto cincuenta y tres, UDP y TCP, se redirige al router. El equipo cree que le contesta Google y le contesta el MikroTik.
+B: ¿Redirect o dst-nat?
+A: En el foro lo explican bien: redirect manda siempre al propio router; dst-nat te deja mandarlo a otro equipo, como un Pi-hole. Y siempre las dos reglas, UDP y TCP, porque si no algo se escapa.
+B: ¿Excepciones?
+A: Una lista. Si hay un servidor DNS propio, no se redirige, porque armarías un lazo. Un controlador de dominio en otra VLAN, lo mismo.
+B: ¿Y es infalible?
+A: No, y ahí está la discusión. DoH va cifrado por el cuatrocientos cuarenta y tres y no se puede redirigir. En el foro, uno miraba con Torch y veía consultas a ocho ocho ocho ocho, puerto cuatrocientos cuarenta y tres, y su filtro quedaba salteado. Un veterano le contestó: con eso convivís.
+B: [suspiro] Clásico.
+A: Hay paliativos. Firefox, antes de prender DoH por su cuenta, pregunta por un dominio canario; si el router dice que no existe, no lo prende. Y se puede cortar el ochocientos cincuenta y tres, el de DNS sobre TLS. Pero quien configura DoH a mano, o usa una VPN, pasa igual.
+B: ¿Laboratorio?
+A: Una estática de prueba, nslookup a ocho ocho ocho ocho antes y después de las reglas, los contadores, la excepción y el canario. Quince minutos.
+B: Y la LAN entera usa tu DNS, con un límite que conocés y le podés explicar al cliente.

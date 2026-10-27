@@ -1,0 +1,35 @@
+[
+  {
+    "q": "El servidor L2TP/IPsec funciona desde un Android pero una notebook Windows detrás del router de un hotel no conecta. ¿Qué probás?",
+    "options": [
+      "Pasar a PPTP",
+      "Cambiar use-ipsec a no",
+      "Abrir TCP 1723",
+      "Poner AssumeUDPEncapsulationContextOnSendRule en 2 en esa notebook y reiniciar"
+    ],
+    "answer": 3,
+    "why": "Microsoft documenta que Windows por defecto no arma SA de IPsec con NAT-T en esos casos; con el valor 2 se permite que servidor y cliente estén detrás de NAT."
+  },
+  {
+    "q": "¿Qué abrís en input para un servidor L2TP/IPsec?",
+    "options": [
+      "UDP 500, UDP 4500, UDP 1701 y el protocolo ESP",
+      "Solo TCP 8291",
+      "UDP 13231",
+      "TCP 443 y TCP 80"
+    ],
+    "answer": 0,
+    "why": "500 es la fase 1 de IKE, 4500 el NAT-T, 1701 el arranque de L2TP y ESP el tráfico cifrado. Sin alguno, la conexión no se establece."
+  },
+  {
+    "q": "¿Por qué use-ipsec=required y no yes en el servidor?",
+    "options": [
+      "Porque yes no existe",
+      "Porque required es más rápido",
+      "Porque required solo acepta L2TP dentro de IPsec; L2TP solo no cifra",
+      "Porque yes desactiva el pool"
+    ],
+    "answer": 2,
+    "why": "La documentación explica que required asegura que solo se acepten conexiones L2TP encapsuladas en IPsec. L2TP por sí mismo no ofrece cifrado."
+  }
+]

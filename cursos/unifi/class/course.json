@@ -1,0 +1,51 @@
+{
+  "slug": "unifi",
+  "title": "UniFi Network: controlador y sitios multi-cliente",
+  "vendor": "Ubiquiti",
+  "tagline": "Del AP que no adopta a 40 sitios ordenados en Site Manager, sin sorpresas el lunes.",
+  "description": "Vas a elegir dónde corre el controlador (Cloud Gateway, CloudKey o UniFi OS Server), adoptar equipos en el local y a distancia, y ordenar muchos clientes en Site Manager. Vas a segmentar con VLANs, zonas y perfiles de puerto, armar un WiFi con canales, potencia y roaming bien elegidos, y sostenerlo con backups, actualizaciones por etapas y un método de diagnóstico.",
+  "level": "Inicial a intermedio",
+  "audience": "Técnicos instaladores y de soporte que instalan o atienden redes UniFi en clientes.",
+  "prerequisites": [
+    "Direccionamiento IP, máscara, gateway y DHCP",
+    "Qué es una VLAN y para qué sirve, aunque no la hayas configurado",
+    "Acceso a una consola UniFi de laboratorio o a una VM Ubuntu para UniFi OS Server, un switch UniFi y un AP"
+  ],
+  "outcomes": [
+    "Elegir y dejar funcionando el controlador correcto para cada cliente, con cada equipo en un solo host",
+    "Adoptar equipos en capa 2 y en capa 3 (DHCP option 43, DNS o set-inform) y resolver una adopción trabada",
+    "Ordenar muchos sitios en Site Manager con la cuenta de la empresa, roles y planilla de sitios",
+    "Segmentar con VLANs, zonas y perfiles de puerto, y entregar una red de invitados aislada y probada",
+    "Ajustar ancho de canal, potencia y opciones de roaming según el sitio y los equipos del cliente",
+    "Actualizar sin sorpresas (backup, notas de versión, sitio piloto) y diagnosticar mirando historial antes de tocar"
+  ],
+  "version_note": "UniFi Network 10.6 y 11.0 (octubre 2026) sobre UniFi OS 5.x y 6.x, y UniFi OS Server. Network 11 requiere UniFi OS 6.0 o superior, quita el Network Server y el soporte a USG, y migra todos los sitios al firewall por zonas. Los nombres de menú cambian seguido entre versiones.",
+  "arcs": [
+    {"title": "Quién manda", "why": "Antes de tocar WiFi o VLANs, saber dónde vive la configuración y cómo entra cada equipo al controlador, en el local y a distancia.", "lessons": [1, 2, 3, 4]},
+    {"title": "Red y WiFi bien hechos", "why": "Lo que se configura en cada obra: segmentar, dejar los puertos en su lugar y un plan de RF que no dependa de la suerte.", "lessons": [5, 6, 7, 8]},
+    {"title": "Sin sorpresas", "why": "Lo que hace que una instalación se sostenga: roaming con cabeza, invitados aislados, actualizaciones por etapas y un método para diagnosticar.", "lessons": [9, 10, 11, 12]}
+  ],
+  "splits": [
+    {"topic": "Fast Roaming (802.11r)", "sides": "WunderTech lo activa y cita que Ubiquiti lo recomienda; LazyAdmin dice que suele hacer más mal que bien; Purple lo limita a SSID Enterprise de voz y video.", "decide": "Inventario de equipos del cliente y prueba con cada tipo en un SSID nuevo. Si alguno no conecta, SSID aparte sin Fast Roaming."},
+    {"topic": "Canales en Auto o fijos", "sides": "WunderTech y LazyAdmin prefieren Auto con Channel AI; HostiFi dice que Auto nunca anduvo bien en sus pruebas y std.rocks elige a mano tras escanear.", "decide": "Con dos o más AP y entorno cambiante, Auto con Channel AI y control en Time Machine. Con un vecino fijo y fuerte, canal manual."},
+    {"topic": "Canales DFS", "sides": "LazyAdmin los evita porque un radar corta el canal; std.rocks los usa porque están limpios.", "decide": "Si 36 a 48 están saturados y no hay eventos de radar en el registro, DFS. Si aparecen cambios por radar, volver a los canales bajos."},
+    {"topic": "Mínimo RSSI", "sides": "std.rocks usa -70 dBm como regla en oficina; WunderTech, citando a Ubiquiti, lo deja apagado salvo alta densidad; Purple lo pone último y suave.", "decide": "Solo con solape de cobertura comprobado caminando. Si el historial muestra desconexiones en vez de roams, se relaja o se agrega un AP."},
+    {"topic": "Adopción en capa 3", "sides": "El soporte de Ubiquiti recomienda DHCP option 43; Tom Lawrence usa set-inform con todos sus clientes sin problemas.", "decide": "Si el DHCP del sitio es tuyo, option 43 o DNS. Si no, set-inform e Inform Host, y control después de cada actualización."},
+    {"topic": "Ancho de canal en 5 GHz", "sides": "80 MHz para casas (Ubiquiti, citado por WunderTech); 40 MHz para oficinas (HostiFi, LazyAdmin); 20 MHz en alta densidad (std.rocks).", "decide": "Por clientes por AP y vecinos en el escaneo: menos clientes y menos vecinos, más ancho."}
+  ],
+  "sources_count": 30,
+  "lessons": [
+    {"n": 1, "dir": "01-quien-manda", "handle": "Quién manda", "summary": "Dónde vive la configuración, un host por equipo y UniFi OS Server como self-hosted en 2026."},
+    {"n": 2, "dir": "02-adopcion-limpia", "handle": "Adopción limpia", "summary": "Reset, misma red, firmware: el orden para que un equipo adopte a la primera."},
+    {"n": 3, "dir": "03-inform-remoto", "handle": "Inform remoto", "summary": "Adopción en capa 3 con DHCP option 43, DNS o set-inform, y el Inform Host."},
+    {"n": 4, "dir": "04-muchos-sitios", "handle": "Muchos sitios", "summary": "Site Manager, puertos de salida, cuenta de la empresa, roles y planilla de sitios."},
+    {"n": 5, "dir": "05-vlan-por-funcion", "handle": "VLAN por función", "summary": "Una red por función con su DHCP y su zona en el firewall por zonas."},
+    {"n": 6, "dir": "06-puertos-con-perfil", "handle": "Puertos con perfil", "summary": "VLAN nativa y Block All en equipos finales, trunk en AP y uplinks, puertos expuestos atados."},
+    {"n": 7, "dir": "07-canales-angostos", "handle": "Canales angostos", "summary": "20 MHz en 2.4 GHz, ancho en 5 GHz según densidad, escaneo y Channel AI."},
+    {"n": 8, "dir": "08-potencia-baja", "handle": "Potencia baja", "summary": "Menos potencia y más AP para que los clientes se pasen al AP cercano."},
+    {"n": 9, "dir": "09-roaming-sin-magia", "handle": "Roaming sin magia", "summary": "BSS Transition siempre, Fast Roaming probado, mínimo RSSI al final y SSID aparte para legado."},
+    {"n": 10, "dir": "10-invitados-aislados", "handle": "Invitados aislados", "summary": "Zona Hotspot, portal con vouchers y la prueba de aislamiento desde un celular."},
+    {"n": 11, "dir": "11-backup-y-etapas", "handle": "Backup y etapas", "summary": "Backup antes de actualizar, notas de versión y despliegue por sitio piloto."},
+    {"n": 12, "dir": "12-mirar-primero", "handle": "Mirar primero", "summary": "Historial de cliente y Time Machine primero, después un cambio por vez."}
+  ]
+}

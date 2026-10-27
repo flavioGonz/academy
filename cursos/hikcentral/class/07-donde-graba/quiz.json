@@ -1,0 +1,5 @@
+[
+  {"q": "Un cliente pide grabación por detección de movimiento y el diseño usa pStor Cluster. ¿Qué advertís?", "options": ["Que necesita licencia extra", "Que pStor Cluster no soporta grabación por detección de movimiento", "Que solo graba en H.264", "Que hay que usar Hik-Connect"], "answer": 1, "why": "El FAQ lista la grabación por detección de movimiento entre las funciones que pStor Cluster no soporta."},
+  {"q": "Una sucursal con un enlace de 10 Mbps al centro tiene 16 cámaras. ¿Dónde conviene grabar?", "options": ["En el NVR de la sucursal", "En el Hybrid SAN central", "En el Cloud Storage Server", "En el SYS"], "answer": 0, "why": "Con un enlace chico, grabar en el sitio evita depender del ancho de banda y del enlace; el centro reproduce cuando hace falta."},
+  {"q": "El NVR que agregás ya tiene un calendario de grabación que funciona. ¿Qué opción usás al dar de alta?", "options": ["Encrypted Add", "Verify Stream Encryption Key", "Get Device's Recording Settings", "Wall Display via Streaming Server"], "answer": 2, "why": "Get Device's Recording Settings toma el calendario configurado en el equipo y los canales graban según ese calendario."}
+]

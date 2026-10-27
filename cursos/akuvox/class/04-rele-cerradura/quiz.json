@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Salida de emergencia con electroimán. Se corta la luz del edificio. ¿Qué tiene que pasar y cómo se logra?",
+  "options": [
+   "La puerta queda trabada; se cablea en NO",
+   "La puerta queda libre; se cablea para que sin energía el imán suelte (fail-safe)",
+   "Da igual, el portero tiene batería",
+   "La puerta queda trabada; se usa el relé del monitor"
+  ],
+  "answer": 1,
+  "why": "Una salida de emergencia es fail-safe: sin energía queda libre. Grandstream lo muestra: NC con COM abre la cerradura cuando se pierde la energía."
+ },
+ {
+  "q": "¿Dónde se configura en Akuvox el botón de salida que abre la puerta desde adentro?",
+  "options": [
+   "Account > Advanced > DTMF",
+   "Intercom > Basic > Direct IP",
+   "Surveillance > RTSP",
+   "Access Control > Input, eligiendo el relé a ejecutar"
+  ],
+  "answer": 3,
+  "why": "La guía del E16 ubica el botón de salida en Access Control > Input: se habilita la entrada, el nivel de disparo y el relé que acciona."
+ },
+ {
+  "q": "Un compañero quiere alimentar una cerradura de 12 V desde la salida del relé del portero sin fuente aparte. ¿Qué le decís?",
+  "options": [
+   "El relé es un contacto que conmuta; la corriente la pone una fuente separada",
+   "Está bien si el portero es PoE",
+   "Está bien si la cerradura es fail-secure",
+   "Conviene usar la salida RTSP"
+  ],
+  "answer": 0,
+  "why": "El relé conmuta un circuito; la energía de la cerradura viene de su propia fuente. Colgarla del equipo es receta para resets y relés quemados."
+ }
+]

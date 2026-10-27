@@ -1,0 +1,22 @@
+A: Lección ocho, la del WiFi. Cliente que se queja: tengo seis access points y el WiFi anda peor que con uno.
+B: [risas] Y todos a potencia máxima, seguro.
+A: Seguro. La guía de TP-Link para optimizar EAP lo dice directo: más potencia no siempre es mejor, porque genera interferencia con los vecinos.
+B: ¿Y qué propone?
+A: Si los APs están a menos de doce metros, bajar potencia. El ejemplo que da: de veintiocho dBm a veinticinco, probar, y si sigue inestable, bajar otra vez.
+B: ¿Y los canales?
+A: En dos coma cuatro, solo uno, seis y once no se pisan, a veinte megahertz. En cinco gigas, cuarenta megahertz como valor de arranque. Veinte si hay mucha interferencia, ochenta o más solo si el ambiente está limpio.
+B: Yo siempre dejaba ochenta en cinco.
+A: En un edificio de oficinas lleno de redes, ochenta es pedir problemas.
+B: ¿Las fuentes coinciden?
+A: Dos de tres que tocan radio. La guía de roaming de TP-Link agrega lo mismo desde otro ángulo: APs muy juntos hacen que el cliente nunca se mueva al más cercano.
+B: ¿Y la optimización automática? Hay un botón, ¿no?
+A: WLAN Optimization. Escanea y elige canal, ancho y potencia. Pero ojo: la misma guía avisa que corta internet varios minutos mientras escanea.
+B: ¿En serio?
+A: En serio. Se programa en horario muerto y al menos diez minutos separado del reinicio programado de los APs. Y tiene historial para volver a la configuración anterior.
+B: ¿Y la región?
+A: Fundamental. Una guía de instalación lo remarca: la región define canales y potencia legales. Uruguay, no Estados Unidos.
+B: En obra, entonces, la oficina de seis APs.
+A: Dos coma cuatro en uno, seis, once alternados; cinco gigas a cuarenta, canales distintos; potencia media; y medís con el celular.
+B: ¿Laboratorio?
+A: Dos EAP, canales y potencia a mano, y medir con una app de análisis WiFi antes y después. Quince minutos.
+B: Menos potencia, mejor WiFi. Suena raro, pero es así.

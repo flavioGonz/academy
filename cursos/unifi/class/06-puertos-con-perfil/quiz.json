@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Configurás el puerto de una cámara IP de terceros en el estacionamiento. ¿Qué combinación corresponde?",
+    "options": [
+      "Native VLAN CCTV y Tagged VLAN Management en Allow All",
+      "Native VLAN Default y CCTV etiquetada",
+      "Native VLAN CCTV y Tagged VLAN Management en Block All",
+      "Puerto deshabilitado y la cámara por WiFi"
+    ],
+    "answer": 2,
+    "why": "Así el puerto entrega solo la red de cámaras sin etiqueta y no deja pedir otras VLANs, como explica LazyAdmin."
+  },
+  {
+    "q": "Un AP emite tres SSID en VLANs 10, 20 y 30 y conecta a un switch UniFi. ¿Cómo queda su puerto?",
+    "options": [
+      "Native de gestión y Allow All en etiquetadas",
+      "Native VLAN 20 y Block All",
+      "Native VLAN 30 y Block All",
+      "Las tres VLANs como nativas"
+    ],
+    "answer": 0,
+    "why": "El AP necesita un trunk que lleve todas las VLANs de sus SSID; Allow All lo permite."
+  },
+  {
+    "q": "Entre el UDM y un AP hay un switch de otra marca y el AP no se adopta. Pusiste la VLAN de gestión del AP etiquetada en ese switch. ¿Qué probás?",
+    "options": [
+      "Subir la potencia del AP",
+      "Activar band steering",
+      "Cambiar el AP a 2.4 GHz",
+      "Dejar la VLAN de gestión del AP sin etiquetar en ese puerto"
+    ],
+    "answer": 3,
+    "why": "En los comentarios de LazyAdmin, un lector lo resolvió así: la red de gestión del AP tiene que llegar sin etiqueta."
+  }
+]

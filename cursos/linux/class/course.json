@@ -1,0 +1,157 @@
+{
+  "slug": "linux",
+  "title": "Linux para técnicos de infraestructura",
+  "vendor": "Debian / Ubuntu",
+  "tagline": "El servidor Linux que te toca en obra, administrado con método y sin quedarte afuera.",
+  "description": "Vas a poder recorrer, actualizar y configurar servidores Debian y Ubuntu, contenedores LXC, appliances y gateways sin romper el acceso. Al terminar diagnosticás servicios, red, disco y memoria con método, dejás SSH con llaves detrás de un firewall que entendés, y tenés backups probados y contenedores Docker sin puertos expuestos por error.",
+  "level": "Inicial a intermedio",
+  "audience": "Técnicos instaladores y de soporte que administran servidores chicos, LXC, appliances y gateways Linux.",
+  "prerequisites": [
+    "Redes básicas: IP, máscara, gateway, DNS y puertos",
+    "Acceso a una VM o LXC de laboratorio con Debian 13 o Ubuntu 24.04/26.04",
+    "Un cliente SSH en la notebook"
+  ],
+  "outcomes": [
+    "Moverse y buscar en un sistema Linux desconocido sin modificarlo",
+    "Dar permisos por grupos y actualizar con unattended-upgrades y reinicios planificados",
+    "Diagnosticar servicios con systemctl y journalctl y la red por escalones con iproute2",
+    "Configurar SSH solo con llaves y un firewall de host con ufw o nftables",
+    "Resolver disco lleno y lecturas de memoria, y programar backups con timers que se prueban restaurando",
+    "Publicar contenedores Docker sin exponer puertos por error"
+  ],
+  "version_note": "Debian 13 trixie (13.7, septiembre de 2026) y Ubuntu Server 24.04 LTS y 26.04 LTS (26.04.1, agosto de 2026). Se señalan los cambios de 26.04: sudo-rs, apt-key eliminado, /tmp en tmpfs, OpenSSH 10.2 y chrony con NTS. Docker: paquete docker.io 29.1.3 de Ubuntu.",
+  "arcs": [
+    {
+      "title": "Fundamentos: moverse y no romper",
+      "why": "Antes de administrar, leer el sistema, entender quién toca qué, actualizar con método y editar sin quedar afuera.",
+      "lessons": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "title": "Operación diaria",
+      "why": "Lo de todas las semanas: un servicio que no levanta, una red que no responde, acceso remoto seguro y un firewall entendible.",
+      "lessons": [
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "title": "Avanzado y troubleshooting",
+      "why": "Los llamados que más se repiten: disco lleno, equipo lento, un backup sin probar y un contenedor expuesto.",
+      "lessons": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  ],
+  "splits": [
+    {
+      "topic": "fail2ban con SSH solo por llaves",
+      "sides": "Las guías de configuración inicial lo instalan siempre; en el hilo de Akamai uno lo ve como ruido de logs y superficie extra con solo llaves, y otro lo defiende porque sirve para cualquier log.",
+      "decide": "Si hay contraseñas habilitadas o paneles web con login expuestos, suma. Si es solo SSH con llave y origen restringido, PerSourcePenalties y el firewall cubren lo principal."
+    },
+    {
+      "topic": "ufw o nftables",
+      "sides": "Ubuntu Server enseña ufw como herramienta por defecto; el Debian Handbook enseña nftables directo con /etc/nftables.conf.",
+      "decide": "Host simple en Ubuntu: ufw. Gateway con NAT o servidor Debian: nftables."
+    },
+    {
+      "topic": "cron o timers de systemd",
+      "sides": "trstringer prefiere timers por logs y sintaxis; la Arch Wiki marca que son dos archivos y no tienen MAILTO; el Debian Handbook enseña cron primero.",
+      "decide": "Una tarea simple de una línea: cron. Si importa el log, la recuperación tras apagado (Persistent) o dependencias: timer."
+    },
+    {
+      "topic": "PermitRootLogin no o prohibit-password",
+      "sides": "Las guías prácticas usan no; el valor por defecto de OpenSSH es prohibit-password (root solo con llave).",
+      "decide": "no, salvo que un proceso automatizado (por ejemplo un backup) entre como root con llave; en ese caso prohibit-password o forced-commands-only."
+    },
+    {
+      "topic": "Reinicio automático tras actualizar",
+      "sides": "Ubuntu trae Automatic-Reboot en false y lo describe como disruptivo; reiniciar a mano exige que alguien se acuerde.",
+      "decide": "Gateway o NVR desatendido: reinicio automático a una hora fija de madrugada. Servidor con usuarios de día: reinicio manual en ventana acordada."
+    }
+  ],
+  "sources_count": 30,
+  "lessons": [
+    {
+      "n": 1,
+      "dir": "01-moverse-sin-miedo",
+      "handle": "Moverse sin miedo",
+      "summary": "Leer cualquier equipo con pwd, ls, less, find, grep y tuberías antes de tocar nada."
+    },
+    {
+      "n": 2,
+      "dir": "02-nunca-777",
+      "handle": "Nunca 777",
+      "summary": "Permisos 755/644/600 y acceso compartido por grupos con setgid, en vez de 777 o root."
+    },
+    {
+      "n": 3,
+      "dir": "03-actualizar-con-metodo",
+      "handle": "Actualizar con método",
+      "summary": "apt update/upgrade, unattended-upgrades para seguridad y reinicios con hora."
+    },
+    {
+      "n": 4,
+      "dir": "04-copia-y-valida",
+      "handle": "Copiá y validá",
+      "summary": "Copia del original, cambios en archivos .d y validación con sshd -t, netplan o findmnt antes de reiniciar."
+    },
+    {
+      "n": 5,
+      "dir": "05-status-y-journal",
+      "handle": "Status y journal",
+      "summary": "Diagnosticar servicios con systemctl status y journalctl, y no confundir start con enable."
+    },
+    {
+      "n": 6,
+      "dir": "06-escalera-de-red",
+      "handle": "Escalera de red",
+      "summary": "Diagnóstico por escalones con iproute2 e IP fija con netplan try o /etc/network/interfaces."
+    },
+    {
+      "n": 7,
+      "dir": "07-llave-no-contrasena",
+      "handle": "Llave, no contraseña",
+      "summary": "SSH con llave ed25519, contraseña y root deshabilitados sin quedar afuera; fail2ban como opción."
+    },
+    {
+      "n": 8,
+      "dir": "08-deny-por-defecto",
+      "handle": "Deny por defecto",
+      "summary": "Firewall de host con ufw o nftables: SSH desde la red de gestión primero y verificación externa."
+    },
+    {
+      "n": 9,
+      "dir": "09-disco-lleno",
+      "handle": "Disco lleno",
+      "summary": "df y du para encontrar al culpable, journal y caché de apt, y fstab por UUID con nofail."
+    },
+    {
+      "n": 10,
+      "dir": "10-available-no-free",
+      "handle": "Available, no free",
+      "summary": "Leer memoria con la columna available, encontrar quién consume y usar kill con criterio."
+    },
+    {
+      "n": 11,
+      "dir": "11-backup-que-restaura",
+      "handle": "Backup que restaura",
+      "summary": "tar y rsync programados con un timer de systemd, copia en otro lugar y restauración probada."
+    },
+    {
+      "n": 12,
+      "dir": "12-docker-sin-sorpresas",
+      "handle": "Docker sin sorpresas",
+      "summary": "Panorama de Docker y por qué los puertos publicados se saltean ufw; publicar en 127.0.0.1."
+    }
+  ]
+}

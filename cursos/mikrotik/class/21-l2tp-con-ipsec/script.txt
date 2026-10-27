@@ -1,0 +1,17 @@
+A: Lección veintiuno: L2TP con IPsec. En la ocho dijimos que WireGuard va primero. Esta es para cuando del otro lado no se puede instalar nada.
+B: La notebook del gerente con Windows bloqueado por el área de sistemas.
+A: Ese. Windows, Mac, iPhone y Android traen cliente L2TP con IPsec de fábrica. En RouterOS el servidor es un comando: barra interface barra l2tp server barra server, enabled yes, use ipsec required y un secreto compartido.
+B: ¿Por qué required y no yes?
+A: Porque con required solo acepta L2TP dentro de IPsec. L2TP solo no cifra nada; lo dice la documentación. Después armás un pool de direcciones, un perfil PPP con la IP local y el pool, y un usuario por persona en secrets, con servicio l2tp.
+B: ¿Y el firewall?
+A: Ahí está la mitad de los problemas. En input: UDP quinientos para la fase uno, cuatro mil quinientos para NAT traversal, mil setecientos uno para L2TP, y el protocolo ESP. Dos de tres fuentes coinciden; una guía, de un proveedor de servidores, suma algo más: si el usuario va a entrar a redes internas, el tráfico IPsec tiene que esquivar FastTrack.
+B: Te cuento el clásico de soporte: el Android conecta y la notebook con Windows no.
+A: [risas] Clásico total. Microsoft lo documenta: Windows por defecto no arma IPsec con NAT traversal si el servidor está detrás de NAT. Hay una clave de registro, AssumeUDPEncapsulationContextOnSendRule, que en dos permite que servidor y cliente estén detrás de NAT. Después, reiniciar.
+B: ¿Y para conectar dos MikroTik?
+A: Un cliente L2TP con use ipsec yes y el mismo secreto, aunque entre dos MikroTik conviene WireGuard. Y la documentación de IPsec aconseja evitar la clave compartida, atacable offline: L2TP la usa igual, así que clave larga y cambiarla si alguien se va.
+B: ¿Diagnóstico?
+A: barra ip barra ipsec barra active peers para ver la fase uno, barra ppp barra active para ver el usuario conectado, y el log.
+B: ¿Laboratorio?
+A: Veinte minutos: servidor, pool, perfil, un usuario, las reglas de input, y conectás desde una notebook con el cliente nativo.
+B: Y PPTP, ni en broma.
+A: Nunca. L2TP con IPsec obligatorio, un usuario por persona, y los cuatro puertos claros.

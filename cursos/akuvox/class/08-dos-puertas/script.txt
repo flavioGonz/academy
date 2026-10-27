@@ -1,0 +1,19 @@
+A: Lección ocho, la del pedido famoso: abrir dos puertas desde un solo monitor.
+B: Portón y puerta del hall. Me lo piden en cada edificio.
+A: Primero hay que separar dos casos, porque se resuelven distinto. Caso uno: un portero con dos relés, uno para cada puerta.
+B: Ese es fácil.
+A: Es fácil: cada relé con su código DTMF, por ejemplo setecientos treinta y uno para el portón y setecientos treinta y dos para el hall, y en el monitor dos teclas en la pantalla de llamada, cada una con su código. Akuvox permite elegir relé A, B o C.
+B: ¿Y si quiero que un solo botón abra las dos?
+A: Grandstream lo documenta en su portero: con el mismo código en las dos puertas, un solo DTMF abre ambas. El principio sirve igual.
+B: ¿Y el caso dos?
+A: Dos porteros distintos. Ahí está la trampa: el DTMF viaja dentro de la llamada, así que solo lo recibe el portero con el que estás hablando. El otro ni se entera.
+B: Ah, claro. ¿Y entonces?
+A: Comando HTTP. Akuvox tiene apertura por HTTP con usuario y clave propios, en Access Control, Relay, Open Relay Via HTTP. La historia está en la comunidad FreePBX: un integrador con un portero en el portón y otro en la oficina armó un botón que manda dos comandos, uno a cada portero.
+B: Y abre las dos.
+A: Abre las dos. Primero lo hizo con una extensión especial que cortaba la llamada con la visita, y lo mejoró con una tecla del teléfono que llama a una URL, así no perdía la conversación. Y él mismo escribió que así como estaba podía tener problemas de seguridad.
+B: Honesto.
+A: Muy. Por eso, usuario propio para el HTTP, distinto del admin, y en lo posible que solo acepte órdenes desde la IP de la central.
+B: ¿Laboratorio?
+A: Si tenés portero de dos relés, dos códigos y dos teclas en el monitor. Y con cualquier portero, probá el comando HTTP con curl desde tu PC. Veinte minutos.
+B: Con un usuario de prueba, no con admin.
+A: Exacto. Y el pedido de las dos puertas deja de ser un dolor de cabeza.

@@ -1,0 +1,18 @@
+A: Lección once. Central cerrada. ¿Sabés cuánto tarda en aparecer el primer intento de ataque cuando abrís el cinco mil sesenta?
+B: ¿Horas?
+A: Un administrador de Wazo contó que al abrir la consola veía varios INVITE maliciosos por segundo, y en los primeros baneos juntó más de cincuenta direcciones IP.
+B: Uf. ¿Y qué buscan?
+A: Llamar a destinos caros a costa del cliente. Por eso la UCM trae Fail2ban activo de fábrica: si una IP falla registros o logins muchas veces, la banea seiscientos segundos. Lo que conviene es agregar tus propias IPs a la lista de permitidos, para no banearte en un soporte.
+B: ¿Y la web de administración?
+A: Según el manual de seguridad: lista blanca de hasta diez IPs en System Settings, HTTP Server. Nada de puerto ochenta ni cuatrocientos cuarenta y tres. SSH apagado, que ya viene así, y AMI nunca en una central expuesta.
+B: ¿Algo más moderno?
+A: Geo-IP: bloqueás países enteros para la web y los registros. Y lo de la lección cinco, privilegios y PIN en rutas caras, porque si igual entran, que no puedan llamar afuera.
+B: Cuatro de siete fuentes coinciden en cerrar la administración, ¿no?
+A: Cuatro de siete. Donde no hay acuerdo es en los remotos: VPN o puertos abiertos.
+B: Yo diría VPN siempre.
+A: Un integrador del foro de FreePBX con quince años de oficio piensa igual, pero cuenta que su VPN se cae de dos a cuatro veces por año, casi siempre por certificados vencidos. Otro usuario la dejó porque se le caía varias veces al día y perdía llamadas.
+B: ¿Y entonces?
+A: Para sedes con IP fija, otra respuesta del mismo foro: lista blanca por IP en el firewall. Para muchos móviles, VPN si alguien la mantiene. Y si no hay ninguna de las dos, puerto no estándar, Fail2ban, Geo-IP y PIN.
+B: ¿Laboratorio?
+A: Quince minutos de auditoría: revisás Fail2ban, la lista blanca web, SSH, y anotás cada puerto abierto en el router con su motivo.
+B: Y cuando llegue la factura del mes, no hay sorpresa.

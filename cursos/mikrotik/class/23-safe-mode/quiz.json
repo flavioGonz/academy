@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Estás por terminal en Safe Mode en un cliente remoto. Cambiaste la ruta por defecto, todo anda y querés dejarlo así. ¿Qué hacés?",
+    "options": [
+      "Ctrl+D, que cierra la sesión de forma prolija",
+      "Reiniciás el router para que el cambio se escriba",
+      "Ctrl+X otra vez, y el prompt deja de mostrar <SAFE>",
+      "/undo, para cerrar el punto de vuelta"
+    ],
+    "answer": 2,
+    "why": "Ctrl+X (o F4) alterna Safe Mode: al salir así, los cambios quedan. Ctrl+D, en cambio, deshace todo lo hecho en modo seguro, y /undo revierte el último cambio."
+  },
+  {
+    "q": "Vas a pedir Safe Mode y RouterOS avisa que otro técnico lo tiene tomado. Sus cambios están bien y los querés conservar. ¿Qué respondés?",
+    "options": [
+      "r: te da el modo seguro y conserva sus cambios",
+      "u: te da el modo seguro y deshace sus cambios",
+      "d: y seguís trabajando, igual quedás en Safe Mode",
+      "Ninguna: reiniciás el router para liberar el modo"
+    ],
+    "answer": 0,
+    "why": "Según la documentación, r conserva los cambios y pone tu sesión en Safe Mode (al otro le llega un aviso); u los deshace; d deja todo como está y no te da el modo seguro."
+  },
+  {
+    "q": "Entrás a un router remoto por un túnel WireGuard y vas a cambiar el túnel por otro. El cambio corta tu sesión sí o sí. ¿Qué pasa si lo hacés en Safe Mode?",
+    "options": [
+      "Safe Mode detecta que fue a propósito y conserva el cambio",
+      "El cambio queda, porque el túnel no es parte de la configuración",
+      "Solo se deshace si hiciste más de 100 cambios",
+      "Al cortarse tu sesión, el router deshace el cambio aunque fuera correcto"
+    ],
+    "answer": 3,
+    "why": "Safe Mode se dispara cuando la sesión que lo tomó termina mal, sin juzgar el cambio. Para estos casos, en el foro proponen un backup con un scheduler que lo restaura si no lo cancelás a tiempo."
+  }
+]

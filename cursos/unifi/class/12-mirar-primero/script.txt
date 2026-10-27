@@ -1,0 +1,21 @@
+A: Última lección. Llamado de soporte: "el WiFi anda mal". Así, sin más datos.
+B: El clásico. Y la tentación es entrar y empezar a cambiar canales.
+A: Esa es la que hay que frenar. Lo primero es mirar. Y UniFi hoy te deja mirar mucho más que antes.
+B: ¿Qué hay?
+A: Desde Network diez punto cinco, historial de conexión del cliente y de roaming. Lawrence Systems lo mostró en su video. Ves a qué AP estuvo conectado, cuándo se movió y con qué señal.
+B: ¿Y del lado de los AP?
+A: En diez punto seis punto ciento uno llegó Time Machine para radios: uso, cambios de configuración y eventos de las últimas veinticuatro horas. Y para los puertos, con un filtro de clientes que flapean, que se conectan y desconectan.
+B: O sea que ves si alguien tocó algo ayer.
+A: Exacto. Y Network once suma una alarma de conexión de cliente y captura de paquetes desde el panel de la radio. Cuatro de cuatro fuentes empujan a mirar historial antes de tocar.
+B: ¿Y qué buscás en el historial?
+A: Purple da tres patrones. Roams en el borde de la celda, no mucho después. Roams y no desconexiones: si se desconecta y reconecta, perdió la red, es un hueco de cobertura. Y el ping pong entre dos AP, que es potencia pareja de más.
+B: ¿Algún número?
+A: Un caso que Purple presenta como ilustrativo: un hotel con teléfonos IP, seis desconexiones en diez minutos en la misma caminata. Ajustando potencia y roaming, pasó a cero, todo como roams.
+B: ¿Y cuando ya encontraste algo?
+A: Un cambio por vez. WunderTech lo dice así: cambiá una cosa, probá, y después la siguiente. Si se rompió, mirá lo último que tocaste. Y LazyAdmin agrega que volver a los valores por defecto muchas veces es el primer paso.
+B: ¿Y el que no tiene arreglo?
+A: std punto rocks lo cierra honesto: si se puede, cable. El WiFi comparte el aire entre todos.
+B: ¿Laboratorio?
+A: Diez minutos. Elegís un cliente real, abrís su historial y el Time Machine de su AP, y escribís en tres líneas qué pasó antes de cambiar nada.
+B: Primero el historial.
+A: Después la teoría, y un cambio por vez.

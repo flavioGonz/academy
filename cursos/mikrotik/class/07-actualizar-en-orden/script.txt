@@ -1,0 +1,17 @@
+A: Lección siete: actualizar en orden. Arranco con un número que me quedó dando vueltas.
+B: Dale.
+A: Los investigadores de Eclypsium buscaron en Shodan y encontraron más de dos millones de MikroTik con alguna interfaz de gestión expuesta. Y estimaron unos trescientos mil vulnerables a fallas que ya tenían parche.
+B: Trescientos mil. O sea que el parche existía y nadie lo instaló.
+A: Exacto. Y la nota de CSO lo dice: MikroTik responde bien a las fallas; el problema es que la gente actualiza el router mucho menos que la computadora. Cuatro de las seis fuentes que hablan de actualización coinciden en el método.
+B: ¿Y cuál es el método?
+A: Primero, el canal. RouterOS tiene long-term, stable, testing y development. La documentación es clara: testing no va en producción. Entre stable y long-term no hay un ganador en las fuentes; long-term trae solo arreglos críticos y cambia poco.
+B: Para un cliente que visitás dos veces por año, yo voy con long-term.
+A: Tiene sentido. Segundo: antes de actualizar, backup. Siempre. Tercero, actualizás RouterOS, reinicia, y después el RouterBOOT, que es el cargador de arranque. Eso es un paso aparte: barra system barra routerboard barra upgrade, y otro reinicio.
+B: Ese paso se olvida mucho. Queda RouterOS nuevo con el arranque viejo.
+A: Y la documentación recomienda hacerlo siempre después de cada actualización. Un detalle más para RouterOS 7: el chequeo de versiones sale por HTTPS desde el router, así que si hay un firewall adelante, el puerto cuatrocientos cuarenta y tres tiene que estar abierto hacia afuera.
+B: ¿Y si el equipo viene de la versión seis?
+A: No salta directo a la última. Primero pasa por una intermedia, la siete punto doce punto uno, y recién ahí aparecen las nuevas.
+B: En obra lo pienso así: entregás el equipo actualizado, y anotás en el legajo versión de RouterOS y de RouterBOOT. En la visita de mantenimiento, comparás.
+A: El laboratorio es justo ese: mirás canal y versión, sacás backup, actualizás, y comparás current-firmware con upgrade-firmware antes y después del paso del RouterBOOT.
+B: Quince minutos.
+A: Y así tu equipo no queda entre los trescientos mil.

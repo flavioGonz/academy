@@ -1,0 +1,15 @@
+A: Segunda lección: usuarios propios. Y te pregunto algo incómodo, Martín. ¿Cuántos routers de clientes conocés donde todos entran como admin?
+B: [suspiro] Casi todos. Admin y la misma contraseña para los cinco técnicos.
+A: Bueno, la documentación de MikroTik es bastante directa con eso. Una cuenta por administrador, contraseña de doce caracteres o más, y el paso que importa: creás tu usuario, probás que entra, y recién ahí deshabilitás admin.
+B: Ese orden es clave. Si lo hacés al revés, te quedás afuera.
+A: Exacto. Las tres fuentes que tocan el tema coinciden, sin discrepancias. Y hay un detalle que me sorprendió: el grupo read que viene de fábrica no es tan de solo lectura como parece.
+B: ¿Cómo que no?
+A: Según la guía de seguridad, el grupo read puede reiniciar el router y ver configuración sensible. Así que si le querés dar acceso a alguien para mirar, conviene armar un grupo propio con las políticas justas.
+B: Mirá vos. Y uno le daba read al de monitoreo pensando que no podía hacer nada.
+A: Otra perlita de la misma página: si ponés la contraseña entre comillas y tiene un signo pesos, RouterOS lo toma como variable y la contraseña queda más corta sin avisarte.
+B: ¿En serio? O sea que creés que pusiste una clave larga y en realidad quedó la mitad.
+A: Tal cual. Ejemplo en obra: entregás un router en una cadena de locales. Cada técnico con su usuario, el de la mesa de ayuda con un grupo que lee pero no reinicia, y además se puede limitar cada cuenta a direcciones de origen, por ejemplo solo desde la VPN de la oficina.
+B: Y cuando un técnico se va de la empresa, deshabilitás su usuario y listo. Nada de cambiarle la clave a cuarenta routers.
+A: Ese es el beneficio real. El laboratorio: creás tu usuario full, probás entrar con él, deshabilitás admin, y armás un grupo de monitoreo sin permiso de reinicio. Después entrás con ese usuario y tratás de reiniciar.
+B: Y te tiene que rebotar.
+A: Diez minutos. Y desde ese momento, en cada log sabés quién hizo qué.

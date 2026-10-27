@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Una oficina tiene seis EAP de techo a ocho metros entre sí, todos en potencia High, y los usuarios se quejan de lentitud. ¿Qué probás primero?",
+    "options": [
+      "Subir todos a potencia máxima",
+      "Pasar el 5 GHz a 160 MHz",
+      "Bajar la potencia y repartir canales que no se solapen",
+      "Agregar dos APs más"
+    ],
+    "answer": 2,
+    "why": "La guía oficial recomienda bajar potencia cuando los APs están a menos de 12 m, porque más potencia también es más interferencia entre vecinos."
+  },
+  {
+    "q": "Edificio de oficinas con muchas redes vecinas. ¿Qué ancho de canal en 5 GHz es un buen punto de partida según TP-Link?",
+    "options": [
+      "20 MHz siempre",
+      "40 MHz",
+      "80 MHz",
+      "160 MHz"
+    ],
+    "answer": 1,
+    "why": "La guía indica 40 MHz como valor empírico general; 20 MHz para interferencia fuerte y 80 MHz o más solo en ambientes limpios."
+  },
+  {
+    "q": "Un cliente pide activar WLAN Optimization. ¿Cuándo la programás?",
+    "options": [
+      "A las 10 de la mañana, para verla funcionar",
+      "Nunca, no sirve",
+      "Justo después del reinicio de los APs",
+      "De madrugada, separada al menos 10 minutos del reinicio programado de los APs"
+    ],
+    "answer": 3,
+    "why": "Durante el escaneo se corta internet varios minutos y los APs tienen que estar conectados; la guía pide horario de bajo tráfico y separarla del reboot."
+  }
+]

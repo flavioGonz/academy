@@ -1,0 +1,19 @@
+A: Martín, ¿cuántos bridges le ponés a un hAP?
+B: Y, uno para las cámaras, otro para la oficina, otro para el WiFi de invitados.
+A: Ahí está el error más caro de la capa dos.
+B: Contame.
+A: Un bridge es un switch dentro del router. Agregás puertos y quedan en la misma red. Esos puertos pasan a ser esclavos: la IP, el servidor DHCP y las VLAN van en el bridge, no en ether3.
+B: ¿Y por qué no varios?
+A: Por el switch chip. Cuando el chip conmuta, el puerto muestra una hache en barra interface barra bridge barra port, y el tráfico va a velocidad de cable sin pasar por la CPU. Pero solo un bridge por chip tiene esa ayuda. El segundo va por el procesador.
+B: Uf. Mis cámaras iban por la CPU.
+A: Probablemente. La documentación lo lista como error de diseño: falta la hache, poco caudal, CPU al cien por ciento. La solución es un bridge y VLAN para separar.
+B: ¿Todos coinciden?
+A: Cuatro de cinco fuentes. El matiz está en el mismo hilo del foro: en un CCR, que no tiene switch chip, da casi igual, y el RB tres mil once tiene dos chips, o sea dos bridges con hache.
+B: ¿Y ether1?
+A: En un hAP o un hEX, la configuración por defecto ya lo deja afuera como WAN. En un CRS con configuración de switch están todos adentro: para usarlo de WAN lo sacás del bridge, lo sumás a la lista WAN y le das cliente DHCP. Y firewall antes de enchufar internet.
+B: ¿Alguna trampa?
+A: Una del foro. Un usuario sacó ether2 del bridge y el router se murió. Un veterano explicó que el bridge había tomado la MAC de ether2. Desde entonces: admin-mac fija antes de sacar puertos.
+B: [risas] Eso me pasó y le eché la culpa al firmware.
+A: El laboratorio: en un hAP de banco mirás la hache, sacás ether5 del bridge, le das su propia red y ves que el ping contesta pero WinBox no, porque ether5 no está en la lista LAN. Después lo volvés.
+B: Quince minutos.
+A: Y el switch vuelve a ser switch, y la CPU queda para rutear.

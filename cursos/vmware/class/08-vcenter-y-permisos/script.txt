@@ -1,0 +1,18 @@
+A: Lección ocho. Cuando el cliente pasa de un host a tres, aparece vCenter.
+B: El que maneja todo desde un solo lugar.
+A: Ese. Hoy vCenter es una máquina virtual que viene armada, el appliance, VCSA. Y con él aparecen el clúster, vMotion, HA y DRS, que vemos más adelante.
+B: ¿Y pide mucho?
+A: Más de lo que la gente cree. William Lam contó que en vSphere ocho el tamaño más chico, el Tiny, pasó de doce a catorce gigas de RAM. Él lo hizo andar con diez en su laboratorio, pero aclara que es su experiencia, no algo soportado.
+B: Catorce gigas para el que administra. En un host de treinta y dos, es casi la mitad.
+A: Por eso se dimensiona antes. Ahora, lo que más importa para soporte: el acceso. vCenter usa un inicio de sesión único, con un dominio que por defecto se llama vsphere punto local.
+B: Y el famoso administrator arroba vsphere punto local.
+A: Esa es la llave maestra. La documentación de Broadcom dice que, recién instalado, es el único usuario que puede entrar. Después, el modelo es simple: un permiso es un usuario o grupo, más un rol, que es un conjunto de privilegios, aplicado sobre un objeto del inventario.
+B: Tipo: Martín, rol de solo lectura, sobre el clúster del cliente.
+A: Exacto. En eso coinciden las dos fuentes de permisos que leímos. Y suma otra cosa: la red de gestión, aislada, que solo la vean los administradores.
+B: ¿Y qué pasa si todos entramos con el administrator?
+A: Que en los registros aparece siempre el mismo usuario y nadie sabe quién apagó la VM del control de acceso un viernes a la noche.
+B: [risas] Me suena esa historia.
+A: El laboratorio: en vCenter, Administración, Single Sign On, Users and Groups, creás un usuario técnico. Clonás el rol de solo lectura, le ponés Soporte Lectura, y lo asignás en una carpeta.
+B: Y entrás con ese usuario para ver qué ve y qué no.
+A: Quince minutos. Y la clave del administrator, guardada en el gestor de contraseñas, no en un post it.
+B: Nadie entra con la llave maestra para el día a día.

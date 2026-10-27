@@ -1,0 +1,65 @@
+from _akv import *
+
+# ---------- 8.svg: dos relés o dos porteros
+c = Canvas("Akuvox · Lección 8", "¿Dos relés en un portero o dos porteros?")
+c.add(panel(48, 130, 540, 480, "Un portero, dos relés", "info"))
+m = c.add(Generic(78, 180, "Monitor", "teclas Portón y Hall", icon="laptop", w=250))
+p = c.add(Generic(78, 400, "Portero", "relés A y B", icon="bell", w=250))
+l1 = c.add(Lock(370, 330, "Portón", "Relay A · 731", w=196))
+l2 = c.add(Lock(370, 460, "Hall", "Relay B · 732", w=196))
+c.add(Arrow(m.bottom(), p.top(), label="DTMF 731 o 732", label_dy=0))
+c.add(Cable(p.right(-14), l1.left(), kind="relay"))
+c.add(Cable(p.right(14), l2.left(), kind="relay"))
+c.add(text(78, 590, "Mismo código en A y B: abren las dos juntas.", 15, 500, INK3))
+
+c.add(panel(612, 130, 540, 480, "Dos porteros", "info"))
+m2 = c.add(Generic(640, 180, "Monitor", "en llamada con P1", icon="laptop", w=230))
+pc = c.add(Generic(900, 180, "PC o central", "comando HTTP", icon="server", w=230))
+p1 = c.add(Generic(640, 400, "Portero 1", "en llamada", icon="bell", w=230))
+p2 = c.add(Generic(900, 400, "Portero 2", "sin llamada", icon="bell", w=230))
+c.add(Arrow(m2.bottom(), p1.top(), kind="ok", label="DTMF", label_dy=0))
+c.add(Arrow(m2.bottom(60), p2.top(-60), kind="alert"))
+c.add(Mark(905, 318, ok=False))
+c.add(Arrow(pc.bottom(40), p2.top(40), kind="ok", label="HTTP", label_at=0.45, label_dy=0))
+c.add(text(640, 532, "El DTMF solo llega al portero que está en la llamada:", 15, 500, INK3))
+c.add(text(640, 556, "la otra puerta se abre por HTTP con usuario propio.", 15, 500, INK3))
+save(c, "8.svg")
+
+# ---------- 8-paso2.svg: una tecla por puerta
+c = Canvas("Akuvox · Lección 8 · Paso 2", "Una tecla por puerta en la pantalla del monitor")
+c.add(f'<rect x="48" y="140" width="460" height="300" rx="22" fill="#F1F4F7" stroke="{LINE2}" stroke-width="2"/>')
+c.add(f'<rect x="68" y="160" width="420" height="230" rx="10" fill="#0B1A28"/>')
+c.add(text(88, 196, "Llamada · Portero calle", 16, 600, "#9FC3E3", FB))
+c.add(text(88, 220, "00:12", 15, 500, "#6E88A1", FM))
+for i, (lab, code) in enumerate((("Portón", "731"), ("Hall", "732"))):
+    bx = 88 + i * 200
+    c.add(f'<rect x="{bx}" y="300" width="180" height="70" rx="12" fill="{CYAN}"/>')
+    c.add(text(bx + 90, 333, lab, 20, 600, WHITE, FB, anchor="middle"))
+    c.add(text(bx + 90, 356, f"DTMF {code}", 14, 600, DEEP, FM, anchor="middle"))
+c.add(text(278, 470, "Device > Relay > SoftKey In Talking Page", 15, 500, BLUE, FM, anchor="middle"))
+ra = c.add(Relay(640, 160, "Relay A · 731", "portón"))
+rb = c.add(Relay(640, 360, "Relay B · 732", "hall"))
+la = c.add(Lock(920, 173, "Portón", "su fuente", w=230))
+lb = c.add(Lock(920, 373, "Hall", "su fuente", w=230))
+c.add(Arrow((512, 300), (634, 215), kind="logical", label="731", label_at=0.5))
+c.add(Arrow((512, 370), (634, 415), kind="logical", label="732", label_at=0.5))
+c.add(Cable((840, 215), la.left(), kind="relay"))
+c.add(Cable((840, 415), lb.left(), kind="relay"))
+c.add(text(740, 510, "Access Control > Relay (portero)", 15, 500, BLUE, FM, anchor="middle"))
+c.add(Step(48, 140, 2))
+c.add(Note(48, 530, 1104, "Cada tecla manda su código; el portero ve cuál llegó y dispara solo ese relé. Así el vecino abre el hall sin dejar el portón abierto.", kind="ok", size=16))
+save(c, "8-paso2.svg")
+
+# ---------- 8-paso5.svg: comando HTTP
+c = Canvas("Akuvox · Lección 8 · Paso 5", "Abrí por HTTP con un usuario que no es el admin")
+c.add(Terminal(48, 150, 640, ["PORTERO=192.168.88.21", ("curl -u 'abre-lab:Ejemplo-Http-2026' \\", CYAN),
+                               ("  \"$PORTERO/fcgi/OpenDoor?action=OpenDoor&DoorNum=1\"", CYAN)], title="PC DE LABORATORIO"))
+c.add(Step(48, 150, 5))
+p = c.add(Generic(780, 160, "Portero", "192.168.88.21", icon="bell", w=250))
+lk = c.add(Lock(780, 330, "Relay A abre", "DoorNum=1", w=250, hl=OK))
+c.add(Arrow((692, 210), p.left(), label="HTTP", label_dy=-14))
+c.add(Arrow(p.bottom(), lk.top(), kind="ok"))
+c.add(Window(48, 310, 640, 135, "Web del portero", path="Access Control > Relay > Open Relay Via HTTP",
+             rows=[("Usuario · Clave", "abre-lab · Ejemplo-Http-2026")], hl=0))
+c.add(Note(48, 500, 1104, "Por HTTP la clave viaja en texto claro: el comando vive solo dentro de la red de porteros, nunca expuesto a internet.", title="Ojo", kind="alert"))
+save(c, "8-paso5.svg")

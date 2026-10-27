@@ -1,0 +1,21 @@
+A: Martín, la sucursal nueva tiene internet por 4G, con CGNAT. ¿Cómo la unís a la central?
+B: Con L2TP e IPsec, servidor en la sucursal.
+A: Al revés. Con CGNAT nadie te puede llamar. Hoy, el túnel saliente: el MikroTik de la sucursal es el que llama.
+B: Ah, el router como cliente.
+A: Eso. Barra interface barra l2tp client: a dónde se conecta, usuario, contraseña, use ipsec en yes y la clave de IPsec. La documentación es clara: L2TP solo no cifra nada.
+B: ¿Y la ruta por defecto?
+A: El punto fino. Add default route en no, que es lo que viene. Así solo las redes de la central van por el túnel: una ruta a su LAN con gateway la interfaz L2TP. En yes, todo el tráfico de la sucursal sale por la central.
+B: ¿Y con eso anda?
+A: Anda de ida. Falta la vuelta: en el servidor, una ruta hacia la LAN de la sucursal por la IP del túnel. Si no podés tocar el otro lado, masquerade hacia el túnel, y del otro lado todo llega como la IP del túnel.
+B: ¿Coinciden las fuentes?
+A: Tres de cuatro en el cliente con IPsec y las rutas en las dos puntas. Un veterano del foro suma la opción del NAT cuando no se puede rutear allá.
+B: ¿Alguna historia?
+A: Una de Australia. Se cayó el ADSL de una sucursal, pusieron 4G y un L2TP a la central. Desde los routers llegaban a las impresoras del otro lado; desde las PC, no.
+B: ¿Y qué era?
+A: Un IPsec viejo, del ADSL, que seguía intentando por detrás. Lo deshabilitaron y anduvo. Moraleja: un túnel por par de redes.
+B: [suspiro] Clásico.
+A: Otro detalle de la documentación: varios clientes L2TP con IPsec detrás del mismo NAT no funcionan en ese modo.
+B: ¿Y el laboratorio?
+A: Con el servidor de banco de la lección de L2TP con IPsec: usuario para la sucursal, cliente en un hAP, mirás que levante, ruta a la LAN central y ping desde una PC. Después probás el masquerade y el add default route, y buscás la ruta barra treinta y dos al servidor.
+B: Veinte minutos.
+A: Y la sucursal sin IP pública deja de ser problema.

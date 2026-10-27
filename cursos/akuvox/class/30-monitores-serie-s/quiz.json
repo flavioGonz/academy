@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Querés manejar una cerradura de 1,5 A directo desde el relé de un S562. ¿Qué pasa?",
+  "options": [
+   "Anda, aguanta 2 A",
+   "El S562 no tiene relé",
+   "Supera la carga del S562 (30 V 1 A); va con relé auxiliar o fuente propia",
+   "Depende del DTMF"
+  ],
+  "answer": 2,
+  "why": "La tabla de carga resistiva da 30 V 1 A para el S562, la mitad que S563, S565 o S567."
+ },
+ {
+  "q": "Un cliente quiere que el monitor de auricular S560 maneje un relé externo por RS485. ¿Se puede?",
+  "options": [
+   "Sí",
+   "No: la tabla de interfaces lo marca sin RS485 ni relé",
+   "Solo con Wi-Fi",
+   "Solo con SmartPlus"
+  ],
+  "answer": 1,
+  "why": "Según la tabla de interfaces, el S560 no tiene RS485, salida de relé ni entrada de timbre."
+ },
+ {
+  "q": "¿Cómo ves la IP de un S565?",
+  "options": [
+   "More > Settings > System Info > Network",
+   "Settings > System Info > Network",
+   "Manteniendo # 5 s",
+   "*2396#"
+  ],
+  "answer": 0,
+  "why": "Akuvox lista para el S565 la ruta More > Settings > System Info > Network."
+ }
+]

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Sumá el portero al NVR como una cámara más</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">AKUVOX · PASO 5</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Sumá el portero al NVR como una cámara más</text>
+<rect x="48" y="140" width="520" height="250" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="172.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Opción A · ONVIF</text>
+<rect x="70" y="200" width="476" height="40" rx="10" fill="#03213C"/><text x="86.0" y="225.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">http://192.168.88.21/onvif/device_service</text>
+<circle cx="79" cy="279.1" r="4.5" fill="#17A8D4"/><text x="94.0" y="284.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="94.0" dy="0.0">Discoverable activado en Surveillance &gt; ONVIF</tspan></text><circle cx="79" cy="309.3" r="4.5" fill="#17A8D4"/><text x="94.0" y="314.2" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="94.0" dy="0.0">Usuario ONVIF propio, no admin / admin</tspan></text>
+<rect x="48" y="410" width="520" height="200" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="442.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Opción B · RTSP manual</text>
+<rect x="70" y="466" width="476" height="40" rx="10" fill="#03213C"/><text x="86.0" y="491.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">rtsp://nvr-lab:…@192.168.88.21/live/ch00_1</text>
+<text x="74.0" y="540.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">ruta ch00_1 para la grilla</text>
+<text x="74.0" y="566.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">… = clave del usuario nvr-lab</text>
+<rect x="640" y="140" width="512" height="360" rx="18" fill="#011E38"/>
+<text x="664.0" y="176.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#FFFFFF" text-anchor="start">NVR · vista en vivo</text>
+<rect x="664" y="196" width="148" height="126" rx="8" fill="#0B3A66" stroke="#17A8D4" stroke-width="3"/>
+<rect x="824" y="196" width="148" height="126" rx="8" fill="#0B1A28" stroke="#2C4A66" stroke-width="1"/>
+<rect x="984" y="196" width="148" height="126" rx="8" fill="#0B1A28" stroke="#2C4A66" stroke-width="1"/>
+<rect x="664" y="336" width="148" height="126" rx="8" fill="#0B1A28" stroke="#2C4A66" stroke-width="1"/>
+<rect x="824" y="336" width="148" height="126" rx="8" fill="#0B1A28" stroke="#2C4A66" stroke-width="1"/>
+<rect x="984" y="336" width="148" height="126" rx="8" fill="#0B1A28" stroke="#2C4A66" stroke-width="1"/>
+<text x="738.0" y="256.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">Portero</text>
+<text x="738.0" y="280.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#17A8D4" text-anchor="middle">ch00_1</text>
+<path d="M572.0 260.0C604.0 260.0,604.0 260.0,636.0 260.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<path d="M572.0 486.0L636.0 450.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<circle cx="48" cy="140" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="146.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<rect x="640" y="525" width="512" height="72" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="640" y="537" width="5" height="48" rx="2.5" fill="#0A63B8"/><text x="666.0" y="559.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="666.0" dy="0.0">En la grilla alcanza el secundario (512 kbps). El</tspan><tspan x="666.0" dy="20.2">principal, si hace falta ver detalle.</tspan></text>
+</svg>

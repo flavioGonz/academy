@@ -1,0 +1,35 @@
+[
+ {
+  "q": "En un cliente, todos los técnicos entran a vCenter con administrator@vsphere.local. ¿Cuál es el principal problema?",
+  "options": [
+   "Ninguno, es la práctica recomendada",
+   "Que no se puede saber quién hizo cada cambio y cualquier error tiene permisos totales",
+   "Que vCenter se pone lento",
+   "Que se gasta la licencia más rápido"
+  ],
+  "answer": 1,
+  "why": "Con una cuenta compartida no hay trazabilidad y todos tienen privilegios máximos; el modelo de vSphere es usuario o grupo + rol + objeto."
+ },
+ {
+  "q": "En vSphere, ¿qué es un rol?",
+  "options": [
+   "Un objeto del inventario",
+   "Una licencia",
+   "Un grupo de usuarios",
+   "Un conjunto de privilegios que se asigna a un usuario o grupo sobre un objeto"
+  ],
+  "answer": 3,
+  "why": "La documentación de Broadcom define los roles como conjuntos de privilegios que se asignan sobre objetos del inventario."
+ },
+ {
+  "q": "Vas a desplegar una VCSA de vSphere 8 en tamaño Tiny en un host de 32 GB. ¿Qué tenés en cuenta?",
+  "options": [
+   "Que la VCSA Tiny pide unos 14 GB de RAM y eso hay que restarlo de lo disponible para las otras VMs",
+   "Que no usa RAM, corre en el hipervisor",
+   "Que hay que instalarla en Windows",
+   "Que necesita 2 GB"
+  ],
+  "answer": 0,
+  "why": "Según William Lam, en vSphere 8 cada tamaño de VCSA sumó 2 GB; Tiny pasó de 12 a 14 GB."
+ }
+]

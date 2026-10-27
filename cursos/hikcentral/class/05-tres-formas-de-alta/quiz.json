@@ -1,0 +1,5 @@
+[
+  {"q": "Una sucursal tiene internet hogareño con IP dinámica y no querés abrir puertos. ¿Cómo agregás su NVR a HikCentral?", "options": ["Por IP pública al puerto 8000", "Por ISUP con Device ID y clave, registrando hacia el SYS", "Por ONVIF", "No se puede agregar"], "answer": 1, "why": "Con ISUP el equipo inicia la conexión hacia el SYS; el manual lo presenta como la opción para equipos sin IP fija."},
+  {"q": "Agregaste cámaras por Hik-Connect DDNS y querés que graben en el Hybrid SAN central. ¿Qué pasa?", "options": ["Funciona igual que por IP", "Graban solo si activás Encrypted Add", "Graban solo en H.265", "No se soporta: esos equipos no graban en Hybrid SAN ni Cloud Storage"], "answer": 3, "why": "El FAQ indica que los equipos agregados por dominio o por Hik-Connect no pueden grabar en Hybrid SAN ni en Cloud Storage Server."},
+  {"q": "Agregás un NVR por IP con la opción Encrypted Add. ¿Qué puerto usa por defecto?", "options": ["8443", "8000", "554", "7660"], "answer": 0, "why": "El manual indica 8000 por defecto y 8443 cuando se marca Encrypted Add."}
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Tenés un host con vmbr0 VLAN aware. Querés una cámara virtual de grabación en la VLAN 30. ¿Qué hacés?",
+    "options": [
+      "Creás un bridge nuevo vmbr30 con eno1.30",
+      "Cambiás la IP del host a la VLAN 30",
+      "Ponés el puerto del switch en access VLAN 30",
+      "En la placa de red de la VM ponés VLAN Tag 30"
+    ],
+    "answer": 3,
+    "why": "Con un bridge VLAN aware, el tag se pone en la placa virtual de cada VM y el bridge lo maneja; el puerto del switch queda en trunk."
+  },
+  {
+    "q": "Editaste /etc/network/interfaces a mano para agregar un bond. ¿Cómo aplicás el cambio sin reiniciar?",
+    "options": [
+      "ifreload -a",
+      "systemctl restart pveproxy",
+      "pvecm updatecerts",
+      "qm rescan"
+    ],
+    "answer": 0,
+    "why": "Con ifupdown2, que es el default desde Proxmox VE 7, ifreload -a aplica la configuración de red en caliente."
+  },
+  {
+    "q": "Un técnico creó primero el bridge con la IP y después intentó crear el bond con las mismas placas, y las VMs quedaron sin red. ¿Cuál es el orden correcto?",
+    "options": [
+      "Bridge, después VLAN, después bond",
+      "Una VLAN por placa y un bridge por VLAN",
+      "Bond con las placas físicas, y el bridge con bridge-ports bond0",
+      "Bond sobre el bridge, con la IP en el bond"
+    ],
+    "answer": 2,
+    "why": "Las placas físicas son esclavas del bond y el bridge usa el bond como puerto; la IP va en el bridge o en una VLAN del bridge."
+  }
+]

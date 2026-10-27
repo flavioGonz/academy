@@ -1,0 +1,16 @@
+A: Dos detectores iguales, mismo modelo, misma caja. Uno salta con el vapor y el otro no. ¿Por qué?
+B: Porque tienen distinto modo programado.
+A: Exacto. En los AVENAR cuatro mil, en RPS no elegís una sensibilidad suelta: elegís el lugar de instalación. Oficina en horario, oficina fuera de horario, sala de servidores, garaje, cocina en servicio, depósito con autoelevadores. Cada lugar fija cómo pesa cada sensor.
+B: ¿Y si no tocás nada?
+A: Queda el de fábrica. El óptico térmico arranca en oficina modo día. El de monóxido arranca en oficina con fumadores, sala de espera o restaurante. Los ópticos, en sensibilidad media.
+B: ¿Se pueden apagar sensores?
+A: Sí. Un multisensor se puede dejar solo óptico, o solo térmico. En cocina en servicio, el óptico térmico queda directamente como térmico. Y ojo: hay combinaciones del de monóxido que, según la guía, ya no cumplen EN cincuenta y cuatro siete.
+B: Ahora, la gran pregunta: ¿multisensor u óptico?
+A: Acá está la grieta del curso. El BRE probó treinta y cinco multisensores contra dos ópticos. Ante fuegos reales, rindieron parecido. Ante tostadas, vapor, polvo y aerosol, los multisensores dispararon más tarde.
+B: Entonces multisensor en todos lados.
+A: Pará. En la prueba de la tostada, el multisensor disparó en promedio cuarenta segundos después que el óptico, todavía un minuto antes de que la tostada prendiera fuego. La ventaja es esperar. Y la asociación de la industria británica advierte que todo filtro demora la respuesta a un fuego real.
+B: O sea, depende del lugar.
+A: Tres de cuatro fuentes apoyan el multisensor contra falsas alarmas, con esa advertencia. La otra, sobre la norma británica, prefiere el de monóxido donde hay vapor. Y otra cosa: el modo no se ve desde afuera del detector, así que lo que no está documentado, se pierde.
+B: ¿Laboratorio?
+A: Abrí una configuración real, listá cada detector con su lugar de instalación y marcá los que quedaron en el modo de fábrica sin que nadie lo decidiera. Diez minutos.
+B: Y esos se revisan con el proyecto.

@@ -1,0 +1,5 @@
+[
+  {"q": "El NVR está online en HikCentral pero sus cámaras no tienen vivo ni reproducción. ¿Qué faltó?", "options": ["Activar la licencia de expansión", "Instalar el Streaming Server", "Importar los canales a un área", "Cambiar el puerto a 8443"], "answer": 2, "why": "El manual indica que sin importar los recursos a un área no se puede hacer vivo, reproducción ni configurar eventos para esas cámaras."},
+  {"q": "Un operador hace doble clic en el área Depósito y aparece que no hay cámaras, aunque están en Nave 1 y Nave 2. ¿Por qué?", "options": ["Las cámaras de un área hija no se muestran al abrir la madre", "El operador no tiene licencia", "Las cámaras están offline", "Falta el E-map"], "answer": 0, "why": "Según el FAQ, las cámaras agregadas a un área hija no están disponibles para el área madre; tienen que estar directamente en el área que se abre."},
+  {"q": "Querés una grilla de cámaras que vean todos los guardias del puesto. ¿Qué tipo de vista usás?", "options": ["Privada", "Pública", "GIS", "Remota"], "answer": 1, "why": "La vista pública la ve cualquier usuario que entra a HikCentral; la privada solo quien la creó."}
+]

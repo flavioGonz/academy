@@ -1,0 +1,17 @@
+A: Lección diecinueve: Back To Home, la VPN de MikroTik para cuando el sitio no tiene IP pública.
+B: El cliente con CGNAT que quiere ver el NVR desde el celular.
+A: Ese. Back To Home convierte al router en un servidor WireGuard. Si tiene IP pública, el teléfono entra directo; si no, entra por un relay de MikroTik. Y la documentación es clara: el tráfico va cifrado de punta a punta, el relay no puede leerlo.
+B: ¿Y en qué equipos anda?
+A: Ese es el primer filtro. Procesadores ARM, ARM sesenta y cuatro o TILE, con RouterOS siete punto doce o más. Un distribuidor lo remarca: los RouterBOARD MIPS viejos quedan afuera. Así que antes de prometerlo, mirá la arquitectura.
+B: Medio parque de hEX viejos fuera.
+A: Exacto. Lo simple es la app: te conectás al WiFi del router, ponés IP, usuario y contraseña, y crea el túnel. En terminal habilitás back to home vpn en barra ip barra cloud y creás un usuario por dispositivo, con su código QR.
+B: ¿Por qué uno por dispositivo?
+A: Por lo mismo que los peers de la lección ocho: si se pierde un celular, borrás ese usuario. Y ojo con allow lan: por defecto está en no, y ese usuario solo navega por internet a través del router. Para ver el NVR, allow lan en yes y client allowed address limitado a la red del sitio.
+B: ¿Y las trampas?
+A: Dos que avisa la documentación. La restricción depende de la lista LAN de la configuración por defecto: si tus VLANs no están en esa lista, no quedan protegidas. Y si revocás Back To Home, se borran todos los usuarios y claves, y hay que reconfigurar cada teléfono.
+B: ¿Y la velocidad?
+A: Por el relay puede ir más lenta, lo dice la propia página. Y para control fino, la documentación recomienda WireGuard a mano. Dos de tres fuentes coinciden, sin discrepancias.
+B: ¿Laboratorio?
+A: Veinte minutos: habilitás, creás un usuario con acceso a la LAN y vencimiento, lo importás en la app WireGuard del celular con datos móviles y mirás si va directo o por relay.
+B: Anotado.
+A: Sí. Un usuario por equipo, la LAN solo a quien la necesita.

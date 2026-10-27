@@ -1,0 +1,23 @@
+A: Hoy, algo que se hace en cada obra y se hace mal la mitad de las veces: la IP fija del servidor.
+B: ¿Mal? Panel de control, propiedades, IPv4, y listo.
+A: Funciona. Pero por consola es repetible, queda en un script y lo podés pegar en el informe. Y en un Server Core no tenés ventanas.
+B: Bien. ¿Cómo es?
+A: Cuatro pasos. Uno: Get-NetAdapter, para saber el nombre o el índice de la placa. Dos: sacar lo que tiene, la IP vieja y la ruta por defecto vieja.
+B: ¿Por qué sacarlas?
+A: Porque si no, te quedan dos gateways y el tráfico sale por donde quiere. Tres: New-NetIPAddress con la IP, el PrefixLength y el gateway.
+B: Ojo, PrefixLength. No le das la máscara.
+A: Exacto, veinticuatro es doscientos cincuenta y cinco punto doscientos cincuenta y cinco punto doscientos cincuenta y cinco punto cero. Y cuatro: Set-DnsClientServerAddress para el DNS, que va aparte.
+B: Y verificar.
+A: Siempre. Get-NetIPAddress, la ruta y el DNS. ¿Cuántas fuentes en esto? Dos, una guía práctica de este año y la documentación de Microsoft. Evidencia fina, pero sin discusión.
+B: ¿Y la documentación de Microsoft qué dice?
+A: Es la del rol DHCP en Server dos mil veinticinco. El primer requisito es justamente una IP estática. Un servidor que reparte direcciones no puede depender de otro.
+B: Tiene lógica.
+A: Y trae un detalle que en obra sorprende: si hay dominio, el DHCP se autoriza en Active Directory. Si no está autorizado, no entrega direcciones, a propósito, para que nadie meta un DHCP trucho en la red.
+B: Ah, por eso a veces "está instalado y no reparte".
+A: Ese es el caso. Después creás el ámbito, ponés gateway y DNS como opciones, y a las cámaras y controladoras les hacés reserva por MAC.
+B: Reserva por MAC. Así no ando con IP fijas en cada cámara.
+A: Ahí hay gustos. Lo importante es que quede documentado.
+B: ¿El laboratorio?
+A: Quince minutos en una máquina virtual: IP fija por consola, verificación, vuelta a DHCP. Y si tenés un Server de prueba, un ámbito con una reserva.
+B: Y nunca por escritorio remoto, que te cortás solo.
+A: [risas] Por consola de la máquina virtual. Esa la aprendimos todos.

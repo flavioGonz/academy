@@ -1,0 +1,35 @@
+[
+  {
+    "q": "El grabador está en la VLAN 20 y la oficina en la VLAN 1, con un gateway Omada que rutea entre ambas y sin ACL. ¿Una PC de la oficina llega al grabador?",
+    "options": [
+      "Sí, porque el gateway rutea entre VLAN",
+      "No, las VLAN están aisladas por definición",
+      "Solo si están en el mismo switch",
+      "Solo por WiFi"
+    ],
+    "answer": 0,
+    "why": "Las VLAN separan dominios de broadcast, pero si el gateway permite el ruteo entre VLAN, se comunican; para cortarlo hacen falta ACL o firewall."
+  },
+  {
+    "q": "Creaste un deny de la VLAN 1 a la VLAN 20 y, debajo, un permit de la PC del vigilador al grabador. El vigilador no llega. ¿Por qué?",
+    "options": [
+      "Las ACL no aplican a hosts puntuales",
+      "El permit tendría que ser bidireccional",
+      "Falta reiniciar el switch",
+      "Las reglas se evalúan de arriba hacia abajo y el deny gana primero"
+    ],
+    "answer": 3,
+    "why": "La guía oficial indica prioridad de arriba hacia abajo: el permit específico tiene que ir arriba del deny general."
+  },
+  {
+    "q": "Querés que la red de invitados salga a internet pero no vea ninguna red interna. ¿Qué armás?",
+    "options": [
+      "Un deny de Invitados hacia Any",
+      "Un deny de Invitados hacia un grupo con las subredes internas",
+      "Una VLAN nueva sin DHCP",
+      "Desactivar el ruteo del gateway"
+    ],
+    "answer": 1,
+    "why": "Negar hacia un grupo con las subredes internas bloquea la red local y deja libre el tráfico a internet; un deny a Any cortaría también internet."
+  }
+]

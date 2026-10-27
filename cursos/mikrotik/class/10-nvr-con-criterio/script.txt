@@ -1,0 +1,15 @@
+A: Lección diez: NVR con criterio. La pregunta que más nos hacen: "¿me abrís los puertos para ver las cámaras?".
+B: [suspiro] Todas las semanas.
+A: La primera respuesta es VPN. Pero a veces igual se publica algo, por ejemplo para una central de monitoreo con IP fija. Para esos casos, cuatro de las seis fuentes coinciden en el criterio.
+B: ¿Y cuál es?
+A: Cuatro cosas. Publicás solo el puerto que usa la app o el software del NVR, no todos. La regla de dst-nat entra por la lista WAN. Limitás el origen con una address-list, por ejemplo solo la IP de la central. Y nunca usás un puerto del propio router, como el ochenta o el ocho dos nueve uno.
+B: Lo del origen, ¿lo dice la documentación?
+A: Sí, la página de NAT de MikroTik sugiere agregar src-address al dst-nat y lo llama directamente más seguro. Ahora, la discrepancia: el ejemplo de primera configuración publica un escritorio remoto sin filtrar el origen. Así que hasta en la documentación oficial hay de las dos.
+B: ¿Y algún caso real?
+A: Uno del foro: una cámara publicada andaba desde afuera, pero desde la oficina, entrando por la IP pública, nada. El dst-nat tenía in-interface en el PPPoE, así que el tráfico de la LAN nunca coincidía. Lo resolvieron con destino local, excluyendo la IP de LAN del router, y un masquerade de hairpin.
+B: O sea que hairpin es solo si alguien adentro entra por la IP pública.
+A: Exacto. Si en la oficina usan la IP local del NVR, no hace falta. Otro detalle: NAT solo mira el primer paquete de cada conexión, así que después de cambiar una regla conviene limpiar las conexiones antes de decir que no anda.
+B: ¿Y el laboratorio?
+A: Una address-list con la IP de la central, un dst-nat filtrado hacia un NVR de prueba, limpiar conexiones, y probar desde el celular con datos móviles: primero sin estar en la lista, después agregando tu IP.
+B: Quince minutos.
+A: Y cada puerto que publicás queda con dueño, origen y fecha de revisión.

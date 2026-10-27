@@ -1,0 +1,15 @@
+A: Lección veinte. Cuando en una obra se habla de "el VPS", acá lo entendemos así: un MikroTik CHR, el router virtual, en un servidor en la nube con IP pública, como concentrador de VPN para los sitios sin IP propia.
+B: El hub. Los routers de clientes llaman a un punto fijo.
+A: Exacto. Y la clave la explica un practicante: como el router del cliente inicia el túnel hacia el VPS, el CGNAT del otro lado deja de importar. Dos de cinco fuentes describen el patrón; una de ellas vende su propia nube como alternativa.
+B: ¿Cómo se instala un CHR en un VPS? No hay pendrive.
+A: La guía de Hetzner: arrancás el VPS en modo rescate, bajás la imagen raw del CHR y la escribís con dd sobre el disco. Reiniciás y arranca RouterOS.
+B: ¿Con qué usuario?
+A: Ese es el punto crítico: admin sin contraseña, en una IP pública. Lo primero: tu usuario, admin deshabilitado, servicios apagados, descubrimiento cerrado, y un firewall de input que solo deje el puerto del túnel y la gestión desde tu oficina. Las lecciones dos a cuatro, el mismo día.
+B: ¿Y la licencia?
+A: La documentación es clara. La gratuita no vence y trae todo, pero limita la subida a un mega por interfaz: alcanza para gestionar pocos routers. Para más, P1, que según MikroTik cuesta cuarenta y cinco dólares y da un giga. Hay prueba de sesenta días con tu cuenta, y las copias de un CHR no reinician la prueba. Se paga lo que se usa.
+B: ¿Y los sitios?
+A: WireGuard. En el CHR, un peer por sitio. En cada sitio, un peer hacia la IP del VPS con persistent keepalive en veinticinco segundos. Y si todos los clientes usan la ciento noventa y dos ciento sesenta y ocho ochenta y ocho, no ruteás sus LAN: entrás a la IP de túnel de cada router.
+B: ¿Laboratorio?
+A: Veinte minutos con un CHR en Proxmox o un VPS de prueba: endurecés, mirás la licencia, conectás un router de laboratorio y entrás a su IP de túnel.
+B: Y el CHR se actualiza como cualquier MikroTik.
+A: Igual. El hub es un router más, y se cuida como el más expuesto.

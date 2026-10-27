@@ -1,0 +1,17 @@
+A: Lección tres. El AP está en el local del cliente, a treinta kilómetros, y el controlador en tu servidor.
+B: Ahí entra el famoso set inform.
+A: Ahí entra la pregunta de cómo se entera el AP de dónde está su controlador. Hay tres caminos: DHCP opción cuarenta y tres, un nombre DNS que se llame unifi, o set inform por SSH.
+B: Yo siempre hice set inform. Entrás por SSH, pegás la URL y listo.
+A: No sos el único. Pero mirá un hilo del foro de Lawrence Systems. Un técnico con varios restaurantes en su controlador adopta todo bien, y cuando los equipos se actualizan o reinician, vuelven a la URL de fábrica, unifi dos puntos ocho mil ochenta.
+B: Uf. ¿Y qué le dijo Ubiquiti?
+A: Que no recomiendan cambios por SSH porque pueden desaparecer al reiniciar. Que usen opción cuarenta y tres. En un gateway UniFi es un campo de la red que se llama Option 43 Application Host Address.
+B: ¿Y todos están de acuerdo?
+A: No. En el mismo hilo Tom Lawrence dice que nunca tuvo problema con set inform y que así vuelven todos sus clientes. Dos de cuatro fuentes prefieren DHCP o DNS, y set inform queda como plan B.
+B: Entonces depende de si el DHCP del sitio es tuyo.
+A: Exacto. Si el router es tuyo, por ejemplo un MikroTik, cargás la opción cuarenta y tres y te olvidás. Si es del proveedor, set inform, y después de cada actualización mirás que siga conectado.
+B: ¿Algo más que se pase siempre?
+A: La URL. HostiFi dice que empieza con hache te te pe, termina en dos puntos ocho mil ochenta barra inform, y que uses nombre DNS, no IP. Y si el controlador está detrás de NAT o en un contenedor, en la configuración avanzada hay un Inform Host con Override. Un lector de LazyAdmin lo escribe en mayúsculas.
+B: [risas] Se ve que le costó.
+A: El laboratorio: cargás la opción cuarenta y tres en un router de pruebas, reseteás un AP en otra red y ves que aparece solo. Veinte minutos.
+B: Y te ahorrás ir hasta el local a reiniciar un AP.
+A: Ese es el punto.

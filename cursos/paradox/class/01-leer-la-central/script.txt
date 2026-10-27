@@ -1,0 +1,19 @@
+A: Arrancamos el curso de alarmas Paradox. Soy Lucía.
+B: Y yo Martín. Lección uno: antes de tocar una tecla, saber qué central tenés adelante.
+A: Exacto. Porque Paradox no es una sola cosa. En el parque instalado vas a encontrar Spectra SP, las SP plus, las Magellan MG, las EVO, y ahora la línea M.
+B: ¿Y cambia tanto de una a otra?
+A: Cambia la forma de programar. En SP y MG entrás con ENTER, el código de instalador, que de fábrica es cero cero cero cero, y secciones de tres dígitos.
+B: ¿Y en EVO?
+A: En EVO mantenés apretado el cero, el código de fábrica son seis ceros y las secciones tienen cuatro dígitos. Si le aplicás el manual de una SP a una EVO, no pasás ni de la puerta.
+B: [risas] Lo vi más de una vez. ¿Y la línea M?
+A: La M25 es otra lógica: va alimentada por PoE y se programa desde la app BlueEye o un software web. Según la página de Paradox maneja doscientas zonas y diez particiones.
+B: ¿Cuánto coinciden las fuentes en esto?
+A: Las cinco páginas que hablan de familias lo cuentan igual. Pero son del fabricante, de distribuidores o de proveedores. Es coherencia, no debate.
+B: Dale. ¿Un caso concreto?
+A: El reseteo. El blog de TremTech, que vende Paradox, explica que en casi todas las SP y MG se resetea con el botón: cinco segundos apretado, soltás, y otro toque antes de dos segundos. Pero la SP cuatro mil y la SP sesenta y cinco van con un puente entre PG uno y la zona uno, y con el bloqueo de instalador apagado.
+B: Uf. Si no sabés el modelo, buscás un botón que no hace lo que creés.
+A: Tal cual. Y la versión también importa. En SP y MG, la sección novecientos ochenta te muestra el firmware, dígito por dígito.
+B: ¿Qué probamos hoy?
+A: Agarrá la central de banco o la próxima de obra. Leé el modelo en la placa, entrá a la novecientos ochenta y anotá la versión. Diez minutos.
+B: Y eso va a la ficha de la obra.
+A: Eso. La próxima vez que llamen, ya sabés con qué manual abrir.

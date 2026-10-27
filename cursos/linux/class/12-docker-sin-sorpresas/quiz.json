@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un servidor tiene ufw con deny por defecto y solo SSH permitido. Levantás un contenedor con -p 3000:3000. ¿Qué pasa con el puerto 3000?",
+  "options": [
+   "Queda bloqueado por ufw",
+   "Docker no arranca hasta que lo abras en ufw",
+   "Solo accesible desde localhost",
+   "Queda accesible desde cualquier red que llegue al servidor, aunque ufw status no lo muestre"
+  ],
+  "answer": 3,
+  "why": "Docker redirige los puertos publicados en la tabla nat, antes de las reglas INPUT donde vive ufw. Por defecto publica en 0.0.0.0, es decir en todas las interfaces."
+ },
+ {
+  "q": "Un panel en contenedor solo lo usa un proxy inverso en el mismo servidor. ¿Cómo lo publicás?",
+  "options": [
+   "-p 127.0.0.1:8080:8080",
+   "-p 8080:8080 y ufw deny 8080",
+   "Con \"iptables\": false en daemon.json",
+   "-p 0.0.0.0:8080:8080"
+  ],
+  "answer": 0,
+  "why": "Publicado en 127.0.0.1 solo responde al propio host. ufw deny no lo frena, y desactivar iptables de Docker rompe la red de los contenedores."
+ },
+ {
+  "q": "¿Cuál es la forma confiable de verificar que un puerto de contenedor no está expuesto?",
+  "options": [
+   "ufw status verbose",
+   "docker ps en el servidor",
+   "Escanear con nmap o nc desde otra máquina u otra red",
+   "Revisar /etc/hosts"
+  ],
+  "answer": 2,
+  "why": "Los chequeos en el propio servidor miran el camino equivocado. ss ayuda a ver la dirección de escucha, pero solo una prueba desde afuera confirma lo que ve la red."
+ }
+]

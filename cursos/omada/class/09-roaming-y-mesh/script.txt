@@ -1,0 +1,22 @@
+A: Arranca el último arco. Lección nueve: roaming y mesh. Un depósito, los operarios con tablets, y la conexión se corta cuando caminan.
+B: Clásico de logística.
+A: La guía de roaming de TP-Link tiene una lista ordenada. Primero lo básico: el SSID tiene que ser idéntico en todos los APs. Nombre, seguridad, cifrado y clave.
+B: ¿Y si uno quedó con otra clave?
+A: El roaming falla. Y segundo: todos los APs en el mismo sitio. Los perfiles de roaming son por sitio.
+B: Ahí se conecta con la lección de sitios.
+A: Exacto. Después, Fast Roaming encendido, que activa el ochocientos dos once k y v, en Site Settings, Wireless Features.
+B: ¿Y el ochocientos dos once r?
+A: Ese es el delicado. La misma guía dice: si un cliente roamea al AP nuevo y queda sin internet, desactivá el r en ese SSID para probar. Hay equipos viejos que no lo soportan.
+B: Las lectoras de código de barras viejas, seguro.
+A: [risas] Seguro. Y la versión seis punto dos sumó cosas: non-stick roaming, para clientes pegados a un AP lejano; supresión de ping-pong, para los que saltan entre dos; y band steering.
+B: ¿Cuántas fuentes respaldan esto?
+A: Acá somos honestos: una sola fuente oficial para roaming y otra para mesh. Evidencia fina.
+B: Bueno, el mesh. En el depósito hay una zona sin cable.
+A: La FAQ de mesh pone números: máximo tres saltos, cuatro APs colgando de cada uplink, y la señal del uplink entre menos cuarenta y menos sesenta y dos dBm. En exterior, hasta ciento ochenta metros en campo abierto.
+B: ¿Y capacidad?
+A: Ahí está el punto. Mesh es para extender cobertura, no capacidad. Con el EAP225 Outdoor recomiendan cincuenta a sesenta clientes para toda la red mesh, no por AP.
+B: O sea, la zona de carga sí; el comedor con cien personas, cable.
+A: Exacto. Y un EAP que fue configurado por su web local tiene el mesh deshabilitado hasta un reset.
+B: ¿Laboratorio?
+A: Dos EAP con el mismo SSID, una notebook con ping continuo y caminar de uno a otro. Contar cuántos pings perdés, con y sin el r. Quince minutos.
+B: Medido así, ya no es "a veces se corta".

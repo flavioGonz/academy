@@ -1,0 +1,19 @@
+A: Lección dieciocho, la que cierra la parte de HTTP. La URL ya la tenemos. ¿Desde dónde la mandamos?
+B: Desde donde ya haya algo andando en la obra, supongo.
+A: Esa es la idea, y acá coinciden las siete fuentes que miramos: cualquier cliente HTTP sirve. Primero se prueba con curl desde la PC, y cuando anda, se muda al sistema.
+B: Empezá por Home Assistant.
+A: Home Assistant tiene rest_command. En el configuration punto yaml declarás un comando con la URL, usuario, clave y el tipo de autenticación, basic o digest. Reiniciás y te queda una acción, por ejemplo abrir portón, para un botón o una automatización.
+B: ¿Y MikroTik?
+A: Barra tool barra fetch. Le pasás la URL, user y password. Por defecto usa basic; con http-auth-scheme igual digest pasa a digest. Y output igual none para que no guarde nada. Sirve para un script o para el scheduler.
+B: ¿Y la central?
+A: En Asterisk o FreePBX, la función CURL del dialplan hace el pedido. Una extensión, por ejemplo siete mil uno, que llama a la URL del portón y corta.
+B: ¿Y el Grandstream UCM? ¿Y HikCentral?
+A: Ahí tengo que ser honesta: en las páginas que leímos no aparece una acción HTTP para abrir, ni en UCM ni en HikCentral. Con UCM, lo documentado sigue siendo el DTMF de las lecciones cinco y seis. Si hace falta HTTP, se pone en el medio un Home Assistant o un Asterisk.
+B: ¿Y cámaras?
+A: Eso sí está. Akuvox documenta cámaras de patentes que abren el portón: la HTTP API del portero en Allowlist con la IP de la cámara, y la cámara manda la patente. Con Hikvision, solo X912 y R29 desde ciertos firmwares, al servidor de alarmas con barra api barra lpr barra hik.
+B: ¿Y el detalle de basic contra digest?
+A: Tres fuentes lo marcan: el cliente tiene que hablar el mismo método que el equipo. Si con basic te devuelve no autorizado, probás digest.
+B: ¿Laboratorio?
+A: Veinte minutos. La misma apertura desde curl, desde un MikroTik y desde Home Assistant, cada uno con su usuario.
+B: Y la tabla de credenciales actualizada.
+A: Siempre. Así cualquier sistema abre, y sabés exactamente cuál fue.

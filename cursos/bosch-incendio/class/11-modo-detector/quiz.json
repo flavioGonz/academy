@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un FAP-425-OT-R quedó con el modo de fábrica. ¿Cuál es?",
+  "options": [
+   "Sala de servidores",
+   "Cocina en servicio",
+   "Oficina (modo día)",
+   "Solo térmico"
+  ],
+  "answer": 2,
+  "why": "Según la guía de operación, el valor por defecto en RPS de FAP-425-OT, OT-R y DOT-R es 'Office (day mode)'."
+ },
+ {
+  "q": "En el estudio BRE, ¿qué pasó con los multisensores ante fuentes de falsa alarma como la tostada?",
+  "options": [
+   "Dispararon antes que los ópticos",
+   "Dispararon en promedio más tarde que los ópticos, pero antes de que la tostada prendiera fuego",
+   "No dispararon nunca",
+   "Se averiaron"
+  ],
+  "answer": 1,
+  "why": "BRE reporta que en la prueba de tostada los multisensores respondieron unos 40 s después que los ópticos y aproximadamente un minuto antes de la ignición."
+ },
+ {
+  "q": "Un DOTC-R en una cocina se configura en un modo con un sensor apagado que la guía marca como no conforme con EN 54-7. ¿Qué corresponde?",
+  "options": [
+   "Revisarlo con el proyecto y documentar la decisión, porque cambia la conformidad y la respuesta al fuego",
+   "Dejarlo, nadie se da cuenta",
+   "Cambiar a dirección automática",
+   "Bajar el firmware"
+  ],
+  "answer": 0,
+  "why": "La guía marca combinaciones del DOTC-R que no cumplen EN 54-7; el modo es una decisión de diseño que se acuerda y se documenta."
+ }
+]

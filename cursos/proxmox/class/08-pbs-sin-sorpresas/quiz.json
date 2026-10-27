@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Bajaste la retención de un datastore de PBS y corriste prune, pero el disco sigue igual de lleno. ¿Por qué?",
+    "options": [
+      "Prune está roto",
+      "Hay que reiniciar PBS",
+      "La deduplicación impide borrar",
+      "Prune solo borra índices; el espacio se libera cuando corre garbage collection"
+    ],
+    "answer": 3,
+    "why": "Según la documentación de PBS, prune elimina metadatos de los snapshots; garbage collection borra después los chunks que nadie referencia, con un período de gracia."
+  },
+  {
+    "q": "¿Qué rol le das al usuario con el que Proxmox VE escribe en PBS para que un host comprometido no pueda borrar backups?",
+    "options": [
+      "DatastoreBackup",
+      "Admin",
+      "DatastoreAdmin",
+      "Audit"
+    ],
+    "answer": 0,
+    "why": "DatastoreBackup permite crear backups pero no borrarlos, así quien tome el host PVE no puede eliminar las copias existentes."
+  },
+  {
+    "q": "Los verify jobs de un PBS que siempre pasaban empiezan a fallar en muchos backups a la vez. ¿Qué sospechás primero?",
+    "options": [
+      "Que se cortó la luz y no pasa nada",
+      "Que el prune job está deshabilitado",
+      "Corrupción del disco o ransomware cifrando el datastore",
+      "Que falta actualizar el navegador"
+    ],
+    "answer": 2,
+    "why": "Verify compara checksums; la doc de PBS señala que si un ransomware cifra backups, los verify empiezan a fallar. También detectan degradación de discos."
+  }
+]

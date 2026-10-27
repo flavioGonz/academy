@@ -1,0 +1,5 @@
+[
+  {"q": "Un cliente con IP180 quiere usar BlueEye por IP estática para no pagar suscripción. ¿Qué le decís?", "options": ["Que los módulos MQTT no admiten conexión por IP estática; la app va por Swan", "Que se configura con un port forward al 10000", "Que tiene que usar Insite Gold", "Que alcanza con desactivar el sondeo Swan"], "answer": 0, "why": "La guía del menú instalador de BlueEye indica que la conexión por IP estática no está soportada en módulos MQTT como el IP180."},
+  {"q": "En una SP6000 el código de PC es 6089. ¿Cómo lo ingresás en BlueEye?", "options": ["6089", "0000", "6F89", "6A89"], "answer": 3, "why": "Según la guía de BlueEye, en paneles MG/SP cada 0 del código de PC se escribe como A, porque el valor es hexadecimal."},
+  {"q": "Borraste un sitio desde el menú instalador de BlueEye. ¿Qué pasa en el servidor Swan?", "options": ["Se borra el sitio y se cancela la suscripción", "El sitio sigue existiendo en el servidor Swan", "Se resetea la central", "El módulo pasa a IP estática"], "answer": 1, "why": "La guía aclara que borrar sitios desde BlueEye no los borra del servidor Swan."}
+]

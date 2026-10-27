@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un servidor con UPS se apagó ordenadamente durante un corte largo y no volvió a encender cuando regresó la luz. El BIOS está en 'Last State'. ¿Por qué?",
+  "options": [
+   "La UPS está fallada",
+   "Para el BIOS el último estado fue 'apagado', porque el apagado fue ordenado",
+   "Windows quedó en hibernación",
+   "Falta la batería del BIOS"
+  ],
+  "answer": 1,
+  "why": "Con Last State el equipo vuelve como estaba; si la UPS lo apagó en orden, estaba apagado y no arranca. Con UPS conviene Power On."
+ },
+ {
+  "q": "¿Qué hace 'powercfg /change standby-timeout-ac 0'?",
+  "options": [
+   "Suspende el equipo de inmediato",
+   "Apaga el monitor",
+   "Desactiva la suspensión con corriente (nunca suspende)",
+   "Activa la hibernación"
+  ],
+  "answer": 2,
+  "why": "En powercfg, un tiempo de 0 significa 'nunca'."
+ },
+ {
+  "q": "En un puesto de monitoreo el Wake on LAN funciona a veces sí y a veces no. ¿Qué ajuste de Windows conviene revisar?",
+  "options": [
+   "El inicio rápido (Fast Startup), que se apaga con powercfg /hibernate off",
+   "El perfil de red",
+   "La firma SMB",
+   "Las horas activas de Windows Update"
+  ],
+  "answer": 0,
+  "why": "Con el inicio rápido activo el Wake on LAN puede fallar; powercfg /hibernate off apaga hibernación e inicio rápido."
+ }
+]

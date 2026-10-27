@@ -1,0 +1,18 @@
+A: Arco tres, comunicación. Lección nueve: BabyWare primero.
+B: El software de Paradox para PC. ¿Por qué primero?
+A: Porque antes de tocar módulos, internet o la app, conviene tener una copia de lo que la central tiene programado. Y la forma más simple es el cable: el 307USB, del conector serie de la central al USB de la notebook.
+B: ¿Y entra cualquiera con BabyWare?
+A: No. La central pide dos llaves que no son el código de instalador: el ID de panel, en la sección novecientos diez, y la contraseña de PC, en la novecientos once. Si no coinciden con las de la cuenta en BabyWare, no conecta.
+B: ¿Y de fábrica?
+A: Acá las fuentes no dicen lo mismo. La guía de las SP plus dice que BabyWare obliga a cambiarlas en la primera conexión si están en cero cero cero cero. Pero los manuales nuevos del IP180 y la guía de BlueEye siguen hablando de cero cero cero cero como valor de fábrica.
+B: O sea, tratalas como si estuvieran cambiadas, y anotalas.
+A: Exacto. Y un detalle clave: el reseteo por botón vuelve todo a fábrica, menos el ID de panel y la contraseña de PC.
+B: ¿Hay historia?
+A: En IPVM, un técnico tenía una MG cinco mil cincuenta sin el código de instalador y el reseteo no le funcionaba. Uno le contestó: entrá con BabyWare usando ID y contraseña de PC, si siguen de fábrica, y cambiá el código desde el software.
+B: [suspiro] Que es la solución para el técnico y el agujero para el cliente.
+A: Las dos cosas. Por eso esas llaves se cambian siempre. Y otra que cuentan en el foro de openHAB: el IP150 atiende una conexión a la vez. Si una integración está conectada, BabyWare queda afuera.
+B: ¿Cuánto coinciden las fuentes?
+A: Dos de cuatro en el procedimiento, con la discrepancia que te conté.
+B: ¿Qué probamos?
+A: Cable 307USB, cambiás ID de panel y contraseña de PC, creás la cuenta en BabyWare, leés toda la programación y la guardás con el nombre de la obra. Quince minutos.
+B: Antes de cambiar nada, la copia.

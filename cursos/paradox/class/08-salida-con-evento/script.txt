@@ -1,0 +1,18 @@
+A: Lección ocho: las PGM. Las salidas programables que el cliente ama porque le abren el portón.
+B: [risas] Y que nosotros odiamos cuando quemamos una.
+A: Por eso arrancamos por ahí. Las PGM de la placa son salidas de baja corriente: la guía de las SP plus habla de cien a ciento cincuenta miliamperes. Sirven para mandar un relé, no para mover un motor ni alimentar una sirena grande.
+B: Relé externo siempre, entonces.
+A: Siempre. La PGM manda, el relé carga. Y si la alimentás del auxiliar, suma en la cuenta de setecientos miliamperes de la lección cuatro.
+B: ¿Y cómo se programa?
+A: Cada PGM tiene un evento de activación y uno de desactivación. Cada evento son tres números: grupo, subgrupo y partición. En lugar de desactivación podés poner un tiempo: de fábrica, cinco segundos.
+B: ¿Y de dónde saco los eventos?
+A: De la tabla de la guía de programación. Hay uno para cada cosa: zona en alarma, partición armada, falla de alimentación, el CLEAR más ENTER para resetear detectores de humo.
+B: ¿Cuánto coinciden las fuentes?
+A: Las dos guías de las SP plus, instalación y programación, cuentan lo mismo. Evidencia fina, pero es el manual.
+B: Dale. ¿El caso real?
+A: Un detalle que ahorra tiempo: de fábrica, la PGM uno ya se activa con el botón B de cualquier control remoto, y la PGM dos con el botón C. El portón está medio programado de entrada.
+B: ¿En serio? Yo siempre lo cargaba a mano.
+A: Y otro detalle: si usás el evento de falla de AC, la PGM recién se activa cuando vence el retardo de reporte de falla de energía. De fábrica, quince minutos.
+B: Uf. Y uno corta la luz y espera que prenda la lucecita al toque.
+A: [risas] Tal cual. En el laboratorio armás dos cosas: un pulso de dos segundos para el portón con un relé, y una luz que avisa la falla de AC y se apaga cuando vuelve. Veinte minutos.
+B: La PGM manda, el relé carga.

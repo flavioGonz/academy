@@ -1,0 +1,304 @@
+# Notes: batch c (ampliación: conexión a internet, software y acceso remoto)
+Pages read: 20 nuevas más 8 ya leídas releídas para estos temas. With notes: 20. Skipped: 0 nuevas (la de LinITX es corta y de 2018, se usa solo como voz de practicante).
+
+Páginas nuevas: manual.mikrotik.com 7.25 (packages, pppoe, dhcp client, ipsec, back-to-home, chr-licensing), blog.linitx.com (canales), wirelessnetware.ca (Back To Home), community.hetzner.com (CHR en Hetzner), mkcontroller.com (IPsec sitio a sitio), learn.microsoft.com (L2TP/IPsec detrás de NAT-T), getlabsdone.com (PPPoE y pfSense con IPsec), mikrotikdocs.fyi (WireGuard sitio a sitio), antel.com.uy (preguntas frecuentes de internet, Internet pyme, Internet corporativo), foros.montevideocomm.uy (configuración de router con PPPoE), macacos.com.uy (dos hilos de usuarios uruguayos sobre el módem de Antel en modo puente).
+Releídas: first-time-configuration, nat, cloud, upgrading-and-installation, building-advanced-firewall, wireguard, mkcontroller dual WAN y VPS, cloudzy L2TP, foro defconf.
+
+## T17 IP fija en la WAN
+- c:N1. Tres formas de conectar la WAN: DHCP (lo más común), IP estática (conexiones empresariales o algunas de fibra) y PPPoE (usuario y contraseña). Si no sabés, empezá por DHCP; según la documentación anda en cerca del 80% de las conexiones hogareñas (su cifra).
+  - Source: https://manual.mikrotik.com/docs/7.25/getting-started/first-time-configuration  Quote: "Start with DHCP — it works for about 80% of home connections"
+  - Kind: rule of thumb
+  - Level: foundation
+  - Also: T18, T19
+- c:N2. IP estática en tres comandos: la dirección en la interfaz WAN, una ruta por defecto con el gateway y los servidores DNS en /ip/dns.
+  - Source: https://manual.mikrotik.com/docs/7.25/getting-started/first-time-configuration  Quote: "Add the IP address to the WAN interface, create a default route using the gateway, and set the DNS server"
+  - Kind: template
+  - Level: foundation
+- c:N3. Masquerade está pensado para IP pública dinámica (DHCP o PPPoE que cambia al reconectar): al caer la interfaz borra las conexiones. Con src-nat las entradas de conexión quedan y pueden seguir tras un corte; con dos enlaces eso puede filtrar IPs privadas, y la documentación propone una ruta blackhole.
+  - Source: https://manual.mikrotik.com/docs/7.25/firewall-and-quality-of-service/firewall/nat  Quote: "when public IP is dynamic"
+  - Kind: definition
+  - Level: core
+  - Also: T10
+- c:N8. Las rutas recursivas solo funcionan con gateways IP estables, no con PPPoE o DHCP donde la dirección cambia; un practicante (vende una plataforma de gestión) lo marca como el error de diseño típico.
+  - Source: https://mkcontroller.com/blog/tutorials/mikrotik/mikrotik-dual-wan-failover-isp-guide/  Quote: "recursive routing only works with stable IP gateways"
+  - Kind: rule of thumb
+  - Level: core
+  - Also: T18, T10
+  - Bias: vende MKController
+- c:N17. Antel Internet pyme incluye 1 IP pública fija sobre fibra (velocidades de 150/30 a 1500/100 Mbps, su oferta), con contrato de un año.
+  - Source: https://antel.com.uy/empresas/internet-y-fija/planes/internet-pyme  Quote: "1 IP Pública fija"
+  - Kind: number
+  - Level: foundation
+- c:N18. Antel Internet corporativo: hasta 29 IPs públicas fijas (un /27), conexión ruteada, Antel instala y administra un router en la empresa y entrega el servicio en un RJ45 Ethernet.
+  - Source: https://antel.com.uy/empresas/internet-y-fija/planes/internet-corporativo  Quote: "Incluye hasta 29 IPs públicas fijas (prefijo /27)"
+  - Kind: number
+  - Level: core
+
+## T18 DHCP cliente en la WAN
+- c:N4. El cliente DHCP agrega la IP como dirección dinámica, una ruta por defecto por el gateway recibido (o las rutas de la opción 121), los DNS al resolver (use-peer-dns) y los NTP al cliente NTP (use-peer-ntp). Al perder el lease saca todo.
+  - Source: https://manual.mikrotik.com/docs/7.25/network-management/dhcp/client/  Quote: "When the lease is lost or the client is disabled, the dynamic address and routes are removed"
+  - Kind: definition
+  - Level: foundation
+- c:N5. add-default-route tiene tres valores: yes (opción 121 si viene, si no la opción 3), special-classless (las dos) y no. Si la opción 121 está presente, el gateway de la opción 3 se ignora (RFC 3442).
+  - Source: https://manual.mikrotik.com/docs/7.25/network-management/dhcp/client/  Quote: "When option 121 is present, the gateway from option 3 is ignored"
+  - Kind: mistake
+  - Level: core
+- c:N6. default-route-distance (1 por defecto) decide qué ruta por defecto gana; con distancias iguales las dos quedan activas y reparten tráfico (ECMP). check-gateway deja de usar la ruta si el gateway no contesta.
+  - Source: https://manual.mikrotik.com/docs/7.25/network-management/dhcp/client/  Quote: "When the distances are equal, both routes are active and traffic is shared between them (ECMP)"
+  - Kind: technique
+  - Level: core
+  - Also: T10
+- c:N7. El cliente DHCP acepta un script de lease con variables como bound, lease-address y gateway-address. El ejemplo oficial crea o actualiza una ruta en una tabla propia cuando cambia el gateway y la borra cuando se pierde el lease.
+  - Source: https://manual.mikrotik.com/docs/7.25/network-management/dhcp/client/  Quote: "updates the route when the gateway changes, and removes it when the lease ends"
+  - Kind: template
+  - Level: advanced
+  - Also: T10
+
+## T19 PPPoE y el caso Antel
+- c:N9. PPPoE suma 8 bytes (6 de PPPoE y 2 de PPP): MTU y MRU no pueden pasar de 1492. Como muchos routers no mandan ICMP de fragmentación y muchos firewalls lo bloquean, la salida práctica es ajustar el MSS.
+  - Source: https://manual.mikrotik.com/docs/7.25/virtual-private-networks/pppoe/  Quote: "the maximum PPPoE MRU and MTU values must not be larger than 1492"
+  - Kind: number
+  - Level: core
+- c:N10. La documentación pide no usar IP estática ni DHCP en la misma interfaz donde corre PPPoE, por seguridad.
+  - Source: https://manual.mikrotik.com/docs/7.25/virtual-private-networks/pppoe/  Quote: "Do not use static IP addresses or DHCP on the same interfaces as PPPoE"
+  - Kind: mistake
+  - Level: core
+- c:N11. Cliente PPPoE: add-default-route=yes y use-peer-dns=yes; desde ese momento la WAN es pppoe-out1 y no ether1, y todo lo que dependa de la WAN (NAT, listas) se ajusta a esa interfaz.
+  - Source: https://manual.mikrotik.com/docs/7.25/getting-started/first-time-configuration  Quote: "the WAN interface becomes pppoe-out1 instead of ether1"
+  - Kind: mistake
+  - Level: foundation
+- c:N12. Algunas fibras exigen etiquetar la WAN con una VLAN (ejemplos 10, 20 o 100) antes del PPPoE: se crea la VLAN sobre ether1 y el PPPoE sobre la VLAN, no sobre ether1. Errores típicos: autenticación fallida (credenciales o MAC atada al router anterior), conectado sin internet en la LAN (masquerade por la interfaz PPPoE) y páginas que cargan a medias (MTU, activar Change TCP MSS).
+  - Source: https://getlabsdone.com/how-to-configure-pppoe-in-mikrotik-router/  Quote: "Some fiber providers require a VLAN tag"
+  - Kind: technique
+  - Level: core
+- c:N13. Antel, en su página oficial de preguntas frecuentes de internet: los equipos (ONT) pueden funcionar en modo puente o router WiFi, y el cambio se pide por MiAntel o al 121. La página no menciona PPPoE, VLAN ni MTU.
+  - Source: https://antel.com.uy/personas/preguntas-frecuentes/internet  Quote: "Los equipos pueden operar en modo puente o router WiFi"
+  - Kind: definition
+  - Level: foundation
+- c:N14. Usuarios uruguayos (foro macacos, 2017): en fibra el cambio de modo puente a router lo hace el proveedor de forma remota; varios tuvieron cortes con el ONT de Antel en puente y su router haciendo PPPoE, y lo resolvieron volviendo el ONT a modo router y poniendo su equipo por DHCP detrás (doble NAT). Es una experiencia vieja y de usuarios, no una regla.
+  - Source: https://www.macacos.com.uy/foros/viewtopic.php?id=17622  Quote: "en fibra lo hacen ellos"
+  - Kind: story
+  - Level: core
+- c:N15. Otro hilo del mismo foro (2020): para administrar la red con un router propio hay que pedirle a Antel que pase el módem a modo bridge; un usuario terminó usando el puerto LAN del módem con IP fija o DHCP en su equipo.
+  - Source: https://www.macacos.com.uy/foros/viewtopic.php?id=17924  Quote: "tenes que pedirle a ANTEL que te configuren el modem a modo bridge"
+  - Kind: story
+  - Level: foundation
+- c:N16. Un instructivo de soporte de un proveedor uruguayo (Montevideo COMM, 2020) configura un TP-Link por PPPoE con un usuario y clave genéricos de Antel con dominio de ADSL. No dice si aplica a fibra; se toma solo como indicio de que el servicio de Antel autentica por PPPoE.
+  - Source: https://foros.montevideocomm.uy/forum/accesorios-wifi-15/question/configuracion-de-router-tp-link-wr941hp-523  Quote: "verificar que el campo Internet Conection Type se encuentre en PPPoE"
+  - Kind: story
+  - Level: core
+  - Bias: soporte de un proveedor, sin fecha de vigencia
+- c:N19. Un practicante registró en su backup versionado el día que el ISP le pidió cambiar las credenciales PPPoE: el commit apareció solo.
+  - Source: https://xtremeownage.com/blog/2025/mikrotik-backup-script/  Quote: "my ISP called, and let me know I needed to update my PPPoe credentials"
+  - Kind: story
+  - Level: core
+  - Also: T13
+
+## T20 Paquetes y canales de RouterOS
+- c:N20. Las funciones de RouterOS vienen en paquetes .npk; casi todo está en el paquete routeros y algunas cosas son paquetes extra (container, zerotier, iot, user-manager, wifi-qcom, wireless). Solo MikroTik puede crear paquetes.
+  - Source: https://manual.mikrotik.com/docs/7.25/getting-started/installation-and-upgrade/packages/  Quote: "Package files are provided exclusively by MikroTik"
+  - Kind: definition
+  - Level: foundation
+- c:N21. Desde 7.13 los equipos WiFi necesitan el paquete de radio aparte: wifi-qcom para 802.11ax, wireless para la generación anterior; wireless y wifi-qcom no pueden estar activos a la vez.
+  - Source: https://manual.mikrotik.com/docs/7.25/getting-started/installation-and-upgrade/packages/  Quote: "they cannot be active at the same time"
+  - Kind: mistake
+  - Level: core
+- c:N22. Paquetes extra desde el router: Check For Updates lista los disponibles con flags X y A; se habilita el paquete y Apply Changes reinicia. En CLI: /system/package/enable y /system/package/apply-changes; uninstall, disable y unschedule para revertir; el log confirma o explica el fallo.
+  - Source: https://manual.mikrotik.com/docs/7.25/getting-started/installation-and-upgrade/packages/  Quote: "select Apply Changes and the device will ask for a reboot"
+  - Kind: technique
+  - Level: core
+- c:N23. Sin internet en el router: bajar el .npk de la arquitectura correcta (System, Resources), arrastrarlo a Files en la raíz (no dentro de otra carpeta) y reiniciar. Si un paquete extra no se subió, ignore-missing actualiza solo el principal. (Aparte, la página de paquetes agrega que un archivo .auto.npk subido por FTP o SFTP se instala solo y reinicia.)
+  - Source: https://help.mikrotik.com/docs/spaces/ROS/pages/328142/Upgrading+and+installation  Quote: "make sure to put the package in the root menu, not inside the hotspot folder"
+  - Kind: technique
+  - Level: core
+  - Also: T14
+- c:N24. Downgrade: subir los .npk de la versión anterior y ejecutar /system/package/downgrade, que reinicia. Otra vía: cambiar a un canal que ofrece una versión más vieja y estable y usar Check for Updates.
+  - Source: https://manual.mikrotik.com/docs/7.25/getting-started/installation-and-upgrade/packages/  Quote: "/system/package/downgrade"
+  - Kind: technique
+  - Level: core
+  - Also: T14
+- c:N25. Hay una actualización local: un router con los paquetes los sirve a otros de la red (/system/package/local-update), útil en sitios sin salida a internet o con muchos equipos.
+  - Source: https://help.mikrotik.com/docs/spaces/ROS/pages/328142/Upgrading+and+installation  Quote: "upgrade one or multiple MikroTik routers within your local network"
+  - Kind: technique
+  - Level: advanced
+- c:N26. Canales: long-term sale poco y trae solo arreglos críticos, sin funciones nuevas dentro de la rama; stable sale cada pocos meses con funciones probadas; testing cada pocas semanas con prueba interna básica y no va en producción; development es para entusiastas.
+  - Source: https://help.mikrotik.com/docs/spaces/ROS/pages/328142/Upgrading+and+installation  Quote: "should not be used in production"
+  - Kind: definition
+  - Level: foundation
+  - Also: T14
+- c:N27. Un distribuidor (LinITX, 2018, con los nombres viejos de los canales) recomienda la rama de solo arreglos para routers de producción; la versión con funciones nuevas, probarla antes en un equipo que no sea crítico; la candidata, nunca en producción porque puede dejar el equipo recuperable solo por Netinstall.
+  - Source: https://blog.linitx.com/mikrotik-routeros-package-channel-bugfix-only-current-release-candidate-legacy/  Quote: "For normal production routers we recommend that you use 'bugfix only'"
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: distribuidor de MikroTik; nombres de canal de RouterOS 6
+- c:N28. La documentación ofrece un script de scheduler que instala solo cuando hay versión nueva en el canal elegido; no funciona la primera vez si venís de v6 (hay que pasar a 7.12.1 a mano).
+  - Source: https://help.mikrotik.com/docs/spaces/ROS/pages/328142/Upgrading+and+installation  Quote: "You can automate the upgrade process by running a script in the system scheduler"
+  - Kind: template
+  - Level: advanced
+
+## T12 IP Cloud y DDNS (ampliación)
+- c:N29. DDNS: nombre <serie>.sn.mynetname.net con TTL de 60 segundos; detrás de NAT el router manda una actualización por minuto; force-update la manda ya; use-local-address hace que resuelva a la IP local. ddns-enabled=auto lo apaga salvo que Back To Home esté activo.
+  - Source: https://manual.mikrotik.com/docs/7.25/network-management/cloud/  Quote: "Behind NAT, where the router cannot see its public address on its own interfaces, the router sends an update every minute"
+  - Kind: definition
+  - Level: core
+- c:N30. El router habla con cloud2.mikrotik.com por UDP 15252. public-address es la dirección que vio el servidor: detrás de NAT es la del equipo NAT; con varias WAN, la de la conexión que usa la ruta hacia cloud2.
+  - Source: https://manual.mikrotik.com/docs/7.25/network-management/cloud/  Quote: "On a router with several internet connections, it is the address of the connection that the route to cloud2.mikrotik.com uses"
+  - Kind: mistake
+  - Level: core
+  - Also: T10
+- c:N31. update-time pone el reloj desde la nube al arrancar solo si el cliente NTP está apagado, y es aproximado; para un reloj exacto, NTP. Los servicios cloud funcionan en equipos MikroTik y en CHR con licencia paga; en RouterOS x86 no.
+  - Source: https://manual.mikrotik.com/docs/7.25/network-management/cloud/  Quote: "The cloud time is approximate: for an accurate clock, use the NTP client"
+  - Kind: rule of thumb
+  - Level: core
+- c:N32. IPsec es muy sensible a la diferencia de reloj: conviene NTP en los dos routers antes de armar el túnel, porque si se desfasan las SA vencen y el túnel se cae (practicante con producto propio).
+  - Source: https://mkcontroller.com/blog/remote_access/mikrotik/mikrotik-ipsec-site-to-site-vpn/  Quote: "IPsec is very sensitive to clock skew"
+  - Kind: mistake
+  - Level: core
+  - Also: T23
+  - Bias: vende MKController
+
+## T24 Back To Home
+- c:N33. Back To Home funciona en CPU ARM, ARM64 o TILE con RouterOS 7.12 o posterior. Convierte al router en servidor WireGuard alcanzable aunque no tenga IP pública: con IP pública el cliente va directo, si no, por un relay de MikroTik; cifrado de punta a punta, el relay no lee el tráfico; por el relay puede ir más lento.
+  - Source: https://manual.mikrotik.com/docs/7.25/network-management/cloud/back-to-home/  Quote: "Through the relay, the speed can be lower"
+  - Kind: definition
+  - Level: foundation
+- c:N34. Usuarios de Back To Home sin la app: /ip/cloud/set back-to-home-vpn=enabled, esperar vpn-status running, y /ip/cloud/back-to-home-user/add con allow-lan, client-allowed-address, client-dns y expires; show-client-config da la configuración y un QR. allow-lan=no (por defecto) solo da internet a través del router. expires no se puede cambiar después.
+  - Source: https://manual.mikrotik.com/docs/7.25/network-management/cloud/back-to-home/  Quote: "allow-lan=no , the default, lets the user reach only the internet through the router"
+  - Kind: template
+  - Level: core
+- c:N35. Al activarlo, RouterOS crea la interfaz back-to-home-vpn con 192.168.216.1/24, reglas dinámicas de input, masquerade y forward, y el nombre <serie>.vpn.mynetname.net. La restricción de usuarios sin LAN depende de la interface list LAN de la configuración por defecto: si tus interfaces locales no están en LAN, la restricción no las cubre.
+  - Source: https://manual.mikrotik.com/docs/7.25/network-management/cloud/back-to-home/  Quote: "keep your local interfaces in that list"
+  - Kind: mistake
+  - Level: core
+- c:N36. Revocar (back-to-home-vpn=revoked-and-disabled) borra todos los usuarios y claves; al volver a activarlo hay claves y puerto nuevos y hay que reconfigurar cada teléfono. vpn-relay-ipv4-status dice si los clientes llegan directo o por relay.
+  - Source: https://manual.mikrotik.com/docs/7.25/network-management/cloud/back-to-home/  Quote: "you set up every phone and computer again"
+  - Kind: mistake
+  - Level: core
+- c:N37. Back To Home es para acceso simple, no para anonimato; para control fino de la VPN, WireGuard configurado a mano.
+  - Source: https://manual.mikrotik.com/docs/7.25/network-management/cloud/back-to-home/  Quote: "For finer control over VPN access, configure WireGuard yourself"
+  - Kind: rule of thumb
+  - Level: core
+  - Also: T11
+- c:N38. Un distribuidor canadiense describe Back To Home como la respuesta de MikroTik al doble NAT y al CGNAT, y aclara que los RouterBOARD con MIPSBE, MMIPS, SMIPS y PPC no están soportados.
+  - Source: https://www.wirelessnetware.ca/blog/back-to-home-with-mikrotik/  Quote: "legacy RouterBoards, which utilize the MIPSBE, MMIPS, SMIPS, and PPC chipsets, are not officially supported"
+  - Kind: mistake
+  - Level: foundation
+  - Bias: distribuidor y escuela MTCNA
+
+- c:N60. La página de servicios cloud resume el mecanismo: cuando el router no es alcanzable desde internet, Back To Home y File Share entran por relays de MikroTik; el router mantiene una conexión abierta al relay más cercano y las claves quedan solo en router y cliente. Siempre es el router el que abre la conexión, por eso no hace falta port forwarding en otro equipo.
+  - Source: https://manual.mikrotik.com/docs/7.25/network-management/cloud/  Quote: "The router keeps a connection open to the nearest relay"
+  - Kind: definition
+  - Level: core
+  - Also: T12
+
+## T21 CHR en un VPS como concentrador
+- c:N39. Licencias CHR (precios de MikroTik): Free sin vencimiento con 1 Mbps de subida por interfaz y todas las funciones; P1 1 Gbps (45 dólares); P10 10 Gbps (95); P-Unlimited sin límite (250). Prueba gratis de 60 días de cualquier nivel pago con cuenta de mikrotik.com y /system/license/renew.
+  - Source: https://manual.mikrotik.com/docs/7.25/getting-started/routeros-licensing/chr/chr-licensing/  Quote: "1 Mbps upload limit per interface"
+  - Kind: number
+  - Level: core
+- c:N40. Si la prueba vence o el CHR no logra renovar contra el servidor de licencias antes de deadline-at, sigue funcionando en el mismo nivel pero sin actualizar RouterOS ni cambiar paquetes. Clonar un CHR no reinicia la prueba: las copias conservan el estado. IP Cloud requiere licencia perpetua paga.
+  - Source: https://manual.mikrotik.com/docs/7.25/getting-started/routeros-licensing/chr/chr-licensing/  Quote: "trial periods cannot be extended by creating copies"
+  - Kind: mistake
+  - Level: core
+- c:N41. Instalación en un VPS (Hetzner): arrancar en el sistema de rescate, bajar la imagen raw del CHR y escribirla con dd sobre el disco; al reiniciar el usuario es admin sin contraseña, así que lo primero es crear un usuario propio y borrar admin, apagar servicios menos SSH, MAC server y descubrimiento en none, DNS remoto, proxy, SOCKS y UPnP apagados, y un firewall de input con lista de administradores. El tutorial usa una imagen 6.49; hoy corresponde una v7.
+  - Source: https://community.hetzner.com/tutorials/mikrotik-chr-basic-setup  Quote: "the default login credentials are user : admin and password : none"
+  - Kind: template
+  - Level: core
+- c:N42. Un VPS con IP pública es el punto de encuentro: el MikroTik del cliente inicia el túnel saliente, así que NAT y CGNAT del lado del cliente no importan. Lista de endurecimiento: claves SSH en el VPS, un certificado o clave por router, publicar solo lo necesario, restringir el firewall a IPs de administradores (practicante con producto propio, el ejemplo es OpenVPN).
+  - Source: https://mkcontroller.com/blog/remote_access/mikrotik/remote_mikrotik_management_via_vps  Quote: "it never accepts inbound connections, so NAT and CGNAT on the customer side don't matter"
+  - Kind: technique
+  - Level: core
+  - Bias: vende MKController
+- c:N43. WireGuard sitio a sitio: el lado sin IP pública inicia con endpoint-address y persistent-keepalive=25s; el lado público no pone endpoint. Si los dos sitios están detrás de CGNAT, hace falta un VPS con IP pública como relay. Un CHR recién instalado no tiene interface list WAN: hay que crearla.
+  - Source: https://mikrotikdocs.fyi/virtual-private-networks/home-cottage-wireguard/  Quote: "If both sites are behind CGNAT, you need a VPS relay with a public IP"
+  - Kind: template
+  - Level: core
+  - Also: T11
+- c:N44. Dos LAN con el mismo rango (por ejemplo las dos 192.168.88.0/24) no se pueden rutear entre sí: hay que renumerar una antes de unirlas.
+  - Source: https://mkcontroller.com/blog/remote_access/mikrotik/mikrotik-ipsec-site-to-site-vpn/  Quote: "If both sites use 192.168.88.0/24 , routing is impossible"
+  - Kind: mistake
+  - Level: core
+  - Also: T23
+
+## T22 L2TP con IPsec
+- c:N45. Servidor L2TP/IPsec en RouterOS: /interface/l2tp-server/server/set enabled=yes use-ipsec=required ipsec-secret=... ; required acepta solo L2TP dentro de IPsec y crea un peer IPsec dinámico (main-l2tp, NAT-T activo, DPD de 2 minutos). Después pool, perfil PPP y un secret por usuario. Funciona con Windows, Android, iOS y macOS.
+  - Source: https://manual.mikrotik.com/docs/7.25/virtual-private-networks/ipsec/  Quote: "use-ipsec is set to required to ensure that only IPsec encapsulated L2TP connections are accepted"
+  - Kind: template
+  - Level: core
+- c:N46. Cliente L2TP/IPsec en RouterOS: /interface/l2tp-client/add con use-ipsec=yes e ipsec-secret; crea peer y política dinámicos.
+  - Source: https://manual.mikrotik.com/docs/7.25/virtual-private-networks/ipsec/  Quote: "This automatically creates dynamic IPsec peer and policy configurations"
+  - Kind: template
+  - Level: core
+- c:N47. Firewall para L2TP/IPsec en input: UDP 500 (fase 1), UDP 4500 (NAT-T), UDP 1701 (L2TP) y protocolo ESP. Si los clientes llegan a subredes internas, regla con matcher de política IPsec en forward y tráfico fuera del masquerade; el bypass de FastTrack es obligatorio. El autor pide modp2048 como mínimo y desaconseja modp1024.
+  - Source: https://cloudzy.com/de/blog/mikrotik-l2tp-vpn/  Quote: "Port 1701 für UDP akzeptieren, um L2TP-Verbindungen aufzubauen"
+  - Kind: technique
+  - Level: core
+  - Bias: proveedor de VPS
+- c:N48. Windows por defecto no arma SA de IPsec NAT-T hacia servidores detrás de NAT. La clave de registro AssumeUDPEncapsulationContextOnSendRule en HKLM\SYSTEM\CurrentControlSet\Services\PolicyAgent: 0 por defecto, 1 si el servidor está detrás de NAT, 2 si servidor y cliente lo están; después, reiniciar.
+  - Source: https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-l2tp-ipsec-server-behind-nat-t-device  Quote: "When it's set to 2, Windows can establish security associations when both the server and VPN client computer"
+  - Kind: technique
+  - Level: core
+- c:N49. La documentación de IPsec advierte que la clave precompartida es vulnerable a ataques offline también en modo main e ike2, y aconseja evitarla.
+  - Source: https://manual.mikrotik.com/docs/7.25/virtual-private-networks/ipsec/  Quote: "You should avoid the PSK authentication method"
+  - Kind: rule of thumb
+  - Level: advanced
+  - Also: T23
+
+## T23 IPsec puro entre marcas
+- c:N50. Dos fases: la fase 1 (profile y peer) debe coincidir en método de autenticación, grupo DH, cifrado, modo de intercambio, hash, NAT-T y opcionalmente DPD y lifetime; la fase 2 (proposal y policy) en protocolo, modo túnel o transporte, autenticación, grupo PFS y lifetime.
+  - Source: https://manual.mikrotik.com/docs/7.25/virtual-private-networks/ipsec/  Quote: "This phase should match the following settings"
+  - Kind: definition
+  - Level: core
+- c:N51. Ejemplo oficial sitio a sitio: profile (dh-group, enc-algorithm), proposal (enc-algorithms, pfs-group), peer (address, profile), identity (peer, secret) y policy (src-address, dst-address, tunnel=yes, action=encrypt, proposal, peer). Verificación: /ip/ipsec/active-peers/print y /ip/ipsec/installed-sa/print, dos SA por router.
+  - Source: https://manual.mikrotik.com/docs/7.25/virtual-private-networks/ipsec/  Quote: "two IPsec Security Associations should be created on both routers"
+  - Kind: template
+  - Level: core
+- c:N52. NAT y FastTrack: el masquerade cambia el origen antes de cifrar y la política ya no coincide, por eso va una regla srcnat accept arriba de todo; si probaste antes de agregarla, limpiar conexiones. FastTrack saltea las políticas IPsec: regla de accept en forward antes del FastTrack.
+  - Source: https://manual.mikrotik.com/docs/7.25/virtual-private-networks/ipsec/  Quote: "if you have IP/Fasttrack enabled, the packet bypasses IPsec policies"
+  - Kind: mistake
+  - Level: core
+- c:N53. FAQ oficial: pérdidas al azar o túnel muy lento que se arreglan al prender el sniffer o Torch: es FastTrack, que se apaga mientras corren esas herramientas.
+  - Source: https://manual.mikrotik.com/docs/7.25/virtual-private-networks/ipsec/  Quote: "enabling packet sniffer/torch fixes the problem"
+  - Kind: story
+  - Level: advanced
+  - Also: T15
+- c:N54. Diagnóstico de fase 1: "no suitable proposal found" o "phase1 negotiation failed" es desacuerdo de parámetros; con logging topics=ipsec,!debug el log muestra cada algoritmo rechazado como local:remoto. "phase1 negotiation failed due to time up" es comunicación: direcciones mal puestas, UDP 500 y 4500 bloqueados, NAT que no traduce bien o local-address mal usado. NO-PROPOSAL-CHOSEN es el otro lado rechazando. Ping en un solo sentido es firewall.
+  - Source: https://manual.mikrotik.com/docs/7.25/virtual-private-networks/ipsec/  Quote: "The Setting before the colon symbol (:) is configured on the local side"
+  - Kind: test
+  - Level: core
+- c:N55. La configuración por defecto trae una regla deshabilitada "accept all that matches IPSec policy" en forward y otra en srcnat; la documentación dice que se activan siempre que se usen túneles IPsec, porque el tráfico IPsec tiene que esquivar FastTrack y NAT.
+  - Source: https://help.mikrotik.com/docs/spaces/ROS/pages/328513/Building+Advanced+Firewall  Quote: "It is very important that IPsec encapsulated traffic bypass fast-track"
+  - Kind: technique
+  - Level: core
+- c:N56. El masquerade de ejemplo de la primera configuración ya trae ipsec-policy=out,none, que deja afuera del NAT el tráfico que va a un túnel.
+  - Source: https://manual.mikrotik.com/docs/7.25/getting-started/first-time-configuration  Quote: "ipsec-policy = out , none action = masquerade"
+  - Kind: template
+  - Level: core
+- c:N57. Practicante con producto propio, IKEv2 entre dos MikroTik: profile sha256, aes-256, modp2048 (grupo 14), proposal sha256 y aes-256-cbc con PFS modp2048, regla de bypass con place-before=0 ("el paso que todos olvidan"), input con UDP 500 y 4500 y ESP, y verificación por ph2-state established en /ip/ipsec/policy/print.
+  - Source: https://mkcontroller.com/blog/remote_access/mikrotik/mikrotik-ipsec-site-to-site-vpn/  Quote: "A healthy tunnel shows an active peer and a policy whose ph2-state reads established"
+  - Kind: template
+  - Level: core
+  - Bias: vende MKController
+- c:N58. pfSense con MikroTik: mismos valores en las dos puntas (IKEv2, AES 256, SHA256, grupo DH 14 en fase 1 y fase 2); en pfSense además hay que permitir el tráfico en la pestaña IPsec del firewall; en MikroTik la fase 1 está en Active Peers y la fase 2 en Policies. El autor destilda NAT traversal porque los dos lados tienen IP pública.
+  - Source: https://getlabsdone.com/setup-ipsec-site-to-site-vpn-tunnel-between-pfsense-and-mikrotik/  Quote: "In MikroTik IPsec phase1 and phase2 are in different places"
+  - Kind: technique
+  - Level: core
+- c:N59. Torch apaga FastTrack y fast path para todo el tráfico mientras corre; vuelven al detenerlo.
+  - Source: https://manual.mikrotik.com/docs/7.25/diagnostics-monitoring-and-troubleshooting/torch  Quote: "While Torch runs, the router turns IP fast path and FastTrack off for all traffic"
+  - Kind: definition
+  - Level: core
+  - Also: T15
+
+## Disagreements seen
+- Canal de producción: https://blog.linitx.com/mikrotik-routeros-package-channel-bugfix-only-current-release-candidate-legacy/ recomienda la rama de solo arreglos (hoy long-term) para producción; https://help.mikrotik.com/docs/spaces/ROS/pages/328142/Upgrading+and+installation describe los canales sin elegir y ofrece un script de actualización automática.
+- Clave precompartida: https://manual.mikrotik.com/docs/7.25/virtual-private-networks/ipsec/ aconseja evitar PSK; el propio ejemplo L2TP/IPsec de esa página, https://cloudzy.com/de/blog/mikrotik-l2tp-vpn/ y https://mkcontroller.com/blog/remote_access/mikrotik/mikrotik-ipsec-site-to-site-vpn/ la usan.
+- NAT-T: https://getlabsdone.com/setup-ipsec-site-to-site-vpn-tunnel-between-pfsense-and-mikrotik/ lo apaga con IPs públicas en ambos lados; https://cloudzy.com/de/blog/mikrotik-l2tp-vpn/ lo pide encendido si alguien puede estar detrás de NAT.
+- ONT de Antel en puente: Antel ofrece el modo puente (https://antel.com.uy/personas/preguntas-frecuentes/internet); usuarios de https://www.macacos.com.uy/foros/viewtopic.php?id=17622 volvieron a modo router por cortes en 2017.
+- Bypass de NAT para IPsec: la documentación de IPsec agrega una regla srcnat accept; la de primera configuración resuelve lo mismo con ipsec-policy=out,none en el masquerade.
+
+## Best stories
+- El túnel IPsec lento que "se arregla" al prender Torch: es FastTrack. https://manual.mikrotik.com/docs/7.25/virtual-private-networks/ipsec/
+- Usuarios uruguayos con cortes con el ONT de Antel en puente, que volvieron a modo router. https://www.macacos.com.uy/foros/viewtopic.php?id=17622
+- Windows que no conecta por L2TP/IPsec y Android sí: la clave de registro de NAT-T. https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-l2tp-ipsec-server-behind-nat-t-device
+- CHR recién instalado con admin sin contraseña en una IP pública. https://community.hetzner.com/tutorials/mikrotik-chr-basic-setup
+- Las copias de un CHR no reinician la prueba de licencia. https://manual.mikrotik.com/docs/7.25/getting-started/routeros-licensing/chr/chr-licensing/

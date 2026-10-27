@@ -1,0 +1,20 @@
+A: Cuarta. El controlador está en la central y los equipos en una sucursal. El broadcast no viaja por internet.
+B: Entonces alguien le tiene que decir al equipo dónde está el controlador.
+A: Esa es la idea entera. La documentación oficial da tres caminos. Uno: la Omada Discovery Utility, un programita que corrés en una PC de la sucursal, ves los equipos y les cargás la dirección del controlador en lote.
+B: Dos: entrar a la web de cada equipo.
+A: Sí, en System Tools, Controller Settings, pegás la inform URL. Y tres: DHCP opción ciento treinta y ocho, con la IP del controlador.
+B: Esa es la más cómoda en obra grande.
+A: Pero con una trampa: la opción recién se aplica cuando el equipo renueva el DHCP. Si ya tenía IP, desconectalo y reconectalo.
+B: ¿Coinciden las fuentes?
+A: Seis de siete que hablan de adopción remota. Para Omada Central es lo mismo pero pegás la Site URL que copiás del dashboard.
+B: ¿Y si hay NAT en el medio?
+A: Port forwarding en el router de la central del veintinueve mil ochocientos diez al veintinueve mil ochocientos diecisiete, mismo puerto de origen y destino. Y ojo, en la versión seis se sumó el veintinueve mil ochocientos diecisiete para datos de monitoreo.
+B: ¿Alguna historia?
+A: La guía de puertos tiene una buena: dos controladores detrás de la misma IP pública. A uno le corren todo diez lugares, del veintinueve mil ochocientos veinte al veintisiete, y la web al dieciocho mil cuarenta y tres. Después le avisan a los equipos con la Discovery Utility, con el puerto en la URL.
+B: [risas] Ingenioso. ¿Y con VPN?
+A: Otra guía oficial: sucursal unida por IPsec, sin port forwarding. Un switch de la sucursal da DHCP con la ciento treinta y ocho apuntando a la IP privada del controlador, y los access points aparecen en Pending.
+B: En obra, entonces: cámaras en la VLAN veinte, controlador en la uno.
+A: Opción ciento treinta y ocho en el DHCP de la VLAN veinte, renovás, y listo.
+B: ¿Laboratorio?
+A: La ciento treinta y ocho en un DHCP de laboratorio, reconectar un AP en otra subred y verlo en Pending. Quince minutos.
+B: Y la sucursal deja de ser un viaje.

@@ -1,0 +1,17 @@
+A: Hoy, la prueba de detectores. ¿Cómo probás un AVENAR?
+B: Aerosol, y que salte.
+A: Casi. Primero, la zona en modo revisión, el walk test. La guía del detector explica por qué: el detector analiza cómo evoluciona la señal en el tiempo, y un fuego real no se comporta como un chorro de aerosol. En revisión, el detector se prepara solo para la prueba.
+B: ¿Y cuánto espero?
+A: El cabezal queda arriba del detector hasta que dispare. Con aerosol puede tardar hasta diez segundos en distribuirse; en los multisensores, hasta veinte.
+B: ¿Y los multisensores cómo se prueban? Tienen tres sensores.
+A: Dos caminos. Walk test secuencial: probás un sensor por vez, el óptico con aerosol, el térmico con la herramienta de calor y el de monóxido con su gas de prueba, medio segundo a un segundo. O walk test simultáneo, con una herramienta multiestímulo tipo Testifire. Y un dato clave: en el simultáneo, el panel muestra alarma solo si dispararon todos los sensores. Si no aparece, uno está fallando.
+B: ¿Y si hay dependencia de dos detectores?
+A: Ahí se prueba fuera de revisión, porque querés ver la lógica real. Un óptico puede tardar hasta un minuto. La guía sugiere aerosol en ráfagas: un segundo, esperás treinta, otra ráfaga.
+B: ¿Y el lazo en sí, sin panel?
+A: Existe la herramienta de prueba de lazo FME cuatrocientos veinte LSN TTL, que lee el lazo desde una PC. En febrero Bosch publicó un archivo actualizado para que reconozca los elementos nuevos.
+B: ¿Las fuentes coinciden?
+A: Las dos que lo tocan, la guía del detector y la hoja técnica de la herramienta, coinciden. Y Bosch suma un autotest remoto de detectores desde su nube, que no reemplaza lo que pida el proyecto.
+B: ¿Laboratorio?
+A: Lazo de banco con un óptico y un multisensor. Modo revisión, aerosol al óptico, contás segundos. Después walk test secuencial en el multisensor y anotás cuánto tardó cada sensor. Veinte minutos.
+B: Y cada detector probado queda con hora y resultado.
+A: Así, cuando alguien pregunte, hay papel.

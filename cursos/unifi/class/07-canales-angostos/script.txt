@@ -1,0 +1,21 @@
+A: Lección siete. Pregunta rápida: AP nuevo de WiFi siete, cliente que pagó por velocidad. ¿Qué ancho de canal le ponés?
+B: El más grande que tenga. Para algo lo compró.
+A: [risas] Esa es la trampa. Canal ancho rinde cuando hay pocos clientes y poco vecino. En una oficina llena, se pisa con todo.
+B: A ver, empecemos por dos coma cuatro.
+A: Ahí hay acuerdo total. Cuatro de cinco fuentes y nadie en contra: veinte megahertz y solo canales uno, seis y once. Son los únicos que no se superponen.
+B: ¿Y cinco giga?
+A: Ahí el principio es el mismo y el número cambia. WunderTech cita a Ubiquiti: ochenta para una casa, cuarenta para oficinas densas. HostiFi dice que cuarenta alcanza para doscientos cincuenta a cuatrocientos megas.
+B: ¿Y alguien baja más?
+A: Mirá este caso de std punto rocks. Una oficina con unos trescientos equipos y diez AP UniFi. Quejas de lentitud, cortes, gente que no conectaba. Escaneó el espectro y los canales treinta y seis a cuarenta y ocho estaban saturados por los vecinos.
+B: ¿Y qué hizo?
+A: Pasó a un canal DFS limpio, el sesenta y cuatro, y bajó a veinte megahertz, con más de treinta clientes por AP.
+B: ¿DFS? LazyAdmin dice que los evitemos.
+A: Esa es la discusión. Si aparece un radar, el AP abandona el canal al toque y los clientes se cortan. LazyAdmin los evita; std punto rocks los usa porque están limpios. Mirá el registro: si ves cambios por radar, volvés a los bajos.
+B: ¿Y Auto o canal fijo?
+A: Otra división. HostiFi dice que en sus pruebas Auto nunca anduvo como debía. WunderTech y LazyAdmin prefieren Auto más Channel AI, que necesita dos AP o más y desde diez punto seis puede correr de noche.
+B: ¿Y el escaneo corta el servicio?
+A: Sí, ojo. El escaneo completo saca a los clientes de esa radio. Hacelo en horario tranquilo.
+B: ¿Laboratorio?
+A: Veinte minutos. Escaneo del entorno, fijás anchos, corrés Channel AI y comparás al día siguiente en Time Machine.
+B: Ancho según clientes, no según la caja.
+A: Esa es la regla.

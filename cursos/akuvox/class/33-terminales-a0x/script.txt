@@ -1,0 +1,21 @@
+A: Lección treinta y tres, entramos a control de acceso. Los terminales chicos: A01, A02, A03, A05 y A08.
+B: Los que van al lado de una puerta interna.
+A: Esos. Akuvox llama terminal de control de acceso IP al A01, A02, A03 y A08, y terminal con reconocimiento facial al A05. La forma más fácil de distinguirlos es por la credencial.
+B: Dale.
+A: El A01, solo tarjeta, de las dos frecuencias. El A02 suma teclado para PIN. El A03 suma Bluetooth. El A05 es el de rostro: PIN, tarjeta de trece coma cincuenta y seis, rostro, Bluetooth y QR. Y el A08, PIN, tarjetas, Bluetooth y QR.
+B: El A08 es el que tiene ficha, ¿no?
+A: Sí. Marco de aluminio, teclado táctil, lector QR, tarjetas de las dos frecuencias más NFC, Bluetooth cinco, PoE o fuente, de pared o embutido, IP65 e IK09. Y hay un A08K con teclado, sin QR.
+B: IK09, nada mal para un terminal.
+A: Para algo tan chico, está muy bien. ¿Relés? El A01, A02 y A03 aguantan treinta voltios tres amperes. El A05 y el A08, treinta voltios dos.
+B: ¿Dan doce voltios para la cerradura?
+A: El A01, A02, A03 y A08 dan quinientos miliamperes por el relé. El A08 con PoE solo desde cierta versión de hardware. El A05, nada.
+B: ¿Y para sacar la IP?
+A: Acá está lo lindo: en el A01, A02, A03 y A08 apretás el botón Reset y te dice la IP en voz alta. Al A05 lo buscás con el IP Scanner.
+B: ¿Reset? ¿No lo resetea?
+A: Según la guía de Akuvox, apretarlo anuncia la IP. Igual, la primera vez probalo en la mesa, no en la obra.
+B: [risas] Por las dudas.
+A: Ocho de once fuentes de esta parte coinciden en cómo se reparte el acceso: terminal en la puerta, controladora en el tablero, y lo que viene en las próximas lecciones.
+B: ¿Laboratorio?
+A: Quince minutos. Un A08 en la mesa: sacás la IP con Reset, entrás a la web, creás un usuario con PIN y tarjeta como en la lección siete, y abrís una cerradura de banco.
+B: Y anotás si va con PoE o con fuente.
+A: Eso.

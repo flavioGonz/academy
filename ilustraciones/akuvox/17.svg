@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Cada evento del portero manda un GET a tu servidor</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">AKUVOX · LECCIÓN 17</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Cada evento del portero manda un GET a tu servidor</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'liga' 0,'calt' 0}</style>
+<rect x="60.0" y="170.0" width="127.5" height="221.0" rx="15.3" fill="#26323F" stroke="#011E38" stroke-width="2"/><circle cx="123.8" cy="195.5" r="10.2" fill="#0B1A28" stroke="#5B6F84" stroke-width="2"/><circle cx="123.8" cy="195.5" r="3.8" fill="#17A8D4"/><rect x="77.0" y="217.6" width="93.5" height="102.0" rx="6.8" fill="#0B1A28" stroke="#5B6F84" stroke-width="1.5"/><rect x="99.1" y="336.6" width="49.3" height="28.9" rx="5.1" fill="#1E2A36" stroke="#5B6F84" stroke-width="1.5"/><text x="123.8" y="417.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="middle">Portero</text><text x="123.8" y="439.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">192.168.88.21</text>
+<rect x="930" y="172" width="222" height="316" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<g transform="translate(1020 220) scale(1.5)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="7" rx="1.5"/><rect x="4" y="14" width="16" height="7" rx="1.5"/><path d="M7.5 6.5h.01M7.5 17.5h.01"/></g>
+<text x="1041.0" y="290.0" font-family="Instrument Sans" font-size="20" font-weight="600" fill="#04223D" text-anchor="middle">Servidor</text>
+<text x="1041.0" y="316.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">192.168.88.10</text>
+<text x="1041.0" y="338.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">puerto 8000</text>
+<text x="1041.0" y="380.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="middle">registra cada</text>
+<text x="1041.0" y="400.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="middle">línea que llega</text>
+<text x="330.0" y="152.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.5">EVENTO</text>
+<text x="520.0" y="152.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.5">LO QUE CARGASTE → LO QUE LLEGA</text>
+<rect x="310" y="172" width="580" height="92" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="330.0" y="206.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Tarjeta válida</text>
+<text x="520.0" y="206.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">/validcard=$card_sn</text>
+<text x="520.0" y="238.0" font-family="JetBrains Mono" font-size="16" font-weight="700" fill="#0A63B8" text-anchor="start">/validcard=&lt;n.º de tarjeta&gt;</text>
+<path d="M892.0 218.0L928.0 218.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="310" y="284" width="580" height="92" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="330.0" y="318.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Relé A se dispara</text>
+<text x="520.0" y="318.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">/relaytrigger=$relay1status</text>
+<text x="520.0" y="350.0" font-family="JetBrains Mono" font-size="16" font-weight="700" fill="#0A63B8" text-anchor="start">/relaytrigger=1</text>
+<path d="M892.0 330.0L928.0 330.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="310" y="396" width="580" height="92" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="330.0" y="430.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Relé A cierra</text>
+<text x="520.0" y="430.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">/relayclose=$relay1status</text>
+<text x="520.0" y="462.0" font-family="JetBrains Mono" font-size="16" font-weight="700" fill="#0A63B8" text-anchor="start">/relayclose=0</text>
+<path d="M892.0 442.0L928.0 442.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<path d="M205.0 290.0C257.5 290.0,257.5 290.0,310.0 290.0" fill="none" stroke="#6E88A1" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 8" marker-end="url(#a-gray)"/>
+<rect x="48" y="540" width="540" height="75" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="552" width="5" height="51" rx="2.5" fill="#0A63B8"/><text x="74.0" y="574.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">El equipo reemplaza cada $variable por el dato real antes</tspan><tspan x="74.0" dy="21.6">de mandar: $relay1status vale 1 abierto y 0 cerrado.</tspan></text>
+<rect x="612" y="540" width="540" height="75" rx="14" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/><rect x="612" y="552" width="5" height="51" rx="2.5" fill="#0E8F5E"/><text x="638.0" y="574.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="638.0" dy="0.0">Lo que abre por HTTP también avisa por HTTP, a un servidor</tspan><tspan x="638.0" dy="21.6">de la misma red (la VLAN de porteros).</tspan></text>
+</svg>

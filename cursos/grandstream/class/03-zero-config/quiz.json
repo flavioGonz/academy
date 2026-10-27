@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Configuraste en la Model Template el idioma inglés para los GRP2614, pero un teléfono sigue en español. Antes alguien lo había cambiado desde la web del teléfono. ¿Por qué?",
+  "options": [
+   "La Global Policy tiene más prioridad que la Model Template",
+   "Hay que reiniciar la UCM",
+   "El GRP2614 no soporta Zero Config",
+   "Lo configurado a mano en la web del teléfono no lo pisa ninguna plantilla"
+  ],
+  "answer": 3,
+  "why": "La guía de Zero Config aclara que la configuración hecha en la web del dispositivo no es sobrescrita por las plantillas; un reset de fábrica lo resuelve."
+ },
+ {
+  "q": "En una red de laboratorio faltan teléfonos en la lista de Zero Config. ¿Qué recomienda la guía oficial?",
+  "options": [
+   "Escanear con método SIP Message a la dirección de broadcast de la red",
+   "Cambiar la UCM a modo Dual",
+   "Desactivar Zero Config y volver a activarlo",
+   "Reiniciar todos los teléfonos a la vez"
+  ],
+  "answer": 0,
+  "why": "Si no aparecen todos, la guía sugiere un escaneo con SIP Message a la dirección de broadcast (por ejemplo 192.168.88.255)."
+ },
+ {
+  "q": "¿Cuál es el orden de prioridad de las plantillas, de menor a mayor?",
+  "options": [
+   "Model Template, Global Template, Global Policy",
+   "Global Template, Global Policy, Model Template",
+   "Global Policy, Global Template, Model Template",
+   "Todas tienen la misma prioridad"
+  ],
+  "answer": 2,
+  "why": "Global Policy es la más general y la de menor prioridad; Model Template, específica del modelo, gana."
+ }
+]

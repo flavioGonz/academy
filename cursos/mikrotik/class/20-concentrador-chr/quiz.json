@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Terminaste de escribir la imagen del CHR en el VPS y reiniciaste. ¿Qué hacés primero?",
+    "options": [
+      "Crear los peers de los clientes",
+      "Crear tu usuario, deshabilitar admin, cerrar servicios y armar el firewall de input",
+      "Activar IP Cloud",
+      "Pedir la prueba de licencia"
+    ],
+    "answer": 1,
+    "why": "El CHR arranca con admin sin contraseña y con IP pública. La guía de instalación pone el endurecimiento como primer paso."
+  },
+  {
+    "q": "Tu hub CHR con licencia Free anda, pero ver una cámara a través del túnel es imposible. ¿Por qué?",
+    "options": [
+      "La licencia Free limita la subida a 1 Mbps por interfaz",
+      "WireGuard no transporta video",
+      "Falta el paquete container",
+      "El VPS no tiene IPv6"
+    ],
+    "answer": 0,
+    "why": "Según la documentación de licencias, Free tiene todas las funciones pero 1 Mbps de subida por interfaz. Para tráfico real, P1 o superior."
+  },
+  {
+    "q": "Un compañero propone clonar el CHR en prueba cada 60 días para no pagar. ¿Qué pasa?",
+    "options": [
+      "Funciona y es legal",
+      "La copia vuelve a Free con 10 Gbps",
+      "Las copias conservan el estado de la prueba original; además la idea es licenciar lo que se usa",
+      "La copia pierde la configuración"
+    ],
+    "answer": 2,
+    "why": "La documentación aclara que las instancias clonadas mantienen el estado de prueba original, así que no se extiende. Al vencer, el CHR sigue andando pero sin actualizaciones."
+  }
+]

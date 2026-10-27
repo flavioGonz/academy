@@ -1,0 +1,19 @@
+A: Lección seis. Te cuento una escena. Cámara en el estacionamiento, cable a la vista. Alguien la saca de la pared y enchufa una notebook en ese cable.
+B: Y si el puerto está abierto, entró a la red.
+A: The Hook Up lo plantea así, tal cual. Por eso hablamos de puertos.
+B: ¿Qué hace un puerto UniFi por defecto?
+A: LazyAdmin lo explica: por defecto cada puerto acepta todas las VLANs etiquetadas. Está bien para un AP o para el uplink a otro switch. Para una cámara, no.
+B: ¿Entonces?
+A: En el Port Manager, al puerto de la cámara le ponés como VLAN nativa la red de CCTV y en Tagged VLAN Management elegís Block All. La cámara recibe su red sin etiqueta y no puede pedir otra.
+B: ¿Y el AP?
+A: El AP necesita el trunk. Nativa la de gestión y Allow All para las etiquetadas, así cada SSID sale por su VLAN. Lo mismo el uplink.
+B: ¿Hay coincidencia?
+A: Tres de cuatro fuentes lo enseñan así. Y hay un caso en los comentarios de LazyAdmin que me gustó: un switch de otra marca entre el Dream Machine y el AP. Con la VLAN del AP etiquetada no andaba; sin etiquetar, sí.
+B: Eso pasa mucho con switches de terceros en obra.
+A: Pasa. Y para lo de la notebook en el estacionamiento hay dos capas más. The Hook Up fija la MAC de la cámara en el puerto. Y las notas de Network diez punto seis punto ciento uno traen una opción nueva en Port Manager: bloquear el puerto a un dispositivo UniFi, con switch en firmware siete punto seis o superior.
+B: Eso para las cámaras UniFi.
+A: Para las de terceros, la MAC fija.
+B: ¿Laboratorio?
+A: Diez minutos. Elegís un puerto, le asignás la VLAN de cámaras como nativa, bloqueás las etiquetadas, hacés power cycle del puerto y verificás que la cámara tome IP de la treinta.
+B: Y probás enchufar tu notebook ahí.
+A: Exacto. Si cae en la red de cámaras y nada más, quedó bien.

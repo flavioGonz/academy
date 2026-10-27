@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Levantaste el controlador en Docker con los puertos publicados (red bridge). La web en el 8043 anda, pero ningún AP de la misma subred aparece para adoptar. ¿Qué cambiás primero?",
+    "options": [
+      "Abrir el puerto 443 en el firewall",
+      "Reinstalar la imagen con otra versión",
+      "Cambiar la región del controlador",
+      "Pasar el contenedor a network_mode: host"
+    ],
+    "answer": 3,
+    "why": "El descubrimiento es un broadcast al UDP 29810 que no cruza la red bridge del contenedor; con red host el controlador lo escucha."
+  },
+  {
+    "q": "Un cliente ofrece su Raspberry Pi 4 para correr el controlador 6.2 en Docker. ¿Qué es lo esperable?",
+    "options": [
+      "MongoDB no arranca porque la Pi 4 no tiene AVX",
+      "Funciona igual que en una PC",
+      "Funciona, pero sin portal cautivo",
+      "Solo admite hasta 25 equipos"
+    ],
+    "answer": 0,
+    "why": "Las guías de practicantes coinciden en que la versión 6 usa un MongoDB que exige AVX; en Pi 4 se queda la rama 5 o se usa una mini PC con Intel de 6ª generación o posterior."
+  },
+  {
+    "q": "Vas a actualizar el controlador en Docker. ¿Cuál de estos comandos te hace perder toda la configuración?",
+    "options": [
+      "docker compose pull",
+      "docker compose up -d",
+      "docker compose down -v",
+      "docker logs omada-controller"
+    ],
+    "answer": 2,
+    "why": "La opción -v borra los volúmenes con nombre, que es donde viven los datos del controlador."
+  }
+]

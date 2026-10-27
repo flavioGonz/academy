@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un cliente quiere que la tecla 1 vaya a ventas de día y al buzón de ventas de noche. ¿Qué hacés?",
+  "options": [
+   "Dos IVR distintos y una ruta entrante para cada uno",
+   "Un grupo de llamada con desvío",
+   "Una tecla con dos destinos con condición de horario (Office Time y Out of Office Time)",
+   "No se puede en la UCM"
+  ],
+  "answer": 2,
+  "why": "Cada evento de tecla admite hasta cinco destinos con condiciones de horario distintas."
+ },
+ {
+  "q": "Los clientes se quejan de que la llamada se corta si no marcan nada. ¿Qué falta?",
+  "options": [
+   "Un destino para Response Timeout (y para tecla inválida)",
+   "Más niveles de IVR",
+   "Activar Auto Record",
+   "Cambiar el codec"
+  ],
+  "answer": 0,
+  "why": "El IVR necesita destino para el silencio y para la tecla inválida; si no, la llamada termina."
+ },
+ {
+  "q": "Habilitaste marcar internas desde el IVR. ¿Cómo evitás que desde afuera se marque cualquier interna?",
+  "options": [
+   "Desactivando Fail2ban",
+   "Cambiando las internas a 5 dígitos",
+   "Con un PIN en cada interna",
+   "Con la lista blanca del IVR, dejando solo las internas permitidas"
+  ],
+  "answer": 3,
+  "why": "El manual permite una Allowlist en el IVR para que solo esas extensiones sean alcanzables."
+ }
+]

@@ -1,0 +1,19 @@
+A: Lección nueve, y arrancamos el arco de clúster con una historia del foro oficial. Marzo de este año. Un usuario arma un clúster de dos nodos, configura alta disponibilidad, y hace la prueba de falla: apaga un nodo.
+B: Y la VM salta al otro. ¿No?
+A: No. El clúster pierde quórum y la HA no hace nada.
+B: ¿En serio? ¿Por qué?
+A: Por cómo funciona el quórum. Cada nodo tiene un voto, y para decidir algo hace falta mayoría. Con dos nodos, si cae uno, el que queda tiene un voto de dos. Eso no es mayoría.
+B: Mitad no alcanza.
+A: Exacto. Y la guía oficial dice qué pasa sin quórum: el clúster se pone en solo lectura. No arranca VMs, no cambia configuración.
+B: Pero es para protegerse, ¿no?
+A: Claro. Si se corta el cable entre los dos, cada uno piensa que el otro murió. Sin la regla de mayoría, los dos arrancarían la misma VM.
+B: Uf, y ahí se rompe el disco.
+A: Por eso la guía pide al menos tres nodos para HA. Y para clústeres de dos tiene una solución: el QDevice. Es un servicio chiquito en un tercer equipo, puede ser una Raspberry o una VM en otro lado, que solo aporta un voto.
+B: ¿Y tiene que estar en la misma red?
+A: Esa fue justo la pregunta del usuario del foro. La guía dice que el QDevice se conecta por TCP y no tiene la exigencia de latencia de corosync, así que puede estar fuera de la LAN. Corosync sí: pide menos de cinco milisegundos entre nodos, y mejor en su propia red, nunca compartida con almacenamiento.
+B: ¿Cuántas fuentes?
+A: Pocas, dos: la guía oficial y ese hilo. Pero no se contradicen en nada.
+B: ¿Laboratorio?
+A: Dos Proxmox anidados. En el primero, pvecm create con el nombre del clúster. En el segundo, pvecm add con la IP del primero. Mirá pvecm status. Apagá uno y mirá cómo el otro dice que no hay quórum. Después instalás corosync qnetd en una tercera máquina, qdevice en los nodos, y pvecm qdevice setup.
+B: Veinte minutos y nunca más vendo dos nodos solos.
+A: Y cada clúster que entregues va a tener sus tres votos.

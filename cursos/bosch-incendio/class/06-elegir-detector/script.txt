@@ -1,0 +1,18 @@
+A: Te llega un plano que dice "detector de humo" en todos lados. ¿Qué ponés?
+B: Óptico en todo, y listo.
+A: Y después te llaman del hotel porque saltó con el vapor de la ducha. [suspiro]
+B: Clásico. ¿Cómo se elige bien?
+A: La Fire Industry Association lo plantea en dos pasos. Primero, el riesgo de fuego del lugar: humo latente, fuego rápido, combustión con poco humo. Segundo, lo que no es fuego pero parece: vapor, polvo, aerosoles, humo de cocina.
+B: ¿Y qué tiene Bosch para cada cosa?
+A: La serie AVENAR detector cuatro mil, nueve variantes. El térmico FAH cuatrocientos veinticinco T R. Los ópticos O y O R. El doble óptico D O R, con un LED infrarrojo y uno azul, que distingue partículas de humo de polvo o vapor. Y los multisensores: óptico térmico, doble óptico térmico, y los que suman sensor de monóxido, el D O T C y el D O T C O.
+B: ¿Y el detector cinco mil? Me lo nombraron.
+A: No lo encontré en ninguna fuente de Bosch. La línea vigente es la cuatro mil, más la serie quinientos de empotrados casi invisibles.
+B: ¿Y un ejemplo de cómo se decide?
+A: Uno buenísimo de una columna sobre la norma británica. Habitación de hotel con ducha: el fuego probable es latente, así que sirven óptico o multisensor. Pero con vapor y aerosoles, el que mejor queda es el de monóxido.
+B: Ah, mirá. ¿Todas las fuentes coinciden?
+A: Cuatro de cinco van por el método de dos pasos. La que tira para otro lado es un resumen de la investigación del BRE que concluye que el multisensor rechaza falsas alarmas mejor que el óptico en todas sus pruebas, y eso tienta a ponerlo en todos lados. Lo vemos en la lección del modo del detector.
+B: ¿Y lo viejo?
+A: Ojo con eso. El firmware cuatro punto ocho es la última versión que soporta la serie cuatrocientos, como el O cuatrocientos o el O T cuatrocientos. Antes de actualizar, conviene relevar.
+B: ¿Qué probamos?
+A: Una tabla con cinco ambientes que conozcas, riesgo de fuego, fenómenos engañosos, detector elegido y por qué. Diez minutos.
+B: Y esa tabla va a la carpeta de obra.

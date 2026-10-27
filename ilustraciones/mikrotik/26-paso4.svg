@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>El servidor DHCP son cuatro piezas</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">MIKROTIK · LECCIÓN 26 · PASO 4</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">El servidor DHCP son cuatro piezas</text>
+<rect x="48" y="150" width="250" height="130" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="66.0" y="188.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">1 · IP en la interfaz</text>
+<text x="66.0" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#0A63B8" text-anchor="start">ether5</text>
+<text x="66.0" y="254.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#41627F" text-anchor="start">10.10.20.1/24</text>
+<path d="M302.0 215.0C315.0 215.0,315.0 215.0,328.0 215.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="332" y="150" width="250" height="130" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="350.0" y="188.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">2 · Pool</text>
+<text x="350.0" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#0A63B8" text-anchor="start">pool-cctv</text>
+<text x="350.0" y="254.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#41627F" text-anchor="start">.100 a .199</text>
+<path d="M586.0 215.0C599.0 215.0,599.0 215.0,612.0 215.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="616" y="150" width="250" height="130" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="634.0" y="188.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">3 · Red</text>
+<text x="634.0" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#0A63B8" text-anchor="start">gateway y DNS</text>
+<text x="634.0" y="254.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#41627F" text-anchor="start">10.10.20.1</text>
+<path d="M870.0 215.0C883.0 215.0,883.0 215.0,896.0 215.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="900" y="150" width="250" height="130" rx="16" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="918.0" y="188.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#FFFFFF" text-anchor="start">4 · Servidor</text>
+<text x="918.0" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#17A8D4" text-anchor="start">dhcp-cctv</text>
+<text x="918.0" y="254.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#9FC3E3" text-anchor="start">ether5 + pool</text>
+<rect x="700" y="400" width="300" height="84" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><g transform="translate(720 426.0) scale(1.35)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 15 5l2 5-12 3.5z"/><path d="m17 10 3.5 1.5M9 13l1 4M6 17h8"/></g><text x="764.0" y="438.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Cámara en ether5</text><text x="764.0" y="461.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">recibe 10.10.20.100</text>
+<path d="M1025.0 280.0L850.0 400.0" fill="none" stroke="#0E8F5E" stroke-width="3" stroke-linecap="round" marker-end="url(#a-ok)"/>
+<rect x="48" y="360" width="600" height="99" rx="14" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/><rect x="48" y="372" width="5" height="75" rx="2.5" fill="#0E8F5E"/><text x="74.0" y="394.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="74.0" dy="0.0">Pool con lugar para las fijas</tspan></text><text x="74.0" y="420.9" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">El pool no incluye la IP del router. Del .2 al .99 queda libre para IP</tspan><tspan x="74.0" dy="20.2">fijas.</tspan></text>
+<rect x="48" y="510" width="600" height="99" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="522" width="5" height="75" rx="2.5" fill="#0A63B8"/><text x="74.0" y="544.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="74.0" dy="0.0">Reserva</tspan></text><text x="74.0" y="571.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Si un equipo tiene que tener siempre la misma IP: make-static sobre su</tspan><tspan x="74.0" dy="20.2">lease.</tspan></text>
+</svg>

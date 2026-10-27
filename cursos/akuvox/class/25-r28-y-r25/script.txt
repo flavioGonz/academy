@@ -1,0 +1,23 @@
+A: Lección veinticinco. Dos familias de la serie R que se confunden poco pero se instalan mucho: el R28 y los R25.
+B: El R28 es el de pantallita, ¿no?
+A: Ese. Pantalla de cuatro coma tres pulgadas, no táctil, aluminio, Linux, IP65 y Wiegand, según la guía de selección. El menú lo lista en versión estándar y con lazo de inducción.
+B: ¿Credenciales?
+A: PIN y tarjetas de las dos frecuencias. Sin rostro, sin Bluetooth, sin QR. Y el relé, treinta voltios tres amperes.
+B: ¿Algo raro en la alimentación?
+A: Algo bueno. PoE af o fuente de doce voltios uno. Y tiene un borne independiente de doce voltios, cuatrocientos miliamperes, que funciona con PoE o con fuente. No depende del relé.
+B: Eso es cómodo para un lector o una cerradura chica.
+A: Exacto. Ojo que tiene dos versiones de hardware, así que el firmware se baja para la tuya. Y se entra con asterisco dos tres nueve seis numeral y después el uno, igual que el S532.
+B: ¿Y los R25?
+A: Dos: el R25A, que Akuvox presenta como portero de un botón, y el R25K. Linux, IP65, Wiegand.
+B: El R25K, ¿tiene teclado?
+A: Acá voy con cuidado. La IP del R25K se consulta igual que en el R20K, marcando asterisco tres dos cinco ocho asterisco. Pero la tabla de métodos de acceso marca a toda la serie R25 sin PIN. Solo tarjetas de las dos frecuencias.
+B: O sea, no prometas PIN en un R25 sin probarlo.
+A: Exacto. El R25A se consulta manteniendo el botón cinco segundos.
+B: ¿Y alimentación?
+A: PoE af o doce voltios un ampere. Relé de treinta voltios dos amperes. Y salida de doce voltios por el relé hasta cuatrocientos miliamperes. Con PoE, solo desde el firmware veinticinco punto treinta punto diez punto once, y depende del volumen del equipo.
+B: ¿Del volumen?
+A: Así lo dice la tabla de Akuvox: la salida está afectada por el ajuste de volumen. No dice cuánto, por eso se mide.
+B: ¿Laboratorio?
+A: Diez minutos. Sacás IP y firmware de un R28 y un R25, y probás la salida de doce voltios del R25 con PoE a volumen bajo y alto.
+B: Midiendo con el tester.
+A: Eso.

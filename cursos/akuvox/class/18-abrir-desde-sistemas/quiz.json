@@ -1,0 +1,35 @@
+[
+ {
+  "q": "El portero responde 401 al pedido de un MikroTik aunque usuario y clave están bien. ¿Qué probás?",
+  "options": [
+   "Cambiar DoorNum a 0",
+   "Bajar el firmware",
+   "Agregar http-auth-scheme=digest al /tool/fetch",
+   "Usar SIP INFO"
+  ],
+  "answer": 2,
+  "why": "Fetch usa basic por defecto; si el equipo espera digest, se indica con http-auth-scheme=digest."
+ },
+ {
+  "q": "El cliente pide abrir el portón desde una Grandstream UCM por HTTP. ¿Qué decís según las páginas leídas?",
+  "options": [
+   "La UCM tiene una acción HTTP nativa para eso",
+   "No hay acción HTTP documentada en UCM; el camino documentado es DTMF, o un intermediario como Home Assistant o Asterisk",
+   "Solo se puede con SmartPlus",
+   "Se hace por RTSP"
+  ],
+  "answer": 1,
+  "why": "Ninguna página leída documenta una acción HTTP en UCM; con UCM el método documentado sigue siendo DTMF."
+ },
+ {
+  "q": "Una cámara LPR Hikvision tiene que abrir el portón de un R29. ¿Qué configurás en el portero?",
+  "options": [
+   "Setting > HTTP API en Allowlist con la IP de la cámara, y la patente en el usuario",
+   "Open Relay via HTTP sin clave",
+   "Action URL hacia la cámara",
+   "Web Relay con state.xml"
+  ],
+  "answer": 0,
+  "why": "La guía de LPR usa la HTTP API en Allowlist, patentes cargadas por usuario, y para Hikvision solo X912 y R29 desde ciertos firmwares."
+ }
+]

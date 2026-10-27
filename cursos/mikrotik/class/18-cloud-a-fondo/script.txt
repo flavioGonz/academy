@@ -1,0 +1,17 @@
+A: Lección dieciocho: IP Cloud a fondo. En la nueve vimos que el nombre no abre puertas. Hoy, cómo se comporta de verdad.
+B: Porque con PPPoE la IP cambia en cada reconexión, como vimos en la quince.
+A: Justo para eso está. La documentación da los números: el nombre es el número de serie seguido de sn punto mynetname punto net, con un tiempo de vida de sesenta segundos. Y si el router está detrás de NAT, manda una actualización por minuto.
+B: ¿Y si cambio de proveedor y no quiero esperar?
+A: barra ip barra cloud barra force update, y sale en el momento. Otro dato fino: con dos WAN, public address es la de la conexión que usa la ruta hacia el servidor de la nube. O sea, el nombre sigue al enlace por donde sale el router, no necesariamente al principal.
+B: En un failover, ojo. ¿Y la hora?
+A: update time pone el reloj desde la nube al arrancar, pero solo si el cliente NTP está apagado, y la propia documentación dice que es aproximado. Para logs y para IPsec, NTP.
+B: ¿Y detect internet? Lo veo prendido en algunos equipos.
+A: Hay discusión. En el foro, un veterano recomienda apagarlo porque mueve interfaces entre las listas LAN y WAN por su cuenta; otro usuario lo usa para registrar caídas. Si tus reglas dependen de las listas, mejor apagado.
+B: ¿Y Back To Home, que también está en IP Cloud?
+A: Mismo menú, otra cosa: una VPN WireGuard que funciona sin IP pública, pasando por un relay de MikroTik. El DDNS te da un nombre; Back To Home, un camino. Detrás de CGNAT, el nombre apunta a una IP compartida que no es tuya.
+B: Entonces con CGNAT el DDNS no sirve para entrar.
+A: Para entrar, no. El detalle lo vemos en la diecinueve. Dos de las cinco fuentes que tratan esto coinciden.
+B: ¿Laboratorio?
+A: Quince minutos: activás el DDNS, mirás el nombre y public address, forzás una actualización, chequeás el NTP, y mirás si detect internet está activo.
+B: Y anotar el nombre en el legajo.
+A: Sí. El nombre sigue a la IP; el NTP pone la hora; y para entrar, túnel.

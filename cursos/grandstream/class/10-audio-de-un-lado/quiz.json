@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Las llamadas de un remoto se cortan siempre a los 32 segundos de atender. ¿Qué sospechás primero?",
+  "options": [
+   "Falta de crédito en el troncal",
+   "El buzón de voz",
+   "El codec G.722",
+   "Un ACK que no llega porque algo en el camino reescribió la señalización, típicamente un SIP ALG"
+  ],
+  "answer": 3,
+  "why": "El corte entre 30 y 35 segundos coincide con el Timer H de SIP (64 × 500 ms) esperando un ACK que no vuelve."
+ },
+ {
+  "q": "En una captura, el INVITE que sale hacia el proveedor tiene c=IN IP4 192.168.88.20. ¿Qué indica?",
+  "options": [
+   "Todo está bien",
+   "La central anuncia su IP privada hacia afuera: falta External Host o algo lo reescribió",
+   "El teléfono está en DHCP",
+   "El troncal usa TLS"
+  ],
+  "answer": 1,
+  "why": "La línea c= dice a dónde mandar el audio; una IP privada hacia internet hace que el otro lado no pueda devolver RTP."
+ },
+ {
+  "q": "Apagaste el SIP ALG del router y el problema sigue igual. ¿Qué paso falta?",
+  "options": [
+   "Reiniciar el router o limpiar sus sesiones",
+   "Activar Direct Media",
+   "Bajar el RTP a 5000 a 6000",
+   "Cambiar de proveedor"
+  ],
+  "answer": 0,
+  "why": "Didlogic advierte que el ALG mantiene el estado de sesiones ya creadas; hay que reiniciar o limpiar sesiones."
+ }
+]

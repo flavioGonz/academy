@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Cargaste la IP fija en ether1 y la ruta por defecto. El ping a 1.1.1.1 anda, pero los navegadores de la LAN no abren ninguna página por nombre. ¿Qué revisás primero?",
+    "options": [
+      "La máscara de la WAN",
+      "Los servidores DNS en /ip/dns",
+      "El cable del módem",
+      "El masquerade"
+    ],
+    "answer": 1,
+    "why": "Si una IP de internet responde, la dirección, la ruta y el camino están bien. Que los nombres no resuelvan apunta a los DNS, que con IP fija se cargan a mano."
+  },
+  {
+    "q": "En un hAP con configuración por defecto vas a poner la IP fija que entregó el proveedor. ¿Qué conviene hacer antes?",
+    "options": [
+      "Borrar el firewall por defecto",
+      "Cambiar ether1 a la lista LAN",
+      "Deshabilitar el cliente DHCP que la configuración por defecto deja en ether1",
+      "Activar el DDNS"
+    ],
+    "answer": 2,
+    "why": "Si el cliente DHCP sigue activo en la misma interfaz, puede instalar otra dirección y otra ruta por defecto. Se deshabilita y se carga la IP fija a mano."
+  },
+  {
+    "q": "Un cliente con Internet corporativo de Antel tiene un /27 de IPs fijas. ¿Qué gateway usa tu MikroTik?",
+    "options": [
+      "El que indica Antel para ese servicio, normalmente su router en el sitio",
+      "Siempre la primera IP del rango de la LAN",
+      "El DNS de Antel",
+      "No hace falta gateway con IP fija"
+    ],
+    "answer": 0,
+    "why": "Según la página de Antel, el servicio corporativo es ruteado y Antel instala y administra un router en la empresa. El gateway de la ruta por defecto es el que entrega Antel junto con el rango."
+  }
+]

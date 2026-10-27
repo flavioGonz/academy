@@ -1,0 +1,19 @@
+A: Llamado de lunes: el servidor de video no graba y los logs dicen no space left on device.
+B: Disco lleno. El clásico de clásicos.
+A: Y la lección es simple: df te dice dónde, du te dice qué. df guion h te muestra cada sistema de archivos y cuánto le queda.
+B: Y ahí ves si es la raíz, barra var o el disco de grabaciones.
+A: Después du para encontrar al culpable. du guion x h, con profundidad uno, en la carpeta que se llenó, ordenado. Bajás de a un nivel hasta encontrarlo.
+B: ¿Y los sospechosos de siempre?
+A: Tres de cuatro fuentes sobre discos los repiten de una forma u otra. La caché de apt, que el Debian Handbook dice que crece con cada actualización. El journal, que tiene su propio límite configurable. Y logs de aplicación que nadie rota.
+B: ¿Y algo nuevo en Ubuntu veintiséis?
+A: Sí, barra tmp ahora va en memoria, con tope de la mitad de la RAM. En un servidor de cuatro gigas te quedan dos. Si un backup o un dump arma archivos grandes en barra tmp, se queda sin lugar aunque el disco esté vacío.
+B: Uf, eso va a confundir a más de uno.
+A: La salida es usar barra var barra tmp. Y ya que estamos con discos, el fstab.
+B: El archivo que te puede dejar sin arranque.
+A: Ese. La Arch Wiki es clara: identificar el disco por UUID, nunca por barra dev barra sda, porque ese nombre puede cambiar entre arranques. lsblk guion f te da el UUID.
+B: ¿Y un disco externo que a veces no está?
+A: Opción nofail, y un timeout corto. La Arch Wiki cuenta que con solo nofail, un disco ausente te suma noventa segundos al arranque.
+B: [risas] Noventa segundos mirando la pantalla negra en obra.
+A: Y antes de reiniciar, findmnt guion x valida el fstab. Laboratorio de quince minutos: encontrás qué ocupa más en barra var, limpiás la caché de apt, achicás el journal, y agregás un disco de prueba al fstab por UUID con nofail.
+B: Lo que cambia es que el disco lleno pasa a ser un llamado de diez minutos.
+A: df para saber dónde, du para saber qué.

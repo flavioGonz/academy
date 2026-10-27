@@ -1,0 +1,21 @@
+A: Martín, pregunta de camioneta: cuando entrás a unifi punto ui punto com y ves todos los clientes, ¿dónde está la configuración?
+B: En la nube, ¿no? Ahí la veo toda.
+A: Eso cree casi todo el mundo. La nube es la puerta. La configuración vive en el controlador de cada sitio.
+B: O sea, el Dream Machine, el Cloud Gateway, el CloudKey...
+A: Exacto. O un UniFi OS Server en una máquina virtual. Site Manager solo te conecta.
+B: ¿Y si se cae internet en el cliente?
+A: El sitio se gestiona en local. Y si se cae el controlador, los equipos siguen con la última configuración. Perdés cambiar, adoptar y ver estadísticas.
+B: Bien. ¿Las fuentes coinciden?
+A: Tres de cuatro lo dicen igual y nadie lo discute. La otra regla es que cada equipo tiene un solo host. Un AP no puede estar en dos controladores a la vez.
+B: Y ahí viene la trampa del Dream Machine, ¿no?
+A: Esa. Un UDM o un UCG corre su propio Network. No lo manejás desde un servidor central. Para eso, el gateway del sitio es un UXG o uno de terceros.
+B: [suspiro] Uf, eso me lo hubiera querido saber hace dos obras.
+A: [risas] Y hay novedad fuerte. En las notas oficiales de Network once, Ubiquiti saca el soporte al Network Server de siempre, el famoso controlador en Windows, y dice que el reemplazo oficial es UniFi OS Server.
+B: ¿O sea que el que tenemos en una VM vieja se queda en diez punto seis?
+A: Se queda en diez punto seis. Lo nuevo viene por UniFi OS Server o por una consola. Y Network once pide UniFi OS seis o superior.
+B: Entonces en obra, lo primero es decidir quién es el host.
+A: Eso. Una pyme con un local: Cloud Gateway y listo. Diez sucursales con routers propios: un UniFi OS Server central y gateways UXG o de terceros.
+B: ¿Y el laboratorio?
+A: Levantás UniFi OS Server en una VM Ubuntu veinticuatro cero cuatro con dos gigas de RAM y anotás las versiones. Quince minutos.
+B: Y antes de cotizar, escribir quién manda en cada equipo.
+A: Así te ahorrás una migración a los seis meses.

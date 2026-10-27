@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>¿Puede el R20 alimentar la cerradura?</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">AKUVOX · LECCIÓN 26 · PASO 3</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">¿Puede el R20 alimentar la cerradura?</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'liga' 0,'calt' 0}</style>
+<rect x="48" y="140" width="300" height="100" rx="14" fill="#011E38" stroke="#17A8D4" stroke-width="2"/><text x="66.0" y="196.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#FFFFFF" text-anchor="start">hardware 3 (o R20B V2.0)</text>
+<text x="366.0" y="196.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#41627F" text-anchor="start">+ fuente 12 V 1,2 A o más</text>
+<path d="M738.0 190.0L794.0 190.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="800" y="140" width="352" height="100" rx="14" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="820.0" y="197.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#0E8F5E" text-anchor="start"><tspan x="820.0" dy="0.0">12 V 500 mA por el relé</tspan></text>
+<rect x="48" y="268" width="300" height="100" rx="14" fill="#011E38" stroke="#17A8D4" stroke-width="2"/><text x="66.0" y="324.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#FFFFFF" text-anchor="start">hardware 3</text>
+<text x="366.0" y="324.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#41627F" text-anchor="start">+ PoE + firmware 320.30.11.42 o más</text>
+<path d="M738.0 318.0L794.0 318.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="800" y="268" width="352" height="100" rx="14" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/>
+<text x="820.0" y="312.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#B45309" text-anchor="start"><tspan x="820.0" dy="0.0">12 V 500 mA, afectada por el</tspan><tspan x="820.0" dy="24.3">volumen</tspan></text>
+<rect x="48" y="396" width="300" height="100" rx="14" fill="#011E38" stroke="#17A8D4" stroke-width="2"/><text x="66.0" y="452.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#FFFFFF" text-anchor="start">hardware viejo</text>
+<text x="366.0" y="452.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#41627F" text-anchor="start">(sin salida de 12 V)</text>
+<path d="M738.0 446.0L794.0 446.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="800" y="396" width="352" height="100" rx="14" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<text x="820.0" y="453.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#D2492F" text-anchor="start"><tspan x="820.0" dy="0.0">fuente propia para la cerradura</tspan></text>
+<rect x="48" y="540" width="1104" height="75" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="552" width="5" height="51" rx="2.5" fill="#0A63B8"/><text x="74.0" y="574.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">R20K V3.0, R20A V5.0 y R20B V2.0 tienen salida; las versiones viejas no. Anotá hardware, firmware y decisión en la planilla</tspan><tspan x="74.0" dy="21.6">(paso 4).</tspan></text>
+</svg>

@@ -1,0 +1,21 @@
+A: Lección dieciséis. Hasta ahora el HTTP disparaba el relé del propio portero. Hoy, los relés que están en otro lado.
+B: ¿Cuántos tipos hay?
+A: Cuatro. El primero es el Web Relay de terceros: un relé con servidor web propio. En el portero, Access Control, Web Relay, cargás su IP, usuario, clave y el comando, por ejemplo state punto xml con relayState igual dos.
+B: ¿Y el portero lo dispara cuándo?
+A: Por DTMF, por tarjeta o desde la nube. Elegís si usa solo el Web Relay o los dos, y en ese caso manda el local. Si dejás la IP vacía, cargás URLs completas, hasta cincuenta comandos.
+B: Cincuenta. ¿Y el segundo?
+A: El SR01, que es de Akuvox. La historia es buenísima: si la cerradura cuelga del relé del portero, alguien rompe el portero y abre. El SR01 va adentro y maneja la cerradura, así que aunque destruyan el portero, la puerta no abre.
+B: ¿Cómo se conecta?
+A: Por RS485, que es Security Relay B, o por la salida de doce voltios, Security Relay A. Y por HTTP se dispara con DoorNum igual SA o SB.
+B: ¿Y el E12?
+A: El E12 no tiene RS485, se conecta de una forma especial que Akuvox mismo no recomienda.
+B: Anotado. ¿Tercero?
+A: Los relés externos del monitor: el MK485 o el RSAC-C1-R8, con ocho relés por RS485. Sirven para luces, persianas o el portón desde la pantalla. Ojo con el RSAC: sin la llavecita DIP uno encendida, el monitor no lo ve.
+B: ¿Y el cuarto?
+A: El WR01, un controlador de relé de borde: dos relés, dos entradas, PoE o fuente, montaje en riel DIN, con API abierta. Para una carga lejos del portero.
+B: ¿Y los tiempos?
+A: Trigger Delay, cuánto espera antes de disparar, y Hold Delay, cuánto lo mantiene. En el monitor, Never lo deja activado. Cada pieza tiene su artículo propio, así que la evidencia es de una o dos páginas por tema.
+B: ¿Laboratorio?
+A: Veinte minutos. SR01 por RS485, Security Relay B, y lo abrís con DoorNum SB desde curl. Sin SR01, el relé B con un portón de banco.
+B: Y la cerradura importante, desde adentro.
+A: Esa es la regla.

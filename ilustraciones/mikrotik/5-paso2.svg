@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>La tabla VLAN: quién lleva qué y cómo</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">MIKROTIK · PASO 2</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">La tabla VLAN: quién lleva qué y cómo</text>
+<text x="48.0" y="180.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">puerto →</text>
+<rect x="256" y="140" width="213" height="60" rx="12" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="362.5" y="168.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#FFFFFF" text-anchor="middle">bridge</text>
+<text x="362.5" y="188.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#9FC3E3" text-anchor="middle">el CPU del router</text>
+<rect x="481" y="140" width="213" height="60" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="587.5" y="168.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#04223D" text-anchor="middle">ether2</text>
+<text x="587.5" y="188.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#6E88A1" text-anchor="middle">cámara</text>
+<rect x="706" y="140" width="213" height="60" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="812.5" y="168.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#04223D" text-anchor="middle">ether3</text>
+<text x="812.5" y="188.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#6E88A1" text-anchor="middle">cámara</text>
+<rect x="931" y="140" width="213" height="60" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="1037.5" y="168.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#04223D" text-anchor="middle">ether4</text>
+<text x="1037.5" y="188.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#6E88A1" text-anchor="middle">trunk</text>
+<rect x="48" y="237" width="154.79999999999998" height="30" rx="15" fill="#0A63B8" stroke="#0A63B8" stroke-width="0"/><text x="125.4" y="258.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">VLAN 20 · CCTV</text>
+<rect x="256" y="226" width="213" height="52" rx="10" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="362.5" y="258.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">con etiqueta</text>
+<rect x="481" y="226" width="213" height="52" rx="10" fill="#E2F5FB" stroke="#17A8D4" stroke-width="1.5"/>
+<text x="587.5" y="258.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0B7FA6" text-anchor="middle">sin etiqueta</text>
+<rect x="706" y="226" width="213" height="52" rx="10" fill="#E2F5FB" stroke="#17A8D4" stroke-width="1.5"/>
+<text x="812.5" y="258.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0B7FA6" text-anchor="middle">sin etiqueta</text>
+<rect x="931" y="226" width="213" height="52" rx="10" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="1037.5" y="258.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">con etiqueta</text>
+<rect x="48" y="313" width="182.39999999999998" height="30" rx="15" fill="#002F58" stroke="#002F58" stroke-width="0"/><text x="139.2" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">VLAN 99 · gestión</text>
+<rect x="256" y="302" width="213" height="52" rx="10" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="362.5" y="334.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">con etiqueta</text>
+<text x="587.5" y="334.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">no pasa</text>
+<text x="812.5" y="334.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">no pasa</text>
+<rect x="931" y="302" width="213" height="52" rx="10" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="1037.5" y="334.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">con etiqueta</text>
+<text x="48.0" y="400.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.6">Y EN CADA PUERTO</text>
+<rect x="48" y="416" width="540" height="150" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="454.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">ether2 y ether3 · access</text>
+<text x="68.0" y="492.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="start">pvid=20</text>
+<text x="68.0" y="518.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">frame-types=admit-only-untagged-…</text>
+<text x="68.0" y="544.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">ingress-filtering=yes</text>
+<rect x="612" y="416" width="540" height="150" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="632.0" y="454.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">ether4 · trunk</text>
+<text x="632.0" y="492.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">frame-types=admit-only-vlan-tagged</text>
+<text x="632.0" y="518.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">ingress-filtering=yes</text>
+<text x="632.0" y="544.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#D2492F" text-anchor="start">sin etiqueta: se descarta</text>
+<text x="48.0" y="612.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">Si bridge no figura como tagged en una VLAN, el router no ve esa VLAN: ni IP, ni DHCP, ni gestión.</text>
+</svg>

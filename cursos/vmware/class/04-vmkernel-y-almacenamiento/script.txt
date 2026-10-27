@@ -1,0 +1,16 @@
+A: Lección cuatro. Hoy hablamos de las IPs del propio host. No las de las VMs, las del ESXi.
+B: Los famosos vmk.
+A: Esos. Los adaptadores VMkernel. La instalación te crea uno solo, el vmk cero, para gestión. Pero el host también habla por la red para otras cosas: vMotion, almacenamiento por iSCSI o NFS, backups.
+B: ¿Y va todo por el mismo?
+A: Ahí está el error clásico. La documentación de Broadcom lo dice clarito: un adaptador VMkernel por cada tipo de tráfico. Cada uno con su VLAN y su subred. Y la guía de phoenixNAP dice lo mismo. Son dos fuentes, pero coinciden punto por punto.
+B: ¿Y por qué tanto cuidado?
+A: Porque si mezclás el almacenamiento con el tráfico de usuarios o de cámaras, aparecen latencias raras que nadie entiende. Y hay un dato fuerte en la documentación: el tráfico de vMotion viaja sin cifrar. Lleva la memoria de la VM. Por eso piden una red privada solo para los hosts.
+B: ¿En serio? ¿La memoria entera pasando en limpio?
+A: En serio. Red aislada y listo. Ahora, almacenamiento. Los datastores pueden ser VMFS, sobre un disco local o una LUN, o NFS, versión tres o cuatro punto uno, contra un NAS.
+B: Tipo un NAS de los que ponemos para grabación.
+A: Ese. Y si usás jumbo frames, MTU nueve mil, tiene que estar igual de punta a punta: el vmk, el vSwitch, el switch físico y el NAS. Si uno queda en mil quinientos, tenés cortes intermitentes.
+B: Lo peor que hay. Funciona, no funciona, funciona.
+A: Para probarlo está vmkping. Desde el host, vmkping guion I vmk uno, guion d para no fragmentar, guion s ocho mil novecientos setenta y dos, y la IP del NAS. Si contesta, el MTU grande pasa entero.
+B: ¿Por qué ocho mil novecientos setenta y dos y no nueve mil?
+A: Porque se descuentan los encabezados IP e ICMP. Ese es el laboratorio: creás el vmk uno en una VLAN de almacenamiento, probás con vmkping y montás un NFS de prueba.
+B: Veinte minutos. Y cada tráfico queda en su carril.

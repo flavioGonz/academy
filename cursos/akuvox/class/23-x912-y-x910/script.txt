@@ -1,0 +1,25 @@
+A: Lección veintitrés. Seguimos en la serie X de calle, pero con los Linux: el X912 y el X910.
+B: El X912 es el antivandálico, ¿no?
+A: Así lo presenta Akuvox. Frente de acero, pantalla táctil, Linux, IP65 según la guía de selección y Wiegand. El menú lo lista en versión estándar y en versión con teclado físico.
+B: ¿Credenciales?
+A: PIN, tarjetas de trece coma cincuenta y seis y ciento veinticinco, rostro, Bluetooth y QR. Relé de treinta voltios tres amperes.
+B: ¿Y cómo entrás? Porque no es Android.
+A: Distinto: tocás el ícono de la llave en la pantalla o el teclado, marcás dos tres nueve seis, que es el PIN de sistema de fábrica, y Dial.
+B: ¿Alimentación?
+A: PoE+ at, o fuente de doce voltios. Y da doce voltios hasta un ampere por el relé, con PoE+ o con fuente de doce voltios dos amperes y medio.
+B: O sea que el X912 sí da la salida con PoE+.
+A: Según la tabla, sí. Y otro dato que vimos en la parte de HTTP: es uno de los dos porteros, con el R29, que leen patentes de cámaras Hikvision, desde el firmware novecientos doce punto treinta punto doce punto ciento catorce.
+B: ¿Y el X910?
+A: Es otra cosa. Un botón, sin pantalla, y Akuvox lo presenta como portero de un botón con detección de paquetes. Linux, aluminio, IP66.
+B: ¿Credenciales?
+A: Sin PIN. Tarjeta solo de trece coma cincuenta y seis, Bluetooth y QR. Ni rostro.
+B: ¿Y la alimentación?
+A: PoE af, o fuente de doce a veinticuatro voltios. Pero si querés su salida de doce voltios, hasta seiscientos miliamperes, pide PoE+ o fuente de doce voltios dos amperes.
+B: Y para sacarle la IP...
+A: Mantenés el botón de llamada cinco segundos y la dice en voz alta, como el R20A.
+B: ¿Cuántas fuentes?
+A: Cinco de diez en revisar alimentación, y la tabla de métodos de acceso marca las credenciales. Del X912 y el X910 no leímos ficha propia.
+B: ¿Laboratorio?
+A: Diez minutos en la mesa. Sacás la IP de cada uno por su camino, leés el firmware, y probás la salida de doce voltios con una cerradura de banco en la alimentación correcta.
+B: Con el tester a mano.
+A: Siempre.

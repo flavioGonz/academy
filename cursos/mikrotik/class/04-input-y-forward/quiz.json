@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Una cámara en la LAN no llega al NVR que está en otra subred del mismo router. ¿En qué cadena mirás primero?",
+    "options": [
+      "input",
+      "output",
+      "srcnat",
+      "forward"
+    ],
+    "answer": 3,
+    "why": "El tráfico entre dos equipos que pasa a través del router atraviesa la cadena forward. Input es solo para tráfico dirigido al router mismo."
+  },
+  {
+    "q": "Agregaste con add una regla accept para WinBox desde WAN y el contador sigue en cero. El router tiene configuración por defecto. ¿Qué pasó?",
+    "options": [
+      "WinBox no usa TCP",
+      "La regla quedó debajo de 'drop all not coming from LAN' y nunca se evalúa",
+      "Hay que reiniciar para que aplique",
+      "Las reglas accept solo funcionan en forward"
+    ],
+    "answer": 1,
+    "why": "Las reglas se evalúan en orden y la primera que coincide manda. Un add común queda al final, debajo del drop de la defconf; la documentación indica usar place-before."
+  },
+  {
+    "q": "Un cliente cambia la IP fija de su oficina cada tanto y tiene acceso permitido en varias reglas. ¿Cómo lo armás?",
+    "options": [
+      "Una regla por servicio con la IP escrita",
+      "Permitir todo desde WAN y filtrar por usuario",
+      "Una address-list con la IP de la oficina y las reglas apuntando a la lista",
+      "Usar available-from en lugar del firewall"
+    ],
+    "answer": 2,
+    "why": "Con una address-list, cuando cambia la IP editás la lista una vez y todas las reglas quedan bien. Es la práctica del firewall base de MikroTik."
+  }
+]

@@ -1,0 +1,19 @@
+A: Lección doce, la última. Portero en la central. El cliente tiene un GDS tres mil setecientos diez en la puerta y quiere atender desde el teléfono de la oficina.
+B: ¿Lo conecto directo al teléfono por IP?
+A: Se puede en lugares chicos, es el modo peer. Pero con más de un portero o más de un teléfono, lo que funciona es registrarlo en la UCM como una extensión más. El blog de Grandstream lo resume así: registrás el GDS como extensión y en su web le decís a quién llamar.
+B: ¿Y en el GDS qué toco?
+A: Según la guía de Grandstream para GDS con GRP: Doorbell Mode en Call Doorbell Number, y en Number Called When Door Bell Pressed ponés la interna o el número de un grupo de llamada, para que suene en recepción y seguridad a la vez.
+B: Bien. ¿Y para abrir?
+A: Dos formas. Configurás un Remote PIN to Open the Door y marcás Enable DTMF Open Door. Durante la llamada, el que atiende marca el PIN y se abre.
+B: ¿Y la otra?
+A: En los GRP hay una tecla OpenDoor que manda un mensaje SIP al GDS. Se puede abrir sin siquiera atender.
+B: Uh, qué cómodo. ¿Y el video?
+A: Depende del modelo. La guía lista que los GRP dos mil seiscientos uno al dos mil seiscientos cuatro, y los dos mil seiscientos doce y trece, son solo audio. Del dos mil seiscientos catorce para arriba muestran imagen.
+B: O sea que el cliente que quiere ver quién toca necesita el teléfono correcto.
+A: Exacto. Y si el GDS va por RemoteConnect, en los GRP el video no anda; la guía sugiere un GXV.
+B: ¿Cuántas fuentes?
+A: Tres de tres: la guía, el blog y el manual de la UCM, que tiene una opción para pasar el pedido de video y la tecla de apertura a los teléfonos.
+B: ¿Laboratorio?
+A: Veinte minutos: registrás el GDS como interna, el timbre llama a un grupo, configurás el PIN y abrís desde un GRP.
+B: Y el PIN no es el de fábrica, ni el del buzón.
+A: Ni el cumpleaños del dueño. Y cerramos el curso: central en pie, llamadas ruteadas y la puerta abriendo desde el teléfono.

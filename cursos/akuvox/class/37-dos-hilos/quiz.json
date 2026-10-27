@@ -1,0 +1,35 @@
+[
+ {
+  "q": "¿Cómo se alimenta un R20A-2?",
+  "options": [
+   "PoE 802.3af",
+   "48 V DC 1,25 A, sin PoE",
+   "12 V 1 A",
+   "Desde el monitor"
+  ],
+  "answer": 1,
+  "why": "La tabla de alimentación marca al R20A-2 sin PoE y con 48 V DC 1,25 A."
+ },
+ {
+  "q": "El monitor C313-2 no tiene PoE. ¿De dónde toma energía?",
+  "options": [
+   "Del NS-2, o de 48 V si no hay NS-2",
+   "Del portero",
+   "De una batería",
+   "De 12 V"
+  ],
+  "answer": 0,
+  "why": "La tabla indica que el C313-2 se alimenta por el NS-2, o con 48 V DC si no se usa NS-2."
+ },
+ {
+  "q": "Te preguntan exactamente qué hace el NX-2. ¿Qué respondés con lo leído?",
+  "options": [
+   "Es un monitor",
+   "Es un portero",
+   "Es el lector UHF",
+   "Figura en el menú de 2 hilos, pero su rol no está en las páginas leídas: se confirma con el distribuidor"
+  ],
+  "answer": 3,
+  "why": "El NX-2 solo aparece por nombre en el menú; no hay ficha leída que diga su función."
+ }
+]

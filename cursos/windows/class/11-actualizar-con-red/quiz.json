@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un servidor de grabación sin nadie conectado se reinicia por actualizaciones a la madrugada, aunque un técnico dejó una sesión de escritorio remoto desconectada. ¿Por qué?",
+  "options": [
+   "Las horas activas no existen en servidores",
+   "Solo una sesión de RDP activa cuenta como usuario conectado; una desconectada no frena el reinicio",
+   "El servidor tiene un virus",
+   "La UPS mandó la señal de apagado"
+  ],
+  "answer": 1,
+  "why": "Según Microsoft, solo los usuarios conectados localmente o con sesión RDP activa cuentan; sin ellos, el equipo se reinicia."
+ },
+ {
+  "q": "Para un servidor de VMS, ¿qué opción de Configure Automatic Updates sugiere Microsoft?",
+  "options": [
+   "Opción 4, descargar e instalar a hora fija con reinicio forzado",
+   "Deshabilitar Windows Update",
+   "Opción 7, avisar para instalar y avisar para reiniciar",
+   "Opción 2, solo avisar sin descargar"
+  ],
+  "answer": 2,
+  "why": "La documentación de reinicios recomienda para servidores la opción 7, que deja la decisión del momento en manos del administrador."
+ },
+ {
+  "q": "Un servidor 2022 amaneció actualizado a 2025 sin licencia. ¿Cuál de estas salidas lo devuelve a como estaba?",
+  "options": [
+   "Restaurar desde un backup previo",
+   "Desinstalar la actualización desde Configuración",
+   "Cambiar la clave de producto por la de 2022",
+   "Esperar un parche de Microsoft"
+  ],
+  "answer": 0,
+  "why": "No había vuelta atrás simple: las opciones fueron restaurar backup, reconstruir o pagar licencia, y solo el backup devolvía el servidor a su estado previo."
+ }
+]

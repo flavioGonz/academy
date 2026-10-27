@@ -1,0 +1,15 @@
+A: Arrancamos una parte nueva: cómo se conecta el MikroTik a internet. Y empezamos por la más simple, la IP fija.
+B: La que el cliente te manda por WhatsApp, en una foto del contrato.
+A: [risas] Esa. Son cuatro datos: dirección, máscara, gateway y DNS. La documentación de MikroTik lo resuelve en tres comandos: la dirección en ether1 con barra ip barra address, una ruta por defecto hacia el gateway con barra ip barra route, y los DNS en barra ip barra dns.
+B: ¿Y por qué no lo hago con QuickSet y listo?
+A: Podés, pero a mano sabés qué quedó. Tres de las cinco fuentes que tocan la IP fija van por ahí, sin discrepancias. La documentación agrega que lo más común en hogares es DHCP, según ellos cerca del ochenta por ciento, y que la IP estática aparece en conexiones de empresa.
+B: Como los planes empresariales de Antel.
+A: Justo. En su página, Internet pyme trae una IP pública fija, y el corporativo hasta veintinueve IPs, una barra veintisiete, entregadas en un RJ cuarenta y cinco con un router que instala y administra Antel. Tu MikroTik toma una de esas IPs y usa como gateway el que indica Antel.
+B: Un detalle de obra: la configuración por defecto trae un cliente DHCP en ether1.
+A: Sí, y conviene deshabilitarlo antes, para no tener dos cosas peleando por la misma interfaz. Después verificás en orden: ping al gateway, ping a una IP de internet, y resolver un nombre. Si el gateway no contesta, es cable, máscara o VLAN; si la IP contesta y el nombre no, son los DNS.
+B: Y si el sitio tiene dos proveedores...
+A: Ahí la IP fija te viene bárbara, porque el gateway no cambia. Es el caso ideal para las rutas recursivas de la lección once.
+B: ¿Y el laboratorio?
+A: Quince minutos: cargás la dirección de ejemplo, la ruta y los DNS, hacés las tres pruebas, y mirás en barra ip barra cloud que public-address sea igual a tu IP. Si coincide, tenés IP directa.
+B: Tres comandos y tres pruebas.
+A: Y la próxima vez que llegue la foto del contrato, en cinco minutos está andando y probado.

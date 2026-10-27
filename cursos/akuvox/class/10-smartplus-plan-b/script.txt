@@ -1,0 +1,19 @@
+A: Lección diez. SmartPlus, la nube de Akuvox con la app para el residente.
+B: El cliente la quiere sí o sí. Atender el portero desde el celular.
+A: Y tiene cosas lindas: ver y hablar con la visita, abrir, dar llaves temporales, Bluetooth para abrir con el teléfono en el bolsillo.
+B: ¿Pero?
+A: Pero hay dos cosas para saber. Una técnica: cuando activás SmartPlus, la nube usa la cuenta SIP uno del equipo. Si además querés central local, va en la cuenta dos.
+B: Eso ya lo vimos.
+A: Sí. La otra es de expectativas. Fui a mirar la app en Google Play: más de cien mil descargas y tres coma seis estrellas, según la tienda.
+B: Mmm, no es mucho.
+A: Y las reseñas cuentan lo que te imaginás. Uno dice que ve a la persona en pantalla pero no puede atender por un error al azar. Otro que las notificaciones a veces no suenan hasta que desbloquea el teléfono.
+B: [suspiro] Y eso te lo reclaman a vos, no a Akuvox.
+A: Exacto. Son reseñas, no un estudio, pero sirven para una regla: la app es un extra. La entrada tiene que andar igual si se cae internet o falla la app.
+B: ¿Y cómo lo garantizás?
+A: El monitor interior, el PIN y la tarjeta trabajan localmente. Si eso está bien configurado, se cae internet y la gente entra igual y atiende en el monitor.
+B: ¿Y qué dicen los de seguridad?
+A: Claroty va más lejos: recomienda no exponer el equipo a internet aunque se pierda la app. Acá hay una división real, y la forma de decidir es esta: que el portero salga hacia la nube puede ser aceptable; abrirle puertos de entrada desde internet, no.
+B: Tiene sentido. ¿Laboratorio?
+A: Dibujá en una hoja qué sigue andando si se cae el WAN: llamada al monitor, apertura, PIN, tarjeta, app. Después desconectá el WAN del router de laboratorio y probá cada cosa. Quince minutos.
+B: Y eso se lo explicás al cliente el día de la entrega.
+A: Así, la app suma y nunca es lo único que abre la puerta.

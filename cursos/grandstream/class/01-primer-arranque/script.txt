@@ -1,0 +1,18 @@
+A: Bueno, lección uno. Arrancamos con una central UCM recién sacada de la caja. ¿Qué es lo primero que hacés?
+B: Enchufo, busco la IP en la pantallita y entro a configurar extensiones. Como todos.
+A: [risas] Ahí está el error. Antes de una sola extensión hay tres cosas: el modo de red, la contraseña y el backup.
+B: ¿El modo de red? Si la conecto al switch y anda.
+A: Anda, pero fijate. La UCM seis mil trescientos tiene tres modos: Switch, que es el de fábrica, Route y Dual. Y hay cosas que solo funcionan en Route, como entregar la dirección de provisioning por DHCP opción sesenta y seis o la defensa dinámica del firewall.
+B: Uh, o sea que si lo cambio después, me desarma lo que ya hice.
+A: Exacto. Se decide primero. Después entrás por HTTPS al puerto ocho mil ochenta y nueve, con usuario admin y la contraseña que viene en la etiqueta.
+B: Pará, yo tenía anotado admin admin.
+A: Eso dicen todavía algunas guías de proveedores, pero según el manual de seguridad de Grandstream, desde enero de dos mil diecisiete cada equipo trae una contraseña aleatoria impresa. Y se cambia en el primer ingreso, de diez a treinta caracteres.
+B: ¿Y pasa en serio?
+A: Hay casos. Un proveedor de troncales australiano dice que dejar la clave de fábrica es de las causas más comunes de centrales hackeadas. Y hay una vulnerabilidad publicada, la CVE dos mil veinticinco veintiocho mil ciento setenta y dos: la UCM seis mil quinientos diez, hasta la versión uno punto cero punto veinte, dejaba probar contraseñas sin límite.
+B: [suspiro] Fuerza bruta servida.
+A: Por eso lo tercero: firmware al día. Pero antes de actualizar, backup. Siempre. Lo bajás desde Maintenance, Backup, y lo guardás fuera de la central.
+B: Tres de cuatro fuentes que leímos coinciden con esto, ¿no?
+A: Tres de cuatro. La que discrepa es justo la guía que todavía dice admin admin.
+B: Bien. ¿Y el laboratorio?
+A: Quince minutos: elegís el modo de red, cambiás la contraseña, anotás la versión de firmware y te bajás un backup.
+B: Y desde ahí, ninguna central sale de la camioneta con la clave de la etiqueta.

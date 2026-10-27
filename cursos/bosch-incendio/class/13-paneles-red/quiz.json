@@ -1,0 +1,35 @@
+[
+ {
+  "q": "El panel con número de nodo 3 no aparece en la red. En RPS figura con IP 192.168.1.7. ¿Qué revisás primero?",
+  "options": [
+   "Que el número de nodo físico del panel coincida con el de RPS, que define el último octeto de la IP",
+   "El cable de alimentación",
+   "La licencia del detector",
+   "La versión de Windows"
+  ],
+  "answer": 0,
+  "why": "La Networking guide indica que la configuración estándar usa el número de nodo físico como último octeto de la IP y que debe coincidir entre panel y RPS para que la red funcione."
+ },
+ {
+  "q": "El cliente propone conectar los paneles a su red corporativa para ahorrar cableado. ¿Qué dice Bosch?",
+  "options": [
+   "Se puede con VLAN",
+   "Solo si los switches son administrables",
+   "Solo en firmware 3.x",
+   "El sistema de incendio no se instala en una red compartida: red física dedicada"
+  ],
+  "answer": 3,
+  "why": "La guía de redes exige una red físicamente dedicada para el sistema y la PC de servicio por seguridad y por requisitos normativos."
+ },
+ {
+  "q": "¿Qué protocolo y puertos usa el gateway seguro de Bosch para Remote Connect?",
+  "options": [
+   "HTTP 80",
+   "Telnet 23",
+   "IPsec por UDP 500 y UDP 4500",
+   "Puertos 25001 a 25008 abiertos a internet"
+  ],
+  "answer": 2,
+  "why": "La Networking guide lista IPsec VPN con UDP 500 y 4500 hacia el gateway; los puertos 25001 a 25008 son de la red interna de paneles."
+ }
+]

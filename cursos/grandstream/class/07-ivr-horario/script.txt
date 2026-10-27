@@ -1,0 +1,22 @@
+A: Lección siete. IVR con horario. El famoso "marque uno para ventas".
+B: Que todo el mundo odia, pero todo el mundo pide.
+A: [risas] Tal cual. En la UCM está en Basic Call Features, IVR. Creás el IVR con un número de extensión propio, le subís un mensaje de bienvenida y configurás qué hace cada tecla.
+B: Hasta ahí, fácil.
+A: Lo interesante es que cada tecla puede tener hasta cinco destinos distintos según el horario. La tecla uno en horario de oficina va a la cola de ventas, y fuera de hora va al buzón de ventas.
+B: Ah, mirá. Entonces no necesito dos IVR, uno de día y uno de noche.
+A: Podés hacerlo con uno solo. Los horarios salen de lo que configuraste en Office Time y Holiday.
+B: ¿Y cuántos niveles de menú se pueden anidar?
+A: Acá hay una diferencia entre fuentes. Un post viejo del blog de Grandstream hablaba de hasta cinco niveles. El manual actual dice hasta sesenta y cuatro IVR anidados.
+B: Sesenta y cuatro. Nadie en su sano juicio.
+A: Nadie. Lo que importa es otra cosa: qué pasa con el que no marca nada. Hay un tiempo de espera de respuesta y una opción para tecla inválida, y las dos necesitan un destino.
+B: Porque si no, la llamada se corta.
+A: Y el que llamó cree que la empresa cerró. Lo práctico es mandar el silencio a la operadora o a un grupo.
+B: ¿Algo de seguridad en el IVR?
+A: Sí. Si habilitás marcar internas desde el IVR, el manual permite una lista blanca de internas alcanzables. Así nadie desde afuera marca una interna que no corresponde.
+B: Y el mensaje, ¿lo grabo con el teléfono?
+A: Se puede, pero se nota. Mejor un archivo bien grabado, subido en Custom Prompt.
+B: ¿Cuántas fuentes respaldan esto?
+A: Dos, el manual y el blog de Grandstream. Coinciden en todo salvo el límite de niveles.
+B: ¿Laboratorio?
+A: Quince minutos. IVR con dos teclas, una con horario, y un destino para el silencio.
+B: Y nadie más escucha "opción inválida, adiós" y un tono de corte.

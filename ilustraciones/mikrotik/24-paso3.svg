@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Qué puerto de afuera va a qué NVR</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">MIKROTIK · LECCIÓN 24 · PASO 3</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Qué puerto de afuera va a qué NVR</text>
+<text x="48.0" y="146.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.6">PUERTOS DE FÁBRICA (CAMBIABLES EN EL NVR)</text>
+<rect x="48" y="162" width="520" height="364" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="64.0" y="194.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">Hikvision</text>
+<text x="200.0" y="194.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">8000 TCP</text>
+<text x="350.0" y="194.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#0E8F5E" text-anchor="start">app e iVMS-4200</text>
+<path d="M60 214H556" stroke="#DDE8F2" stroke-width="1"/>
+<text x="64.0" y="246.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">Hikvision</text>
+<text x="200.0" y="246.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">554 / 10554</text>
+<text x="350.0" y="246.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">RTSP</text>
+<path d="M60 266H556" stroke="#DDE8F2" stroke-width="1"/>
+<text x="64.0" y="298.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">Hikvision</text>
+<text x="200.0" y="298.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">80 / 443</text>
+<text x="350.0" y="298.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#D2492F" text-anchor="start">web: mejor no</text>
+<path d="M60 318H556" stroke="#DDE8F2" stroke-width="1"/>
+<text x="64.0" y="350.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">Dahua</text>
+<text x="200.0" y="350.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">37777 TCP</text>
+<text x="350.0" y="350.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#0E8F5E" text-anchor="start">SmartPSS y DMSS</text>
+<path d="M60 370H556" stroke="#DDE8F2" stroke-width="1"/>
+<text x="64.0" y="402.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">Dahua</text>
+<text x="200.0" y="402.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">37778 UDP</text>
+<text x="350.0" y="402.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#B45309" text-anchor="start">si no hay video</text>
+<path d="M60 422H556" stroke="#DDE8F2" stroke-width="1"/>
+<text x="64.0" y="454.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">Dahua</text>
+<text x="200.0" y="454.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">554</text>
+<text x="350.0" y="454.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">RTSP</text>
+<path d="M60 474H556" stroke="#DDE8F2" stroke-width="1"/>
+<text x="64.0" y="506.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">Dahua</text>
+<text x="200.0" y="506.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">80 / 443</text>
+<text x="350.0" y="506.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#D2492F" text-anchor="start">web: mejor no</text>
+<text x="640.0" y="146.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.6">UNA IP PÚBLICA, VARIOS NVR</text>
+<rect x="640" y="162" width="160" height="364" rx="18" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="720.0" y="196.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#7DD3FC" text-anchor="middle">203.0.113.10</text>
+<rect x="656" y="208" width="128" height="40" rx="10" fill="#0B3A66" stroke="#4E7396" stroke-width="1.5"/>
+<text x="720.0" y="235.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#FCD34D" text-anchor="middle">:18000</text>
+<path d="M804.0 228.0C887.0 228.0,887.0 228.0,970.0 228.0" fill="none" stroke="#0E8F5E" stroke-width="3" stroke-linecap="round" marker-end="url(#a-ok)"/><rect x="854.5" y="199.0" width="65.0" height="28" rx="14" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="1.5"/><text x="887.0" y="218.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#0E8F5E" text-anchor="middle">:8000</text>
+<rect x="974" y="192" width="178" height="72" rx="14" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="3"/><text x="1063.0" y="225.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="middle">NVR1</text><text x="1063.0" y="247.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">192.168.88.50</text>
+<rect x="656" y="308" width="128" height="40" rx="10" fill="#0B3A66" stroke="#4E7396" stroke-width="1.5"/>
+<text x="720.0" y="335.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#FCD34D" text-anchor="middle">:18554</text>
+<path d="M804.0 328.0C887.0 328.0,887.0 328.0,970.0 328.0" fill="none" stroke="#0E8F5E" stroke-width="3" stroke-linecap="round" marker-end="url(#a-ok)"/><rect x="858.8" y="299.0" width="56.4" height="28" rx="14" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="1.5"/><text x="887.0" y="318.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#0E8F5E" text-anchor="middle">:554</text>
+<rect x="974" y="292" width="178" height="72" rx="14" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="3"/><text x="1063.0" y="325.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="middle">NVR1</text><text x="1063.0" y="347.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">192.168.88.50</text>
+<rect x="656" y="428" width="128" height="40" rx="10" fill="#0B3A66" stroke="#4E7396" stroke-width="1.5"/>
+<text x="720.0" y="455.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#FCD34D" text-anchor="middle">:18001</text>
+<path d="M804.0 448.0C887.0 448.0,887.0 448.0,970.0 448.0" fill="none" stroke="#0E8F5E" stroke-width="3" stroke-linecap="round" marker-end="url(#a-ok)"/><rect x="854.5" y="419.0" width="65.0" height="28" rx="14" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="1.5"/><text x="887.0" y="438.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#0E8F5E" text-anchor="middle">:8000</text>
+<rect x="974" y="412" width="178" height="72" rx="14" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="3"/><text x="1063.0" y="445.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="middle">NVR2</text><text x="1063.0" y="467.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">192.168.88.51</text>
+<rect x="48" y="548" width="1104" height="52" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="560" width="5" height="28" rx="2.5" fill="#0A63B8"/><text x="74.0" y="582.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">En la app: IP pública (o nombre DDNS) y el puerto de afuera. dst-port es el de afuera; to-ports, el del NVR.</tspan></text>
+<text x="48.0" y="650.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="start">Hikvision: puertos según learncctv.com y un distribuidor; Dahua: aviso oficial. Confirmá en tu modelo.</text>
+</svg>

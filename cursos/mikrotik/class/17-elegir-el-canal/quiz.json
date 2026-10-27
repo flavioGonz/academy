@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un cliente con tres sucursales que visitás dos veces por año. ¿Qué canal dejás?",
+    "options": [
+      "testing, para tener arreglos antes",
+      "long-term en los tres equipos",
+      "development en uno y stable en los otros",
+      "El que venga de fábrica en cada uno"
+    ],
+    "answer": 1,
+    "why": "Long-term trae solo arreglos críticos y cambia poco. Mantener todos los equipos de un cliente en el mismo canal hace que se comporten igual."
+  },
+  {
+    "q": "Necesitás una función que solo está en stable. ¿Qué es lo razonable?",
+    "options": [
+      "Pasar todos los clientes a stable ese mismo día",
+      "Pasar a testing, que es más nuevo",
+      "Activar el script de actualización automática",
+      "Probar esa versión stable en el banco y recién después pasar ese equipo"
+    ],
+    "answer": 3,
+    "why": "El distribuidor citado recomienda probar la versión con funciones nuevas en un equipo no crítico antes de producción. Testing no va en producción según la documentación."
+  },
+  {
+    "q": "Un router quedó en stable y lo querés de vuelta en long-term, que tiene una versión más vieja. ¿Cómo?",
+    "options": [
+      "Backup, cambiar el canal a long-term y usar Check for Updates para instalar la versión que ofrece",
+      "No se puede bajar de versión",
+      "Solo con Netinstall",
+      "Cambiar el canal sin hacer nada más; se baja solo"
+    ],
+    "answer": 0,
+    "why": "La documentación dice que el menú de actualización también sirve para bajar si se cambia a un canal con una versión más vieja y estable. Siempre con backup antes."
+  }
+]

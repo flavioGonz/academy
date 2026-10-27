@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Cargaste una adlist con unos 75 000 nombres y name-count quedó muy por debajo. En el log aparece \"adlist read: max cache size reached\". ¿Qué hacés?",
+    "options": [
+      "Subís cache-size y listo, la lista se completa sola",
+      "Reiniciás el router",
+      "Subís cache-size, borrás la adlist y la volvés a agregar",
+      "Pasás la lista a estáticas"
+    ],
+    "answer": 2,
+    "why": "La documentación dice que, si la caché no alcanza, el router corta la importación, y subir cache-size después no la completa: hay que borrar la adlist y agregarla de nuevo."
+  },
+  {
+    "q": "El cliente quiere bloquear un sitio y todos sus subdominios (www, m, cdn). ¿Qué usás?",
+    "options": [
+      "Una estática type=NXDOMAIN con match-subdomain=yes para el dominio",
+      "Una adlist con el dominio: bloquea también lo de abajo",
+      "Una address-list con el nombre y drop en input",
+      "Una regla redirect al puerto 80"
+    ],
+    "answer": 0,
+    "why": "La adlist bloquea solo el nombre exacto, sin comodines. Una estática NXDOMAIN con match-subdomain=yes responde que no existe para el nombre y todo lo que está debajo."
+  },
+  {
+    "q": "Bloqueaste un servicio con una address-list cargada por nombre, y al otro día otro servicio que nadie tocó dejó de andar. ¿La causa más probable?",
+    "options": [
+      "La address-list se borró al reiniciar",
+      "El servicio usa una CDN y comparte direcciones con el otro: el bloqueo por IP los cortó a los dos",
+      "El DNS del router está caído",
+      "El firewall por defecto bloquea todo"
+    ],
+    "answer": 1,
+    "why": "Con CDN, varias marcas comparten IP y las direcciones cambian por consulta. En el foro lo resumen: permitir WhatsApp probablemente permite Facebook; bloquear por IP tiene el mismo problema al revés."
+  }
+]

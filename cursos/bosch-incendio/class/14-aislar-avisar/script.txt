@@ -1,0 +1,18 @@
+A: Hoy, la lección que más rápido se olvida y más cara sale. Antes de disparar un detector, ¿qué hacés?
+B: Aviso al monitoreo.
+A: Primero eso, y a la gente del edificio. La guía de inspección de Minnesota, basada en NFPA setenta y dos, lo pone así: antes de cualquier prueba programada se notifica a ocupantes y a la empresa de monitoreo, para evitar que alguien responda en serio y se lastime.
+B: ¿Y después?
+A: Aislar lo que mueve cosas. Un sistema de incendio no solo suena: libera puertas, manda ascensores a planta baja, cierra o abre ventilación, transmite a bomberos y, a veces, dispara extinción. Antes de probar, esas salidas se deshabilitan en el panel o se bloquean en el equipo que comandan.
+B: La extinción sobre todo.
+A: Sobre todo. Con gas, la prueba se coordina con la empresa de extinción y con la central de extinción bloqueada. Y el manual de Bosch, en la puesta en marcha, prueba esas salidas una por una y a propósito, no por accidente.
+B: ¿Y los detectores en sí?
+A: Se pasa la zona a modo revisión, el walk test. Así el panel sabe que es prueba. En la lección que viene lo vemos en detalle.
+B: ¿Y cuando termino?
+A: Ahí está el otro error clásico: dejar salidas deshabilitadas. Al final, se habilita todo, se verifica en el panel que no quede nada bloqueado y se avisa al monitoreo que termina la prueba.
+B: ¿Algún número?
+A: Uno de la misma guía: si cambiaste el software del sitio, se prueba el cien por ciento de lo afectado y un diez por ciento de los dispositivos no afectados, hasta cincuenta.
+B: ¿Las fuentes coinciden?
+A: Las tres. Minnesota, el manual de Bosch y la guía del detector. Nadie dice que se pueda probar en vivo sin aislar.
+B: ¿Laboratorio?
+A: Tu checklist de antes y después de probar, en una hoja, con el teléfono del monitoreo y la lista de salidas a aislar de una obra real. Diez minutos.
+B: Y no se dispara nada sin monitoreo avisado y salidas aisladas. Siempre.

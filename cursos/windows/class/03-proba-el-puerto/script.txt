@@ -1,0 +1,22 @@
+A: Seguimos con la cámara. Ya sabés que está viva. Pero el VMS no la agrega.
+B: Y ahí arranca el baile. Que la contraseña, que el firmware...
+A: Antes de eso, una pregunta sola: ¿llega al puerto? Porque el ping te dice que hay alguien. No te dice que el servicio atiende.
+B: ¿Y cómo lo pruebo sin instalar nada?
+A: Test-NetConnection, que viene en Windows. Le das la IP y guion Port quinientos cincuenta y cuatro, el de RTSP, o el ochenta. Te devuelve TcpTestSucceeded, verdadero o falso.
+B: Ah, esa es la que reemplaza al telnet.
+A: Esa. Y si querés la respuesta corta para un script, le agregás InformationLevel Quiet.
+B: ¿Y del lado del servidor? A veces el VMS dice que arrancó y nadie lo puede ver.
+A: Ahí va Get-NetTCPConnection con estado Listen y el puerto. Te muestra quién escucha y el número de proceso. Con Get-Process y ese número sabés qué programa es.
+B: Me pasó que otro programa se había quedado con el ochenta.
+A: Clásico. Y fijate la dirección local: si dice cero punto cero punto cero punto cero, escucha en todas las placas. Si dice una IP, solo en esa.
+B: Bien. ¿Y el DNS?
+A: Ese es el tercero. Lo leímos en un artículo del blog de redes de Microsoft, de este año: nslookup no usa el resolvedor de Windows. Ignora el archivo hosts y la caché, y le pega directo al servidor DNS.
+B: ¿En serio? Siempre usé nslookup.
+A: Y tiene otra trampa. Si escribís un nombre sin punto final, le va agregando cada sufijo DNS que tenga configurado. En el ejemplo del artículo probó los cuatro sufijos de la lista antes del nombre real, y dio timeout.
+B: Uf. ¿Entonces?
+A: Para ver lo que ve la aplicación, Resolve-DnsName. Y nslookup lo dejás para comparar.
+B: ¿Cuántas fuentes en esto?
+A: Tres de cinco coinciden en probar el puerto concreto. Lo del DNS sale de una sola fuente, pero es de Microsoft.
+B: Laboratorio.
+A: Quince minutos: probás un puerto abierto y uno cerrado, buscás qué proceso escucha y comparás las dos herramientas de DNS.
+B: Y la próxima vez no digo "no hay red" sin probar el puerto.

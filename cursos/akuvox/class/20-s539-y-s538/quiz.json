@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Vas a alimentar la cerradura desde la salida de 12 V del S539. ¿Cómo alimentás el portero?",
+  "options": [
+   "Fuente de 24 V y al menos 2,5 A",
+   "PoE 802.3af",
+   "Fuente de 12 V 1 A",
+   "PoE pasivo"
+  ],
+  "answer": 0,
+  "why": "La tabla de 12 V indica que el S539 da 12 V/1 A por el relé solo con fuente de 24 V/2,5 A o más."
+ },
+ {
+  "q": "Te piden un S538 para un acceso expuesto al frío en la versión resistente. ¿Qué alimentación llevás?",
+  "options": [
+   "PoE+ y listo",
+   "12 V 1 A",
+   "Batería",
+   "Fuente de 24 V de 2 A o más, sin PoE"
+  ],
+  "answer": 3,
+  "why": "Según Akuvox, la versión para frío del S538 admite solo entrada DC de 24 V/2 A o más."
+ },
+ {
+  "q": "¿Cómo entrás al menú de información del S539 para ver la IP?",
+  "options": [
+   "Asterisco 2396 numeral",
+   "Mantener el botón 5 s",
+   "9999, Dial, 3888, System Info y Network",
+   "Asterisco 3258 asterisco"
+  ],
+  "answer": 2,
+  "why": "Es el camino que publica Akuvox para S539, S538, S535, X915, X916 y R29; en el S539 se toca además Network."
+ }
+]

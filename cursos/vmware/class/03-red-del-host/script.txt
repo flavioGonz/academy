@@ -1,0 +1,17 @@
+A: Lección tres, la red del host. Martín, ¿cuántas veces dejaste un ESXi sin acceso por tocar una VLAN?
+B: [risas] Una. Bastó una. Me tocó ir hasta la obra con un monitor en el asiento.
+A: Bueno, hoy evitamos la segunda. Adentro de ESXi hay un switch virtual, el vSwitch estándar. Tiene uplinks, que son las placas físicas, las vmnic, y port groups, que son los puertos lógicos donde se conectan las VMs.
+B: Como un switch administrable, pero adentro del servidor.
+A: Igualito. Y cada port group lleva un VLAN ID. Si ponés cero, el tráfico sale sin etiqueta, por la VLAN nativa del switch físico.
+B: Y el puerto del switch físico va en troncal, con las VLAN permitidas.
+A: Exacto. En eso coinciden las dos fuentes que leímos sobre redes estándar, la base de conocimiento de Broadcom y una guía de phoenixNAP. Son pocas, pero una es la oficial.
+B: ¿Y lo de la VLAN de gestión?
+A: Ahí va la historia. La propia KB de Broadcom avisa que cambiar el port group de gestión desde el cliente o por SSH puede cortarte el acceso al host. Recomienda hacerlo desde la consola remota, iLO o iDRAC, o desde la pantalla del servidor.
+B: O sea, lo que me pasó a mí, pero escrito por el fabricante.
+A: Tal cual. Otra cosa: dos uplinks por vSwitch, a dos bocas distintas del switch. Si se cae un cable, la red sigue andando.
+B: Imaginate el servidor de grabación de cámaras con un solo cable. Alguien lo engancha limpiando el rack y se cae todo.
+A: Por eso. El laboratorio: en un host de prueba, por SSH, creás un vSwitch uno, le agregás dos vmnic, un port group para la VLAN veinte, y verificás con esxcfg guion vswitch guion ele.
+B: ¿Cuánto lleva?
+A: Quince minutos, y los comandos están en la tarjeta.
+B: Y la regla: la red de gestión se toca solo con la consola fuera de banda abierta.
+A: Esa. Con eso no volvés a manejar dos horas con un monitor al lado.

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Que el tráfico al túnel no pase por NAT ni FastTrack</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">MIKROTIK · PASO 4</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Que el tráfico al túnel no pase por NAT ni FastTrack</text>
+<rect x="48" y="130" width="1104" height="136" rx="16" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<text x="68.0" y="160.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#D2492F" text-anchor="start">Sin bypass de NAT</text>
+<rect x="68" y="180" width="236" height="66" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="84.0" y="207.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#04223D" text-anchor="start">PC 192.168.88.x</text>
+<text x="84.0" y="231.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#6E88A1" text-anchor="start">va a 10.10.10.x</text>
+<path d="M308.0 213.0L326.0 213.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="330" y="180" width="236" height="66" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="346.0" y="207.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#04223D" text-anchor="start">masquerade</text>
+<text x="346.0" y="231.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#6E88A1" text-anchor="start">cambia el origen</text>
+<path d="M570.0 213.0L588.0 213.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="592" y="180" width="236" height="66" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="608.0" y="207.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#04223D" text-anchor="start">policy</text>
+<text x="608.0" y="231.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#6E88A1" text-anchor="start">origen ya no es 192.168.88.0/24</text>
+<rect x="854" y="180" width="278" height="66" rx="12" fill="#D2492F"/><text x="993.0" y="218.4" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">no se cifra</text>
+<rect x="48" y="286" width="1104" height="136" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="68.0" y="316.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#0E8F5E" text-anchor="start">Con accept arriba de todo en srcnat</text>
+<rect x="68" y="336" width="236" height="66" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="84.0" y="363.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#04223D" text-anchor="start">PC 192.168.88.x</text>
+<text x="84.0" y="387.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#6E88A1" text-anchor="start">va a 10.10.10.x</text>
+<path d="M308.0 369.0L326.0 369.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="330" y="336" width="236" height="66" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="346.0" y="363.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#04223D" text-anchor="start">nat: accept</text>
+<text x="346.0" y="387.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#6E88A1" text-anchor="start">no NAT al túnel</text>
+<path d="M570.0 369.0L588.0 369.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="592" y="336" width="236" height="66" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="608.0" y="363.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#04223D" text-anchor="start">policy coincide</text>
+<text x="608.0" y="387.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#6E88A1" text-anchor="start">action=encrypt</text>
+<rect x="854" y="336" width="278" height="66" rx="12" fill="#0E8F5E"/><text x="993.0" y="374.4" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">entra al túnel</text>
+<rect x="48" y="442" width="1104" height="136" rx="16" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/>
+<text x="68.0" y="472.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#B45309" text-anchor="start">FastTrack sin bypass en forward</text>
+<rect x="68" y="492" width="236" height="66" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="84.0" y="519.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#04223D" text-anchor="start">conexión</text>
+<text x="84.0" y="543.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#6E88A1" text-anchor="start">ya establecida</text>
+<path d="M308.0 525.0L326.0 525.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="330" y="492" width="236" height="66" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="346.0" y="519.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#04223D" text-anchor="start">fasttrack</text>
+<text x="346.0" y="543.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#6E88A1" text-anchor="start">saltea las policies</text>
+<path d="M570.0 525.0L588.0 525.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="592" y="492" width="236" height="66" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="608.0" y="519.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#04223D" text-anchor="start">síntoma</text>
+<text x="608.0" y="543.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#6E88A1" text-anchor="start">lento o con pérdidas</text>
+<rect x="854" y="492" width="278" height="66" rx="12" fill="#B45309"/><text x="993.0" y="530.4" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">se arregla con Torch</text>
+<text x="48.0" y="620.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">Si probaste antes del bypass, borrá las conexiones viejas: /ip/firewall/connection/remove</text>
+</svg>

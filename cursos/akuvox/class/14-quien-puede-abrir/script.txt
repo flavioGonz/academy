@@ -1,0 +1,19 @@
+A: Lección catorce. Ya sabemos qué URL abre. Ahora, la pregunta incómoda: ¿quién más la conoce?
+B: Uf. El de la domótica, el del NVR, el sobrino del dueño...
+A: [risas] Por eso esta lección. Akuvox tiene, además de Open Relay via HTTP, una pantalla en Setting, HTTP API, para las integraciones más nuevas. Ahí elegís el modo de autorización.
+B: ¿Cuáles hay?
+A: None, sin clave, que Akuvox recomienda solo para pruebas o demos. Allowlist, que solo acepta las IP que vos cargás, pensado para la red local. Basic, usuario y clave, pero viajan en claro. Y Digest, que protege la credencial. Y Normal, que es de uso interno de Akuvox.
+B: O sea, Digest o Allowlist.
+A: Esa es la idea en la que coinciden tres de las cinco fuentes que tocan el tema: la guía de Akuvox, la de las cámaras de patentes y una librería para Home Assistant llamada pylocal-akuvox.
+B: ¿Y quién discrepa?
+A: Dos. La guía de apertura de Akuvox permite dejar usuario y clave en blanco. Y en el foro de LogicMachine un integrador apaga la alta seguridad y pone admin en la URL.
+B: Uf, admin en la URL.
+A: Y ojo con algo que avisa la librería: en la URL vieja la clave va dentro de la dirección, así que puede quedar guardada en logs de proxies o del propio equipo.
+B: Entonces: usuario propio para cada integración.
+A: Exacto. Uno para Home Assistant, otro para la central, otro para el MikroTik. Si uno se filtra, cambiás uno solo. Y todo eso adentro de la VLAN de porteros que armamos en la lección once, sin nada publicado a internet.
+B: ¿Y HTTPS?
+A: Donde el equipo lo soporte, mejor. La misma librería cuenta que algunos equipos viejos, como el S562, usan claves de cifrado que los clientes modernos rechazan. Ahí, red cerrada y listo.
+B: ¿Laboratorio?
+A: Quince minutos. Ponés la HTTP API en Digest con un usuario de prueba, te conectás con la librería desde una PC, después probás con una clave mala para ver el rechazo, y armás la tabla de quién tiene cada usuario.
+B: La tabla me encanta.
+A: Con esa tabla, el día que alguien deja la obra, sabés exactamente qué clave cambiar.

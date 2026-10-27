@@ -1,0 +1,18 @@
+A: Se corta la luz en el edificio. ¿Cuánto aguanta la central?
+B: Lo que den las baterías. Y ahí siempre hay discusión.
+A: Hay. Primero lo nuevo de Bosch. Desde el dos de mayo de este año, en obra nueva con AVENAR se usa el concepto de zonas de energía, con el módulo de baterías FPE ocho mil BCM.
+B: ¿Y el BCM cero cero cero cero B de siempre?
+A: Queda para ampliaciones y repuestos. No se mezclan los dos en un mismo panel, y el nuevo pide firmware cuatro punto siete o más. Además, los módulos que más consumen van al lado del BCM, y cada zona de energía se separa quitando el cable rojo entre rieles.
+B: ¿Y la cuenta de la batería?
+A: La base es conocida: reposo por su corriente, más alarma por la suya, todo por un factor de seguridad. Acá aparece la grieta.
+B: ¿Cuál?
+A: Una guía de examen sobre NFPA setenta y dos usa veinticuatro horas, cinco minutos y factor uno coma veinte. Un columnista de Security Sales usa factor de envejecimiento uno coma veinticinco. Y la IT once uruguaya de dos mil diez pedía quince minutos de alarma, no cinco.
+B: ¿Y el programa de Bosch?
+A: El RPS ahora trae treinta horas de reposo por defecto. Y tiene una falla reconocida: valida la autonomía con la corriente de alarma de los equipos, así que en zonas con muchas sirenas marca sobrecorriente que no existe.
+B: ¿Y qué hacés?
+A: Bosch propone un truco temporal hasta una versión corregida a fin de año: bajar el reposo a una hora y poner veintiséis amperes hora para poder descargar. Y pide expresamente volver a los valores reales después.
+B: Eso va anotado en la carpeta.
+A: Exacto. Y en la puesta en marcha, el manual pide medir entre doce y catorce coma uno voltios por batería y probar falta de red y de batería por separado.
+B: ¿Laboratorio?
+A: Una cuenta con dos variantes. Reposo cero coma seis amperes, alarma dos coma cinco. Primero veinticuatro horas, cinco minutos, uno coma veinte. Después treinta horas, quince minutos, uno coma veinticinco. Quince minutos.
+B: Y elegís la batería con la norma que pida el proyecto.

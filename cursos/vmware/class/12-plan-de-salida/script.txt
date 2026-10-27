@@ -1,0 +1,18 @@
+A: Última lección. El cliente te mira y te pregunta: "¿y si nos vamos de VMware?"
+B: Pregunta del año. ¿Qué le contestás?
+A: Primero, que es un proyecto, no un clic. Introserv lo dice así: ninguna alternativa reemplaza a vSphere en un clic. Y ojo, ellos venden servidores para migrar.
+B: ¿Y Broadcom qué dice?
+A: Broadcom recomienda pasar a VCF nueve o VVF nueve. Lo dice en la misma KB del fin de soporte de vSphere ocho. Esa es la división fuerte del curso.
+B: ¿Y cómo se decide?
+A: Con números. Contás núcleos físicos contra núcleos licenciables, como en la lección uno. Listás qué se usa de verdad: vSAN, NSX, DRS. Si los hosts son densos y usan todo, renovar tiene sentido. Si son dos servidores de ocho núcleos con un grabador y un ERP, la cuenta suele no cerrar.
+B: Y si se migra, ¿a qué?
+A: Lo más común en nuestro tamaño es Proxmox VE. Tres de las cuatro fuentes de migración coinciden en el método. Proxmox trae un importador: agregás el ESXi como almacenamiento de importación, ves las VMs y las traés.
+B: ¿Directo contra el host o contra vCenter?
+A: Contra el host. El wiki de Proxmox dice que por vCenter es muchísimo más lento. Y antes: desinstalar VMware Tools, anotar la red porque la placa cambia de nombre, y en Windows preparar los drivers VirtIO.
+B: ¿Y en caliente?
+A: El wiki ofrece una importación en vivo para cortar menos. Pero avisa que si falla, perdés todo lo escrito desde que empezó. Thomas-Krenn prefiere apagar la VM e importar en frío.
+B: En frío, entonces. ¿Y la historia?
+A: Entre agosto y septiembre de este año Broadcom retiró las descargas públicas del VDDK, una librería que usan varias herramientas de migración. Virtualization Howto cuenta que varias quedaron trabadas. El importador de Proxmox no depende de esa librería.
+B: Uf. Mejor saberlo antes de prometer fechas.
+A: El laboratorio: en un Proxmox de prueba, agregás el ESXi de laboratorio como almacenamiento, importás una VM apagada y la arrancás.
+B: Veinte minutos. Y la regla: ninguna migración arranca sin piloto, backup verificado y vuelta atrás.

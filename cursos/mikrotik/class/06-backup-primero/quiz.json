@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Vas a reemplazar un hAP quemado por un RB5009 nuevo. ¿Qué usás para pasar la configuración?",
+    "options": [
+      "El .backup del hAP restaurado tal cual",
+      "El export .rsc revisado y adaptado a las interfaces del nuevo equipo",
+      "Copiar la carpeta Files completa",
+      "Netinstall con el .backup"
+    ],
+    "answer": 1,
+    "why": "El backup binario es para el mismo equipo o uno idéntico. Para otro modelo, la documentación indica usar export e import, revisando nombres y cantidad de interfaces; dry-run ayuda a encontrar errores."
+  },
+  {
+    "q": "Hacés un export común y lo importás en un equipo nuevo. Los usuarios no pueden entrar con sus claves. ¿Por qué?",
+    "options": [
+      "El export no incluye las contraseñas de los usuarios",
+      "El import falló a mitad",
+      "Las claves se exportan cifradas con la serie del equipo",
+      "Hay que reiniciar después del import"
+    ],
+    "answer": 0,
+    "why": "Según la documentación, el export no lleva contraseñas de usuarios del sistema, certificados ni claves SSH. Hay que volver a cargarlas."
+  },
+  {
+    "q": "Guardaste un export con show-sensitive en el legajo del cliente. ¿Qué cuidado corresponde?",
+    "options": [
+      "Ninguno, show-sensitive solo agrega comentarios",
+      "Subirlo al grupo de WhatsApp de técnicos para tenerlo a mano",
+      "Tratarlo como un secreto: incluye claves de WiFi, PPPoE y VPN",
+      "Borrar las líneas de /ip address"
+    ],
+    "answer": 2,
+    "why": "show-sensitive muestra la información sensible que el export oculta por defecto, como contraseñas y claves. El archivo pasa a ser sensible y se guarda con acceso restringido."
+  }
+]

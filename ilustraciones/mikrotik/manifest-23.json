@@ -1,0 +1,51 @@
+{
+  "23": {
+    "fig": {
+      "file": "23.svg",
+      "alt": "Una terminal de RouterOS muestra Ctrl+X, el aviso Safe Mode taken y el prompt con SAFE. Debajo, el historial del sistema con tres cambios marcados con F: una regla de firewall, la IP de gestión y la ruta por defecto. Una flecha verde lleva a confirmar con Ctrl+X otra vez o soltando el botón, y los cambios quedan; una flecha roja lleva a la sesión cortada o la salida con Ctrl+D, y RouterOS deshace todo lo marcado con F. Una nota ámbar avisa que entran 100 acciones.",
+      "caption": "Lo que hacés en Safe Mode queda marcado con F: si confirmás queda, si la sesión se corta o salís con Ctrl+D se deshace."
+    },
+    "steps": [
+      {
+        "file": "23-paso2.svg",
+        "step": 2,
+        "alt": "Esquema de la barra de arriba de WinBox 4 con los botones Undo, Redo, Safe Mode resaltado y Disconnect. A la derecha, la terminal con Ctrl+X, el aviso Safe Mode taken y el prompt con SAFE, y dos etiquetas: Ctrl+X otra vez confirma, Ctrl+D descarta todo. Una nota ámbar explica que en un enlace malo el botón puede quedar apretado sin que el router entre en modo seguro.",
+        "caption": "El botón está en la barra de arriba de WinBox; en la terminal, el aviso y el SAFE del prompt confirman que entraste.",
+        "after": "Activá Safe Mode: en WinBox, el botón"
+      },
+      {
+        "file": "23-paso3.svg",
+        "step": 3,
+        "alt": "Tres cuadros en secuencia con una notebook con WinBox conectada a un hAP de banco. En el primero el cable está activo y el router en SAFE. En el segundo, después de deshabilitar ether2, el cable está cortado en rojo y dice sesión cortada. En el tercero el router deshizo el cambio, el cable vuelve en verde y dice ether2 vuelve. Una nota aclara que la vuelta puede tardar de segundos a varios minutos.",
+        "caption": "Deshabilitás ether2 a propósito, la sesión se corta y, cuando el router la da por muerta, deshace el cambio solo.",
+        "after": "Cortate a propósito deshabilitando"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Safe Mode",
+        "para_que": "Nació para un problema muy concreto: hacés un cambio en un router remoto, ese cambio te corta la conexión y ya no hay forma de deshacerlo, porque para deshacer necesitás estar adentro. Safe Mode deja marcado un punto de vuelta antes de tocar, y si tu sesión muere, el router vuelve solo a ese punto.",
+        "como": "Se activa con el botón Safe Mode de WinBox o WebFig, o con Ctrl+X (o F4) en la terminal, donde aparece Safe Mode taken y el prompt suma SAFE. Lo que vigila es la sesión que lo tomó: si esa sesión termina mal, RouterOS deshace todos los cambios hechos mientras estaba activo, incluso los que hizo otra sesión. Si otro técnico ya lo tiene tomado, al pedirlo te ofrece u (deshace lo suyo y te lo da), r (conserva sus cambios y te lo da) o d (no toca nada).",
+        "ejemplo": "Estás desde la oficina cambiando la regla de input que deja entrar a WinBox en el router de un depósito en Canelones. Activás Safe Mode, agregás la regla nueva y borrás la vieja; si te equivocaste de cadena y WinBox se congela, esperás unos minutos y el router vuelve a la regla anterior, sin que nadie maneje 40 kilómetros."
+      },
+      {
+        "name": "Historial de acciones",
+        "para_que": "RouterOS anota cada acción que hacés, desde WinBox o desde la terminal, en /system/history. Ese registro es lo que permite deshacer y rehacer, y es la lista que Safe Mode usa para saber qué revertir.",
+        "como": "Con /system/history/print ves las acciones; las hechas en Safe Mode llevan la marca F (floating-undo), que significa que se van a deshacer si la sesión se corta. Fuera de Safe Mode, /undo y /redo (o los botones Undo y Redo de WinBox) revierten o reaplican la última acción. El historial guarda las 100 acciones más recientes: si en Safe Mode te pasás de ese número, el router sale solo del modo seguro y no deshace nada.",
+        "ejemplo": "Pegás en Safe Mode un script de 150 líneas para armar las VLAN de CCTV y control de acceso de un edificio en Pocitos. A mitad del script ya no estás protegido y no te enterás. Lo que funciona es partirlo en tandas chicas: una tanda, verificás, confirmás con Ctrl+X, y volvés a entrar en Safe Mode para la siguiente."
+      },
+      {
+        "name": "Confirmar o descartar",
+        "para_que": "Safe Mode necesita saber cuándo terminaste bien y cuándo no. La forma de salir es lo que le dice si tus cambios quedan o se van, y es justo donde más se confunde un técnico nuevo.",
+        "como": "Ctrl+X otra vez (o soltar el botón en WinBox) sale del modo seguro y deja los cambios: el prompt pierde el SAFE. /quit también cuenta como salida normal y los deja. Ctrl+D, en cambio, cierra la sesión deshaciendo todo lo hecho en Safe Mode. Conviene confirmar después de cada cambio verificado, así un error posterior no se lleva también lo que ya estaba bien.",
+        "ejemplo": "Cambiaste la ruta por defecto de un local con dos WAN y verificaste con ping que sale por el enlace nuevo. Apretás Ctrl+X, el prompt vuelve a la normalidad y recién ahí pasás a tocar el firewall, con un Safe Mode nuevo. Si en el firewall algo sale mal, la ruta buena queda."
+      },
+      {
+        "name": "Lo que Safe Mode no cubre",
+        "para_que": "Safe Mode protege contra el error que te corta la sesión, pero no juzga si el cambio era bueno o malo. Conocer sus bordes evita confiar en él donde no sirve.",
+        "como": "Si el cambio corta tu sesión a propósito, por ejemplo mover la VPN de gestión a otro túnel, el router lo deshace igual al perder la sesión. Para esos casos, un veterano del foro propone sacar un backup y dejar un scheduler que lo restaura a los 5 minutos si no lo borrás a tiempo. Y un corte de energía no es una forma de deshacer: en el foro vieron cambios que quedaron aplicados después de cortar la luz en Safe Mode.",
+        "ejemplo": "Un router de un barrio cerrado entra por WireGuard por la fibra y querés pasarlo a un túnel por el 4G de respaldo. Como tu sesión se va a cortar sí o sí, Safe Mode lo revertiría. Sacás un backup, programás la restauración, hacés el cambio, entrás por el túnel nuevo y recién ahí borrás la tarea programada. Para el detalle del scheduler, `/system/scheduler/print` muestra lo que dejaste armado."
+      }
+    ]
+  }
+}

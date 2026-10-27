@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un X910 alimentado con PoE 802.3af no entrega 12 V para la cerradura. ¿Qué cambiás?",
+  "options": [
+   "Nada, el X910 no tiene salida",
+   "El DTMF",
+   "El firmware a uno Android",
+   "PoE+ o fuente de 12 V 2 A, como pide la tabla"
+  ],
+  "answer": 3,
+  "why": "La tabla de 12 V indica que el X910 da 12 V/600 mA si se alimenta con PoE+ o con fuente de 12 V/2 A o más."
+ },
+ {
+  "q": "El cliente quiere entrar con PIN en un acceso de un solo botón. ¿El X910 sirve?",
+  "options": [
+   "Sí, tiene teclado oculto",
+   "Solo con SmartPlus",
+   "No, la tabla de métodos lo marca sin PIN",
+   "Solo con el módulo de huella"
+  ],
+  "answer": 2,
+  "why": "Según la tabla de métodos de acceso, el X910 no admite PIN; acepta tarjeta 13,56 MHz, Bluetooth y QR."
+ },
+ {
+  "q": "¿Cómo entrás al menú del X912 para ver la IP?",
+  "options": [
+   "9999 y 3888",
+   "Ícono de llave o teclado, 2396 y Dial",
+   "*3258*",
+   "Mantener la pantalla 5 s"
+  ],
+  "answer": 1,
+  "why": "Es el procedimiento que Akuvox publica para el X912, con 2396 como PIN de sistema de fábrica."
+ }
+]

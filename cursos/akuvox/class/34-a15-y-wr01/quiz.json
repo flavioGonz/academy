@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Hay que manejar el portón del fondo, a 80 m del portero, con una carga chica. ¿Qué equipo de esta lección encaja?",
+  "options": [
+   "A15",
+   "A05",
+   "WR01, relé de borde con 2 relés y API",
+   "S560"
+  ],
+  "answer": 2,
+  "why": "El WR01 es un controlador de relé web de borde, con 2 relés, 2 entradas y control por web y API."
+ },
+ {
+  "q": "El cliente quiere abrir el WR01 con tarjeta. ¿Qué decís?",
+  "options": [
+   "Tiene lector de 13,56 MHz",
+   "La tabla de métodos lo marca solo con Bluetooth; para tarjeta hace falta un lector o terminal",
+   "Tiene lector UHF",
+   "Solo con PIN"
+  ],
+  "answer": 1,
+  "why": "Según la tabla de métodos de acceso, el WR01 solo admite Bluetooth."
+ },
+ {
+  "q": "¿Cuánta corriente da el borne de 12 V del A15 alimentado por PoE+?",
+  "options": [
+   "500 mA",
+   "1 A",
+   "2 A",
+   "No tiene"
+  ],
+  "answer": 0,
+  "why": "La tabla de 12 V indica 500 mA máximo con PoE+ y 1 A con fuente."
+ }
+]

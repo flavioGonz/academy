@@ -1,0 +1,19 @@
+A: Lección cinco. Martín, ¿cuánto tardás en tener una VM Linux nueva lista, con usuario, clave e IP?
+B: Y, entre bajar el ISO, instalar y configurar, media hora larga.
+A: Una guía de computingforgeeks hace la cuenta: instalar desde ISO, unos veinte minutos de clics. Clonar desde una plantilla, menos de un minuto.
+B: ¿Menos de un minuto? Contame.
+A: La receta es así. Bajás una imagen cloud oficial de la distribución, por ejemplo la genericcloud de Debian trece. Creás una VM vacía, le importás esa imagen como disco, y le agregás una unidad especial que se llama cloud init.
+B: ¿Y esa unidad qué hace?
+A: Proxmox arma un CD chiquito con lo que vos configurás desde afuera: usuario, clave SSH, IP, gateway. Cuando la VM arranca por primera vez, lee ese CD y se configura sola.
+B: Ah, o sea que la IP no la ponés adentro, la ponés en Proxmox.
+A: Exacto. Convertís esa VM en plantilla, y de ahí sacás clones. Las cuatro fuentes que leímos sobre esto coinciden en la receta.
+B: ¿Y en qué no coinciden?
+A: En el tipo de clon. La wiki oficial destaca el linked clone, que sale al instante porque comparte el disco con la plantilla. Pero la misma guía de computingforgeeks avisa: si borrás la plantilla, todos los linked clones se rompen.
+B: [suspiro] Me imagino a alguien limpiando plantillas un viernes.
+A: Tal cual. Por eso croit y computingforgeeks recomiendan full clone para producción. Linked, para laboratorio.
+B: ¿Algún detalle de seguridad?
+A: La wiki recomienda clave SSH antes que contraseña, porque la contraseña queda guardada en los datos de cloud init. Y recomienda armar tu propia imagen para saber qué tiene adentro.
+B: ¿Laboratorio?
+A: Veinte minutos. Creás la plantilla nueve mil desde la imagen de Debian, con disco importado, unidad cloud init y consola serie. Después clonás la doscientos uno en full, le ponés usuario, tu clave y una IP fija, y arrancás. Entrás por SSH sin haber tocado un instalador.
+B: Eso para una obra con diez VMs es oro.
+A: Y desde ahí, cada VM nueva es un clon y tres parámetros.

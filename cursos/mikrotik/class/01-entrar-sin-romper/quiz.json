@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Llegás a un hAP de fábrica y WinBox muestra el equipo en Neighbors con IP 0.0.0.0. ¿Cómo entrás?",
+    "options": [
+      "Hacés doble clic sobre la MAC y te conectás por capa 2",
+      "Le ponés una IP fija a la notebook en 192.168.88.0/24 y esperás",
+      "Reseteás con el botón para que tome IP",
+      "Te conectás por ether1, que es el puerto de gestión"
+    ],
+    "answer": 0,
+    "why": "WinBox puede conectarse por MAC sin que haya IP configurada; la documentación recomienda usar la MAC cuando la IP no responde o figura 0.0.0.0. Ether1 es WAN en la configuración por defecto."
+  },
+  {
+    "q": "Estás en Safe Mode cambiando el firewall de un sitio remoto y se corta la conexión. ¿Qué pasa?",
+    "options": [
+      "Los cambios quedan aplicados y hay que ir al sitio",
+      "El router se reinicia con la configuración de fábrica",
+      "El router deshace los cambios hechos en Safe Mode",
+      "Se guarda un backup y se aplica en el próximo reinicio"
+    ],
+    "answer": 2,
+    "why": "Si la sesión en Safe Mode termina de forma anormal, RouterOS deshace todos los cambios hechos mientras estaba activo, después del timeout de la sesión."
+  },
+  {
+    "q": "Pegaste un script de 150 comandos en Safe Mode y algo salió mal. ¿Por qué puede que no se deshaga?",
+    "options": [
+      "Porque Safe Mode no cubre comandos pegados",
+      "Porque los scripts siempre se ejecutan fuera de Safe Mode",
+      "Porque hace falta confirmar con Ctrl+S",
+      "Porque el historial guarda hasta 100 acciones y al pasarse sale del modo seguro sin deshacer"
+    ],
+    "answer": 3,
+    "why": "Según la documentación, si el historial no alcanza (100 acciones), la sesión sale de Safe Mode y no deshace nada. Por eso conviene trabajar en pasos chicos."
+  }
+]

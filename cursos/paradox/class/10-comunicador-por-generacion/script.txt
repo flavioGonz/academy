@@ -1,0 +1,18 @@
+A: Lección diez: el comunicador. La pieza que más cambió en Paradox en los últimos años.
+B: IP150, IP150 plus, IP180, PCS... es una sopa de letras.
+A: Ordenémosla en dos generaciones. La vieja, que Paradox llama TURN: IP150, IP150 plus, los PCS hasta la versión siete. Reportan a receptoras IPR512 y conectan con Insite Gold o BlueEye.
+B: ¿Y la nueva?
+A: MQTT: el IP180, el IP150 plus MQ, el IP150 actualizado a versión seis, y el PCS doscientos sesenta y cinco versión ocho. Según sus manuales, reportan solo en Contact ID, solo a un conversor IPC10, y solo con la app BlueEye.
+B: ¿Y se pueden mezclar? Un IP180 y un PCS viejo de respaldo.
+A: No. La guía del menú instalador de BlueEye dice que módulos MQTT y TURN no conviven en la misma central. El manual del IP180 lo repite: no mezclar.
+B: ¿Cuánto coinciden las fuentes?
+A: Cuatro de seis: los manuales del IP180 y del IP150M, la guía de BlueEye y la ficha de un distribuidor. Ninguna discrepa.
+B: ¿Y la historia?
+A: El IP150M. Es el IP150 de toda la vida, actualizado a MQTT, versión seis cincuenta. El manual arranca con una advertencia: toda la comunicación, incluido BabyWare remoto, pasa a necesitar un sitio Swan pago. Y la actualización no tiene vuelta atrás.
+B: Uf. Actualizás para arreglar algo y le cambiás el modelo de negocio al cliente.
+A: [risas] Tal cual. Y además Insite Gold deja de conectar. Por eso, primero sabés qué generación hay, y después actualizás.
+B: ¿Y la red del cliente?
+A: Los módulos nuevos necesitan salida a internet por algunos puertos: el ocho mil ochocientos ochenta y tres TCP para MQTT, el cuatrocientos cuarenta y tres para firmware, DNS y hora. Si el informático del cliente los cierra, el módulo no registra.
+B: ¿Qué probamos?
+A: Un inventario. Anotás modelo y firmware del módulo, qué receptora usa el monitoreo, si el cliente usa Insite Gold, y le pasás al informático la lista de puertos. Quince minutos.
+B: Generación primero, actualización después.

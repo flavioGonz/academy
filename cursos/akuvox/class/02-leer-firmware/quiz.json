@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un portero muestra firmware 416.30.10.x. ¿Qué modelo y hardware es?",
+  "options": [
+   "E16 versión de hardware 3",
+   "E16 versión de hardware 2",
+   "R20 versión 3",
+   "C316"
+  ],
+  "answer": 0,
+  "why": "En la tabla de Akuvox, la parte A '416' corresponde al E16V3; '216' es E16V2 y '316' es el monitor C316."
+ },
+ {
+  "q": "Tenés un R20A con etiqueta 'V3.0'. ¿Qué firmware bajás?",
+  "options": [
+   "El de hardware 3, porque dice V3.0",
+   "El de hardware 2, y lo confirmás en Product Information",
+   "Cualquiera, el R20A tiene un solo firmware",
+   "El de E12, que es compatible"
+  ],
+  "answer": 1,
+  "why": "Akuvox aclara que el R20A V3.0 es hardware 2 y el V5.0 es hardware 3; por eso se confirma en la web antes de bajar el archivo."
+ },
+ {
+  "q": "Durante una actualización por web, la barra parece trabada. ¿Qué hacés?",
+  "options": [
+   "Refrescar la pestaña para ver el estado",
+   "Cortar la alimentación PoE y reintentar",
+   "Esperar sin cerrar ni refrescar la ventana y verificar la versión al final",
+   "Subir el archivo .zip en lugar del .rom"
+  ],
+  "answer": 2,
+  "why": "La guía oficial indica no cerrar ni refrescar la ventana durante la actualización; cortar la energía es la forma clásica de dejar un equipo inservible."
+ }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un cliente con oficina central y una sucursal, cada una con su ER605, se gestiona desde un solo controlador. ¿Cómo lo organizás?",
+    "options": [
+      "Los dos gateways en el sitio Default",
+      "Un sitio por sede, cada uno con su gateway",
+      "Un controlador distinto para cada sede",
+      "Un sitio para gateways y otro para APs"
+    ],
+    "answer": 1,
+    "why": "Un sitio adopta un solo gateway; cada sede con gateway va en su propio sitio, lo que además habilita la VPN automática entre sitios."
+  },
+  {
+    "q": "Querés gestionar a veinte empresas distintas con modo MSP. ¿Cuál de estas opciones NO lo soporta según la comparación oficial?",
+    "options": [
+      "Software Controller",
+      "Omada Central Standard",
+      "Omada Central Essentials",
+      "Ninguna, todas lo soportan"
+    ],
+    "answer": 2,
+    "why": "La guía oficial indica que Cloud Essentials no soporta MSP; sí lo hacen el Software Controller y Cloud Standard."
+  },
+  {
+    "q": "El encargado del cliente quiere mirar el estado de su WiFi sin poder tocar nada. ¿Qué le das?",
+    "options": [
+      "Un usuario con rol Viewer limitado a su sitio",
+      "Un usuario Administrator",
+      "La cuenta Main Administrator compartida",
+      "La clave del TP-Link ID de la empresa"
+    ],
+    "answer": 0,
+    "why": "El rol Viewer permite ver estado y configuración sin modificar; limitarlo a su sitio evita que vea otros clientes."
+  }
+]

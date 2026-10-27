@@ -1,0 +1,18 @@
+A: Edificio con tres torres, un panel por torre. ¿Cómo los unís?
+B: Por la red del cliente, que ya está.
+A: Ahí está el primer error. La guía de redes de Bosch es tajante: el sistema de incendio no se instala en una red compartida. Red física dedicada, y la laptop de servicio se desconecta de la red de incendio antes de conectarse a internet.
+B: Bien, red propia. ¿Por dónde?
+A: Ethernet o CAN, o mezcla. Hasta treinta y dos nodos, contando paneles, teclados remotos y servidores como OPC o BACnet. En Ethernet cada panel trae un switch interno con RSTP, así que armás un anillo. En cobre, menos de cien metros entre nodos; en CAN, hasta mil.
+B: ¿Y las direcciones IP?
+A: Viene todo por defecto en ciento noventa y dos punto ciento sesenta y ocho punto uno, y el último número es el número de nodo físico, el que cargás en el panel y en RPS. Si no coinciden, la red no arranca. Usa los puertos veinticinco mil uno a veinticinco mil ocho.
+B: ¿Y los switches externos?
+A: Dentro del gabinete del panel. Afuera, Bosch dice que no cumple EN cincuenta y cuatro.
+B: ¿Y el BMS?
+A: Por OPC, FSI o BACnet, y cada panel que tenga que verse necesita licencia premium. Un detalle fino: si el Ethernet del panel lo usás solo para el BMS, conviene apagar la comunicación panel a panel por TCP IP, para no mandar datos de incendio sin querer.
+B: ¿Y el acceso remoto?
+A: Con el gateway seguro de Bosch, que arma un túnel IPsec por los puertos UDP quinientos y cuatro mil quinientos, con la subred del panel separada de la del router del cliente. Nada de abrir puertos al panel.
+B: ¿Las fuentes discuten algo?
+A: Acá hay dos, la guía de redes y la web de servicios remotos, y van en la misma línea. Evidencia corta, pero primaria.
+B: ¿Laboratorio?
+A: El plan de direcciones de una red de tres paneles y un servidor OPC: número de nodo, IP, licencia, puerto de switch y por dónde va el cable. Quince minutos.
+B: Y la red de incendio no comparte switch con nada.

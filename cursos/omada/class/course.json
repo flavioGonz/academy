@@ -1,0 +1,157 @@
+{
+  "slug": "omada",
+  "title": "TP-Link Omada: controlador SDN de punta a punta",
+  "vendor": "TP-Link",
+  "tagline": "Del OC200 a Omada Central: adoptá, segmentá y mantené redes Omada sin sorpresas.",
+  "description": "Al terminar vas a poder elegir y levantar el controlador Omada adecuado para cada obra, adoptar gateways ER, switches JetStream y access points EAP en la misma subred o a distancia, y armar VLANs, ACL, WiFi, portal cautivo y VPN entre sedes. También vas a poder respaldar, actualizar y migrar el controlador sin perder la configuración.",
+  "level": "Inicial a intermedio",
+  "audience": "Técnicos instaladores y de soporte que instalan o atienden redes TP-Link Omada en obra.",
+  "prerequisites": [
+    "Direccionamiento IP, máscara y gateway",
+    "Qué es una VLAN y la diferencia entre tagged y untagged",
+    "Uso básico de navegador, consola de Windows y, para el laboratorio de Docker, una terminal Linux"
+  ],
+  "outcomes": [
+    "Elegir entre controlador software, OC200/OC220/OC300/OC400, Omada Central o gateway integrado según la obra",
+    "Adoptar equipos en capa 2 y en capa 3 con Discovery Utility, Inform URL o DHCP option 138, y resolver Adopt Failed",
+    "Crear VLANs completas con perfiles de puerto y aislarlas con ACL",
+    "Ajustar canales, ancho, potencia y roaming de los EAP, y decidir cuándo usar mesh",
+    "Configurar portal cautivo con vouchers y VPN IPsec de sitio a sitio entre gateways Omada",
+    "Programar backups, actualizar el controlador de forma segura y migrarlo a otro equipo"
+  ],
+  "version_note": "Omada SDN Controller 6.x (las fuentes citan 6.2.10.17 y 6.3.0.111, vigentes a octubre de 2026), con notas para 5.x donde cambia algo: puerto TCP 29817 nuevo en 6.0, funciones de roaming de 6.2 y asistente de migración desde 6.2.10.",
+  "arcs": [
+    {
+      "title": "Elegir y levantar el controlador",
+      "why": "Antes de configurar una sola VLAN hay que decidir dónde vive el controlador, levantarlo bien y lograr que los equipos lo encuentren.",
+      "lessons": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "title": "Armar la red del cliente",
+      "why": "Con los equipos adoptados, el trabajo diario es ordenar sitios, crear VLANs, aislar lo que tiene que estar aislado y dejar el WiFi limpio.",
+      "lessons": [
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "title": "WiFi avanzado, sedes y mantenimiento",
+      "why": "Roaming, portal, sedes unidas y un controlador que se actualiza o se muda sin perder nada son lo que hace que una instalación se sostenga.",
+      "lessons": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  ],
+  "splits": [
+    {
+      "topic": "Confiar en TP-Link para clientes de empresa",
+      "sides": "Un practicante del foro de Lawrence Systems no lo usaría por el historial de seguridad; Evan McCann lo recomienda para negocios con necesidades básicas.",
+      "decide": "Según la criticidad del cliente, las exigencias de seguridad del contrato y si la gestión queda expuesta a internet."
+    },
+    {
+      "topic": "Gateway Omada o firewall de terceros",
+      "sides": "La documentación pone al gateway Omada en el centro; McCann prefiere switches y APs Omada detrás de otro firewall.",
+      "decide": "Si hace falta VPN de usuarios con RADIUS, routing dinámico o logs de firewall, otro firewall; si no, el ER alcanza y suma la VPN automática entre sitios."
+    },
+    {
+      "topic": "Dónde corre el controlador",
+      "sides": "Docker comunitario en servidor propio (gratis, sin soporte oficial) frente a hardware OC o Omada Central (soporte oficial, costo de equipo o licencias).",
+      "decide": "Por quién mantiene el host durante los próximos años y si el cliente tiene presupuesto de licencias."
+    },
+    {
+      "topic": "Capacidad del OC200",
+      "sides": "La tabla oficial actual recomienda hasta 25 equipos; una reseña de 2022 citaba hasta 100.",
+      "decide": "Dimensionar por la cifra recomendada vigente y dejar margen de crecimiento."
+    },
+    {
+      "topic": "Ritmo de firmware",
+      "sides": "Usuarios reportan pocas actualizaciones; TP-Link ofrece canales Beta y RC además del estable.",
+      "decide": "Producción en estable, con backup previo; Beta y RC solo en laboratorio."
+    }
+  ],
+  "sources_count": 27,
+  "lessons": [
+    {
+      "n": 1,
+      "dir": "01-donde-vive",
+      "handle": "Dónde vive",
+      "summary": "Elegir entre controlador local (Software, OC200 a OC400), Omada Central o gateway integrado, y dimensionarlo por la capacidad recomendada."
+    },
+    {
+      "n": 2,
+      "dir": "02-host-dedicado",
+      "handle": "Host dedicado",
+      "summary": "Levantar el controlador software en un equipo dedicado con Docker, red host, CPU con AVX y cierre limpio de MongoDB."
+    },
+    {
+      "n": 3,
+      "dir": "03-adopcion-limpia",
+      "handle": "Adopción limpia",
+      "summary": "Adoptar equipos en capa 2 y resolver Adopt Failed leyendo el mensaje: credenciales, VLAN, firewall o uplink mesh."
+    },
+    {
+      "n": 4,
+      "dir": "04-tres-caminos",
+      "handle": "Tres caminos",
+      "summary": "Adoptar en otra subred o sede con Discovery Utility, Inform URL o DHCP option 138, y los puertos 29810 a 29817 con NAT."
+    },
+    {
+      "n": 5,
+      "dir": "05-sitios-y-clientes",
+      "handle": "Sitios y clientes",
+      "summary": "Un sitio por sede con gateway, modo MSP donde está soportado y roles separados por persona."
+    },
+    {
+      "n": 6,
+      "dir": "06-vlan-completa",
+      "handle": "VLAN completa",
+      "summary": "Las tres patas de una VLAN en gateway ER y switch JetStream, con perfiles de puerto."
+    },
+    {
+      "n": 7,
+      "dir": "07-vlan-no-aisla",
+      "handle": "VLAN no aísla",
+      "summary": "Aislar CCTV, invitados y oficina con ACL ordenadas, porque la VLAN sola no corta el ruteo."
+    },
+    {
+      "n": 8,
+      "dir": "08-menos-potencia",
+      "handle": "Menos potencia",
+      "summary": "Canales, ancho y potencia en EAP, región correcta y WLAN Optimization sin cortar el servicio."
+    },
+    {
+      "n": 9,
+      "dir": "09-roaming-y-mesh",
+      "handle": "Roaming y mesh",
+      "summary": "Roaming con 802.11k/v y 802.11r probado, funciones de la 6.2, y mesh solo para cobertura."
+    },
+    {
+      "n": 10,
+      "dir": "10-portal-cautivo",
+      "handle": "Portal cautivo",
+      "summary": "Portal con vouchers, accesos previos y excepciones, sabiendo que depende del controlador."
+    },
+    {
+      "n": 11,
+      "dir": "11-tunel-entre-sedes",
+      "handle": "Túnel entre sedes",
+      "summary": "VPN IPsec de sitio a sitio entre gateways Omada: Auto sin NAT, Manual con NAT, y verificación."
+    },
+    {
+      "n": 12,
+      "dir": "12-backup-primero",
+      "handle": "Backup primero",
+      "summary": "Backup programado, upgrade de a una versión mayor y migración de controlador en el orden correcto."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un consorcio pide huella en el portero de entrada. ¿Qué modelo de esta lección lo resuelve y cómo?",
+  "options": [
+   "S532 con firmware nuevo",
+   "S535 con el módulo de huella",
+   "S535 sin módulos",
+   "Ninguno"
+  ],
+  "answer": 1,
+  "why": "El S535 se vende con unidad de expansión de huella; la tabla de métodos la marca como opcional."
+ },
+ {
+  "q": "Un S532 alimentado solo por PoE+ no da 12 V para la cerradura. ¿Por qué?",
+  "options": [
+   "La salida de 12 V del S532 requiere fuente de 12 V de al menos 2,5 A",
+   "Está fallado",
+   "El S532 no tiene relé",
+   "Hay que activar Wiegand"
+  ],
+  "answer": 0,
+  "why": "La tabla de salida de 12 V indica que el S532 debe alimentarse con fuente DC de 12 V/2,5 A o más."
+ },
+ {
+  "q": "¿Cómo se entra al menú de administrador del S532?",
+  "options": [
+   "9999 y 3888",
+   "Mantener el botón 5 s",
+   "*3258*",
+   "*2396# y luego 1"
+  ],
+  "answer": 3,
+  "why": "Akuvox agrupa a R27, R28 y S532: asterisco 2396 numeral y después 1."
+ }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Heredás un MikroTik con un firewall armado a mano, sin la configuración por defecto, y allow-remote-requests=yes. El enlace anda saturado y la CPU alta. ¿Qué revisás primero?",
+    "options": [
+      "La versión de RouterBOOT",
+      "Si el puerto 53 UDP y TCP está abierto desde la WAN: el router puede estar contestando como resolver abierto",
+      "El tamaño de la caché DNS",
+      "Si el DHCP entrega bien el gateway"
+    ],
+    "answer": 1,
+    "why": "Con allow-remote-requests=yes el router contesta en el 53 en todas sus direcciones. Sin drop en input desde la WAN queda como resolver abierto, que se usa en ataques de amplificación."
+  },
+  {
+    "q": "Configuraste use-doh-server en un cliente y a la semana el servicio DoH no responde. ¿Qué pasa en la LAN?",
+    "options": [
+      "Nada: el router vuelve solo a los servidores de servers",
+      "El router pasa a resolver directo contra los servidores raíz",
+      "Los equipos usan su DNS secundario de fábrica",
+      "Los equipos reciben SERVFAIL: con DoH activo no hay respaldo"
+    ],
+    "answer": 3,
+    "why": "Según la documentación 7.25, mientras haya un servidor DoH configurado todas las consultas van a él y no se usan los servidores normales; si no llega, los equipos reciben SERVFAIL."
+  },
+  {
+    "q": "Agregaste /ip/dns/static name=nvr.lan address=192.168.88.50, pero una PC sigue resolviendo nvr.lan a la dirección vieja. ¿Qué probás?",
+    "options": [
+      "/ip/dns/cache/flush en el router y vaciar la caché DNS de la PC",
+      "Reiniciar el NVR",
+      "Poner allow-remote-requests=no",
+      "Borrar la regla de masquerade"
+    ],
+    "answer": 0,
+    "why": "Las respuestas quedan en caché durante su TTL (las estáticas usan 1 día por defecto). Vaciar la caché del router, y la de la PC, hace que vean el cambio enseguida."
+  }
+]

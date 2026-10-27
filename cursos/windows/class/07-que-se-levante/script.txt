@@ -1,0 +1,21 @@
+A: Te llaman un lunes: "el sábado se cortó la grabación y volvió sola el domingo". ¿Qué pasó?
+B: El servicio del VMS se cayó y alguien lo levantó.
+A: O no lo levantó nadie y el servidor se reinició por actualizaciones. Sea como sea, un día y medio sin grabar. Hoy: que se levante solo.
+B: ¿Cómo?
+A: Dos piezas. La primera, el servicio. En la consola de servicios, o con sc punto exe, el tipo de inicio: automático, o automático retrasado si depende de la red o de la base de datos.
+B: Retrasado, para que no arranque antes que la placa de red.
+A: Eso. Y la segunda parte del servicio, la que casi nadie toca: la pestaña Recuperación. Qué hace Windows si el servicio se cae.
+B: Por defecto no hace nada, ¿no?
+A: Muchas veces no. Con sc failure le decís: reiniciar el servicio en la primera, la segunda y la tercera falla, con una demora, y cada cuánto se resetea el contador.
+B: ¿Hay valores recomendados?
+A: Una plantilla de Octopus que leímos usa tres minutos de espera en cada falla y resetea el contador cada veinticuatro horas. Es un buen punto de partida. Son dos fuentes, ss sesenta y cuatro y esa plantilla, evidencia fina, pero ninguna dice otra cosa.
+B: ¿Y la trampa?
+A: En PowerShell, "sc" es otra cosa, es Set-Content. Escribís sc punto exe. Y entre el igual y el valor va un espacio, "start igual espacio auto". Sin espacio, falla.
+B: [risas] Me pasó. ¿Y la segunda pieza?
+A: Las tareas programadas, para lo que no es servicio: un script de chequeo, un cliente que hay que lanzar al inicio. Disparador "al iniciar el sistema", que corra aunque no haya nadie logueado, con privilegios altos.
+B: Y que no dependa de que alguien inicie sesión.
+A: Exacto. LazyAdmin agrega un detalle: si no ponés la carpeta de inicio, el script deja sus archivos en System32.
+B: Clásico. ¿Laboratorio?
+A: Quince minutos. Le configurás la recuperación a un servicio de prueba, lo matás a mano y mirás cómo vuelve. Y creás una tarea al inicio con un script que escribe la hora.
+B: Todo servicio crítico con recuperación.
+A: Configurada y probada.

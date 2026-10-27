@@ -1,0 +1,19 @@
+A: Lección nueve. El cliente ya tiene NVR y pregunta: ¿el portero puede grabar ahí?
+B: Siempre preguntan eso.
+A: Y la respuesta es sí. El portero Akuvox entrega video por RTSP, y también se deja descubrir por ONVIF.
+B: ¿Cuál es la ruta?
+A: Según la guía del E16: rtsp, dos puntos, barra barra, la IP del portero, barra live, barra ch cero cero guion bajo cero para el stream principal. Y ch cero cero guion bajo uno para el secundario.
+B: ¿Qué calidad trae cada uno?
+A: Por defecto, H doscientos sesenta y cuatro a veinticinco cuadros. El principal a dos mil cuarenta y ocho kilobits, el secundario a quinientos doce.
+B: O sea, para la grilla del NVR, el secundario.
+A: Exacto, y el principal si de verdad necesitás ver detalle. Ahora, aviso: esto sale de una sola fuente, el manual del E16, así que es evidencia escasa. No encontré un practicante contando la integración con un NVR concreto.
+B: Bueno, es el manual. ¿Y ONVIF?
+A: En Surveillance, ONVIF, lo activás como descubrible. Y el usuario y la clave de ONVIF vienen en admin y admin por defecto.
+B: [suspiro] Otra vez admin y admin.
+A: Otra vez. Lo mismo con RTSP: en Surveillance, RTSP, RTSP Basic, activás la autorización en Digest y le ponés usuario propio. Y hay un tercer acceso, MJPEG por el puerto ocho mil ochenta, que también conviene proteger con clave.
+B: Tres puertas de entrada al video.
+A: Tres, y las tres con credencial propia. Un detalle práctico: si cambiás la clave RTSP del portero, el monitor que lo mira por RTSP necesita la misma clave, o deja de verlo.
+B: Buen dato. ¿Laboratorio?
+A: Probá el RTSP del portero desde tu PC con ffprobe o VLC, los dos streams. Después activá la autorización RTSP, volvé a probar con usuario y clave, y agregalo al NVR por ONVIF o por RTSP manual. Diez minutos.
+B: Y anotás la clave en la ficha, que si no el del NVR te llama a los seis meses.
+A: Con esto, el portero queda grabado como una cámara más y sin claves de fábrica.

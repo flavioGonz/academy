@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Hiciste diez linked clones de la plantilla 9000 para un cliente. Un compañero borra la plantilla para liberar espacio. ¿Qué pasa?",
+    "options": [
+      "Nada, los clones son independientes",
+      "Proxmox convierte los clones en full automáticamente",
+      "Solo se pierde la configuración de cloud-init",
+      "Los linked clones se rompen porque leen los bloques originales de la plantilla"
+    ],
+    "answer": 3,
+    "why": "Un linked clone guarda solo los cambios y lee el resto de la imagen original; sin la plantilla, los clones quedan rotos. Para producción conviene full clone."
+  },
+  {
+    "q": "¿Dónde se configura la IP fija de una VM desplegada con cloud-init?",
+    "options": [
+      "Adentro de la VM, editando la red a mano después del primer arranque",
+      "En el DHCP del router, siempre",
+      "En Proxmox, en la sección Cloud-Init de la VM (ipconfig0)",
+      "En el archivo interfaces del host"
+    ],
+    "answer": 2,
+    "why": "Proxmox genera una unidad cloud-init con usuario, claves e IP; la VM la lee en el primer arranque y se configura sola."
+  },
+  {
+    "q": "Según la wiki oficial, ¿qué conviene usar para acceder a VMs creadas con cloud-init?",
+    "options": [
+      "Clave SSH pública",
+      "Contraseña en cipassword",
+      "Usuario root sin contraseña",
+      "Telnet por la consola serie"
+    ],
+    "answer": 0,
+    "why": "La wiki recomienda autenticación por clave SSH porque la contraseña queda guardada cifrada dentro de los datos de cloud-init."
+  }
+]

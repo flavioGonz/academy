@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Vas a reemplazar el usuario admin en un router remoto. ¿Cuál es el orden seguro?",
+    "options": [
+      "Deshabilitar admin y después crear tu usuario",
+      "Crear tu usuario, probar que entra en otra sesión, y recién ahí deshabilitar admin",
+      "Cambiar el nombre de admin y dejar la contraseña vacía hasta terminar",
+      "Borrar admin desde Safe Mode, porque se deshace si falla"
+    ],
+    "answer": 1,
+    "why": "La documentación recomienda crear el nuevo administrador, verificar que funciona y después deshabilitar o borrar admin. Al revés podés quedar afuera."
+  },
+  {
+    "q": "Querés que la mesa de ayuda vea la configuración pero no pueda reiniciar. ¿Qué hacés?",
+    "options": [
+      "Le das el grupo read de fábrica, que es solo lectura",
+      "Le das el grupo write sin policy",
+      "Le das full y le pedís que no toque nada",
+      "Creás un grupo propio con read y sin reboot ni write"
+    ],
+    "answer": 3,
+    "why": "Según la guía de seguridad, el grupo read de fábrica puede reiniciar el router y ver configuración sensible. Un grupo propio con las políticas justas evita eso."
+  },
+  {
+    "q": "Pusiste una contraseña entre comillas que incluye un signo $. ¿Qué riesgo hay?",
+    "options": [
+      "El $ inicia una variable y la contraseña queda más corta sin aviso",
+      "Ninguno, RouterOS acepta cualquier símbolo",
+      "El router rechaza la contraseña con error",
+      "La contraseña se guarda en texto plano en el export"
+    ],
+    "answer": 0,
+    "why": "La documentación avisa que un $ sin escapar inicia un nombre de variable; se reemplaza (normalmente por nada) y la contraseña queda más corta sin aviso. Se escribe como \\$."
+  }
+]

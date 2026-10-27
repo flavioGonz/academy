@@ -1,0 +1,21 @@
+A: Lección cuatro, cierre del primer arco. Antes de tocar.
+B: Suena a cartel de obra.
+A: Y lo es. La idea: antes de cambiar hardware, migrar o actualizar el servidor de HikCentral, dos cosas. Backup del sistema fuera del servidor y licencia desactivada.
+B: ¿Por qué la licencia?
+A: Porque en máquina física la licencia queda atada al hardware. Si cambia el hardware, se invalida. Y la guía de requisitos dice que migrar la máquina virtual también rompe la verificación de licencia.
+B: O sea, un vMotion y chau.
+A: Chau. Y el síntoma que describe el FAQ es feo: el servicio SYS alterna entre arrancando y detenido, en loop. Y si querés activar el mismo código en el servidor nuevo, error mil ciento ocho: código usado en otro servidor.
+B: ¿Cuántas fuentes coinciden?
+A: Cuatro de cinco páginas sobre licencias apuntan a lo mismo, todas de Hikvision. Nadie dice lo contrario.
+B: ¿Y el backup cómo es?
+A: En el Web Client, Mantenimiento, backup y restauración de datos del sistema. Elegís qué guardar: configuración, imágenes, eventos, pasadas de tarjeta. Lo programás, por ejemplo semanal, y definís cuántas copias guardar, de una a cinco.
+B: ¿Dónde quedan?
+A: Ahí está el detalle. El manual dice que quedan en el propio servidor SYS.
+B: Entonces si se muere el disco, se muere el backup.
+A: Exacto. Por eso la regla es copiarlo afuera. Un NAS, otro servidor, lo que tenga el cliente. Y hasta el competidor que critica HikCentral lo dice: los backups son responsabilidad del integrador o del cliente.
+B: ¿Ejemplo en obra?
+A: Te llaman para cambiar el disco del servidor por uno más grande. Antes de abrir el gabinete: backup ahora, copia al NAS, desactivar licencia, recién ahí apagar.
+B: Y reactivar al final.
+A: Y reactivar al final. El laboratorio: programar un backup semanal, hacer uno ya, copiarlo a otra máquina y escribir el checklist de cambio en una hoja.
+B: Quince minutos.
+A: Antes de actualizar, backup. Siempre.

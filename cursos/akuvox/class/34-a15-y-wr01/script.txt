@@ -1,0 +1,23 @@
+A: Lección treinta y cuatro. Dos equipos de acceso que no se parecen en nada: el A15 y el WR01.
+B: Arrancá por el A15.
+A: Akuvox lo presenta como terminal de control de acceso con reconocimiento facial, de cuatro coma cincuenta y nueve pulgadas, para marco de puerta. O sea, angosto, para ir en el perfil al lado de la puerta.
+B: ¿Credenciales?
+A: PIN, tarjeta de trece coma cincuenta y seis, rostro, Bluetooth y QR. Va con PoE at o fuente de doce voltios dos amperes.
+B: ¿Da doce voltios?
+A: Tiene un borne propio: quinientos miliamperes si lo alimentás con PoE+, y un ampere si es con fuente.
+B: ¿Y cómo entrás?
+A: Mantenés apretada la pantalla de inicio unos cinco segundos, ponés el PIN de administrador o pasás la tarjeta de administrador, y vas a Setting, System Info, Network.
+B: ¿Y el WR01?
+A: Ese es el relé de borde que ya mencionamos en la parte de HTTP. Akuvox lo llama controlador de relé web. Dos relés, dos entradas, veinte mil usuarios, cien mil registros, Bluetooth, montaje en pared o en riel DIN, y una versión WR01-L con LTE.
+B: ¿Alimentación?
+A: Lo más flexible del catálogo: PoE at, o doce o veinticuatro voltios, en continua o en alterna. Y da doce voltios quinientos miliamperes por un borne propio.
+B: ¿Credenciales en el WR01?
+A: Solo Bluetooth, según la tabla de métodos. No tiene lector. Es para que una carga lejos del portero se maneje por web, por API o desde el celular.
+B: Por ejemplo, un portón de fondo.
+A: Por ejemplo. Y está en la lista de equipos que leen patentes de cámaras desde mil cuatrocientos uno punto treinta punto once punto doscientos veintiuno.
+B: ¿Cuántas fuentes?
+A: Ocho de once en el reparto del acceso. Del WR01 leímos la ficha; del A15, solo las tablas.
+B: ¿Laboratorio?
+A: Quince minutos. El WR01 en riel, alimentado con lo que tengas, un relé a una lámpara de banco y una entrada a un pulsador. Lo abrís desde la web y mirás el registro.
+B: ¿Y el A15?
+A: Si tenés uno, le sacás la IP con el PIN de administrador y lo anotás.

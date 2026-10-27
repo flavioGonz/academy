@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>¿Qué relé dispara cada DoorNum?</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">AKUVOX · LECCIÓN 16 · PASOS 4 Y 5</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">¿Qué relé dispara cada DoorNum?</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'liga' 0,'calt' 0}</style>
+<rect x="48" y="130" width="1104" height="104" rx="14" fill="#03213C"/><text x="66.0" y="156.0" font-family="JetBrains Mono" font-size="13" font-weight="500" fill="#7FA6C9" text-anchor="start" letter-spacing="1.5">PC DE LABORATORIO</text><text x="66.0" y="186.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#9FC3E3" text-anchor="start">PORTERO=192.168.88.21</text><text x="66.0" y="212.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#D9E9F8" text-anchor="start">curl -s -u &#x27;abre-lab:Ejemplo-Http-2026&#x27; &quot;$PORTERO/fcgi/OpenDoor?action=OpenDoor&amp;DoorNum=SB&quot;</text>
+<rect x="48" y="270" width="1104" height="66" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="80.0" y="312.0" font-family="JetBrains Mono" font-size="19" font-weight="700" fill="#0A63B8" text-anchor="start">DoorNum=1</text>
+<path d="M300.0 304.0C340.0 304.0,340.0 304.0,380.0 304.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<text x="400.0" y="312.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Relé A</text>
+<text x="640.0" y="312.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start">en el portero</text>
+<rect x="1000.0" y="291" width="68.0" height="30" rx="15" fill="#011E38"/><text x="1034.0" y="312.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">local</text>
+<rect x="48" y="352" width="1104" height="66" rx="14" fill="#E5F0FB" stroke="#17A8D4" stroke-width="2.5"/>
+<text x="80.0" y="394.0" font-family="JetBrains Mono" font-size="19" font-weight="700" fill="#0A63B8" text-anchor="start">DoorNum=2</text>
+<path d="M300.0 386.0C340.0 386.0,340.0 386.0,380.0 386.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<text x="400.0" y="394.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Relé B</text>
+<text x="640.0" y="394.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start">en el portero</text>
+<rect x="1000.0" y="373" width="68.0" height="30" rx="15" fill="#011E38"/><text x="1034.0" y="394.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">local</text>
+<circle cx="48" cy="352" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="358.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<rect x="48" y="434" width="1104" height="66" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="80.0" y="476.0" font-family="JetBrains Mono" font-size="19" font-weight="700" fill="#0A63B8" text-anchor="start">DoorNum=SA</text>
+<path d="M300.0 468.0C340.0 468.0,340.0 468.0,380.0 468.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<text x="400.0" y="476.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Security Relay A</text>
+<text x="640.0" y="476.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start">SR01 por la salida de 12 V</text>
+<rect x="1000.0" y="455" width="84.8" height="30" rx="15" fill="#E3F5EC"/><text x="1042.4" y="476.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">adentro</text>
+<rect x="48" y="516" width="1104" height="66" rx="14" fill="#E5F0FB" stroke="#17A8D4" stroke-width="2.5"/>
+<text x="80.0" y="558.0" font-family="JetBrains Mono" font-size="19" font-weight="700" fill="#0A63B8" text-anchor="start">DoorNum=SB</text>
+<path d="M300.0 550.0C340.0 550.0,340.0 550.0,380.0 550.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<text x="400.0" y="558.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Security Relay B</text>
+<text x="640.0" y="558.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start">SR01 por RS485</text>
+<rect x="1000.0" y="537" width="84.8" height="30" rx="15" fill="#E3F5EC"/><text x="1042.4" y="558.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">adentro</text>
+<circle cx="48" cy="516" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="522.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="48.0" y="628.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">Paso 4: SB con el SR01 por RS485.  Paso 5: sin SR01, DoorNum=2 sobre el relé B con un portón o lámpara de banco.</text>
+</svg>

@@ -1,0 +1,19 @@
+A: Arco tres, cuando algo falla. Y la primera pregunta no es "qué se rompió". Es "qué cambió".
+B: Ayer andaba, hoy no.
+A: Exacto. Y Windows tiene una herramienta que casi nadie abre: el Monitor de confiabilidad. Escribís perfmon barra rel.
+B: ¿Esa del gráfico con cruces rojas?
+A: Esa. Un índice de uno a diez por día, y abajo las fallas de aplicaciones, de Windows, las instalaciones y las actualizaciones. TechTarget muestra un caso donde el índice viene estable y se desploma justo el día que se instaló una aplicación nueva.
+B: O sea, ves el cambio y la falla en la misma columna.
+A: En la misma columna. Y lo podés exportar para el informe.
+B: Bien. ¿Y si necesito el detalle?
+A: Visor de eventos. Pero no a mano, recorriendo miles de líneas. Get-WinEvent con un FilterHashtable: el log, el ID y desde qué fecha. TheITBros dice que es muchísimo más rápido que filtrar después con Where-Object.
+B: ¿Y qué IDs busco?
+A: Para reinicios, dos. El mil setenta y cuatro te dice quién o qué pidió el reinicio. Woshub muestra ejemplos: un usuario, o NT AUTHORITY SYSTEM con el proceso de Windows Update.
+B: Ah, el clásico "nadie lo reinició".
+A: [risas] Y el evento dice que fue Windows Update a las tres de la mañana. El otro es el seis mil ocho: el apagado anterior fue inesperado. Corte de luz o pantallazo azul.
+B: ¿Cuántas fuentes?
+A: Dos de tres coinciden en filtrar con FilterHashtable, y los IDs de reinicio salen de woshub. Nadie en contra. Un detalle más: si el log es chico y se sobrescribe, perdés la evidencia. Conviene agrandarlo.
+B: ¿Laboratorio?
+A: Diez minutos. Abrís Confiabilidad y mirás la última semana. Después buscás los mil setenta y cuatro y los seis mil ocho de tu equipo, y los errores del log Sistema de las últimas veinticuatro horas.
+B: Y eso va al informe del cliente.
+A: Con fecha y hora. Primero qué cambió, después qué se rompió.

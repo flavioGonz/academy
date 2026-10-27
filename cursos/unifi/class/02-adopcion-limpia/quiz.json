@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Llevás un AP nuevo de stock a un sitio con un controlador que no se actualiza hace un año. No adopta y queda en 'Update Required'. ¿Qué es lo más probable?",
+    "options": [
+      "El cable está mal crimpado",
+      "El AP está en otro controlador",
+      "Falta abrir el puerto 443 de entrada",
+      "Desfase de firmware entre AP y controlador"
+    ],
+    "answer": 3,
+    "why": "Según LazyAdmin el problema más común es la diferencia de versiones; HostiFi agrega que algunos equipos piden actualizar firmware antes de adoptar."
+  },
+  {
+    "q": "Un switch adoptado en el controlador de otro integrador tiene que pasar al tuyo. ¿Cuál es el orden correcto?",
+    "options": [
+      "Adoptarlo directo en tu controlador, toma prioridad el último",
+      "Hacer set-inform a tu controlador sin resetear",
+      "Eliminarlo del controlador viejo, reset de fábrica y adoptarlo en el tuyo",
+      "Actualizar el firmware y esperar que aparezca solo"
+    ],
+    "answer": 2,
+    "why": "Un equipo tiene un solo host. Sin eliminarlo y resetearlo, sigue respondiendo al controlador viejo."
+  },
+  {
+    "q": "Con el controlador instalado en una notebook, el AP aparece como 'adoptando' y después 'offline', pero responde por SSH. ¿Qué revisás primero?",
+    "options": [
+      "El firewall de la notebook del controlador",
+      "La potencia del AP",
+      "El canal de 5 GHz",
+      "El voucher del portal"
+    ],
+    "answer": 0,
+    "why": "En los comentarios de LazyAdmin un lector encontró que el firewall de Windows bloqueaba la comunicación del AP con el controlador."
+  }
+]

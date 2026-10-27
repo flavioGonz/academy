@@ -1,0 +1,37 @@
+{
+ "topic": "Alarmas Paradox: de la central al monitoreo (Spectra SP/SP+, Magellan MG, EVO192/EVOHD+, IP150/IP180/PCS, BabyWare, BlueEye/Insite Gold, IPC10/IPR512, línea M25)",
+ "level": "inicial a intermedio",
+ "min_words": 150,
+ "pages": [
+  "https://www.paradox.com/web/product/m25-m25-lte/",
+  "https://www.finmon.co.za/kb/books/gsm-communicator-programming-manual/page/paradox-mg5050-and-sp6000-programming",
+  "https://www.mintlify.com/ParadoxAlarmInterface/pai/connection/ip150",
+  "https://www.mintlify.com/ParadoxAlarmInterface/pai/connection/overview",
+  "https://community.openhab.org/t/help-build-binding-for-paradox-alarm-panel-with-ip150/1712?page=3",
+  "https://community.openhab.org/t/paradox-evo-binding/58026?page=28",
+  "https://community.home-assistant.io/t/paradox-security-system/30004",
+  "https://forumdacasa.com/discussion/60287/4/alarme-paradox/",
+  "https://forumdacasa.com/discussion/60287/5/alarme-paradox/",
+  "https://blog.tremtech.com/blog/how-to-wire-security-alarm-zones/",
+  "https://blog.tremtech.com/blog/manually-resetting-paradox-sp-and-mg-alarm-panels/",
+  "https://www.csd.com.au/products/PDX-IP150+",
+  "https://ipvm.com/forums/video-surveillance/topics/paradox-mg5050-installer-id-issue"
+ ],
+ "pdf_pages": [
+  "https://www.paradox.com/Downloader/?ID=11662",
+  "https://www.paradox.com/Downloader/?ID=11650",
+  "https://www.paradox.com/Downloader/?ID=12435",
+  "https://www.paradox.com/Downloader/?ID=12343",
+  "https://www.paradox.com/Downloader/?ID=11873",
+  "https://descargas.fiesa.com.ar/descargas/Paradox/Manuales%20y%20Documentos/Paneles/EVOHD+/EVOHD+%20-%20Manual%20de%20Instalaci%c3%b3n.pdf",
+  "https://descargas.fiesa.com.ar/descargas/Paradox/Manuales%20y%20Documentos/Receptoras/Manual_IPR512.pdf",
+  "https://descargas.fiesa.com.ar/descargas/Paradox/Manuales%20y%20Documentos/Software/BlueEye/BlueEye_Installer_Menu_v2.0%20.pdf",
+  "https://store.tremtech.com/content/K32LCDPlus_Installation_Guide_En.pdf"
+ ],
+ "api_pages": [
+  "https://support.paradox.com/portal/en/kb/articles/how-can-i-add-a-static-ip-site-in-blueeye",
+  "https://support.paradox.com/portal/en/kb/articles/i-cannot-connect-to-my-site-what-should-i-do",
+  "https://support.paradox.com/portal/en/kb/articles/i-cannot-configure-the-ip150-anymore-from-the-web-interface-18-11-2022"
+ ],
+ "note": "pdf_pages: manuales oficiales de Paradox (paradox.com/Downloader, catálogo de productos legacy; copias del distribuidor FIESA y de TremTech), no los maneja scrape.py; convertidos con pdftotext -layout y guardados en raw/web con la misma cabecera. api_pages: artículos de la base de conocimiento de Paradox (Zoho Desk), que solo cargan con JavaScript; el texto se tomó de la API pública del portal (/portal/api/kbArticles/<id>) y se guardó con la url web del artículo. Se descartó un hilo de openHAB (1712?page=9) porque trataba de degradar firmware armando archivos .puf."
+}

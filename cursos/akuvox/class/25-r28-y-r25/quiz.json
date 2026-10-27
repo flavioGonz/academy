@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Necesitás 12 V para un lector externo sin ocupar el relé del portero. ¿Cuál de estos lo trae?",
+  "options": [
+   "R25A",
+   "R28, con borne de 12 V 400 mA independiente",
+   "E12",
+   "E16C"
+  ],
+  "answer": 1,
+  "why": "La tabla de 12 V marca al R28 con puerto independiente de 12 V/400 mA, con PoE o fuente."
+ },
+ {
+  "q": "Un cliente quiere abrir con PIN en un R25K. ¿Qué decís?",
+  "options": [
+   "La tabla de métodos marca toda la serie R25 sin PIN; se prueba antes de prometerlo",
+   "Sí, tiene teclado",
+   "Solo con SmartPlus",
+   "Solo con LTE"
+  ],
+  "answer": 0,
+  "why": "La tabla de métodos de acceso de Akuvox indica que la serie R25 no soporta PIN."
+ },
+ {
+  "q": "Un R25 con PoE da poca tensión en la salida de 12 V cuando el volumen está alto. ¿Es normal?",
+  "options": [
+   "No, está roto",
+   "Solo pasa con LTE",
+   "Es un problema de DTMF",
+   "Sí: según la tabla, con PoE esa salida depende del volumen del equipo"
+  ],
+  "answer": 3,
+  "why": "Akuvox aclara que con PoE la salida de 12 V del R25 está afectada por el ajuste de volumen."
+ }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un AP nuevo está enchufado y con IP, pero no aparece en Pending. El controlador está en la VLAN 1 y el AP en la VLAN 30. ¿Cuál es la causa más probable?",
+    "options": [
+      "El broadcast de descubrimiento no cruza a la VLAN del controlador",
+      "El AP necesita firmware nuevo",
+      "Falta la licencia del AP",
+      "El puerto 8043 está cerrado"
+    ],
+    "answer": 0,
+    "why": "El descubrimiento en capa 2 es un broadcast al UDP 29810 que queda dentro de su subred; en otra VLAN hace falta un método de capa 3."
+  },
+  {
+    "q": "Al adoptar un ER605 que configuraste a mano para darle internet, el controlador muestra Adopt Failed y pide usuario y contraseña. ¿Qué ponés?",
+    "options": [
+      "admin/admin siempre",
+      "Las credenciales que creaste en la web local del ER605",
+      "Tu cuenta de TP-Link ID",
+      "Las credenciales del controlador"
+    ],
+    "answer": 1,
+    "why": "El equipo ya tiene credenciales propias; se adopta con las de su GUI local y, una vez adoptado, pasa a usar las credenciales del sitio."
+  },
+  {
+    "q": "Tenés que reutilizar un switch JetStream sin botón de reset que estuvo en otro controlador. ¿Cómo lo dejás de fábrica?",
+    "options": [
+      "Desenchufándolo 30 segundos",
+      "Con la app Omada por Bluetooth",
+      "Desde el controlador nuevo con Forget",
+      "Por consola a 38400 baudios entrando a BootUtil"
+    ],
+    "answer": 3,
+    "why": "La guía oficial indica conectar por consola a 38400 baudios y usar BootUtil para resetear un switch sin botón."
+  }
+]

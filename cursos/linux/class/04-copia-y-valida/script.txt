@@ -1,0 +1,19 @@
+A: Hoy la lección es corta de explicar y larga de agradecer. Copiá y validá.
+B: Me suena a algo que aprendiste por las malas.
+A: [suspiro] Todos lo aprendimos así. Editás el archivo de SSH de un servidor remoto, reiniciás el servicio, y el servicio no levanta. Y SSH era tu única forma de entrar.
+B: Y ahí a pedir que alguien vaya a la consola.
+A: La documentación de Ubuntu Server lo advierte con esas palabras: si SSH es tu único acceso y te equivocás en la configuración, podés quedar afuera al reiniciar.
+B: ¿Y el método cuál es?
+A: Tres pasos. Uno: antes de tocar, copia del original. Dos: tu cambio va en un archivo propio dentro de la carpeta punto d, en vez de editar el archivo del paquete. Tres: validás con la herramienta del propio servicio, y recién después reiniciás.
+B: ¿Cuántas fuentes dicen esto?
+A: Cuatro de cinco que hablan de editar configuración, ninguna en contra. Y cada servicio trae su validador. Para SSH es sshd guion t. Para netplan, netplan generate. Para el fstab, findmnt guion x. Para sudoers, visudo guion c.
+B: ¿Y lo de la carpeta punto d, por qué?
+A: Porque cuando el paquete se actualiza no te pregunta si pisa tu cambio. Y hay una sutileza en SSH: en Ubuntu, el archivo principal incluye esa carpeta al principio, y SSH se queda con el primer valor que lee. O sea que tu archivo gana.
+B: ¿En serio? Entonces si alguien edita el principal y no cambia nada, puede ser que haya un snippet pisándolo.
+A: Exacto, eso confunde muchísimo. Primero mirás la carpeta.
+B: ¿Y el editor? Porque no todos se llevan con vim.
+A: nano está bien para empezar: control O guarda, control X sale. Y de vim, lo mínimo: i para escribir, escape, dos puntos w q para guardar y salir, dos puntos q exclamación para salir sin guardar.
+B: Con eso sobrevivís en cualquier appliance.
+A: Laboratorio de quince minutos: ponés un banner en SSH en un archivo propio, metés un error a propósito, ves cómo sshd guion t te marca la línea, lo corregís y recién ahí recargás.
+B: Copia, punto d, validación, y después restart.
+A: Ese orden te ahorra el viaje.

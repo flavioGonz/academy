@@ -1,0 +1,153 @@
+{
+  "slug": "hikcentral",
+  "title": "HikCentral Professional: videovigilancia y control de acceso centralizado",
+  "vendor": "Hikvision",
+  "tagline": "Del servidor bien parado a la puerta que abre: HikCentral sin vueltas en obra y en soporte.",
+  "description": "Al terminar vas a poder dimensionar, instalar, licenciar y respaldar un servidor HikCentral Professional, dar de alta cámaras y controladoras por IP, ISUP o Hik-Connect, y ordenarlas en áreas con grabación y alarmas útiles. También vas a configurar niveles de acceso, asistencia y roles, y diagnosticar equipos offline con un método y la matriz de puertos.",
+  "level": "Inicial a intermedio",
+  "audience": "Técnicos instaladores y de soporte que ya manejan redes IP y equipos Hikvision sueltos, y empiezan a trabajar con la plataforma central.",
+  "prerequisites": [
+    "Direccionamiento IP, máscara, gateway y DNS",
+    "Haber configurado una cámara o NVR Hikvision por su web local",
+    "Manejo básico de Windows Server y PowerShell",
+    "Un servidor o VM de laboratorio con una cámara y, si es posible, una controladora de acceso"
+  ],
+  "outcomes": [
+    "Dimensionar e instalar el SYS y leer el Service Manager para detectar conflictos de puertos",
+    "Activar licencias online y offline e interpretar los errores de activación más comunes",
+    "Respaldar el sistema y cambiar hardware o migrar sin perder licencia ni configuración",
+    "Dar de alta equipos por IP, ISUP o Hik-Connect, ordenarlos en áreas y decidir dónde graba cada cámara",
+    "Configurar niveles de acceso, turnos de asistencia, roles y eventos con alarmas útiles",
+    "Diagnosticar dispositivos offline y problemas de streaming con la Communication Matrix"
+  ],
+  "version_note": "Escrito en octubre de 2026 para HikCentral Professional V3.x, pero apoyado en documentación oficial V2.4 a V2.6.1 (manual del Web Client, Quick Start Guide, FAQ V2.5.500, Communication Matrix V2.4.1 y guía de requisitos V2.4.510): la documentación V3 no estuvo disponible para lectura automática. Los conceptos se mantienen; las rutas de menú y algunas cifras de hardware pueden variar en V3, y cada tarjeta lo avisa.",
+  "arcs": [
+    {
+      "title": "Fundamentos: el servidor bien parado",
+      "why": "Antes de agregar una sola cámara, la plataforma tiene que estar dimensionada, instalada, licenciada y con un plan para cuando haya que tocar el servidor.",
+      "lessons": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "title": "Operación diaria: equipos, video y alarmas",
+      "why": "Es lo que se hace en cada obra: dar de alta equipos, ordenarlos, decidir dónde graban y qué avisa.",
+      "lessons": [
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "title": "Acceso, gestión y troubleshooting",
+      "why": "Acceso y asistencia concentran las llamadas de soporte, y el troubleshooting cierra el curso con un método repetible.",
+      "lessons": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  ],
+  "splits": [
+    {
+      "topic": "Acceso remoto a los equipos",
+      "sides": "Los blogs de instaladores (learncctv) enseñan port forwarding directo de 80, 554 y 8000; la documentación oficial ofrece ISUP y Hik-Connect, donde el equipo registra hacia el servidor, y la voz crítica sobre seguridad aconseja no exponer equipos.",
+      "decide": "Con IP fija y VPN, alta por IP sobre la VPN; sin IP fija, ISUP; abrir puertos a internet como último recurso y con contraseñas fuertes."
+    },
+    {
+      "topic": "Dónde grabar",
+      "sides": "Grabar en el NVR del sitio es simple y no depende del enlace; grabar en almacenamiento central (pStor, Hybrid SAN) da retención y redundancia pero tiene límites documentados en el FAQ.",
+      "decide": "Si el enlace al centro es chico o inestable, en el sitio; si hacen falta retención y redundancia centrales y hay ancho de banda, central, revisando antes los límites de cada opción."
+    },
+    {
+      "topic": "On-premises contra nube",
+      "sides": "VXG, competidor de nube, sostiene que operar el servidor (backups, parches, seguridad) es la carga principal; Hikvision trata el servidor propio como base y permite AWS y Azure con limitaciones.",
+      "decide": "Si nadie puede mantener backups, parches y licencias, presupuestá ese mantenimiento o evaluá otra arquitectura antes de vender la plataforma."
+    },
+    {
+      "topic": "Alta de personas en plataforma o en equipo",
+      "sides": "El FAQ recomienda una sola fuente de verdad; en la práctica se dan de alta en ambos lados.",
+      "decide": "Con HikCentral, alta en la plataforma y aplicar a los equipos; solo en sitios sin servidor permanente, alta en el equipo."
+    }
+  ],
+  "sources_count": 23,
+  "lessons": [
+    {
+      "n": 1,
+      "dir": "01-mapa-de-capas",
+      "handle": "Mapa de capas",
+      "summary": "SYS, Streaming Gateway y Server, Web, Control y Mobile Client: dónde vive cada falla."
+    },
+    {
+      "n": 2,
+      "dir": "02-servidor-a-medida",
+      "handle": "Servidor a medida",
+      "summary": "Dimensionar el SYS con la guía oficial, instalar bien y leer el Service Manager."
+    },
+    {
+      "n": 3,
+      "dir": "03-licencia-sin-sorpresas",
+      "handle": "Licencia sin sorpresas",
+      "summary": "Licencia base y expansiones, activación online y offline, y los códigos de error que más aparecen."
+    },
+    {
+      "n": 4,
+      "dir": "04-antes-de-tocar",
+      "handle": "Antes de tocar",
+      "summary": "Backup fuera del SYS y licencia desactivada antes de cambiar hardware o migrar."
+    },
+    {
+      "n": 5,
+      "dir": "05-tres-formas-de-alta",
+      "handle": "Tres formas de alta",
+      "summary": "Alta por IP, por ISUP sin IP fija o por Hik-Connect, y cuándo conviene cada una."
+    },
+    {
+      "n": 6,
+      "dir": "06-areas-primero",
+      "handle": "Áreas primero",
+      "summary": "El árbol de áreas, las vistas públicas y privadas, E-map y GIS."
+    },
+    {
+      "n": 7,
+      "dir": "07-donde-graba",
+      "handle": "Dónde graba",
+      "summary": "Grabación en el equipo o central (pStor, Hybrid SAN, Cloud Storage) y sus límites."
+    },
+    {
+      "n": 8,
+      "dir": "08-alarmas-con-criterio",
+      "handle": "Alarmas con criterio",
+      "summary": "Evento contra alarma, menos ruido y grabación con pre y post evento."
+    },
+    {
+      "n": 9,
+      "dir": "09-niveles-de-acceso",
+      "handle": "Niveles de acceso",
+      "summary": "Persona, credencial, nivel de acceso, horario y aplicar a dispositivos sin trancar puertas."
+    },
+    {
+      "n": 10,
+      "dir": "10-asistencia-y-hora",
+      "handle": "Asistencia y hora",
+      "summary": "Puntos de marca, reglas, turnos y la zona horaria que tiene que coincidir."
+    },
+    {
+      "n": 11,
+      "dir": "11-roles-y-cuentas",
+      "handle": "Roles y cuentas",
+      "summary": "Roles a medida, contraseñas fuertes y HTTPS con certificado propio."
+    },
+    {
+      "n": 12,
+      "dir": "12-offline-de-abajo-arriba",
+      "handle": "Offline de abajo arriba",
+      "summary": "Diagnóstico ordenado de dispositivos offline, streaming y puertos contra la matriz."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+A: Lección cuatro, la que se toca con destornillador: el relé y la cerradura.
+B: Mi parte favorita. Y donde más líos veo.
+A: [risas] La primera decisión no es el borne, es qué pasa cuando se corta la luz.
+B: Fail-safe o fail-secure.
+A: Eso. Fail-safe: sin energía la puerta queda libre, que es lo que buscás en una salida de emergencia. Fail-secure: sin energía la puerta queda trabada, para un depósito por ejemplo.
+B: ¿Y eso cómo se traduce en el relé?
+A: Grandstream lo explica clarito con su portero, y el principio vale para cualquier marca: si cableás NC con COM, la cerradura abre al cortarse la energía; con NO y COM queda trabada. Un electroimán es típicamente fail-safe, una cerradura eléctrica de pestillo suele ser fail-secure.
+B: Y la cerradura con su fuente, no colgada del portero.
+A: Claro. El relé es un contacto que conmuta, la corriente la pone una fuente aparte, y en un electroimán va el diodo para la contracorriente.
+B: ¿Y del lado Akuvox?
+A: En Access Control, Relay, ajustás cuánto tiempo queda abierto. Y en Access Control, Input, habilitás la entrada del botón de salida y le decís qué relé dispara. En esa misma pantalla hay dos alarmas útiles: puerta abierta demasiado tiempo y apertura forzada.
+B: La de apertura forzada me encanta para edificios.
+A: Es oro. Solo dos fuentes tocan esto, la guía del E16 y la de Grandstream, así que es evidencia escasa, pero coinciden.
+B: ¿Laboratorio?
+A: En el banco, una cerradura de prueba o una lámpara de doce voltios con su fuente. Cableala al relé en NO, abrí desde la web y medí el tiempo. Pasala a NC y mirá qué cambia. Después un pulsador en la entrada como botón de salida. Veinte minutos.
+B: Y cortá la fuente para ver qué hace la puerta sin luz.
+A: Exacto. Probarlo en el banco te ahorra descubrirlo el día del corte.
+B: Y el cliente ni se entera.
+A: Con eso, nunca más una salida de emergencia que queda trabada en un apagón.

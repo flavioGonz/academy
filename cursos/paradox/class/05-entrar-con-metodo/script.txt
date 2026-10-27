@@ -1,0 +1,19 @@
+A: Arco dos, programar. Lección cinco: entrar con método.
+B: ENTER, código y a tocar. ¿Qué método hay?
+A: [risas] Justamente ese es el problema. En SP y MG la secuencia es ENTER, código de instalador, la sección de tres dígitos y el dato. Pero el dato puede ser de tres formas.
+B: ¿Tres?
+A: Decimal, de cero cero cero a doscientos cincuenta y cinco, como los retardos. Hexadecimal, donde la tecla cero vale A y las teclas de función valen de B a F, como los números de abonado. Y por opciones, del uno al ocho, que prendés y apagás y guardás con ENTER.
+B: Y CLEAR sale sin guardar.
+A: Exacto. Y el truco que más uso: entrás a la sección y, antes de cargar nada, apretás ENTER. La central te muestra lo que tiene, dígito por dígito, sin cambiarlo.
+B: Mirar antes de escribir. Me gusta.
+A: Las tres guías que tocan el tema coinciden en el procedimiento. Una cosa más: para entrar, las particiones tienen que estar desarmadas y el StayD apagado. Si no, no entrás.
+B: ¿Y los códigos de fábrica?
+A: Instalador cero cero cero cero, maestro del sistema uno dos tres cuatro, y el de mantenimiento viene vacío. El de mantenimiento programa casi todo, menos la comunicación y los códigos de usuario.
+B: ¿Y por qué tanto drama con cambiarlos?
+A: Porque en un foro portugués de vivienda alguien le sugería a otro usuario entrar con BabyWare a la central que había puesto un instalador, probando los códigos de fábrica.
+B: [suspiro] O sea, la puerta abierta.
+A: Tal cual. Por eso el primer día se cambian: el de instalador en la sección trescientos noventa y siete, el maestro en la trescientos noventa y nueve.
+B: ¿Qué probamos?
+A: Entrás a la setecientos diez, apretás ENTER y leés el retardo de entrada sin tocarlo. Salís con CLEAR. Después cambiás instalador y maestro por códigos propios de la obra. Diez minutos.
+B: Y los anotás en la ficha, no en un papelito pegado al gabinete.
+A: Desde hoy, mirás la sección antes de escribirla.

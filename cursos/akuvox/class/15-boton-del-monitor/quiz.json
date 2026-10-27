@@ -1,0 +1,35 @@
+[
+ {
+  "q": "El residente quiere ver la cámara del portón y abrirlo sin que nadie haya llamado. ¿Dónde ponés la tecla?",
+  "options": [
+   "Softkey in Talking Page",
+   "En el DTMF del portero",
+   "En la central",
+   "Softkey In Monitor Page"
+  ],
+  "answer": 3,
+  "why": "La tecla en la pantalla de monitoreo dispara el relé remoto mientras se mira el video, sin llamada de por medio."
+ },
+ {
+  "q": "Configuraste la tecla de vista previa y no aparece. ¿Qué falta primero?",
+  "options": [
+   "Una cuenta SmartPlus",
+   "Cambiar el DTMF a SIP INFO",
+   "El video del portero configurado en el monitor",
+   "Un relé SR01"
+  ],
+  "answer": 2,
+  "why": "Akuvox indica que monitoreo y vista previa requieren el video del portero ya configurado en el monitor."
+ },
+ {
+  "q": "El segundo portero tiene firmware con tercer número 10 y alta seguridad encendida. ¿Qué formato cargás en el monitor?",
+  "options": [
+   "/fcgi/do con usuario y clave como parámetros",
+   "El formato nuevo /fcgi/OpenDoor",
+   "RTSP ch00_1",
+   "Cualquiera, el monitor lo traduce"
+  ],
+  "answer": 1,
+  "why": "Con alta seguridad encendida el portero solo acepta el formato nuevo, y el monitor tiene que mandar ese."
+ }
+]

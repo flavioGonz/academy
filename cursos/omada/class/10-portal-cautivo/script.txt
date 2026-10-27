@@ -1,0 +1,20 @@
+A: Lección diez. Un hotel chico quiere que los huéspedes entren con un código que les dan en recepción.
+B: Vouchers. Portal cautivo.
+A: Exacto. En el controlador seis está en Site Settings, Authentication, Portal. Creás el portal, elegís el SSID de huéspedes y el tipo de autenticación.
+B: ¿Qué tipos hay?
+A: Según la guía oficial: sin autenticación, solo con la página; clave simple; Hotspot, que agrupa voucher, usuario local, SMS, RADIUS y formulario; RADIUS directo, con un servidor RADIUS incorporado desde la cinco punto doce; LDAP externo; y portal externo.
+B: Para el hotel, Hotspot con voucher.
+A: Imprimís los códigos desde el controlador, cada uno con su duración, y recepción los entrega.
+B: ¿Algo que muerda?
+A: Lo más importante: el portal funciona mientras el controlador está corriendo. La guía lo dice tal cual.
+B: O sea, si el OC se cuelga, los huéspedes nuevos no entran.
+A: Exacto. Y en la nube, si vence la licencia, el portal se apaga. Dos de tres fuentes sobre portal van por ahí.
+B: ¿Y el certificado?
+A: Una iglesia que armó su controlador lo contó: para que el portal no tire advertencias en el celular, pusieron nombre de dominio y certificado propio. El controlador acepta un solo archivo pfx, con certificado y clave juntos.
+B: ¿Y lo del upgrade?
+A: La guía de upgrade al controlador SDN lo dejó claro: al pasar a la cuatro punto uno punto cinco, la configuración de portal no se migraba sola y había que rehacerla a mano.
+B: [suspiro] Entonces, después de cada upgrade grande, probar el portal.
+A: Eso. Y dos ajustes útiles: Pre-Authentication Access, para dejar entrar a la web del hotel antes de autenticar, y Authentication-Free Client, para exceptuar por MAC el televisor del lobby.
+B: ¿Laboratorio?
+A: SSID de invitados, portal con voucher, generar dos códigos y probar uno desde el celular. Quince minutos.
+B: Y con eso recepción deja de dictar la clave del WiFi.

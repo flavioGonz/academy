@@ -1,0 +1,18 @@
+A: Tercer arco: acceso, gestión y troubleshooting. Lección nueve, niveles de acceso.
+B: La que más llamadas genera: "le di permiso y no le abre".
+A: [suspiro] Esa. Vamos por partes. Primero la persona, con su credencial: tarjeta, huella, rostro, PIN o QR, según la lectora.
+B: Hasta ahí, fácil.
+A: Después el nivel de acceso. Es un grupo de puertas con una plantilla de horario. Por ejemplo: puertas de oficina, días hábiles de ocho a diecinueve. Y ese nivel se asigna a personas o a departamentos.
+B: ¿Y ya abre?
+A: No. Y acá está la clave. El manual dice que después de asignar hay que aplicar la relación entre personas y puertas a los dispositivos. Si no aplicás, la controladora no se entera.
+B: Ahí está el "le di permiso y no le abre".
+A: Exacto. Y el aplicado tiene dos modos. Aplicar cambios, que manda solo lo nuevo, editado o borrado. Y el aplicado inicial, que borra todo lo que tiene el equipo y lo reescribe desde la plataforma.
+B: Ese suena peligroso.
+A: Lo es. El manual avisa que durante el aplicado inicial los dispositivos quedan offline y las personas no pueden pasar por esas puertas.
+B: Uf. En un edificio a las nueve de la mañana.
+A: Imaginate el hall lleno. Por eso el inicial va fuera de horario. Y si quedó algo pendiente, aparece un ícono de pendiente, y se revisa con la prueba de control de acceso.
+B: ¿Cuántas fuentes?
+A: Una de tres páginas de acceso describe el aplicado, la del manual. Evidencia fina pero directa del fabricante. Y el FAQ agrega otra: elegí un solo lugar para dar de alta personas, plataforma o equipo, no los dos. Y las reglas de ID de persona solo se definen con la lista vacía.
+B: ¿Laboratorio?
+A: Una persona de prueba con tarjeta, un nivel con una puerta y horario de días hábiles, asignarlo, aplicar cambios y pasar la tarjeta. Después cambiar el horario, ver el pendiente y aplicar de nuevo. Veinte minutos.
+B: Y la próxima llamada la resolvés en un minuto.

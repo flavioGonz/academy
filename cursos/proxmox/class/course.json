@@ -1,0 +1,162 @@
+{
+  "slug": "proxmox",
+  "title": "Proxmox VE: virtualización y contenedores en producción",
+  "vendor": "Proxmox Server Solutions",
+  "tagline": "Del primer host al clúster con alta disponibilidad, sin los errores que llenan el foro.",
+  "description": "Vas a poder instalar y dejar en orden un host Proxmox VE 9, armar su red con VLAN y bonds, elegir el almacenamiento correcto y crear VMs y contenedores bien configurados. Además vas a respaldar con vzdump y Proxmox Backup Server con restores probados, armar un clúster con quórum real y alta disponibilidad, asegurar el acceso y diagnosticar las fallas más comunes.",
+  "level": "Inicial a intermedio",
+  "audience": "Técnicos instaladores y de soporte que montan o mantienen servidores de virtualización en clientes.",
+  "prerequisites": [
+    "Redes básicas: IP, máscara, gateway, VLAN y trunk en un switch",
+    "Manejo básico de la consola Linux (ssh, editar un archivo, apt)",
+    "Un equipo de laboratorio con virtualización por hardware, o una VM con virtualización anidada"
+  ],
+  "outcomes": [
+    "Instalar Proxmox VE 9 y configurar repositorios y actualizaciones sin romper paquetes",
+    "Armar la red del host con bond LACP y bridge VLAN-aware",
+    "Elegir entre LVM-thin y ZFS y crear VMs con VirtIO, guest agent y plantillas cloud-init",
+    "Hacer backups con vzdump y Proxmox Backup Server, con prune, GC, verify y restores de prueba",
+    "Armar un clúster con quórum (QDevice en dos nodos), migración y alta disponibilidad",
+    "Asegurar usuarios, 2FA y firewall, y diagnosticar quórum, logs, locks y almacenamiento"
+  ],
+  "version_note": "Proxmox VE 9.x (referencia 9.2, mayo de 2026, Debian 13 Trixie, kernel 7.0) y Proxmox Backup Server 4.x. Se marcan los cambios respecto de 8.x, que quedó sin soporte en agosto de 2026.",
+  "arcs": [
+    {
+      "title": "Un host bien parado",
+      "why": "Casi todos los problemas de soporte nacen en la instalación: repositorio, red, disco y VM bien elegidos el primer día ahorran meses de parches.",
+      "lessons": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "title": "La operación de todos los días",
+      "why": "Con el host en orden, el trabajo diario es desplegar invitados rápido y poder volver atrás cuando algo sale mal.",
+      "lessons": [
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "title": "Clúster, seguridad y rescate",
+      "why": "El clúster y la HA son lo que más se vende y lo que más se rompe: cuándo armarlos, cómo protegerlos y cómo salir de un problema.",
+      "lessons": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  ],
+  "splits": [
+    {
+      "topic": "Repositorio no-subscription en producción",
+      "sides": "La wiki oficial no lo recomienda para producción; muchas guías de practicantes lo usan como rutina.",
+      "decide": "Si el servicio es crítico o el cliente necesita soporte del fabricante, suscripción y enterprise; si no, no-subscription con backups probados y actualizando unos días después de cada publicación."
+    },
+    {
+      "topic": "Docker en LXC o en VM",
+      "sides": "La documentación oficial y WunderTech recomiendan VM por aislamiento; en el foro muchos usan LXC para ahorrar recursos.",
+      "decide": "Producción o expuesto a Internet, VM; servicio interno chico o laboratorio, LXC no privilegiado aceptando que un upgrade puede romperlo."
+    },
+    {
+      "topic": "ZFS con SSD de consumo y cuánta RAM",
+      "sides": "La guía oficial desaconseja SSD de consumo y pide RAM para el ARC; el foro dice que la regla de 1 GB por TB es exagerada y que el desgaste es tolerable.",
+      "decide": "SSD de consumo, RAID por hardware o poca RAM, LVM-thin; HBA, SSD con PLP y RAM de sobra, ZFS."
+    },
+    {
+      "topic": "Linked clone o full clone",
+      "sides": "La wiki oficial destaca los linked clones por velocidad; computingforgeeks y croit prefieren full clone para producción.",
+      "decide": "Si la VM va a vivir más que la plantilla, full clone."
+    },
+    {
+      "topic": "Usuario para conectar Proxmox VE con PBS",
+      "sides": "Thomas Krenn conecta con root@pam; Hake Hardware y la documentación de PBS usan un usuario dedicado que no puede borrar.",
+      "decide": "Si un atacante que tome el host PVE pudiera borrar los backups, usuario dedicado con DatastoreBackup."
+    },
+    {
+      "topic": "Garbage collection diario o semanal",
+      "sides": "La documentación de PBS sugiere arrancar semanal; Thomas Krenn propone diario o semanal.",
+      "decide": "Datastore que se llena rápido, diario; si no, semanal."
+    }
+  ],
+  "sources_count": 28,
+  "lessons": [
+    {
+      "n": 1,
+      "dir": "01-repos-en-orden",
+      "handle": "Repos en orden",
+      "summary": "Versión actual (9.2), repositorio enterprise o no-subscription elegido a conciencia y actualización con full-upgrade."
+    },
+    {
+      "n": 2,
+      "dir": "02-puente-vlan-aware",
+      "handle": "Puente VLAN-aware",
+      "summary": "Placas, bond y bridge en ese orden; un vmbr0 VLAN aware con el tag en cada VM."
+    },
+    {
+      "n": 3,
+      "dir": "03-disco-con-criterio",
+      "handle": "Disco con criterio",
+      "summary": "LVM-thin o ZFS según discos, RAM y controladora; nunca ZFS sobre RAID por hardware."
+    },
+    {
+      "n": 4,
+      "dir": "04-vm-bien-armada",
+      "handle": "VM bien armada",
+      "summary": "VirtIO SCSI, guest agent probado, virtio-win en versión estable y tipo de CPU según migración."
+    },
+    {
+      "n": 5,
+      "dir": "05-plantilla-y-clon",
+      "handle": "Plantilla y clon",
+      "summary": "Plantillas desde imágenes cloud con cloud-init; full clone para producción."
+    },
+    {
+      "n": 6,
+      "dir": "06-contenedor-sin-privilegios",
+      "handle": "Contenedor sin privilegios",
+      "summary": "LXC no privilegiado para servicios livianos; Docker en VM."
+    },
+    {
+      "n": 7,
+      "dir": "07-backup-que-restaura",
+      "handle": "Backup que restaura",
+      "summary": "vzdump en modo snapshot con agente, snapshot no es backup, y restore de prueba a una VM nueva."
+    },
+    {
+      "n": 8,
+      "dir": "08-pbs-sin-sorpresas",
+      "handle": "PBS sin sorpresas",
+      "summary": "Prune, garbage collection y verify programados, usuario DatastoreBackup y copia fuera del sitio."
+    },
+    {
+      "n": 9,
+      "dir": "09-tres-votos",
+      "handle": "Tres votos",
+      "summary": "Quórum por mayoría, corosync en red propia y QDevice para clústeres de dos nodos."
+    },
+    {
+      "n": 10,
+      "dir": "10-ha-con-fencing",
+      "handle": "HA con fencing",
+      "summary": "Alta disponibilidad con fencing por watchdog, migración en vivo y disarm de HA para mantenimiento (9.2)."
+    },
+    {
+      "n": 11,
+      "dir": "11-acceso-blindado",
+      "handle": "Acceso blindado",
+      "summary": "Usuarios con rol justo, 2FA con claves de recuperación y firewall sin quedarse afuera."
+    },
+    {
+      "n": 12,
+      "dir": "12-upgrade-y-rescate",
+      "handle": "Upgrade y rescate",
+      "summary": "Upgrade mayor de 8 a 9 nodo por nodo y diagnóstico en orden: quórum, logs, locks, almacenamiento."
+    }
+  ]
+}

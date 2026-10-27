@@ -1,0 +1,18 @@
+A: Arco cuatro, diagnóstico. Lección trece: primero el TBL.
+B: La tecla que el cliente nunca toca y nosotros deberíamos tocar siempre.
+A: [risas] Esa. Cuando llaman diciendo "la alarma pita", casi siempre la central ya te está diciendo qué le pasa. Apretás TBL y se encienden números: cada número es un grupo de fallas.
+B: Dame los que más aparecen.
+A: Grupo dos, alimentación: adentro, el uno es batería de la central y el dos es falla de AC. Grupo tres, campana. Grupo cuatro, comunicación. Grupo cinco, tamper o cableado de zona. Grupo ocho, pérdida de reloj. Y grupo diez, módulos del bus que no responden.
+B: ¿Y el reloj por qué se pierde?
+A: Porque la central se quedó sin red y sin batería. Volvés a cargar la hora y listo. Es inofensiva, pero asusta al cliente y genera llamadas.
+B: ¿Cuánto coinciden las fuentes?
+A: Las cuatro que tocan el tema coinciden: las dos guías de las SP plus, la guía rápida del K32LCD plus y la guía de la EVOHD+.
+B: ¿Y la historia?
+A: La puesta en marcha de la EVOHD+. El manual dice que al energizar un grupo de módulos solo deberían aparecer pérdida de reloj y campana ausente. Esa frase es un método: sabés cuáles son las fallas normales, y todo lo demás es cableado.
+B: Me gusta. ¿Algo que engañe?
+A: Dos cosas. Si sacás un módulo del bus, la falla de supervisión queda aunque resetees: se borra en la sección novecientos cincuenta y cinco. Y la falla de AC aparece en el teclado al toque, pero el reporte a monitoreo espera el retardo de la ochocientos treinta y nueve, quince minutos de fábrica.
+B: Y el LED de la placa también habla.
+A: Un destello por segundo, todo bien. Un segundo prendido y uno apagado, hay falla.
+B: ¿Qué probamos?
+A: En la central de banco provocás fallas a propósito: sacás la batería, cortás la red, sacás la resistencia de campana, desconectás el expansor. Y después de cada una, TBL. Veinte minutos.
+B: Ningún diagnóstico sin TBL.

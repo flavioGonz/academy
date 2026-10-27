@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un cliente tiene un USG y te piden actualizar su controlador a Network 11. ¿Qué hacés?",
+    "options": [
+      "Actualizar, el USG se adapta solo",
+      "Actualizar y después hacer set-inform al USG",
+      "Leer las notas: Network 11 quita soporte a USG, así que el sitio se queda en 10.6 o se cambia el gateway antes",
+      "Hacer factory reset del USG"
+    ],
+    "answer": 2,
+    "why": "Las notas de 11.0.97 indican que 10.6 es la última versión con soporte a USG."
+  },
+  {
+    "q": "Restauraste un backup en un controlador nuevo y tu usuario actual no funciona. ¿Qué probás?",
+    "options": [
+      "Reinstalar el controlador",
+      "El usuario ubnt/ubnt",
+      "La cuenta de Site Manager de otro técnico",
+      "El usuario y contraseña que existían cuando se hizo el backup"
+    ],
+    "answer": 3,
+    "why": "Deluisio explica que tras restaurar se entra con las credenciales vigentes al momento del backup."
+  },
+  {
+    "q": "Sale una versión nueva de Network marcada como Release Candidate. Tenés 40 sitios. ¿Qué hace HostiFi en un caso así?",
+    "options": [
+      "La instala en todos para estar al día",
+      "Espera a que pase a Official, la prueba internamente 2 a 3 semanas, mira los foros y recién la despliega",
+      "La instala solo en los sitios grandes",
+      "La saltea siempre"
+    ],
+    "answer": 1,
+    "why": "HostiFi solo usa Official y espera 2 a 3 semanas con pruebas antes de desplegar."
+  }
+]

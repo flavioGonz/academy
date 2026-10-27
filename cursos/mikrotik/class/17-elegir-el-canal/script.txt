@@ -1,0 +1,17 @@
+A: Lección diecisiete: los canales. Long term, stable, testing y development. ¿Cuál va en un cliente?
+B: Yo siempre dejé stable, porque suena a estable.
+A: Suena, pero no es el más conservador. La documentación los define así: long term sale poco y trae solo arreglos críticos, sin funciones nuevas dentro de su rama. Stable sale cada pocos meses, con funciones nuevas ya probadas.
+B: ¿Y testing?
+A: Cada pocas semanas, con prueba interna básica, y la documentación dice textual que no va en producción. Development es para entusiastas que quieren ver lo último.
+B: Entonces, ¿quién elige?
+A: Ahí hay una diferencia. La documentación describe los canales sin recomendar uno, y hasta trae un script para actualizar solo por scheduler. Un distribuidor de MikroTik, en cambio, dice que para routers de producción va la rama de solo arreglos, que hoy es long term; que la versión con funciones nuevas se prueba antes en un equipo que no sea crítico; y que una versión de prueba puede dejarte el router recuperable solo con Netinstall.
+B: Uf. Eso en un sitio a doscientos kilómetros es un viaje.
+A: Exacto. Por eso el criterio para sitios de clientes es simple: long term por defecto. Stable cuando necesitás una función que long term todavía no tiene, y la probaste en el laboratorio. Testing y development, solo en tu banco de pruebas.
+B: ¿Y cómo cambio de canal?
+A: En la misma ventana de Check for Updates elegís el canal, o en terminal, barra system barra package barra update set channel. Y un detalle: el cambio de canal también sirve para bajar. Si el canal elegido tiene una versión más vieja, te la ofrece.
+B: O sea, si quedé en stable y quiero volver a long term, cambio el canal y bajo.
+A: Con backup antes, sí. Y todos los equipos de un cliente en el mismo canal.
+B: ¿Laboratorio?
+A: Diez minutos: mirás qué canal tiene cada equipo, comparás installed version con latest version en long term y en stable, elegís y lo anotás en el legajo.
+B: Y el script automático para clientes, ni loco.
+A: Solo si probaste esa versión antes. La regla: long term en clientes, lo nuevo primero en el banco.

@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un cliente con un AVENAR panel 2000 de licencia standard quiere sumarlo a la red de su otro edificio. ¿Qué pasa?",
+  "options": [
+   "No puede: cada AVENAR panel 2000 que va en red necesita licencia premium, y la licencia viene grabada en el controlador",
+   "Se activa la licencia premium desde RPS con un código",
+   "Alcanza con que el panel del otro edificio sea premium",
+   "Solo hay que actualizar el firmware a 4.8.1"
+  ],
+  "answer": 0,
+  "why": "Según el System manual, la licencia se graba en producción y no se puede modificar ni trasladar, y cada AVENAR panel 2000 en red necesita su propia licencia premium."
+ },
+ {
+  "q": "Una red tiene dos FPA-5000 y se agrega un AVENAR panel 8000. ¿Qué firmware corre la red?",
+  "options": [
+   "Los AVENAR en 4.x y los FPA en 3.x",
+   "Todos en 2.x",
+   "Da igual mientras todos tengan licencia premium",
+   "Todos los paneles en la misma versión 3.x"
+  ],
+  "answer": 3,
+  "why": "Bosch indica que en una red con paneles FPA todos los controladores, AVENAR incluidos, se actualizan a la misma versión 3.x; la 4.x es solo para redes 100 % AVENAR."
+ },
+ {
+  "q": "¿Cuál es la diferencia de capacidad entre el AVENAR panel 2000 y el 8000?",
+  "options": [
+   "2000: 2 lazos; 8000: 8 lazos",
+   "Ninguna, solo cambia la pantalla",
+   "2000: hasta 4 lazos en 6 módulos; 8000: hasta 32 lazos en 46 módulos",
+   "2000: 32 lazos sin red; 8000: 4 lazos con red"
+  ],
+  "answer": 2,
+  "why": "El System manual fija 6 módulos funcionales y hasta 4 de lazo para el 2000, y 46 módulos con hasta 32 de lazo para el 8000."
+ }
+]

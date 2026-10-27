@@ -1,0 +1,17 @@
+A: Lección cinco. El fabricante del software de cámaras te manda un archivo punto ova y te dice: instalalo en el VMware del cliente.
+B: Ah, lo subo al datastore y lo abro, ¿no?
+A: Casi todos hacen eso. No va así. Un ova se trae con el asistente Deploy OVF Template. Ese asistente valida el paquete y te pregunta red, disco y datos del appliance.
+B: Ok, primer error evitado. ¿Qué más?
+A: VMware Tools. Tres de las cuatro fuentes que leímos sobre VMs lo mencionan, cada una por un motivo distinto. Trae el driver de balloon para la memoria, permite snapshots consistentes y manda el latido que usa HA para saber si la VM está viva.
+B: O sea que una VM sin Tools es medio ciega.
+A: Medio ciega. La base de conocimiento de esxtop lo dice directo: si el driver de balloon no aparece, instalá VMware Tools.
+B: ¿Y los discos? Siempre dudo entre thin y thick.
+A: La documentación de Broadcom define tres. Thick lazy zeroed reserva el espacio al crear y lo pone en cero cuando se usa. Thick eager zeroed lo pone en cero de entrada, y es el que piden funciones como Fault Tolerance. Y thin arranca chiquito y crece a medida que la VM escribe.
+B: Thin es lo más cómodo.
+A: Es cómodo, pero ojo con lo que advierte la documentación: un disco thin puede crecer hasta ocupar todo lo que le asignaste. Si sobreasignaste y el datastore se llena con la VM corriendo, la VM se detiene.
+B: [suspiro] El grabador de video escribiendo todo el día sobre discos thin. Receta para un lunes complicado.
+A: Exacto. No es que thin sea malo, es que hay que mirar provisionado contra libre.
+B: ¿Y el laboratorio?
+A: Por SSH en el host: listás las VMs con vim guion cmd, mirás el estado de Tools de cada una, y comparás cuánto espacio tienen asignado contra lo que queda libre en el datastore.
+B: Diez minutos.
+A: Y ninguna VM queda en producción sin Tools y sin saber cuánto puede crecer.

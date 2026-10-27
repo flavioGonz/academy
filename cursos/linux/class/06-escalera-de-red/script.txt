@@ -1,0 +1,19 @@
+A: Lección de red. La llamo la escalera. El cliente dice no anda internet en el servidor. ¿Por dónde empezás?
+B: Por ping a Google, como todo el mundo.
+A: Y si falla, no sabés dónde. La escalera es subir de a un escalón. Primero: ¿la interfaz tiene IP? ip addr.
+B: ip a, para los apurados.
+A: Exacto. Y olvidate de ifconfig: la Debian Reference tiene una tabla donde ifconfig pasa a ip addr, route pasa a ip route y arp pasa a ip neigh. Cuatro de cinco fuentes de red usan iproute2.
+B: Segundo escalón, el gateway.
+A: ip route te muestra la ruta por defecto. Hacés ping al gateway. Si no responde, el problema es local: cable, VLAN, máscara.
+B: Tercero, una IP pública.
+A: Ping a una IP, sin nombre. Si responde, tenés salida. Cuarto escalón: ping a un nombre. linuxconfig lo resume perfecto: si internet anda y el DNS no, revisá los nameservers. Y dig te dice qué servidor contestó.
+B: ¿Y el quinto?
+A: El puerto. ss guion t l n p te dice qué está escuchando y en qué dirección. Y desde afuera, curl o nc. Un truco de ssdnodes: si te rechaza la conexión, no hay nada escuchando. Si se queda colgado hasta el timeout, hay un firewall tirando paquetes.
+B: Muy útil. ¿Y para poner IP fija?
+A: Depende de la distro. En Ubuntu Server es netplan, un YAML en barra etc barra netplan. Ojo: dos espacios, nunca tabulador. En Debian servidor sigue siendo el archivo interfaces de barra etc barra network.
+B: ¿Y si lo estoy cambiando remoto?
+A: netplan try. Aplica el cambio y si no confirmás en ciento veinte segundos, vuelve solo a lo anterior. netplan apply no tiene vuelta.
+B: [risas] Eso me hubiera salvado un viaje a Maldonado.
+A: A todos. Laboratorio: en una VM subís la escalera completa, anotás cada escalón, y después cambiás la IP con netplan try, dejando que se revierta sola una vez.
+B: Lo que cambia es que ya no decís no anda internet.
+A: Decís en qué escalón se corta.

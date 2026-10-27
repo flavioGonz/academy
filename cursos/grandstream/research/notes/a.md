@@ -1,0 +1,431 @@
+# Notes: batch a
+Pages read: 24. With notes: 22. Skipped: 2 (pbx training syllabi ntsdirect y streakwave sirven solo para armar el mapa de temas; no traen técnica).
+
+## T01 Plataforma UCM6300/6300A
+- a:N1. El UCM630x tiene tres puertos Gigabit que trabajan en modo Switch (por defecto), Route o Dual. En Route el puerto LAN rutea; en Switch es un puente; en Dual son dos uplinks independientes. Se elige en System Settings, Network Settings, Basic Settings, Method.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "Select Route, Switch, or Dual mode ... The default setting is Switch."
+  - Kind: definition
+  - Level: foundation
+  - Also: T13 (Dynamic Defense y DHCP opción 66 exigen Route)
+  - Bias: none
+- a:N2. La web va por HTTPS en el puerto 8089; con "Redirect From Port 80" activo, escribir la IP sola redirige a https://IP:8089. La IP se lee en el LCD (UCM6304/6308) o con el botón Home.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "Web access port number, which is 8089 by default."
+  - Kind: definition
+  - Level: foundation
+  - Bias: none
+- a:N3. Desde enero de 2017 cada unidad trae una contraseña de admin aleatoria impresa en la etiqueta; se cambia al primer ingreso en Maintenance, Login Settings, Change Password, entre 10 y 30 caracteres.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm6xxx-security-manual/  Quote: "Units manufactured starting January 2017 have a unique random password printed on the sticker."
+  - Kind: rule of thumb
+  - Level: foundation
+  - Also: T13
+  - Bias: none
+- a:N4. El primer login abre un asistente que guía contraseña, red, zona horaria, extensiones y rutas, y muestra un resumen antes de aplicar.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "the system will automatically start the setup wizard"
+  - Kind: technique
+  - Level: foundation
+  - Bias: none
+- a:N5. Firmware: se baja el .bin de grandstream.com/support/firmware y se sube en Maintenance, Upgrade; también hay "Detect" y tareas programadas. El backup está en Maintenance, Backup, con backups programados a USB, SD, SFTP, NAS o S3; el archivo a restaurar va en .tar o .tgz, menos de 100 MB y sin caracteres especiales en el nombre.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "The uploaded backup file size must be under 100MB."
+  - Kind: technique
+  - Level: foundation
+  - Bias: none
+- a:N6. Las FXS tienen lifeline: si se corta la luz, FXS1 pasa a FXO1, FXS2 a FXO2.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "the FXS1 port will fail over to FXO 1 port"
+  - Kind: definition
+  - Level: foundation
+  - Bias: none
+- a:N7. Varios proveedores todavía dicen que el login de fábrica es admin/admin, en contra del manual de seguridad actual.
+  - Source: https://support.telnyx.com/en/articles/5748258-grandstream-configuring-sip-trunks-on-your-grandstream-ucm6xxx-series  Quote: "Username: admin Password: admin"
+  - Kind: mistake
+  - Level: foundation
+  - Also: T13
+  - Bias: proveedor de troncales
+- a:N8. Simtex insiste: cambiar la contraseña por defecto es lo primero, y dejar admin/admin es una de las causas más comunes de centrales comprometidas.
+  - Source: https://www.simtex.com.au/support/kb/pbx-setup-guides/grandstream-ucm-sip-trunk-configuration  Quote: "one of the most common causes of PBX compromise"
+  - Kind: rule of thumb
+  - Level: foundation
+  - Also: T13
+  - Bias: vende troncales SIP
+
+## T02 Extensiones
+- a:N9. La contraseña de la extensión pide al menos 10 caracteres con mayúscula, minúscula, número y especial, sin secuencias; "Enable Random Password" la genera sola.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "at least 10 characters"
+  - Kind: rule of thumb
+  - Level: foundation
+  - Also: T13
+  - Bias: none
+- a:N10. Registros concurrentes: por defecto 3, hasta 10 por extensión. Permite teléfono de escritorio más Wave.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "For security concerns, the default value is 3."
+  - Kind: number
+  - Level: core
+  - Bias: none
+- a:N11. En la extensión, NAT viene activado por defecto y Direct Media desactivado: la central pasa el audio por ella misma. DTMF por defecto RFC4733.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "By default, the PBX will route the media streams from SIP endpoints through itself."
+  - Kind: definition
+  - Level: core
+  - Also: T16
+  - Bias: none
+
+## T03 Zero Config
+- a:N12. Zero Config descubre los teléfonos por SIP SUBSCRIBE multicast al arrancar, o por DHCP opción 66 (solo si la UCM está en Route), y les sirve un XML por TFTP, HTTP o HTTPS.
+  - Source: https://documentation.grandstream.com/knowledge-base/zero-config-guide/  Quote: "Route mode needs to be set to use this feature."
+  - Kind: definition
+  - Level: core
+  - Bias: none
+- a:N13. Si no aparecen todos, escanear con método "SIP Message" a la dirección de broadcast (por ejemplo 192.168.6.255) desde Device Management, Zero Config, Auto Discover.
+  - Source: https://documentation.grandstream.com/knowledge-base/zero-config-guide/  Quote: "it is recommended to run a scan using the SIP message method"
+  - Kind: technique
+  - Level: core
+  - Bias: none
+- a:N14. Prioridad de plantillas: Global Policy menor que Global Template menor que Model Template. Lo que se configuró a mano en la web del teléfono no lo pisa ninguna plantilla.
+  - Source: https://documentation.grandstream.com/knowledge-base/zero-config-guide/  Quote: "the configuration made on the web UI of the devices will not overwritten"
+  - Kind: mistake
+  - Level: core
+  - Bias: none
+- a:N15. Si falta el modelo, se baja su plantilla en Model Update. Las extensiones se asignan a mano o con Auto Assign Extension, y con Pick Extension el usuario elige desde el teléfono.
+  - Source: https://documentation.grandstream.com/knowledge-base/zero-config-guide/  Quote: "Enable Pick Extension"
+  - Kind: technique
+  - Level: core
+  - Bias: none
+- a:N16. El manual lista series compatibles con Zero Config: GXP, GRP, GXV, GSC, GDS, WP, HT, DP y otras, siempre que esté instalada la plantilla del modelo.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "depends on whether the corresponding model template package is installed"
+  - Kind: definition
+  - Level: core
+  - Also: T15
+  - Bias: none
+
+## T04 GDMS
+- a:N17. GDMS es la plataforma en la nube de Grandstream para aprovisionar, actualizar firmware, monitorear y diagnosticar equipos por sitio, grupo o modelo; según Grandstream es gratis y sin límite de equipos (su afirmación, en un post de la época beta).
+  - Source: https://blog.grandstream.com/company/news/blog/gdms-is-a-game-changer  Quote: "zero-touch cloud provisioning and management"
+  - Kind: definition
+  - Level: core
+  - Bias: el fabricante promociona su plataforma
+- a:N18. El manual del UCM usa GDMS para firmware, backup en la nube y SSH remoto; el SSH remoto por GDMS viene apagado y se recomienda dejarlo así salvo durante un soporte.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "strongly recommended to turn off this option when remote troubleshooting is not required"
+  - Kind: rule of thumb
+  - Level: core
+  - Also: T13
+  - Bias: none
+
+## T05 Troncales SIP
+- a:N19. Tipos: Register (credenciales con el proveedor), Peer (por IP, para unir centrales) y Account (para que un equipo sin IP fija se registre en la UCM). Hasta 200 troncales.
+  - Source: https://documentation.grandstream.com/knowledge-base/sip-trunks-guide/  Quote: "UCM6xxx series support up to 200 SIP trunks."
+  - Kind: definition
+  - Level: foundation
+  - Bias: none
+- a:N20. El estado se ve en System Status, Dashboard. "Rejected" significa que no registró: revisar que el servidor del proveedor sea alcanzable y las credenciales.
+  - Source: https://documentation.grandstream.com/knowledge-base/sip-trunks-guide/  Quote: "If status shows “Rejected”, it means that UCM6xxx didn’t get registered"
+  - Kind: test
+  - Level: foundation
+  - Also: T16
+  - Bias: none
+- a:N21. DID Mode: el proveedor puede mandar el número llamado en la Request-line o en el To; si está mal, las entrantes no matchean.
+  - Source: https://documentation.grandstream.com/knowledge-base/sip-trunks-guide/  Quote: "Provider may include DID number in “Request-line” or “To-header”."
+  - Kind: mistake
+  - Level: core
+  - Also: T07
+  - Bias: none
+- a:N22. Heartbeat: la UCM manda SIP OPTIONS cada 60 segundos por defecto para saber si el troncal vive; Simtex lo recomienda para detectar caídas y disparar el failover.
+  - Source: https://www.simtex.com.au/support/kb/pbx-setup-guides/grandstream-ucm-sip-trunk-configuration  Quote: "Heartbeat Detection sends SIP OPTIONS packets"
+  - Kind: technique
+  - Level: core
+  - Also: T06
+  - Bias: vende troncales
+- a:N23. Codec del troncal: G.711 A-law (PCMA) primero cuando la red pública es A-law, y sacar los codecs que no se usan.
+  - Source: https://www.simtex.com.au/support/kb/pbx-setup-guides/grandstream-ucm-sip-trunk-configuration  Quote: "Remove any unnecessary codecs from the enabled list."
+  - Kind: rule of thumb
+  - Level: core
+  - Also: T16
+  - Bias: vende troncales
+- a:N24. Para el troncal registrado no hace falta abrir puertos: "en el 99,9 % de los casos" (su afirmación); y no exponer la UCM a internet.
+  - Source: https://www.simtex.com.au/support/kb/pbx-setup-guides/grandstream-ucm-sip-trunk-configuration  Quote: "Do not expose your UCM to the public internet."
+  - Kind: rule of thumb
+  - Level: core
+  - Also: T14
+  - Bias: vende troncales
+- a:N25. Telnyx recomienda TLS para cifrar el tráfico del troncal, agregando :5061 al host.
+  - Source: https://support.telnyx.com/en/articles/5748258-grandstream-configuring-sip-trunks-on-your-grandstream-ucm6xxx-series  Quote: "Enable TLS to encrypt your traffic"
+  - Kind: technique
+  - Level: advanced
+  - Also: T13
+  - Bias: proveedor de troncales
+
+## T06 Rutas salientes
+- a:N26. Patrones con guion bajo inicial: X es 0 a 9, Z es 1 a 9, N es 2 a 9, el punto es uno o más, el signo de exclamación cero o más. Ejemplo de la guía: internacionales con prefijo 99, nacionales 06 de 10 dígitos.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "All patterns are prefixed by the “_” character"
+  - Kind: definition
+  - Level: foundation
+  - Bias: none
+- a:N27. Si se marca con prefijo (por ejemplo 9) el patrón lo incluye y Strip lo saca antes de mandar al troncal: _9NXXXXXXXXX con Strip 1.
+  - Source: https://support.telnyx.com/en/articles/5748258-grandstream-configuring-sip-trunks-on-your-grandstream-ucm6xxx-series  Quote: "To strip off this number "9" when dialing out"
+  - Kind: technique
+  - Level: foundation
+  - Bias: proveedor
+- a:N28. Privilegios: Internal, Local, National, International. La extensión llama por la ruta si su nivel es igual o mayor al de la ruta.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm6xxx-security-manual/  Quote: "higher or equal to the privilege level of the outbound rule"
+  - Kind: rule of thumb
+  - Level: core
+  - Also: T13
+  - Bias: none
+- a:N29. Failover: la UCM usa el troncal de respaldo si el principal no responde en 32 segundos, si devuelve 403, 407, 408, 503 o 603, si está deshabilitado o si es analógico y está ocupado.
+  - Source: https://support.telnyx.com/en/articles/5748258-grandstream-configuring-sip-trunks-on-your-grandstream-ucm6xxx-series  Quote: "No response from first trunk after 32 seconds."
+  - Kind: number
+  - Level: core
+  - Bias: proveedor
+- a:N30. Orden de rutas: Simtex dice que la UCM usa la primera que matchea de arriba abajo; el manual actual dice que la prioridad se elige entre orden de lista o precisión del patrón (Outgoing Routing Priority).
+  - Source: https://www.simtex.com.au/support/kb/pbx-setup-guides/grandstream-ucm-sip-trunk-configuration  Quote: "uses the first matching pattern"
+  - Kind: mistake
+  - Level: core
+  - Bias: vende troncales
+- a:N31. DOD: asignar a una extensión uno de los DIDs para que salga con su número directo, en VoIP Trunks, DOD.
+  - Source: https://documentation.grandstream.com/knowledge-base/sip-trunks-guide/  Quote: "Direct Outward Dialing (DOD)"
+  - Kind: technique
+  - Level: core
+  - Bias: none
+
+## T07 Rutas entrantes
+- a:N32. Ejemplo oficial: patrón DID _0655441XXX, destino ByDID, Strip 6. Una llamada a 0655441007 llega a la interna 1007.
+  - Source: https://documentation.grandstream.com/knowledge-base/sip-trunks-guide/  Quote: "If call is coming to 0655441007, UCM6xxx will strip 065544 and keep 1007."
+  - Kind: story
+  - Level: core
+  - Bias: none
+- a:N33. Horario de oficina y feriados se definen en System Settings, Time Settings, Office Time/Holiday, y se usan como condiciones de tiempo en rutas entrantes e IVR. Hay lista negra global de entrantes que acepta "Anonymous".
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "Anonymous can also be added as a Blacklist Number"
+  - Kind: technique
+  - Level: core
+  - Also: T08
+  - Bias: none
+- a:N34. Modo múltiple de entrante: desde un teléfono se cambia el destino con códigos de función (ejemplo *62 a modo 1, *61 vuelta al destino por defecto).
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "dial feature codes (e.g., *62) to switch to “Mode 1”"
+  - Kind: technique
+  - Level: advanced
+  - Bias: none
+
+## T08 IVR
+- a:N35. IVR en Basic Call Features, IVR. Cada tecla puede tener hasta cinco destinos con condiciones de horario distintas; destinos: extensión, cola, grupo, buzón, otro IVR, número externo y más. Hay tiempo de espera de respuesta y destino para opción inválida.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "Each key event supports up to five time conditions"
+  - Kind: technique
+  - Level: core
+  - Bias: none
+- a:N36. El manual actual admite hasta 64 IVR anidados; un post viejo del blog de Grandstream hablaba de hasta 5 niveles. Cambió con las versiones.
+  - Source: https://blog.grandstream.com/company/news/blog/how-to-use-the-ucm-ip-pbxs-call-center-features  Quote: "Users can create up to a 5-level IVR system"
+  - Kind: number
+  - Level: core
+  - Bias: el fabricante promociona
+- a:N37. Prompts propios en PBX Settings, Voice Prompt, Custom Prompt; también hay lista blanca o negra para limitar a qué internas se puede marcar desde el IVR.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "only the extensions in the list can be allowed to be reached via IVR"
+  - Kind: technique
+  - Level: core
+  - Also: T13
+  - Bias: none
+
+## T09 Grupos y colas
+- a:N38. Grupo de llamada: estrategia en orden o simultánea, 60 segundos por miembro por defecto, opción de saltear ocupados y buzón propio del grupo.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "default is 60 seconds"
+  - Kind: number
+  - Level: core
+  - Bias: none
+- a:N39. Cola: estrategias Ring All (por defecto), Linear, Least Recent, Fewest Calls, Random, Round Robin; 30 segundos de timbre por agente, 5 de reintento, 10 de descanso; si se pasa el largo máximo, va al destino de desborde.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "The default setting is “Ring All”."
+  - Kind: number
+  - Level: core
+  - Bias: none
+- a:N40. Funciones de call center: devolución de llamada que conserva el lugar en la cola, anuncio de posición, escucha y susurro por códigos, estadísticas de cola.
+  - Source: https://blog.grandstream.com/company/news/blog/how-to-use-the-ucm-ip-pbxs-call-center-features  Quote: "without losing their position in the queue"
+  - Kind: technique
+  - Level: advanced
+  - Bias: el fabricante promociona
+
+## T10 Buzón de voz
+- a:N41. *97 entra al buzón propio; el PIN es numérico de al menos 4 dígitos y rechaza 1234 o 1111. Mensaje máximo 15 minutos por defecto, 50 mensajes por carpeta.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "Sequential or repetitive numbers (e.g., 1234, 1111) are rejected."
+  - Kind: number
+  - Level: foundation
+  - Bias: none
+- a:N42. Buzón a correo requiere SMTP configurado; "Keep Voicemail after Emailing" viene activo. "Voicemail Remote Access" deja a quien llama por DID entrar al buzón con interna y PIN (apagado por defecto).
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "SMTP server must be configured to use this option"
+  - Kind: technique
+  - Level: core
+  - Also: T13
+  - Bias: none
+
+## T11 Extensiones remotas y NAT
+- a:N43. Para internas remotas con la UCM detrás de NAT: en PBX Settings, SIP Settings, NAT poner External Host (IP pública o DDNS), activar Use IP address in SDP y cargar Local Network Address con las redes internas; en el router, SIP ALG apagado y reenvío de 5060 y RTP 10000 a 20000; NAT activo en la extensión; reiniciar.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm-remote-extensions-guide/  Quote: "If not configured, the external IP address will not be set correctly."
+  - Kind: technique
+  - Level: core
+  - Bias: none
+- a:N44. Del lado del teléfono, si no registra: STUN stun.ipvideotalk.com y NAT Traversal en STUN. Con NAT simétrico STUN no anda; entonces keep alive y puertos abiertos.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm-remote-extensions-guide/  Quote: "If symmetric NAT is detected, STUN will not work."
+  - Kind: technique
+  - Level: core
+  - Bias: none
+- a:N45. En UCM630x, si se usa este método manual, el servicio MediaNAT Traversal de RemoteConnect queda desactivado; RemoteConnect es la alternativa paga que evita tocar el router.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm-remote-extensions-guide/  Quote: "make sure that “MediaNAT Traversal Service” is disabled"
+  - Kind: mistake
+  - Level: advanced
+  - Bias: none
+- a:N46. Cambiar el puerto SIP solo en el router (5555 afuera hacia 5060 adentro) no funciona porque SIP lleva el puerto dentro de los encabezados: el cambio se hace en la central.
+  - Source: https://community.freepbx.org/t/fail2ban-securing-pbx-behind-router-with-port-forwarding/70943  Quote: "forwarding external 5555 to internal 5060 won’t work"
+  - Kind: mistake
+  - Level: core
+  - Also: T13
+  - Bias: none
+
+## T12 SIP ALG
+- a:N47. SIP ALG reescribe direcciones dentro de SIP y SDP; síntomas: audio de un lado, llamadas que se cortan a los 30 y pico de segundos, registra pero no entran llamadas. El corte a los 32 segundos es el Timer H: 64 veces T1 de 500 ms esperando un ACK que no llega.
+  - Source: https://didlogic.com/learn/sip-alg-explained/  Quote: "A call that consistently dies between 30 and 35 seconds after answer is almost always a missing ACK"
+  - Kind: number
+  - Level: core
+  - Also: T16
+  - Bias: vende troncales
+- a:N48. RFC 4787 (BCP 127) REQ-10 dice que los ALG de UDP deberían venir apagados. Después de apagarlo, reiniciar el router o limpiar sesiones; si no se puede apagar: TLS, otro segmento o cambiar el equipo.
+  - Source: https://didlogic.com/learn/sip-alg-explained/  Quote: "After disabling it, reboot the device or at minimum clear existing sessions."
+  - Kind: technique
+  - Level: core
+  - Bias: vende troncales
+- a:N49. Plexatalk reconoce casos raros donde el ALG ayuda (servidores viejos que no entienden NAT) y como último recurso propone DMZ solo para un equipo de voz dedicado.
+  - Source: https://www.plexatalk.co.uk/?p=17613  Quote: "In some rare edge cases"
+  - Kind: rule of thumb
+  - Level: advanced
+  - Bias: vende routers ya configurados
+- a:N50. SureVoIP: "en pocas situaciones es útil", pero para su servicio debe ir apagado.
+  - Source: https://surevoip.co.uk/support/wiki/troubleshooting/sip_alg/start.html  Quote: "In few situations this is useful"
+  - Kind: rule of thumb
+  - Level: foundation
+  - Bias: proveedor
+- a:N51. Teleproject pide apagarlo y avisa que puede cobrar fallas causadas por el router del cliente.
+  - Source: https://teleprojectuk.helpdocs.io/article/k6xq10vkqm-what-is-sip-alg-and-when-should-it-be-disabled  Quote: "this functionality must be turned OFF"
+  - Kind: rule of thumb
+  - Level: foundation
+  - Bias: proveedor
+
+## T13 Seguridad
+- a:N52. Fail2ban viene activo en la UCM: SIP Defense (REGISTER, INVITE, SUBSCRIBE fallidos) y Login Attack Defense; baneo de 600 segundos por defecto; Allowlist para IPs propias. Ruta: System Settings, Security Settings, Fail2Ban.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm6xxx-security-manual/  Quote: "Set to 600 seconds by default."
+  - Kind: number
+  - Level: core
+  - Bias: none
+- a:N53. Web: lista blanca de hasta 10 IPs en System Settings, HTTP Server; desactivar redirección del 80 y evitar puertos conocidos; MFA disponible; baneo de 5 minutos tras 5 intentos de login fallidos.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm6xxx-security-manual/  Quote: "a list of up to 10 IP addresses"
+  - Kind: technique
+  - Level: core
+  - Bias: none
+- a:N54. Fraude de peaje: privilegios por ruta, filtro por caller ID de origen, contraseña o grupos de PIN en rutas caras, y lista de países bloqueados en las salientes.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm6xxx-security-manual/  Quote: "unauthorized international and long-distance calls"
+  - Kind: technique
+  - Level: core
+  - Also: T06
+  - Bias: none
+- a:N55. Orden de defensas: estática, Geo-IP estricto, dinámica, Fail2Ban, ACL, Geo-IP no estricto. Dynamic Defense viene apagada, umbral 100 conexiones y necesita modo Route.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "The defense priority is: Static Defense"
+  - Kind: definition
+  - Level: advanced
+  - Bias: none
+- a:N56. SSH viene apagado; AMI no se habilita en una UCM expuesta. TLS de señalización viene activo en UCM63xx.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm6xxx-security-manual/  Quote: "It is disabled by default for security reasons"
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: none
+- a:N57. Un administrador de Wazo, al abrir la consola, veía varios INVITE maliciosos por segundo y en los primeros baneos juntó más de 50 IPs; buscan llamar a destinos caros.
+  - Source: https://wazo-platform.discourse.group/t/fail2ban-guide-for-servers-on-the-internet/399  Quote: "I got several malicious invites per second."
+  - Kind: story
+  - Level: core
+  - Bias: none
+- a:N58. CVE-2025-28172: el UCM6510 hasta 1.0.20.52 permitía intentos de login sin límite, abriendo la puerta a fuerza bruta. Argumento para firmware al día.
+  - Source: https://www.tenable.com/cve/CVE-2025-28172  Quote: "Improper Restriction of Excessive Authentication Attempts"
+  - Kind: story
+  - Level: core
+  - Bias: none
+
+## T14 Exponer SIP o VPN
+- a:N59. VPN es lo que más reduce superficie de ataque; si no se puede, puertos SIP y RTP no estándar, Fail2Ban, no exponer la administración y patrones de marcado que bloqueen destinos de pago.
+  - Source: https://community.freepbx.org/t/vpn-or-tls/91126  Quote: "VPN is the best approach for limiting points of attack."
+  - Kind: rule of thumb
+  - Level: advanced
+  - Bias: none
+- a:N60. Un integrador con 15 años en FreePBX usa VPN en todos los remotos pero cuenta caídas de 2 a 4 veces por año, casi siempre por certificados vencidos.
+  - Source: https://community.freepbx.org/t/vpn-or-tls/91126  Quote: "Most of the time, it’s certificate renewals causing breakdowns."
+  - Kind: story
+  - Level: advanced
+  - Bias: none
+- a:N61. Para 15 sedes con IP fija, mejor lista blanca por IP en el firewall que VPN en cada teléfono; la VPN suma complejidad y carga.
+  - Source: https://community.freepbx.org/t/cloud-hosted-pbx-direct-sip-or-vpn/47641  Quote: "I would start with the FreePBX firewall whitelisting the sites"
+  - Kind: rule of thumb
+  - Level: advanced
+  - Bias: none
+- a:N62. Otro usuario abandonó la VPN porque se caía varias veces al día sin aviso y perdía llamadas.
+  - Source: https://community.freepbx.org/t/fail2ban-securing-pbx-behind-router-with-port-forwarding/70943  Quote: "I found our VPN solution to be not reliable enough."
+  - Kind: story
+  - Level: advanced
+  - Bias: none
+
+## T15 Porteros GDS y GSC
+- a:N63. El GDS3710 se integra registrándolo como una extensión más en la central y diciéndole en su web a quién llamar cuando tocan timbre.
+  - Source: https://blog.grandstream.com/company/news/blog/get-more-gds3710-integrating-it-your-grandstream-solution  Quote: "Register your GDS3710 as an extension on your IP PBX"
+  - Kind: technique
+  - Level: core
+  - Bias: el fabricante promociona
+- a:N64. En el GDS: Doorbell Mode en Call Doorbell Number, el número de la interna o grupo en Number Called When Door Bell Pressed, Remote PIN to Open the Door y Enable DTMF Open Door. En el GRP la tecla OpenDoor manda un mensaje SIP; tras atender también se puede marcar el PIN.
+  - Source: https://documentation.grandstream.com/knowledge-base/connecting-gds37xx-with-grp26xxx/  Quote: "Please make sure to check “Enable DTMF Open Door”"
+  - Kind: technique
+  - Level: core
+  - Bias: none
+- a:N65. GRP2601 a 2604, 2612 y 2613 solo audio; GRP2614, 2615, 2616, 2624, 2634, 2636, 2650 y 2670 audio y video JPEG con GDS. Con RemoteConnect el MJPEG no anda en GRP; conviene un GXV.
+  - Source: https://documentation.grandstream.com/knowledge-base/connecting-gds37xx-with-grp26xxx/  Quote: "support audio only"
+  - Kind: number
+  - Level: core
+  - Bias: none
+- a:N66. La UCM tiene "Transparent Call-Info header" para pasar al GXP21xx o GRP261x el pedido de video en vivo del GDS y la tecla de abrir puerta.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "give the option to open the door via softkey"
+  - Kind: technique
+  - Level: advanced
+  - Bias: none
+
+## T16 Troubleshooting
+- a:N67. El manual repite en extensiones y troncales: el audio de un solo lado casi siempre es configuración de NAT o puertos SIP y RTP en el firewall.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "If there is a one-way audio issue, usually it is related to NAT configuration"
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: none
+- a:N68. Captura de paquetes desde la propia UCM en Maintenance, Network Troubleshooting, Ethernet Capture (con opción para descifrar SRTP). Syslog en Maintenance, Syslog: nivel por defecto error, módulos útiles pbx, pjsip y chan_dahdi; no dejar todo en verbose.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "Turning on all levels for all syslog modules is not recommended for daily usage."
+  - Kind: technique
+  - Level: advanced
+  - Bias: none
+- a:N69. Capturar en el propio equipo, no en un espejo del otro lado del router, y comparar lo que salió con lo que llegó: así se ve si alguien reescribió el SDP.
+  - Source: https://didlogic.com/learn/sip-alg-explained/  Quote: "capture at the endpoint itself"
+  - Kind: technique
+  - Level: advanced
+  - Bias: vende troncales
+- a:N70. Caso 3CX: GXP1625 y 1628 oían pero no eran oídos, solo contra un servidor; ya habían revisado SIP ALG, sacado el teléfono afuera del firewall y reseteado de fábrica, y con la app sí andaba.
+  - Source: https://www.3cx.com/community/threads/grandstream-phone-receiver-cant-hear-me.116955/  Quote: "I can hear other side, but other side can't hear me."
+  - Kind: story
+  - Level: core
+  - Bias: none
+- a:N71. Caso pfSense: con la central detrás del firewall las llamadas conectaban pero un lado nunca oía al otro; lo resolvieron sacando la central afuera del firewall. pfSense no es un SBC.
+  - Source: https://forum.netgate.com/post/897197  Quote: "Calls would connect but one side could never hear the other side."
+  - Kind: story
+  - Level: core
+  - Also: T14
+  - Bias: none
+- a:N72. Strict RTP descarta RTP que no venga del origen del flujo; RTP por defecto 10000 a 20000; STUN por defecto stun.ipvideotalk.com puerto 3478.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "The default STUN Server is stun.ipvideotalk.com."
+  - Kind: definition
+  - Level: advanced
+  - Also: T11
+  - Bias: none
+
+## Disagreements seen
+- Credenciales de fábrica: Telnyx y Simtex dicen admin/admin; el manual de seguridad de Grandstream dice contraseña aleatoria en la etiqueta desde 2017 (https://support.telnyx.com/en/articles/5748258-grandstream-configuring-sip-trunks-on-your-grandstream-ucm6xxx-series vs https://documentation.grandstream.com/knowledge-base/ucm6xxx-security-manual/).
+- Remotos: VPN siempre (https://community.freepbx.org/t/vpn-or-tls/91126) contra lista blanca por IP o puertos abiertos con defensas (https://community.freepbx.org/t/cloud-hosted-pbx-direct-sip-or-vpn/47641, https://community.freepbx.org/t/fail2ban-securing-pbx-behind-router-with-port-forwarding/70943).
+- SIP ALG: casi todos dicen apagarlo siempre; Plexatalk y SureVoIP admiten casos raros donde ayuda (https://www.plexatalk.co.uk/?p=17613, https://surevoip.co.uk/support/wiki/troubleshooting/sip_alg/start.html).
+- Orden de rutas salientes: primera de arriba abajo (Simtex) contra prioridad configurable por precisión de patrón (manual).
+- Límite de IVR anidados: 5 niveles (blog viejo) contra 64 (manual actual).
+
+## Best stories
+- Strip 6 del DID 0655441007 a la 1007: https://documentation.grandstream.com/knowledge-base/sip-trunks-guide/
+- Corte a los 32 segundos por ACK perdido: https://didlogic.com/learn/sip-alg-explained/
+- Varios INVITE maliciosos por segundo y 50 IPs baneadas: https://wazo-platform.discourse.group/t/fail2ban-guide-for-servers-on-the-internet/399
+- VPN que se cae 2 a 4 veces por año por certificados: https://community.freepbx.org/t/vpn-or-tls/91126
+- GXP que oye pero no es oído, solo contra un servidor: https://www.3cx.com/community/threads/grandstream-phone-receiver-cant-hear-me.116955/

@@ -1,0 +1,15 @@
+A: Lección diecinueve, arrancamos el catálogo. Y la primera pregunta no es qué modelo comprar, sino qué es vigente.
+B: Porque en las paredes hay de todo.
+A: De todo. Así que usamos dos fuentes con roles distintos. El menú de productos de akuvox punto com dice qué se vende hoy. Y las tablas de la base de conocimiento dicen los datos que cruzan a toda la línea: alimentación, carga del relé, métodos de acceso, salida de doce voltios, interfaces de los monitores.
+B: ¿Y cómo está ordenado el menú?
+A: Por tipo. Porteros, monitores interiores, un panel con agente de inteligencia artificial, casa inteligente, cuidado de mayores, dos hilos, kits, control de acceso, teléfono de video Android, teléfonos IP, una cámara IP, software y accesorios.
+B: Bastante más que porteros.
+A: Mucho más. Y dentro de cada modelo, el menú lista versiones. El R29 viene estándar, con Bluetooth y doble cámara, con LTE o con huella. El S535 viene con módulos. Por eso el sufijo importa: R29C-L no es lo mismo que R29S.
+B: ¿Hubo sorpresas?
+A: Una linda. El E16 y el C316 siguen en el menú a fines de octubre de dos mil veintiséis. Y en cambio el E11, el C315 o el IT83 ya no están en el menú, pero siguen en las tablas de firmware.
+B: O sea que "discontinuado" lo decimos con cuidado.
+A: Con mucho cuidado. Ninguna página que leímos publica una lista oficial de discontinuados. Lo que podemos decir es: está o no está en el menú hoy. Tres de las siete fuentes de esta parte del catálogo van en esa línea.
+B: ¿Y el laboratorio?
+A: Quince minutos de escritorio. Armás una planilla con una fila por modelo: tipo, serie, sistema, PoE, carga del relé y una columna "en el menú hoy, sí o no". La llenás con el menú y las tablas.
+B: Y esa planilla sirve para cotizar.
+A: Para cotizar y para soporte. Cuando llaman por un equipo raro, lo buscás ahí y sabés si hay repuesto o hay que pensar en un reemplazo.

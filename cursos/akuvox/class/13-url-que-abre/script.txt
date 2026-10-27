@@ -1,0 +1,19 @@
+A: Lección trece, arrancamos con relés por HTTP. La pregunta de siempre: ¿cómo abro el portón sin estar en una llamada?
+B: Con DTMF no se puede, porque el tono viaja dentro de la llamada.
+A: Exacto. Para eso está el HTTP. El portero escucha una dirección web y, cuando le llega el pedido con la clave correcta, dispara el relé.
+B: ¿Y dónde se habilita?
+A: En el R29 está en Intercom, Relay, Open Relay via HTTP. En el E18, en Access Control, Relay. Tildás Enabled y le ponés un usuario y una clave propios.
+B: ¿Y la URL?
+A: Acá está la trampa. Hay dos familias. La vieja es barra fcgi barra do, con action igual OpenDoor y el usuario y la clave como parámetros. La nueva es barra fcgi barra OpenDoor, con el usuario y la clave delante de la IP, separados por dos puntos y una arroba.
+B: ¿Y cuál uso?
+A: Depende del firmware. Si el tercer número de la versión es diez o más, el equipo está en la rama de alta seguridad. Con ese modo encendido, solo acepta la nueva. Apagado, acepta las dos.
+B: Por eso un día anda y después de actualizar no anda más.
+A: Tal cual. Las dos guías de Akuvox que leímos coinciden, y la del E18 directamente llama recomendado al formato nuevo. Un integrador en el foro de LogicMachine hace lo contrario: apaga la alta seguridad para seguir con la vieja.
+B: [suspiro] Eso da para otra charla.
+A: La de la lección que viene. Dos detalles más: DoorNum uno es el relé A y dos es el relé B. Y Session Check queda apagado, porque Akuvox avisa que puede hacer fallar la apertura.
+B: ¿Y en obra cómo queda?
+A: Portón en el relé B de un R29. URL nueva con DoorNum dos, y lo abre cualquier sistema de la red de porteros que tenga la clave.
+B: ¿Laboratorio?
+A: Diez minutos. Habilitás el HTTP con un usuario de prueba, mirás la versión de firmware, probás la URL nueva con curl desde tu PC y después la vieja, para ver cuál acepta.
+B: Y lo anotás en la ficha.
+A: Eso. Con esto, el "no abre por HTTP" deja de ser un misterio.

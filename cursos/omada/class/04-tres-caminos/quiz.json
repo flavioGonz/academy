@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Configuraste DHCP option 138 en la VLAN de cámaras, pero los APs que ya estaban encendidos siguen sin aparecer en Pending. ¿Qué falta?",
+    "options": [
+      "Reiniciar el controlador",
+      "Cambiar la opción 138 por la 43",
+      "Que los APs renueven DHCP, por ejemplo desconectándolos y reconectándolos",
+      "Abrir el puerto 8043"
+    ],
+    "answer": 2,
+    "why": "La opción 138 viaja en la respuesta DHCP; un equipo que ya tenía concesión no la recibe hasta renovar."
+  },
+  {
+    "q": "El controlador 6.x está detrás del NAT de la central y la sucursal llega por internet. ¿Qué rango reenviás?",
+    "options": [
+      "Solo 8043",
+      "29810 a 29816",
+      "27001 y 27217",
+      "29810 a 29817, con el mismo puerto de origen y destino"
+    ],
+    "answer": 3,
+    "why": "Descubrimiento y gestión usan 29810 a 29817; en la versión 6 se agregó el TCP 29817 para datos de monitoreo, y la guía pide no remapear esos puertos."
+  },
+  {
+    "q": "Los equipos de un cliente se van a gestionar desde Omada Central. ¿Qué pegás en la Inform URL del equipo?",
+    "options": [
+      "La Site URL copiada del dashboard del sitio",
+      "La IP pública de la oficina",
+      "El TP-Link ID del cliente",
+      "La dirección MAC del gateway"
+    ],
+    "answer": 0,
+    "why": "Omada Central usa la Site URL del sitio destino, que se copia desde Global View > Dashboard y se pega en la Inform URL o en la Discovery Utility."
+  }
+]

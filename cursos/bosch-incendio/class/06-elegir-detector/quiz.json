@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Habitación de hotel con ducha. ¿Qué detector sugiere el ejemplo basado en BS 5839-1 para equilibrar detección y falsas alarmas?",
+  "options": [
+   "Óptico simple",
+   "Un detector con sensor de CO",
+   "Térmico de máxima",
+   "Ninguno"
+  ],
+  "answer": 1,
+  "why": "En el ejemplo, ópticos y multisensores detectan el fuego latente, pero ante vapor y aerosoles el de CO es el que mejor rechaza falsas alarmas."
+ },
+ {
+  "q": "Un cliente tiene detectores OT400 y pide actualizar el panel al firmware más nuevo. ¿Qué conviene?",
+  "options": [
+   "Actualizar sin más",
+   "Pasar los detectores a modo classic",
+   "Cambiar solo las bases",
+   "Relevar primero: según Bosch, el firmware 4.8 es la última versión que soporta la serie 400"
+  ],
+  "answer": 3,
+  "why": "La TI 2715 indica que 4.8 es la última versión con soporte para O400, OT400, OC410, OTC410 y T400 y pide planificar reemplazos."
+ },
+ {
+  "q": "¿Cuál es el primer paso para elegir un detector según la FIA?",
+  "options": [
+   "Analizar el riesgo de fuego del lugar",
+   "Elegir el más barato",
+   "Mirar qué hay en stock",
+   "Poner multisensor siempre"
+  ],
+  "answer": 0,
+  "why": "La FIA propone primero analizar el riesgo de fuego y después los fenómenos que no son fuego, y registrar la decisión."
+ }
+]

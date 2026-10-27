@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Se cortó internet en el edificio. ¿Qué debería seguir funcionando si la instalación está bien hecha?",
+  "options": [
+   "Nada, SmartPlus maneja todo",
+   "Solo la app",
+   "Llamada al monitor interior, apertura desde el monitor, PIN y tarjeta",
+   "Solo el RTSP al NVR"
+  ],
+  "answer": 2,
+  "why": "Monitor, PIN y tarjeta trabajan en la red local; la app y las llaves temporales nuevas dependen de la nube."
+ },
+ {
+  "q": "Activaste SmartPlus y querés también que el portero suene en la central local. ¿Qué cuenta SIP usás para la central?",
+  "options": [
+   "La cuenta 2",
+   "La cuenta 1",
+   "Ninguna, no se puede",
+   "Una tercera cuenta"
+  ],
+  "answer": 0,
+  "why": "La documentación de Akuvox indica que la cuenta 1 es la que usa SmartPlus al activarse."
+ },
+ {
+  "q": "El cliente pide la app y alguien propone reenviar puertos del router al portero. ¿Qué decidís?",
+  "options": [
+   "Reenviar 80 y 5060 al portero",
+   "Poner el portero en DMZ",
+   "Desactivar la clave web para que la app conecte",
+   "Permitir solo tráfico saliente hacia la nube y no abrir puertos de entrada al portero"
+  ],
+  "answer": 3,
+  "why": "Claroty recomienda no exponer el equipo a internet; la salida hacia la nube es otra cosa que abrir puertos entrantes."
+ }
+]

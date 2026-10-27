@@ -1,0 +1,19 @@
+A: Lección dos. Llegás a la obra, enchufás el AP, abrís el controlador... y nada. No aparece.
+B: El clásico. Y el cliente mirándote por arriba del hombro.
+A: [risas] Bueno, LazyAdmin lo resume en cuatro condiciones para adoptar. El equipo no está en otro controlador, la URL de inform está bien, el firmware no es demasiado viejo y el controlador está al día.
+B: ¿Y cuál falla más?
+A: Según ellos, el desfase de firmware. Un AP con firmware nuevo contra un controlador diez versiones atrás, o al revés.
+B: ¿Coinciden las otras fuentes?
+A: Las tres que hablan de adopción dicen lo mismo y ninguna discrepa. HostiFi agrega un caso: hay equipos que quedan en pendiente de adopción porque piden actualizar primero. Si el botón de adoptar y actualizar no lo logra, se actualiza a mano por SSH.
+B: ¿Y el reset?
+A: Botón diez segundos con el equipo prendido, o por SSH el comando set default.
+B: Una vez me pasó que el AP aparecía, decía adoptando, y después offline. Y seguía respondiendo al ping.
+A: Hay un caso igual en los comentarios de LazyAdmin. Era el firewall de Windows de la máquina del controlador. Lo apagó y el AP adoptó.
+B: ¿Y cuando un equipo ya estaba adoptado y lo querés volver a meter?
+A: Otro caso de ahí. Después de un corte de luz, tres equipos reseteados no volvían. La respuesta fue borrarlos primero del controlador y recién después readoptar.
+B: Entonces el orden en obra sería...
+A: Uno, reset. Dos, el equipo en la misma red que el controlador, con un solo DHCP. Tres, firmware. Y recién ahí sospechás del controlador.
+B: Me gusta. ¿Laboratorio?
+A: Reseteás un AP, lo adoptás en capa dos, entrás por SSH con el usuario de fábrica y corrés info. Ahí ves la versión, la IP y a qué URL de inform está mirando. Quince minutos.
+B: Con eso ya sabés si el problema es del equipo o tuyo.
+A: Y dejás de reiniciar el controlador a ciegas.

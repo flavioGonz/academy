@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un edificio quiere administrar el intercom de toda la comunidad en un servidor local, sin depender de la nube. ¿Qué software de Akuvox encaja?",
+  "options": [
+   "SDMC",
+   "SmartPlus App",
+   "My MobileKey",
+   "Installer Kit Tool"
+  ],
+  "answer": 0,
+  "why": "Akuvox describe al SDMC como software local para gestionar el intercom de una comunidad."
+ },
+ {
+  "q": "El firmware de un equipo es 29.31.10.400. ¿Qué indica el 31?",
+  "options": [
+   "Versión a medida sin nube",
+   "Rama de alta seguridad",
+   "Hardware 3",
+   "Versión sin logo que soporta nube, SDMC y descubrimiento"
+  ],
+  "answer": 3,
+  "why": "Según la guía de firmware, B=31 es la versión sin logo con nube, SDMC y modo descubrimiento; la alta seguridad la marca el bloque C."
+ },
+ {
+  "q": "¿Sobre qué hardware está armado el Installer Kit Tool?",
+  "options": [
+   "R49G",
+   "X937",
+   "S563W",
+   "A095"
+  ],
+  "answer": 2,
+  "why": "La página de software de Akuvox dice que está construido sobre hardware S563W con PoE y Wi-Fi."
+ }
+]

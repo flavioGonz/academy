@@ -1,0 +1,5 @@
+[
+  {"q": "Le pusiste IP fija a un servidor con New-NetIPAddress y ahora el tráfico a internet sale por momentos por otro lado. ¿Qué te faltó?", "options": ["Reiniciar el servidor", "Quitar la ruta por defecto vieja con Remove-NetRoute antes de asignar", "Desactivar IPv6", "Cambiar la máscara a 255.255.0.0"], "answer": 1, "why": "Si no se elimina la ruta 0.0.0.0/0 anterior quedan dos gateways y Windows puede usar cualquiera."},
+  {"q": "Instalaste el rol DHCP en un Windows Server unido a dominio, el ámbito está activo y los equipos no reciben dirección. ¿Qué es lo primero que revisás?", "options": ["Que el servidor esté autorizado en Active Directory", "Que el servidor tenga la última versión de BIOS", "Que el ámbito tenga más de 100 direcciones", "Que el DNS sea 8.8.8.8"], "answer": 0, "why": "En un dominio, un servidor DHCP no autorizado no entrega direcciones; es una protección contra DHCP no autorizados."},
+  {"q": "¿Qué valor va en -PrefixLength para una red 10.10.10.0 con máscara 255.255.255.0?", "options": ["255", "8", "16", "24"], "answer": 3, "why": "Una máscara de 255.255.255.0 tiene 24 bits en uno, por eso el prefijo es 24."}
+]

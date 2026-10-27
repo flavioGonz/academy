@@ -1,0 +1,16 @@
+A: Lección treinta y dos: bloqueo por DNS. Publicidad, sitios puntuales, y qué se le puede prometer al cliente y qué no.
+B: Una oficina que quiere sacar publicidad y un par de sitios. ¿El MikroTik lo hace?
+A: Desde la siete quince, sí, con adlist. Le das una lista de dominios en formato hosts, por URL o como archivo, y el router contesta cero punto cero punto cero punto cero para cada uno.
+B: ¿Y antes cómo se hacía?
+A: A mano, con estáticas. En el foro hay un caso de dos mil diecisiete: cinco mil estáticas en un RB novecientos cincuenta y uno, y al navegar la CPU subía al ochenta por ciento. El que lo probó terminó usando un DNS público que filtra.
+B: Uf.
+A: La adlist vive en la caché DNS: según la documentación, unos setenta y cinco bytes por nombre. Setenta y cinco mil nombres son unos seis megas, así que primero se sube cache size. Y en el hilo de la siete quince, un empleado de MikroTik dijo que pide almacenamiento y RAM, y la recomendó para equipos ARM sesenta y cuatro.
+B: ¿Bloquea los subdominios?
+A: No. Solo el nombre exacto. Para un sitio entero con todo lo de abajo, una estática de tipo NXDOMAIN con match subdomain.
+B: ¿Y en el firewall, con una address list por nombre?
+A: Sirve, con límites. El router resuelve el nombre por su cuenta, y con las CDN las direcciones cambian o se comparten. En el foro lo dicen: si permitís WhatsApp, probablemente estás permitiendo Facebook. Lo más fino es una estática FWD con address list: carga justo lo que el router les contestó a los equipos.
+B: ¿Y el equipo que usa otro DNS?
+A: Para eso está la lección anterior, el DNS transparente. Y DoH o una VPN pasan igual: esto filtra, no es un candado.
+B: ¿Laboratorio?
+A: Versión y memoria, una adlist con un archivo de prueba, NXDOMAIN para un sitio con subdominios, una excepción, la pausa, y una regla de forward con la lista FWD. Veinte minutos.
+B: Y el cliente sabe exactamente qué se bloquea y qué no.

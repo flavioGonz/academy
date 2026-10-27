@@ -1,0 +1,19 @@
+A: Lección veintisiete. La serie E con reconocimiento facial: el E18 y el E16.
+B: El E16 es el de las guías que usamos al principio del curso.
+A: Ese mismo, y sigue en el menú vigente. Los dos son de plástico, Linux, IP65, con Wiegand. El E16 tiene pantalla táctil de cinco pulgadas. Al E18 Akuvox lo presenta con siete, y viene estándar o con LTE.
+B: ¿Credenciales?
+A: El E18C: PIN, tarjetas de las dos frecuencias, rostro, Bluetooth y QR. El E16: PIN, tarjeta solo de trece coma cincuenta y seis, rostro, Bluetooth y QR. Y el E16P suma venas de la palma.
+B: ¿Alimentación?
+A: PoE af en los dos. Fuente de doce voltios un ampere en el E16C, uno y medio en el E18C, y dos y medio en el E18 con LTE. Relé de treinta voltios dos amperes.
+B: ¿Dan doce voltios para la cerradura?
+A: No. Ni el E18C ni el E16C tienen salida de doce voltios. La cerradura va con fuente propia, siempre.
+B: Eso conviene saberlo antes de cablear.
+A: Antes de cotizar, incluso. Y la historia de esta familia es el PIN de sistema. Para entrar al menú mantenés apretada la pantalla cinco segundos y te pide el PIN. Hasta cierto firmware era admin, en minúscula; después, Admin trescientos veintiuno. En el E16 el corte es el doscientos dieciséis punto treinta punto diez punto ciento veintiuno; en el E18, el dieciocho punto treinta punto diez punto doscientos once.
+B: El que prueba el viejo se queda afuera.
+A: [risas] Clásico. El E16 tiene además tres versiones de hardware: el firmware empieza con ciento dieciséis, doscientos dieciséis o cuatrocientos dieciséis.
+B: ¿Y lo de HTTP?
+A: El E18, desde dieciocho punto treinta punto once punto veintisiete, acepta cerrar, dejar abierta y consultar el estado de la puerta por HTTP. Y con el SR01 no tiene Hold Delay.
+B: ¿Laboratorio?
+A: Quince minutos. Entrás al menú de cada uno con el PIN que corresponda a su firmware, sacás la IP, leés la versión, y anotás la fuente de la cerradura.
+B: Y cambiás el PIN de sistema.
+A: Eso también.

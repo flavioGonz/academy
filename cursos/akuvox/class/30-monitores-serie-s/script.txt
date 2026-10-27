@@ -1,0 +1,23 @@
+A: Lección treinta, pasamos adentro de la casa. Monitores interiores, empezando por la serie S.
+B: S560, S562, S563, S565, S567. Muchos números.
+A: Vamos por partes. El S562 es el de siete pulgadas con Linux. El S563, ocho pulgadas con Android. El S567, diez pulgadas con Android. Los tres de plástico y con PoE, según la guía de selección.
+B: ¿Y el S565?
+A: Está en el menú vigente, pero no en la guía de selección. Así que de tamaño y sistema no te digo nada que no leí. Sí sabemos sus interfaces.
+B: Dale con las interfaces.
+A: S562, S563, S565 y S567 tienen un RS485, una salida de relé y una entrada de timbre. Los tres primeros, además del puerto PoE, traen otro RJ45.
+B: ¿Y el relé cuánto aguanta?
+A: Acá está la trampa de la familia. El S563, S565 y S567 dan treinta voltios dos amperes. El S562, treinta voltios un ampere. La mitad.
+B: Uf, si colgás un portón del S562...
+A: Lo mirás antes. ¿Y el S560? Es el de auricular: sin RS485, sin relé, sin entrada de timbre. Solo PoE. Para sacarle la IP mantenés el numeral cinco segundos y la dice.
+B: ¿Y en los otros?
+A: En pantalla. S562, S563 y S567: Settings, System Info, Network. El S565: More, Settings, System Info, Network.
+B: ¿Alimentación?
+A: El S567, PoE af o doce voltios uno y medio. Para el resto, la tabla da fuente de doce voltios un ampere.
+B: ¿Y el RS485 para qué?
+A: Para los relés externos de la lección dieciséis, el MK485 o el RSAC-C1-R8, con firmware mínimo por modelo. Y un dato del S562: la librería pylocal cuenta que usa claves de cifrado viejas que los clientes modernos rechazan en HTTPS.
+B: ¿Cuántas fuentes?
+A: Cuatro de siete coinciden en mirar sistema, relés e interfaces: la guía de selección y las tablas de interfaces, de relé y de alimentación.
+B: ¿Laboratorio?
+A: Quince minutos. Con el monitor que tengas, sacás la IP, mirás el firmware y probás el relé con una carga que no pase lo que aguanta ese modelo.
+B: Un ampere en el S562.
+A: Exacto.

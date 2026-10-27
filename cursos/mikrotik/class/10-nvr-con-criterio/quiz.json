@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Una central de monitoreo con IP fija necesita ver un NVR. ¿Cuál es la regla más acotada?",
+    "options": [
+      "dst-nat de todos los puertos del NVR desde cualquier origen",
+      "Poner el NVR en DMZ",
+      "dst-nat del puerto de la app, in-interface-list=WAN y src-address-list con la IP de la central",
+      "Habilitar UPnP para que el NVR abra lo que necesite"
+    ],
+    "answer": 2,
+    "why": "La documentación de NAT sugiere restringir el dst-nat por src-address y lo llama más seguro. Publicar solo el puerto necesario y filtrar el origen reduce la exposición."
+  },
+  {
+    "q": "La cámara publicada anda desde afuera, pero desde la oficina, usando la IP pública, no. El dst-nat tiene in-interface=pppoe-out1. ¿Qué pasa?",
+    "options": [
+      "El dst-nat nunca coincide para tráfico que sale de la LAN, y además falta un masquerade de hairpin",
+      "El proveedor bloquea el puerto",
+      "La cámara no soporta NAT",
+      "Falta activar DDNS"
+    ],
+    "answer": 0,
+    "why": "Es el caso del foro: con in-interface en el PPPoE, el tráfico desde la LAN no coincide. Se usa dst-address-type=local (excluyendo la IP LAN del router) y un srcnat de hairpin."
+  },
+  {
+    "q": "Cambiaste un dst-nat y seguís viendo el comportamiento viejo. ¿Qué probás primero?",
+    "options": [
+      "Reinstalar RouterOS",
+      "Cambiar el puerto del NVR",
+      "Desactivar el firewall",
+      "Limpiar las conexiones afectadas en /ip/firewall/connection"
+    ],
+    "answer": 3,
+    "why": "NAT solo evalúa el primer paquete de una conexión; connection tracking recuerda la acción. La documentación recomienda limpiar la tabla al cambiar reglas NAT."
+  }
+]

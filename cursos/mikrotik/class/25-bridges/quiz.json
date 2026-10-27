@@ -1,0 +1,35 @@
+[
+  {
+    "q": "En un hEX con el bridge por defecto, otro técnico creó un segundo bridge para las cámaras con ether4 y ether5. El NVR graba con cortes y la CPU está al 100 %. En /interface/bridge/port/print, ether4 y ether5 no tienen la H. ¿Qué pasa?",
+    "options": [
+      "Las cámaras mandan demasiado multicast y hay que apagar IGMP snooping",
+      "Solo un bridge por switch chip tiene hardware offloading: el segundo bridge conmuta por la CPU",
+      "Falta poner la IP de las cámaras en ether4 y ether5",
+      "La H aparece recién después de reiniciar el router"
+    ],
+    "answer": 1,
+    "why": "Según la documentación de errores de capa 2, fuera de los CRS1xx/2xx solo un bridge por switch chip queda en hardware; los demás van por la CPU. Lo correcto es un solo bridge y separar con VLAN."
+  },
+  {
+    "q": "Tenés que poner una IP de gestión en un switch CRS con configuración de switch, donde todos los puertos están en el bridge. ¿Dónde la cargás?",
+    "options": [
+      "En ether1, porque es el primer puerto",
+      "En cada puerto donde haya un equipo a gestionar",
+      "En el puerto SFP, que no es esclavo",
+      "En el bridge (o en una VLAN sobre el bridge), nunca en un puerto que está adentro"
+    ],
+    "answer": 3,
+    "why": "Los puertos de un bridge son esclavos y su tráfico sube por la interfaz bridge. La documentación de IP Addressing aclara que una IP puesta en un puerto del bridge en realidad queda en el bridge."
+  },
+  {
+    "q": "Vas a sacar ether2 del bridge de un router remoto para dedicarlo a un decodificador de IPTV. Entrás por ether3. ¿Qué conviene revisar antes, según la experiencia del foro?",
+    "options": [
+      "Que el bridge tenga auto-mac=no y una admin-mac fija, para que su MAC no cambie al sacar el puerto",
+      "Que ether2 tenga la H, porque sin ella no se puede sacar",
+      "Nada: sacar un puerto del bridge nunca afecta a los otros",
+      "Que el decodificador tenga IP fija"
+    ],
+    "answer": 0,
+    "why": "Con auto-mac el bridge toma la MAC de un puerto; si sacás justo ese puerto, la MAC del bridge cambia y la conexión por IP puede caerse. La documentación recomienda fijar admin-mac. Y siempre en Safe Mode."
+  }
+]

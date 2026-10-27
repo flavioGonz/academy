@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un A095 con PoE+ tiene 8 lectores conectados. ¿Cuánto da cada salida de 12 V?",
+  "options": [
+   "500 mA",
+   "800 mA",
+   "1 A",
+   "0,2 A como máximo"
+  ],
+  "answer": 3,
+  "why": "La tabla de 12 V indica 0,2 A máximo por salida con PoE+ y los 8 lectores conectados."
+ },
+ {
+  "q": "¿Cómo se alimenta el A094?",
+  "options": [
+   "PoE 802.3af",
+   "12 V 5 A",
+   "100 a 240 VAC 1,5 A, sin PoE",
+   "48 V"
+  ],
+  "answer": 2,
+  "why": "La tabla de alimentación marca al A094 sin PoE y con entrada de 100 a 240 VAC."
+ },
+ {
+  "q": "La obra tiene ascensor con EC33. ¿Qué controladora no se integra con él?",
+  "options": [
+   "A095",
+   "A094",
+   "A08",
+   "A15"
+  ],
+  "answer": 1,
+  "why": "La guía del EC33 indica que todos los porteros y terminales se integran salvo A094 y E20."
+ }
+]

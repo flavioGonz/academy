@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Una puerta interna necesita apertura solo con tarjeta, sin teclado. ¿Qué terminal alcanza?",
+  "options": [
+   "A05C",
+   "A01S",
+   "A08S",
+   "A15"
+  ],
+  "answer": 1,
+  "why": "Según la tabla de métodos, el A01S acepta tarjetas de 13,56 y 125 kHz y no tiene PIN."
+ },
+ {
+  "q": "¿Cómo sacás la IP de un A08?",
+  "options": [
+   "Apretando Reset: anuncia la IP",
+   "Con 9999 y 3888",
+   "Solo con SmartPlus",
+   "*3258*"
+  ],
+  "answer": 0,
+  "why": "Akuvox indica que en A01, A02, A03, A08 y A095 el botón Reset hace que el equipo anuncie su IP."
+ },
+ {
+  "q": "¿Qué grado de protección publica la ficha del A08?",
+  "options": [
+   "IP54",
+   "IP66 e IK10",
+   "No publica",
+   "IP65 e IK09"
+  ],
+  "answer": 3,
+  "why": "La ficha del A08 lista IP65 & IK09 en sus versiones."
+ }
+]

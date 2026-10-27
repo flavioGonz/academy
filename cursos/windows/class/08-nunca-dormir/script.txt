@@ -1,0 +1,21 @@
+A: Pregunta de obra: ¿cuántos puestos de monitoreo encontraste suspendidos a la mañana?
+B: Muchos. Y el grabador que no volvió después del corte de luz, otros tantos.
+A: Hoy es eso: un equipo veinticuatro siete no duerme, y vuelve solo cuando vuelve la luz.
+B: ¿Por dónde empiezo?
+A: Por powercfg. Con powercfg barra change, suspensión, hibernación y apagado de disco en cero. Cero quiere decir "nunca".
+B: El monitor sí lo podés apagar.
+A: El monitor sí. Y además, powercfg barra hibernate off. Eso apaga la hibernación y también el inicio rápido, el Fast Startup.
+B: ¿Y qué tiene de malo el inicio rápido?
+A: SS sesenta y cuatro avisa que con el inicio rápido el Wake on LAN puede fallar y algunas actualizaciones no se instalan bien. En un servidor no te da nada y te puede quitar.
+B: Bien. ¿Y lo del corte de luz?
+A: Eso está en el BIOS, no en Windows. La opción se llama Restore on AC Power Loss, o After Power Failure, y tiene tres valores: apagado, último estado y encendido.
+B: Yo siempre pongo último estado.
+A: Y ahí viene la historia. ServeTheHome lo explica: si la UPS manda la señal y el servidor se apaga ordenadamente, cuando vuelve la luz, para el BIOS el último estado fue "apagado". Y no arranca.
+B: ¿En serio? O sea, cuanto mejor instalás la UPS, menos vuelve.
+A: [risas] Justo eso. Con UPS que apaga en orden, la opción es Power On. La contra: también enciende un equipo que alguien apagó a propósito.
+B: ¿Cuántas fuentes?
+A: Dos de tres, SS sesenta y cuatro y ServeTheHome, y una tercera, woshub, que te da el evento seis mil ocho para confirmar que hubo un apagado inesperado.
+B: ¿Laboratorio?
+A: Diez minutos. Revisás el plan de energía, ponés todo en nunca, apagás la hibernación y mirás qué estados de suspensión tiene el equipo. Y en un equipo de banco, entrás al BIOS y buscás la opción de corte de energía.
+B: Y lo probás bajando la llave.
+A: En el de banco, sí. Así el día del corte real no te enterás por el cliente.

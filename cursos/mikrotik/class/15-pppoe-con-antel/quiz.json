@@ -1,0 +1,35 @@
+[
+  {
+    "q": "El MikroTik ya marca PPPoE con Antel y tiene IP pública, pero las PCs de la LAN no navegan. El masquerade de la defconf sale por out-interface-list=WAN. ¿Qué falta casi seguro?",
+    "options": [
+      "Cambiar el MTU a 1500",
+      "Agregar la interfaz PPPoE a la lista WAN",
+      "Activar el cliente DHCP en ether1",
+      "Reiniciar el ONT"
+    ],
+    "answer": 1,
+    "why": "Con PPPoE la salida a internet es la interfaz pppoe, no ether1. Si no está en la lista WAN, el masquerade no la cubre y la LAN sale con IPs privadas."
+  },
+  {
+    "q": "Algunas páginas cargan a medias y otras no abren, con el PPPoE conectado. ¿Qué ajuste corresponde?",
+    "options": [
+      "Subir el MTU de pppoe a 1500",
+      "Cambiar los DNS",
+      "Activar el bandwidth server",
+      "Dejar MTU y MRU en 1492 o menos y ajustar el MSS"
+    ],
+    "answer": 3,
+    "why": "PPPoE suma 8 bytes, así que el MTU no puede pasar de 1492. Como los avisos de fragmentación suelen perderse, la documentación propone ajustar el MSS."
+  },
+  {
+    "q": "Vas a instalar un MikroTik con fibra de Antel y no sabés si el servicio pide VLAN con el ONT en puente. ¿Qué es lo razonable?",
+    "options": [
+      "Preguntar a Antel y, en el sitio, probar con pppoe-client/scan sin VLAN antes de crear una",
+      "Copiar la VLAN que usa un operador español",
+      "Poner VLAN 1 por las dudas",
+      "Configurar DHCP y PPPoE en ether1 a la vez"
+    ],
+    "answer": 0,
+    "why": "Ninguna fuente leída confirma una VLAN para Antel. El escáner muestra si el concentrador responde sin VLAN, y el dato definitivo lo da Antel."
+  }
+]

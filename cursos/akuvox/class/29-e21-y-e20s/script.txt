@@ -1,0 +1,21 @@
+A: Lección veintinueve, la última de porteros de calle: los de emergencia. El E21 y el E20S.
+B: Los de estacionamiento.
+A: Los de cualquier punto donde alguien necesita pedir ayuda. Akuvox presenta al E21 como intercomunicador de emergencia SIP con video, y al E20S como intercomunicador de emergencia SIP.
+B: ¿Qué tiene el E21?
+A: Según la guía de selección: frente de acero inoxidable, sin pantalla, Linux, cámara, ONVIF e IP65. Y lo importante es lo que no tiene: ni PIN, ni tarjeta, ni Wiegand. No es un control de acceso, es un botón que llama.
+B: ¿Pero tiene relé?
+A: Sí, treinta voltios tres amperes. Y la tabla de métodos de acceso lo lista en dos versiones, E21V y E21A, las dos sin credenciales.
+B: ¿Alimentación?
+A: PoE af o doce voltios un ampere, y sin salida de doce voltios para afuera. Tiene tres versiones de hardware, así que el firmware se baja para la tuya.
+B: ¿Y el E20S?
+A: Más simple todavía. La tabla de alimentación lo da solo con PoE af, sin fuente opcional, y sin salida de doce voltios. No figura en la guía de selección, así que de cámara o protección no decimos nada.
+B: ¿Cómo les sacás la IP?
+A: Al E21 manteniendo el pulsador cinco segundos. Del E20S, Akuvox solo dice que lo encendés y lo conectás a la red; la IP la buscás con el IP Scanner o en el DHCP.
+B: ¿Y en obra qué se configura?
+A: Lo de la lección cinco: se registran como extensión SIP y el botón llama al interno de guardia. Y como el E21 tiene cámara con ONVIF, se suma al NVR como en la lección nueve.
+B: ¿Cuántas fuentes?
+A: Dos de diez en el método de la IP y la lectura del firmware, más las tablas. Ficha propia, ninguna.
+B: ¿Laboratorio?
+A: Diez minutos. Registrás un E21 en la central de laboratorio, apretás el botón y verificás que suene la guardia. Después lo sumás al NVR.
+B: ¿Y si no atiende nadie?
+A: Buena pregunta para la central: desvío o cola. El botón de emergencia nunca termina en el vacío.

@@ -1,0 +1,23 @@
+A: Arranca el segundo arco. Lección cinco: sitios. ¿Vos cómo ordenás un cliente con tres locales?
+B: Todo en el sitio Default y le pongo nombres lindos a los equipos.
+A: [risas] Funciona hasta que querés poner el segundo gateway.
+B: ¿Por qué?
+A: Porque la guía oficial lo dice clarito: un sitio adopta un solo gateway. Si la sucursal tiene su router, va en un sitio nuevo.
+B: Ah. Entonces el sitio es la sede, más que el cliente.
+A: Exacto. Y eso pesa en otras cosas. El roaming es por sitio: un AP en otro sitio no comparte el perfil. Y la VPN automática entre gateways pide justamente dos sitios distintos dentro del mismo controlador.
+B: ¿Y si el cliente es otro? Nosotros atendemos varias empresas.
+A: Ahí entra el modo MSP. Se activa en Global Settings, Controller Settings. Te aparece una vista arriba de todo, con clientes, y adentro de cada cliente sus sitios.
+B: ¿Cualquier controlador lo tiene?
+A: No. Según la comparación oficial, lo tienen el controlador software y Omada Central Standard. Essentials no, y los OC tampoco.
+B: Bueno saberlo antes de vender un OC300 para gestionar a todos.
+A: Tal cual. Y el límite: la guía de MSP dice cien clientes en la versión cinco y quinientos en la seis. Subirlo no aumenta la cantidad de equipos que banca.
+B: ¿Coinciden las fuentes?
+A: Dos de tres que tocan sitios y MSP. No encontramos quien discrepe.
+B: ¿Y las cuentas?
+A: Dos niveles de roles: MSP, para la vista general, y Customer, para cada cliente. Cada uno con Main Administrator, Administrator y Viewer. Un detalle: el Administrator común no hace backups automáticos ni migra clientes.
+B: Entonces, para el supervisor del cliente, un Viewer de su sitio y listo.
+A: Eso. Y cada técnico con su usuario, nada de compartir el admin.
+B: ¿Laboratorio?
+A: Crear dos sitios, Central y Sucursal, con la zona horaria correcta, y un usuario Viewer limitado a Sucursal. Diez minutos.
+B: Y probás entrar con ese usuario.
+A: Si solo ve la sucursal, quedó bien. Ordenar sitios al principio te ahorra rehacer todo cuando llega el segundo router.

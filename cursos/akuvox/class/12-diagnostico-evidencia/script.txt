@@ -1,0 +1,19 @@
+A: Última lección. Diagnóstico con evidencia.
+B: La que te salva cuando no abre, no registra o no se ve.
+A: Exacto. Y la idea es simple: en vez de tocar perillas al azar, juntás tres cosas. Log, captura y versión.
+B: ¿Quién lo dice?
+A: El propio soporte de Akuvox, en su artículo de lectura obligatoria, y la comunidad de FreePBX en la práctica. Akuvox pide: descripción que se pueda reproducir, topología de red, diagrama eléctrico si es de relé, firmware, archivo de configuración exportado, log del sistema en nivel siete y captura PCAP si es de red o llamada.
+B: ¿PCAP desde el portero?
+A: Desde la web del portero, sí. Con un detalle: guarda solo un mega. Así que la arrancás justo antes de reproducir la falla, no media hora antes.
+B: Ah, bien. ¿Y del lado de la central?
+A: En FreePBX, el log de Asterisk y activar el logger de pjsip. Ahí apareció el failed to authenticate del R20A, ¿te acordás?
+B: La contraseña.
+A: La contraseña. Y hay otro caso precioso. Un integrador con un R20 y un videoteléfono Grandstream: la vista previa del video andaba directo y por FreePBX no. Miró la captura, vio que el video llegaba a la central pero no salía hacia el teléfono, y encontró la causa: la opción r minúscula del Dial de Asterisk, que fuerza tono de llamada y descarta el early media. Con R mayúscula, anduvo.
+B: [risas] Una letra.
+A: Una letra. Pero la encontró porque tenía la captura, no adivinando.
+B: ¿Y si perdés la clave del equipo?
+A: Akuvox documenta caminos: por SmartPlus, por PC Manager en la misma red, o exportando la llave del equipo y mandándola a soporte, que devuelve un archivo de desbloqueo.
+B: ¿Laboratorio?
+A: Rompé el registro a propósito: poné mal la contraseña SIP del portero. Miralo en el log de la central, arrancá la PCAP en el portero, reproducilo, exportá. Juntá firmware, configuración, log y captura en una carpeta como si fuera un ticket. Veinte minutos.
+B: Y arreglalo al final.
+A: [risas] Y arreglalo. Con esto cerramos: del cajón a la puerta abierta, y con pruebas cuando algo falla.

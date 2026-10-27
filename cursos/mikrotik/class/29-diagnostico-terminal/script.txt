@@ -1,0 +1,17 @@
+A: Lección veintinueve: diagnóstico por terminal. Ping y traceroute, pero con método.
+B: Ping lo usamos todos los días. ¿Qué tiene de nuevo?
+A: El orden. Una escalera, de adentro hacia afuera. Un equipo de la LAN, el gateway del proveedor, una IP de internet como uno uno uno uno, y al final un nombre.
+B: Y el primer escalón que falla te dice dónde mirar.
+A: Exacto. Si falla la LAN, es cable, puerto o bridge. Si anda la LAN y no el gateway, es la WAN. Si anda la IP y no el nombre, la documentación de RouterOS lo dice claro: la conexión anda y falla el DNS.
+B: ¿Y si una cámara no contesta el ping pero graba lo más bien?
+A: Muchos equipos bloquean el ping. Para eso está arp ping: en tu misma red contesta ARP sí o sí, porque si no, no podría hablar con nadie.
+B: ¿Y traceroute?
+A: Muestra los saltos, y en MikroTik repite rondas, como mtr. Acá viene la trampa. En el foro, uno veía cien por ciento de pérdida en el salto dos y estaba convencido de que el proveedor le cortaba.
+B: ¿Y no?
+A: No. Muchos routers limitan las respuestas ICMP. La regla de la documentación: la pérdida real empieza en un salto y sigue en todos los siguientes. Si el destino contesta, no pasa nada.
+B: [risas] Cuántas llamadas al proveedor nos hubiéramos ahorrado.
+A: Dos trucos más. El router sale con la IP de la WAN, así que para probar el masquerade o un túnel entre dos LAN, pingueás con src address desde la IP de la LAN. Y para la MTU, ping con do not fragment y tamaño mil quinientos, bajando hasta que conteste.
+B: Ojo que en MikroTik el tamaño es el paquete entero; en Windows son mil cuatrocientos setenta y dos de datos.
+A: En esto coinciden la documentación, el foro y Wikipedia. ¿Laboratorio?
+B: Cuatro pings en escalera, arp ping, traceroute, src address antes y después de apagar el masquerade, y MTU. Veinte minutos.
+A: Y el ticket deja de decir "no anda internet" para decir "falla en el gateway del proveedor".

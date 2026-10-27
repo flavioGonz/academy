@@ -1,0 +1,21 @@
+A: Lección once. Viernes a las seis de la tarde, aparece el aviso de actualización en la consola del cliente. ¿Qué hacés?
+B: Antes te decía "actualizo y me voy". Ahora ya no.
+A: [risas] Bien. Porque mirá lo que trae Network once en las notas oficiales: borra el historial de estadísticas, saca el soporte al gateway USG y migra todos los sitios al firewall por zonas.
+B: O sea que un cliente con USG queda fuera.
+A: Se queda en diez punto seis. Por eso, primero se leen las notas de versión. Tres de cinco fuentes lo marcan antes de un salto grande.
+B: ¿Y el backup?
+A: Antes de actualizar, backup. Siempre. Las notas de Network diez lo piden explícito y avisan que la actualización puede reaprovisionar los equipos.
+B: ¿Dónde se baja?
+A: En la configuración del sistema, backups. Deluisio agrega dos cosas: al restaurar, entrás con el usuario que existía cuando se hizo el backup. Y que tengas dos backups recientes fuera del equipo. El archivo no lleva video de Protect ni logs.
+B: ¿Y cuándo actualizar?
+A: HostiFi lo hace así: Ubiquiti tiene tres canales, Official, Release Candidate y Early Access. Ellos solo usan Official, esperan dos a tres semanas, prueban en servidores internos y miran los foros.
+B: ¿Alguna vez saltearon una?
+A: Sí. La siete punto cinco punto ciento setenta y cuatro, por redes WiFi que no se emitían. Y dicen tener más de quinientos mil equipos conectados, así que se enteran rápido.
+B: ¿Y si igual sale mal?
+A: Desde Network diez punto cinco hay revert de firmware y de la aplicación, y Test and Confirm, que deshace un cambio si perdés conexión. Lawrence Systems lo mostró en su video de la diez punto cinco.
+B: Entonces en obra: Official, esperar, un sitio piloto y después el resto.
+A: Exacto. Cuatro de cinco fuentes lo hacen por etapas.
+B: ¿Laboratorio?
+A: Quince minutos. Bajás un backup, lo restaurás en la VM de laboratorio, entrás con el usuario de ese momento y leés la nota de la próxima versión antes de tocar nada.
+B: Restaurar al menos una vez en paz.
+A: Para no aprenderlo el día del incendio.

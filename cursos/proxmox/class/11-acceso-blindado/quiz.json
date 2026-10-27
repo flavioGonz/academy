@@ -1,0 +1,35 @@
+[
+  {
+    "q": "El encargado de sistemas del cliente necesita prender, apagar y abrir la consola de las VMs, pero no cambiar configuración. ¿Qué rol le das?",
+    "options": [
+      "Administrator",
+      "PVEAuditor",
+      "Root compartido",
+      "PVEVMUser"
+    ],
+    "answer": 3,
+    "why": "PVEVMUser permite ver, hacer backup, configurar CD-ROM, abrir consola y manejar encendido de VMs, sin ser administrador."
+  },
+  {
+    "q": "Vas a habilitar el firewall a nivel datacenter en un nodo remoto. ¿Qué hacés antes?",
+    "options": [
+      "Nada, el firewall no bloquea la web",
+      "Reiniciás el nodo",
+      "Abrís una sesión SSH y creás el IPSet management con tus IPs de administración",
+      "Deshabilitás el 2FA"
+    ],
+    "answer": 2,
+    "why": "La guía oficial recomienda tener una sesión SSH abierta y usar el IPSet management, que genera las reglas para acceder a la web y SSH desde esas IPs."
+  },
+  {
+    "q": "Un usuario perdió el celular con el TOTP y no tiene claves de recuperación. ¿Qué puede hacer un administrador?",
+    "options": [
+      "Desbloquear el 2FA del usuario con pveum user tfa unlock o desde la lista de usuarios",
+      "Reinstalar Proxmox",
+      "Borrar /etc/pve",
+      "Nada, el usuario queda bloqueado para siempre"
+    ],
+    "answer": 0,
+    "why": "La guía indica que un administrador puede desbloquear el segundo factor de un usuario en cualquier momento desde la GUI o con pveum user tfa unlock."
+  }
+]

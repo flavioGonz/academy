@@ -1,0 +1,20 @@
+A: Lección seis. Áreas primero.
+B: Esto me parece trámite, te digo la verdad.
+A: Pensá esto. Agregaste el NVR, aparece online, todo verde. Abrís el Control Client y no hay video. Ni vivo ni reproducción.
+B: Uh. Me pasó.
+A: Es porque no importaste los canales a un área. El manual es claro: si no importás los recursos a un área, no hay vivo, reproducción ni eventos para esas cámaras.
+B: O sea, el área no es solo una carpeta.
+A: No. En HikCentral el área es donde viven las cámaras, entradas y salidas de alarma, puertas. Los permisos de los roles se dan por área, los mapas se cuelgan de áreas, las alarmas se ven en el árbol de áreas.
+B: ¿Y otra trampa?
+A: El FAQ tiene una. Doble clic en un área para ver en vivo y sale: no hay cámaras en esta área. Porque las cámaras están en el área hija, no en la madre. Las de un área hija no se ven al abrir la madre.
+B: ¿Cuánto respaldo tiene esto?
+A: Lo de importar al área lo dicen las tres páginas de alta de equipos. Lo del área hija, una sola, el FAQ. Evidencia fina, pero oficial.
+B: ¿Y las vistas?
+A: La vista es una grilla armada con cámaras. Pública la ve cualquier usuario; privada, solo el que la creó. Para el puesto de monitoreo, públicas. Para cada operador, privadas si quiere.
+B: ¿Y mapas?
+A: Dos tipos. E-map, un plano fijo, ideal para planta de un edificio. GIS, un mapa geográfico con datos vivos, para muchos sitios. Una cámara entra una vez por mapa y en hasta seis mapas.
+B: ¿Ejemplo de obra?
+A: Un depósito con dos naves. Área Depósito, hijas Nave uno y Nave dos, cada una con sus cámaras y puertas. Una vista pública por nave y un E-map con el plano.
+B: Lógico. ¿Laboratorio?
+A: Armá el árbol de áreas en papel antes de dar de alta, después crealo, importá los canales y armá una vista pública de cuatro cámaras. Quince minutos.
+B: Ordenás una vez y el resto cae solo.

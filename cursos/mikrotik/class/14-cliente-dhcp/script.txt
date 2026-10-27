@@ -1,0 +1,17 @@
+A: Lección catorce: el cliente DHCP en la WAN. El caso más común y el que menos miramos.
+B: Porque anda solo. Enchufás ether1 al módem y listo.
+A: Anda solo, pero instala cosas que conviene conocer. Según la documentación, cuando recibe el lease agrega la IP como dirección dinámica, una ruta por defecto, los DNS del proveedor y también los servidores NTP.
+B: ¿NTP también? No sabía.
+A: Con use peer ntp, sí. Y hay un detalle fino: si el servidor manda rutas por la opción ciento veintiuno, el gateway común se ignora, y te podés quedar sin ruta por defecto. Para eso existe add default route igual a special classless.
+B: Eso parece raro, pero cuando pasa te vuelve loco.
+A: Las dos fuentes que tratan el cliente DHCP coinciden en lo básico: mirar que el estado sea bound y qué instaló. Nadie discrepa. Lo que suma la documentación es la distancia: default route distance, uno por defecto.
+B: ¿Y para qué la toco?
+A: Para el segundo proveedor. Si las dos WAN son DHCP y las dos quedan con distancia uno, el router reparte tráfico entre las dos. Si querés principal y respaldo, al respaldo le ponés distancia dos.
+B: ¿Y las rutas recursivas de la lección once?
+A: Ahí está el límite. Un practicante lo dice claro: las recursivas necesitan gateway estable, y con DHCP el gateway puede cambiar. Para eso la documentación trae un script de lease: cuando el cliente recibe la concesión, crea o corrige una ruta con el gateway nuevo, y cuando la pierde, la borra.
+B: Y el otro clásico: el MikroTik detrás del router del proveedor.
+A: Doble NAT. Si la IP que recibe ether1 es privada, ciento noventa y dos punto ciento sesenta y ocho o diez algo, hay otro NAT adelante. Lo confirmás comparando con public address de IP Cloud.
+B: ¿Laboratorio?
+A: Quince minutos: mirás el cliente con print detail, cambiás la distancia a dos y ves cómo queda la ruta, hacés renew, y comparás tu IP de WAN con public address. Con eso sabés si hay doble NAT.
+B: O sea, no dar por hecho que DHCP es lo fácil.
+A: Exacto. Lo que instala el DHCP, lo leo antes de irme.

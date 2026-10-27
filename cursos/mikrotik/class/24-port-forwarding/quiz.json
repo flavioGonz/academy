@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Agregás `chain=dstnat protocol=tcp dst-port=80 action=dst-nat to-addresses=192.168.88.50` para publicar la web de un NVR y en la oficina deja de abrir cualquier página por http. ¿Qué pasó?",
+    "options": [
+      "Falta una regla de accept en forward para el puerto 80",
+      "Falta limpiar las conexiones en /ip/firewall/connection",
+      "La regla no tiene in-interface-list=WAN ni dst-address, así que también desvía al NVR las conexiones de la LAN al puerto 80 de cualquier servidor",
+      "El NVR no tiene cargado el MikroTik como gateway"
+    ],
+    "answer": 2,
+    "why": "Es el caso del foro: una regla con solo el puerto coincide con todo el tráfico a ese puerto, de la LAN y de la WAN. Se ata a la entrada con in-interface-list=WAN o a la IP pública con dst-address."
+  },
+  {
+    "q": "Un NVR Hikvision en 192.168.88.50 tiene que verse desde la app de la central de monitoreo, entrando por el puerto externo 18000. ¿Qué regla es la correcta?",
+    "options": [
+      "dst-nat con dst-port=8000 y to-ports=18000, sin filtro de origen",
+      "dst-nat con in-interface-list=WAN, src-address-list=nvr-permitidos, dst-port=18000, to-addresses=192.168.88.50 y to-ports=8000",
+      "dst-nat de los puertos 80, 443, 554 y 8000 desde cualquier origen, por las dudas",
+      "dst-nat del 8291 hacia el NVR para que la app encuentre el equipo"
+    ],
+    "answer": 1,
+    "why": "dst-port es el puerto que llega de afuera y to-ports el del NVR. La entrada por la lista WAN y el origen limitado a la lista son lo que recomiendan la documentación de NAT y el foro; el 8000 es el puerto de servidor de Hikvision para iVMS y la app."
+  },
+  {
+    "q": "Publicaste el NVR, probás desde el celular agregado a la lista y el contador del dst-nat no sube. La IP de ether1 es 100.72.15.4. ¿Qué pasa?",
+    "options": [
+      "Falta el masquerade de hairpin",
+      "La regla de forward de la configuración por defecto bloquea lo publicado",
+      "El NVR tiene cambiado el puerto 8000",
+      "Hay CGNAT: 100.72.15.4 está en 100.64.0.0/10, el espacio compartido del proveedor, y no hay port forwarding posible; queda Back To Home, un concentrador o pedir IP pública"
+    ],
+    "answer": 3,
+    "why": "Si el contador no sube, el paquete nunca llega al MikroTik. Con la WAN en 100.64.0.0/10, la documentación de NAT dice que CGNAT hace imposible el port forwarding."
+  }
+]

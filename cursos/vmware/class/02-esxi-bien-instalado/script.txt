@@ -1,0 +1,18 @@
+A: Lección dos. Te llega un servidor usado para montar un ESXi en una obra. ¿Qué es lo primero que hacés?
+B: Le enchufo el pendrive y lo instalo. [risas] Ya sé, ya sé.
+A: Casi. Lo primero es buscar el modelo en la Broadcom Compatibility Guide, la vieja HCL. Las tres fuentes de hardware que leímos dicen lo mismo: si no está en la lista, no tiene soporte.
+B: ¿Y qué pide ESXi ocho como mínimo?
+A: Según la documentación de Broadcom: dos núcleos, ocho gigas de RAM, doce recomendado para producción, el bit NX y la virtualización habilitados en el BIOS, una placa de red gigabit soportada y arranque UEFI.
+B: ¿Y el disco?
+A: Ahí está el cambio grande. Treinta y dos gigas mínimo de disco persistente. Lo óptimo, ciento veintiocho, y en RAID uno. Las tarjetas SD y los pendrives quedan solo para la partición de arranque, y van de salida.
+B: Uf, la cantidad de servidores que instalamos en la SD interna.
+A: Y si no hay disco persistente, ESXi te muestra una alarma diciendo que no encontró un dispositivo persistente secundario.
+B: ¿Y con vSphere nueve?
+A: Peor para los fierros viejos. William Lam cuenta que ESXi nueve deja afuera procesadores Skylake y Broadwell. Él muestra cómo forzar la instalación en laboratorio, pero aclara que queda sin soporte.
+B: Para el cliente, ni loco.
+A: Ni loco. Y Lam tiene un truco que me encanta: bootear el instalador desde un USB sin instalar nada. Si reconoce la CPU, las placas de red y la controladora, vas bien. Si no, te lo dice en pantalla.
+B: Sin tocar el disco del cliente.
+A: Exacto. Ese es el laboratorio. Buscás el modelo en la guía, booteás el instalador y mirás. Si después instalás, en la consola apretás F dos, Configure Management Network, IP fija, DNS y nombre de host.
+B: Y entrás por el navegador a la IP para ver el Host Client.
+A: Quince minutos, y te ahorrás instalar sobre hardware que te va a dar dolores de cabeza.
+B: Y volver a la obra por un servidor que se cuelga solo.

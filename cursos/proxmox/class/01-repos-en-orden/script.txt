@@ -1,0 +1,19 @@
+A: Arrancamos con Proxmox. Martín, instalás un Proxmox nuevo en un cliente. ¿Qué hacés primero?
+B: Entro a la web por el puerto ocho mil seis, veo que todo levantó y le doy a actualizar.
+A: Ahí está la primera trampa. Antes de actualizar conviene decidir de qué repositorio bajás los paquetes.
+B: ¿Por el error de "no autorizado" que tira el primer apt update?
+A: Exacto. Proxmox viene con el repositorio enterprise habilitado, y ese pide suscripción paga. Sin clave, falla.
+B: Y ahí la gente pega cualquier comando que encontró en un foro.
+A: [suspiro] Tal cual. La wiki oficial lo explica: hay tres repositorios. Enterprise, para producción, con suscripción. No subscription, gratis, que según Proxmox es para pruebas y uso no productivo, porque sus paquetes están menos validados. Y test, que es para desarrolladores.
+B: Pero media internet usa el no subscription en producción.
+A: Sí, y ahí está la discusión. De las siete páginas que leímos sobre versiones y updates, tres hablan del repositorio, y una de ellas actualiza a la nueve punto dos con no subscription como si nada. La wiki dice que no lo recomienda. Lo que funciona es decidirlo con el cliente, no por costumbre.
+B: ¿Y qué versión estamos instalando hoy?
+A: La nueve punto dos, que salió en mayo de dos mil veintiséis sobre Debian trece. Y un dato del anuncio oficial: la ocho punto cuatro tuvo parches de seguridad hasta agosto de este año. Un cliente que sigue en la ocho, hoy está sin parches.
+B: Uf. Eso va derecho a mantenimientos.
+A: Otra novedad: con Debian trece los repositorios van en archivos punto sources. Apt modernize sources migra los viejos.
+B: ¿Y para actualizar, el apt upgrade de siempre?
+A: No. Full upgrade. La guía de administración avisa que apt upgrade puede dejar paquetes a medio actualizar, porque no puede quitar paquetes para resolver dependencias.
+B: Mirá vos. Yo hacía upgrade a secas.
+A: Es el clásico. Laboratorio: en el nodo, Updates, Repositories. Dejá habilitado un solo repositorio de Proxmox, el que elegiste. Después apt update y apt full upgrade, sin errores.
+B: Diez minutos, tranquilo.
+A: Y desde ahí, cada Proxmox que entregues tiene su repositorio elegido a conciencia y se actualiza sin sorpresas.

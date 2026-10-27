@@ -1,0 +1,15 @@
+A: Lección nueve: nombre, no puerta. Hablamos de IP Cloud, el DDNS de MikroTik.
+B: El famoso nombre que termina en sn punto mynetname punto net.
+A: Ese. Lo activás en barra ip barra cloud, y el router recibe un nombre con su número de serie que sigue a la IP pública. Si el proveedor te la cambia, el nombre se actualiza solo.
+B: Y con eso ya entro desde afuera, ¿no?
+A: Esa es justamente la confusión. La documentación lo dice literal: el nombre solo hace más fácil encontrar el router y no abre ningún acceso. El firewall por defecto sigue descartando todo lo que viene de internet.
+B: O sea, es la dirección de la casa, no la llave.
+A: Exacto. Dos de las tres fuentes que tocan el tema van por ahí. Del otro lado, en el foro hay usuarios que publican cámaras y servidores por puertos detrás de ese nombre como algo normal. Eso lo vemos en la lección diez.
+B: ¿Y qué más te da IP Cloud, además del nombre?
+A: Un dato que vale oro en soporte: public-address. Es la IP con la que el router sale a internet, vista desde los servidores de MikroTik. Si la comparás con la IP que tiene tu interfaz WAN, sabés cómo es la conexión.
+B: Ah, mirá. Si son iguales, el router tiene la IP pública directo.
+A: Si son distintas, hay otro NAT adelante: el módem del proveedor, o peor, CGNAT, con direcciones cien punto sesenta y cuatro. Y la documentación de NAT es tajante: detrás de CGNAT el port forwarding es imposible.
+B: Cuántas tardes perdidas con eso.
+A: Por eso el laboratorio es rápido y te cambia el diagnóstico: activás el DDNS, leés el nombre y public-address, comparás con la IP del WAN, y decidís el camino. IP directa, se puede publicar con cuidado. NAT del módem, se pide modo bridge o se reenvía ahí también. CGNAT, túnel saliente o Back To Home.
+B: Diez minutos. Y antes de prometerle al cliente que va a ver las cámaras desde el celular, mirás esto primero.
+A: Esa es la regla.

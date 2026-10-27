@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un lazo LSN cerrado sufre un corte de cable a mitad de recorrido. ¿Qué esperás ver?",
+  "options": [
+   "Todos los detectores después del corte quedan fuera",
+   "Alarma general",
+   "El panel se reinicia",
+   "Aviso de avería y todos los elementos siguen funcionando, alimentados desde los dos extremos"
+  ],
+  "answer": 3,
+  "why": "En topología de lazo el panel parte el lazo en dos tramos alimentados por LSN1 y LSN2; los elementos siguen operativos y el lazo queda en avería."
+ },
+ {
+  "q": "Un instalador conectó un detector en una derivación usando solo el borne b1. ¿Qué problema genera?",
+  "options": [
+   "Ninguno",
+   "Ese elemento no actúa como aislador y un corto en ese tramo arrastra a todos los elementos entre dos aisladores",
+   "El detector no tiene dirección",
+   "El lazo pasa a modo classic"
+  ],
+  "answer": 1,
+  "why": "El System manual explica que en un ramal de un elemento la corriente no pasa por el aislador, así que ese equipo no aísla y crece la zona que cae ante un corto."
+ },
+ {
+  "q": "Un AVENAR panel 8000 va a tener 700 detectores y pulsadores. ¿Qué pide EN 54-2 según Bosch?",
+  "options": [
+   "Nada especial",
+   "Un segundo módulo de baterías",
+   "Un controlador redundante (otro controlador o un AVENAR keypad 8000 como redundante)",
+   "Pasar todo a LSN classic"
+  ],
+  "answer": 2,
+  "why": "Una falla no puede dejar fuera más de 512 detectores y pulsadores; por encima de eso el panel se diseña con controlador redundante."
+ }
+]

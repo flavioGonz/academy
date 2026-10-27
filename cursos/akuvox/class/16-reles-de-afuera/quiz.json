@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un edificio sufrió que arrancaran el portero y abrieran la puerta puenteando cables. ¿Qué cambia el SR01?",
+  "options": [
+   "Maneja la cerradura desde adentro, así que destruir el portero no abre la puerta",
+   "Nada, solo agrega un relé",
+   "Cifra el RTSP",
+   "Reemplaza a la central"
+  ],
+  "answer": 0,
+  "why": "Akuvox lo presenta así: el SR01 va del lado de adentro y controla la cerradura directamente."
+ },
+ {
+  "q": "Conectaste el SR01 por RS485. ¿Qué DoorNum usás por HTTP?",
+  "options": [
+   "DoorNum=1",
+   "DoorNum=2",
+   "DoorNum=SA",
+   "DoorNum=SB"
+  ],
+  "answer": 3,
+  "why": "Por RS485 el SR01 es Security Relay B, que por HTTP se dispara con DoorNum=SB."
+ },
+ {
+  "q": "Instalaste un RSAC-C1-R8 en el RS485 del monitor y no aparece. ¿Qué revisás?",
+  "options": [
+   "Que el portero tenga alta seguridad",
+   "El codec de audio",
+   "Que el DIP 1 esté encendido",
+   "La cuenta SIP 2"
+  ],
+  "answer": 2,
+  "why": "La guía de relés externos indica que sin el DIP 1 encendido el monitor no detecta el RSAC-C1-R8."
+ }
+]

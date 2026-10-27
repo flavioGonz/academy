@@ -1,0 +1,35 @@
+[
+ {
+  "q": "En el escritorio de guardia hay una sola boca de red para el teléfono y la PC. ¿Qué equipo de Akuvox lo resuelve según su ficha?",
+  "options": [
+   "SP-R50P",
+   "VC50B",
+   "R49G, con dos puertos Gigabit conmutados",
+   "MR03"
+  ],
+  "answer": 2,
+  "why": "La ficha del R49G lista dos puertos Ethernet 10/100/1000 conmutados."
+ },
+ {
+  "q": "Te piden la resolución de la cámara VC50T. ¿Qué hacés con lo leído?",
+  "options": [
+   "Decís 2 MP",
+   "No está en las páginas leídas: se pide la ficha al distribuidor",
+   "Decís 4K",
+   "Es igual a la del R29"
+  ],
+  "answer": 1,
+  "why": "En lo leído la VC50 solo aparece en el menú y con su código de firmware; sin ficha no se afirman especificaciones."
+ },
+ {
+  "q": "¿Qué sistema operativo usa el R49G según su ficha?",
+  "options": [
+   "Android 9",
+   "Linux",
+   "Android 14",
+   "Windows"
+  ],
+  "answer": 0,
+  "why": "La ficha del R49G indica Android 9 OS."
+ }
+]

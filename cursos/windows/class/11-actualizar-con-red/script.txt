@@ -1,0 +1,21 @@
+A: Windows Update en un servidor de video. El tema que más discusiones genera en la camioneta.
+B: Porque si actualizás, se reinicia y corta la grabación. Y si no actualizás, te entra cualquier cosa.
+A: Las dos cosas son ciertas. Y las fuentes no se ponen de acuerdo, así que veamos los lados.
+B: Dale.
+A: TechTarget dice: actualizaciones automáticas, sin vueltas. Microsoft, en su documentación de reinicios, para servidores sugiere otra cosa: la opción siete, que avise para instalar y avise para reiniciar.
+B: O sea, que alguien decida el momento.
+A: Eso. Y Bosch, para su VMS, pide un ciclo máximo de seis meses entre actualizaciones y una versión mayor cada dos años.
+B: ¿Y vos qué hacés?
+A: Actualizar sí, siempre. Con fecha, con aviso, validando con el fabricante del VMS. Y algo que Microsoft aclara y sorprende: solo una sesión de escritorio remoto activa cuenta como usuario conectado. Un servidor sin nadie logueado se reinicia cuando le toca.
+B: Por eso los reinicios a las tres de la mañana.
+A: Esos. Ahora la historia. Noviembre de dos mil veinticuatro. Administradores que se despiertan con sus Windows Server dos mil veintidós convertidos en dos mil veinticinco.
+B: ¿Cómo que convertidos?
+A: Windows Latest lo contó: la actualización a Server dos mil veinticinco quedó mal etiquetada en la API de Windows Update, como si fuera de seguridad. Las herramientas de parches de terceros la instalaron solas. Servidores sin licencia, y sin vuelta atrás simple.
+B: [suspiro] ¿Y cómo salieron?
+A: Tres caminos: restaurar desde backup, reconstruir, o pagar la licencia. El que tenía backup al menos tenía una salida.
+B: Entonces la regla...
+A: Antes de actualizar, backup. Siempre. En Server, wbadmin te hace una copia con los volúmenes críticos para poder restaurar el sistema.
+B: ¿Laboratorio?
+A: Veinte minutos. Revisás las horas activas y el historial de actualizaciones, y en un Server de prueba hacés un backup con wbadmin a un segundo disco y listás las versiones.
+B: Actualizar con red de seguridad.
+A: Esa es la idea.

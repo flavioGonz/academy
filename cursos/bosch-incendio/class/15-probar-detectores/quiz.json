@@ -1,0 +1,35 @@
+[
+ {
+  "q": "En un walk test simultáneo de un multisensor con herramienta multiestímulo no aparece alarma en el panel. ¿Qué indica?",
+  "options": [
+   "Que está todo bien",
+   "Que falta licencia premium",
+   "Que uno de los sensores del detector está fallando",
+   "Que la herramienta está apagada, siempre"
+  ],
+  "answer": 2,
+  "why": "La guía indica que en el walk test simultáneo la alarma solo aparece si todos los sensores dispararon; si no, uno está fallado."
+ },
+ {
+  "q": "Probás un óptico que participa de una dependencia de dos detectores, fuera de modo revisión. ¿Qué esperás?",
+  "options": [
+   "Alarma en 1 segundo",
+   "Que pueda tardar hasta un minuto; conviene aerosol en ráfagas cortas",
+   "Que no dispare nunca",
+   "Que dispare solo con calor"
+  ],
+  "answer": 1,
+  "why": "Fuera de revisión el detector evalúa la evolución temporal; la guía habla de hasta 1 min y sugiere ráfagas de 1 s con 30 s de espera."
+ },
+ {
+  "q": "¿Para qué sirve la herramienta FME-420-LSN-TTL?",
+  "options": [
+   "Para leer y diagnosticar un lazo LSN desde una PC",
+   "Para cargar firmware al panel",
+   "Para calibrar baterías",
+   "Para programar la red Ethernet"
+  ],
+  "answer": 0,
+  "why": "Es la herramienta de prueba del bus LSN; Bosch publicó en 2026 un archivo actualizado para que reconozca elementos nuevos."
+ }
+]

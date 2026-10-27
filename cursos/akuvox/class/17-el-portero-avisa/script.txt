@@ -1,0 +1,19 @@
+A: Lección diecisiete. Hasta ahora le mandábamos órdenes al portero. Hoy es al revés: el portero avisa.
+B: ¿Avisa qué?
+A: Lo que pasa. Akuvox lo llama Action URL. Cuando ocurre un evento, el portero manda un pedido HTTP a un servidor que vos elegís.
+B: ¿Qué eventos?
+A: En la lista del X915 versión dos: llamadas, cortes, relés que se disparan o se cierran, entradas, códigos y tarjetas válidos o inválidos, rostro, QR, intrusión y el arranque del equipo.
+B: ¿Y el servidor cómo sabe cuál fue?
+A: Por las variables. Escribís la URL con un signo pesos y el nombre, y el portero lo reemplaza antes de mandarla. Pesos relay1status llega con uno si el relé A abrió y cero si cerró. Pesos card underscore sn trae el número de tarjeta, pesos code el PIN, pesos mac, pesos ip, pesos model y pesos firmware identifican al equipo.
+B: Ah, entonces el NVR o la domótica se entera de cada apertura.
+A: Exacto. El ejemplo de ComfortClick hace eso con un E11R: escucha por HTTP el timbre, el botón de salida y el movimiento, y abre los relés por HTTP. Ida y vuelta.
+B: ¿Dónde se configura?
+A: En el R20A con firmware trescientos veinte punto treinta punto once punto cuarenta y siete, en Device Management, Setting, Action URL. Lo habilitás y, si el servidor pide digest, cargás usuario y clave. Si la URL ya trae credenciales, mandan esas.
+B: ¿Alguna trampa?
+A: Una: el evento de arranque, Setup Completed, no lo controla el interruptor general. Si no lo usás, el campo queda vacío. Y la lista de eventos cambia según el modelo.
+B: ¿Cuántas fuentes lo dicen?
+A: Dos de dos: la guía de Akuvox y el ejemplo de ComfortClick. Poca evidencia, así que se prueba en el modelo real.
+B: ¿Laboratorio?
+A: Quince minutos. Levantás un servidor HTTP de una línea en tu PC, cargás la URL del relé A y la de tarjeta válida, abrís la puerta y mirás llegar los pedidos en la terminal.
+B: Y ves el uno y el cero.
+A: Eso. Con esto, lo que abre por HTTP también avisa por HTTP.

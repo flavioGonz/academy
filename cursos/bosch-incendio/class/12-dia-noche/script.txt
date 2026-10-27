@@ -1,0 +1,16 @@
+A: Shopping, dos de la tarde, salta un detector en el patio de comidas. ¿Evacuás todo de una?
+B: Y, depende de lo que diga el proyecto.
+A: Exacto, y de eso trata hoy: retardos, verificación y modo día y noche. Es donde más se juega la seguridad de vida en la programación.
+B: ¿Qué ofrece el panel?
+A: Las opciones de EN cincuenta y cuatro dos que el manual de Bosch lista: retardo de la transmisión a bomberos o al monitoreo, dependencia de más de una señal, de tipo A, B o C, contador de alarmas y estado de modo día. Y teclas programables para pasar de día a noche o cambiar a la sensibilidad alternativa.
+B: ¿Y cómo se usa bien?
+A: La asociación de la industria británica describe varias estrategias. Alarma demorada para que alguien investigue: la norma británica la limita a seis minutos, y un pulsador la anula al instante. Alarma confirmada por un segundo detector. Prealarma. Y día y noche: de día se investiga, de noche va directo.
+B: ¿Y en Uruguay?
+A: La IT once de dos mil diez permite, en locales con mucha gente, una preseñal de hasta dos minutos antes de la alarma general. Siempre según el proyecto.
+B: ¿Y la verificación del monitoreo?
+A: Eso es otra cosa y tiene grieta. La NFPA setenta y dos, desde dos mil trece, permite que la central de monitoreo verifique antes de despachar, solo si los bomberos lo piden, en noventa segundos como máximo y avisando igual al despacho. Sus críticos temen demoras en un fuego real.
+B: ¿Y las fuentes en general?
+A: Tres de cuatro coinciden en que todo retardo se acuerda con la autoridad y no toca los pulsadores. La propia guía británica advierte que cualquier filtro demora la respuesta a un fuego real, y que en residencias de cuidado una demora probablemente no sirve.
+B: ¿Laboratorio?
+A: En papel. Un local comercial: escribí qué pasa de día y de noche con un detector, con dos detectores y con un pulsador, y cuánto retardo hay en cada caso. Quince minutos.
+B: Y eso se lleva al técnico registrado antes de programar nada.

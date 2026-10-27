@@ -1,0 +1,19 @@
+A: Hoy, el lazo. Todo lo que cuelga de un AVENAR habla por un solo par de cables: el LSN.
+B: Local Security Network. ¿Y cuántos equipos le entran?
+A: En LSN improved, hasta doscientos cincuenta y cuatro elementos por módulo de lazo. Pero ojo: si metés un solo elemento LSN classic, de los viejos, el lazo entero baja a ciento veintisiete.
+B: ¿Uno solo?
+A: Uno solo. Y además perdés los T-tap, las derivaciones en T. Es la trampa típica cuando ampliás una instalación vieja.
+B: ¿Y los dos módulos de lazo qué diferencia tienen?
+A: El LSN cero trescientos A entrega trescientos miliamperes y llega a mil seiscientos metros de cable. El LSN mil quinientos A llega a mil quinientos miliamperes con elementos improved y a tres mil metros.
+B: Bien. ¿Y el direccionamiento?
+A: Los detectores con R al final, por ejemplo el FAP cuatrocientos veinticinco O R, traen tres perillas rotativas. Cero cero cero es automático, viene así de fábrica: el panel numera solo según el orden en el cable. Pero en automático no hay T-tap.
+B: ¿Y si necesito una derivación?
+A: Pasás todo a manual, del uno al doscientos cincuenta y cuatro, centenas a la izquierda y unidades a la derecha. Y en el programa FSP cinco mil RPS marcás T-tap, aunque el cableado sea un lazo común. El manual lo dice así: si elegís manual, marcás T-tap.
+B: ¿Y la posición CL?
+A: CL cero cero es modo classic, para convivir con lo viejo. Volvés a ciento veintisiete.
+B: Acá no hay grieta, ¿no?
+A: El System manual y la guía del detector dicen exactamente lo mismo. Es regla de fabricante, no opinión.
+B: Ok. ¿Qué probamos?
+A: Tres detectores en un lazo de banco. Primero los tres en cero cero cero y autodetección desde RPS. Después los pasás a uno, dos y tres, marcás T-tap y autodetectás de nuevo. Comparás qué dirección mostró el panel cada vez. Quince minutos.
+B: Y te queda claro por qué en obra grande conviene manual y anotado en el plano.
+A: Exacto. El que viene después a mantener te lo va a agradecer.

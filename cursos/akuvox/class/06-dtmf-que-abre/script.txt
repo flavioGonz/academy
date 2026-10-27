@@ -1,0 +1,19 @@
+A: Lección seis, la estrella del curso: abrir la puerta por DTMF durante la llamada.
+B: La que más tickets genera.
+A: Lejos. Y la regla que repiten las cinco fuentes es una sola: mismo tipo de DTMF y mismo código en las dos puntas.
+B: ¿Qué tipos hay?
+A: Tres. Inband, que viaja como tono dentro del audio y se arruina con codecs comprimidos como G setecientos veintinueve. RFC dos ocho tres tres, que manda el dígito como evento aparte dentro del RTP. Y SIP INFO, que lo manda por la señalización.
+B: ¿Y cuál elijo?
+A: Acá hay discusión. Akuvox presenta SIP INFO como confiable. Tres CX, en cambio, lo desaconseja: dice que no viaja sincronizado con el audio y que muchos servicios no lo soportan. Y agrega algo clave: si le llega SIP INFO, lo reenvía como SIP INFO.
+B: O sea que la central no te salva si el otro lado no lo entiende.
+A: Exacto. Por eso lo práctico es RFC dos ocho tres tres en portero, central y monitor.
+B: ¿Y en Akuvox dónde se toca?
+A: En el portero, Account, Advanced, DTMF para el tipo, y Access Control, Relay para la cantidad de dígitos y el código. En el monitor, el mismo tipo, y el código en Device, Relay, Remote Relay. Y si querés un botón en pantalla, SoftKey In Talking Page, tipo Remote Relay DTMF.
+B: ¿Historia?
+A: La documentación de Yeastar dice que desde su app abrís marcando cero, el código que trae el portero de fábrica.
+B: [suspiro] El cero de fábrica. Ese lo marca cualquiera.
+A: Por eso conviene cambiarlo, y además usar la lista blanca DTMF del portero, Open Relay Via DTMF, para que solo abran los contactos cargados.
+B: ¿Laboratorio?
+A: Con portero y monitor ya registrados: RFC dos ocho tres tres en los dos, código de tres dígitos, botón en pantalla, y abrís. Después pasá solo el monitor a SIP INFO y mirá cómo deja de abrir. Volvé a dejarlo igual. Quince minutos.
+B: Romperlo a propósito para reconocerlo después.
+A: Eso. Y la próxima vez que no abra, ya sabés por dónde empezar.

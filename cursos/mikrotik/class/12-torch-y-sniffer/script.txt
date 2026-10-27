@@ -1,0 +1,17 @@
+A: Última lección: Torch y sniffer. Las herramientas para dejar de adivinar.
+B: Porque el "reiniciá a ver si anda" no es diagnóstico.
+A: [risas] No. Mirá cómo lo ordenan las fuentes. Ping y traceroute preguntan: mandan paquetes y te dicen si hay respuesta y hasta dónde llegan. Torch no manda nada: mira en vivo lo que pasa por una interfaz, con direcciones, puertos y velocidad de cada flujo. Y el sniffer guarda los paquetes en un archivo para abrirlo en Wireshark.
+B: ¿Coinciden todas?
+A: En el uso combinado coinciden las que hablan de cada herramienta, sin discrepancias. Y la documentación de Torch tiene dos detalles finos. Torch ve los paquetes antes del firewall, así que te muestra tráfico que después se descarta. Y mientras corre apaga FastTrack, entonces en un router cargado la CPU sube.
+B: O sea, lo prendés, mirás, y lo apagás.
+A: Y lo mirás en la interfaz LAN, no en la WAN, porque del lado de afuera todo aparece con la IP pública del router después del NAT.
+B: Contame un caso.
+A: Uno de un blog de Admiral. Tenían un portal cautivo que mostraba la página de pago en blanco. Sacaron una captura con el sniffer, la abrieron en Wireshark filtrando DNS, y aparecieron unos veinte dominios que había que permitir y que el proveedor ni documentaba.
+B: Adivinando no llegabas nunca.
+A: Y te dejan un truco: si el archivo de captura pesa veinticuatro bytes, no capturó nada; es solo el encabezado.
+B: Caso de obra nuestro: una cámara que se ve en el NVR a ratos. Torch en el bridge filtrando por la IP de la cámara: si el tráfico aparece y cae a cero, es la cámara o el cable. Si fluye parejo, el problema está del lado del NVR.
+A: Y si sospechás de una regla, le activás log mientras probás, y después se lo sacás. ¿Laboratorio?
+B: Dale.
+A: Ping y traceroute a un destino, Torch en el bridge filtrado por una cámara o una PC, una captura de treinta segundos a un archivo punto pcap que abrís en Wireshark, y un log temporal en una regla de drop.
+B: Quince minutos.
+A: Y con eso, cada ticket arranca con evidencia en lugar de corazonadas.

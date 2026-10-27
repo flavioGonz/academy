@@ -1,0 +1,19 @@
+A: Lección cuatro. Creamos una VM. ¿Qué tocás en el asistente?
+B: Nombre, ISO, disco, memoria, y listo.
+A: Y ahí se escapan tres cosas que después cuestan caro. Primera: la controladora del disco. La guía oficial recomienda VirtIO SCSI single con IO thread, que desde la siete punto tres es el default para Linux. Nada de IDE, que es un diseño de mil novecientos ochenta y cuatro.
+B: [risas] Más viejo que yo.
+A: Segunda: el guest agent. Es un programita que va adentro de la VM. Según la wiki de Proxmox sirve para dos cosas: apagar bien la máquina, y congelar el sistema de archivos durante el backup.
+B: Ah, entonces sin agente el backup puede salir inconsistente.
+A: Más riesgo, sí. Se activa en la VM, en Options, QEMU Guest Agent, y se instala adentro. Y se prueba con qm agent, el número de la VM, ping.
+B: ¿Y Windows?
+A: Windows no trae drivers VirtIO. Montás el ISO de virtio win y corrés el instalador. Pero acá hay una historia buena. La wiki de Proxmox lleva una lista de versiones. La cero punto uno punto dos ochenta y cinco dio errores de lectura con Windows Server dos mil veinticinco y SQL Server. Y la que marcan sin problemas conocidos es la dos setenta y uno.
+B: ¿En serio? O sea que la última no siempre es la mejor.
+A: Exacto. Y en septiembre estaban probando una más nueva sin recomendarla todavía para producción. Lo que funciona es usar la que ellos marcan estable.
+B: Anotado. ¿La tercera cosa?
+A: El tipo de CPU. Host te da todo el rendimiento, pero si después querés migrar en vivo a otro nodo con otro procesador, puede fallar. En un nodo solo, host. En clúster, el modelo más viejo que tengan todos.
+B: ¿Cuántas fuentes coinciden?
+A: En VirtIO y agente, tres de cuatro.
+B: ¿Y el laboratorio?
+A: En una VM Linux: qm set con agent uno, instalás qemu guest agent adentro, reiniciás, y qm agent ping. Si no tira error, está hablando. Después pedile las IPs con network get interfaces.
+B: Quince minutos.
+A: Y de ahí en más, cada VM sale de fábrica lista para backup y apagado limpio.

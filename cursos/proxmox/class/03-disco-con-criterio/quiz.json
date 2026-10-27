@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un servidor de cliente trae una controladora RAID con caché y batería, con un RAID 10 armado. ¿Qué almacenamiento elegís en la instalación?",
+    "options": [
+      "ZFS RAIDZ2 sobre el volumen del RAID",
+      "ZFS RAID0 para aprovechar la caché",
+      "ext4 con LVM-thin sobre el volumen del RAID",
+      "Ceph con un solo nodo"
+    ],
+    "answer": 2,
+    "why": "ZFS necesita acceso directo a los discos y no se usa sobre RAID por hardware con caché. Con RAID por hardware, LVM-thin es la opción indicada."
+  },
+  {
+    "q": "Creaste una VM con un disco de 100 GB en local-lvm y adentro hay 12 GB de datos. ¿Cuánto ocupa aproximadamente en el thin pool?",
+    "options": [
+      "100 GB",
+      "112 GB",
+      "0 GB hasta que se apague",
+      "Unos 12 GB"
+    ],
+    "answer": 3,
+    "why": "LVM-thin asigna bloques recién cuando se escriben; el disco ocupa lo que realmente tiene escrito."
+  },
+  {
+    "q": "Un nodo con ZFS tiene un pool de 8 TiB. Según la regla de la guía oficial, ¿cuánta memoria conviene para el ARC?",
+    "options": [
+      "10 GiB",
+      "1 GiB",
+      "8 GiB",
+      "64 GiB"
+    ],
+    "answer": 0,
+    "why": "La guía indica 2 GiB base más 1 GiB por TiB de almacenamiento: 2 + 8 = 10 GiB."
+  }
+]

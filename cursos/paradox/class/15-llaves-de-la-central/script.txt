@@ -1,0 +1,18 @@
+A: Lección quince: las llaves de la central. Todas las contraseñas que una Paradox tiene, y que casi nadie cambia completas.
+B: ¿Cuántas son? Yo pensaba en el instalador y el maestro.
+A: Más. Código de instalador, de mantenimiento, maestro del sistema, ID de panel, contraseña de PC, la contraseña de instalador del software, la del receptor IP y la del módulo. La guía de las SP plus trae casi todas con su valor de fábrica.
+B: Y esos valores están en manuales públicos.
+A: Exacto, por eso el primer día se cambian. Cuatro de las diez páginas que tocan seguridad lo sostienen, y ninguna dice lo contrario.
+B: ¿Y la historia?
+A: En IPVM, un técnico tenía una MG cinco mil cincuenta sin código de instalador, y el reseteo por botón no le funcionaba. Le respondieron con los códigos de fábrica y con la vía de BabyWare. En un foro portugués, alguien sugería lo mismo para la central que había puesto otro instalador.
+B: [suspiro] Lo que para uno es solución, para el cliente es riesgo.
+A: Tal cual. Y está el bloqueo de instalador: en la sección trescientos noventa y cinco cargás ciento cuarenta y siete y la programación queda trabada. Según la guía, con eso el reseteo por botón ya no borra nada. Se quita poniendo tres ceros.
+B: ¿Y cuándo lo usás?
+A: Cuando está escrito en el contrato con el cliente. Y si te toca una central bloqueada sin códigos, el camino es el cliente y el instalador anterior, no buscar atajos.
+B: ¿Y la SP sesenta y cinco?
+A: La de TremTech: el reseteo por puente exige el bloqueo apagado. Coherente con lo anterior.
+B: ¿Algo más que proteja?
+A: El bloqueo de teclado: después de varios códigos inválidos, los teclados se bloquean unos minutos y se reporta a monitoreo.
+B: ¿Qué probamos?
+A: Una ficha de llaves. Recorrés la central de banco con modo visualización, anotás cada llave, la cambiás si está de fábrica y dejás el bloqueo de teclado configurado. Quince minutos.
+B: Ninguna central sale de obra con un código de fábrica.

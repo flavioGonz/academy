@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>El sufijo cambia funciones: marcá cada versión</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">AKUVOX · LECCIÓN 19 · PASO 4</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">El sufijo cambia funciones: marcá cada versión</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'liga' 0,'calt' 0}</style>
+<rect x="48" y="140" width="540" height="96" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="72.0" y="182.0" font-family="JetBrains Mono" font-size="21" font-weight="700" fill="#04223D" text-anchor="start">R29S</text>
+<rect x="72.0" y="197" width="236.0" height="30" rx="15" fill="#E5F0FB"/><text x="190.0" y="218.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#41627F" text-anchor="middle">una cámara, sin Bluetooth</text>
+<rect x="612" y="140" width="540" height="96" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="636.0" y="182.0" font-family="JetBrains Mono" font-size="21" font-weight="700" fill="#04223D" text-anchor="start">R29C-L</text>
+<rect x="636.0" y="197" width="185.6" height="30" rx="15" fill="#FFF4DE"/><text x="728.8" y="218.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#B45309" text-anchor="middle">LTE · no acepta PoE</text>
+<rect x="48" y="258" width="540" height="96" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="72.0" y="300.0" font-family="JetBrains Mono" font-size="21" font-weight="700" fill="#04223D" text-anchor="start">R29C-T</text>
+<rect x="72.0" y="315" width="160.4" height="30" rx="15" fill="#17A8D4"/><text x="152.2" y="336.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">lector de huella</text>
+<rect x="612" y="258" width="540" height="96" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="636.0" y="300.0" font-family="JetBrains Mono" font-size="21" font-weight="700" fill="#04223D" text-anchor="start">R20K-L</text>
+<rect x="636.0" y="315" width="51.2" height="30" rx="15" fill="#FFF4DE"/><text x="661.6" y="336.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#B45309" text-anchor="middle">LTE</text>
+<rect x="48" y="376" width="540" height="96" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="72.0" y="418.0" font-family="JetBrains Mono" font-size="21" font-weight="700" fill="#04223D" text-anchor="start">X915P · E16P</text>
+<rect x="72.0" y="433" width="168.8" height="30" rx="15" fill="#17A8D4"/><text x="156.4" y="454.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">venas de la palma</text>
+<rect x="612" y="376" width="540" height="96" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="636.0" y="418.0" font-family="JetBrains Mono" font-size="21" font-weight="700" fill="#04223D" text-anchor="start">X915 HID iClass / Prox</text>
+<rect x="636.0" y="433" width="110.0" height="30" rx="15" fill="#17A8D4"/><text x="691.0" y="454.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">lector HID</text>
+<rect x="48" y="510" width="1104" height="54" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="522" width="5" height="30" rx="2.5" fill="#0A63B8"/><text x="74.0" y="544.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Mismo modelo, distinta versión: cambian la fuente o las credenciales. En la planilla, cada versión con sufijo va en otro color.</tspan></text>
+</svg>

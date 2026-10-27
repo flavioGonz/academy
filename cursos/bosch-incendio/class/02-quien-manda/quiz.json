@@ -1,0 +1,35 @@
+[
+ {
+  "q": "En una obra, el manual de Bosch permite una distancia que el proyecto firmado no permite. ¿Qué vale?",
+  "options": [
+   "El manual, porque es del fabricante",
+   "El proyecto firmado por el técnico registrado y lo que exija la DNB",
+   "Lo que diga el técnico de campo",
+   "La norma NFPA 72 por ser la más conocida"
+  ],
+  "answer": 1,
+  "why": "El propio System manual indica respetar las normas nacionales y a la autoridad; en Uruguay el Decreto 372/023 pone el proyecto en manos del técnico registrado."
+ },
+ {
+  "q": "Según el Decreto 372/023, ¿quién puede instalar y mantener un sistema de detección y alarma?",
+  "options": [
+   "Cualquier electricista matriculado",
+   "Solo Bosch",
+   "El propietario si tiene el manual",
+   "Una empresa registrada ante la Dirección Nacional de Bomberos"
+  ],
+  "answer": 3,
+  "why": "El artículo 24 exige que esos sistemas los suministren, instalen, pongan en marcha y mantengan empresas registradas ante la DNB."
+ },
+ {
+  "q": "Bomberos publicó en 2026 el borrador de una nueva IT11. ¿Se puede usar ya para un proyecto?",
+  "options": [
+   "No: según el comunicado, no autoriza su uso hasta que se publique la versión final y entre en vigencia",
+   "Sí, es más moderna",
+   "Sí, si el cliente lo pide",
+   "Solo para obras nuevas"
+  ],
+  "answer": 0,
+  "why": "El comunicado de la DNB del 31/07/2026 aclara que la publicación del borrador no autoriza su uso para asesorar proyectos hasta su vigencia."
+ }
+]

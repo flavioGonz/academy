@@ -1,0 +1,20 @@
+A: Lección dos. Extensión sólida. Parece lo más fácil del mundo, ¿no?
+B: Y sí. Número, nombre, contraseña. Listo.
+A: Bueno, en esa contraseña empiezan la mitad de los problemas. ¿Qué contraseña le ponés vos?
+B: [risas] Muchas veces la misma del número de interna. Para que el cliente la recuerde.
+A: Uf. Justamente el cliente no la tiene que recordar nunca, la carga el teléfono. La UCM tiene una opción, Enable Random Password, en PBX Settings, General Settings. Con eso cada extensión nueva nace con una clave aleatoria.
+B: ¿Y qué pide el manual como mínimo?
+A: Según el manual del UCM seis mil trescientos, diez caracteres, con mayúscula, minúscula, número y un especial, y sin secuencias. Las fuentes oficiales que leímos, las dos, van en la misma línea.
+B: Ok. ¿Qué más miro en la extensión?
+A: Registros concurrentes. Por defecto son tres, y se puede subir hasta diez. Es la cantidad de equipos que pueden usar esa misma cuenta.
+B: Ah, el teléfono de escritorio más la app Wave en el celular.
+A: Exacto. Pero si nadie usa la app, dejalo bajo. Cada registro de más es una puerta más.
+B: Tiene sentido. ¿Y la pestaña de media?
+A: Ahí hay dos cosas que conviene entender. NAT viene activado por defecto, y Direct Media viene apagado. Eso quiere decir que el audio pasa por la central.
+B: ¿Y eso no es más carga para la central?
+A: Un poco, pero te ahorra un montón de audio de un solo lado. Con Direct Media prendido, la central intenta que los teléfonos se hablen directo, y si hay NAT en el medio, chau audio.
+B: O sea, lo dejo como viene salvo que sepa por qué lo cambio.
+A: Esa es la regla. Y el DTMF, en RFC cuatro mil setecientos treinta y tres, que es el de fábrica.
+B: ¿Laboratorio?
+A: Diez minutos. Activás la contraseña aleatoria, creás tres extensiones, y en cada una revisás registros concurrentes y la pestaña Media.
+B: Y después, en soporte, cuando un teléfono no registra, ya sabés que la clave no la inventó nadie de memoria.

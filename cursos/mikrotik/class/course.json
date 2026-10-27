@@ -1,0 +1,269 @@
+{
+  "slug": "mikrotik",
+  "title": "MikroTik RouterOS para integradores",
+  "vendor": "MikroTik",
+  "tagline": "Un MikroTik bien entregado: al que entrás vos, por túnel, y nadie más.",
+  "description": "Al terminar vas a poder recibir un MikroTik de fábrica o heredado, conectarlo a internet por IP fija, DHCP o PPPoE (incluido el caso de Antel), dejarlo seguro y documentado, separar CCTV, control de acceso y datos en VLANs, mantenerlo al día con el canal correcto, y entrar a gestionarlo por WireGuard, Back To Home, un concentrador CHR, L2TP/IPsec o IPsec con equipos de otras marcas. Incluye criterios para publicar un NVR, armar un failover y diagnosticar con Torch, el packet sniffer y los logs.",
+  "level": "Inicial a intermedio",
+  "audience": "Técnicos instaladores y de soporte que ya manejan IP, máscara, gateway y VLAN, y empiezan a trabajar con RouterOS en obra.",
+  "prerequisites": [
+    "Direccionamiento IPv4: IP, máscara, gateway y DNS",
+    "Saber qué es una VLAN y qué es NAT, aunque no las hayas configurado",
+    "Un RouterBOARD de laboratorio (hAP, hEX o RB5009) con RouterOS 7 y una notebook con WinBox"
+  ],
+  "outcomes": [
+    "Entrar por WinBox (también por MAC) y trabajar en Safe Mode sin perder el acceso",
+    "Asegurar un equipo: usuarios por técnico, servicios cerrados, auditoría de equipos heredados",
+    "Escribir reglas de firewall en la cadena y el orden correctos, con address-lists",
+    "Separar sistemas en VLANs con bridge vlan-filtering, ingress-filtering y VLAN de gestión",
+    "Mantener el equipo: export y backup, actualización de RouterOS y RouterBOOT, acceso por WireGuard",
+    "Diagnosticar con ping, traceroute, Torch, packet sniffer y logs, y decidir sobre port forwarding y failover",
+    "Conectar la WAN por IP fija, DHCP cliente o PPPoE (con el ONT de Antel en modo puente), verificando rutas, DNS, MTU y doble NAT",
+    "Mantener RouterOS con paquetes, actualización sin internet, downgrade y el canal adecuado para cada cliente",
+    "Dar acceso remoto a sitios sin IP pública con Back To Home o un concentrador CHR, y armar y diagnosticar túneles L2TP/IPsec e IPsec con otras marcas"
+  ],
+  "version_note": "RouterOS 7 (documentación de la versión 7.25, octubre de 2026). Los detalles que cambian según la versión están marcados: chequeo de actualizaciones por HTTPS desde 7.23, QR de WireGuard desde 7.21, Back To Home desde 7.12 solo en ARM, ARM64 y TILE, paquetes de radio separados desde 7.13, paso intermedio 7.12.1 para quien viene de RouterOS 6. Los datos de Antel son los publicados en antel.com.uy a octubre de 2026; la VLAN del servicio con ONT en puente no está confirmada por ninguna fuente leída.",
+  "arcs": [
+    {
+      "title": "Entrar y blindar",
+      "why": "Un MikroTik recién sacado de la caja se puede dejar abierto o se puede perder el acceso en cinco minutos; estas cinco lecciones dejan un equipo al que entrás vos y nadie más.",
+      "lessons": [
+        1,
+        23,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "title": "Operación diaria",
+      "why": "Lo que un integrador hace todas las semanas: separar sistemas en VLANs, guardar la configuración, actualizar y entrar a distancia.",
+      "lessons": [
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "title": "Avanzado y diagnóstico",
+      "why": "Casos donde las fuentes dan más de un camino; cada lección deja un criterio para decidir en el sitio.",
+      "lessons": [
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "title": "Conexión a internet",
+      "why": "Antes de VLANs, firewall o VPN, el router tiene que salir a internet: las tres formas que aparecen en obra en Uruguay, de la más simple a la que más consultas genera.",
+      "lessons": [
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "title": "Software al día",
+      "why": "La lección 7 dejó el orden; estas dos dan las herramientas para actualizar sin internet, deshacer una versión y elegir qué versión vive en cada cliente.",
+      "lessons": [
+        16,
+        17
+      ]
+    },
+    {
+      "title": "Acceso remoto y VPN",
+      "why": "Lo que aparece cuando el sitio no tiene IP pública, cuando del otro lado solo hay un cliente nativo y cuando el otro extremo es un firewall de otra marca.",
+      "lessons": [
+        18,
+        19,
+        20,
+        21,
+        22
+      ]
+    }
+  ],
+  "splits": [
+    {
+      "topic": "Firewall por defecto o drop explícito",
+      "sides": "La documentación y una escuela del foro: no tocar la defconf y abrir agujeros puntuales. Otra escuela del foro: reescribir con un drop final y permitir solo lo explícito.",
+      "decide": "Si el equipo lo van a tocar varios técnicos de distinto nivel, defconf. Si tenés una plantilla propia probada y documentada, drop explícito."
+    },
+    {
+      "topic": "Rutas recursivas o Netwatch para el failover",
+      "sides": "La documentación usa rutas recursivas con check-gateway, sin scripts. Un practicante (con producto propio) dice que conmutan en 20 a 30 segundos y suma Netwatch.",
+      "decide": "Si el sitio tolera medio minuto de corte, rutas recursivas. Si hay voz o cobros, Netwatch con una plantilla única para toda la flota."
+    },
+    {
+      "topic": "WireGuard, L2TP/IPsec o túnel saliente",
+      "sides": "La guía de seguridad propone WireGuard; una guía práctica defiende L2TP/IPsec por el cliente nativo; otra propone túnel saliente a un VPS para sitios con CGNAT.",
+      "decide": "WireGuard si podés instalar el cliente; L2TP/IPsec si solo hay cliente nativo; túnel saliente o Back To Home si el sitio no tiene IP pública."
+    },
+    {
+      "topic": "Publicar cámaras por puerto o no",
+      "sides": "En el foro se trata como rutina; MikroTik y la prensa de seguridad empujan a no exponer nada.",
+      "decide": "Si quien mira tiene IP fija, dst-nat filtrado por origen. Si son celulares con IP cambiante, VPN o la nube del fabricante del NVR."
+    },
+    {
+      "topic": "Configuración por defecto o desde cero",
+      "sides": "La documentación recomienda conservarla a principiantes; la guía de VLAN del foro arranca de cero.",
+      "decide": "Desde cero solo con una plantilla probada y un acceso de rescate (puerto fuera del bridge o consola)."
+    },
+    {
+      "topic": "Canal stable o long-term",
+      "sides": "La documentación describe ambos sin elegir y ofrece actualización automática; un distribuidor recomienda la rama de solo arreglos para producción.",
+      "decide": "Long-term en sitios de clientes; stable solo si necesitás una función nueva y la probaste en el banco; testing y development nunca en producción."
+    },
+    {
+      "topic": "ONT de Antel en puente o en router",
+      "sides": "Antel ofrece el modo puente y con él el MikroTik es el router del cliente; usuarios de un foro uruguayo volvieron a modo router por cortes en 2017 y quedaron con doble NAT.",
+      "decide": "Si vas a dar acceso remoto, VPN o publicar algo, puente. Si el cliente solo navega y tuvo cortes en puente, router de Antel con el MikroTik por DHCP detrás, sabiendo que hay doble NAT."
+    },
+    {
+      "topic": "Back To Home, CHR propio o servicio de terceros para CGNAT",
+      "sides": "Back To Home es gratis pero solo ARM y pasa por relays de MikroTik; un CHR propio da control y cuesta licencia y mantenimiento; un practicante ofrece su nube (sesgo comercial).",
+      "decide": "Pocos sitios con equipos ARM, Back To Home. Flota mixta o con MIPS, concentrador CHR."
+    },
+    {
+      "topic": "Clave compartida o certificados en IPsec",
+      "sides": "La documentación aconseja evitar la clave compartida; los ejemplos prácticos y L2TP/IPsec la usan.",
+      "decide": "Clave larga y única por túnel para pocos sitios; certificados cuando crece la cantidad de túneles o el otro extremo lo soporta."
+    }
+  ],
+  "sources_count": 46,
+  "lessons": [
+    {
+      "n": 1,
+      "dir": "01-entrar-sin-romper",
+      "handle": "Entrar sin romper",
+      "summary": "WinBox por MAC desde un puerto LAN, Safe Mode y cuándo conservar la configuración por defecto."
+    },
+    {
+      "n": 2,
+      "dir": "02-usuarios-propios",
+      "handle": "Usuarios propios",
+      "summary": "Un usuario por técnico, admin deshabilitado y grupos con las políticas justas."
+    },
+    {
+      "n": 3,
+      "dir": "03-cerrar-puertas",
+      "handle": "Cerrar puertas",
+      "summary": "Gestión fuera de internet, servicios apagados y auditoría de equipos heredados tras Mēris."
+    },
+    {
+      "n": 4,
+      "dir": "04-input-y-forward",
+      "handle": "Input y forward",
+      "summary": "Qué cadena protege qué, el orden de las reglas y las address-lists."
+    },
+    {
+      "n": 5,
+      "dir": "05-vlan-por-sistema",
+      "handle": "VLAN por sistema",
+      "summary": "CCTV, accesos y datos separados con bridge vlan-filtering sin quedarte afuera."
+    },
+    {
+      "n": 6,
+      "dir": "06-backup-primero",
+      "handle": "Backup primero",
+      "summary": "Export en texto y backup binario: cuándo usar cada uno y cómo comparar antes y después."
+    },
+    {
+      "n": 7,
+      "dir": "07-actualizar-en-orden",
+      "handle": "Actualizar en orden",
+      "summary": "Canales, backup, RouterOS y RouterBOOT en el orden correcto."
+    },
+    {
+      "n": 8,
+      "dir": "08-tunel-de-gestion",
+      "handle": "Túnel de gestión",
+      "summary": "WireGuard con un peer por técnico y L2TP/IPsec cuando solo hay cliente nativo."
+    },
+    {
+      "n": 9,
+      "dir": "09-nombre-no-puerta",
+      "handle": "Nombre, no puerta",
+      "summary": "IP Cloud y DDNS, y cómo detectar NAT doble o CGNAT antes de prometer acceso remoto."
+    },
+    {
+      "n": 10,
+      "dir": "10-nvr-con-criterio",
+      "handle": "NVR con criterio",
+      "summary": "Si hay que publicar un NVR: un puerto, origen filtrado y hairpin solo cuando hace falta."
+    },
+    {
+      "n": 11,
+      "dir": "11-dos-wan",
+      "handle": "Dos WAN",
+      "summary": "Failover con rutas recursivas a hosts testigo y cómo probarlo de verdad."
+    },
+    {
+      "n": 12,
+      "dir": "12-torch-y-sniffer",
+      "handle": "Torch y sniffer",
+      "summary": "Ping, traceroute, Torch, packet sniffer y logs para diagnosticar con evidencia."
+    },
+    {
+      "n": 13,
+      "dir": "13-ip-fija",
+      "handle": "IP fija",
+      "summary": "Dirección, ruta por defecto y DNS a mano, sin el DHCP de la defconf, y verificación por capas."
+    },
+    {
+      "n": 14,
+      "dir": "14-cliente-dhcp",
+      "handle": "Cliente DHCP",
+      "summary": "Qué instala el cliente DHCP, distancia de la ruta para principal y respaldo, y cómo detectar doble NAT."
+    },
+    {
+      "n": 15,
+      "dir": "15-pppoe-con-antel",
+      "handle": "PPPoE con Antel",
+      "summary": "ONT de Antel en puente, cliente PPPoE, lista WAN, MTU 1492 y MSS; qué está confirmado y qué preguntar a Antel."
+    },
+    {
+      "n": 16,
+      "dir": "16-paquetes-al-dia",
+      "handle": "Paquetes al día",
+      "summary": "Check for Updates, paquetes extra, actualización sin internet con .npk, downgrade y RouterBOOT."
+    },
+    {
+      "n": 17,
+      "dir": "17-elegir-el-canal",
+      "handle": "Elegir el canal",
+      "summary": "Long-term, stable, testing y development: cuál va en clientes y cómo cambiar de canal."
+    },
+    {
+      "n": 18,
+      "dir": "18-cloud-a-fondo",
+      "handle": "Cloud a fondo",
+      "summary": "DDNS con IP dinámica, force-update, public-address con dos WAN, hora por NTP y detect-internet."
+    },
+    {
+      "n": 19,
+      "dir": "19-back-to-home",
+      "handle": "Back To Home",
+      "summary": "VPN WireGuard de MikroTik por relay para sitios sin IP pública: equipos soportados, usuarios y límites."
+    },
+    {
+      "n": 20,
+      "dir": "20-concentrador-chr",
+      "handle": "Concentrador CHR",
+      "summary": "MikroTik CHR en un VPS como hub de VPN: instalación, endurecimiento, licencias y sitios que llaman al hub."
+    },
+    {
+      "n": 21,
+      "dir": "21-l2tp-con-ipsec",
+      "handle": "L2TP con IPsec",
+      "summary": "Servidor L2TP con IPsec obligatorio, puertos, clientes nativos y la clave de NAT-T de Windows."
+    },
+    {
+      "n": 22,
+      "dir": "22-ipsec-entre-marcas",
+      "handle": "IPsec entre marcas",
+      "summary": "Fase 1 y fase 2 con otras marcas, bypass de NAT y FastTrack, y diagnóstico de peers, políticas y SA."
+    }
+  ]
+}

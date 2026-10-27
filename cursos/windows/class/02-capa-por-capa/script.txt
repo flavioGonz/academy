@@ -1,0 +1,21 @@
+A: Llamada clásica: "no veo la cámara del depósito". ¿Qué hacés?
+B: Ping a la cámara. Si no responde, está caída y mando a alguien.
+A: Ahí está el error más caro de la semana. Un ping que no vuelve no prueba que el equipo esté apagado.
+B: ¿Por qué no?
+A: Porque muchos equipos y firewalls bloquean ICMP, que es lo que usa el ping. El Firewall de Windows, sin ir más lejos, viene bloqueando lo entrante.
+B: Bien. ¿Entonces?
+A: Vas por capas. Primero ipconfig barra all en tu puesto: IP, máscara, puerta de enlace y DNS. Si eso está mal, lo demás no importa.
+B: Después ping al gateway.
+A: Eso. Y si la cámara está en tu misma subred, después del ping mirás arp guion a. Si aparece la MAC de la cámara, contestó en la capa dos. Está viva.
+B: Ah, mirá. Aunque no responda el ping.
+A: Exacto. Y si está en otra red, usás pathping. Hace un trazado como tracert, y después le pega a cada salto y te dice dónde se pierden paquetes.
+B: ¿Esto lo dice mucha gente?
+A: Lo leímos en dos fuentes, LazyAdmin y la documentación de Test-NetConnection de Microsoft, así que evidencia fina, pero no encontramos a nadie que diga lo contrario. El autor de LazyAdmin dice que desde que conoció pathping no volvió a usar tracert.
+B: [risas] Pero pathping tarda una eternidad.
+A: Por defecto manda cien consultas por salto y resuelve nombres. Con guion n, guion q diez y guion h cinco, lo hacés en segundos.
+B: Bárbaro. ¿Y en PowerShell?
+A: Test-NetConnection con guion TraceRoute te da la ruta. Para la pérdida por salto, pathping.
+B: Entonces el laboratorio...
+A: Diez minutos. ipconfig, ping al gateway, arp, y pathping a un equipo de otra red. Y una vez, con el firewall bloqueando el ping, comprobás que la MAC igual aparece.
+B: Me lo anoto. Antes de mandar a alguien al depósito, ARP.
+A: Y pathping si hay saltos. El viaje lo hacés solo si hace falta.

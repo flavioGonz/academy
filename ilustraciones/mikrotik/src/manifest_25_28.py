@@ -1,0 +1,412 @@
+"""Genera manifest-25-28.json (figuras, pasos, conceptos, teoría y script_rsc de las lecciones 25 a 28)."""
+import json, re
+from pathlib import Path
+
+OUT = Path("/home/claude/ies-training/ilustraciones/mikrotik/manifest-25-28.json")
+CLASS = Path("/home/claude/claudemy/mikrotik/class")
+DIRS = {"25": "25-bridges", "26": "26-asignar-ip", "27": "27-rutas-estaticas", "28": "28-l2tp-cliente"}
+
+M = {}
+
+# =====================================================================================  25
+M["25"] = {
+    "fig": {"file": "25.svg",
+            "alt": "Un hAP o hEX con cinco puertos. ether1, en azul, va a Internet como WAN con cliente DHCP. ether2 a ether5, en celeste, tienen debajo una marca verde H y bajan a una caja oscura llamada bridge con 192.168.88.1/24, DHCP y VLAN. A la derecha, tres notas: H es hardware offloading y el switch chip conmuta a velocidad de cable; un segundo bridge en rojo, porque fuera de los CRS1xx/2xx solo un bridge por switch chip tiene H; y para separar redes, un bridge y VLAN.",
+            "caption": "Los puertos con H los conmuta el switch chip; la IP, el DHCP y las VLAN van en el bridge, y ether1 queda afuera como WAN."},
+    "steps": [
+        {"file": "25-paso3.svg", "step": 3,
+         "alt": "Dos routers lado a lado. Antes: ether2 a ether5 en celeste, dentro del bridge. Después: ether5 en ámbar, fuera del bridge, con la IP 10.10.50.1/24 y una notebook conectada con 10.10.50.2/24. Debajo, una tilde verde dice que el ping a 10.10.50.1 contesta porque la configuración por defecto acepta ICMP, y una cruz roja dice que WinBox no entra. Una nota ámbar explica que ether5 no está en la lista LAN.",
+         "caption": "Fuera del bridge, ether5 es un puerto ruteado con su propia red: contesta el ping, pero WinBox no entra hasta sumarlo a la lista LAN.",
+         "after": "Sacá ether5 del bridge y dale una red propia"},
+        {"file": "25-paso4.svg", "step": 4,
+         "alt": "Tabla de configuraciones por defecto: AP Router (hAP, hEX, RB4011) con ether1 afuera, ya es WAN; Switch (CRS sin WiFi) con ether1 adentro del bridge; IP Only (CCR, RB1100) con 192.168.88.1 en ether1. Debajo, una terminal con tres comandos numerados: sacar ether1 del bridge, sumarlo a la lista WAN y agregarle un cliente DHCP. Notas: crear la lista WAN si no existe, poner firewall antes de enchufar internet a un CRS, y hacerlo desde otro puerto y en Safe Mode.",
+         "caption": "Si ether1 vino dentro del bridge, tres comandos lo devuelven a WAN; en un CRS, el firewall va antes de enchufar internet.",
+         "after": "Si un equipo vino con ether1 dentro del bridge"},
+    ],
+    "concepts": [
+        {"name": "Bridge y puertos esclavos",
+         "para_que": "Un router tiene varios puertos, pero en la LAN de un cliente casi siempre querés que se comporten como un switch: que la PC de ether3 vea a la impresora de ether4 sin pasar por el router. El bridge resuelve eso: junta puertos en un mismo dominio de capa 2.",
+         "como": "Se crea con /interface/bridge/add y se le suman puertos con /interface/bridge/port/add. Cada puerto que entra pasa a ser esclavo: su tráfico sube por la interfaz bridge, así que la IP, el servidor DHCP y las VLAN se configuran en el bridge. Una IP puesta en un puerto de adentro termina en el bridge, y una VLAN sobre un puerto esclavo nunca recibe nada.",
+         "ejemplo": "En un local con hEX, la configuración por defecto ya trae `bridge` con ether2 a ether5 y la IP 192.168.88.1/24. Si alguien cargó 192.168.10.1/24 en ether3 pensando que era \"la red de las cámaras\", esa IP en realidad quedó en el bridge y las cámaras de ether3 y la oficina comparten la misma red."},
+        {"name": "Hardware offloading (la marca H)",
+         "para_que": "Un bridge hecho por software le pide a la CPU que mire cada trama. En equipos con switch chip, eso es un desperdicio: el chip puede conmutar a velocidad de cable solo. El hardware offloading le pasa ese trabajo al chip.",
+         "como": "Viene activado por defecto (hw=yes en cada puerto) y se ve con la marca H en /interface/bridge/port/print. Fuera de los CRS1xx/2xx, solo un bridge por switch chip puede tener H; el segundo bridge va por la CPU. Algunas funciones (split horizon, ciertos filtros) apagan el offload, y cambiar vlan-filtering, L2MTU o el snooping puede reiniciar el chip y cortar un momento todos los puertos.",
+         "ejemplo": "Un NVR grabando 16 cámaras en un hAP con dos bridges: el segundo bridge, sin H, manda todo el video por la CPU, que se pone al 100 % y la grabación tiene cortes. Con un solo bridge y una VLAN para las cámaras, el chip vuelve a conmutar y la CPU queda libre."},
+        {"name": "ether1 como WAN y la configuración por defecto",
+         "para_que": "Cada MikroTik sale de fábrica con una configuración pensada para su uso típico, y saber cuál tiene evita sorpresas: un router hogareño trae WAN y firewall, un switch no.",
+         "como": "En AP Router (hAP, hEX, RB4011) ether1 es WAN con cliente DHCP y firewall, y el resto va al bridge. En Switch (CRS sin WiFi) todos los puertos van al bridge. En IP Only (CCR, RB1100) la IP queda en ether1. /system/default-configuration/print muestra los comandos exactos. Para pasar ether1 a WAN: sacarlo del bridge, sumarlo a la lista WAN y darle cliente DHCP o IP fija.",
+         "ejemplo": "Te toca usar un CRS326 como router de una obra chica. Antes de enchufar la fibra a ether1: lo sacás del bridge, creás la lista WAN, le agregás el cliente DHCP y armás el firewall de input y forward, porque la configuración de switch no lo trae."},
+    ],
+    "teoria_md": """### Un poco de historia
+Antes de los switches, una red Ethernet era un solo cable compartido: todos escuchaban todo. El bridge nació para cortar ese cable en tramos y que cada tramo solo recibiera lo que le correspondía. La idea quedó escrita en el estándar IEEE 802.1D, que define los bridges MAC transparentes: aprenden solos qué MAC está detrás de cada puerto y no hace falta configurarles nada. El mismo estándar incorporó el árbol de expansión (STP), el algoritmo que diseñó Radia Perlman a mediados de los ochenta para que dos caminos entre switches no armen un bucle. Con los años STP se reemplazó por RSTP, más rápido y compatible hacia atrás.
+
+Un switch moderno es, en el fondo, un bridge de muchos puertos hecho en un chip. MikroTik tuvo durante años dos formas de armar un switch: el bridge por software y el viejo master-port del switch chip. En 2017, con la versión 6.41, unificó todo en el bridge con hardware offloading: configurás un bridge y, si el equipo tiene switch chip, el chip hace el trabajo.
+
+### Cómo funciona
+**Aprender y reenviar.** El bridge mira la MAC de origen de cada trama y anota en su tabla de hosts (/interface/bridge/host) por qué puerto la vio. Cuando llega una trama para una MAC conocida, la manda solo a ese puerto; si no la conoce, o es broadcast, la inunda a todos los puertos del bridge.
+
+**Maestro y esclavos.** Al agregar un puerto, el bridge pasa a ser la interfaz maestra. Lo que el router tiene que procesar (un ping a su IP, un pedido DHCP, una consulta DNS) sube por el bridge, no por el puerto. Por eso la IP y el servidor DHCP van en el bridge.
+
+**La MAC del bridge.** Con auto-mac, el bridge toma la MAC de uno de sus puertos. Si sacás ese puerto, la MAC del bridge cambia y los equipos de la LAN tienen que volver a aprenderla. Fijar admin-mac lo evita.
+
+**El chip.** Con hardware offloading, la trama entra al switch chip, que decide el puerto de salida sin molestar a la CPU: la CPU solo ve estadísticas. El chip puede atender un bridge (salvo los CRS1xx/2xx): el segundo bridge vuelve a la CPU. Para separar redes dentro del mismo chip, la herramienta es VLAN, que el chip también entiende.""",
+}
+
+M["25"]["script_rsc"] = {
+    "titulo": "Un bridge con sus puertos, MAC fija y la IP en el bridge",
+    "descripcion": "Crea el bridge si no existe (con admin-mac fija) o le fija la MAC si ya existe, suma los puertos que indiques salteando los que son WAN o tienen IP propia, y deja la IP de la LAN en el bridge. No saca puertos de ningún bridge.",
+    "variables": [
+        {"nombre": "BRIDGE", "valor": "bridge", "detalle": "Nombre del bridge (el de la configuración por defecto se llama bridge)"},
+        {"nombre": "PUERTOS", "valor": "ether2,ether3,ether4,ether5", "detalle": "Puertos que van al bridge, separados por coma"},
+        {"nombre": "LAN_IP", "valor": "192.168.88.1/24", "detalle": "IP y máscara del router en la LAN"},
+    ],
+    "codigo": """# IES Training · MikroTik · Un bridge con sus puertos y la IP en el bridge
+# Probalo primero en un equipo de banco y en Safe Mode (Ctrl+X).
+:local bridge "{{BRIDGE}}"
+:local puertos [:toarray "{{PUERTOS}}"]
+:local lanip "{{LAN_IP}}"
+# 1. El bridge, con MAC fija para que no cambie al sacar un puerto
+:if ([:len [/interface/bridge/find name=$bridge]] = 0) do={
+  :local mac [/interface/ethernet/get [find name=[:pick $puertos 0]] mac-address]
+  /interface/bridge/add name=$bridge auto-mac=no admin-mac=$mac comment="ies-bridge"
+  :put ("Bridge " . $bridge . " creado con admin-mac " . $mac)
+} else={
+  :if ([/interface/bridge/get [find name=$bridge] auto-mac]) do={
+    :local mac [/interface/bridge/get [find name=$bridge] mac-address]
+    /interface/bridge/set [find name=$bridge] auto-mac=no admin-mac=$mac
+    :put ("admin-mac fijada en " . $mac)
+  }
+}
+# 2. Puertos al bridge: salteo los que ya están en un bridge, los WAN y los que tienen IP
+:foreach p in=$puertos do={
+  :if ([:len [/interface/bridge/port/find interface=$p]] > 0) do={
+    :put ($p . " ya está en un bridge: no lo toco")
+  } else={
+    :if ([:len [/interface/list/member/find list=WAN interface=$p]] > 0 || [:len [/ip/address/find interface=$p]] > 0) do={
+      :put ($p . " es WAN o tiene IP propia: lo salteo")
+    } else={
+      /interface/bridge/port/add bridge=$bridge interface=$p comment="ies-bridge"
+      :put ($p . " agregado a " . $bridge)
+    }
+  }
+}
+# 3. La IP de la LAN va en el bridge, nunca en un puerto
+:if ([:len [/ip/address/find interface=$bridge address=$lanip]] = 0) do={
+  /ip/address/add address=$lanip interface=$bridge comment="ies-bridge"
+  :put ("IP " . $lanip . " cargada en " . $bridge)
+}
+# 4. (Opcional, comentado) ether1 como WAN si vino dentro del bridge.
+#    Ojo: si entrás por ether1, te corta. Hacelo desde otro puerto.
+# /interface/bridge/port/remove [find interface=ether1]
+# /interface/list/member/add list=WAN interface=ether1
+# /ip/dhcp-client/add interface=ether1 disabled=no
+:put ("Listo: bridge " . $bridge . " con sus puertos y la IP " . $lanip . ". Verificá la marca H con /interface/bridge/port/print")""",
+    "notas": [
+        "Después de pegarlo, mirá /interface/bridge/port/print: los puertos sin H van por la CPU (por ejemplo, si quedó un segundo bridge en el mismo switch chip).",
+        "No crea VLAN ni toca el firewall. Para separar cámaras y oficina, VLAN (lección de VLAN por sistema).",
+        "Si usás otro nombre de bridge que el de la configuración por defecto, el DHCP y la lista LAN de la defconf siguen apuntando a bridge: revisalos.",
+    ],
+}
+
+# =====================================================================================  26
+M["26"] = {
+    "fig": {"file": "26.svg",
+            "alt": "A la izquierda, el comando /ip/address/add address=10.10.20.1/24 interface=ether5 y una tabla de lo que RouterOS calcula solo: red 10.10.20.0, hosts 10.10.20.1 a 10.10.20.254, broadcast 10.10.20.255 y la ruta conectada DAc 10.10.20.0/24 ether5. A la derecha, dónde va la IP: en verde el bridge, una interfaz VLAN y un puerto ruteado fuera del bridge; en rojo un puerto dentro del bridge, porque es esclavo y la IP termina en el bridge.",
+            "caption": "Dirección, máscara e interfaz: el resto lo calcula RouterOS, incluida la ruta conectada. Y la IP nunca va en un puerto de adentro del bridge."},
+    "steps": [
+        {"file": "26-paso2.svg", "step": 2,
+         "alt": "Un MikroTik con dos etiquetas en el bridge: 192.168.88.1/24 en celeste y 192.168.1.254/24 en ámbar. Una notebook con 192.168.88.254 y un equipo de fábrica con 192.168.1.x están conectados al router. Una nota dice que hay dos rutas conectadas y que desde la notebook se llega al equipo a través del router. Abajo, una nota ámbar recuerda borrar la IP temporal al terminar.",
+         "caption": "Una segunda IP en el bridge te deja llegar a un equipo que viene de fábrica en otra red; al terminar, se borra.",
+         "after": "Segunda IP en la misma interfaz"},
+        {"file": "26-paso4.svg", "step": 4,
+         "alt": "Cuatro cajas en fila unidas por flechas: 1 IP en la interfaz (ether5, 10.10.20.1/24), 2 Pool (pool-cctv, .100 a .199), 3 Red (gateway y DNS 10.10.20.1) y 4 Servidor (dhcp-cctv, ether5 más pool), esta última oscura. De la cuarta sale una flecha verde a una cámara en ether5 que recibe 10.10.20.100. Notas: el pool no incluye la IP del router y deja del .2 al .99 para fijas; reserva con make-static.",
+         "caption": "IP, pool, red y servidor: si falta una de las cuatro piezas, la cámara no toma dirección.",
+         "after": "El servidor DHCP, pieza por pieza"},
+    ],
+    "concepts": [
+        {"name": "Dirección, máscara y ruta conectada",
+         "para_que": "Una IP sola no le dice al router qué equipos tiene al lado y cuáles están lejos. La máscara marca qué parte de la dirección es la red; con eso el router sabe a quién le habla directo y a quién por un gateway.",
+         "como": "/ip/address/add address=10.10.20.1/24 interface=ether5. RouterOS calcula la red (10.10.20.0) y el broadcast (10.10.20.255) y crea sola la ruta conectada, que aparece como DAc en /ip/route. Una interfaz puede tener varias IP o ninguna (un puerto de bridge, una WAN por PPPoE).",
+         "ejemplo": "Un técnico carga 10.10.20.1/16 en vez de /24 en la red de cámaras: el router cree que 10.10.30.5 (otra red del edificio) está al lado, le pregunta por ARP en lugar de mandarlo al gateway y la conexión no anda. La máscara correcta lo arregla en un segundo."},
+        {"name": "Varias IP en una interfaz",
+         "para_que": "En obra aparecen equipos que vienen de fábrica en otra red, o migraciones donde la red vieja y la nueva conviven unos días. Poder sumar una segunda IP evita reconfigurar todo de golpe.",
+         "como": "Se agrega otra /ip/address en la misma interfaz (el bridge o la VLAN), con un comment para encontrarla después. Aparece una segunda ruta conectada y el router enruta entre las dos redes. Cuando termina el trabajo, se borra.",
+         "ejemplo": "Un NVR nuevo llega con 192.168.1.64 y la LAN del cliente es 192.168.88.0/24. Sumás 192.168.1.254/24 al bridge con comment=\"lab temporal\", entrás al NVR desde tu notebook, le ponés 192.168.88.20 y borrás la IP temporal."},
+        {"name": "Servidor DHCP en cuatro piezas",
+         "para_que": "Configurar a mano cada PC, celular y cámara no escala y termina en IP repetidas. El servidor DHCP reparte dirección, gateway y DNS, y lleva la cuenta de quién tiene qué.",
+         "como": "Necesita la IP en la interfaz (sin ella queda inválido), un pool (/ip/pool) que no incluya la IP del router, una red (/ip/dhcp-server/network) con gateway y DNS, y el servidor (/ip/dhcp-server) que une interfaz y pool. /ip/dhcp-server/setup arma todo en un paso. Antes de ofrecer una dirección, prueba con ARP y ping que nadie la use; los leases se guardan en disco cada 5 minutos.",
+         "ejemplo": "Red de cámaras en un edificio de Pocitos: pool del .100 al .199, NVR y switches con IP fija del .2 al .99, y las cámaras que siempre tienen que tener la misma dirección reservadas con make-static sobre su lease."},
+    ],
+    "teoria_md": """### Un poco de historia
+La dirección IPv4 de 32 bits viene del RFC 791, de 1981. Al principio las redes se repartían por clases (A, B y C), con máscaras fijas de 8, 16 o 24 bits. Pronto quedó chico: en 1985 el RFC 950 permitió partir una red en subredes con su propia máscara, y en 1993 CIDR (RFC 1519) eliminó las clases y trajo la notación que usás hoy, dirección barra cantidad de bits. Los rangos privados que llenan cualquier obra (10.0.0.0/8, 172.16.0.0/12 y 192.168.0.0/16) quedaron fijados en el RFC 1918, de 1996, y la documentación de MikroTik los cita hoy por el RFC 6890.
+
+Para encontrar la MAC de un vecino a partir de su IP se usa ARP, del RFC 826 (1982). Y el reparto automático de direcciones nació como BOOTP, para que equipos sin disco arrancaran por red, y evolucionó en DHCP, el RFC 2131 de 1997.
+
+### Cómo funciona
+**La máscara.** Con 10.10.20.1/24, los primeros 24 bits son la red. El router hace un AND entre dirección y máscara y obtiene la red 10.10.20.0; la última dirección, 10.10.20.255, es el broadcast, y lo del medio son hosts. Si un destino cae dentro de esa red, el router lo busca directo por ARP; si no, lo manda a un gateway.
+
+**La ruta conectada.** Cada dirección en una interfaz habilitada crea una ruta conectada (DAc) con distancia 0. Por eso, apenas cargás la IP, el router ya sabe llegar a esa red sin que agregues nada en /ip/route.
+
+**Dónde vive la IP.** En un puerto de bridge, la IP termina en el bridge: el puerto es esclavo y su tráfico sube por la interfaz maestra. Por eso la IP de la LAN va en el bridge, y la de una red separada, en una VLAN o en un puerto fuera del bridge.
+
+**DHCP en cuatro mensajes.** El equipo grita un Discover por broadcast; el servidor responde con un Offer (dirección, gateway, DNS, tiempo de lease); el equipo pide esa dirección con un Request y el servidor confirma con un Ack. Antes del Offer, RouterOS prueba la dirección con ARP y ping. A mitad del lease, el equipo renueva. Con authoritative=yes, el servidor contesta enseguida con un NAK a quien pide una dirección que no le corresponde, así el equipo empieza de nuevo sin esperar.""",
+}
+
+M["26"]["script_rsc"] = {
+    "titulo": "Red nueva en un puerto con su servidor DHCP",
+    "descripcion": "Deja una red propia en un puerto fuera del bridge (o en una VLAN): IP del router, miembro de la lista LAN, pool con lugar para fijas, red con gateway y DNS, y el servidor DHCP. Si el puerto todavía está dentro de un bridge, se detiene y avisa.",
+    "variables": [
+        {"nombre": "INTERFAZ", "valor": "ether5", "detalle": "Puerto o interfaz VLAN donde va la red nueva (no un puerto de bridge)"},
+        {"nombre": "NOMBRE", "valor": "cctv", "detalle": "Nombre corto de la red, se usa en el pool y el servidor"},
+        {"nombre": "IP_ROUTER", "valor": "10.10.20.1/24", "detalle": "IP y máscara del router en esa red"},
+        {"nombre": "RED", "valor": "10.10.20.0/24", "detalle": "La red, con máscara"},
+        {"nombre": "GATEWAY", "valor": "10.10.20.1", "detalle": "Gateway y DNS que reciben los equipos (la IP del router, sin máscara)"},
+        {"nombre": "RANGO", "valor": "10.10.20.100-10.10.20.199", "detalle": "Rango del pool; lo de afuera queda para IP fijas"},
+    ],
+    "codigo": """# IES Training · MikroTik · Red nueva con IP y servidor DHCP
+# Probalo primero en un equipo de banco y en Safe Mode (Ctrl+X).
+:local iface "{{INTERFAZ}}"
+:local nombre "{{NOMBRE}}"
+:local ipr "{{IP_ROUTER}}"
+:local red "{{RED}}"
+:local gw "{{GATEWAY}}"
+:local rango "{{RANGO}}"
+:local pool ("pool-" . $nombre)
+:local srv ("dhcp-" . $nombre)
+# 0. La IP no va en un puerto de bridge: si lo está, freno acá
+:if ([:len [/interface/bridge/port/find interface=$iface]] > 0) do={
+  :put ($iface . " está dentro de un bridge. Sacalo primero (y no desde ese mismo puerto):")
+  :put ("/interface/bridge/port/remove [find interface=" . $iface . "]")
+  :error "detenido: puerto dentro de un bridge"
+}
+# 1. IP del router en la interfaz
+:if ([:len [/ip/address/find interface=$iface address=$ipr]] = 0) do={
+  /ip/address/add address=$ipr interface=$iface comment=("ies-" . $nombre)
+}
+# 2. En la lista LAN, para que el router le conteste DNS y WinBox
+:if ([:len [/interface/list/find name=LAN]] > 0 && [:len [/interface/list/member/find list=LAN interface=$iface]] = 0) do={
+  /interface/list/member/add list=LAN interface=$iface comment=("ies-" . $nombre)
+}
+# 3. Pool (sin la IP del router)
+:if ([:len [/ip/pool/find name=$pool]] = 0) do={
+  /ip/pool/add name=$pool ranges=$rango comment=("ies-" . $nombre)
+} else={ /ip/pool/set [find name=$pool] ranges=$rango }
+# 4. Red: gateway y DNS que reciben los equipos
+:if ([:len [/ip/dhcp-server/network/find address=$red]] = 0) do={
+  /ip/dhcp-server/network/add address=$red gateway=$gw dns-server=$gw comment=("ies-" . $nombre)
+} else={ /ip/dhcp-server/network/set [find address=$red] gateway=$gw dns-server=$gw }
+# 5. El servidor, que une interfaz y pool
+:if ([:len [/ip/dhcp-server/find name=$srv]] = 0) do={
+  /ip/dhcp-server/add name=$srv interface=$iface address-pool=$pool disabled=no comment=("ies-" . $nombre)
+} else={ /ip/dhcp-server/set [find name=$srv] interface=$iface address-pool=$pool disabled=no }
+:put ("Listo: " . $ipr . " en " . $iface . " con DHCP " . $srv . " (" . $rango . "). Verificá con /ip/dhcp-server/lease/print where server=" . $srv)""",
+    "notas": [
+        "Para reservar un equipo: /ip/dhcp-server/lease/make-static [find address=10.10.20.100] (cambiá la dirección).",
+        "Antes de pegarlo, confirmá que en esa red no hay otro servidor DHCP (el módem del cliente, un NVR): dos servidores en la misma red pelean.",
+        "No toca el firewall más allá de sumar la interfaz a la lista LAN. Si la red tiene que estar aislada de la oficina, eso va en forward (lección de input y forward).",
+    ],
+}
+
+# =====================================================================================  27
+M["27"] = {
+    "fig": {"file": "27.svg",
+            "alt": "Un paquete a 192.168.20.15 frente a una tabla de rutas: 0.0.0.0/0 por 192.168.1.1 del ISP coincide; 192.168.20.0/24 por l2tp-central está marcada en verde como la que gana por ser /24; 192.168.88.0/24 conectada al bridge y 203.0.113.10/32 por el ISP no coinciden. A la derecha, tres tarjetas: 1, la más específica; 2, la menor distancia, solo entre rutas al mismo destino (conectada 0, estática 1, OSPF 110); 3, el gateway tiene que estar vivo.",
+            "caption": "Primero gana la ruta más específica; la distancia solo desempata entre rutas al mismo destino, y una ruta con gateway muerto no compite."},
+    "steps": [
+        {"file": "27-paso3.svg", "step": 3,
+         "alt": "Una línea de tiempo con tres pings al gateway: a los 0 segundos contesta (tilde verde), a los 10 segundos no hay respuesta en 1 segundo (cruz roja) y a los 20 segundos el segundo timeout (cruz roja), con la etiqueta ruta inactiva. Debajo, una tabla de rutas a 10.20.30.0/24: lab principal por 192.168.88.250 con ping, sin A, inactiva; lab respaldo por 192.168.88.251 con distancia 2, activa. Una nota ámbar resume los tiempos y aclara que solo mira el próximo salto.",
+         "caption": "Con check-gateway=ping, dos pruebas perdidas apagan la ruta y entra la de respaldo con distancia mayor.",
+         "after": "Que el router vigile el gateway"},
+        {"file": "27-paso5.svg", "step": 5,
+         "alt": "La sucursal conectada a un ISP con gateway 192.168.1.1 y, más allá, el servidor VPN 203.0.113.10. Una línea punteada muestra el túnel l2tp-central. Debajo, dos rutas: 192.168.20.0/24 por l2tp-central, la LAN de la central por adentro del túnel; y 203.0.113.10/32 por 192.168.1.1, para que el túnel mismo salga por el ISP. Una nota ámbar explica que la /32 hace falta cuando la ruta por defecto va por el túnel.",
+         "caption": "La LAN remota va por el túnel; la IP pública del servidor, por el ISP. Si la ruta por defecto va por el túnel, la /32 evita que se coma su propio camino.",
+         "after": "Para cuando tengas un túnel (lección siguiente)"},
+    ],
+    "concepts": [
+        {"name": "La ruta más específica y la distancia",
+         "para_que": "Un router casi siempre tiene varias rutas que podrían servir para un mismo paquete. Hacía falta una regla fija para decidir sin ambigüedad, y para poder tener rutas de respaldo que esperan su turno.",
+         "como": "Primero se busca la coincidencia más específica, la de máscara más larga: una /24 le gana a 0.0.0.0/0. Solo entre rutas al mismo destino decide la distancia (conectada 0, estática 1, OSPF 110): gana la menor. Si dos empatan, son ECMP y el tráfico se reparte.",
+         "ejemplo": "En una sucursal unida a la central por túnel, la ruta 192.168.20.0/24 por l2tp-central le gana a la ruta por defecto para todo lo que va a la central, y el resto de internet sigue saliendo por el proveedor local."},
+        {"name": "check-gateway",
+         "para_que": "Una ruta estática no sabe si su gateway está vivo: mientras el gateway esté en una red conectada, la ruta sigue activa aunque el equipo esté apagado. check-gateway hace que el router lo pruebe y apague la ruta si no contesta.",
+         "como": "Se agrega check-gateway=ping (o arp) a la ruta. Según la documentación, prueba cada 10 segundos con timeout de 1 segundo, y con dos timeouts marca el gateway inalcanzable; los tiempos se ajustan en /routing/settings. Mira solo el próximo salto, no internet entero.",
+         "ejemplo": "Un local con fibra y un 4G de respaldo: la ruta por defecto de la fibra con check-gateway=ping y distancia 1, la del 4G con distancia 2. Si alguien desenchufa el ONT, a los 20 segundos sale todo por el 4G. Si la fibra cae aguas arriba y el ONT sigue contestando, no conmuta: para eso, rutas recursivas a hosts testigo."},
+        {"name": "Rutas por un túnel y la ruta al servidor",
+         "para_que": "Un túnel crea una interfaz nueva, pero no le dice al router qué redes hay del otro lado. Hacen falta rutas en las dos puntas, y una ruta especial si todo el tráfico va a salir por el túnel.",
+         "como": "En cada punta, dst-address la LAN de enfrente y gateway la interfaz del túnel (o la IP del otro extremo del túnel). Si la ruta por defecto va por el túnel, la IP pública del servidor VPN necesita una ruta /32 por el gateway del ISP, porque si no los paquetes del propio túnel intentan entrar al túnel. El cliente L2TP de RouterOS la agrega solo cuando usa add-default-route.",
+         "ejemplo": "Una central con dos sucursales por L2TP: cada sucursal llegaba a la central pero no a la otra, hasta que se agregaron en las dos sucursales las rutas hacia la LAN de enfrente y hacia la red de los túneles."},
+    ],
+    "teoria_md": """### Un poco de historia
+Rutear es decidir, paquete por paquete, a quién pasárselo. Desde los primeros tiempos de la red ARPANET, cada router tuvo una tabla con destinos y próximos saltos. Esa tabla se puede llenar a mano (rutas estáticas) o con protocolos que la arman solos (RIP, OSPF, BGP). En redes chicas, como las de un integrador, las estáticas siguen siendo lo más común: son predecibles y no dependen de nada.
+
+La regla de "gana la más específica" tomó importancia en 1993 con CIDR (RFC 1519), que eliminó las clases y permitió redes de cualquier tamaño; desde entonces una tabla puede tener una /16 y una /24 que se superponen, y el router elige la de máscara más larga. Los requisitos de un router IPv4 quedaron reunidos en el RFC 1812, de 1995. En MikroTik, RouterOS 7 (estable desde 2021) reescribió el motor de ruteo: separa con claridad la RIB, donde están todas las rutas candidatas, de la FIB, la lista corta que se usa para reenviar.
+
+### Cómo funciona
+**RIB y FIB.** Todas las rutas (conectadas, estáticas, de DHCP, de PPP, de protocolos) entran a la RIB. Para cada destino, la RIB elige una ganadora y la copia a la FIB. Cuando llega un paquete, el router busca en la FIB la coincidencia de máscara más larga.
+
+**Quién compite.** Una ruta participa si no está deshabilitada y su gateway es alcanzable: un gateway dentro de una red conectada activa cuenta como alcanzable. Entre candidatas al mismo destino gana la de menor distancia; las conectadas tienen 0, las estáticas 1, OSPF 110. Si empatan con gateways distintos, son ECMP y el tráfico se reparte.
+
+**Próximo salto.** El router necesita saber por qué interfaz sale el gateway. Lo resuelve con las rutas conectadas; los parámetros scope y target-scope permiten resolverlo a través de otras rutas, que es lo que usan las rutas recursivas de la lección de dos WAN.
+
+**check-gateway.** Prueba el gateway cada 10 segundos con ping o ARP; con dos timeouts de 1 segundo lo da por caído y la ruta queda inactiva, así gana la siguiente por distancia. Cuando vuelve a contestar, la ruta recupera su lugar.
+
+**Ida y vuelta.** Cada router decide solo por su tabla. Que la sucursal sepa llegar a la central no le dice nada a la central sobre la sucursal: cada ruta hacia allá necesita su ruta de vuelta.""",
+}
+
+M["27"]["script_rsc"] = {
+    "titulo": "Ruta a una red remota con check-gateway y respaldo",
+    "descripcion": "Agrega (o corrige) una ruta a una red remota por un gateway principal vigilado con check-gateway=ping y otra de respaldo con distancia 2. No toca la ruta por defecto. Deja comentada la ruta /32 al servidor VPN para cuando la ruta por defecto vaya por un túnel.",
+    "variables": [
+        {"nombre": "RED_REMOTA", "valor": "10.20.30.0/24", "detalle": "Red de destino, con máscara"},
+        {"nombre": "GW_PRINCIPAL", "valor": "192.168.88.250", "detalle": "Gateway principal (IP o interfaz de túnel)"},
+        {"nombre": "GW_RESPALDO", "valor": "192.168.88.251", "detalle": "Gateway de respaldo"},
+    ],
+    "codigo": """# IES Training · MikroTik · Ruta a una red remota con check-gateway y respaldo
+# Probalo primero en un equipo de banco y en Safe Mode (Ctrl+X).
+:local red "{{RED_REMOTA}}"
+:local gw1 "{{GW_PRINCIPAL}}"
+:local gw2 "{{GW_RESPALDO}}"
+# 1. Ruta principal, distancia 1, con el gateway vigilado
+:local r1 [/ip/route/find comment="ies-ruta-principal" dst-address=$red]
+:if ([:len $r1] = 0) do={
+  /ip/route/add dst-address=$red gateway=$gw1 distance=1 check-gateway=ping comment="ies-ruta-principal"
+  :put ("Ruta principal a " . $red . " por " . $gw1)
+} else={
+  /ip/route/set $r1 gateway=$gw1 distance=1 check-gateway=ping
+  :put "Ruta principal actualizada"
+}
+# 2. Ruta de respaldo, distancia 2: entra si la principal queda inactiva
+:local r2 [/ip/route/find comment="ies-ruta-respaldo" dst-address=$red]
+:if ([:len $r2] = 0) do={
+  /ip/route/add dst-address=$red gateway=$gw2 distance=2 comment="ies-ruta-respaldo"
+  :put ("Ruta de respaldo a " . $red . " por " . $gw2)
+} else={
+  /ip/route/set $r2 gateway=$gw2 distance=2
+  :put "Ruta de respaldo actualizada"
+}
+# 3. (Opcional, comentado) Si la ruta por defecto va por un túnel, la IP pública
+#    del servidor VPN sale por el ISP. Cambiá los datos antes de descomentar.
+# /ip/route/add dst-address=203.0.113.10/32 gateway=192.168.1.1 comment="ies-ruta-vpn"
+:put ("Listo: " . $red . " por " . $gw1 . " (vigilado) y respaldo por " . $gw2 . ". Verificá con /ip/route/print where dst-address=" . $red)""",
+    "notas": [
+        "check-gateway tarda unos 20 segundos en apagar la ruta (dos pruebas de 10 s). Mira solo el gateway, no internet.",
+        "No toca la ruta por defecto: para el respaldo de internet con dos proveedores, la lección de dos WAN usa rutas recursivas.",
+        "Acordate de la vuelta: en el otro extremo hace falta una ruta hacia tu red.",
+    ],
+}
+
+# =====================================================================================  28
+M["28"] = {
+    "fig": {"file": "28.svg",
+            "alt": "La sucursal, un hAP con 4G y CGNAT, conectada a la central con IP 203.0.113.10 por un tubo verde que dice IPsec cifra, con un tubo azul adentro que dice L2TP 10.255.1.2 a 10.255.1.1. Una flecha verde indica que la conexión sale de la sucursal. Abajo, la LAN de la sucursal 192.168.88.0/24 y la LAN de la central 10.10.1.0/24, y dos tarjetas: ida en la sucursal, 10.10.1.0/24 por l2tp-central; vuelta en la central, 192.168.88.0/24 por 10.255.1.2. Una nota verde: use-ipsec=yes y add-default-route=no, y anda detrás de CGNAT.",
+            "caption": "La sucursal llama a la central, L2TP viaja dentro de IPsec, y cada LAN necesita su ruta de ida y su ruta de vuelta."},
+    "steps": [
+        {"file": "28-paso4.svg", "step": 4,
+         "alt": "Una PC de la sucursal, el router de la sucursal con 10.255.1.2, el router de la central con 10.255.1.1 y un servidor 10.10.1.1, unidos en fila. Tilde verde: el ping desde el router anda porque sale como 10.255.1.2, que la central conoce. Cruz roja: el ping desde la PC sale como 192.168.88.254 y la respuesta no vuelve. Dos opciones: ruta de vuelta en la central por 10.255.1.2, en verde, o masquerade al túnel, en ámbar, si no podés tocar la central.",
+         "caption": "Si el router llega y la PC no, falta la vuelta: una ruta en la central o, si no podés tocarla, masquerade hacia el túnel.",
+         "after": "La ruta hacia la LAN central, y la prueba"},
+        {"file": "28-paso7.svg", "step": 7,
+         "alt": "Tabla de rutas de la sucursal con add-default-route=yes: 0.0.0.0/0 por l2tp-central; 203.0.113.10/32 por 192.168.1.1 del ISP, resaltada en verde como dinámica para que el túnel siga saliendo por el ISP; 10.255.1.1/32 por l2tp-central, el otro extremo; y 192.168.88.0/24 en el bridge. Dos notas: para que la LAN navegue por la central hace falta masquerade al túnel o NAT en la central; y después volver a add-default-route=no.",
+         "caption": "Con add-default-route=yes todo sale por la central, y RouterOS agrega la /32 al servidor por el ISP.",
+         "after": "todo sale por la central. Mirá la tabla"},
+    ],
+    "concepts": [
+        {"name": "Túnel saliente",
+         "para_que": "Muchos sitios no tienen IP pública: salen por 4G, por CGNAT o detrás de un módem que no se puede tocar. Nadie les puede iniciar una conexión, pero ellos sí pueden salir. El túnel saliente aprovecha eso: el router del sitio es el que llama.",
+         "como": "En el sitio, /interface/l2tp-client con connect-to (la IP pública de la central), user, password, use-ipsec=yes e ipsec-secret. En la central, un servidor L2TP/IPsec con un usuario por sitio y direcciones de túnel fijas en el secret. El cliente no necesita abrir puertos en input: el firewall deja pasar las respuestas como conexiones establecidas.",
+         "ejemplo": "Una sucursal de una cadena de farmacias en el interior con internet 4G: el hAP llama a la central de Montevideo, y desde allá se ven las cámaras y el NVR de la sucursal sin abrir un solo puerto en el módem."},
+        {"name": "use-ipsec e ipsec-secret",
+         "para_que": "L2TP arma el túnel y autentica al usuario, pero no cifra nada. IPsec es la capa que protege cada paquete; la combinación quedó estandarizada justamente porque L2TP solo no alcanzaba.",
+         "como": "Con use-ipsec=yes, RouterOS crea solo un peer y una policy de IPsec en modo transporte para el tráfico L2TP hacia el servidor; ipsec-secret es la clave compartida, la misma del servidor. allow-fast-path tiene que quedar apagado con IPsec, y varios clientes L2TP/IPsec detrás del mismo NAT no funcionan en este modo.",
+         "ejemplo": "Si el túnel levanta en PPP pero /ip/ipsec/active-peers/print está vacío, revisá use-ipsec y que el ipsec-secret coincida letra por letra con el del servidor; el log con /log/print where topics~\"l2tp|ipsec\" dice en qué fase se corta."},
+        {"name": "add-default-route y la ruta de vuelta",
+         "para_que": "Hay dos usos distintos de un túnel: unir redes (solo lo de la central va por el túnel) o mandar todo el tráfico del sitio por la central. add-default-route elige entre los dos, y la ruta de vuelta decide si los equipos de la LAN se ven de verdad.",
+         "como": "Con add-default-route=no (por defecto) agregás una ruta a cada LAN remota con gateway la interfaz del túnel, y la central necesita una ruta hacia tu LAN por la IP del túnel. Si no podés tocar la central, un masquerade con out-interface igual al túnel hace que todo llegue como la IP del túnel. Con add-default-route=yes todo sale por la central y RouterOS agrega una /32 al servidor por el ISP.",
+         "ejemplo": "Una sucursal de Salto llega a la central desde la terminal del router, pero las PC no. El router sale con la IP del túnel, que la central conoce; las PC salen con 192.168.88.x, que la central no sabe dónde está. Con la ruta de vuelta en la central, anda."},
+    ],
+    "teoria_md": """### Un poco de historia
+A fines de los noventa había dos formas rivales de llevar una conexión PPP a través de internet: PPTP, impulsado por Microsoft, y L2F, de Cisco. La IETF las unió en L2TP, publicado como RFC 2661 en agosto de 1999 por autores de Cisco, Ascend, Microsoft y Redback. La idea original era separar dónde se conecta el usuario (el LAC, un concentrador cerca de él) de dónde termina su sesión PPP (el LNS, el servidor de la empresa), con internet en el medio.
+
+L2TP no cifra: se pensó para transportar, no para proteger. En noviembre de 2001, el RFC 3193 definió cómo meterlo dentro de IPsec, con ESP obligatorio y modo transporte, porque la autenticación de L2TP y la de PPP no protegen cada paquete. Esa combinación, L2TP/IPsec, es la que traen de fábrica Windows, macOS, iOS y Android. Más tarde, el RFC 3931 (2005) definió L2TPv3, que también puede llevar tramas Ethernet; RouterOS lo soporta desde la versión 7.1.
+
+### Cómo funciona
+**Tres capas.** Por fuera, IPsec: primero IKE negocia claves por UDP 500 (o UDP 4500 si hay NAT en el medio, NAT-T), y después los datos viajan cifrados en ESP. Adentro, L2TP: una conexión de control por UDP 1701 que arma el túnel y las sesiones. Y adentro de L2TP, PPP: usuario, contraseña y las direcciones de cada punta del túnel.
+
+**El cliente llama.** Con use-ipsec=yes, el cliente de RouterOS crea solo el peer y la policy de IPsec hacia connect-to. Primero se arma IPsec; después pasa L2TP por adentro; al final PPP autentica y aparece la interfaz con su IP de túnel (por ejemplo 10.255.1.2) y una ruta /32 hacia el otro extremo.
+
+**Rutas.** El túnel es una interfaz punto a punto: una ruta con gateway igual al nombre de la interfaz alcanza. Con add-default-route=no, vos decidís qué redes van por ahí. Con add-default-route=yes, el cliente instala la ruta por defecto por el túnel y agrega una /32 hacia el servidor por el gateway anterior, para que los paquetes del propio túnel no entren al túnel.
+
+**Firewall.** El cliente no abre puertos: la conexión sale de él y vuelve como establecida. Lo que entra por el túnel no está en la lista WAN de la configuración por defecto, así que en forward pasa; si el otro extremo no es tuyo, conviene sumar el túnel a esa lista.""",
+}
+
+M["28"]["script_rsc"] = {
+    "titulo": "Cliente L2TP/IPsec hacia la central, con su ruta",
+    "descripcion": "Crea (o corrige) el cliente L2TP con IPsec obligatorio y sin ruta por defecto, y la ruta hacia la LAN de la central por el túnel. Opcionalmente agrega el masquerade hacia el túnel. No toca la ruta por defecto ni abre puertos en input.",
+    "variables": [
+        {"nombre": "INTERFAZ", "valor": "l2tp-central", "detalle": "Nombre de la interfaz del túnel"},
+        {"nombre": "SERVIDOR", "valor": "203.0.113.10", "detalle": "IP pública (o nombre) del servidor L2TP de la central"},
+        {"nombre": "USUARIO", "valor": "sucursal1", "detalle": "Usuario PPP de este sitio en el servidor"},
+        {"nombre": "CLAVE", "valor": "Clave-Sucursal-Ejemplo-1", "detalle": "Contraseña PPP (ejemplo: cambiala por la real)"},
+        {"nombre": "SECRETO_IPSEC", "valor": "Secreto-IPsec-Largo-De-Ejemplo-2026", "detalle": "Clave IPsec compartida, la misma del servidor (ejemplo: cambiala)"},
+        {"nombre": "LAN_REMOTA", "valor": "10.10.1.0/24", "detalle": "LAN de la central, con máscara"},
+        {"nombre": "NAT", "valor": "no", "detalle": "si: agrega masquerade hacia el túnel (cuando no podés poner la ruta de vuelta en la central)"},
+    ],
+    "codigo": """# IES Training · MikroTik · Cliente L2TP/IPsec hacia la central
+# Probalo primero en un equipo de banco y en Safe Mode (Ctrl+X).
+:local nombre "{{INTERFAZ}}"
+:local servidor "{{SERVIDOR}}"
+:local usuario "{{USUARIO}}"
+:local clave "{{CLAVE}}"
+:local secreto "{{SECRETO_IPSEC}}"
+:local lanremota "{{LAN_REMOTA}}"
+:local nat "{{NAT}}"
+# 1. El cliente: IPsec obligatorio, sin ruta por defecto
+:if ([:len [/interface/l2tp-client/find name=$nombre]] = 0) do={
+  /interface/l2tp-client/add name=$nombre connect-to=$servidor user=$usuario password=$clave use-ipsec=yes ipsec-secret=$secreto add-default-route=no allow-fast-path=no disabled=no comment="ies-l2tp"
+  :put ("Cliente " . $nombre . " creado hacia " . $servidor)
+} else={
+  /interface/l2tp-client/set [find name=$nombre] connect-to=$servidor user=$usuario password=$clave use-ipsec=yes ipsec-secret=$secreto add-default-route=no allow-fast-path=no disabled=no
+  :put ("Cliente " . $nombre . " actualizado")
+}
+# 2. La LAN de la central, por el túnel
+:if ([:len [/ip/route/find dst-address=$lanremota comment="ies-l2tp"]] = 0) do={
+  /ip/route/add dst-address=$lanremota gateway=$nombre comment="ies-l2tp"
+} else={ /ip/route/set [find dst-address=$lanremota comment="ies-l2tp"] gateway=$nombre }
+# 3. (Opcional) NAT hacia el túnel, solo si la central no tiene ruta de vuelta
+:if ($nat = "si" && [:len [/ip/firewall/nat/find comment="ies-l2tp-nat"]] = 0) do={
+  /ip/firewall/nat/add chain=srcnat out-interface=$nombre action=masquerade comment="ies-l2tp-nat"
+  :put "Masquerade hacia el túnel agregado"
+}
+# 4. (Opcional, comentado) WinBox desde la central y túnel en la lista WAN
+# /ip/firewall/filter/add chain=input in-interface=l2tp-central protocol=tcp dst-port=8291 action=accept comment="ies-l2tp-winbox" place-before=[find comment="defconf: drop all not coming from LAN"]
+# /interface/list/member/add list=WAN interface=l2tp-central
+:delay 5s
+:put ("Listo: " . $nombre . " hacia " . $servidor . " y ruta a " . $lanremota . ". Verificá con /ip/ipsec/active-peers/print y /ip/address/print where interface=" . $nombre)""",
+    "notas": [
+        "Las claves de ejemplo son falsas: cambialas por las del servidor antes de pegar.",
+        "En la central hace falta el usuario (un secret con service=l2tp y direcciones fijas) y la ruta de vuelta hacia la LAN de este sitio, salvo que uses NAT=si.",
+        "Las LAN de las dos puntas tienen que ser distintas: si las dos son 192.168.88.0/24, renumerá una antes.",
+        "Si no levanta: /log/print where topics~\"l2tp|ipsec\".",
+    ],
+}
+
+# ------------------------------------------------------------------ validación
+for k, v in M.items():
+    card = (CLASS / DIRS[k] / "card.md").read_text(encoding="utf-8")
+    lab = card.split("**Laboratorio**", 1)[1].split("**Regla para quedarse**", 1)[0]
+    lab_nocode = re.sub(r"```.*?```", "", lab, flags=re.S)
+    for s in v["steps"]:
+        a = s["after"]
+        assert lab_nocode.count(a) == 1, (k, a, lab_nocode.count(a))
+        line = [l for l in lab_nocode.splitlines() if a in l][0]
+        assert line.lstrip().startswith(f"{s['step']}."), (k, s["step"], line[:40])
+    words = len(re.sub(r"[#*`]", "", v["teoria_md"]).split())
+    assert 250 <= words <= 450, (k, words)
+    nl = v["script_rsc"]["codigo"].count("\n") + 1
+    assert 15 <= nl <= 60, (k, nl)
+    for t in json.dumps(v, ensure_ascii=False), :
+        assert "—" not in t and "–" not in t, k
+    print(k, "teoria", words, "palabras · script", nl, "líneas")
+
+OUT.write_text(json.dumps(M, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+print("guardado", OUT)

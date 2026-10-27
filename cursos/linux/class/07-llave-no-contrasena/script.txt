@@ -1,0 +1,20 @@
+A: Si dejás un servidor con SSH abierto a internet, en minutos tenés bots probando contraseñas. ¿Cuál es la defensa de fondo?
+B: Una contraseña larga.
+A: Mejor todavía: que no haya contraseña. Llave, no contraseña. Esa es la lección.
+B: Contame cómo funciona, que a los chicos nuevos les cuesta.
+A: Generás un par de llaves en tu notebook. La privada nunca sale de ahí. La pública la copiás al servidor. Cuando te conectás, el servidor te manda un desafío que solo la privada puede responder.
+B: Y la frase de paso de la llave, ¿viaja?
+A: No. La Arch Wiki lo aclara: la frase solo descifra la llave en tu máquina. Por eso con llaves no hay fuerza bruta posible.
+B: ¿Qué tipo de llave?
+A: ed veinticinco cinco uno nueve. La recomienda la documentación de Ubuntu, y ssh keygen ya la genera por defecto.
+B: ¿Y cuántas fuentes coinciden?
+A: Cuatro de siete en usar llave ed veinticinco cinco uno nueve, y ninguna recomienda quedarse con contraseña. El orden importa. Uno: copiás tu llave con ssh copy id. Dos: entrás con la llave y confirmás. Tres: recién ahí, en un archivo propio de sshd config punto d, ponés PasswordAuthentication no y PermitRootLogin no.
+B: Y con otra sesión abierta.
+A: Siempre. Nunca cerrás la sesión que funciona hasta probar una nueva.
+B: ¿Y fail2ban? Yo lo instalo en todos lados.
+A: Acá las fuentes discrepan. En un hilo de la comunidad de Akamai alguien dice que con solo llaves, fail2ban apenas limpia los logs, y que no le gusta un script como root leyendo con expresiones regulares lo que escribe el atacante. Otro le responde que fail2ban sirve para cualquier log, no solo SSH.
+B: ¿Y vos qué hacés?
+A: Si hay contraseñas o un panel web expuesto, fail2ban suma. Si es solo SSH con llave, OpenSSH ya trae PerSourcePenalties, que frena a quien falla seguido. Y mejor todavía, el firewall que solo deja entrar desde tu red de gestión.
+B: Laboratorio.
+A: Veinte minutos: generás tu llave, la copiás a una VM, entrás, deshabilitás contraseña y root, y comprobás que una conexión con contraseña ya no entra.
+B: Lo que cambia es que el bot sigue tocando la puerta, pero no hay cerradura que forzar.

@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un AP de 2.4 GHz está en canal 3 con 40 MHz. ¿Qué cambiás?",
+    "options": [
+      "Nada, 40 MHz rinde más",
+      "80 MHz y canal 13",
+      "Desactivar 5 GHz para que todos usen 2.4",
+      "20 MHz y canal 1, 6 u 11"
+    ],
+    "answer": 3,
+    "why": "Las fuentes coinciden: en 2.4 GHz solo 1, 6 y 11 no se superponen, y 20 MHz es el único ancho razonable."
+  },
+  {
+    "q": "Oficina con 10 AP, más de 30 clientes por AP y los canales 36 a 48 llenos de vecinos. ¿Qué probó std.rocks con éxito?",
+    "options": [
+      "160 MHz en el canal 36",
+      "Subir la potencia al máximo",
+      "Un canal DFS limpio (el 64) y 20 MHz",
+      "Apagar 5 GHz"
+    ],
+    "answer": 2,
+    "why": "Escaneó, encontró DFS limpio y bajó a 20 MHz por la densidad de clientes."
+  },
+  {
+    "q": "Vas a correr un Airtime Scan Full en un AP de una clínica. ¿Cuándo lo hacés?",
+    "options": [
+      "En horario pico, para ver el peor caso",
+      "Fuera de horario, porque desconecta a los clientes de esa radio",
+      "Nunca, rompe el AP",
+      "Solo con el AP desadoptado"
+    ],
+    "answer": 1,
+    "why": "WunderTech y HostiFi advierten que el escaneo deja la radio sin servicio o expulsa a sus clientes durante varios minutos."
+  }
+]

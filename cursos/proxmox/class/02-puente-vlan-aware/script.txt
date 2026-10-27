@@ -1,0 +1,17 @@
+A: Lección dos. ¿Cuántas veces te llamaron con "la VM no tiene red"?
+B: [risas] Uf, perdí la cuenta. Y casi siempre es el bridge.
+A: Casi siempre. Arranquemos por cómo piensa Proxmox la red. Las placas físicas abajo. Si tenés dos, arriba va un bond. Y arriba del bond, el bridge, el famoso vmbr cero, que es el switch virtual donde enchufás las VMs.
+B: Placas, bond, bridge. En ese orden.
+A: Exacto. Una guía de práctica dice textual que mucha gente nueva no sabe qué crear primero, y termina con máquinas sin red.
+B: ¿Y las VLAN? Yo vi gente que crea un bridge por cada VLAN.
+A: Ese es el modo tradicional, y la guía oficial lo describe, pero hay uno mejor: marcás el bridge como VLAN aware. Entonces cada placa virtual lleva su tag, y el bridge lo maneja solo. El ejemplo oficial deja pasar las VLAN de la dos a la cuatro mil noventa y cuatro, y pone la IP de gestión en vmbr cero punto cinco.
+B: O sea, un solo bridge, y en la VM ponés VLAN diez, VLAN veinte, lo que sea.
+A: Eso. Tres de las cuatro fuentes de red coinciden. La cuarta prefiere Open vSwitch para separar clientes, pero para obra no hace falta.
+B: ¿Y el puerto del switch?
+A: En trunk, con esas VLAN permitidas. Y ojo con otra trampa que cuenta la misma guía: si movés la IP de gestión a una VLAN tagueada estando conectado por red, perdés la conexión en ese mismo momento.
+B: Clásico. Te quedás mirando el ping que no vuelve.
+A: Por eso Proxmox no escribe directo la configuración. Guarda los cambios en un archivo aparte, interfaces punto new, y recién los aplica cuando tocás Apply Configuration, o con ifreload guion a si editaste a mano.
+B: Buenísimo, porque podés revisar antes de aplicar.
+A: Laboratorio: en System, Network, editá vmbr cero, tildá VLAN aware y aplicá. Creá una VM de prueba con tag diez, y en la consola corré bridge vlan show para ver el tag en el puerto de la VM.
+B: Quince minutos, con café.
+A: Y desde ahí, un solo bridge te alcanza para todas las VLAN del cliente.

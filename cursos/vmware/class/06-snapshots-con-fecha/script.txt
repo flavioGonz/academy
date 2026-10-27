@@ -1,0 +1,19 @@
+A: Lección seis. Martín, decime la verdad. ¿Alguna vez dejaste un snapshot olvidado?
+B: [risas] Uno de "antes de actualizar". Lo encontré tres meses después.
+A: Clásico. Y la KB de Broadcom sobre snapshots arranca con una frase sin vueltas: no uses snapshots como backup.
+B: ¿Por qué no? Si vuelvo atrás y anda.
+A: Porque el snapshot no es una copia. Cuando lo sacás, el disco original queda congelado y todo lo nuevo se escribe en un archivo aparte, el delta. Ese delta depende del disco original. Si el original se rompe, el snapshot solo no te sirve para nada.
+B: Ah, es como una capa encima, no un duplicado.
+A: Exacto. Y el delta crece todo el tiempo que lo tenés. Por eso la KB pone dos números: hasta treinta y dos en cadena como máximo técnico, pero usá dos o tres, y ninguno más de setenta y dos horas.
+B: ¿Todos dicen lo mismo?
+A: Las tres fuentes que leímos sobre snapshots, sí. CloudBolt es todavía más estricta: entre veinticuatro y setenta y dos horas.
+B: ¿Y qué no hay que hacer nunca?
+A: Dos cosas que marca la KB. Agrandar un disco con snapshots vivos, porque puede corromperse. Y cancelar una consolidación a mitad de camino.
+B: Uf. ¿Y la historia?
+A: Una guía de estudio de la certificación cuenta un caso típico: varias VMs con el aviso de que necesitan consolidación, y el datastore llenándose. Era el backup nocturno: sacaba el snapshot, fallaba y dejaba el delta colgado.
+B: Y nadie lo veía porque en el administrador de snapshots no aparecía.
+A: Justo eso también lo dice la KB: los snapshots que crea un software de backup pueden no verse. Hay que buscarlos.
+B: ¿El laboratorio?
+A: Sacás un snapshot por línea de comandos, vas al datastore y ves aparecer el archivo delta. Lo borrás y verificás que no queda ninguno.
+B: Diez minutos. ¿Y la regla?
+A: Todo snapshot lleva en el nombre la fecha de borrado. Y se borra antes de las setenta y dos horas.

@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Vas a instalar una UCM6304 y querés que los GRP tomen la dirección de provisioning por DHCP opción 66 desde la propia central. ¿Qué modo de red elegís?",
+  "options": [
+   "Switch, que es el de fábrica",
+   "Route",
+   "Dual",
+   "Cualquiera, la opción 66 no depende del modo"
+  ],
+  "answer": 1,
+  "why": "Según la guía de Zero Config, la opción 66 servida por la UCM requiere el modo Route; en Switch la central no actúa como servidor DHCP de la LAN."
+ },
+ {
+  "q": "Un cliente con una UCM6302 de 2023 dice que la clave de admin es admin/admin y no entra. ¿Qué es lo más probable?",
+  "options": [
+   "La central está dañada",
+   "Hay que resetear de fábrica para que vuelva a admin/admin",
+   "Los equipos desde 2017 traen contraseña aleatoria en la etiqueta trasera",
+   "El usuario de fábrica es root"
+  ],
+  "answer": 2,
+  "why": "El manual de seguridad de Grandstream indica que desde enero de 2017 cada unidad trae una contraseña aleatoria impresa en la etiqueta."
+ },
+ {
+  "q": "Encontrás una versión nueva de firmware para la UCM de un cliente. ¿Cuál es el paso previo correcto?",
+  "options": [
+   "Actualizar directo, el firmware conserva la configuración",
+   "Cambiar el modo de red a Dual",
+   "Apagar Fail2ban",
+   "Bajar un backup y guardarlo fuera de la central"
+  ],
+  "answer": 3,
+  "why": "Antes de actualizar va un backup guardado fuera del equipo, para poder volver atrás si algo sale mal."
+ }
+]

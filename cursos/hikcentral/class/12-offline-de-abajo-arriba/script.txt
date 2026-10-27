@@ -1,0 +1,19 @@
+A: Última lección. Offline de abajo arriba.
+B: El ticket de todos los días: la cámara aparece offline.
+A: Y el método que más ahorra es ir de abajo hacia arriba. Primero físico: cable, link, PoE. Después IP: dirección, máscara, gateway en la misma subred. Después DNS. Después el servicio: ¿está habilitado? Y al final, puertos.
+B: ¿Y las fuentes coinciden?
+A: Cuatro de ocho páginas de troubleshooting siguen ese orden. El soporte de Hikvision tiene una receta para equipos con Hik-Connect offline: casilla habilitada, servidor correcto, DNS ocho ocho ocho ocho, verificar salida a internet, gateway igual al de la PC, y puertos STUN abiertos en el firewall: seis mil dos, seis mil ochocientos, ocho mil quinientos cincuenta y cinco, nueve mil diez y nueve mil veinte.
+B: Uf, esos nadie los tiene anotados.
+A: Por eso existe la matriz de comunicación de HikCentral. Ahí están todos: ochenta y cuatrocientos cuarenta y tres para los clientes, siete mil seiscientos sesenta para registro ISUP, el quinientos cincuenta y cuatro y el quinientos cincuenta y nueve del gateway.
+B: ¿El quinientos cincuenta y nueve?
+A: Historia del FAQ. El vivo anda en Internet Explorer pero no en Chrome ni Firefox. Es porque el Web Client usa el puerto quinientos cincuenta y nueve del gateway en esos navegadores. Se abre en el firewall y listo.
+B: Buenísimo. ¿Y alguna que no sea red?
+A: El error de máximo número de streams. Un artículo del soporte explica que el NVR llegó a su límite de conexiones remotas, ciento veintiocho en ese modelo, y que eso no es ancho de banda. Ahí un Streaming Server reparte la carga.
+B: ¿Y cámaras ONVIF?
+A: El FAQ: HikCentral entra a ONVIF por el puerto ochenta, y si la cámara usa otro, queda offline. Se corrige el puerto.
+B: ¿Quién discrepa?
+A: Los blogs de instaladores van directo a abrir puertos en el router. En HikCentral, primero la matriz.
+B: ¿Laboratorio?
+A: Un checklist: ping al equipo y al gateway, prueba de puertos ocho mil, siete mil seiscientos sesenta y quinientos cincuenta y nueve, y revisar el registro de online y offline del equipo. Quince minutos.
+B: Cierre del curso.
+A: De abajo hacia arriba, y cada puerto contra la matriz.

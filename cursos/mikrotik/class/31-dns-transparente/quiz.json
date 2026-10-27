@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Pusiste solo la regla de redirect para UDP 53. Un equipo sigue resolviendo con su DNS de fábrica algunas consultas grandes. ¿Qué falta?",
+    "options": [
+      "Subir cache-size",
+      "Poner allow-remote-requests=no",
+      "La misma regla para TCP 53: el DNS también usa TCP",
+      "Un masquerade hacia la LAN"
+    ],
+    "answer": 2,
+    "why": "El DNS usa UDP y, para respuestas que no entran o transferencias, TCP. En el foro insisten en dos reglas, una por protocolo, para que nada se escape."
+  },
+  {
+    "q": "Activás el DNS transparente en una oficina con un controlador de dominio en la VLAN 20, y las PC dejan de encontrar el dominio. ¿Qué pasó?",
+    "options": [
+      "Sus consultas al controlador también se redirigen al router: falta ponerlo como excepción",
+      "El controlador de dominio no soporta TCP",
+      "La regla rompió el DHCP",
+      "Hay que reiniciar las PC para que tomen el NAT"
+    ],
+    "answer": 0,
+    "why": "Las reglas agarran todo el 53 que sale de la LAN hacia un destino que no es el router. Un DNS propio en otra VLAN va en la lista de excepciones, o se usa dst-nat hacia él."
+  },
+  {
+    "q": "Con el DNS transparente andando, Torch muestra a un celular hablando con 8.8.8.8 en el puerto 443, y el bloqueo de un sitio no le aplica. ¿Qué es lo más honesto que le decís al cliente?",
+    "options": [
+      "Que con una regla redirect al 443 se arregla",
+      "Que el celular está usando DoH: va cifrado y no se puede redirigir; hay paliativos, no un bloqueo total",
+      "Que el MikroTik tiene un error y hay que actualizar",
+      "Que es tráfico de una cámara"
+    ],
+    "answer": 1,
+    "why": "DoH viaja dentro de HTTPS con certificados, así que no se redirige como el puerto 53. Listas de servidores DoH o el dominio canario de Firefox ayudan, pero un usuario que lo configura a mano o usa VPN pasa igual."
+  }
+]

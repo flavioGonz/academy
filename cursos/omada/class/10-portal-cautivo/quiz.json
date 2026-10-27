@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un hotel con portal por voucher en un OC200 reporta que los huéspedes nuevos no pueden entrar, pero los ya conectados siguen navegando. ¿Qué revisás primero?",
+    "options": [
+      "Que el controlador esté encendido y en línea",
+      "La potencia de los APs",
+      "El canal de 2,4 GHz",
+      "La clave del SSID"
+    ],
+    "answer": 0,
+    "why": "La guía oficial de portal indica que el controlador tiene que estar corriendo para que el portal autentique clientes."
+  },
+  {
+    "q": "El televisor del lobby no puede completar el portal. ¿Qué usás?",
+    "options": [
+      "Pre-Authentication Access con su MAC",
+      "Un voucher de 365 días",
+      "Authentication-Free Client con su MAC o IP",
+      "Desactivar el portal"
+    ],
+    "answer": 2,
+    "why": "Authentication-Free Client permite que clientes puntuales, por IP o MAC, accedan sin autenticarse; Pre-Authentication Access es para destinos (URLs o subredes)."
+  },
+  {
+    "q": "Vas a subir el controlador de un hotel a una versión mayor. ¿Qué hacés después del upgrade, según la experiencia documentada?",
+    "options": [
+      "Nada, la configuración se migra sola siempre",
+      "Pasar el portal a portal externo",
+      "Borrar y recrear todos los SSID",
+      "Probar el portal con un celular, porque saltos grandes ya obligaron a reconfigurarlo"
+    ],
+    "answer": 3,
+    "why": "En el paso al controlador SDN 4.1.5 la configuración de portal no se migró y hubo que rehacerla a mano; probarlo tras cada salto grande evita sorpresas."
+  }
+]

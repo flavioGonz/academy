@@ -1,0 +1,18 @@
+A: Lección nueve. Interno remoto. El gerente quiere el teléfono de la oficina en su casa.
+B: Abro el cinco mil sesenta en el router, apunto el teléfono a la IP pública, y que pruebe.
+A: Y registra, suena, atiende, y no se escucha nada.
+B: [suspiro] Me pasó. ¿Qué falta?
+A: Falta decirle a la central quién es afuera. La guía de extensiones remotas de Grandstream lo arma así: en PBX Settings, SIP Settings, NAT, cargás External Host con la IP pública o un DDNS, activás Use IP address in SDP, y llenás Local Network Address con tus redes internas.
+B: ¿Y esa última para qué?
+A: Para que la central sepa a quién le habla desde adentro y a quién desde afuera. La guía lo dice tal cual: si no la configurás, la dirección externa no se arma bien.
+B: Ah, entonces a los de adentro les mandaría la pública también.
+A: Exacto. Después, en el router: reenviar el cinco mil sesenta UDP y el rango de audio, diez mil a veinte mil UDP, a la central. SIP ALG apagado. Y en la extensión, NAT activado.
+B: ¿Y el teléfono en la casa?
+A: Si no registra, en el teléfono ponés un servidor STUN, por ejemplo stun punto ipvideotalk punto com, y NAT Traversal en STUN. Ojo, con NAT simétrico STUN no funciona, y ahí vas a keep alive y puertos abiertos.
+B: ¿Puedo cambiar el puerto afuera para esquivar ataques? Cinco mil quinientos cincuenta y cinco afuera, cinco mil sesenta adentro.
+A: Esa la cuenta un hilo del foro de FreePBX: no funciona, porque SIP lleva el puerto adentro de los mensajes. Si querés otro puerto, lo cambiás en la central y en los teléfonos.
+B: ¿Cuántas fuentes coinciden?
+A: Tres de tres: la guía de remotos, el manual y ese foro. Y Grandstream ofrece una alternativa paga, RemoteConnect, que evita tocar el router.
+B: ¿Laboratorio?
+A: Veinte minutos con dos redes: la central en una, un teléfono detrás de otro router hogareño.
+B: Y el gerente escucha y es escuchado desde el living.

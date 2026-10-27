@@ -1,0 +1,19 @@
+A: Lección veinte. Empezamos los porteros por la punta de arriba de la serie S: el S539 y el S538.
+B: Los Android grandes.
+A: Los dos son Android, sí. El S539 tiene pantalla de diez pulgadas y, según la guía de selección de Akuvox, es IP66, con Wiegand y apps de terceros. Al S538 Akuvox lo presenta como "Tri-Vision".
+B: ¿Dónde los ponés?
+A: En el acceso principal de un edificio donde se quiere pantalla, directorio y varias formas de entrar. Los dos aceptan PIN, tarjeta de trece coma cincuenta y seis y de ciento veinticinco kilohertz, rostro, Bluetooth y QR.
+B: ¿Y la alimentación? Porque estos chupan.
+A: Acá está lo importante. El S539 va con PoE+ ochocientos dos punto tres at, o fuente de doce voltios tres amperes o veinticuatro voltios uno y medio. El S538, PoE at o fuente de veinticuatro voltios dos amperes.
+B: ¿Y si quiero alimentar la cerradura desde el portero?
+A: El S539 da doce voltios hasta un ampere por el relé, pero solo si lo alimentás con fuente de veinticuatro voltios y dos amperes y medio como mínimo. El S538 tiene borne propio de doce voltios, quinientos miliamperes. Y la versión del S538 para frío va solo con fuente de veinticuatro voltios, nada de PoE.
+B: Uf, eso en invierno...
+A: [risas] En Uruguay no tanto, pero conviene saberlo. Los dos relés aguantan treinta voltios tres amperes.
+B: ¿Y entrar?
+A: Igual que el R29 o el X915: nueve nueve nueve nueve, Dial, tres ocho ocho ocho, y System Info. En el S539 además tocás Network.
+B: ¿Algo de lo que vimos en HTTP?
+A: Sí. Son de los pocos que disparan un Web Relay desde la app SmartPlus, porque son Android. Cinco de las diez fuentes del catálogo coinciden en revisar la alimentación por modelo, y estos son el mejor ejemplo.
+B: ¿Laboratorio?
+A: Quince minutos. Sacás la IP, leés el firmware, que empieza con quinientos treinta y nueve o quinientos treinta y ocho, y revisás que el switch tenga presupuesto PoE+ para ese puerto.
+B: O llevás la fuente de veinticuatro.
+A: Eso. Con estos dos, la alimentación se decide antes de ir a la obra.

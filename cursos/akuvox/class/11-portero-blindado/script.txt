@@ -1,0 +1,19 @@
+A: Lección once, la que más me importa: el portero blindado.
+B: ¿Por qué tanto?
+A: Porque un portero es una cámara, un micrófono y un relé que abre una puerta, colgados en la pared de la calle con un cable de red.
+B: Dicho así, asusta.
+A: Y hay un caso que lo muestra. En marzo de dos mil veintitrés, el equipo de investigación de Claroty publicó trece vulnerabilidades en el Akuvox E11. Ejecución remota de código en la red local, encender cámara y micrófono sin autenticación, y fotos de cada apertura subidas a un FTP externo con un solo usuario para todos los equipos.
+B: ¿Trece?
+A: Trece. Y según Claroty, intentaron avisar al fabricante desde enero de dos mil veintidós sin respuesta. CISA publicó el aviso y puntuó el peor caso en nueve coma ocho sobre diez. Después Akuvox confirmó y prometió firmware.
+B: ¿Y cuántos equipos había expuestos?
+A: Claroty contó unos cinco mil con Censys, según su cifra. Es un modelo y un firmware de esa época, pero las recomendaciones valen para cualquier portero.
+B: ¿Cuáles son?
+A: Las tres fuentes de seguridad coinciden: no exponer el equipo a internet, ponerlo en su propia red y dejar que hable solo con lo necesario, y cambiar la clave por defecto. Claroty agrega bloquear el puerto UDP ocho mil quinientos, el de descubrimiento.
+B: ¿Y del lado del equipo?
+A: Claves propias en web, RTSP, ONVIF y apertura HTTP. Prevent SIP Hacking, que acepta llamadas solo de la lista blanca. Firmware al día. Y la central también: Grandstream, en su manual de la UCM, pide clave fuerte, lista blanca de IP para la web, y SRTP y TLS si se puede.
+B: ¿Y quién discrepa?
+A: Yeastar documenta registro remoto reenviando puertos, y SmartPlus necesita salir a internet. La línea que propongo: salida hacia una nube o una VPN, sí; puertos entrantes al portero, no.
+B: ¿Laboratorio?
+A: Con el portero en su VLAN, escaneá sus puertos desde la red de usuarios con nmap. Todo lo que responda y no sea necesario, se filtra en el firewall. Veinte minutos.
+B: Hacelo solo en tu laboratorio o con permiso.
+A: Siempre. Y el portero deja de ser la puerta trasera de la red.

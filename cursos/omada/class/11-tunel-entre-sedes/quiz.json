@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Central y sucursal tienen ER605 con la LAN de fábrica 192.168.0.0/24. Querés un Auto IPsec entre ambas. ¿Qué hacés antes?",
+    "options": [
+      "Nada, el Auto IPsec traduce las direcciones",
+      "Cambiar la LAN de una sede para que no se solapen",
+      "Poner los dos ER en el mismo sitio",
+      "Activar NAT en la WAN de ambos"
+    ],
+    "answer": 1,
+    "why": "La guía oficial de Auto IPsec indica que las LAN del sitio local y remoto no se pueden solapar."
+  },
+  {
+    "q": "La sucursal tiene el router del proveedor haciendo NAT delante del ER. ¿Qué camino corresponde?",
+    "options": [
+      "Auto IPsec sin cambios",
+      "No se puede hacer VPN",
+      "Port forwarding del 8043",
+      "Manual IPsec, con UDP 500 y 4500 abiertos en el equipo con NAT y ID tipo Name"
+    ],
+    "answer": 3,
+    "why": "Auto IPsec pide IP pública en la WAN; detrás de NAT la guía indica Manual IPsec con UDP 500/4500 y Local/Remote ID tipo Name."
+  },
+  {
+    "q": "¿Dónde verificás en el controlador que el túnel sitio a sitio levantó?",
+    "options": [
+      "Network Config > VPN Status > Site-to-Site VPN > IPsec",
+      "Devices > Gateway > Ports",
+      "Global View > Account",
+      "Site Settings > Wireless Features"
+    ],
+    "answer": 0,
+    "why": "La guía oficial indica revisar las entradas IPsec en VPN Status; si aparecen, el túnel está establecido."
+  }
+]

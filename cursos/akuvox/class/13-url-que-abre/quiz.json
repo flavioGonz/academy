@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un R29 abría por HTTP con /fcgi/do y, después de actualizar a un firmware 29.30.10.x, dejó de abrir. ¿Qué es lo más probable?",
+  "options": [
+   "Se quemó el relé A",
+   "El equipo pasó a la rama de alta seguridad y con el modo encendido solo acepta /fcgi/OpenDoor",
+   "El HTTP solo funciona con SmartPlus",
+   "Hay que usar DoorNum=0"
+  ],
+  "answer": 1,
+  "why": "Con el tercer número del firmware en 10 o más el equipo tiene alta seguridad; con ese modo encendido solo acepta el formato nuevo."
+ },
+ {
+  "q": "El portón está en el relé B del portero. ¿Qué parámetro va en la URL?",
+  "options": [
+   "DoorNum=2",
+   "DoorNum=B",
+   "Relay=1",
+   "DoorNum=SB"
+  ],
+  "answer": 0,
+  "why": "Según Akuvox, DoorNum=1 es el relé A y DoorNum=2 el relé B; SA y SB son para el relé de seguridad SR01."
+ },
+ {
+  "q": "Habilitaste Open Relay via HTTP y la apertura falla aunque la URL y la clave están bien. ¿Qué revisás primero en esa pantalla?",
+  "options": [
+   "Que el RTSP tenga clave",
+   "Que el DTMF sea RFC 2833",
+   "Que el PIN público sea 33333333",
+   "Que Session Check esté apagado"
+  ],
+  "answer": 3,
+  "why": "Akuvox indica dejar Session Check desactivado porque puede hacer fallar la apertura."
+ }
+]

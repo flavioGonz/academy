@@ -1,0 +1,19 @@
+A: Te pregunto algo incómodo. ¿Cuándo fue la última vez que actualizaste ese gateway Linux que instalamos en el depósito?
+B: [risas] Cuando lo instalamos. Más o menos.
+A: Por eso esta lección. Actualizar con método. Primero, los dos comandos de siempre: apt update baja la lista de lo que hay, apt upgrade instala lo nuevo sin quitar nada.
+B: ¿Y el full upgrade?
+A: Ese puede quitar e instalar paquetes para resolver dependencias. Es el del salto de versión mayor, así que se planifica, con backup antes.
+B: ¿Las fuentes coinciden en esto?
+A: Tres de las cuatro que leímos sobre paquetes y actualizaciones, sí. El Debian Handbook recomienda actualizar regularmente por la seguridad, y la documentación de Ubuntu Server va más lejos: dice que el riesgo de no aplicar un parche de seguridad es mayor que el de aplicarlo.
+B: Por eso unattended upgrades viene instalado en Ubuntu.
+A: Exacto. Una vez por día aplica solo seguridad. En Debian trece verificás que esté y, si falta, lo instalás. Pero hay un detalle: el reinicio automático viene apagado.
+B: Tiene sentido. Un gateway que se reinicia a media tarde es un llamado de soporte.
+A: Claro. La doc de Ubuntu muestra un caso: el proceso termina, encuentra el archivo reboot required y agenda el reinicio a la hora configurada. Si eso lo querés, lo fijás a una hora, tipo cuatro y media de la mañana.
+B: ¿Y si el equipo lo usa gente de día y no puede reiniciarse solo?
+A: Lo dejás apagado y reiniciás vos en una ventana. Lo importante es saber que hay un reinicio pendiente. Otro caso real: alguien quiso pasar de Ubuntu veinticuatro a veintiséis y el instalador se negó porque tenía un reinicio pendiente.
+B: [risas] El propio sistema te frena.
+A: Y para saber qué cambió y cuándo, está el historial de apt en barra var barra log barra apt.
+B: ¿Laboratorio?
+A: Quince minutos: revisás que la actualización automática esté activa, leés su log y el historial de apt, y dejás el reinicio a una hora fija en una VM de prueba.
+B: Lo que cambia es que ya no actualizás cuando te acordás.
+A: Seguridad sola todos los días, reinicio con hora, y el salto de versión con backup.

@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Creaste la interfaz WireGuard y el peer, pero el handshake nunca ocurre. El router tiene firewall por defecto. ¿Qué falta casi seguro?",
+    "options": [
+      "Aceptar UDP 13231 en input arriba de 'drop all not coming from LAN'",
+      "Activar el DDNS",
+      "Poner MTU 1500 en la interfaz",
+      "Abrir TCP 8291 desde WAN"
+    ],
+    "answer": 0,
+    "why": "La documentación avisa que el firewall por defecto bloquea el establecimiento del túnel; hay que aceptar el puerto de WireGuard en input antes de los drops."
+  },
+  {
+    "q": "Un cliente remoto solo puede usar el cliente VPN que trae Windows, sin instalar nada. ¿Qué opción encaja?",
+    "options": [
+      "PPTP, que viene en todos lados",
+      "Abrir WinBox con available-from",
+      "L2TP/IPsec con IPsec requerido",
+      "WireGuard sin cliente"
+    ],
+    "answer": 2,
+    "why": "L2TP/IPsec tiene cliente nativo en Windows, macOS, iOS y Android. PPTP tiene fallas conocidas y las fuentes lo descartan."
+  },
+  {
+    "q": "Cada técnico usa la misma clave privada de WireGuard. Uno se va de la empresa. ¿Qué problema tenés?",
+    "options": [
+      "Ninguno, WireGuard caduca las claves solo",
+      "Hay que cambiar la clave en todos los equipos y notebooks, porque no podés dar de baja solo a él",
+      "Solo hay que cambiar el puerto",
+      "Basta con deshabilitar su usuario de WinBox"
+    ],
+    "answer": 1,
+    "why": "Con un peer por técnico y allowed-address /32, se borra solo su peer. Con una clave compartida, revocar a uno implica cambiarla para todos."
+  }
+]

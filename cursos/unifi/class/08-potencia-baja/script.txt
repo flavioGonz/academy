@@ -1,0 +1,19 @@
+A: Lección ocho. Te llama el cliente: "tengo tres AP y en la sala de reuniones el WiFi anda horrible, y eso que tengo señal llena".
+B: Señal llena y anda mal. Clásico.
+A: Y casi siempre es la potencia. LazyAdmin dice que la potencia mal configurada es probablemente la causa número uno de problemas de WiFi.
+B: ¿Pero más potencia no es más cobertura?
+A: Es más cobertura para el AP. Pero el celular no grita tan fuerte. El AP llega lejos, el celular no le contesta bien, y esa conexión se llena de reintentos.
+B: Y el celular sigue pegado al AP lejano.
+A: Eso. Ve la señal fuerte del primero y no busca otro. Es el cliente pegajoso. Y std punto rocks agrega lo peor: un cliente con señal pobre usa velocidades bajas y se come el airtime de todos los demás en ese AP.
+B: ¿Coinciden todos?
+A: Cinco de cinco. Es de los pocos temas sin discusión. El único matiz que nota WunderTech es que con un solo AP sí lo querés alto.
+B: ¿Y qué valores ponen?
+A: WunderTech arranca con dos coma cuatro en baja, cinco giga entre baja y media, seis giga en alta. LazyAdmin dice: probá Auto, y si sigue mal, dos coma cuatro baja y cinco media, y dejalo unos días. std punto rocks pone baja con un AP por ambiente y media si un AP cubre varios.
+B: ¿Y si queda un rincón sin señal?
+A: LazyAdmin es claro: mejor otro AP que subirle a todos. Y Purple agrega un detalle de diseño: dos coma cuatro entre tres y seis dB por debajo de cinco, porque atraviesa más paredes.
+B: Entonces la de la sala de reuniones...
+A: Bajás potencia a los tres, caminás con el celular midiendo, y ves si se pasa al AP de al lado.
+B: ¿Laboratorio?
+A: Veinte minutos. Anotás la señal en tres puntos con WiFiman, bajás potencia, repetís la caminata y comparás a qué AP queda conectado en cada punto.
+B: Más AP con menos volumen.
+A: Esa es.

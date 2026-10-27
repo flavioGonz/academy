@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Actualizaste RouterOS y el equipo reinició bien. En /system/routerboard/print, current-firmware es más viejo que upgrade-firmware. ¿Qué falta?",
+    "options": [
+      "Nada, el bootloader se actualiza solo en el próximo arranque",
+      "Hacer Netinstall",
+      "Cambiar al canal testing",
+      "Ejecutar /system/routerboard/upgrade y reiniciar"
+    ],
+    "answer": 3,
+    "why": "Cada versión de RouterOS trae su RouterBOOT, pero se aplica a mano: la documentación recomienda /system routerboard upgrade y un reinicio después de cada actualización."
+  },
+  {
+    "q": "Un cliente con el router en un sitio que visitás dos veces por año. ¿Qué canal es razonable?",
+    "options": [
+      "development, para tener lo último",
+      "long-term o stable, según si necesitás funciones nuevas",
+      "testing, porque sale más seguido",
+      "Cualquiera, son iguales"
+    ],
+    "answer": 1,
+    "why": "La documentación dice que testing no va en producción. Long-term trae solo arreglos críticos y cambia poco; stable incorpora funciones nuevas cada pocos meses."
+  },
+  {
+    "q": "En RouterOS 7.24, Check for Updates falla con error de conexión, pero la navegación funciona. Hay un firewall del cliente adelante. ¿Qué revisás?",
+    "options": [
+      "Que el puerto 8291 esté abierto hacia adentro",
+      "Que el DDNS esté activo",
+      "Que el bandwidth server esté encendido",
+      "Que el router pueda salir por TCP 443 hacia los servidores de MikroTik"
+    ],
+    "answer": 3,
+    "why": "Desde 7.23 la consulta de actualizaciones sale del router por HTTPS; la documentación pide permitir TCP 443 en firewalls que estén adelante."
+  }
+]

@@ -1,0 +1,21 @@
+A: Lección nueve. Roaming. Y arranco con una frase de Purple que ordena todo: el roaming es una decisión del cliente.
+B: ¿O sea que el AP no lo pasa de uno a otro?
+A: No. El AP puede darle información, acelerar el traspaso o empujarlo. Pero el que decide es el celular.
+B: Y UniFi tiene varias perillas para eso.
+A: Varias. Band steering, que lo empuja de dos coma cuatro a cinco. BSS Transition, que es el ochocientos dos once v: le sugiere un AP mejor. Fast Roaming, el ochocientos dos once r: acelera la reautenticación. Y mínimo RSSI, que directamente lo patea.
+B: ¿Cuál se activa?
+A: BSS Transition, siempre. Cuatro fuentes coinciden y ninguna discrepa. Viene activado y un cliente que no lo entiende lo ignora.
+B: ¿Y Fast Roaming?
+A: Ahí está la pelea. WunderTech cita que Ubiquiti lo recomienda y en su casa notó una diferencia enorme. LazyAdmin dice que suele hacer más mal que bien. Purple lo deja solo para redes Enterprise con voz y video.
+B: ¿Por qué tanto lío?
+A: Porque hay drivers viejos que no se conectan a un SSID que anuncia Fast Roaming. Purple tiene un caso, que ellos mismos presentan como ilustrativo: una cadena de cuarenta locales lo activa en todos los SSID y los lectores de código de barras viejos dejan de conectar en nueve locales.
+B: [suspiro] Me imagino el lunes.
+A: Lo volvieron atrás en una hora, armaron un SSID aparte sin Fast Roaming para los lectores, y desde ahí todo modelo nuevo se prueba en un local antes de desplegar.
+B: ¿Y mínimo RSSI?
+A: Último y suave. std punto rocks usa menos setenta como regla en oficina. WunderTech cita que Ubiquiti no lo recomienda salvo alta densidad, y Purple lo pone al final y solo con solape de cobertura probado. Si no hay otro AP cerca, el cliente se cae.
+B: Y lo mismo para WPA tres, ¿no? Equipos viejos que no entran.
+A: Igual. Equipos de legado, SSID aparte.
+B: ¿Laboratorio?
+A: Quince minutos. Un SSID de prueba con Fast Roaming, conectás cada tipo de equipo del cliente, caminás entre dos AP y mirás el historial de roaming.
+B: Probar con todo antes de activar.
+A: Esa es la regla.

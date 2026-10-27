@@ -1,0 +1,20 @@
+A: Lección cuatro. Troncal registrado. La central ya tiene teléfonos, ahora tiene que salir al mundo.
+B: El proveedor te manda un mail con servidor, usuario y contraseña, y a cargar.
+A: Eso. En Extension Trunk, VoIP Trunks, elegís Register SIP Trunk. Hay otros dos tipos: Peer, que es por IP y sirve para unir dos centrales, y Account, para que un equipo sin IP fija se registre en tu UCM.
+B: O sea que para un proveedor con usuario y contraseña, siempre Register.
+A: Siempre. Cargás host, usuario, Auth ID y contraseña. Y después mirás el Dashboard, en System Status.
+B: ¿Y si dice Rejected?
+A: La guía de troncales de Grandstream es clara: o la central no llega al servidor del proveedor, o las credenciales están mal. Copiá y pegá, nada de tipear.
+B: Clásico. Un cero de más en el usuario.
+A: [risas] Clásico. Ahora, dos cosas que agregan los proveedores. Simtex, un proveedor australiano, recomienda activar el heartbeat: la UCM manda un OPTIONS cada sesenta segundos y se da cuenta rápido si el troncal se cayó.
+B: Y eso sirve para el failover.
+A: Exacto. Y los codecs: dejar solo los que usa el proveedor. Normalmente G punto setecientos once, A-law y mu-law. Sacás el resto.
+B: ¿Y puertos? ¿Abro el cinco mil sesenta en el router?
+A: Para el troncal registrado, según Simtex, en el noventa y nueve coma nueve por ciento de los casos no hace falta reenviar ningún puerto. La central sale, registra, y el proveedor le contesta por la misma conexión.
+B: ¿Qué tan de acuerdo están las fuentes?
+A: Tres de tres en lo básico: Register, verificar en el Dashboard, heartbeat. Lo de los codecs lo dice una sola, el proveedor.
+B: ¿Y cómo lo pruebo?
+A: Cuatro pruebas: llamás afuera, te llaman de un celular, mirás que el número que aparece sea el correcto, y dejás un mensaje en un buzón marcando una tecla.
+B: Para ver que el DTMF pasa.
+A: Justo. Laboratorio de quince minutos con un troncal de prueba.
+B: Y el cliente no se entera de que existe un troncal, porque simplemente anda.

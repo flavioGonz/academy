@@ -1,0 +1,17 @@
+A: Lección cinco. Patrón y privilegio. Con el troncal registrado, ¿quién puede llamar a dónde?
+B: Yo armo una ruta con punto, que agarra todo, y a otra cosa.
+A: [risas] Esa ruta es una invitación al fraude. Vamos de a poco. En la UCM los patrones empiezan con guion bajo. X es cualquier dígito, Z del uno al nueve, N del dos al nueve, y el punto es uno o más dígitos.
+B: Ok. Si el cliente marca nueve para salir.
+A: El patrón incluye el nueve y con Strip uno lo sacás antes de mandarlo al proveedor. Es el ejemplo de la guía de Telnyx: guion bajo, nueve, N y nueve X, con Strip uno.
+B: Bien. ¿Y el privilegio?
+A: Cuatro niveles: Internal, Local, National, International. La extensión usa la ruta si su nivel es igual o mayor al de la ruta. El manual de seguridad lo pone como primera barrera contra llamadas internacionales no autorizadas.
+B: Y para la ruta internacional, ¿algo más?
+A: Contraseña o grupo de PIN. Así, aunque alguien registre una extensión robada, no llama a cualquier país sin el PIN. Cuatro de cinco fuentes que tocan rutas coinciden en esto.
+B: ¿Y la que no?
+A: No es que discrepe en el PIN. La diferencia es otra: un proveedor dice que la UCM usa la primera ruta que matchea de arriba hacia abajo, y el manual actual dice que eso depende de una opción, Outgoing Routing Priority, que puede ordenar por lista o por precisión del patrón.
+B: O sea, miro esa opción en cada central.
+A: Exacto. Y por último el failover. Según Telnyx, la UCM pasa al troncal de respaldo si el principal no responde en treinta y dos segundos, o si contesta con errores como cuatrocientos tres, cuatrocientos ocho o quinientos tres.
+B: Mirá vos, treinta y dos segundos es bastante para alguien esperando.
+A: Por eso el heartbeat de la lección anterior ayuda. Laboratorio de quince minutos: una ruta nacional, una internacional con PIN y privilegio International, y probás con una interna Local.
+B: Que tiene que rebotar.
+A: Si rebota, la barrera funciona. Y ese cliente no recibe una factura de miles de dólares un lunes.

@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un E18 con firmware 18.30.10.250 no acepta el PIN de sistema admin. ¿Qué probás?",
+  "options": [
+   "2396",
+   "33333333",
+   "123456",
+   "Admin321"
+  ],
+  "answer": 3,
+  "why": "Para el E18, hasta 18.30.10.211 el PIN es admin; en versiones posteriores es Admin321."
+ },
+ {
+  "q": "Vas a instalar un E16C con cerradura de 12 V. ¿Cómo la alimentás?",
+  "options": [
+   "Desde la salida de 12 V del E16C",
+   "Con el PoE del portero",
+   "Con fuente propia: el E16C no tiene salida de 12 V",
+   "Desde el monitor"
+  ],
+  "answer": 2,
+  "why": "La tabla de 12 V marca al E16C (y al E18C) sin salida para alimentación externa."
+ },
+ {
+  "q": "El pliego pide apertura con venas de la palma en un equipo de la serie E. ¿Qué pedís?",
+  "options": [
+   "E18C",
+   "E16P",
+   "E13S",
+   "E12W"
+  ],
+  "answer": 1,
+  "why": "La tabla de métodos de acceso indica palma soportada en el E16P."
+ }
+]

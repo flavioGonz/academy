@@ -1,0 +1,20 @@
+A: Lección tres: la resistencia al final de la línea. Lo que separa una zona supervisada de un cable cualquiera.
+B: Y acá cada marca tiene su valor, ¿no?
+A: Exacto. Y ese es el primer error. El blog de TremTech explica muy bien el concepto, pero con valores de DSC, cinco coma seis kilohms. En Paradox la resistencia de fin de línea es de un kilohm.
+B: ¿Y qué gano con ponerla?
+A: Sin resistencia, la central solo ve cerrado o abierto. Con resistencia, además detecta el cortocircuito. Es la diferencia entre un cable pisado que nadie nota y una falla en el teclado.
+B: ¿Y se configura zona por zona?
+A: En las SP plus no. Es la sección setecientos seis, opción dos, y vale para toda la central. O todas con resistencia, o ninguna.
+B: Uf. Si la activás en una obra vieja sin resistencias...
+A: Se te ponen todas las zonas en falla. Por eso se decide al cablear y se anota en la tapa.
+B: ¿Y el ATZ? Lo veo en todos los planos.
+A: ATZ es duplicar zonas: dos detectores en el mismo par. En el dibujo de la guía de la EVOHD+, uno lleva un kilohm y el otro dos coma dos. Se activa en la setecientos cinco, opción uno.
+B: ¿En cualquier central?
+A: No. La guía de las SP plus dice que en esa serie solo la SP seis mil plus tiene ATZ. Y en EVO, la zona del teclado no admite ATZ ni reconoce tamper.
+B: ¿Cuánto coinciden las fuentes?
+A: Tres de cuatro coinciden en la resistencia de un kilohm. En ATZ, dos de cuatro. En un foro portugués un usuario preguntaba si con ATZ podía meter dos tamper en la misma zona. Es la duda de todo el que cablea su primera SP seis mil.
+B: ¿Y las zonas de fuego?
+A: Normalmente abiertas, con resistencia, y no se pueden anular.
+B: ¿Qué probamos?
+A: Tester, resistencias de uno y de dos coma dos, un contacto magnético y la central de banco. Cableás una zona simple y una doble, y mirás qué zona abre cada detector. Veinte minutos.
+B: Y la planilla de cableado, con el criterio anotado.

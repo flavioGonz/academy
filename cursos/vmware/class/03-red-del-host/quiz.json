@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un port group de VMs tiene VLAN ID 0. ¿Qué significa?",
+  "options": [
+   "Que el tráfico sale sin etiqueta y usa la VLAN nativa del puerto del switch físico",
+   "Que usa la VLAN 1 siempre, sin importar el switch",
+   "Que bloquea todo el tráfico",
+   "Que pasa todas las VLAN"
+  ],
+  "answer": 0,
+  "why": "Según la KB de Broadcom, VLAN 0 significa sin etiqueta: el tráfico usa la VLAN nativa configurada en el switch físico."
+ },
+ {
+  "q": "Te piden mover la red de gestión de un ESXi de cliente a otra VLAN. Solo tenés acceso por SSH desde la oficina. ¿Qué hacés?",
+  "options": [
+   "Lo cambio desde el Host Client, que es más seguro que SSH",
+   "Reinicio el host y lo cambio en el arranque",
+   "Lo cambio por SSH, si se corta vuelvo a entrar",
+   "Coordino acceso a la consola remota (iLO, iDRAC) o física antes de tocarlo"
+  ],
+  "answer": 3,
+  "why": "La KB advierte que cambiar el VMkernel de gestión desde el cliente o por SSH puede cortar el acceso; recomienda hacerlo con consola remota o física."
+ },
+ {
+  "q": "¿Para qué sirve poner dos uplinks en el mismo vSwitch?",
+  "options": [
+   "Para duplicar las VLAN disponibles",
+   "Para tener redundancia y balanceo: si se cae un cable o una boca, la red sigue",
+   "No sirve, ESXi usa solo el primero",
+   "Para que cada VM tenga dos IPs"
+  ],
+  "answer": 1,
+  "why": "Con NIC teaming, varios uplinks dan balanceo y failover; si falla uno, el tráfico sigue por el otro."
+ }
+]

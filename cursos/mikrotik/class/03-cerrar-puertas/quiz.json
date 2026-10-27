@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Heredás un router de otro instalador. Lo actualizás a la última stable. ¿Ya está seguro?",
+    "options": [
+      "Sí, la actualización borra cualquier configuración maliciosa",
+      "Sí, si además reiniciás",
+      "No: hay que cambiar contraseñas y revisar scheduler, scripts, SOCKS y reglas desconocidas",
+      "No: hay que hacer Netinstall siempre"
+    ],
+    "answer": 2,
+    "why": "MikroTik explicó, con Mēris, que actualizar no ayuda si la contraseña ya fue robada: el atacante usa funciones de RouterOS. Hay que cambiar la contraseña y buscar configuración que no creaste."
+  },
+  {
+    "q": "Configuraste winbox available-from=192.168.88.0/24. Desde internet, ¿qué ve un escáner en el puerto 8291?",
+    "options": [
+      "Nada, el puerto queda oculto",
+      "El puerto aparece, pero el router cierra la conexión sin atender",
+      "El puerto redirige a la LAN",
+      "Depende del canal de actualización"
+    ],
+    "answer": 1,
+    "why": "Según la referencia de /ip service, available-from cierra la conexión a clientes no permitidos pero el puerto sigue visible. Para ocultarlo hace falta un drop en el firewall input."
+  },
+  {
+    "q": "En la auditoría encontrás una regla de input que acepta TCP 5678 y SOCKS habilitado. Nadie del equipo lo configuró. ¿Qué indica?",
+    "options": [
+      "Es una marca típica de routers tomados por la botnet Mēris",
+      "Es la configuración por defecto de RouterOS 7",
+      "Es la herramienta de bandwidth test",
+      "Es el puerto de Back To Home"
+    ],
+    "answer": 0,
+    "why": "El aviso de MikroTik y el análisis de Gen Digital señalan SOCKS y el puerto 5678 como rastro de compromiso. Por defecto SOCKS está apagado y no hay reglas de scheduler."
+  }
+]

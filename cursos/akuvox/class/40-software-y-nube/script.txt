@@ -1,0 +1,19 @@
+A: Lección cuarenta. El software: lo que no se atornilla pero decide cómo se administra todo.
+B: SmartPlus ya lo vimos en la lección diez.
+A: Sí, la app del residente con la nube de Akuvox: ver y hablar con la visita, abrir, mirar la entrada y dar llaves virtuales. Hoy completamos el resto de la página de software de Akuvox.
+B: Dale.
+A: My MobileKey: una credencial Bluetooth en el celular, para porteros con Bluetooth. Abre acercando la mano o con un botón en la app, cifrado AES de doscientos cincuenta y seis bits, y se integra con ACMS.
+B: ¿Y ACMS?
+A: Un sistema de control de acceso en PC para pymes: personal, equipos, permisos y registros. ACMS Pro es la versión empresa: monitoreo y control remoto de equipos y estado de puertas, grupos de autorización y acceso desde varios puestos, en web o cliente.
+B: ¿Y para edificios?
+A: SDMC: software local para administrar el intercom de toda una comunidad, sin nube. Despliegue de equipos por lotes, video en vivo, control de acceso, y mensajes y avisos.
+B: ¿Y el Installer Kit?
+A: Esto me gustó: es una herramienta de Akuvox armada sobre el hardware de un S563W, con PoE y Wi-Fi. Junta solo la información de red de los equipos y sube el proyecto a la nube. Pensado para el instalador que no quiere pelearse con la red.
+B: ¿Cómo sé si un equipo habla con todo eso?
+A: Por el segundo número del firmware. Según Akuvox, treinta quiere decir versión con logo de Akuvox que soporta nube, SDMC y modo descubrimiento a la vez. Otros valores son versiones a medida.
+B: Ah, mirá. ¿Cuántas fuentes?
+A: Una de siete describe el software, la propia página de Akuvox. El resto ya lo traíamos de las lecciones uno, diez y doce.
+B: ¿Laboratorio?
+A: Quince minutos. Tres obras: una casa, un edificio sin internet confiable y una oficina con cuarenta empleados. Para cada una elegís software y verificás en un equipo que el segundo número del firmware sea treinta.
+B: Y la casa con plan B local.
+A: Siempre, como en la lección diez.

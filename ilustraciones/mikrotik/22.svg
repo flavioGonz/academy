@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>IPsec: dos fases y policies que se espejan</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">MIKROTIK</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">IPsec: dos fases y policies que se espejan</text>
+<rect x="48" y="150" width="250" height="124" rx="16" fill="#011E38" stroke="#011E38" stroke-width="2"/><text x="68.0" y="208.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#FFFFFF" text-anchor="start">Sitio A · MikroTik</text><text x="68.0" y="231.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#9FC3E3" text-anchor="start">203.0.113.10</text>
+<rect x="902" y="150" width="250" height="124" rx="16" fill="#011E38" stroke="#011E38" stroke-width="2"/><text x="922.0" y="208.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#FFFFFF" text-anchor="start">Sitio B · otra marca</text><text x="922.0" y="231.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#9FC3E3" text-anchor="start">198.51.100.20</text>
+<rect x="318" y="136" width="564" height="152" rx="76.0" fill="#0A63B8" fill-opacity="0.07" stroke="#0A63B8" stroke-width="2.5"/>
+<text x="600.0" y="166.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="middle">Fase 1 · IKE: profile + peer + identity</text>
+<text x="600.0" y="274.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="middle">UDP 500 / 4500 · se ve en active-peers</text>
+<rect x="358" y="186" width="484" height="62" rx="31.0" fill="#0E8F5E" fill-opacity="0.14" stroke="#0E8F5E" stroke-width="2.5"/>
+<text x="600.0" y="223.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0E8F5E" text-anchor="middle">Fase 2 · SA ESP: proposal + policy</text>
+<path d="M298.0 212.0C308.0 212.0,308.0 212.0,318.0 212.0" fill="none" stroke="#0A63B8" stroke-width="4" stroke-linecap="round"/><circle cx="298.0" cy="212.0" r="5" fill="#0A63B8"/><circle cx="318.0" cy="212.0" r="5" fill="#0A63B8"/>
+<path d="M882.0 212.0C892.0 212.0,892.0 212.0,902.0 212.0" fill="none" stroke="#0A63B8" stroke-width="4" stroke-linecap="round"/><circle cx="882.0" cy="212.0" r="5" fill="#0A63B8"/><circle cx="902.0" cy="212.0" r="5" fill="#0A63B8"/>
+<text x="48.0" y="336.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="start">POLICY EN A</text>
+<text x="1152.0" y="336.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="end">POLICY EN B</text>
+<rect x="48" y="352" width="420" height="60" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="68.0" y="389.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">src-address</text>
+<text x="448.0" y="389.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#04223D" text-anchor="end">192.168.88.0/24</text>
+<rect x="732" y="352" width="420" height="60" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="752.0" y="389.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">local</text>
+<text x="1132.0" y="389.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#04223D" text-anchor="end">10.10.10.0/24</text>
+<rect x="48" y="426" width="420" height="60" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="68.0" y="463.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">dst-address</text>
+<text x="448.0" y="463.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#04223D" text-anchor="end">10.10.10.0/24</text>
+<rect x="732" y="426" width="420" height="60" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="752.0" y="463.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">remota</text>
+<text x="1132.0" y="463.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#04223D" text-anchor="end">192.168.88.0/24</text>
+<path d="M474.0 382.0C600.0 382.0,600.0 456.0,726.0 456.0" fill="none" stroke="#0E8F5E" stroke-width="3" stroke-linecap="round"/>
+<path d="M474.0 456.0C600.0 456.0,600.0 382.0,726.0 382.0" fill="none" stroke="#0E8F5E" stroke-width="3" stroke-linecap="round"/>
+<rect x="550.2" y="404" width="99.6" height="30" rx="15" fill="#E3F5EC"/><text x="600.0" y="425.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">= espejo</text>
+<rect x="48" y="520" width="1104" height="75" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="48" y="532" width="5" height="51" rx="2.5" fill="#B45309"/><text x="74.0" y="554.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Cifrado, hash, grupo DH, lifetimes y redes tienen que coincidir en las dos puntas. Primero la tabla firmada por los dos</tspan><tspan x="74.0" dy="21.6">técnicos, después el túnel.</tspan></text>
+</svg>

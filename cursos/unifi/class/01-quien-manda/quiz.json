@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un cliente con 8 sucursales tiene un UCG Ultra en cada una. Querés gestionar todo desde un UniFi OS Server central en tu datacenter. ¿Qué pasa con los UCG?",
+    "options": [
+      "Se adoptan en el servidor central como cualquier gateway",
+      "Siguen corriendo su propio Network; para un controlador central el gateway del sitio tiene que ser un UXG o uno de terceros",
+      "Se adoptan si antes se les hace set-inform al servidor central",
+      "Se pueden gestionar desde los dos controladores a la vez"
+    ],
+    "answer": 1,
+    "why": "Un Cloud Gateway corre su propia Network Application y cada equipo tiene un solo host. Con controlador central, el gateway del sitio es un UXG o de terceros."
+  },
+  {
+    "q": "Se cae la VM del controlador un sábado. ¿Qué le pasa al WiFi del cliente?",
+    "options": [
+      "Se corta hasta que vuelva el controlador",
+      "Los AP pasan a modo de fábrica",
+      "Siguen andando solo los SSID abiertos",
+      "Sigue andando con la última configuración; no se puede cambiar, adoptar ni ver estadísticas hasta que vuelva"
+    ],
+    "answer": 3,
+    "why": "Los equipos guardan su configuración. El controlador hace falta para cambios, adopción y estadísticas."
+  },
+  {
+    "q": "En octubre de 2026 un cliente quiere seguir con controlador propio en una VM. ¿Qué instalás?",
+    "options": [
+      "UniFi OS Server, el reemplazo oficial del Network Server",
+      "El Network Server 10.6, que es la versión actual",
+      "Un contenedor Docker oficial de Ubiquiti",
+      "Network 11 directamente sobre Windows Server"
+    ],
+    "answer": 0,
+    "why": "Las notas de Network 11.0 eliminan el soporte al Network Server y nombran a UniFi OS Server como reemplazo oficial. El 10.6 fue el último Network Server."
+  }
+]

@@ -1,0 +1,22 @@
+A: Lección siete. Pregunta trampa: si las cámaras están en la VLAN veinte y la oficina en la uno, ¿una PC de la oficina ve las cámaras?
+B: No, están separadas.
+A: Si el gateway rutea entre VLAN, sí las ve.
+B: ¿En serio?
+A: En serio. La misma guía de VLAN de TP-Link lo aclara: separan dominios de broadcast, pero si el router permite el ruteo entre VLAN, se comunican. Para cortar, ACL o reglas de firewall.
+B: O sea, la VLAN ordena, pero no encierra.
+A: Esa es la frase. Las tres fuentes que tocan seguridad entre redes van en esa dirección.
+B: ¿Y cómo se arman las ACL en Omada?
+A: Site Settings, Network Security, ACL. Hay ACL de gateway, de switch y de access point. La guía oficial de ACL de switch trae los casos típicos: una red que solo ve un servidor, una que solo ve lo interno, y la de invitados que solo sale a internet.
+B: La de invitados la uso siempre.
+A: Y dos detalles que muerden. Uno: las reglas se evalúan de arriba hacia abajo. El permiso al servidor puntual va arriba del deny general.
+B: Si lo ponés abajo, nunca llega.
+A: Exacto. Dos: la ACL del switch funciona como lista negra. Para "solo interno" primero permitís hacia las subredes internas y después negás todo lo demás.
+B: ¿Y la historia?
+A: Una del foro de Lawrence Systems, de un técnico escéptico. Cuenta que en un switch TP-Link la IP de gestión respondía desde cualquier VLAN.
+B: [suspiro] Eso es justo lo que un cliente de seguridad no quiere.
+A: Por eso, además de la ACL entre redes de usuarios, conviene proteger la red de gestión de los equipos.
+B: En obra: grabador en la VLAN veinte, oficina en la uno.
+A: ACL que niega de la uno a la veinte, y arriba un permit solo desde la PC del vigilador hacia el grabador.
+B: ¿Laboratorio?
+A: Red de invitados que solo sale a internet, y probar desde una notebook que no llega al gateway de la red principal. Quince minutos.
+B: Y con eso dejamos de prometer aislamiento que no existe.

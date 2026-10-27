@@ -1,0 +1,35 @@
+[
+ {
+  "q": "RPS te pide una descarga completa aunque no cambiaste nada. ¿Qué es lo más probable?",
+  "options": [
+   "La hora del panel no coincide con la de la laptop; se usa Set Panel Time antes de descargar",
+   "El panel está roto",
+   "Falta la licencia premium",
+   "El cable USB es muy largo"
+  ],
+  "answer": 0,
+  "why": "La TI 2715 lista como problema conocido que el resumen de configuración puede pedir descarga completa si fecha y hora del panel no están sincronizadas con la laptop."
+ },
+ {
+  "q": "Tenés una configuración de un FPA-5000 en cuenta 3.x y vas a poner un AVENAR con firmware 4.8. ¿Cómo se sube?",
+  "options": [
+   "En un solo paso a 4.8",
+   "Creando todo de cero obligatoriamente",
+   "No se puede",
+   "A AVENAR panel 3.5, cambiar los nodos FPA a AVENAR y después subir a la cuenta 4.x"
+  ],
+  "answer": 3,
+  "why": "Desde RPS 5.15.27 se quitó el salto directo de 3.x con nodos FPA a 4.x; Bosch indica esos tres pasos."
+ },
+ {
+  "q": "¿Qué se guarda como acta al final de la puesta en marcha según el System manual?",
+  "options": [
+   "Una foto de la pantalla",
+   "La factura",
+   "El archivo de diagnóstico leído del panel",
+   "Nada, alcanza con el walk test"
+  ],
+  "answer": 2,
+  "why": "La guía de puesta en marcha termina con leer el archivo de diagnóstico y guardarlo como registro de la prueba."
+ }
+]

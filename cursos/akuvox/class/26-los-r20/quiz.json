@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un R20A tiene etiqueta V3.0. ¿Qué versión de hardware es según Akuvox?",
+  "options": [
+   "Hardware 3",
+   "Hardware 1",
+   "Hardware 2",
+   "Es un R20K"
+  ],
+  "answer": 2,
+  "why": "Akuvox aclara la excepción: R20A V3.0 es hardware 2 y R20A V5.0 es hardware 3."
+ },
+ {
+  "q": "¿Cuál de los R20 acepta PIN?",
+  "options": [
+   "R20A",
+   "R20K",
+   "R20B",
+   "Ninguno"
+  ],
+  "answer": 1,
+  "why": "La tabla de métodos marca PIN en R20K (y R20K-L); R20A y R20B no admiten PIN."
+ },
+ {
+  "q": "Un R20K V3.0 con PoE y firmware 320.30.11.20 no da 12 V por el relé. ¿Por qué?",
+  "options": [
+   "Con PoE, la salida pide firmware 320.30.11.42 o más",
+   "El relé está quemado",
+   "El R20K no tiene relé",
+   "Falta SmartPlus"
+  ],
+  "answer": 0,
+  "why": "La tabla de 12 V indica que con PoE la salida requiere firmware 320.30.11.42 o superior."
+ }
+]

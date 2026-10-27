@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Una sucursal sale a internet por 4G con CGNAT y la central tiene IP pública fija. ¿Cómo armás el L2TP/IPsec?",
+    "options": [
+      "Servidor L2TP en la sucursal y port forwarding en el módem 4G",
+      "Cliente L2TP en el MikroTik de la sucursal, que llama al servidor de la central",
+      "Servidor en las dos puntas, para que cualquiera pueda llamar",
+      "Con CGNAT no se puede armar ningún túnel"
+    ],
+    "answer": 1,
+    "why": "Con CGNAT nadie puede iniciar una conexión hacia la sucursal, pero la sucursal sí puede salir. El túnel saliente usa /interface/l2tp-client hacia la IP pública de la central."
+  },
+  {
+    "q": "El túnel levantó y desde la terminal del MikroTik de la sucursal llegás a 10.10.1.1, pero desde una PC de la sucursal no. En la central no podés tocar nada. ¿Qué probás?",
+    "options": [
+      "Activar add-default-route=yes",
+      "Desactivar use-ipsec",
+      "Un masquerade con out-interface igual a la interfaz del túnel",
+      "Subir default-route-distance a 2"
+    ],
+    "answer": 2,
+    "why": "El router llega porque sale con la IP del túnel, que la central conoce; la LAN de la sucursal no tiene ruta de vuelta allá. Si no se puede agregar esa ruta, el masquerade hacia el túnel hace que todo llegue como la IP del túnel."
+  },
+  {
+    "q": "El cliente pide que todo el tráfico de la sucursal salga por la central y activás add-default-route=yes. ¿Qué ruta aparece en la tabla para que el túnel no intente salir por sí mismo?",
+    "options": [
+      "Una ruta 10.112.112.0/24 de dial-on-demand",
+      "Ninguna: hay que borrar a mano la ruta por defecto del ISP",
+      "Una ruta conectada hacia la LAN central",
+      "Una ruta /32 hacia la IP pública del servidor por el gateway del ISP"
+    ],
+    "answer": 3,
+    "why": "En el caso del foro, con add-default-route la tabla mostraba una ruta dinámica /32 al servidor por el gateway del ISP. Sin ella, los paquetes del propio túnel intentarían entrar al túnel."
+  }
+]

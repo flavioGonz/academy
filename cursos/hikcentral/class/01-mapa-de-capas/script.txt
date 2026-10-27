@@ -1,0 +1,21 @@
+A: Arrancamos el curso de HikCentral Professional. Soy Lucía.
+B: Y yo Martín. Lección uno: el mapa antes del viaje.
+A: Exacto. Porque cuando un cliente llama y dice "no anda el HikCentral", eso no dice nada. HikCentral son varias piezas.
+B: Claro. A ver, contame las piezas.
+A: El corazón es el SYS, el servicio de gestión del sistema. Autentica usuarios, guarda roles, dispositivos y la base de datos. Todo pasa por ahí.
+B: ¿Y el video también pasa por el SYS?
+A: Pasa por el Streaming Gateway, que viene adentro del SYS. Cuando la obra crece, se suma un Streaming Server aparte.
+B: ¿Y cuándo es crecer?
+A: Según el FAQ oficial de Hikvision, el gateway sirve hasta doscientas cámaras reenviadas. Arriba de eso, Streaming Server. Y en otra máquina, porque el SYS ya trae su gateway y no conviven.
+B: Uf, eso lo vi instalado todo junto más de una vez. ¿Y los clientes?
+A: Tres. El Web Client, por navegador, es para configurar: equipos, áreas, grabación, usuarios. El Control Client, que se instala en Windows, es para operar: vivo, PTZ, reproducción, alarmas. Y el Mobile Client en el celular.
+B: ¿Cuánto coinciden las fuentes?
+A: Tres de las cuatro páginas de arquitectura lo cuentan igual, pero son todas de Hikvision. Es coherencia del fabricante. Y para ubicarte, Professional es el hermano mayor de la familia; hay versiones livianas para sitios chicos.
+B: Dale. ¿Un caso de soporte?
+A: El clásico. El operador no puede entrar al Control Client y le sale el error VSM doscientos diecisiete. El FAQ lo explica: el Control Client quedó en otra versión que el SYS.
+B: [risas] Actualizaron el servidor y nadie tocó las PCs del monitoreo.
+A: Tal cual. Y otra que conviene saber: el Control Client no corre en máquina virtual. El SYS sí.
+B: ¿Qué probamos hoy?
+A: Agarrá una obra que conozcas y dibujá las capas: equipos, SYS con su gateway, streaming si hace falta, y los clientes. Si ya tenés un servidor de laboratorio, abrí el Service Manager y anotá servicios y puertos.
+B: Diez minutos.
+A: Y la próxima vez que algo falle, la primera pregunta es en qué capa está.

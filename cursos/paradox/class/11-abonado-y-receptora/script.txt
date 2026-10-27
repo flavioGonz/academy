@@ -1,0 +1,18 @@
+A: Lección once: abonado y receptora. Que la alarma llegue a monitoreo con nombre y apellido.
+B: El momento en que el operador te llama y dice "me llega un evento de un abonado que no existe".
+A: [risas] Ese. Arranquemos por el formato. En SP y MG es la sección ochocientos diez: el cuatro es Contact ID y el cinco es SIA. Un dígito por cada teléfono de receptora.
+B: ¿Y por IP qué uso?
+A: Contact ID. La guía de programación de las SP plus aclara que SIA no está soportado por GPRS ni por IP. Y los módulos nuevos, IP180 e IP150M, reportan solo Contact ID.
+B: Pero el receptor IPR512 acepta SIA, ¿no?
+A: Sí, su manual dice que acepta los dos. Ahí está la discrepancia: depende de por dónde viaje el evento. Por línea telefónica o con IPR512 hay elección; con IPC10, no.
+B: ¿Y el abonado?
+A: Va por partición. Ochocientos once y ochocientos doce para teléfono; novecientos dieciocho y novecientos diecinueve para IP. Y una página de finmon, que fabrica comunicadores, insiste en algo que se olvida mucho: el abonado se carga en las dos particiones.
+B: ¿Cuánto coinciden las fuentes?
+A: Cuatro de siete coinciden en Contact ID y abonado por partición. Cinco de siete en elegir la receptora según el módulo.
+B: ¿Y qué me pide la receptora?
+A: Según el manual del IPR512, la empresa de monitoreo le da al instalador cuatro datos: abonado por partición, IP y puerto del receptor, contraseña y perfil de seguridad. Con IPC10 la contraseña ya no se usa, y el perfil define la supervisión: el cero uno son mil doscientos segundos, el cero cuatro, noventa.
+B: ¿Y cómo sé que registró?
+A: En la sección novecientos treinta y cinco apretás ARM y la central registra el módulo. Si hay un error, el teclado te dice cuál.
+B: ¿Qué probamos?
+A: Programás reporte IP con Contact ID, abonado en las dos particiones, IP del receptor, perfil, registrás, y dejás una prueba automática diaria. Veinte minutos, con el operador del otro lado.
+B: El abonado en cada partición y en cada canal.

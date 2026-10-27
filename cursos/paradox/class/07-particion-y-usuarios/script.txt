@@ -1,0 +1,20 @@
+A: Lección siete: particiones y usuarios. Dos casas en una central.
+B: El típico: vivienda adelante, taller atrás.
+A: Ese. En las SP plus tenés dos particiones; en la EVOHD+, ocho. El particionado se prende en la sección setecientos, opción uno. Y cada zona dice a qué partición pertenece con el tercer dígito de su sección: uno, dos, o tres para las dos.
+B: ¿Y si una zona está en las dos?
+A: Se arma cuando las dos particiones están armadas, y se desarma cuando cualquiera desarma. Ideal para el pasillo compartido.
+B: ¿Hay alguna trampa?
+A: Una fea. Si después apagás el particionado, todo pasa a la partición uno, y las zonas que habías puesto en la dos dejan de funcionar. La guía lo dice así de seco.
+B: Uf. ¿Y los usuarios?
+A: Hay un maestro del sistema, un maestro por partición y veintinueve usuarios más. A cada usuario, el instalador le define opciones: a qué particiones entra, si puede anular zonas, armar en Stay, forzar, si solo arma, si solo activa una PGM, y si tiene código de coacción.
+B: ¿Coacción?
+A: Si al cliente lo obligan a desarmar, usa ese código: desarma y manda una alerta silenciosa a monitoreo.
+B: ¿Cuánto coinciden las fuentes?
+A: Es una sola, la guía de las SP plus. Evidencia fina, pero es cómo funciona la central.
+B: ¿Y la historia?
+A: El largo del código. Podés usar cuatro o seis dígitos. Si cambiás a seis con códigos ya cargados, la central completa con los dos primeros. El manual da el ejemplo: uno dos tres cuatro pasa a ser uno dos tres cuatro uno dos.
+B: [risas] Y el cliente jurando que no le anda el código.
+A: Exacto. Esa decisión se toma antes de cargar usuarios.
+B: ¿Qué probamos?
+A: Casa con taller: prendés el particionado, pasás dos zonas a la partición dos y armás un usuario que solo entra al taller, sin anular. Después probás que no pueda tocar la casa. Quince minutos.
+B: Cada usuario con lo mínimo que necesita.

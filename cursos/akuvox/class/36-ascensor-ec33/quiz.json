@@ -1,0 +1,35 @@
+[
+ {
+  "q": "El edificio quiere que, al identificarse, el vecino vaya directo a su piso sin tocar botones. ¿Cómo va el relé del EC33?",
+  "options": [
+   "En paralelo con el botón del piso",
+   "En serie con el común de los botones",
+   "En la entrada de timbre",
+   "Por Wiegand"
+  ],
+  "answer": 0,
+  "why": "Para acceso directo al piso, la guía indica conectar el relé del EC33 en paralelo con el circuito del botón."
+ },
+ {
+  "q": "¿Cómo se comunica el terminal con el EC33 en un proyecto local?",
+  "options": [
+   "Por DTMF",
+   "Por RTSP",
+   "Por SIP INFO",
+   "Por HTTP: Open Relay via HTTP en el EC33 y Lift Control en el terminal con esas credenciales"
+  ],
+  "answer": 3,
+  "why": "La guía configura Open Relay via HTTP con usuario y clave en el EC33, y el terminal apunta a su IP con esas credenciales."
+ },
+ {
+  "q": "¿Qué equipos no se integran con el EC33 según Akuvox?",
+  "options": [
+   "A095 y R29",
+   "X915 y S539",
+   "A094 y E20",
+   "Ninguno"
+  ],
+  "answer": 2,
+  "why": "La guía dice que todos los porteros y terminales Akuvox lo soportan excepto A094 y E20."
+ }
+]

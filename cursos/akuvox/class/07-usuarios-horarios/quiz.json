@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Entregás un edificio con un E16 sin tocar los PIN. ¿Qué riesgo queda?",
+  "options": [
+   "Ninguno, el PIN público viene deshabilitado",
+   "El PIN público de fábrica es 33333333 y está documentado",
+   "Los usuarios no pueden usar tarjeta",
+   "El RTSP queda abierto"
+  ],
+  "answer": 1,
+  "why": "La guía del E16 indica que el PIN público por defecto es 33333333; si no se cambia o deshabilita, cualquiera que lo conozca abre."
+ },
+ {
+  "q": "Tenés que cargar 150 empleados con PIN y tarjeta. ¿Cuál es el camino documentado?",
+  "options": [
+   "Cargar uno por uno desde la pantalla",
+   "Exportar el .tgz, completar el .csv de adentro y reimportarlo",
+   "Mandarlos por DTMF",
+   "Importar un Excel directo en la web"
+  ],
+  "answer": 1,
+  "why": "Akuvox documenta la carga masiva exportando la lista de usuarios, editando el CSV dentro del tgz y reimportando (no importa fotos de rostro)."
+ },
+ {
+  "q": "Un usuario prueba con una foto impresa de un vecino y el portero abre. ¿Qué ajuste quedó mal?",
+  "options": [
+   "Face Living Recognition Matching Level en Close",
+   "La distancia de detección en 3 m",
+   "El horario en Never",
+   "El DTMF en inband"
+  ],
+  "answer": 0,
+  "why": "La guía del E16 explica que con el nivel antisuplantación en Close la verificación puede pasar con sustitutos no vivos, como una foto."
+ }
+]

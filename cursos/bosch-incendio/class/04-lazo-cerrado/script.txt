@@ -1,0 +1,16 @@
+A: Te hago una pregunta de obra. Un pintor perfora el cable del lazo en el tercer piso. ¿Qué deja de andar?
+B: Depende de cómo esté cableado, ¿no?
+A: Exacto, esa es la lección. En Bosch, cada elemento LSN trae un aislador adentro, entre los bornes b uno y b dos. Si el cable sale del panel, recorre todo y vuelve al panel, es un lazo.
+B: Lo que en NFPA llaman clase A.
+A: Eso. Y si hay un corte o un corto, el panel parte el lazo en dos y alimenta cada mitad desde un extremo. Todo sigue funcionando, con aviso de avería. Con los aisladores, hasta sobrevive a un corto, que es lo que NFPA llama clase X.
+B: ¿Y si es un ramal, un cable que no vuelve?
+A: Clase B. Perdés todo lo que está después de la falla. Por eso Bosch recomienda lazo siempre que se pueda.
+B: ¿Y todas las fuentes piensan igual?
+A: Las tres que lo tocan coinciden en cómo se comporta cada uno. Donde hay matiz es en la elección: la guía sobre NFPA dice que la norma no impone clase, que eso lo decide el proyecto, y que la B sigue siendo la más común en Estados Unidos.
+B: Lógico, es más barata. ¿Algún error que veas seguido?
+A: Dos. Uno, los ramales de un solo elemento conectados nada más a b uno. Ese equipo no aísla, y entre dos aisladores queda un tramo que cae entero ante un corto. Dos, las mallas: cables que cierran círculos dentro del lazo. Están prohibidas.
+B: ¿Y hay un tope de cuánto puede caer junto?
+A: EN cincuenta y cuatro dos: una falla de componente no puede dejar fuera más de quinientos doce detectores y pulsadores. Por eso un panel con más de quinientos doce pide controlador redundante. Y la autoridad local puede poner un tope más chico.
+B: ¿Y cómo lo vemos con las manos?
+A: Lazo de banco con tres detectores. Abrís un cable en el medio: avería, y los tres siguen respondiendo. Después desconectás el retorno, lo convertís en ramal, y abrís de nuevo. Mirás cuántos se pierden. Quince minutos.
+B: Y no te olvidás nunca más de cerrar el lazo.

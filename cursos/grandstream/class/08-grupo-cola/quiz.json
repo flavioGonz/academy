@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Una inmobiliaria de 3 personas quiere que el número principal suene en los 3 teléfonos a la vez y nunca tiene llamadas en espera. ¿Qué usás?",
+  "options": [
+   "Una cola con Ring All",
+   "Una ruta entrante por cada teléfono",
+   "Un IVR de una tecla",
+   "Un grupo de llamada con Ring Simultaneously"
+  ],
+  "answer": 3,
+  "why": "Sin necesidad de espera ni reparto, el grupo de llamada es lo más simple; la cola tiene sentido cuando hay que retener y repartir."
+ },
+ {
+  "q": "Una cola se llena en horas pico y la gente escucha música indefinidamente. ¿Qué configurás?",
+  "options": [
+   "Max Queue Length y un destino de desborde",
+   "Más agentes estáticos sin cambiar nada más",
+   "Agent Rest Time en 0",
+   "Strategy Random"
+  ],
+  "answer": 0,
+  "why": "El largo máximo de cola, al superarse, manda al que llama al destino de desborde configurado."
+ },
+ {
+  "q": "Un usuario quiere poner 1234 como PIN de buzón. ¿Qué pasa en la UCM6300?",
+  "options": [
+   "Lo acepta",
+   "Lo acepta pero no manda correo",
+   "Lo rechaza por secuencial",
+   "Pide un PIN de 10 dígitos"
+  ],
+  "answer": 2,
+  "why": "El manual indica que rechaza secuencias o repeticiones como 1234 o 1111."
+ }
+]

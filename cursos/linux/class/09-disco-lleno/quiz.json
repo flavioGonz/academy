@@ -1,0 +1,35 @@
+[
+ {
+  "q": "df -h muestra /var al 100 por ciento. ¿Qué comando te dice qué carpeta lo llenó?",
+  "options": [
+   "mount -a",
+   "lsblk -f",
+   "free -h",
+   "sudo du -xh -d1 /var | sort -h | tail"
+  ],
+  "answer": 3,
+  "why": "du mide el árbol de directorios; con -d1 ves el primer nivel y con sort encontrás el más grande. df solo dice qué sistema de archivos está lleno."
+ },
+ {
+  "q": "Un servidor Ubuntu 26.04 con 4 GB de RAM falla al armar un dump de 3 GB en /tmp, aunque el disco tiene 50 GB libres. ¿Por qué?",
+  "options": [
+   "El disco está dañado",
+   "Falta swap",
+   "/tmp es tmpfs en memoria con tope de la mitad de la RAM",
+   "apt-get clean borró /tmp"
+  ],
+  "answer": 2,
+  "why": "En 26.04 /tmp va en tmpfs con límite de la mitad de la RAM (2 GB en este caso). Los archivos grandes conviene armarlos en /var/tmp."
+ },
+ {
+  "q": "Agregás un disco USB de backups al fstab y a veces no está conectado. ¿Qué evita que el arranque falle o se demore?",
+  "options": [
+   "Usar /dev/sdb en vez de UUID",
+   "nofail junto con x-systemd.device-timeout corto",
+   "Poner 0 en el campo fsck",
+   "Montarlo en /tmp"
+  ],
+  "answer": 1,
+  "why": "Sin nofail, un disco ausente da error de arranque. Con solo nofail, la Arch Wiki indica que se esperan 90 segundos; el timeout corto lo evita."
+ }
+]

@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un cliente marca 9 antes del número externo. El proveedor espera el número sin el 9. ¿Cómo armás la ruta?",
+  "options": [
+   "Patrón _NXXXXXXXX y Prepend 9",
+   "Patrón _X. y que el proveedor lo saque",
+   "Patrón _9. sin strip",
+   "Patrón _9NXXXXXXXX y Strip 1"
+  ],
+  "answer": 3,
+  "why": "El patrón incluye el 9 que marca el usuario y Strip 1 lo quita antes de mandar el número al troncal."
+ },
+ {
+  "q": "Una extensión con privilegio National intenta usar una ruta con privilegio International. ¿Qué pasa?",
+  "options": [
+   "La llamada sale igual",
+   "La llamada se rechaza",
+   "Sale por el troncal de failover",
+   "Pide el PIN del buzón"
+  ],
+  "answer": 1,
+  "why": "Solo pueden usar la ruta las extensiones con privilegio igual o mayor al de la ruta."
+ },
+ {
+  "q": "Según Telnyx, ¿en cuál de estos casos la UCM pasa al troncal de failover?",
+  "options": [
+   "Cuando la llamada dura más de 32 minutos",
+   "Cuando el usuario marca un número internacional",
+   "Cuando el troncal principal responde 503 o no responde en 32 segundos",
+   "Cuando el codec no es G.711"
+  ],
+  "answer": 2,
+  "why": "Telnyx enumera: sin respuesta en 32 segundos, respuestas 403, 407, 408, 503 o 603, troncal deshabilitado o analógico ocupado."
+ }
+]

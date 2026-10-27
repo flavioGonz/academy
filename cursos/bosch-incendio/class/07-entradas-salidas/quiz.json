@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un FLM-420-I8R1 con sus 8 entradas programadas como alarma. ¿Cuántos puntos suma para los límites del panel?",
+  "options": [
+   "1",
+   "0, los módulos no cuentan",
+   "Hasta 8",
+   "16"
+  ],
+  "answer": 2,
+  "why": "Cada entrada que puede disparar una alarma es un punto; el System manual le asigna hasta 8 al FLM-420-I8R1."
+ },
+ {
+  "q": "El cliente pide que las sirenas se apaguen solas a los 5 minutos. ¿Qué dice Bosch?",
+  "options": [
+   "Se programa sin problema",
+   "El temporizador de duración solo vale para señales que no son EN 54: EN 54-2 pide silenciar o reponer manualmente",
+   "Se hace cortando la alimentación de las sirenas",
+   "Solo con firmware 3.x"
+  ],
+  "answer": 1,
+  "why": "La TI 2715 aclara que EN 54-2 exige acción manual de un operador para silenciar o reponer avisadores."
+ },
+ {
+  "q": "En la oficina hay RPS 5.15.27 y la obra tiene módulos FLM-420-RLE-S de extinción. ¿Qué conviene?",
+  "options": [
+   "Actualizar a 5.15.28 o posterior antes de abrir esas configuraciones",
+   "Seguir con 5.15.27",
+   "Bajar a 5.14.17",
+   "Borrar el RLE-S de la configuración"
+  ],
+  "answer": 0,
+  "why": "Según la TI 2715, las versiones 5.14.17 y 5.15.27 eliminaban sin aviso una entrada de realimentación del RLE-S; la 5.15.28 la corrigió."
+ }
+]

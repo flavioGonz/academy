@@ -1,0 +1,18 @@
+A: Lección catorce: cuando no reporta. El llamado del operador de monitoreo diciendo "hace dos días que no recibo nada de ese abonado".
+B: Y vos sin saber si es la central, el módulo, la red o la receptora.
+A: Por eso hay un orden: de la central hacia afuera. Primero el serie: el LED de RX TX del módulo tiene que titilar, eso dice que habla con la central. Después la red: cable, IP, salida a internet. Después los puertos. Y recién ahí la receptora.
+B: ¿Y la central ayuda en algo?
+A: Muchísimo. En la guía de programación de las SP plus hay una tabla de estados del registro IP. Entrás a la sección de estado del receptor, la novecientos treinta y cinco, y el teclado te muestra el error con números.
+B: ¿Por ejemplo?
+A: Grupo dos, submenú ocho: cable de red desenchufado. Grupo tres: falta programar la IP, el puerto o el abonado. Grupo cuatro: no puede conectar, perfil inválido, formato inválido.
+B: Eso es oro. ¿Y la historia?
+A: El último error del grupo cuatro: abonado ya registrado con otra dirección MAC. Pasa cuando cambiás el módulo y el receptor sigue atado al viejo.
+B: [risas] Cambiaste el IP150 quemado y monitoreo sigue esperando al muerto.
+A: Exacto. Se resuelve con la empresa de monitoreo, que libera el abonado. Cuatro de las seis fuentes del tema van en la misma línea: la guía SP plus, la guía de BlueEye, el manual del IP180 y un foro de openHAB.
+B: ¿Y cuando el que no conecta es la app?
+A: Desde el menú instalador de BlueEye podés reiniciar el módulo. Pero la guía avisa que puede tardar hasta cinco minutos con firmware cuatro, y hasta quince con firmware cinco, hasta el próximo sondeo.
+B: O sea, reiniciás y esperás, no reiniciás cinco veces.
+A: Tal cual. Y si hay una integración conectada al IP150, según el foro de openHAB, el módulo atiende una conexión a la vez.
+B: ¿Qué probamos?
+A: En el banco provocás errores a propósito: desenchufás el cable, borrás el puerto, ponés un perfil que no existe. Y leés la tabla cada vez. Veinte minutos.
+B: De la central hacia afuera.

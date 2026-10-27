@@ -1,0 +1,50 @@
+{
+  "slug": "grandstream",
+  "title": "Telefonía IP Grandstream: UCM y terminales",
+  "vendor": "Grandstream",
+  "tagline": "De la caja al portero abriendo la puerta: la UCM bien hecha, sin audio de un solo lado ni facturas sorpresa.",
+  "description": "Vas a poner en marcha una central UCM6300 cerrada desde el primer día, aprovisionar teléfonos GRP y WP con Zero Config y registrar un troncal SIP con su ruteo de entrada y salida. Al terminar armás IVR, grupos y colas, conectás internos remotos y porteros GDS, y diagnosticás el audio unidireccional con una captura en lugar de prueba y error.",
+  "level": "Inicial a intermedio",
+  "audience": "Técnicos instaladores y de soporte con base de redes que instalan o mantienen telefonía IP Grandstream.",
+  "prerequisites": [
+    "Direccionamiento IP, máscara, gateway y DNS",
+    "Qué es NAT y cómo se hace un reenvío de puertos en un router",
+    "Nociones de VLAN y PoE",
+    "Acceso a una UCM6300 o UCM6300A de laboratorio y al menos un teléfono GRP"
+  ],
+  "outcomes": [
+    "Poner en marcha una UCM6300 eligiendo el modo de red, cambiando credenciales y dejando backup antes de actualizar firmware",
+    "Aprovisionar teléfonos con Zero Config y crear extensiones con contraseña aleatoria",
+    "Registrar un troncal SIP y armar rutas salientes con privilegios y PIN, y entrantes por DID con ByDID y Strip",
+    "Configurar IVR con horarios, grupos de llamada, colas con desborde y buzón de voz",
+    "Conectar internos remotos y porteros GDS37xx a la central, y cerrarla con Fail2ban, listas blancas y Geo-IP",
+    "Diagnosticar audio de un solo lado con Ethernet Capture leyendo el SDP"
+  ],
+  "version_note": "UCM6300/UCM6300A con el firmware oficial vigente a octubre de 2026 (manual UCM630x actualizado el 27/10/2026); teléfonos GRP26xx, GXP y WP8xx; porteros GDS37xx. En UCM6200 y UCM6510 algunos menús cambian de nombre.",
+  "arcs": [
+    {"title": "La central en pie", "why": "Antes de rutas y menús, la central tiene que quedar con la red bien elegida, cerrada, con extensiones sólidas, teléfonos aprovisionados solos y un troncal registrado.", "lessons": [1, 2, 3, 4]},
+    {"title": "Las llamadas van donde tienen que ir", "why": "Con la central en pie, el trabajo diario es rutear: quién puede marcar qué, a dónde entra cada número, qué escucha el que llama y quién atiende.", "lessons": [5, 6, 7, 8]},
+    {"title": "Fuera de la oficina y cuando algo falla", "why": "Internos remotos, routers ajenos, ataques y porteros son donde se gana o se pierde el soporte.", "lessons": [9, 10, 11, 12]}
+  ],
+  "splits": [
+    {"topic": "Internos remotos: VPN o puertos abiertos", "sides": "Un integrador con 15 años en FreePBX pone VPN siempre, aunque se le cae 2 a 4 veces por año por certificados; otros prefieren lista blanca por IP para sedes fijas, o dejaron la VPN porque perdían llamadas.", "decide": "Pocas sedes con IP fija: lista blanca por IP. Muchos móviles y alguien que mantenga certificados: VPN. Si no hay ninguna de las dos: puerto no estándar, Fail2ban, Geo-IP y PIN en rutas caras."},
+    {"topic": "SIP ALG: siempre apagado o depende", "sides": "La mayoría lo apaga sin excepción y cita RFC 4787; Plexatalk y SureVoIP admiten casos raros con servidores viejos que no manejan NAT.", "decide": "Con UCM y teléfonos Grandstream, que ya manejan NAT, apagado; si el router no deja apagarlo, TLS o cambiar el router."},
+    {"topic": "Credenciales de fábrica", "sides": "Guías de proveedores citan admin/admin; el manual de seguridad de Grandstream dice contraseña aleatoria en la etiqueta desde enero de 2017.", "decide": "Mirá la etiqueta del equipo y cambiala en el primer ingreso."},
+    {"topic": "Orden de rutas salientes", "sides": "Un proveedor dice que gana la primera que matchea de arriba abajo; el manual actual dice que depende de Outgoing Routing Priority (orden de lista o precisión del patrón).", "decide": "Revisá esa opción en cada central y probá con un número que matchee dos rutas."}
+  ],
+  "sources_count": 24,
+  "lessons": [
+    {"n": 1, "dir": "01-primer-arranque", "handle": "Primer arranque", "summary": "Modo de red, contraseña de la etiqueta, firmware y backup antes de configurar nada."},
+    {"n": 2, "dir": "02-extension-solida", "handle": "Extensión sólida", "summary": "Contraseña aleatoria, registros concurrentes acotados, NAT activo y Direct Media apagado."},
+    {"n": 3, "dir": "03-zero-config", "handle": "Zero Config", "summary": "Descubrir y aprovisionar teléfonos desde la UCM con plantillas por prioridad."},
+    {"n": 4, "dir": "04-troncal-registrado", "handle": "Troncal registrado", "summary": "Register SIP Trunk, estado en el Dashboard, heartbeat, codecs y las cuatro pruebas."},
+    {"n": 5, "dir": "05-patron-privilegio", "handle": "Patrón y privilegio", "summary": "Patrones salientes, Strip, privilegios, PIN en internacionales y failover."},
+    {"n": 6, "dir": "06-cada-did", "handle": "Cada DID", "summary": "Una ruta entrante ByDID con Strip y el DID Mode correcto en el troncal."},
+    {"n": 7, "dir": "07-ivr-horario", "handle": "IVR con horario", "summary": "Destinos por horario en cada tecla y un destino para el que no marca nada."},
+    {"n": 8, "dir": "08-grupo-cola", "handle": "Grupo o cola", "summary": "Cuándo grupo y cuándo cola, estrategias, desborde y buzón con PIN no trivial."},
+    {"n": 9, "dir": "09-interno-remoto", "handle": "Interno remoto", "summary": "External Host, Local Network Address, puertos 5060 y 10000 a 20000, y STUN en el teléfono."},
+    {"n": 10, "dir": "10-audio-de-un-lado", "handle": "Audio de un lado", "summary": "NAT y puertos, después SIP ALG, después captura leyendo la línea c= del SDP."},
+    {"n": 11, "dir": "11-central-cerrada", "handle": "Central cerrada", "summary": "Fail2ban con Allowlist, administración cerrada, Geo-IP y la decisión VPN o puertos."},
+    {"n": 12, "dir": "12-portero-en-la-central", "handle": "Portero en la central", "summary": "GDS37xx como extensión, timbre a un grupo, apertura por PIN DTMF u OpenDoor y video según el GRP."}
+  ]
+}

@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Según Claroty y CISA, ¿cuál es la primera medida frente a vulnerabilidades como las del Akuvox E11?",
+  "options": [
+   "Desactivar el relé",
+   "No exponer el equipo a internet",
+   "Cambiar el codec a G.729",
+   "Poner el equipo en la misma red que las PCs"
+  ],
+  "answer": 1,
+  "why": "CISA recomienda desconectar los E11 de internet y Claroty pide no exponerlos, segmentarlos y cambiar la clave por defecto."
+ },
+ {
+  "q": "¿Qué hace la opción Prevent SIP Hacking del portero?",
+  "options": [
+   "Cifra el video",
+   "Bloquea el puerto 80",
+   "Hace que el equipo solo acepte llamadas de contactos en la lista blanca",
+   "Cambia la clave cada 30 días"
+  ],
+  "answer": 2,
+  "why": "La guía del E16 describe Prevent SIP Hacking como la opción para recibir llamadas solo de contactos en la lista blanca."
+ },
+ {
+  "q": "Un escaneo desde la red de usuarios muestra el puerto UDP 8500 del portero respondiendo. ¿Qué hacés?",
+  "options": [
+   "Filtrarlo: es descubrimiento y no hace falta desde esa red",
+   "Nada, es el RTSP",
+   "Abrirlo también hacia internet",
+   "Cambiar el PIN público"
+  ],
+  "answer": 0,
+  "why": "Claroty recomienda bloquear el UDP 8500 de entrada porque el protocolo de descubrimiento no es necesario en operación."
+ }
+]

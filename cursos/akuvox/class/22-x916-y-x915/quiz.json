@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un portón con motor pide un contacto que maneje más corriente que lo habitual. ¿Qué portero de la línea tiene el relé de mayor carga según Akuvox?",
+  "options": [
+   "R20A",
+   "E12",
+   "X916, con 30 V 5 A",
+   "S535"
+  ],
+  "answer": 2,
+  "why": "En la tabla de carga resistiva el X916 es el único con 30 V 5 A."
+ },
+ {
+  "q": "El pliego pide IP66 e IK10 y te ofrecen un X915. ¿Qué hacés?",
+  "options": [
+   "Rechazarlo, la guía dice IP65",
+   "Verificar en la ficha de la versión exacta: la del X915 V2.0 dice IP66 e IK10",
+   "Aceptarlo sin mirar",
+   "Pedir un E16"
+  ],
+  "answer": 1,
+  "why": "La guía de selección y la ficha del X915 V2.0 no coinciden; vale la ficha de la versión que se compra."
+ },
+ {
+  "q": "Un X915 V2 con PoE+ no da 12 V para la cerradura. ¿Qué revisás?",
+  "options": [
+   "La versión de hardware y firmware: con PoE solo la da en hw 2915.1.0.8 a 2915.1.0.13 y firmware 2915.30.10.228 o más",
+   "La cuenta SIP",
+   "El código DTMF",
+   "Nada, nunca da 12 V"
+  ],
+  "answer": 0,
+  "why": "Para el resto de las versiones, la tabla pide fuente de 24 V/2,5 A para esa salida."
+ }
+]

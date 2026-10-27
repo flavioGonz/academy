@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Querés saber qué PC está saturando el enlace. ¿Dónde corrés Torch?",
+    "options": [
+      "En ether1 (WAN)",
+      "En la interfaz WireGuard",
+      "En el bridge de LAN",
+      "En lo, el loopback"
+    ],
+    "answer": 2,
+    "why": "La documentación de Torch indica mirar la interfaz LAN: en la WAN, después del src-nat, todos los flujos aparecen con la IP pública del router."
+  },
+  {
+    "q": "Hiciste una captura con el sniffer y el archivo .pcap pesa 24 bytes. ¿Qué significa?",
+    "options": [
+      "Que la captura está comprimida",
+      "Que Wireshark no lo va a abrir",
+      "Que el router se quedó sin disco",
+      "Que solo tiene el encabezado: no capturó paquetes (revisá filtro e interfaz)"
+    ],
+    "answer": 3,
+    "why": "Según el caso de Admiral, un pcap de 24 bytes es solo el encabezado; si crece, se están capturando paquetes."
+  },
+  {
+    "q": "Torch muestra tráfico de una cámara llegando al router, pero el NVR no lo recibe. ¿Qué te dice eso?",
+    "options": [
+      "Que la cámara está apagada",
+      "Que el paquete llega a la interfaz; puede estar descartándolo el firewall, porque Torch ve antes del filtro",
+      "Que Torch no funciona con cámaras",
+      "Que hay que reiniciar el NVR"
+    ],
+    "answer": 1,
+    "why": "Torch ve lo recibido antes del firewall, así que muestra tráfico que después se descarta. El siguiente paso es revisar reglas de forward, por ejemplo con log=yes."
+  }
+]

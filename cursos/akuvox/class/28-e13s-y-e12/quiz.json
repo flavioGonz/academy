@@ -1,0 +1,35 @@
+[
+ {
+  "q": "¿Cómo sacás la IP de un E13S sin pantalla?",
+  "options": [
+   "Mantener el botón de llamada 5 s y escucharla",
+   "9999 y 3888",
+   "*2396#",
+   "Solo por SmartPlus"
+  ],
+  "answer": 0,
+  "why": "Akuvox agrupa a R20A, R25A, E11, E12, E13 y X910: se mantiene el botón y anuncia la IP."
+ },
+ {
+  "q": "Un cliente quiere SR01 con un E12. ¿Qué le decís?",
+  "options": [
+   "Se conecta por RS485 sin problema",
+   "El SR01 no existe",
+   "Se conecta por Wi-Fi",
+   "El E12 no tiene RS485 y su conexión especial al SR01 no la recomienda Akuvox"
+  ],
+  "answer": 3,
+  "why": "La guía del SR01 aclara que el E12 se conecta de forma excepcional por no tener RS485 y no lo recomienda por seguridad."
+ },
+ {
+  "q": "¿Qué credenciales acepta un E12S según la tabla de métodos?",
+  "options": [
+   "PIN y rostro",
+   "Huella",
+   "Tarjeta 13,56 MHz y Bluetooth",
+   "Solo PIN"
+  ],
+  "answer": 2,
+  "why": "La tabla marca para E12S y E12W tarjeta de 13,56 MHz y Bluetooth, sin PIN, rostro ni QR."
+ }
+]

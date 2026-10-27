@@ -1,0 +1,21 @@
+A: Llamado típico: el servidor de accesos no levanta después de un cambio. ¿Qué hacés primero?
+B: Reinicio el servicio a ver si anda.
+A: [risas] Lo que hacemos todos. Pero la lección de hoy es otro orden: primero preguntale al sistema qué pasó.
+B: Dale. ¿Con qué?
+A: Dos comandos. systemctl status y el nombre del servicio. Te dice si está activo, si falló, desde cuándo, y te muestra las últimas líneas de log.
+B: ¿Y si con eso no alcanza?
+A: journalctl guion u y el servicio. Es el log completo de esa unidad. Con guion f lo seguís en vivo, como un tail.
+B: ¿Esto lo dicen todas las fuentes?
+A: Cinco de seis páginas que hablan de logs coinciden en usar journalctl filtrado así. Y el Debian Handbook tiene el ejemplo perfecto. SSH no arranca. status dice failed. Miran el journal y aparece: línea veintiocho de sshd config, opción no soportada, y la palabra es yess, con dos s.
+B: [risas] Un typo.
+A: Un typo. Lo corrigen, arrancan el servicio, status otra vez, activo. Ese es el método completo: status, journal, arreglo, status.
+B: Y algo que confunde mucho: start y enable no son lo mismo.
+A: Para nada. start lo levanta ahora. enable hace que arranque en el próximo booteo. Podés tener un servicio andando que después de un corte de luz no vuelve, porque nadie le dio enable.
+B: Uf, eso lo vi en una central telefónica.
+A: Clásico. Y para cortes de luz hay otra joya: journalctl guion b guion uno te muestra el log del arranque anterior. Ahí ves qué pasó antes de que se apagara.
+B: ¿Y filtrar solo errores?
+A: guion p err. Y con guion S y una frase como una hora atrás, acotás el tiempo. phoenixNAP tiene una tabla de opciones muy clara.
+B: Laboratorio.
+A: Diez minutos. Rompés a propósito la config de un servicio de prueba, lo reiniciás, leés el error en status y en el journal, lo arreglás y verificás. Y de paso mirás si está enable.
+B: Lo que cambia es que dejás de reiniciar a ciegas.
+A: Status, journal, arreglo, status otra vez.

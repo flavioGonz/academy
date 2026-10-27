@@ -1,0 +1,20 @@
+A: Lección tres. Zero Config. ¿Cuántos teléfonos configuraste a mano en tu vida?
+B: [suspiro] Cientos. Entrar a la web de cada uno, cargar usuario, contraseña, servidor, hora.
+A: Bueno, la UCM tiene eso resuelto. Zero Config: la central encuentra los teléfonos de la red y les manda la configuración.
+B: ¿Cómo los encuentra?
+A: Dos caminos principales. Cuando el teléfono arranca, manda un mensaje SIP a una dirección multicast y la central le contesta con la dirección de su archivo. O por DHCP opción sesenta y seis, que solo funciona si la UCM está en modo Route.
+B: Ah, por eso lo del modo de red de la lección uno.
+A: Exacto. Y si no aparecen todos, la guía de Grandstream recomienda escanear con el método SIP Message a la dirección de broadcast. Por ejemplo, ciento noventa y dos punto ciento sesenta y ocho punto ochenta y ocho punto doscientos cincuenta y cinco.
+B: ¿Y la configuración de dónde sale?
+A: De plantillas. Hay tres niveles: Global Policy, Global Template y Model Template, de menor a mayor prioridad. Lo general, como idioma y zona horaria, en la política global. Lo de un modelo puntual, en la plantilla de modelo.
+B: Y si falta el modelo en la lista.
+A: Lo bajás en Model Update. Ahora, la trampa: lo que alguien configuró a mano en la web del teléfono, ninguna plantilla lo pisa.
+B: ¿En serio? Entonces el técnico que "arregló" un teléfono a mano después lo deja distinto para siempre.
+A: Tal cual. Por eso el teléfono que se aprovisiona no se toca a mano. Si hace falta, se resetea de fábrica y se deja que lo agarre la central.
+B: ¿Y los WP, los inalámbricos?
+A: El manual lista las series compatibles: GXP, GRP, WP, GDS, GSC y más, siempre que esté la plantilla del modelo. Y para varios sitios está GDMS, que es lo mismo en la nube.
+B: ¿Cuántas fuentes respaldan esto?
+A: Dos, las dos oficiales: la guía de Zero Config y el manual. Poca cantidad, pero son la fuente primaria.
+B: ¿Laboratorio?
+A: Veinte minutos. Descubrís un GRP, le asignás una extensión y sincronizás.
+B: Y el próximo edificio de cuarenta teléfonos lo terminás antes del almuerzo.

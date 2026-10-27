@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Después de un corte de luz, el servicio del gestor de accesos no volvió, aunque ayer funcionaba. systemctl status dice inactive (dead). ¿Qué es lo más probable?",
+  "options": [
+   "El disco se dañó",
+   "Nunca se hizo systemctl enable, solo start",
+   "Falta actualizar el kernel",
+   "El firewall lo bloquea"
+  ],
+  "answer": 1,
+  "why": "start lo levanta en el momento; enable lo deja configurado para arrancar en cada booteo. Un servicio solo con start no vuelve después de un reinicio."
+ },
+ {
+  "q": "Un servidor se reinició solo de madrugada y querés ver los errores previos al reinicio. ¿Qué comando usás?",
+  "options": [
+   "journalctl -b -1 -p err",
+   "journalctl -f",
+   "systemctl restart",
+   "dmesg -c"
+  ],
+  "answer": 0,
+  "why": "-b -1 selecciona el arranque anterior y -p err filtra errores y lo más grave. -f solo sigue lo que está pasando ahora."
+ },
+ {
+  "q": "systemctl status nginx muestra failed. ¿Cuál es el paso siguiente según el método?",
+  "options": [
+   "Reinstalar nginx",
+   "Reiniciar el servidor",
+   "Borrar /var/log",
+   "journalctl -u nginx para leer el error completo"
+  ],
+  "answer": 3,
+  "why": "El journal de la unidad muestra el mensaje real del fallo (por ejemplo, un error de sintaxis con número de línea). Recién con eso se corrige y se vuelve a verificar con status."
+ }
+]

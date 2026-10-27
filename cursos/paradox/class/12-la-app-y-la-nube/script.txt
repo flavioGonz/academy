@@ -1,0 +1,18 @@
+A: Lección doce: la app y la nube. Donde las fuentes se pelean de verdad.
+B: Esto me lo preguntan todos los clientes. ¿Qué app?
+A: BlueEye. Paradox la presenta como el reemplazo de Insite Gold, y su soporte explica cómo pasar los sitios viejos con el ID de sitio y el correo.
+B: ¿Y cómo se conecta la app a la central?
+A: Dos caminos. Swan, el servidor de Paradox: el módulo sale a internet, el sitio tiene una suscripción, y la app entra por ahí. O IP estática: la app va directo al módulo, y desde afuera con un port forward al puerto del módulo.
+B: ¿Y cuál conviene?
+A: Depende de la generación. Con módulos MQTT, la guía de BlueEye dice que no hay conexión por IP estática, y con el IP150M todo pasa por Swan pago. Con módulos viejos, el soporte de Paradox todavía documenta la IP estática.
+B: ¿Y quién discrepa?
+A: PAI, un proyecto de software libre para integrar Paradox, no recomienda Swan y cita una vulnerabilidad documentada en la nube de Paradox. Ojo, es un proyecto que compite con la app oficial. Cuatro de ocho fuentes sostienen Swan como camino por defecto, y cuatro de ocho que la IP estática sigue existiendo en legado.
+B: ¿Y la IP estática es más segura?
+A: No necesariamente. El mismo artículo de soporte dice que en IP150 con firmware uno o cuatro punto cero punto cuatro, la contraseña del módulo tiene que quedar en la de fábrica.
+B: [suspiro] Una puerta abierta con la clave en el manual.
+A: Exacto. Y la historia del foro portugués: un usuario pasó su IP150 a Swan, pagó, y a los tres días la app dejó de conectar. Terminó llamando a la empresa instaladora.
+B: O sea, nosotros.
+A: Nosotros. Por eso, antes de vender la app, explicás quién paga la suscripción, qué pasa si vence, y que el monitoreo va por otro canal.
+B: ¿Qué probamos?
+A: En BlueEye, entrás al menú instalador, agregás el sitio de banco, ponés el código de PC y mirás los detalles: días de suscripción y firmware. Quince minutos.
+B: Y eso queda en la ficha.

@@ -1,0 +1,35 @@
+[
+  {
+    "q": "La fibra se cayó aguas arriba pero el módem sigue respondiendo ping. La ruta por defecto apunta al módem con check-gateway=ping. ¿Qué pasa?",
+    "options": [
+      "El router conmuta al 4G enseguida",
+      "El router conmuta a los 10 segundos siempre",
+      "El router no conmuta, porque el módem responde",
+      "El router reparte tráfico entre los dos"
+    ],
+    "answer": 2,
+    "why": "check-gateway sobre el módem solo verifica que el módem conteste. Por eso se usan rutas recursivas a hosts testigo en internet, que detectan la caída aguas arriba."
+  },
+  {
+    "q": "Configuraste el testigo del ISP2, pero su ruta /32 sale por el ISP1. ¿Qué consecuencia tiene?",
+    "options": [
+      "Ninguna, cualquier camino sirve",
+      "La prueba del enlace de respaldo no dice nada sobre el respaldo",
+      "El 4G se apaga",
+      "El masquerade deja de funcionar"
+    ],
+    "answer": 1,
+    "why": "El testigo de cada enlace tiene que alcanzarse por ese enlace; si no, el chequeo mide otro camino. MKController lo marca como error típico."
+  },
+  {
+    "q": "Un call center no tolera 30 segundos de corte. Según las fuentes, ¿qué alternativa evaluás?",
+    "options": [
+      "Netwatch con intervalos propios y scripts de up y down, con una plantilla única para todos los sitios",
+      "Sacar check-gateway",
+      "Poner las dos rutas con distancia 1 sin chequeo",
+      "Usar solo el 4G"
+    ],
+    "answer": 0,
+    "why": "Según MKController, check-gateway conmuta en 20 a 30 segundos y no ve pérdidas parciales; Netwatch permite intervalos y tipos de prueba propios, a costa de mantener scripts."
+  }
+]

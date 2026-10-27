@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Llegás a un rack con un switch administrable de otra marca y querés saber en qué puerto del MikroTik está conectado. ¿Qué mirás primero?",
+    "options": [
+      "/ip/arp/print, que muestra la IP del switch",
+      "/interface/ethernet/print, buscando el puerto con link",
+      "/ip/neighbor/print: si el switch anuncia LLDP, aparece con su nombre y el puerto físico",
+      "/tool/torch en el bridge"
+    ],
+    "answer": 2,
+    "why": "La tabla de vecinos muestra la identidad del equipo y el puerto real (además del bridge). ARP solo te da la interfaz bridge y la IP; el link de los puertos no te dice qué equipo es."
+  },
+  {
+    "q": "Un router se configuró desde cero, sin configuración por defecto, y nadie tocó discovery-settings. ¿Por dónde anuncia nombre, versión e IP?",
+    "options": [
+      "Por todas las interfaces estáticas, también la WAN, porque el valor de fábrica de discover-interface-list es static",
+      "Solo por la lista LAN",
+      "Por ninguna hasta que se habilite",
+      "Solo mientras haya un WinBox abierto"
+    ],
+    "answer": 0,
+    "why": "Según la referencia de la CLI, el valor de fábrica es static. La configuración por defecto lo deja en LAN, pero sin ella la WAN también anuncia."
+  },
+  {
+    "q": "En un edificio, ether5 va a la red de la administración. No querés que el router se anuncie ahí, pero sí seguir viendo el switch de ether3. ¿Qué hacés?",
+    "options": [
+      "Drop de UDP 5678 en forward",
+      "mode=rx-only en discovery-settings",
+      "Apagar LLDP y dejar solo CDP",
+      "Una lista de descubrimiento con ether3 (y el puerto de gestión) sueltos, sin el bridge, y ether5 afuera"
+    ],
+    "answer": 3,
+    "why": "Sacar la interfaz de la lista corta el anuncio y la escucha solo ahí. rx-only dejaría de anunciar en todos los puertos, y filtrar 5678 en forward no toca lo que el router anuncia."
+  }
+]

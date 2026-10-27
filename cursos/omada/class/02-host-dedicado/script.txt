@@ -1,0 +1,23 @@
+A: Segunda. El cliente no quiere comprar OC200 y te dice: instalalo en la PC de recepción.
+B: [risas] Clásico. Y a los dos meses la PC se actualiza sola un domingo.
+A: Le pasó a una iglesia en Inglaterra que lo contó en su blog. El controlador corría en la PC de la mesa técnica, se dormía o se reiniciaba, y los equipos quedaban sin gestión hasta que alguien lo levantaba.
+B: ¿Y qué hicieron?
+A: Lo pasaron a un equipo dedicado con Docker. Y ahí está la idea: si el controlador es tuyo, que viva en algo que no se apague.
+B: ¿Docker es oficial de TP-Link?
+A: No. Las guías coinciden: no hay imagen oficial. La que usa todo el mundo es una comunitaria, mbentley barra omada controller, que trae Java y MongoDB adentro. Cuatro de cinco fuentes de instalación van por un host dedicado. El fabricante, en cambio, te empuja a hardware o nube.
+B: ¿Y qué es lo que más se rompe?
+A: La red del contenedor. Una guía probada en julio con la seis punto dos lo cuenta: con la red bridge y los puertos publicados, la web anda perfecto, pero los access points nunca aparecen.
+B: Porque el descubrimiento es broadcast.
+A: Exacto, no cruza el bridge. La solución es network mode host.
+B: ¿Algo más que muerda?
+A: Dos cosas. La versión seis usa un MongoDB que pide instrucciones AVX. Una Raspberry Pi cuatro o un NAS viejo no arrancan.
+B: Uf, eso no lo sabía.
+A: Y la otra: darle sesenta segundos al contenedor para apagarse, así MongoDB cierra limpio y no se corrompe la base.
+B: ¿Cuánta memoria?
+A: Una de las guías midió alrededor de un giga nueve al arrancar. Cuatro gigas libres es razonable.
+B: En obra, entonces, una mini PC con Linux en el rack.
+A: Eso. Intel de sexta generación para arriba, Docker, red host, y cuenta local en el asistente, así no depende de la nube.
+B: ¿Laboratorio?
+A: Una máquina virtual Linux, el compose de la tarjeta, levantarlo y entrar al puerto ocho mil cuarenta y tres. Veinte minutos.
+B: Si un AP de la misma subred aparece solo, quedó bien.
+A: Esa es la prueba. Un controlador que no se duerme cambia todo el soporte.

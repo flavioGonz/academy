@@ -1,0 +1,19 @@
+A: Bueno, arrancamos por lo que más tiempo se come en obra. Portero conectado, luz prendida, y ni idea de qué IP tiene.
+B: Uf, clásico. Y uno se pone a escanear toda la red como loco.
+A: Exacto. Y con Akuvox no hace falta, porque cada familia te dice su IP a su manera.
+B: ¿Cómo a su manera?
+A: Los que no tienen teclado, tipo R20A, E12 o E13, mantenés apretado el botón de llamada unos cinco segundos y el equipo la dice en voz alta.
+B: ¿En serio? Eso no lo sabía.
+A: En serio. En el R20K marcás asterisco tres dos cinco ocho asterisco. En el E16 y el E18 apretás la pantalla cinco segundos y entrás con el PIN de sistema. Y en el R29 o el X915 marcás nueve nueve nueve nueve, después tres ocho ocho ocho, y vas a System Info.
+B: ¿Y los monitores?
+A: Más fácil, está en pantalla. En el C316, Settings, System Info, Network. En el C315, More, System Info, Network.
+B: Y si nada de eso anda, el IP Scanner.
+A: Claro. Corre en Windows de sesenta y cuatro bits. Las tres fuentes que lo tocan, Akuvox, Yeastar y Grandstream, arrancan igual: primero la IP, después la web.
+B: Y en la web, admin y admin.
+A: Admin y admin. Pero ojo con el PIN del E16, que cambió con el firmware. Según Akuvox, hasta la versión doscientos dieciséis punto treinta punto diez punto ciento veintiuno el PIN es admin, en minúscula. De ahí en adelante es Admin trescientos veintiuno.
+B: [risas] O sea que el que prueba el viejo se queda afuera y piensa que el equipo está roto.
+A: Tal cual. Y la clave web de fábrica está publicada, la conoce cualquiera. Se cambia en la primera visita.
+B: ¿Y qué propongo probar hoy?
+A: Agarrá un portero y un monitor del laboratorio. Sacá la IP de cada uno por dos caminos distintos, por ejemplo la voz y el IP Scanner, entrá a la web y cambiá la clave de admin. Diez minutos.
+B: Y anotás la IP y la clave nueva en la ficha del equipo.
+A: Eso. Con esto, la primera media hora de cada obra pasa a ser cinco minutos.

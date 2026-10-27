@@ -1,0 +1,420 @@
+# Notas: lote a
+Páginas leídas: 30. Con notas: 28. Saltadas: 2 (las notas de 10.6.106 y 11.0.94 solo traen correcciones menores; se usan como apoyo de versión, sin notas propias de peso).
+
+Nota de método: help.ui.com devuelve HTTP 403 a scripts y community.ui.com/releases solo carga con JavaScript. La voz oficial de Ubiquiti entra por el feed RSS público de notas de versión (community.ui.com) y por citas textuales de artículos de help.ui.com que reproducen UniHosted, WunderTech, Lawrence Systems y HostiFi. Cuando una nota dice "según Ubiquiti, citado por X", la fuente en disco es X.
+
+## T01 Arquitectura: UniFi OS, Network Application, consola y host
+- a:N1. Site Manager no corre la red: cada sitio tiene su propio controlador (Cloud Gateway, CloudKey, UniFi OS Server u Official Hosting). La configuración vive en ese controlador, no en la nube; si cae internet, el sitio se gestiona en local.
+  - Source: https://www.unihosted.com/blog/unifi-site-management  Quote: "brokers a direct connection between the administrator and each site's control plane"
+  - Kind: definition
+  - Level: foundation
+  - Also: T03
+  - Bias: UniHosted vende hosting de UniFi OS Server.
+- a:N2. Cada dispositivo UniFi tiene un solo host. Un CloudKey que corre Protect no puede gestionar también los mismos equipos de red que gestiona un UniFi OS Server.
+  - Source: https://www.unihosted.com/blog/unifi-os-server  Quote: "each device can only have one host"
+  - Kind: rule of thumb
+  - Level: foundation
+  - Also: T02
+  - Bias: vende hosting.
+- a:N3. Si el controlador se cae, los equipos siguen funcionando con la última configuración; lo que se pierde es cambiar, adoptar y ver estadísticas hasta que vuelva.
+  - Source: https://www.unihosted.com/blog/unifi-os-server
+  - Kind: rule of thumb
+  - Level: foundation
+  - Bias: vende hosting.
+
+## T02 Dónde corre el controlador
+- a:N4. UniFi Network 10.6 es la última versión del Network Server independiente; 11.0 lo elimina y Ubiquiti indica pasar a UniFi OS Server, "the official replacement". Network 11.0.97 requiere UniFi OS 6.0 o superior y migra la base a PostgreSQL.
+  - Source: https://community.ui.com/releases/UniFi-Network-Application-11-0-97/15662d06-8122-44e2-a1ba-af5d71b8a045  Quote: "Removed Network Application Server support. Upgrade to UniFi OS Server, the official replacement."
+  - Kind: number
+  - Level: foundation
+- a:N5. Para despliegues sin necesidad de self-hosting, Ubiquiti sigue recomendando Cloud Gateways; para self-hosted, UniFi OS Server.
+  - Source: https://community.ui.com/releases/UniFi-Network-Application-11-0-83/d6940379-cd5a-4e61-8596-7e22d647a4ea  Quote: "UniFi Cloud Gateways remain our recommended solution for deployments that do not require self-hosting."
+  - Kind: rule of thumb
+  - Level: foundation
+- a:N6. Requisitos mínimos de UniFi OS Server publicados por Ubiquiti (citados por UniHosted): Ubuntu 24.04 o Debian 13 con Podman 4.9.3+, Windows 10/Server 2022 vía WSL 2, macOS 13.1; 2 GB RAM, 10 GB disco, x86-64 o ARM64. No soportado dentro de una VM Hyper-V; no corre como servicio de Windows.
+  - Source: https://www.unihosted.com/blog/unifi-os-server
+  - Kind: number
+  - Level: core
+  - Bias: vende hosting.
+- a:N7. No clonar una VM de UniFi OS Server salvo para alta disponibilidad: los clones comparten los tokens de acceso remoto de Site Manager.
+  - Source: https://www.unihosted.com/blog/unifi-os-server  Quote: "Clones share the same remote-access tokens"
+  - Kind: mistake
+  - Level: core
+- a:N8. Un sitio con Cloud Gateway (UDM, UCG) no puede ser gestionado por un UniFi OS Server externo, porque el gateway corre su propia Network Application. Con controlador central, el gateway del sitio tiene que ser UXG o de terceros.
+  - Source: https://www.unihosted.com/blog/unifi-os-server
+  - Kind: rule of thumb
+  - Level: core
+  - Also: T01
+- a:N9. Al migrar del Network Server a UniFi OS Server el portal cautivo cambia del puerto 8843 al 8444.
+  - Source: https://www.unihosted.com/blog/unifi-os-server
+  - Kind: number
+  - Level: advanced
+  - Also: T13
+
+## T03 Site Manager y muchos sitios
+- a:N10. Si un sitio no aparece en Site Manager: Remote Management apagado (Settings > Control Plane > Console), salida TCP 443 y 8883 bloqueada, DNS UDP 53 o NTP UDP 123 bloqueados, o se entró con otra cuenta UI. No hace falta abrir puertos de entrada.
+  - Source: https://www.unihosted.com/blog/unifi-site-management  Quote: "You don't need to open any inbound ports."
+  - Kind: test
+  - Level: core
+  - Bias: vende hosting.
+- a:N11. Según la documentación de Ubiquiti citada por UniHosted, un Cloud Gateway por sitio es "functionally and administratively equivalent" a un UniFi OS Server central; la decisión se reduce a costo de hardware, actualizaciones y quién mantiene el controlador.
+  - Source: https://www.unihosted.com/blog/unifi-site-management
+  - Kind: rule of thumb
+  - Level: core
+  - Also: T02
+- a:N12. Para MSP: Fabrics agrupan sitios bajo un mismo set de administradores, roles y políticas, con SSO opcional (GA en abril 2026); MSP Groups dan acceso al personal del integrador a Fabrics de clientes (julio 2026).
+  - Source: https://www.unihosted.com/blog/unifi-site-management
+  - Kind: definition
+  - Level: advanced
+- a:N13. Network 10.6.101 suma Drift Inspector a Blueprints en Site Manager: se empuja configuración por plantilla y se ve qué sitio se desvió.
+  - Source: https://community.ui.com/releases/UniFi-Network-Application-10-6-101/05283624-0980-4dd7-b8d6-9fa5c4e28da4  Quote: "with a clear view of configuration drift and an easy way to resolve it"
+  - Kind: technique
+  - Level: advanced
+- a:N14. Network 11.0 saca System Settings de la vista vía Site Manager: idioma y hora pasan al encabezado de Site Manager y se sincronizan entre aplicaciones; NTP pasa al panel del gateway.
+  - Source: https://community.ui.com/releases/UniFi-Network-Application-11-0-97/15662d06-8122-44e2-a1ba-af5d71b8a045
+  - Kind: definition
+  - Level: core
+- a:N15. Un usuario que administra varios sitios de pymes en un controlador propio lo cuenta como el caso típico de L3: funciona bien hasta que el equipo se actualiza o reinicia y vuelve al inform por defecto.
+  - Source: https://forums.lawrencesystems.com/t/unifi-l3-persistent-inform-url/20405
+  - Kind: story
+  - Level: core
+  - Also: T05
+
+## T04 Adopción en capa 2
+- a:N16. Requisitos para adoptar según LazyAdmin: el equipo no está gestionado por otro controlador, inform correcto, firmware no demasiado viejo, controlador al día. El caso más común es desfase de firmware entre AP y controlador.
+  - Source: https://lazyadmin.nl/home-network/unifi-adoption-failed/  Quote: "The most common issue is a firmware mismatch."
+  - Kind: rule of thumb
+  - Level: foundation
+- a:N17. Reset de fábrica: botón 10 segundos con el equipo encendido, o por SSH el comando set-default.
+  - Source: https://lazyadmin.nl/home-network/unifi-adoption-failed/
+  - Kind: technique
+  - Level: foundation
+- a:N18. Si el equipo ni aparece, revisar que AP y controlador estén en el mismo rango IP y que haya un solo servidor DHCP; conectar el AP al mismo switch que el controlador ayuda.
+  - Source: https://lazyadmin.nl/home-network/unifi-adoption-failed/
+  - Kind: test
+  - Level: foundation
+- a:N19. Un caso en comentarios: tras un corte de luz, tres equipos reseteados no se adoptaban; el autor indica que hay que eliminar el dispositivo del controlador antes de readoptarlo, y menciona "Set replacement device" para copiar la configuración.
+  - Source: https://lazyadmin.nl/home-network/unifi-adoption-failed/
+  - Kind: story
+  - Level: core
+- a:N20. Un lector cuenta que el firewall de Windows bloqueaba la adopción: el AP aparecía adoptando y pasaba a offline mientras seguía respondiendo por SSH.
+  - Source: https://lazyadmin.nl/home-network/unifi-adoption-failed/
+  - Kind: story
+  - Level: core
+  - Also: T05
+- a:N21. Con algunos equipos hace falta actualizar firmware antes de adoptar; si "Adopt and Upgrade" no lo logra, actualización manual por SSH (comando upgrade con la URL del firmware).
+  - Source: https://www.hostifi.com/support/unifi-troubleshooting-unifi-cloud-adoption
+  - Kind: technique
+  - Level: core
+  - Also: T14
+  - Bias: HostiFi vende hosting y su herramienta de descubrimiento.
+
+## T05 Adopción en capa 3
+- a:N22. URL de inform: empieza con http:// y termina en :8080/inform; HostiFi recomienda usar siempre el nombre DNS del servidor y no la IP. Con SSH, el comando info muestra el estado y el inform actual.
+  - Source: https://www.hostifi.com/support/unifi-troubleshooting-unifi-cloud-adoption  Quote: "Always use the DNS name of the server instead of IP address"
+  - Kind: technique
+  - Level: foundation
+  - Bias: vende hosting.
+- a:N23. Respuesta de soporte de Ubiquiti citada en el foro: no recomiendan cambios por SSH porque pueden desaparecer tras reiniciar; para L3 recomiendan DHCP option 43, que en un gateway UniFi se carga en el campo "Option 43 Application Host Address" de la red.
+  - Source: https://forums.lawrencesystems.com/t/unifi-l3-persistent-inform-url/20405  Quote: "we strongly recommend using DHCP option 43"
+  - Kind: rule of thumb
+  - Level: core
+- a:N24. Disidencia en el mismo hilo: Tom Lawrence dice que nunca tuvo problemas con set-inform y que así vuelven todos sus clientes a su controlador; otro usuario reporta que desde hace unos meses el equipo vuelve a unifi:8080/inform tras reiniciar sin gateway UniFi.
+  - Source: https://forums.lawrencesystems.com/t/unifi-l3-persistent-inform-url/20405
+  - Kind: story
+  - Level: core
+- a:N25. En controladores en contenedor o detrás de NAT, la opción Inform Host (Settings > System > Advanced, con Override) es la que hace que el equipo apunte a la IP o nombre correcto; un lector lo marca como el detalle más fácil de olvidar.
+  - Source: https://lazyadmin.nl/home-network/unifi-adoption-failed/  Quote: "Click OVERRIDE!!"
+  - Kind: mistake
+  - Level: core
+- a:N26. Tras migrar a otro host, los equipos en otra red quedan desconectados hasta un set-inform con la URL nueva; Sikich advierte que a veces hay que repetir el comando más de una vez para completar la reasociación.
+  - Source: https://www.sikich.com/insight/migrate-ubiquiti-unifi-controller-to-a-new-server/
+  - Kind: rule of thumb
+  - Level: core
+  - Also: T06
+- a:N27. Si el controlador está en otro lugar, se pueden usar credenciales de Device Authentication del sitio (Settings > Site) para entrar por SSH a los equipos ya adoptados.
+  - Source: https://www.sikich.com/insight/migrate-ubiquiti-unifi-controller-to-a-new-server/
+  - Kind: technique
+  - Level: core
+
+## T06 Backups y migración
+- a:N28. Antes de restaurar, bajar un backup fresco. Restaurar desde Settings > System > Backup (historial de autobackups) o subiendo el .unf; el controlador reinicia. Después se entra con las credenciales que existían cuando se hizo el backup.
+  - Source: https://deluisio.com/networking/unifi/2025/08/05/how-to-restore-unifi-from-backup/
+  - Kind: technique
+  - Level: core
+- a:N29. El backup incluye configuración, dispositivos y clientes, pero no video de Protect ni logs locales. Tener al menos dos backups recientes fuera del equipo.
+  - Source: https://deluisio.com/networking/unifi/2025/08/05/how-to-restore-unifi-from-backup/  Quote: "Keep at least two recent backups stored offline"
+  - Kind: rule of thumb
+  - Level: core
+- a:N30. Para migrar, instalar el controlador nuevo en la misma versión que el viejo antes de restaurar (Sikich, guía clásica de controlador).
+  - Source: https://www.sikich.com/insight/migrate-ubiquiti-unifi-controller-to-a-new-server/
+  - Kind: rule of thumb
+  - Level: core
+- a:N31. Las notas oficiales de Network 10.0.160 piden crear un backup antes de actualizar y avisan que la actualización puede reaprovisionar los equipos adoptados.
+  - Source: https://ubiquiti-networks-forum.de/board/thread/13809-final-unifi-network-application-10-x-x/  Quote: "Create a backup before upgrading"
+  - Kind: rule of thumb
+  - Level: foundation
+  - Also: T14
+- a:N32. Network 10.6.101 corrige un caso en que la configuración MC-LAG se perdía al restaurar un backup: restaurar no es infalible, conviene verificar después.
+  - Source: https://community.ui.com/releases/UniFi-Network-Application-10-6-101/05283624-0980-4dd7-b8d6-9fa5c4e28da4
+  - Kind: story
+  - Level: advanced
+
+## T07 Redes y VLANs
+- a:N33. Una red en Settings > Networks con VLAN ID; cada VLAN necesita su propio alcance DHCP; los SSID se mapean a una red. Errores típicos: puerto de switch que no lleva la VLAN, falta de DHCP, switch no administrable que descarta las etiquetas.
+  - Source: https://www.unihosted.com/blog/everything-you-need-to-know-about-vlan-tagging-in-unifi
+  - Kind: mistake
+  - Level: foundation
+  - Also: T08
+  - Bias: vende hosting.
+- a:N34. Con el firewall clásico, UniFi permite tráfico entre VLANs por defecto; hay que bloquearlo con reglas. La red de invitados se aísla con la opción de aislamiento.
+  - Source: https://lazyadmin.nl/home-network/unifi-vlan-configuration/  Quote: "inter-VLAN traffic is allowed by default"
+  - Kind: rule of thumb
+  - Level: foundation
+- a:N35. Desde Network 9.0 existe el firewall por zonas; Network 11.0 migra automáticamente todos los sitios a Zone-Based Firewall.
+  - Source: https://community.ui.com/releases/UniFi-Network-Application-11-0-97/15662d06-8122-44e2-a1ba-af5d71b8a045  Quote: "All sites are automatically migrated to the Zone-Based Firewall."
+  - Kind: number
+  - Level: core
+- a:N36. Ejemplo de plan simple: staff VLAN 10, invitados VLAN 20, CCTV VLAN 30; trunk al AP con 10, 20 y 30; el NVR en un puerto de la VLAN 30.
+  - Source: https://www.unihosted.com/blog/everything-you-need-to-know-about-vlan-tagging-in-unifi
+  - Kind: template
+  - Level: foundation
+  - Also: T08
+- a:N37. Network 10.6.101 activa DHCP Guarding por defecto en redes nuevas.
+  - Source: https://community.ui.com/releases/UniFi-Network-Application-10-6-101/05283624-0980-4dd7-b8d6-9fa5c4e28da4
+  - Kind: number
+  - Level: core
+- a:N38. Disidencia de práctica: The Hook Up deja las cámaras en la VLAN principal sin etiquetar, con reglas que bloquean su salida, para no hacer pasar 11 streams 4K por el router entre VLANs; reconoce que eso es mala seguridad de puerto y lo compensa fijando MAC por puerto.
+  - Source: https://www.thesmarthomehookup.com/test_install/unifi-network-update-part-2-vlans-wifi-partitioning-and-advanced-features/
+  - Kind: story
+  - Level: advanced
+  - Also: T08
+
+## T08 Puertos de switch y perfiles
+- a:N39. Por defecto cada puerto acepta todas las VLAN etiquetadas. Para una cámara o equipo IoT: VLAN nativa = la red del equipo y Tagged VLAN Management = Block All, en Port Manager. Uplink y puertos de AP con Allow All.
+  - Source: https://lazyadmin.nl/home-network/unifi-vlan-configuration/
+  - Kind: technique
+  - Level: foundation
+- a:N40. Un lector reporta que un switch de terceros entre el UDM y el AP tenía que llevar la VLAN de gestión del AP sin etiquetar; con etiqueta el AP no funcionaba.
+  - Source: https://lazyadmin.nl/home-network/unifi-adoption-failed/
+  - Kind: story
+  - Level: core
+  - Also: T04
+- a:N41. Seguridad de puerto: The Hook Up fija la MAC de la cámara en el puerto para que alguien que la arranca de la pared y enchufa una laptop no entre a la red.
+  - Source: https://www.thesmarthomehookup.com/test_install/unifi-network-update-part-2-vlans-wifi-partitioning-and-advanced-features/
+  - Kind: story
+  - Level: core
+- a:N42. Network 10.6.101 suma "Lock Port to UniFi Device" en Port Manager (requiere firmware de switch 7.6 o superior).
+  - Source: https://community.ui.com/releases/UniFi-Network-Application-10-6-101/05283624-0980-4dd7-b8d6-9fa5c4e28da4
+  - Kind: technique
+  - Level: advanced
+
+## T09 Plan de RF: bandas, canales, ancho
+- a:N43. 2.4 GHz siempre en 20 MHz y solo canales 1, 6 y 11. Coinciden HostiFi, LazyAdmin, WunderTech y std.rocks.
+  - Source: https://lazyadmin.nl/home-network/optimize-your-unifi-network/  Quote: "Stick to 20 MHz."
+  - Kind: rule of thumb
+  - Level: foundation
+  - Also: also stated at https://www.hostifi.com/support/unifi-wireless-best-practices, https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/, https://std.rocks/improve-wifi-performance-guide.html
+- a:N44. 5 GHz: HostiFi dice que 40 MHz alcanza para 250 a 400 Mbps; LazyAdmin 40 MHz urbano y 80 MHz en lugares aislados; WunderTech cita a Ubiquiti: 80 MHz para casas, 40 MHz para oficinas densas; std.rocks bajó a 20 MHz con más de 30 clientes por AP.
+  - Source: https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/
+  - Kind: rule of thumb
+  - Level: core
+- a:N45. std.rocks: oficina de unos 300 dispositivos y unos 10 AP UniFi con quejas de lentitud y cortes; el escaneo mostró 36 a 48 saturados y eligió el canal DFS 64 limpio, 20 MHz y potencia media.
+  - Source: https://std.rocks/improve-wifi-performance-guide.html
+  - Kind: story
+  - Level: core
+  - Also: T10
+- a:N46. DFS: LazyAdmin recomienda evitarlos (un radar apaga el canal al instante); std.rocks los usa porque están más limpios. Disidencia directa.
+  - Source: https://lazyadmin.nl/home-network/optimize-your-unifi-network/
+  - Kind: rule of thumb
+  - Level: core
+- a:N47. Channel AI (desde Network 9.5) recomienda canales con al menos dos AP activos; Network 10.6.97/10.6.101 suma la optimización nocturna con selección de radios. Ajustar ancho de canal antes, porque Channel AI no lo toca.
+  - Source: https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/
+  - Kind: technique
+  - Level: core
+  - Also: https://community.ui.com/releases/UniFi-Network-Application-10-6-101/05283624-0980-4dd7-b8d6-9fa5c4e28da4
+- a:N48. HostiFi: en sus pruebas "Auto" nunca funcionó como se espera y recomienda escanear y planificar; LazyAdmin y WunderTech prefieren Auto más Channel AI. Disidencia.
+  - Source: https://www.hostifi.com/support/unifi-wireless-best-practices
+  - Kind: rule of thumb
+  - Level: core
+- a:N49. El escaneo de entorno del AP deja la radio sin servicio unos 5 a 10 minutos (HostiFi) o expulsa a los clientes de esa radio en modo Full (WunderTech): hacerlo en horario tranquilo.
+  - Source: https://www.hostifi.com/support/unifi-wireless-best-practices
+  - Kind: mistake
+  - Level: core
+  - Also: https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/
+
+## T10 Potencia de transmisión
+- a:N50. Potencia al máximo no mejora el WiFi: deja conectados clientes lejanos con señal pobre que gastan airtime y genera clientes pegajosos. LazyAdmin lo llama probablemente la causa número uno de problemas.
+  - Source: https://lazyadmin.nl/home-network/optimize-your-unifi-network/  Quote: "probably the number one reason for wireless network issues"
+  - Kind: rule of thumb
+  - Level: foundation
+  - Also: https://std.rocks/improve-wifi-performance-guide.html, https://www.hostifi.com/support/unifi-wireless-best-practices, https://www.purple.ai/en-us/guides/unifi-802-11k-802-11r-fast-roaming
+- a:N51. Punto de partida con varios AP: 2.4 GHz baja, 5 GHz entre baja y media, 6 GHz alta (WunderTech); LazyAdmin propone Auto y si falla 2.4 baja y 5 media; std.rocks baja por AP por ambiente, media si cubre varios. Con un solo AP, alta.
+  - Source: https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/
+  - Kind: template
+  - Level: core
+- a:N52. Purple: 2.4 GHz entre 3 y 6 dB por debajo de 5 GHz es común en diseños enterprise; objetivo de borde de celda -67 dBm para voz (guía de Cisco que citan).
+  - Source: https://www.purple.ai/en-us/guides/unifi-802-11k-802-11r-fast-roaming
+  - Kind: number
+  - Level: advanced
+  - Bias: Purple vende WiFi de identidad para staff.
+
+## T11 Roaming y steering
+- a:N53. El roaming lo decide el cliente; el AP solo puede dar información, acelerar el traspaso o empujar.
+  - Source: https://www.purple.ai/en-us/guides/unifi-802-11k-802-11r-fast-roaming  Quote: "Roaming is a client decision."
+  - Kind: definition
+  - Level: foundation
+  - Also: https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/
+- a:N54. Mapa de opciones UniFi: Fast Roaming = 802.11r (riesgo alto de dejar afuera drivers viejos), BSS Transition = 802.11v (riesgo bajo), 802.11k sin interruptor propio, mínimo RSSI es función de fabricante.
+  - Source: https://www.purple.ai/en-us/guides/unifi-802-11k-802-11r-fast-roaming
+  - Kind: definition
+  - Level: core
+- a:N55. BSS Transition: dejarlo activado; coinciden LazyAdmin, WunderTech, Purple y Deluisio.
+  - Source: https://lazyadmin.nl/home-network/optimize-your-unifi-network/
+  - Kind: rule of thumb
+  - Level: core
+  - Also: https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/, https://www.purple.ai/en-us/guides/unifi-802-11k-802-11r-fast-roaming, https://deluisio.com/networking/unifi/2024/08/19/optimizing-wi-fi-roaming-a-guide-to-bss-transition-in-unifi-networks/
+- a:N56. Fast Roaming: Ubiquiti lo recomienda fuerte según WunderTech y él notó gran diferencia en su SSID de equipos nuevos; LazyAdmin dice que suele hacer más mal que bien; Purple lo limita a SSID Enterprise con voz y video. Disidencia fuerte.
+  - Source: https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/
+  - Kind: rule of thumb
+  - Level: core
+  - Also: https://lazyadmin.nl/home-network/optimize-your-unifi-network/, https://www.purple.ai/en-us/guides/unifi-802-11k-802-11r-fast-roaming
+- a:N57. Caso de Purple (ilustrativo, armado por ellos): cadena de 40 locales activa Fast Roaming en todos los SSID y los lectores de código de barras viejos dejan de conectar en 9 locales; solución: SSID aparte sin FT y piloto en un local antes de desplegar.
+  - Source: https://www.purple.ai/en-us/guides/unifi-802-11k-802-11r-fast-roaming
+  - Kind: story
+  - Level: core
+  - Bias: vende producto; el caso es ilustrativo según la propia página.
+- a:N58. Band steering: WunderTech dice que ahora es ajuste del SSID, activo por defecto, y vale dejarlo; en 2024 decía que no hace falta configurarlo y no aplicarlo a la vez en AP y SSID. LazyAdmin: la mayoría de estas funciones hacen más mal que bien. Purple: modo "preferir", no forzar.
+  - Source: https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/
+  - Kind: rule of thumb
+  - Level: core
+  - Also: https://www.wundertech.net/unifi-band-steering/, https://lazyadmin.nl/home-network/optimize-your-unifi-network/, https://www.purple.ai/en-us/guides/unifi-802-11k-802-11r-fast-roaming
+- a:N59. Mínimo RSSI: std.rocks recomienda -70 dBm como balance; WunderTech cita que Ubiquiti no lo recomienda fuera de alta densidad y sugiere dejarlo apagado; Purple lo pone último y unos dB por debajo del borde de diseño, solo con solape probado.
+  - Source: https://std.rocks/improve-wifi-performance-guide.html
+  - Kind: rule of thumb
+  - Level: advanced
+  - Also: https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/, https://www.purple.ai/en-us/guides/unifi-802-11k-802-11r-fast-roaming
+- a:N60. Handoff Suggestions (antes Roaming Assistant) es la versión suave: avisa al cliente por 802.11v cuando baja de un umbral (Ubiquiti sugiere -70 dBm). Ubiquiti trata -70 dBm como mínimo y recomienda -65 dBm o mejor (citado por WunderTech).
+  - Source: https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/
+  - Kind: number
+  - Level: core
+  - Also: T16
+
+## T12 Seguridad WiFi
+- a:N61. WPA3 exige PMF; los equipos que no lo soportan no se unen. Se tratan igual que el bloqueo por 802.11r: SSID aparte.
+  - Source: https://www.purple.ai/en-us/guides/unifi-802-11k-802-11r-fast-roaming
+  - Kind: rule of thumb
+  - Level: core
+- a:N62. MLO (WiFi 7) pasa el SSID a WPA3, lo que puede dejar afuera IoT; Private Pre-Shared Keys exige WPA2.
+  - Source: https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/
+  - Kind: rule of thumb
+  - Level: advanced
+- a:N63. Ocultar el SSID y filtrar por MAC no son seguridad real (la MAC se falsifica); Deluisio los menciona como capas extra, no como medida principal.
+  - Source: https://deluisio.com/networking/unifi/2024/08/13/optimizing-your-unifi-network-a-guide-to-advanced-wi-fi-settings/
+  - Kind: mistake
+  - Level: foundation
+  - Bias: Deluisio recomienda activar casi todas las opciones avanzadas, postura más permisiva que el resto.
+
+## T13 Invitados y portal cautivo
+- a:N64. En sitios con firewall por zonas, una red es de invitados al ponerla en la zona Hotspot; el viejo "Guest Network" solo queda en sitios con firewall clásico. El WiFi tiene tres tipos: Standard, Hotspot, IoT.
+  - Source: https://www.wundertech.net/how-to-set-up-a-guest-network-vlan-in-unifi/
+  - Kind: definition
+  - Level: core
+- a:N65. Trampa: si la red está en zona Hotspot, la landing page del Hotspot Portal viene activada; si se quiere solo contraseña, desmarcar Show Landing Page.
+  - Source: https://www.wundertech.net/how-to-set-up-a-guest-network-vlan-in-unifi/
+  - Kind: mistake
+  - Level: core
+- a:N66. Post-Authorization Restrictions vienen con 192.168.0.0/16, 172.16.0.0/12 y 10.0.0.0/8: el invitado autenticado no llega a direcciones privadas.
+  - Source: https://help.cloudunifi.com/unifi/setting-up-hotspot/
+  - Kind: number
+  - Level: core
+  - Also: https://www.wundertech.net/how-to-set-up-a-guest-network-vlan-in-unifi/
+- a:N67. Métodos de autenticación del portal: Facebook, contraseña, pago con Stripe, vouchers (con vencimiento, límite de ancho de banda y cuota de datos), RADIUS y portal externo. Pre-Authorization Allowances para dejar pasar dominios del portal o del proveedor de pago.
+  - Source: https://help.cloudunifi.com/unifi/setting-up-hotspot/
+  - Kind: definition
+  - Level: core
+  - Also: https://help.ironwifi.com/configuration-guides/ubiquiti/unifi-hotspot
+- a:N68. Verificar aislamiento: Zone Matrix, fila Hotspot debe decir Allow Return hacia Internal y Block All al resto; prueba de campo: desde un celular en el WiFi de invitados intentar abrir la web de una impresora o NAS interno, debe vencer el tiempo.
+  - Source: https://www.wundertech.net/how-to-set-up-a-guest-network-vlan-in-unifi/
+  - Kind: test
+  - Level: core
+- a:N69. HTTPS Redirection puede generar advertencias de certificado; Domain hace que la redirección use el FQDN y no la IP, para que coincida el certificado.
+  - Source: https://help.cloudunifi.com/unifi/setting-up-hotspot/
+  - Kind: technique
+  - Level: advanced
+  - Bias: Cloud UniFi vende hosting.
+- a:N70. Network 11.0 corrige casos raros en que un voucher reportaba éxito sin dar internet y en que invitados de Hotspot debían reautenticarse al cambiar de AP.
+  - Source: https://community.ui.com/releases/UniFi-Network-Application-11-0-97/15662d06-8122-44e2-a1ba-af5d71b8a045
+  - Kind: story
+  - Level: advanced
+
+## T14 Firmware y actualizaciones
+- a:N71. Ubiquiti publica en tres canales: Official (estable), Release Candidate y Beta/Early Access. HostiFi espera 2 a 3 semanas desde que una versión pasa a Official, la prueba en servidores internos y mira los foros antes de desplegarla.
+  - Source: https://www.hostifi.com/support/hostifi-how-we-handle-unifi-updates
+  - Kind: technique
+  - Level: core
+  - Bias: vende hosting con actualizaciones gestionadas.
+- a:N72. HostiFi saltó la versión 7.5.174 por problemas de redes WiFi que no se emitían; con más de 500.000 equipos en sus servidores (su número), se enteran rápido de los firmwares con fallas y vuelven a una versión conocida.
+  - Source: https://www.hostifi.com/support/hostifi-how-we-handle-unifi-updates
+  - Kind: story
+  - Level: core
+- a:N73. Firmware de equipos: actualizaciones automáticas programables por sitio y por dispositivo (HostiFi indica Settings > Services > Scheduled Upgrades).
+  - Source: https://www.hostifi.com/support/hostifi-how-we-handle-unifi-updates
+  - Kind: technique
+  - Level: core
+- a:N74. Network 10.5 suma SafeOps (Test & Confirm de cambios), auto-recuperación de equipos y revert de versión de firmware y aplicación; 10.6.101 agrega confirmación al actualizar todos los equipos y muestra cuántos clientes se pueden cortar.
+  - Source: https://forums.lawrencesystems.com/t/unifi-10-5-made-changes-safer-troubleshooting-clients-a-lot-easier-youtube-release/26907
+  - Kind: technique
+  - Level: core
+  - Also: https://community.ui.com/releases/UniFi-Network-Application-10-6-101/05283624-0980-4dd7-b8d6-9fa5c4e28da4
+- a:N75. Network 11.0 borra el historial de estadísticas (nuevo motor), quita soporte a USG y migra todo a firewall por zonas: ejemplo de por qué no actualizar a ciegas.
+  - Source: https://community.ui.com/releases/UniFi-Network-Application-11-0-97/15662d06-8122-44e2-a1ba-af5d71b8a045  Quote: "Existing statistics history is cleared and starts fresh after the update."
+  - Kind: number
+  - Level: core
+
+## T15 Monitoreo y alertas
+- a:N76. Network 10.6.101 agrega Time Machine para radios (uso, cambios y eventos de las últimas 24 horas) y para todos los puertos, con filtro de clientes que "flapean".
+  - Source: https://community.ui.com/releases/UniFi-Network-Application-10-6-101/05283624-0980-4dd7-b8d6-9fa5c4e28da4
+  - Kind: technique
+  - Level: core
+- a:N77. Network 11.0 suma una nueva alarma de conexión de cliente y captura de paquetes desde el panel de la radio; el Alarm Manager tuvo correcciones de envíos inesperados.
+  - Source: https://community.ui.com/releases/UniFi-Network-Application-11-0-97/15662d06-8122-44e2-a1ba-af5d71b8a045
+  - Kind: technique
+  - Level: core
+- a:N78. Network 10.5: Client Observability con historial de conexión y correlación, e historial de roaming WiFi por cliente.
+  - Source: https://forums.lawrencesystems.com/t/unifi-10-5-made-changes-safer-troubleshooting-clients-a-lot-easier-youtube-release/26907
+  - Kind: technique
+  - Level: core
+  - Also: T16
+
+## T16 Troubleshooting de clientes WiFi
+- a:N79. Método de Purple para validar roaming: caminata con llamada en vivo, comparar historial del cliente antes y después; buscar roams en el borde de celda, roams y no desconexiones, y el ping-pong entre dos AP.
+  - Source: https://www.purple.ai/en-us/guides/unifi-802-11k-802-11r-fast-roaming
+  - Kind: test
+  - Level: core
+- a:N80. Si un cambio rompe conexiones, mirar lo último que se cambió; un cambio por vez y probar (WunderTech). Fast Roaming, WPA3 de MLO y mínimo RSSI son los sospechosos habituales con equipos viejos.
+  - Source: https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/  Quote: "make one change, test it, and then move on to the next"
+  - Kind: rule of thumb
+  - Level: foundation
+- a:N81. Ante problemas, volver a la configuración por defecto es muchas veces el primer paso; después firmware al día y drivers de los clientes; con Auto el sistema puede necesitar un día para asentar canales.
+  - Source: https://lazyadmin.nl/home-network/optimize-your-unifi-network/
+  - Kind: technique
+  - Level: foundation
+- a:N82. std.rocks: siempre que se pueda, cable; el WiFi comparte airtime entre todos y ninguna optimización arregla todo.
+  - Source: https://std.rocks/improve-wifi-performance-guide.html
+  - Kind: rule of thumb
+  - Level: foundation
+
+## Disagreements seen
+- Fast Roaming (802.11r): https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/ lo activa y cita que Ubiquiti lo recomienda; https://lazyadmin.nl/home-network/optimize-your-unifi-network/ dice que suele hacer más mal que bien; https://www.purple.ai/en-us/guides/unifi-802-11k-802-11r-fast-roaming solo en SSID Enterprise de voz y video.
+- Canales DFS: https://lazyadmin.nl/home-network/optimize-your-unifi-network/ evitarlos; https://std.rocks/improve-wifi-performance-guide.html usarlos porque están limpios.
+- Canales en Auto: https://www.hostifi.com/support/unifi-wireless-best-practices Auto nunca anduvo bien en sus pruebas; https://lazyadmin.nl/home-network/optimize-your-unifi-network/ y https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/ Auto más Channel AI.
+- Mínimo RSSI: https://std.rocks/improve-wifi-performance-guide.html -70 dBm como regla; https://www.wundertech.net/how-to-optimize-a-unifi-wi-fi-network/ apagado salvo alta densidad; https://www.purple.ai/en-us/guides/unifi-802-11k-802-11r-fast-roaming último paso y con solape probado.
+- Adopción L3: soporte de Ubiquiti en https://forums.lawrencesystems.com/t/unifi-l3-persistent-inform-url/20405 prefiere DHCP option 43; Tom Lawrence en el mismo hilo usa set-inform sin problemas.
+
+## Best stories
+- Oficina con unos 300 equipos y 10 AP: canal DFS 64, 20 MHz y potencia media resolvieron la mayoría de las quejas. https://std.rocks/improve-wifi-performance-guide.html
+- Fast Roaming activado en toda una cadena dejó sin conexión a lectores viejos en 9 locales (caso ilustrativo). https://www.purple.ai/en-us/guides/unifi-802-11k-802-11r-fast-roaming
+- Equipos que vuelven a unifi:8080/inform después de un reinicio en sitios sin gateway UniFi. https://forums.lawrencesystems.com/t/unifi-l3-persistent-inform-url/20405
+- Firewall de Windows que hacía "rebotar" la adopción entre adoptando y offline. https://lazyadmin.nl/home-network/unifi-adoption-failed/
+- HostiFi saltó la 7.5.174 por SSID que no se emitían. https://www.hostifi.com/support/hostifi-how-we-handle-unifi-updates

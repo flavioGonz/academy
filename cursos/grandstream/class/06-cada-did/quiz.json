@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Los DIDs llegan como 0655441001 a 0655441010 y las internas son 1001 a 1010. Con destino ByDID, ¿qué Strip ponés?",
+  "options": [
+   "4",
+   "6",
+   "7",
+   "10"
+  ],
+  "answer": 1,
+  "why": "Hay que quitar los primeros seis dígitos (065544) para que quede 1001 a 1010; es el ejemplo de la guía oficial."
+ },
+ {
+  "q": "El troncal registra bien, pero ninguna llamada entrante matchea la ruta por DID. ¿Qué revisás en el troncal?",
+  "options": [
+   "Heartbeat",
+   "El privilegio de la extensión",
+   "El codec G.722",
+   "DID Mode: si el número llamado viene en la Request-line o en el To"
+  ],
+  "answer": 3,
+  "why": "La guía de troncales advierte que el proveedor puede mandar el DID en la Request-line o en el To; si DID Mode no coincide, no hay match."
+ },
+ {
+  "q": "¿Cuál es la forma más confiable de saber qué Strip poner?",
+  "options": [
+   "Usar el número de la factura",
+   "Preguntarle al cliente",
+   "Ver en el CDR o en una captura cómo llega el número en la primera llamada de prueba",
+   "Probar valores hasta que suene"
+  ],
+  "answer": 2,
+  "why": "El proveedor puede anteponer código de país o sacar el cero; el dato real es el que llega en la llamada."
+ }
+]

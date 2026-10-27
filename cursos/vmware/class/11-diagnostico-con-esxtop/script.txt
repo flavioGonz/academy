@@ -1,0 +1,18 @@
+A: Lección once. Llamado típico: "el servidor anda lento". ¿Qué hacés?
+B: Le agrego RAM a la VM. [risas] Mentira. Bueno, a veces.
+A: A veces funciona de casualidad. Lo que funciona siempre es medir. Y para eso está esxtop, adentro del propio host.
+B: El top de Linux, pero para ESXi.
+A: Parecido. Entrás por SSH, escribís esxtop, y con una letra cambiás de pantalla. C para CPU, M para memoria, U para los discos, V para los discos por VM, N para la red.
+B: ¿Y qué miro primero?
+A: En CPU, la columna erre de ere ye, porcentaje de ready. La KB de Broadcom la define como el tiempo que la VM estuvo lista para correr, esperando que le den un procesador físico. Si es alto, la VM no tiene poca CPU: está haciendo fila.
+B: Ah, entonces agregarle más vCPU puede empeorarlo.
+A: Puede. Y en disco está la parte más útil. La misma KB explica que la latencia que ve la VM, GAVG, es la suma de dos: DAVG, lo que tarda el almacenamiento, y KAVG, lo que tarda el propio host. KAVG debería estar cerca de cero.
+B: O sea, si DAVG está alto, el problema es el NAS o la cabina.
+A: Exacto. Y si sube KAVG, hay cola dentro del host. Con ese número dejás de discutir con el que administra el almacenamiento.
+B: ¿Coinciden las fuentes?
+A: Cuatro de las siete fuentes que leímos sobre troubleshooting dicen lo mismo: medir y leer los logs antes de opinar. Ninguna da un umbral universal, así que conviene comparar con cómo andaba el host un día normal.
+B: ¿Y los logs?
+A: En el host, en barra var barra run barra log. William Lam cuenta el caso de un usuario con un procesador de escritorio, fuera de lista, que tenía cortes de red: las pistas estaban en vmkernel punto log y vmkwarning punto log.
+B: El laboratorio, entonces.
+A: Abrís esxtop, mirás ready y DAVG, grabás un minuto en modo batch a un archivo, y buscás errores en vmkernel punto log.
+B: Quince minutos. Y la regla: no diagnostico lentitud sin un minuto de esxtop guardado.
