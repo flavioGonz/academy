@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Espera = personas en la fila ÷ ritmo de salida</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS FILAS · LECCIÓN 8</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Espera = personas en la fila ÷ ritmo de salida</text>
+<rect x="48" y="130" width="700" height="300" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="162.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">La fila ahora</text><text x="68.0" y="186.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">aforo actual (canal Aforo)</text>
+<circle cx="110" cy="281.3" r="10.5" fill="#0A63B8"/><path d="M93 315.3a17 17 0 0 1 34 0z" fill="#0A63B8"/>
+<circle cx="172" cy="281.3" r="10.5" fill="#0A63B8"/><path d="M155 315.3a17 17 0 0 1 34 0z" fill="#0A63B8"/>
+<circle cx="234" cy="281.3" r="10.5" fill="#0A63B8"/><path d="M217 315.3a17 17 0 0 1 34 0z" fill="#0A63B8"/>
+<circle cx="296" cy="281.3" r="10.5" fill="#0A63B8"/><path d="M279 315.3a17 17 0 0 1 34 0z" fill="#0A63B8"/>
+<circle cx="358" cy="281.3" r="10.5" fill="#0A63B8"/><path d="M341 315.3a17 17 0 0 1 34 0z" fill="#0A63B8"/>
+<circle cx="420" cy="281.3" r="10.5" fill="#0A63B8"/><path d="M403 315.3a17 17 0 0 1 34 0z" fill="#0A63B8"/>
+<circle cx="482" cy="281.3" r="10.5" fill="#0A63B8"/><path d="M465 315.3a17 17 0 0 1 34 0z" fill="#0A63B8"/>
+<circle cx="544" cy="281.3" r="10.5" fill="#0A63B8"/><path d="M527 315.3a17 17 0 0 1 34 0z" fill="#0A63B8"/>
+<path d="M620.0 290.0C660.0 290.0,660.0 290.0,700.0 290.0" fill="none" stroke="#0E8F5E" stroke-width="3" stroke-linecap="round" marker-end="url(#a-ok)"/>
+<rect x="696" y="240" width="36" height="110" rx="8" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2" opacity="1"/>
+<text x="714.0" y="380.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">caja</text>
+<text x="330.0" y="400.0" font-family="JetBrains Mono" font-size="20" font-weight="700" fill="#04223D" text-anchor="middle">L = 8 personas</text>
+<rect x="780" y="130" width="372" height="300" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><text x="800.0" y="162.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#0E8F5E" text-anchor="start">Últimos 15 minutos</text><text x="800.0" y="186.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">salidas (canal Salida)</text>
+<text x="966.0" y="250.0" font-family="JetBrains Mono" font-size="26" font-weight="700" fill="#0E8F5E" text-anchor="middle">20 salidas</text>
+<text x="966.0" y="300.0" font-family="JetBrains Mono" font-size="18" font-weight="600" fill="#41627F" text-anchor="middle">λ = 20 / 15</text>
+<text x="966.0" y="330.0" font-family="JetBrains Mono" font-size="18" font-weight="600" fill="#41627F" text-anchor="middle">≈ 1,33 por minuto</text>
+<rect x="48" y="460" width="1104" height="90" rx="16" fill="#011E38" stroke="#011E38" stroke-width="0" opacity="1"/>
+<text x="600.0" y="518.0" font-family="JetBrains Mono" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">W = L ÷ λ = 8 ÷ 1,33 ≈ 6 minutos</text>
+<rect x="48" y="572" width="540" height="72" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="48" y="584" width="5" height="48" rx="2.5" fill="#B45309"/><text x="74.0" y="606.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Sin salidas en 15 minutos no hay ritmo: el kiosko muestra un</tspan><tspan x="74.0" dy="20.2">guion.</tspan></text>
+<rect x="612" y="572" width="540" height="72" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="612" y="584" width="5" height="48" rx="2.5" fill="#B45309"/><text x="638.0" y="606.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="638.0" dy="0.0">Vale con la fila estable; si entra más gente de la que sale, se</tspan><tspan x="638.0" dy="20.2">queda corta.</tspan></text>
+</svg>

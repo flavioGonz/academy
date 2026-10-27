@@ -18,6 +18,32 @@ from build import md, inline
 ROOT = Path("/home/claude/ies-training")
 
 
+UNI = "cero uno dos tres cuatro cinco seis siete ocho nueve diez once doce trece catorce quince dieciséis diecisiete dieciocho diecinueve veinte veintiuno veintidós veintitrés veinticuatro veinticinco veintiséis veintisiete veintiocho veintinueve".split()
+DEC = {3: "treinta", 4: "cuarenta", 5: "cincuenta", 6: "sesenta", 7: "setenta", 8: "ochenta", 9: "noventa"}
+
+
+def palabras(n):
+    if n < 30:
+        return UNI[n]
+    d, u = divmod(n, 10)
+    return DEC[d] + (f" y {UNI[u]}" if u else "")
+
+
+NUMW = r"(?:\d+|(?:cero|uno|una|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|once|doce|trece|catorce|quince|dieci\w+|veinte|veinti\w+|treinta|cuarenta|cincuenta|sesenta|setenta|ochenta|noventa)(?: y (?:uno|una|dos|tres|cuatro|cinco|seis|siete|ocho|nueve))?)"
+APERTURA = re.compile(r"^(Lección|Última lección|Lección número) " + NUMW + r"(?=[:,.])")
+
+
+def renumerar_charla(l):
+    """La charla suele abrir con 'Lección once: ...'. Tras reordenar, se ajusta al número nuevo."""
+    for sl in l.get("script", [])[:3]:
+        t = sl.get("t", "")
+        nt = APERTURA.sub(lambda m: "Lección " + palabras(l["n"]), t, count=1)
+        if nt != t:
+            sl["t"] = nt
+            return True
+    return False
+
+
 def strip_obj(x):
     x = re.sub(r"^Al terminar (el módulo |la lección |el curso )?vas a poder\s+", "", x.strip())
     return x[:1].upper() + x[1:] if x else x
@@ -37,6 +63,7 @@ def main():
                 ls = [str(i) for i in m["lessons"]]
                 if str(ins["despues_de"]) in ls and str(ins["id"]) not in ls:
                     ls.insert(ls.index(str(ins["despues_de"])) + 1, str(ins["id"])); m["lessons"] = ls
+        e.setdefault("avisos", []).extend(x.get("avisos", []))
         for lid, v in x.get("lecciones", {}).items():
             e.setdefault("lecciones", {}).setdefault(str(lid), {}).update(v)
     rep = {"modulos": 0, "lecciones": 0, "avisos_aplicados": 0, "avisos_sin_texto": [], "faltan_en_curso": []}
@@ -114,6 +141,7 @@ def main():
                 rep["avisos_aplicados"] += 1
             else:
                 rep["avisos_sin_texto"].append(f"{ids[0]}: {t[:60]}")
+    rep["charla_renumerada"] = sum(renumerar_charla(l) for l in c["lessons"])
     json.dump(c, open(a.salida, "w", encoding="utf-8"), ensure_ascii=False)
     print(json.dumps(rep, ensure_ascii=False, indent=1))
 

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Fibra por PPPoE principal, 4G por DHCP de respaldo</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">MIKROTIK · LECCIÓN 37</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Fibra por PPPoE principal, 4G por DHCP de respaldo</text>
+<rect x="40" y="262" width="222" height="84" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><g transform="translate(60 288.0) scale(1.35)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="7" rx="1.5"/><rect x="4" y="14" width="16" height="7" rx="1.5"/><path d="M7.5 6.5h.01M7.5 17.5h.01"/></g><text x="104.0" y="300.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">LAN</text><text x="104.0" y="323.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">192.168.88.0/24</text>
+<rect x="306" y="180" width="196" height="250" rx="18" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="326.0" y="216.0" font-family="Familjen Grotesk" font-size="20" font-weight="600" fill="#FFFFFF" text-anchor="start">Router</text>
+<rect x="324" y="238" width="160" height="40" rx="8" fill="#0A63B8" stroke="#0A63B8" stroke-width="0"/>
+<text x="404.0" y="264.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">ether1</text>
+<rect x="324" y="372" width="160" height="40" rx="8" fill="#0B3A66" stroke="#4E7396" stroke-width="2"/>
+<text x="404.0" y="398.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">ether2</text>
+<text x="326.0" y="311.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#9FC3E3" text-anchor="start">bridge · LAN</text>
+<path d="M262.0 304.0C284.0 304.0,284.0 305.0,306.0 305.0" fill="none" stroke="#0A63B8" stroke-width="4" stroke-linecap="round"/><circle cx="262.0" cy="304.0" r="5" fill="#0A63B8"/><circle cx="306.0" cy="305.0" r="5" fill="#0A63B8"/>
+<rect x="560" y="128" width="330" height="192" rx="16" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2.5"/>
+<text x="580.0" y="166.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Principal · PPPoE Antel</text>
+<text x="580.0" y="200.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">pppoe-antel sobre ether1</text>
+<text x="580.0" y="228.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">add-default-route=no</text>
+<text x="580.0" y="256.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">testigos por la interfaz</text>
+<rect x="578.0" y="277" width="228.4" height="30" rx="15" fill="#0A63B8"/><text x="692.2" y="298.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">recursiva · distance=1</text>
+<rect x="560" y="340" width="330" height="192" rx="16" fill="#FFFFFF" stroke="#6E88A1" stroke-width="2.5"/>
+<text x="580.0" y="378.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Respaldo · DHCP del 4G</text>
+<text x="580.0" y="412.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">ether2 · gw 192.168.8.1</text>
+<text x="580.0" y="440.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">default-route-distance=2</text>
+<text x="580.0" y="468.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">use-peer-dns=no</text>
+<rect x="578.0" y="489" width="200.8" height="30" rx="15" fill="#E5F0FB"/><text x="678.4" y="510.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#41627F" text-anchor="middle">distance=2 · espera</text>
+<path d="M502.0 258.0C531.0 258.0,531.0 224.0,560.0 224.0" fill="none" stroke="#0A63B8" stroke-width="4" stroke-linecap="round"/><circle cx="502.0" cy="258.0" r="5" fill="#0A63B8"/><circle cx="560.0" cy="224.0" r="5" fill="#0A63B8"/>
+<path d="M502.0 392.0C531.0 392.0,531.0 436.0,560.0 436.0" fill="none" stroke="#0A63B8" stroke-width="4" stroke-linecap="round"/><circle cx="502.0" cy="392.0" r="5" fill="#0A63B8"/><circle cx="560.0" cy="436.0" r="5" fill="#0A63B8"/>
+<rect x="940" y="150" width="212" height="112" rx="16" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<text x="958.0" y="182.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">Testigos</text>
+<text x="958.0" y="214.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">1.1.1.1</text>
+<text x="958.0" y="244.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">9.9.9.9</text>
+<path d="M890.0 224.0C915.0 224.0,915.0 206.0,940.0 206.0" fill="none" stroke="#6E88A1" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 8" marker-end="url(#a-gray)"/>
+<text x="1046.0" y="290.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="middle">gateway=pppoe-antel</text>
+<rect x="940" y="372" width="212" height="128" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="958.0" y="404.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">DNS del router</text>
+<text x="958.0" y="436.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#41627F" text-anchor="start">1.0.0.1</text>
+<text x="958.0" y="466.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#41627F" text-anchor="start">8.8.4.4</text>
+<text x="958.0" y="490.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="start">no son testigos</text>
+<rect x="40" y="560" width="1112" height="75" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="40" y="572" width="5" height="51" rx="2.5" fill="#0A63B8"/><text x="66.0" y="594.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="66.0" dy="0.0">En RouterOS 7 la ruta /32 al testigo puede usar el nombre de la interfaz PPPoE como gateway: la IP del otro extremo cambia en</tspan><tspan x="66.0" dy="21.6">cada reconexión y no importa.</tspan></text>
+</svg>

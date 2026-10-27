@@ -1,0 +1,114 @@
+{
+ "36": {
+  "fig": {
+   "file": "36.svg",
+   "alt": "Una tabla con las zonas de origen en filas (GESTION más VPN, ADMIN, CCTV, ACCESOS, INVITADOS, WAN) y las de destino en columnas (WAN, GESTION, ADMIN, CCTV, ACCESOS, INVITADOS y el router). GESTION y VPN pueden todo, en verde. ADMIN e INVITADOS salen a WAN en verde. ADMIN a CCTV solo el NVR, en ámbar. CCTV y ACCESOS a WAN solo NTP, en ámbar. Todas las zonas ven DNS y DHCP del router, en ámbar. Desde WAN, solo lo publicado con dst-nat y el túnel. El resto, en rojo. Leyenda: verde es una regla accept, ámbar un accept con puerto o destino, rojo lo corta el drop final.",
+   "caption": "Cada casillero verde o ámbar es una regla; los rojos no se escriben."
+  },
+  "steps": [
+   {
+    "file": "36-paso2.svg",
+    "step": 2,
+    "alt": "Tres columnas. Interfaces del banco: bridge (ether2), ether3, ether4, ether5, wg-gestion y, punteada, vlan10-admin que entra en el paso 6. Cada una apunta a su zona: GESTION, CCTV, ACCESOS, INVITADOS, VPN y ADMIN. A la derecha, las listas compuestas: GESTION con include=VPN, SISTEMAS con include=CCTV,ACCESOS para NTP, y CLIENTES con include de ADMIN, CCTV, ACCESOS e INVITADOS para DNS y DHCP. Una nota explica el orden: include suma, exclude resta, los miembros estáticos suman al final, y member print solo muestra los estáticos.",
+    "caption": "Una interfaz, una zona; las listas compuestas se arman por include.",
+    "after": "Creá las zonas y sus miembros"
+   },
+   {
+    "file": "36-paso4.svg",
+    "step": 4,
+    "alt": "Dos paquetes del NVR 10.10.20.50 que entra por ether3, zona CCTV. El primero, UDP 123 hacia WAN, baja por la lista de reglas de forward y coincide con SISTEMAS a WAN udp 123, en verde. El segundo, TCP 443 para navegar, no coincide con ningún casillero y termina en el drop final con log ZONA-DROP, en rojo. Las reglas en orden: GESTION a todas, ADMIN a WAN, INVITADOS a WAN, ADMIN al NVR, SISTEMAS a WAN, WAN a lo publicado y drop final.",
+    "caption": "Lo que coincide con un casillero pasa; lo demás baja hasta el drop final.",
+    "after": "Forward por par de zonas"
+   },
+   {
+    "file": "36-paso6.svg",
+    "step": 6,
+    "alt": "Una terminal con tres líneas: crear vlan10-admin sobre el bridge, darle 10.10.10.1/24 y sumarla a la lista ADMIN, resaltada en verde. A la derecha, vlan10-admin entra a ADMIN y ya le aplican ADMIN a WAN, ADMIN al NVR y DNS y DHCP, con tildes verdes, y WinBox al router no, con una cruz roja. Dos notas: si la WAN pasa a PPPoE, pppoe-out1 va a la lista WAN; los túneles L2TP o SSTP del servidor son dinámicos y entran a VPN desde el perfil PPP con interface-list.",
+    "caption": "Lo nuevo se suma a la lista; las reglas no cambian.",
+    "after": "Una red nueva, sin tocar reglas"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "La zona es una interface list",
+    "para_que": "En un edificio con cámaras, control de acceso, administración e invitados, las reglas escritas interfaz por interfaz se multiplican y nadie puede auditarlas. La zona agrupa las interfaces que merecen la misma confianza, y las reglas hablan de zonas.",
+    "como": "Creás una lista por zona (`/interface/list/add name=CCTV`) y metés en cada una sus interfaces ruteadas: la VLAN, el bridge, un puerto suelto, la PPPoE o el túnel. Cada interfaz va en una sola zona. Los puertos que están dentro de un bridge no van: el tráfico ruteado entra por el bridge o por la VLAN, no por ether3.",
+    "ejemplo": "En un edificio de oficinas de Ciudad Vieja, `vlan20-cctv` del subsuelo y `vlan21-cctv` de la azotea van a la lista CCTV. Las reglas dicen `in-interface-list=CCTV` una vez, y valen para las dos."
+   },
+   {
+    "name": "La matriz de zonas y el drop final",
+    "para_que": "Una tabla de \"de, a\" obliga a decidir qué tiene que hablar con qué antes de escribir reglas, y deja a la vista lo que no se pensó. Con un drop al final de forward, todo lo que no está en la tabla queda cortado.",
+    "como": "Dibujá la matriz con las zonas en filas y columnas, y una columna más para el router. Cada casillero verde o ámbar es una regla: en forward con `in-interface-list` y `out-interface-list`, en input con `in-interface-list` y el servicio. Los rojos no se escriben. Antes del drop final va el accept de `connection-nat-state=dstnat`, o se caen los port forwarding. En un sitio en uso, el último renglón empieza como `action=log` y pasa a drop cuando el log queda limpio.",
+    "ejemplo": "Un hotel en Punta del Este pide que el WiFi de huéspedes no vea las cámaras. En la matriz, INVITADOS a CCTV queda en rojo: no se escribe nada y el drop final lo resuelve. Si un día el gerente quiere ver el NVR desde administración, se pinta un casillero ámbar y se agrega una regla con el puerto del NVR."
+   },
+   {
+    "name": "include, exclude y listas compuestas",
+    "para_que": "Algunas reglas valen para varias zonas a la vez: DNS y DHCP para todos los clientes, NTP para los sistemas de seguridad. En vez de repetir la regla por zona, se arma una lista que junta otras listas.",
+    "como": "`/interface/list/add name=SISTEMAS include=CCTV,ACCESOS` crea una lista que siempre tiene lo que tengan CCTV y ACCESOS. `exclude` resta, y los miembros estáticos se suman al final, así que un miembro estático gana sobre un exclude. Conviene usar include solo para grupos evidentes y no armar listas que incluyan listas compuestas: el print de miembros no muestra lo que entra por include y cuesta seguirlo.",
+    "ejemplo": "Una regla `in-interface-list=SISTEMAS out-interface-list=WAN protocol=udp dst-port=123` deja sincronizar la hora a las cámaras y a la controladora de accesos. Cuando el cliente suma una zona de alarmas, la incluís en SISTEMAS y ya tiene NTP."
+   },
+   {
+    "name": "Interfaces nuevas, PPPoE y túneles",
+    "para_que": "Una obra cambia: llega otra VLAN, la WAN pasa de DHCP a PPPoE, se suman técnicos por VPN. Si la política vive en las listas, el firewall no se toca: se actualiza la membresía.",
+    "como": "Para una interfaz estática alcanza con `/interface/list/member/add list=ADMIN interface=vlan10-admin`. Una `pppoe-out1` creada a mano también es estática y va a la lista WAN, o las reglas de WAN y el masquerade no la ven. Las interfaces de servidor L2TP o SSTP son dinámicas: aparecen al conectar, y entran a una lista desde el perfil con `/ppp/profile/set ... interface-list=VPN`.",
+    "ejemplo": "Antel cambia el servicio de un cliente a PPPoE. El técnico crea `pppoe-out1`, la suma a WAN y listo: el drop de lo que entra por WAN sin dst-nat, la regla del túnel y el masquerade siguen funcionando sin tocar una sola regla."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLos primeros firewalls de routers se escribían interfaz por interfaz: una lista de acceso en la entrada de cada puerto. En Cisco IOS, el firewall clásico (CBAC) aplicaba la inspección por interfaz. Con dos o tres redes alcanzaba; con diez, cada servicio nuevo obligaba a tocar varias listas y nadie podía decir de un vistazo qué red hablaba con cuál.\n\nLa respuesta de la industria fueron las zonas. Cisco sumó su Zone-Based Policy Firewall con IOS 12.4(6)T: cada interfaz pertenece a una zona, las interfaces de una misma zona se hablan, y la política se escribe para un par de zonas (zone-pair), una por sentido. El router mismo es una zona más, la self zone. Fortinet hace algo parecido en FortiGate: agrupa VLAN, puertos o túneles IPsec en una zona y la política nombra la zona, no cada interfaz.\n\nNetfilter, la base del firewall de Linux y de RouterOS, no tiene zonas propias: tiene cadenas, reglas y la interfaz de entrada y de salida. MikroTik resolvió el agrupamiento con las interface lists de RouterOS 6, que ya en 6.41 se usaban también para elegir dónde anunciarse con descubrimiento de vecinos. La configuración por defecto trae dos, LAN y WAN, y todas sus reglas las usan. Con eso, el firewall por zonas en MikroTik no es una función especial: es una forma de escribir.\n\n### Cómo funciona\n\nUna interface list es un conjunto de interfaces con nombre. Hay cuatro fijas (`all`, `none`, `dynamic`, `static`) y las que crees vos. Una lista se arma en tres pasos y en este orden: se suman los miembros de las listas de `include`, se restan los de `exclude` y al final se agregan los miembros estáticos. Lo que entra por `include` no aparece en `/interface/list/member/print`.\n\nCuando un paquete llega a una regla con `in-interface-list=CCTV`, el router pregunta si la interfaz por la que entró está en esa lista. `out-interface-list` pregunta lo mismo por la interfaz de salida, que recién se conoce después de la decisión de ruteo: por eso tiene sentido en forward y no en input.\n\nLa zona agrupa interfaces ruteadas, no equipos. Dos equipos en la misma red del bridge se hablan sin pasar por el router, y ninguna regla los ve. Por eso el orden en obra es VLAN primero, zonas después.\n\nLa matriz se traduce así: en forward, una regla accept por casillero permitido con la zona de origen y la de destino, una regla que deja pasar lo dst-nateado y un drop al final; en input, qué servicios del router ve cada zona, arriba del drop de fábrica. Una interfaz nueva hereda la política en el momento en que entra a su lista.",
+  "script_rsc": {
+   "titulo": "Zonas de un edificio y su matriz de reglas",
+   "descripcion": "Crea las listas GESTION, ADMIN, CCTV, ACCESOS, INVITADOS y VPN con la interfaz de cada una, las compuestas SISTEMAS y CLIENTES, las reglas de input por zona y las de forward por par de zonas. El drop final queda en modo ensayo (solo log) hasta que lo pases a drop.",
+   "variables": [
+    {
+     "nombre": "IF_GESTION",
+     "valor": "vlan99-gestion",
+     "detalle": "Interfaz de la zona de gestión (técnicos, switches, APs). En el banco: bridge"
+    },
+    {
+     "nombre": "IF_ADMIN",
+     "valor": "vlan10-admin",
+     "detalle": "Interfaz de la zona de administración"
+    },
+    {
+     "nombre": "IF_CCTV",
+     "valor": "vlan20-cctv",
+     "detalle": "Interfaz de la zona de cámaras y NVR"
+    },
+    {
+     "nombre": "IF_ACCESOS",
+     "valor": "vlan30-accesos",
+     "detalle": "Interfaz de la zona de control de acceso"
+    },
+    {
+     "nombre": "IF_INVITADOS",
+     "valor": "vlan40-invitados",
+     "detalle": "Interfaz de la zona de WiFi de invitados"
+    },
+    {
+     "nombre": "IF_VPN",
+     "valor": "wg-gestion",
+     "detalle": "Túnel de los técnicos (zona VPN)"
+    },
+    {
+     "nombre": "NVR_IP",
+     "valor": "10.10.20.50",
+     "detalle": "IP del NVR que administración puede ver"
+    },
+    {
+     "nombre": "PUERTO_VPN",
+     "valor": "13231",
+     "detalle": "Puerto UDP del túnel que se acepta desde WAN"
+    }
+   ],
+   "codigo": "# IES Training · MikroTik · Zonas con interface lists (lección 36)\n# Probalo primero en un equipo de banco y en Safe Mode (Ctrl+X).\n# Requiere el firewall por defecto. El drop final queda en ensayo: solo log.\n{\n:local zonas {\"GESTION\"=\"{{IF_GESTION}}\";\"ADMIN\"=\"{{IF_ADMIN}}\";\"CCTV\"=\"{{IF_CCTV}}\";\"ACCESOS\"=\"{{IF_ACCESOS}}\";\"INVITADOS\"=\"{{IF_INVITADOS}}\";\"VPN\"=\"{{IF_VPN}}\"}\n:local nvr \"{{NVR_IP}}\"\n:local vpn \"{{PUERTO_VPN}}\"\n:local drop [/ip/firewall/filter/find chain=input comment=\"defconf: drop all not coming from LAN\"]\n:if ([:len $drop] = 0) do={ :error \"No encuentro el drop de la defconf: revisa el firewall a mano\" }\n# 1. Una lista por zona, con su interfaz si existe\n:foreach z,i in=$zonas do={\n  :if ([:len [/interface/list/find name=$z]] = 0) do={ /interface/list/add name=$z comment=\"ies-zona\" }\n  :if ([:len [/interface/find name=$i]] = 0) do={ :put (\"Ojo: no existe \" . $i . \", la zona \" . $z . \" queda vacia\") } else={\n    :if ([:len [/interface/list/member/find list=$z interface=$i]] = 0) do={ /interface/list/member/add list=$z interface=$i comment=\"ies-zona\" } } }\n# 2. Compuestas: VPN cuenta como gestion; SISTEMAS y CLIENTES\n/interface/list/set [find name=GESTION] include=VPN\n:if ([:len [/interface/list/find name=SISTEMAS]] = 0) do={ /interface/list/add name=SISTEMAS include=CCTV,ACCESOS comment=\"ies-zona\" }\n:if ([:len [/interface/list/find name=CLIENTES]] = 0) do={ /interface/list/add name=CLIENTES include=ADMIN,CCTV,ACCESOS,INVITADOS comment=\"ies-zona\" }\n# 3. Input por zona, arriba del drop de fabrica (solo accepts: no corta a nadie)\n:if ([:len [/ip/firewall/filter/find comment=\"ies-zona-in-gestion\"]] = 0) do={\n  /ip/firewall/filter/add chain=input in-interface-list=GESTION action=accept comment=\"ies-zona-in-gestion\" place-before=$drop\n  /ip/firewall/filter/add chain=input in-interface-list=CLIENTES protocol=udp dst-port=53,67 action=accept comment=\"ies-zona-in-dns-dhcp\" place-before=$drop\n  /ip/firewall/filter/add chain=input in-interface-list=CLIENTES protocol=tcp dst-port=53 action=accept comment=\"ies-zona-in-dns-tcp\" place-before=$drop\n  /ip/firewall/filter/add chain=input in-interface-list=WAN protocol=udp dst-port=$vpn action=accept comment=\"ies-zona-in-tunel\" place-before=$drop }\n# 4. Forward: primero el renglon final (ensayo), despues un accept por casillero\n:if ([:len [/ip/firewall/filter/find comment=\"ies-zona-fin\"]] = 0) do={\n  /ip/firewall/filter/add chain=forward action=log log-prefix=\"ZONA-ENSAYO\" comment=\"ies-zona-fin\" }\n:local fin [/ip/firewall/filter/find comment=\"ies-zona-fin\"]\n:if ([:len [/ip/firewall/filter/find comment=\"ies-zona-gestion\"]] = 0) do={\n  /ip/firewall/filter/add chain=forward in-interface-list=GESTION action=accept comment=\"ies-zona-gestion\" place-before=$fin\n  /ip/firewall/filter/add chain=forward in-interface-list=ADMIN out-interface-list=WAN action=accept comment=\"ies-zona-admin-wan\" place-before=$fin\n  /ip/firewall/filter/add chain=forward in-interface-list=INVITADOS out-interface-list=WAN action=accept comment=\"ies-zona-invitados-wan\" place-before=$fin\n  /ip/firewall/filter/add chain=forward in-interface-list=ADMIN out-interface-list=CCTV dst-address=$nvr protocol=tcp dst-port=80,443,8000 action=accept comment=\"ies-zona-admin-nvr\" place-before=$fin\n  /ip/firewall/filter/add chain=forward in-interface-list=SISTEMAS out-interface-list=WAN protocol=udp dst-port=123 action=accept comment=\"ies-zona-sistemas-ntp\" place-before=$fin\n  /ip/firewall/filter/add chain=forward in-interface-list=WAN connection-nat-state=dstnat action=accept comment=\"ies-zona-publicado\" place-before=$fin }\n# Cuando el log ZONA-ENSAYO muestre solo lo que esperabas, pasalo a drop:\n# /ip/firewall/filter/set [find comment=\"ies-zona-fin\"] action=drop log=yes log-prefix=\"ZONA-DROP\"\n:put \"Listo: zonas, compuestas, input por zona y forward por par de zonas (final en ensayo).\"\n:put \"Verifica con: /interface/list/member/print y /ip/firewall/filter/print stats where comment~\\\"ies-zona\\\"\"\n}",
+   "notas": [
+    "Mientras el renglón final esté en ensayo (action=log), lo que no está en la matriz sigue pasando y queda en el log con ZONA-ENSAYO. Miralo unos días con /log/print where message~\"ZONA-ENSAYO\" antes de pasarlo a drop.",
+    "En input solo agrega accepts: las zonas que no están en la lista LAN ya las corta el drop de fábrica, salvo DNS, DHCP y el túnel.",
+    "Si una interfaz no existe, el script avisa y deja la zona vacía: cuando la crees, sumala con /interface/list/member/add.",
+    "No crea VLANs, IPs, servidores DHCP ni el túnel WireGuard: eso es de las lecciones de VLAN, IP, DHCP y túnel de gestión.",
+    "En obra conviene que la lista LAN de fábrica sea la de gestión (/interface/list/set LAN include=GESTION y sacar el miembro suelto). El script no lo hace porque cambia desde dónde se administra el router.",
+    "Para deshacer: /ip/firewall/filter/remove [find comment~\"^ies-zona\"], /interface/list/member/remove [find comment=\"ies-zona\"] y /interface/list/remove [find comment=\"ies-zona\"]."
+   ]
+  }
+ }
+}

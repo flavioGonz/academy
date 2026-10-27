@@ -1,0 +1,18 @@
+A: Lección seis: atender una alarma de punta a punta. Esta es para el operador.
+B: Dale. Estoy en el puesto y un canal se pone rojo.
+A: Primero, ese canal sube solo arriba de todo, a actividad reciente. Dice cruce de línea detectada, hace doce segundos. Pasás el mouse y aparece aceptar alarma.
+B: ¿Y aceptar ya es decir que es real?
+A: No. Aceptar abre la ficha del evento: la foto grande, la línea marcada en rojo y dos botones. Falsa alarma, con la letra F. Confirmar real, con la A o Enter.
+B: ¿Y cómo decido? Porque la foto a veces no dice mucho.
+A: Para eso está el análisis. Hoy vive en la vista de pared Intrusión: tocás la detección y la ficha te dice si la cámara lo clasificó como persona, cuántas detecciones hubo en cinco minutos, si fue de noche, si otra cámara detectó algo tres minutos antes o después, y qué matrículas pasaron.
+B: Lo de otra cámara está bueno.
+A: Es lo que en alarmas se llama cruce de zonas: dos zonas vecinas en poco tiempo pesan más que una sola. Y hay un mapa chiquito, dónde fue el cruce, con la cámara y su línea.
+B: ¿Y si hubo cinco detecciones seguidas?
+A: El análisis te lo dice clarito: es un mismo episodio, no cinco intrusiones. Una central de Estados Unidos hace lo mismo: si la misma zona dispara varias veces en una hora, despacha una sola vez.
+B: Bien. ¿Y después de confirmar real?
+A: La cámara queda en atención, con borde animado, hasta que alguien toca resolver. Y ojo: la decisión vale para todo lo pendiente de esa cámara en las últimas seis horas.
+B: ¿Las fuentes qué dicen del operador?
+A: Las cuatro de monitoreo coinciden: verificar con video antes de actuar. Y SDM tiene una frase que me encanta: atenete a los hechos. No digas que tiene un arma si no la ves.
+B: [risas] Anotado. ¿Laboratorio?
+A: Un compañero cruza dos veces. Aceptás, recorrés con las flechas, leés el análisis en la pared, confirmás real y, cuando el guardia te dice que está todo bien, resolvés.
+B: Regla: decidir con foto, análisis y vivo, y dejar la cámara resuelta.

@@ -1,15 +1,17 @@
-A: Lección cuatro: input y forward. Si entendés esto, la mitad de los tickets de "no anda" se resuelven solos.
-B: Bueno, prometés mucho. A ver.
-A: El firewall de MikroTik tiene cadenas. Input es lo que va dirigido al router mismo: WinBox, el DNS del router, un ping a su IP. Forward es lo que pasa a través del router: la cámara que habla con el NVR, la PC que sale a internet.
-B: Y la IP de LAN del router también cuenta como input.
-A: Sí, input es todo lo que tiene como destino alguna IP del router. Las tres fuentes que analizan el firewall por defecto coinciden en este reparto: la regla que descarta lo que no viene de LAN protege al router, y la que descarta lo que entra por WAN sin dst-nat protege a la LAN.
-B: ¿Y nadie discute?
-A: En el concepto no. Sí hay dos escuelas en el foro: una dice que el firewall por defecto está bien pensado y solo abrís agujeros puntuales; la otra lo reescribe con un drop final explícito. Eso lo dejamos como decisión.
-B: Bien. ¿Y el error más común?
-A: El orden. Las reglas se leen de arriba abajo y la primera que coincide manda. La documentación lo avisa con un caso concreto: si en un router con configuración por defecto agregás una regla para permitir algo desde WAN con un add común, queda abajo del drop y nunca coincide.
-B: [risas] Y uno mirando la regla perfecta, sin entender por qué no anda.
-A: Para eso está place-before, que la mete arriba de la regla que elijas. Y otra herramienta: las address-lists. En lugar de poner IPs sueltas en cada regla, armás una lista que se llame admins y la regla apunta a la lista.
-B: Así, cuando cambia la IP de la oficina, tocás la lista y no diez reglas.
-A: Exacto. El laboratorio: creás la lista admins, una regla que acepta WinBox solo desde esa lista, ubicada con place-before arriba del drop, y mirás los contadores de paquetes.
-B: Quince minutos.
-A: Y después de esto, antes de escribir cualquier regla, te preguntás en qué cadena va y qué tiene arriba.
+A: Lección cuatro, input y forward, versión larga. Esto resuelve la mitad de los tickets de "no anda".
+B: A ver, arrancá por lo básico. ¿Cuántas cadenas hay?
+A: Tres en filter. Input es lo que va al router: WinBox, el DNS, un ping a cualquiera de sus IP, también la de la LAN. Forward es lo que pasa a través: la PC que sale a internet, la cámara que habla con un NVR en otra red. Y output, lo que genera el propio router.
+B: ¿Y el port forwarding? Va dirigido a la IP pública del router.
+A: Esa es la trampa. El dst-nat se hace antes de decidir el camino: cuando el paquete llega al filter, el destino ya es el NVR, y cae en forward. En el foro un usuario preguntaba justo eso, cómo un paquete de internet esquivaba input.
+B: Uf, yo también me lo pregunté. ¿Y el orden?
+A: De arriba abajo, y manda la primera regla que decide. Las siete fuentes coinciden. Por eso arriba va established y related: el resto solo mira el primer paquete de cada conexión. Y un veterano del foro lo dice clarito: una cadena que termina sin regla es un accept.
+B: O sea que si no ponés drop, pasa.
+A: Exacto. La única discusión es de estilo: respetar la configuración por defecto y abrir agujeros, o terminar cada cadena con un drop propio.
+B: ¿Y en obra qué armamos?
+A: WinBox desde la WAN solo para la oficina, con una cadena propia que loguea el resto. Ping al router desde la LAN con límite, desde la WAN no. El NVR que sale solo a su nube y a NTP, cámaras sin internet, invitados con horario.
+B: Drop hacia afuera y reject adentro, ¿no?
+A: Claro. Al de afuera no le contestás; al NVR le avisás enseguida y no queda esperando.
+B: ¿Y cómo sé que la regla anda?
+A: Con el contador. Si no sube, la regla no coincide o hay otra arriba que se lo come. Contadores a cero, deshabilitás, probás, y Torch para ver si el tráfico llega.
+B: Media hora de laboratorio, entonces.
+A: Media hora. Primero la cadena, después el lugar, y al final el contador que lo confirma.

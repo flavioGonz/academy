@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Hacé la cuenta del disco antes de prometer días</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS LPR · PASO 5</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Hacé la cuenta del disco antes de prometer días</text>
+<rect x="48" y="150" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="75.0" y="184.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">1</text>
+<rect x="110" y="150" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="137.0" y="184.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">2</text>
+<rect x="172" y="150" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="199.0" y="184.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">3</text>
+<rect x="234" y="150" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="261.0" y="184.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">4</text>
+<rect x="296" y="150" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="323.0" y="184.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">5</text>
+<rect x="358" y="150" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="385.0" y="184.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">6</text>
+<rect x="420" y="150" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="447.0" y="184.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">7</text>
+<rect x="482" y="150" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="509.0" y="184.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">8</text>
+<rect x="544" y="150" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="571.0" y="184.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">9</text>
+<rect x="606" y="150" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="633.0" y="184.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">10</text>
+<rect x="48" y="220" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="75.0" y="254.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">11</text>
+<rect x="110" y="220" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="137.0" y="254.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">12</text>
+<rect x="172" y="220" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="199.0" y="254.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">13</text>
+<rect x="234" y="220" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="261.0" y="254.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">14</text>
+<rect x="296" y="220" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="323.0" y="254.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">15</text>
+<rect x="358" y="220" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="385.0" y="254.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">16</text>
+<rect x="420" y="220" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="447.0" y="254.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">17</text>
+<rect x="482" y="220" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="509.0" y="254.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">18</text>
+<rect x="544" y="220" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="571.0" y="254.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">19</text>
+<rect x="606" y="220" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="633.0" y="254.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">20</text>
+<rect x="48" y="290" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="75.0" y="324.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">21</text>
+<rect x="110" y="290" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="137.0" y="324.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">22</text>
+<rect x="172" y="290" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="199.0" y="324.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">23</text>
+<rect x="234" y="290" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="261.0" y="324.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">24</text>
+<rect x="296" y="290" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="323.0" y="324.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">25</text>
+<rect x="358" y="290" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="385.0" y="324.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">26</text>
+<rect x="420" y="290" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="447.0" y="324.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">27</text>
+<rect x="482" y="290" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="509.0" y="324.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">28</text>
+<rect x="544" y="290" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="571.0" y="324.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">29</text>
+<rect x="606" y="290" width="54" height="56" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/>
+<text x="633.0" y="324.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">30</text>
+<text x="48.0" y="392.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">30 días de fotos · 8 cámaras con tráfico normal</text>
+<rect x="48" y="412" width="610" height="40" rx="10" fill="#03213C"/><text x="64.0" y="437.6" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#7EE2B8" text-anchor="start">3,5 GB/día x 30 días = 105 GB (el manual redondea a 120 GB)</text>
+<rect x="48" y="464" width="610" height="40" rx="10" fill="#03213C"/><text x="64.0" y="489.6" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#D9E9F8" text-anchor="start">clips: 7 días de retención (valor típico)</text>
+<rect x="700" y="140" width="452" height="200" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="720.0" y="172.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Dónde se ajusta</text>
+<rect x="720" y="196" width="412" height="40" rx="10" fill="#03213C"/><text x="736.0" y="221.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">Configuración → Sistema → Almacenamiento</text>
+<text x="720.0" y="270.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="720.0" dy="0.0">Retención de fotos (típico 30 días) y de clips</tspan><tspan x="720.0" dy="21.6">(típico 7 días), por bucket.</tspan></text>
+<rect x="700" y="366" width="452" height="97" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="700" y="378" width="5" height="73" rx="2.5" fill="#B45309"/><text x="726.0" y="400.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="726.0" dy="0.0">Bajar la retención para que entre en el disco es</tspan><tspan x="726.0" dy="21.6">perder evidencia. Si falta espacio, se agranda el</tspan><tspan x="726.0" dy="21.6">disco.</tspan></text>
+<text x="48.0" y="560.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">Según el Manual del Instalador: hasta 4 cámaras, 250 GB SSD; 8 a 16 cámaras, 500 GB SSD.</text>
+</svg>

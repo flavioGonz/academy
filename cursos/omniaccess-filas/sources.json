@@ -1,0 +1,32 @@
+{
+ "topic": "OmniAccess Filas: control de filas y aforo con cámaras Bosch IVA Pro, ONVIF y go2rtc",
+ "level": "inicial a intermedio (técnicos instaladores y de soporte, operadores de filas)",
+ "pages": [
+  "https://knowledge.keenfinity-group.com/video-systems/article/how-to-set-up-count-with-iva-pro-fw-9-40-and-get-the-data-from-the-camera",
+  "https://knowledge.keenfinity-group.com/video-systems/article/how-is-rtsp-usage-supported-with-bosch-vip-devices",
+  "https://knowledge.keenfinity-group.com/video-systems/article/tns1-iva-does-not-include-all-iva-rules-in-camera",
+  "https://knowledge.keenfinity-group.com/video-systems/article/how-can-you-add-the-analytics-of-bosch-cameras-to-the-onvif-getprofile",
+  "https://www.onvif.org/profiles/profile-m/",
+  "https://www.onvif.org/?p=4937",
+  "https://docs.edgexfoundry.org/3.2/microservices/device/services/device-onvif-camera/supplementary-info/api-event-handling/",
+  "https://docs.edgexfoundry.org/3.2/microservices/device/services/device-onvif-camera/supplementary-info/api-analytic-support/",
+  "https://doc.milestonesys.com/latest/en-US/onvifdriver/events.htm",
+  "https://forum.milestonesys.com/t/the-onvif-pull-point-event-is-raised-redundantly-by-the-onvif-driver/13473",
+  "https://projectproduction.org/journal/reprint-littles-law-as-viewed-on-its-50th-anniversary/",
+  "https://third-bit.com/2026/05/30/littles-law/",
+  "https://www.footfallcam.com/blog/2024/03/redefining-queue-analytics-a-big-data-modelling-approach/",
+  "https://developer.axis.com/analytics/axis-object-analytics-counting-data",
+  "https://docs.bullmq.io/guide/retrying-failing-jobs",
+  "https://core.telegram.org/bots/api",
+  "https://pushpad.xyz/blog/web-push-what-is-vapid/",
+  "https://pkg.go.dev/github.com/AlexxIT/go2rtc",
+  "https://datatracker.ietf.org/doc/html/rfc7826",
+  "https://datatracker.ietf.org/doc/html/rfc8030",
+  "https://datatracker.ietf.org/doc/html/rfc8292",
+  "https://en.wikipedia.org/wiki/Little%27s_law",
+  "https://en.wikipedia.org/wiki/ONVIF",
+  "https://developer.mozilla.org/en-US/docs/Web/API/Push_API",
+  "https://www.onvif.org/specs/2606/ONVIF-Core-Spec-v2606.pdf",
+  "https://media.boschsecurity.com/fs/media/pb/media/partners_1/integration_tools_1/developer/Bosch-Metadata-and-IVA-Events.pdf"
+ ]
+}

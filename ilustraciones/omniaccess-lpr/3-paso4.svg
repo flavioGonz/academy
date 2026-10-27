@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Medí la patente en píxeles sobre una captura real</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS LPR · PASO 4</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Medí la patente en píxeles sobre una captura real</text>
+<rect x="48" y="126" width="620" height="420" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><path d="M48 140a14 14 0 0 1 14 -14h592a14 14 0 0 1 14 14v26h-620z" fill="#E5F0FB"/><circle cx="68" cy="146" r="5" fill="#C2D4E6"/><circle cx="86" cy="146" r="5" fill="#C2D4E6"/><circle cx="104" cy="146" r="5" fill="#C2D4E6"/><text x="124.0" y="152.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#41627F" text-anchor="start">Editor de imágenes · captura.jpg</text>
+<rect x="64" y="174" width="588" height="356" rx="6" fill="#1B2A38"/>
+<path d="M120 520 Q360 300 600 520" fill="#2E4052"/>
+<rect x="283.0" y="400.0" width="150.0" height="49.5" rx="6" fill="#FFFFFF" stroke="#04223D" stroke-width="2.5"/><rect x="285.0" y="402.0" width="146.0" height="9.9" rx="4" fill="#0A63B8"/><text x="358.0" y="440.6" font-family="JetBrains Mono" font-size="22" font-weight="700" fill="#04223D" text-anchor="middle">SBA 1234</text>
+<rect x="283" y="400" width="150" height="50" fill="none" stroke="#17A8D4" stroke-width="2.5" stroke-dasharray="6 4"/>
+<path d="M283 470H433" stroke="#17A8D4" stroke-width="2.5" marker-end="url(#a-cyan)" marker-start="url(#a-cyan)"/>
+<rect x="319.0" y="480.0" width="78.0" height="28" rx="14.0" fill="#1B2A38" stroke="#17A8D4" stroke-width="1.5"/><text x="358.0" y="500.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#17A8D4" text-anchor="middle">150 px</text>
+<rect x="720" y="260" width="140" height="56" fill="#FCEAE6" stroke="#D2492F" stroke-width="1.5"/>
+<text x="790.0" y="284.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">&lt; 130 px</text>
+<text x="790.0" y="306.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="middle">acercar</text>
+<rect x="860" y="260" width="180" height="56" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="1.5"/>
+<text x="950.0" y="284.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#0E8F5E" text-anchor="middle">130 a 300 px</text>
+<text x="950.0" y="306.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="middle">bien</text>
+<rect x="1040" y="260" width="112" height="56" fill="#FCEAE6" stroke="#D2492F" stroke-width="1.5"/>
+<text x="1096.0" y="284.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">&gt; 300 px</text>
+<text x="1096.0" y="306.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="middle">abrir zoom</text>
+<text x="720.0" y="236.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Qué hacer según el ancho medido</text>
+<rect x="720" y="360" width="432" height="97" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="720" y="372" width="5" height="73" rx="2.5" fill="#0A63B8"/><text x="746.0" y="394.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="746.0" dy="0.0">Con el auto quieto en el punto de lectura. DTK</tspan><tspan x="746.0" dy="21.6">y el manual aceptan desde 100 px; Hikvision</tspan><tspan x="746.0" dy="21.6">pide 130 y recomienda 150 a 200.</tspan></text>
+</svg>

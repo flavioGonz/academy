@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Dispositivos → Agregar → Cámara LPR, paso por paso</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS LPR</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Dispositivos → Agregar → Cámara LPR, paso por paso</text>
+<rect x="48" y="138" width="170" height="58" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="66.0" y="174.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">1. Tipo</text>
+<rect x="234" y="138" width="170" height="58" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="252.0" y="174.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">2. Equipo</text>
+<path d="M220 167H231" stroke="#6E88A1" stroke-width="2"/>
+<rect x="420" y="138" width="170" height="58" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="438.0" y="174.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">3. Conexión</text>
+<path d="M406 167H417" stroke="#6E88A1" stroke-width="2"/>
+<rect x="606" y="138" width="170" height="58" rx="14" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="624.0" y="174.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#FFFFFF" text-anchor="start">4. Ubicación</text>
+<path d="M592 167H603" stroke="#6E88A1" stroke-width="2"/>
+<rect x="792" y="138" width="170" height="58" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="810.0" y="174.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">5. Grabación</text>
+<path d="M778 167H789" stroke="#6E88A1" stroke-width="2"/>
+<rect x="978" y="138" width="170" height="58" rx="14" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="996.0" y="174.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#FFFFFF" text-anchor="start">6. Puesta a punto</text>
+<path d="M964 167H975" stroke="#6E88A1" stroke-width="2"/>
+<rect x="48" y="228" width="540" height="330" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="260.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Ubicación decide</text>
+<rect x="72" y="280" width="236" height="150" rx="16" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="92.0" y="314.0" font-family="Familjen Grotesk" font-size="20" font-weight="700" fill="#0A63B8" text-anchor="start">Entrada</text>
+<text x="92.0" y="344.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="92.0" dy="0.0">columna Entradas; suma a</tspan><tspan x="92.0" dy="21.6">los que están adentro</tspan></text>
+<rect x="328" y="280" width="236" height="150" rx="16" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="348.0" y="314.0" font-family="Familjen Grotesk" font-size="20" font-weight="700" fill="#0A63B8" text-anchor="start">Salida</text>
+<text x="348.0" y="344.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="348.0" dy="0.0">columna Salidas;</tspan><tspan x="348.0" dy="21.6">permanencia; cierra</tspan><tspan x="348.0" dy="21.6">visitas</tspan></text>
+<rect x="72" y="448" width="492" height="75" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="72" y="460" width="5" height="51" rx="2.5" fill="#B45309"/><text x="98.0" y="482.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="98.0" dy="0.0">Sin grupo de acceso la cámara no deja pasar a nadie</tspan><tspan x="98.0" dy="21.6">por servidor.</tspan></text>
+<rect x="612" y="228" width="540" height="330" rx="16" fill="#011E38" stroke="#17A8D4" stroke-width="2"/><text x="632.0" y="260.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#FFFFFF" text-anchor="start">Puesta a punto (ISAPI)</text>
+<circle cx="644" cy="291" r="5" fill="#17A8D4"/>
+<text x="660.0" y="296.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#FFFFFF" text-anchor="start">Dar de alta la cámara</text>
+<circle cx="644" cy="319" r="5" fill="#17A8D4"/>
+<text x="660.0" y="324.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#FFFFFF" text-anchor="start">Poner la hora</text>
+<circle cx="644" cy="347" r="5" fill="#17A8D4"/>
+<text x="660.0" y="352.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#FFFFFF" text-anchor="start">Servidor de alarmas → OmniAccess</text>
+<circle cx="644" cy="375" r="5" fill="#17A8D4"/>
+<text x="660.0" y="380.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#FFFFFF" text-anchor="start">Modo ANPR</text>
+<circle cx="644" cy="403" r="5" fill="#17A8D4"/>
+<text x="660.0" y="408.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#FFFFFF" text-anchor="start">Video H.264</text>
+<circle cx="644" cy="431" r="5" fill="#17A8D4"/>
+<text x="660.0" y="436.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#FFFFFF" text-anchor="start">Video en vivo</text>
+<circle cx="644" cy="459" r="5" fill="#17A8D4"/>
+<text x="660.0" y="464.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#FFFFFF" text-anchor="start">Cargar matrículas</text>
+<circle cx="644" cy="487" r="5" fill="#17A8D4"/>
+<text x="660.0" y="492.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#FFFFFF" text-anchor="start">Vincular la grabación</text>
+<circle cx="644" cy="515" r="5" fill="#17A8D4"/>
+<text x="660.0" y="520.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#FFFFFF" text-anchor="start">Calcular retención</text>
+<text x="48.0" y="600.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">Nombre con la convención del manual:</text>
+<rect x="376.4" y="580.0" width="187.2" height="29" rx="14.5" fill="#FFFFFF" stroke="#0A63B8" stroke-width="1.5"/><text x="470.0" y="601.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="middle">P1 - Entrada (21)</text>
+<text x="600.0" y="600.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#6E88A1" text-anchor="start">acceso · sentido · último octeto de la IP</text>
+</svg>

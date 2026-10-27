@@ -1,0 +1,171 @@
+{
+ "curso": {
+  "objetivo": "Al terminar el curso vas a poder instalar, calibrar y dar soporte a OmniAccess LPR en un barrio o predio cerrado, y operarlo como lo hace el guardia y el administrador: leer el monitor, investigar una matrícula, manejar alertas y diagnosticar la llamada de \"dejaron de entrar matrículas\".",
+  "recorrido": "Arrancás siguiendo una patente desde la cámara hasta la pantalla del guardia y entendiendo quién abre la barrera. Después hacés el trabajo de obra en orden: colocar la cámara con cinta y píxeles, darla de alta con su puesta a punto, vincularla al NVR con la hora correcta y calibrarla para la noche. Con el sistema andando pasás del lado del puesto: el Monitor LPR, la ficha de una matrícula, la permanencia, el merodeo y la lista de vigilancia. Cerrás con lo que sostiene la instalación en el tiempo: el padrón, el reporte del mes y el árbol de diagnóstico con las alertas de salud."
+ },
+ "modulos": [
+  {
+   "title": "Entender el sistema",
+   "why": "Antes de tocar una cámara conviene saber qué viaja por la red, dónde se decide la barrera y qué significa cada color para el guardia. Termina con el recorrido de una lectura dibujado y los dos cerebros que abren identificados.",
+   "objetivos": [
+    "Al terminar el módulo vas a poder ubicar los cinco tramos de una lectura y medir cuánto tarda en llegar al monitor.",
+    "Al terminar el módulo vas a poder explicar cuándo abre la lista de la cámara y cuándo decide el servidor con el padrón y el Modo LPR.",
+    "Al terminar el módulo vas a poder reconocer el antirrebote y los tres estados que ve el guardia."
+   ],
+   "lessons": ["1", "2"]
+  },
+  {
+   "title": "Instalar y configurar",
+   "why": "Es el trabajo del técnico en obra, en el orden en que se hace. Termina con una cámara bien colocada, dada de alta, reportando, grabando con la hora correcta y calibrada para la noche.",
+   "objetivos": [
+    "Al terminar el módulo vas a poder colocar una cámara ANPR con ángulos de hasta 30° y la patente entre 130 y 300 píxeles.",
+    "Al terminar el módulo vas a poder dar de alta una cámara LPR con el alta guiada y leer el resultado de su puesta a punto.",
+    "Al terminar el módulo vas a poder vincular cada cámara a su NVR y dejar cámaras, NVR y servidor con la misma hora.",
+    "Al terminar el módulo vas a poder calibrar zona, línea y perfil nocturno y medir el resultado con la tasa de lectura por hora."
+   ],
+   "lessons": ["3", "4", "5", "6"]
+  },
+  {
+   "title": "Operar",
+   "why": "El turno del guardia y del operador, con el sistema ya andando. Termina con alguien que lee el monitor de lejos, investiga una matrícula con evidencia y sabe qué hacer con un merodeo o una lista negra.",
+   "objetivos": [
+    "Al terminar el módulo vas a poder leer el Monitor LPR y actuar según el color de cada tarjeta.",
+    "Al terminar el módulo vas a poder investigar una matrícula con su perfil, su grabación y el ZIP de evidencia.",
+    "Al terminar el módulo vas a poder interpretar permanencia, merodeo y anomalías de presencia.",
+    "Al terminar el módulo vas a poder cargar matrículas en la lista de vigilancia con motivo y verificar el recorte antes de actuar."
+   ],
+   "lessons": ["7", "8", "9", "10"]
+  },
+  {
+   "title": "Administrar y diagnosticar",
+   "why": "Lo que sostiene la instalación en el tiempo: el padrón al día y sincronizado con las cámaras, el reporte del mes y el árbol para la llamada de urgencia. Termina con la lista de entrega recorrida.",
+   "objetivos": [
+    "Al terminar el módulo vas a poder cargar la cadena completa del padrón, sincronizar las cámaras en Incremental y exportar el reporte del mes.",
+    "Al terminar el módulo vas a poder diagnosticar \"dejaron de entrar matrículas\" con el árbol y revertir una cámara que el NVR pasó a smart.",
+    "Al terminar el módulo vas a poder leer las alertas de salud y cerrar una instalación con la lista de entrega."
+   ],
+   "lessons": ["11", "12"]
+  }
+ ],
+ "lecciones": {
+  "1": {
+   "objetivos": [
+    "Al terminar vas a poder nombrar los cinco tramos de una lectura: cámara, red, servidor, base y fotos, monitor.",
+    "Al terminar vas a poder comprobar que el receptor de eventos está vivo y ver llegar una lectura en Webhooks.",
+    "Al terminar vas a poder explicar qué sigue andando sin internet y qué se demora."
+   ],
+   "sigue": "Ya sabés por dónde viaja una lectura. La próxima responde la pregunta de garita: cuando la barrera sube, ¿la subió la cámara con su lista o el servidor con el padrón?",
+   "requisitos": []
+  },
+  "2": {
+   "objetivos": [
+    "Al terminar vas a poder explicar el orden de decisión: lista de la cámara, credencial en el padrón, Modo LPR.",
+    "Al terminar vas a poder reconocer el antirrebote de 5 y 20 segundos en una prueba con curl.",
+    "Al terminar vas a poder traducir Autorizado, Denegado y Lista negra en la acción del guardia."
+   ],
+   "conecta": "En Recorrido de lectura seguiste la patente hasta el servidor. Acá ves qué hace el servidor con ella y por qué la cámara a veces abre antes de que el servidor decida.",
+   "sigue": "La decisión depende de que la cámara lea bien, y eso se gana en la obra. La próxima arranca con cinta métrica: ángulo, distancia y píxeles de patente.",
+   "requisitos": ["1"]
+  },
+  "3": {
+   "objetivos": [
+    "Al terminar vas a poder calcular el ángulo vertical con arctan((H - h) / D) y decidir si la cámara se aleja o se baja.",
+    "Al terminar vas a poder medir el ancho de la patente en píxeles sobre una captura real.",
+    "Al terminar vas a poder justificar una cámara por carril y la lectura en el punto de detención."
+   ],
+   "conecta": "En Quién abre viste que todo empieza con una lectura correcta. Acá colocás la cámara para que esa lectura salga bien de entrada.",
+   "sigue": "Con la cámara en el poste y bien apuntada, toca que OmniAccess la conozca. La próxima la da de alta en Dispositivos con su puesta a punto.",
+   "requisitos": []
+  },
+  "4": {
+   "objetivos": [
+    "Al terminar vas a poder dar de alta una cámara LPR con el alta guiada y la convención de nombre del manual.",
+    "Al terminar vas a poder elegir el sentido y el grupo de acceso sabiendo qué cambia cada uno.",
+    "Al terminar vas a poder leer cada tarea de la puesta a punto y confirmar el primer evento en Webhooks."
+   ],
+   "conecta": "En Cámara bien parada dejaste la cámara colocada y medida. Ahora la sumás al sistema y dejás que la puesta a punto la configure por ISAPI.",
+   "sigue": "La cámara ya reporta, pero sin video del instante ni hora pareja la evidencia no sirve. La próxima vincula la grabación y sincroniza los relojes.",
+   "requisitos": ["3"]
+  },
+  "5": {
+   "objetivos": [
+    "Al terminar vas a poder vincular cada cámara a su NVR y canal con Detectar grabaciones.",
+    "Al terminar vas a poder leer el desfase de cada equipo y corregirlo con la hora del servidor o NTP.",
+    "Al terminar vas a poder calcular el disco necesario para la retención de fotos prometida."
+   ],
+   "conecta": "En Alta guiada la puesta a punto ya puso la hora y vinculó la grabación. Acá verificás ese trabajo en todas las cámaras y lo mantenés en el tiempo.",
+   "sigue": "Con la cámara grabando y en hora, falta lo que más cuesta: que lea de noche. La próxima calibra zona, línea y perfil nocturno.",
+   "requisitos": ["4"]
+  },
+  "6": {
+   "objetivos": [
+    "Al terminar vas a poder ajustar la zona de lectura y la línea de captura desde Calibrar ANPR.",
+    "Al terminar vas a poder aplicar el perfil barrio-noche anotando los valores anteriores.",
+    "Al terminar vas a poder leer la tasa de lectura por hora y decidir si la calibración sirvió."
+   ],
+   "conecta": "En Cámara bien parada fijaste la geometría física; acá ajustás la geometría dentro de la imagen y la exposición, con la cámara ya dada de alta.",
+   "sigue": "La instalación está lista. Ahora cambiás de silla: la próxima es la pantalla donde el guardia pasa el turno, el Monitor LPR.",
+   "requisitos": ["4"]
+  },
+  "7": {
+   "objetivos": [
+    "Al terminar vas a poder leer las tres columnas y la barra del día del Monitor LPR.",
+    "Al terminar vas a poder actuar según cada color de tarjeta, incluida la de sin lectura.",
+    "Al terminar vas a poder usar los filtros y el buscador para encontrar una lectura reciente."
+   ],
+   "conecta": "En Quién abre aprendiste qué significan los tres estados. Acá los ves en la pantalla del guardia, en vivo y a distancia.",
+   "sigue": "El monitor muestra lo que pasa ahora. Cuando alguien pregunta por lo que pasó anoche, se abre la ficha de la matrícula: es la próxima.",
+   "requisitos": []
+  },
+  "8": {
+   "objetivos": [
+    "Al terminar vas a poder usar las seis acciones de la ficha del evento.",
+    "Al terminar vas a poder leer el perfil de una matrícula y decidir si es habitual.",
+    "Al terminar vas a poder responder un reclamo de \"no me abrió\" y exportar el ZIP de evidencia."
+   ],
+   "conecta": "En Monitor en vivo el botón Investigar abría esta ficha. Acá la recorrés entera y sumás la Búsqueda inteligente para cuando no tenés la matrícula.",
+   "sigue": "Una lectura sola dice poco; varias en el tiempo dicen mucho. La próxima mira patrones: permanencia, merodeo y anomalías de presencia.",
+   "requisitos": ["7"]
+  },
+  "9": {
+   "objetivos": [
+    "Al terminar vas a poder leer la permanencia de una salida y saber de qué depende.",
+    "Al terminar vas a poder explicar cuándo salta el merodeo con los valores por defecto.",
+    "Al terminar vas a poder usar las anomalías de presencia para la ronda nocturna."
+   ],
+   "conecta": "En Investigar matrícula el perfil ya mostraba frecuencias y horarios. Acá el sistema convierte esos patrones en alertas y listas.",
+   "sigue": "El merodeo detecta lo que da vueltas; para lo que ya se sabe que hay que vigilar está la lista de vigilancia, que es la próxima.",
+   "requisitos": ["8"]
+  },
+  "10": {
+   "objetivos": [
+    "Al terminar vas a poder elegir entre Lista negra, VIP y En búsqueda según lo que pide el cliente.",
+    "Al terminar vas a poder cargar una matrícula con motivo y decidir si avisa o queda en silencio.",
+    "Al terminar vas a poder verificar el recorte antes de actuar sobre una alerta."
+   ],
+   "conecta": "En Quién abre la lista negra era un color; en Investigar matrícula, un botón. Acá ves todo lo que hace: en el servidor, en las lectoras y en el monitor.",
+   "sigue": "La lista de vigilancia es una parte del padrón. La próxima cubre el resto: unidades, usuarios, matrículas, cámaras sincronizadas y el reporte del mes.",
+   "requisitos": ["8"]
+  },
+  "11": {
+   "objetivos": [
+    "Al terminar vas a poder cargar la cadena unidad, usuario, credencial y grupo.",
+    "Al terminar vas a poder analizar y sincronizar las matrículas a las cámaras en Incremental.",
+    "Al terminar vas a poder crear un pase de invitado y exportar el reporte del mes en PDF."
+   ],
+   "conecta": "En Quién abre viste que el servidor decide con el padrón y la cámara con su lista. Acá mantenés las dos cosas al día.",
+   "sigue": "Con el padrón en orden, queda estar listo para el día que algo falla. La última lección es el árbol de \"dejaron de entrar matrículas\".",
+   "requisitos": ["2"]
+  },
+  "12": {
+   "objetivos": [
+    "Al terminar vas a poder recorrer el árbol de diagnóstico desde Webhooks hasta la cámara.",
+    "Al terminar vas a poder consultar el modo del recurso inteligente por ISAPI y revertir una cámara en smart en el orden correcto.",
+    "Al terminar vas a poder leer las alertas de salud y cerrar una instalación con la lista de entrega."
+   ],
+   "conecta": "Usás todo lo anterior: el recorrido de la lectura para ubicar el tramo, la puesta a punto para el HTTP host y la tasa de lectura de la calibración.",
+   "cierre": "Con esto tenés el ciclo completo de OmniAccess LPR: colocar, dar de alta, calibrar, operar y diagnosticar. El hábito que más sostiene una instalación es mirar la tasa por hora y la hora de los equipos en cada visita, y no compartir nunca la cámara de patentes con la búsqueda por imagen del NVR.",
+   "requisitos": ["1", "4", "6"]
+  }
+ }
+}

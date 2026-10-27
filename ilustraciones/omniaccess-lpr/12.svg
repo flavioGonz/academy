@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>«Dejaron de entrar matrículas»: seguí el árbol</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS LPR</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">«Dejaron de entrar matrículas»: seguí el árbol</text>
+<rect x="420" y="126" width="360" height="64" rx="16" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="600.0" y="156.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="middle"><tspan x="600.0" dy="0.0">¿Llegan eventos a Webhooks?</tspan></text>
+<rect x="48" y="250" width="330" height="90" rx="16" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<text x="213.0" y="280.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="middle"><tspan x="213.0" dy="0.0">No llega nada</tspan></text>
+<text x="213.0" y="306.9" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="middle">red o receptor caído</text>
+<rect x="435" y="250" width="330" height="90" rx="16" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/>
+<text x="600.0" y="280.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="middle"><tspan x="600.0" dy="0.0">Llegan sin matrícula</tspan></text>
+<text x="600.0" y="306.9" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="middle">la cámara no hace ANPR</text>
+<rect x="822" y="250" width="330" height="90" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="987.0" y="280.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="middle"><tspan x="987.0" dy="0.0">Llegan, pero de una sola no</tspan></text>
+<text x="987.0" y="306.9" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="middle">mirar esa cámara</text>
+<path d="M470.0 190.0C341.5 190.0,341.5 246.0,213.0 246.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/><rect x="321.9" y="191.0" width="39.2" height="28" rx="14" fill="#FFFFFF" stroke="#0A63B8" stroke-width="1.5"/><text x="341.5" y="210.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#0A63B8" text-anchor="middle">no</text>
+<path d="M600.0 190.0L600.0 246.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/><rect x="550.3" y="199.0" width="99.4" height="28" rx="14" fill="#FFFFFF" stroke="#0A63B8" stroke-width="1.5"/><text x="600.0" y="218.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#0A63B8" text-anchor="middle">sin chapa</text>
+<path d="M730.0 190.0C858.5 190.0,858.5 246.0,987.0 246.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/><rect x="813.1" y="191.0" width="90.8" height="28" rx="14" fill="#FFFFFF" stroke="#0A63B8" stroke-width="1.5"/><text x="858.5" y="210.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#0A63B8" text-anchor="middle">una sola</text>
+<text x="66.0" y="384.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">· ping al servidor</text>
+<text x="66.0" y="414.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">· receptor 10000/health → OK</text>
+<text x="66.0" y="444.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">· switch y enlace</text>
+<text x="453.0" y="384.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">· modo: roadDetection</text>
+<text x="453.0" y="414.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">· canal fuera de la búsqueda del NVR</text>
+<text x="453.0" y="444.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">· reiniciar y esperar 80 s</text>
+<text x="840.0" y="384.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">· estado y latencia</text>
+<text x="840.0" y="414.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">· HTTP host (reset)</text>
+<text x="840.0" y="444.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">· tasa de lectura por hora</text>
+<rect x="48" y="520" width="1104" height="75" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="48" y="532" width="5" height="51" rx="2.5" fill="#B45309"/><text x="74.0" y="554.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Mientras se diagnostica, el control de accesos se hace a mano en la garita. La falla silenciosa (cámara con imagen que no lee)</tspan><tspan x="74.0" dy="21.6">la avisa la alerta de ANPR apagado.</tspan></text>
+</svg>

@@ -92,7 +92,7 @@ function normalize_course(array $c, string $slug): array {
         // ilustración principal y conceptos ("para qué se creó, cómo se usa, ejemplo")
         $fig = (array)($l['fig'] ?? []);
         if (preg_match('#^(ilustraciones|capturas)/[A-Za-z0-9_/-]+\.(webp|png|jpg|jpeg|gif|svg)$#', (string)($fig['src'] ?? '')) && !str_contains((string)$fig['src'], '..'))
-            $lessons[count($lessons) - 1]['fig'] = ['src' => $fig['src'], 'alt' => s($fig['alt'] ?? '', 400), 'caption' => s($fig['caption'] ?? '', 300)];
+            $lessons[count($lessons) - 1]['fig'] = ['src' => $fig['src'], 'alt' => s($fig['alt'] ?? '', 1200), 'caption' => s($fig['caption'] ?? '', 300)];
         $concepts = [];
         foreach (array_slice((array)($l['concepts'] ?? []), 0, 8) as $k) {
             if (!is_array($k) || s($k['name'] ?? '') === '') continue;

@@ -57,6 +57,8 @@
     plus: '<path d="M12 5v14M5 12h14"/>',
     history: '<path d="M3.5 12a8.5 8.5 0 1 0 2.5-6L3.5 8.5"/><path d="M3.5 4v4.5H8M12 8v4.5l3 2"/>',
     sort: '<path d="M7 4v16M3.5 7.5 7 4l3.5 3.5M17 20V4M13.5 16.5 17 20l3.5-3.5"/>',
+    clip: '<rect x="8" y="3" width="8" height="4" rx="1"/><path d="M8 5H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2"/>',
+    trash: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
     image: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="9.5" r="1.8"/><path d="m21 16-5-5-9 9"/>',
     login: '<path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4M10 16l4-4-4-4M14 12H3"/>',
     dot: '<circle cx="12" cy="12" r="3"/>',
@@ -421,7 +423,7 @@
     ["#p-resumen", "#p-teoria", "#p-laboratorio .lab-body"].forEach(sel => glossify($(sel)));
     wireAuto(l, slug);
     // ampliar ilustraciones e imágenes del laboratorio
-    const zoomPics = [...$$(".l-fig img"), ...$$(".pics img"), ...$$(".lab-body img")];
+    const zoomPics = [...$$(".l-fig img"), ...$$(".pics img"), ...$$(".lab-body img"), ...$$(".theory img")];
     zoomPics.forEach((im, ix) => { im.style.cursor = "zoom-in"; (im.closest(".zoom") || im).addEventListener("click", () => lightbox(zoomPics.map(x => ({url: x.getAttribute("src"), texto: x.closest("figure")?.querySelector("figcaption")?.textContent || x.alt, tipo: /\.gif$/i.test(x.src) ? "gif" : "imagen"})), ix)); });
 
     // quiz
@@ -590,7 +592,7 @@
       const pt = el.closest?.("[data-pt]");
       if (el.id === "labMd") return addPhoto(file, "lab");
       if (el.id === "thMd") return addPhoto(file, "theory");
-      if (pt && /^[ik]/.test(pt.dataset.pt)) return addPhoto(file, pt.dataset.pt);
+      if (pt && /^([ik]|fig$)/.test(pt.dataset.pt)) return addPhoto(file, pt.dataset.pt);
       try { const j = await uploadInline(slug, l, file); el.focus(); document.execCommand("insertText", false, `\n![foto](${j.captura.url})\n`); toast("Imagen agregada"); } catch (err) { toast(err.message); }
     };
     const onPaste = e => { const fs = [...(e.clipboardData?.items || [])].filter(i => i.kind === "file" && /^image\//.test(i.type)).map(i => i.getAsFile()).filter(Boolean); if (!fs.length) return; e.preventDefault(); e.stopImmediatePropagation(); add(fs); };
@@ -817,7 +819,7 @@
             <div class="card route-box ed"><p class="conecta"><span class="k">De dónde venimos</span>${ie(l.conecta, "Cómo se conecta con la lección anterior (1 o 2 oraciones)", "e-con", "span")}</p>
               <div class="objs"><span class="k">En esta lección vas a</span><ul id="objs"></ul><button class="mini" type="button" id="addObj">+ Objetivo</button></div>
               <p class="conecta"><span class="k">Qué sigue</span>${ie(l.sigue, "Qué deja planteado para la próxima lección", "e-sig", "span")}</p></div>
-            <figure class="l-fig ed" id="figBox"></figure>
+            <figure class="l-fig ed figx" id="figBox" tabindex="0" data-pt="fig" aria-label="Ilustración principal: hacé clic y pegá con Ctrl+V, arrastrá una imagen o subila"></figure>
             <span class="k">La idea, en tres líneas</span>
             <ul class="ideas ed" id="ideas"></ul>
             <div class="row" style="margin:-6px 0 18px"><button class="mini" type="button" id="addIdea">+ Agregar línea</button><span class="note">Admite \`código\` y **negrita**.</span></div>
@@ -859,6 +861,7 @@
       </div>`;
     document.title = `Editar: ${l.handle} · IES Training`;
     const mark = editBar(slug, d, async () => { await saveDraft(slug); forgetCourses(); toast("Lección guardada"); location.hash = `#/curso/${slug}/${pos}`; }, `#/curso/${slug}/${pos}`);
+    const clearDirty = () => { d.dirty = false; const a = $("#edDirty"), b = $("#edUndo"); if (a) a.hidden = true; if (b) b.hidden = true; };
     const bind = (el, fn) => el.addEventListener("input", () => { fn(ieText(el)); mark(); });
     $$(".tab").forEach(t => t.onclick = () => { $$(".tab").forEach(x => x.setAttribute("aria-selected", x === t)); $$(".panel").forEach(p => p.hidden = p.id !== `p-${t.dataset.tab}`); });
     bind($(".l-head .h1"), v => l.handle = v); bind($(".l-head .sum"), v => l.summary = v);
@@ -868,16 +871,76 @@
     paintObj(); $("#addObj").onclick = () => { l.objetivos.push(""); paintObj(); $$("#objs .ie").pop().focus(); };
     $$(".kv .ie").forEach((el, i) => bind(el, v => { if (i === 0) l.impact_md = v; else l.who_md = v; }));
     bind($(".rule-t"), v => l.rule = v);
-    // ilustración principal
-    const paintFig = () => {
+    // ilustración principal: pegar (Ctrl+V o botón), arrastrar o subir; se sube y se guarda sola
+    const FIG_OK = /^image\/(png|jpeg|webp|gif)$/;
+    let figBusy = false;
+    const figSaved = (txt, cls = "ok") => { const ch = $("#figState"); if (!ch) return; ch.className = `fx-state ${cls}`; ch.innerHTML = `${cls === "ok" ? icon("check") : cls === "err" ? "" : '<i class="fx-spin"></i>'}<span>${esc(txt)}</span>`; };
+    const paintFig = (anim) => {
       const f = $("#figBox");
-      f.innerHTML = l.fig ? `<img src="${esc(l.fig.src)}" alt="${esc(l.fig.alt || "")}"><figcaption>${ie(l.fig.caption, "Qué mirar en la imagen (una línea)", "", "span")}</figcaption>
-        <div class="fig-tools"><label class="btn light sm">${icon("upload")}Cambiar<input type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden></label><button class="btn light sm" type="button" id="figX">Quitar</button></div>`
-        : `<label class="fig-empty">${icon("image")}<b>Agregar ilustración principal</b><span>PNG, JPG, WebP o GIF. Se muestra arriba del resumen.</span><input type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden></label>`;
-      $("input[type=file]", f).onchange = async e => { const file = e.target.files[0]; if (!file) return; try { const j = await uploadInline(slug, l, file); l.fig = {src: j.captura.url, alt: l.fig?.alt || l.handle, caption: l.fig?.caption || ""}; mark(); paintFig(); } catch (err) { toast(err.message); } };
-      $("#figX")?.addEventListener("click", () => { delete l.fig; mark(); paintFig(); });
+      f.classList.toggle("has", !!l.fig); f.classList.remove("fx-out");
+      f.innerHTML = (l.fig ? `<div class="fx-media${anim ? " fx-in" : ""}"><img src="${esc(l.fig.src)}" alt="${esc(l.fig.alt || "")}"></div>
+          <figcaption>${ie(l.fig.caption, "Qué mirar en la imagen (una línea)", "", "span")}</figcaption>`
+        : `<div class="fx-empty"><span class="fx-ico">${icon("image")}</span><b>Ilustración principal</b><span>Hacé clic acá y pegá con <kbd>Ctrl</kbd>+<kbd>V</kbd>, arrastrá una imagen o subila.</span><span class="fx-fmt">PNG · JPG · WebP · GIF animado</span></div>`)
+        + `<div class="fx-tools" role="toolbar" aria-label="Ilustración principal">
+            <button class="fx-b" type="button" id="figPaste" title="Pegar la imagen copiada">${icon("clip")}<span>Pegar</span></button>
+            <label class="fx-b" title="Subir desde la computadora">${icon("upload")}<span>Subir</span><input type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden></label>
+            ${l.fig ? `<button class="fx-b fx-danger" type="button" id="figX" title="Quitar la ilustración">${icon("trash")}<span>Quitar</span></button>` : ""}
+          </div>
+          <span class="fx-hint">${icon("clip")}Ctrl+V reemplaza la imagen</span>
+          <span class="fx-state" id="figState" hidden></span>
+          <div class="fx-drop"><span>${icon("upload")}Soltá la imagen para reemplazarla</span></div>
+          <div class="fx-prog" hidden><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19"/><circle class="fx-arc" cx="22" cy="22" r="19"/></svg><b>0%</b></div>`;
+      $("input[type=file]", f).onchange = e => { const file = e.target.files[0]; e.target.value = ""; if (file) setFig(file); };
+      $("#figPaste").onclick = e => { e.stopPropagation(); pasteFig(); };
+      $("#figX")?.addEventListener("click", async e => { e.stopPropagation(); if (!window.confirm("¿Quitar la ilustración principal de esta lección?")) return; f.classList.add("fx-out"); await new Promise(r => setTimeout(r, 220)); delete l.fig; mark(); paintFig(); await saveFig("Ilustración quitada"); });
       const cap = $("figcaption .ie", f); if (cap) bind(cap, v => { l.fig.caption = v; });
     };
+    async function pasteFig() {
+      if (!navigator.clipboard?.read) { $("#figBox").focus(); toast("Hacé clic en la imagen y pegá con Ctrl+V."); return; }
+      try {
+        for (const it of await navigator.clipboard.read()) {
+          const t = it.types.find(x => FIG_OK.test(x)) || it.types.find(x => x.startsWith("image/"));
+          if (t) { const b = await it.getType(t); return setFig(new File([b], `portapapeles.${(t.split("/")[1] || "png").replace("jpeg", "jpg")}`, {type: b.type || t})); }
+        }
+        toast("No hay ninguna imagen copiada. Copiá una captura (Win+Shift+S) y volvé a tocar Pegar.");
+      } catch { $("#figBox").focus(); toast("El navegador no dejó leer el portapapeles: con la imagen marcada, pegá con Ctrl+V."); }
+    }
+    async function saveFig(okText) {
+      figSaved("Guardando…", "busy"); $("#figState").hidden = false;
+      try { await saveDraft(slug, true); forgetCourses(); clearDirty(); figSaved(okText); setTimeout(() => { const st = $("#figState"); if (st) st.classList.add("fx-fade"); }, 2600); }
+      catch (e) { figSaved(e.status === 409 ? "No se guardó: otra persona guardó el curso" : "No se guardó: tocá Guardar cambios", "err"); }
+    }
+    async function setFig(file) {
+      if (figBusy) return;
+      if (!FIG_OK.test(file.type)) { toast("Solo imágenes PNG, JPG, WebP o GIF."); return; }
+      const f = $("#figBox"); figBusy = true; setTarget("fig");
+      const local = URL.createObjectURL(file);
+      // vista previa inmediata, desenfocada mientras sube
+      f.classList.add("has", "fx-up");
+      let media = $(".fx-media", f);
+      if (!media) { $(".fx-empty", f)?.remove(); f.insertAdjacentHTML("afterbegin", `<div class="fx-media"><img alt=""></div>`); media = $(".fx-media", f); }
+      $("img", media).src = local;
+      const prog = $(".fx-prog", f), arc = $(".fx-arc", f), pct = $(".fx-prog b", f); prog.hidden = false;
+      const setP = p => { arc.style.strokeDashoffset = String(119.4 * (1 - p / 100)); pct.textContent = `${p}%`; };
+      setP(2);
+      try {
+        const j = await uploadInline(slug, l, file, setP); setP(100);
+        // imagen nueva: el texto alternativo de la anterior ya no la describe; el pie queda para editarlo
+        l.fig = {src: j.captura.url, alt: `Ilustración de la lección ${l.handle || ""}`.trim(), caption: l.fig?.caption || ""};
+        await new Promise(r => { const im = new Image(); im.onload = im.onerror = r; im.src = j.captura.url; });
+        mark(); f.classList.remove("fx-up"); paintFig(true); f.classList.add("fx-flash"); setTimeout(() => f.classList.remove("fx-flash"), 900);
+        await saveFig("Imagen guardada");
+      } catch (err) { f.classList.remove("fx-up"); paintFig(); toast(err.message); }
+      finally { URL.revokeObjectURL(local); figBusy = false; }
+    }
+    { // arrastrar y soltar sobre la ilustración
+      const f = $("#figBox"); let depth = 0;
+      f.addEventListener("dragenter", e => { if ([...(e.dataTransfer?.types || [])].includes("Files")) { e.preventDefault(); depth++; f.classList.add("fx-over"); } });
+      f.addEventListener("dragover", e => { if ([...(e.dataTransfer?.types || [])].includes("Files")) e.preventDefault(); });
+      f.addEventListener("dragleave", () => { if (--depth <= 0) { depth = 0; f.classList.remove("fx-over"); } });
+      f.addEventListener("drop", e => { e.preventDefault(); depth = 0; f.classList.remove("fx-over"); const file = [...(e.dataTransfer?.files || [])].find(x => FIG_OK.test(x.type)); if (file) setFig(file); else toast("Soltá una imagen PNG, JPG, WebP o GIF."); });
+      f.addEventListener("click", e => { if (!e.target.closest(".ie,.fx-tools")) f.focus(); });
+    }
     paintFig();
     // ideas
     const paintIdeas = () => {
@@ -929,7 +992,8 @@
       return [...ls.slice(0, j), "", html, "", ...ls.slice(j)].join("\n");
     };
     async function addPhoto(file, key = target) {
-      if (!key) { toast("Hacé clic en la idea, el concepto o el paso donde va la foto y volvé a pegar."); return; }
+      if (key === "fig") return setFig(file);
+      if (!key) { toast("Hacé clic en la idea, el concepto, el paso o la ilustración donde va la foto y volvé a pegar."); return; }
       if (!/^image\//.test(file.type)) { toast("Solo imágenes (PNG, JPG, WebP o GIF)."); return; }
       const st = $("#insS"); toast("Subiendo foto…");
       try {
@@ -1749,9 +1813,10 @@
     drafts[slug] = {course, base: course.updated || "", dirty: false};
     return drafts[slug];
   }
-  async function saveDraft(slug) {
+  async function saveDraft(slug, stay) {
     const d = drafts[slug]; const m = await loadMarked();
-    const c = d.course;
+    // stay: guardar sin salir del editor; se procesa una copia para no mover lo que está en pantalla
+    const c = stay ? structuredClone(d.course) : d.course;
     c.lessons.forEach(l => {
       const keep = (l.idea_md || []).map((x, i) => [x, (l.idea_pics || [])[i] || []]).filter(([x, ps]) => x.trim() || ps.length);
       l.idea_md = keep.map(k => k[0]); l.idea_pics = keep.map(k => k[1]);
@@ -1762,6 +1827,7 @@
     });
     const {course} = await api("api/admin.php?a=course_save", {course: c, base: d.base});
     delete courses[slug]; catalog = null;
+    if (stay) { d.base = course.updated || d.base; d.dirty = false; return course; }
     await loadDraft(slug, true);
     return course;
   }

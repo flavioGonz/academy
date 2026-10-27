@@ -1,0 +1,21 @@
+A: Última lección. Suena el teléfono: dejaron de entrar matrículas.
+B: [suspiro] La llamada que nadie quiere.
+A: Pero tiene diagnóstico conocido. Es un árbol. Primera pregunta: ¿llegan eventos a la pantalla de Webhooks?
+B: ¿Y si no llega nada?
+A: Red o el receptor de eventos caído. Si llegan, pero sin matrícula, la cámara no está haciendo ANPR. Y ahí está la falla más traicionera de todo el sistema.
+B: ¿Cuál?
+A: En estas cámaras con analítica propia, el motor es uno solo. O lee patentes, o alimenta la búsqueda por imagen del NVR. Si alguien, con buena intención, agrega el canal de la cámara LPR a esa búsqueda del NVR, el NVR le cambia el modo y la cámara deja de leer.
+B: ¿Y sigue mostrando imagen?
+A: Sigue mostrando imagen y parece sana. Por eso es silenciosa. En IPCamTalk un integrador cuenta algo parecido: cambió el modo de detección y la cámara dejó de mandarle los eventos.
+B: ¿Cómo se arregla?
+A: En orden, si no, no anda. Sacás el canal de la búsqueda del NVR, volvés el modo a road detection, reiniciás la cámara y esperás unos ochenta segundos.
+B: ¿Y el sistema avisa?
+A: Sí. Vigila cada equipo y abre alertas: sin respuesta en dos sondeos, disco, memoria arriba de noventa y cinco por ciento, reloj corrido más de dos minutos, y ANPR apagado. Con aviso por Telegram para las cámaras y los NVR.
+B: ¿Y si es una sola cámara?
+A: Estado, ping, el servidor de alarmas que se pierde con un reset, y la tasa de lectura. Porque leer mal no es lo mismo que no leer.
+B: ¿Laboratorio?
+A: En una cámara de prueba. Mirás estado y latencia, pasás un auto mirando Webhooks, le preguntás por ISAPI en qué modo está, y tiene que decir road detection. Revisás el NVR. Y desenchufás la cámara tres minutos para ver la alerta.
+B: Y cerrás con la lista de entrega.
+A: De día y de noche, tasa arriba de noventa, grabación, relojes, reinicio, avisos y claves de fábrica cambiadas.
+B: Y nunca le damos la cámara de patentes a la búsqueda del NVR.
+A: Nunca. Si quieren las dos cosas, segunda cámara.

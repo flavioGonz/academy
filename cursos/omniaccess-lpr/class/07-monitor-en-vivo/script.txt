@@ -1,0 +1,21 @@
+A: Lección siete. Cambiamos de público: esta es para el guardia. La pantalla donde pasa el turno.
+B: El Monitor LPR.
+A: Ese. El manual dice que está pensado para mirarse de lejos, y es verdad. Tres columnas: a la izquierda las entradas, a la derecha las salidas, y en el medio el foco.
+B: ¿Qué es el foco?
+A: La última lectura, en grande, con el recorte real de la patente. Ves marca, tipo, color, la cámara y la hora. Y dos botones: Investigar y Registrar.
+B: ¿Y arriba?
+A: La barra. En casa, cuántos autos hay adentro sobre el total. Hoy, las lecturas del día, con los permitidos y los denegados. Los filtros Todos, Permitidos, Denegados, y Color y Tipo para cuando buscás la camioneta blanca que acaba de pasar.
+B: Y el parlante.
+A: El parlante, el escudo de la lista de vigilancia con su contador, y un interruptor para que las anomalías salten solas.
+B: ¿Y cómo lee los colores el guardia?
+A: Verde, pasa solo. Ámbar, denegado: verificás con el residente. Rojo con sonido, lista negra: protocolo del cliente. Y el manual insiste en algo: la mayoría de los ámbar son visitas o autos nuevos.
+B: No es una alarma.
+A: No. La alarma es el rojo. Y hay una cuarta tarjeta, amarilla, sin lectura. La cámara sacó la foto pero no leyó. Con Cargar matrícula escribís la patente que ves y el servidor vuelve a decidir.
+B: ¿Y si una patente se lee mal siempre igual?
+A: No la corregís una por una. Avisás al técnico con el nombre exacto de la cámara. Es calibración, no el auto.
+B: Me hace acordar al caso de Roseville.
+A: Sí, un nueve que se leía como ocho. Allá las alertas equivocadas no terminaron en nada porque cada una se verificaba. Ese es el espíritu.
+B: [risas] Verificar antes de abrir. ¿Laboratorio?
+A: Práctica guiada: leés la barra, filtrás denegados, comparás recorte contra lectura, buscás una matrícula y, en una de prueba, cargás a mano una sin lectura.
+B: Y si silenciás de noche, volvés a prender el sonido antes de irte.
+A: Siempre.

@@ -1,0 +1,5 @@
+[
+  {"q": "Hay 10 personas en la fila y en los últimos 15 minutos salieron 30. ¿Qué espera estimada muestra el kiosko?", "options": ["~5 min", "~10 min", "~15 min", "~30 min"], "answer": 0, "why": "Ritmo = 30 / 15 = 2 personas por minuto. Espera = 10 / 2 = 5 minutos."},
+  {"q": "El kiosko muestra un guion en espera estimada con gente en la fila. ¿Qué significa?", "options": ["Que la cámara está offline", "Que no hubo salidas en los últimos 15 minutos y no hay ritmo para calcular", "Que el umbral está mal", "Que el kiosko no tiene marca"], "answer": 1, "why": "La estimación divide el aforo por el ritmo de salidas de 15 minutos; sin salidas no hay ritmo."},
+  {"q": "¿En qué situación la espera estimada se queda corta?", "options": ["Cuando la fila está estable", "Cuando hay una sola caja", "Cuando llega mucha más gente de la que sale y la fila crece", "Cuando el kiosko está en pantalla completa"], "answer": 2, "why": "La ley de Little vale con la fila estable. Si las llegadas superan a las salidas, la fila crece y el promedio de los últimos 15 minutos subestima la espera."}
+]

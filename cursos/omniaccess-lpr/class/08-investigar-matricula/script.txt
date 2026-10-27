@@ -1,0 +1,19 @@
+A: Lección ocho. Llega el administrador y te dice: anoche entró una camioneta rara, ¿quién era?
+B: [risas] El clásico del lunes.
+A: El clásico. Para eso está la ficha del evento. Un clic en cualquier captura y la tenés: estado, hora, foto completa, dirección, cámara, y si es una salida, cuánto tiempo estuvo adentro.
+B: ¿Y las acciones?
+A: Seis. Grabación abre el video del NVR en ese segundo. Similares busca el mismo vehículo en las cámaras de contexto del barrio. Clip baja un video corto. Exportar arma el ZIP. Registrar da de alta. Y Lista negra marca la matrícula.
+B: ¿Qué trae el ZIP?
+A: Cuatro archivos: la captura, el recorte de la patente, un clip de treinta segundos y un archivo con todos los datos. Es lo que se entrega ante un reclamo o una denuncia.
+B: ¿Y las pestañas?
+A: Esa es la parte linda. Perfil te dice si esa matrícula es habitual: cuántas veces pasa por día, por qué portones entra y sale, y a qué hora. Un auto que entra todos los días a las ocho y hoy entra a las tres de la mañana es un dato, aunque esté autorizado.
+B: ¿Y si no tengo la matrícula?
+A: Búsqueda inteligente, modo Accesos. Escribís como hablás: camioneta blanca ayer a la tarde. Y abajo te muestra unas etiquetas con lo que entendió.
+B: ¿Cuánto tarda?
+A: Menos de un segundo, porque busca en la base propia. Los otros dos modos, por texto y por imagen, le preguntan al NVR y tardan más. Ojo: el menú aparece solo si hay un NVR VPro dado de alta. Si no, investigás desde el Historial.
+B: Y antes de afirmar algo...
+A: Mirás el recorte y la grabación. Una lectura identifica un vehículo, no a quien maneja, y puede estar mal leída.
+B: ¿Laboratorio?
+A: Buscás entradas denegadas hoy, abrís una, leés el perfil y decidís si es habitual. Mirás la grabación, exportás el ZIP y verificás los cuatro archivos. Y después un reclamo simulado: no me abrió anoche.
+B: Si hay evento denegado, padrón. Si no hay evento, grabación.
+A: Con eso el lunes se resuelve en minutos.

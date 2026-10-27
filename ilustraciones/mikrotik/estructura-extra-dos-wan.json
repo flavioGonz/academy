@@ -1,0 +1,50 @@
+{
+  "insertar": [
+    {"id": "37", "despues_de": "11", "titulo": "Dos WAN: PPPoE + DHCP"},
+    {"id": "38", "despues_de": "37", "titulo": "Dos WAN: IP fija + PPPoE"},
+    {"id": "39", "despues_de": "38", "titulo": "Dos WAN: IP fija + DHCP"}
+  ],
+  "lecciones": {
+    "11": {
+      "objetivos": [
+        "Al terminar vas a poder elegir entre failover y balanceo PCC para una obra y decir cómo pone su ruta por defecto cada tipo de WAN (IP fija, DHCP y PPPoE).",
+        "Al terminar vas a poder armar rutas recursivas con dos testigos por proveedor, scope y target-scope, y probar el corte y la vuelta contando pings.",
+        "Al terminar vas a poder cubrir las dos salidas con masquerade, revisar las conexiones que quedan en conntrack y hacer que lo que entra por una WAN responda por la misma."
+      ],
+      "conecta": "En la lección anterior armaste rutas con distance y check-gateway; ahora las combinás para dos salidas y descubrís por qué check-gateway solo no alcanza cuando el módem responde pero internet no.",
+      "sigue": "Esta fue la base común. En la próxima la aplicás a la combinación más común en comercios: fibra de Antel por PPPoE como principal y un 4G por DHCP de respaldo, con la configuración completa.",
+      "requisitos": ["13", "14", "15", "27", "6", "23"]
+    },
+    "37": {
+      "objetivos": [
+        "Al terminar vas a poder dejar un PPPoE principal sin ruta automática y con rutas recursivas por la interfaz PPPoE.",
+        "Al terminar vas a poder sumar un respaldo por DHCP en distancia 2, sin sus DNS y fuera del bridge.",
+        "Al terminar vas a poder probar los dos cortes (sesión caída y PPPoE arriba sin internet) y revisar las conexiones que quedan al volver."
+      ],
+      "conecta": "En la lección anterior viste las piezas de dos WAN con gateways fijos; ahora el principal es un PPPoE cuya IP de gateway cambia y el respaldo trae su propia ruta y sus DNS por DHCP.",
+      "sigue": "El PPPoE fue el principal. En la próxima cambia el reparto: una IP fija trabaja y publica servicios, el PPPoE queda de respaldo, y aprendés a que lo que entra por la fija responda por la fija.",
+      "requisitos": ["15", "14", "11"]
+    },
+    "38": {
+      "objetivos": [
+        "Al terminar vas a poder dejar una IP fija como principal con rutas recursivas y un PPPoE de respaldo con su ruta en distancia 2.",
+        "Al terminar vas a poder atar un dst-nat a la IP fija y a una lista de origen, sin abrirlo en toda la lista WAN.",
+        "Al terminar vas a poder crear una tabla de ruteo con marcas de conexión y de ruteo para que lo publicado en la IP fija responda por ella aunque el principal sea otro."
+      ],
+      "conecta": "En la lección anterior el PPPoE era el principal; ahora pasa a respaldo y la IP fija carga con lo que se publica, que es justo lo que se rompe cuando cambia el enlace principal.",
+      "sigue": "Te falta el caso del respaldo celular por DHCP detrás de NAT. En la próxima armás IP fija con un 4G de respaldo y, como variante, el balanceo PCC entre los dos enlaces.",
+      "requisitos": ["13", "15", "11", "24"]
+    },
+    "39": {
+      "objetivos": [
+        "Al terminar vas a poder dejar una IP fija como principal y un 4G por DHCP de respaldo en distancia 2, sin sus DNS.",
+        "Al terminar vas a poder explicar qué deja de funcionar con el 4G activo (lo publicado) y comprobar en IP Cloud la IP pública y el relay de Back To Home.",
+        "Al terminar vas a poder armar un balanceo PCC con dos tablas, la lista de redes que no se balancean y FastTrack solo para lo no marcado."
+      ],
+      "conecta": "En la lección anterior hiciste que lo publicado responda por la IP fija; ahora el respaldo es un 4G detrás de NAT, por donde todo sale pero nada entra, y aparece el pedido de usar los dos enlaces a la vez.",
+      "sigue": "Ya tenés dos salidas en cualquier combinación. En la próxima el diagnóstico se vuelve método: ping y traceroute desde el router, con src-address para probar por cada salida y ver dónde se corta.",
+      "requisitos": ["13", "14", "11"]
+    }
+  },
+  "nota": "El módulo \"Rutas, failover y vigilancia\" queda con 7 lecciones (27, 11, 37, 38, 39, 29, 35), justo en el límite. Si se agrega otra, conviene partirlo en \"Rutas y dos WAN\" (27, 11, 37, 38, 39) y \"Diagnóstico y vigilancia\" (29, 35). En ese caso, el conecta de la 29 que habla de \"dos salidas armadas\" sigue valiendo."
+}

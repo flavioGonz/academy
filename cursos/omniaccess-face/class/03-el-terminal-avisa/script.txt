@@ -1,0 +1,19 @@
+A: Lección tres. El terminal ya está en la pared; ahora tiene que hablar con OmniAccess.
+B: Y eso arranca en Dispositivos, me imagino.
+A: Arranca ahí. Gestión, Dispositivos Faciales, Agregar. Tipo Acceso Facial, fabricante, modelo, IP, usuario y clave de la API del equipo, si es entrada o salida. Y un campo que la gente deja vacío: Hardware ID, la MAC.
+B: ¿Y la MAC para qué, si ya tiene la IP?
+A: Porque cuando el terminal avisa un evento, se presenta con la MAC. El servidor de eventos busca qué equipo tiene esa MAC. Si no la encuentra, prueba por IP, y si no hay forma de saber quién es, el evento se descarta.
+B: ¿Se pierde?
+A: Se pierde. En el código dice, literal, evento salteado: dispositivo no encontrado.
+B: Uf. ¿Y cómo avisa el terminal?
+A: Con una Action URL. Es la idea del webhook: cuando pasa algo, el equipo llama a una dirección web. Wikipedia lo explica así, y Akuvox ya lo ofrece hasta desde su nube.
+B: ¿La URL la armo yo a mano?
+A: No hace falta. En la fila del equipo, menú de los tres puntos, Webhooks Action URL. Te muestra una por evento: rostro válido, inválido, tarjeta, relé, arranque. Copiar URL y la pegás en el terminal. Van al puerto diez mil, que es el servidor de eventos.
+B: ¿Y la foto viaja en ese aviso?
+A: No. El aviso trae nombre, MAC, hora. La foto la va a buscar el servidor al registro del terminal, con el usuario y la clave que cargaste. Por eso, si el servidor no llega al terminal, tenés evento sin foto.
+B: Caso de obra.
+A: Barrio Ejemplo, portería peatonal. El técnico carga todo menos la MAC. El terminal abre, el guardia ve la puerta moverse, y en el monitor no aparece nada.
+B: Y le echan la culpa al sistema.
+A: [suspiro] Siempre. ¿Laboratorio? Veinticinco minutos. Alta del equipo con MAC, copiás la URL de rostro válido, la pegás en el terminal, pasás una cara y mirás Configuración, Sistema, Webhooks. Tiene que figurar con el nombre del equipo. Al final, tocá el botón Relé.
+B: Y la puerta se mueve.
+A: Y llega el evento de puerta abierta. Sin MAC no hay evento.

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>El roaming lo decide el cliente; el AP solo sugiere</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">UNIFI</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">El roaming lo decide el cliente; el AP solo sugiere</text>
+<defs><linearGradient id="g9" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E8F5E"/><stop offset=".6" stop-color="#B45309"/><stop offset="1" stop-color="#D2492F"/></linearGradient></defs>
+<rect x="56" y="134" width="10" height="404" rx="5" fill="url(#g9)"/>
+<text x="82.0" y="128.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="start">informa</text>
+<text x="82.0" y="562.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="start">patea</text>
+<rect x="90" y="140" width="1062" height="68" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="112.0" y="172.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">802.11k</text>
+<text x="112.0" y="194.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">neighbor reports</text>
+<text x="330.0" y="182.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start">Le pasa la lista de AP vecinos.</text>
+<rect x="900.5" y="161.0" width="198.9" height="29" rx="14.5" fill="#FFFFFF" stroke="#6E88A1" stroke-width="1.5"/><text x="1000.0" y="182.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#6E88A1" text-anchor="middle">sin interruptor propio</text>
+<rect x="90" y="220" width="1062" height="68" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="112.0" y="252.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">BSS Transition</text>
+<text x="112.0" y="274.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">802.11v</text>
+<text x="330.0" y="262.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start">Le sugiere un AP mejor; puede ignorarlo.</text>
+<rect x="924.4" y="241.0" width="151.2" height="29" rx="14.5" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="1.5"/><text x="1000.0" y="262.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">siempre activado</text>
+<rect x="90" y="300" width="1062" height="68" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="112.0" y="332.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Band steering</text>
+<text x="112.0" y="354.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">del SSID</text>
+<text x="330.0" y="342.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start">Lo empuja de 2.4 a 5 GHz.</text>
+<rect x="912.5" y="321.0" width="175.1" height="29" rx="14.5" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="1.5"/><text x="1000.0" y="342.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">preferir, no forzar</text>
+<rect x="90" y="380" width="1062" height="68" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="112.0" y="412.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Fast Roaming</text>
+<text x="112.0" y="434.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">802.11r</text>
+<text x="330.0" y="422.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start">Acelera la reautenticación.</text>
+<rect x="876.7" y="401.0" width="246.6" height="29" rx="14.5" fill="#FFF4DE" stroke="#B45309" stroke-width="1.5"/><text x="1000.0" y="422.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#B45309" text-anchor="middle">solo si probaste cada equipo</text>
+<rect x="90" y="460" width="1062" height="68" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="112.0" y="492.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Mínimo RSSI</text>
+<text x="112.0" y="514.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">del fabricante</text>
+<text x="330.0" y="502.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start">Lo desconecta bajo un umbral.</text>
+<rect x="928.4" y="481.0" width="143.2" height="29" rx="14.5" fill="#FCEAE6" stroke="#D2492F" stroke-width="1.5"/><text x="1000.0" y="502.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">al final, suave</text>
+<rect x="48" y="584" width="1104" height="54" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="596" width="5" height="30" rx="2.5" fill="#0A63B8"/><text x="74.0" y="618.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Equipos que no toleran Fast Roaming o WPA3 (PMF obligatorio) van a un SSID aparte, en su propia VLAN.</tspan></text>
+</svg>

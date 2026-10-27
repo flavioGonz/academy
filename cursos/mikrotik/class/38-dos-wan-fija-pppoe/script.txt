@@ -1,0 +1,17 @@
+A: Segunda combinación: un enlace dedicado con IP fija como principal y un PPPoE dinámico de respaldo. O al revés.
+B: El caso de la central de monitoreo, que entra por la IP fija.
+A: Ese. Primero el failover, lo fácil: la fija tiene gateway estable, así que van dos testigos por ese gateway y las rutas por defecto recursivas.
+B: ¿Y el PPPoE de respaldo? ¿También con testigos?
+A: No hace falta. El respaldo solo trabaja cuando el principal cae, así que le dejás su ruta automática con default route distance en dos. Y use peer DNS en no.
+B: Bien. ¿Dónde está lo difícil?
+A: En lo que entra. El NVR se publica por la IP fija, con el dst-nat atado a esa IP y a la central de monitoreo. Mientras la fija sea la principal, anda.
+B: ¿Y si un día el PPPoE pasa a principal?
+A: Ahí se rompe sin avisar. El pedido entra por la fija, el NVR responde, y la respuesta sigue la ruta por defecto: sale por el PPPoE, con otra IP. La central ve una respuesta que no pidió y la descarta.
+B: [suspiro] Clásico de soporte: "ayer andaba".
+A: Las tres fuentes que lo tratan coinciden en la salida. En el foro uno lo explica paso a paso: el router marca la conexión según la interfaz por donde entró, y cuando vuelve la respuesta, le pone una marca de ruteo que la manda a una tabla que sale por esa misma WAN.
+B: ¿Y nadie discrepa?
+A: La documentación de Policy Routing ofrece routing rules, más simples, y avisa que no conviene mezclarlas con mangle. Y dos trampas: la marca también en la cadena output, para que WinBox por la IP fija responda, y FastTrack solo para lo que no tiene marca.
+B: ¿Laboratorio?
+A: Veinticinco minutos. Recursivas por la fija, PPPoE en distancia dos, el NVR publicado, simulás el corte. Después subís la distancia de la fija, probás el NVR desde afuera y no abre. Ponés las tres reglas de mangle y abre.
+B: Así se ve el problema antes de arreglarlo.
+A: Y te queda la regla: lo que entra por la IP fija, sale por la IP fija.

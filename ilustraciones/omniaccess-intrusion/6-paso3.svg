@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Leé los indicios antes de decidir</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS INTRUSIÓN · LECCIÓN 6 · PASO 3</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Leé los indicios antes de decidir</text>
+<rect x="48" y="140" width="640" height="380" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="172.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Análisis</text>
+<rect x="72" y="190" width="186" height="92" rx="12" fill="#E5F0FB"/>
+<text x="88.0" y="232.0" font-family="Familjen Grotesk" font-size="28" font-weight="700" fill="#04223D" text-anchor="start">2</text>
+<text x="88.0" y="260.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="start"><tspan x="88.0" dy="0.0">detecciones en el</tspan><tspan x="88.0" dy="18.9">episodio</tspan></text>
+<rect x="274" y="190" width="186" height="92" rx="12" fill="#E5F0FB"/>
+<text x="290.0" y="232.0" font-family="Familjen Grotesk" font-size="28" font-weight="700" fill="#04223D" text-anchor="start">7</text>
+<text x="290.0" y="260.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="start"><tspan x="290.0" dy="0.0">hoy en esta cámara</tspan></text>
+<rect x="476" y="190" width="186" height="92" rx="12" fill="#E5F0FB"/>
+<text x="492.0" y="232.0" font-family="Familjen Grotesk" font-size="28" font-weight="700" fill="#04223D" text-anchor="start">82 %</text>
+<text x="492.0" y="260.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="start"><tspan x="492.0" dy="0.0">de falsas en esta</tspan><tspan x="492.0" dy="18.9">cámara</tspan></text>
+<circle cx="85" cy="316.7" r="4.5" fill="#17A8D4"/><text x="100.0" y="322.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="100.0" dy="0.0">La cámara lo clasificó como persona.</tspan></text><circle cx="85" cy="350.3" r="4.5" fill="#17A8D4"/><text x="100.0" y="355.6" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="100.0" dy="0.0">2 detecciones en 14 s: es un mismo episodio, no 2 intrusiones.</tspan></text><circle cx="85" cy="383.9" r="4.5" fill="#B45309"/><text x="100.0" y="389.2" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="100.0" dy="0.0">Fue de noche (02:11:40).</tspan></text><circle cx="85" cy="417.5" r="4.5" fill="#0E8F5E"/><text x="100.0" y="422.8" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="100.0" dy="0.0">De las últimas 50 revisadas, 41 fueron falsas (82 %).</tspan></text><circle cx="85" cy="451.1" r="4.5" fill="#B45309"/><text x="100.0" y="456.4" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="100.0" dy="0.0">También detectó Perímetro Sur 07 a las 02:13: puede ser un</tspan><tspan x="100.0" dy="21.6">recorrido.</tspan></text>
+<text x="720.0" y="162.0" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.2">DÓNDE FUE EL CRUCE</text>
+<rect x="720" y="176" width="432" height="300" rx="14" fill="#2E3F33"/>
+<path d="M720 350H1152" stroke="#55626B" stroke-width="18"/>
+<path d="M760 214L960 214" stroke="#ef4444" stroke-width="7" stroke-linecap="round"/>
+<circle cx="860" cy="290" r="11" fill="#60a5fa" stroke="#fff" stroke-width="3"/>
+<circle cx="1080" cy="250" r="10" fill="#f59e0b" stroke="#fff" stroke-width="3"/>
+<text x="878.0" y="296.0" font-family="Instrument Sans" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="start">la cámara</text>
+<text x="1060.0" y="236.0" font-family="Instrument Sans" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="end">otra que detectó</text>
+<text x="780.0" y="204.0" font-family="Instrument Sans" font-size="14" font-weight="600" fill="#FFB4B4" text-anchor="start">su línea</text>
+<rect x="720" y="496" width="432" height="72" rx="14" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/><rect x="720" y="508" width="5" height="48" rx="2.5" fill="#0E8F5E"/><text x="746.0" y="530.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="746.0" dy="0.0">Son indicios, no un veredicto: la alarma la</tspan><tspan x="746.0" dy="20.2">decide quien mira la foto.</tspan></text>
+<circle cx="48" cy="140" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="146.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+</svg>

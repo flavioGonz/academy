@@ -112,13 +112,12 @@ Por qué este arco: casos donde las fuentes dan más de un camino; cada lección
 - Regla: un puerto por servicio, entrando por la WAN, para una lista de orígenes; lo pruebo desde afuera y miro el contador.
 
 ### 11. Dos WAN
-- 2 de 3 fuentes coinciden en rutas recursivas (TH23); un practicante las considera lentas y suma Netwatch.
-- Idea: rutas /32 a hosts testigo por cada ISP, y defaults recursivas con check-gateway=ping y distancias 1 y 2; así se detecta la caída aguas arriba del módem. Las dos salidas en la lista WAN para el masquerade.
-- Por qué importa: el módem prendido con internet caída es el caso más común, y un failover que solo mira el módem no lo ve.
-- Historia: según MKController, check-gateway tarda de 20 a 30 segundos en conmutar y no ve pérdidas parciales (https://mkcontroller.com/blog/tutorials/mikrotik/mikrotik-dual-wan-failover-isp-guide/); la documentación suma un segundo testigo por enlace (https://help.mikrotik.com/docs/spaces/ROS/pages/26476608/Failover+WAN+Backup).
-- Laboratorio: Foco, 20 min. Rutas testigo, defaults recursivas, segunda WAN en la lista, ping continuo y cortar el ISP1 aguas arriba.
-- Regla: un failover que no probé desenchufando no existe.
-
+- (Reescrita en octubre de 2026 como base común de las lecciones 37 a 39.) 4 de 5 fuentes coinciden en rutas recursivas con dos testigos por proveedor (TH23); MKController las mide en 20 a 30 s y suma Netwatch; un hilo de 2015 (RouterOS 6) no logró la recursiva por la interfaz PPPoE, el foro en 2024 lo atribuye a la versión 6. Notas: research/notes/n11-37-39.md.
+- Idea: failover o balanceo PCC y cuándo cada uno; cómo pone su ruta cada tipo de WAN (estática, DHCP con default-route-distance, PPPoE con add-default-route y default-route-distance); distance y check-gateway, que solo mira el próximo salto; recursivas con scope y target-scope, Netwatch como alternativa; masquerade por las dos salidas; conntrack al conmutar y volver; acceso entrante (port forwarding, WinBox, Back To Home) con marca de conexión, marca de ruteo y FastTrack solo para lo no marcado.
+- Por qué importa: el módem prendido con internet caída es el caso más común, y los accesos publicados se rompen al responder por el enlace equivocado.
+- Historia: con PPPoE y LTE, el ping no volvía al regresar la fibra hasta borrar las conexiones (https://forum.mikrotik.com/t/simple-failover-isp1-pppoe-isp2-lte/178550); check-gateway prueba cada 10 s con timeout de 1 s y dos fallas (https://manual.mikrotik.com/docs/7.25/user-guides/routing-and-networking-protocols/routing-decision); el port forward por la segunda WAN responde por la primera sin marcas (https://forum.mikrotik.com/t/what-is-the-right-way-to-do-port-forward-with-multiple-wans-and-lans/143684).
+- Laboratorio: Foco, 25 min. Inventario de rutas por defecto, testigos, recursivas, lista WAN y DNS, corte simulado en la cadena output, vuelta y conntrack, marca para lo que entra por la WAN2, prueba de campo.
+- Regla: un failover que no probé cortando aguas arriba del módem, y volviendo, no existe.
 ### 12. Torch y sniffer
 - 2 de 6 fuentes de troubleshooting coinciden en el uso combinado (TH31, TH32), sin discrepancias.
 - Idea: ping y traceroute preguntan, Torch mira lo que pasa por una interfaz en vivo, el sniffer guarda paquetes para Wireshark, y el log con log=yes en una regla dice qué se descarta. Torch en la interfaz LAN, no en la WAN.
@@ -351,3 +350,39 @@ Cada lección: script.txt (diálogo Lucía y Martín, 260 a 360 palabras), card.
 
 - (Lecciones 33 a 35, divisiones) Listas de fuerza bruta: la documentación las da como capa extra; un veterano del foro las ve casi inútiles. Cómo decidir: solo si SSH tiene que quedar abierto a WAN, con la lista de admins arriba; lo primero es VPN y claves. Limitar ICMP o dejarlo al kernel (100 pps según MikroTik): opcional; si se limita, solo echo desde WAN. Reinicio de PoE por script de Netwatch o por power-cycle-ping: el vigilante del puerto no depende de scripts; Netwatch permite además avisar. Una sola de las dos por puerto. Ocultar el descubrimiento filtrando UDP 5678 o sacando la interfaz de la lista: la lista.
 - (Lecciones 33 a 35, huecos) Ninguna fuente leída confirma qué modelos de cámaras o NVR anuncian LLDP: la lección 34 dice "según modelo y firmware". La documentación 7.26 (aún no estable a la fecha) dice que la sonda simple tiene intervalo de 60 s por defecto y la referencia 7.25 dice 10 s: la lección 35 fija interval en cada comando. No se guardó la API de Telegram (página enorme): el formato sendMessage sale de los hilos del foro.
+
+### 36. Zonas con listas
+- 5 de 6 fuentes coinciden en agrupar interfaces en zonas y escribir las reglas entre zonas (https://help.mikrotik.com/docs/spaces/ROS/pages/47579180/Interface+Lists, https://www.h-schmidt.net/articles/zone-based-firewalling-on-mikrotik-routers.html, https://forum.mikrotik.com/t/comfortable-way-to-block-inter-vlan-traffic/117490, https://docs.fortinet.com/document/fortigate/5.6.0/cookbook/213584, https://grumpy-networkers-journal.readthedocs.io/en/latest/VENDOR/CISCO/FIREWALL/IOS/ZBFW.html); en el debate de 2026 un veterano propone partir de la defconf sin "grupos y subgrupos" y otro se queja de que WinBox no muestra los miembros por include (https://forum.mikrotik.com/t/firewall-rules-and-interface-lists-best-practice/273047).
+- Idea: una zona es una interface list de interfaces ruteadas con el mismo nivel de confianza (LAN y WAN de fábrica, más GESTION, ADMIN, CCTV, ACCESOS, INVITADOS y VPN); matriz "de, a"; forward con in-interface-list y out-interface-list por par permitido; input por zona; drop final con accept de lo dst-nateado; include para listas compuestas; una VLAN nueva se suma a la lista y hereda la política.
+- Por qué importa: en un edificio con varios sistemas, el firewall regla por regla crece con el cuadrado de las VLAN y nadie lo puede auditar.
+- Historia: 3 VLAN son 6 reglas, 4 son 12, 5 son 20; con una lista, una sola regla, probado en un CCR1009 (https://forum.mikrotik.com/t/comfortable-way-to-block-inter-vlan-traffic/117490); el drop final que se comió los port forwarding (mismo hilo); la PPPoE que no estaba en la lista WAN (https://forum.mikrotik.com/t/trying-to-understand-defconf-firewall/267442).
+- Laboratorio: Foco, 25 min. Matriz del edificio, zonas en puertos sueltos del banco, listas y miembros, input por zona, forward por par, pruebas con la notebook en cada zona, VLAN nueva sin tocar reglas, la versión de obra con VLANs.
+- Regla: primero la matriz, después una lista por zona y una regla por casillero; lo nuevo se suma a la lista.
+
+- (Lección 4, ampliación de octubre 2026) Se reescribió más extensa: tres cadenas y camino del paquete con dst-nat y src-nat (https://manual.mikrotik.com/docs/7.25/firewall-and-quality-of-service/packet-flow-in-routeros), estados y FastTrack, acciones (accept, drop, reject, jump, log, passthrough; https://help.mikrotik.com/docs/spaces/ROS/pages/48660574/Filter), matchers time y limit (https://help.mikrotik.com/docs/spaces/ROS/pages/250708064/Common+Firewall+Matchers+and+Actions), cinco ejemplos de obra y diagnóstico con print stats, reset-counters, disable, move y Torch. Laboratorio Foco, 30 min. Regla: primero la cadena, después el lugar, y al final el contador que lo confirma.
+- (Lecciones 4 y 36, divisiones) Una regla por par de zonas o listas anidadas por servicio: la primera es más fácil de leer en el firewall, la segunda mueve la política a las listas (https://forum.mikrotik.com/t/firewall-rules-and-interface-lists-best-practice/273047). Cómo decidir: en obra, una regla por casillero de la matriz e include solo para grupos evidentes (SISTEMAS = CCTV + ACCESOS), sin listas que incluyan listas compuestas. Cadenas propias por zona con jump (https://www.h-schmidt.net/articles/zone-based-firewalling-on-mikrotik-routers.html) o reglas planas: jump cuando la matriz pasa de cinco zonas.
+- (Lecciones 4 y 36, huecos) Ninguna fuente leída documenta si una lista con include puede incluir otra lista que a su vez tiene include: la lección 36 no anida. La ubicación exacta de cada campo en las pestañas de WinBox no está en una página guardada; la lección 4 la describe según la ventana de WinBox 3 y 4. Los nombres de la nube de cada fabricante de NVR no se confirmaron: el ejemplo usa un nombre .example.
+
+### 37. Dos WAN: PPPoE + DHCP
+- 3 de 4 fuentes coinciden en recursivas con la interfaz PPPoE de gateway y respaldo con distancia mayor (Failover WAN Backup, foro 178550 y 177576); en contra, un hilo de 2015 con RouterOS 6. VLAN y MTU de Antel sin confirmar, igual que en la lección 15.
+- Idea: PPPoE principal con add-default-route=no y testigos por la interfaz pppoe-antel; DHCP de respaldo con default-route-distance=2 y use-peer-dns=no; ether2 fuera del bridge; dos cortes distintos (sesión caída, PPPoE arriba sin internet); Netwatch opcional que limpia UDP al volver.
+- Por qué importa: es la combinación más común en comercios con fibra de Antel y un 4G, y la ruta automática del PPPoE o del DHCP rompe el failover sin avisar.
+- Historia: el usuario que cortaba el cable del módem y no la fibra de la pared, y el testigo que se alcanzaba por el LTE (https://forum.mikrotik.com/t/simple-failover-isp1-pppoe-isp2-lte/178550); en RouterOS 7 el nombre de la interfaz PPPoE sirve de gateway (https://forum.mikrotik.com/t/failover-pppoe-static-with-dynamics-gateways/177576).
+- Laboratorio: Campo, 25 min.
+- Regla: PPPoE principal sin ruta automática, testigos por la interfaz PPPoE, DHCP de respaldo en distancia 2 y sin sus DNS, y dos cortes probados.
+
+### 38. Dos WAN: IP fija + PPPoE
+- 3 de 3 fuentes sobre acceso entrante coinciden en marcar la conexión por la interfaz de entrada y rutear la respuesta por su tabla (PCC, foro 177576 y 143684); Policy Routing ofrece /routing/rule y desaconseja mezclarlo con mangle.
+- Idea: fija principal con recursivas, PPPoE de respaldo con su ruta en distancia 2; dst-nat atado a la IP fija; al revés (PPPoE principal), tabla por-fija, mark-connection en prerouting por ether1, mark-routing en prerouting desde la LAN y en output, FastTrack solo para connection-mark=no-mark.
+- Por qué importa: lo publicado deja de andar en cuanto cambia el principal, y el síntoma es "ayer andaba".
+- Historia: "you need policy routing" para responder desde la dirección a la que llegó el pedido (https://forum.mikrotik.com/t/failover-pppoe-static-with-dynamics-gateways/177576); FastTrack solo trabaja con la tabla main (https://help.mikrotik.com/docs/spaces/ROS/pages/48660587/Mangle).
+- Laboratorio: Foco, 25 min. Se ve el problema (subir la distancia de la fija y probar el NVR desde afuera) antes de arreglarlo.
+- Regla: lo publicado entra por la IP fija y sale por la IP fija, sea cual sea el principal.
+
+### 39. Dos WAN: IP fija + DHCP
+- 3 de 3 fuentes coinciden en el respaldo DHCP con distancia mayor (cliente DHCP 7.25, Load Balancing, foro 161606); la página de PCC da la receta de balanceo y la descarta con Hotspot; MKController separa failover de balanceo.
+- Idea: fija principal con recursivas, 4G por DHCP en distancia 2 sin sus DNS; IP privada o CGNAT en el 4G (nada publicado entra, Back To Home por relay); script de lease si el gateway cambia; variante PCC con dos tablas, both-addresses, lista no-balancear y FastTrack para lo no marcado.
+- Por qué importa: el pedido de "usá los dos" aparece en cada oficina, y con un 4G limitado el balanceo consume el plan.
+- Historia: con ISP y LTE por DHCP el failover solo andaba si caía el módem, hasta sumar testigo con blackhole y Netwatch (https://forum.mikrotik.com/t/automated-wan-failover-using-2-dhcp-wan-connections/161606); PCC no sirve con Hotspot (https://help.mikrotik.com/docs/spaces/ROS/pages/152600617/Per+connection+classifier).
+- Laboratorio: Foco, 20 min más 15 con PCC.
+- Regla: el 4G de respaldo espera en distancia 2 y sin sus DNS; balanceo solo con enlaces sin tope y con la lista de lo que no se balancea.

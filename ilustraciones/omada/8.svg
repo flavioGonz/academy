@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Primero canal y ancho, después potencia</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMADA</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Primero canal y ancho, después potencia</text>
+<rect x="48" y="124" width="540" height="380" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="156.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">2.4 GHz: tres canales que no se pisan</text>
+<path d="M117.2 400C142.3 254,203.9 254,229.1 400" fill="#6E88A1" fill-opacity="0.03" stroke="#6E88A1" stroke-width="1.2"/>
+<path d="M145.1 400C170.3 254,231.9 254,257.0 400" fill="#6E88A1" fill-opacity="0.03" stroke="#6E88A1" stroke-width="1.2"/>
+<path d="M173.1 400C198.3 254,259.8 254,285.0 400" fill="#6E88A1" fill-opacity="0.03" stroke="#6E88A1" stroke-width="1.2"/>
+<path d="M201.1 400C226.3 254,287.8 254,313.0 400" fill="#6E88A1" fill-opacity="0.03" stroke="#6E88A1" stroke-width="1.2"/>
+<path d="M257.0 400C282.2 254,343.8 254,369.0 400" fill="#6E88A1" fill-opacity="0.03" stroke="#6E88A1" stroke-width="1.2"/>
+<path d="M285.0 400C310.2 254,371.8 254,396.9 400" fill="#6E88A1" fill-opacity="0.03" stroke="#6E88A1" stroke-width="1.2"/>
+<path d="M313.0 400C338.2 254,399.7 254,424.9 400" fill="#6E88A1" fill-opacity="0.03" stroke="#6E88A1" stroke-width="1.2"/>
+<path d="M341.0 400C366.2 254,427.7 254,452.9 400" fill="#6E88A1" fill-opacity="0.03" stroke="#6E88A1" stroke-width="1.2"/>
+<path d="M89.2 400C114.4 214,175.9 214,201.1 400" fill="#0A63B8" fill-opacity="0.16" stroke="#0A63B8" stroke-width="3"/>
+<path d="M229.1 400C254.2 214,315.8 214,341.0 400" fill="#0E8F5E" fill-opacity="0.16" stroke="#0E8F5E" stroke-width="3"/>
+<path d="M369.0 400C394.1 214,455.7 214,480.9 400" fill="#17A8D4" fill-opacity="0.16" stroke="#17A8D4" stroke-width="3"/>
+<path d="M70 400H566" stroke="#6E88A1" stroke-width="2"/>
+<text x="145.1" y="426.0" font-family="JetBrains Mono" font-size="16" font-weight="700" fill="#04223D" text-anchor="middle">1</text>
+<text x="173.1" y="426.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">2</text>
+<text x="201.1" y="426.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">3</text>
+<text x="229.1" y="426.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">4</text>
+<text x="257.0" y="426.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">5</text>
+<text x="285.0" y="426.0" font-family="JetBrains Mono" font-size="16" font-weight="700" fill="#04223D" text-anchor="middle">6</text>
+<text x="313.0" y="426.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">7</text>
+<text x="341.0" y="426.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">8</text>
+<text x="369.0" y="426.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">9</text>
+<text x="396.9" y="426.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">10</text>
+<text x="424.9" y="426.0" font-family="JetBrains Mono" font-size="16" font-weight="700" fill="#04223D" text-anchor="middle">11</text>
+<text x="72.0" y="470.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Solo 1, 6 y 11, siempre a 20 MHz.</text>
+<rect x="612" y="124" width="540" height="380" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="632.0" y="156.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">5 GHz: el ancho según la interferencia</text>
+<rect x="636" y="176" width="492" height="80" rx="16" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/>
+<text x="660.0" y="210.0" font-family="JetBrains Mono" font-size="20" font-weight="600" fill="#04223D" text-anchor="start">20 MHz</text>
+<text x="660.0" y="236.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">Antiinterferencia</text>
+<text x="1104.0" y="223.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="end">mucha interferencia</text>
+<rect x="636" y="272" width="492" height="80" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="660.0" y="306.0" font-family="JetBrains Mono" font-size="20" font-weight="600" fill="#04223D" text-anchor="start">40 MHz</text>
+<text x="660.0" y="332.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">Equilibrado</text>
+<text x="1104.0" y="319.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="end">buen valor de arranque</text>
+<rect x="636" y="368" width="492" height="80" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="660.0" y="402.0" font-family="JetBrains Mono" font-size="20" font-weight="600" fill="#04223D" text-anchor="start">80 MHz o más</text>
+<text x="660.0" y="428.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">Alto ancho</text>
+<text x="1104.0" y="415.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="end">solo en ambiente limpio</text>
+<rect x="48" y="526" width="1104" height="102" rx="14" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/><rect x="48" y="538" width="5" height="78" rx="2.5" fill="#0E8F5E"/><text x="74.0" y="560.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="74.0" dy="0.0">Recién ahí, potencia</tspan></text><text x="74.0" y="587.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Más potencia no es mejor: con EAP a menos de 12 m, bajala. El ejemplo oficial va de 28 a 25 dBm y prueba; 3 dB menos es la</tspan><tspan x="74.0" dy="21.6">mitad de la potencia, y la celda se achica sin dejar huecos.</tspan></text>
+</svg>

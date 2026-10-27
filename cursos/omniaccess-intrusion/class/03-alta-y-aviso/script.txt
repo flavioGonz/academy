@@ -1,0 +1,20 @@
+A: Lección tres: alta y aviso. La cámara ya detecta; ahora tiene que avisar.
+B: El alta es en Dispositivos, ¿no? Agregar, cámara.
+A: Agregar, y elegís cámara de intrusión. Pero lo normal en un barrio es otra cosa: vas al NVR y le das a importar cámaras, clasificar. Te muestra cada canal con su foto y vos marcás LPR, intrusión u omitir.
+B: Eso ahorra un montón.
+A: Ojo ahí. Las importadas toman el usuario y la clave del NVR. Si la cámara tiene otra, OmniAccess no le puede pedir la foto del evento. Se corrige en editar.
+B: Bien. ¿Y el aviso?
+A: En el monitor, la campanita del canal abre servidor de alarma. Si dice OmniAccess no configurado, tocás configurar OmniAccess como alarma. Lo agrega en la cámara sin borrar los otros servidores que tenga.
+B: ¿Y después probar reporte?
+A: Probar reporte manda el test. Según cctvcamerapros, es un envío vacío y la cámara espera un doscientos. Pero varias cámaras ni lo implementan, así que puede no confirmar.
+B: Entonces el test no alcanza.
+A: No alcanza. Dos fuentes coinciden en un detalle que mata: en la regla de la cámara, en el método de vinculación, tiene que estar tildado notificar al centro de vigilancia. Sin ese tilde, la cámara detecta y se lo guarda.
+B: [suspiro] El tilde de la tarde perdida.
+A: Ese. Por eso la prueba de verdad es cruzar la línea y verla llegar: el canal se pone rojo y la tarjeta trae la foto.
+B: ¿Y con Dahua?
+A: Con NVR Dahua no se escribe nada en la cámara. El mismo botón dice verificar suscripción y te confirma si el NVR responde.
+B: ¿Y si aparece falta configurar el host de eventos?
+A: Eso es del servidor, no de la cámara. Al instalar OmniAccess se carga la IP donde escuchan los eventos. Sin eso, no tiene qué escribirle a la cámara.
+B: ¿El laboratorio?
+A: Importás dos canales del NVR de demo como intrusión, configurás el servidor de alarma de Perímetro Norte doce, probás, revisás el tilde y cruzás. Al final, en Dispositivos, la fila tiene que decir configurada y avisa. Veinticinco minutos.
+B: La regla: está dada de alta cuando la cruzaste y la viste llegar.

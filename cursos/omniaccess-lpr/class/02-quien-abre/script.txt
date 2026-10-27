@@ -1,0 +1,21 @@
+A: Lección dos. Pregunta de garita: cuando la barrera sube, ¿quién la subió?
+B: El sistema, ¿no?
+A: Sí, pero el sistema tiene dos cerebros. Uno es la propia cámara. OmniAccess le carga una lista blanca, y cuando la cámara lee una patente de esa lista cierra su relé, el semáforo verde, y abre.
+B: Ah, o sea que la cámara puede abrir sola.
+A: Puede. Syscom y Epcom lo muestran con cámaras Hikvision: la lista vive en la cámara y la salida de alarma mueve la barrera, a veces con un relé intermedio.
+B: ¿Y el otro cerebro?
+A: El servidor. Cuando llega la lectura, primero mira si la cámara ya decidió con su lista. Si no, busca la matrícula en el padrón, sin espacios ni guiones. Está registrada, Autorizado. No está, Denegado.
+B: Simple.
+A: Con un detalle: en Configuración, Modos, está el Modo LPR. Por defecto es Lista Blanca, la registrada pasa. Si alguien lo pone en Lista Negra, lo registrado se deniega.
+B: [risas] Uf, eso en producción es un desastre.
+A: Por eso no se toca. Y otra cosa: el antirrebote. Si la misma patente llega dos veces en cinco segundos, o la misma cámara la manda dos veces en veinte, se descarta.
+B: ¿Y la que no se leyó?
+A: Esa no se agrupa nunca. Dos lecturas sin chapa pueden ser dos autos distintos.
+B: ¿Y los colores?
+A: Verde autorizado, ámbar denegado, rojo con sonido lista negra. El manual insiste: un ámbar no es una alarma. Casi siempre es una visita o un auto nuevo.
+B: Me gusta. ¿Laboratorio?
+A: En una instalación de prueba, mandás una lectura simulada con curl al puerto diez mil, con la patente S B A uno dos tres cuatro. Te contesta deny. La mandás de nuevo enseguida: debounced.
+B: Después la registro desde el monitor.
+A: Exacto, esperás veinticinco segundos, la mandás otra vez y ahora te dice grant, en verde. Y al final borrás el usuario de prueba.
+B: Así cuando alguien dice no me abrió, ya sabés por dónde empezar.
+A: La lista de la cámara, el padrón o el modo. En ese orden.

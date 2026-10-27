@@ -1,0 +1,21 @@
+A: Última lección. Suena el teléfono: "el facial no anda".
+B: La frase más inútil del soporte.
+A: [risas] Se parte en cuatro capas, de a una: ¿llega el aviso?, ¿trae foto?, ¿se vincula con la ficha?, ¿el terminal reconoce?
+B: Primera capa.
+A: En Dispositivos, cada terminal tiene un ícono azul de push: se prende si llegó un aviso en los últimos cinco minutos. Y en Configuración, Sistema, Webhooks, ves cada aviso con su MAC. Si dice dispositivo desconocido, la MAC no coincide.
+B: Segunda, la foto.
+A: El ícono verde de pull: OmniAccess pudo consultar el terminal. Si no se prende, es usuario, clave o red de vuelta. Y mirá el reloj del equipo, que también está en esa lista.
+B: ¿Y la tercera?
+A: La más traicionera. Abrís la ficha del evento y ves el nombre correcto, pero dice no registrado. El terminal lo reconoció y abrió; OmniAccess no encontró la ficha.
+B: ¿Por qué pasa?
+A: Con Akuvox, OmniAccess vincula buscando una credencial de rostro con el nombre que manda el terminal. En la versión que revisamos, las fichas creadas desde Usuarios no la generan. Entonces, con lista blanca, el evento queda denegado aunque la puerta abrió.
+B: Uf. ¿Y qué hace el técnico?
+A: Verifica que el nombre sea idéntico en los dos lados, y si sigue, lo reporta a soporte de Infratec.
+B: Cuarta capa, el reconocimiento.
+A: Eso vive en el terminal: luz, foto de alta y umbral. Hikvision lo explica en su configuración: cuanto más alto el nivel, menos falsas aceptaciones y más falsos rechazos. AWS dice que no hay valor universal: ochenta para fotos familiares, noventa y nueve para uso policial.
+B: Entonces bajar el umbral es abrirle la puerta a los parecidos.
+A: A todos. Y otra cosa: NIST evaluó ciento ochenta y nueve algoritmos de noventa y nueve desarrolladores y la mayoría mostró diferencias según edad, sexo u origen. Por eso se prueba con varias personas, no solo con vos.
+B: ¿Laboratorio?
+A: Veinticinco minutos. Un compañero te prepara fallas en una demo: borra la MAC, cambia la clave, carga una foto mala. Vos recorrés las capas en orden y anotás capa, síntoma y solución.
+B: De a una capa por vez.
+A: Aviso, foto, vínculo, reconocimiento. Gracias por acompañarnos.

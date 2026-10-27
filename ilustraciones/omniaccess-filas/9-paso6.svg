@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Un corte de cámara queda registrado con su duración</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS FILAS · LECCIÓN 9 · PASO 6</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Un corte de cámara queda registrado con su duración</text>
+<path d="M80.0 300.0L1120.0 300.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<circle cx="140" cy="300" r="8" fill="#0E8F5E"/>
+<rect x="85.6" y="249" width="108.8" height="30" rx="15" fill="#E3F5EC"/><text x="140.0" y="270.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">sondeo ok</text>
+<circle cx="330" cy="300" r="8" fill="#B45309"/>
+<rect x="284.8" y="249" width="90.4" height="30" rx="15" fill="#FFF4DE"/><text x="330.0" y="270.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#B45309" text-anchor="middle">falla 1</text>
+<circle cx="470" cy="300" r="8" fill="#D2492F"/>
+<rect x="424.8" y="249" width="90.4" height="30" rx="15" fill="#FCEAE6"/><text x="470.0" y="270.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">falla 2</text>
+<circle cx="860" cy="300" r="8" fill="#0E8F5E"/>
+<rect x="819.4" y="249" width="81.2" height="30" rx="15" fill="#E3F5EC"/><text x="860.0" y="270.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">vuelve</text>
+<rect x="470" y="320" width="390" height="40" rx="10" fill="#FCEAE6" stroke="#D2492F" stroke-width="2" opacity="1"/>
+<text x="665.0" y="346.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">corte abierto: guarda el último aforo</text>
+<rect x="860" y="320" width="260" height="40" rx="10" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2" opacity="1"/>
+<text x="990.0" y="346.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">cierra con la duración</text>
+<circle cx="48" cy="150" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="156.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text>
+<text x="80.0" y="200.0" font-family="Instrument Sans" font-size="18" font-weight="500" fill="#04223D" text-anchor="start">Desconectá la cámara unos 30 s y volvé a conectarla.</text>
+<rect x="48" y="420" width="540" height="72" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="432" width="5" height="48" rx="2.5" fill="#0A63B8"/><text x="74.0" y="454.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Monitor en Vivo: tocá la cámara y buscá la marca &quot;Corte de</tspan><tspan x="74.0" dy="20.2">cámara&quot; en la curva de hoy.</tspan></text>
+<rect x="612" y="420" width="540" height="72" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="612" y="432" width="5" height="48" rx="2.5" fill="#0A63B8"/><text x="638.0" y="454.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="638.0" dy="0.0">Reportes: la tabla &quot;Cortes de conexión de cámara&quot; explica los</tspan><tspan x="638.0" dy="20.2">huecos del período.</tspan></text>
+</svg>

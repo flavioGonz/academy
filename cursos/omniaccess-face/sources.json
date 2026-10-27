@@ -1,0 +1,37 @@
+{
+ "topic": "OmniAccess Face: reconocimiento facial en control de acceso (terminales faciales Akuvox y Hikvision, alta y sincronización de rostros, Action URL / webhooks, apertura de puerta, umbral de coincidencia, monitor facial, privacidad de datos biométricos en Uruguay)",
+ "level": "inicial a intermedio",
+ "min_words": 150,
+ "pages": [
+  "https://www.controlid.com.br/docs/access-api-en/facial-recognition/recommendations-photos-install/",
+  "https://help.synerion.com/agile/knowledge-base/gt-installation-guidelines",
+  "https://clockrite-support.helpscoutdocs.com/article/1259-c400-best-practice-for-installation",
+  "https://enpinfo.hikvision.com/unzip/20201102205526_84041_doc/GUID-981B3FAD-F5BA-4E59-8D03-58DB01122125.html",
+  "https://enpinfo.hikvision.com/unzip/20201102205526_84041_doc/GUID-1C74D204-C508-44DA-B19A-411FF9D7C050.html",
+  "https://cie-group.com/news/what-are-akuvox-event-trigger-rules-and-how-do-they-work",
+  "https://info.specotech.com/how-to-upload-images-for-facial-recognition",
+  "https://docs.aws.amazon.com/rekognition/latest/dg/thresholds-collections.html",
+  "https://pages.nist.gov/frvt/html/frvt11.html",
+  "https://www.nist.gov/node/1603646",
+  "https://www.impo.com.uy/bases/leyes/18331-2008/9",
+  "https://www.impo.com.uy/bases/leyes/18331-2008/18",
+  "https://www.impo.com.uy/bases/leyes/18331-2008/4",
+  "https://www.gub.uy/unidad-reguladora-control-datos-personales/institucional/normativa/dictamen-n-3023-0",
+  "https://www.csoonline.com/article/565080/biometrics-in-the-workplace-what-about-consent-and-legitimate-interest.html",
+  "https://docs.min.io/community/minio-object-store/administration/object-management/object-lifecycle-management.html",
+  "https://docs.min.io/community/minio-object-store/administration/object-management/create-lifecycle-management-expiration-rule.html",
+  "https://en.wikipedia.org/wiki/Webhook",
+  "https://developer.mozilla.org/en-US/docs/Web/API/Push_API",
+  "https://enpinfo.hikvision.com/hkwsen/unzip/20251224164304_81809_doc/GUID-9F07C169-0B01-4F3E-8729-0BD5189C7613.html",
+  "https://xnet.senstar.com/webhelp/Symphony/8.0/en/topic_reference/air_face_settings_8.html",
+  "https://www.infodocket.com/2019/12/19/new-nist-study-evaluates-effects-of-race-age-sex-on-face-recognition-software/"
+ ],
+ "pdf_pages": [
+  "https://pinfo.hikvision.com/hkwsen/unzip/20260304161336_58290_doc/UD24344B-E_Baseline_DS-K1T343%20Series%20Face%20Recognition%20Terminal_Quick%20Start%20Guide_V1.1_20250107.pdf"
+ ],
+ "text_pages": [
+  "https://raw.githubusercontent.com/AlexxIT/go2rtc/HEAD/internal/mjpeg/README.md"
+ ],
+ "product_sources": "Fuente de verdad del producto (no publicada, no citada por URL): código y manuales de OmniAccess (Infratec), rama de desarrollo de octubre de 2026: docs/manual/face-operador.md y face-administrador.md (estructura sin redactar), docs/help/akuvox-api.md, akuvox-webhook.md, door-control.md, server.js (handleAkuvoxWebhook y eventos faciales Hikvision), src/lib/drivers/AkuvoxDriver.ts e HikvisionDriver.ts, src/app/actions/deviceMemory.ts, face-sync.ts, users.ts, groups.ts, settings.ts, src/app/admin/monitor-face, dashboard-face, devices, history, groups, settings, src/app/pwa/face, src/components/users/CajonUsuario.tsx, DeviceMemoryDialog.tsx, AkuvoxActionUrlDialog.tsx, DeviceFormDialog.tsx, EventDetailsDialog.tsx, prisma/schema.prisma.",
+ "note": "pdf_pages: guía rápida oficial de Hikvision convertida con pdftotext -layout. text_pages: README en texto plano (el scraper lo veía vacío). Las páginas de IMPO se volvieron a decodificar en latin-1 (el scraper las leyó como UTF-8 y perdía los acentos); mismo contenido y misma url. Se descartaron: páginas de GitHub (403 por el proxy), ASIS (403), idrnd (conexión cortada), Andersen (404), RFC 8030 (vacía para el scraper), epcom (502), una nota técnica de ICT sobre Akuvox (PDF escaneado, 56 palabras) y el blog del BID (el scraper no pudo guardarlo por la fecha)."
+}

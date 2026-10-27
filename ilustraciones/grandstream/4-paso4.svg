@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Cuatro pruebas para dar el troncal por terminado</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">GRANDSTREAM · PASO 4</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Cuatro pruebas para dar el troncal por terminado</text>
+<rect x="48" y="132" width="540" height="162" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<g transform="translate(72 162) scale(1.6)" fill="none" stroke="#0E8F5E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/></g>
+<text x="128.0" y="188.0" font-family="Familjen Grotesk" font-size="22" font-weight="600" fill="#04223D" text-anchor="start">Sale</text>
+<text x="128.0" y="228.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="128.0" dy="0.0">Llamá a un celular desde una interna.</tspan></text>
+<circle cx="548" cy="172" r="18" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><g transform="translate(536 160)" fill="none" stroke="#0E8F5E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g>
+<rect x="612" y="132" width="540" height="162" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<g transform="translate(636 162) scale(1.6)" fill="none" stroke="#0E8F5E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/></g>
+<text x="692.0" y="188.0" font-family="Familjen Grotesk" font-size="22" font-weight="600" fill="#04223D" text-anchor="start">Entra</text>
+<text x="692.0" y="228.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="692.0" dy="0.0">Desde un celular, llamá al número del troncal.</tspan></text>
+<circle cx="1112" cy="172" r="18" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><g transform="translate(1100 160)" fill="none" stroke="#0E8F5E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g>
+<rect x="48" y="318" width="540" height="162" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<g transform="translate(72 348) scale(1.6)" fill="none" stroke="#0E8F5E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></g>
+<text x="128.0" y="374.0" font-family="Familjen Grotesk" font-size="22" font-weight="600" fill="#04223D" text-anchor="start">Muestra bien el número</text>
+<text x="128.0" y="414.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="128.0" dy="0.0">El celular ve el caller ID que corresponde.</tspan></text>
+<circle cx="548" cy="358" r="18" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><g transform="translate(536 346)" fill="none" stroke="#0E8F5E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g>
+<rect x="612" y="318" width="540" height="162" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<g transform="translate(636 348) scale(1.6)" fill="none" stroke="#0E8F5E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/></g>
+<text x="692.0" y="374.0" font-family="Familjen Grotesk" font-size="22" font-weight="600" fill="#04223D" text-anchor="start">Pasa los tonos</text>
+<text x="692.0" y="414.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="692.0" dy="0.0">Dejá un mensaje en un buzón usando el teclado.</tspan></text>
+<circle cx="1112" cy="358" r="18" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><g transform="translate(1100 346)" fill="none" stroke="#0E8F5E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g>
+<circle cx="48" cy="132" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="138.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<rect x="48" y="516" width="1104" height="75" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="48" y="528" width="5" height="51" rx="2.5" fill="#B45309"/><text x="74.0" y="550.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">El DTMF se prueba con algo que reaccione a las teclas, como el buzón. Si una de las cuatro falla, el troncal no está terminado</tspan><tspan x="74.0" dy="21.6">aunque el Dashboard diga Registered.</tspan></text>
+</svg>

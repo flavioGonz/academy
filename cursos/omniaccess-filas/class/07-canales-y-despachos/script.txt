@@ -1,0 +1,23 @@
+A: Lección siete: canales y despachos. Que el aviso salga y llegue.
+B: Que no es lo mismo.
+A: Para nada. Todo se configura en la pantalla Notificaciones. En esta versión, en el modo Cola no tiene ítem propio en el menú: se entra por su dirección, barra admin barra notificaciones.
+B: Anotado. ¿Qué canales hay?
+A: Telegram con un bot, WhatsApp a través de OpenWA, correo, un webhook y las notificaciones push de la app. Cada uno tiene su botón Enviar prueba.
+B: ¿Y a quién le llega?
+A: En la pestaña Destinatarios cargás cada persona o grupo con su canal. Las alertas de aforo de la lección seis le mandan a todos los destinatarios activos. Ahí también está el interruptor del clip animado.
+B: ¿El clip de unos segundos?
+A: Ese. Cinco segundos antes de la alerta y tres después, armado del anillo que graba el stream de go2rtc.
+B: ¿Y si Telegram está caído un rato?
+A: Para eso está la cola. Cada aviso se guarda como un despacho y un worker aparte lo manda, con hasta cinco intentos y espera exponencial. La documentación de BullMQ lo explica: cada reintento espera el doble que el anterior.
+B: ¿Dónde lo veo?
+A: En Despachos. A la izquierda la cola, con Pendiente, Procesando, Enviado o Fallido, y un botón Reintentar. A la derecha, las alertas que salieron.
+B: ¿Alguna trampa conocida?
+A: Dos. Telegram manda la foto y el clip bajando una dirección web del servidor, así que esa dirección pública tiene que responder desde internet. La documentación del bot lo dice: Telegram descarga el archivo de la URL. Si no llega, el despacho queda Fallido.
+B: ¿Y la otra?
+A: El correo. En el código de esta versión el worker no tiene envío por correo: un despacho por Email termina en Canal no soportado. Para avisos, Telegram, WhatsApp o push.
+B: ¿Y el push qué necesita?
+A: Claves VAPID en el servidor y que el supervisor instale la app de filas y acepte las notificaciones.
+B: Laboratorio.
+A: Configurá Telegram, mandá la prueba, cargá un destinatario, forzá una alerta y seguila en Despachos hasta Enviado.
+B: Veinte minutos.
+A: Y el día que alguien diga no me llegó, tenés la prueba de qué salió y cuándo.

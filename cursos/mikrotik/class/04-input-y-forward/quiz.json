@@ -1,35 +1,35 @@
 [
   {
-    "q": "Una cámara en la LAN no llega al NVR que está en otra subred del mismo router. ¿En qué cadena mirás primero?",
+    "q": "Publicaste un NVR con un dst-nat del puerto 18000 de la IP pública. ¿En qué cadena de filter aparecen esas conexiones para limitarlas?",
     "options": [
-      "input",
-      "output",
-      "srcnat",
-      "forward"
-    ],
-    "answer": 3,
-    "why": "El tráfico entre dos equipos que pasa a través del router atraviesa la cadena forward. Input es solo para tráfico dirigido al router mismo."
-  },
-  {
-    "q": "Agregaste con add una regla accept para WinBox desde WAN y el contador sigue en cero. El router tiene configuración por defecto. ¿Qué pasó?",
-    "options": [
-      "WinBox no usa TCP",
-      "La regla quedó debajo de 'drop all not coming from LAN' y nunca se evalúa",
-      "Hay que reiniciar para que aplique",
-      "Las reglas accept solo funcionan en forward"
+      "input, porque llegan a la IP pública del router",
+      "forward, porque el dst-nat cambia el destino antes de la decisión de ruteo",
+      "output, porque el router las reenvía",
+      "En ninguna: el dst-nat saltea el filter"
     ],
     "answer": 1,
-    "why": "Las reglas se evalúan en orden y la primera que coincide manda. Un add común queda al final, debajo del drop de la defconf; la documentación indica usar place-before."
+    "why": "El dst-nat se aplica en prerouting, antes de decidir el camino. Cuando el paquete llega al filter su destino ya es el NVR, así que pasa por forward y no por input."
   },
   {
-    "q": "Un cliente cambia la IP fija de su oficina cada tanto y tiene acceso permitido en varias reglas. ¿Cómo lo armás?",
+    "q": "Agregaste al final de forward un drop para que una cámara no salga a internet, pero la cámara sigue mandando video a la nube por la misma sesión. ¿Qué pasa?",
     "options": [
-      "Una regla por servicio con la IP escrita",
-      "Permitir todo desde WAN y filtrar por usuario",
-      "Una address-list con la IP de la oficina y las reglas apuntando a la lista",
-      "Usar available-from en lugar del firewall"
+      "Las reglas de forward recién aplican después de reiniciar el router",
+      "La regla tendría que estar en input, porque la cámara habla con el router",
+      "La sesión ya estaba abierta: la acepta established,related, que está arriba; se corta desde /ip/firewall/connection o al reconectarse",
+      "FastTrack hace que forward nunca tenga efecto"
     ],
     "answer": 2,
-    "why": "Con una address-list, cuando cambia la IP editás la lista una vez y todas las reglas quedan bien. Es la práctica del firewall base de MikroTik."
+    "why": "Las reglas de abajo solo ven paquetes new porque established,related se acepta primero. Una regla nueva frena las conexiones nuevas; la que ya existía sigue hasta que se cierra o la borrás de la tabla de conexiones."
+  },
+  {
+    "q": "Querés que un escaneo desde internet no reciba respuesta y que un NVR de la LAN se entere al instante cuando le bloqueás una salida. ¿Qué acciones usás?",
+    "options": [
+      "drop hacia la WAN y reject (por ejemplo icmp-admin-prohibited) para lo bloqueado en la LAN",
+      "reject en los dos casos, así todos saben que está cerrado",
+      "drop en los dos casos, porque reject consume más CPU",
+      "passthrough en los dos casos y mirar los contadores"
+    ],
+    "answer": 0,
+    "why": "drop descarta en silencio y no le da información al que escanea; reject manda un ICMP de vuelta y el equipo de adentro corta enseguida en vez de esperar timeouts. passthrough solo cuenta y deja seguir."
   }
 ]

@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Una oficina tiene IP fija y un 4G de respaldo con IP 100.64.12.7 en ether2. Durante el failover, la central de monitoreo no ve el NVR. ¿Es una falla de configuración?",
+    "options": [
+      "Sí, falta un dst-nat por ether2",
+      "Sí, falta subir la distancia del DHCP",
+      "Sí, el masquerade está mal",
+      "No: con CGNAT en el 4G no entra nada publicado; se avisa antes y se usa un túnel o Back To Home"
+    ],
+    "answer": 3,
+    "why": "100.64.0.0/10 es CGNAT del operador: desde afuera no se llega a esa IP. Lo publicado depende de la IP fija, y mientras dura el failover solo sirven los accesos salientes como un túnel o Back To Home por relay."
+  },
+  {
+    "q": "El cliente pide usar los dos enlaces a la vez. El segundo es un 4G con 30 GB por mes. ¿Qué recomendás?",
+    "options": [
+      "PCC con both-addresses:2/0 y 2/1",
+      "Dejar el 4G como respaldo en distancia 2",
+      "Las dos rutas en distancia 1",
+      "Balanceo por paquete"
+    ],
+    "answer": 1,
+    "why": "Balancear con un enlace de datos limitados consume el plan. PCC tiene sentido con dos enlaces sin tope; con un 4G limitado, failover."
+  },
+  {
+    "q": "Armaste PCC y desde la LAN el panel web del router 4G en 192.168.8.1 a veces carga y a veces no. ¿Qué falta?",
+    "options": [
+      "Un accept al principio de mangle para las redes locales, como la lista no-balancear",
+      "Otra regla de masquerade",
+      "Bajar el MTU de ether2",
+      "Más testigos"
+    ],
+    "answer": 0,
+    "why": "Sin excepción, la mitad de esas conexiones se marca hacia la tabla de la fija y sale a internet en vez de ir a la red del 4G. La receta oficial acepta primero el tráfico hacia redes conectadas."
+  }
+]

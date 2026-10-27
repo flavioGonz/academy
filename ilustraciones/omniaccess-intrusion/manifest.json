@@ -1,0 +1,414 @@
+{
+ "1": {
+  "fig": {
+   "file": "1.svg",
+   "alt": "Diagrama: una cámara Hikvision empuja el cruce por HTTP al servidor OmniAccess 192.0.2.10; el servidor también se suscribe a un NVR Dahua. Dentro del servidor, cinco pasos: webhooks en el puerto 10000, guarda la detección, pide la foto, la sube al bucket intrusion y avisa a las pantallas. Salen flechas al Monitor Intrusión y al mapa y la pared. Abajo, avisos: el movimiento simple se descarta y no entra nada por ONVIF.",
+   "caption": "Seguí las flechas: la cámara o el NVR detectan, OmniAccess recibe, guarda, pide la foto y avisa."
+  },
+  "steps": [
+   {
+    "file": "1-paso3.svg",
+    "step": 3,
+    "alt": "Tabla de tres filas: Hikvision directa o en NVR Hikvision detecta la cámara y llega por push al servidor de alarma 10000, con tilde verde; cualquier marca en NVR Dahua detecta el NVR y OmniAccess se suscribe, con tilde verde; Dahua en NVR Hikvision no avisa nadie, sin vía, con cruz roja.",
+    "caption": "La vía la decide quién graba la cámara, no solo su marca.",
+    "after": "anotá quién detecta y por dónde avisa"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Analítica en el borde",
+    "para_que": "Analizar video de decenas de cámaras en un servidor central cuesta mucho procesamiento y ancho de banda. Por eso los fabricantes metieron la analítica en la propia cámara o en el NVR: el equipo mira su video y solo manda un evento corto cuando pasa algo.",
+    "como": "En OmniAccess Intrusión la regla (línea o zona) vive en la cámara Hikvision o en el NVR Dahua. El servidor no mira el video para detectar: recibe el evento, lo guarda y pide la foto. Por eso, si la cámara no detecta o no avisa, OmniAccess no tiene cómo enterarse.",
+    "ejemplo": "En un barrio con 40 cámaras de perímetro, cada cámara manda unos pocos kilobytes por cruce en lugar de que el servidor procese 40 videos a la vez. El servidor queda libre para el monitor, la grabación y las pantallas del puesto."
+   },
+   {
+    "name": "Push y suscripción",
+    "para_que": "Un evento puede viajar de dos maneras: la cámara lo empuja a un servidor que escucha, o el servidor abre una conexión al equipo y se queda esperando eventos. Cada fabricante eligió una forma principal.",
+    "como": "Con Hikvision, OmniAccess se carga en la cámara como servidor de alarma (HTTP, XML, puerto 10000) y la cámara le manda cada cruce. Con un NVR Dahua, OmniAccess abre una suscripción permanente (eventManager) y el NVR le va contando los cruces y las intrusiones; si se corta, reintenta a los 5 segundos.",
+    "ejemplo": "Un NVR Dahua que graba 16 cámaras de varias marcas por ONVIF manda todos los eventos por una sola suscripción. Una cámara Hikvision directa, en cambio, necesita su propio servidor de alarma apuntando a 192.0.2.10:10000."
+   },
+   {
+    "name": "Movimiento descartado",
+    "para_que": "La detección de movimiento simple compara píxeles entre cuadros y dispara con sombras, lluvia, faros y hojas. En un perímetro grande genera miles de eventos por noche y llena el disco de fotos que nadie mira.",
+    "como": "OmniAccess descarta el movimiento (VMD) en cuanto llega: no lo guarda, no lo muestra y no pide foto. Solo entran cruce de línea, intrusión de zona y entrada o salida de región. Por eso el filtro Movimiento del monitor normalmente queda vacío.",
+    "ejemplo": "Un técnico deja activa la detección de movimiento con notificación en una cámara del cerco y espera verla en el monitor: no aparece nada. Lo que corresponde es configurar la línea de cruce en esa cámara."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLa detección por video empezó comparando cuadros: si cambiaban muchos píxeles, había movimiento. Funcionaba en interiores tranquilos, pero en exteriores disparaba con viento, lluvia o un auto que pasaba con las luces encendidas. Las primeras analíticas de \"cruce de línea\" y \"zona\" agregaron reglas geométricas: no alcanza con que algo se mueva, tiene que atravesar una línea o quedarse dentro de un área.\n\nCon el tiempo esas reglas se metieron dentro de las cámaras y los grabadores. ONVIF, el foro de estándares fundado en 2008 por Axis, Bosch y Sony, describe hoy dos reglas genéricas que casi todos los fabricantes implementan a su manera: LineDetector (un objeto cruza una polilínea en un sentido) y FieldDetector (un objeto está dentro de un polígono). Hikvision las llama Line Crossing y Field Detection; Dahua, CrossLineDetection y CrossRegionDetection.\n\n### Cómo funciona\n\nEn OmniAccess el recorrido es siempre el mismo. La cámara (o el NVR Dahua) analiza su propio video. Cuando la regla se cumple, genera un evento. Con Hikvision, ese evento sale por HTTP hacia el \"servidor de alarma\" configurado en la cámara, que es el proceso de webhooks de OmniAccess escuchando en el puerto 10000. Con un NVR Dahua, OmniAccess mantiene abierta una suscripción al NVR y recibe los eventos de todos sus canales.\n\nAl llegar, el servidor clasifica el evento (Cruce de línea, Intrusión, Entra a zona, Sale de zona), busca la cámara por la IP o la MAC que trae el mensaje y guarda una detección. Si no es movimiento, le pide a la cámara una foto (`/ISAPI/Streaming/channels/101/picture` en Hikvision) y la sube al bucket `intrusion` de MinIO. En paralelo avisa por socket a todas las pantallas abiertas: el canal se pone rojo en segundos.\n\nTres cosas quedan afuera en esta versión: el movimiento simple, que se descarta; los eventos por ONVIF, que no se usan para intrusión; y una cámara Dahua grabada por un NVR Hikvision, porque ese NVR no analiza canales de otra marca."
+ },
+ "2": {
+  "fig": {
+   "file": "2.svg",
+   "alt": "Cuadro nocturno de la cámara Perímetro Norte 12 con un cerco, una línea celeste paralela al cerco con lado A afuera y lado B adentro, flechas naranjas de A hacia B, una zona roja a la derecha y una persona clasificada como Persona. A la derecha, el calibrador con Línea, Zona, Sentido, Sensibilidad 40, 60 u 80 y Objetivo, y una nota verde del Auto-perfil.",
+   "caption": "Las flechas marcan el sentido que dispara; el objetivo Persona deja afuera animales y sombras."
+  },
+  "steps": [
+   {
+    "file": "2-paso2.svg",
+    "step": 2,
+    "alt": "Dos cuadros comparados. A la izquierda, con cruz roja, una línea corta sobre el árbol y otra pegada al borde derecho. A la derecha, con tilde verde, una línea larga de punta a punta del paso, lejos del árbol.",
+    "caption": "La línea larga y lejos del borde ve al intruso antes de que pase; la corta sobre el árbol dispara con el viento.",
+    "after": "los dos extremos a lo largo del cerco"
+   },
+   {
+    "file": "2-paso5.svg",
+    "step": 5,
+    "alt": "Dos cuadros con la misma línea. En el primero una persona cruza de A hacia B y aparece en Detecciones; en el segundo cruza de B hacia A y no dispara.",
+    "caption": "Con sentido A→B, solo la pasada que entra aparece en la franja de detecciones.",
+    "after": "Pedile a alguien que cruce caminando"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Sentido de cruce",
+    "para_que": "En muchos perímetros la gente pasa en los dos sentidos por razones legítimas. Si la regla dispara en ambos, cada salida de un vecino o del jardinero es una alarma.",
+    "como": "En el calibrador, Sentido rota entre A→B, Ambos y B→A, y la cámara lo guarda como left-right, any o right-left. Las flechas sobre la línea muestran qué pasada dispara. Después de cambiarlo, conviene cruzar en los dos sentidos para confirmar.",
+    "ejemplo": "En el cerco que da a la calle de un barrio en Canelones, la línea queda A→B de la calle hacia adentro: el que salta desde la vereda dispara, el guardia que sale a revisar no."
+   },
+   {
+    "name": "Sensibilidad",
+    "para_que": "La sensibilidad define cuánto cambio de imagen hace falta para que la cámara considere que algo se movió en la regla. Existe porque no hay un valor que sirva para todas las escenas: un patio despejado no es un cerco con plantas.",
+    "como": "El calibrador ofrece 40, 60 y 80 y escribe el mismo valor en la línea y en la zona. La ayuda del producto dice que 40 a 60 suele ser el equilibrio con vegetación. Subirla atrapa más cosas, incluidas hojas y bichos; bajarla de más puede dejar pasar a una persona chica en el cuadro.",
+    "ejemplo": "Una cámara con un ligustro en el borde dispara cada vez que sopla el viento: con 60 sigue; con 40 y la línea movida medio metro hacia adentro, deja de disparar y una persona caminando todavía dispara."
+   },
+   {
+    "name": "Objetivo persona o vehículo",
+    "para_que": "Las cámaras con clasificación (AcuSense en Hikvision) distinguen personas y vehículos de todo lo demás. Sirve para que un perro, una rama o la lluvia no disparen la regla.",
+    "como": "Objetivo rota entre Persona, Vehículo y Ambos, y solo aparece en cámaras que lo soportan; en las demás el calibrador avisa que no filtra por objetivo. Con persona, el evento además llega con la clase y el monitor lo muestra como Persona.",
+    "ejemplo": "En un patio de servicio donde entran camionetas de proveedores de día, la zona queda con objetivo Persona: la camioneta no dispara, el que baja a pie fuera de hora sí."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLas primeras analíticas de cruce de línea aparecieron en software de video que corría en servidores, con reglas dibujadas sobre la imagen. Cuando los procesadores de las cámaras crecieron, los fabricantes pasaron esas reglas al propio equipo. Después llegó la clasificación de objetos: en lugar de reaccionar a cualquier cosa que se mueva, la cámara decide si lo que cruza es una persona o un vehículo.\n\nLos fabricantes coinciden en las perillas básicas. Milesight describe los tres sentidos (A→B, B→A y A↔B); Uniview, el umbral de tiempo, la sensibilidad y el porcentaje del área; Ajax, cómo dibujar la línea para que la cámara llegue a ver el cruce. Cambian los nombres, no la idea.\n\n### Cómo funciona\n\nUna regla de línea es un segmento en coordenadas de la imagen. Hikvision guarda los puntos en una escala de 0 a 1000 con el origen abajo a la izquierda; el calibrador de OmniAccess invierte la altura para dibujarla sobre el cuadro. La cámara sigue cada objeto entre cuadros y, cuando su posición pasa de un lado al otro del segmento en el sentido permitido, genera el evento.\n\nLa zona es un polígono de tres puntos o más. El evento se produce cuando un objeto entra y permanece dentro, según la sensibilidad y, en otras marcas, el tiempo mínimo y el tamaño.\n\nEl calibrador no inventa la configuración: lee el XML de la regla con `GET /ISAPI/Smart/LineDetection/1` (o `FieldDetection/1`), cambia solo la geometría, el sentido, la sensibilidad o el objetivo, y lo devuelve con `PUT`. Así no se pisan otros campos que la cámara tenga. En canales de un NVR Dahua, la misma pantalla escribe la regla IVS en el NVR.\n\nEl Auto-perfil aplica tres cosas juntas: sensibilidad 60, objetivo personas y vehículos (si la cámara clasifica) y el servidor de alarma hacia OmniAccess. Es reversible y es un punto de partida: la prueba caminando decide si queda."
+ },
+ "3": {
+  "fig": {
+   "file": "3.svg",
+   "alt": "Cuatro tarjetas en fila: 1 Alta en Dispositivos o importando del NVR; 2 Servidor de alarma desde la campana del canal con Configurar OmniAccess como alarma y Probar reporte; 3 Vinculación Notificar al centro de vigilancia en la regla; 4 Cruzar la línea, en verde. Abajo, lo que se escribe en la cámara: host 192.0.2.10:10000, URL /api/webhooks/hikvision, XML sin autenticación, y una nota de que el test no alcanza.",
+   "caption": "Los cuatro pasos van juntos; el último, cruzar y ver llegar, es la prueba que vale."
+  },
+  "steps": [
+   {
+    "file": "3-paso1.svg",
+    "step": 1,
+    "alt": "Tabla de importación del NVR con canales D1 Acceso Principal Entrada como LPR entrada, D5 Perímetro Norte 12 como intrusión, D6 Perímetro Sur 07 Dahua como intrusión y D9 Quincho interior omitido. Notas: la sugerencia sale del nombre y las cámaras creadas toman la clave del NVR.",
+    "caption": "Elegí el rol de cada canal; los que ya existen solo se vinculan a su grabación.",
+    "after": "Marcá dos canales del perímetro como"
+   },
+   {
+    "file": "3-paso5.svg",
+    "step": 5,
+    "alt": "Web de la cámara en Detección de cruce de línea, pestaña Método de vinculación, con Notificar al centro de vigilancia tildado y resaltado en verde, Grabar tildado y Enviar email y Alarma sonora sin tildar.",
+    "caption": "Sin Notificar al centro de vigilancia, la cámara detecta pero no le manda nada a OmniAccess.",
+    "after": "verificá la vinculación de la regla"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Servidor de alarma (HTTP host)",
+    "para_que": "Las cámaras Hikvision pueden mandar sus eventos a uno o más servidores externos. Es la forma de que un software de terceros se entere al instante, sin estar preguntando todo el tiempo.",
+    "como": "Desde la campana del canal, OmniAccess escribe en la cámara un servidor con su IP, el puerto 10000 y la ruta de webhooks, en formato XML y sin autenticación, usando un lugar libre y sin borrar los otros. Probar reporte manda el test de la cámara; varias no lo implementan y no confirman.",
+    "ejemplo": "Una cámara que ya mandaba eventos al NVR de otro proveedor queda con los dos servidores: el viejo en el lugar 1 y OmniAccess en el 2. Ninguno pisa al otro."
+   },
+   {
+    "name": "Notificar al centro de vigilancia",
+    "para_que": "En Hikvision, cada evento tiene su propia lista de acciones (vinculación): grabar, mandar mail, sonar, notificar. La opción de notificar al centro es la que habilita mandar ese evento a los servidores externos.",
+    "como": "Se tilda en la regla de cruce de línea y, aparte, en la de intrusión de zona: Configuración, Evento, Evento inteligente, la regla, Método de vinculación. Sin ese tilde la cámara detecta, puede grabar, pero no le manda el evento a OmniAccess.",
+    "ejemplo": "En una obra nueva, la línea dispara en la web de la cámara y no llega nada al monitor. La campana dice OmniAccess presente. El tilde estaba destildado de fábrica: se tilda, se cruza y el canal se pone rojo."
+   },
+   {
+    "name": "Importar clasificando",
+    "para_que": "En un barrio, las cámaras de perímetro suelen estar todas grabadas en uno o dos NVR. Cargarlas una por una es lento y fácil de errar.",
+    "como": "Desde el NVR, Importar cámaras (clasificar) lee cada canal con su foto, marca y protocolo, y deja elegir LPR, intrusión u omitir. Las nuevas se crean con usuario y clave del NVR; las que ya existían solo se vinculan a su canal de grabación.",
+    "ejemplo": "Un NVR de 32 canales con 24 cámaras de cerco y 4 de acceso se importa en una pasada: 24 como intrusión, 4 como LPR y 4 omitidas. Después se corrige la clave de las cámaras que no comparten la del NVR."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nAntes de que las cámaras hablaran HTTP, los eventos de video viajaban por contactos secos: la cámara cerraba un relé y una central de alarma lo leía como una zona. Con las cámaras IP aparecieron los \"servidores de alarma\": la cámara abre una conexión a una dirección configurada y manda un mensaje con el tipo de evento, la hora y la cámara. Hikvision lo expone en su API ISAPI como notificación a hosts HTTP; otros fabricantes lo llaman HTTP Notification o HTTP POST.\n\nLa guía de cctvcamerapros describe el mismo patrón en otra marca: hasta tres servidores por cámara, un botón de prueba que manda un envío vacío y espera un código 200, y un heartbeat periódico para saber si la conexión sigue viva.\n\n### Cómo funciona\n\nCuando tocás Configurar OmniAccess como alarma, el servidor lee la lista de hosts de la cámara (`/ISAPI/Event/notification/httpHosts`). Si ya hay uno con su IP y puerto, no hace nada. Si no, elige un lugar libre (IP 0.0.0.0) o el siguiente número, y escribe uno nuevo con protocolo HTTP, formato XML, sin autenticación, apuntando al host de eventos de la instalación (por defecto puerto 10000 y ruta `/api/webhooks/hikvision`).\n\nEse host de eventos es un dato del servidor, cargado al instalarlo. Si falta, el sistema lo dice con todas las letras y no escribe nada.\n\nLa cámara, a partir de ahí, manda al servidor los eventos cuya regla tenga tildado Notificar al centro de vigilancia. El webhook busca la cámara por la MAC o la IP del mensaje, guarda la detección y pide la foto con el usuario y la clave cargados en OmniAccess. Por eso una cámara importada con la clave del NVR llega sin foto propia: el sistema muestra entonces un cuadro de la grabación.\n\nCon un NVR Dahua no se escribe nada en la cámara: Verificar suscripción solo comprueba que el NVR responda y autentique."
+ },
+ "4": {
+  "fig": {
+   "file": "4.svg",
+   "alt": "Dos mapas semanales lado a lado. A la izquierda, la grabación del NVR con barras azules de 0 a 24 horas todos los días. A la derecha, el armado de la línea en la cámara con bloques verdes de 0 a 6 y de 22 a 24 horas, texto línea L-D 22:00-06:00. Una línea punteada marca ahora a las 15:00. Notas: fuera del horario graba pero no avisa; a las 15 está desarmada.",
+   "caption": "A las 15:00 la cámara graba pero la regla está desarmada: el verde es cuando avisa."
+  },
+  "steps": [
+   {
+    "file": "4-paso3.svg",
+    "step": 3,
+    "alt": "Editor de Programación de armado de la regla de cruce de línea con siete filas, cada una con un bloque verde de 00:00 a 06:00 y otro de 22:00 a 24:00, y botones Copiar a todos y Guardar. Notas: el rango que cruza medianoche se guarda en dos bloques y OmniAccess lo muestra como L-D 22:00-06:00.",
+    "caption": "La noche se carga partida en dos bloques por día; la vista de pared la vuelve a juntar.",
+    "after": "armá la línea de noche"
+   },
+   {
+    "file": "4-paso6.svg",
+    "step": 6,
+    "alt": "Dos tarjetas. Horario de armado en la cámara: decide si la cámara avisa, fuera de horario no llega nada, se cambia en la web de la cámara. Horario en el Mapa: solo calla el mapa, la detección llega igual al monitor, queda en el historial, sin horario es siempre armada. Abajo, la ruta para quitarlo.",
+    "caption": "El horario del mapa solo silencia el mapa; el de la cámara decide si llega la alarma.",
+    "after": "el mapa no calla lo que la cámara avisa"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Horario de armado",
+    "para_que": "Hay lugares donde la regla no tiene sentido las 24 horas: un patio de servicio con proveedores de día o un estacionamiento en horario comercial. El horario de armado permite que la regla avise solo cuando importa.",
+    "como": "Vive en la cámara, una por regla (línea y zona), en Configuración, Evento, Evento inteligente, la regla, Programación de armado. Fuera de ese horario la cámara sigue grabando pero no manda el evento. OmniAccess lo lee y lo muestra en la vista de pared y en la ficha de cada cámara.",
+    "ejemplo": "En el depósito de un barrio, la zona del patio queda armada de 18:00 a 08:00 y los fines de semana todo el día. De día los camiones no generan alarmas; de noche, cualquier persona sí."
+   },
+   {
+    "name": "Armado frente a grabación",
+    "para_que": "Son dos horarios distintos en el mismo equipo y se confunden seguido. Uno decide cuándo se graba video; el otro, cuándo una regla puede disparar un evento.",
+    "como": "La grabación se mira en el NVR (continua, por evento, por horario). El armado se mira en la regla de la cámara. Que la grabación esté 24/7 no dice nada sobre el armado. En la vista de pared, el punto verde o ámbar habla solo del armado.",
+    "ejemplo": "Un cliente reclama que no sonó un robo a las 3 de la mañana, pero la grabación lo muestra clarito. La regla estaba armada de 8 a 18 porque alguien la copió de otra cámara."
+   },
+   {
+    "name": "Horario del mapa",
+    "para_que": "El mapa del barrio suena y habla con cada cruce. En algunas líneas eso molesta en ciertos horarios aunque la cámara deba seguir avisando al monitor.",
+    "como": "Cada línea o zona dibujada en el Mapa puede tener su propio horario y clase (todo, solo persona, solo auto). Fuera de ese rango el mapa no suena ni titila, pero la detección llega igual al monitor y queda en el historial. No toca la cámara.",
+    "ejemplo": "La línea del portón de proveedores suena en el mapa de la garita todo el día. Se le pone horario 20:00 a 07:00 en el mapa: de día la garita trabaja tranquila y el monitor del puesto sigue registrando cada cruce."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEl armado viene de las centrales de alarma: una zona \"armada\" dispara, una \"desarmada\" no. Las cámaras con analítica copiaron la idea para cada regla, con un calendario semanal. Hikvision lo llama Arming Schedule y su soporte insiste en que el error más común es dejarlo activo de día y apagado de noche. También aclara la diferencia con el horario de grabación, que es otra cosa.\n\n### Cómo funciona\n\nEn una cámara Hikvision, cada regla tiene un documento de horario con bloques por día de la semana: el 1 es lunes y el 7 domingo, cada bloque con una hora de inicio y una de fin, y \"24:00\" como fin de día. Un rango de 22:00 a 06:00 no entra en un solo bloque porque cruza la medianoche: se guarda como 22:00 a 24:00 de un día y 00:00 a 06:00 del siguiente.\n\nOmniAccess lee ese documento para la línea (`/ISAPI/Event/schedules/lineDetections/lineDetection-1`) y para la zona (`.../fieldDetections/fieldDetection-1`), vuelve a juntar los bloques partidos y lo describe en palabras: `Siempre`, `Nunca (desarmada)` o `L–D 22:00–06:00`. Con la hora del servidor calcula si en este momento está armada (punto verde) o no (ámbar). Esa lectura se guarda cinco minutos para no castigar las cámaras con pedidos.\n\nEn el código hay un editor para cambiar el horario desde OmniAccess, con preajustes y un mapa semanal, pero en esta versión no está conectado a ninguna pantalla: el cambio se hace en la web de la cámara o del NVR.\n\nEl Mapa del barrio tiene un horario aparte para cada línea dibujada, que solo decide si el mapa suena. Es útil, pero no reemplaza al de la cámara: si la cámara está desarmada, no hay evento que el mapa pueda mostrar."
+ },
+ "5": {
+  "fig": {
+   "file": "5.svg",
+   "alt": "Cuatro tarjetas: Monitor Intrusión con el canal rojo, tilde verde; Mapa con pitido y voz Persona en Perímetro Norte 12, tilde verde; Pantalla de pared con Sin sonido, Un tono o Repetir hasta que se acepte, tilde verde; Celular con Telegram, WhatsApp o push sin regla de intrusión, cruz roja. Notas: Telegram avisa la salud de los equipos y por WhatsApp sale el clip del operador.",
+   "caption": "Tres lugares suenan con la intrusión; el celular, en esta versión, no."
+  },
+  "steps": [
+   {
+    "file": "5-paso3.svg",
+    "step": 3,
+    "alt": "Una PC de pared abre la vista Intrusión y suena. Debajo, el comando de Chrome en modo kiosco con autoplay y el enlace de pantalla con token. Notas: por qué esas opciones, qué pasa sin kiosco y que el enlace es de solo lectura.",
+    "caption": "En kiosco, la pared queda a pantalla completa y suena sin esperar un toque.",
+    "after": "abrí Chrome en modo kiosco"
+   },
+   {
+    "file": "5-paso4.svg",
+    "step": 4,
+    "alt": "Mapa esquemático del barrio con calles y lotes, el cerco punteado arriba, la cámara Perímetro Norte 12 con su campo de visión y una línea azul de dos puntos dibujada sobre el cerco. Abajo, la barra Cruce Perímetro Norte 12 2 pts con el botón Finalizar. A la derecha, la ruta Mapa, Editar mapa, video, Cruces de línea con Dibujar, Sugerir y Horario.",
+    "caption": "Dos puntos sobre el cerco y Finalizar: así el mapa sabe dónde titilar y el análisis dónde ubicar el cruce.",
+    "after": "Si la cámara ya está ubicada, probá"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Pantalla de pared",
+    "para_que": "En un puesto de monitoreo hay pantallas grandes que nadie toca, y no tiene sentido dejarles un usuario del panel abierto. Las vistas de pared muestran lo importante a varios metros y sin sesión.",
+    "como": "Desde Monitores se crea un Nuevo enlace de pantalla para la vista Intrusión. El enlace abre sin usuario y solo para mirar; el sonido se elige por vista: Sin sonido, Un tono por alarma o Repetir hasta que se acepte. Quien entra con usuario del panel y permiso de intrusión puede decidir desde la pared.",
+    "ejemplo": "En la garita de un barrio queda una tele de 50 pulgadas con la vista Intrusión en kiosco y el sonido en Repetir. El guardia la ve desde la ventanilla y confirma desde la PC del escritorio."
+   },
+   {
+    "name": "Avisos en esta versión",
+    "para_que": "Los clientes suelen dar por hecho que la alarma les llega al celular. Saber con precisión dónde suena evita prometer lo que no está.",
+    "como": "La intrusión avisa en el Monitor Intrusión, en el Mapa (pitido y voz) y en las pantallas de pared. Telegram manda alertas de salud de los equipos. Las reglas de Notificaciones y los Despachos de esta versión son de Filas: no hay regla de intrusión al celular.",
+    "ejemplo": "En la entrega al administrador se deja por escrito: suena en la pared de la garita y en el mapa del puesto; al celular llegan los avisos de cámara caída por Telegram, no las intrusiones."
+   },
+   {
+    "name": "Línea en el mapa",
+    "para_que": "Una alarma sirve más si el operador ve dónde fue dentro del predio. El mapa del barrio pone cada cámara y su línea sobre la imagen satelital.",
+    "como": "En Mapa, Editar mapa, Cruces de línea o Zonas de intrusión, se elige la cámara y se marcan los puntos sobre el mapa. Si la analítica cambia en la cámara, el panel la marca Desactualizada. Con un cruce, la línea titila en rojo con tocá para aceptar.",
+    "ejemplo": "La cámara del fondo de un lote apunta a dos cercos; en el mapa se dibuja solo el que corresponde a su línea, y el operador sabe a qué esquina mandar al guardia."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLos avisos fuera del puesto pasaron por varias tecnologías: el SMS, el mail, después las apps con notificaciones propias. Telegram abrió su Bot API en 2015, y muchos integradores la usan porque un bot se crea en minutos con @BotFather y manda texto y fotos con una llamada HTTP. Web Push, estandarizado por la IETF en la RFC 8030 de 2016, permite que un servidor despierte al navegador o a una app web aunque esté cerrada.\n\nEn monitoreo profesional, la discusión es otra: no alcanza con avisar, el aviso tiene que llegar a quien puede actuar, calificado y con el video a mano. Davantis lo resume en que la alarma llegue \"calificada\" y no como señal cruda.\n\n### Cómo funciona\n\nEn OmniAccess, cada detección se emite por un socket a todas las pantallas abiertas. El Monitor Intrusión pinta el canal de rojo y lo sube arriba. El Mapa, si la línea está dibujada y dentro de su horario, la hace titilar, pita (un tono distinto si es persona) y dice con voz \"Persona en\" y el nombre de la cámara.\n\nLas pantallas de pared (`/monitor/intrusion` y la Rotación) leen cada pocos segundos el estado y suenan según el ajuste de Monitores. Los navegadores bloquean el audio hasta que alguien toca la página: por eso la pantalla pide un toque, o se abre Chrome en kiosco con la opción `--autoplay-policy=no-user-gesture-required`.\n\nFuera del puesto, en esta versión, Telegram se usa para la salud de los equipos (cámara sin respuesta, disco, memoria, reloj) y WhatsApp para mandar un clip a mano desde la grabación. Las reglas de Notificaciones y la cola de Despachos manejan Filas y reportes; los avisos de intrusión al celular aparecen mencionados en textos de la interfaz, pero no están implementados."
+ },
+ "6": {
+  "fig": {
+   "file": "6.svg",
+   "alt": "Diagrama de estados. Detectada, en rojo, se divide: con Falsa alarma tecla F va a Archivada como falsa; con Confirmar real tecla A va a En atención, en ámbar. De En atención, Resolver lleva a Resuelta, en verde, y Era falsa alarma lleva a Archivada como falsa. Notas: la decisión vale para lo pendiente de la cámara en 6 horas y las teclas de la ficha.",
+   "caption": "Toda alarma termina archivada como falsa o resuelta; En atención es el estado intermedio de la real."
+  },
+  "steps": [
+   {
+    "file": "6-paso3.svg",
+    "step": 3,
+    "alt": "Bloque Análisis con tres cifras de ejemplo: 2 detecciones en el episodio, 7 hoy en esta cámara, 82 por ciento de falsas. Lista de indicios: clasificada como persona, dos detecciones en 14 segundos son un mismo episodio, fue de noche, de las últimas 50 revisadas 41 fueron falsas, otra cámara detectó dos minutos después. A la derecha, recuadro Dónde fue el cruce con la cámara en azul, su línea en rojo y otra cámara en ámbar.",
+    "caption": "Indicios con su número, no un veredicto: la decisión es de quien mira la foto.",
+    "after": "En otra pestaña, con tu sesión del panel"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Aceptar no es confirmar",
+    "para_que": "Al operador se le pide una decisión, no un clic para callar la alarma. Separar abrir la ficha de decidir evita confirmar sin mirar.",
+    "como": "Aceptar alarma abre la ficha del evento con la foto y la geometría. Ahí se decide: Falsa alarma (F) o Confirmar real (A o Enter). Las flechas recorren los eventos de esa cámara. La decisión se aplica a todas las detecciones sin aceptar de la cámara de las últimas 6 horas.",
+    "ejemplo": "Un canal tiene tres eventos apilados de una misma persona caminando por el cerco. Una sola decisión, real, los cierra a los tres y deja la cámara En atención."
+   },
+   {
+    "name": "En atención",
+    "para_que": "Una alarma real no termina cuando alguien la confirma: termina cuando alguien fue y la resolvió. El estado intermedio deja a la vista lo que sigue abierto.",
+    "como": "Confirmar real pone la cámara En atención con borde animado. Se cierra con Resolver en el canal o, en la pared, con Resuelta. Si al mirar mejor era un perro, Era falsa alarma corrige las aceptadas como reales de esa cámara en las últimas 6 horas.",
+    "ejemplo": "A las 2:10 se confirma real un cruce en el cerco norte. El guardia llega, encuentra la malla cortada y nadie adentro; a las 2:25 el operador toca Resolver y la cámara vuelve a la calma."
+   },
+   {
+    "name": "Indicios del análisis",
+    "para_que": "Con una foto sola cuesta decidir. El análisis reúne lo que la base ya sabe alrededor de ese momento, para que el operador no tenga que buscarlo en tres pantallas.",
+    "como": "Está en la ficha de la detección de la vista de pared. Muestra la clase, la ráfaga de 5 minutos, si fue de noche, si hay más movimiento que el promedio de esa hora en 7 días, el porcentaje de falsas de las últimas revisadas, otras cámaras en ±3 minutos, matrículas leídas cerca y el mapa del cruce.",
+    "ejemplo": "Un cruce a las 3 en el cerco sur coincide con una detección en la cámara del portón dos minutos después y una matrícula que salió a las 3:06. El operador lo trata como un recorrido y avisa al supervisor."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLa verificación de alarmas nació por un problema concreto: la policía de muchas ciudades se cansó de ir a alarmas falsas. En Estados Unidos se difundió la verificación con llamadas (ECV): antes de despachar, la central llama a dos números del cliente. Según SecurityInfoWatch, cuando Florida la hizo obligatoria en julio de 2006, el condado de Palm Beach bajó mucho sus despachos. Al mismo tiempo se extendió el cruce de zonas: dos sensores vecinos que disparan en poco tiempo pesan más que uno solo. La verificación por video agregó lo que faltaba: ver qué pasó antes de actuar.\n\n### Cómo funciona\n\nEn OmniAccess, cada detección nace pendiente (`acknowledged = false`). Las pendientes de las últimas 6 horas se reconstruyen al recargar la página, así una alarma no se pierde por cerrar el navegador. Aceptar abre la ficha; la decisión marca todas las pendientes de esa cámara en esa ventana como reales o falsas y guarda la hora de la decisión, que después sirve para medir el tiempo de reacción.\n\nCuando es real, la cámara entra en una lista de \"en atención\" hasta que alguien la resuelve. Resolver la saca de esa lista; Era falsa alarma, además, corrige el registro.\n\nEl análisis no decide. Consulta la base: cuántas detecciones hubo en esa cámara 5 minutos antes y después (ráfaga), cuántas en esta hora contra el promedio de la misma hora en los 7 días previos, cuántas de las últimas 50 revisadas fueron falsas (con al menos 5), qué otras cámaras detectaron en ±3 minutos y qué matrículas leyeron las cámaras LPR en ese margen. Si la cámara y su línea están en el Mapa, dibuja dónde fue el cruce. Es el mismo razonamiento del cruce de zonas, con números a la vista."
+ },
+ "7": {
+  "fig": {
+   "file": "7.svg",
+   "alt": "Tres filas. La cámara manda RTSP principal y secundario a go2rtc en el servidor, que alimenta la pestaña Vivo con SD o HD, PTZ y seguimiento. El NVR, que graba en H.264 o H.265, pasa por la reproducción del servidor que transcodifica si hace falta y alimenta la pestaña Grabación. El bucket intrusion alimenta la pestaña Evidencia. Nota: sin NVR y canal vinculados, Grabación no tiene qué pedir.",
+   "caption": "Cada pestaña sale de un lugar distinto: por eso puede andar el vivo y no la grabación."
+  },
+  "steps": [
+   {
+    "file": "7-paso2.svg",
+    "step": 2,
+    "alt": "Cuadro en vivo de Perímetro Norte 12 con una persona y un trazo punteado hacia un ícono naranja de cámara rotulado Perímetro Sur 07, puesto donde se pasa a esa cámara. Panel con los pasos del seguimiento visual y una nota de que el ícono rebota en rojo si la vecina tiene eventos.",
+    "caption": "El ícono va en el punto de la escena por donde el intruso sale hacia la otra cámara.",
+    "after": "Arrastrá el ícono al punto del cuadro"
+   },
+   {
+    "file": "7-paso5.svg",
+    "step": 5,
+    "alt": "Línea de tiempo de la grabación con una marca roja del cruce a las 02:11:40 y una ventana celeste de 10 segundos antes y 10 después. Botones Descargar y Enviar por WhatsApp.",
+    "caption": "El clip toma 10 segundos a cada lado del instante; se baja o se manda por WhatsApp.",
+    "after": "bajá un clip de 10 s antes y 10 s después"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Flujo principal y secundario",
+    "para_que": "Las cámaras generan dos o más flujos de video: uno de alta resolución para grabar y otro liviano para ver en pantallas chicas o por redes lentas. Así una grilla de muchas cámaras no satura la red.",
+    "como": "En el vivo, SD usa el flujo secundario (abre rápido y consume poco) y HD el principal (más detalle, más demora). El vivo pasa por go2rtc en el servidor, que convierte el RTSP de la cámara en un video que el navegador puede reproducir.",
+    "ejemplo": "De noche, con el enlace a la garita cargado, el operador abre el vivo en SD para seguir al intruso y pasa a HD solo cuando necesita leer un detalle de la ropa."
+   },
+   {
+    "name": "Seguimiento visual",
+    "para_que": "Un intruso no se queda en el cuadro de una cámara. Saltar de una cámara a la vecina buscando en una lista hace perder segundos valiosos.",
+    "como": "Con el lápiz del vivo se agregan íconos de cámaras vecinas y se arrastran al punto de la escena por donde se pasa a cada una. Tocando el ícono, el vivo cambia a esa cámara y la anterior queda en una ventanita. Si la vecina tiene eventos, el ícono rebota en rojo.",
+    "ejemplo": "Desde la cámara del cerco norte se pone el ícono de la cámara del parque en el sendero de la izquierda. Cuando alguien salta y camina por el sendero, un toque y el operador ya lo ve desde la otra."
+   },
+   {
+    "name": "Clip de evidencia",
+    "para_que": "Para la policía, el seguro o el administrador, una foto no alcanza: hace falta el video del momento con algo de contexto antes y después.",
+    "como": "En la pestaña Grabación, el botón de descarga arma un clip desde el NVR, por defecto 10 segundos antes y 10 después del instante elegido, con una intro. Se baja o se manda por WhatsApp a destinatarios del Centro de Notificaciones o a un usuario, con un tope de duración.",
+    "ejemplo": "Después de un intento de robo en un depósito, el operador manda por WhatsApp al supervisor el clip de 20 segundos del salto del cerco, y deja el archivo descargado para la denuncia."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nRTSP, el protocolo con el que se pide video a una cámara IP, se publicó como RFC 2326 en 1998 y se renovó como RTSP 2.0 en la RFC 7826 de 2016. Funciona como un control remoto: el cliente pide la descripción del flujo, lo configura y le da play. Los navegadores, en cambio, nunca hablaron RTSP. Por eso los sistemas web necesitan un intermediario que convierta el video. go2rtc es un proyecto abierto que hace justamente eso: toma decenas de formatos de entrada y los entrega en los que entiende el navegador, transcodificando solo si hace falta.\n\nONVIF ordenó la parte de video con su Perfil S (2011), que describe cómo un cliente pide y controla el video de una cámara; hoy está en proceso de retiro a favor de perfiles más nuevos.\n\n### Cómo funciona\n\nEn OmniAccess, cada cámara tiene dos flujos registrados en go2rtc: uno liviano y uno de alta resolución. El navegador pide el video al servidor (`/go2rtc/api/stream.mp4`) y no a la cámara, así la cámara recibe una sola conexión aunque la miren varios operadores.\n\nLa grabación no viene de go2rtc sino del NVR. El servidor busca en qué NVR y canal graba la cámara (el mapeo de canales), le pide al NVR el tramo de ese horario y lo entrega al navegador. Muchos NVR graban en H.265, que varios navegadores no reproducen: el servidor lo transcodifica antes de mandarlo. Si no hay vínculo con un canal, la pestaña lo dice; si el NVR no tiene video de ese momento, también.\n\nEl seguimiento visual se guarda en el servidor como una lista de enlaces por cámara (a qué cámara lleva y en qué punto del cuadro está el ícono). La Evidencia, por último, son las fotos que el sistema pidió a la cámara en cada detección, guardadas en el bucket de intrusión."
+ },
+ "8": {
+  "fig": {
+   "file": "8.svg",
+   "alt": "Pantalla esquemática de Evidencia: a la izquierda los filtros Cámara Perímetro Norte 12, Estado Pendientes, Desde anoche 22:00, Hasta hoy 06:00; al centro cuatro tarjetas con estados Pendiente, Real, Falsa y Pendiente; a la derecha cómo corregir una detección: Pendiente a Falsa alarma o Fue real, Real a Era falsa alarma, Falsa a Era real. Abajo, la retención del bucket intrusion.",
+   "caption": "Filtrá las pendientes de anoche y cerralas una por una: el turno termina sin Pendientes."
+  },
+  "steps": [
+   {
+    "file": "8-paso6.svg",
+    "step": 6,
+    "alt": "Mapa esquemático con la línea roja de Perímetro Norte 12 sobre el cerco y tres guardias; el Guardia 1, en verde, es el más cercano y tiene una flecha hacia la línea. A la derecha, el mensaje por radio en cuatro datos: cámara, lugar, qué se vio y hace cuánto. Nota: la tablet del guardia no recibe la intrusión en esta versión.",
+    "caption": "El puesto elige al guardia más cercano en el mapa y le pasa cuatro datos por radio.",
+    "after": "ubicá al guardia más cercano"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Estado de una detección",
+    "para_que": "El registro sirve si dice la verdad: qué pasó, quién lo miró y qué decidió. Un registro lleno de pendientes no le sirve al administrador ni ante un reclamo.",
+    "como": "Cada detección está Pendiente, Real o Falsa. Evidencia filtra por cámara, estado y fechas; Historial lista por tipo. Una sola se corrige desde la ficha de la detección en la pared (Falsa alarma, Fue real, Era falsa alarma, Era real) sin tocar las demás de la cámara.",
+    "ejemplo": "El lunes, el administrador pide lo del fin de semana en el cerco sur. Con Evidencia filtrada por cámara y fechas aparecen 23 detecciones, 21 falsas por un perro y 2 reales del sábado a la noche, cada una con foto."
+   },
+   {
+    "name": "Retención",
+    "para_que": "Las fotos ocupan disco y no se pueden guardar para siempre. La retención define cuántos días se conservan antes de borrarse solas.",
+    "como": "Las fotos de intrusión van al bucket intrusion del almacenamiento de objetos (MinIO, compatible con S3). En Configuración, Almacenamiento, Políticas de Retención, se fijan los días; vencido el plazo, el almacenamiento las borra automáticamente.",
+    "ejemplo": "Un cliente pide poder reclamar hasta un mes después. Se deja la retención del bucket de intrusión en 45 días y se calcula el disco con la cantidad de detecciones diarias de la semana de prueba."
+   },
+   {
+    "name": "La guardia en el terreno",
+    "para_que": "El operador ve, el guardia llega. Si el guardia va al lugar equivocado o sin datos, se pierde el tiempo que la cámara ganó.",
+    "como": "En esta versión la tablet del guardia no recibe la alarma de intrusión. El puesto ve la posición de cada guardia en el Mapa (cada 10 segundos con la app en pantalla) y lo manda por radio con cuatro datos: cámara, lugar, qué se vio y hace cuánto. El botón de pánico de la tablet es otra vía, del guardia hacia el puesto.",
+    "ejemplo": "A las 2:12 el operador ve que el Guardia 1 está a una cuadra del cerco norte y le dice: Perímetro Norte 12, cerco entre lotes 14 y 16, una persona cruzando, hace 40 segundos."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEl cuaderno de la garita fue durante décadas el registro de lo que pasaba en un predio. Tenía dos problemas: lo que no se anotaba no existía y lo que se anotaba no tenía prueba. Los sistemas de video sumaron la imagen, y el almacenamiento de objetos (el modelo que Amazon popularizó con S3 en 2006 y que MinIO implementa en servidores propios) resolvió dónde guardar millones de fotos con reglas de vencimiento automáticas.\n\nEn monitoreo profesional, SDM cuenta que algunas centrales graban exactamente lo que vio el operador para que sirva como evidencia, y que los turnos cortos ayudan a que el operador no se sature. La coordinación con el que va al lugar siempre fue por radio o teléfono, con mensajes cortos y concretos.\n\n### Cómo funciona\n\nCada detección guarda tipo, cámara, hora, clase si la hay, la ruta de la foto y tres datos de la decisión: si fue revisada, si fue real o falsa y cuándo. Historial y Evidencia son dos vistas de la misma tabla: una en lista paginada y otra en grilla con foto, filtros y un resumen de pendientes y revisadas. Al pasar el mouse por una tarjeta, el sistema pide al NVR un clip corto de ese instante.\n\nLas acciones del canal deciden por cámara (todo lo pendiente de 6 horas); la corrección desde la ficha de la detección cambia solo esa. Así el registro puede quedar exacto aunque la primera decisión haya sido apurada.\n\nLas fotos viven en el bucket de intrusión, que es el mismo en todos los modos del sistema. La política de retención es una regla de vencimiento del almacenamiento: pasados los días configurados, las fotos se borran solas. Las detecciones siguen en la base, pero sin su imagen.\n\nPara la guardia, la posición de cada tablet llega al servidor y se muestra en el Mapa. La alarma de intrusión, en esta versión, no viaja a la tablet: el vínculo es el operador."
+ },
+ "9": {
+  "fig": {
+   "file": "9.svg",
+   "alt": "Escalera de cuatro niveles de abajo hacia arriba: 1 Instalación, horizonte y calle fuera del cuadro, vidrio limpio, sin telarañas; 2 Regla, línea lejos del árbol, un sentido, zona chica, sensibilidad 40 a 60; 3 Objetivo, Persona o Vehículo si la cámara clasifica; 4 Medir, porcentaje de falsas y ritmo en el Análisis durante una semana. Notas: el otro error es dejar de detectar a la persona y, en cámaras que no clasifican, gana la geometría.",
+   "caption": "Se sube de a un escalón: primero lo que no cuesta nada, al final medir."
+  },
+  "steps": [
+   {
+    "file": "9-paso4.svg",
+    "step": 4,
+    "alt": "Tabla de causa y cambio: telaraña o vidrio sucio, limpiar en la cámara; faros o calle en el cuadro, línea más adentro o sentido A→B en el calibrador; perros, gatos, pájaros, objetivo Persona; árbol o arbustos, zona más chica, línea lejos y sensibilidad 40. Nota: anotá la fecha del cambio.",
+    "caption": "La causa que muestra la foto elige el cambio; uno solo por vez.",
+    "after": "cambio según la causa"
+   },
+   {
+    "file": "9-paso6.svg",
+    "step": 6,
+    "alt": "Gráfico de barras de ejemplo: 82 por ciento de falsas antes del cambio en rojo y 35 por ciento una semana después en verde. Notas: el análisis calcula con las últimas 50 revisadas desde 5, y el cambio queda si la persona sigue disparando de noche.",
+    "caption": "Ejemplo de comparación a la semana: bajó el porcentaje y la persona sigue disparando.",
+    "after": "Anotá la fecha del cambio"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Falso positivo y falso negativo",
+    "para_que": "Una alarma falsa molesta y cansa; una intrusión sin alarma es el problema real. Bajar uno a costa del otro empeora la seguridad aunque los números se vean mejor.",
+    "como": "Cada ajuste se prueba con una persona caminando de noche: si deja de disparar, el ajuste se pasó. Davantis lo plantea como dos problemas distintos: las falsas se ven y se cuentan; las detecciones perdidas solo se descubren cuando ya pasó algo.",
+    "ejemplo": "Para callar una cámara ruidosa alguien baja la sensibilidad de todo el perímetro a 20. La semana siguiente hay cero falsas y también cero detecciones del que saltó el cerco del fondo."
+   },
+   {
+    "name": "Porcentaje de falsas por cámara",
+    "para_que": "Decir que una cámara da muchas falsas no alcanza para decidir. Un número por cámara permite elegir cuál atacar primero y saber si el cambio sirvió.",
+    "como": "El Análisis calcula, de las últimas 50 detecciones revisadas de esa cámara (con 5 o más), cuántas fueron falsas. También compara el ritmo de esta hora con el promedio de esa hora en los 7 días previos, y la ficha de la cámara muestra detecciones, reales y falsas de hoy.",
+    "ejemplo": "La cámara del fondo tiene 82 por ciento de falsas, casi todas por un ligustro. Se mueve la línea y se baja a 40; a la semana, 35 por ciento, y la persona de prueba sigue disparando."
+   },
+   {
+    "name": "Ráfaga y episodio",
+    "para_que": "Una persona caminando frente a la línea puede disparar varias detecciones en segundos. Contarlas como intrusiones separadas infla los números y confunde al operador.",
+    "como": "El Análisis agrupa las detecciones de la misma cámara en un margen de 5 minutos y lo dice: es un mismo episodio. Para medir falsas conviene pensar en episodios, y la decisión del operador cierra todas las pendientes juntas.",
+    "ejemplo": "Un perro que pasea por la zona genera 12 detecciones en 4 minutos. Es un solo episodio falso, y el cambio que corresponde es uno: objetivo Persona."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLas falsas alarmas son tan viejas como las alarmas. En las centrales con sensores, la industria respondió con paneles que reducen errores del usuario (la norma ANSI/SIA CP-01 del año 2000), verificación con llamadas y cruce de zonas. En video, la primera respuesta fue la analítica con reglas; la segunda, la clasificación de objetos, que separa personas y vehículos de animales, lluvia y sombras.\n\nDavantis, que vende analítica, afirma que con detección de movimiento convencional más del 76 por ciento de lo que recibe una central es falso, y propone atacar el problema en cuatro niveles: instalación, configuración, tecnología y proceso. Uniview suma causas de todos los días: arañas que tejen frente al domo y reflejan el infrarrojo, superficies metálicas que brillan, el horizonte con el sol.\n\n### Cómo funciona\n\nUna regla de cruce dispara cuando la cámara cree que un objeto atravesó la línea. Esa creencia depende de la imagen (luz, contraste, suciedad del vidrio), de la geometría (dónde está la línea respecto de lo que se mueve) y de los umbrales (sensibilidad, objetivo). Por eso el orden importa: si el vidrio está sucio o el sol entra de frente, ningún umbral lo arregla.\n\nCon la clasificación, la cámara además decide qué es el objeto y descarta lo que no sea persona o vehículo. Sin clasificación, como contó un usuario en un foro, ni el porcentaje ni la sensibilidad frenan a un gato que entra en la zona: la solución pasa por achicar la zona o mover la línea.\n\nOmniAccess ayuda a medir. Cada decisión del operador (real o falsa) queda guardada, y el Análisis de una detección calcula el porcentaje de falsas de las últimas revisadas de la cámara, la ráfaga y el ritmo contra los 7 días previos. Con un cambio por vez y una semana de datos se sabe si el cambio sirvió o si hay que volver atrás."
+ },
+ "10": {
+  "fig": {
+   "file": "10.svg",
+   "alt": "Cadena de cinco eslabones para que llegue: 1 regla armada, punto verde en la pared; 2 vinculación, notificar al centro; 3 servidor de alarma, campana y probar reporte; 4 red al puerto 10000, curl desde la red de cámaras; 5 alta con su IP o MAC, si no entra sin cámara. Debajo, para que llegue completo: foto propia con la clave de la cámara, grabación con NVR y canal, hora sincronizada. Notas sobre Dahua y sobre no resetear la cámara.",
+   "caption": "Se recorre de izquierda a derecha: el primer eslabón roto explica el resto."
+  },
+  "steps": [
+   {
+    "file": "10-paso5.svg",
+    "step": 5,
+    "alt": "Una PC en la red de cámaras 192.0.2.30 prueba el puerto 10000 del servidor OmniAccess 192.0.2.10. Dos terminales con el mismo curl: uno responde 200 y otro termina en 000 por timeout. Notas: si responde, el puerto está abierto y el problema está antes o en el alta; si hay timeout, revisar firewall, VLAN y ruteo.",
+    "caption": "Cualquier código HTTP es puerto abierto; el timeout apunta a la red.",
+    "after": "Desde una PC en la red de cámaras"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Diagnóstico por eslabones",
+    "para_que": "Cuando algo no llega, la tentación es cambiar varias cosas a la vez y no saber cuál lo arregló, o romper otra. Recorrer la cadena en orden encuentra la falla con menos pasos.",
+    "como": "Se va de la cámara al monitor: regla que detecta y armada ahora, vinculación con Notificar al centro, servidor de alarma con OmniAccess, red hasta el puerto 10000, cámara dada de alta con la IP o MAC que manda. Recién con eso andando se mira foto, grabación y hora.",
+    "ejemplo": "Una cámara del fondo no avisa. Punto verde: armada. Tilde: está. Campana: OmniAccess presente. curl desde la red de cámaras: timeout. El firewall de la VLAN de cámaras bloqueaba el 10000 hacia el servidor."
+   },
+   {
+    "name": "Identificación de la cámara",
+    "para_que": "El evento que llega trae la IP y la MAC de quien lo mandó. OmniAccess necesita reconocer esa cámara para saber qué canal pintar y a quién pedirle la foto.",
+    "como": "El webhook busca un equipo dado de alta con esa MAC o esa IP. Si no lo encuentra, guarda la detección sin cámara: aparece en la franja como Cámara sin nombre, pero no pinta ningún canal ni arma alarma. Se arregla dando de alta la cámara o corrigiendo su IP en Dispositivos.",
+    "ejemplo": "Después de cambiar el direccionamiento de la red de cámaras, los cruces siguen llegando pero ningún canal se pone rojo. Las cámaras tenían IP nueva y en OmniAccess seguían con la vieja."
+   },
+   {
+    "name": "Salud de los equipos",
+    "para_que": "Una cámara caída es un pedazo de perímetro ciego, y nadie se entera hasta que hace falta. El sondeo activo avisa antes.",
+    "como": "OmniAccess sondea los equipos y abre alertas por falta de respuesta (dos sondeos seguidos), disco, memoria y reloj corrido más de 2 minutos, con aviso por Telegram de ALERTA y NORMALIZADO. Se ven en Dispositivos, en el historial de salud y en la pantalla Salud del sistema.",
+    "ejemplo": "A las 4 de la mañana llega por Telegram ALERTA de Perímetro Sur 07 sin respuesta. El técnico ve en el historial que se cortó junto con otras dos del mismo switch: era la fuente del switch."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEl diagnóstico por capas es tan viejo como las redes: primero lo físico, después la red, después la aplicación. En sistemas de eventos de cámaras se suma una capa propia, la configuración del evento, que es donde más se pierde tiempo. Los foros de integradores repiten las mismas trampas: la guía de Home Assistant pide que el usuario de la cámara tenga el permiso de notificar al centro y autenticación digest; Bosch documenta que, por ONVIF, el cruce de línea viaja por un tópico distinto del resto de su analítica y un cliente suscripto al tópico equivocado no lo recibe nunca.\n\n### Cómo funciona\n\nPara que un cruce llegue a OmniAccess tienen que cumplirse cinco condiciones en cadena. La regla tiene que detectar y estar armada en ese momento. La regla tiene que tener tildado Notificar al centro de vigilancia. La cámara tiene que tener a OmniAccess como servidor de alarma. El mensaje tiene que atravesar la red hasta el puerto 10000 del servidor. Y el servidor tiene que reconocer la cámara por su MAC o su IP.\n\nCada condición tiene su prueba: el punto verde de la vista de pared, la pestaña de vinculación en la web de la cámara, la campana del canal, un `curl` desde la red de cámaras y la lista de Dispositivos. Un curl que devuelve cualquier código HTTP prueba que el puerto está abierto; un timeout, que el problema es de red.\n\nCon el evento llegando, faltan tres cosas para que llegue completo: la foto, que el servidor le pide a la cámara con su propia clave por el puerto 80; la grabación, que necesita el vínculo con el NVR y el canal; y la hora, porque con relojes corridos el clip del NVR no coincide con el evento.\n\nCon Dahua, la cadena es más corta: OmniAccess se suscribe al NVR, y si el NVR no responde o no autentica, no llega ningún evento de sus canales."
+ }
+}

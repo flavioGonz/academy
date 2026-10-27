@@ -1,0 +1,18 @@
+A: Lección ocho: el registro y el guardia. Lo que queda cuando termina el turno.
+B: Arranquemos por el registro. ¿Dónde busco lo de anoche?
+A: En el monitor de intrusión hay dos botones arriba: historial y evidencia. Historial es la lista, con filtros por tipo: intrusión, línea, movimiento, todo. Evidencia es la grilla con foto, y ahí filtrás por cámara, por estado y por fechas.
+B: ¿Estado?
+A: Pendientes o revisadas. Y cada tarjeta dice pendiente, real o falsa. Si dejás el mouse tres segundos encima, te reproduce el clip del NVR.
+B: Muy cómodo. ¿Y si alguien marcó mal una?
+A: Se corrige una sola, sin tocar las demás, desde la ficha de la detección en la vista de pared. Era falsa alarma, o era real. Así el registro dice la verdad.
+B: ¿Y cuánto tiempo se guardan las fotos?
+A: Lo que diga la retención del bucket de intrusión, en configuración, almacenamiento. El manual del administrador habla de treinta días como valor típico. Ojo: si la bajás, lo viejo se borra para siempre.
+B: ¿Las fuentes qué dicen del registro?
+A: SDM cuenta que algunas centrales graban exactamente la pantalla que vio el operador, para que sirva como evidencia. Y la misma nota habla de turnos cortos para evitar la fatiga.
+B: Bien. ¿Y el guardia? ¿Le salta la alarma en la tablet?
+A: En esta versión, no. La tablet del guardia no recibe la intrusión. Lo que sí: el puesto ve a cada guardia en el mapa, con su posición cada diez segundos.
+B: Entonces el operador lo manda por radio.
+A: Exacto. Mirás la línea en rojo en el mapa, el guardia más cercano, y le pasás cuatro datos: qué cámara, qué lugar, qué se vio y hace cuánto.
+B: [risas] Y que no vaya corriendo al otro lado del barrio.
+A: Para eso está el mapa. El laboratorio: en evidencia filtrás las pendientes de anoche de Perímetro Norte doce, mirás el clip, corregís una desde la pared, revisás la retención y practicás el mensaje al guardia. Quince minutos.
+B: Regla: ninguna detección termina el turno como pendiente.

@@ -1,0 +1,19 @@
+A: Lección cinco: dónde suena la alarma. Y empiezo por la pregunta que te va a hacer el cliente.
+B: ¿Me llega al celular?
+A: Esa. Y la respuesta honesta, en esta versión, es no. La intrusión avisa en pantallas.
+B: ¿Cuáles?
+A: Tres. El monitor de intrusión, donde el canal se pone rojo. El mapa, que pita y habla: dice persona en Perímetro Norte doce, y la línea dibujada titila en rojo. Y las pantallas de pared.
+B: Las de pared son las del menú Monitores, ¿no?
+A: Esas. Creás un enlace de pantalla para la vista Intrusión, que abre sin usuario y solo para mirar. Y elegís el sonido: sin sonido, un tono por alarma, o repetir hasta que se acepte.
+B: ¿Y Telegram? Porque en Notificaciones hay Telegram y WhatsApp.
+A: Las reglas de Notificaciones y los Despachos, hoy, son de Filas. Telegram sí avisa la salud: alerta y normalizado cuando una cámara deja de responder. Pero no hay regla de intrusión al celular.
+B: Raro, porque en algún texto de la pantalla dice que suena en el bot.
+A: Por eso lo aclaro. Está mencionado, pero no está en esta versión. Lo que sí sale por WhatsApp es el clip que manda el operador desde la grabación.
+B: ¿Qué dicen las fuentes de todo esto?
+A: Davantis insiste en que la alarma tiene que llegar calificada y con el video a un clic, en la herramienta que el operador ya usa. Si hay que cambiar de pantalla, se atiende fuera del protocolo.
+B: Tiene lógica. ¿El laboratorio?
+A: En Monitores ponés repetir hasta que se acepte, creás el enlace y lo abrís en Chrome modo kiosco, que suena sin pedir el primer toque. Después vas al mapa, editar mapa, cruces de línea, y dibujás la línea de Perímetro Norte doce sobre el cerco.
+B: Y cruzo y escucho.
+A: Y escuchás. [risas] Avisá antes, que la voz es fuerte.
+B: Veinte minutos. ¿La regla?
+A: Decile al cliente por escrito dónde suena la alarma y dónde no.

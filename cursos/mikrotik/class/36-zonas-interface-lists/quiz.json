@@ -1,0 +1,35 @@
+[
+  {
+    "q": "En un edificio con zonas ya armadas, el cliente suma una VLAN de cámaras para el tercer piso. ¿Qué hacés para que tenga la misma política que el resto del CCTV?",
+    "options": [
+      "Copio cada regla de CCTV y cambio la interfaz por la VLAN nueva",
+      "Agrego la VLAN nueva como miembro de la lista CCTV",
+      "Agrego la VLAN al bridge y listo, el firewall la toma solo",
+      "La meto en la lista LAN para que tenga los permisos de fábrica"
+    ],
+    "answer": 1,
+    "why": "Las reglas apuntan a la lista con in-interface-list y out-interface-list. Una interfaz nueva en la lista hereda la política de la zona sin tocar el firewall."
+  },
+  {
+    "q": "Terminaste forward con un drop final y armaste la matriz de zonas. Al otro día la central de monitoreo no entra al NVR publicado con dst-nat. ¿Qué falta?",
+    "options": [
+      "Pasar el NVR a la zona GESTION",
+      "Un accept en input para el puerto publicado",
+      "Sacar el masquerade",
+      "Una regla arriba del drop: in-interface-list=WAN connection-nat-state=dstnat action=accept"
+    ],
+    "answer": 3,
+    "why": "El tráfico dst-nateado pasa por forward, no por input, y el drop final lo descarta. Una regla que acepte lo que vino de WAN y fue dst-nateado lo deja pasar, como en el hilo del foro."
+  },
+  {
+    "q": "Pusiste las cámaras y el NVR en la zona CCTV y la PC de administración en ADMIN, pero todos siguen en la misma red 192.168.88.0/24 del bridge. La PC sigue viendo las cámaras. ¿Por qué?",
+    "options": [
+      "Porque están en la misma red: el bridge los conmuta en capa 2 y ese tráfico no pasa por forward",
+      "Porque las interface lists solo funcionan en input",
+      "Porque falta reiniciar el router para que tome las listas",
+      "Porque ADMIN tiene que estar incluida en LAN"
+    ],
+    "answer": 0,
+    "why": "Las zonas separan interfaces ruteadas. Dos equipos en la misma red se hablan sin pasar por el router; para filtrarlos, cada sistema en su VLAN con su IP en el router, y recién ahí la matriz de zonas los separa."
+  }
+]

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Leé cada tarea de la puesta a punto</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS LPR · PASO 6</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Leé cada tarea de la puesta a punto</text>
+<rect x="48" y="124" width="1104" height="40" rx="10" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="68.0" y="150.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Dar de alta la cámara</text>
+<rect x="440.0" y="131.0" width="42.8" height="29" rx="14.5" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="1.5"/><text x="461.4" y="152.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">ok</text>
+<text x="580.0" y="150.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">P1 - Entrada (21) · 192.0.2.21</text>
+<rect x="48" y="170" width="1104" height="40" rx="10" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="68.0" y="196.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Poner la hora</text>
+<rect x="440.0" y="177.0" width="42.8" height="29" rx="14.5" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="1.5"/><text x="461.4" y="198.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">ok</text>
+<text x="580.0" y="196.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">hora del servidor</text>
+<rect x="48" y="216" width="1104" height="40" rx="10" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="68.0" y="242.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Servidor de alarmas → OmniAccess</text>
+<rect x="440.0" y="223.0" width="42.8" height="29" rx="14.5" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="1.5"/><text x="461.4" y="244.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">ok</text>
+<text x="580.0" y="242.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">192.0.2.10:10000/api/webhooks/hikvision</text>
+<rect x="48" y="262" width="1104" height="40" rx="10" fill="#FCEAE6" stroke="#D2492F" stroke-width="1.5"/>
+<text x="68.0" y="288.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Modo ANPR</text>
+<rect x="440.0" y="269.0" width="68.0" height="29" rx="14.5" fill="#FCEAE6" stroke="#D2492F" stroke-width="1.5"/><text x="474.0" y="290.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">error</text>
+<text x="580.0" y="288.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#D2492F" text-anchor="start">está en &#x27;smart&#x27;: pasala a roadDetection</text>
+<rect x="48" y="308" width="1104" height="40" rx="10" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="68.0" y="334.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Video H.264</text>
+<rect x="440.0" y="315.0" width="42.8" height="29" rx="14.5" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="1.5"/><text x="461.4" y="336.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">ok</text>
+<text x="580.0" y="334.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">canales 101 y 102</text>
+<rect x="48" y="354" width="1104" height="40" rx="10" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="68.0" y="380.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Video en vivo</text>
+<rect x="440.0" y="361.0" width="42.8" height="29" rx="14.5" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="1.5"/><text x="461.4" y="382.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">ok</text>
+<text x="580.0" y="380.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">stream registrado</text>
+<rect x="48" y="400" width="1104" height="40" rx="10" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="68.0" y="426.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Cargar matrículas</text>
+<rect x="440.0" y="407.0" width="42.8" height="29" rx="14.5" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="1.5"/><text x="461.4" y="428.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">ok</text>
+<text x="580.0" y="426.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">+120 agregadas</text>
+<rect x="48" y="446" width="1104" height="40" rx="10" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="68.0" y="472.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Vincular la grabación</text>
+<rect x="440.0" y="453.0" width="42.8" height="29" rx="14.5" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="1.5"/><text x="461.4" y="474.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">ok</text>
+<text x="580.0" y="472.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">NVR de prueba · canal 3</text>
+<rect x="48" y="492" width="1104" height="40" rx="10" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="68.0" y="518.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Calcular retención</text>
+<rect x="440.0" y="499.0" width="42.8" height="29" rx="14.5" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="1.5"/><text x="461.4" y="520.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">ok</text>
+<text x="580.0" y="518.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">el canal guarda 31 días</text>
+<text x="48.0" y="598.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">Sin NVR, Vincular la grabación y Calcular retención quedan salteadas. Error en Modo ANPR: se resuelve con el árbol de diagnóstico.</text>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Zona sobre el carril, línea de captura y perfil nocturno</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS LPR</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Zona sobre el carril, línea de captura y perfil nocturno</text>
+<rect x="48" y="132" width="600" height="440" rx="12" fill="#14222F"/>
+<text x="64.0" y="160.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#9FC3E3" text-anchor="start" letter-spacing="1.2">Calibrar ANPR · en vivo</text>
+<path d="M276.0 182 L420.0 182 L618.0 572 L78.0 572 Z" fill="#2E4052"/>
+<path d="M348.0 192 L348.0 572" stroke="#C2D4E6" stroke-width="3" stroke-dasharray="16 14"/>
+<polygon points="348,282 468,282 568,542 348,542" fill="#17A8D4" fill-opacity=".14" stroke="#17A8D4" stroke-width="3" stroke-dasharray="10 6"/>
+<circle cx="348" cy="282" r="7" fill="#FFFFFF" stroke="#17A8D4" stroke-width="3"/>
+<circle cx="468" cy="282" r="7" fill="#FFFFFF" stroke="#17A8D4" stroke-width="3"/>
+<circle cx="568" cy="542" r="7" fill="#FFFFFF" stroke="#17A8D4" stroke-width="3"/>
+<circle cx="348" cy="542" r="7" fill="#FFFFFF" stroke="#17A8D4" stroke-width="3"/>
+<path d="M348 462H568" stroke="#0E8F5E" stroke-width="4"/>
+<rect x="403.0" y="422.0" width="110.0" height="36.3" rx="6" fill="#FFFFFF" stroke="#04223D" stroke-width="2.5"/><rect x="405.0" y="424.0" width="106.0" height="7.3" rx="4" fill="#0A63B8"/><text x="458.0" y="451.8" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#04223D" text-anchor="middle">SBA 1234</text>
+<rect x="160.0" y="326.0" width="96.0" height="28" rx="14.0" fill="#14222F" stroke="#17A8D4" stroke-width="1.5"/><text x="208.0" y="346.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#17A8D4" text-anchor="middle">Carril 1</text>
+<rect x="114.0" y="448.0" width="168.0" height="28" rx="14.0" fill="#14222F" stroke="#0E8F5E" stroke-width="1.5"/><text x="198.0" y="468.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">Línea de captura</text>
+<rect x="680" y="132" width="472" height="440" rx="16" fill="#011E38" stroke="#17A8D4" stroke-width="2"/><text x="700.0" y="164.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#FFFFFF" text-anchor="start">Perfil ANPR barrio-noche</text><text x="700.0" y="188.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#9FC3E3" text-anchor="start">20 a 30 km/h, faros de frente</text>
+<text x="704.0" y="230.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#FFFFFF" text-anchor="start">Obturador</text>
+<text x="1128.0" y="230.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#17A8D4" text-anchor="end">1/500</text>
+<text x="704.0" y="270.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#FFFFFF" text-anchor="start">Anti-brillo de patente</text>
+<text x="1128.0" y="270.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#17A8D4" text-anchor="end">60</text>
+<text x="704.0" y="310.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#FFFFFF" text-anchor="start">WDR</text>
+<text x="1128.0" y="310.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#17A8D4" text-anchor="end">apagado</text>
+<text x="704.0" y="350.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#FFFFFF" text-anchor="start">HLC</text>
+<text x="1128.0" y="350.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#17A8D4" text-anchor="end">apagado</text>
+<text x="704.0" y="390.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#FFFFFF" text-anchor="start">Ganancia máxima</text>
+<text x="1128.0" y="390.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#17A8D4" text-anchor="end">40</text>
+<text x="704.0" y="430.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#FFFFFF" text-anchor="start">Filtro IR</text>
+<text x="1128.0" y="430.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#17A8D4" text-anchor="end">automático</text>
+<text x="704.0" y="470.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#FFFFFF" text-anchor="start">Iluminador IR</text>
+<text x="1128.0" y="470.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#17A8D4" text-anchor="end">auto</text>
+<text x="704.0" y="510.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#FFFFFF" text-anchor="start">Foco</text>
+<text x="1128.0" y="510.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#17A8D4" text-anchor="end">semiautomático</text>
+<text x="704.0" y="552.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#9FC3E3" text-anchor="start">Solo Hikvision · reversible</text>
+</svg>

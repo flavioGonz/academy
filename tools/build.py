@@ -12,7 +12,7 @@ import markdown
 
 WS = Path("/home/claude/claudemy")
 SITE = Path("/home/claude/ies-training/site2")
-ORDER = ["mikrotik", "grandstream", "unifi", "omada", "akuvox", "hikcentral", "paradox", "bosch-incendio", "proxmox", "vmware", "windows", "linux"]
+ORDER = ["mikrotik", "grandstream", "unifi", "omada", "akuvox", "hikcentral", "omniaccess-lpr", "omniaccess-face", "omniaccess-intrusion", "omniaccess-filas", "paradox", "bosch-incendio", "proxmox", "vmware", "windows", "linux"]
 SECTIONS = {"**Escuchá:**": "listen", "**La idea, en tres líneas**": "idea", "**Impacto:**": "impact",
             "**Quién lo dice:**": "who", "**Laboratorio**": "lab", "**Regla para quedarse**": "rule",
             "**Saltear**": "skip", "**Para profundizar (opcional)**": "deeper"}

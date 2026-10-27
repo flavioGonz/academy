@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Bajá las falsas en este orden</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS INTRUSIÓN · LECCIÓN 9</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Bajá las falsas en este orden</text>
+<rect x="48" y="420" width="1104" height="70" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<circle cx="82" cy="455" r="17" fill="#17A8D4"/>
+<text x="82.0" y="461.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="112.0" y="462.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Instalación</text>
+<text x="238.0" y="462.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">horizonte y calle fuera del cuadro, vidrio limpio, sin telarañas</text>
+<rect x="198" y="340" width="954" height="70" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<circle cx="232" cy="375" r="17" fill="#17A8D4"/>
+<text x="232.0" y="381.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="262.0" y="382.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Regla</text>
+<text x="388.0" y="382.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">línea lejos del árbol, un sentido, zona chica, sensibilidad 40 a 60</text>
+<rect x="348" y="260" width="804" height="70" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<circle cx="382" cy="295" r="17" fill="#17A8D4"/>
+<text x="382.0" y="301.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="412.0" y="302.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Objetivo</text>
+<text x="538.0" y="302.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">Persona o Vehículo, si la cámara clasifica</text>
+<rect x="498" y="180" width="654" height="70" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<circle cx="532" cy="215" r="17" fill="#17A8D4"/>
+<text x="532.0" y="221.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="562.0" y="222.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Medir</text>
+<text x="688.0" y="222.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">% de falsas y ritmo en el Análisis, una semana</text>
+<rect x="48" y="520" width="540" height="99" rx="14" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/><rect x="48" y="532" width="5" height="75" rx="2.5" fill="#D2492F"/><text x="74.0" y="554.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="74.0" dy="0.0">El otro error</tspan></text><text x="74.0" y="581.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Un cambio por vez y probado caminando de noche: si la persona</tspan><tspan x="74.0" dy="20.2">deja de disparar, te pasaste.</tspan></text>
+<rect x="612" y="520" width="540" height="99" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="612" y="532" width="5" height="75" rx="2.5" fill="#B45309"/><text x="638.0" y="554.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="638.0" dy="0.0">Cámara que no clasifica</tspan></text><text x="638.0" y="581.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="638.0" dy="0.0">Sin clasificación, ni porcentaje ni sensibilidad frenan gatos y</tspan><tspan x="638.0" dy="20.2">pájaros: gana la geometría.</tspan></text>
+<text x="48.0" y="215.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#6E88A1" text-anchor="start">de abajo hacia arriba ↑</text>
+</svg>

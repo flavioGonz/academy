@@ -1,0 +1,575 @@
+{
+ "1": {
+  "fig": {
+   "file": "1.svg",
+   "alt": "Tres columnas con las familias de controlador Omada. Local: OC200 a OC400 o Software propio; el servicio corre en la red del cliente y se sigue gestionando sin internet. En la nube: Omada Central Essentials, gratis y sin MSP, o Standard, con una licencia por equipo; sin internet no hay gestión. Gateway integrado: Fusion o ER7212PC, router y controlador en la misma caja; el ER7212PC V2 llega a 22 switches y EAP. Dos notas: con licencia vencida en Central Standard la red sigue pero se apagan Portal, Fast Roaming y Schedule; Cloud Access es una puerta remota y no un controlador en la nube. Abajo, la capacidad recomendada: OC200 25 equipos, OC220 40, OC300 160, OC400 500.",
+   "caption": "El controlador se elige por dónde corre el servicio y por la capacidad recomendada."
+  },
+  "steps": [
+   {
+    "file": "1-paso2.svg",
+    "step": 2,
+    "after": "Para cada fila elegí entre",
+    "alt": "Arriba, la fila de la planilla: obra, equipos, sin internet, portal, MSP, controlador y licencias por año. Debajo, una tabla de qué mirar según lo que pide la obra: gestionar sin internet lleva a OC, Software propio o gateway integrado; varios clientes con MSP, a Software propio o Central Standard; nadie que mantenga un servidor, a OC, Central o Fusion y ER7212PC; cero costo de licencias, a OC, Software, Essentials o gateway integrado; todo en una caja en un local chico, a ER7212PC. Notas: Essentials y los OC no tienen MSP; las licencias de Central Standard corren desde que se activan.",
+    "caption": "Cada respuesta de la planilla achica la lista de controladores posibles."
+   },
+   {
+    "file": "1-paso4.svg",
+    "step": 4,
+    "after": "Si elegiste hardware, verificá",
+    "alt": "Cuatro tarjetas con la capacidad recomendada: OC200 hasta 25 equipos, OC220 hasta 40, OC300 hasta 160 y OC400 hasta 500. Ejemplo de una obra con 22 equipos: en un OC200 ocupa 22 de 25 y queda sin lugar para crecer, en ámbar; en un OC220 ocupa 22 de 40 y queda margen, en verde. Notas: una reseña de 2022 citaba el OC200 hasta 100 equipos, pero la tabla oficial actual recomienda 25; Software propio recomendado hasta 10.000, ER7212PC V2 hasta 22 switches y EAP, Fusion 30 equipos.",
+    "caption": "Con la cifra recomendada y margen para crecer, no con la máxima."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Controlador SDN",
+    "para_que": "Omada separa la configuración de los equipos: gateways, switches y EAP reciben todo de un controlador central en lugar de configurarse uno por uno. Así una red de veinte equipos se cambia desde una pantalla, con el mismo criterio en todos.",
+    "como": "El controlador guarda la configuración del sitio y la empuja a cada equipo adoptado. Si el controlador se cae, los equipos siguen con lo último que recibieron, pero se pierde gestión, monitoreo y las funciones que dependen de él, como el portal. Por eso dónde corre el controlador es la primera decisión de cada obra.",
+    "ejemplo": "Un local de ropa en Tres Cruces con un ER, un switch y cuatro EAP: un OC200 en el rack los gestiona, y si mañana se suma un quinto EAP aparece en el mismo controlador con los mismos SSID."
+   },
+   {
+    "name": "Cloud Access y controlador en la nube",
+    "para_que": "Son dos cosas distintas que se confunden mucho. Cloud Access es una puerta para entrar de forma remota a un controlador que corre en tu hardware; Omada Central es el controlador corriendo en la nube de TP-Link.",
+    "como": "Con un OC, un Software propio o un gateway integrado, el servicio, la configuración y los logs quedan en el lugar, y la red se sigue gestionando en local aunque se caiga internet. Con Omada Central el servicio vive en la nube: sin internet no hay gestión, y en Standard cada equipo lleva su licencia.",
+    "ejemplo": "Un hotel en Colonia con un OC300 y Cloud Access activado: si se corta la fibra, el técnico que está en el lugar entra al OC por la red local y sigue trabajando."
+   },
+   {
+    "name": "Licencias de Omada Central Standard",
+    "para_que": "Central Standard cobra por equipo gestionado. La licencia es la que mantiene el vínculo entre el equipo y el controlador en la nube.",
+    "como": "La licencia corre desde que se activa, esté o no asignada a un equipo, y se puede desvincular una cantidad limitada de veces. El controlador avisa por mail 30 días antes del vencimiento. Si vence, el equipo sigue con la última configuración pero se apagan funciones como Portal, Fast Roaming y Schedule. Cada TP-Link ID tiene una prueba única de 10 licencias por 30 días.",
+    "ejemplo": "Un cliente con portal de vouchers en un hostel de Punta del Diablo deja vencer las licencias en enero: el WiFi sigue, pero los huéspedes nuevos no pasan el portal. Anotar quién renueva y cuándo evita esa llamada."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEl controlador de TP-Link nació gestionando los access points EAP; todavía hoy, en Linux, se instala en `/opt/tplink/EAPController`. Con la versión 4.1.5 pasó a llamarse Omada SDN Controller y empezó a gestionar también gateways y switches desde la misma pantalla. La guía oficial de ese salto ya listaba el OC200 y el OC300, este en su primera versión, como controladores de hardware, y el controlador en la nube figuraba como \"Coming Soon\".\n\nHoy TP-Link agrupa las opciones en tres familias. Locales: el Software Controller, que se instala en un servidor propio, y los OC200, OC220, OC300 y OC400. En la nube: Omada Central Essentials, gratis y sin modo MSP, y Central Standard, con una licencia por equipo. Y los gateways con controlador integrado: la serie Fusion y el ER7212PC.\n\nLas cifras de capacidad también cambiaron. Una reseña de 2022 citaba el OC200 hasta 100 equipos; la tabla oficial actual lo recomienda hasta 25. La diferencia es entre lo máximo y lo recomendado, y conviene dimensionar por lo segundo.\n\n### Cómo funciona\n\nEl controlador es el que guarda la configuración de cada sitio (redes, WiFi, puertos, ACL) y la empuja a los equipos adoptados. Los equipos hablan con él por puertos propios de Omada, del UDP 29810 al TCP 29817. Si el controlador desaparece, cada equipo sigue con lo último que recibió: la red anda, pero nadie puede cambiar nada, y lo que depende del controlador corriendo, como el portal cautivo, deja de autenticar.\n\nLo que cambia entre familias es dónde corre ese servicio:\n\n- **Local**: corre en la red del cliente. Sigue gestionando sin internet; a cambio, alguien mantiene el host, los backups y las versiones.\n- **Nube**: corre en servidores de Amazon que usa TP-Link (Irlanda, Singapur o Estados Unidos, según dónde se registró el TP-Link ID). No hay host que cuidar, pero la gestión depende de internet y, en Standard, de licencias vigentes.\n- **Integrado**: corre dentro del router. Es simple y sin licencias, con escala chica: el ER7212PC V2 llega a 22 switches y EAP, y un Fusion gestiona solo su propio sistema.\n\nCloud Access es otra cosa: una puerta remota hacia un controlador local o integrado. El servicio sigue en tu hardware."
+ },
+ "2": {
+  "fig": {
+   "file": "2.svg",
+   "alt": "Dos paneles. A la izquierda, en rojo, red bridge con puertos publicados: un EAP de fábrica manda un broadcast a UDP 29810, que se corta en el borde de la red bridge de Docker antes de llegar al contenedor del controlador; la web en el puerto 8043 abre, pero los EAP nunca aparecen. A la derecha, en verde, network_mode host: el controlador usa la red de la VM y escucha el 29810, el broadcast entra y el EAP queda en Pending. Notas: TP-Link no publica imagen Docker y se usa la comunitaria mbentley/omada-controller con Java y MongoDB; en Docker Desktop de Windows o macOS la red host no funciona y los equipos llegan por Inform URL.",
+   "caption": "Con red bridge la web abre pero los EAP no aparecen; con red host, sí."
+  },
+  "steps": [
+   {
+    "file": "2-paso1.svg",
+    "step": 1,
+    "after": "1. Verificá AVX:",
+    "alt": "Terminal de la VM con el comando grep de avx en /proc/cpuinfo. Dos resultados: si imprime avx, se usa la imagen mbentley/omada-controller:6.2 y se sigue con el compose; si avisa que no hay AVX, la imagen de la rama 5 o una mini PC Intel de sexta generación o más nueva. Notas: el controlador 6.x usa un MongoDB que pide AVX, que no tienen una Raspberry Pi 4 ni un NAS viejo; al arrancar usa unos 1,9 GB de RAM y conviene dejarle 4 GB libres.",
+    "caption": "Si la CPU no tiene AVX, el controlador 6 no arranca: rama 5 u otro equipo."
+   },
+   {
+    "file": "2-paso2.svg",
+    "step": 2,
+    "after": "2. Creá el compose:",
+    "alt": "El archivo docker-compose.yml con cinco líneas resaltadas y su motivo: network_mode host para que llegue el broadcast de descubrimiento, restart unless-stopped para volver solo después de un reinicio, stop_grace_period 60s para que MongoDB cierre limpio, TZ America/Montevideo para la hora de logs y programaciones, y el volumen omada-data en /opt/tplink/EAPController/data, donde vive toda la configuración. Aviso en rojo: para actualizar, pull y up; nunca down -v, que borra los volúmenes.",
+    "caption": "Red host, reinicio automático, sesenta segundos para cerrar y la configuración en un volumen."
+   },
+   {
+    "file": "2-paso4.svg",
+    "step": 4,
+    "after": "En el asistente elegí",
+    "alt": "La dirección https IP de la VM puerto 8043, a la que se entra cuando el log muestra la versión, entre 1 y 2 minutos. Ventana del asistente con Create a Local Account resaltado, región Uruguay y zona horaria America/Montevideo. Notas: la cuenta local hace que el controlador no dependa de la nube de TP-Link; la región define canales y potencia legales; al cerrar el asistente, el EAP de la misma subred aparece en Devices como Pending.",
+    "caption": "Cuenta local, región real y, al final, el EAP en Pending."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Red host en Docker",
+    "para_que": "Un EAP de fábrica no sabe dónde está el controlador y lo busca con un broadcast al UDP 29810. La red bridge de Docker pone al contenedor detrás de su propio NAT, y el broadcast de la LAN no lo atraviesa.",
+    "como": "Con `network_mode: host` el contenedor usa directamente la red de la VM: escucha el 29810 como si el controlador estuviera instalado en el sistema. Con bridge y puertos publicados, la web en el 8043 abre igual, y por eso el problema confunde. En Docker Desktop de Windows o macOS la red host no funciona: ahí los equipos llegan con Inform URL.",
+    "ejemplo": "Un técnico levanta el controlador en un mini PC de la oficina con el compose de un blog que usaba bridge. Entra a la web, todo bien, pero los tres EAP del banco de pruebas nunca aparecen. Cambia a `network_mode: host`, recrea el contenedor y aparecen en Pending."
+   },
+   {
+    "name": "AVX y MongoDB",
+    "para_que": "El controlador guarda su base en MongoDB. La versión de MongoDB que usa el controlador 6.x necesita la instrucción AVX del procesador, y sin ella el contenedor no arranca.",
+    "como": "Antes de instalar, `grep -o -m1 avx /proc/cpuinfo` dice si la CPU la tiene. Si no, quedan dos caminos: la imagen de la rama 5 o un equipo más nuevo, como una mini PC Intel de sexta generación o posterior. En una VM, además, el hipervisor tiene que pasarle AVX al invitado.",
+    "ejemplo": "La Raspberry Pi 4 que sobró de otra obra parece ideal para el controlador de un consultorio, pero no tiene AVX: el controlador 6 no arranca. Una mini PC usada con Intel moderno resuelve lo mismo y queda dedicada."
+   },
+   {
+    "name": "Host dedicado y cierre limpio",
+    "para_que": "Un controlador que se duerme, se reinicia por actualizaciones o se apaga de golpe deja la red sin gestión y puede corromper la base. El host dedicado y el tiempo de cierre existen para evitar las dos cosas.",
+    "como": "El controlador va en un equipo o VM que solo hace eso y no se suspende. `restart: unless-stopped` lo levanta después de un corte, y `stop_grace_period: 60s` le da a MongoDB tiempo para cerrar limpio. Para actualizar, `docker compose pull && docker compose up -d`; `down -v` borra los volúmenes con toda la configuración.",
+    "ejemplo": "Una iglesia en Inglaterra corría el controlador en la PC de la mesa técnica: se dormía o se reiniciaba por actualizaciones y los equipos quedaban sin gestión hasta que alguien la prendía. Lo pasaron a un equipo dedicado. Lo mismo vale para la PC de recepción de un cliente en Maldonado."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nTP-Link publica el Software Controller para Windows y Linux, pero no una imagen de Docker. La que usa casi todo el mundo es comunitaria: `mbentley/omada-controller`, que trae adentro Java y MongoDB. La guía de computingforgeeks la probó en julio de 2026 con la versión 6.2.10.17, y la de mariushosting con la 6.3.0.111.\n\nCon la rama 6 apareció un requisito nuevo: el MongoDB que usa necesita la instrucción AVX del procesador. AVX llegó a los Intel en 2011, con la generación Sandy Bridge, pero muchos equipos chicos no la tienen: la Raspberry Pi 4 es ARM y varios NAS usan CPU de gama baja. Por eso las guías de LazyAdmin y de mariushosting dicen lo mismo: sin AVX, imagen de la rama 5 o equipo más nuevo.\n\nLa otra lección vino de obra. En 2021 una iglesia en Inglaterra contó que su controlador vivía en la PC de la mesa técnica, que se dormía o se reiniciaba por actualizaciones; cada vez, la red quedaba sin gestión hasta que alguien la prendía. Lo mudaron a un equipo dedicado.\n\n### Cómo funciona\n\nEl EAP de fábrica toma IP por DHCP y manda un mensaje de presentación por broadcast al UDP 29810 de su subred. El controlador escucha ese puerto y le responde. Todo depende de que el broadcast llegue.\n\nEn Docker hay dos formas de conectar un contenedor:\n\n- **Bridge**: el contenedor vive en una red interna con NAT y solo recibe lo que se publica con `ports:`. Un pedido dirigido al 8043 llega bien; un broadcast de la LAN no cruza ese NAT.\n- **Host**: el contenedor comparte la red de la VM. El 29810 que escucha es el de la VM, y el broadcast llega igual que a un controlador instalado.\n\nDespués del primer arranque, muchas variables del contenedor quedan guardadas en la base: LazyAdmin avisa que para cambiar puertos hace falta `WEB_CONFIG_OVERRIDE=true`. Y el arranque tarda de 1 a 2 minutos con unos 1,9 GB de RAM; reiniciarlo por impaciencia solo lo demora.\n\nLa configuración entera vive en el volumen montado en `/opt/tplink/EAPController/data`. Mientras ese volumen exista, el contenedor se puede borrar y recrear sin perder nada."
+ },
+ "3": {
+  "fig": {
+   "file": "3.svg",
+   "alt": "Diagrama de secuencia entre un EAP de fábrica que tomó IP por DHCP y el controlador en la misma VLAN y subred. El EAP manda un broadcast a UDP 29810; el controlador responde por el mismo puerto; el equipo aparece en Devices como Pending y el técnico toca Adopt; el controlador le manda la configuración y la Device Account, y el equipo queda Connected, con la GUI local que ya no manda. Notas: el broadcast no cruza routers; si no aparece en Pending, primero la VLAN, después loops, ping y firewall; equipo usado, reset de fábrica antes de adoptar.",
+   "caption": "Broadcast, respuesta, Pending, Adopt y Connected, todo dentro de la misma subred."
+  },
+  "steps": [
+   {
+    "file": "3-paso2.svg",
+    "step": 2,
+    "after": "Forzá un fallo: en el controlador",
+    "alt": "Cuatro pasos en fila: Forget en el controlador desde Devices; reset del EAP con el botón hasta que titile la luz; entrar a la web local en http IP del EAP con admin y admin; poner la clave nueva de ejemplo Lab-Omada-2026, en ámbar. Debajo: ahora el EAP está en modo standalone con una clave que el controlador no conoce, y una ventana de Retry con usuario admin y clave Lab-Omada-2026. Nota: en el paso 3 aparece Adopt Failed y con Retry y la clave de la web local adopta.",
+    "caption": "Un EAP con clave propia que el controlador no conoce: el Adopt Failed de obra, a propósito."
+   },
+   {
+    "file": "3-paso4.svg",
+    "step": 4,
+    "after": "Anotá el mensaje exacto que viste",
+    "alt": "Tabla de mensaje y qué revisar: username or password is incorrect, la clave de la web local o la Device Account del otro controlador; does not respond to adopt commands, tags de VLAN hasta el DHCP, loops, ping y firewall; Failed to link to uplink AP, en mesh distancia u obstáculos u otro uplink; This device does not exist, refrescar el navegador; switch sin botón de reset, consola a 38400 baudios y BootUtil. Notas: si el equipo estuvo en otro controlador, la clave está en Settings, Site, Device Account de ese controlador; con controlador software, el firewall o el antivirus de la PC tienen que dejar pasar el 29810 y del 29811 al 29816.",
+    "caption": "Cada mensaje de Adopt Failed apunta a una causa distinta."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Descubrimiento por broadcast",
+    "para_que": "Un equipo recién sacado de la caja no tiene configurado dónde está su controlador. El broadcast al UDP 29810 es la forma de preguntarle a toda su subred si hay alguno escuchando.",
+    "como": "El EAP toma IP por DHCP y anuncia que existe; el controlador, o la Omada Discovery Utility, escucha el 29810 y responde por el mismo puerto. El equipo aparece en Devices como Pending. Como el broadcast no cruza routers, si no aparece lo primero es confirmar que esté en la misma VLAN que el controlador.",
+    "ejemplo": "En un estudio contable de Cordón el EAP nuevo no aparece. El puerto del switch estaba en la VLAN de cámaras y el controlador en la de oficina: se corrige el perfil del puerto y en un minuto está en Pending."
+   },
+   {
+    "name": "Adopt Failed",
+    "para_que": "Es el aviso de que el controlador vio el equipo pero no pudo tomarlo. El mensaje que lo acompaña dice por qué, y leerlo ahorra resetear a ciegas.",
+    "como": "Con usuario o clave incorrectos, se prueba Retry con las credenciales de la web local; si estaba en otro controlador, salen de Settings > Site > Device Account de aquel. Si no responde a los comandos, se revisan tags de VLAN, loops, ping y firewall. Failed to link to uplink AP es de mesh: distancia u obstáculos. Recién si nada de eso funciona, reset de fábrica.",
+    "ejemplo": "HostiFi cuenta el caso de un gateway que alguien configuró por su web antes de adoptarlo: el controlador muestra Adopt Failed y pide usuario y clave. Con los de la GUI local, adopta sin resetear."
+   },
+   {
+    "name": "Standalone o controlador",
+    "para_que": "Omada deja que cada equipo funcione solo, con su web o su CLI, o que lo gestione un controlador. Son dos modos excluyentes, y saber en cuál está un equipo explica la mayoría de las sorpresas.",
+    "como": "Una vez adoptado, el equipo toma las credenciales de Device Account y su web local deja de servir: manda el controlador. En switches, pasar de un modo al otro pide reset de fábrica. Un equipo usado conviene resetearlo antes de adoptarlo, y si un switch no tiene botón, el reset se hace por consola a 38400 baudios con BootUtil.",
+    "ejemplo": "Un JetStream que vino de otra obra no aparece en el controlador porque sigue en standalone con la configuración vieja. Por consola, BootUtil, reset, y aparece en Pending como uno nuevo."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nOmada tiene una particularidad frente a sus competidores directos: cada equipo puede funcionar solo. Evan McCann lo señaló en 2022 al compararlo con UniFi e Instant On: en Omada, gateways, switches y EAP tienen su propia web y, en los switches, CLI. Eso da flexibilidad, pero obliga a saber en qué modo está cada equipo antes de adoptarlo.\n\nLos puertos de adopción también cuentan su historia. Los equipos con firmware de la época del controlador 4 usan el TCP 29811 y 29812; los adaptados al 5 se gestionan por el 29814. Desde la 5.9 se sumaron el 29815, para información del equipo y capturas, y el 29816, para la terminal remota. Y con la 6.0 llegó el TCP 29817, para los datos de monitoreo. El descubrimiento sigue siendo el mismo de siempre: UDP 29810.\n\n### Cómo funciona\n\nLa adopción en capa 2 tiene cuatro momentos:\n\n1. **Anuncio.** El EAP de fábrica toma IP y manda un broadcast al UDP 29810 de su subred.\n2. **Respuesta.** El controlador escucha ese puerto y le responde por el mismo. El equipo aparece como Pending.\n3. **Adopción.** El técnico toca Adopt. El controlador le carga la configuración del sitio y las credenciales de Device Account, que reemplazan a las de fábrica.\n4. **Gestión.** El equipo queda Connected y se reporta por los puertos de gestión. Su web local deja de mandar.\n\nCuando algo falla, el mensaje dice en qué momento. Si el equipo nunca aparece, el anuncio no llegó: casi siempre está en otra VLAN o subred, y la solución es la VLAN o uno de los métodos para otra subred. Si aparece y falla con usuario o clave, el equipo ya tenía dueño: alguien lo configuró por su web o estaba en otro controlador. Si no responde a los comandos, el camino está roto en algún punto: tags de VLAN entre el equipo y el DHCP, un loop o un firewall. En el controlador software instalado en una PC, el firewall o el antivirus de esa PC es sospechoso habitual.\n\nEl reset es el último recurso, no el primero: borra cualquier configuración que el equipo tuviera, incluida la que hacía falta conservar."
+ },
+ "4": {
+  "fig": {
+   "file": "4.svg",
+   "alt": "A la izquierda, la red 192.168.88.0/24 con el controlador 192.168.88.10. En el medio, un router que rutea entre subredes. A la derecha, la VLAN 20 10.10.10.0/24 con un EAP 10.10.10.x cuyo broadcast se corta en el router. Una flecha verde muestra que, con la dirección del controlador, el EAP llama directo y queda en Pending. Abajo, tres tarjetas: A, Discovery Utility, programa en una PC de la subred del equipo con Batch Setting; B, Inform URL en la web del equipo, System Tools, Controller Settings; C, DHCP option 138, el DHCP entrega la IP del controlador y actúa cuando el equipo renueva. Notas: en Omada Central va la Site URL; con Docker Desktop, la Inform URL.",
+   "caption": "En otra subred, Discovery Utility, Inform URL u option 138 le dicen al EAP dónde ir."
+  },
+  "steps": [
+   {
+    "file": "4-paso1.svg",
+    "step": 1,
+    "after": "La IP del controlador va en hexadecimal",
+    "alt": "El comando de RouterOS que crea la opción omada138 con código 138 y valor 0xC0A8580A. Cuatro cajas con los bytes C0, A8, 58 y 0A, y debajo 192, 168, 88 y 10: la IP del controlador 192.168.88.10, un byte por octeto en hexadecimal. Nota: en el gateway Omada no hace falta el hex, se escribe Option 138 = 192.168.88.10 en Advanced DHCP Options. Debajo, el comando que asigna la opción a la red 10.10.10.0/24, y un aviso: la opción llega con la próxima concesión, por eso el paso 2 es desconectar y reconectar el EAP.",
+    "caption": "192.168.88.10 en hexadecimal es C0 A8 58 0A, y llega recién al renovar DHCP."
+   },
+   {
+    "file": "4-paso5.svg",
+    "step": 5,
+    "after": "Si hay NAT entre sede y controlador",
+    "alt": "Un EAP en la sucursal conectado por internet al router de la central, que hace port forwarding hacia el controlador 192.168.88.10. La regla: TCP y UDP del 29810 al 29817 hacia 192.168.88.10, mismos puertos de origen y destino. Notas: en descubrimiento, adopción y gestión, origen y destino iguales, y desde la 5.9 solo web y portal admiten otro puerto de origen; en el controlador 6 se sumó el TCP 29817 para datos de monitoreo; exponer la gestión a internet abre el controlador al mundo y conviene un túnel VPN con option 138 por adentro. Al pie: dos controladores detrás de una IP, uno pasa a 29820 a 29827 y web 18043, con el puerto en la Inform URL.",
+    "caption": "Del 29810 al 29817, TCP y UDP, con el mismo puerto de los dos lados."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "DHCP option 138",
+    "para_que": "Es la forma de que la propia red le diga al equipo dónde está el controlador, sin tocar el equipo. Sirve para sucursales, VLAN de cámaras y cualquier EAP nuevo que se conecte en una subred distinta a la del controlador.",
+    "como": "El servidor DHCP de esa subred entrega, junto con la IP, la dirección del controlador. En un gateway Omada se escribe la IP tal cual en Advanced DHCP Options; en un MikroTik va en hexadecimal, un byte por octeto: 192.168.88.10 queda `0xC0A8580A`. Solo actúa cuando el equipo renueva el DHCP, así que después de configurarla se desconecta y se reconecta el EAP.",
+    "ejemplo": "Una cadena de farmacias con MikroTik en cada local y el controlador en la oficina de IES por VPN: la option 138 en el DHCP de cada local hace que cualquier EAP reseteado aparezca solo en Pending."
+   },
+   {
+    "name": "Inform URL y Site URL",
+    "para_que": "Cuando el DHCP no es tuyo, la dirección del controlador se le escribe al equipo a mano. En Omada Central no hay IP fija para escribir: se usa la Site URL del sitio de destino.",
+    "como": "En la web standalone del equipo, System Tools > Controller Settings, se carga la IP o la URL del controlador en el campo Inform URL. Para Omada Central se copia la Site URL desde Global View > Dashboard y se habilita Cloud-based Controller Management. La Discovery Utility hace lo mismo en lote desde una PC de la subred del equipo, con Batch Setting.",
+    "ejemplo": "Un ER605 nuevo para una sucursal en Paysandú: se le carga internet en su web, se pega la Inform URL del controlador y aparece en Pending sin que nadie viaje."
+   },
+   {
+    "name": "Puertos 29810 a 29817 con NAT",
+    "para_que": "Si entre el equipo y el controlador hay un router con NAT, el equipo solo llega si ese router reenvía los puertos de Omada hacia el controlador.",
+    "como": "En el router de la central, una regla de TCP y UDP del 29810 al 29817 hacia la IP del controlador, con el mismo puerto de origen y de destino. En el controlador 6 se sumó el TCP 29817, que tiene que estar abierto. Exponer estos puertos a internet abre el controlador al mundo: si se puede, mejor un túnel VPN entre sedes y la option 138 apuntando a la IP privada.",
+    "ejemplo": "La guía oficial muestra dos controladores detrás de la misma IP pública: a uno se le corren los puertos al 29820 a 29827 y la web al 18043, y se usa la Discovery Utility con el puerto en la Inform URL."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nDHCP no solo entrega IP: la RFC 2132, de 1997, definió las opciones, datos extra que el servidor manda junto con la dirección. La opción 138 la asignó la RFC 5417, de 2009, para un caso muy parecido al de Omada: decirle a un access point dónde están sus controladores, dentro del estándar CAPWAP. TP-Link usa ese mismo número para que sus equipos encuentren el controlador.\n\nLos otros dos caminos son propios de Omada. La Omada Discovery Utility es un programa para PC que encuentra los equipos de su subred y les carga la dirección del controlador en lote. La Inform URL se escribe en la web de cada equipo, en System Tools > Controller Settings. Con la llegada de Omada Central se sumó la Site URL, que reemplaza a la IP cuando el controlador está en la nube.\n\n### Cómo funciona\n\nEl broadcast del UDP 29810 no cruza routers. Cuando el equipo está en otra VLAN, otra subred u otra sede, alguien tiene que decirle dónde está el controlador; después, el equipo llama directo a esa dirección y aparece en Pending.\n\n- **Option 138.** El equipo pide IP y en la respuesta viene la del controlador. En RouterOS el valor es la IP en hexadecimal, sin nada más: `0xC0A8580A` para 192.168.88.10. Llega con cada concesión nueva, así que un equipo que ya tenía IP no se entera hasta renovar.\n- **Inform URL.** Queda guardada en el equipo. Sirve para un equipo puntual, para Omada Central con la Site URL y, según LazyAdmin, es el camino práctico con Docker Desktop.\n- **Discovery Utility.** Corre en una PC de la subred del equipo, ve los equipos por broadcast y les manda la dirección del controlador con sus credenciales.\n\nSi en el medio hay NAT, el router reenvía TCP y UDP del 29810 al 29817 con el mismo puerto de los dos lados. Desde la 5.9 los puertos web y de portal se pueden remapear, pero los de descubrimiento, adopción y gestión no.\n\nLa opción más prolija para sedes es otra: un túnel VPN entre los gateways y la option 138 apuntando a la IP privada del controlador. Así no hay puertos de gestión abiertos a internet."
+ },
+ "5": {
+  "fig": {
+   "file": "5.svg",
+   "alt": "Árbol jerárquico. Arriba, el controlador, Software o Central Standard, en modo MSP. Debajo, Cliente A y Cliente B. Cliente A tiene el Sitio Central con ER, switch y EAP y el Sitio Sucursal con ER y EAP; Cliente B tiene el Sitio Local con ER, switch y EAP. Al costado: un gateway por sitio. Notas: los perfiles WiFi y el roaming son por sitio; Auto IPsec une sitios del mismo controlador, cada uno con su gateway; MSP existe en Software Controller y Central Standard, no en Essentials ni en los OC.",
+   "caption": "Cliente, sitio por sede con gateway y equipos de esa sede."
+  },
+  "steps": [
+   {
+    "file": "5-paso1.svg",
+    "step": 1,
+    "after": "cada uno con región Uruguay",
+    "alt": "Ventana de Global View, Dashboard, Site List, con dos sitios: Central y Sucursal, los dos con Uruguay y America/Montevideo. A la derecha, en rojo, un sitio con dos gateways, ER central y ER sucursal, marcado con una cruz: un sitio adopta un solo gateway. En verde, dos sitios con un ER cada uno, marcado como correcto. Notas: al crear cada sitio, región y zona horaria; con todo en el sitio Default funciona hasta que llega el segundo gateway.",
+    "caption": "Cada sede con su router es un sitio: un sitio adopta un solo gateway."
+   },
+   {
+    "file": "5-paso2.svg",
+    "step": 2,
+    "after": "y acceso solo al sitio",
+    "alt": "Tabla de roles: Main Administrator para la empresa, todo en su vista; Administrator para cada técnico, casi todo pero sin migrar clientes ni hacer backups automáticos; Viewer para el cliente, mirar estado y ajustes sin cambiar, resaltado. Tarjeta del usuario viewer-sucursal con rol Viewer, acceso solo a Sucursal y clave de ejemplo Visor-Lab-2026. Notas: al entrar con ese usuario tiene que ver solo Sucursal y no poder cambiar nada; con MSP hay rol MSP y rol Customer.",
+    "caption": "Un usuario por persona, y al cliente un Viewer limitado a su sitio."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Sitio",
+    "para_que": "El sitio es la unidad con la que Omada ordena una red: sus equipos, sus redes, sus SSID y sus reglas. Existe para que cada sede tenga su configuración propia dentro del mismo controlador.",
+    "como": "Un sitio adopta un solo gateway, así que cada sede con su router va en un sitio aparte. El roaming y los perfiles WiFi son por sitio, y la VPN automática (Auto IPsec) une sitios distintos del mismo controlador. Cada sitio lleva su región y su zona horaria.",
+    "ejemplo": "Un cliente con un depósito en Las Piedras y una oficina en Pocitos, cada uno con su ER: dos sitios. Si se arma todo en Default, el día que llega el segundo ER no hay dónde adoptarlo."
+   },
+   {
+    "name": "Modo MSP",
+    "para_que": "Es la capa que agrega clientes arriba de los sitios. Sirve a un integrador como IES para tener muchos clientes en un solo controlador, cada uno con sus sitios y sus usuarios, sin mezclarlos.",
+    "como": "Se activa en Global Settings > Controller Settings y existe en el Software Controller y en Central Standard, no en Essentials ni en los OC. Los clientes se agregan nuevos, copiando uno existente o importando una configuración. El límite es de 100 clientes en la versión 5 y 500 en la 6, ajustable con `customer.limit`, aunque subirlo no sube la cantidad de equipos que el controlador soporta.",
+    "ejemplo": "IES con un Software Controller en su servidor y modo MSP: un cliente por empresa atendida, y adentro de cada uno un sitio por local. El técnico de guardia ve todo desde la vista MSP."
+   },
+   {
+    "name": "Roles y cuentas",
+    "para_que": "Cada persona con su usuario y el permiso justo. Así se sabe quién hizo cada cambio y el cliente puede mirar su red sin poder romperla.",
+    "como": "Hay tres roles por defecto: Main Administrator, Administrator y Viewer. El Administrator puede casi todo, pero no migra clientes ni hace backups automáticos. Con MSP hay dos niveles: rol MSP para la vista MSP y rol Customer para la vista Global y la de cada sitio. También se pueden crear roles a medida.",
+    "ejemplo": "El encargado de un supermercado en Salto quiere ver si los EAP están en línea: un Viewer solo para su sitio. Los técnicos de IES, un Administrator cada uno; el Main Administrator queda para la empresa."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nCuando TP-Link pasó al Omada SDN Controller 4.1.5 redefinió los roles. Los viejos Administrator, Operator y Observer se convirtieron en tres niveles nuevos: Master Administrator, Administrator y Viewer. Hoy la documentación habla de Main Administrator, Administrator y Viewer, y la cuenta que arranca el controlador por primera vez queda como Main Administrator.\n\nEl modo MSP llegó para los integradores que atienden muchas empresas. En la versión 5 admitía hasta 100 clientes y en la 6 subió a 500. La tabla comparativa oficial lo limita al Software Controller y a Central Standard; Essentials y los controladores de hardware no lo tienen.\n\n### Cómo funciona\n\nOmada ordena todo en capas:\n\n1. **MSP** (opcional): la vista del integrador, con la lista de clientes, su estado y las cuentas.\n2. **Cliente**: cada empresa atendida, con su vista Global.\n3. **Sitio**: cada sede. Tiene sus equipos, redes, SSID, ACL y reglas.\n4. **Equipos**: gateway, switches y EAP de esa sede.\n\nLa regla que define cuántos sitios hacen falta es simple: un sitio adopta un solo gateway. Si una sucursal tiene su propio ER, es un sitio nuevo. La guía oficial de adopción remota lo repite: si el gateway de la central ya está en el sitio Default, el de la sucursal va en otro sitio.\n\nEsa división tiene consecuencias. El roaming solo funciona entre EAP del mismo sitio, porque los perfiles WiFi son por sitio. La VPN automática entre gateways (Auto IPsec) une sitios distintos del mismo controlador. Y los permisos se pueden dar por sitio: un usuario puede ver solo la sucursal que le corresponde.\n\nLos roles se combinan con esa estructura. Main Administrator accede a todo en su vista. Administrator accede a casi todo, con algunas cosas reservadas: no migra clientes ni hace backups automáticos, y ve la gestión de licencias solo para lectura. Viewer mira estado y ajustes sin cambiar nada. Con MSP, cada usuario lleva un rol MSP y un rol Customer.\n\nUn usuario por persona no es burocracia: es lo que permite saber quién cambió qué y sacarle el acceso a alguien sin cambiarle la clave a todos."
+ },
+ "6": {
+  "fig": {
+   "file": "6.svg",
+   "alt": "Un gateway ER con la VLAN 20, 10.10.20.1/24 y DHCP, marcado con el número 1. Un cable de uplink al puerto 1 de un switch JetStream, rotulado perfil All con la VLAN 20 tagueada, número 2. Del puerto 5 del switch baja un cable a una cámara que toma 10.10.20.x, con el rótulo perfil CCTV, VLAN 20 nativa, número 3. Notas: la VLAN solo en el switch no da IP, hacen falta red y DHCP en el gateway, uplink tagueado y puerto con la VLAN nativa; si no agarra IP, revisar en orden 1, 2 y 3.",
+   "caption": "Gateway, uplink y puerto: si falta una de las tres patas, la cámara no toma IP."
+  },
+  "steps": [
+   {
+    "file": "6-paso1.svg",
+    "step": 1,
+    "after": "Network Settings > LAN > Add",
+    "alt": "Formulario de Network Config, Network Settings, LAN, Add con Name CCTV, VLAN 20 resaltada, Gateway/Subnet 10.10.20.1/24, DHCP Server activado y rango 10.10.20.100 a 10.10.20.200. Notas: al crear la red el controlador crea su perfil de puerto CCTV; con router de terceros, la red se crea con DHCP Server Device en None; la red por defecto queda como VLAN de gestión y conviene dejarla así.",
+    "caption": "Un formulario crea la interfaz, el DHCP y el perfil de puerto de la VLAN."
+   },
+   {
+    "file": "6-paso3.svg",
+    "step": 3,
+    "after": "editá el puerto 5 y asignale",
+    "alt": "Switch JetStream de cinco puertos, el 1 resaltado en azul y el 5 en cian, en Devices, switch, Ports. Tabla: puerto 1 al gateway con perfil All, red por defecto nativa y VLAN 20 tagueada; puerto 5 a cámara o notebook con perfil CCTV, VLAN 20 nativa sin tag. Notas: verificar que el uplink siga en All; no cambiar el perfil del puerto por donde el switch habla con el controlador. Debajo, ipconfig /renew e ipconfig con findstr IPv4 que tiene que mostrar 10.10.20.x.",
+    "caption": "El uplink lleva todo tagueado; el puerto de la cámara, solo la VLAN 20 nativa."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Las tres patas de una VLAN",
+    "para_que": "Una VLAN es una red aparte que comparte cables y switches con las demás. Para que un equipo en ella tenga IP y salida, la red tiene que existir de punta a punta, no solo en el switch.",
+    "como": "Pata uno: interfaz y DHCP de esa VLAN en el gateway. Pata dos: el uplink entre gateway y switch la lleva tagueada. Pata tres: el puerto donde va el equipo la tiene como nativa, sin tag. En Omada las tres se arman desde Network Config > Network Settings > LAN, y si algo falla se revisan en ese orden.",
+    "ejemplo": "Cámaras nuevas en un colegio de Carrasco que no toman IP: el técnico configuró bien los puertos del switch, pero el uplink tenía un perfil que no llevaba la VLAN 20. Con All en el uplink, las cámaras toman 10.10.20.x."
+   },
+   {
+    "name": "Perfiles de puerto",
+    "para_que": "En lugar de configurar VLAN por VLAN en cada puerto, Omada usa perfiles: un nombre que define qué red va nativa y cuáles tagueadas. Así un cambio se aplica igual en todos los puertos que usan ese perfil.",
+    "como": "Al crear una red, el controlador crea su perfil con esa VLAN como nativa. El perfil All lleva la red por defecto nativa y las demás tagueadas: es el de los uplinks y los EAP con varios SSID. El perfil se asigna en Devices > (switch) > Ports. Conviene no tocar el perfil del puerto por donde el switch habla con el controlador.",
+    "ejemplo": "En un edificio de oficinas en Ciudad Vieja, los puertos de cámaras van con el perfil CCTV, los de los EAP con All, y el día que se suma una VLAN de telefonía los EAP la reciben sin tocar puerto por puerto."
+   },
+   {
+    "name": "Red por defecto y VLAN de gestión",
+    "para_que": "Los equipos Omada se comunican con el controlador por una red; esa es la VLAN de gestión. La documentación recomienda que sea la red por defecto, la que traen todos los puertos de fábrica.",
+    "como": "En el gateway, todos los puertos LAN tienen la red por defecto como nativa (PVID 1). Moverla a otra VLAN es posible, pero Evan McCann la describe como más engorrosa de lo que debería. Con un router de terceros, las redes se crean con DHCP Server Device en None y el switch lleva las VLAN hacia ese router. Legal DHCP Servers sirve para que solo respondan los DHCP indicados.",
+    "ejemplo": "Un cliente con un firewall propio en Punta Carretas: los switches Omada llevan las VLAN y el firewall da el DHCP. Cada red se crea en None y los equipos Omada se gestionan por la red por defecto."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nAntes de las VLAN, separar redes era separar cables y switches. La norma IEEE 802.1Q, de 1998, resolvió eso con una etiqueta de 4 bytes que se agrega a la trama Ethernet y lleva el número de VLAN. Ese número tiene 12 bits: 4094 VLAN útiles, porque la 0 y la 4095 están reservadas. Gracias a la etiqueta, un mismo cable puede llevar varias redes separadas.\n\nLos fabricantes de redes administradas fueron simplificando la configuración. Omada usa perfiles de puerto: al crear una red, el controlador crea su perfil, y después se asigna ese perfil al puerto. La propia guía oficial de VLAN responde la pregunta de siempre: por qué un cliente pierde la red cuando se lo pasa a una VLAN.\n\n### Cómo funciona\n\nEn 802.1Q un puerto puede llevar tráfico de dos formas:\n\n- **Untagged (nativa).** La trama va sin etiqueta. El switch la asigna a la VLAN nativa del puerto, su PVID. Es lo que necesita una cámara o una notebook, que no saben de VLAN.\n- **Tagged.** La trama lleva la etiqueta con el número de VLAN. Es lo que usan los uplinks entre switches, el puerto hacia el gateway y el de un EAP con varios SSID en VLAN distintas.\n\nUna cámara en la VLAN 20 toma IP así: manda un pedido DHCP sin etiqueta; el switch lo mete en la VLAN 20 porque es la nativa del puerto; por el uplink el pedido viaja con la etiqueta 20; el gateway lo recibe en su interfaz de la VLAN 20 y responde desde el DHCP de esa red. Si cualquiera de los tres tramos falla, no hay IP.\n\nEn Omada:\n\n1. **Gateway**: Network Config > Network Settings > LAN > Add crea la interfaz y el DHCP. Con router de terceros, DHCP Server Device en None.\n2. **Uplink**: el perfil All lleva la red por defecto nativa y las demás tagueadas. Los puertos que quedan en trunk llevan la VLAN nueva tagueada automáticamente.\n3. **Puerto**: el perfil de la red, por ejemplo CCTV, deja la VLAN 20 como nativa.\n\nUna VLAN separa el broadcast, pero no aísla: si el gateway rutea entre VLAN, se ven. Eso se corta con ACL, y es el tema que sigue."
+ },
+ "7": {
+  "fig": {
+   "file": "7.svg",
+   "alt": "Un gateway que rutea entre VLAN, en el centro, conectado a cuatro redes: Oficina VLAN 1 192.168.88.0/24, CCTV VLAN 20 10.10.20.0/24, Internet e Invitados VLAN 30 10.10.30.0/24, resaltada. Desde Invitados, los caminos hacia Oficina y CCTV tienen una cruz roja y el camino a internet un tilde verde, con la regla Deny Invitados a Redes-Internas. Notas: sin ACL, las VLAN separan el broadcast pero el gateway rutea y las tres redes se ven; con la regla, Invitados sale a internet y no llega a la oficina ni a las cámaras.",
+   "caption": "Sin regla el gateway rutea entre VLAN; con la ACL, Invitados solo sale a internet."
+  },
+  "steps": [
+   {
+    "file": "7-paso3.svg",
+    "step": 3,
+    "after": "Gateway ACL > Create New Rule",
+    "alt": "Formulario de Network Security, ACL, Gateway ACL con Name Invitados-sin-interna, Policy Deny resaltado, Protocols All, Source red Invitados y Destination IP Group Redes-Internas, que agrupa 192.168.88.0/24 y 10.10.20.0/24. A la derecha, dos órdenes de reglas: bien, con la deny arriba y el permit general abajo, la deny se evalúa primero; mal, con el permit general arriba, la deny nunca llega a actuar. Notas: las ACL se leen de arriba hacia abajo; una ACL mal ordenada en producción puede cortar cámaras o el controlador.",
+    "caption": "La deny va arriba de cualquier permit general: se leen de arriba hacia abajo."
+   },
+   {
+    "file": "7-paso4.svg",
+    "step": 4,
+    "after": "conectá una notebook y probá",
+    "alt": "Una notebook conectada al SSID Invitados-Lab en la VLAN 30 con IP 10.10.30.x. Tres pings: a 10.10.30.1 responde porque es su propio gateway; a 192.168.88.1 no responde, la oficina quedó aislada; a 1.1.1.1 responde, sale a internet. Los tres resultados son los esperados. Nota: si 192.168.88.1 responde, la deny está debajo de un permit general y hay que subirla.",
+    "caption": "Gateway propio sí, red interna no, internet sí: eso es aislamiento."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "VLAN separa, no aísla",
+    "para_que": "La VLAN divide el broadcast: cada red tiene el suyo. Pero si el gateway tiene una interfaz en cada VLAN y rutea entre ellas, un equipo de una red llega a otra por capa 3.",
+    "como": "La guía oficial de VLAN lo aclara con una nota: si el router permite rutear entre VLAN, los equipos de la 10 y de la 20 se pueden comunicar igual. Para cortar ese paso hacen falta ACL en el gateway, en los switches o en los EAP, o un firewall. Y conviene probarlo con un ping, no suponerlo.",
+    "ejemplo": "Un practicante en el foro de Lawrence Systems cuenta un switch TP-Link cuya IP de gestión respondía desde cualquier VLAN. En un edificio de Malvín, la VLAN de invitados llegaba a la web del NVR hasta que se agregó la regla."
+   },
+   {
+    "name": "ACL de arriba hacia abajo",
+    "para_que": "Una ACL es una lista de reglas que deja pasar o corta tráfico según origen, destino y protocolo. El orden importa porque se evalúan de arriba hacia abajo.",
+    "como": "La regla más específica va arriba. Si un permit general está antes que la deny, la deny nunca llega a actuar. En las ACL de switch, además, el mecanismo es de lista negra: para dejar una red solo con acceso interno, se arma un permit hacia las subredes internas y después una deny hacia todo. Los IP Group (Site Settings > Profile > Groups) agrupan subredes para usarlas en una sola regla.",
+    "ejemplo": "La guía oficial arma dos permit para que la VLAN 10 llegue a un servidor puntual de la VLAN 20, y los pone arriba de la deny entre las dos redes. Al revés, el servidor queda inaccesible."
+   },
+   {
+    "name": "Red de invitados aislada",
+    "para_que": "Los invitados necesitan internet y nada más. Aislarlos protege las cámaras, el control de acceso y la gestión de la red del cliente.",
+    "como": "Se crea la red Invitados con su VLAN y DHCP, un IP Group con las redes internas y una Gateway ACL Deny desde Invitados hacia ese grupo. El SSID de invitados se asocia a esa VLAN. La prueba son tres pings desde un cliente invitado: a su gateway responde, a la red interna no, a internet sí.",
+    "ejemplo": "Un café en Pocitos con el WiFi de clientes y el de caja en el mismo AP: con la regla, un cliente con la notebook no ve ni la impresora fiscal ni el NVR del local."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLas listas de control de acceso son una idea clásica de routers y firewalls: una lista ordenada de reglas, cada una con un criterio y una acción, permitir o denegar. En Omada tomaron forma con el SDN Controller 4.1.5: el antiguo Access Control de la parte inalámbrica pasó a ser ACL dentro del módulo Network Security, aplicable a clientes o grupos cuyo tráfico pasa por el gateway, los switches y los EAP. La guía de upgrade de esa versión avisaba que las reglas viejas no se migraban solas.\n\nLa desconfianza también tiene historia. En un hilo del foro de Lawrence Systems de 2023, un practicante cuenta que un switch TP-Link tenía su IP de gestión alcanzable desde cualquier VLAN, y otro dice que no confiaría en TP-Link para clientes de empresa. Más allá de la opinión, la lección es práctica: el aislamiento se configura y se prueba.\n\n### Cómo funciona\n\nCada VLAN es un dominio de broadcast. Para salir de él, un equipo manda el tráfico a su gateway, que tiene una interfaz en cada VLAN. Si el gateway rutea, entrega el paquete en la otra red. Ahí actúan las ACL:\n\n- **Gateway ACL**: filtra lo que el gateway rutea entre redes o hacia internet. Es la más directa para aislar invitados.\n- **Switch ACL**: filtra en los puertos de los switches. Funciona como lista negra, con permiso por defecto: \"solo interno\" se arma con un permit a las subredes internas y una deny a todo.\n- **EAP ACL**: filtra el tráfico de los clientes inalámbricos en el propio AP.\n\nLas reglas se evalúan de arriba hacia abajo, y la primera que coincide decide. Por eso el permit puntual, como el acceso de una red a un servidor concreto, va arriba de la deny general entre redes. Y una deny debajo de un permit general nunca llega a actuar.\n\nPara escribir menos reglas se usan los IP Group: un grupo `Redes-Internas` con 192.168.88.0/24 y 10.10.20.0/24 permite cortar Invitados hacia todas las redes internas con una sola regla.\n\nLa verificación vale tanto como la regla. Desde un cliente invitado, `ping` a su propio gateway responde, a la red interna no responde y a internet responde. Si la red interna responde, el problema casi siempre es el orden."
+ },
+ "8": {
+  "fig": {
+   "file": "8.svg",
+   "alt": "Dos paneles. 2.4 GHz: las campanas de los canales 1 a 11 superpuestas, con 1, 6 y 11 resaltados porque no se pisan, siempre a 20 MHz. 5 GHz: el ancho según la interferencia, 20 MHz antiinterferencia para mucha interferencia, en ámbar; 40 MHz equilibrado como buen valor de arranque, en verde; 80 MHz o más, alto ancho, solo en ambiente limpio. Nota: recién después, potencia; con EAP a menos de 12 m conviene bajarla, el ejemplo oficial va de 28 a 25 dBm, y 3 dB menos es la mitad de la potencia.",
+   "caption": "Canal y ancho primero; la potencia se ajusta después, y casi siempre hacia abajo."
+  },
+  "steps": [
+   {
+    "file": "8-paso3.svg",
+    "step": 3,
+    "after": "(EAP 2) > Config > Radios",
+    "alt": "Planta con dos EAP de techo al centro del ambiente, a 10 o 12 metros, con sus celdas apenas superpuestas. Tabla en Devices, EAP, Config, Radios: EAP 1 en 2.4 GHz canal 1 a 20 MHz y en 5 GHz canal 36 a 40 MHz; EAP 2 en canal 6 u 11 a 20 MHz y canal 44 o 149 a 40 MHz; los dos con potencia Medium. Nota: en el paso 4, región Uruguay en el sitio, que define canales y potencia legales.",
+    "caption": "Canales distintos en cada vecino y la misma potencia media."
+   },
+   {
+    "file": "8-paso5.svg",
+    "step": 5,
+    "after": "Medí después desde los mismos",
+    "alt": "Planilla de tres puntos con antes y después de canal, ancho y dBm, en blanco para completar. Debajo, una escala de señal de -40 a -90 dBm: mejor que -70 alcanza, en verde; por debajo de -70, subir un escalón, en ámbar. Notas: si un punto quedó por debajo de -70 dBm, subir un escalón solo la potencia del AP que lo cubre y volver a medir; subir todos a High trae de vuelta la interferencia y el cliente pegado al AP lejano.",
+    "caption": "Por debajo de -70 dBm, un escalón más solo en el AP que cubre ese punto."
+   },
+   {
+    "file": "8-paso6.svg",
+    "step": 6,
+    "after": "programala para las 3:30",
+    "alt": "La ruta Network Config, Network Settings, WLAN, WLAN Optimization y una línea de tiempo de 0 a 6 de la mañana con el reinicio de AP como ejemplo antes de las 3 y la optimización a las 3:30, separados por 10 minutos o más. Notas: mientras escanea, los clientes se quedan sin internet varios minutos; los AP tienen que estar conectados durante la optimización, por eso se separa del reinicio; si el resultado no convence, Optimization Record Detail, Apply Previous Settings.",
+    "caption": "De madrugada, separada al menos 10 minutos del reinicio programado."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Canales que no se pisan",
+    "para_que": "Dos AP en el mismo canal, o en canales que se superponen, se turnan para hablar y se frenan entre sí. Elegir canales que no se pisan es la forma más barata de ganar rendimiento.",
+    "como": "En 2.4 GHz solo 1, 6 y 11 no se superponen, siempre a 20 MHz. En 5 GHz todos los canales de 20 MHz son independientes, y el problema pasa a ser el ancho. Una app de análisis WiFi en el celular muestra qué canales usan los vecinos antes de elegir.",
+    "ejemplo": "Un consultorio en Pocitos con dos EAP en canal 3 y 9 a 40 MHz en 2.4 GHz: se pisaban entre ellos y con todo el edificio. Pasados a 1 y 6 a 20 MHz, las quejas de lentitud bajaron."
+   },
+   {
+    "name": "Ancho de canal",
+    "para_que": "Juntar canales da más velocidad máxima, pero ocupa más espectro y aguanta peor la interferencia. El ancho es un compromiso, no un número fijo.",
+    "como": "La guía de TP-Link plantea tres modos en 5 GHz: 20 MHz para interferencia fuerte, 40 MHz como valor equilibrado y punto de partida, y 80 MHz o más solo con poca interferencia. En 2.4 GHz, siempre 20 MHz. Se fija en Devices > (EAP) > Config > Radios.",
+    "ejemplo": "En una oficina de un piso compartido en Ciudad Vieja, 80 MHz en 5 GHz daba buenos números en el test de velocidad de madrugada y cortes a media mañana. A 40 MHz el número bajó y el servicio quedó parejo."
+   },
+   {
+    "name": "Potencia de transmisión",
+    "para_que": "La potencia define el tamaño de la celda. Más potencia no es mejor: genera interferencia con los AP vecinos y hace que el cliente se quede pegado a un AP lejano.",
+    "como": "Con EAP a menos de 12 m conviene bajar potencia. El ejemplo oficial es pasar de 28 a 25 dBm y probar; 3 dB menos es la mitad de la potencia. Se mide antes y después desde los mismos puntos, y si uno queda por debajo de -70 dBm se sube un escalón solo el AP que lo cubre.",
+    "ejemplo": "Un local con seis EAP en High que anda peor que con uno: todos a Medium, una caminata con el celular midiendo dBm y un solo AP de vuelta a High en el rincón del depósito."
+   },
+   {
+    "name": "WLAN Optimization",
+    "para_que": "Es la función de Omada que elige canal, ancho y potencia de forma automática según lo que escanean los AP, la carga y los clientes. Ahorra trabajo, con un costo: corta el servicio mientras escanea.",
+    "como": "Está en Network Config > Network Settings > WLAN > WLAN Optimization. Se puede correr a mano, programar o dejar en modo adaptativo. Durante el escaneo los clientes se quedan sin internet varios minutos: se programa de madrugada y al menos 10 minutos lejos del reinicio programado de los AP. Si el resultado no convence, Apply Previous Settings vuelve atrás.",
+    "ejemplo": "Un hotel en Piriápolis la programó a las 10 de la mañana y recepción se quedó sin sistema de reservas un rato. Pasada a las 3:30, nadie lo nota."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEl WiFi nació con la norma IEEE 802.11, de 1997, en la banda de 2.4 GHz. Esa banda está dividida en canales separados 5 MHz entre sí, pero cada transmisión ocupa unos 20 MHz: por eso los canales vecinos se pisan y solo 1, 6 y 11 quedan libres entre ellos. La guía de TP-Link lo resume: 14 canales en teoría, según el país, y apenas 3 que no se superponen.\n\nCon 802.11n, aprobada en 2009, llegó la unión de canales: dos de 20 MHz forman uno de 40 MHz. 802.11ac, de 2013, llevó la idea a 80 y 160 MHz en 5 GHz. Cada salto aumentó la velocidad máxima y el espectro ocupado. Y la región que se elige en el controlador define qué canales y qué potencia son legales en cada país.\n\nLa optimización automática apareció después, en el propio controlador: WLAN Optimization, también llamada RRM, decide canal, ancho y potencia a partir de lo que escanean los AP.\n\n### Cómo funciona\n\nEl aire es un medio compartido: en un canal habla uno por vez. Dos AP en el mismo canal, o en canales superpuestos, se escuchan, se turnan y se frenan, aunque cada uno tenga pocos clientes. De ahí el orden de trabajo.\n\n1. **Canal.** En 2.4 GHz, 1, 6 u 11. En 5 GHz, distintos entre vecinos.\n2. **Ancho.** 20 MHz en 2.4 GHz. En 5 GHz, 40 MHz para empezar; 20 si hay mucha interferencia, 80 o más solo en ambiente limpio. Más ancho es más velocidad máxima y menos tolerancia al ruido.\n3. **Potencia.** Se mide en dBm, una escala logarítmica: 3 dB menos es la mitad de la potencia. Pasar de 28 a 25 dBm, como en el ejemplo oficial, achica la celda sin dejar huecos si los AP están a menos de 12 m.\n\nBajar potencia también ayuda al roaming. Con AP muy juntos y a máxima potencia, el cliente nunca ve caer lo suficiente la señal del primero y no cambia, aunque tenga otro al lado.\n\nLa medición cierra el ciclo: antes y después, desde los mismos puntos, con una app en el celular. Como referencia práctica, una señal por debajo de -70 dBm en un lugar de trabajo pide un escalón más de potencia en el AP que lo cubre, y no en todos.\n\nWLAN Optimization hace este análisis solo, pero escanea con los AP fuera de servicio: varios minutos sin internet. De madrugada, y lejos del reinicio programado, para que los AP estén conectados mientras optimiza."
+ },
+ "9": {
+  "fig": {
+   "file": "9.svg",
+   "alt": "Dos EAP con sus celdas, los dos con el SSID Roaming-Lab, y un celular que camina de uno al otro. Debajo, qué hace cada estándar: 802.11k le pasa la lista de vecinos, 802.11v le sugiere un EAP mejor, los dos en verde; 802.11r, claves por adelantado, en ámbar, con prueba. A la derecha, lista para que haya roaming: SSID idéntico en nombre, seguridad, cifrado y clave; los dos EAP en el mismo sitio; Fast Roaming con k y v encendido; 802.11r solo si los clientes lo soportan y probado; sin Lock to AP en el cliente; EAP no tan juntos, porque si no el cliente nunca suelta al primero.",
+   "caption": "El cliente decide cuándo cambiar; k y v lo ayudan, y r se activa con prueba."
+  },
+  "steps": [
+   {
+    "file": "9-paso5.svg",
+    "step": 5,
+    "after": "Caminá de un AP al otro y volvé",
+    "alt": "Terminal ilustrativa con ping -t 192.168.88.1: respuestas con tiempos de 3 a 5 ms y una línea en rojo de Tiempo de espera agotado para esta solicitud. Planilla para anotar cortes y AP final con Fast Roaming k y v, y con 802.11r en el SSID. Notas: cada Tiempo de espera agotado es un corte y en Clients se mira a qué EAP quedó asociada la notebook; en el paso 6 se activa 802.11r en Edit SSID, Advanced Settings y se repite el recorrido; si algún equipo pierde internet al cambiar de EAP con 802.11r, se deja apagado en ese SSID.",
+    "caption": "Cada Tiempo de espera agotado es un corte: se cuentan con k y v, y después con r."
+   },
+   {
+    "file": "9-paso7.svg",
+    "step": 7,
+    "after": "Para mesh: verificá en el EAP sin cable",
+    "alt": "Un switch con cable al Root AP; desde el Root AP, enlaces inalámbricos a dos Mesh AP de un salto, y desde uno de ellos a un Mesh AP de dos saltos. Rótulo: señal del uplink entre -40 y -62 dBm. Texto: estrella mejor que cadena, cada salto resta rendimiento. Panel de límites: hasta 3 saltos, hasta 4 downlinks por uplink, uplink entre -40 y -62 dBm, EAP225-Outdoor con 50 a 60 clientes en toda la red mesh. Notas: un EAP que se manejó por su web local tiene el mesh apagado hasta un reset; con mucha gente, cable; Auto Failover viene apagado y necesita el controlador corriendo.",
+    "caption": "El mesh lleva señal donde no llega el cable; no suma capacidad."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Roaming: decide el cliente",
+    "para_que": "Cuando una tablet se mueve, en algún momento le conviene pasar a otro AP. Esa decisión la toma el cliente, no la red; lo que hace la red es darle información y facilitarle el cambio.",
+    "como": "Para que pueda cambiar, el SSID tiene que ser idéntico en todos los EAP (nombre, seguridad, cifrado y clave) y todos tienen que estar en el mismo sitio. Fast Roaming, en Site Settings > Wireless Features, activa 802.11k y 802.11v: la lista de vecinos y la sugerencia de un AP mejor. Lock to AP en un cliente anula el roaming.",
+    "ejemplo": "En un depósito de logística en Colonia las tablets se cortaban al cruzar el galpón: un EAP tenía el SSID con WPA2 y otro con WPA2/WPA3. Igualada la seguridad, el cliente empezó a cambiar solo."
+   },
+   {
+    "name": "802.11r",
+    "para_que": "Acelera el cambio de AP preparando las claves de cifrado por adelantado, para que el cliente no repita el intercambio completo en cada salto.",
+    "como": "Se activa por SSID en Edit SSID > Advanced Settings. Algunos clientes viejos no lo soportan: la guía oficial describe el equipo que cambia de AP y se queda sin internet. Por eso se prueba con un equipo de cada tipo del cliente, con ping continuo, y se deja apagado si alguno falla.",
+    "ejemplo": "Con 802.11r encendido, las terminales de mano nuevas de un supermercado en Canelones roamean sin cortes, pero los lectores viejos de góndola pierden internet. Queda apagado en ese SSID y los lectores van a uno aparte."
+   },
+   {
+    "name": "Funciones de roaming de la 6.2",
+    "para_que": "Atacan dos problemas clásicos: el cliente pegajoso, que se queda en un AP lejano, y el ping-pong, que salta todo el tiempo entre dos AP con señal pareja.",
+    "como": "En Site Settings > Wireless Features: Non-Stick Roaming desconecta al cliente pegajoso para que busque uno mejor; Ping-Pong Roaming Suppression estabiliza el borde entre dos AP (solo desde el controlador, no desde la app); AI Roaming ajusta los traspasos de los clientes con k y v; Band Steering mueve a los clientes de doble banda a 5 o 6 GHz.",
+    "ejemplo": "En un colegio de Maldonado los celulares de los profesores iban y venían entre dos EAP del corredor. Con Ping-Pong Roaming Suppression la conexión se estabilizó sin mover los equipos."
+   },
+   {
+    "name": "Mesh",
+    "para_que": "Permite instalar un EAP sin cable de datos, enlazado por radio a otro que sí tiene cable. Sirve para llegar donde no se puede cablear, no para atender más gente.",
+    "como": "El Root AP va cableado y los Mesh AP se enlazan por radio: hasta 3 saltos y 4 downlinks por uplink, con señal del uplink entre -40 y -62 dBm. Cada salto resta rendimiento, así que conviene estrella antes que cadena. La capacidad es de toda la red mesh junta: 50 a 60 clientes para el EAP225-Outdoor. Un EAP que se manejó por su web local necesita reset antes de hacer mesh.",
+    "ejemplo": "Un parador en La Paloma quiere WiFi en el deck, a 60 metros del local y sin forma de pasar cable: un EAP de exterior en mesh resuelve. Para el salón con cien personas, cable."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEl 802.11 original no pensaba en clientes que caminan. Las enmiendas llegaron después: 802.11k, de 2008, para que el AP le pase al cliente la lista de vecinos; 802.11r, también de 2008, para preparar las claves antes del salto y hacer el cambio más rápido; y 802.11v, de 2011, para que la red le sugiera al cliente un AP mejor. Ninguna obliga al cliente: le dan información o le ahorran trabajo.\n\nEn Omada, Fast Roaming activa k y v en el sitio, y 802.11r se elige por SSID. El controlador 6.2 sumó funciones automáticas: Non-Stick Roaming, Ping-Pong Roaming Suppression, AI Roaming y Band Steering.\n\nEl mesh llegó como función de firmware de los EAP, no como un producto aparte: la FAQ oficial cita el EAP225-Outdoor como uno de los primeros modelos y pide controlador 2.7.0 o superior. La misma FAQ aclara que el mesh de los EAP no se mezcla con el de los Deco.\n\n### Cómo funciona\n\n**Roaming.** El cliente mide la señal de su AP. Cuando baja de su propio umbral, busca otro con el mismo SSID y se pasa. La red ayuda de tres formas:\n\n- Con **802.11k**, el cliente sabe qué vecinos hay y en qué canal, y escanea menos.\n- Con **802.11v**, el AP le sugiere irse a otro; el cliente puede aceptar o no.\n- Con **802.11r**, las claves para el AP nuevo ya están listas y el salto tarda menos. Algunos drivers viejos no lo toleran.\n\nSi los EAP están muy juntos o a máxima potencia, la señal del primero nunca baja lo suficiente y el cliente no cambia: el problema no es de roaming sino de potencia. Si están muy lejos, hay un hueco y el cliente se desconecta antes de encontrar el siguiente.\n\nLa prueba más útil es simple: un ping continuo mientras se camina. Cada Tiempo de espera agotado es un corte, y en Clients se ve a qué AP quedó el equipo.\n\n**Mesh.** Un Mesh AP usa parte de su radio para hablar con su uplink y otra parte para los clientes. Como la radio es half-duplex, cada salto reparte el tiempo de aire otra vez, y el rendimiento baja con cada salto. De ahí los límites: 3 saltos, 4 downlinks por uplink, señal del uplink entre -40 y -62 dBm y topología en estrella. Sin controlador corriendo, el mesh mantiene la cobertura básica pero pierde Auto Failover y Fast Roaming."
+ },
+ "10": {
+  "fig": {
+   "file": "10.svg",
+   "alt": "Diagrama de secuencia con cuatro columnas: celular del huésped, EAP con el SSID Huespedes-Lab, controlador corriendo e internet. El celular se conecta al SSID; pide una web y queda retenida en el EAP, con una cruz roja; el EAP lo manda a la página del portal; el celular ingresa el voucher en el portal por HTTPS 8843; el controlador valida el código y habilita al cliente; el celular navega hasta que vence el voucher. Notas: si el controlador está apagado, los clientes nuevos no pueden autenticarse, y en la nube además hace falta la licencia vigente; en hotelería, controlador dedicado, backup al día y prueba con un celular después de cada upgrade grande.",
+   "caption": "El portal lo sirve y lo valida el controlador: sin controlador, no hay autenticación."
+  },
+  "steps": [
+   {
+    "file": "10-paso2.svg",
+    "step": 2,
+    "after": "Portal > Create New Portal",
+    "alt": "Formulario en Site Settings, Authentication, Portal con Portal Name Huespedes, SSID and Network Huespedes-Lab, Authentication Type Hotspot, Hotspot Option Voucher resaltado, HTTPS Redirection activado y Landing Page la URL que pidió el cliente. A la derecha, otros tipos de autenticación: No Authentication, Simple Password, Hotspot con Voucher, Local User, SMS, RADIUS y Form Auth, RADIUS Server incorporado desde la 5.12, External LDAP Server y External Portal Server. Notas: generar 2 vouchers de 1 día y probar uno; con HTTPS Redirection conviene un certificado propio, que el controlador pide en un único archivo pfx.",
+    "caption": "Hotspot con Voucher, HTTPS Redirection y la URL original como landing."
+   },
+   {
+    "file": "10-paso4.svg",
+    "step": 4,
+    "after": "agregá la URL del sitio del cliente",
+    "alt": "Dos paneles. Pre-Authentication Access: un celular sin autenticar llega a la URL o subred de la lista, como la web del cliente antes del portal, con tilde verde, pero no al resto de internet hasta autenticar, con cruz roja. Authentication-Free Client: un equipo de prueba identificado por MAC o IP no ve el portal y navega directo, sin código; sirve para equipos puntuales que tienen que navegar sin pasar por el portal. Nota: en el laboratorio, la URL del sitio del cliente en Pre-Authentication Access y la MAC de un equipo de prueba en Authentication-Free Client.",
+    "caption": "Pre-Authentication abre destinos antes del portal; Authentication-Free exceptúa equipos."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Portal cautivo",
+    "para_que": "Es una página que aparece antes de dar internet, para autenticar al cliente o mostrarle condiciones. Resuelve el problema de dar acceso controlado sin dictar la clave del WiFi en recepción.",
+    "como": "Se crea en Site Settings > Authentication > Portal y se asocia a un SSID o red. El tipo de autenticación puede ser sin autenticación, clave simple, Hotspot (voucher, usuario local, SMS, RADIUS, formulario), RADIUS, LDAP externo o un portal externo. La página la sirve el controlador, por el 8088 en HTTP o el 8843 en HTTPS.",
+    "ejemplo": "Una sala de espera de una mutualista en el Centro: portal sin autenticación con las condiciones de uso. Un hotel en Punta del Este: Hotspot con vouchers."
+   },
+   {
+    "name": "Voucher",
+    "para_que": "Es un código de acceso con duración, generado por el controlador. Sirve para atar el acceso a la estadía o a la compra: el huésped recibe su código en recepción y vence solo.",
+    "como": "Con Authentication Type Hotspot y la opción Voucher, en la sección Voucher del portal se generan los códigos con su duración y se imprimen o se entregan. Cada código se prueba desde un celular antes de entregar el sistema.",
+    "ejemplo": "Un hostel en Punta del Diablo genera vouchers de 3 días al hacer el check-in. Cuando el huésped se va, su código deja de servir sin que nadie cambie claves."
+   },
+   {
+    "name": "Pre-Authentication Access y Authentication-Free Client",
+    "para_que": "Son las excepciones del portal. Una deja llegar a ciertos destinos antes de autenticar; la otra deja que ciertos equipos naveguen sin pasar por el portal.",
+    "como": "Pre-Authentication Access lleva una lista de URL o subredes accesibles sin autenticar, como la web del cliente o una página de reservas. Authentication-Free Client exceptúa equipos por IP o MAC. Las dos están en la parte de Access Control del portal.",
+    "ejemplo": "En un hotel, la web de reservas en Pre-Authentication Access para que el huésped la vea sin código, y el televisor del lobby por MAC en Authentication-Free Client."
+   },
+   {
+    "name": "El portal depende del controlador",
+    "para_que": "El portal no vive en los EAP: lo sirve y lo valida el controlador. Entender eso cambia cómo se diseña una obra con portal.",
+    "como": "Si el controlador se apaga, los clientes nuevos no pueden autenticarse. En la nube, además, una licencia vencida apaga el portal. Por eso en hotelería conviene un controlador dedicado, backup al día y probar el portal con un celular después de cada upgrade grande.",
+    "ejemplo": "Un hotel con el controlador en la PC de recepción: se reinicia por una actualización de Windows un viernes a la noche y los huéspedes que llegan no pueden entrar al WiFi hasta el lunes."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEl portal cautivo nació para el WiFi público: hoteles, aeropuertos y shoppings que querían dar internet con alguna condición. La técnica es siempre parecida: retener el tráfico del cliente hasta que pasa por una página.\n\nEn Omada, el portal cambió mucho con el SDN Controller 4.1.5. La guía de upgrade de esa versión cuenta que el portal se mejoró para aplicarse a SSID y a redes LAN, que quedó uno por sitio con un solo tipo de autenticación, y que la configuración vieja no se migraba: había que rehacerla a mano en Settings > Authentication. La vieja Free Authentication Policy pasó a ser la Authentication-Free Policy, dentro del portal.\n\nDespués siguieron las funciones. Desde la 5.12 el controlador trae un servidor RADIUS incorporado, soporta LDAP externo y suma CHAP para RADIUS; desde la 5.14, Portal Logout. RADIUS es un estándar viejo y estable: su versión vigente es la RFC 2865, de 2000.\n\n### Cómo funciona\n\n1. El huésped se conecta al SSID del portal y recibe IP.\n2. Pide cualquier web. El EAP retiene ese tráfico porque el cliente todavía no está autenticado.\n3. El cliente es redirigido a la página del portal, que sirve el controlador: por el 8088 en HTTP o el 8843 en HTTPS.\n4. Ingresa el voucher, la clave o el usuario. El controlador lo valida y habilita a ese cliente.\n5. El cliente navega hasta que vence el código o el tiempo de autenticación.\n\nDe ese recorrido salen las reglas prácticas. Sin controlador corriendo, el paso 4 no existe: los clientes nuevos no entran. En Omada Central, una licencia vencida apaga el portal.\n\nCon HTTPS Redirection, el cliente es llevado a la página segura del portal. Un certificado propio ayuda a que esa página se vea limpia; el controlador lo acepta en un único archivo `.pfx` con certificado y clave, y conviene fijar el nombre del controlador al mismo que figura en el certificado.\n\nLas excepciones completan el diseño. Pre-Authentication Access deja pasar URL o subredes antes de autenticar, como la web del propio negocio. Authentication-Free Client exceptúa equipos por IP o MAC, para los que tienen que navegar sin portal.\n\nY un detalle de red: el portal no aísla. La VLAN de invitados con su ACL sigue haciendo falta."
+ },
+ "11": {
+  "fig": {
+   "file": "11.svg",
+   "alt": "Arriba, el controlador con un sitio por sede, unido con líneas punteadas a dos sitios. Sitio Central: ER Central con WAN 203.0.113.10 y LAN 10.10.10.0/24, con la PC de monitoreo. Sitio Sucursal: ER Sucursal con WAN 203.0.113.20 y LAN 10.10.20.0/24, con cámaras y control de acceso. Entre los dos ER, un túnel IPsec por internet. Notas: los dos gateways en sitios distintos del mismo controlador; IP pública en la WAN de cada ER sin NAT adelante, y si hay NAT, Manual IPsec; una subred distinta en cada sede.",
+   "caption": "Mismo controlador, sitios distintos, IP pública en la WAN y LAN que no se pisan."
+  },
+  "steps": [
+   {
+    "file": "11-paso1.svg",
+    "step": 1,
+    "after": "Planificá subredes que no se solapen",
+    "alt": "Tabla con el plan: Central LAN 10.10.10.0/24 y WAN 203.0.113.10; Sucursal LAN 10.10.20.0/24 y WAN 203.0.113.20. Panel rojo: dos ER605 de fábrica con la LAN sin cambiar, los dos en 192.168.0.1/24; un paquete a 192.168.0.20 no se sabe si va a la LAN propia o al túnel. Panel verde: con el plan, cada destino tiene un solo lugar, lo local se queda y lo otro va al túnel. Aviso: cambiar la LAN por defecto en producción corta a los clientes hasta que renuevan DHCP, en ventana de mantenimiento.",
+    "caption": "Dos sedes con la misma subred no se pueden unir: el router no sabe adónde mandar."
+   },
+   {
+    "file": "11-paso6.svg",
+    "step": 6,
+    "after": "Si en la vida real la sucursal tiene",
+    "alt": "Cadena de equipos: ER Central 203.0.113.10, internet, router del proveedor que hace NAT, resaltado en ámbar, y ER Sucursal con IP privada en la WAN. Rótulo: abrir UDP 500 y 4500 hacia el ER. Tabla: UDP 500 para IKE, donde los dos ER se autentican y acuerdan claves; UDP 4500 para IPsec dentro de UDP, para atravesar el NAT. Notas: Auto IPsec pide IP pública en la WAN y con NAT adelante va Manual IPsec con Local ID y Remote ID de tipo Name; verificación en Network Config, VPN Status, Site-to-Site VPN, IPsec.",
+    "caption": "Con NAT adelante: Manual IPsec y UDP 500 y 4500 abiertos hacia el ER."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Auto IPsec",
+    "para_que": "Une las LAN de dos sedes con un túnel cifrado por internet, sin cargar a mano cada parámetro. Como el controlador conoce los dos gateways, arma el túnel con pocos datos.",
+    "como": "Los dos gateways tienen que estar en sitios distintos del mismo controlador, con IP pública en la WAN (sin NAT adelante) y LAN que no se solapen. Se crea en Network Config > VPN > Site-to-Site VPN, tipo Auto IPsec, eligiendo el sitio remoto. Se verifica en VPN Status y con un ping a la LAN del otro lado.",
+    "ejemplo": "Un cliente con central en Montevideo y sucursal en Florida, dos ER605 con fibra con IP pública: Auto IPsec y la PC de monitoreo ve las cámaras de la sucursal."
+   },
+   {
+    "name": "Manual IPsec y NAT",
+    "para_que": "Cuando un gateway está detrás del router del proveedor, Auto IPsec no aplica. Manual IPsec permite armar el túnel igual, cargando cada parámetro y resolviendo el NAT.",
+    "como": "En el equipo que hace NAT se abren UDP 500 y 4500 hacia el ER, y en el túnel se usan Local ID y Remote ID de tipo Name. Se cargan el gateway remoto, las subredes y una clave precompartida igual en los dos extremos. Si un extremo está en standalone, IKEv1 y una sola red local.",
+    "ejemplo": "La sucursal de Rivera tiene el router de la operadora adelante y no se puede poner en bridge: se pide abrir UDP 500 y 4500 hacia el ER y el túnel va como Manual IPsec."
+   },
+   {
+    "name": "Subredes que no se solapan",
+    "para_que": "Un túnel une dos redes por ruteo. Si las dos usan la misma subred, el router no puede saber si un destino está en su LAN o del otro lado del túnel.",
+    "como": "Antes de crear el túnel se planifica una subred distinta por sede, por ejemplo 10.10.10.0/24 y 10.10.20.0/24. Un ER605 sale de fábrica con 192.168.0.1/24: si las dos sedes quedaron así, una tiene que cambiar. Cambiar la LAN en producción corta a los clientes hasta que renuevan DHCP, así que va en ventana de mantenimiento.",
+    "ejemplo": "Dos locales de una cadena de ópticas, los dos en 192.168.0.0/24 desde la instalación. Antes del túnel, la sucursal pasa a 10.10.20.0/24 un domingo temprano."
+   },
+   {
+    "name": "Adopción por el túnel",
+    "para_que": "Con el túnel arriba, la sucursal ya llega a la red privada de la central. Eso permite adoptar sus equipos sin abrir puertos de gestión a internet.",
+    "como": "El DHCP de la sucursal entrega la option 138 con la IP privada del controlador. Los EAP de la sucursal la reciben al renovar DHCP, llaman al controlador por el túnel y aparecen en Pending. La guía oficial muestra el caso con un switch de la sucursal dando el DHCP.",
+    "ejemplo": "Se suman dos EAP en la sucursal de Florida: se conectan, toman la option 138 que apunta al controlador de la central y aparecen en Pending sin abrir ningún puerto en internet."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nIPsec es el estándar de túneles cifrados del IETF. Su arquitectura vigente es la RFC 4301, de 2005. El intercambio de claves tuvo dos versiones: IKEv1, de 1998 (RFC 2409), e IKEv2, de 2014 en su versión vigente (RFC 7296). Y como IPsec original no atravesaba bien los routers con NAT, en 2005 se publicaron las RFC 3947 y 3948, que lo encapsulan en UDP 4500: es NAT Traversal.\n\nLos gateways Omada traen dos sabores de VPN de sitio a sitio: Auto IPsec, que el controlador arma solo entre sitios propios, y Manual IPsec, que se configura parámetro por parámetro. Evan McCann, en su reseña de 2022, consideraba que el sitio a sitio de Omada estaba bien, pero que para VPN de usuarios remotos y ruteo avanzado convenía otro firewall. La tabla comparativa oficial actual lista además WireGuard, OpenVPN, L2TP, PPTP y SSL en los controladores locales.\n\n### Cómo funciona\n\nUn túnel IPsec tiene dos etapas:\n\n1. **IKE, por UDP 500.** Los dos gateways se autentican, con una clave precompartida o certificados, y acuerdan cómo cifrar. Si detectan un NAT en el medio, pasan a UDP 4500.\n2. **ESP.** El tráfico entre las dos LAN viaja cifrado. Con NAT, va dentro de UDP 4500.\n\nPara cada destino, el gateway decide: si la IP es de su LAN, la entrega local; si es de la subred remota, la mete en el túnel. Por eso las dos LAN no pueden solaparse: con las dos sedes en 192.168.0.0/24, el router nunca mandaría nada al túnel.\n\n**Auto IPsec** aprovecha que el controlador conoce los dos gateways: con los dos en sitios distintos del mismo controlador, IP pública en la WAN y LAN distintas, se crea eligiendo el sitio remoto. **Manual IPsec** es para cuando hay NAT adelante o un extremo no está en el mismo controlador: se cargan gateway remoto, subredes, clave, y Local ID y Remote ID de tipo Name; en el equipo que hace NAT se abren UDP 500 y 4500.\n\nLa verificación tiene dos partes: las entradas en Network Config > VPN Status > Site-to-Site VPN > IPsec, y un ping de una LAN a la otra.\n\nCon el túnel arriba aparece una ventaja extra: los equipos de la sucursal pueden adoptarse con option 138 apuntando a la IP privada del controlador, sin exponer la gestión a internet."
+ },
+ "12": {
+  "fig": {
+   "file": "12.svg",
+   "alt": "Dos controladores, 5.x y 6.x, cada uno con su archivo de backup debajo, backup-5.x.cfg y backup-6.x.cfg. Una flecha verde del 5.x al 6.x dice de a una versión mayor. Una flecha roja del backup de 6.x hacia el 5.x, con una cruz, dice que un backup de 6.x no entra en un 5.x. Texto: volver atrás es reinstalar, desinstalar sin guardar datos, instalar la versión vieja y restaurar el backup de esa misma versión. Notas: backup programado y fuera del controlador; de 5.x a 6.x sin saltear; Beta y Release Candidate solo en laboratorio.",
+   "caption": "Un backup guardado por cada versión: el downgrade es reinstalar y restaurar el de esa versión."
+  },
+  "steps": [
+   {
+    "file": "12-paso1.svg",
+    "step": 1,
+    "after": "activalo, semanal, domingo 3:00",
+    "alt": "Ventana de Settings, Maintenance, Backup Schedule con estado activado, frecuencia semanal, domingo 3:00, contenido Configuration y destino Save to File Server resaltado. Al lado, el controlador manda el archivo cfg semanal a un servidor de archivos SFTP en otro host. Debajo, el nombre de ejemplo omada-lab_v6.2.10.17_2026-10-27.cfg del export a mano del paso 2, con la versión en el nombre. Nota: un Administrator común no programa backups automáticos, lo hace el Main Administrator.",
+    "caption": "Semanal, de madrugada y en otro equipo: si muere el host, el backup sigue."
+   },
+   {
+    "file": "12-paso3.svg",
+    "step": 3,
+    "after": "copiá también el volumen de datos",
+    "alt": "Tres comandos en la VM: detener el compose en /opt/omada, crear un tar.gz con fecha del volumen omada_omada-data y volver a arrancar. Tres tarjetas: parar, para que MongoDB cierre limpio y no se copie a mitad de escritura; copiar el volumen omada-data entero; arrancar, el controlador vuelve en 1 a 2 minutos. Notas: ese tar.gz más el docker-compose.yml alcanzan para rearmar el controlador en otro host; nunca docker compose down -v.",
+    "caption": "Contenedor detenido, volumen copiado con fecha y el compose guardado al lado."
+   },
+   {
+    "file": "12-paso5.svg",
+    "step": 5,
+    "after": "Verificá sitios, redes y SSID",
+    "alt": "Cuatro pasos en fila: exportar en Global View, Settings, Migration; importar en el destino con la misma Major.Minor.Patch; migrar los equipos con la IP o la Inform URL nueva; Forget en el controlador viejo cuando todos estén Connected, en verde. Notas: desde la 5.15.24, si se saltea la importación el destino no adopta los equipos solo; desde la 5.13.11.41 solo se importa un archivo de la misma Major.Minor.Patch; el backup de un ER7212PC solo vuelve a otro ER7212PC; pasar de un controlador local a la nube deja los equipos Unactivated hasta asignarles licencia.",
+    "caption": "Exportar, importar, migrar equipos y recién al final Forget."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Backup fuera del controlador",
+    "para_que": "Un controlador quemado o un upgrade fallido sin backup es rehacer la obra entera. El backup programado y guardado en otro equipo es lo que convierte ese desastre en una restauración.",
+    "como": "En Settings > Maintenance > Backup Schedule se programa semanal, de madrugada, con contenido Configuration, y con Save to File Server se guarda en un SFTP. Además, antes de cada cambio grande, un export a mano con la versión en el nombre. En Docker, también el volumen de datos, con el contenedor detenido.",
+    "ejemplo": "El disco del mini PC que corría el controlador de un cliente en Las Piedras se muere un martes. Con el .cfg del domingo en el SFTP de IES, se levanta un controlador nuevo, se restaura y los equipos vuelven a Connected."
+   },
+   {
+    "name": "Un backup por versión",
+    "para_que": "Un backup de una versión nueva no entra en una versión vieja, y bajar de versión el controlador es reinstalar. Guardar un backup de cada versión es lo único que permite volver atrás.",
+    "como": "En saltos de versión mayor se va de a uno, de 5.x a 6.x sin saltear, con backup antes y verificando que arranque limpio. Para hacer downgrade del Software Controller se desinstala sin guardar datos, se instala la versión vieja y se restaura el backup de esa versión. En producción se usa el canal estable; Beta y Release Candidate, solo en laboratorio.",
+    "ejemplo": "Después de un upgrade, el portal de un hotel en Piriápolis deja de andar. Con el backup guardado de la versión anterior, se reinstala esa versión y se restaura en una hora, sin rehacer nada."
+   },
+   {
+    "name": "Migración en orden",
+    "para_que": "Mudar el controlador a otro equipo, o un sitio a otro controlador, sin readoptar a mano cada equipo. Desde la 6.2.10, Omada trae un asistente de Migration para eso.",
+    "como": "El orden es exportar, importar en el destino, migrar los equipos con la IP o la Inform URL nueva, y recién cuando todos están Connected en el destino, Forget Devices en el viejo. El destino tiene que tener la misma Major.Minor.Patch. Saltear la importación hace que el destino no adopte los equipos solo.",
+    "ejemplo": "IES muda el controlador de un cliente de un OC200 que quedó chico a un Software Controller en su servidor: exporta, importa, migra los equipos y deja el OC200 hasta ver todo Connected."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLa guía de upgrade al Omada SDN Controller 4.1.5 ya marcaba el procedimiento que sigue vigente: backup en Backup & Restore, eligiendo cuántos días de datos retener; desinstalar el controlador viejo sin guardar datos; instalar el nuevo; restaurar; y después actualizar el firmware de los equipos.\n\nCon los años se agregaron reglas. Desde la 5.13.11.41, la migración solo importa archivos de la misma versión Major.Minor.Patch, por ejemplo 5.13.11. Desde la 5.15.24, saltear la importación y pasar directo a migrar equipos hace que el destino no los adopte solo. Y la 6.2.10 trajo el asistente de Migration, con Site Migration y Controller Migration.\n\nSobre el ritmo de versiones hay discrepancia. Un usuario del foro de Lawrence Systems contaba en 2023 que vio una sola actualización de firmware de switch en un año; la documentación oficial, en cambio, muestra canales Beta y Release Candidate dentro de un programa de acceso anticipado.\n\n### Cómo funciona\n\nEl backup del controlador es un archivo `.cfg` con la configuración y, si se elige, datos retenidos. Tiene dos límites que explican las reglas:\n\n- **No viaja hacia atrás.** Un backup de una versión nueva no se restaura en una vieja. Bajar de versión el Software Controller es desinstalar sin guardar datos, instalar la versión anterior y restaurar un backup de esa misma versión. Por eso se guarda uno por versión.\n- **Solo sirve si existe fuera del equipo.** Un backup guardado en el mismo disco del controlador muere con él. Backup Schedule con Save to File Server lo deja en un SFTP.\n\nEn Docker se agrega una capa: el volumen de datos. Con el contenedor detenido, para que MongoDB cierre limpio, un `tar` del volumen más el `docker-compose.yml` alcanzan para rearmar el controlador en otro host. Y `docker compose down -v` borra justamente eso.\n\nLa migración tiene un orden porque cada paso depende del anterior. Primero se exporta la configuración y se importa en el destino: así el destino conoce los equipos. Después se les dice a los equipos la nueva dirección, con la IP o la Inform URL. Recién cuando todos están Connected en el destino se hace Forget en el viejo. Si se hace Forget antes, los equipos quedan sin controlador.\n\nEn el controlador de hardware, el upgrade tarda de 6 a 8 minutos con el OC offline. Ventana de mantenimiento, backup descargado y notas de versión leídas, siempre antes."
+ }
+}

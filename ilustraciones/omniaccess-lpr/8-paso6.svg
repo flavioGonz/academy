@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Exportar arma un ZIP con cuatro archivos</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS LPR · PASO 6</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Exportar arma un ZIP con cuatro archivos</text>
+<rect x="48" y="140" width="544" height="128" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<g transform="translate(72 180) scale(1.6)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 15 5l2 5-12 3.5z"/><path d="m17 10 3.5 1.5M9 13l1 4M6 17h8"/></g>
+<text x="128.0" y="196.0" font-family="JetBrains Mono" font-size="21" font-weight="700" fill="#04223D" text-anchor="start">captura.jpg</text>
+<text x="128.0" y="228.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">la foto completa de la escena</text>
+<rect x="608" y="140" width="544" height="128" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<g transform="translate(632 180) scale(1.6)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></g>
+<text x="688.0" y="196.0" font-family="JetBrains Mono" font-size="21" font-weight="700" fill="#04223D" text-anchor="start">recorte_matricula.jpg</text>
+<text x="688.0" y="228.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">el acercamiento de la patente</text>
+<rect x="48" y="290" width="544" height="128" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<g transform="translate(72 330) scale(1.6)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="7" rx="1.5"/><rect x="4" y="14" width="16" height="7" rx="1.5"/><path d="M7.5 6.5h.01M7.5 17.5h.01"/></g>
+<text x="128.0" y="346.0" font-family="JetBrains Mono" font-size="21" font-weight="700" fill="#04223D" text-anchor="start">clip_30s.mp4</text>
+<text x="128.0" y="378.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">video del NVR alrededor del evento</text>
+<rect x="608" y="290" width="544" height="128" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<g transform="translate(632 330) scale(1.6)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g>
+<text x="688.0" y="346.0" font-family="JetBrains Mono" font-size="21" font-weight="700" fill="#04223D" text-anchor="start">evento.json</text>
+<text x="688.0" y="378.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">hora, cámara, vehículo y decisión</text>
+<rect x="48" y="460" width="1104" height="54" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="472" width="5" height="30" rx="2.5" fill="#0A63B8"/><text x="74.0" y="494.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Tarda 5 a 15 segundos porque le pide el video al NVR en el momento. Sin canal de NVR, el ZIP sale sin clip.</tspan></text>
+<rect x="48" y="552" width="1104" height="54" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="48" y="564" width="5" height="30" rx="2.5" fill="#B45309"/><text x="74.0" y="586.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Tiene datos personales: se entrega solo a quien el cliente autoriza.</tspan></text>
+</svg>

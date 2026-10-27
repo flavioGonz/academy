@@ -1,0 +1,19 @@
+A: Lección once, para el administrador del barrio. El padrón.
+B: La planilla de quién vive dónde.
+A: Más que una planilla, una cadena. Unidad, usuario, credencial y grupo. El lote, la persona, su matrícula y por dónde y cuándo puede pasar.
+B: ¿Y si cargo la matrícula sola, sin persona?
+A: Abre igual. Pero el día que te preguntan qué autos tiene el lote doce, no hay forma de saberlo. El manual lo marca como el error más común al empezar.
+B: ¿Y Vehículos y Matrículas?
+A: Es la vista al revés: cada auto con su dueño y la última vez que lo vio una cámara, con la foto. Sirve para corregir una matrícula mal cargada o para ver duplicados de un auto que cambió de dueño adentro del barrio.
+B: ¿Y la cámara cómo se entera de los nuevos?
+A: En Dispositivos, Sincronizar matrículas a las cámaras. Analiza cámara por cámara qué falta y qué sobra. Incremental aplica solo las diferencias y la cámara nunca queda sin lista. Reemplazo total borra y recarga todo: solo para reparar.
+B: ¿Y las visitas?
+A: Invitados. Un pase con la patente y la vigencia. Cuando la cámara lo lee, si el barrio tiene WhatsApp configurado, le avisa al anfitrión. Y tolera un error de lectura de uno o dos caracteres.
+B: Hablando de visitas, ¿leíste lo de gatesentry?
+A: La residente que llega con el auto del taller y el portón no abre. Doce minutos esperando. Ese artículo calcula entre veinte y ochenta horas de carga para migrar un barrio de quinientas casas.
+B: [suspiro] Y cada auto nuevo es otra alta.
+A: Por eso conviene el alta rápida desde el monitor y los pases de invitado. ¿Y los reportes? Historial de Acceso, Exportar en Excel o PDF, con período, eventos y columnas. La portada con la marca del cliente se arma en Branding.
+B: ¿Laboratorio?
+A: Creás un lote de prueba, un residente con dos matrículas y su grupo, lo buscás en Vehículos, sincronizás en Incremental, hacés un pase de invitado y exportás el PDF del mes.
+B: Y al final, suspendido, no eliminado.
+A: Así conserva el historial. Con la cadena completa, no me abre deja de ser un misterio.

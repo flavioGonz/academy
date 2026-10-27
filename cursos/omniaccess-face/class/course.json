@@ -1,0 +1,145 @@
+{
+ "slug": "omniaccess-face",
+ "title": "OmniAccess Face: reconocimiento facial en el acceso",
+ "vendor": "Infratec",
+ "tagline": "Del terminal en la pared al evento con foto en el monitor: instalar, enrolar, operar y diagnosticar OmniAccess Face.",
+ "description": "Al terminar vas a poder montar un terminal facial donde reconoce, darlo de alta en OmniAccess con su MAC y su Action URL, enrolar personas con una foto que sirve y verificar que llegaron a la memoria del equipo. También vas a operar el Monitor Facial, manejar visitas y bloqueos de verdad, armar reportes y diagnosticar fallas por capas, cuidando los datos biométricos según la Ley 18.331.",
+ "level": "Inicial a intermedio",
+ "audience": "Técnicos de IES que instalan OmniAccess Face y operadores (guardia, portería, administrador del barrio o edificio) que lo usan todos los días.",
+ "prerequisites": [
+  "Direccionamiento IP, puertos y firewall a nivel básico",
+  "Haber entrado a la web de un terminal o portero Akuvox (curso Porteros IP Akuvox)",
+  "Usuario administrador en una instalación de demo o de prueba de OmniAccess",
+  "Un terminal facial Akuvox o Hikvision de banco, si es posible"
+ ],
+ "outcomes": [
+  "Explicar quién decide la apertura (el terminal) y qué hace OmniAccess con cada evento según el Modo Face",
+  "Montar un terminal facial a la altura y con la luz que piden los fabricantes",
+  "Dar de alta el terminal con MAC, credenciales de API y Action URL al puerto 10000, y verificar el aviso",
+  "Enrolar personas con una foto que sirve y comprobar en Memoria Flash que están en el terminal",
+  "Operar el Monitor Facial, la ficha del evento, visitas y bajas, y exportar reportes del Historial",
+  "Diagnosticar por capas (aviso, foto, vínculo, reconocimiento) y aplicar consentimiento, retención y borrado de datos biométricos"
+ ],
+ "version_note": "Escrito en octubre de 2026 sobre la rama de desarrollo de OmniAccess de ese mes (versión de manuales 2026.09). Los manuales de Face del producto tienen el índice armado y el contenido pendiente: pantallas y flujos salen del código. Terminales con funciones faciales en el sistema: Akuvox e Hikvision. Lo que depende de la instalación (módulos activos, video en vivo, pantallas adicionales) se indica en cada lección.",
+ "arcs": [
+  {
+   "title": "Entender y montar",
+   "why": "Antes de tocar el panel conviene saber quién abre la puerta y dónde va el terminal: los dos errores más caros salen de ahí.",
+   "lessons": [
+    1,
+    2
+   ]
+  },
+  {
+   "title": "Conectar y sincronizar",
+   "why": "Es el trabajo del técnico en el panel: que el terminal exista con su MAC, que avise, que abra a pedido y que tenga las caras correctas.",
+   "lessons": [
+    3,
+    4,
+    5
+   ]
+  },
+  {
+   "title": "Operar en portería",
+   "why": "Lo de todos los días para el guardia y el administrador: mirar, entender un evento, enrolar a alguien y manejar visitas y bloqueos.",
+   "lessons": [
+    6,
+    7,
+    8
+   ]
+  },
+  {
+   "title": "Administrar y diagnosticar",
+   "why": "El sistema se sostiene con reportes que respondan preguntas y con un método para las fallas de siempre, cuidando los datos biométricos.",
+   "lessons": [
+    9,
+    10
+   ]
+  }
+ ],
+ "splits": [
+  {
+   "topic": "Altura de montaje del terminal",
+   "sides": "ClockRite recomienda 1,1 m mirando hacia abajo; Control iD 1,30 m; Synerion la cámara a 1,48 m; Hikvision pide personas de 1,4 a 1,9 m a 0,5 m.",
+   "decide": "Manda la ficha del modelo; validala con la persona más baja y la más alta del lugar."
+  },
+  {
+   "topic": "Peso de la foto de alta",
+   "sides": "Speco pide menos de 70 KB; Hikvision entre 40 y 200 KB; la documentación de Akuvox del sistema, menos de 200 KB y al menos 640x480.",
+   "decide": "Manda el equipo destino; para Akuvox desde OmniAccess, JPG de menos de 200 KB."
+  },
+  {
+   "topic": "Consentimiento como base suficiente",
+   "sides": "La Ley 18.331 pone el consentimiento previo informado como regla general; CSO Online (GDPR) advierte que en una relación laboral no es libre sin alternativa.",
+   "decide": "Pedir consentimiento documentado y ofrecer siempre tarjeta, PIN o portería sin castigo; la evaluación de impacto y la inscripción de la base las define el responsable con su asesor."
+  },
+  {
+   "topic": "Eventos locales o en la nube",
+   "sides": "OmniAccess recibe Action URL locales en el puerto 10000; Akuvox ofrece reglas y webhooks desde Smart Access Cloud.",
+   "decide": "Con OmniAccess, Action URL local; la nube depende de la suscripción del cliente."
+  }
+ ],
+ "sources_count": 24,
+ "lessons": [
+  {
+   "n": 1,
+   "dir": "01-quien-decide-la-puerta",
+   "handle": "Quién decide la puerta",
+   "summary": "El terminal abre; OmniAccess registra, clasifica con el Modo Face y guarda la foto."
+  },
+  {
+   "n": 2,
+   "dir": "02-terminal-bien-parado",
+   "handle": "Terminal bien parado",
+   "summary": "Altura según el modelo, persona a 50 cm, sin sol ni contraluz y con luz frontal."
+  },
+  {
+   "n": 3,
+   "dir": "03-el-terminal-avisa",
+   "handle": "El terminal avisa",
+   "summary": "Alta del terminal con MAC, Action URL al puerto 10000, foto desde el registro del equipo y botón Relé."
+  },
+  {
+   "n": 4,
+   "dir": "04-rostros-al-terminal",
+   "handle": "Rostros al terminal",
+   "summary": "Foto que sirve, envío a Terminales de rostro y Memoria Flash para ver la memoria real."
+  },
+  {
+   "n": 5,
+   "dir": "05-grupos-y-horarios",
+   "handle": "Grupos y horarios",
+   "summary": "Grupos de Acceso documentan el permiso; la copia y el horario viven en el terminal."
+  },
+  {
+   "n": 6,
+   "dir": "06-monitor-y-evento",
+   "handle": "Monitor y evento",
+   "summary": "Monitor Facial, filtros, LIVE y la ficha del evento con Registrar y Exportar."
+  },
+  {
+   "n": 7,
+   "dir": "07-enrolar-en-porteria",
+   "handle": "Enrolar en portería",
+   "summary": "Alta desde el evento con foto revisada y consentimiento según la Ley 18.331."
+  },
+  {
+   "n": 8,
+   "dir": "08-visitas-y-bloqueos",
+   "handle": "Visitas y bloqueos",
+   "summary": "Visitas con baja ordenada y bloqueo real: sacar la cara del terminal antes que la ficha."
+  },
+  {
+   "n": 9,
+   "dir": "09-historial-y-reportes",
+   "handle": "Historial y reportes",
+   "summary": "Reportes por filtros, sincronización del doorlog y retención del Bucket FACE."
+  },
+  {
+   "n": 10,
+   "dir": "10-diagnostico-facial",
+   "handle": "Diagnóstico facial",
+   "summary": "Cuatro capas: aviso, foto, vínculo con la ficha y reconocimiento en el terminal."
+  }
+ ]
+}

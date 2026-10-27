@@ -1,0 +1,35 @@
+[
+  {
+    "q": "En un local con fibra de Antel por PPPoE y un 4G por DHCP, el PPPoE quedó con add-default-route=yes en distancia 1 además de las recursivas. La sesión sigue arriba pero no hay internet. ¿Qué pasa?",
+    "options": [
+      "Conmuta al 4G porque los testigos no contestan",
+      "No conmuta: la ruta automática del PPPoE sigue activa mientras la sesión esté arriba",
+      "El PPPoE se reconecta solo",
+      "El 4G toma la mitad del tráfico"
+    ],
+    "answer": 1,
+    "why": "La ruta que instala el PPPoE depende de la sesión, no de internet. Las recursivas caen, pero esa ruta en distancia 1 sigue ganando. Por eso el PPPoE principal va con add-default-route=no."
+  },
+  {
+    "q": "Agregaste el cliente DHCP en ether2 para el router 4G y de golpe las PCs de la LAN reciben IP 192.168.8.x. ¿Qué pasó?",
+    "options": [
+      "El 4G está en modo puente",
+      "Falta el masquerade",
+      "Hay que bajar el MTU",
+      "ether2 sigue en el bridge de fábrica y el servidor DHCP del 4G atiende a la LAN"
+    ],
+    "answer": 3,
+    "why": "En la configuración de fábrica ether2 es puerto del bridge. Antes de usarlo como WAN se saca del bridge; si no, la LAN y el 4G quedan en el mismo dominio."
+  },
+  {
+    "q": "Volvió la fibra después de un failover y el teléfono IP del local no registra hasta que alguien reinicia el router. ¿Qué explica mejor el síntoma?",
+    "options": [
+      "La conexión UDP que se armó por el 4G quedó en conntrack y sigue con la traducción del 4G",
+      "El DNS del 4G",
+      "El MTU del PPPoE",
+      "La distancia del DHCP"
+    ],
+    "answer": 0,
+    "why": "El 4G no se cayó, así que el masquerade no limpió esas conexiones. Al volver la ruta por la fibra, la conexión vieja queda inservible. Un Netwatch que borra las conexiones UDP al volver el testigo lo resuelve."
+  }
+]

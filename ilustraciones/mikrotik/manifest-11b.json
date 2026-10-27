@@ -1,0 +1,117 @@
+{
+  "11": {
+    "fig": {
+      "file": "11.svg",
+      "alt": "La LAN 192.168.88.0/24 conectada al router. ether1 va al ISP1 con IP fija 203.0.113.10/29, gateway 203.0.113.9 y ruta recursiva con distance=1; ether2 va al router 4G con gateway 192.168.8.1 y distance=2 de respaldo. Cada ISP tiene sus testigos con ruta /32 y scope=10: 1.1.1.1 y 9.9.9.9 para el ISP1, 8.8.8.8 y 208.67.222.222 para el ISP2. Abajo, tres tarjetas: la IP fija escribe su ruta en /ip/route, el cliente DHCP la instala con default-route-distance y el PPPoE con add-default-route y default-route-distance.",
+      "caption": "Cada WAN pone su ruta por defecto distinto; la distancia decide cuál trabaja y los testigos dicen si hay internet."
+    },
+    "steps": [
+      {
+        "file": "11-paso3.svg",
+        "step": 3,
+        "alt": "Tres cajas encadenadas: la ruta 0.0.0.0/0 con gateway=1.1.1.1 y target-scope=11 se resuelve con la ruta 1.1.1.1/32 por 203.0.113.9 con scope=10, que a su vez se resuelve con la red conectada 203.0.113.8/29 en ether1. Debajo, el ping de check-gateway sale del router, pasa por el módem e internet y llega a 1.1.1.1. Una nota explica que la ruta del DHCP del 4G, con scope 30, no puede resolver el testigo.",
+        "caption": "La default apunta al testigo y el ping de check-gateway llega hasta él, pasando por el módem.",
+        "after": "Rutas por defecto recursivas, y apagá"
+      },
+      {
+        "file": "11-paso5.svg",
+        "step": 5,
+        "alt": "Una fila de pings desde la notebook: cinco bien por el ISP1, seis perdidos hasta conmutar y cinco bien por el ISP2. Debajo, la tabla de rutas por defecto: las de 1.1.1.1 y 9.9.9.9 activas antes y inactivas con el corte; las de 8.8.8.8 y 208.67.222.222 en espera antes y activas con el corte. Una nota aclara que el corte simulado descarta los pings del router a los testigos y que el módem sigue vivo.",
+        "caption": "Con el corte simulado caen las recursivas del ISP1 y entran las del ISP2; contá los pings perdidos.",
+        "after": "Simulá internet caída con el módem vivo"
+      },
+      {
+        "file": "11-paso7.svg",
+        "step": 7,
+        "alt": "Dos paneles. Sin marcas: un pedido entra por el ISP2, el NVR responde y la respuesta sale por el ISP1 con otra IP y se descarta. Con marcas: la respuesta sale por el ISP2. Abajo, las tres reglas de mangle: marcar la conexión nueva que entra por ether2, marcar la ruta de las respuestas desde la LAN y marcar la ruta de las respuestas del propio router en output.",
+        "caption": "La marca de conexión recuerda por dónde entró; la marca de ruteo manda la respuesta por ahí.",
+        "after": "que la respuesta salga por donde entró"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Failover o balanceo",
+        "para_que": "Dos enlaces se pueden usar de dos maneras: uno trabaja y el otro espera (failover), o los dos trabajan a la vez repartiendo conexiones (balanceo). La mayoría de las obras de seguridad electrónica necesitan continuidad, no más ancho de banda, y el respaldo suele ser un 4G con datos limitados.",
+        "como": "El failover se arma con distancias: la ruta del principal con distancia menor y la del respaldo con distancia mayor, más algo que detecte la caída. El balanceo por conexión usa PCC con marcas y una tabla por enlace; la documentación de MikroTik lo describe como obligatorio por conexión cuando controlás una sola punta.",
+        "ejemplo": "Un supermercado con fibra y un 4G de 30 GB: failover. Una oficina con dos fibras parecidas de proveedores distintos que pide sumar velocidad: PCC, con la lista de redes locales que no se balancean."
+      },
+      {
+        "name": "check-gateway y rutas recursivas",
+        "para_que": "check-gateway=ping le hace ping al gateway cada 10 segundos y, con dos fallas, deja la ruta inactiva. Mira el próximo salto, que casi siempre es el módem. La ruta recursiva cambia a quién se le hace el ping: a un host testigo en internet que se alcanza por ese proveedor.",
+        "como": "Una /32 a cada testigo por el gateway de su proveedor con scope=10 y la ruta por defecto con gateway=<testigo>, target-scope=11 y check-gateway=ping. Dos testigos por enlace: el cambio completo ocurre solo cuando fallan los dos. Los testigos no se usan como DNS de la red.",
+        "ejemplo": "En un local de Pando una obra corta la fibra en la vereda. El módem sigue con luz verde y contesta, pero 1.1.1.1 y 9.9.9.9 no: las dos defaults del ISP1 caen y las cajas siguen cobrando por el 4G. Con check-gateway al módem, el local se habría quedado sin internet."
+      },
+      {
+        "name": "Conntrack al conmutar y al volver",
+        "para_que": "Cada conexión queda registrada en connection tracking con su traducción de NAT. Si el enlace cambia, las conexiones viejas siguen con la IP del enlace anterior y no sirven por el nuevo.",
+        "como": "El masquerade borra sus conexiones cuando la interfaz se cae o cambia de IP. Con rutas recursivas la interfaz no se cae, así que las conexiones quedan hasta que vencen. Se miran en /ip/firewall/connection y, si hace falta, un Netwatch borra las UDP al volver el principal.",
+        "ejemplo": "Vuelve la fibra y el teléfono IP de la recepción no registra: su conexión UDP se armó por el 4G y sigue ahí. Borrar las conexiones UDP lo resuelve sin reiniciar el router, sabiendo que corta las llamadas en curso."
+      },
+      {
+        "name": "Acceso entrante con dos WAN",
+        "para_que": "Un port forward, WinBox o Back To Home reciben pedidos por una WAN, pero la respuesta sigue la ruta por defecto. Si el pedido entró por la WAN que no es la principal, la respuesta sale por la otra con otra IP y se pierde.",
+        "como": "Se marca la conexión nueva según la interfaz de entrada (mark-connection en prerouting), después se marca la ruta de sus respuestas desde la LAN y desde el router (mark-routing en prerouting y output) hacia una tabla creada en /routing/table con su ruta por defecto por esa WAN. FastTrack solo usa la tabla main, así que se limita a connection-mark=no-mark.",
+        "ejemplo": "Una central de monitoreo entra al NVR por la IP del segundo proveedor mientras la fibra es la principal. Sin marcas, el NVR responde por la fibra y la central no ve nada; con las tres reglas, la respuesta sale por donde entró."
+      }
+    ],
+    "teoria_md": "### Un poco de historia\n\nLos grandes operadores resuelven la redundancia con BGP y bloques de IP propios. Un comercio o una oficina no tiene eso: tiene dos proveedores, cada uno con su IP y su gateway, y un router que tiene que elegir. La solución clásica es tener dos rutas por defecto con distinta prioridad y algo que detecte cuándo la principal dejó de servir.\n\nLa búsqueda recursiva del próximo salto nació para BGP: un vecino iBGP anuncia rutas cuyo next hop está a varios saltos, y el router tiene que resolverlo con otras rutas. RouterOS controla esa búsqueda con `scope` y `target-scope`. En el foro de MikroTik describen el failover con testigos como un uso creativo de esa búsqueda, y la documentación oficial lo enseña en su artículo de Failover. En RouterOS 7, estable desde 2021, `target-scope` y `check-gateway` pasaron a guardarse por gateway, y las tablas de ruteo se crean en `/routing/table` antes de usarlas.\n\nEl otro protagonista es el NAT. El RFC 1631, de 1994, lo describió como una salida temporal a la falta de direcciones, y el RFC 3022, de 2001, lo actualizó. MikroTik pensó `masquerade` para IP dinámicas: cuando la interfaz se cae o cambia de IP, borra sus conexiones.\n\n### Cómo funciona\n\nCada ruta tiene una `distance`. Entre rutas al mismo destino gana la menor; con la misma distancia, quedan activas las dos y se reparte el tráfico (ECMP). El cliente DHCP pone su ruta con `default-route-distance` y el PPPoE con `add-default-route` y `default-route-distance`.\n\nCon `check-gateway=ping`, el router le hace ping al gateway cada 10 segundos, espera 1 segundo y, tras dos fallas, deja la ruta inactiva. En la ruta recursiva el gateway es el testigo: la default dice `gateway=1.1.1.1` con `target-scope=11`, y el router busca cómo llegar a 1.1.1.1 solo entre rutas con `scope` menor o igual a 11. La /32 con `scope=10` cumple; la ruta del DHCP, con scope 30, no. El ping viaja hasta el testigo, y si cualquier tramo se corta, la ruta cae.\n\nAl conmutar, conntrack conserva cada conexión con su traducción. Si la interfaz no bajó, nada las borra, y las que se armaron por un enlace quedan inservibles por el otro hasta que vencen.\n\nLo que entra de afuera sigue la misma lógica de ruteo: la respuesta sale por la ruta por defecto. Por eso se marca la conexión al entrar y se marca la ruta de su respuesta hacia una tabla que sale por la misma WAN.\n",
+    "script_rsc": {
+      "titulo": "Failover con dos WAN por rutas recursivas",
+      "descripcion": "Crea dos testigos por proveedor con su /32, las rutas por defecto recursivas con distancias 1 y 2, suma las dos salidas a la lista WAN y fija DNS que no son testigos. Avisa si algún cliente DHCP o PPPoE mete su propia ruta con distancia baja.",
+      "variables": [
+        {
+          "nombre": "WAN1_IF",
+          "valor": "ether1",
+          "detalle": "Interfaz del proveedor principal (con gateway fijo)"
+        },
+        {
+          "nombre": "WAN2_IF",
+          "valor": "ether2",
+          "detalle": "Interfaz del proveedor de respaldo"
+        },
+        {
+          "nombre": "GW1",
+          "valor": "203.0.113.9",
+          "detalle": "Gateway del principal"
+        },
+        {
+          "nombre": "GW2",
+          "valor": "192.168.8.1",
+          "detalle": "Gateway del respaldo (por ejemplo, el router 4G)"
+        },
+        {
+          "nombre": "TESTIGO1_A",
+          "valor": "1.1.1.1",
+          "detalle": "Primer testigo del principal"
+        },
+        {
+          "nombre": "TESTIGO1_B",
+          "valor": "9.9.9.9",
+          "detalle": "Segundo testigo del principal"
+        },
+        {
+          "nombre": "TESTIGO2_A",
+          "valor": "8.8.8.8",
+          "detalle": "Primer testigo del respaldo"
+        },
+        {
+          "nombre": "TESTIGO2_B",
+          "valor": "208.67.222.222",
+          "detalle": "Segundo testigo del respaldo"
+        },
+        {
+          "nombre": "DNS",
+          "valor": "1.0.0.1,8.8.4.4",
+          "detalle": "DNS del router separados por coma, distintos de los testigos"
+        }
+      ],
+      "codigo": "# IES Training · MikroTik · Dos WAN con failover por rutas recursivas\n# Probalo primero en un equipo de banco y en Safe Mode (Ctrl+X). Antes, un export.\n:local wan1 \"{{WAN1_IF}}\"\n:local wan2 \"{{WAN2_IF}}\"\n:local gw1 \"{{GW1}}\"\n:local gw2 \"{{GW2}}\"\n:local t1a \"{{TESTIGO1_A}}\"\n:local t1b \"{{TESTIGO1_B}}\"\n:local t2a \"{{TESTIGO2_A}}\"\n:local t2b \"{{TESTIGO2_B}}\"\n:local dns \"{{DNS}}\"\n# Testigos: una /32 por su proveedor (scope=10)\n:if ([:len [/ip/route/find where comment=\"ies-testigo-isp1-a\"]] = 0) do={/ip/route/add dst-address=$t1a gateway=$gw1 scope=10 comment=\"ies-testigo-isp1-a\"} else={/ip/route/set [find where comment=\"ies-testigo-isp1-a\"] dst-address=$t1a gateway=$gw1 scope=10}\n:if ([:len [/ip/route/find where comment=\"ies-testigo-isp1-b\"]] = 0) do={/ip/route/add dst-address=$t1b gateway=$gw1 scope=10 comment=\"ies-testigo-isp1-b\"} else={/ip/route/set [find where comment=\"ies-testigo-isp1-b\"] dst-address=$t1b gateway=$gw1 scope=10}\n:if ([:len [/ip/route/find where comment=\"ies-testigo-isp2-a\"]] = 0) do={/ip/route/add dst-address=$t2a gateway=$gw2 scope=10 comment=\"ies-testigo-isp2-a\"} else={/ip/route/set [find where comment=\"ies-testigo-isp2-a\"] dst-address=$t2a gateway=$gw2 scope=10}\n:if ([:len [/ip/route/find where comment=\"ies-testigo-isp2-b\"]] = 0) do={/ip/route/add dst-address=$t2b gateway=$gw2 scope=10 comment=\"ies-testigo-isp2-b\"} else={/ip/route/set [find where comment=\"ies-testigo-isp2-b\"] dst-address=$t2b gateway=$gw2 scope=10}\n# Rutas por defecto recursivas: ISP1 distancia 1, ISP2 distancia 2\n:if ([:len [/ip/route/find where comment=\"ies-default-isp1-a\"]] = 0) do={/ip/route/add dst-address=0.0.0.0/0 gateway=$t1a target-scope=11 check-gateway=ping distance=1 comment=\"ies-default-isp1-a\"} else={/ip/route/set [find where comment=\"ies-default-isp1-a\"] dst-address=0.0.0.0/0 gateway=$t1a target-scope=11 check-gateway=ping distance=1}\n:if ([:len [/ip/route/find where comment=\"ies-default-isp1-b\"]] = 0) do={/ip/route/add dst-address=0.0.0.0/0 gateway=$t1b target-scope=11 check-gateway=ping distance=1 comment=\"ies-default-isp1-b\"} else={/ip/route/set [find where comment=\"ies-default-isp1-b\"] dst-address=0.0.0.0/0 gateway=$t1b target-scope=11 check-gateway=ping distance=1}\n:if ([:len [/ip/route/find where comment=\"ies-default-isp2-a\"]] = 0) do={/ip/route/add dst-address=0.0.0.0/0 gateway=$t2a target-scope=11 check-gateway=ping distance=2 comment=\"ies-default-isp2-a\"} else={/ip/route/set [find where comment=\"ies-default-isp2-a\"] dst-address=0.0.0.0/0 gateway=$t2a target-scope=11 check-gateway=ping distance=2}\n:if ([:len [/ip/route/find where comment=\"ies-default-isp2-b\"]] = 0) do={/ip/route/add dst-address=0.0.0.0/0 gateway=$t2b target-scope=11 check-gateway=ping distance=2 comment=\"ies-default-isp2-b\"} else={/ip/route/set [find where comment=\"ies-default-isp2-b\"] dst-address=0.0.0.0/0 gateway=$t2b target-scope=11 check-gateway=ping distance=2}\n# Las rutas por defecto comunes a esos gateways compiten: se apagan, no se borran\n/ip/route/disable [find where static and dst-address=0.0.0.0/0 and (gateway=$gw1 or gateway=$gw2)]\n# Las dos salidas en la lista WAN, para el masquerade de fábrica\n:foreach i in={$wan1;$wan2} do={:if ([:len [/interface/list/member/find where list=WAN and interface=$i]] = 0) do={/interface/list/member/add list=WAN interface=$i comment=\"ies-dos-wan\"}}\n# DNS del router que no sean testigos\n/ip/dns/set servers=[:toarray $dns]\n# Clientes DHCP o PPPoE que meten su propia ruta con distancia baja\n:foreach c in=[/ip/dhcp-client/find where disabled=no and add-default-route=yes and default-route-distance<3] do={:put (\"Ojo: el cliente DHCP de \" . [/ip/dhcp-client/get $c interface] . \" instala su ruta por defecto con distancia baja\")}\n:foreach c in=[/interface/pppoe-client/find where disabled=no and add-default-route=yes and default-route-distance<3] do={:put (\"Ojo: el PPPoE \" . [/interface/pppoe-client/get $c name] . \" instala su ruta por defecto con distancia baja\")}\n:put \"Listo: testigos, recursivas con distancias 1 y 2, lista WAN y DNS. Verificá con /ip/route/print where dst-address=0.0.0.0/0\"",
+      "notas": [
+        "Pensado para gateways estables (IP fija o un router 4G en modo router). Con PPPoE o DHCP en el principal, usá el script de la lección de esa combinación.",
+        "Apaga (no borra) las rutas por defecto estáticas a GW1 y GW2: si algo falla, se vuelven a habilitar.",
+        "No arma marcas para el acceso entrante ni limpia conexiones: eso está en los pasos 6 y 7 del laboratorio.",
+        "Probalo cortando aguas arriba del módem y anotá cuántos pings se pierden al conmutar y al volver."
+      ]
+    }
+  }
+}

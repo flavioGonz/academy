@@ -1,0 +1,19 @@
+A: Lección seis. Según el Manual del Instalador, el ochenta por ciento de las lecturas fallidas pasan de noche.
+B: Y de noche es cuando más importan.
+A: Por eso esta lección es nocturna. OmniAccess trae un calibrador en el panel: en Dispositivos tocás Calibrar ANPR y ves la cámara en vivo.
+B: ¿Qué se toca ahí?
+A: Dos cosas de geometría. La zona de lectura, que arrastrás para que cubra solo el carril, sin la vereda ni la calle de afuera. Y la línea de captura, donde la patente se ve derecha y grande.
+B: Lo mismo que dice Omada en su guía: zona solo sobre el carril.
+A: Igualito. Y después está la auto-calibración, el perfil barrio-noche. Pensado para autos a veinte o treinta kilómetros por hora con los faros de frente.
+B: ¿Qué cambia?
+A: Obturador a un quinientosavo, anti-brillo de patente en sesenta, WDR y HLC apagados, ganancia máxima cuarenta, infrarrojo automático y foco semiautomático.
+B: Pará. Hikvision en su guía dice un milésimo para cortar los faros.
+A: Bien visto. Ahí las fuentes discrepan. Un milésimo congela más el movimiento pero entra la mitad de luz. En un barrio, donde se anda despacio, el perfil elige un quinientosavo. Y con el WDR pasa algo parecido: Omada propone probar prendido y apagado.
+B: ¿Y cómo sé cuál anda?
+A: Midiendo. En Dispositivos está la Tasa de lectura: leídas contra no leídas, por cámara y por hora. Arriba de noventa y cinco, bien. Debajo de ochenta y cinco, hay un problema de emplazamiento o de luz.
+B: Por hora, no el promedio.
+A: Por hora. Un noventa general puede esconder un sesenta entre las dos y las cinco.
+B: [risas] Clásico. ¿Laboratorio?
+A: De noche. Mirás la tasa y elegís la peor cámara. Ajustás zona y línea, anotás los valores actuales, aplicás el perfil y pasás un auto con luces. Mirás el recorte en el monitor.
+B: Y a la semana volvés a mirar la tasa nocturna.
+A: Así la cámara deja de perder las patentes de las tres de la mañana.

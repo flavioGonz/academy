@@ -1,0 +1,5 @@
+[
+ {"q": "La administración pide que se avise si aparece una camioneta, pero sin impedirle entrar. ¿Qué categoría usás?", "options": ["Lista negra", "VIP / Autorizado", "En búsqueda, con el motivo escrito", "Ninguna, se le dice al guardia de palabra"], "answer": 2, "why": "En búsqueda avisa cuando aparece sin bloquear, y exige un motivo que el guardia ve en la captura."},
+ {"q": "Suena la alerta roja de lista negra. ¿Qué hace primero el guardia?", "options": ["Confirma a ojo que el recorte dice esa patente y sigue el protocolo del cliente", "Llama a la policía sin mirar", "Abre para no generar problemas", "Silencia el monitor"], "answer": 0, "why": "Las lecturas pueden estar equivocadas (Roseville: 71 % de alertas erróneas); verificar el recorte evita frenar a un inocente."},
+ {"q": "Una matrícula está en lista negra y además tiene un pase de invitado vigente. ¿Qué pasa al leerla?", "options": ["Pasa por el pase", "Gana la lista negra: queda denegada", "Depende de la hora", "El sistema pregunta al anfitrión"], "answer": 1, "why": "En el código la lista negra tiene precedencia sobre los invitados: el pase no se aplica a una matrícula en lista negra."}
+]

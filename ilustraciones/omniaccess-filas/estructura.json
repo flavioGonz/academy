@@ -1,0 +1,141 @@
+{
+ "curso": {
+  "objetivo": "Al terminar el curso vas a poder dejar funcionando una fila en OmniAccess Filas, de la cámara Bosch que cuenta al aviso que llega al supervisor, y operarla todos los días: leer el monitor y la espera estimada, atender alertas y mandar los reportes.",
+  "recorrido": "Arrancás entendiendo quién cuenta y por dónde viaja el número. Después ubicás y configurás la cámara Bosch con IVA Pro, la das de alta en OmniAccess verificando el sondeo ONVIF y ponés el video en vivo con go2rtc. Con la fila contando, la calibrás, le programás el reseteo y el umbral, y configurás los canales de aviso. Cerrás del lado del operador: monitor, espera estimada con la ley de Little, alertas y reportes del día."
+ },
+ "modulos": [
+  {
+   "title": "La fila entra al sistema",
+   "why": "Antes de configurar avisos, la cámara tiene que contar bien, OmniAccess tiene que recibir sus eventos y el video tiene que verse. Cierra con una fila dada de alta, con aforo, entradas y salidas llegando y el vivo funcionando.",
+   "objetivos": [
+    "Al terminar el módulo vas a poder explicar el flujo cámara, evento, monitor y alerta, y activar el Modo Cola.",
+    "Al terminar el módulo vas a poder ubicar y configurar una cámara Bosch con IVA Pro con la tarea de ocupación llamada Aforo y las tareas de entrada y salida.",
+    "Al terminar el módulo vas a poder dar de alta un Contador de Filas y comprobar que el sondeo ONVIF recibe cambios de aforo.",
+    "Al terminar el módulo vas a poder publicar el stream bosch_<ip> en go2rtc y diagnosticar un vivo que no se ve."
+   ],
+   "lessons": ["1", "2", "3", "4"]
+  },
+  {
+   "title": "Que avise bien",
+   "why": "Un aforo que parpadea genera alertas falsas y un aviso que no sale no sirve. Cierra con la fila calibrada, reseteada a la apertura, con su umbral y con un canal probado de punta a punta.",
+   "objetivos": [
+    "Al terminar el módulo vas a poder medir el parpadeo del aforo y ajustar zona, rebote y ventana en la cámara con backup.",
+    "Al terminar el módulo vas a poder programar el reseteo diario y una alerta de aforo con umbral, cooldown y escalamiento.",
+    "Al terminar el módulo vas a poder configurar canales y destinatarios y seguir cada aviso en Despachos hasta Enviado."
+   ],
+   "lessons": ["5", "6", "7"]
+  },
+  {
+   "title": "Operar la fila",
+   "why": "El operador vive en el monitor, en la alerta y en el reporte del día. Cierra con un turno simulado: leer la fila, atender una alerta y mandar el reporte.",
+   "objetivos": [
+    "Al terminar el módulo vas a poder leer el Monitor en Vivo y el kiosko, y explicar la espera estimada con la ley de Little.",
+    "Al terminar el módulo vas a poder atender una alerta verificando la imagen, reconocer alertas de salud y ubicar cortes de cámara.",
+    "Al terminar el módulo vas a poder sacar reportes de afluencia, programar el resumen diario y detectar sus trampas de hora y canal."
+   ],
+   "lessons": ["8", "9", "10"]
+  }
+ ],
+ "lecciones": {
+  "1": {
+   "objetivos": [
+    "Al terminar vas a poder explicar quién cuenta (la cámara) y qué hace OmniAccess con ese número.",
+    "Al terminar vas a poder activar el Modo Cola en una instalación de prueba y ubicar cada pantalla del menú.",
+    "Al terminar vas a poder separar un número equivocado (cámara) de un número que no llega (camino)."
+   ],
+   "sigue": "Si el número nace en la cámara, la cámara tiene que estar bien puesta y bien configurada. En la próxima la ubicás sobre la fila y le armás las tres tareas de conteo.",
+   "requisitos": []
+  },
+  "2": {
+   "objetivos": [
+    "Al terminar vas a poder elegir la ubicación de la cámara de conteo: vista cenital, más de 3 m, sin reflejos.",
+    "Al terminar vas a poder configurar en IVA Pro la tarea de ocupación llamada Aforo y las tareas de entrada y salida de campo.",
+    "Al terminar vas a poder dejar ONVIF habilitado y el usuario de OmniAccess anotado en la ficha de la obra."
+   ],
+   "conecta": "En Qué cuenta Filas viste que el número nace en la cámara. Acá la ponés donde ve bien la fila y le das las tareas que OmniAccess sabe leer.",
+   "sigue": "La cámara ya cuenta, pero OmniAccess todavía no la conoce. En la próxima la das de alta y comprobás que los eventos ONVIF llegan.",
+   "requisitos": ["1"]
+  },
+  "3": {
+   "objetivos": [
+    "Al terminar vas a poder dar de alta un Contador de Filas Bosch en Dispositivos Conteo.",
+    "Al terminar vas a poder explicar el pull point de ONVIF, la diferencia entre Initialized y Changed, y el papel del push.",
+    "Al terminar vas a poder verificar el sondeo con Analíticas ONVIF, el estado del servidor y el registro."
+   ],
+   "conecta": "La cámara de La cámara cuenta ya tiene sus tareas y su usuario. Ahora cargás esos datos en OmniAccess para que empiece a preguntarle por eventos.",
+   "sigue": "Los números ya llegan, pero el cliente quiere ver la fila. En la próxima ponés el video en vivo con go2rtc, que además alimenta los clips de las alertas.",
+   "requisitos": ["2"]
+  },
+  "4": {
+   "objetivos": [
+    "Al terminar vas a poder agregar en go2rtc.yaml el stream bosch_<ip> con la URL RTSP de Bosch.",
+    "Al terminar vas a poder comprobar el stream en go2rtc y en las pantallas de OmniAccess.",
+    "Al terminar vas a poder reconocer la foto de respaldo y saber que el clip de la alerta depende del mismo stream."
+   ],
+   "conecta": "Con el contador dado de alta en Alta del contador, los números ya llegan. Ahora sumás la imagen, con el nombre de stream que OmniAccess arma a partir de la misma IP.",
+   "sigue": "La fila se ve y cuenta, pero el número puede parpadear. En la próxima medís ese ruido y lo corregís en la cámara antes de configurar alertas.",
+   "requisitos": ["3"]
+  },
+  "5": {
+   "objetivos": [
+    "Al terminar vas a poder leer la Señal del aforo y su rebote sugerido.",
+    "Al terminar vas a poder ajustar zona, rebote y ventana anti doble conteo desde el editor de la cámara.",
+    "Al terminar vas a poder guardar con backup y restaurar una configuración anterior."
+   ],
+   "conecta": "En Video en vivo dejaste el video andando; el editor de zona lo usa para dibujar la zona sobre la imagen real de la fila.",
+   "sigue": "Con un aforo estable ya podés confiar en un umbral. En la próxima programás el reseteo diario y la alerta de aforo.",
+   "requisitos": ["2", "4"]
+  },
+  "6": {
+   "objetivos": [
+    "Al terminar vas a poder crear un horario con reseteo automático y comprobar la tarea del servidor que lo dispara.",
+    "Al terminar vas a poder crear una alerta de aforo con umbral y cooldown, y reconocer los estados OK, Alto y Lleno.",
+    "Al terminar vas a poder explicar cuándo se dispara el escalamiento al supervisor."
+   ],
+   "conecta": "La calibración de Calibrar el aforo dejó un número que no parpadea. Ahora le ponés límites: cuándo arranca el día y cuándo la fila está llena.",
+   "sigue": "La alerta ya se dispara, pero todavía no sabe a quién avisar. En la próxima configurás canales y destinatarios y seguís cada aviso en Despachos.",
+   "requisitos": ["5"]
+  },
+  "7": {
+   "objetivos": [
+    "Al terminar vas a poder configurar y probar el canal de Telegram, cargar destinatarios y crear una regla de notificación.",
+    "Al terminar vas a poder seguir un despacho por sus estados y reintentar uno fallido.",
+    "Al terminar vas a poder diagnosticar los errores típicos: credenciales, dirección pública y canal no soportado."
+   ],
+   "conecta": "La alerta de Horarios y umbrales ya dispara. Acá definís por dónde sale y a quién llega, y ves la cola que la sostiene.",
+   "sigue": "La parte técnica está completa. En la próxima te sentás del lado del operador: el monitor, el cartel de sala y la espera estimada.",
+   "requisitos": ["6"]
+  },
+  "8": {
+   "objetivos": [
+    "Al terminar vas a poder leer el Monitor en Vivo y la línea de tiempo de una cámara con sus cortes.",
+    "Al terminar vas a poder configurar el kiosko de una fila y leer sus estados.",
+    "Al terminar vas a poder calcular a mano la espera estimada con la ley de Little y saber cuándo engaña."
+   ],
+   "conecta": "Las pantallas de esta lección muestran lo que armaste en los dos módulos anteriores: el aforo calibrado, el umbral y las salidas que cuenta la cámara.",
+   "sigue": "Leer la fila es la mitad del turno; la otra mitad es reaccionar cuando se llena. En la próxima atendés una alerta de punta a punta.",
+   "requisitos": ["6"]
+  },
+  "9": {
+   "objetivos": [
+    "Al terminar vas a poder atender el recuadro Alerta de aforo verificando el video antes de actuar.",
+    "Al terminar vas a poder reconocer las alertas de salud de la cámara y el escalamiento.",
+    "Al terminar vas a poder ubicar un corte de cámara en el monitor y en los reportes."
+   ],
+   "conecta": "En Monitor y espera aprendiste a leer la fila en calma. Ahora la fila se llena y llegan los avisos que configuraste en Canales y despachos.",
+   "sigue": "Lo que pasó en el día queda registrado. En la próxima lo convertís en reportes para el gerente, a mano o programados.",
+   "requisitos": ["7", "8"]
+  },
+  "10": {
+   "objetivos": [
+    "Al terminar vas a poder sacar y exportar un reporte de afluencia por hora, día, semana o mes.",
+    "Al terminar vas a poder programar el resumen diario y mandarlo en el momento desde Despachos.",
+    "Al terminar vas a poder detectar los detalles de esta versión: hora del servidor, canal de envío y conteo de alertas."
+   ],
+   "conecta": "Los cortes que viste en Atender la alerta y los picos del monitor aparecen ordenados por período en estos reportes.",
+   "cierre": "Con esto la fila cuenta, avisa, se atiende y queda documentada. Cuando aparezca una sucursal nueva, el recorrido es el mismo: cámara, alta, video, calibración, avisos y operación.",
+   "requisitos": ["6", "7"]
+  }
+ },
+ "avisos": []
+}

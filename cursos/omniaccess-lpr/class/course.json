@@ -1,0 +1,51 @@
+{
+ "slug": "omniaccess-lpr",
+ "title": "OmniAccess LPR: lectura de matrículas de la cámara al guardia",
+ "vendor": "Infratec",
+ "tagline": "Del poste con la cámara bien parada al guardia que investiga una matrícula en minutos: OmniAccess LPR instalado, calibrado y operado.",
+ "description": "Al terminar vas a poder colocar y calibrar una cámara ANPR para que lea de día y de noche, darla de alta en OmniAccess con su grabación y su hora, y explicar quién abre la barrera en cada portón. Del lado de la operación, vas a poder leer el Monitor LPR de lejos, investigar una matrícula con su perfil y su evidencia, manejar merodeo, permanencia y lista de vigilancia, mantener el padrón y diagnosticar la llamada de \"dejaron de entrar matrículas\".",
+ "level": "Inicial a intermedio",
+ "audience": "Técnicos de IES que instalan y mantienen OmniAccess LPR, y operadores (guardia, portería, puesto de monitoreo, administrador del barrio) que lo usan todos los días.",
+ "prerequisites": [
+  "Direccionamiento IP, máscara, gateway y uso del navegador para entrar a equipos",
+  "Haber configurado alguna cámara IP y un NVR",
+  "Para los laboratorios técnicos: una cámara ANPR Hikvision de prueba, un NVR y acceso a una instalación de prueba de OmniAccess",
+  "Para los laboratorios de operación: un usuario del panel en un barrio de demo o de prueba"
+ ],
+ "outcomes": [
+  "Ubicar cualquier falla en el recorrido de una lectura: cámara, red, servidor, almacenamiento o monitor",
+  "Colocar una cámara ANPR con el ángulo y los píxeles correctos y calibrarla para la noche midiendo la tasa de lectura por hora",
+  "Dar de alta una cámara LPR con su puesta a punto, vincularla al NVR y dejar todos los relojes sincronizados",
+  "Operar el Monitor LPR e investigar una matrícula con perfil, grabación y ZIP de evidencia",
+  "Usar merodeo, permanencia y la lista de vigilancia con motivo y verificación",
+  "Mantener el padrón, sincronizar las matrículas a las cámaras y diagnosticar con el árbol de \"dejaron de entrar matrículas\""
+ ],
+ "version_note": "Escrito en octubre de 2026 sobre los manuales de OmniAccess LPR versión 2026.09 y el código vigente de esa fecha. Cámaras: Hikvision ANPR por ISAPI (el alta guiada también acepta Dahua con menos automatización). Cuando el manual y el código difieren se sigue el código y se aclara; algunas pantallas (Búsqueda inteligente, módulo Guardia, avisos por WhatsApp) dependen de cómo esté configurado cada sistema.",
+ "arcs": [
+  {"title": "Entender el sistema", "why": "Antes de tocar una cámara conviene saber qué viaja por la red, dónde se decide la barrera y qué significa cada color para el guardia.", "lessons": [1, 2]},
+  {"title": "Instalar y configurar", "why": "Es el trabajo del técnico en obra: termina con una cámara bien colocada, dada de alta, grabando con la hora correcta y calibrada para la noche.", "lessons": [3, 4, 5, 6]},
+  {"title": "Operar", "why": "El turno del guardia y del operador: leer el monitor de lejos, investigar una matrícula y saber qué hacer con un merodeo o una lista negra.", "lessons": [7, 8, 9, 10]},
+  {"title": "Administrar y diagnosticar", "why": "Lo que sostiene la instalación en el tiempo: el padrón al día, el reporte del mes y el árbol para la llamada de urgencia.", "lessons": [11, 12]}
+ ],
+ "splits": [
+  {"topic": "Obturador de noche", "sides": "La guía de Hikvision propone del orden de 1/1000 para cortar la luz de los faros; el perfil barrio-noche de OmniAccess usa 1/500 porque en un barrio se anda a 20 o 30 km/h y entra el doble de luz.", "decide": "Por la velocidad real del acceso: arrancar con el perfil y comparar la tasa de lectura nocturna antes y después de cada cambio."},
+  {"topic": "WDR de noche", "sides": "Omada sugiere probar con y sin WDR en cada lugar; el perfil de OmniAccess lo apaga porque mete artefactos en la lectura nocturna.", "decide": "Dejarlo apagado y prenderlo solo si un carril con contraluz fuerte muestra peor tasa por hora."},
+  {"topic": "LPR como credencial única", "sides": "Distribuidores y fabricantes abren barreras solo con la lista de la cámara; las fuentes críticas (Roseville, gatesentry) muestran lecturas equivocadas y autos prestados que quedan afuera.", "decide": "Usar LPR como credencial principal pero con respaldo siempre: guardia que verifica el ámbar, pases de invitado, tag o alta rápida."},
+  {"topic": "Píxeles mínimos de la patente", "sides": "DTK y el Manual del Instalador hablan de 100 px; Hikvision pide al menos 130 y recomienda 150 a 200.", "decide": "Apuntar a 150 a 200 px medidos en una captura real con el auto en el punto de lectura."}
+ ],
+ "sources_count": 30,
+ "lessons": [
+  {"n": 1, "dir": "01-recorrido-de-lectura", "handle": "Recorrido de lectura", "summary": "De la cámara al monitor en 1 a 3 segundos, todo dentro del predio."},
+  {"n": 2, "dir": "02-quien-abre", "handle": "Quién abre", "summary": "Lista en la cámara o decisión del servidor, Modo LPR y antirrebote."},
+  {"n": 3, "dir": "03-camara-bien-parada", "handle": "Cámara bien parada", "summary": "Ángulos de 30°, patente de 130 a 300 px y un carril por cámara."},
+  {"n": 4, "dir": "04-alta-guiada", "handle": "Alta guiada", "summary": "Dispositivos → Agregar → Cámara LPR y la puesta a punto por ISAPI."},
+  {"n": 5, "dir": "05-grabacion-y-hora", "handle": "Grabación y hora", "summary": "Canal del NVR, retención y la misma hora en cámara, NVR y servidor."},
+  {"n": 6, "dir": "06-calibrar-de-noche", "handle": "Calibrar de noche", "summary": "Zona de lectura, línea de captura, perfil barrio-noche y tasa por hora."},
+  {"n": 7, "dir": "07-monitor-en-vivo", "handle": "Monitor en vivo", "summary": "Tres columnas, la barra del día y qué hacer con cada color."},
+  {"n": 8, "dir": "08-investigar-matricula", "handle": "Investigar matrícula", "summary": "Ficha, perfil, grabación, búsqueda inteligente y ZIP de evidencia."},
+  {"n": 9, "dir": "09-permanencia-y-merodeo", "handle": "Permanencia y merodeo", "summary": "Cuánto estuvo adentro, quién da vueltas y las anomalías de presencia."},
+  {"n": 10, "dir": "10-lista-de-vigilancia", "handle": "Lista de vigilancia", "summary": "Lista negra, VIP y en búsqueda, con motivo y verificación."},
+  {"n": 11, "dir": "11-padron-y-reportes", "handle": "Padrón y reportes", "summary": "Unidad, usuario, matrícula y grupo; sincronizar cámaras y exportar el mes."},
+  {"n": 12, "dir": "12-lecturas-que-faltan", "handle": "Lecturas que faltan", "summary": "El árbol de diagnóstico, el modo VCA y las alertas de salud."}
+ ]
+}

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Permanencia y merodeo: patrones en el tiempo</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS LPR</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Permanencia y merodeo: patrones en el tiempo</text>
+<rect x="48" y="126" width="1104" height="210" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="158.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Permanencia · residente SBA 1234</text>
+<path d="M90 270H1110" stroke="#6E88A1" stroke-width="2"/>
+<path d="M140 264V276" stroke="#6E88A1" stroke-width="2"/>
+<text x="140.0" y="298.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">08:00</text>
+<path d="M400 264V276" stroke="#6E88A1" stroke-width="2"/>
+<text x="400.0" y="298.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">08:45</text>
+<path d="M660 264V276" stroke="#6E88A1" stroke-width="2"/>
+<text x="660.0" y="298.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">09:30</text>
+<path d="M920 264V276" stroke="#6E88A1" stroke-width="2"/>
+<text x="920.0" y="298.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">10:15</text>
+<rect x="140" y="236" width="780" height="22" rx="11" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="1.5"/>
+<text x="530.0" y="252.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#0E8F5E" text-anchor="middle">adentro 2h 15m</text>
+<rect x="85.0" y="193.0" width="110.0" height="29" rx="14.5" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/><text x="140.0" y="214.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">entra · P1</text>
+<rect x="869.2" y="193.0" width="101.6" height="29" rx="14.5" fill="#E5F0FB" stroke="#0A63B8" stroke-width="1.5"/><text x="920.0" y="214.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">sale · P2</text>
+<rect x="48" y="360" width="1104" height="230" rx="16" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/><text x="68.0" y="392.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#D2492F" text-anchor="start">Merodeo · SCD 5678, no registrada</text>
+<path d="M90 500H1110" stroke="#6E88A1" stroke-width="2"/>
+<path d="M140 494V506" stroke="#6E88A1" stroke-width="2"/>
+<text x="140.0" y="528.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">21:00</text>
+<path d="M380 494V506" stroke="#6E88A1" stroke-width="2"/>
+<text x="380.0" y="528.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">21:10</text>
+<path d="M620 494V506" stroke="#6E88A1" stroke-width="2"/>
+<text x="620.0" y="528.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">21:20</text>
+<path d="M860 494V506" stroke="#6E88A1" stroke-width="2"/>
+<text x="860.0" y="528.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">21:30</text>
+<rect x="140" y="470" width="720" height="14" rx="7" fill="#D2492F" opacity=".18"/>
+<text x="500.0" y="466.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">ventana de 30 min</text>
+<circle cx="200" cy="500" r="11" fill="#D2492F"/>
+<text x="200.0" y="432.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#04223D" text-anchor="middle">P1</text>
+<circle cx="452" cy="500" r="11" fill="#D2492F"/>
+<text x="452.0" y="432.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#04223D" text-anchor="middle">P2</text>
+<circle cx="716" cy="500" r="11" fill="#D2492F"/>
+<text x="716.0" y="432.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#04223D" text-anchor="middle">P1</text>
+<rect x="760.0" y="539.0" width="252.8" height="29" rx="14.5" fill="#FCEAE6" stroke="#D2492F" stroke-width="1.5"/><text x="886.4" y="560.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">3.ª pasada → alerta Merodeo</text>
+<text x="68.0" y="560.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">Por defecto: 3 pasadas en 30 min, por cualquier acceso; no cuenta residentes autorizados.</text>
+<text x="48.0" y="628.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">La permanencia necesita cámaras con el sentido bien puesto; el merodeo deja una entrada en la bitácora.</text>
+</svg>

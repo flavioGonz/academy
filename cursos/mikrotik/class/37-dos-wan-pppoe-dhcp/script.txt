@@ -1,0 +1,19 @@
+A: Primera combinación: fibra de Antel por PPPoE como principal y, de respaldo, un router 4G o un cablemódem que entrega IP por DHCP.
+B: La más común en comercios. ¿Por dónde arrancamos?
+A: Por algo que parece al revés: al PPPoE le sacamos la ruta automática. Add default route en no.
+B: ¿Por qué? Si con add default route anda.
+A: Anda, pero esa ruta queda activa mientras la sesión esté arriba, haya internet o no. Si el problema está más allá, el router nunca conmuta. Entonces hacés las recursivas: dos testigos, uno uno uno uno y nueve nueve nueve nueve, con ruta barra treinta y dos por la interfaz pppoe antel.
+B: ¿Por la interfaz y no por una IP?
+A: Exacto. En PPPoE la IP del otro lado puede cambiar en cada reconexión. En el foro, en dos mil veinticuatro, lo aclaran: solo en RouterOS seis hacía falta la IP. Un hilo de dos mil quince dice que no anda, pero era la seis.
+B: ¿Y el DHCP del 4G?
+A: Ese es el que se cuela. Trae su ruta en distancia uno y sus DNS. Si no tocás nada, el router reparte tráfico entre la fibra y el 4G. Distancia dos, use peer DNS en no, y DNS fijos que no sean los testigos.
+B: Y ojo con ether2 en el bridge de fábrica.
+A: Clásico: el DHCP del 4G termina repartiendo IP a la LAN. Lo sacás del bridge antes.
+B: ¿Cómo lo probás?
+A: Con dos cortes, porque son distintos. Uno, deshabilitás el PPPoE: la sesión cae y el masquerade limpia esas conexiones solo. Dos, PPPoE arriba sin internet: descartás los pings a los testigos y mirás que conmute igual.
+B: ¿Y al volver?
+A: En el foro, un técnico con PPPoE y LTE perdía el ping al volver la fibra hasta borrar las conexiones: lo armado por el 4G quedaba colgado. La opción es un Netwatch que limpia lo UDP cuando el testigo vuelve.
+B: ¿Y la VLAN de Antel?
+A: Igual que en la lección de PPPoE: ninguna fuente lo confirma. Se prueba con el escáner y se pregunta.
+B: PPPoE sin ruta automática, DHCP en distancia dos y dos cortes probados.
+A: Esa es la regla.

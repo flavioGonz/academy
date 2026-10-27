@@ -1,0 +1,21 @@
+A: Lección tres. La que se juega con cinta métrica y escalera.
+B: La colocación.
+A: El Manual del Instalador lo pone primero en la lista de lo que define si la obra sale bien. Una cámara mal colocada no se arregla con software.
+B: Dale, las reglas.
+A: Ángulo. Hasta treinta grados contra el piso y treinta contra el sentido de marcha. En esto coinciden las cuatro fuentes que leímos: Hikvision, DTK, una guía inglesa y el propio manual.
+B: ¿Y el tamaño de la patente?
+A: Ahí hay una diferencia chica. DTK y el manual dicen que la patente ocupe al menos cien píxeles de ancho. Hikvision pide ciento treinta, y lo ideal entre ciento cincuenta y doscientos.
+B: Entonces apuntás a ciento cincuenta y quedás bien con todos.
+A: [risas] Exacto. En metros, eso suele ser entre cuatro y ocho del punto donde el auto frena.
+B: ¿Y una cámara para entrada y salida?
+A: No. Un carril por cámara. Si cubre los dos, lee mal los dos. Y se lee donde el auto va lento, antes de la barrera, no después.
+B: ¿Qué más trae la guía de Hikvision?
+A: Dos cosas que me encantan. Que el poste no vibre cuando pasa un camión, porque la imagen sale movida. Y que te acuerdes del sol: al amanecer o al atardecer de frente, te quema la imagen.
+B: Pensá en una entrada que mira al este.
+A: Esa. A las siete de la mañana no lee nadie.
+B: ¿Y cómo lo verifico en obra?
+A: Laboratorio: auto quieto en el punto de lectura. Medís con cinta la altura de la cámara, la altura de la patente y la distancia. Sacás el arco tangente de la diferencia de alturas sobre la distancia, y ese es tu ángulo vertical.
+B: Cámara a dos metros y medio, patente a medio metro, cinco metros de distancia...
+A: Unos veintidós grados. Bien. Después sacás una captura, la abrís en un editor y medís la patente en píxeles. Menos de ciento treinta, acercás.
+B: Y lo anotás en la ficha del acceso.
+A: Con eso la tasa de lectura se gana antes de tirar un solo cable.

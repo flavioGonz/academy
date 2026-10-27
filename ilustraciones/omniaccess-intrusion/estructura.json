@@ -1,0 +1,149 @@
+{
+  "curso": {
+    "objetivo": "Al terminar el curso vas a poder dejar funcionando la intrusión de OmniAccess en un perímetro real, de la línea dibujada en la cámara a la alarma atendida y registrada, y diagnosticarla cuando algo no llega.",
+    "recorrido": "Arrancás entendiendo quién detecta y por dónde llega el aviso. Después, como técnico, dibujás la regla en la cámara, das de alta la cámara con su servidor de alarma, revisás el horario de armado y dejás sonando las pantallas del puesto. Con eso andando pasás al turno del operador: atender una alarma con la foto y el análisis, mirar el vivo y la grabación, cerrar el registro y mandar al guardia. Cerrás afinando: menos falsas alarmas con números, y una lista para encontrar el eslabón roto cuando un evento no llega."
+  },
+  "modulos": [
+    {
+      "title": "Entender el sistema",
+      "why": "Antes de tocar una cámara hay que saber quién detecta, por dónde llega el aviso y qué hace OmniAccess con él. Cierra con el recorrido completo de una detección dibujado en una hoja.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder explicar que la cámara o el NVR detectan y OmniAccess recibe, guarda, pide la foto y avisa.",
+        "Al terminar el módulo vas a poder decir para cada cámara si avisa por push al servidor de alarma, por suscripción al NVR Dahua o si no tiene vía."
+      ],
+      "lessons": ["1"]
+    },
+    {
+      "title": "Instalar y configurar",
+      "why": "Es el trabajo del técnico en obra: la regla en la cámara, el alta con el aviso a OmniAccess, el horario en que avisa y dónde suena. Cierra con una cámara de perímetro que dispara, llega al monitor y suena en la pared.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder dibujar línea y zona con sentido, sensibilidad y objetivo desde el calibrador.",
+        "Al terminar el módulo vas a poder dar de alta o importar cámaras de intrusión y dejar su servidor de alarma probado con un cruce real.",
+        "Al terminar el módulo vas a poder leer y corregir el horario de armado de cada regla.",
+        "Al terminar el módulo vas a poder dejar la pantalla de pared y el mapa avisando, y decirle al cliente qué avisos hay."
+      ],
+      "lessons": ["2", "3", "4", "5"]
+    },
+    {
+      "title": "Operar",
+      "why": "Es el turno del operador: decidir si es real, mirar el vivo y la grabación, dejar registro y coordinar al guardia. Cierra con una alarma de prueba atendida de punta a punta.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder atender una alarma con la ficha, el análisis y el mapa del cruce, y dejar la cámara resuelta.",
+        "Al terminar el módulo vas a poder seguir a un intruso entre cámaras y sacar el clip de evidencia.",
+        "Al terminar el módulo vas a poder cerrar el turno sin pendientes y mandar al guardia más cercano con los datos justos."
+      ],
+      "lessons": ["6", "7", "8"]
+    },
+    {
+      "title": "Afinar y diagnosticar",
+      "why": "Con el sistema andando, el trabajo es que avise solo cuando importa y saber dónde mirar cuando no avisa. Cierra con un plan de ajuste semanal y una lista de diagnóstico.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder bajar las falsas alarmas de una cámara con un cambio medido sin perder detecciones reales.",
+        "Al terminar el módulo vas a poder encontrar el eslabón roto entre la cámara y el monitor sin cambiar nada a ciegas."
+      ],
+      "lessons": ["9", "10"]
+    }
+  ],
+  "lecciones": {
+    "1": {
+      "objetivos": [
+        "Al terminar vas a poder explicar quién detecta un cruce y qué hace OmniAccess cuando le llega.",
+        "Al terminar vas a poder clasificar cada cámara por su vía: push Hikvision, suscripción Dahua o sin vía.",
+        "Al terminar vas a poder decir qué eventos se descartan en esta versión (movimiento simple) y que no hay ingesta por ONVIF."
+      ],
+      "sigue": "Ya sabés que la que detecta es la cámara. La próxima dibuja la regla en esa cámara: línea, sentido, sensibilidad y objetivo, desde el calibrador de OmniAccess.",
+      "requisitos": []
+    },
+    "2": {
+      "objetivos": [
+        "Al terminar vas a poder dibujar una línea de cruce y una zona sobre un cuadro real con el calibrador.",
+        "Al terminar vas a poder elegir sentido, sensibilidad (40, 60, 80) y objetivo según la escena.",
+        "Al terminar vas a poder probar la regla caminando en los dos sentidos."
+      ],
+      "conecta": "En Camino del evento viste que la analítica corre en la cámara. Acá la configurás, y todo lo que guardes queda escrito en el equipo.",
+      "sigue": "La cámara ya detecta bien, pero todavía no le avisa a nadie. La próxima la da de alta en OmniAccess y le carga el servidor de alarma.",
+      "requisitos": ["1"]
+    },
+    "3": {
+      "objetivos": [
+        "Al terminar vas a poder dar de alta una cámara de intrusión o importarla desde su NVR eligiendo el rol de cada canal.",
+        "Al terminar vas a poder configurar y probar el servidor de alarma desde la campana del canal, o verificar la suscripción Dahua.",
+        "Al terminar vas a poder revisar el tilde de Notificar al centro de vigilancia y confirmar el alta con un cruce real."
+      ],
+      "conecta": "La regla que dibujaste en Regla en cámara detecta; ahora hace falta que el evento salga de la cámara y llegue al servidor.",
+      "sigue": "La cámara avisa, pero solo dentro de su horario de armado. La próxima te enseña a leerlo desde OmniAccess y a corregirlo en la cámara.",
+      "requisitos": ["2"]
+    },
+    "4": {
+      "objetivos": [
+        "Al terminar vas a poder leer el horario de armado de cada regla en la vista de pared y en la ficha de la cámara.",
+        "Al terminar vas a poder cargar en la cámara un horario nocturno que cruza la medianoche.",
+        "Al terminar vas a poder distinguir el horario de la cámara del horario del mapa y del de grabación."
+      ],
+      "conecta": "En Alta y aviso dejaste la cámara avisando. Ese aviso solo sale dentro del horario de armado de cada regla.",
+      "sigue": "Con la cámara armada de noche, falta decidir dónde suena la alarma. La próxima arma la pantalla de pared y la línea en el mapa.",
+      "requisitos": ["3"]
+    },
+    "5": {
+      "objetivos": [
+        "Al terminar vas a poder crear un enlace de pantalla de la vista Intrusión con el sonido que corresponde y abrirlo en kiosco.",
+        "Al terminar vas a poder dibujar la línea de una cámara en el Mapa para que titile y suene.",
+        "Al terminar vas a poder explicarle al cliente qué avisos hay en esta versión y cuáles no."
+      ],
+      "conecta": "La cámara ya avisa a OmniAccess dentro de su horario (Horario de armado). Ahora ese aviso tiene que verse y escucharse en el puesto.",
+      "sigue": "La instalación está lista. La próxima cambia de silla: el operador recibe una alarma y la atiende de punta a punta.",
+      "requisitos": ["3"]
+    },
+    "6": {
+      "objetivos": [
+        "Al terminar vas a poder aceptar una alarma y decidir Falsa alarma o Confirmar real con el teclado.",
+        "Al terminar vas a poder leer el Análisis y el mapa del cruce antes de decidir.",
+        "Al terminar vas a poder resolver una cámara En atención o corregirla si era falsa."
+      ],
+      "conecta": "En Avisos y pantallas dejaste el canal sonando y la línea dibujada en el mapa. Acá esa alarma llega al operador.",
+      "sigue": "Para decidir bien muchas veces hace falta ver más que una foto. La próxima abre el vivo, la grabación y el seguimiento entre cámaras.",
+      "requisitos": ["3"]
+    },
+    "7": {
+      "objetivos": [
+        "Al terminar vas a poder abrir el vivo en SD o HD y mover una PTZ.",
+        "Al terminar vas a poder armar el seguimiento visual entre cámaras vecinas.",
+        "Al terminar vas a poder buscar el instante en la grabación y sacar un clip para descargar o mandar por WhatsApp."
+      ],
+      "conecta": "En Atender la alarma decidiste con la foto y el análisis. El vivo y la grabación son el paso siguiente cuando la foto no alcanza.",
+      "sigue": "Cada decisión queda registrada. La próxima te muestra cómo encontrar y corregir el registro, y cómo mandar al guardia al lugar.",
+      "requisitos": ["6"]
+    },
+    "8": {
+      "objetivos": [
+        "Al terminar vas a poder filtrar Evidencia por cámara, estado y fechas y cerrar las pendientes.",
+        "Al terminar vas a poder corregir una sola detección sin tocar las demás.",
+        "Al terminar vas a poder ubicar al guardia más cercano en el Mapa y pasarle un mensaje de cuatro datos por radio."
+      ],
+      "conecta": "Las decisiones de Atender la alarma y los clips de Vivo y grabación quedan en el registro; acá aprendés a usarlo y a llevar al guardia al lugar.",
+      "sigue": "Con el registro limpio aparecen los números: qué cámaras dan más falsas. La próxima los usa para ajustar.",
+      "requisitos": ["6"]
+    },
+    "9": {
+      "objetivos": [
+        "Al terminar vas a poder elegir el cambio que corresponde según la causa que muestra la foto falsa.",
+        "Al terminar vas a poder leer el porcentaje de falsas, la ráfaga y el ritmo en el Análisis.",
+        "Al terminar vas a poder medir un cambio durante una semana sin perder detecciones reales."
+      ],
+      "conecta": "El registro de Registro y guardia y el calibrador de Regla en cámara son las dos herramientas de esta lección.",
+      "sigue": "Queda el otro problema: la alarma que directamente no llega. La última lección es la lista para encontrarla.",
+      "requisitos": ["2", "8"]
+    },
+    "10": {
+      "objetivos": [
+        "Al terminar vas a poder recorrer la cadena de la cámara al monitor y encontrar el eslabón roto.",
+        "Al terminar vas a poder probar el puerto de eventos desde la red de cámaras e interpretar el resultado.",
+        "Al terminar vas a poder explicar por qué una detección llega sin foto, sin grabación o sin cámara."
+      ],
+      "conecta": "Cada eslabón de esta lista lo configuraste en Alta y aviso y en Horario de armado; acá los revisás en orden.",
+      "cierre": "Con esto tenés el módulo completo: la regla en la cámara, el aviso y su horario, las pantallas que suenan, la atención de punta a punta, el registro limpio, el ajuste con números y el diagnóstico ordenado. Lo que queda es repetirlo en cada obra y revisar el armado de noche en cada visita.",
+      "requisitos": ["3", "4"]
+    }
+  },
+  "avisos": []
+}

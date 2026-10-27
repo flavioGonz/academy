@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Llamá al 7000 y no marques nada</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">GRANDSTREAM · PASO 5</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Llamá al 7000 y no marques nada</text>
+<rect x="48" y="150" width="1104" height="180" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><text x="68.0" y="182.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#0E8F5E" text-anchor="start">Con destino de Timeout</text>
+<rect x="72" y="206" width="220" height="92" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="90.0" y="244.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Bienvenida</text>
+<text x="90.0" y="274.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">suena el prompt</text>
+<path d="M296.0 252.0C307.0 252.0,307.0 252.0,318.0 252.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="322" y="206" width="220" height="92" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="340.0" y="244.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Espera 10 s</text>
+<text x="340.0" y="274.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">Response Timeout</text>
+<path d="M546.0 252.0C557.0 252.0,557.0 252.0,568.0 252.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="572" y="206" width="220" height="92" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="590.0" y="244.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Repite</text>
+<text x="590.0" y="274.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">3 veces de fábrica</text>
+<path d="M796.0 252.0C807.0 252.0,807.0 252.0,818.0 252.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="822" y="206" width="306" height="92" rx="12" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="842.0" y="244.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#6E88A1" text-anchor="start">Al terminar</text>
+<text x="842.0" y="276.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#0E8F5E" text-anchor="start">Ring Group recepción</text>
+<rect x="48" y="360" width="1104" height="180" rx="16" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/><text x="68.0" y="392.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#D2492F" text-anchor="start">Sin destino de Timeout</text>
+<rect x="72" y="416" width="220" height="92" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="90.0" y="454.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Bienvenida</text>
+<text x="90.0" y="484.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">suena el prompt</text>
+<path d="M296.0 462.0C307.0 462.0,307.0 462.0,318.0 462.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="322" y="416" width="220" height="92" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="340.0" y="454.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Espera 10 s</text>
+<text x="340.0" y="484.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">Response Timeout</text>
+<path d="M546.0 462.0C557.0 462.0,557.0 462.0,568.0 462.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="572" y="416" width="220" height="92" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="590.0" y="454.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Repite</text>
+<text x="590.0" y="484.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">3 veces de fábrica</text>
+<path d="M796.0 462.0C807.0 462.0,807.0 462.0,818.0 462.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="822" y="416" width="306" height="92" rx="12" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<text x="842.0" y="454.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#6E88A1" text-anchor="start">Al terminar</text>
+<text x="842.0" y="486.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#D2492F" text-anchor="start">la central corta</text>
+<circle cx="48" cy="150" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="156.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<text x="48.0" y="600.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">Para probar fuera de horario sin esperar a la noche, cambiá el horario de oficina y volvé a llamar.</text>
+</svg>

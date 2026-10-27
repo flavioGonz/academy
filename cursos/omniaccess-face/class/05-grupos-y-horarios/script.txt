@@ -1,0 +1,19 @@
+A: Lección cinco: grupos y horarios. El administrador siempre pregunta lo mismo.
+B: "Quiero que la de limpieza entre de lunes a viernes de ocho a cinco."
+A: Esa. Y para contestarla bien hay que separar tres cosas: el grupo, la copia y el horario.
+B: Arrancá por el grupo.
+A: Gestión, Grupos de Acceso, Crear grupo. Le ponés nombre, elegís personas y elegís equipos. La pantalla lo resume con una fórmula: personas del grupo por equipos del grupo, igual a quién pasa por dónde.
+B: Lindo. ¿Y con eso el terminal ya la conoce?
+A: No. Esa es la parte que confunde. La ficha de la persona lo dice con estas palabras: los grupos dan el permiso, esto copia la credencial a la memoria del equipo, son cosas distintas.
+B: O sea, el grupo documenta y la copia se hace en "A qué equipos se manda".
+A: Exacto. En esta versión, el grupo no manda nada solo.
+B: ¿Y el horario?
+A: Acá viene lo honesto. En la base de OmniAccess existe un modelo de horarios por grupo, pero ninguna pantalla lo usa para Face. Cuando OmniAccess manda a alguien a un Akuvox, lo manda con el horario de siempre del equipo.
+B: Entonces el horario se pone en el terminal.
+A: En el terminal, por persona. Cómo se hace está en el curso de Porteros IP Akuvox, en la lección de usuarios y horarios. Y Hikvision, para cuando hace falta más seguridad, sugiere combinar modos, por ejemplo cara y tarjeta.
+B: ¿Alguna trampa?
+A: Una. Si después cambiás la ficha y la reenviás, OmniAccess actualiza a la persona en el terminal con el horario de siempre. Te puede pisar lo que cargaste a mano.
+B: Uf. Y la de limpieza entra un domingo.
+A: Y nadie entiende por qué. Por eso el laboratorio de hoy, veinte minutos: creás el grupo, ponés el horario en el terminal, probás dentro y fuera de hora, y después reenviás la ficha y revisás si el horario sigue.
+B: Y lo anotás en la ficha de la obra.
+A: Eso. El horario que se cumple es el que está en el terminal.

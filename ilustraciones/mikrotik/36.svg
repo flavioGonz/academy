@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>La matriz de zonas: quién habla con quién</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">MIKROTIK · LECCIÓN 36</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">La matriz de zonas: quién habla con quién</text>
+<rect x="48" y="136" width="1101" height="54" rx="12" fill="#E5F0FB" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="64.0" y="170.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#6E88A1" text-anchor="start">de ↓   a →</text>
+<text x="284.5" y="170.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#002F58" text-anchor="middle">WAN</text>
+<text x="417.5" y="170.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#002F58" text-anchor="middle">GESTION</text>
+<text x="550.5" y="170.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#002F58" text-anchor="middle">ADMIN</text>
+<text x="683.5" y="170.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#002F58" text-anchor="middle">CCTV</text>
+<text x="816.5" y="170.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#002F58" text-anchor="middle">ACCESOS</text>
+<text x="949.5" y="170.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#002F58" text-anchor="middle">INVITADOS</text>
+<text x="1082.5" y="170.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#0A63B8" text-anchor="middle">ROUTER</text>
+<rect x="48" y="196" width="162" height="46" rx="10" fill="#011E38" stroke="#011E38" stroke-width="0"/>
+<text x="62.0" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="start">GESTION+VPN</text>
+<rect x="222" y="196" width="125" height="46" rx="10" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/>
+<text x="284.5" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#0E8F5E" text-anchor="middle">sí</text>
+<rect x="355" y="196" width="125" height="46" rx="10" fill="#F7FAFD" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="417.5" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">·</text>
+<rect x="488" y="196" width="125" height="46" rx="10" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/>
+<text x="550.5" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#0E8F5E" text-anchor="middle">sí</text>
+<rect x="621" y="196" width="125" height="46" rx="10" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/>
+<text x="683.5" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#0E8F5E" text-anchor="middle">sí</text>
+<rect x="754" y="196" width="125" height="46" rx="10" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/>
+<text x="816.5" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#0E8F5E" text-anchor="middle">sí</text>
+<rect x="887" y="196" width="125" height="46" rx="10" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/>
+<text x="949.5" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#0E8F5E" text-anchor="middle">sí</text>
+<rect x="1020" y="196" width="125" height="46" rx="10" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/>
+<text x="1082.5" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#0E8F5E" text-anchor="middle">todo</text>
+<rect x="48" y="250" width="162" height="46" rx="10" fill="#011E38" stroke="#011E38" stroke-width="0"/>
+<text x="62.0" y="280.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="start">ADMIN</text>
+<rect x="222" y="250" width="125" height="46" rx="10" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/>
+<text x="284.5" y="280.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#0E8F5E" text-anchor="middle">sí</text>
+<rect x="355" y="250" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="417.5" y="280.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="488" y="250" width="125" height="46" rx="10" fill="#F7FAFD" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="550.5" y="280.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">·</text>
+<rect x="621" y="250" width="125" height="46" rx="10" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/>
+<text x="683.5" y="280.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#B45309" text-anchor="middle">solo NVR</text>
+<rect x="754" y="250" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="816.5" y="280.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="887" y="250" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="949.5" y="280.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="1020" y="250" width="125" height="46" rx="10" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/>
+<text x="1082.5" y="280.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#B45309" text-anchor="middle">DNS·DHCP</text>
+<rect x="48" y="304" width="162" height="46" rx="10" fill="#011E38" stroke="#011E38" stroke-width="0"/>
+<text x="62.0" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="start">CCTV</text>
+<rect x="222" y="304" width="125" height="46" rx="10" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/>
+<text x="284.5" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#B45309" text-anchor="middle">NTP</text>
+<rect x="355" y="304" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="417.5" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="488" y="304" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="550.5" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="621" y="304" width="125" height="46" rx="10" fill="#F7FAFD" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="683.5" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">·</text>
+<rect x="754" y="304" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="816.5" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="887" y="304" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="949.5" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="1020" y="304" width="125" height="46" rx="10" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/>
+<text x="1082.5" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#B45309" text-anchor="middle">DNS·DHCP</text>
+<rect x="48" y="358" width="162" height="46" rx="10" fill="#011E38" stroke="#011E38" stroke-width="0"/>
+<text x="62.0" y="388.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="start">ACCESOS</text>
+<rect x="222" y="358" width="125" height="46" rx="10" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/>
+<text x="284.5" y="388.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#B45309" text-anchor="middle">NTP</text>
+<rect x="355" y="358" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="417.5" y="388.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="488" y="358" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="550.5" y="388.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="621" y="358" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="683.5" y="388.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="754" y="358" width="125" height="46" rx="10" fill="#F7FAFD" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="816.5" y="388.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">·</text>
+<rect x="887" y="358" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="949.5" y="388.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="1020" y="358" width="125" height="46" rx="10" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/>
+<text x="1082.5" y="388.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#B45309" text-anchor="middle">DNS·DHCP</text>
+<rect x="48" y="412" width="162" height="46" rx="10" fill="#011E38" stroke="#011E38" stroke-width="0"/>
+<text x="62.0" y="442.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="start">INVITADOS</text>
+<rect x="222" y="412" width="125" height="46" rx="10" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/>
+<text x="284.5" y="442.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#0E8F5E" text-anchor="middle">sí</text>
+<rect x="355" y="412" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="417.5" y="442.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="488" y="412" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="550.5" y="442.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="621" y="412" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="683.5" y="442.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="754" y="412" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="816.5" y="442.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="887" y="412" width="125" height="46" rx="10" fill="#F7FAFD" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="949.5" y="442.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">·</text>
+<rect x="1020" y="412" width="125" height="46" rx="10" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/>
+<text x="1082.5" y="442.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#B45309" text-anchor="middle">DNS·DHCP</text>
+<rect x="48" y="466" width="162" height="46" rx="10" fill="#011E38" stroke="#011E38" stroke-width="0"/>
+<text x="62.0" y="496.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="start">WAN</text>
+<rect x="222" y="466" width="125" height="46" rx="10" fill="#F7FAFD" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="284.5" y="496.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">·</text>
+<rect x="355" y="466" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="417.5" y="496.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="488" y="466" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="550.5" y="496.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="621" y="466" width="125" height="46" rx="10" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/>
+<text x="683.5" y="496.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#B45309" text-anchor="middle">dst-nat</text>
+<rect x="754" y="466" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="816.5" y="496.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="887" y="466" width="125" height="46" rx="10" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/>
+<text x="949.5" y="496.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#D2492F" text-anchor="middle">no</text>
+<rect x="1020" y="466" width="125" height="46" rx="10" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/>
+<text x="1082.5" y="496.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#B45309" text-anchor="middle">túnel</text>
+<rect x="48.0" y="533" width="200.8" height="30" rx="15" fill="#E3F5EC"/><text x="148.4" y="554.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">verde: regla accept</text>
+<rect x="290.0" y="533" width="338.8" height="30" rx="15" fill="#FFF4DE"/><text x="459.4" y="554.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#B45309" text-anchor="middle">ámbar: accept con puerto o destino</text>
+<rect x="660.0" y="533" width="283.6" height="30" rx="15" fill="#FCEAE6"/><text x="801.8" y="554.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">rojo: lo corta el drop final</text>
+<text x="48.0" y="600.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">Cada casillero verde o ámbar es una regla de forward o de input. Los rojos no se escriben: los descarta el drop del final.</text>
+</svg>

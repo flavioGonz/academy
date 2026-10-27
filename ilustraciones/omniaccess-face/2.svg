@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>La cámara ve de frente a 50 cm, sin luz detrás</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS FACE · LECCIÓN 2</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">La cámara ve de frente a 50 cm, sin luz detrás</text>
+<path d="M48 610H622" stroke="#6E88A1" stroke-width="3"/>
+<rect x="600" y="140" width="22" height="470" fill="#E3EAF1" stroke="#C2D4E6"/>
+<rect x="576" y="280.0" width="24" height="110" rx="6" fill="#26323F"/>
+<circle cx="576" cy="330.0" r="6" fill="#17A8D4"/>
+<text x="560.0" y="268.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="end">Terminal</text>
+<path d="M650 610V330.0" stroke="#0A63B8" stroke-width="2" marker-end="url(#a-blue)" marker-start="url(#a-blue)"/>
+<text x="662.0" y="476.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">1,30 a 1,48 m</text>
+<text x="662.0" y="498.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">hasta la cámara</text>
+<circle cx="440.0" cy="252.0" r="22.0" fill="none" stroke="#6E88A1" stroke-width="3" stroke-dasharray="7 6"/><path d="M412.0 282.0h56l6 328.0h-68z" fill="none" stroke="#6E88A1" stroke-width="3" stroke-dasharray="7 6" opacity="1"/>
+<circle cx="440.0" cy="322.0" r="22.0" fill="#0A63B8" stroke="#0A63B8" stroke-width="3"/><path d="M412.0 352.0h56l6 258.0h-68z" fill="#0A63B8" stroke="#0A63B8" stroke-width="3" opacity="0.9"/>
+<text x="394.0" y="256.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#6E88A1" text-anchor="end">1,90 m</text>
+<text x="394.0" y="326.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="end">1,55 m</text>
+<path d="M476.0 632H576" stroke="#6E88A1" stroke-width="2" marker-end="url(#a-gray)" marker-start="url(#a-gray)"/>
+<text x="526.0" y="658.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#41627F" text-anchor="middle">≈ 0,5 m</text>
+<path d="M456.0 260.0L576 330.0" stroke="#17A8D4" stroke-width="2" stroke-dasharray="5 5"/>
+<path d="M456.0 326.0L576 330.0" stroke="#17A8D4" stroke-width="2" stroke-dasharray="5 5"/>
+<rect x="70" y="250" width="150" height="230" rx="6" fill="#FFF6D6" stroke="#B45309" stroke-width="2.5"/>
+<circle cx="145" cy="330" r="34" fill="#F7C948" stroke="#B45309" stroke-width="2"/>
+<path d="M189.0 330.0L203.0 330.0" stroke="#B45309" stroke-width="3" stroke-linecap="round"/>
+<path d="M176.1 361.1L186.0 371.0" stroke="#B45309" stroke-width="3" stroke-linecap="round"/>
+<path d="M145.0 374.0L145.0 388.0" stroke="#B45309" stroke-width="3" stroke-linecap="round"/>
+<path d="M113.9 361.1L104.0 371.0" stroke="#B45309" stroke-width="3" stroke-linecap="round"/>
+<path d="M101.0 330.0L87.0 330.0" stroke="#B45309" stroke-width="3" stroke-linecap="round"/>
+<path d="M113.9 298.9L104.0 289.0" stroke="#B45309" stroke-width="3" stroke-linecap="round"/>
+<path d="M145.0 286.0L145.0 272.0" stroke="#B45309" stroke-width="3" stroke-linecap="round"/>
+<path d="M176.1 298.9L186.0 289.0" stroke="#B45309" stroke-width="3" stroke-linecap="round"/>
+<text x="145.0" y="510.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#B45309" text-anchor="middle">ventana o vidrio</text>
+<text x="145.0" y="530.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#B45309" text-anchor="middle">detrás de la persona</text>
+<rect x="812" y="140" width="348" height="145" rx="14" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/><rect x="812" y="152" width="5" height="121" rx="2.5" fill="#D2492F"/><text x="838.0" y="174.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="838.0" dy="0.0">Lo que más falla</tspan></text><text x="838.0" y="200.9" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="838.0" dy="0.0">Contraluz: la cara queda en sombra y</tspan><tspan x="838.0" dy="21.6">el terminal no la encuentra. Mové el</tspan><tspan x="838.0" dy="21.6">equipo, usá WDR o sumá luz de</tspan><tspan x="838.0" dy="21.6">frente.</tspan></text>
+<rect x="812" y="350" width="348" height="163" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="812" y="362" width="5" height="139" rx="2.5" fill="#0A63B8"/><text x="838.0" y="384.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="838.0" dy="0.0">Las fuentes no coinciden en el</tspan><tspan x="838.0" dy="23.0">número</tspan></text><text x="838.0" y="433.9" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="838.0" dy="0.0">ClockRite 1,1 m · Control iD 1,30 m ·</tspan><tspan x="838.0" dy="20.2">Synerion cámara a 1,48 m · Hikvision:</tspan><tspan x="838.0" dy="20.2">personas de 1,4 a 1,9 m a 0,5 m. Manda</tspan><tspan x="838.0" dy="20.2">la ficha del modelo.</tspan></text>
+</svg>

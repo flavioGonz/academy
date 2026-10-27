@@ -1,0 +1,20 @@
+A: Lección siete: vivo y grabación. La foto te dice que pasó algo. El video te dice qué y para dónde fue.
+B: ¿Desde dónde lo abro?
+A: Desde el canal: el botón rojo de video. Se abre ver en vivo, con tres pestañas: vivo, grabación y evidencia.
+B: ¿El vivo viene directo de la cámara?
+A: Pasa por go2rtc, que corre en el servidor. Toma el RTSP de la cámara y lo entrega al navegador. Según su documentación, transcodifica solo si hace falta, para no agregar demora.
+B: ¿Y el botón SD y HD?
+A: SD es el flujo secundario, liviano. HD es el principal. Si la red está justa, SD abre más rápido.
+B: ¿Y las PTZ?
+A: Un detalle: el sistema reconoce la PTZ por el nombre. Si el nombre dice PTZ, aparecen los controles y la movés arrastrando, con la rueda hacés zoom.
+B: [risas] O sea que el nombre importa.
+A: Importa. Ahora, lo mejor: el seguimiento visual. En el vivo ponés íconos de las cámaras vecinas en el lugar por donde se pasa a cada una. El tipo cruza el cerco, camina hacia el portón, y vos tocás el ícono del portón y seguís con esa cámara.
+B: Eso es oro para el operador.
+A: Y si esa cámara vecina tiene eventos, el ícono rebota en rojo.
+B: ¿Y la grabación?
+A: Pestaña grabación: el NVR en una línea de tiempo con zoom y velocidad uno, dos, cuatro u ocho, con los eventos marcados. Y un botón para bajar el clip, diez segundos antes y diez después, o mandarlo por WhatsApp.
+B: ¿Y si dice sin NVR o canal para reproducir?
+A: Casi siempre es que la cámara no está vinculada a su NVR y canal. Eso se arregla en Dispositivos. No es el NVR.
+B: ¿Laboratorio?
+A: Abrís Perímetro Norte doce, probás SD y HD, armás el seguimiento visual hacia Perímetro Sur siete, buscás el último cruce en la grabación, retrocedés diez segundos y bajás el clip. Veinte minutos.
+B: Y la regla: antes de decir que no hay nada, mirá los diez segundos de antes.

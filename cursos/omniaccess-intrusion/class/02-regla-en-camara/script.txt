@@ -1,0 +1,20 @@
+A: Lección dos: la regla en la cámara. Donde se gana o se pierde todo.
+B: Esto es dibujar la línea en la web de la cámara, ¿no?
+A: Se puede, pero OmniAccess trae un calibrador. Tocás el ícono de regla y lápiz del canal y dibujás sobre un cuadro real.
+B: ¿Y eso dónde queda guardado? ¿En el servidor?
+A: En la cámara. El calibrador escribe por ISAPI en la propia cámara. Una regla de línea y una de zona por cámara. Si es un NVR Dahua, escribe en el NVR.
+B: Bien. ¿Qué se ajusta?
+A: Línea, dos puntos. Zona, tres o más. Sentido: A hacia B, ambos o B hacia A. Sensibilidad: cuarenta, sesenta u ochenta. Y objetivo: persona, vehículo o ambos, si la cámara clasifica.
+B: ¿Y cuál conviene en un cerco con plantas?
+A: El propio sistema dice que entre cuarenta y sesenta suele ser el equilibrio. Y hay un botón, auto perfil, que te deja sesenta, personas y vehículos, y el aviso a OmniAccess de una.
+B: ¿Las fuentes en qué coinciden?
+A: Cuatro de cinco en cómo dibujar: la línea larga, que corte todo el paso, lejos del borde del cuadro y lejos de árboles y postes. Ajax lo dice clarito: si la línea queda pegada al borde, la cámara ve al tipo cuando ya pasó.
+B: [risas] O sea, te avisa tarde.
+A: Exacto. Y cuatro de cuatro en filtrar por persona o vehículo. Davantis discrepa un poco: dice que la clasificación sola falla con objetos chicos y lejos, de noche.
+B: Entonces el sentido también ayuda, ¿no? Si solo me importa el que entra...
+A: Ahí está. Con A hacia B, el vecino que sale a sacar la basura no te dispara nada.
+B: ¿Y el laboratorio?
+A: Calibrás Perímetro Norte doce: línea a lo largo del cerco, sentido A hacia B, sensibilidad sesenta, objetivo persona. Después alguien cruza para un lado y para el otro. Solo la primera pasada tiene que aparecer.
+B: ¿Algo para cuidar?
+A: Que escribís en la cámara del cliente. Avisá antes y anotá lo que había.
+B: Y la regla de hoy: la línea corta todo el camino, lejos del borde, y se prueba caminando.

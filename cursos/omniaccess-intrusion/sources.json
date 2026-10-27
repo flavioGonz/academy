@@ -1,0 +1,40 @@
+{
+ "topic": "OmniAccess Intrusión: analíticas de cruce de línea e intrusión de zona en cámaras Hikvision y Dahua, horario de armado, recepción de eventos por HTTP (ISAPI) y suscripción (Dahua eventManager), ONVIF, falsas alarmas, video en vivo y grabación, verificación y atención de alarmas",
+ "level": "inicial a intermedio",
+ "min_words": 100,
+ "pages": [
+  "https://supportusa.hikvision.com/support/solutions/articles/17000129443-why-is-the-arming-schedule-important-",
+  "https://supportusa.hikvision.com/support/solutions/articles/17000133598-what-is-the-difference-between-arming-schedule-recording-schedule-",
+  "https://www.ipcamtalk.com/threads/difference-between-arming-schedule-and-recording-schedule.7096",
+  "https://videos.cctvcamerapros.com/developer/docs/getting-started/http-post-setup",
+  "https://hub.docker.com/r/toxuin/alarmserver",
+  "https://www.home-assistant.io/integrations/hikvision",
+  "https://community.home-assistant.io/t/dahua-ipc-to-mqtt-app/93327?page=5",
+  "https://www.onvif.org/specs/2206/Analytics.html",
+  "https://www.onvif.org/profiles/profile-s/",
+  "https://datatracker.ietf.org/doc/html/rfc8030",
+  "https://core.telegram.org/bots/api",
+  "https://core.telegram.org/bots/features",
+  "https://pkg.go.dev/github.com/AlexxIT/go2rtc",
+  "https://min.io/docs/minio/linux/administration/object-management/object-lifecycle-management.html",
+  "https://storage.trassir.com/manual/en/setup-line-crossing.html",
+  "https://www.milesight.com/support/download/document-center/ipc-series/ai/en/user-manual/line-crossing.html",
+  "https://www.uniview.com/News/Blog/202605/1100575_169683_0.htm",
+  "https://knowledge.keenfinity-group.com/video-systems/article/tns1-iva-does-not-include-all-iva-rules-in-camera",
+  "https://developer.axis.com/vapix/applications/cross-line-detection-1.1-api/",
+  "https://www.sdmmag.com/articles/89047-video-monitoring-best-practices",
+  "https://www.securitysales.com/insights/central-stations-assess-actual-alarms/147248/",
+  "https://www.securityinfowatch.com/home/article/10537347/seeing-is-believing",
+  "https://datatracker.ietf.org/doc/html/rfc7826",
+  "https://www.milesight.com/support/download/document-center/ipc-series/ndaa/en/user-manual/intrusion-detection.html",
+  "https://ipcamtalk.com/threads/intrusion-detection-settings-does-not-work.24107",
+  "https://www.securitywholesalers.com.au/faqs/how-to-configure-acusense-using-hikvision-nvr-v5-0-firmware/",
+  "https://ajax.systems/support/posts/line-crossing-detection-in-ajax-video-surveillance/"
+ ],
+ "pdf_pages": [
+  "https://www.davantis.com/wp-content/uploads/perimeter-security-false-alarms-guide.pdf",
+  "https://www.onvif.org/wp-content/uploads/2021/06/onvif-profile-feature-overview.pdf",
+  "https://global.uniview.com/res/201905/30/20190530_1728629_How-to-set-Intrusion-Detection_850805_168459_0.pdf"
+ ],
+ "note": "El código de OmniAccess (Infratec) es la fuente principal del curso y no se guarda acá: se cita en el texto por nombre de pantalla. pdf_pages: no los maneja scrape.py; se convirtieron con pdftotext -layout y se guardaron en raw/web con la misma cabecera. min_words bajado a 100 para conservar dos artículos oficiales cortos de soporte de Hikvision sobre el horario de armado. Se descartaron la guía AcuSense de netviewcctv (el texto del artículo no se pudo leer, solo el menú) y un hilo de ipcamtalk sobre la API de Dahua (la página guardada era otro tema)."
+}

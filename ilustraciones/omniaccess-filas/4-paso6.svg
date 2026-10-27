@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Si el stream falla: reintentos y foto de respaldo</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS FILAS · LECCIÓN 4 · PASO 6</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Si el stream falla: reintentos y foto de respaldo</text>
+<rect x="68.0" y="209" width="164.0" height="30" rx="15" fill="#0A63B8"/><text x="150.0" y="230.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">pide stream.mp4</text>
+<path d="M240.0 221.0C297.0 221.0,297.0 221.0,354.0 221.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="364.0" y="209" width="72.0" height="30" rx="15" fill="#FCEAE6"/><text x="400.0" y="230.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">falla</text>
+<path d="M444.0 221.0C497.6 221.0,497.6 221.0,551.2 221.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="561.2" y="209" width="237.6" height="30" rx="15" fill="#FFF4DE"/><text x="680.0" y="230.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#B45309" text-anchor="middle">reintenta hasta 6 veces</text>
+<path d="M806.8 221.0C857.0 221.0,857.0 221.0,907.2 221.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="917.2" y="209" width="145.6" height="30" rx="15" fill="#E5F0FB"/><text x="990.0" y="230.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#41627F" text-anchor="middle">foto cada 5 s</text>
+<circle cx="48" cy="160" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="166.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text>
+<rect x="360" y="290" width="480" height="230" rx="16" fill="#0B1A28" stroke="#0B1A28" stroke-width="2" opacity="1"/>
+<text x="600.0" y="395.0" font-family="Familjen Grotesk" font-size="22" font-weight="600" fill="#FFFFFF" text-anchor="middle">Cámara offline</text>
+<text x="600.0" y="428.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#9FC3E3" text-anchor="middle">Sin señal · reintentando…</text>
+<circle cx="600" cy="345" r="9" fill="#D2492F"/>
+<rect x="48" y="550" width="1104" height="52" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="562" width="5" height="28" rx="2.5" fill="#0A63B8"/><text x="74.0" y="584.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Para la prueba renombrá el stream y recargá Filas; al terminar, volvé el nombre a su lugar y reiniciá go2rtc.</tspan></text>
+</svg>

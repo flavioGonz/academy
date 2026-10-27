@@ -1,0 +1,19 @@
+A: Lección tres: dar de alta el contador y ver que el aforo llegue de verdad.
+B: Que no es lo mismo que cargarlo.
+A: Para nada. Primero el alta: en Dispositivos Conteo, Agregar, tipo Contador de Filas, fabricante Bosch, la IP y el usuario que creaste en la cámara.
+B: ¿Y ahí ya cuenta?
+A: Ahí OmniAccess empieza a escuchar. Y conviene entender cómo, porque es lo que vas a diagnosticar. ONVIF tiene dos formas de entregar eventos. Una es el pull point: el servidor le pide a la cámara un buzón, y cada tanto pregunta si hay mensajes.
+B: ¿Cada cuánto?
+A: OmniAccess, cada cinco segundos. Lo mismo hace por defecto el driver ONVIF de Milestone, así que no es un invento raro.
+B: ¿Y la otra forma?
+A: El push. La cámara se suscribe y le manda al servidor cada evento apenas pasa. Más rápido, pero la cámara tiene que poder llegar al servidor y la suscripción hay que renovarla.
+B: ¿OmniAccess cuál usa?
+A: Los dos. El pull es el principal. El push es opcional, con una variable de entorno; si el push está entregando, el pull se calla para no contar doble.
+B: ¿Y cómo sabe qué es nuevo?
+A: Por el PropertyOperation. La especificación ONVIF dice Initialized cuando arranca la suscripción y Changed cuando el valor cambia. OmniAccess solo graba si el número es distinto al último. Hay un hilo en el foro de Milestone de un desarrollador al que el mismo evento le saltaba en cada pull: filtrar bien no es trivial.
+B: Bien. ¿Cómo verifico?
+A: En la pantalla Filas tocás Analíticas ONVIF. Ahí ves las reglas VCA de la cámara, con Aforo como ocupación, y los tópicos que publica. Y en el servidor, la ruta barra api barra queue barra poll con info igual a uno te dice si el sondeo está activo y cuándo fue el último pull.
+B: Laboratorio.
+A: Dá de alta la cámara de la lección dos, mirá esas dos cosas y pasá caminando. Hasta que no ves el aforo cambiar en la tabla de detección, la fila no está instalada.
+B: Veinte minutos.
+A: Y cuando llamen porque no cuenta, ya sabés dónde mirar primero.

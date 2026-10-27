@@ -1,0 +1,19 @@
+A: Lección cuatro: el video en vivo de la fila.
+B: Que el cliente es lo primero que mira.
+A: Siempre. Y acá aparece go2rtc, un programa chiquito que hace de relevo. Toma el RTSP de la cámara una sola vez y se lo reparte a todos los navegadores.
+B: ¿Por qué no que cada navegador vaya directo a la cámara?
+A: Porque el navegador no habla RTSP, y porque diez pestañas abiertas serían diez streams pidiéndole a la cámara. go2rtc lo convierte en MP4 por HTTP y la cámara atiende una sola conexión.
+B: ¿Cómo sabe OmniAccess qué stream pedir?
+A: Por el nombre. Lo arma solo: bosch, guion bajo, y la IP con guiones bajos en vez de puntos. Si la cámara es la uno nueve dos punto cero punto dos punto diez, el stream se llama bosch uno nueve dos guion bajo cero guion bajo dos guion bajo diez.
+B: Y ese nombre lo cargás vos.
+A: A mano, en el archivo go2rtc punto yaml de la instalación, con la URL RTSP de la cámara. La guía de OmniAccess usa el segundo stream, inst igual a dos, y el túnel RTSP de Bosch.
+B: ¿Eso de inst lo confirma Bosch?
+A: Sí. Su documento de RTSP explica que sin parámetros te da el stream uno y que inst igual a dos pide el segundo. Y la documentación de go2rtc pone la API en el puerto mil novecientos ochenta y cuatro.
+B: ¿Y si el stream falla?
+A: El monitor reintenta seis veces y después muestra una foto cada cinco segundos con el cartel Cámara offline. Ojo que ese mismo stream lo usa el worker para armar el clip de la alerta.
+B: O sea que sin stream tampoco hay clip.
+A: Exacto. Un detalle más: conviene que el segundo stream esté en H punto doscientos sesenta y cuatro, así pasa al navegador sin convertir.
+B: Laboratorio.
+A: Agregá el stream de tu cámara de banco, reiniciá go2rtc, probalo en su interfaz web y después mirá que aparezca en Filas y en el Monitor en Vivo.
+B: Veinte minutos.
+A: Y el día que el vivo quede negro, vas directo al nombre del stream.

@@ -1,0 +1,19 @@
+A: Arrancamos el curso de OmniAccess Filas. Soy Lucía.
+B: Y yo Martín. Lección uno: entender quién cuenta a la gente.
+A: Porque la primera pregunta del cliente siempre es la misma: ¿el sistema cuenta con inteligencia artificial en el servidor?
+B: Y la respuesta es que no. El que cuenta es la cámara.
+A: Exacto. Una cámara Bosch con IVA Pro tiene la analítica adentro. Vos le dibujás la zona de la fila y ella sabe cuántas personas hay ahí, y cuántas entraron o salieron.
+B: ¿Y OmniAccess qué hace entonces?
+A: Escucha. Cada cinco segundos le pregunta a la cámara por ONVIF si hubo eventos nuevos. Cuando el aforo cambia, lo guarda, lo muestra en el monitor y, si pasa el umbral, avisa por Telegram, WhatsApp o una notificación en el celular.
+B: Cámara, evento, monitor, alerta. Cuatro pasos.
+A: Cuatro pasos. Y las fuentes coinciden: la nota técnica de Bosch, su documento de eventos ONVIF y el de Axis cuentan lo mismo, la analítica vive en la cámara y sale como evento. La única voz distinta es la de un fabricante de contadores que recuerda que ningún contador es perfecto.
+B: Lo cual es justo. ¿Algo de historia?
+A: En 2020, cuando ONVIF presentó el Profile M para analíticas, puso como ejemplo la gestión de filas con conteo de personas. O sea, esto ya es un caso de uso estándar.
+B: Bien. ¿Y en el software cómo se ve?
+A: OmniAccess trabaja por modos. Activás el Modo Cola en Configuración, en Modos, y la interfaz cambia entera: aparece Monitor en Vivo, Flujo de Filas, y una sección Filas con Despachos, Reportes, Dispositivos Conteo, Horarios, Kiosko y Calibración.
+B: ¿Y LPR queda prendido?
+A: No, los modos son exclusivos. Por eso en producción no se toca sin coordinar.
+B: Laboratorio.
+A: En una demo, activá el Modo Cola y recorré el menú. Después dibujá en una hoja los cuatro pasos y anotá en qué pantalla ves cada uno.
+B: Quince minutos.
+A: Y la próxima vez que un número esté mal, ya sabés por dónde empezar: por la cámara.

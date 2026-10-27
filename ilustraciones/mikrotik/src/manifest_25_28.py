@@ -80,9 +80,11 @@ M["25"]["script_rsc"] = {
 # 2. Puertos al bridge: salteo los que ya están en un bridge, los WAN y los que tienen IP
 :foreach p in=$puertos do={
   :if ([:len [/interface/bridge/port/find interface=$p]] > 0) do={
-    :put ($p . " ya está en un bridge: no lo toco")
+    :put ($p . " ya esta en un bridge: no lo toco")
   } else={
-    :if ([:len [/interface/list/member/find list=WAN interface=$p]] > 0 || [:len [/ip/address/find interface=$p]] > 0) do={
+    :local esWan false
+    :if ([:len [/interface/list/find name=WAN]] > 0) do={ :set esWan ([:len [/interface/list/member/find list=WAN interface=$p]] > 0) }
+    :if ($esWan || ([:len [/ip/address/find interface=$p]] > 0)) do={
       :put ($p . " es WAN o tiene IP propia: lo salteo")
     } else={
       /interface/bridge/port/add bridge=$bridge interface=$p comment="ies-bridge"
@@ -100,7 +102,7 @@ M["25"]["script_rsc"] = {
 # /interface/bridge/port/remove [find interface=ether1]
 # /interface/list/member/add list=WAN interface=ether1
 # /ip/dhcp-client/add interface=ether1 disabled=no
-:put ("Listo: bridge " . $bridge . " con sus puertos y la IP " . $lanip . ". Verificá la marca H con /interface/bridge/port/print")""",
+:put ("Listo: bridge " . $bridge . " con sus puertos y la IP " . $lanip . ". Verifica la marca H con /interface/bridge/port/print")""",
     "notas": [
         "Después de pegarlo, mirá /interface/bridge/port/print: los puertos sin H van por la CPU (por ejemplo, si quedó un segundo bridge en el mismo switch chip).",
         "No crea VLAN ni toca el firewall. Para separar cámaras y oficina, VLAN (lección de VLAN por sistema).",
@@ -175,7 +177,7 @@ M["26"]["script_rsc"] = {
 :local srv ("dhcp-" . $nombre)
 # 0. La IP no va en un puerto de bridge: si lo está, freno acá
 :if ([:len [/interface/bridge/port/find interface=$iface]] > 0) do={
-  :put ($iface . " está dentro de un bridge. Sacalo primero (y no desde ese mismo puerto):")
+  :put ($iface . " esta dentro de un bridge. Sacalo primero (y no desde ese mismo puerto):")
   :put ("/interface/bridge/port/remove [find interface=" . $iface . "]")
   :error "detenido: puerto dentro de un bridge"
 }
@@ -184,8 +186,10 @@ M["26"]["script_rsc"] = {
   /ip/address/add address=$ipr interface=$iface comment=("ies-" . $nombre)
 }
 # 2. En la lista LAN, para que el router le conteste DNS y WinBox
-:if ([:len [/interface/list/find name=LAN]] > 0 && [:len [/interface/list/member/find list=LAN interface=$iface]] = 0) do={
-  /interface/list/member/add list=LAN interface=$iface comment=("ies-" . $nombre)
+:if ([:len [/interface/list/find name=LAN]] > 0) do={
+  :if ([:len [/interface/list/member/find list=LAN interface=$iface]] = 0) do={
+    /interface/list/member/add list=LAN interface=$iface comment=("ies-" . $nombre)
+  }
 }
 # 3. Pool (sin la IP del router)
 :if ([:len [/ip/pool/find name=$pool]] = 0) do={
@@ -199,7 +203,7 @@ M["26"]["script_rsc"] = {
 :if ([:len [/ip/dhcp-server/find name=$srv]] = 0) do={
   /ip/dhcp-server/add name=$srv interface=$iface address-pool=$pool disabled=no comment=("ies-" . $nombre)
 } else={ /ip/dhcp-server/set [find name=$srv] interface=$iface address-pool=$pool disabled=no }
-:put ("Listo: " . $ipr . " en " . $iface . " con DHCP " . $srv . " (" . $rango . "). Verificá con /ip/dhcp-server/lease/print where server=" . $srv)""",
+:put ("Listo: " . $ipr . " en " . $iface . " con DHCP " . $srv . " (" . $rango . "). Verifica con /ip/dhcp-server/lease/print where server=" . $srv)""",
     "notas": [
         "Para reservar un equipo: /ip/dhcp-server/lease/make-static [find address=10.10.20.100] (cambiá la dirección).",
         "Antes de pegarlo, confirmá que en esa red no hay otro servidor DHCP (el módem del cliente, un NVR): dos servidores en la misma red pelean.",
@@ -287,7 +291,7 @@ M["27"]["script_rsc"] = {
 # 3. (Opcional, comentado) Si la ruta por defecto va por un túnel, la IP pública
 #    del servidor VPN sale por el ISP. Cambiá los datos antes de descomentar.
 # /ip/route/add dst-address=203.0.113.10/32 gateway=192.168.1.1 comment="ies-ruta-vpn"
-:put ("Listo: " . $red . " por " . $gw1 . " (vigilado) y respaldo por " . $gw2 . ". Verificá con /ip/route/print where dst-address=" . $red)""",
+:put ("Listo: " . $red . " por " . $gw1 . " (vigilado) y respaldo por " . $gw2 . ". Verifica con /ip/route/print where dst-address=" . $red)""",
     "notas": [
         "check-gateway tarda unos 20 segundos en apagar la ruta (dos pruebas de 10 s). Mira solo el gateway, no internet.",
         "No toca la ruta por defecto: para el respaldo de internet con dos proveedores, la lección de dos WAN usa rutas recursivas.",
@@ -373,15 +377,15 @@ M["28"]["script_rsc"] = {
   /ip/route/add dst-address=$lanremota gateway=$nombre comment="ies-l2tp"
 } else={ /ip/route/set [find dst-address=$lanremota comment="ies-l2tp"] gateway=$nombre }
 # 3. (Opcional) NAT hacia el túnel, solo si la central no tiene ruta de vuelta
-:if ($nat = "si" && [:len [/ip/firewall/nat/find comment="ies-l2tp-nat"]] = 0) do={
+:if (($nat = "si") && ([:len [/ip/firewall/nat/find comment="ies-l2tp-nat"]] = 0)) do={
   /ip/firewall/nat/add chain=srcnat out-interface=$nombre action=masquerade comment="ies-l2tp-nat"
-  :put "Masquerade hacia el túnel agregado"
+  :put "Masquerade hacia el tunel agregado"
 }
 # 4. (Opcional, comentado) WinBox desde la central y túnel en la lista WAN
 # /ip/firewall/filter/add chain=input in-interface=l2tp-central protocol=tcp dst-port=8291 action=accept comment="ies-l2tp-winbox" place-before=[find comment="defconf: drop all not coming from LAN"]
 # /interface/list/member/add list=WAN interface=l2tp-central
 :delay 5s
-:put ("Listo: " . $nombre . " hacia " . $servidor . " y ruta a " . $lanremota . ". Verificá con /ip/ipsec/active-peers/print y /ip/address/print where interface=" . $nombre)""",
+:put ("Listo: " . $nombre . " hacia " . $servidor . " y ruta a " . $lanremota . ". Verifica con /ip/ipsec/active-peers/print y /ip/address/print where interface=" . $nombre)""",
     "notas": [
         "Las claves de ejemplo son falsas: cambialas por las del servidor antes de pegar.",
         "En la central hace falta el usuario (un secret con service=l2tp y direcciones fijas) y la ruta de vuelta hacia la LAN de este sitio, salvo que uses NAT=si.",
@@ -406,6 +410,9 @@ for k, v in M.items():
     assert 15 <= nl <= 60, (k, nl)
     for t in json.dumps(v, ensure_ascii=False), :
         assert "—" not in t and "–" not in t, k
+    for ln in v["script_rsc"]["codigo"].splitlines():
+        if ":put" in ln or ":error" in ln:
+            assert ln == ln.translate(str.maketrans("áéíóú","aeiou")), ln
     print(k, "teoria", words, "palabras · script", nl, "líneas")
 
 OUT.write_text(json.dumps(M, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

@@ -396,7 +396,8 @@
    "term": "gateway",
    "aliases": [
     "puerta de enlace",
-    "gateways"
+    "gateways",
+    "GW"
    ],
    "cat": "Redes",
    "short": "El router al que un equipo le manda todo lo que no es de su propia red.",
@@ -2135,7 +2136,10 @@
   {
    "id": "g711",
    "term": "G.711",
-   "aliases": [],
+   "aliases": [
+    "PCMA",
+    "PCMU"
+   ],
    "cat": "Telefonía IP",
    "short": "Codec de audio sin compresión de 64 kbps, el estándar de la telefonía digital desde 1972.",
    "long": "Es el de mejor calidad y el más compatible en una LAN. Con G.711 incluso el DTMF inband funciona.",
@@ -4359,6 +4363,1527 @@
    "long": "Reemplazó a la RFC 1631 de 1994 y ordenó lo que los routers ya hacían: con NAPT, muchos equipos de la LAN salen por una sola IP pública y el router distingue cada conexión por el puerto. Es el NAT que hace un masquerade, y por eso para entrar desde afuera hace falta un dst-nat.",
    "year": 2001,
    "case": true
+  },
+  {
+   "id": "rfc826",
+   "term": "RFC 826",
+   "aliases": [
+    "RFC826"
+   ],
+   "cat": "RFC",
+   "short": "ARP: cómo se averigua la dirección MAC que corresponde a una IP dentro de la misma red.",
+   "long": "Escrita por David Plummer en 1982. Antes de mandar un paquete a una IP de la LAN, el equipo pregunta por difusión quién tiene esa IP y guarda la respuesta en su tabla ARP. Por eso un ARP ping llega a equipos que bloquean el ping común.",
+   "case": true,
+   "year": 1982
+  },
+  {
+   "id": "rfc882",
+   "term": "RFC 882",
+   "aliases": [
+    "RFC882"
+   ],
+   "cat": "RFC",
+   "short": "Primera descripción de los nombres de dominio y su jerarquía, con la que nació el DNS.",
+   "long": "Paul Mockapetris la publicó en 1983 junto con la RFC 883, para reemplazar el archivo HOSTS.TXT que se copiaba a mano a cada máquina de ARPANET. En 1987 las reemplazaron las RFC 1034 y 1035, que son las vigentes.",
+   "case": true,
+   "year": 1983
+  },
+  {
+   "id": "rfc883",
+   "term": "RFC 883",
+   "aliases": [
+    "RFC883"
+   ],
+   "cat": "RFC",
+   "short": "Primera especificación del funcionamiento del DNS: mensajes, consultas y servidores.",
+   "long": "Compañera de la RFC 882 (1983), de Paul Mockapetris. Definió cómo se pregunta y se responde un nombre. La reemplazó la RFC 1035 en 1987.",
+   "case": true,
+   "year": 1983
+  },
+  {
+   "id": "rfc950",
+   "term": "RFC 950",
+   "aliases": [
+    "RFC950"
+   ],
+   "cat": "RFC",
+   "short": "Subredes: permite partir una red IP en redes más chicas con una máscara.",
+   "long": "De 1985. Antes solo existían las clases A, B y C; con la máscara de subred una organización pudo dividir su bloque en varias redes. Es la base de escribir 192.168.88.0/24 o 255.255.255.0.",
+   "case": true,
+   "year": 1985
+  },
+  {
+   "id": "rfc1812",
+   "term": "RFC 1812",
+   "aliases": [
+    "RFC1812"
+   ],
+   "cat": "RFC",
+   "short": "Requisitos de los routers IPv4: qué tiene que hacer un equipo que reenvía paquetes entre redes.",
+   "long": "De 1995. Junta en un documento cómo decide la ruta un router (la más específica gana), cómo trata el TTL, el ICMP y la fragmentación. Es la referencia de lo que hace RouterOS al rutear.",
+   "case": true,
+   "year": 1995
+  },
+  {
+   "id": "rfc3931",
+   "term": "RFC 3931",
+   "aliases": [
+    "RFC3931"
+   ],
+   "cat": "RFC",
+   "short": "L2TPv3: la versión 3 de L2TP, que lleva cualquier capa 2 por una red IP, no solo PPP.",
+   "long": "De 2005, actualiza la RFC 2661. Permite transportar Ethernet, VLAN y otros enlaces de capa 2 entre dos sitios. El cliente y servidor L2TP clásicos de MikroTik siguen la versión 2; L2TPv3 se usa para extender una LAN.",
+   "case": true,
+   "year": 2005
+  },
+  {
+   "id": "rfc6890",
+   "term": "RFC 6890",
+   "aliases": [
+    "RFC6890"
+   ],
+   "cat": "RFC",
+   "short": "El registro de direcciones IP de uso especial: privadas, de documentación, loopback, CGNAT y otras.",
+   "long": "De 2013. Junta en una tabla los rangos que no se rutean en internet o tienen un uso reservado: 10.0.0.0/8, 192.168.0.0/16, 100.64.0.0/10 (CGNAT), 192.0.2.0/24 y 203.0.113.0/24 (documentación). Sirve para armar listas de bogons en el firewall.",
+   "case": true,
+   "year": 2013
+  },
+  {
+   "id": "rfc8484",
+   "term": "RFC 8484",
+   "aliases": [
+    "RFC8484"
+   ],
+   "cat": "RFC",
+   "short": "DoH: consultas DNS dentro de HTTPS, por el puerto 443.",
+   "long": "De 2018. Cifra el DNS para que nadie en el camino lo lea o lo cambie. Como va mezclado con el tráfico web, un DNS transparente en el router no lo puede redirigir; RouterOS 7 puede usarlo como cliente para sus propias consultas.",
+   "case": true,
+   "year": 2018
+  },
+  {
+   "id": "pcc",
+   "term": "PCC",
+   "aliases": [
+    "Per Connection Classifier",
+    "per-connection-classifier"
+   ],
+   "cat": "MikroTik",
+   "short": "Per Connection Classifier: reparte conexiones entre dos o más WAN según una cuenta sobre direcciones y puertos.",
+   "long": "Un mangle con per-connection-classifier=both-addresses:2/0 y 2/1 marca la mitad de las conexiones para cada salida, siempre igual para el mismo par de IPs, así una sesión no salta de proveedor. Es balanceo por conexión, no por ancho de banda.",
+   "case": true
+  },
+  {
+   "id": "rib",
+   "term": "RIB",
+   "aliases": [
+    "Routing Information Base"
+   ],
+   "cat": "Redes",
+   "short": "Routing Information Base: todas las rutas que conoce el router, activas o no.",
+   "long": "Incluye estáticas, conectadas, de DHCP, PPPoE y protocolos dinámicos. De ahí el router elige la mejor por destino (la más específica y después la de menor distancia) y la copia a la FIB.",
+   "case": true
+  },
+  {
+   "id": "fib",
+   "term": "FIB",
+   "aliases": [
+    "Forwarding Information Base"
+   ],
+   "cat": "Redes",
+   "short": "Forwarding Information Base: la tabla que el router usa de verdad para reenviar cada paquete.",
+   "long": "Se arma con las rutas ganadoras de la RIB. En RouterOS 7, /routing/route muestra la RIB y /ip/route las rutas activas que van a la FIB.",
+   "case": true
+  },
+  {
+   "id": "sstp",
+   "term": "SSTP",
+   "aliases": [],
+   "cat": "VPN",
+   "short": "Secure Socket Tunneling Protocol: túnel PPP dentro de TLS por el puerto 443.",
+   "long": "Lo creó Microsoft para Windows Vista SP1 (2008). Pasa por casi cualquier firewall porque parece HTTPS. MikroTik lo soporta como cliente y servidor.",
+   "case": true,
+   "year": 2008
+  },
+  {
+   "id": "smtp",
+   "term": "SMTP",
+   "aliases": [],
+   "cat": "Web e integración",
+   "short": "Protocolo para enviar correo electrónico entre servidores y desde un equipo a su servidor de salida.",
+   "long": "Definido en 1982 (RFC 821, hoy RFC 5321). El router lo usa para mandar avisos con /tool/e-mail, normalmente por el puerto 587 con TLS y usuario.",
+   "case": true,
+   "year": 1982
+  },
+  {
+   "id": "stp",
+   "term": "STP",
+   "aliases": [
+    "Spanning Tree"
+   ],
+   "cat": "Redes",
+   "short": "Spanning Tree Protocol: evita los bucles en una red de switches bloqueando los caminos redundantes.",
+   "long": "Lo inventó Radia Perlman en 1985 y se estandarizó como IEEE 802.1D. Sin STP, un cable que cierra un anillo inunda la red de difusiones. RSTP es su versión rápida.",
+   "case": true,
+   "year": 1985
+  },
+  {
+   "id": "rstp",
+   "term": "RSTP",
+   "aliases": [
+    "Rapid Spanning Tree"
+   ],
+   "cat": "Redes",
+   "short": "Rapid Spanning Tree: versión rápida de STP, converge en segundos en vez de casi un minuto.",
+   "long": "Estandarizado como IEEE 802.1w en 2001. Es el modo por defecto del bridge de RouterOS.",
+   "case": true,
+   "year": 2001
+  },
+  {
+   "id": "tlv",
+   "term": "TLV",
+   "aliases": [
+    "Type-Length-Value"
+   ],
+   "cat": "Redes",
+   "short": "Tipo, largo y valor: forma de empaquetar datos en un protocolo, campo por campo.",
+   "long": "LLDP, CDP y MNDP mandan su información (nombre, puerto, IP, versión) como una lista de TLV. Así un equipo puede ignorar los campos que no entiende.",
+   "case": true
+  },
+  {
+   "id": "lac",
+   "term": "LAC",
+   "aliases": [],
+   "cat": "VPN",
+   "short": "L2TP Access Concentrator: el extremo que inicia el túnel L2TP, el cliente.",
+   "long": "En un MikroTik, /interface/l2tp-client actúa como LAC: se conecta al LNS de la central.",
+   "case": true
+  },
+  {
+   "id": "lns",
+   "term": "LNS",
+   "aliases": [],
+   "cat": "VPN",
+   "short": "L2TP Network Server: el extremo que recibe los túneles L2TP, el servidor.",
+   "long": "En un MikroTik es /interface/l2tp-server/server. Termina las sesiones PPP de los clientes y les da IP.",
+   "case": true
+  },
+  {
+   "id": "cbac",
+   "term": "CBAC",
+   "aliases": [],
+   "cat": "Seguridad",
+   "short": "Context-Based Access Control: firewall con estado de Cisco IOS aplicado por interfaz.",
+   "long": "Fue el antecesor del firewall por zonas de Cisco (ZBF, desde IOS 12.4(6)T). Inspeccionaba las conexiones salientes y abría la vuelta. Ilustra por qué hoy se piensa en zonas y no en interfaces sueltas.",
+   "case": true
+  },
+  {
+   "id": "aaaa",
+   "term": "AAAA",
+   "aliases": [
+    "registro AAAA"
+   ],
+   "cat": "Redes",
+   "short": "Registro DNS que guarda una dirección IPv6, como el A guarda una IPv4.",
+   "long": "Si un nombre tiene registro AAAA y el equipo tiene IPv6, suele preferirlo. En bloqueos por DNS conviene responder tanto el A como el AAAA.",
+   "case": true
+  },
+  {
+   "id": "mx",
+   "term": "MX",
+   "aliases": [
+    "registro MX"
+   ],
+   "cat": "Redes",
+   "short": "Registro DNS que dice qué servidor recibe el correo de un dominio.",
+   "long": "Mail Exchanger. Tiene una prioridad: si el primero no responde, se prueba el siguiente.",
+   "case": true
+  },
+  {
+   "id": "rfc1350",
+   "term": "RFC 1350",
+   "aliases": [
+    "RFC1350"
+   ],
+   "cat": "RFC",
+   "short": "TFTP: el protocolo más simple para bajar un archivo por UDP 69, sin usuario ni clave.",
+   "long": "Los teléfonos IP y muchos equipos lo usan para bajar su configuración o firmware al arrancar. Como no tiene autenticación ni cifrado, conviene usarlo solo en la red interna o pasar a HTTP/HTTPS.",
+   "year": 1992,
+   "case": true
+  },
+  {
+   "id": "rfc1889",
+   "term": "RFC 1889",
+   "aliases": [
+    "RFC1889"
+   ],
+   "cat": "RFC",
+   "short": "Primera versión de RTP, el protocolo que lleva el audio y el video en tiempo real.",
+   "long": "La reemplazó la RFC 3550 en 2003, que es la vigente.",
+   "year": 1996,
+   "case": true
+  },
+  {
+   "id": "rfc2132",
+   "term": "RFC 2132",
+   "aliases": [
+    "RFC2132"
+   ],
+   "cat": "RFC",
+   "short": "Opciones de DHCP: datos extra que el servidor entrega además de la IP, como DNS, NTP o la opción 66.",
+   "long": "La opción 66 (nombre del servidor TFTP) es la que usan los teléfonos IP para encontrar de dónde bajar su configuración automáticamente.",
+   "year": 1997,
+   "case": true
+  },
+  {
+   "id": "rfc2327",
+   "term": "RFC 2327",
+   "aliases": [
+    "RFC2327"
+   ],
+   "cat": "RFC",
+   "short": "Primera versión de SDP, el formato que describe una sesión multimedia: códecs, IP y puertos.",
+   "long": "La reemplazó la RFC 4566 en 2006 y después la RFC 8866 en 2021.",
+   "year": 1998,
+   "case": true
+  },
+  {
+   "id": "rfc3264",
+   "term": "RFC 3264",
+   "aliases": [
+    "RFC3264"
+   ],
+   "cat": "RFC",
+   "short": "Modelo oferta y respuesta de SDP: cómo dos equipos SIP acuerdan códecs y direcciones.",
+   "long": "Uno ofrece la lista de códecs y puertos en el INVITE y el otro responde con lo que acepta. Si no coinciden en ningún códec, la llamada falla con 488.",
+   "year": 2002,
+   "case": true
+  },
+  {
+   "id": "rfc3265",
+   "term": "RFC 3265",
+   "aliases": [
+    "RFC3265"
+   ],
+   "cat": "RFC",
+   "short": "Eventos en SIP: SUBSCRIBE y NOTIFY para avisar cambios de estado.",
+   "long": "Se usa para el estado de extensiones (BLF) y el aviso de mensajes de voz. La reemplazó la RFC 6665 en 2012.",
+   "year": 2002,
+   "case": true
+  },
+  {
+   "id": "rfc3428",
+   "term": "RFC 3428",
+   "aliases": [
+    "RFC3428"
+   ],
+   "cat": "RFC",
+   "short": "Método SIP MESSAGE: mensajes cortos de texto dentro de SIP, sin establecer una llamada.",
+   "long": "Algunos porteros y teléfonos lo usan para mandar órdenes, por ejemplo la tecla de abrir puerta.",
+   "year": 2002,
+   "case": true
+  },
+  {
+   "id": "rfc3489",
+   "term": "RFC 3489",
+   "aliases": [
+    "RFC3489"
+   ],
+   "cat": "RFC",
+   "short": "Primera versión de STUN, que además clasificaba los tipos de NAT, entre ellos el NAT simétrico.",
+   "long": "La reemplazó la RFC 5389 en 2008, que dejó la clasificación de NAT de lado porque no era confiable.",
+   "year": 2003,
+   "case": true
+  },
+  {
+   "id": "rfc3550",
+   "term": "RFC 3550",
+   "aliases": [
+    "RFC3550"
+   ],
+   "cat": "RFC",
+   "short": "RTP vigente: lleva el audio y el video de las llamadas, con número de secuencia y marca de tiempo.",
+   "long": "Va acompañado de RTCP, que informa pérdida y jitter. Los puertos RTP los negocia SDP; por eso el NAT y el firewall tienen que dejar pasar ese rango.",
+   "year": 2003,
+   "case": true
+  },
+  {
+   "id": "rfc3581",
+   "term": "RFC 3581",
+   "aliases": [
+    "RFC3581"
+   ],
+   "cat": "RFC",
+   "short": "rport: que las respuestas SIP vuelvan a la IP y el puerto desde donde salió el pedido realmente.",
+   "long": "Resuelve parte del problema de SIP detrás de NAT: el equipo de afuera responde al puerto público que vio, no al que el teléfono escribió en el mensaje.",
+   "year": 2003,
+   "case": true
+  },
+  {
+   "id": "rfc4566",
+   "term": "RFC 4566",
+   "aliases": [
+    "RFC4566"
+   ],
+   "cat": "RFC",
+   "short": "SDP: describe la sesión multimedia con líneas como c= (dirección) y m= (medio, puerto y códecs).",
+   "long": "Reemplazó a la RFC 2327 y la reemplazó la RFC 8866 en 2021. Cuando el audio va en una sola dirección, mirar la línea c= suele mostrar una IP privada mal anunciada.",
+   "year": 2006,
+   "case": true
+  },
+  {
+   "id": "rfc5389",
+   "term": "RFC 5389",
+   "aliases": [
+    "RFC5389"
+   ],
+   "cat": "RFC",
+   "short": "STUN vigente: un servidor le dice a un equipo con qué IP y puerto públicos lo ve internet.",
+   "long": "Sirve para que un teléfono detrás de NAT anuncie su dirección pública. No atraviesa todos los NAT; para el simétrico hace falta TURN o un SBC.",
+   "year": 2008,
+   "case": true
+  },
+  {
+   "id": "rfc6665",
+   "term": "RFC 6665",
+   "aliases": [
+    "RFC6665"
+   ],
+   "cat": "RFC",
+   "short": "Notificación de eventos SIP vigente (SUBSCRIBE/NOTIFY).",
+   "long": "Reemplazó a la RFC 3265.",
+   "year": 2012,
+   "case": true
+  },
+  {
+   "id": "rfc8866",
+   "term": "RFC 8866",
+   "aliases": [
+    "RFC8866"
+   ],
+   "cat": "RFC",
+   "short": "SDP vigente, reemplaza a la RFC 4566.",
+   "long": "No cambia el formato en lo práctico: las líneas v=, o=, c= y m= siguen igual.",
+   "year": 2021,
+   "case": true
+  },
+  {
+   "id": "ivr",
+   "term": "IVR",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "Menú automático que atiende y deriva llamadas según la tecla que marque quien llama.",
+   "long": "Interactive Voice Response. Por ejemplo: \"marque 1 para administración, 2 para soporte\". Cada opción lleva a una extensión, un grupo, una cola u otro menú.",
+   "case": true
+  },
+  {
+   "id": "did",
+   "term": "DID",
+   "aliases": [
+    "DDI"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Número directo entrante: el número externo que llega por el troncal y la central deriva a un destino.",
+   "long": "El proveedor manda en la llamada el número marcado y la central lo usa para elegir la ruta entrante: un DID va al IVR, otro directo a una extensión o a una cola.",
+   "case": true
+  },
+  {
+   "id": "stun",
+   "term": "STUN",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Servidor que le dice a un equipo con qué IP y puerto públicos lo ve internet.",
+   "long": "Session Traversal Utilities for NAT (RFC 5389, antes RFC 3489). El teléfono pregunta al servidor STUN y usa la respuesta para anunciar su IP pública en SIP y SDP.",
+   "case": true,
+   "year": 2003
+  },
+  {
+   "id": "cdr",
+   "term": "CDR",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "Registro de llamadas: quién llamó a quién, cuándo, cuánto duró y cómo terminó.",
+   "long": "Cada llamada genera una línea con origen, destino, hora, duración y estado (atendida, no atendida, ocupado). Es la primera fuente para responder \"¿llamó o no llamó?\".",
+   "case": true
+  },
+  {
+   "id": "tftp",
+   "term": "TFTP",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Transferencia de archivos simple por UDP 69, sin usuario ni clave.",
+   "long": "Trivial File Transfer Protocol, RFC 1350. Sin autenticación ni cifrado, por eso se usa solo dentro de la red, por ejemplo para que un teléfono baje su configuración al arrancar.",
+   "case": true,
+   "year": 1992
+  },
+  {
+   "id": "ata",
+   "term": "ATA",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "Adaptador para conectar un teléfono analógico a una central o servicio IP.",
+   "long": "Tiene uno o más puertos FXS para conectar un teléfono común o un fax y se registra en la central como una extensión SIP más.",
+   "case": true
+  },
+  {
+   "id": "acd",
+   "term": "ACD",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "Distribución automática de llamadas entre los agentes de una cola.",
+   "long": "En una cola de la central decide a qué agente va cada llamada según una estrategia: todos a la vez, el que menos atendió, en orden. Es lo que hace que una cola reparta en vez de hacer sonar siempre al mismo.",
+   "case": true
+  },
+  {
+   "id": "zrtp",
+   "term": "ZRTP",
+   "aliases": [],
+   "cat": "Seguridad",
+   "short": "Intercambio de claves para cifrar el audio con SRTP directamente entre los dos teléfonos.",
+   "long": "Lo propuso Phil Zimmermann (creador de PGP); quedó como RFC 6189 en 2011. Las claves se acuerdan dentro del propio audio, sin depender de la central ni de un certificado.",
+   "case": true,
+   "year": 2011
+  },
+  {
+   "id": "mfa",
+   "term": "MFA",
+   "aliases": [
+    "2FA"
+   ],
+   "cat": "Seguridad",
+   "short": "Autenticación de varios factores: además de la clave, un código o una aplicación del celular.",
+   "long": "Aunque alguien consiga la clave, le falta el segundo factor. Es una de las protecciones más efectivas para el acceso remoto a centrales, routers y paneles en la nube.",
+   "case": true
+  },
+  {
+   "id": "acl",
+   "term": "ACL",
+   "aliases": [],
+   "cat": "Seguridad",
+   "short": "Lista de control de acceso: qué direcciones o usuarios pueden entrar a un servicio.",
+   "long": "En una central, un router o un servicio web, una ACL permite solo ciertas IP o redes. Para la web de administración de una central conviene limitarla a la red de gestión.",
+   "case": true
+  },
+  {
+   "id": "oui",
+   "term": "OUI",
+   "aliases": [],
+   "cat": "Redes",
+   "short": "Los primeros 3 bytes de una MAC, que identifican al fabricante.",
+   "long": "Se usa para reconocer de qué marca es un equipo viendo su MAC, por ejemplo en la tabla ARP o en un escaneo de la red. Las centrales lo usan también para aprovisionar por modelo.",
+   "case": true
+  },
+  {
+   "id": "gdms",
+   "term": "GDMS",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "Plataforma en la nube de Grandstream para administrar y aprovisionar sus equipos.",
+   "long": "Permite ver el estado de los equipos, aplicar configuraciones y actualizar firmware a distancia, sin entrar a cada uno por su IP.",
+   "case": true
+  },
+  {
+   "id": "ssid",
+   "term": "SSID",
+   "aliases": [
+    "SSIDs",
+    "Service Set Identifier",
+    "nombre de la red WiFi"
+   ],
+   "cat": "Redes",
+   "short": "Service Set Identifier: el nombre de una red WiFi, el que ve el celular en la lista.",
+   "long": "Viene del estándar 802.11 original, de 1997. Un mismo AP puede emitir varios SSID a la vez, cada uno asociado a una red o VLAN distinta: staff, invitados, equipos viejos. Ocultarlo no es una medida de seguridad real.",
+   "case": true
+  },
+  {
+   "id": "dfs",
+   "term": "DFS",
+   "aliases": [
+    "Dynamic Frequency Selection",
+    "canales DFS",
+    "Extended 5 GHz Spectrum"
+   ],
+   "cat": "Redes",
+   "short": "Dynamic Frequency Selection: canales de 5 GHz compartidos con radares, que el AP abandona si detecta uno.",
+   "long": "La regla llegó con la enmienda IEEE 802.11h, de 2003. Los canales DFS suelen estar más limpios que 36 a 48, pero si aparece un radar meteorológico o militar el AP deja el canal en el acto y los clientes se cortan. En UniFi se habilitan con Extended 5 GHz Spectrum (DFS).",
+   "year": 2003,
+   "case": true
+  },
+  {
+   "id": "80211h",
+   "term": "802.11h",
+   "aliases": [
+    "IEEE 802.11h",
+    "TPC",
+    "Transmit Power Control"
+   ],
+   "cat": "Normas",
+   "short": "Enmienda de 802.11 que agregó en 5 GHz la detección de radar (DFS) y el control de potencia de transmisión (TPC).",
+   "long": "Se publicó en 2003 para que el WiFi en 5 GHz pudiera convivir con radares. De ahí vienen DFS y la idea de no transmitir siempre al máximo.",
+   "year": 2003,
+   "case": true
+  },
+  {
+   "id": "rssi",
+   "term": "RSSI",
+   "aliases": [
+    "Received Signal Strength Indicator",
+    "mínimo RSSI",
+    "Minimum RSSI"
+   ],
+   "cat": "Redes",
+   "short": "Received Signal Strength Indicator: la intensidad de señal con que se recibe, en dBm (más cerca de cero, mejor).",
+   "long": "Ubiquiti trata -70 dBm como mínimo y recomienda -65 dBm o mejor. El mínimo RSSI de UniFi es una función del fabricante, no un estándar: desconecta al cliente que baja de un umbral y conviene dejarlo para el final, solo con solape de cobertura probado.",
+   "case": true
+  },
+  {
+   "id": "bss-transition",
+   "term": "BSS Transition",
+   "aliases": [
+    "802.11v",
+    "IEEE 802.11v",
+    "BSS Transition Management"
+   ],
+   "cat": "Redes",
+   "short": "Función 802.11v: el AP le sugiere al cliente un AP mejor, y el cliente puede aceptar o ignorar.",
+   "long": "La enmienda 802.11v es de 2011. En UniFi viene activada y conviene dejarla así en todos los SSID: un cliente que no la entiende la ignora. Handoff Suggestions (antes Roaming Assistant) es su versión por umbral de señal.",
+   "year": 2011,
+   "case": true
+  },
+  {
+   "id": "fast-roaming",
+   "term": "Fast Roaming",
+   "aliases": [
+    "802.11r",
+    "IEEE 802.11r",
+    "Fast BSS Transition",
+    "FT"
+   ],
+   "cat": "Redes",
+   "short": "Función 802.11r: deriva por adelantado las claves del próximo AP para que el roaming tarde pocas tramas.",
+   "long": "La enmienda 802.11r es de 2008. Sirve sobre todo en redes 802.1X con voz, donde evita un intercambio completo con RADIUS en cada cambio de AP. Algunos drivers viejos no se conectan a un SSID que la anuncia: se prueba con cada tipo de equipo antes de activarla en producción. Ojo con los nombres: en Omada, el interruptor Fast Roaming de Site Settings > Wireless Features activa 802.11k y 802.11v; 802.11r se habilita aparte en cada SSID.",
+   "year": 2008,
+   "case": true
+  },
+  {
+   "id": "80211k",
+   "term": "802.11k",
+   "aliases": [
+    "IEEE 802.11k",
+    "neighbor report",
+    "neighbor reports"
+   ],
+   "cat": "Redes",
+   "short": "Enmienda de 802.11 con la que el AP le pasa al cliente la lista de AP vecinos y sus canales.",
+   "long": "Es de 2008. Con esa lista el cliente escanea pocos canales y decide el roaming más rápido. En UniFi no tiene un interruptor propio: se confirma con una captura buscando tramas de neighbor report.",
+   "year": 2008,
+   "case": true
+  },
+  {
+   "id": "pmf",
+   "term": "PMF",
+   "aliases": [
+    "Protected Management Frames",
+    "802.11w",
+    "IEEE 802.11w"
+   ],
+   "cat": "Seguridad",
+   "short": "Protected Management Frames: protección de las tramas de gestión WiFi contra falsificación, definida en 802.11w.",
+   "long": "La enmienda 802.11w es de 2009 y WPA3 la hace obligatoria. Los equipos que no soportan PMF no entran a un SSID WPA3: van a un SSID de legado con WPA2.",
+   "year": 2009,
+   "case": true
+  },
+  {
+   "id": "wpa",
+   "term": "WPA",
+   "aliases": [
+    "WPA2",
+    "WPA3",
+    "Wi-Fi Protected Access"
+   ],
+   "cat": "Seguridad",
+   "short": "Wi-Fi Protected Access: la familia de seguridad del WiFi; hoy WPA2 y WPA3.",
+   "long": "WPA apareció en 2003 como parche sobre WEP; WPA2, de 2004, implementa la norma 802.11i; WPA3, de 2018, exige PMF. Pueden ser Personal (clave compartida) o Enterprise (802.1X con RADIUS). Algunos equipos viejos solo entran con WPA2.",
+   "case": true
+  },
+  {
+   "id": "radius",
+   "term": "RADIUS",
+   "aliases": [
+    "Remote Authentication Dial-In User Service",
+    "servidor RADIUS"
+   ],
+   "cat": "Seguridad",
+   "short": "Protocolo para autenticar usuarios contra un servidor central, usado en WiFi Enterprise y portales cautivos.",
+   "long": "Su versión vigente es la RFC 2865, de 2000. En WiFi con 802.1X cada conexión se valida contra el servidor RADIUS; en UniFi también es uno de los métodos del portal de invitados.",
+   "year": 2000,
+   "case": true
+  },
+  {
+   "id": "nas",
+   "term": "NAS",
+   "aliases": [
+    "Network Attached Storage"
+   ],
+   "cat": "Redes",
+   "short": "Network Attached Storage: un equipo de almacenamiento en red, como un servidor de archivos chico.",
+   "long": "En las pruebas de aislamiento es un buen blanco: desde el WiFi de invitados, abrir la página del NAS interno tiene que vencer el tiempo. Ojo: en RADIUS, NAS significa otra cosa (Network Access Server).",
+   "case": true
+  },
+  {
+   "id": "mlo",
+   "term": "MLO",
+   "aliases": [
+    "Multi-Link Operation"
+   ],
+   "cat": "Redes",
+   "short": "Multi-Link Operation: función de WiFi 7 que conecta a un equipo por más de una banda a la vez.",
+   "long": "En UniFi requiere AP WiFi 7 y clientes compatibles, y pasa el SSID a WPA3, lo que puede dejar afuera equipos IoT. Conviene usarlo solo en el SSID de equipos nuevos.",
+   "case": true
+  },
+  {
+   "id": "sso",
+   "term": "SSO",
+   "aliases": [
+    "Single Sign-On",
+    "inicio de sesión único"
+   ],
+   "cat": "Seguridad",
+   "short": "Single Sign-On: entrar a varios sistemas con una sola cuenta del proveedor de identidad de la empresa.",
+   "long": "En UniFi, los Fabrics de Site Manager admiten SSO opcional con el proveedor de identidad de la empresa: cuando alguien se va, se le da de baja en un solo lugar.",
+   "case": true
+  },
+  {
+   "id": "mc-lag",
+   "term": "MC-LAG",
+   "aliases": [
+    "Multi-Chassis Link Aggregation"
+   ],
+   "cat": "Redes",
+   "short": "Multi-Chassis Link Aggregation: un enlace agregado repartido entre dos switches, para que la caída de uno no corte el enlace.",
+   "long": "Aparece en el curso como ejemplo de que restaurar un backup no es infalible: UniFi Network 10.6.101 corrigió un caso en que la configuración MC-LAG se perdía al restaurar.",
+   "case": true
+  },
+  {
+   "id": "wsl",
+   "term": "WSL",
+   "aliases": [
+    "WSL 2",
+    "Windows Subsystem for Linux"
+   ],
+   "cat": "Herramientas",
+   "short": "Windows Subsystem for Linux: la capa de Windows que corre Linux por dentro.",
+   "long": "El instalador de UniFi OS Server para Windows arma WSL 2 por su cuenta. UniFi OS Server todavía no corre como servicio de Windows, así que para un servidor siempre prendido conviene Linux.",
+   "case": true
+  },
+  {
+   "id": "mqtt",
+   "term": "MQTT",
+   "aliases": [
+    "secure-mqtt"
+   ],
+   "cat": "Web e integración",
+   "short": "Protocolo liviano de mensajes publicar y suscribir; sobre TLS usa el puerto 8883.",
+   "long": "Nació en 1999 para enlaces de poco ancho de banda y hoy es común en IoT. La IANA registra el puerto 8883 para MQTT sobre TLS; es uno de los puertos de salida que necesita una consola UniFi para Site Manager.",
+   "year": 1999,
+   "case": true
+  },
+  {
+   "id": "itu-t",
+   "term": "ITU-T",
+   "aliases": [
+    "ITU",
+    "G.114"
+   ],
+   "cat": "Normas",
+   "short": "El sector de normas de telecomunicaciones de la Unión Internacional de Telecomunicaciones.",
+   "long": "Publica las recomendaciones de la serie G, entre otras. La G.114 recomienda menos de 150 ms de demora en un sentido para la voz, por eso un roaming lento se nota en una llamada.",
+   "case": true
+  },
+  {
+   "id": "fqdn",
+   "term": "FQDN",
+   "aliases": [
+    "Fully Qualified Domain Name",
+    "nombre completo"
+   ],
+   "cat": "Redes",
+   "short": "Fully Qualified Domain Name: el nombre completo de un equipo en DNS, como unifi.example.com.",
+   "long": "Se usa en vez de la IP para que un certificado coincida o para que una dirección siga valiendo si la IP cambia. En el portal de invitados de UniFi, el campo Domain hace que la redirección use el FQDN.",
+   "case": true
+  },
+  {
+   "id": "msp",
+   "term": "MSP",
+   "aliases": [
+    "Managed Service Provider",
+    "MSP Groups"
+   ],
+   "cat": "Redes",
+   "short": "Managed Service Provider: la empresa que administra la red o los sistemas de sus clientes.",
+   "long": "En Site Manager, los MSP Groups (julio de 2026) dan acceso al personal del integrador a los Fabrics de sus clientes, sin compartir cuentas.",
+   "case": true
+  },
+  {
+   "id": "cloud-gateway",
+   "term": "Cloud Gateway",
+   "aliases": [
+    "Cloud Gateways",
+    "UCG",
+    "UDM",
+    "Dream Machine"
+   ],
+   "cat": "Redes",
+   "short": "Consola de Ubiquiti que es router y controlador UniFi a la vez (UCG, UDM).",
+   "long": "Corre su propio UniFi Network, así que es el controlador de su sitio y no se gestiona desde un UniFi OS Server externo. Ubiquiti la sigue recomendando para sitios que no necesitan self-hosting.",
+   "case": true
+  },
+  {
+   "id": "uxg",
+   "term": "UXG",
+   "aliases": [
+    "UniFi Gateway"
+   ],
+   "cat": "Redes",
+   "short": "Gateway UniFi sin controlador propio, pensado para sitios gestionados desde un controlador externo.",
+   "long": "Es la opción cuando el sitio se administra desde un UniFi OS Server central: a diferencia de un UDM o UCG, no corre su propio Network.",
+   "case": true
+  },
+  {
+   "id": "usg",
+   "term": "USG",
+   "aliases": [
+    "UniFi Security Gateway"
+   ],
+   "cat": "Redes",
+   "short": "UniFi Security Gateway: el gateway UniFi de generación anterior.",
+   "long": "UniFi Network 10.6 es la última versión que lo soporta: Network 11.0 quita el soporte a USG. Un sitio con USG se queda en 10.6 hasta cambiar el gateway.",
+   "case": true
+  },
+  {
+   "id": "site-manager",
+   "term": "Site Manager",
+   "aliases": [
+    "unifi.ui.com",
+    "cuenta UI",
+    "UI account"
+   ],
+   "cat": "Redes",
+   "short": "El portal de Ubiquiti en unifi.ui.com que muestra todas las consolas de una cuenta y conecta con cada una.",
+   "long": "No guarda configuración: arma una conexión directa con el controlador de cada sitio. La consola solo necesita salida TCP 443 y 8883, DNS y NTP; no hace falta abrir puertos de entrada.",
+   "case": true
+  },
+  {
+   "id": "channel-ai",
+   "term": "Channel AI",
+   "aliases": [
+    "Nightly Channel AI Optimization"
+   ],
+   "cat": "Redes",
+   "short": "La herramienta de UniFi que propone y aplica un plan de canales para los AP de una banda.",
+   "long": "Llegó con UniFi Network 9.5, necesita al menos dos AP activos y desde 10.6.97 puede correr de noche con las radios elegidas. No cambia el ancho de canal: se fija antes.",
+   "case": true
+  },
+  {
+   "id": "unifi-inform",
+   "term": "inform",
+   "aliases": [
+    "URL de inform",
+    "set-inform",
+    "Inform Host"
+   ],
+   "cat": "Redes",
+   "short": "La dirección a la que cada equipo UniFi se reporta: http://<controlador>:8080/inform.",
+   "long": "En la misma red el equipo la encuentra solo; en otra red se la da la DHCP option 43, el nombre DNS unifi o set-inform por SSH. Con el controlador detrás de NAT, Inform Host con Override hace que anuncie una dirección alcanzable.",
+   "case": true
+  },
+  {
+   "id": "zone-based-firewall",
+   "term": "firewall por zonas",
+   "aliases": [
+    "Zone-Based Firewall",
+    "Zone Matrix",
+    "zona Hotspot"
+   ],
+   "cat": "Seguridad",
+   "short": "El firewall de UniFi que agrupa redes en zonas (Internal, Hotspot, DMZ o propias) y define qué pasa entre ellas.",
+   "long": "Existe desde UniFi Network 9.0 y Network 11.0 migra todos los sitios a él. La Zone Matrix muestra la política: fila origen, columna destino. Allow Return deja solo responder a conexiones que empezaron del otro lado.",
+   "case": true
+  },
+  {
+   "id": "8021x",
+   "term": "802.1X",
+   "aliases": [
+    "802.1x",
+    "dot1x"
+   ],
+   "cat": "Seguridad",
+   "short": "Autenticación por puerto: un equipo tiene que identificarse antes de que el switch o el AP le dé acceso a la red.",
+   "long": "Estándar IEEE de 2001. El cliente (suplicante) se identifica ante el switch o AP (autenticador), que consulta a un servidor RADIUS. Es lo que usa WPA2/WPA3 Enterprise: cada usuario con su propia credencial en vez de una clave compartida.",
+   "year": 2001,
+   "case": true
+  },
+  {
+   "id": "rfc8030",
+   "term": "RFC 8030",
+   "aliases": [
+    "RFC8030"
+   ],
+   "cat": "RFC",
+   "short": "Web Push: cómo un servidor manda notificaciones al navegador a través de un servicio de push.",
+   "long": "El servidor de la aplicación le entrega el mensaje al servicio de push del navegador (de Google, Mozilla o Apple), que lo hace llegar aunque la página esté cerrada. Es lo que usan las PWA para avisar en el celular.",
+   "case": true,
+   "year": 2016
+  },
+  {
+   "id": "rfc8292",
+   "term": "RFC 8292",
+   "aliases": [
+    "RFC8292"
+   ],
+   "cat": "RFC",
+   "short": "VAPID: el servidor se identifica y firma cada Web Push con su clave.",
+   "long": "La suscripción del navegador queda atada a la clave pública del servidor y cada aviso se firma con la privada. Si se pierden o cambian esas claves, las suscripciones existentes dejan de recibir.",
+   "case": true,
+   "year": 2017
+  },
+  {
+   "id": "vapid",
+   "term": "VAPID",
+   "aliases": [],
+   "cat": "Web e integración",
+   "short": "Par de claves con el que el servidor firma sus notificaciones push (RFC 8292).",
+   "long": "Voluntary Application Server Identification. La clave pública va al navegador al suscribirse; la privada queda en el servidor.",
+   "case": true,
+   "year": 2017
+  },
+  {
+   "id": "vca",
+   "term": "VCA",
+   "aliases": [
+    "Video Content Analysis"
+   ],
+   "cat": "Video",
+   "short": "Analítica de video: detecta objetos y evalúa reglas sobre la imagen (cruce de línea, zona, conteo).",
+   "long": "En Bosch se llama IVA o IVA Pro y corre dentro de la cámara. El resultado sale como evento o metadato, por ejemplo por ONVIF.",
+   "case": true
+  },
+  {
+   "id": "pwa",
+   "term": "PWA",
+   "aliases": [
+    "Progressive Web App"
+   ],
+   "cat": "Web e integración",
+   "short": "Sitio web que se instala como una app en el celular o la PC y puede recibir notificaciones push.",
+   "long": "No pasa por una tienda de aplicaciones: se abre la dirección en el navegador y se elige \"Agregar a pantalla de inicio\". Necesita HTTPS.",
+   "case": true
+  },
+  {
+   "id": "mse",
+   "term": "MSE",
+   "aliases": [
+    "Media Source Extensions"
+   ],
+   "cat": "Web e integración",
+   "short": "Función del navegador que reproduce video armado por la propia página, pedazo a pedazo.",
+   "long": "Permite mostrar video en vivo sin complementos: el servidor (por ejemplo go2rtc) manda fragmentos de MP4 por WebSocket y la página los va entregando al reproductor.",
+   "case": true
+  },
+  {
+   "id": "hls",
+   "term": "HLS",
+   "aliases": [
+    "HTTP Live Streaming"
+   ],
+   "cat": "Video",
+   "short": "Video partido en segmentos cortos que se piden por HTTP.",
+   "long": "Lo creó Apple en 2009. Pasa por cualquier proxy porque es HTTP común, pero suma varios segundos de demora; para vivo con poca demora se usan WebRTC o MSE.",
+   "case": true,
+   "year": 2009
+  },
+  {
+   "id": "utc",
+   "term": "UTC",
+   "aliases": [
+    "hora UTC"
+   ],
+   "cat": "Redes",
+   "short": "Hora universal coordinada, la referencia de hora de los servidores.",
+   "long": "Uruguay es UTC-3 todo el año. Un servidor en UTC que programa algo a las 22:00 lo hace a las 19:00 de Uruguay si el programa no convierte la zona horaria.",
+   "case": true
+  },
+  {
+   "id": "rcp",
+   "term": "RCP+",
+   "aliases": [
+    "RCP plus"
+   ],
+   "cat": "Video",
+   "short": "Protocolo de Bosch para leer y escribir la configuración de sus cámaras, incluida la analítica.",
+   "long": "Remote Control Protocol plus. Lo usan Configuration Manager y los integradores para tocar parámetros que ONVIF no cubre.",
+   "case": true
+  },
+  {
+   "id": "wsbn",
+   "term": "WS-BaseNotification",
+   "aliases": [
+    "WS-Notification"
+   ],
+   "cat": "Web e integración",
+   "short": "Estándar de OASIS para suscribirse a notificaciones entre servicios web; es la base de los eventos ONVIF.",
+   "long": "Define cómo un cliente se suscribe a temas (topics) y recibe mensajes, ya sea porque el servidor se los empuja (push) o porque el cliente los va a buscar (pull point).",
+   "case": true,
+   "year": 2006
+  },
+  {
+   "id": "rfc6455",
+   "term": "RFC 6455",
+   "aliases": [
+    "RFC6455",
+    "WebSocket"
+   ],
+   "cat": "RFC",
+   "short": "WebSocket: una conexión que queda abierta entre navegador y servidor para que el servidor empuje datos al instante.",
+   "long": "Antes de 2011 la página tenía que preguntar cada pocos segundos si había novedades. Con WebSocket el servidor manda el evento apenas ocurre: así un monitor muestra una lectura o una alarma en vivo. Atrás de un proxy hay que habilitar el soporte de WebSocket.",
+   "case": true,
+   "year": 2011
+  },
+  {
+   "id": "urcdp",
+   "term": "URCDP",
+   "aliases": [
+    "Unidad Reguladora y de Control de Datos Personales"
+   ],
+   "cat": "Normas",
+   "short": "Organismo de Uruguay que controla el cumplimiento de la Ley 18.331 de protección de datos personales.",
+   "long": "Creada por la Ley 18.331 de 2008. Recibe el registro de bases de datos, emite dictámenes (por ejemplo sobre biometría en el trabajo) y puede sancionar.",
+   "case": true,
+   "year": 2008
+  },
+  {
+   "id": "wdr",
+   "term": "WDR",
+   "aliases": [
+    "Wide Dynamic Range"
+   ],
+   "cat": "Video",
+   "short": "Rango dinámico amplio: la cámara equilibra zonas muy claras y muy oscuras en la misma imagen.",
+   "long": "Clave en accesos con contraluz, como un portón que da a la calle o un hall vidriado: sin WDR la cara o la matrícula quedan negras contra el fondo claro.",
+   "case": true
+  },
+  {
+   "id": "fmr",
+   "term": "FMR",
+   "aliases": [
+    "False Match Rate",
+    "tasa de falsa aceptación"
+   ],
+   "cat": "Control de acceso",
+   "short": "Tasa de falsa aceptación: cuántas veces el sistema confunde a una persona con otra.",
+   "long": "Baja si se sube el umbral de coincidencia, a costa de más rechazos falsos (FNMR). En control de acceso se suele preferir un FMR muy bajo.",
+   "case": true
+  },
+  {
+   "id": "fnmr",
+   "term": "FNMR",
+   "aliases": [
+    "False Non-Match Rate",
+    "tasa de falso rechazo"
+   ],
+   "cat": "Control de acceso",
+   "short": "Tasa de falso rechazo: cuántas veces el sistema no reconoce a alguien que sí está registrado.",
+   "long": "Sube cuando el umbral es exigente, con mala luz o con fotos de alta pobres. Es lo que el usuario vive como \"no me abre\".",
+   "case": true
+  },
+  {
+   "id": "frte",
+   "term": "FRTE",
+   "aliases": [
+    "FRVT",
+    "Face Recognition Technology Evaluation"
+   ],
+   "cat": "Control de acceso",
+   "short": "Programa de NIST (Estados Unidos) que evalúa algoritmos de reconocimiento facial de muchos fabricantes.",
+   "long": "Antes se llamaba FRVT. Publica tasas de error medidas de forma independiente, incluido un estudio de diferencias demográficas de 2019.",
+   "case": true
+  },
+  {
+   "id": "gdpr",
+   "term": "GDPR",
+   "aliases": [
+    "RGPD"
+   ],
+   "cat": "Normas",
+   "short": "Reglamento general de protección de datos de la Unión Europea.",
+   "long": "Aprobado en 2016 y aplicable desde 2018. Trata los datos biométricos como categoría especial. Uruguay tiene nivel de protección adecuado reconocido por la Unión Europea.",
+   "case": true,
+   "year": 2016
+  },
+  {
+   "id": "ptz",
+   "term": "PTZ",
+   "aliases": [
+    "Pan-Tilt-Zoom"
+   ],
+   "cat": "Video",
+   "short": "Cámara motorizada que gira, inclina y hace zoom desde el software.",
+   "long": "Se maneja por ONVIF o por la API del fabricante. Sirve para seguir algo en vivo, pero mientras mira para otro lado deja de cubrir su zona.",
+   "case": true
+  },
+  {
+   "id": "isapi",
+   "term": "ISAPI",
+   "aliases": [],
+   "cat": "Web e integración",
+   "short": "API HTTP con XML de Hikvision para leer y escribir la configuración de cámaras y NVR y recibir sus eventos.",
+   "long": "Se usa con GET y PUT de documentos XML; cubre analíticas, horarios de armado, servidores de alarma y más. Es lo que usan los integradores para hablar con equipos Hikvision sin el software del fabricante.",
+   "case": true
+  },
+  {
+   "id": "vmd",
+   "term": "VMD",
+   "aliases": [
+    "Video Motion Detection"
+   ],
+   "cat": "Video",
+   "short": "Detección de movimiento por cambio de píxeles, sin saber qué se movió.",
+   "long": "Dispara con sombras, lluvia, insectos y faros. Por eso los sistemas serios usan analíticas que clasifican personas y vehículos (cruce de línea, intrusión de zona).",
+   "case": true
+  },
+  {
+   "id": "ivs",
+   "term": "IVS",
+   "aliases": [
+    "Intelligent Video System"
+   ],
+   "cat": "Video",
+   "short": "Analíticas de Dahua (cruce de línea, intrusión de zona) que corren en la cámara o el NVR.",
+   "long": "Generan eventos que un sistema externo puede recibir por la API de Dahua o por ONVIF.",
+   "case": true
+  },
+  {
+   "id": "acusense",
+   "term": "AcuSense",
+   "aliases": [],
+   "cat": "Video",
+   "short": "Tecnología de Hikvision que clasifica personas y vehículos para filtrar falsas alarmas.",
+   "long": "Se aplica a las reglas de cruce de línea e intrusión: el evento sale solo si el objetivo es del tipo elegido.",
+   "case": true
+  },
+  {
+   "id": "xml",
+   "term": "XML",
+   "aliases": [],
+   "cat": "Web e integración",
+   "short": "Lenguaje de texto con etiquetas para estructurar datos; lo usan ISAPI, ONVIF y muchos archivos de configuración.",
+   "long": "Estándar del W3C de 1998. Es más verboso que JSON pero permite validar la estructura con esquemas.",
+   "case": true,
+   "year": 1998
+  },
+  {
+   "id": "h265",
+   "term": "H.265",
+   "aliases": [
+    "HEVC"
+   ],
+   "cat": "Video",
+   "short": "Códec de video que comprime más que H.264 con la misma calidad.",
+   "long": "Estándar de 2013. Ahorra disco y ancho de banda, pero varios navegadores no lo reproducen; para verlo en la web hay que transcodificar o usar H.264 en el segundo flujo.",
+   "case": true,
+   "year": 2013
+  },
+  {
+   "id": "go2rtc",
+   "term": "go2rtc",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "Servidor de streaming que toma RTSP y otros formatos y los entrega al navegador (WebRTC, MSE, MJPEG).",
+   "long": "Liviano y sin transcodificar cuando no hace falta. Atrás de un proxy necesita WebSocket habilitado para el video en vivo.",
+   "case": true
+  },
+  {
+   "id": "minio",
+   "term": "MinIO",
+   "aliases": [
+    "S3"
+   ],
+   "cat": "Herramientas",
+   "short": "Almacenamiento de objetos compatible con Amazon S3, con buckets y reglas de vencimiento.",
+   "long": "Guarda fotos, clips y archivos en buckets. Una regla de vencimiento (retención) borra lo viejo sola, y se aplica a todo lo que haya en el bucket.",
+   "case": true
+  },
+  {
+   "id": "ecv",
+   "term": "ECV",
+   "aliases": [
+    "Enhanced Call Verification"
+   ],
+   "cat": "Seguridad",
+   "short": "Verificar una alarma con dos llamadas antes de despachar a la policía.",
+   "long": "Práctica de las centrales de monitoreo para bajar las falsas alarmas: si no contesta el primer contacto, se llama a un segundo.",
+   "case": true
+  },
+  {
+   "id": "sia-cp01",
+   "term": "ANSI/SIA CP-01",
+   "aliases": [
+    "CP-01"
+   ],
+   "cat": "Normas",
+   "short": "Norma de paneles de alarma con funciones para reducir falsas alarmas.",
+   "long": "Pide demoras de salida y entrada, cancelación, confirmación de zona cruzada y otras funciones que evitan disparos por error del usuario.",
+   "case": true
+  },
+  {
+   "id": "rfc958",
+   "term": "RFC 958",
+   "aliases": [
+    "RFC958"
+   ],
+   "cat": "RFC",
+   "short": "Primera versión publicada de NTP, el protocolo de hora por red.",
+   "long": "David Mills describió en 1985 cómo sincronizar relojes por internet. NTP evolucionó hasta la versión 4 (RFC 5905, 2010).",
+   "case": true,
+   "year": 1985
+  },
+  {
+   "id": "rfc2069",
+   "term": "RFC 2069",
+   "aliases": [
+    "RFC2069"
+   ],
+   "cat": "RFC",
+   "short": "Primera definición de la autenticación HTTP Digest.",
+   "long": "Introdujo el resumen con nonce para no mandar la clave en claro. La reemplazaron la RFC 2617 (1999) y la RFC 7616 (2015). La ISAPI de Hikvision la usa.",
+   "case": true,
+   "year": 1997
+  },
+  {
+   "id": "anpr",
+   "term": "ANPR",
+   "aliases": [
+    "Automatic Number Plate Recognition"
+   ],
+   "cat": "Video",
+   "short": "Lectura automática de matrículas: la cámara encuentra la patente y la convierte en texto.",
+   "long": "Nació en 1976 en la Police Scientific Development Branch del Reino Unido. Hoy la cámara lee a bordo y manda el resultado (matrícula, foto, hora) al sistema.",
+   "case": true,
+   "year": 1976
+  },
+  {
+   "id": "ocr",
+   "term": "OCR",
+   "aliases": [
+    "reconocimiento óptico de caracteres"
+   ],
+   "cat": "Video",
+   "short": "Reconocimiento óptico de caracteres: convierte la imagen de un texto, como una patente, en texto.",
+   "long": "En LPR es el último paso, después de ubicar y enderezar la patente. Su exactitud depende de los píxeles por carácter, el ángulo y la luz.",
+   "case": true
+  },
+  {
+   "id": "hlc",
+   "term": "HLC",
+   "aliases": [
+    "Highlight Compensation"
+   ],
+   "cat": "Video",
+   "short": "Compensación de luces fuertes: oscurece los puntos muy brillantes, como los faros.",
+   "long": "En LPR suele quedar apagado y se prende solo en carriles con encandilamiento fuerte.",
+   "case": true
+  },
+  {
+   "id": "ir",
+   "term": "IR",
+   "aliases": [
+    "infrarrojo"
+   ],
+   "cat": "Video",
+   "short": "Infrarrojo: iluminación invisible al ojo que usan las cámaras para ver de noche.",
+   "long": "En LPR sirve porque la patente retrorreflectiva devuelve el IR a la cámara; si es demasiado, la satura y no se lee.",
+   "case": true
+  },
+  {
+   "id": "eap-omada",
+   "term": "EAP",
+   "aliases": [
+    "EAPs",
+    "access point EAP"
+   ],
+   "cat": "Redes",
+   "short": "El nombre de los access points de TP-Link Omada, como el EAP225, el EAP610 o el EAP660.",
+   "long": "Se gestionan desde el controlador Omada o, sin controlador, desde su propia web en modo standalone. Ojo con la sigla: en seguridad WiFi, EAP también es Extensible Authentication Protocol, el marco de autenticación de 802.1X y de WPA2 y WPA3 Enterprise (RFC 3748, de 2004).",
+   "case": true
+  },
+  {
+   "id": "omada",
+   "term": "Omada",
+   "aliases": [
+    "TP-Link Omada",
+    "Omada SDN",
+    "Omada SDN Controller",
+    "Omada Controller",
+    "controlador Omada"
+   ],
+   "cat": "Redes",
+   "short": "La plataforma de redes administradas de TP-Link: gateways ER, switches JetStream y access points EAP gestionados desde un controlador.",
+   "long": "Las primeras versiones del controlador gestionaban los access points EAP; con la 4.1.5 pasó a llamarse Omada SDN Controller y sumó gateways y switches. Hoy el controlador puede ser software propio, un OC de hardware, Omada Central en la nube o un gateway con controlador integrado.",
+   "case": true
+  },
+  {
+   "id": "avx",
+   "term": "AVX",
+   "aliases": [
+    "Advanced Vector Extensions"
+   ],
+   "cat": "Herramientas",
+   "short": "Advanced Vector Extensions: instrucciones de los procesadores x86 que pide el MongoDB del controlador Omada 6.",
+   "long": "Intel las estrenó en 2011 con la generación Sandy Bridge. MongoDB 5.0 y posteriores no arrancan en una CPU x86 sin AVX, por eso el controlador 6.x no corre en equipos viejos ni en una Raspberry Pi 4, que es ARM. En Linux se verifica con grep avx /proc/cpuinfo.",
+   "year": 2011,
+   "case": true
+  },
+  {
+   "id": "wlan",
+   "term": "WLAN",
+   "aliases": [
+    "Wireless LAN"
+   ],
+   "cat": "Redes",
+   "short": "Wireless LAN: una red local inalámbrica; en la práctica, la red WiFi.",
+   "long": "La define la norma IEEE 802.11, de 1997. En Omada, el menú WLAN agrupa los SSID del sitio y la función WLAN Optimization.",
+   "year": 1997,
+   "case": true
+  },
+  {
+   "id": "wlan-optimization",
+   "term": "WLAN Optimization",
+   "aliases": [
+    "RRM",
+    "Radio Resource Management",
+    "Adaptive WLAN Optimization"
+   ],
+   "cat": "Redes",
+   "short": "Función de Omada que elige canal, ancho y potencia de los EAP de forma automática; también se la llama RRM.",
+   "long": "Se corre a mano, programada o en modo adaptativo desde Network Config > Network Settings > WLAN. Mientras escanea, los clientes se quedan sin internet varios minutos: se programa de madrugada y al menos 10 minutos lejos del reinicio programado. Apply Previous Settings vuelve a la configuración anterior.",
+   "case": true
+  },
+  {
+   "id": "omada-hardware-controller",
+   "term": "Omada Hardware Controller",
+   "aliases": [
+    "OC",
+    "OC200",
+    "OC220",
+    "OC300",
+    "OC400"
+   ],
+   "cat": "Redes",
+   "short": "Los controladores Omada en hardware dedicado: OC200, OC220, OC300 y OC400.",
+   "long": "Se eligen por la capacidad recomendada de la tabla oficial: OC200 hasta 25 equipos, OC220 hasta 40, OC300 hasta 160 y OC400 hasta 500. Gestionan sin internet y no necesitan una PC prendida, pero no tienen modo MSP. El upgrade de firmware tarda de 6 a 8 minutos con el equipo offline.",
+   "case": true
+  },
+  {
+   "id": "sdn",
+   "term": "SDN",
+   "aliases": [
+    "Software-Defined Networking",
+    "redes definidas por software"
+   ],
+   "cat": "Redes",
+   "short": "Software-Defined Networking: la red se configura desde un controlador central en lugar de equipo por equipo.",
+   "long": "La idea viene de la investigación en redes de fines de los años 2000. En el uso comercial, como en Omada SDN, significa que gateways, switches y access points reciben su configuración de un controlador y se gestionan desde una sola interfaz.",
+   "case": true
+  },
+  {
+   "id": "gui",
+   "term": "GUI",
+   "aliases": [
+    "GUI local",
+    "interfaz gráfica",
+    "web local"
+   ],
+   "cat": "Herramientas",
+   "short": "Graphical User Interface: la interfaz gráfica de un equipo; en redes, su página web de administración.",
+   "long": "En Omada se habla de la GUI local o web standalone de cada equipo. Cuando el controlador adopta el equipo, esa GUI deja de mandar; si alguien la usó antes de adoptar, aparece Adopt Failed pidiendo esas credenciales.",
+   "case": true
+  },
+  {
+   "id": "sftp",
+   "term": "SFTP",
+   "aliases": [
+    "SSH File Transfer Protocol"
+   ],
+   "cat": "Redes",
+   "short": "SSH File Transfer Protocol: transferencia de archivos cifrada que viaja dentro de SSH, por el TCP 22.",
+   "long": "No es FTP con cifrado sino un protocolo distinto. En Omada es el destino recomendado del Backup Schedule (Save to File Server): el backup queda en otro equipo y sobrevive si muere el controlador.",
+   "case": true
+  },
+  {
+   "id": "ldap",
+   "term": "LDAP",
+   "aliases": [
+    "Lightweight Directory Access Protocol",
+    "servidor LDAP"
+   ],
+   "cat": "Seguridad",
+   "short": "Lightweight Directory Access Protocol: el protocolo para consultar directorios de usuarios, como Active Directory.",
+   "long": "Su versión vigente, LDAPv3, está en la RFC 4511, de 2006. En Omada, desde la 5.12, el portal cautivo puede autenticar contra un servidor LDAP externo.",
+   "case": true
+  },
+  {
+   "id": "sms",
+   "term": "SMS",
+   "aliases": [
+    "Short Message Service"
+   ],
+   "cat": "Redes",
+   "short": "Short Message Service: el mensaje de texto del celular.",
+   "long": "En el portal cautivo de Omada es una de las opciones de Hotspot: el cliente recibe un código de verificación en el celular y lo ingresa en el portal.",
+   "case": true
+  },
+  {
+   "id": "release-candidate",
+   "term": "Release Candidate",
+   "aliases": [
+    "RC",
+    "Early Access"
+   ],
+   "cat": "Herramientas",
+   "short": "Versión candidata a estable: casi terminada, publicada para probar antes del lanzamiento.",
+   "long": "TP-Link ofrece firmware Beta y Release Candidate dentro de su programa Early Access y avisa que puede ser inestable. En producción se usa el canal estable; Beta y RC, solo en laboratorio.",
+   "case": true
+  },
+  {
+   "id": "heredoc",
+   "term": "heredoc",
+   "aliases": [
+    "here document",
+    "EOF"
+   ],
+   "cat": "Herramientas",
+   "short": "Here document: forma de la terminal de Linux para escribir un bloque de texto en un archivo o pasárselo a un comando.",
+   "long": "Se abre con <<'EOF' y se cierra con una línea que dice solo EOF; todo lo del medio va tal cual. Con las comillas en 'EOF', la terminal no reemplaza variables adentro. En el curso de Omada se usa para crear el docker-compose.yml de una vez.",
+   "case": true
+  },
+  {
+   "id": "tz",
+   "term": "TZ",
+   "aliases": [
+    "variable TZ"
+   ],
+   "cat": "Herramientas",
+   "short": "Variable de entorno con la zona horaria, en formato de la base de datos IANA, por ejemplo America/Montevideo.",
+   "long": "Un contenedor no siempre toma la zona horaria del host y suele quedar en UTC: los logs y las tareas programadas salen con otra hora. En el controlador Omada en Docker se pasa como TZ=America/Montevideo en el compose.",
+   "case": true
+  },
+  {
+   "id": "capwap",
+   "term": "CAPWAP",
+   "aliases": [
+    "Control And Provisioning of Wireless Access Points"
+   ],
+   "cat": "Redes",
+   "short": "Control And Provisioning of Wireless Access Points: el estándar del IETF para que access points y controladores se encuentren y se gestionen.",
+   "long": "Se publicó en 2009 (RFC 5415). La RFC 5417, del mismo año, le asignó la opción 138 de DHCP para decirle al AP dónde está su controlador. TP-Link usa ese mismo número de opción en Omada para indicar la IP del controlador.",
+   "year": 2009,
+   "case": true
+  },
+  {
+   "id": "chap",
+   "term": "CHAP",
+   "aliases": [
+    "Challenge Handshake Authentication Protocol"
+   ],
+   "cat": "Seguridad",
+   "short": "Challenge Handshake Authentication Protocol: autenticación en la que la clave no viaja, sino una respuesta calculada a un desafío.",
+   "long": "Viene de PPP y está en la RFC 1994, de 1996. Su alternativa simple es PAP, que manda la clave tal cual. En el portal de Omada con RADIUS se elige PAP o CHAP; CHAP está desde la 5.12.",
+   "year": 1996,
+   "case": true
+  },
+  {
+   "id": "rfc2865",
+   "term": "RFC 2865",
+   "aliases": [
+    "RFC2865"
+   ],
+   "cat": "RFC",
+   "short": "RADIUS: el protocolo para autenticar usuarios contra un servidor central.",
+   "long": "Es la versión vigente de RADIUS, de 2000, y usa UDP 1812 para autenticar. La contabilidad (accounting) va aparte, en la RFC 2866. En WiFi Enterprise y en portales cautivos, el AP o el controlador le pregunta al servidor RADIUS si el usuario vale.",
+   "year": 2000,
+   "case": true
+  },
+  {
+   "id": "rfc5417",
+   "term": "RFC 5417",
+   "aliases": [
+    "RFC5417"
+   ],
+   "cat": "RFC",
+   "short": "La opción 138 de DHCP: la lista de direcciones de los controladores de access points (CAPWAP).",
+   "long": "Es de 2009. El servidor DHCP entrega, junto con la IP, las direcciones IPv4 de los controladores, 4 bytes cada una. TP-Link usa la opción 138 en Omada para que los equipos encuentren el controlador desde otra subred.",
+   "year": 2009,
+   "case": true
+  },
+  {
+   "id": "opcion-138",
+   "term": "opción 138",
+   "aliases": [
+    "option 138",
+    "DHCP option 138"
+   ],
+   "cat": "Redes",
+   "short": "Opción de DHCP que le dice a un equipo Omada la IP de su controlador.",
+   "long": "La definió la RFC 5417, de 2009, para controladores de access points. En un gateway Omada se carga la IP tal cual en Advanced DHCP Options; en un MikroTik va en hexadecimal, un byte por octeto (192.168.88.10 queda 0xC0A8580A). Solo llega cuando el equipo renueva el DHCP.",
+   "year": 2009,
+   "case": false
+  },
+  {
+   "id": "inform-url",
+   "term": "Inform URL",
+   "aliases": [
+    "Site URL",
+    "Controller Inform URL"
+   ],
+   "cat": "Redes",
+   "short": "La dirección del controlador Omada que se le escribe a un equipo para que lo encuentre desde otra subred.",
+   "long": "Se carga en la web standalone del equipo, en System Tools > Controller Settings, o en lote con la Omada Discovery Utility. Para Omada Central se usa la Site URL que se copia en Global View > Dashboard. También sirve para migrar equipos a un controlador nuevo.",
+   "case": true
+  },
+  {
+   "id": "portal-cautivo",
+   "term": "portal cautivo",
+   "aliases": [
+    "portales cautivos",
+    "captive portal"
+   ],
+   "cat": "Redes",
+   "short": "Página que aparece antes de dar internet en un WiFi, para autenticar al cliente o mostrarle condiciones.",
+   "long": "En Omada lo sirve el controlador, por el 8088 en HTTP o el 8843 en HTTPS, así que sin controlador corriendo los clientes nuevos no se autentican. Puede pedir voucher, clave, usuario local, SMS, RADIUS o LDAP.",
+   "case": false
+  },
+  {
+   "id": "voucher",
+   "term": "voucher",
+   "aliases": [
+    "vouchers"
+   ],
+   "cat": "Redes",
+   "short": "Código de acceso con duración que genera el controlador para entrar por el portal cautivo.",
+   "long": "Se usa en hotelería y locales: el cliente recibe su código en recepción y deja de servir al vencer, sin cambiar claves. En Omada se genera en la sección Voucher de un portal tipo Hotspot.",
+   "case": false
+  },
+  {
+   "id": "mesh",
+   "term": "mesh",
+   "aliases": [
+    "red mesh",
+    "Mesh AP",
+    "Root AP"
+   ],
+   "cat": "Redes",
+   "short": "Access points enlazados por radio entre sí, sin cable de datos, a partir de uno cableado (Root AP).",
+   "long": "Sirve para extender cobertura, no capacidad: cada salto resta rendimiento. En Omada admite hasta 3 saltos y 4 downlinks por uplink, con señal del uplink entre -40 y -62 dBm.",
+   "case": false
   }
  ]
 }

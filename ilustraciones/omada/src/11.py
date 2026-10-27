@@ -1,0 +1,56 @@
+import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/omada/src")
+from _om import *
+
+# ---------------------------------------------------------------- 11.svg: Auto IPsec entre dos sitios
+c = Canvas(K(), "Auto IPsec: dos sitios del mismo controlador")
+c.add(Generic(450, 116, "Controlador", "un sitio por sede", icon="server", w=300, dark=True))
+c.add(Zone(48, 250, 380, 250, "Sitio Central"))
+c.add(Zone(772, 250, 380, 250, "Sitio Sucursal"))
+erc = c.add(Box(72, 290, 332, 84, "ER Central", "WAN 203.0.113.10", dark=True))
+ers = c.add(Box(796, 290, 332, 84, "ER Sucursal", "WAN 203.0.113.20", dark=True))
+c.add(text(72, 412, "LAN 10.10.10.0/24", 17, 600, BLUE, FM))
+c.add(text(72, 440, "PC de monitoreo", 16, 400, INK2, FB))
+c.add(text(796, 412, "LAN 10.10.20.0/24", 17, 600, BLUE, FM))
+c.add(text(796, 440, "cámaras y control de acceso", 16, 400, INK2, FB))
+c.add(wire([(560, 200), (560, 226), (238, 226), (238, 290)], kind="logical"))
+c.add(wire([(640, 200), (640, 226), (962, 226), (962, 290)], kind="logical"))
+c.add(f'<path d="M404 332H796" stroke="{CYAN}" stroke-width="10" stroke-opacity=".18" stroke-linecap="round"/>')
+c.add(f'<path d="M404 332H796" stroke="{CYAN}" stroke-width="4" stroke-dasharray="10 7"/>')
+c.add(icon(584, 296, "tunnel", CYAN, 1.3))
+c.add(mid(600, 366, "túnel IPsec por internet", 16, 600, INK2, FB))
+c.add(Note(48, 520, 352, "Los dos gateways en sitios distintos del mismo controlador.", title="Mismo controlador", kind="ok"))
+c.add(Note(424, 520, 352, "IP pública en la WAN de cada ER, sin NAT adelante. Si hay NAT, Manual IPsec.", title="Sin NAT", kind="warn"))
+c.add(Note(800, 520, 352, "Una subred distinta en cada sede: 10.10.10.0/24 y 10.10.20.0/24.", title="LAN que no se pisan", kind="ok"))
+save(c, "11.svg")
+
+# ---------------------------------------------------------------- 11-paso1: subredes que no se solapan
+c = Canvas(K(1), "Antes del túnel: una subred distinta por sede")
+c.add(Table(48, 124, ["Sitio", "LAN", "WAN"], [
+    ["Central", "10.10.10.0/24", "203.0.113.10"], ["Sucursal", "10.10.20.0/24", "203.0.113.20"]], [260, 420, 424], row_h=48, mono_cols=(1, 2)))
+c.add(Step(48, 124, 1))
+c.add(panel(48, 296, 540, 210, "Dos ER605 de fábrica, LAN sin cambiar", "alert"))
+c.add(lines(72, 364, ["Central:  192.168.0.1/24", "Sucursal: 192.168.0.1/24"], 17, 30, INK, FM, 600))
+c.add(lines(72, 438, ["Un paquete a 192.168.0.20, ¿va a la LAN", "propia o al túnel? El router no puede saber."], 16, 26))
+c.add(panel(612, 296, 540, 210, "Planificado", "ok"))
+c.add(lines(636, 364, ["Central:  10.10.10.0/24", "Sucursal: 10.10.20.0/24"], 17, 30, INK, FM, 600))
+c.add(lines(636, 438, ["Cada destino tiene un solo lugar:", "lo local se queda, lo otro va al túnel."], 16, 26))
+c.add(Note(48, 528, 1104, "Cambiar la LAN por defecto de un gateway en producción corta a todos los clientes hasta que renueven DHCP: hacelo en ventana de mantenimiento (paso 2).", kind="warn"))
+save(c, "11-paso1.svg")
+
+# ---------------------------------------------------------------- 11-paso6: con NAT adelante, Manual IPsec
+c = Canvas(K(6), "Router del proveedor adelante: Manual IPsec")
+c.add(Box(48, 150, 250, 84, "ER Central", "203.0.113.10", dark=True))
+c.add(Internet(360, 150, "Internet", "", w=180))
+c.add(Box(602, 150, 270, 84, "Router del proveedor", "hace NAT", hl=WARN))
+c.add(Box(934, 150, 218, 84, "ER Sucursal", "IP privada en WAN", dark=True))
+c.add(Cable((298, 192), (356, 192), kind="data"))
+c.add(Cable((544, 192), (598, 192), kind="data"))
+c.add(Cable((876, 192), (930, 192), kind="data"))
+c.add(tag(737, 280, "abrir UDP 500 y 4500 hacia el ER", "warn", mono=False))
+c.add(Step(48, 150, 6))
+c.add(Table(48, 330, ["Puerto", "Para qué"], [
+    ["UDP 500", "IKE: los dos ER se autentican y acuerdan claves"],
+    ["UDP 4500", "IPsec dentro de UDP, para atravesar el NAT"]], [200, 904], row_h=48, mono_cols=(0,)))
+c.add(Note(48, 492, 540, "Auto IPsec pide IP pública en la WAN. Con un NAT adelante, el túnel va como Manual IPsec, con Local ID y Remote ID de tipo Name.", title="Por qué Manual", kind="info"))
+c.add(Note(612, 492, 540, "Network Config > VPN Status > Site-to-Site VPN > IPsec: si aparecen las entradas, el túnel está arriba.", title="Verificación", kind="ok"))
+save(c, "11-paso6.svg")

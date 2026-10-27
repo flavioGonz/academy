@@ -1,0 +1,19 @@
+A: Última lección: cuando la alarma no llega. La llamada de soporte más común.
+B: "La cámara de atrás no avisa". Te la sé de memoria.
+A: [risas] Y la tentación es tocar todo a la vez. El método es de la cámara hacia el monitor.
+B: Arrancá por la cámara.
+A: Primero, ¿la regla detecta y está armada ahora? Lo ves en la vista de pared, con el puntito verde. Segundo, en la web de la cámara, ¿la vinculación tiene tildado notificar al centro de vigilancia?
+B: El tilde famoso.
+A: El tilde. Home Assistant agrega otra trampa: el usuario de la cámara necesita el permiso de notificar al centro y autenticación digest. Tercero, la campana del canal: ¿OmniAccess presente? Probás el reporte.
+B: ¿Y si todo eso está bien?
+A: Cuarto, la red. Desde una PC en la red de cámaras, un curl al puerto diez mil del servidor. Si contesta cualquier código, el puerto está abierto. Si se cuelga, es firewall o ruteo.
+B: ¿Las fuentes coinciden en probar así?
+A: Dos de dos usan el test y el estado de conexión. Cctvcamerapros explica que si el servidor no contesta cada envío, la cámara marca la conexión como offline y la corta.
+B: ¿Y del lado de OmniAccess?
+A: La cámara tiene que estar dada de alta con la IP o la MAC que manda en el evento. Si no, la detección entra sin cámara y no pinta ningún canal. Sin la clave propia, no hay foto. Sin NVR y canal, no hay grabación. Y con la hora corrida, el clip no coincide.
+B: ¿Y Dahua?
+A: Verificar suscripción. Si dice NVR no accesible, es red o credenciales del NVR. Y la salud de todo está en Dispositivos y en Salud del sistema, y Telegram te avisa cuando una cámara deja de responder.
+B: ¿El laboratorio?
+A: Un compañero te rompe tres cosas en la demo sin decirte cuáles: te destilda el aviso, te arma la línea de ocho a nueve y te cambia la clave. Vos cruzás, seguís la lista y los encontrás.
+B: Y nada de resetear la cámara para probar.
+A: Nada: se pierden la regla, el horario y el servidor. La regla: de la cámara al monitor, un eslabón por vez.

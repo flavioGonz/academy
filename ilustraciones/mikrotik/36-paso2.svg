@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Cada interfaz en una zona; las compuestas, por include</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">MIKROTIK · LECCIÓN 36 · PASO 2</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Cada interfaz en una zona; las compuestas, por include</text>
+<text x="48.0" y="140.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.6">INTERFAZ (BANCO)</text>
+<text x="400.0" y="140.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.6">ZONA (MIEMBRO ESTÁTICO)</text>
+<text x="790.0" y="140.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.6">LISTA COMPUESTA (INCLUDE)</text>
+<rect x="48" y="160" width="250" height="52" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="66.0" y="193.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">bridge (ether2)</text>
+<rect x="400" y="160" width="220" height="52" rx="12" fill="#FFFFFF" stroke="#0A63B8" stroke-width="3"/>
+<text x="418.0" y="193.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0A63B8" text-anchor="start">GESTION</text>
+<path d="M298.0 186.0C349.0 186.0,349.0 186.0,400.0 186.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="48" y="232" width="250" height="52" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="66.0" y="265.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">ether3</text>
+<rect x="400" y="232" width="220" height="52" rx="12" fill="#FFFFFF" stroke="#17A8D4" stroke-width="3"/>
+<text x="418.0" y="265.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#17A8D4" text-anchor="start">CCTV</text>
+<path d="M298.0 258.0C349.0 258.0,349.0 258.0,400.0 258.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="48" y="304" width="250" height="52" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="66.0" y="337.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">ether4</text>
+<rect x="400" y="304" width="220" height="52" rx="12" fill="#FFFFFF" stroke="#17A8D4" stroke-width="3"/>
+<text x="418.0" y="337.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#17A8D4" text-anchor="start">ACCESOS</text>
+<path d="M298.0 330.0C349.0 330.0,349.0 330.0,400.0 330.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="48" y="376" width="250" height="52" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="66.0" y="409.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">ether5</text>
+<rect x="400" y="376" width="220" height="52" rx="12" fill="#FFFFFF" stroke="#B45309" stroke-width="3"/>
+<text x="418.0" y="409.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#B45309" text-anchor="start">INVITADOS</text>
+<path d="M298.0 402.0C349.0 402.0,349.0 402.0,400.0 402.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="48" y="448" width="250" height="52" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="66.0" y="481.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">wg-gestion</text>
+<rect x="400" y="448" width="220" height="52" rx="12" fill="#FFFFFF" stroke="#0A63B8" stroke-width="3"/>
+<text x="418.0" y="481.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0A63B8" text-anchor="start">VPN</text>
+<path d="M298.0 474.0C349.0 474.0,349.0 474.0,400.0 474.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="48" y="520" width="250" height="52" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="6 6"/>
+<text x="66.0" y="553.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">vlan10-admin</text>
+<rect x="400" y="520" width="220" height="52" rx="12" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="3"/>
+<text x="418.0" y="553.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0E8F5E" text-anchor="start">ADMIN</text>
+<path d="M298.0 546.0C349.0 546.0,349.0 546.0,400.0 546.0" fill="none" stroke="#6E88A1" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 8" marker-end="url(#a-gray)"/>
+<text x="48.0" y="586.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">vlan10-admin entra en el paso 6</text>
+<rect x="790" y="160" width="362" height="92" rx="14" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="810.0" y="192.0" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="start">GESTION</text>
+<text x="810.0" y="216.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#7DD3FC" text-anchor="start">include=VPN</text>
+<text x="810.0" y="238.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#7FA6C9" text-anchor="start">VPN cuenta como gestión</text>
+<rect x="790" y="268" width="362" height="92" rx="14" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="810.0" y="300.0" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="start">SISTEMAS</text>
+<text x="810.0" y="324.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#7DD3FC" text-anchor="start">include=CCTV,ACCESOS</text>
+<text x="810.0" y="346.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#7FA6C9" text-anchor="start">NTP para los sistemas</text>
+<rect x="790" y="376" width="362" height="92" rx="14" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="810.0" y="408.0" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="start">CLIENTES</text>
+<text x="810.0" y="432.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#7DD3FC" text-anchor="start">include=ADMIN,CCTV,</text>
+<text x="810.0" y="454.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#7FA6C9" text-anchor="start">ACCESOS,INVITADOS · DNS y DHCP</text>
+<path d="M620.0 474.0C620.0 326.6,790.0 353.4,790.0 206.0" fill="none" stroke="#6E88A1" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 8" marker-end="url(#a-gray)"/>
+<rect x="790" y="494" width="362" height="93" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="790" y="506" width="5" height="69" rx="2.5" fill="#0A63B8"/><text x="816.0" y="528.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="816.0" dy="0.0">Orden: 1 include suma, 2 exclude resta,</tspan><tspan x="816.0" dy="20.2">3 los miembros estáticos suman.</tspan><tspan x="816.0" dy="20.2">member/print solo muestra los estáticos.</tspan></text>
+</svg>

@@ -1,0 +1,21 @@
+A: Lección ocho: leer la fila. Del lado del operador.
+B: El que tiene el monitor delante todo el día.
+A: Ese. La pantalla de arranque del modo Cola es Monitor en Vivo: cada cámara de fila con su video, el número grande y un estado. OK, ALTO desde el setenta por ciento del umbral, LLENO.
+B: ¿Y si toco una cámara?
+A: Se abre su línea de tiempo: la curva del aforo, con los cortes de cámara marcados. Tocás un punto y ves la captura de ese momento.
+B: Eso sirve para discutir con el cliente.
+A: Muchísimo. Después está el cartel de sala, Pantalla Kiosko: dice PASE, AGUARDE o AFORO COMPLETO, las personas en fila y la espera estimada.
+B: Ahí quiero llegar. ¿De dónde sale la espera?
+A: De la ley de Little, probada en mil novecientos sesenta y uno. La gente en la fila es igual al ritmo con que pasan por el tiempo que se quedan. Las fuentes coinciden: vale sin importar cómo lleguen ni cuántas cajas haya, mientras la fila esté estable.
+B: ¿Y OmniAccess cómo la usa?
+A: Cuenta las salidas de los últimos quince minutos, saca el ritmo por minuto, y divide el aforo actual por ese ritmo. Ocho personas, veinte salidas en quince minutos: sale cerca de una persona y un tercio por minuto, o sea unos seis minutos de espera.
+B: ¿Y si nadie salió en quince minutos?
+A: Muestra un guion. Sin salidas no hay ritmo.
+B: ¿Alguien discrepa?
+A: Un fabricante de contadores prefiere calcularla con el tiempo medio de atención de la caja. Y la propia ley avisa: si llega más gente de la que sale, la fila crece y el número se queda corto.
+B: O sea, un promedio, no una promesa.
+A: Exacto. Un detalle del monitor: el pitido, en esta versión, suena desde ocho personas sin mirar tu umbral. El aviso que manda es la alerta.
+B: Laboratorio.
+A: Abrí el monitor, tocá una cámara y recorré la curva de hoy. Después abrí el kiosko de esa fila y calculá la espera a mano con las salidas que ves en Flujo de Filas.
+B: Quince minutos.
+A: Y la próxima vez que pregunten cuánto falta, sabés qué hay atrás del número.

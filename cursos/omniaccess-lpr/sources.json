@@ -1,0 +1,41 @@
+{
+ "topic": "OmniAccess LPR: lectura de matrículas, instalación y operación",
+ "level": "inicial a intermedio",
+ "min_words": 150,
+ "pages": [
+  "https://en.wikipedia.org/wiki/Automatic_number-plate_recognition",
+  "https://www.traffictechnologytoday.com/features/feature-who-invented-anpr-the-untold-british-story-behind-a-global-traffic-technology-revolution.html",
+  "https://home-security-guide.readthedocs.io/en/latest/cctv/17-anpr-camera-installation-guide-uk/",
+  "https://www.dtksoft.com/camera-installation",
+  "https://www.omadanetworks.com/au/support/faq/4723/",
+  "https://support.reolink.com/hc/en-us/articles/900002181186-Can-t-See-License-Plate-at-Night",
+  "https://blog.epcom.net/?p=128",
+  "https://syscom.mx/blog/hikvision-anpr-reconocimiento-de-placas",
+  "https://ipcamtalk.com/threads/assistance-with-hikvision-ds-2cd7a26g0-p-izs-integration-using-http-listening.79674/post-897038",
+  "https://ipcamtalk.com/threads/get-passed-license-plate-numbers-using-isapi.79032/post-888496",
+  "https://www.onvif.org/blog/2021/08/04/do-you-know-your-onvif-profiles/",
+  "https://www.videoexpertsgroup.com/glossary/onvif-profile-m",
+  "https://www.rfc-editor.org/rfc/rfc7826",
+  "https://core.telegram.org/bots/api",
+  "https://developer.mozilla.org/en/docs/Web/API/Push_API",
+  "https://min.io/docs/minio/linux/administration/object-management/create-lifecycle-management-expiration-rule.html",
+  "https://mobatime.com/support/faq/why-is-time-important-for-cctv",
+  "https://www.cctvcameraworld.com/security-cameras-must-show-accurate-time-for-court/",
+  "https://www.autoblog.com.uy/2015/04/ya-circulan-las-primeras-patentes.html",
+  "https://www.parking.net/parking-news/survision/lets-be-accurate-about-lpr-accuracy",
+  "https://perceptics.com/measuring-license-plate-recognition-accuracy/",
+  "https://www.techspot.com/community/topics/one-california-town-found-flocks-license-plate-cameras-were-wrong-71-of-the-time.298313/",
+  "https://www.forasoft.com/learn/video-surveillance/articles-vms/license-plate-recognition-lpr-anpr",
+  "https://pkg.go.dev/github.com/AlexxIT/go2rtc",
+  "https://www.milestonesys.com/globalassets/techcomm/ltsb/provms/english-united-states/10900.htm",
+  "https://www.intertraffic.com/news/parking/automatic-number-plate-recognition-read-rate",
+  "https://www.forasoft.com/learn/video-surveillance/glossary/terms-vms/time-sync",
+  "https://hertzbeat.incubator.apache.org/docs/help/hikvision_isapi",
+  "https://gatesentry.com/blog/license-plate-recognition-hoa-gates/"
+ ],
+ "pdf_pages": [
+  "https://cdn.connectec.uk/Files/Products/CCTV/Camera/Hikvision_Trade/installation_guide_of_hikvision_lpr_camera.pdf"
+ ],
+ "note": "pdf_pages: Hikvision PDF not handled by scrape.py; converted with pdftotext and saved to raw/web with the same front matter.",
+ "product_sources": "Manuales del producto (Manual del Operador, del Administrador, del Instalador y Guía rápida de OmniAccess LPR, versión 2026.09) y código vigente de octubre 2026; se citan por nombre, sin URL."
+}

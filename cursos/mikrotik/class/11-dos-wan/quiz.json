@@ -1,35 +1,35 @@
 [
   {
-    "q": "La fibra se cayó aguas arriba pero el módem sigue respondiendo ping. La ruta por defecto apunta al módem con check-gateway=ping. ¿Qué pasa?",
+    "q": "Un comercio tiene fibra y un 4G de respaldo. La ruta por defecto de la fibra apunta al módem con check-gateway=ping. Se corta la fibra en la calle y el módem sigue prendido. ¿Qué pasa?",
     "options": [
-      "El router conmuta al 4G enseguida",
-      "El router conmuta a los 10 segundos siempre",
-      "El router no conmuta, porque el módem responde",
-      "El router reparte tráfico entre los dos"
-    ],
-    "answer": 2,
-    "why": "check-gateway sobre el módem solo verifica que el módem conteste. Por eso se usan rutas recursivas a hosts testigo en internet, que detectan la caída aguas arriba."
-  },
-  {
-    "q": "Configuraste el testigo del ISP2, pero su ruta /32 sale por el ISP1. ¿Qué consecuencia tiene?",
-    "options": [
-      "Ninguna, cualquier camino sirve",
-      "La prueba del enlace de respaldo no dice nada sobre el respaldo",
-      "El 4G se apaga",
-      "El masquerade deja de funcionar"
+      "El router conmuta al 4G a los 20 segundos",
+      "El router no conmuta, porque el módem sigue contestando el ping",
+      "El router reparte tráfico entre las dos salidas",
+      "El 4G toma la ruta porque tiene distancia mayor"
     ],
     "answer": 1,
-    "why": "El testigo de cada enlace tiene que alcanzarse por ese enlace; si no, el chequeo mide otro camino. MKController lo marca como error típico."
+    "why": "check-gateway solo prueba el próximo salto. Para ver la caída aguas arriba se usan rutas recursivas a hosts testigo que se alcanzan por ese proveedor."
   },
   {
-    "q": "Un call center no tolera 30 segundos de corte. Según las fuentes, ¿qué alternativa evaluás?",
+    "q": "Agregaste un cliente DHCP en ether2 para el router 4G y dejaste todo por defecto. Tu ruta recursiva de la fibra tiene distance=1. ¿Qué ves en la tabla?",
     "options": [
-      "Netwatch con intervalos propios y scripts de up y down, con una plantilla única para todos los sitios",
-      "Sacar check-gateway",
-      "Poner las dos rutas con distancia 1 sin chequeo",
-      "Usar solo el 4G"
+      "Solo la ruta de la fibra activa",
+      "Solo la ruta del 4G activa",
+      "Las dos rutas activas con distancia 1 y el tráfico repartido entre ambas",
+      "Ninguna ruta por defecto"
+    ],
+    "answer": 2,
+    "why": "El cliente DHCP instala su ruta con default-route-distance=1. Con distancias iguales las dos quedan activas (ECMP). Para un respaldo, distancia 2 o mayor."
+  },
+  {
+    "q": "El NVR se publica por la WAN del 4G con IP pública, pero la fibra es la principal. Desde afuera la conexión no abre. ¿Qué falta casi seguro?",
+    "options": [
+      "Marcar las conexiones que entran por el 4G y rutear sus respuestas por una tabla que sale por el 4G",
+      "Bajar la distancia del 4G a 1",
+      "Desactivar el masquerade",
+      "Agregar el 4G como testigo de la fibra"
     ],
     "answer": 0,
-    "why": "Según MKController, check-gateway conmuta en 20 a 30 segundos y no ve pérdidas parciales; Netwatch permite intervalos y tipos de prueba propios, a costa de mantener scripts."
+    "why": "La respuesta del NVR sigue la ruta por defecto y sale por la fibra con otra IP. Con mark-connection por interfaz de entrada y mark-routing hacia una tabla del 4G, la respuesta sale por donde entró."
   }
 ]

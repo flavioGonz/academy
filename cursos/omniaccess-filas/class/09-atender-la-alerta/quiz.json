@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Aparece 'Alerta de aforo' en Caja 2. ¿Qué hacés primero?",
+  "options": [
+   "Llamar al supervisor sin mirar",
+   "Subir el umbral para que deje de sonar",
+   "Mirar el video del recuadro para confirmar que es cola real",
+   "Reiniciar la cámara"
+  ],
+  "answer": 2,
+  "why": "Ningún contador es perfecto: unos segundos de video confirman si es cola real antes de mover gente o escalar."
+ },
+ {
+  "q": "Llega 'Cámara movida o tapada' de la fila 3. ¿Qué implica para el aforo de esa fila?",
+  "options": [
+   "Que no es confiable hasta revisar la cámara",
+   "Que es más preciso",
+   "Nada, es solo informativo",
+   "Que se reseteó a cero"
+  ],
+  "answer": 0,
+  "why": "La alerta de salud indica que la escena cambió de golpe; el conteo de esa fila puede estar mal hasta que alguien revise la cámara."
+ },
+ {
+  "q": "La cámara estuvo sin red un minuto. ¿Dónde queda registrado?",
+  "options": [
+   "En ningún lado",
+   "En la línea de tiempo del Monitor en Vivo y en los reportes, como corte de cámara con su duración",
+   "Solo en el registro del NVR",
+   "En el horario de reseteo"
+  ],
+  "answer": 1,
+  "why": "Tras dos fallas seguidas del sondeo, OmniAccess abre un corte de cámara; al volver lo cierra con la duración, y aparece en la curva y en los reportes."
+ }
+]

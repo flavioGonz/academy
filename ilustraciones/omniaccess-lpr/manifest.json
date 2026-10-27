@@ -1,0 +1,516 @@
+{
+ "1": {
+  "fig": {
+   "file": "1.svg",
+   "alt": "Diagrama del predio: la cámara ANPR manda por HTTP un XML con fotos al servidor OmniAccess en el puerto 10000, que guarda evento y foto en la base y el almacenamiento, pide el clip al NVR y empuja la lectura al Monitor LPR. Internet queda afuera y solo lleva avisos.",
+   "caption": "Los cinco tramos de una lectura, todos dentro del predio; internet solo lleva los avisos externos."
+  },
+  "steps": [
+   {
+    "file": "1-paso2.svg",
+    "step": 2,
+    "alt": "Pantalla esquemática de Webhooks con cuatro lecturas de las cámaras de prueba, una de ellas NO_LEIDA, y al lado la ruta de salud del receptor que contesta OK.",
+    "caption": "Webhooks muestra cada lectura que llega; si no aparece, el problema está antes del servidor.",
+    "after": "Configuración → Sistema → Webhooks y dejala abierta"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Lectura a bordo (ANPR en la cámara)",
+    "para_que": "Leer patentes en un servidor central obligaba a mandarle video de todas las cámaras y a tener mucha CPU. Las cámaras ANPR actuales traen el reconocimiento adentro: mandan el resultado, no el video para que otro lea.",
+    "como": "La cámara detecta el vehículo, recorta la patente, hace el OCR y arma un mensaje con la matrícula, la confianza, la hora y las fotos. OmniAccess solo recibe ese mensaje y decide. Por eso la calidad de lectura se ajusta en la cámara (posición, luz, región), no en el servidor.",
+    "ejemplo": "En el portón de un barrio de Canelones la cámara manda `SBA1234` con la foto de la escena y el recorte; el servidor nunca procesa video para leer, solo decide y guarda."
+   },
+   {
+    "name": "Receptor de eventos (puerto 10000)",
+    "para_que": "Es la puerta de entrada de todas las lecturas: un servicio aparte de la web, pensado para recibir muchos avisos de cámaras sin trabarse y emitirlos en vivo al monitor.",
+    "como": "Las cámaras Hikvision apuntan a la IP del servidor, puerto `10000`, ruta `/api/webhooks/hikvision`. La web del panel vive en otro puerto (10001) y, si una cámara le pega por error, solo contesta que hay que ir al 10000. La ruta `/health` del receptor contesta `OK` si el servicio está arriba.",
+    "ejemplo": "Desde la PC del puesto, `192.0.2.10:10000/health` en el navegador devuelve `OK`: el receptor vive. Si no contesta, ninguna cámara va a poder reportar."
+   },
+   {
+    "name": "Funciona sin internet",
+    "para_que": "Muchas soluciones en la nube dejan el portón sin criterio cuando se cae el enlace. OmniAccess corre entero en el predio para que un corte de internet no corte el control de acceso.",
+    "como": "Lectura, decisión, fotos, grabación, búsqueda y tablets usan la red local. Lo que necesita salida son los avisos por Telegram o WhatsApp y los logos de marcas de autos, que se degradan sin romper nada.",
+    "ejemplo": "Se cae la fibra del barrio a las 22 h: los autos siguen entrando con su matrícula y queda todo registrado; los avisos de Telegram salen cuando vuelve el enlace."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLa lectura automática de matrículas nació en el Reino Unido. La Police Scientific Development Branch, el laboratorio del Home Office, la inventó en 1976 y en 1979 ya había prototipos funcionando, con pruebas en el túnel de Dartford para detectar autos robados. Los primeros contratos industriales fueron para EMI Electronics y después para Computer Recognition Systems, una empresa de visión artificial fundada en 1981.\n\nAquellas pruebas leían video Super VHS y, según quienes las hicieron, acertaban entre 70 % y 90 % de las patentes en tiempo real. Durante décadas el reconocimiento se hizo en computadoras aparte, alimentadas con el video de las cámaras. La gran diferencia de hoy es que la cámara ANPR trae el reconocimiento adentro y manda el resultado ya leído.\n\n### Cómo funciona\n\nUna lectura en OmniAccess recorre cinco tramos:\n\n1. **Cámara.** Detecta el vehículo cuando cruza la línea de captura, ubica la patente, la normaliza y hace el OCR. Arma un mensaje `EventNotificationAlert` en XML con `licensePlate`, confianza, MAC, hora y las fotos (escena y recorte).\n2. **Red.** Lo envía por HTTP, como un `POST` multipart, al servidor del predio.\n3. **Servidor.** El receptor del puerto `10000` separa el XML de las imágenes, reconoce la cámara por su MAC o su IP, descarta repeticiones y decide Autorizado o Denegado.\n4. **Base y almacenamiento.** La foto va al almacenamiento de objetos (bucket `lpr`) y el evento a la base de datos.\n5. **Monitor.** El servidor empuja el evento en vivo a los navegadores abiertos, que lo dibujan en el Monitor LPR.\n\nEl manual pone el número que sirve de alarma: entre 1 y 3 segundos desde la línea hasta la pantalla. Si habitualmente tarda más de 10, algún tramo está degradado. El NVR graba aparte, todo el tiempo, y el servidor le pide el video del instante solo cuando alguien toca Grabación, Clip o Exportar."
+ },
+ "2": {
+  "fig": {
+   "file": "2.svg",
+   "alt": "A la izquierda, la cámara con su lista blanca cierra el relé y sube la barrera. A la derecha, el orden de decisión del servidor: primero la lista de la cámara, después el padrón, si no Denegado. Abajo, los tres estados con su acción.",
+   "caption": "Dos cerebros pueden abrir: la lista de la cámara con su relé y la decisión del servidor."
+  },
+  "steps": [
+   {
+    "file": "2-paso2.svg",
+    "step": 2,
+    "alt": "Terminal con tres envíos de la misma lectura simulada y sus respuestas DENY, Debounced y GRANT, y una línea de tiempo con la ventana de antirrebote de 5 segundos y el alta en el medio.",
+    "caption": "La misma lectura cambia de respuesta según el antirrebote y el padrón.",
+    "after": "mandá una lectura simulada de la cámara"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Lista de la cámara y relé",
+    "para_que": "Que la barrera abra aunque el servidor tarde o no esté: la cámara compara contra su propia lista y cierra su salida de relé al instante.",
+    "como": "OmniAccess carga en cada lectora Hikvision las matrículas habilitadas (tarea Cargar matrículas de la puesta a punto o Sincronizar matrículas a las cámaras). Cuando la cámara lee una de la lista, prende el semáforo verde con su relé; la lista negra va a la lista de bloqueo. Según el equipo de apertura puede hacer falta un relé o temporizador intermedio.",
+    "ejemplo": "La cámara del P1 tiene 120 matrículas en su lista blanca; un residente llega, la cámara lo lee y la barrera sube aunque el servidor esté reiniciándose."
+   },
+   {
+    "name": "Modo LPR",
+    "para_que": "Define cómo interpreta el servidor una matrícula que encuentra en el padrón. Existe para instalaciones que usan el padrón como lista de permitidos o, al revés, como lista de bloqueados.",
+    "como": "Configuración → Modos → Modos (LPR / Face / Cola) → Modo LPR. Lista Blanca (el valor por defecto): registrada es Autorizado. Lista Negra: registrada es Denegado. Aprendizaje: pensado para sumar matrículas desconocidas. En un barrio en servicio no se toca.",
+    "ejemplo": "Un técnico prueba Lista Negra en producción: en la siguiente hora todos los residentes que no abre la cámara quedan en ámbar. Se vuelve a Lista Blanca y se prueba en una instalación de prueba."
+   },
+   {
+    "name": "Antirrebote",
+    "para_que": "Una cámara puede mandar la misma patente varias veces mientras el auto avanza. Sin antirrebote, un solo paso aparecería como tres entradas y arruinaría permanencia y merodeo.",
+    "como": "El servidor descarta la misma matrícula si llega dentro de los 5 segundos, y la misma matrícula por la misma cámara si la hora del evento está dentro de los 20 segundos. Una lectura sin chapa (NO_LEIDA) nunca se agrupa, porque pueden ser dos autos distintos.",
+    "ejemplo": "Mandás dos veces seguidas `SBA1234` con curl: la segunda responde `Debounced`. Si esperás 25 segundos, se registra de nuevo."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nDesde los primeros sistemas, leer una patente nunca fue lo mismo que decidir un acceso: la lectura es una conjetura y la decisión se toma comparándola contra una lista. En estacionamientos y accesos cerrados se aceptó temprano cierta tolerancia, por ejemplo un carácter de diferencia, porque es improbable que un intruso tenga una patente casi igual a la de un residente. En la industria del parking esa idea se formalizó como validar en N-1 o N-2.\n\nLas cámaras ANPR actuales sumaron otra pieza: guardan sus propias listas (en algunos modelos Hikvision, unas 2048 matrículas entre blancas y negras) y pueden accionar una salida de alarma para la barrera. Así aparecen los dos cerebros que conviven en OmniAccess.\n\n### Cómo funciona\n\nCuando llega una lectura, el servidor sigue este orden:\n\n1. Si el XML trae la lista de la cámara (`whiteList` o `blackList`), manda la cámara: Autorizado o Denegado.\n2. Si no, normaliza la matrícula (mayúsculas, sin espacios ni guiones) y la busca como credencial de tipo matrícula en el padrón.\n3. Si la encuentra y el Modo LPR es Lista Blanca, Autorizado; si el modo es Lista Negra, Denegado.\n4. Si no la encuentra, Denegado.\n\nAntes de decidir aplica el antirrebote (5 segundos por matrícula y 20 por cámara) y acepta la hora de la cámara solo si está a menos de 10 minutos de la del servidor. Después revisa la lista de vigilancia y los pases de invitado; la lista negra siempre le gana a un pase.\n\nPara el guardia, todo se traduce en tres colores: verde Autorizado, ámbar Denegado (no registrado o fuera de lo previsto, casi siempre una visita) y rojo con sonido para la lista negra. El Manual del Administrador menciona también el horario del grupo; en esta versión el receptor de lecturas decide con la lista de la cámara, el padrón y el modo, así que el horario conviene verificarlo en cada instalación."
+ },
+ "3": {
+  "fig": {
+   "file": "3.svg",
+   "alt": "Vista de costado: cámara a 2,5 m en un poste, auto a 5 m con la patente a medio metro, línea de visión con un ángulo de 22 grados contra un máximo de 30. Arriba a la derecha, vista desde arriba con un carril por cámara y ángulo horizontal hasta 30 grados.",
+   "caption": "Ángulo vertical y horizontal hasta 30°, distancia de 4 a 8 m y la patente de 130 a 300 px."
+  },
+  "steps": [
+   {
+    "file": "3-paso2.svg",
+    "step": 2,
+    "alt": "Dos vistas de costado comparadas: cámara a 2,5 m y auto a 5 m da 22 grados, en verde; cámara a 3 m y auto a 4 m da 32 grados, en rojo.",
+    "caption": "Con la cinta y la fórmula se sabe antes de fijar si el ángulo pasa los 30°.",
+    "after": "Calculá el ángulo vertical y anotalo"
+   },
+   {
+    "file": "3-paso4.svg",
+    "step": 4,
+    "alt": "Captura de cámara en un editor de imágenes con la patente medida en 150 píxeles y una escala: menos de 130 acercar, 130 a 300 bien, más de 300 abrir zoom.",
+    "caption": "El ancho de la patente se mide en píxeles sobre una captura real con el auto quieto.",
+    "after": "Medí el ancho de la patente en píxeles"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Ángulo de incidencia",
+    "para_que": "El OCR espera caracteres casi de frente. Cuanto más de costado o de arriba mira la cámara, más se deforman las letras y más se confunden entre sí.",
+    "como": "Se mide en dos planos: vertical, contra el piso, y horizontal, contra el sentido de marcha. Las guías de Hikvision y DTK y el Manual del Instalador coinciden en un máximo de 30° en cada uno. El vertical se calcula con `arctan((H - h) / D)`.",
+    "ejemplo": "Cámara a 3 m sobre el portón y el auto frena a 4 m: da 32°. Alejando el punto de lectura a 5 m baja a 27° y la lectura nocturna mejora."
+   },
+   {
+    "name": "Píxeles de patente",
+    "para_que": "La resolución de la cámara no dice nada por sí sola: lo que importa es cuántos píxeles ocupa la patente en la imagen, porque de eso depende que cada carácter sea legible.",
+    "como": "Con el auto quieto en el punto de lectura se saca una captura y se mide el ancho de la patente en un editor. El manual pide 100 a 300 px; Hikvision al menos 130 y recomienda 150 a 200. Con menos se acerca con el zoom; con más se abre.",
+    "ejemplo": "En la captura la patente mide 95 px: aunque a ojo se lea, para la cámara es poco. Con un poco de zoom pasa a 160 px y la tasa sube."
+   },
+   {
+    "name": "Un carril por cámara y punto de detención",
+    "para_que": "Una cámara que cubre dos carriles tiene la patente chica y en ángulo en los dos; y un auto en movimiento rápido sale movido.",
+    "como": "Cada carril lleva su cámara, declarada como entrada o salida, y se lee donde el vehículo va lento o frena, antes de la barrera. El poste tiene que ser firme: los camiones lo hacen vibrar. Se mira el sol de frente al amanecer y al atardecer.",
+    "ejemplo": "En un acceso con entrada y salida separadas por una isla se ponen dos cámaras; la de entrada lee a 5 m antes de la barrera, donde todos frenan."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLas primeras guías de instalación de cámaras LPR se escribieron cuando los fabricantes vieron que la mayoría de los reclamos de \"no lee\" eran de colocación, no de software. La guía de instalación de cámaras LPR de Hikvision, de 2015, ya fija lo que hoy repiten todos: patente de 130 a 300 píxeles de ancho (óptimo 150 a 200), inclinación de la patente dentro de ±5°, y no más de 30° de ángulo vertical ni horizontal. DTK, otro fabricante de software de lectura, da números parecidos con un mínimo de 100 píxeles.\n\nEl Manual del Instalador de OmniAccess resume lo mismo en cuatro reglas: ángulo, distancia, un carril por cámara y punto de detención, y advierte que una cámara mal colocada no se arregla con software.\n\n### Cómo funciona\n\nEl OCR trabaja sobre la imagen de la patente. Tres cosas la arruinan:\n\n- **Perspectiva.** Si la cámara mira muy de arriba o muy de costado, los caracteres se aplastan o se inclinan. Por eso el límite de 30°. El ángulo vertical sale de la geometría: `arctan((H - h) / D)`, con H la altura de la cámara, h la de la patente y D la distancia horizontal.\n- **Tamaño.** Con pocos píxeles por carácter, letras como 8 y B o 0 y D se vuelven iguales. La medida útil es el ancho de la patente en la imagen, no los megapíxeles de la cámara.\n- **Movimiento.** Un auto rápido sale movido. Leer donde frena reduce el problema y permite obturadores más lentos de noche.\n\nUn ejemplo con números: cámara a 2,5 m, patente a 0,5 m y punto de lectura a 5 m dan unos 22°; con la cámara a 3 m y el auto a 4 m se llega a 32°, fuera de rango. En la práctica eso suele terminar en una distancia de 4 a 8 m entre la cámara y el punto de detención."
+ },
+ "4": {
+  "fig": {
+   "file": "4.svg",
+   "alt": "Barra de seis pasos del alta guiada: Tipo, Equipo, Conexión, Ubicación, Grabación y Puesta a punto. Debajo, la decisión de Ubicación entre Entrada y Salida con el aviso de grupo de acceso, y la lista de nueve tareas de la puesta a punto.",
+   "caption": "El alta guiada pide lo justo y termina configurando la cámara por ISAPI."
+  },
+  "steps": [
+   {
+    "file": "4-paso6.svg",
+    "step": 6,
+    "alt": "Lista de las nueve tareas de la puesta a punto con su estado: ocho en ok y Modo ANPR en error porque la cámara está en smart.",
+    "caption": "Cada tarea dice ok, error o salteado, con el detalle de lo que hizo.",
+    "after": "Tocá Crear y poner a punto y mirá cada tarea"
+   },
+   {
+    "file": "4-paso7.svg",
+    "step": 7,
+    "alt": "La cámara P1 envía un POST al servidor OmniAccess en el puerto 10000 y el evento aparece en Webhooks con su nombre; al lado, la configuración de HTTP host que dejó la puesta a punto.",
+    "caption": "El primer evento en Webhooks, con el nombre de la cámara, cierra el alta.",
+    "after": "pasá un auto y confirmá que llega el evento"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Sentido de la cámara",
+    "para_que": "OmniAccess necesita saber de qué lado del portón está cada lectora para contar quién está adentro, calcular permanencia y cerrar visitas.",
+    "como": "En el paso Ubicación se elige Entrada (lee a los que entran) o Salida (lee a los que salen; cierra visitas). Define la columna del Monitor LPR, si suma o resta a En casa y si una lectura calcula permanencia.",
+    "ejemplo": "Una cámara de salida quedó como Entrada: los autos que se van aparecen como entradas, el contador de adentro crece sin parar y la permanencia nunca se calcula."
+   },
+   {
+    "name": "Puesta a punto por ISAPI",
+    "para_que": "Configurar a mano cada cámara en su web llevaba tiempo y dejaba detalles olvidados (la hora, el destino de los eventos, el códec). La puesta a punto lo hace en un solo recorrido y deja constancia de cada paso.",
+    "como": "Con las credenciales del alta, OmniAccess le pone la hora del servidor, configura el HTTP host hacia `192.0.2.10:10000/api/webhooks/hikvision` en XML, verifica que el recurso inteligente esté en `roadDetection`, pasa los canales 101 y 102 a H.264, registra el video en vivo, carga las matrículas y vincula la grabación.",
+    "ejemplo": "En una obra nueva se dan de alta cuatro cámaras en veinte minutos; una queda con Modo ANPR en error porque alguien la había agregado a la búsqueda por imagen del NVR, y se resuelve antes de entregar."
+   },
+   {
+    "name": "HTTP host (servidor de alarmas)",
+    "para_que": "Es la configuración de la cámara que dice a dónde mandar cada lectura. Sin ella la cámara lee perfecto y nadie se entera.",
+    "como": "Se configura en la cámara como notificación HTTP: IP del servidor, puerto de webhooks, ruta del driver, formato XML, sin autenticación por estar en red privada. Se pierde con un reset de fábrica.",
+    "ejemplo": "Un electricista resetea una cámara al cambiarle la fuente; al otro día no entran matrículas por ese portón. Repetir la puesta a punto desde la ficha del equipo vuelve a poner el HTTP host."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nCada fabricante de cámaras IP creó su propia API para configurarlas por red. La de Hikvision se llama ISAPI: recursos en rutas HTTP como `/ISAPI/System/time` o `/ISAPI/Event/notification/httpHosts`, documentos XML y autenticación Digest. En paralelo, en 2008, Axis, Bosch y Sony fundaron ONVIF para estandarizar lo común entre marcas: Profile S para video, Profile T para códecs más nuevos y, a mediados de 2021, Profile M para metadatos de analítica y Profile D para periféricos de control de acceso, entre ellos cámaras LPR.\n\nONVIF resolvió el video y los eventos genéricos, pero la lectura de patentes, sus listas y sus parámetros siguen siendo de cada fabricante. Por eso OmniAccess configura las cámaras Hikvision por ISAPI.\n\n### Cómo funciona\n\nEl alta guiada tiene dos mitades. Primero los datos: Tipo (Cámara LPR, Cámara de intrusión o NVR), Equipo (fabricante y nombre), Conexión (IP, usuario, contraseña, Digest), Ubicación (sentido y grupo de acceso) y Grabación (NVR y canal).\n\nDespués, Crear y poner a punto ejecuta tareas por ISAPI y muestra el resultado de cada una:\n\n- `PUT /ISAPI/System/time` con la hora del servidor.\n- `PUT /ISAPI/Event/notification/httpHosts/1` con el destino `IP:10000/api/webhooks/hikvision` en XML.\n- `GET .../VCAResource`: si no dice `roadDetection`, marca error y no lo fuerza, porque cambiarlo pide reiniciar.\n- `PUT /ISAPI/Streaming/channels/101` y `102` con `H.264`, para ver el vivo en el navegador sin transcodificar.\n- Registro del stream en el servidor de video y carga incremental de matrículas.\n\nCuando la cámara reporta, el receptor la identifica primero por la MAC que viene en el XML y después por la IP. Eso evita el problema clásico de las cámaras detrás de NAT que mandan eventos sin decir quiénes son."
+ },
+ "5": {
+  "fig": {
+   "file": "5.svg",
+   "alt": "El servidor OmniAccess con su hora de referencia sincroniza la hora de la cámara P1, con 2 segundos de desfase, y del NVR, con 185 segundos y alerta de reloj. La cámara está vinculada al NVR en el canal 3.",
+   "caption": "La hora del servidor manda; el vínculo cámara, NVR y canal hace posible ver el video del evento."
+  },
+  "steps": [
+   {
+    "file": "5-paso3.svg",
+    "step": 3,
+    "alt": "Tabla de Sincronizar hora con tres equipos y su desfase, uno en alerta con más 185 segundos, y dos modos: hora del servidor, sin internet, y NTP si hay servidor de hora en la red.",
+    "caption": "Primero se lee el desfase de cada equipo; después se confirma la corrección.",
+    "after": "Botón Sincronizar hora: anotá el desfase"
+   },
+   {
+    "file": "5-paso5.svg",
+    "step": 5,
+    "alt": "Treinta casilleros de días y la cuenta: 3,5 GB por día por 30 días dan 105 GB de fotos, el manual redondea a 120 GB; la retención se ajusta en Configuración, Sistema, Almacenamiento.",
+    "caption": "La retención prometida se calcula contra el disco, no al revés.",
+    "after": "anotá la retención de fotos y de clips"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Vínculo cámara, NVR y canal",
+    "para_que": "La foto de la lectura sola no alcanza ante un reclamo: hace falta el video de ese segundo. Para pedírselo al NVR, OmniAccess necesita saber en qué grabador y en qué canal está cada cámara.",
+    "como": "Se fija en el paso Grabación del alta o con Detectar grabaciones, que busca la IP de cada cámara en los canales de todos los NVR. Calcular retención mira la grabación más vieja del canal. Sin vínculo, el historial dice sin NVR y no hay Grabación, Clip ni clip en el ZIP.",
+    "ejemplo": "Tras cambiar el NVR de un barrio, las fichas dejan de abrir el video. Detectar grabaciones vuelve a vincular las cámaras por IP y el botón Grabación funciona de nuevo."
+   },
+   {
+    "name": "Sincronizar hora (servidor o NTP)",
+    "para_que": "Si la cámara, el NVR y el servidor tienen horas distintas, el video que se abre no coincide con el evento y una búsqueda por rango devuelve otra cosa. La hora es parte de la evidencia.",
+    "como": "Dispositivos → Sincronizar hora muestra la hora y el desfase de cada cámara LPR y NVR y pregunta antes de corregir. El modo hora del servidor empuja la hora de Montevideo por la red local sin internet; NTP configura un servidor de hora, útil solo si los equipos lo alcanzan. Con más de 120 s se abre la alerta de reloj.",
+    "ejemplo": "Un NVR con 3 minutos de adelanto: el clip de un incidente muestra la calle vacía porque el auto pasó 3 minutos antes. Sincronizar hora lo corrige y la alerta se cierra."
+   },
+   {
+    "name": "Retención y disco",
+    "para_que": "Las fotos ocupan espacio todos los días. Sin una política de borrado el disco se llena y alguien termina borrando a mano lo que no debía.",
+    "como": "En Configuración → Sistema → Almacenamiento se fijan los días de fotos (típico 30) y de clips (típico 7). El manual estima 3 a 4 GB por día con 8 cámaras: con 30 días son unos 120 GB solo de fotos.",
+    "ejemplo": "Un cliente pide 90 días de fotos con 8 cámaras: unos 315 GB solo de fotos. Se dimensiona el disco antes de prometerlo."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLa sincronización de relojes por red es casi tan vieja como internet: NTP, el Network Time Protocol de David Mills, se publicó por primera vez en los años ochenta (RFC 958, de 1985) y su versión 4 actual es la RFC 5905, de 2010. En video, el streaming que usan cámaras y NVR viene de RTSP, la RFC 2326 de 1998, actualizada como RTSP 2.0 en la RFC 7826 de 2016.\n\nEn seguridad electrónica la hora se volvió un tema de prueba: los textos sobre evidencia en video insisten en que una grabación con la hora mal puesta pierde valor ante un reclamo o en un juzgado, y que los relojes de PC y de grabadores derivan con el tiempo.\n\n### Cómo funciona\n\nCada lectura queda con una hora. El receptor usa la de la cámara si está a menos de 10 minutos de la del servidor; si no, usa la propia. Cuando alguien toca Grabación, OmniAccess le pide al NVR el video de ese canal en esa hora. Si el NVR está corrido, el video no coincide aunque todo lo demás esté bien.\n\nPor eso hay tres piezas:\n\n- **Vínculo.** Cámara, NVR y canal, fijados en el alta o con Detectar grabaciones.\n- **Hora.** Sincronizar hora pone por ISAPI `timeMode` manual con la hora del servidor (no necesita internet) o configura NTP. La salud de dispositivos abre la alerta de reloj con más de 120 segundos de diferencia.\n- **Retención.** Las fotos y clips se guardan en el almacenamiento de objetos con días de retención por bucket, el mismo concepto que las reglas de expiración de MinIO o S3. La grabación continua vive en el NVR, con su propio disco.\n\nLa cuenta del disco es simple y conviene hacerla siempre: gigabytes por día por días de retención, más margen."
+ },
+ "6": {
+  "fig": {
+   "file": "6.svg",
+   "alt": "Vista esquemática de la cámara en el calibrador con la zona de lectura dibujada sobre el carril y la línea de captura donde la patente se ve derecha; a la derecha, los ocho valores del perfil ANPR barrio-noche.",
+   "caption": "Geometría en el calibrador y perfil de partida para la noche: los dos se miden después con la tasa por hora."
+  },
+  "steps": [
+   {
+    "file": "6-paso1.svg",
+    "step": 1,
+    "alt": "Gráfico de barras de la tasa de lectura por hora de una cámara: verde de día, rojo entre las 0 y las 5 con cerca de 60 por ciento, y una tasa global de 91 por ciento.",
+    "caption": "Un 91 % global puede esconder un 60 % de madrugada.",
+    "after": "Anotá la tasa global, la peor cámara"
+   },
+   {
+    "file": "6-paso2.svg",
+    "step": 2,
+    "alt": "Comparación de dos vistas de cámara: a la izquierda una zona de lectura enorme que incluye un cartel y la calle, en rojo; a la derecha una zona justa solo sobre el carril, en verde.",
+    "caption": "Zona solo sobre el carril: menos lecturas falsas y más aciertos.",
+    "after": "arrastrá los puntos de la Zona de lectura"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Zona de lectura y línea de captura",
+    "para_que": "Decirle a la cámara dónde buscar patentes y en qué punto sacar la foto, para que no lea carteles ni autos de la calle y dispare cuando la patente se ve mejor.",
+    "como": "Dispositivos → Calibrar ANPR: sobre el video en vivo se arrastran los puntos de la Zona de lectura de patente (Carril 1, Carril 2) y se ubica la Línea de captura. Guardar línea de captura → Sí, guardar escribe la región en la cámara por ISAPI; se puede revertir. Las coordenadas de Hikvision van de 0 a 1000 con origen abajo a la izquierda.",
+    "ejemplo": "Una cámara leía `CAUTION` de un cartel de obra en la vereda. Al achicar la zona al carril, desaparecen esas lecturas y sube la tasa."
+   },
+   {
+    "name": "Perfil ANPR barrio-noche",
+    "para_que": "Un punto de partida probado para accesos de barrio, con tráfico lento y faros de frente, en vez de tocar ocho parámetros a ciegas.",
+    "como": "Auto-calibración aplica, paso a paso y de forma reversible: obturador 1/500, anti-brillo de patente nivel 60, WDR apagado, HLC apagado, ganancia máxima 40, filtro IR automático, iluminador IR automático y foco semiautomático. Es solo para Hikvision y algunos cambios reinician la cámara.",
+    "ejemplo": "Una cámara con patentes quemadas de noche por los faros: con el anti-brillo y el obturador del perfil, el recorte nocturno pasa a ser legible."
+   },
+   {
+    "name": "Tasa de lectura por hora",
+    "para_que": "Es la métrica que dice si la calibración sirvió. Mirada por hora muestra la degradación nocturna que el promedio esconde.",
+    "como": "Dispositivos → vista Cámaras LPR → Tasa de lectura: leídas contra no leídas, por cámara (peor primero) y por hora del día. Más de 95 % correcta, 85 a 95 % aceptable, menos de 85 % problema de emplazamiento o luz.",
+    "ejemplo": "Antes del perfil, la franja de 0 a 5 h daba 60 %; una semana después da 88 %. Se deja el cambio y se sigue mirando."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLas patentes se fabrican retrorreflectivas: devuelven la luz hacia la fuente, como las señales de tránsito. Por eso, desde los primeros sistemas ANPR, la noche se resolvió con iluminación infrarroja propia y cámaras sensibles al infrarrojo, que ven la patente brillante y el resto de la escena oscuro. Con una cámara común pasa lo contrario: el IR de la cámara rebota en la patente y la quema, que es lo que explican los fabricantes de cámaras genéricas.\n\nLas guías de fabricantes agregaron el resto: obturador rápido para cortar faros (Hikvision habla de 1/1000), probar con y sin WDR (TP-Link Omada) y no confiar en la ganancia, que mete ruido (Milestone).\n\n### Cómo funciona\n\nDe noche se juegan tres cosas a la vez:\n\n- **Luz.** El IR ilumina la patente; si es demasiado fuerte, satura. El anti-brillo (supresión de sobreexposición) baja los brillos para que la patente no se queme con los faros.\n- **Movimiento.** El obturador decide cuánto se mueve el auto durante la foto. Un milésimo congela más pero entra la mitad de luz que un quinientosavo. El perfil de OmniAccess elige 1/500 porque en un barrio se anda a 20 o 30 km/h; en un acceso rápido conviene acercarse a lo que pide Hikvision.\n- **Geometría.** La zona de lectura limita dónde se buscan patentes y la línea de captura decide el instante de la foto.\n\nEl calibrador escribe todo por ISAPI: la región en `/ISAPI/Traffic/channels/1/vehicleDetect` y los parámetros de imagen en `/ISAPI/Image/channels/1/...`, leyendo primero el XML de la cámara y cambiando solo el campo necesario. Después se mide con la tasa por hora: leídas sobre total, franja por franja."
+ },
+ "7": {
+  "fig": {
+   "file": "7.svg",
+   "alt": "Monitor LPR esquemático: barra superior con buscador, En casa, Hoy, permitidos, denegados y filtros; columna de entradas con tarjetas verde, ámbar y amarilla sin lectura; foco central con la patente grande y botones Investigar y Registrar; columna de salidas con una tarjeta verde y una roja de lista negra.",
+   "caption": "Tres columnas y cuatro tipos de tarjeta: lo importante se ve de reojo."
+  },
+  "steps": [
+   {
+    "file": "7-paso3.svg",
+    "step": 3,
+    "alt": "Cuatro tarjetas con su acción: Autorizado, nada; Denegado, verificar con el residente; Lista negra, mirar el recorte y seguir el protocolo; Sin lectura, mirar la foto y cargar la matrícula.",
+    "caption": "Cada color tiene una acción concreta para el guardia.",
+    "after": "Tocá Denegados. Elegí una tarjeta ámbar"
+   },
+   {
+    "file": "7-paso6.svg",
+    "step": 6,
+    "alt": "Una tarjeta sin lectura pasa al diálogo Cargar matrícula con SBA1234, el servidor re-evalúa residente, decisión y vigilancia, y el resultado es Autorizado o Denegado.",
+    "caption": "Cargar matrícula convierte una lectura sin chapa en una decisión.",
+    "after": "tocá Cargar matrícula, escribí la patente"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Las tres columnas",
+    "para_que": "El guardia mira el monitor de lejos mientras atiende otra cosa. Separar entradas, salidas y la última lectura en grande deja ver lo que pasa sin leer filas.",
+    "como": "Izquierda: Entradas, con la última captura de cada cámara de entrada y las capturas recientes. Centro: el foco, con la última lectura grande, el recorte de la patente, marca, tipo, color, cámara y hora, y los botones Investigar y Registrar. Derecha: Salidas. La columna depende del sentido de cada cámara.",
+    "ejemplo": "A la noche, el guardia ve de reojo una tarjeta roja en la columna Salidas: alguien de la lista de vigilancia se está yendo por el P2."
+   },
+   {
+    "name": "La barra del día",
+    "para_que": "Dar el estado del turno en una línea y filtrar rápido cuando se busca algo puntual.",
+    "como": "En casa muestra autos adentro sobre el total; Hoy, las lecturas del día con permitidos y denegados. Los filtros Todos, Permitidos y Denegados y los desplegables Color y Tipo achican la vista. El escudo abre la lista de vigilancia; otro interruptor hace saltar solas las anomalías; el parlante silencia o activa las alertas. El manual describe indicadores LIVE y En buffer que esta versión no muestra.",
+    "ejemplo": "Llaman de un lote preguntando por una camioneta blanca: filtro Color Blanco, Tipo Camioneta, y aparecen las tres de la última hora."
+   },
+   {
+    "name": "Sin lectura y Cargar matrícula",
+    "para_que": "La cámara saca la foto aunque no lea la chapa. Esa foto sirve: un humano puede leerla y el sistema decidir con ese dato.",
+    "como": "La tarjeta amarilla dice SIN LECTURA. Con Cargar matrícula se escribe la patente sin espacios ni guiones y el servidor re-evalúa residente, decisión y vigilancia. Si una misma matrícula se lee mal siempre, no se corrige una por una: se avisa al técnico, es calibración.",
+    "ejemplo": "Una moto con la patente sucia entra de noche: en la foto se lee `SBC123`; el guardia la carga y queda Autorizada como la moto del lote 40."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLos puestos de monitoreo vienen de las paredes de monitores del CCTV analógico, donde el operador miraba video y nada más. Con la lectura de patentes la pantalla cambió: lo importante ya no es el video sino la decisión. El Manual del Operador de OmniAccess lo dice así: la pantalla está pensada para mirarse de lejos, y los colores dicen todo sin tener que leer.\n\nLa experiencia de otros sistemas suma una lección: las alertas automáticas se equivocan. En Roseville, California, de 1427 alertas de vehículo buscado el 71 % fueron lecturas equivocadas, y no terminaron en detenciones porque cada una se verificaba. El monitor ayuda; la verificación la hace una persona.\n\n### Cómo funciona\n\nEl monitor recibe cada lectura en vivo por WebSocket (Socket.io) desde el receptor de eventos. Para no trabarse con ráfagas, junta los eventos y redibuja unas cuatro veces por segundo. Cada tarjeta se pinta según tres datos: la decisión (Autorizado o Denegado), si la matrícula está en vigilancia (lista negra, VIP o en búsqueda) y si la lectura vino sin chapa.\n\nPara el guardia la regla es corta:\n\n- **Verde.** Pasa solo.\n- **Ámbar.** No registrada o fuera de lo previsto: se verifica con el residente. Casi siempre es una visita o un auto nuevo.\n- **Rojo con sonido.** Lista negra: se mira el recorte y se sigue el protocolo del cliente. El sonido sigue hasta abrir el evento.\n- **Amarillo.** Sin lectura: se mira la foto y, si corresponde, Cargar matrícula.\n\nLas alertas críticas (merodeo y lista negra) aparecen además como ventanas chicas abajo a la izquierda, siempre activas."
+ },
+ "8": {
+  "fig": {
+   "file": "8.svg",
+   "alt": "Ficha esquemática de un evento: foto del vehículo con la patente, chips de dirección, cámara y permanencia, el estado Autorizado, seis botones de acción, pestañas Perfil, Historial y Datos, y un gráfico de pasadas por día de los últimos 30 días.",
+   "caption": "Seis acciones y un perfil que responde si la matrícula es habitual."
+  },
+  "steps": [
+   {
+    "file": "8-paso6.svg",
+    "step": 6,
+    "alt": "Los cuatro archivos del ZIP de Exportar: captura.jpg, recorte_matricula.jpg, clip_30s.mp4 y evento.json, con su descripción.",
+    "caption": "El ZIP junta foto, recorte, video y datos, listo para un reclamo.",
+    "after": "Exportar: bajá el ZIP y abrilo"
+   },
+   {
+    "file": "8-paso7.svg",
+    "step": 7,
+    "alt": "Árbol del reclamo no me abrió: si hay evento Denegado se revisa padrón, credencial y grupo y se exporta; si no hay evento, la cámara no lo leyó y se mira la grabación y la cámara.",
+    "caption": "El reclamo se responde según haya o no un evento a esa hora.",
+    "after": "Reclamo simulado:"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Perfil de la matrícula",
+    "para_que": "Responder rápido si un vehículo es habitual o es la primera vez, que es lo que importa en un incidente aunque esté autorizado.",
+    "como": "La pestaña Perfil muestra la frecuencia (pasadas por día, hoy, última semana y gráfico de 30 días), las cámaras habituales con desglose de entradas y salidas y los horarios habituales con su histograma de 24 h. Historial lista todos sus accesos y Datos lo que mandó la cámara.",
+    "ejemplo": "Un auto autorizado entra todos los días a las 8 y hoy entró a las 3: el perfil lo muestra al instante y el supervisor llama al residente."
+   },
+   {
+    "name": "Búsqueda inteligente, modo Accesos",
+    "para_que": "Encontrar un vehículo sin la matrícula, escribiendo como se habla, en vez de revisar video durante una hora.",
+    "como": "Búsqueda inteligente → modo Accesos (verde) busca en la base propia por color, tipo, marca, matrícula, acceso P1 a P7, entradas o salidas, autorizados o denegados, franja del día y fechas relativas, y muestra etiquetas con lo que entendió. Responde en menos de un segundo. Los modos Por texto y Por imagen consultan el NVR y solo cubren cámaras de contexto. El ítem del menú aparece si hay un NVR VPro dado de alta.",
+    "ejemplo": "`camioneta blanca ayer a la tarde` devuelve cinco lecturas; las etiquetas muestran color blanco, tipo camioneta, ayer, franja tarde."
+   },
+   {
+    "name": "ZIP de evidencia",
+    "para_que": "Entregar todo lo del evento en un solo archivo, sin pedirle nada al proveedor ni exportar desde tres sistemas.",
+    "como": "Exportar arma `captura.jpg`, `recorte_matricula.jpg`, `clip_30s.mp4` y `evento.json`. El clip se pide al NVR en el momento, por eso tarda 5 a 15 segundos y requiere el vínculo con el canal. Tiene datos personales: se entrega a quien el cliente autoriza.",
+    "ejemplo": "Un vecino choca la barrera y lo niega: el administrador entrega el ZIP con la foto, el recorte y los 30 segundos de video."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nInvestigar en video era, durante años, mirar horas de grabación. Los NVR sumaron búsquedas por evento y por patente, y los más nuevos búsquedas por texto e imagen sobre índices de analítica. En paralelo, los sistemas de lectura de matrículas acumularon algo más útil para un barrio: el registro de cada paso, con hora, cámara y decisión, sobre el que se puede preguntar directamente.\n\nLas fuentes sobre evidencia en video coinciden en dos condiciones para que sirva: la hora tiene que ser confiable y la lectura tiene que verificarla una persona. Una lectura identifica un vehículo, no a quien maneja.\n\n### Cómo funciona\n\nLa ficha del evento junta todo lo que el sistema sabe de una lectura:\n\n- **Acciones.** Grabación abre el video del NVR en ese instante; Similares encuadra el objetivo y lo busca en las cámaras de contexto; Clip descarga o envía un video corto con la ventana configurada en Video del evento; Exportar arma el ZIP; Registrar da de alta con la matrícula escrita; Lista negra la marca.\n- **Pestañas.** Perfil, Historial y Datos.\n\nLa Búsqueda inteligente en modo Accesos no usa inteligencia artificial ni internet: un analizador traduce la frase a filtros sobre los eventos propios, a partir de lo que la cámara reportó (color, tipo, marca) y de lo que sabe el sistema (acceso, sentido, decisión, hora). Por eso es instantánea y cubre los portones.\n\nLa búsqueda por imagen es distinta: le pide al NVR que busque en sus índices de analítica, que solo existen en cámaras de contexto. Las cámaras de matrícula no alimentan esa búsqueda, y es una limitación del hardware.\n\nUn reclamo de \"no me abrió\" se resuelve con este método: si hay evento Denegado, el problema está en el padrón; si no hay evento, la cámara no lo leyó y la grabación lo confirma."
+ },
+ "9": {
+  "fig": {
+   "file": "9.svg",
+   "alt": "Dos líneas de tiempo: arriba la permanencia de un residente que entra a las 8:00 por P1 y sale a las 10:15 por P2, adentro 2 horas 15 minutos; abajo tres pasadas de una matrícula no registrada en 30 minutos por P1, P2 y P1, con la alerta de merodeo en la tercera.",
+   "caption": "La permanencia se mide entre entrada y salida; el merodeo cuenta pasadas en una ventana."
+  },
+  "steps": [
+   {
+    "file": "9-paso2.svg",
+    "step": 2,
+    "alt": "Tres tarjetas de Anomalías de presencia: autos no identificados adentro, vehículo del barrio adentro hace mucho con más de 4 días, y lotes sin movimiento con 21 días.",
+    "caption": "Las anomalías de presencia juntan lo que se arrastra en días.",
+    "after": "Anomalías de presencia: anotá cuántos"
+   },
+   {
+    "file": "9-paso3.svg",
+    "step": 3,
+    "alt": "Bucle de tres envíos con curl separados por 30 segundos sobre una línea de tiempo con la ventana de antirrebote de 20 segundos, y la tarjeta de alerta Merodeo en la tercera pasada.",
+    "caption": "Separar los envíos más que el antirrebote es lo que permite ver el merodeo.",
+    "after": "Simulá un merodeo con una matrícula"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Permanencia",
+    "para_que": "Saber cuánto estuvo adentro un vehículo: un proveedor que se quedó cuatro horas, una visita que nunca salió.",
+    "como": "En un evento de salida, la ficha calcula el tiempo desde la última entrada de esa matrícula. Necesita cámaras con el sentido bien puesto. En Plazas de Parking, En casa y las anomalías de presencia usan la misma lógica de entradas y salidas.",
+    "ejemplo": "Un proveedor entra a las 9:10 y sale a las 13:40: la ficha de salida dice Permanencia 4h 30m, y el administrador lo compara con el trabajo que declaró."
+   },
+   {
+    "name": "Merodeo",
+    "para_que": "Detectar un vehículo que da vueltas: pasa varias veces en poco tiempo sin ser un residente autorizado, un patrón típico de alguien relevando.",
+    "como": "Por defecto: 3 pasadas o más de la misma matrícula en 30 minutos, por cualquier acceso, excluyendo residentes autorizados, con 30 minutos de enfriamiento. Genera la alerta Merodeo en el monitor y una entrada en la bitácora con cuántas pasadas y por cuántos accesos. Los umbrales se ajustan en la configuración del sistema; el manual habla del mismo acceso, el código cuenta todos.",
+    "ejemplo": "Un auto no registrado pasa por P1, P2 y otra vez P1 en 25 minutos. Salta Merodeo; el guardia mira la grabación y ve un repartidor perdido buscando el lote 12."
+   },
+   {
+    "name": "Anomalías de presencia",
+    "para_que": "Mostrar lo que no es un evento puntual sino un estado que dura días: autos que entraron y no salieron, casas que parecen vacías.",
+    "como": "Plazas de Parking → Anomalías de presencia: Autos no identificados adentro (entraron, no salieron y no son de ningún lote), Vehículo del barrio adentro hace mucho (4 días por defecto) y Lotes sin movimiento, posible casa vacía (21 días).",
+    "ejemplo": "Un lote lleva 23 días sin movimiento: el guardia de la noche lo suma a la ronda mientras la familia está de viaje."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLos sistemas de video sumaron hace años analíticas de comportamiento, como la detección de merodeo (loitering): una persona o un objeto que se queda o vuelve a un lugar más de lo normal. ONVIF incluyó ese tipo de resultado entre los metadatos estandarizados de Profile M, publicado en 2021, junto con la lectura de patentes.\n\nCon lectura de matrículas el merodeo se puede detectar sin analítica de video: alcanza con contar cuántas veces pasa la misma patente en una ventana de tiempo. Al mismo tiempo, las fuentes advierten que las lecturas guardadas forman un mapa de por dónde anda la gente, y que ese dato merece cuidado y retención acotada.\n\n### Cómo funciona\n\nLas tres funciones comparten la misma materia prima: lecturas con matrícula, cámara, sentido y hora.\n\n- **Permanencia.** Cuando llega una salida, se busca la última entrada de esa matrícula y se resta. Si una cámara tiene mal el sentido, el cálculo se rompe.\n- **Merodeo.** Con cada lectura con chapa, el servidor cuenta las pasadas de esa matrícula en los últimos 30 minutos. Si llegan a 3 y no es un residente autorizado, abre la alerta, la anota en la bitácora y no vuelve a avisar por esa matrícula durante 30 minutos. Las lecturas sin chapa no cuentan.\n- **Presencia.** Plazas de Parking cruza entradas y salidas con las unidades para saber qué hay adentro y desde cuándo.\n\nUn detalle para el laboratorio: el antirrebote descarta la misma matrícula por la misma cámara dentro de 20 segundos. Para simular un merodeo hay que separar los envíos más que eso.\n\nEn todos los casos la alerta es un indicio. Lo que decide si se escala es el historial de la matrícula y la grabación."
+ },
+ "10": {
+  "fig": {
+   "file": "10.svg",
+   "alt": "Tres tarjetas de categorías de la lista de vigilancia: Lista negra en rojo, toda lectura queda denegada y pasa a la lista de bloqueo de las lectoras; VIP en verde, se destaca sin cambiar la barrera; En búsqueda en ámbar, avisa sin bloquear y pide motivo.",
+   "caption": "Cada categoría tiene un efecto distinto en la barrera y en el monitor."
+  },
+  "steps": [
+   {
+    "file": "10-paso4.svg",
+    "step": 4,
+    "alt": "Comparación de recortes: a la izquierda el recorte coincide con la lista y se sigue el protocolo; a la derecha el recorte dice SAB 2924 y la lectura SAB 2024, un 9 leído como 0, y no se actúa.",
+    "caption": "Antes de actuar, el recorte manda sobre la lectura.",
+    "after": "Mirá la tarjeta ámbar con el motivo"
+   },
+   {
+    "file": "10-paso5.svg",
+    "step": 5,
+    "alt": "La lista de vigilancia confirma pasar SAB2024 a lista negra; OmniAccess la aplica en tres lectoras, dos actualizadas y una que no respondió; la nueva lectura sale roja y denegada.",
+    "caption": "El resumen dice qué lectoras quedaron actualizadas; el servidor deniega igual.",
+    "after": "Volvé a la lista y pasala a Lista negra"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Categorías de vigilancia",
+    "para_que": "No todas las matrículas que importan se tratan igual: algunas se bloquean, otras se destacan y otras se avisan sin cortar el paso.",
+    "como": "Lista negra: toda lectura queda Denegada, rojo con sonido y pasa a la lista de bloqueo de las lectoras. VIP / Autorizado: se destaca en verde, no cambia la barrera. En búsqueda: ámbar, avisa cuando aparece y exige un motivo, que es lo que ve el guardia en la captura.",
+    "ejemplo": "La administración pide saber cuándo entra la camioneta de una obra con deudas, sin impedirle trabajar: En búsqueda con el motivo escrito."
+   },
+   {
+    "name": "Avisa o En silencio",
+    "para_que": "Algunas matrículas justifican un aviso fuera del puesto; otras solo tienen que verse en el monitor.",
+    "como": "Con Avisa, al detectarla se manda Telegram y se dispara la regla de vigilancia; En silencio, solo se ve en el monitor. Un usuario con rol de bloqueado arrastra todas sus matrículas a la lista negra sin cargarlas dos veces.",
+    "ejemplo": "Una matrícula denunciada como robada va con Avisa: al supervisor le llega el Telegram con la cámara y el sentido apenas la cámara la lee."
+   },
+   {
+    "name": "Verificación del recorte",
+    "para_que": "Las lecturas se equivocan. Actuar sobre una alerta sin mirar puede frenar a un vecino inocente.",
+    "como": "Antes de seguir el protocolo, el guardia compara a ojo el recorte de la patente con la matrícula de la lista. Si no coincide, no actúa y avisa. El ejemplo de Roseville (71 % de alertas equivocadas) muestra por qué.",
+    "ejemplo": "Suena la alerta por `SAB2024` pero el recorte dice `SAB2924`: la cámara leyó un 9 como 0. El guardia no detiene a nadie y avisa al técnico."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLas listas de vigilancia (hotlists) son tan viejas como ANPR: el primer uso fue buscar autos robados. En el Reino Unido la red policial creció hasta unas 13.000 cámaras que, según Wikipedia, registran del orden de 55 millones de lecturas por día, cruzadas contra listas de vehículos de interés.\n\nEsa escala también mostró el problema. Organizaciones de derechos civiles cuestionaron la retención de lecturas de gente no sospechosa, y en Roseville, California, una revisión interna encontró que el 71 % de 1427 alertas de vehículo buscado eran lecturas equivocadas; el caso más citado fue un 9 leído como 8 varias veces. Otras fuentes documentan cámaras que \"leían\" carteles como si fueran patentes.\n\n### Cómo funciona\n\nEn OmniAccess la lista de vigilancia vive en el servidor y tiene tres categorías: lista negra, VIP y en búsqueda. Cada entrada guarda la matrícula normalizada, el motivo, quién la cargó y si avisa.\n\nCuando una matrícula entra en lista negra:\n\n- El servidor la trata como Denegada en las lecturas siguientes.\n- Se carga en todas las lectoras Hikvision como `blackList` (un PUT la mueve de la lista blanca a la de bloqueo), así la cámara tampoco cierra su relé.\n- Si una lectora no responde, el resumen lo dice y la barrera la deniega igual por servidor.\n\nAl sacarla, vuelve a la lista blanca si tiene credencial o se borra de la cámara si no la tiene. La lista negra le gana a cualquier pase de invitado. Y un usuario con rol de bloqueado arrastra todas sus matrículas.\n\nNinguna de estas piezas reemplaza la verificación: el recorte de la patente manda sobre la lectura."
+ },
+ "11": {
+  "fig": {
+   "file": "11.svg",
+   "alt": "Cadena del padrón: Unidad Lote 99, Usuario Residente Prueba, Credencial con dos matrículas y Grupo de acceso Residentes. Debajo, la vista Vehículos / Matrículas con última detección y el panel de sincronización a las cámaras en modo Incremental o Reemplazo total.",
+   "caption": "La cadena completa permite responder qué autos tiene cada lote y mantener las cámaras al día."
+  },
+  "steps": [
+   {
+    "file": "11-paso4.svg",
+    "step": 4,
+    "alt": "Tabla de análisis por cámara con matrículas en la base, en la cámara, a agregar y a quitar, y dos paneles: Incremental recomendado y Reemplazo total solo para reparar.",
+    "caption": "Analizar primero y sincronizar en Incremental: la cámara nunca queda sin lista.",
+    "after": "Sincronizar matrículas a las cámaras → Analizar"
+   },
+   {
+    "file": "11-paso6.svg",
+    "step": 6,
+    "alt": "Diálogo Exportar reporte con período, eventos, columnas y formato PDF, el PDF con portada de Barrio Ejemplo y el recuadro que indica que la portada se arma en Branding, Reportes Exportables.",
+    "caption": "El reporte del mes sale del Historial con la portada del cliente.",
+    "after": "Exportar (Excel / PDF): período del mes"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Cadena del padrón",
+    "para_que": "Que cada matrícula tenga dueño y lugar: sin eso, el sistema abre pero nadie puede responder de quién es un auto o qué autos tiene un lote.",
+    "como": "Unidades / Lotes, después Usuarios & Residentes con su unidad, sus credenciales de matrícula (sin espacios ni guiones) y su grupo de acceso. Vehículos / Matrículas muestra cada vehículo con su dueño y su última detección. Para bajas temporales, Suspendido; Eliminado borra el nombre de los eventos históricos.",
+    "ejemplo": "La administración pregunta qué autos tiene el lote 12: con la cadena completa sale en un filtro; con matrículas sueltas no hay forma."
+   },
+   {
+    "name": "Sincronización con las cámaras",
+    "para_que": "La cámara abre sola solo con lo que tiene en su lista. Cada alta, baja o paso a lista negra hay que reflejarlo en todas las lectoras.",
+    "como": "Dispositivos → vista Cámaras LPR → Sincronizar matrículas a las cámaras → Analizar muestra, por cámara, cuántas hay en la base, cuántas tiene, cuántas faltan y cuántas sobran. Incremental aplica solo las diferencias; Reemplazo total borra y recarga, solo para reparar.",
+    "ejemplo": "Una cámara tiene 676 matrículas y la base 673: el análisis muestra las 3 que sobran en la cámara (por ejemplo, registros de prueba) y el Incremental las quita sin dejar la cámara vacía."
+   },
+   {
+    "name": "Invitados y reporte del mes",
+    "para_que": "Las visitas no van al padrón permanente, y el administrador necesita un cierre de mes presentable.",
+    "como": "Invitados → Nuevo pase de visita: nombre, patente y validez; el pase avisa a las garitas y, si hay WhatsApp configurado, al anfitrión cuando el invitado entra. La lectura del invitado tolera uno o dos caracteres de error. El reporte sale de Historial de Acceso → Exportar (Excel / PDF), con portada de Branding → Reportes Exportables.",
+    "ejemplo": "Un residente espera visitas el sábado: crea el pase con la patente y validez Fin de semana; el lunes, el administrador exporta el PDF del mes con la portada del barrio."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEn Uruguay, la patente Mercosur empezó a emitirse en marzo de 2015 en Montevideo y Canelones: tres letras y cuatro números con un diseño común para el bloque, pensado para cientos de millones de combinaciones. Para un sistema de lectura eso es una ventaja, porque un formato estable mejora el OCR y la validación. También deja una tarea permanente: cada auto nuevo, vendido o prestado es un cambio en el padrón.\n\nLas voces críticas de LPR como credencial ponen el número de ese trabajo: una empresa de credenciales móviles estima entre 20 y 80 horas para cargar un barrio de 500 casas al migrar, y recuerda el caso del residente que llega con el auto del taller y el portón no abre.\n\n### Cómo funciona\n\nEl padrón de OmniAccess es una cadena: unidad, usuario, credencial y grupo. La decisión del servidor busca la credencial de tipo matrícula normalizada; la vista Vehículos / Matrículas ordena lo mismo desde el auto.\n\nLas cámaras tienen una copia: su lista blanca y su lista de bloqueo. La sincronización incremental compara, cámara por cámara, lo que hay en la base con lo que tiene la cámara, y aplica solo diferencias:\n\n- agrega lo que falta,\n- quita lo que sobra,\n- mueve a la lista de bloqueo lo que está en lista negra.\n\nEl Reemplazo total vacía la lista y recarga todo; mientras tanto la cámara no abre sola.\n\nLos pases de invitado viven aparte, con vigencia, y la coincidencia tolera errores de lectura (uno o dos caracteres según el largo). La lista negra siempre gana.\n\nPara el cierre de mes, el Historial de Acceso exporta a Excel o PDF el período, los eventos y las columnas elegidas, con la portada que se define en Branding."
+ },
+ "12": {
+  "fig": {
+   "file": "12.svg",
+   "alt": "Árbol de diagnóstico: ¿llegan eventos a Webhooks? Si no llega nada, red o receptor caído; si llegan sin matrícula, la cámara no hace ANPR; si falta una sola cámara, revisar estado, HTTP host y tasa. Cada rama con sus verificaciones.",
+   "caption": "Tres ramas para la llamada de urgencia, de la red a la cámara."
+  },
+  "steps": [
+   {
+    "file": "12-paso3.svg",
+    "step": 3,
+    "alt": "Comparación de una cámara en roadDetection que lee la patente y una en smart, forzada por la búsqueda por imagen del NVR, que no lee; los cuatro pasos para revertir y el comando curl para consultar el recurso.",
+    "caption": "Un solo motor: o lee patentes o alimenta la búsqueda del NVR.",
+    "after": "Preguntale a la cámara en qué modo"
+   },
+   {
+    "file": "12-paso6.svg",
+    "step": 6,
+    "alt": "Línea de tiempo de una alerta: cámara desconectada, dos sondeos sin respuesta, alerta Sin respuesta con aviso por Telegram y normalizado al reconectar; abajo la tabla de las cinco alertas de salud.",
+    "caption": "La salud de dispositivos abre y cierra alertas sola.",
+    "after": "Desconectá la cámara de prueba unos 3 minutos"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "El árbol de diagnóstico",
+    "para_que": "Ordenar la llamada de \"dejaron de entrar matrículas\" para no reiniciar todo a ciegas y llegar a la causa en minutos.",
+    "como": "Primera pregunta: ¿llegan eventos a Configuración → Sistema → Webhooks? Si no llega nada, red o receptor (ruta de salud en el 10000). Si llegan sin matrícula, la cámara no está haciendo ANPR. Si falta una sola cámara: estado y latencia, ping, HTTP host (se pierde con un reset) y tasa de lectura.",
+    "ejemplo": "Un lunes no entra ninguna matrícula: Webhooks muestra eventos sin chapa de todas las cámaras. No es la red: alguien tocó el NVR el fin de semana."
+   },
+   {
+    "name": "Recurso inteligente: roadDetection o smart",
+    "para_que": "Entender la falla más traicionera: la cámara sigue mostrando imagen y parece sana, pero dejó de leer.",
+    "como": "En estas cámaras el recurso inteligente tiene un solo modo: `roadDetection` lee matrículas; `smart` alimenta la búsqueda por imagen del NVR. Si se agrega el canal LPR a esa búsqueda, el NVR la fuerza a `smart`. Se revierte en orden: sacar el canal de la búsqueda del NVR, volver a `roadDetection`, reiniciar y esperar unos 80 segundos. Si se quieren las dos cosas, va una segunda cámara de contexto.",
+    "ejemplo": "`curl -s --digest -u integrador 192.0.2.21/ISAPI/System/Video/inputs/channels/1/VCAResource` devuelve `smart`: el diagnóstico está hecho."
+   },
+   {
+    "name": "Salud de dispositivos",
+    "para_que": "Enterarse de la falla antes que el cliente, incluida la que no se ve en la imagen.",
+    "como": "El sistema sondea cada cámara y NVR por ISAPI y guarda 14 días de historial. Abre alertas de Sin respuesta (dos sondeos seguidos), Disco del NVR, Memoria arriba de 95 %, Reloj con más de 120 s y ANPR apagado, y avisa por Telegram para cámaras LPR y NVR. Cuando la condición se resuelve, manda el normalizado.",
+    "ejemplo": "A las 4 de la mañana llega un Telegram: ANPR apagado en P1 - Entrada (21). El técnico lo revierte antes de que alguien necesite una lectura que no existe."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLos fabricantes de cámaras con analítica pusieron varios motores en un mismo procesador, pero no todos a la vez. En las cámaras Hikvision con analítica propia el recurso inteligente tiene un solo modo activo, y los NVR más nuevos, con búsqueda por texto e imagen, pueden pedirle a la cámara que cambie de modo para alimentar su índice. El resultado es una falla silenciosa conocida por los integradores: en IPCamTalk, un integrador cuenta que al cambiar el modo de detección de su cámara dejó de recibir los eventos por HTTP.\n\nLa autenticación Digest que usa ISAPI para estas consultas viene de las RFC 2069 (1997) y 2617 (1999), actualizada en la RFC 7616 de 2015.\n\n### Cómo funciona\n\nEl diagnóstico sigue la misma línea que el recorrido de una lectura:\n\n1. **¿Llegan eventos?** Webhooks y la ruta `/health` del receptor dicen si la red y el servicio están bien.\n2. **¿Llegan con matrícula?** Si llegan sin chapa, la cámara vio el auto pero no leyó: se consulta `VCAResource` y `vehicleDetect` por ISAPI.\n3. **¿Es una sola?** Estado, latencia, HTTP host y tasa de lectura.\n\nLa salud de dispositivos hace este trabajo sola: sondea cada equipo, guarda muestras 14 días y abre o cierra alertas con su motivo. Para no dar falsas alarmas, Sin respuesta pide dos sondeos seguidos; memoria abre en 95 % y cierra en 90 %; reloj abre con más de 120 segundos.\n\nLa exactitud real también es parte del diagnóstico. Las fuentes recuerdan que un sistema LPR tiene dos números, captura y lectura, que se multiplican, y que los porcentajes de catálogo son sobre patentes legibles. Por eso la entrega se cierra con la tasa medida de día y de noche, no con la del folleto."
+ }
+}

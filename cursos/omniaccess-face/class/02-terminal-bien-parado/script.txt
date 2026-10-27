@@ -1,0 +1,21 @@
+A: Lección dos. Antes de tocar el panel, el equipo en la pared.
+B: ¿Tanto importa dónde va? Es una pantallita con cámara.
+A: Importa más que cualquier configuración. Un terminal mal ubicado no lo arregla ningún umbral.
+B: Bueno, ¿a qué altura va?
+A: Ahí está lo interesante: las fuentes no coinciden en el número. Control iD dice un metro treinta. ClockRite dice un metro diez, con la gente mirando hacia abajo. Synerion pone la cámara a un metro cuarenta y ocho.
+B: ¿Y en qué coinciden?
+A: En la lógica. Las cuatro buscan que la cámara vea de frente a un rango de estaturas, a una distancia de medio metro más o menos. Synerion lo cuenta clarito: con la cámara a ciento cuarenta y ocho centímetros reconoce gente de uno cincuenta a dos metros parada a cincuenta centímetros.
+B: Entonces manda la ficha del modelo.
+A: Manda la ficha, y después la prueba con la persona más baja y la más alta del lugar.
+B: ¿Y la luz?
+A: Ahí sí, cinco de cinco fuentes dicen lo mismo: nada de sol directo y nada de contraluz. Si atrás de la persona hay una puerta de vidrio que da a la calle, la cara queda en sombra.
+B: Uf, eso es el hall de cualquier edificio.
+A: Exacto. Caso típico: Edificio Rambla, terminal en el hall, instalado a las diez de la mañana, anda perfecto. A las cinco de la tarde el sol entra por la puerta y empiezan los "no me reconoce".
+B: ¿Y qué se hace?
+A: Moverlo para que la puerta no quede detrás, o usar el WDR del equipo, o sumar luz de frente. Hikvision recomienda WDR cuando va afuera, y Synerion pone la luz frontal al máximo por defecto.
+B: ¿Algo más que se olvida siempre?
+A: Limpiar la ventana de la cámara. Synerion lo pone como mantenimiento.
+B: ¿Qué probamos?
+A: Veinte minutos con un terminal de banco y una cinta. Medí hasta la cámara, probá con dos personas de alturas distintas a treinta, cincuenta y cien centímetros, y mirá qué hay detrás de ellas. Si hay vidrio, anotalo.
+B: Y si no reconoce, primero la luz, después el umbral.
+A: Eso. El terminal se monta para la peor hora del día.

@@ -1,0 +1,19 @@
+A: Lección cuatro: dar de alta la cámara. Y te adelanto que ya no es entrar a la web de la cámara y tocar diez pantallas.
+B: ¿No?
+A: No. En Dispositivos tocás Agregar, elegís Cámara LPR y te lleva por pasos: Equipo, Conexión, Ubicación, Grabación y Puesta a punto.
+B: Equipo es la marca y el nombre.
+A: Eso. Y para el nombre el manual propone una convención: acceso, sentido y el último octeto de la IP. Pe uno, entrada, veintiuno. Ese nombre después sale en cada alerta y en cada reporte.
+B: Conexión, la IP y el usuario.
+A: IP, usuario, contraseña y autenticación Digest. Un usuario del integrador, no el de fábrica.
+B: ¿Y Ubicación?
+A: Ahí está lo importante. El Sentido: entrada o salida. Decide en qué columna del monitor aparece, si suma a los que están adentro y si cierra visitas. Y el grupo de acceso. Si lo dejás sin grupo, te avisa que esa cámara no deja pasar a nadie por servidor.
+B: Grabación es el NVR.
+A: El NVR y el canal. Y después el botón que me gusta: Crear y poner a punto. Va tarea por tarea: le pone la hora, le configura el servidor de alarmas para que mande cada lectura a OmniAccess, verifica el modo ANPR, pasa el video a H.264, registra el vivo, carga las matrículas en la cámara y vincula la grabación.
+B: ¿Y si una sale en rojo?
+A: Te dice por qué. Lo anotás y lo resolvés. ¿Te acordás del integrador de Brasil en IPCamTalk?
+B: ¿El de las cámaras detrás de NAT?
+A: Ese. Le llegaban los posts y no sabía de qué cámara eran. OmniAccess busca primero por la MAC que viene en el XML y después por la IP, justamente por eso.
+B: Bien pensado. ¿Laboratorio?
+A: Cámara de prueba con IP fija. Hacés el alta completa con el nombre de la convención, mirás la puesta a punto y anotás qué quedó verde. Después abrís Webhooks en Configuración, Sistema, pasás un auto y ves llegar el evento con su nombre.
+B: Y si después alguien le hace un reset de fábrica...
+A: Pierde el servidor de alarmas y deja de reportar. Repetís la puesta a punto y listo.

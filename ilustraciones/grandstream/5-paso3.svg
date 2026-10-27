@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Strip 1: el 9 sirve para elegir la ruta y se saca</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">GRANDSTREAM · PASO 3</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Strip 1: el 9 sirve para elegir la ruta y se saca</text>
+<text x="48.0" y="158.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">1. La interna marca</text>
+<rect x="48" y="176" width="50" height="60" rx="8" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/>
+<text x="73.0" y="216.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">9</text>
+<rect x="106" y="176" width="50" height="60" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="131.0" y="216.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">2</text>
+<rect x="164" y="176" width="50" height="60" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="189.0" y="216.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">9</text>
+<rect x="222" y="176" width="50" height="60" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="247.0" y="216.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">0</text>
+<rect x="280" y="176" width="50" height="60" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="305.0" y="216.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">0</text>
+<rect x="338" y="176" width="50" height="60" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="363.0" y="216.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">1</text>
+<rect x="396" y="176" width="50" height="60" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="421.0" y="216.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">0</text>
+<rect x="454" y="176" width="50" height="60" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="479.0" y="216.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">0</text>
+<rect x="512" y="176" width="50" height="60" rx="8" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="537.0" y="216.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">7</text>
+<text x="48.0" y="290.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">2. Matchea el patrón</text>
+<rect x="48" y="306" width="300" height="48" rx="10" fill="#03213C"/><text x="64.0" y="337.0" font-family="JetBrains Mono" font-size="20" font-weight="500" fill="#D9E9F8" text-anchor="start">_9NXXXXXXX</text>
+<text x="370.0" y="338.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">9 fijo · N de 2 a 9 · 7 dígitos más</text>
+<text x="48.0" y="410.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">3. Strip 1 saca el primer dígito</text>
+<rect x="48" y="428" width="50" height="60" rx="8" fill="#FFFFFF" stroke="#D2492F" stroke-width="2" stroke-dasharray="5 4"/>
+<text x="73.0" y="468.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#D2492F" text-anchor="middle">9</text>
+<path d="M56 480L90 436" stroke="#D2492F" stroke-width="3"/>
+<rect x="106" y="428" width="50" height="60" rx="8" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="131.0" y="468.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">2</text>
+<rect x="164" y="428" width="50" height="60" rx="8" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="189.0" y="468.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">9</text>
+<rect x="222" y="428" width="50" height="60" rx="8" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="247.0" y="468.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">0</text>
+<rect x="280" y="428" width="50" height="60" rx="8" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="305.0" y="468.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">0</text>
+<rect x="338" y="428" width="50" height="60" rx="8" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="363.0" y="468.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">1</text>
+<rect x="396" y="428" width="50" height="60" rx="8" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="421.0" y="468.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">0</text>
+<rect x="454" y="428" width="50" height="60" rx="8" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="479.0" y="468.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">0</text>
+<rect x="512" y="428" width="50" height="60" rx="8" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="537.0" y="468.0" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#04223D" text-anchor="middle">7</text>
+<path d="M580.0 458.0C630.0 458.0,630.0 458.0,680.0 458.0" fill="none" stroke="#0E8F5E" stroke-width="3" stroke-linecap="round" marker-end="url(#a-ok)"/>
+<rect x="700" y="416" width="300" height="84" rx="16" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="3"/><g transform="translate(720 442.0) scale(1.35)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 9.5 4.3 4.3 0 0 0 7 18z"/></g><text x="764.0" y="454.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Proveedor_Lab</text><text x="764.0" y="477.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">recibe 29001007</text>
+<circle cx="48" cy="176" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="182.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<rect x="720" y="160" width="432" height="124" rx="14" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/><rect x="720" y="172" width="5" height="100" rx="2.5" fill="#D2492F"/><text x="746.0" y="194.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="746.0" dy="0.0">Sin Strip</tspan></text><text x="746.0" y="220.9" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="746.0" dy="0.0">Si el patrón incluye el 9 y no ponés Strip, el</tspan><tspan x="746.0" dy="21.6">9 viaja al proveedor pegado al número:</tspan><tspan x="746.0" dy="21.6">929001007.</tspan></text>
+<rect x="48" y="528" width="1104" height="75" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="540" width="5" height="51" rx="2.5" fill="#0A63B8"/><text x="74.0" y="562.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">El prefijo de salida es una costumbre de la oficina, no parte del número: el patrón lo usa para elegir la ruta y Strip lo quita</tspan><tspan x="74.0" dy="21.6">antes del troncal.</tspan></text>
+</svg>

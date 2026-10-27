@@ -1,0 +1,12 @@
+{
+ "27": {
+  "teoria_figs": [
+   {
+    "file": "27-rib-fib.svg",
+    "after": "**RIB y FIB.**",
+    "alt": "Animación en cinco tiempos: las rutas entran a la RIB, por destino gana la de menor distancia y pasa a la FIB, un paquete a 10.20.5.7 coincide con la /16 y la /24 y gana la /24, cae el ISP A y la FIB pasa al ISP B, vuelve el ISP A y recupera su lugar.",
+    "caption": "RIB y FIB en movimiento: la RIB guarda todas las rutas candidatas; la FIB, solo las ganadoras. Mirá qué cambia en cada una cuando cae el ISP A."
+   }
+  ]
+ }
+}

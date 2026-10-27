@@ -1,0 +1,47 @@
+{
+ "slug": "omniaccess-filas",
+ "title": "OmniAccess Filas: control de filas y aforo",
+ "vendor": "Infratec",
+ "tagline": "La cámara cuenta, OmniAccess avisa: filas y aforo con Bosch IVA Pro, ONVIF y go2rtc, del alta al reporte del día.",
+ "description": "Al terminar vas a poder configurar una cámara Bosch con IVA Pro para contar una fila, darla de alta en OmniAccess Filas y verificar que los eventos ONVIF lleguen, poner el video en vivo con go2rtc, calibrar el aforo, programar el reseteo, los umbrales y los canales de aviso. Del lado de la operación, vas a leer el monitor y la espera estimada sabiendo de dónde sale, atender una alerta con la imagen en la mano y mandar los reportes del día.",
+ "level": "Inicial a intermedio",
+ "audience": "Técnicos de IES que instalan y mantienen OmniAccess Filas, y operadores o supervisores que miran las filas todos los días.",
+ "prerequisites": [
+  "Direccionamiento IP, máscara, gateway y acceso a un servidor Linux por SSH",
+  "Haber configurado una cámara IP y visto su stream RTSP",
+  "Una cámara Bosch con IVA Pro de banco y Configuration Manager 7.74 o superior",
+  "Una instalación de prueba o demo de OmniAccess donde se pueda activar el Modo Cola"
+ ],
+ "outcomes": [
+  "Ubicar y configurar una cámara Bosch IVA Pro para contar una fila: zona, tarea de ocupación llamada Aforo y tareas de entrada y salida",
+  "Dar de alta el contador en OmniAccess y verificar el sondeo ONVIF (pull point) con Analíticas ONVIF y el estado del servidor",
+  "Publicar el video en vivo con go2rtc con el stream bosch_<ip> y diagnosticar el vivo y los clips",
+  "Calibrar el aforo con la señal cruda y el editor de la cámara, con backup, y programar el reseteo diario",
+  "Configurar umbrales, canales y destinatarios, y seguir cada aviso en Despachos",
+  "Operar la fila: leer el monitor y la espera estimada (ley de Little), atender alertas y cortes, y sacar reportes"
+ ],
+ "version_note": "Escrito en octubre de 2026 sobre el código de OmniAccess (rama de desarrollo de octubre de 2026). Los manuales de OmniAccess Filas (operador y administrador) están en estructura, con secciones pendientes: los menús y pantallas del curso salen del código y pueden diferir del índice del manual. Cámaras: Bosch con IVA Pro (nota técnica de conteo para FW 9.40 y Configuration Manager 7.74). El sondeo de Filas en esta versión trabaja solo con cámaras Bosch; el manual menciona Hikvision por ISAPI, que el código de Filas no implementa. Algunos detalles dependen de la instalación (push ONVIF, zona horaria del servidor, canales configurados).",
+ "arcs": [
+  {"title": "La fila entra al sistema", "why": "Antes de configurar avisos, la cámara tiene que contar bien, OmniAccess tiene que recibir sus eventos y el video tiene que verse.", "lessons": [1, 2, 3, 4]},
+  {"title": "Que avise bien", "why": "Un aforo que parpadea genera alertas falsas y un aviso que no sale no sirve: calibración, horarios, umbrales y canales.", "lessons": [5, 6, 7]},
+  {"title": "Operar la fila", "why": "El operador vive en el monitor, en la alerta y en el reporte del día.", "lessons": [8, 9, 10]}
+ ],
+ "splits": [
+  {"topic": "Cómo estimar la espera", "sides": "OmniAccess aplica la ley de Little con las salidas de los últimos 15 minutos (aforo dividido por el ritmo de salida); FootfallCam propone estimarla con el tiempo medio de atención y el largo medio de la fila.", "decide": "Con una zona de salida bien contada, la estimación de OmniAccess es buena en fila estable. Si las salidas se cuentan mal o la fila crece de golpe, usar la espera como tendencia y no como promesa."},
+  {"topic": "Cámara dedicada o la que ya está", "sides": "Bosch dice que la vista frontal no sirve para contar y pide vista cenital a más de 3 m; el manual comercial de OmniAccess habla de usar las mismas cámaras del lugar.", "decide": "Si la cámara existente no ve la fila desde arriba o a más de 3 m, cotizar una cámara dedicada para el conteo y dejar la existente para el video."},
+  {"topic": "Pull o push ONVIF", "sides": "La especificación ofrece los dos; el pull es amigable con el firewall y el push es más inmediato pero depende de que la cámara llegue al servidor y de renovar la suscripción. En OmniAccess el pull es el camino completo y el push, en esta versión, solo avisa por Telegram.", "decide": "Dejar el pull como camino principal. Activar el push solo después de probar con todas las cámaras que cada evento cae en su fila y que todos los canales de aviso funcionan."}
+ ],
+ "sources_count": 26,
+ "lessons": [
+  {"n": 1, "dir": "01-que-cuenta-filas", "handle": "Qué cuenta Filas", "summary": "La cámara cuenta y OmniAccess lee sus eventos, los muestra y avisa; el Modo Cola es exclusivo."},
+  {"n": 2, "dir": "02-la-camara-cuenta", "handle": "La cámara cuenta", "summary": "Ubicar la cámara Bosch y armar las tareas IVA Pro, con la de ocupación llamada Aforo."},
+  {"n": 3, "dir": "03-alta-del-contador", "handle": "Alta del contador", "summary": "Dar de alta el Contador de Filas y verificar el sondeo ONVIF, pull y push."},
+  {"n": 4, "dir": "04-video-en-vivo", "handle": "Video en vivo", "summary": "go2rtc con el stream bosch_<ip> para el vivo y los clips de las alertas."},
+  {"n": 5, "dir": "05-calibrar-el-aforo", "handle": "Calibrar el aforo", "summary": "Medir el parpadeo y ajustar zona, rebote y ventana anti doble conteo en la cámara, con backup."},
+  {"n": 6, "dir": "06-horarios-y-umbrales", "handle": "Horarios y umbrales", "summary": "Reseteo a la apertura, umbral con cooldown, estados y escalamiento."},
+  {"n": 7, "dir": "07-canales-y-despachos", "handle": "Canales y despachos", "summary": "Canales, destinatarios y reglas, y la cola con reintentos que se ve en Despachos."},
+  {"n": 8, "dir": "08-monitor-y-espera", "handle": "Monitor y espera", "summary": "Leer el Monitor en Vivo y el kiosko, y entender la espera estimada con la ley de Little."},
+  {"n": 9, "dir": "09-atender-la-alerta", "handle": "Atender la alerta", "summary": "Del recuadro rojo a la acción: mirar la imagen, escalar, alertas de salud y cortes."},
+  {"n": 10, "dir": "10-reportes-programados", "handle": "Reportes programados", "summary": "Reportes de afluencia exportables y resumen diario programado, con sus detalles de canal y hora."}
+ ]
+}

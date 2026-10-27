@@ -1,0 +1,93 @@
+{
+ "4": {
+  "fig": {
+   "file": "4.svg",
+   "alt": "Internet a la izquierda y la LAN con NVR y PCs a la derecha. Una flecha input va desde internet a los servicios del propio router (WinBox, SSH, DNS, API). Otra flecha forward atraviesa el router hacia la LAN. Abajo, tres reglas en orden: accept para admins al 8291, accept established y related, y drop de lo que no viene de la LAN.",
+   "caption": "input es lo que va al router; forward, lo que pasa a través. Y se lee de arriba abajo."
+  },
+  "steps": [
+   {
+    "file": "4-paso2.svg",
+    "step": 2,
+    "alt": "El camino del paquete de izquierda a derecha: entra por una interfaz, pasa por prerouting (raw, connection tracking y dst-nat resaltado), llega a la decisión de ruteo que pregunta si el destino es una IP del router. Si es así va a input y al router (WinBox, DNS, ping); si no, a forward. Lo que genera el router baja por output. Todo sale por postrouting, donde está el src-nat (masquerade). Una nota dice que el dst-nat cambia el destino antes de la decisión, así que un port forwarding cae en forward. Abajo, tres ejemplos: ping a 192.168.88.1 va a input, ping a 1.1.1.1 a forward y el ping desde el router a output.",
+    "caption": "El dst-nat va antes de decidir el camino; el masquerade, después del filter.",
+    "after": "Mirá el camino del paquete"
+   },
+   {
+    "file": "4-paso4.svg",
+    "step": 4,
+    "alt": "A la izquierda, las reglas de la cadena input en orden: accept established, drop invalid, accept ICMP, un jump resaltado a gestion-wan para WAN TCP 22 y 8291, y el drop de lo que no viene de LAN. Una flecha jump lleva a la cadena gestion-wan, con accept para la lista admins y drop con log-prefix GESTION-WAN; una flecha punteada vuelve a input si nadie decide. Abajo, 203.0.113.25 en admins entra por WinBox (verde) y 198.51.100.7 queda en el log y se descarta (rojo). Una terminal muestra la línea del log con el prefijo GESTION-WAN.",
+    "caption": "jump ordena la gestión desde WAN en una cadena propia; log-prefix la hace fácil de buscar.",
+    "after": "Ejemplo 1: WinBox y SSH desde WAN"
+   },
+   {
+    "file": "4-paso9.svg",
+    "step": 9,
+    "alt": "Arriba, el comando print stats de forward. Dos tablas con números de ejemplo. Bien ordenado: NVR a NTP 12 paquetes, NVR a su nube 340, NVR resto 25. Con el reject arriba por error: NVR resto 377 y las dos reglas accept en 0, en rojo. Notas: manda la primera que coincide y move la devuelve a su lugar; si no sube ninguna, el tráfico no llega y se mira con Torch.",
+    "caption": "La regla que suma es la que coincide; la de abajo queda en 0 aunque esté bien escrita.",
+    "after": "Diagnóstico, en este orden"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "El camino del paquete y dónde entra el NAT",
+    "para_que": "El router necesita saber qué hacer con cada paquete antes de filtrarlo: si es para él o si lo tiene que reenviar. Separar el recorrido en etapas fijas permite poner cada función en su lugar: traducir el destino antes de decidir, filtrar después, y traducir el origen al salir.",
+    "como": "Pensá el recorrido como una línea: prerouting (raw, estado de la conexión, dst-nat), decisión de ruteo, input o forward, y postrouting (src-nat). Antes de escribir una regla, preguntate en qué punto de esa línea está el paquete que querés frenar y con qué direcciones llega ahí. Las reglas de forward ven la IP privada de la PC, porque el masquerade viene después; las del NVR publicado ven la IP del NVR, porque el dst-nat vino antes.",
+    "ejemplo": "Un NVR en una clínica de Pocitos está publicado por el 18000. El técnico pone `chain=input dst-port=18000` para limitar orígenes y el contador queda en 0. La regla correcta es en forward, con `dst-address=192.168.88.50 dst-port=8000`: cuando el paquete llega al filter ya tiene el destino y el puerto del NVR."
+   },
+   {
+    "name": "Estados de conexión y FastTrack",
+    "para_que": "Revisar cada paquete de una descarga o de un flujo de video contra todas las reglas sería lento y difícil de escribir. El connection tracking recuerda cada conexión, así el firewall decide una vez, con el primer paquete, y el resto viaja con el estado established.",
+    "como": "La primera regla de input y de forward acepta established, related y untracked; después se descarta invalid; recién ahí van tus reglas, que solo ven paquetes new. FastTrack acelera lo ya establecido salteando firewall y colas: si usás colas simples o IPsec, conviene revisarlo. Ojo: una regla nueva no corta lo que ya estaba abierto; para probar, se borra la conexión en `/ip/firewall/connection`.",
+    "ejemplo": "Bloqueás la salida a internet de una cámara que mandaba video a una nube y la cámara sigue subiendo. No es que la regla esté mal: la sesión ya estaba establecida. Con `/ip/firewall/connection/remove [find src-address~\"192.168.88.101\"]` la cortás y desde ahí manda tu drop."
+   },
+   {
+    "name": "drop, reject, jump y passthrough",
+    "para_que": "No todo bloqueo es igual. Hacia internet conviene no dar información; adentro conviene que el equipo se entere rápido para no colgar procesos esperando. Y cuando las reglas crecen, hace falta ordenarlas en grupos y poder contar sin decidir.",
+    "como": "drop descarta en silencio; reject descarta y avisa con un ICMP o un `tcp-reset` (`reject-with=icmp-admin-prohibited`, por ejemplo). jump manda el paquete a una cadena tuya, como `gestion-wan`, y si ahí nadie decide vuelve a la cadena original. passthrough suma al contador y deja seguir: sirve para medir sin tocar nada. log=yes con un `log-prefix` deja el paquete en el log con una etiqueta fácil de buscar.",
+    "ejemplo": "En un barrio privado de Canelones, la central de monitoreo entra por WinBox desde su IP fija. Una regla `jump` de la WAN al 8291 lleva todo a `gestion-wan`: la IP de la central se acepta, el resto se registra con `GESTION-WAN` y se descarta. Al otro día, `/log/print where message~\"GESTION-WAN\"` muestra quién estuvo probando."
+   },
+   {
+    "name": "Contadores y diagnóstico",
+    "para_que": "El firewall no da errores: si una regla está mal ubicada, simplemente no coincide. Los contadores son la forma de saber qué regla se queda con cada paquete sin adivinar.",
+    "como": "`/ip/firewall/filter/print stats` muestra bytes y paquetes por regla. Ponés en cero con `reset-counters`, generás el tráfico y mirás cuál sube. Si no sube ninguna, el tráfico no llega (Torch lo confirma); si sube una de arriba, esa se lo come. `disable` y `enable` sirven para probar sin borrar, y `move` reordena. En WinBox es lo mismo: columnas Bytes y Packets, el botón de reset y arrastrar la regla.",
+    "ejemplo": "Un NVR no sincroniza la hora. En el print stats, la regla `NVR a NTP` está en 0 y `NVR resto` en 377: alguien movió el reject arriba. Un `move` lo devuelve abajo y el contador de NTP empieza a subir en un minuto."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEl firewall de RouterOS no es un invento aislado: RouterOS corre sobre Linux y su firewall usa el mismo modelo de cadenas y tablas que netfilter, el marco de filtrado del kernel. Netfilter lo empezó Rusty Russell en 1998, después de haber escrito ipchains, su antecesor. El 26 de agosto de 1999 entró al kernel en desarrollo 2.3.15 y quedó en la versión estable 2.4.0, que salió a comienzos de 2001 con la herramienta iptables.\n\nLa gran diferencia con ipfwadm e ipchains fue separar el trabajo en piezas que se enganchan en puntos fijos del camino del paquete, y sumar un connection tracking de verdad: el kernel recuerda cada conexión y puede decir si un paquete es nuevo, parte de algo ya aceptado o basura. Ese seguimiento es lo que permite que una sola regla de established y related deje volver todas las respuestas, incluso en UDP.\n\nMikroTik tomó esa base y le puso su propia interfaz: los mismos nombres de cadenas, los mismos estados, y agregados propios como las address lists, las interface lists y FastTrack. RouterOS 7, estable desde 2021, mantiene el mismo modelo.\n\n### Cómo funciona\n\nUn paquete que entra recorre etapas fijas. En prerouting pasan raw, el connection tracking (que le pone el estado) y el dst-nat. Recién después el router decide el camino: si el destino es una de sus IP, el paquete va a input; si no, a forward. Lo que genera el propio router sale por output. Al final, en postrouting, se aplica el src-nat, por ejemplo el masquerade hacia la WAN.\n\nEso explica dos cosas que confunden en obra. Un port forwarding nunca se ve en input: el dst-nat ya cambió el destino al NVR antes de la decisión. Y una regla de forward ve las direcciones privadas originales de la LAN, porque el masquerade todavía no ocurrió.\n\nDentro de cada cadena las reglas se leen en orden. Las acciones accept, drop, reject y jump deciden; passthrough y log anotan y dejan seguir. Si el paquete llega al final sin que nadie decida, pasa: en `/ip/firewall/filter` una cadena vacía es un accept. Una cadena propia creada con `jump` vuelve sola a la cadena que la llamó si no decide nada.\n\nFastTrack marca conexiones establecidas para que sus paquetes salteen firewall, connection tracking y colas. Por eso se acompaña con un accept igual, y por eso un contador de forward puede quedar quieto aunque haya tráfico.",
+  "script_rsc": {
+   "titulo": "Reglas de obra: gestión desde la oficina, salida del NVR y cámaras sin internet",
+   "descripcion": "Agrega la oficina a la lista admins, una cadena gestion-wan que deja entrar a WinBox y SSH desde WAN solo a esa lista y registra el resto, y en forward deja al NVR salir solo a NTP y a su nube y a las cámaras sin internet. Todo con comentarios ies- y sobre el firewall por defecto.",
+   "variables": [
+    {
+     "nombre": "OFICINA_IP",
+     "valor": "203.0.113.25",
+     "detalle": "IP pública fija de la oficina que administra (va a la lista admins)"
+    },
+    {
+     "nombre": "NVR_IP",
+     "valor": "192.168.88.50",
+     "detalle": "IP del NVR en la LAN"
+    },
+    {
+     "nombre": "NUBE_NVR",
+     "valor": "nube.fabricante.example",
+     "detalle": "Nombre o IP de la nube que publica el fabricante del NVR"
+    },
+    {
+     "nombre": "CAMARAS",
+     "valor": "192.168.88.101-192.168.88.150",
+     "detalle": "Rango o red de las cámaras"
+    }
+   ],
+   "codigo": "# IES Training · MikroTik · Input y forward: reglas de obra (lección 4)\n# Probalo primero en un equipo de banco y en Safe Mode (Ctrl+X).\n# Requiere el firewall por defecto. No borra reglas existentes.\n{\n:local oficina \"{{OFICINA_IP}}\"\n:local nvr \"{{NVR_IP}}\"\n:local nube \"{{NUBE_NVR}}\"\n:local camaras \"{{CAMARAS}}\"\n:local drop [/ip/firewall/filter/find chain=input comment=\"defconf: drop all not coming from LAN\"]\n:if ([:len $drop] = 0) do={ :error \"No encuentro el drop de la defconf: revisa el firewall a mano\" }\n# 1. La oficina en la lista admins\n:if ([:len [/ip/firewall/address-list/find list=admins address=$oficina]] = 0) do={\n  /ip/firewall/address-list/add list=admins address=$oficina comment=\"ies-admins\" }\n# 2. Gestion desde WAN: cadena propia; admins entra, el resto queda en el log\n:if ([:len [/ip/firewall/filter/find comment=\"ies-gestion-wan\"]] = 0) do={\n  /ip/firewall/filter/add chain=gestion-wan src-address-list=admins action=accept comment=\"ies-gestion-wan-admins\"\n  /ip/firewall/filter/add chain=gestion-wan action=drop log=yes log-prefix=\"GESTION-WAN\" comment=\"ies-gestion-wan-resto\"\n  /ip/firewall/filter/add chain=input in-interface-list=WAN protocol=tcp dst-port=22,8291 action=jump jump-target=gestion-wan comment=\"ies-gestion-wan\" place-before=$drop }\n# 3. Listas del NVR y de las camaras\n:if ([:len [/ip/firewall/address-list/find list=nube-nvr address=$nube]] = 0) do={\n  /ip/firewall/address-list/add list=nube-nvr address=$nube comment=\"ies-nube-nvr\" }\n:if ([:len [/ip/firewall/address-list/find list=camaras address=$camaras]] = 0) do={\n  /ip/firewall/address-list/add list=camaras address=$camaras comment=\"ies-camaras\" }\n# 4. Forward: NVR solo a NTP y a su nube (reject al resto); camaras sin internet\n:if ([:len [/ip/firewall/filter/find comment=\"ies-nvr-ntp\"]] = 0) do={\n  /ip/firewall/filter/add chain=forward src-address=$nvr out-interface-list=WAN protocol=udp dst-port=123 action=accept comment=\"ies-nvr-ntp\"\n  /ip/firewall/filter/add chain=forward src-address=$nvr out-interface-list=WAN dst-address-list=nube-nvr action=accept comment=\"ies-nvr-nube\"\n  /ip/firewall/filter/add chain=forward src-address=$nvr out-interface-list=WAN action=reject reject-with=icmp-admin-prohibited comment=\"ies-nvr-resto\"\n  /ip/firewall/filter/add chain=forward src-address-list=camaras out-interface-list=WAN action=drop comment=\"ies-camaras-sin-internet\" }\n# Si ya hay un drop final de zonas (lección 36), estas reglas van arriba de el\n:local fin [/ip/firewall/filter/find comment=\"ies-zona-fin\"]\n:if ([:len $fin] > 0) do={\n  :foreach c in={\"ies-nvr-ntp\";\"ies-nvr-nube\";\"ies-nvr-resto\";\"ies-camaras-sin-internet\"} do={\n    /ip/firewall/filter/move [/ip/firewall/filter/find comment=$c] destination=$fin } }\n:put \"Listo: admins, cadena gestion-wan, salida del NVR y camaras sin internet.\"\n:put \"Verifica con: /ip/firewall/filter/print stats where comment~\\\"ies-\\\"\"\n}",
+   "notas": [
+    "Si entrás desde la WAN para pegarlo, tu IP tiene que ser la de OFICINA_IP: las conexiones nuevas de otras IP al 22 y al 8291 quedan en el log y se descartan. Lo más seguro es pegarlo desde la LAN.",
+    "Si limitaste WinBox con available-from (lección de cerrar puertas), sumá ahí también la IP de la oficina.",
+    "El DNS del NVR conviene que sea el router: es input y ya está permitido desde la LAN. Si el NVR usa un DNS público, la regla de reject lo corta.",
+    "No hace el ping limitado ni las reglas con horario: el ping desde WAN lo resuelve el script de la lección de reglas de protección, y el horario de invitados se arma a mano con los valores del cliente.",
+    "Para deshacer: /ip/firewall/filter/remove [find comment~\"^ies-(gestion-wan|nvr|camaras)\"] y /ip/firewall/address-list/remove [find comment~\"^ies-(nube-nvr|camaras)\"]."
+   ]
+  }
+ }
+}

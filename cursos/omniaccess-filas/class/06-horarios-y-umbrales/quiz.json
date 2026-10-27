@@ -1,0 +1,5 @@
+[
+  {"q": "Creaste un horario con Reseteo automático a las 08:00, pero los contadores nunca vuelven a cero. ¿Qué es lo más probable?", "options": ["Falta en el servidor la tarea programada que llama cada minuto a schedule/tick", "La cámara está en H.265", "El umbral está muy alto", "El kiosko está apagado"], "answer": 0, "why": "El reseteo lo dispara una tarea por minuto en el servidor; sin esa línea en el cron, el horario no hace nada."},
+  {"q": "Umbral 10. La fila tiene 7 personas. ¿Qué estado muestra OmniAccess?", "options": ["OK", "Lleno", "Alto", "Crítico"], "answer": 2, "why": "Alto empieza en el 70 % del umbral; Lleno al llegar al 100 %."},
+  {"q": "La fila supera el umbral y sigue así 5 minutos. ¿Qué pasa además del aviso inicial?", "options": ["Nada más hasta el día siguiente", "Se reinicia la cámara", "Se baja el umbral solo", "Llega por Telegram un aviso de escalamiento para el supervisor"], "answer": 3, "why": "Si el aforo se sostiene sobre el umbral el tiempo de escalamiento (5 minutos por defecto), OmniAccess manda el aviso de escalamiento por Telegram y encola un reporte."}
+]

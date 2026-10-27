@@ -1,0 +1,18 @@
+A: Lección nueve: menos falsas alarmas. Y arranco con un número de Davantis, que vende analítica, así que tomalo como su afirmación.
+B: Dale.
+A: Dicen que, con detección de movimiento común, más del setenta y seis por ciento de lo que recibe una central es falso.
+B: Uf. Tres de cada cuatro.
+A: Y cuentan algo peor: un operador que vio quinientas falsas seguidas responde peor a la quinientos uno. Esa es la que importa.
+B: ¿Y por dónde se empieza a bajar?
+A: Cuatro de cinco fuentes coinciden en el orden. Primero la instalación: que no entre el horizonte ni la calle, vidrio limpio, sin telarañas. Uniview dice que las arañas frente al domo reflejan el infrarrojo y disparan toda la noche.
+B: [risas] La araña, el peor intruso del barrio.
+A: Segundo, la regla: línea lejos del árbol, un solo sentido, zona más chica, sensibilidad entre cuarenta y sesenta. Tercero, objetivo persona, si la cámara clasifica. Y cuarto, medir.
+B: ¿Y si la cámara no clasifica?
+A: Un usuario en Argentina lo contó en un foro: con el porcentaje al noventa le disparaban gatos y pájaros. Sin clasificación, la perilla sola no alcanza. Ahí se gana reubicando y achicando.
+B: ¿Y cómo mido en OmniAccess?
+A: El análisis de cada detección te da el porcentaje de falsas de las últimas cincuenta revisadas de esa cámara, y cuántas lleva en esta hora contra el promedio de esa hora en los siete días anteriores. Y la ficha de la cámara en la pared muestra detecciones, reales y falsas de hoy.
+B: O sea, ya está el número. No hay que sacar cuentas.
+A: Exacto. Y un cuidado: Davantis advierte que bajar falsas a costa de perder detecciones reales empeora el problema. Por eso un cambio por vez, y probás caminando de noche.
+B: ¿Laboratorio?
+A: En evidencia buscás la cámara con más falsas de la semana, leés su análisis, mirás tres fotos falsas, anotás la causa, aplicás un solo cambio con el calibrador y lo probás de noche. En una semana comparás. Veinte minutos hoy.
+B: Regla: un cambio por vez, probado de noche y medido una semana.

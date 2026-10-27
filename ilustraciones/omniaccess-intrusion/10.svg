@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>De la cámara al monitor, un eslabón por vez</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS INTRUSIÓN · LECCIÓN 10</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">De la cámara al monitor, un eslabón por vez</text>
+<rect x="48" y="160" width="204" height="130" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="78" cy="194" r="16" fill="#17A8D4"/>
+<text x="78.0" y="200.0" font-family="Familjen Grotesk" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="104.0" y="200.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="104.0" dy="0.0">Regla armada</tspan></text>
+<text x="68.0" y="252.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="start"><tspan x="68.0" dy="0.0">punto verde en la pared</tspan></text>
+<path d="M254.0 225.0C262.0 225.0,262.0 225.0,270.0 225.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="272" y="160" width="204" height="130" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="302" cy="194" r="16" fill="#17A8D4"/>
+<text x="302.0" y="200.0" font-family="Familjen Grotesk" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="328.0" y="200.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="328.0" dy="0.0">Vinculación</tspan></text>
+<text x="292.0" y="252.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="start"><tspan x="292.0" dy="0.0">Notificar al centro</tspan></text>
+<path d="M478.0 225.0C486.0 225.0,486.0 225.0,494.0 225.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="496" y="160" width="204" height="130" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="526" cy="194" r="16" fill="#17A8D4"/>
+<text x="526.0" y="200.0" font-family="Familjen Grotesk" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="552.0" y="200.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="552.0" dy="0.0">Servidor de</tspan><tspan x="552.0" dy="23.0">alarma</tspan></text>
+<text x="516.0" y="252.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="start"><tspan x="516.0" dy="0.0">campana · Probar</tspan><tspan x="516.0" dy="18.9">reporte</tspan></text>
+<path d="M702.0 225.0C710.0 225.0,710.0 225.0,718.0 225.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="720" y="160" width="204" height="130" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="750" cy="194" r="16" fill="#17A8D4"/>
+<text x="750.0" y="200.0" font-family="Familjen Grotesk" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="776.0" y="200.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="776.0" dy="0.0">Red al :10000</tspan></text>
+<text x="740.0" y="252.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="start"><tspan x="740.0" dy="0.0">curl desde la red de</tspan><tspan x="740.0" dy="18.9">cámaras</tspan></text>
+<path d="M926.0 225.0C934.0 225.0,934.0 225.0,942.0 225.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="944" y="160" width="204" height="130" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="974" cy="194" r="16" fill="#17A8D4"/>
+<text x="974.0" y="200.0" font-family="Familjen Grotesk" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<text x="1000.0" y="200.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="1000.0" dy="0.0">Alta con su IP</tspan><tspan x="1000.0" dy="23.0">o MAC</tspan></text>
+<text x="964.0" y="252.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="start"><tspan x="964.0" dy="0.0">si no, entra sin cámara</tspan></text>
+<text x="48.0" y="140.0" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.2">PARA QUE LLEGUE</text>
+<text x="48.0" y="340.0" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.2">PARA QUE LLEGUE COMPLETO</text>
+<rect x="48" y="360" width="280" height="84" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><g transform="translate(68 386.0) scale(1.35)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 15 5l2 5-12 3.5z"/><path d="m17 10 3.5 1.5M9 13l1 4M6 17h8"/></g><text x="112.0" y="398.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Foto propia</text><text x="112.0" y="421.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">clave de la cámara</text>
+<rect x="348" y="360" width="280" height="84" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><g transform="translate(368 386.0) scale(1.35)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="7" rx="1.5"/><rect x="4" y="14" width="16" height="7" rx="1.5"/><path d="M7.5 6.5h.01M7.5 17.5h.01"/></g><text x="412.0" y="398.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Grabación</text><text x="412.0" y="421.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">NVR y canal vinculados</text>
+<rect x="648" y="360" width="280" height="84" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><g transform="translate(668 386.0) scale(1.35)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></g><text x="712.0" y="398.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Hora</text><text x="712.0" y="421.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">Sincronizar hora</text>
+<rect x="48" y="480" width="540" height="72" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="492" width="5" height="48" rx="2.5" fill="#0A63B8"/><text x="74.0" y="514.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Dahua: Verificar suscripción tiene que decir «Suscripción</tspan><tspan x="74.0" dy="20.2">activa». «NVR no accesible» es red o credenciales del NVR.</tspan></text>
+<rect x="612" y="480" width="540" height="72" rx="14" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/><rect x="612" y="492" width="5" height="48" rx="2.5" fill="#D2492F"/><text x="638.0" y="514.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="638.0" dy="0.0">No resetees la cámara para probar: se pierden la regla, el</tspan><tspan x="638.0" dy="20.2">horario y el servidor de alarma.</tspan></text>
+</svg>

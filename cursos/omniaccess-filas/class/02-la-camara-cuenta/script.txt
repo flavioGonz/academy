@@ -1,0 +1,21 @@
+A: Lección dos: la cámara que cuenta. Acá se gana o se pierde la instalación.
+B: Porque si la cámara cuenta mal, todo lo demás muestra mal.
+A: Tal cual. Primero, dónde la ponés. Bosch es clarísimo: la mejor vista es cenital. Una cámara de frente no sirve para contar.
+B: ¿Por qué tan tajante?
+A: Porque de frente la gente se tapa entre sí. Según la nota técnica de Bosch, un objeto tapado más de la mitad no se cuenta. Y pide más de tres metros de altura, nada que refleje, pasillos rectos y no más de sesenta y cuatro personas en escena.
+B: Uf, el piso brillante del supermercado.
+A: [risas] Ese mismo. El reflejo camina con la persona y puede contarse.
+B: ¿Y qué le configurás a la cámara?
+A: En Configuration Manager, en VCA, dejás IVA Pro Buildings como análisis y en Tareas borrás la que viene por defecto. Después dibujás la zona de la fila y le ponés tres tareas: una de ocupación, que dice cuántos hay adentro, y dos de campo, una cuando alguien entra y otra cuando sale.
+B: ¿El nombre importa?
+A: Muchísimo. OmniAccess usa el nombre de la regla como nombre del canal. Y la espera estimada, el reporte diario y el reseteo buscan un canal que se llame Aforo. Si a la tarea de ocupación le ponés Ocupación caja uno, la pantalla Filas la muestra, pero la espera queda en guion y el reporte diario sale vacío.
+B: Así que la tarea se llama Aforo.
+A: Aforo, con mayúscula. Las de entrada y salida OmniAccess las renombra solas a Entrada y Salida.
+B: ¿Y las fuentes coinciden?
+A: En la vista cenital y en separar ocupación de cruces, sí: Bosch y Axis lo hacen igual. Lo que choca es la venta, que a veces promete usar la cámara que ya está.
+B: Y no siempre ve la fila de arriba.
+A: Exacto. Por último, habilitás ONVIF en la cámara y creás el usuario que va a usar OmniAccess.
+B: Laboratorio.
+A: Con una Bosch de banco, armá las tres tareas, nombrá la de ocupación Aforo y pasá caminando por la zona mirando el contador.
+B: Veinticinco minutos.
+A: Y la fila empieza a contar bien desde el primer día.

@@ -1,0 +1,20 @@
+A: Lección siete. Llega alguien nuevo a la portería y hay que enrolarlo.
+B: El caso más común: la señora que limpia, el jardinero, el familiar de los martes.
+A: Y OmniAccess tiene un atajo bueno. Pasa por el terminal, sale Denegado, abrís la ficha del evento y tocás Registrar.
+B: ¿Y qué hace?
+A: Te abre una ficha nueva con la foto de esa captura ya puesta. Completás nombre y unidad, marcás el terminal en "A qué equipos se manda", y guardás.
+B: Pero la foto de la captura no siempre es buena.
+A: Ahí está el ojo del guardia. Si salió de costado, oscura o con gorro, tocás Cambiar y sacás otra, de frente y con luz pareja. Las cinco fuentes de fabricantes que leímos coinciden en eso.
+B: ¿Y antes de la foto?
+A: Antes de la foto, el consentimiento. En Uruguay la Ley dieciocho mil trescientos treinta y uno define el dato biométrico en el artículo cuarto, literal eñe, y lo agregó una ley de dos mil veinte. Incluye el reconocimiento de imagen.
+B: ¿Y qué pide?
+A: El artículo nueve pide consentimiento libre, previo, expreso e informado, y documentado. Y la Unidad Reguladora, en un dictamen de dos mil veintitrés sobre biometría facial, recuerda que con datos biométricos va una evaluación de impacto previa y que la base se inscribe.
+B: Eso es tarea de la administración, no del guardia.
+A: Lo de la evaluación y la inscripción, sí. Lo del guardia es leer el texto, anotar que la persona aceptó y ofrecer otra opción si no acepta.
+B: ¿Otra opción?
+A: Tarjeta, PIN o portería. Una nota de CSO Online lo dice fuerte para el trabajo: si el empleado no puede decir que no sin perder algo, el consentimiento no es libre.
+B: Tiene sentido. ¿Y la app del celular?
+A: La de Control Facial tiene Registrar rostro, pero crea a la persona como visita y no la manda a ningún terminal. Sirve de borrador.
+B: ¿Laboratorio?
+A: Veinte minutos. Leés el consentimiento a un compañero, lo anotás, lo hacés pasar sin estar enrolado, Registrar desde el evento, revisás la foto, mandás al terminal y vuelve a pasar. Tiene que salir Permitido con su nombre.
+B: Sin consentimiento, no hay foto.

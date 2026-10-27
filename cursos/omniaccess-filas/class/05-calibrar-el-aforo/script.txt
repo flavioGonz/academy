@@ -1,0 +1,19 @@
+A: Lección cinco: calibrar el aforo. O cómo evitar que el número baile.
+B: El clásico: hay tres personas y la pantalla dice tres, cuatro, dos, tres.
+A: [suspiro] Y cada vez que toca el umbral, sale una alerta. Eso quema al cliente en una semana.
+B: ¿De dónde sale el baile?
+A: De sombras, de alguien que roza el borde de la zona, de una persona que sale y vuelve a entrar. La nota de Bosch lo anticipa: pide dejar lugar antes y después del borde y evitar escenas donde la gente merodea sobre la línea.
+B: ¿Y OmniAccess qué te da?
+A: Una pantalla, Calibración, con dos pestañas. La primera es Señal del aforo: elegís una ventana de diez, treinta o sesenta minutos y te dibuja dos curvas, la cruda que manda la cámara y la estabilizada.
+B: ¿Y te dice qué tocar?
+A: Te cuenta cuántas veces cambió el número por minuto y te sugiere un tiempo de rebote. Si pasa de ocho cambios por minuto, parpadea demasiado.
+B: ¿Y el rebote dónde se pone?
+A: En la cámara. Ahí entra la otra pestaña, Zona y rebote en la cámara, que solo aparece con Bosch. Podés mover los puntos de la zona sobre el video y ajustar tres cosas: el rebote, que es cuánto tiene que estar alguien adentro para que cuente; la ventana anti doble conteo, para que el que sale y vuelve enseguida cuente una sola vez; y el aforo crítico.
+B: ¿Y si le escribo algo que la cámara no acepta?
+A: Está pensado. Antes de cada cambio guarda un backup de lo que tenía la cámara. Escribe, relee, y si no coincide restaura solo. Y solo un administrador puede guardar.
+B: Bien. Laboratorio.
+A: Con la fila andando, mirá la señal de los últimos treinta minutos y anotá los cambios por minuto. Después aplicá el rebote sugerido desde el editor, esperá un rato y volvé a medir.
+B: ¿Cuánto?
+A: Veinte minutos, más el rato de espera. Y algo importante: guardar en la cámara reinicia sus contadores, así que hacelo con el local tranquilo.
+B: O sea, medir, tocar y volver a medir.
+A: Exacto. Y la fila deja de gritar alertas que no existen.

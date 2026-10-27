@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Qué hacer según el estado que muestra Devices</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">UNIFI · PASO 5</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Qué hacer según el estado que muestra Devices</text>
+<rect x="48" y="140" width="400" height="100" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<g transform="translate(0 192.2)"><text x="70.0" y="0.0" font-family="JetBrains Mono" font-size="19" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="70.0" dy="0.0">Pending Adoption</tspan></text></g>
+<path d="M456.0 190.0C478.0 190.0,478.0 190.0,500.0 190.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="508" y="140" width="270" height="100" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="530.0" y="198.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Adopt</text>
+<path d="M786.0 190.0C808.0 190.0,808.0 190.0,830.0 190.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<g transform="translate(0 191.5)"><text x="842.0" y="0.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="842.0" dy="0.0">queda adoptado y conectado</tspan></text></g>
+<rect x="48" y="272" width="400" height="100" rx="16" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/>
+<g transform="translate(0 311.4)"><text x="70.0" y="0.0" font-family="JetBrains Mono" font-size="19" font-weight="600" fill="#B45309" text-anchor="start"><tspan x="70.0" dy="0.0">Pending Adoption (Update</tspan><tspan x="70.0" dy="25.7">Required)</tspan></text></g>
+<path d="M456.0 322.0C478.0 322.0,478.0 322.0,500.0 322.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="508" y="272" width="270" height="100" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="530.0" y="330.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Adopt and Upgrade</text>
+<path d="M786.0 322.0C808.0 322.0,808.0 322.0,830.0 322.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<g transform="translate(0 312.1)"><text x="842.0" y="0.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="842.0" dy="0.0">si no actualiza solo: upgrade por</tspan><tspan x="842.0" dy="23.0">SSH</tspan></text></g>
+<rect x="48" y="404" width="400" height="100" rx="16" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<g transform="translate(0 456.2)"><text x="70.0" y="0.0" font-family="JetBrains Mono" font-size="19" font-weight="600" fill="#D2492F" text-anchor="start"><tspan x="70.0" dy="0.0">Adopta y pasa a offline</tspan></text></g>
+<path d="M456.0 454.0C478.0 454.0,478.0 454.0,500.0 454.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="508" y="404" width="270" height="100" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="530.0" y="462.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Firewall de la PC</text>
+<path d="M786.0 454.0C808.0 454.0,808.0 454.0,830.0 454.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<g transform="translate(0 444.1)"><text x="842.0" y="0.0" font-family="Instrument Sans" font-size="17" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="842.0" dy="0.0">controlador en una PC: revisá su</tspan><tspan x="842.0" dy="23.0">firewall</tspan></text></g>
+<circle cx="48" cy="272" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="278.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<rect x="508" y="560" width="644" height="40" rx="10" fill="#03213C"/><text x="524.0" y="585.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">upgrade &lt;url-del-firmware-para-tu-modelo&gt;</text>
+<text x="48.0" y="586.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">Firmware de tu modelo, desde la página</text>
+<text x="48.0" y="610.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">de descargas de Ubiquiti, por SSH:</text>
+</svg>

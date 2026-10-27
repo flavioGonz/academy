@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Diagnóstico por capas: de a una, en orden</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS FACE · LECCIÓN 10</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Diagnóstico por capas: de a una, en orden</text>
+<rect x="48" y="130" width="1104" height="96" rx="14" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<circle cx="84" cy="178" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="84.0" y="184.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="120.0" y="170.0" font-family="Familjen Grotesk" font-size="20" font-weight="600" fill="#04223D" text-anchor="start">¿Llega el aviso?</text>
+<text x="120.0" y="200.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">ícono Push azul · Configuración → Sistema → Webhooks</text>
+<text x="700.0" y="170.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#D2492F" text-anchor="start">Si falla:</text>
+<text x="700.0" y="194.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="700.0" dy="0.0">URL al puerto 10000, firewall, MAC en la ficha del</tspan><tspan x="700.0" dy="20.2">equipo</tspan></text>
+<rect x="48" y="242" width="1104" height="96" rx="14" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<circle cx="84" cy="290" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="84.0" y="296.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="120.0" y="282.0" font-family="Familjen Grotesk" font-size="20" font-weight="600" fill="#04223D" text-anchor="start">¿Trae foto?</text>
+<text x="120.0" y="312.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">ícono Pull verde · contadores Faces y Tags · Hora / NTP</text>
+<text x="700.0" y="282.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#D2492F" text-anchor="start">Si falla:</text>
+<text x="700.0" y="306.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="700.0" dy="0.0">usuario y clave de API, autenticación, red de vuelta al</tspan><tspan x="700.0" dy="20.2">terminal</tspan></text>
+<rect x="48" y="354" width="1104" height="96" rx="14" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<circle cx="84" cy="402" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="84.0" y="408.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="120.0" y="394.0" font-family="Familjen Grotesk" font-size="20" font-weight="600" fill="#04223D" text-anchor="start">¿Se vincula con la ficha?</text>
+<text x="120.0" y="424.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">ficha del evento: Autorizado o No registrado</text>
+<text x="700.0" y="394.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#D2492F" text-anchor="start">Si falla:</text>
+<text x="700.0" y="418.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="700.0" dy="0.0">nombre idéntico; si persiste, soporte de Infratec</tspan></text>
+<rect x="48" y="466" width="1104" height="96" rx="14" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="2"/>
+<circle cx="84" cy="514" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="84.0" y="520.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="120.0" y="506.0" font-family="Familjen Grotesk" font-size="20" font-weight="600" fill="#04223D" text-anchor="start">¿El terminal reconoce?</text>
+<text x="120.0" y="536.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">&quot;Desconocido&quot; para alguien enrolado</text>
+<text x="700.0" y="506.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#D2492F" text-anchor="start">Si falla:</text>
+<text x="700.0" y="530.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="700.0" dy="0.0">luz, foto de alta, y recién después el umbral del</tspan><tspan x="700.0" dy="20.2">terminal</tspan></text>
+<text x="48.0" y="600.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#0A63B8" text-anchor="start">En OmniAccess: capas 1 a 3.  En el terminal: capa 4.</text>
+</svg>

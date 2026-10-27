@@ -1,0 +1,19 @@
+A: Lección diez, la lista de vigilancia. La que hace sonar el monitor.
+B: La lista negra.
+A: La lista negra es una de tres categorías. Lista negra, en rojo: toda lectura de esa matrícula queda denegada y además se carga como bloqueo en las cámaras lectoras. VIP o autorizado, en verde, que se destaca. Y En búsqueda, en ámbar.
+B: ¿Qué hace la de búsqueda?
+A: Avisa cuando aparece, sin bloquear. Y te obliga a escribir un motivo, porque eso es lo que el guardia ve en la captura. Qué se busca y por qué.
+B: ¿Dónde se carga?
+A: En el monitor, el escudo de la lista de vigilancia, o desde la ficha de cualquier evento con el botón Lista negra. La matrícula va como la lee la cámara, sin espacios ni guiones.
+B: ¿Y a quién le avisa?
+A: Si la cargás con aviso, manda un Telegram cuando la detecta. En silencio, solo se ve en el monitor. Y un detalle: si un usuario tiene rol de bloqueado, todas sus matrículas entran solas a la lista negra.
+B: ¿Y si tiene un pase de invitado?
+A: La lista negra le gana siempre al pase.
+B: Bien. ¿Algún cuidado?
+A: El más importante. Acordate de Roseville: de mil cuatrocientas alertas de vehículo buscado, el setenta y uno por ciento eran lecturas equivocadas.
+B: [suspiro] Y gatesentry cuenta de cámaras que leían carteles como si fueran patentes.
+A: Por eso la regla es mirar el recorte antes de actuar. Un ocho leído como nueve es un vecino inocente frenado en el portón.
+B: ¿Laboratorio?
+A: En una instalación de prueba agregás una matrícula En búsqueda con motivo y aviso, mandás una lectura simulada y ves la tarjeta ámbar con el motivo. Después la pasás a lista negra, leés qué lectoras se actualizaron y mandás otra lectura: rojo, con sonido, denegada.
+B: Y al final la das de baja.
+A: Y mirás que el contador del escudo baje. Así la alerta roja aparece solo para lo que importa, con el porqué escrito.

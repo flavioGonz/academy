@@ -22,6 +22,19 @@ ROOT = Path("/home/claude/ies-training")
 NUM = re.compile(r"^\d+\.\s")
 
 
+def rsc_ascii(code):
+    """La terminal de RouterOS maneja mal lo que no es ASCII y toma '?' como pedido de ayuda: el código queda en ASCII."""
+    import unicodedata
+    code = code.replace("·", "-").replace("¿", "").replace("¡", "").replace("→", "->").replace("…", "...").replace("—", "-").replace("–", "-")
+    code = "".join(ch for ch in unicodedata.normalize("NFKD", code) if not unicodedata.combining(ch))
+    out = []
+    for ln in code.split("\n"):
+        if ln.lstrip().startswith("#"):
+            ln = ln.replace("?", "")
+        out.append(ln.encode("ascii", "replace").decode().replace("\ufffd", "?") if any(ord(c) > 127 for c in ln) else ln)
+    return "\n".join(out)
+
+
 def webp(slug, f):
     name = Path(f).with_suffix(".webp").name
     p = ROOT / "site2" / "ilustraciones" / slug / name
@@ -81,11 +94,28 @@ def main():
             else:
                 rep["faltan"].append(src)
         if m.get("script_rsc"):
-            l["auto"] = m["script_rsc"]; rep["scripts"] = rep.get("scripts", 0) + 1
+            au = dict(m["script_rsc"]); au["codigo"] = rsc_ascii(au.get("codigo", ""))
+            l["auto"] = au; rep["scripts"] = rep.get("scripts", 0) + 1
         if m.get("teoria_md"):
             l["theory_md"] = m["teoria_md"].strip()
             l["theory"] = md(l["theory_md"])
             rep["teoria"] = rep.get("teoria", 0) + 1
+        for tf in m.get("teoria_figs", []):  # figuras o animaciones dentro de la teoría, después del párrafo con "after"
+            src = f"ilustraciones/{a.slug}/{tf['file']}"
+            if not (ROOT / "site2" / src).exists():
+                rep["faltan"].append(src); continue
+            th = l.get("theory_md", "")
+            if not th or src in th:
+                continue
+            paras = th.split("\n\n")
+            k = next((i for i, x in enumerate(paras) if tf["after"] in x), None)
+            if k is None:
+                rep["sin_ancla"].append(f"{lid}: teoría {tf['file']}"); continue
+            alt = tf.get("alt", "").replace('"', "&quot;").replace("<", "&lt;")
+            cap = tf.get("caption", "").replace("<", "&lt;")
+            paras.insert(k + 1, f'<figure class="lab-fig th-fig"><img src="{src}" alt="{alt}" loading="lazy" width="1200" height="675"><figcaption>{cap}</figcaption></figure>')
+            l["theory_md"] = "\n\n".join(paras); l["theory"] = md(l["theory_md"])
+            rep["teoria_figs"] = rep.get("teoria_figs", 0) + 1
         if m.get("concepts"):
             prevpics = {k.get("name", "").strip().lower(): k.get("pics") for k in l.get("concepts", []) if k.get("pics")}
             l["concepts"] = [{k: x.get(k, "") for k in ("name", "para_que", "como", "ejemplo")} for x in m["concepts"] if x.get("name")]

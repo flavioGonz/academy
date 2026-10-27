@@ -1,0 +1,19 @@
+A: Lección cinco. Grabación y hora, que parecen aburridas hasta el día que te piden un video.
+B: [suspiro] Y el video no coincide con el evento.
+A: Ese día. Arranquemos por la grabación. Cada cámara LPR va vinculada a un NVR y a un canal. Eso es lo que permite que el guardia toque Grabación en la ficha y vea el video en ese segundo.
+B: ¿Y si no está vinculada?
+A: El botón queda apagado y en el historial dice sin NVR. No hay clip ni ZIP con video.
+B: ¿Hay que vincular a mano?
+A: En Dispositivos hay un botón, Detectar grabaciones, que busca la IP de cada cámara en los canales de todos los NVR y la vincula sola. Y en la ficha, Calcular retención te dice cuántos días guarda ese canal.
+B: Útil para cuando el cliente pregunta cuánto guarda.
+A: Ahora la hora. Las cuatro fuentes que leímos dicen lo mismo: sin hora confiable, la grabación pierde valor de prueba. Mobatime lo dice clarito: un reloj de PC deriva y nadie se da cuenta hasta que hace falta.
+B: ¿NTP entonces?
+A: NTP si tenés un servidor de hora en la red. Pero muchos barrios no tienen internet en esa red. Por eso OmniAccess tiene Sincronizar hora: te muestra el desfase de cada cámara y cada NVR, te pregunta, y les empuja la hora del servidor. Sin internet.
+B: ¿Y cuándo avisa?
+A: Con más de ciento veinte segundos abre una alerta. Y un dato fino: si la cámara manda un evento con la hora corrida más de diez minutos, el servidor usa su propia hora.
+B: ¿Y el disco?
+A: El manual da el número: ocho cámaras generan tres a cuatro gigas de fotos por día. Con treinta días, unos ciento veinte gigas solo de fotos.
+B: Y bajar la retención es perder evidencia.
+A: Exacto. Laboratorio: Detectar grabaciones, Calcular retención, Sincronizar hora anotando cada desfase, y abrís una lectura con Grabación para comparar la hora del video con la del evento.
+B: Al segundo.
+A: Al segundo. Y lo repetís en cada visita.

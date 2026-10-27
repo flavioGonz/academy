@@ -1,0 +1,147 @@
+{
+ "curso": {
+  "objetivo": "Al terminar el curso vas a poder instalar, conectar, operar y diagnosticar OmniAccess Face: montar el terminal facial donde reconoce, darlo de alta con su MAC y su Action URL, enrolar personas con una foto que sirve, manejar el monitor, las visitas y los bloqueos, y cuidar los datos biométricos según la Ley 18.331.",
+  "recorrido": "Arrancás entendiendo quién abre la puerta (el terminal) y qué hace OmniAccess con cada evento, y montás el equipo con la luz a favor. Después lo conectás: alta con MAC, avisos al puerto 10000, caras copiadas a la memoria del terminal y la diferencia entre grupo, copia y horario. Con eso andando pasás a la portería: leer el Monitor Facial, enrolar a alguien con consentimiento y manejar visitas y bloqueos de verdad. Cerrás con reportes sin huecos, una retención pensada y un método de diagnóstico por capas."
+ },
+ "modulos": [
+  {
+   "title": "Entender y montar",
+   "why": "Antes de tocar el panel conviene saber quién abre la puerta y dónde va el terminal: los dos errores más caros (esperar que OmniAccess bloquee y montar el equipo a contraluz) salen de ahí.",
+   "objetivos": [
+    "Al terminar el módulo vas a poder explicarle al cliente que la apertura la decide el terminal y qué cambia el Modo Face.",
+    "Al terminar el módulo vas a poder elegir altura y pared para un terminal facial y comprobarlo con personas de distintas estaturas."
+   ],
+   "lessons": ["1", "2"]
+  },
+  {
+   "title": "Conectar y sincronizar",
+   "why": "Es el trabajo del técnico en el panel: que el terminal exista con su MAC, que avise, que abra a pedido y que tenga las caras correctas, sabiendo qué hace el grupo y dónde vive el horario.",
+   "objetivos": [
+    "Al terminar el módulo vas a poder dar de alta un terminal facial con MAC y credenciales de API, cargar sus Action URL y verificar los avisos en Webhooks.",
+    "Al terminar el módulo vas a poder enrolar una persona con una foto que sirve y comprobar en Memoria Flash que está en el terminal.",
+    "Al terminar el módulo vas a poder separar grupo, copia y horario, y revisar el horario del terminal después de cada reenvío."
+   ],
+   "lessons": ["3", "4", "5"]
+  },
+  {
+   "title": "Operar en portería",
+   "why": "Lo de todos los días para el guardia y el administrador: mirar el monitor, entender un evento, enrolar a alguien con su consentimiento y manejar visitas y bloqueos sin dejar puertas abiertas.",
+   "objetivos": [
+    "Al terminar el módulo vas a poder leer el Monitor Facial y la ficha de un evento, y distinguir un desconocido de un evento sin ficha vinculada.",
+    "Al terminar el módulo vas a poder enrolar a una persona desde un evento, con foto revisada y consentimiento registrado.",
+    "Al terminar el módulo vas a poder dar de alta una visita frecuente y hacer su baja en orden, primero en el terminal."
+   ],
+   "lessons": ["6", "7", "8"]
+  },
+  {
+   "title": "Administrar y diagnosticar",
+   "why": "El sistema se sostiene con reportes que respondan preguntas, una retención de fotos pensada y un método para las fallas de siempre.",
+   "objetivos": [
+    "Al terminar el módulo vas a poder armar y exportar reportes del Historial, recuperar eventos del doorlog y revisar la retención del Bucket FACE.",
+    "Al terminar el módulo vas a poder diagnosticar una falla facial por capas: aviso, foto, vínculo y reconocimiento."
+   ],
+   "lessons": ["9", "10"]
+  }
+ ],
+ "lecciones": {
+  "1": {
+   "objetivos": [
+    "Al terminar vas a poder explicar qué decide el terminal facial y qué hace OmniAccess con cada evento.",
+    "Al terminar vas a poder encontrar el Modo Face y decir qué cambia Lista Blanca y Lista Negra (y qué no cambia).",
+    "Al terminar vas a poder reconocer cómo cambia el menú cuando el módulo OmniAccess Face está activo."
+   ],
+   "sigue": "Ya sabés que la puerta la decide el terminal. En la próxima lo ubicás en la pared: altura, distancia y luz, que pesan más que cualquier ajuste del sistema.",
+   "requisitos": []
+  },
+  "2": {
+   "objetivos": [
+    "Al terminar vas a poder elegir la altura del terminal con la ficha del modelo y validarla con la persona más baja y la más alta.",
+    "Al terminar vas a poder detectar un contraluz y resolverlo con la ubicación, el WDR o luz frontal.",
+    "Al terminar vas a poder dejar anotadas en la ficha de la obra la altura y las condiciones de luz."
+   ],
+   "conecta": "En la lección anterior viste que el terminal decide solo; acá le das las mejores condiciones para que decida bien.",
+   "sigue": "El terminal ya reconoce en la pared. En la próxima lo das de alta en OmniAccess para que cada evento llegue al monitor con su foto.",
+   "requisitos": ["1"]
+  },
+  "3": {
+   "objetivos": [
+    "Al terminar vas a poder dar de alta un terminal facial en Dispositivos con su MAC, credenciales de API y sentido.",
+    "Al terminar vas a poder copiar las Action URL del configurador, cargarlas en el terminal y verificar los avisos en Webhooks.",
+    "Al terminar vas a poder abrir la puerta a pedido con el botón Relé y explicar por qué un evento puede llegar sin foto."
+   ],
+   "conecta": "Retoma la idea de la lección 1: el terminal decide y avisa; acá armás el camino de ese aviso hasta el servidor.",
+   "sigue": "Los avisos ya llegan. En la próxima le cargás las caras al terminal desde la ficha de cada persona y comprobás que quedaron en su memoria.",
+   "requisitos": ["1"]
+  },
+  "4": {
+   "objetivos": [
+    "Al terminar vas a poder reconocer una foto de alta que sirve y una que no.",
+    "Al terminar vas a poder mandar a una persona a un terminal desde su ficha y seguir los pasos del envío.",
+    "Al terminar vas a poder comprobar en Memoria Flash qué identidades tiene el terminal y usar con cuidado Volcar e Importar."
+   ],
+   "conecta": "Con el terminal dado de alta en la lección 3, ahora OmniAccess puede escribir en su memoria.",
+   "sigue": "Ya enrolás personas una por una. En la próxima ordenás quién pasa por dónde con Grupos de Acceso y ves dónde vive el horario de cada persona.",
+   "requisitos": ["3"]
+  },
+  "5": {
+   "objetivos": [
+    "Al terminar vas a poder crear un Grupo de Acceso con personas y equipos y leerlo en la ficha de la persona.",
+    "Al terminar vas a poder explicar la diferencia entre el permiso del grupo y la copia al terminal.",
+    "Al terminar vas a poder poner un horario por persona en el terminal y revisarlo después de cada reenvío."
+   ],
+   "conecta": "Usa la copia de la lección 4 y suma la capa de permisos y horarios.",
+   "sigue": "El técnico ya dejó todo andando. En la próxima cambia el punto de vista: el guardia y su pantalla, el Monitor Facial.",
+   "requisitos": ["4"]
+  },
+  "6": {
+   "objetivos": [
+    "Al terminar vas a poder leer el Monitor Facial: columnas, filtros e indicador LIVE u OFFLINE.",
+    "Al terminar vas a poder abrir la ficha de un evento y distinguir Autorizado, No registrado y Desconocido.",
+    "Al terminar vas a poder exportar la evidencia de un evento."
+   ],
+   "conecta": "Los eventos que armaste en la lección 3 son los que el guardia ve acá.",
+   "sigue": "Ya sabés leer un Denegado. En la próxima convertís ese evento en una persona enrolada, con su consentimiento y una foto que sirve.",
+   "requisitos": []
+  },
+  "7": {
+   "objetivos": [
+    "Al terminar vas a poder pedir y registrar el consentimiento antes de sacar la foto, y ofrecer una alternativa sin cara.",
+    "Al terminar vas a poder dar de alta a una persona desde la ficha de un evento con Registrar.",
+    "Al terminar vas a poder explicar qué dice la Ley 18.331 sobre datos biométricos y consentimiento."
+   ],
+   "conecta": "Junta la ficha del evento de la lección 6 con el enrolamiento de la lección 4, ahora desde la portería.",
+   "sigue": "Ya enrolás en portería. En la próxima ves el otro extremo: visitas que terminan y bloqueos que tienen que ser de verdad.",
+   "requisitos": ["6"]
+  },
+  "8": {
+   "objetivos": [
+    "Al terminar vas a poder dar de alta una visita frecuente y planificar su baja.",
+    "Al terminar vas a poder bloquear a una persona sacando su cara de la memoria del terminal.",
+    "Al terminar vas a poder decidir si conviene borrar una ficha o dejarla sin terminales."
+   ],
+   "conecta": "Cierra la idea de la lección 1: el bloqueo real está en el terminal, no en el Modo Face.",
+   "sigue": "La operación diaria está cubierta. En la próxima pasás a la administración: reportes que responden preguntas y una retención de fotos pensada.",
+   "requisitos": ["4"]
+  },
+  "9": {
+   "objetivos": [
+    "Al terminar vas a poder armar y exportar un reporte del Historial a partir de una pregunta concreta.",
+    "Al terminar vas a poder recuperar eventos del doorlog de un terminal Akuvox con Auditoría Hardware.",
+    "Al terminar vas a poder explicar qué borra la retención del Bucket FACE antes de cambiarla."
+   ],
+   "conecta": "Usa los eventos del monitor (lección 6) y el ciclo de vida de los datos (lecciones 7 y 8).",
+   "sigue": "Tenés los reportes. En la última lección armás el método para cuando algo no anda: el diagnóstico por capas.",
+   "requisitos": []
+  },
+  "10": {
+   "objetivos": [
+    "Al terminar vas a poder diagnosticar una falla facial en cuatro capas: aviso, foto, vínculo y reconocimiento.",
+    "Al terminar vas a poder explicar qué hace el umbral de coincidencia y por qué se toca al final.",
+    "Al terminar vas a poder documentar cada falla con capa, síntoma y solución."
+   ],
+   "conecta": "Repasa todo el curso: el aviso de la lección 3, la foto y la memoria de la lección 4, la ficha del evento de la lección 6 y la luz de la lección 2.",
+   "cierre": "Con esto cerrás OmniAccess Face: el terminal en la pared, conectado, con caras propias, un monitor que se entiende, bajas en orden, reportes sin huecos y un método para cuando algo falla. Para lo del equipo en sí (red, firmware, relé, horarios), seguí con el curso Porteros IP Akuvox.",
+   "requisitos": ["3", "4", "6"]
+  }
+ }
+}

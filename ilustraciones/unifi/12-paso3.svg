@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Time Machine: ¿qué cambió en las últimas 24 horas?</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">UNIFI · PASO 3</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Time Machine: ¿qué cambió en las últimas 24 horas?</text>
+<rect x="48" y="128" width="1104" height="230" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><path d="M48 142a14 14 0 0 1 14 -14h1076a14 14 0 0 1 14 14v26h-1104z" fill="#E5F0FB"/><circle cx="68" cy="148" r="5" fill="#C2D4E6"/><circle cx="86" cy="148" r="5" fill="#C2D4E6"/><circle cx="104" cy="148" r="5" fill="#C2D4E6"/><text x="124.0" y="154.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#41627F" text-anchor="start">UniFi Network</text><text x="66.0" y="194.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#0A63B8" text-anchor="start">UniFi Devices &gt; AP &gt; AirView &gt; Radios &gt; Time Machine</text>
+<path d="M90 290H1110" stroke="#6E88A1" stroke-width="2"/>
+<path d="M90 284V296" stroke="#6E88A1" stroke-width="2"/>
+<text x="90.0" y="320.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">-24 h</text>
+<path d="M345 284V296" stroke="#6E88A1" stroke-width="2"/>
+<text x="345.0" y="320.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">-18 h</text>
+<path d="M600 284V296" stroke="#6E88A1" stroke-width="2"/>
+<text x="600.0" y="320.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">-12 h</text>
+<path d="M855 284V296" stroke="#6E88A1" stroke-width="2"/>
+<text x="855.0" y="320.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">-6 h</text>
+<path d="M1110 284V296" stroke="#6E88A1" stroke-width="2"/>
+<text x="1110.0" y="320.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">ahora</text>
+<circle cx="330" cy="290" r="11" fill="#B45309" stroke="#FFFFFF" stroke-width="3"/>
+<text x="330.0" y="262.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#B45309" text-anchor="middle">cambio de canal</text>
+<circle cx="640" cy="290" r="11" fill="#B45309" stroke="#FFFFFF" stroke-width="3"/>
+<text x="640.0" y="262.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#B45309" text-anchor="middle">cambio de potencia</text>
+<circle cx="900" cy="290" r="11" fill="#D2492F" stroke="#FFFFFF" stroke-width="3"/>
+<text x="900.0" y="262.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">cambio de config.</text>
+<text x="90.0" y="230.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">eventos de la radio (ilustrativo)</text>
+<circle cx="48" cy="128" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="134.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<rect x="48" y="384" width="352" height="110" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="68.0" y="424.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">¿Hubo cambio de canal?</text>
+<text x="68.0" y="454.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="68.0" dy="0.0">Channel AI, Auto o un radar en DFS.</tspan></text>
+<rect x="424" y="384" width="352" height="110" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="444.0" y="424.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">¿Cambió la potencia?</text>
+<text x="444.0" y="454.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="444.0" dy="0.0">alguien bajó o subió un nivel.</tspan></text>
+<rect x="800" y="384" width="352" height="110" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="820.0" y="424.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">¿Cambió la configuración?</text>
+<text x="820.0" y="454.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="820.0" dy="0.0">un cambio de ayer suele ser la causa de</tspan><tspan x="820.0" dy="20.2">hoy.</tspan></text>
+<rect x="48" y="516" width="1104" height="75" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="48" y="528" width="5" height="51" rx="2.5" fill="#B45309"/><text x="74.0" y="550.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Paso 4: Port Manager &gt; Time Machine del puerto del AP, con el filtro de clientes que flapean. Si el uplink se cayó y volvió, el</tspan><tspan x="74.0" dy="21.6">problema no es de radio.</tspan></text>
+</svg>

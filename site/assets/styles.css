@@ -940,7 +940,7 @@ svg.i.xs{width:12px;height:12px}
 /* ilustración principal de la lección */
 .l-fig{margin:0 0 22px;border-radius:var(--r-lg);overflow:hidden;background:var(--paper);border:1px solid var(--line);box-shadow:var(--sh-s)}
 .l-fig .zoom{display:block;border:0;padding:0;background:none;width:100%;cursor:zoom-in}
-.l-fig img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.l-fig img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;background:var(--ground)}
 .l-fig figcaption{padding:12px 18px;font-size:14.5px;color:var(--ink-2);border-top:1px solid var(--line);background:var(--ground)}
 .lab-body img{cursor:zoom-in}
 
@@ -1037,7 +1037,7 @@ svg.i.xs{width:12px;height:12px}
 body:has(.ebar) .foot{padding-bottom:90px}
 .learn li .mini,.reqs li .mini{align-self:center;height:28px}
 .lab-fig{margin:16px 0 18px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--paper);box-shadow:var(--sh-s)}
-.lab-body .lab-fig img{margin:0;border:0;border-radius:0;width:100%;height:auto;display:block}
+.theory .lab-fig img,.lab-body .lab-fig img{margin:0;border:0;border-radius:0;width:100%;height:auto;display:block}
 .lab-fig figcaption{padding:10px 16px;font-size:14px;color:var(--ink-2);background:var(--ground);border-top:1px solid var(--line)}
 .lab-fig figcaption b{color:var(--blue)}
 
@@ -1226,3 +1226,61 @@ body:has(.ebar) .foot{padding-bottom:90px}
 .auto-ed{margin-top:16px;display:grid;gap:10px}
 .auto-ed textarea#auC{min-height:260px;width:100%;font-family:var(--fm);font-size:13px;border:1px solid var(--line-2);border-radius:12px;padding:12px;background:var(--code);color:var(--code-ink)}
 .auto-ed .src-ed2{grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1.2fr) auto}
+
+/* ---- editor: ilustración principal (pegar, arrastrar, subir; se guarda sola) ---- */
+.figx{position:relative;border:1px solid var(--line);outline:none;isolation:isolate;transition:box-shadow .25s,border-color .25s,transform .25s}
+.figx::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1.5px;background:linear-gradient(120deg,var(--cyan),var(--blue),#7C5CFF,var(--cyan));background-size:300% 300%;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;pointer-events:none;z-index:3}
+.figx:hover::before,.figx:focus-visible::before,.figx.ptarget::before,.figx.fx-over::before,.figx.fx-up::before{opacity:1;animation:fxGlow 4s linear infinite}
+.figx.ptarget,.figx:focus-visible{box-shadow:0 10px 30px -12px rgba(10,99,184,.45)}
+@keyframes fxGlow{to{background-position:300% 0}}
+.figx .fx-media{position:relative;overflow:hidden;background:var(--ground)}
+.figx .fx-media img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;transition:filter .5s,transform .6s cubic-bezier(.2,.8,.2,1)}
+.figx.fx-up .fx-media img{filter:blur(6px) saturate(.7) brightness(.92);transform:scale(1.02)}
+.figx .fx-media.fx-in img{animation:fxIn .7s cubic-bezier(.2,.8,.2,1)}
+@keyframes fxIn{from{opacity:0;transform:scale(1.035);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+.figx.fx-flash .fx-media::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-100%);animation:fxShine .9s ease-out forwards;pointer-events:none}
+@keyframes fxShine{to{transform:translateX(100%)}}
+.figx.fx-out{opacity:0;transform:scale(.985);transition:opacity .2s,transform .2s}
+.fx-empty{display:grid;justify-items:center;align-content:center;gap:8px;aspect-ratio:16/9;max-height:340px;width:100%;padding:24px;text-align:center;color:var(--ink-2);cursor:pointer;background:radial-gradient(120% 90% at 50% 0%,var(--blue-soft),var(--ground) 70%)}
+.fx-empty b{font-family:var(--fd);font-size:19px;color:var(--ink)}
+.fx-empty span{font-size:14.5px;max-width:420px}
+.fx-empty .fx-fmt{font-family:var(--fm);font-size:12px;letter-spacing:.06em;color:var(--ink-3)}
+.fx-ico{display:grid;place-items:center;width:64px;height:64px;border-radius:20px;background:var(--paper);box-shadow:var(--sh-m);color:var(--blue);animation:fxFloat 3.2s ease-in-out infinite}
+.fx-ico svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.6}
+@keyframes fxFloat{50%{transform:translateY(-5px)}}
+.fx-empty kbd,.fx-hint kbd{font-family:var(--fm);font-size:12px;padding:1px 6px;border-radius:6px;border:1px solid var(--line-2);background:var(--paper);box-shadow:0 1px 0 var(--line-2)}
+.fx-tools{position:absolute;top:12px;right:12px;display:flex;gap:6px;padding:5px;border-radius:14px;background:color-mix(in srgb,var(--paper) 74%,transparent);backdrop-filter:blur(12px) saturate(1.4);-webkit-backdrop-filter:blur(12px) saturate(1.4);border:1px solid color-mix(in srgb,var(--paper) 70%,transparent);box-shadow:0 8px 24px -10px rgba(4,34,61,.35);z-index:4;opacity:0;transform:translateY(-6px);transition:opacity .25s,transform .25s}
+.figx:not(.has) .fx-tools,.figx:hover .fx-tools,.figx:focus-within .fx-tools,.figx.ptarget .fx-tools{opacity:1;transform:none}
+.fx-b{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 12px;border:0;border-radius:10px;background:transparent;color:var(--navy);font:600 14px/1 var(--fb);cursor:pointer;transition:background .15s,color .15s,transform .15s}
+.fx-b svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8}
+.fx-b:hover{background:var(--blue);color:#fff;transform:translateY(-1px)}
+.fx-b:active{transform:none}
+.fx-b.fx-danger:hover{background:#D2492F}
+.fx-hint{position:absolute;left:12px;top:12px;display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:rgba(4,34,61,.78);color:#fff;font:600 12.5px/1 var(--fb);backdrop-filter:blur(8px);z-index:4;opacity:0;transform:translateY(-6px);transition:opacity .25s,transform .25s;pointer-events:none}
+.fx-hint svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
+.figx.has.ptarget .fx-hint,.figx.has:focus .fx-hint{opacity:1;transform:none}
+.fx-state{position:absolute;left:12px;bottom:58px;display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:999px;font:600 13px/1 var(--fb);z-index:4;box-shadow:0 8px 20px -10px rgba(4,34,61,.4);animation:fxPop .35s cubic-bezier(.2,1.4,.4,1)}
+.figx:not(.has) .fx-state{bottom:12px}
+.fx-state svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.4}
+.fx-state.ok{background:var(--ok-bg);color:var(--ok)}
+.fx-state.busy{background:var(--paper);color:var(--blue)}
+.fx-state.err{background:var(--alert-bg);color:var(--alert)}
+.fx-state.fx-fade{opacity:0;transform:translateY(6px);transition:opacity .5s,transform .5s}
+@keyframes fxPop{from{opacity:0;transform:translateY(8px) scale(.9)}}
+.fx-spin{width:13px;height:13px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:fxRot .7s linear infinite}
+@keyframes fxRot{to{transform:rotate(360deg)}}
+.fx-drop{position:absolute;inset:0;display:grid;place-items:center;background:rgba(10,99,184,.14);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .2s;z-index:5}
+.fx-drop span{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border-radius:16px;background:var(--paper);color:var(--blue);font:600 16px/1 var(--fb);box-shadow:var(--sh-m);border:2px dashed var(--blue);animation:fxFloat 1.6s ease-in-out infinite}
+.fx-drop svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8}
+.figx.fx-over .fx-drop{opacity:1}
+.fx-prog{position:absolute;left:50%;top:calc(50% - 22px);transform:translate(-50%,-50%);display:grid;place-items:center;width:84px;height:84px;border-radius:50%;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(8px);box-shadow:var(--sh-m);z-index:5}
+.figx:not(.has) .fx-prog{top:50%}
+.fx-prog svg{position:absolute;inset:8px;width:68px;height:68px;transform:rotate(-90deg)}
+.fx-prog circle{fill:none;stroke:var(--line);stroke-width:4}
+.fx-prog .fx-arc{stroke:var(--blue);stroke-linecap:round;stroke-dasharray:119.4;stroke-dashoffset:119.4;transition:stroke-dashoffset .25s}
+.fx-prog b{font:700 15px/1 var(--fm);color:var(--navy)}
+.figx figcaption{position:relative;z-index:2}
+@media (prefers-reduced-motion:reduce){.figx::before,.fx-ico,.fx-drop span{animation:none!important}.figx .fx-media.fx-in img{animation:none}}
+@media (max-width:640px){.fx-b span{display:none}.fx-b{padding:0 10px}}
+.l-fig.figx{border-style:solid}
+.fx-prog[hidden],.fx-state[hidden]{display:none}

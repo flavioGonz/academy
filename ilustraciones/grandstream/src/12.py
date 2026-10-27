@@ -1,0 +1,57 @@
+import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/grandstream/src")
+from _gs import *
+
+# ---------------------------------------------------------------- 12.svg: el portero es una extensión más
+c = Canvas(K(), "El portero es una extensión más de la central")
+g = c.add(Intercom(70, 150, "GDS3710", "extensión 8001", keypad=True))
+u = c.add(Generic(430, 150, "UCM", "192.168.88.20", icon="server", w=260, dark=True))
+c.add(arrow((222, 200), (424, 182), kind="logical", label="REGISTER 8001", label_dy=-10))
+c.add(arrow((222, 250), (424, 214), kind="flow", label="timbre: llama al 6000", label_at=0.5, label_dy=26))
+c.add(Zone(800, 130, 352, 330, "Ring Group 6000", BLUE))
+c.add(DeskPhone(818, 170, "Recepción", "GRP", w=150))
+c.add(DeskPhone(984, 170, "Seguridad", "GRP", w=150))
+c.add(arrow((694, 192), (812, 230)))
+c.add(arrow((900, 372), (232, 300), kind="ok", label="PIN 4829# o tecla OpenDoor", label_at=0.5, label_dy=34))
+c.add(Lock(262, 470, "Cerradura", "salida en Open Door", hl=CYAN, w=260))
+c.add(Cable((222, 334), (392, 468), kind="relay", label="salida de alarma", label_at=0.45, label_dy=0))
+c.add(Note(560, 486, 592, "Timbre, apertura y registro pasan por la central: se atiende desde cualquier teléfono del grupo. El PIN de apertura es propio, ni el de fábrica ni el del buzón.", kind="ok", size=16))
+save(c, "12.svg")
+
+# ---------------------------------------------------------------- 12-paso3: timbre y apertura en el GDS
+c = Canvas(K(3), "En el GDS: a quién llama el timbre y qué PIN abre")
+c.add(Window(48, 132, 640, 290, "GDS3710 · web", path="Door System Settings > Basic Settings",
+             rows=[("Doorbell Mode", "Call Doorbell Number"), ("Number Called When Door Bell Pressed", "6000"), ("Enable DTMF Open Door", "Sí"), ("Remote PIN to Open the Door", "4829 (ejemplo)"), ("ALMOUT1 Feature", "Open Door")], hl=3))
+c.add(Step(48, 132, 3))
+c.add(Intercom(780, 140, "GDS3710", "8001"))
+c.add(Lock(900, 470, "Cerradura", "de la puerta", hl=CYAN, w=252))
+c.add(Cable((930, 294), (1026, 468), kind="relay", label="ALMOUT1", label_at=0.5, label_dy=0))
+c.add(Note(48, 452, 640, "Usá un PIN propio de 4 dígitos o más: el 4829 es solo de ejemplo. Si la salida que maneja la cerradura no está en Open Door, el PIN se acepta y la puerta no se mueve.", kind="warn", size=16))
+save(c, "12-paso3.svg")
+
+# ---------------------------------------------------------------- 12-paso4: el GRP conoce al portero
+c = Canvas(K(4), "En el GRP: el portero, su número y el mismo PIN")
+c.add(Window(48, 132, 520, 270, "GRP26xx · web", path="External Service > GDS", rows=[("Service Type", "GDS"), ("Account", "Account 1"), ("System Number", "8001"), ("Access Password", "4829 (el del GDS)")], hl=3))
+c.add(Step(48, 132, 4))
+c.add(text(612, 158, "¿Muestra la imagen del portero?", 19, 600, INK, FD))
+c.add(Table(612, 176, ["GRP", "Con GDS37xx"], [["2601, 2602, 2603, 2604", "solo audio"], ["2612, 2613", "solo audio"], ["2614, 2615, 2616", "audio y video JPEG"], ["2624, 2634, 2636", "audio y video JPEG"], ["2650, 2670", "audio y video JPEG"]], [270, 270], mono_cols=(0,), row_h=40))
+c.add(Note(48, 430, 520, "Access Password tiene que ser igual al Remote PIN del GDS: es lo que manda la tecla OpenDoor.", kind="info", size=16))
+c.add(Note(612, 430, 540, "Si el portero entra por RemoteConnect, el video MJPEG no anda en los GRP: para ver imagen conviene un GXV.", kind="warn", size=16))
+save(c, "12-paso4.svg")
+
+# ---------------------------------------------------------------- 12-paso5: dos maneras de abrir
+c = Canvas(K(5), "Dos maneras de abrir: con la llamada o sin atender")
+xs = (200, 600, 1000)
+c.add(lifeline(xs[0], 130, 560, "GRP recepción", "Ring Group 6000", w=230))
+c.add(lifeline(xs[1], 130, 560, "UCM", "192.168.88.20", w=200))
+c.add(lifeline(xs[2], 130, 560, "GDS3710", "8001", w=200))
+c.add(msg(xs[2], xs[0], 240, "tocan timbre: suena el 6000", "flow"))
+c.add(f'<rect x="60" y="270" width="1092" height="120" rx="14" fill="{OK_BG}" opacity=".6"/>')
+c.add(text(76, 296, "A · ATENDÉS", 14, 600, OK, FM, ls=1.2))
+c.add(msg(xs[0], xs[2], 340, "marcás 4829# (DTMF, RFC4733)", "ok"))
+c.add(f'<rect x="60" y="410" width="1092" height="120" rx="14" fill="{SOFT}" opacity=".7"/>')
+c.add(text(76, 436, "B · SIN ATENDER", 14, 600, BLUE, FM, ls=1.2))
+c.add(msg(xs[0], xs[2], 480, "tecla OpenDoor: mensaje SIP", "flow"))
+c.add(Mark(1060, 340, ok=True)); c.add(Mark(1060, 480, ok=True))
+c.add(Step(xs[0] - 115, 130, 5))
+c.add(Note(48, 584, 1104, "Probalo con la puerta abierta o con alguien del lado de adentro: un relé mal configurado puede dejarla trabada o abierta.", kind="warn", size=16))
+save(c, "12-paso5.svg")

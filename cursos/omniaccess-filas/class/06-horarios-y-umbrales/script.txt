@@ -1,0 +1,21 @@
+A: Lección seis: horarios y umbrales. Dos cosas que se configuran una vez y se olvidan.
+B: Mientras estén bien puestas.
+A: Claro. Arranquemos por los horarios. Las entradas y salidas son acumulados: suman todo el día. Si nadie los pone en cero, el martes arranca con lo del lunes.
+B: ¿Eso pasa en otras marcas también?
+A: Pasa. La documentación de Axis dice que el conteo de cruces nunca se resetea si no activás el reset a medianoche. Y la nota de Bosch recomienda resetear los contadores con regularidad.
+B: ¿En OmniAccess dónde se hace?
+A: En Horarios de Filas. Creás un horario con nombre, la fila o todas, los días, la hora de apertura y la de cierre, y tildás Reseteo automático. A la hora de apertura los contadores vuelven a cero.
+B: ¿Quién dispara eso?
+A: Una tarea programada en el servidor que llama cada minuto. Si esa línea del cron no está, el horario se ve lindo en pantalla y no hace nada.
+B: Clásico de instalación a medias.
+A: [risas] Clásico. También tenés un botón, Reset ahora, para cuando abren fuera de hora.
+B: Vamos a los umbrales.
+A: En Filas, Nuevo Umbral. Le ponés nombre, la cámara, el umbral en personas y un cooldown en segundos. Cuando el aforo llega al umbral, avisa, y no vuelve a avisar hasta que pase el cooldown.
+B: ¿Y los colores?
+A: Verde hasta el setenta por ciento del umbral, ámbar desde ahí, rojo al llegar. Y si la fila sigue llena cinco minutos, OmniAccess escala: manda por Telegram un aviso para el supervisor.
+B: ¿Algún consejo?
+A: Una alerta por fila. Hay pantallas que toman el umbral más bajo y otras el más alto; con una sola, todas dicen lo mismo.
+B: Laboratorio.
+A: Creá un horario de apertura con reseteo y probá el Reset ahora. Después creá un umbral bajo, de dos personas, con treinta segundos de cooldown, y meté tres personas en la zona.
+B: Quince minutos.
+A: Y el cliente recibe avisos cuando de verdad hay cola.

@@ -1,0 +1,19 @@
+A: Última lección: reportes. Lo que el gerente del local mira al otro día.
+B: Y lo que justifica la instalación.
+A: Totalmente. Hay dos caminos. El primero es la pantalla Reportes, Reportes de Afluencia. Elegís por hora, por día, por semana o por mes, la fila o todas, y exportás a Excel o PDF con la marca del cliente.
+B: ¿Por hora en qué intervalos?
+A: Cinco, quince, treinta o cuarenta y cinco minutos, o la hora entera. Cada intervalo te da el aforo exacto al cierre, el máximo y el promedio. Y abajo, una tabla con los cortes de conexión de cámara del período.
+B: Que es clave.
+A: Clave. Si a las once hay un hueco en la curva, la tabla de cortes te dice que la cámara estuvo caída doce minutos, y no que no vino nadie.
+B: ¿Y el segundo camino?
+A: Los reportes programados. En Notificaciones, pestaña Horarios, creás uno diario o semanal con su hora. A esa hora sale un resumen: pico de aforo con su hora, promedio, alertas emitidas, lecturas, cortes de cámara y las tres horas críticas del día.
+B: ¿Por qué canal?
+A: Acá hay dos detalles del código. Uno: en esta versión el reporte sale por el Telegram configurado, aunque elijas otro canal. Dos: la hora se compara con el reloj del servidor. Si el servidor está en hora universal, un reporte de las veintidós sale a las diecinueve de Uruguay.
+B: Uf. Entonces se revisa la zona horaria del servidor.
+A: Exacto. Y otra cosa: el resumen cuenta el canal Aforo, por eso la tarea de la lección dos se llama así.
+B: ¿Alguna idea de fondo?
+A: Una linda. El propio Little, a los cincuenta años de su prueba, defendió usar su ley en intervalos finitos, como un día de una tienda, si medís bien llegadas y salidas. Un reporte diario es justamente eso.
+B: Laboratorio.
+A: Sacá el reporte por hora de hoy en intervalos de quince minutos y exportalo en PDF. Después programá un resumen diario, y desde Despachos tocá Reporte diario para recibirlo ya.
+B: Quince minutos.
+A: Y con eso cerramos: la fila cuenta, avisa, se atiende y queda documentada.

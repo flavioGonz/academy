@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Calculá el ángulo con la cinta antes de fijar</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS LPR · PASO 2</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Calculá el ángulo con la cinta antes de fijar</text>
+<rect x="48" y="126" width="540" height="430" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><text x="68.0" y="158.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#0E8F5E" text-anchor="start">Cámara a 2,5 m · auto a 5 m</text>
+<rect x="612" y="126" width="540" height="430" rx="16" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/><text x="632.0" y="158.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#D2492F" text-anchor="start">Cámara a 3 m · auto a 4 m</text>
+<path d="M60 440H570.0" stroke="#6E88A1" stroke-width="2"/>
+<rect x="114" y="289.0" width="12" height="151.0" fill="#6E88A1"/>
+<g transform="translate(116 295.0) scale(0.9)"><rect x="0" y="-14" width="74" height="30" rx="7" fill="#011E38"/><rect x="70" y="-10" width="14" height="22" rx="3" fill="#0B3A66"/><path d="M-6 -20 H82" stroke="#011E38" stroke-width="5" stroke-linecap="round"/><circle cx="62" cy="1" r="5" fill="#17A8D4"/></g>
+<path d="M410.0 418 q0 -19 17 -21 l22 -19 h59 l20 19 q22 0 22 21 v6 z" fill="#5B6F84"/><path d="M453 397 l8 -15 h46 l14 15 z" fill="#C2D4E6"/><circle cx="438" cy="430" r="10" fill="#04223D"/><circle cx="522" cy="430" r="10" fill="#04223D"/>
+<rect x="402.0" y="397.0" width="10" height="28" rx="2" fill="#FFFFFF" stroke="#04223D" stroke-width="2"/>
+<path d="M190 295.0L402.0 411.0" stroke="#0E8F5E" stroke-width="3" stroke-dasharray="9 7"/>
+<path d="M285 295.0 A95 95 0 0 1 278.2 330.3" fill="none" stroke="#0E8F5E" stroke-width="2.5"/>
+<path d="M190 295.0H315" stroke="#6E88A1" stroke-width="1.5" stroke-dasharray="4 4"/>
+<path d="M630 440H1082.0" stroke="#6E88A1" stroke-width="2"/>
+<rect x="684" y="260.0" width="12" height="180.0" fill="#6E88A1"/>
+<g transform="translate(686 266.0) scale(0.9)"><rect x="0" y="-14" width="74" height="30" rx="7" fill="#011E38"/><rect x="70" y="-10" width="14" height="22" rx="3" fill="#0B3A66"/><path d="M-6 -20 H82" stroke="#011E38" stroke-width="5" stroke-linecap="round"/><circle cx="62" cy="1" r="5" fill="#17A8D4"/></g>
+<path d="M922.0 418 q0 -19 17 -21 l22 -19 h59 l20 19 q22 0 22 21 v6 z" fill="#5B6F84"/><path d="M965 397 l8 -15 h46 l14 15 z" fill="#C2D4E6"/><circle cx="950" cy="430" r="10" fill="#04223D"/><circle cx="1034" cy="430" r="10" fill="#04223D"/>
+<rect x="914.0" y="397.0" width="10" height="28" rx="2" fill="#FFFFFF" stroke="#04223D" stroke-width="2"/>
+<path d="M760 266.0L914.0 411.0" stroke="#D2492F" stroke-width="3" stroke-dasharray="9 7"/>
+<path d="M855 266.0 A95 95 0 0 1 840.6 316.3" fill="none" stroke="#D2492F" stroke-width="2.5"/>
+<path d="M760 266.0H885" stroke="#6E88A1" stroke-width="1.5" stroke-dasharray="4 4"/>
+<rect x="70" y="470" width="496" height="40" rx="10" fill="#03213C"/><text x="86.0" y="495.6" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#7EE2B8" text-anchor="start">arctan((2,5 - 0,5) / 5) = 22°</text>
+<rect x="634" y="470" width="496" height="40" rx="10" fill="#03213C"/><text x="650.0" y="495.6" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#FFB4A6" text-anchor="start">arctan((3,0 - 0,5) / 4) = 32°</text>
+<text x="318.0" y="534.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#0E8F5E" text-anchor="middle">Bien: queda debajo de 30°</text>
+<text x="882.0" y="534.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#D2492F" text-anchor="middle">Se pasa: alejar el punto o bajar la cámara</text>
+<text x="600.0" y="610.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#41627F" text-anchor="middle">ángulo vertical = arctan((H - h) / D)   ·   h = altura de la patente, casi siempre 0,4 a 0,6 m</text>
+</svg>

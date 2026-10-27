@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Cada capa frena lo que la anterior dejó pasar</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">GRANDSTREAM</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Cada capa frena lo que la anterior dejó pasar</text>
+<rect x="48" y="150" width="216" height="84" rx="16" fill="#FFFFFF" stroke="#D2492F" stroke-width="3"/><g transform="translate(68 176.0) scale(1.35)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-3 3-3 15 0 18M12 3c3 3 3 15 0 18"/></g><text x="112.0" y="188.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Barrido</text><text x="112.0" y="211.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">INVITE, REGISTER</text>
+<text x="60.0" y="270.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#D2492F" text-anchor="start">varios intentos</text>
+<text x="60.0" y="292.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#D2492F" text-anchor="start">por segundo</text>
+<rect x="280" y="130" width="160" height="380" rx="16" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<g transform="translate(342 150) scale(1.5)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z"/></g>
+<text x="360.0" y="222.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="middle">Router</text>
+<text x="360.0" y="256.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#41627F" text-anchor="middle">solo puertos con</text>
+<text x="360.0" y="278.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#41627F" text-anchor="middle">nombre y motivo</text>
+<rect x="456" y="130" width="160" height="380" rx="16" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<g transform="translate(518 150) scale(1.5)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-3 3-3 15 0 18M12 3c3 3 3 15 0 18"/></g>
+<text x="536.0" y="222.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="middle">Geo-IP</text>
+<text x="536.0" y="256.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#41627F" text-anchor="middle">solo los países</text>
+<text x="536.0" y="278.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#41627F" text-anchor="middle">que usás</text>
+<rect x="632" y="130" width="160" height="380" rx="16" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<g transform="translate(694 150) scale(1.5)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></g>
+<text x="712.0" y="222.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="middle">Fail2ban</text>
+<text x="712.0" y="256.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#41627F" text-anchor="middle">600 s de baneo</text>
+<text x="712.0" y="278.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#41627F" text-anchor="middle">tras intentos fallidos</text>
+<rect x="808" y="130" width="160" height="380" rx="16" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<g transform="translate(870 150) scale(1.5)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="m11 12 8.5-8.5M16 7l2.5 2.5"/></g>
+<text x="888.0" y="222.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="middle">Administración</text>
+<text x="888.0" y="256.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#41627F" text-anchor="middle">lista blanca web,</text>
+<text x="888.0" y="278.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#41627F" text-anchor="middle">sin 80 ni 443,</text>
+<text x="888.0" y="300.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#41627F" text-anchor="middle">SSH y AMI apagados</text>
+<rect x="984" y="130" width="160" height="380" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<g transform="translate(1046 150) scale(1.5)" fill="none" stroke="#0E8F5E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/></g>
+<text x="1064.0" y="222.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="middle">Rutas</text>
+<text x="1064.0" y="256.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#41627F" text-anchor="middle">privilegio y PIN:</text>
+<text x="1064.0" y="278.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#41627F" text-anchor="middle">si entran, no</text>
+<text x="1064.0" y="300.0" font-family="Instrument Sans" font-size="14" font-weight="500" fill="#41627F" text-anchor="middle">llaman afuera</text>
+<path d="M256 418L1128 438L1128 442L256 462z" fill="#D2492F" opacity=".35"/>
+<path d="M256 418L1128 438M256 462L1128 442" stroke="#D2492F" stroke-width="1.5" fill="none"/>
+<text x="60.0" y="430.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#D2492F" text-anchor="start">lo que sigue</text>
+<text x="60.0" y="452.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#D2492F" text-anchor="start">pasando, capa</text>
+<text x="60.0" y="474.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#D2492F" text-anchor="start">tras capa</text>
+<rect x="48" y="540" width="1104" height="75" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="552" width="5" height="51" rx="2.5" fill="#0A63B8"/><text x="74.0" y="574.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Ninguna capa sola alcanza. Un administrador de Wazo vio varios INVITE maliciosos por segundo y juntó más de 50 IPs en sus</tspan><tspan x="74.0" dy="21.6">primeros baneos: por eso Fail2ban mira y las rutas caras piden PIN igual.</tspan></text>
+</svg>

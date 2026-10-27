@@ -1,0 +1,19 @@
+A: Tercera combinación: la IP fija como principal y, de respaldo, un módem 4G o un proveedor por DHCP.
+B: La de las oficinas con enlace dedicado y un 4G en una repisa.
+A: Esa. El principal ya lo conocés: recursivas por el gateway de la fija.
+B: ¿Y el DHCP?
+A: Distancia dos y use peer DNS en no. Si el router 4G está en modo router, su gateway, ciento noventa y dos punto ciento sesenta y ocho punto ocho punto uno, no cambia. Si cambia, la documentación del cliente DHCP trae un script de lease que mantiene la ruta al día.
+B: ¿Qué cambia cuando entra el 4G?
+A: Lo que sale, nada. Lo que entra, todo. El 4G casi siempre da una IP privada o de CGNAT. Mientras dura el failover, lo publicado por la fija no se ve, y Back To Home sigue andando, pero por el relay de MikroTik.
+B: Y eso se avisa antes, no cuando llama el cliente.
+A: Exacto. En el laboratorio lo ves: forzás el corte y mirás en IP Cloud cómo cambia public address a la del 4G.
+B: ¿Y el balanceo? Acá suele salir el pedido de "usá los dos".
+A: Variante opcional, con PCC. La documentación trae la receta: dos tablas y marcas de conexión por las dos direcciones, para que cada par de cliente y servidor quede en un enlace, con las rutas de siempre como failover. Las tres fuentes que tratan el respaldo DHCP coinciden en lo básico, y la página de PCC agrega un límite: con Hotspot no sirve.
+B: ¿Y con un 4G de datos limitados?
+A: No. Un practicante lo dice claro: failover no es balanceo. Si repartís, gastás el plan en una semana. PCC tiene sentido con dos enlaces cableados parecidos.
+B: ¿Y lo que se rompe con PCC?
+A: Dos cosas. Sin una lista de redes locales que no se balancean, el tráfico a otra VLAN sale a internet. Y FastTrack solo funciona con la tabla main: lo marcado queda afuera y la CPU sube.
+B: ¿Cuánto lleva?
+A: Veinte minutos el failover, quince más el balanceo.
+B: Resumen: el 4G espera en distancia dos.
+A: Y se balancea solo con enlaces sin tope.

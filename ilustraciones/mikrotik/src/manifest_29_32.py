@@ -1,0 +1,393 @@
+"""Genera manifest-29-32.json (lecciones 29 a 32 del curso MikroTik).
+Fuentes: class/29..32/card.md y research/notes/n29-32.md.
+  python3 /home/claude/ies-training/ilustraciones/mikrotik/src/manifest_29_32.py
+"""
+import json
+
+OUT = "/home/claude/ies-training/ilustraciones/mikrotik/manifest-29-32.json"
+CAB = "# Probalo primero en un equipo de banco y en Safe Mode (Ctrl+X).\n"
+
+M = {}
+
+# =========================================================== 29
+M["29"] = {
+    "fig": {
+        "file": "29.svg",
+        "alt": "Una escalera de cuatro escalones de abajo hacia arriba: 1 LAN con /ping 192.168.88.254, 2 gateway del ISP con /ping 203.0.113.1, 3 IP de internet con /ping 1.1.1.1 y 4 un nombre con /ping mikrotik.com. Al lado de cada escalón, qué revisar si falla ahí: cable, puerto o bridge; la WAN; la ruta o el proveedor; el DNS.",
+        "caption": "Probás de adentro hacia afuera: el primer escalón que no contesta te dice dónde mirar.",
+    },
+    "steps": [
+        {"file": "29-paso2.svg", "step": 2,
+         "alt": "El MikroTik manda un ping ICMP a la notebook 192.168.88.254 y el firewall de Windows lo frena (timeout). Después pregunta por ARP quién tiene .254 y la notebook contesta con su MAC. Abajo, la terminal con /ping 192.168.88.254 arp-ping=yes interface=bridge count=2 y una MAC como respuesta.",
+         "caption": "Si contesta ARP, el equipo está vivo aunque no responda el ping.",
+         "after": "Si la notebook no contestó"},
+        {"file": "29-paso3.svg", "step": 3,
+         "alt": "Dos tablas de traceroute. En el caso A el salto 2 tiene 90% de pérdida pero los saltos 3 y 4 tienen 0%: no es falla. En el caso B los saltos 1 y 2 contestan y del 3 en adelante todo es timeout: falla real después de 203.0.113.6.",
+         "caption": "La pérdida real empieza en un salto y sigue en todos los siguientes.",
+         "after": "Traceroute a internet, tres rondas"},
+        {"file": "29-paso4.svg", "step": 4,
+         "alt": "El MikroTik, con WAN 203.0.113.10 y LAN 192.168.88.1, hace tres pings a 1.1.1.1. El normal sale con la IP de la WAN y llega. El que usa src-address=192.168.88.1 pasa por el masquerade y llega. Con el masquerade apagado sale con 192.168.88.1 y la respuesta no vuelve.",
+         "caption": "Ping normal sí y ping desde la LAN no: el masquerade está roto.",
+         "after": "Probá el camino de la LAN con"},
+    ],
+    "concepts": [
+        {"name": "La escalera de pings",
+         "para_que": "Cuando un cliente dice \"no anda internet\", la falla puede estar en cuatro lugares muy distintos: el cable de un equipo, la WAN, el proveedor o el DNS. La escalera existe para no adivinar: cada escalón descarta una parte del camino.",
+         "como": "Se pingea en orden: un equipo de la LAN, el gateway que muestra la ruta por defecto, una IP de internet como 1.1.1.1 y al final un nombre. El primer escalón que no contesta marca la zona del problema. Si la IP contesta y el nombre da \"resolve failed\", la conexión anda y lo que falla es el DNS.",
+         "ejemplo": "Una oficina en el Cordón sin internet: `/ping 203.0.113.1` contesta y `/ping 1.1.1.1` no. El cable y la WAN están bien; el problema es del proveedor después de su gateway, y el reclamo sale con ese dato."},
+        {"name": "ARP ping",
+         "para_que": "Muchos equipos no contestan el ping porque su firewall lo bloquea (Windows, algunos NVR), y parecen apagados aunque estén funcionando. ARP ping se usa para confirmar que un equipo está presente sin depender del ICMP.",
+         "como": "Solo sirve en la misma subred del router: `/ping IP arp-ping=yes interface=bridge`. Si aparece una MAC, el equipo está vivo; esa MAC se busca en los leases del DHCP o en la etiqueta del equipo. ARP no se puede bloquear sin dejar al equipo incomunicado.",
+         "ejemplo": "Una cámara en 192.168.88.60 no responde el ping pero el NVR la graba. Con `/ping 192.168.88.60 arp-ping=yes interface=bridge count=2` aparece su MAC: está bien, solo tiene el ping desactivado."},
+        {"name": "Pérdida en un salto de traceroute",
+         "para_que": "Traceroute muestra por qué routers pasa el tráfico y cuánto tarda cada uno. Se creó para encontrar dónde se corta o se pone lento un camino, pero su tabla se malinterpreta seguido.",
+         "como": "Cada salto contesta con un mensaje ICMP de tiempo excedido, y muchos routers limitan esos mensajes. Por eso, una pérdida en un salto que no sigue en los siguientes no es una falla. La pérdida real empieza en un salto y se ve en todos los que siguen; dos direcciones que se alternan son un lazo de ruteo.",
+         "ejemplo": "Un cliente ve 90% de pérdida en el salto 2 y quiere cambiar de proveedor. El salto 3 y el destino tienen 0%: el tráfico pasa, ese router solo responde poco a las sondas."},
+        {"name": "src-address y do-not-fragment",
+         "para_que": "El router prueba desde su IP de la WAN, que no es la que usan los equipos de la LAN. `src-address` sirve para probar el camino real del tráfico de la LAN, y `do-not-fragment` con `size` para encontrar la MTU más chica del camino.",
+         "como": "`/ping 1.1.1.1 src-address=192.168.88.1` pasa por el masquerade; si el ping normal anda y este no, el NAT está roto. En un túnel entre dos LAN es la única prueba válida. Para la MTU: `size=1500 do-not-fragment`, bajando hasta que conteste; en RouterOS el tamaño es el paquete entero (1500 equivale a 1472 de datos en Windows).",
+         "ejemplo": "Una sucursal por PPPoE donde las páginas cargan a medias: `/ping 1.1.1.1 size=1500 do-not-fragment` no contesta y `size=1492` sí. La MTU del camino es 1492 y el problema es de MTU y MSS, no de la PC."},
+    ],
+    "teoria_md": (
+        "### Un poco de historia\n"
+        "Ping y traceroute nacieron en los años ochenta, cuando internet era una red de universidades. `ping` lo escribió Mike Muuss en 1983 y usa el mensaje ICMP echo: un pedido de tipo 8 que el otro equipo contesta con un tipo 0. Unos años después, en 1987, Van Jacobson escribió `traceroute` a partir de una idea de Steve Deering, aprovechando el soporte de ICMP que Muuss había agregado para su ping.\n\n"
+        "Windows trajo su propia versión, `tracert`, que usa ICMP; los Unix usan UDP al puerto 33434 por defecto. RouterOS 7 incluye las dos herramientas dentro del router y su traceroute repite rondas como `mtr`, con pérdida, promedio, mejor, peor y desvío por salto.\n\n"
+        "### Cómo funciona\n"
+        "**Ping** manda un echo request y mide cuánto tarda el echo reply. Lo que no vuelve dentro del `interval` (1 segundo por defecto) cuenta como timeout. La columna TTL de la respuesta dice más o menos cuántos routers cruzó: si el otro equipo manda con 64 y llega con 62, pasó por dos.\n\n"
+        "**Traceroute** usa el campo TTL al revés. Cada router que reenvía un paquete le resta uno, y cuando llega a cero lo descarta y avisa con un ICMP de tiempo excedido. Traceroute manda la primera sonda con TTL 1 (contesta el primer router), la segunda con TTL 2 (contesta el segundo) y así hasta 30 saltos o hasta llegar al destino. Como muchos routers limitan o atienden tarde esos avisos, un salto puede mostrar pérdida aunque el tráfico pase: la pérdida real arranca en un salto y sigue en todos los siguientes.\n\n"
+        "**El origen importa.** El router sale con la IP de la interfaz por donde sale el paquete, que hacia internet es la WAN. Ese tráfico no necesita el masquerade y no entra en las políticas de un túnel entre LAN. Con `src-address=192.168.88.1` la prueba sigue el mismo camino que una PC de la oficina.\n\n"
+        "**La MTU** es el paquete más grande que entra en un enlace: 1500 en Ethernet, 1492 en PPPoE. Con `do-not-fragment`, un router que no puede pasar el paquete entero contesta \"fragmentation needed\" en vez de partirlo. Bajando `size` hasta que conteste encontrás la MTU del camino; en RouterOS ese tamaño incluye los encabezados IP e ICMP."),
+    "script_rsc": {
+        "titulo": "Chequeo de conectividad en escalera",
+        "descripcion": "No cambia nada: hace la escalera de pings (LAN, gateway, internet, nombre), prueba ARP si el equipo de la LAN no contesta, el ping desde la IP de la LAN y la MTU del camino, e imprime dónde está la primera falla.",
+        "variables": [
+            {"nombre": "LAN_HOST", "valor": "192.168.88.254", "detalle": "Un equipo de la LAN para el primer escalón"},
+            {"nombre": "LAN_IF", "valor": "bridge", "detalle": "Interfaz de la LAN (para el ARP ping)"},
+            {"nombre": "LAN_IP_ROUTER", "valor": "192.168.88.1", "detalle": "IP del router en la LAN (para src-address)"},
+            {"nombre": "IP_INTERNET", "valor": "1.1.1.1", "detalle": "Una IP pública que conteste ping"},
+            {"nombre": "NOMBRE", "valor": "mikrotik.com", "detalle": "Un nombre para probar el DNS"},
+        ],
+        "codigo": (
+            "# IES Training · MikroTik · L29 · Chequeo de conectividad en escalera\n" + CAB +
+            "# Solo lee y pingea: no toca la configuracion.\n"
+            "{\n"
+            ":local host \"{{LAN_HOST}}\"\n"
+            ":local lanif \"{{LAN_IF}}\"\n"
+            ":local lanip \"{{LAN_IP_ROUTER}}\"\n"
+            ":local ipnet \"{{IP_INTERNET}}\"\n"
+            ":local nombre \"{{NOMBRE}}\"\n"
+            ":local falla \"ninguna\"\n"
+            "# 1. LAN (si no contesta ping, probamos ARP)\n"
+            ":local r1 [/ping $host count=3]\n"
+            ":if ($r1 = 0) do={\n"
+            "  :local a [/ping $host arp-ping=yes interface=$lanif count=2]\n"
+            "  :if ($a = 0) do={ :set falla \"1 LAN: cable, puerto o bridge\" } else={ :put \"El equipo contesta ARP: esta vivo, bloquea el ping.\" }\n"
+            "}\n"
+            "# 2. Gateway de la ruta por defecto activa\n"
+            ":local rt [/ip/route/find where dst-address=0.0.0.0/0 active]\n"
+            ":local gw \"\"\n"
+            ":if ([:len $rt] > 0) do={ :set gw [:tostr [/ip/route/get [:pick $rt 0] gateway]] }\n"
+            ":if ([:typeof [:toip $gw]] = \"ip\") do={\n"
+            "  :if (([/ping $gw count=3] = 0) and ($falla = \"ninguna\")) do={ :set falla \"2 gateway: WAN, modem, VLAN o PPPoE\" }\n"
+            "} else={ :put (\"Gateway sin IP (\" . $gw . \"): escalon 2 salteado.\") }\n"
+            "# 3. IP de internet\n"
+            ":if (([/ping $ipnet count=3] = 0) and ($falla = \"ninguna\")) do={ :set falla \"3 internet: ruta por defecto o proveedor\" }\n"
+            "# 4. Nombre (si no resuelve, ping corta el script: lo atajamos)\n"
+            ":do { :if (([/ping $nombre count=3] = 0) and ($falla = \"ninguna\")) do={ :set falla \"4 nombre: sin respuesta\" } } on-error={ :if ($falla = \"ninguna\") do={ :set falla \"4 nombre: DNS (resolve failed)\" } }\n"
+            "# 5. Desde la IP de la LAN: prueba el masquerade\n"
+            ":if ([/ping $ipnet src-address=$lanip count=3] = 0) do={ :put \"Ojo: desde la IP de la LAN no hay respuesta. Revisar masquerade.\" }\n"
+            "# 6. MTU del camino, sin fragmentar\n"
+            ":local mtu 0\n"
+            ":foreach s in={1500;1492;1480;1450;1400} do={\n"
+            "  :if ($mtu = 0) do={ :if ([/ping $ipnet size=$s do-not-fragment count=2] > 0) do={ :set mtu $s } }\n"
+            "}\n"
+            ":put (\"MTU del camino: \" . $mtu . \" (0 = ninguna probada paso)\")\n"
+            ":put (\"Listo: primera falla = \" . $falla . \". Para ver los saltos: /tool/traceroute \" . $ipnet . \" count=3\")\n"
+            "}"),
+        "notas": [
+            "Si el equipo de la LAN tiene el firewall prendido, el ping falla y el ARP ping lo confirma vivo: no es una falla.",
+            "Con PPPoE el gateway es una interfaz y el escalón 2 se saltea; mirá el estado de pppoe-client.",
+            "No arregla nada: el reporte dice dónde mirar. Va sin tildes a propósito para la terminal de RouterOS.",
+        ],
+    },
+}
+
+# =========================================================== 30
+M["30"] = {
+    "fig": {
+        "file": "30.svg",
+        "alt": "La notebook y el NVR de la LAN le preguntan al MikroTik por el puerto 53 (flechas verdes). El MikroTik, con resolver y caché, pregunta a los servidores de arriba 1.1.1.1 y 9.9.9.9. Desde internet, alguien intenta consultar el puerto 53 del router y queda bloqueado con una cruz roja por el drop en input.",
+        "caption": "El resolver del router atiende a la LAN; desde internet, el 53 queda cerrado.",
+    },
+    "steps": [
+        {"file": "30-paso4.svg", "step": 4,
+         "alt": "La notebook pregunta al MikroTik por nvr.lan y el router contesta 192.168.88.50 desde su tabla /ip/dns/static (TTL 1d). Después la notebook entra al NVR por nombre. Abajo, los comandos para ver y vaciar la caché DNS y una nota: si ves la dirección vieja, vaciá la caché del router y de la PC.",
+         "caption": "Una estática da nombre al NVR; la caché explica por qué un cambio tarda en verse.",
+         "after": "Un nombre local para el NVR"},
+        {"file": "30-paso5.svg", "step": 5,
+         "alt": "La LAN pregunta al MikroTik por el 53; el MikroTik, con use-doh-server y verify-doh-cert=yes, pregunta cifrado por el 443 al servidor DoH. Una flecha roja punteada hacia los DNS comunes dice que no son respaldo. Notas: si el DoH no responde, la LAN recibe SERVFAIL; algunos servicios piden HTTP/2, solo en ARM64 y x86.",
+         "caption": "Con DoH activo todo va a ese servidor: si se cae, no hay plan B.",
+         "after": "DoH, con el log abierto en otra terminal"},
+    ],
+    "concepts": [
+        {"name": "allow-remote-requests",
+         "para_que": "Es la opción que convierte al router en el servidor DNS de la LAN: sin ella, el resolver solo atiende las consultas del propio router. Existe para que los equipos tengan un DNS cercano, con caché y con los nombres locales que vos cargues.",
+         "como": "Con la opción en `yes`, el router contesta en UDP y TCP 53 en todas sus direcciones, también la pública. Por eso va siempre junto con el drop en input desde la WAN: la configuración por defecto ya lo hace con su regla de input; con un firewall propio, la documentación da dos reglas de drop, UDP y TCP, desde la lista WAN.",
+         "ejemplo": "Un router heredado en un local de Pocitos con firewall armado a mano y la CPU al tope. `nslookup mikrotik.com` a su IP pública desde afuera contesta: era un resolver abierto. Con las dos reglas de drop se acaba."},
+        {"name": "Resolver abierto",
+         "para_que": "Un resolver abierto es un servidor DNS que contesta a cualquiera en internet. Es peligroso porque sirve para ataques de amplificación: el atacante manda una consulta chica con la IP de la víctima falsificada y el resolver le dispara una respuesta mucho más grande.",
+         "como": "La regla es simple: un resolver solo contesta a sus clientes. En MikroTik, drop del 53 desde la WAN o apagar `allow-remote-requests` si el router no tiene que servir DNS (un CHR en un VPS, por ejemplo). Se prueba desde afuera con `nslookup nombre IP_PUBLICA`: tiene que dar timeout.",
+         "ejemplo": "El CSIRT de LACNIC, con sede en Montevideo, busca resolvers abiertos en la región y avisa a los dueños. Si te llega uno de esos avisos por un cliente, la causa casi siempre es esta opción sin firewall."},
+        {"name": "Entradas estáticas y caché",
+         "para_que": "Las estáticas dan nombres a equipos que no están en ningún DNS público (el NVR, la impresora, un servidor) y la caché evita preguntar afuera cada vez. Juntas hacen la red más cómoda y más rápida.",
+         "como": "`/ip/dns/static/add name=nvr.lan address=192.168.88.50` crea un registro A con TTL de 1 día. Con `match-subdomain=yes` también contesta los nombres de abajo. Una sola entrada por nombre y tipo, porque el orden no decide. Si cambiaste algo y no lo ves, `/ip/dns/cache/flush` en el router y vaciar la caché de la PC.",
+         "ejemplo": "En un edificio en Malvín, los guardias entran al grabador con `nvr.lan` en lugar de recordar la IP. Cuando se cambia el NVR de dirección, se edita una línea en el router y nadie más se entera."},
+        {"name": "DoH en el router",
+         "para_que": "DNS sobre HTTPS cifra las consultas que el router manda hacia arriba, para que nadie en el camino las lea o las cambie. Es útil cuando no confiás en el DNS del proveedor o el cliente pide privacidad.",
+         "como": "`use-doh-server` con la dirección del servicio y `verify-doh-cert=yes`. Dejás `servers` cargado para resolver el nombre del servidor DoH. Con DoH activo no hay respaldo: si el servicio no responde, la LAN recibe SERVFAIL. Algunos servicios piden HTTP/2, solo en equipos ARM64 y x86; los errores aparecen en el log con el tema dns.",
+         "ejemplo": "En una clínica que pidió consultas cifradas, se configura DoH y se deja un Netwatch o un monitoreo que avise si el log muestra errores de DoH, porque una caída del servicio deja a todos sin nombres."},
+    ],
+    "teoria_md": (
+        "### Un poco de historia\n"
+        "Antes del DNS, cada equipo de ARPANET tenía un archivo con todos los nombres y direcciones de la red, que se bajaba de un servidor central. Con el crecimiento eso dejó de escalar. En 1983 Paul Mockapetris describió el sistema de nombres de dominio en los RFC 882 y 883 y escribió el primer servidor, llamado Jeeves. Después de unos años de prueba, en 1987 salieron los RFC 1034 y 1035, que siguen siendo la base de todo DNS. En Berkeley nació BIND, el servidor que dominó internet durante décadas.\n\n"
+        "El cifrado llegó mucho después: DNS sobre HTTPS (DoH) es el RFC 8484, de octubre de 2018. RouterOS lo soporta como cliente en sus versiones 7, y en 7.25 verifica el certificado del servidor con un almacén de confianza incorporado.\n\n"
+        "### Cómo funciona\n"
+        "**Resolver con caché.** El equipo de la LAN le pregunta al router por UDP al puerto 53 (TCP si la respuesta no entra). El router busca primero en sus estáticas y en la caché; si no lo tiene, pregunta a sus servidores de arriba: primero los de `servers`, después los `dynamic-servers` que le dio el proveedor por DHCP o PPPoE. Guarda la respuesta durante su TTL y la contesta.\n\n"
+        "**Estados de respuesta.** NOERROR: el nombre existe. NXDOMAIN: no existe. SERVFAIL: el router no consiguió respuesta de arriba. Saber leerlos ahorra mucho tiempo: NXDOMAIN es un nombre mal escrito o bloqueado; SERVFAIL es un problema hacia arriba.\n\n"
+        "**El riesgo.** Con `allow-remote-requests=yes`, el router escucha el 53 en todas sus direcciones. Si desde internet nadie lo frena, cualquiera puede usarlo y queda como resolver abierto, útil para amplificar ataques porque la respuesta es mucho más grande que la consulta.\n\n"
+        "**DoH.** Con `use-doh-server`, el router mantiene una conexión HTTPS al puerto 443 del servidor DoH y manda por ahí todas las consultas. Mientras esté configurado no usa los servidores comunes como respaldo; los usa solo para resolver el nombre del servidor DoH."),
+    "script_rsc": {
+        "titulo": "DNS del router con servidores propios y el 53 cerrado hacia afuera",
+        "descripcion": "Carga los servidores DNS, deja al router como DNS de la LAN, agrega las dos reglas de drop del 53 desde la WAN si no está la regla de fábrica y crea el nombre local del NVR. DoH queda comentado.",
+        "variables": [
+            {"nombre": "DNS1", "valor": "1.1.1.1", "detalle": "Servidor DNS principal"},
+            {"nombre": "DNS2", "valor": "9.9.9.9", "detalle": "Servidor DNS secundario"},
+            {"nombre": "NOMBRE_NVR", "valor": "nvr.lan", "detalle": "Nombre local para el NVR"},
+            {"nombre": "IP_NVR", "valor": "192.168.88.50", "detalle": "IP del NVR en la LAN"},
+        ],
+        "codigo": (
+            "# IES Training · MikroTik · L30 · DNS del router\n" + CAB +
+            "{\n"
+            ":local dns1 \"{{DNS1}}\"\n"
+            ":local dns2 \"{{DNS2}}\"\n"
+            ":local nvrname \"{{NOMBRE_NVR}}\"\n"
+            ":local nvrip \"{{IP_NVR}}\"\n"
+            "# 1. Primero el candado: el 53 cerrado desde la WAN\n"
+            ":local defconf [:len [/ip/firewall/filter/find comment=\"defconf: drop all not coming from LAN\"]]\n"
+            ":if ($defconf = 0) do={\n"
+            "  :if ([:len [/interface/list/find name=WAN]] = 0) do={ :error \"No existe la lista WAN: crearla antes de seguir.\" }\n"
+            "  :foreach p in={\"udp\";\"tcp\"} do={\n"
+            "    :if ([:len [/ip/firewall/filter/find comment=(\"ies-dns-wan-\" . $p)]] = 0) do={\n"
+            "      :if ([:len [/ip/firewall/filter/find]] > 0) do={\n"
+            "        /ip/firewall/filter/add chain=input in-interface-list=WAN protocol=$p dst-port=53 action=drop comment=(\"ies-dns-wan-\" . $p) place-before=[:pick [/ip/firewall/filter/find] 0]\n"
+            "      } else={\n"
+            "        /ip/firewall/filter/add chain=input in-interface-list=WAN protocol=$p dst-port=53 action=drop comment=(\"ies-dns-wan-\" . $p)\n"
+            "      }\n"
+            "    }\n"
+            "  }\n"
+            "  :put \"Sin regla de fabrica: agregue drop del 53 UDP y TCP desde la WAN.\"\n"
+            "} else={ :put \"Esta la regla de fabrica: el 53 ya esta cerrado desde la WAN.\" }\n"
+            "# 2. Servidores y DNS para la LAN\n"
+            "/ip/dns/set servers=($dns1 . \",\" . $dns2) allow-remote-requests=yes\n"
+            "# 3. Nombre local del NVR (si existe, se actualiza)\n"
+            ":local e [/ip/dns/static/find name=$nvrname]\n"
+            ":if ([:len $e] = 0) do={\n"
+            "  /ip/dns/static/add name=$nvrname address=$nvrip comment=\"ies-nvr-dns\"\n"
+            "} else={ /ip/dns/static/set $e address=$nvrip }\n"
+            "/ip/dns/cache/flush\n"
+            "# 4. DoH (opcional): sin respaldo si el servicio se cae. Descomentar y completar:\n"
+            "# /ip/dns/set use-doh-server=\"<URL-DoH>\" verify-doh-cert=yes\n"
+            ":do { :put (\"Prueba: mikrotik.com = \" . [:resolve mikrotik.com]) } on-error={ :put \"Ojo: no resuelve. Revisar servidores y salida a internet.\" }\n"
+            ":put (\"Listo: DNS \" . $dns1 . \" y \" . $dns2 . \", \" . $nvrname . \" = \" . $nvrip . \". Verifica con /ip/dns/print\")\n"
+            "}"),
+        "notas": [
+            "Probá desde la red del lado de la WAN: nslookup mikrotik.com a la IP pública del router tiene que dar timeout.",
+            "Si el router no debe servir DNS a nadie (un CHR en un VPS), cambiá allow-remote-requests a no.",
+            "DoH queda comentado: si lo activás, todas las consultas dependen de ese servicio.",
+        ],
+    },
+}
+
+# =========================================================== 31
+M["31"] = {
+    "fig": {
+        "file": "31.svg",
+        "alt": "Una tele o DVR con el DNS clavado en 8.8.8.8 manda la consulta al puerto 53. El MikroTik, con una regla dstnat redirect del 53 UDP y TCP desde la LAN, la desvía a su propio resolver y contesta; 8.8.8.8 no la recibe (cruz roja). Abajo, un celular con DoH sale por el 443 cifrado directo al servidor DoH en internet: pasa igual.",
+        "caption": "Lo que va al 53 lo contesta el router; DoH por el 443 se escapa.",
+    },
+    "steps": [
+        {"file": "31-paso3.svg", "step": 3,
+         "alt": "Una PC de la oficina 192.168.88.254 manda su consulta y el MikroTik la redirige. El MikroTik tiene la lista dns-libre con 192.168.88.10, que es un servidor con DNS propio: sus consultas salen sin redirigir hacia el DNS que él use en internet. Nota: sin la excepción se arma un lazo.",
+         "caption": "Lo que está en dns-libre sale sin redirigir; el resto va al resolver del router.",
+         "after": "La lista de excepciones"},
+        {"file": "31-paso5.svg", "step": 5,
+         "alt": "Dos terminales. Antes de las reglas, nslookup prueba-dns.lan 8.8.8.8 responde que el dominio no existe. Después de las reglas, el mismo comando devuelve 192.168.88.77. Abajo, los contadores de las reglas DNS transparente udp y tcp.",
+         "caption": "Google no conoce prueba-dns.lan: si aparece 192.168.88.77, contestó el router.",
+         "after": "Repetí la prueba del paso 2"},
+        {"file": "31-paso6.svg", "step": 6,
+         "alt": "Tres tarjetas. Firefox: si el router contesta NXDOMAIN para use-application-dns.net, no prende DoH solo. DNS sobre TLS: reject al TCP 853 y los equipos vuelven al 53. Queda afuera: DoH configurado a mano, apps con DoH propio y VPN. Abajo, los comandos.",
+         "caption": "Dos paliativos que ayudan y lo que ningún paliativo cubre.",
+         "after": "Paliativos para DoH. El dominio canario"},
+    ],
+    "concepts": [
+        {"name": "DNS transparente",
+         "para_que": "Las estáticas y los bloqueos del router solo valen para quien le pregunta al router. El DNS transparente existe para alcanzar también a los equipos que traen el DNS clavado: teles, DVR, celulares con 8.8.8.8.",
+         "como": "Dos reglas de NAT en la cadena dstnat, una para UDP y otra para TCP 53, desde la lista LAN y con `dst-address-type=!local` para no tocar lo que ya va al router. Con `action=redirect` la consulta va al resolver del router aunque el equipo haya preguntado a otro servidor. Requiere `allow-remote-requests=yes`.",
+         "ejemplo": "En una oficina en la Ciudad Vieja, el bloqueo de un sitio no le aplicaba a la tele de la sala de espera. Con el redirect, la tele pregunta a 8.8.8.8, contesta el MikroTik y el bloqueo le llega."},
+        {"name": "redirect o dst-nat",
+         "para_que": "Las dos acciones cambian el destino del paquete. Se eligen según dónde querés que termine la consulta: en el propio router o en otro servidor DNS de la red.",
+         "como": "`redirect` manda siempre a una dirección del router y al puerto de `to-ports`. `dst-nat` manda a la IP de `to-addresses`, por ejemplo un Pi-hole. Ese servidor va en la lista de excepciones, y si está en la misma subred que los clientes hace falta el src-nat del hairpin para que la respuesta vuelva por el router.",
+         "ejemplo": "Un cliente con un Pi-hole en 192.168.88.10: las reglas usan `action=dst-nat to-addresses=192.168.88.10 to-ports=53`, y el Pi-hole está en `dns-libre` para que sus propias consultas a internet no vuelvan a él."},
+        {"name": "Lista de excepciones",
+         "para_que": "Algunos equipos tienen que usar su propio DNS: el servidor DNS de la red, un controlador de dominio, un Pi-hole. Si se los redirige, se rompe el dominio o se arma un lazo.",
+         "como": "Una address-list (`dns-libre`) con esas IP y `src-address-list=!dns-libre` en las reglas. Un DNS interno en otra VLAN también se suma, porque las consultas de las PC hacia él cruzan el router y las reglas las agarrarían.",
+         "ejemplo": "Una empresa con controlador de dominio en la VLAN 20: sin excepción, las PC dejaron de encontrar el dominio al activar el redirect. Con la IP del controlador en `dns-libre`, todo volvió."},
+        {"name": "DoH y sus paliativos",
+         "para_que": "DNS sobre HTTPS se creó para cifrar las consultas y que nadie en el camino las vea o las cambie. Por diseño, el router no puede redirigirlas: van dentro de una conexión HTTPS con certificado.",
+         "como": "Hay paliativos: la estática NXDOMAIN para `use-application-dns.net`, que le dice a Firefox que no prenda DoH por su cuenta, y cortar el TCP 853 de DNS sobre TLS. Listas de servidores DoH en el firewall existen, pero son un blanco móvil y pueden romper apps. Quien configura DoH a mano o usa VPN pasa igual.",
+         "ejemplo": "Con Torch en el bridge ves a un celular hablando con 8.8.8.8 en el 443: es DoH. Lo honesto es explicarle al cliente que el filtro cubre la red, no un equipo que decide saltearlo."},
+    ],
+    "teoria_md": (
+        "### Un poco de historia\n"
+        "El DNS de los RFC 1034 y 1035 (1987) viaja sin cifrar por el puerto 53: cualquiera en el camino puede leer o cambiar una consulta. Durante años eso se aprovechó también para bien: los administradores de red forzaban el DNS de los equipos con una regla de NAT y así aplicaban filtros y nombres locales a todos.\n\n"
+        "En 2018 se publicó DNS sobre HTTPS (RFC 8484), que mete las consultas dentro de HTTPS. Los navegadores lo adoptaron rápido: Firefox lo activó por defecto para usuarios de Estados Unidos el 25 de febrero de 2020, y Chrome lo usa desde la versión 83 cuando el DNS del sistema es de un proveedor que lo soporta. Para no romper redes con filtros, Mozilla definió un dominio canario: si la red contesta que `use-application-dns.net` no existe, Firefox no prende DoH por su cuenta. DNS sobre TLS usa su propio puerto, el 853.\n\n"
+        "### Cómo funciona\n"
+        "**La regla de NAT.** Cuando un equipo de la LAN manda una consulta a 8.8.8.8:53, el paquete entra al router por el bridge. En la cadena dstnat, la regla `redirect` cambia el destino por una dirección del router y el puerto por el 53. El resolver del router contesta, y al volver la respuesta el router deshace el cambio: el equipo ve que le contestó 8.8.8.8. Por eso estáticas, adlists y bloqueos pasan a valer para ese equipo.\n\n"
+        "**Las condiciones.** `in-interface-list=LAN` limita la regla a la red interna. `dst-address-type=!local` evita tocar las consultas que ya iban al router. `src-address-list=!dns-libre` deja afuera al servidor DNS propio. Hacen falta dos reglas, UDP y TCP, porque el DNS usa TCP cuando la respuesta no entra en UDP.\n\n"
+        "**El límite.** DoH va por el 443 con certificado, igual que cualquier sitio web: el router no lo distingue por puerto ni lo puede redirigir sin romper el cifrado. Por eso el DNS transparente filtra la red, pero no es un candado contra quien decide saltearlo."),
+    "script_rsc": {
+        "titulo": "DNS transparente con lista de excepciones",
+        "descripcion": "Redirige al resolver del router todo el UDP y TCP 53 que sale de la LAN, salvo las IP de la lista dns-libre, y agrega el dominio canario de Firefox y el corte de DNS sobre TLS. No hace nada si el router no está sirviendo DNS a la LAN.",
+        "variables": [
+            {"nombre": "EXCEPCION", "valor": "192.168.88.10", "detalle": "IP con DNS propio que no se redirige (servidor, controlador de dominio, Pi-hole)"},
+            {"nombre": "LISTA_LAN", "valor": "LAN", "detalle": "Lista de interfaces de la LAN"},
+        ],
+        "codigo": (
+            "# IES Training · MikroTik · L31 · DNS transparente\n" + CAB +
+            "{\n"
+            ":local exc \"{{EXCEPCION}}\"\n"
+            ":local lan \"{{LISTA_LAN}}\"\n"
+            "# Sin resolver para la LAN, redirigir dejaria a todos sin nombres\n"
+            ":if (![/ip/dns/get allow-remote-requests]) do={ :error \"allow-remote-requests esta en no: configurar el DNS del router primero (leccion de DNS).\" }\n"
+            ":if ([:len [/interface/list/find name=$lan]] = 0) do={ :error (\"No existe la lista \" . $lan) }\n"
+            "# 1. Excepciones\n"
+            ":if ([:len [/ip/firewall/address-list/find list=dns-libre address=$exc]] = 0) do={\n"
+            "  /ip/firewall/address-list/add list=dns-libre address=$exc comment=\"ies-dns-libre\"\n"
+            "}\n"
+            "# 2. Redireccion UDP y TCP 53 al router\n"
+            ":foreach p in={\"udp\";\"tcp\"} do={\n"
+            "  :if ([:len [/ip/firewall/nat/find comment=(\"ies-dns-transparente-\" . $p)]] = 0) do={\n"
+            "    /ip/firewall/nat/add chain=dstnat in-interface-list=$lan src-address-list=!dns-libre dst-address-type=!local protocol=$p dst-port=53 action=redirect to-ports=53 comment=(\"ies-dns-transparente-\" . $p)\n"
+            "  }\n"
+            "}\n"
+            "# 3. Firefox: no prender DoH por su cuenta\n"
+            ":if ([:len [/ip/dns/static/find name=\"use-application-dns.net\"]] = 0) do={\n"
+            "  /ip/dns/static/add name=use-application-dns.net type=NXDOMAIN comment=\"ies-canario-firefox\"\n"
+            "}\n"
+            "# 4. DNS sobre TLS (853): reject para que vuelvan al 53\n"
+            ":if ([:len [/ip/firewall/filter/find comment=\"ies-sin-dot\"]] = 0) do={\n"
+            "  /ip/firewall/filter/add chain=forward in-interface-list=$lan protocol=tcp dst-port=853 action=reject reject-with=icmp-admin-prohibited comment=\"ies-sin-dot\"\n"
+            "}\n"
+            ":put (\"Listo: 53 de \" . $lan . \" redirigido al router, excepcion \" . $exc . \". Verifica con /ip/firewall/nat/print stats where comment~\\\"ies-dns\\\"\")\n"
+            "}"),
+        "notas": [
+            "Probá desde una PC: nslookup de un nombre que solo conoce el router, preguntándole a 8.8.8.8. Si contesta, la redirección anda.",
+            "Un DNS propio en otra VLAN va en dns-libre: agregalo antes de pegar el script.",
+            "DoH configurado a mano o una VPN pasan igual: el script no lo puede evitar.",
+        ],
+    },
+}
+
+# =========================================================== 32
+M["32"] = {
+    "fig": {
+        "file": "32.svg",
+        "alt": "Tres tarjetas. Adlist (7.15 en adelante): example.net da 0.0.0.0 y www.example.net pasa, porque bloquea solo el nombre exacto. NXDOMAIN con match-subdomain: example.com y www.example.com no existen. FWD con address-list: example.org manda su IP a la lista y el firewall rechaza la conexión. Abajo, el límite: vale para quien usa el DNS del router; DoH y VPN pasan.",
+        "caption": "Adlist para listas grandes, NXDOMAIN para un sitio entero, FWD con address-list para el firewall.",
+    },
+    "steps": [
+        {"file": "32-paso2.svg", "step": 2,
+         "alt": "Terminal con cache-size=16384, el archivo adlist-prueba.txt con example.net y ads.example.net y el alta de la adlist. Tabla de nslookup: example.net y ads.example.net dan 0.0.0.0, www.example.net da su IP real. Recuadro: la lista vive en la caché, unos 75 bytes por nombre, 75 000 nombres son unos 6 MiB.",
+         "caption": "La adlist bloquea el nombre exacto y ocupa caché: primero se sube cache-size.",
+         "after": "Subí la caché y cargá una adlist"},
+        {"file": "32-paso5.svg", "step": 5,
+         "alt": "La notebook pregunta por example.org; el MikroTik, con una estática FWD con address-list=bloqueo-ejemplo, consulta hacia internet, le contesta la IP y la anota en la lista. Cuando la notebook intenta conectarse, la regla de forward con reject la corta (cruz roja). Notas: la lista es dinámica; con CDN el bloqueo puede cortar otros servicios.",
+         "caption": "El router anota lo que contestó y el firewall corta exactamente esas IP.",
+         "after": "Cortar en el firewall con lo que"},
+    ],
+    "concepts": [
+        {"name": "Adlist",
+         "para_que": "Bloquear publicidad y rastreadores en toda la red sin instalar nada en los equipos. Antes de RouterOS 7.15 se hacía con miles de estáticas, que cargaban la CPU; adlist toma una lista en formato hosts y el router contesta 0.0.0.0 a esos nombres.",
+         "como": "`/ip/dns/adlist/add url=...` o `file=...`. La lista vive en la caché DNS (unos 75 bytes por nombre), así que primero se sube `cache-size`; si no entra, el log dice `max cache size reached` y hay que borrar y volver a agregar. Bloquea solo el nombre exacto, sin comodines. MikroTik la recomienda para equipos ARM64, con RAM y almacenamiento.",
+         "ejemplo": "En un estudio contable de Tres Cruces con un router ARM64, una lista de 75 000 nombres pide unos 6 MiB de caché: se sube a 16384 y `match-count` empieza a contar bloqueos ese mismo día."},
+        {"name": "NXDOMAIN con match-subdomain",
+         "para_que": "Para un sitio puntual que el cliente no quiere en su red, con todos sus subdominios. Es el bloqueo por nombre más preciso y no depende de listas externas.",
+         "como": "`/ip/dns/static/add name=sitio.com type=NXDOMAIN match-subdomain=yes`. El router contesta que el nombre no existe, para el dominio y para todo lo que está debajo. Para sacar un nombre de una adlist se usa lo contrario: una estática `type=FWD` con ese nombre.",
+         "ejemplo": "Un comercio pide bloquear un sitio de apuestas en la red de los empleados. Una línea con NXDOMAIN y match-subdomain bloquea el dominio, el www y las versiones móviles."},
+        {"name": "FWD con address-list",
+         "para_que": "A veces hace falta cortar en el firewall, no solo en el DNS: por ejemplo, cortar la conexión a un servicio aunque el equipo tenga la IP guardada de antes. La estática FWD con address-list une las dos cosas.",
+         "como": "La entrada FWD hace que el router consulte el nombre normalmente y anote en una address-list las IP que les contestó a los equipos. Una regla de forward con `dst-address-list` y `reject` corta esas conexiones. La lista se llena cuando un equipo pregunta y cada IP se borra al vencer el TTL. Es más exacta que poner el nombre en una address-list, que el router resuelve por su cuenta.",
+         "ejemplo": "Para cortar el acceso a un servicio de streaming en la red de cajas de un supermercado, la FWD con address-list y un reject en forward hacen que la app corte enseguida, en vez de quedarse esperando como con drop."},
+        {"name": "Los límites del bloqueo por DNS",
+         "para_que": "Saber qué no cubre es parte del trabajo: evita prometerle al cliente un candado que no existe y explica los reclamos de \"igual entra\".",
+         "como": "Solo vale para equipos que usan el DNS del router: se completa con el DNS transparente. DoH, VPN y apps con DNS propio pasan igual. Con CDN, varias marcas comparten direcciones: bloquear por IP puede cortar otros servicios, y permitir uno puede abrir otros.",
+         "ejemplo": "En el foro lo resumen así: si permitís WhatsApp por IP, probablemente estás permitiendo Facebook. Por eso, para sitios, primero el bloqueo por nombre y el firewall solo para casos puntuales y probados."},
+    ],
+    "teoria_md": (
+        "### Un poco de historia\n"
+        "Bloquear por DNS es una idea vieja: los archivos hosts con miles de dominios de publicidad apuntando a 0.0.0.0 circulan desde hace décadas, y proyectos como Pi-hole los llevaron a toda la red. En MikroTik, durante años la única forma era cargar entradas estáticas; en el foro hay casos de 2017 con 5000 estáticas que llevaban la CPU de un RB951 al 80% al navegar, y la recomendación era usar un DNS externo que filtre.\n\n"
+        "En 2024, con la rama 7.15, RouterOS sumó `adlist`: el router lee una lista en formato hosts, por URL o archivo, y la guarda en su caché DNS. MikroTik aclaró en el foro que pide almacenamiento y RAM y la recomendó para equipos ARM64.\n\n"
+        "### Cómo funciona\n"
+        "**Adlist.** Cuando un equipo pregunta por un nombre que está en la lista, el router contesta 0.0.0.0 (o :: en IPv6) con un TTL de 2 segundos, y el navegador no llega a ningún lado. Cada nombre ocupa unos 75 bytes de caché. Solo se bloquea el nombre exacto, y el router revisa cambios en las listas cada 4 horas. Una estática FWD con el mismo nombre lo saca del bloqueo.\n\n"
+        "**Estáticas NXDOMAIN.** Responden que el nombre no existe para todos los tipos de registro; con `match-subdomain=yes` cubren también lo de abajo. Sirven para sitios puntuales.\n\n"
+        "**Del DNS al firewall.** Una estática FWD con `address-list` deja que la consulta siga hacia arriba y anota en la lista las direcciones que el router les contestó a los equipos, con la duración del TTL. Así una regla de forward puede cortar exactamente esas conexiones. Si en cambio ponés el nombre directo en una address-list, el router lo resuelve por su cuenta, y con CDN o DNS por turnos puede obtener otras direcciones que las que usan los equipos.\n\n"
+        "**El límite.** Todo esto actúa sobre el DNS que contesta el router. Un equipo con otro DNS lo saltea (para eso está el DNS transparente) y DoH o una VPN lo saltean igual. Es un filtro de red, no un control total del equipo."),
+    "script_rsc": {
+        "titulo": "Adlist y bloqueo de un sitio por DNS",
+        "descripcion": "Comprueba que el RouterOS sea 7.15 o más, sube la caché DNS si hace falta, carga una adlist por URL si la completás y bloquea un sitio con todos sus subdominios con una estática NXDOMAIN.",
+        "variables": [
+            {"nombre": "CACHE_KIB", "valor": "16384", "detalle": "Tamaño mínimo de la caché DNS en KiB (unos 75 bytes por nombre de la lista)"},
+            {"nombre": "SITIO", "valor": "example.com", "detalle": "Dominio a bloquear con sus subdominios"},
+            {"nombre": "URL_ADLIST", "valor": "", "detalle": "URL de una lista en formato hosts (vacío: no carga ninguna)"},
+        ],
+        "codigo": (
+            "# IES Training · MikroTik · L32 · Adlist y bloqueo de un sitio\n" + CAB +
+            "{\n"
+            ":local cache [:tonum \"{{CACHE_KIB}}\"]\n"
+            ":local sitio \"{{SITIO}}\"\n"
+            ":local url \"{{URL_ADLIST}}\"\n"
+            "# 1. Version: adlist existe desde 7.15\n"
+            ":local v [/system/resource/get version]\n"
+            ":local p [:find $v \".\"]\n"
+            ":local mayor [:tonum [:pick $v 0 $p]]\n"
+            ":local resto [:pick $v ($p + 1) [:len $v]]\n"
+            ":local fin [:find $resto \".\"]\n"
+            ":if ([:typeof $fin] = \"nil\") do={ :set fin [:find $resto \" \"] }\n"
+            ":local menor [:tonum [:pick $resto 0 $fin]]\n"
+            ":local conadlist (($mayor > 7) or (($mayor = 7) and ($menor >= 15)))\n"
+            ":put (\"RouterOS \" . $v . \" en \" . [/system/resource/get architecture-name])\n"
+            "# 2. Cache: solo se sube, nunca se baja\n"
+            ":if ([/ip/dns/get cache-size] < $cache) do={ /ip/dns/set cache-size=$cache }\n"
+            "# 3. Adlist por URL (si la completaste y la version la soporta)\n"
+            ":if (($url != \"\") and $conadlist) do={\n"
+            "  :if ([:len [/ip/dns/adlist/find url=$url]] = 0) do={ /ip/dns/adlist/add url=$url }\n"
+            "} else={ :if (!$conadlist) do={ :put \"Ojo: esta version no tiene adlist. Actualizar a 7.15 o mas.\" } }\n"
+            "# 4. Sitio entero con subdominios\n"
+            ":if ([:len [/ip/dns/static/find name=$sitio type=NXDOMAIN]] = 0) do={\n"
+            "  /ip/dns/static/add name=$sitio type=NXDOMAIN match-subdomain=yes comment=\"ies-bloqueo-sitio\"\n"
+            "}\n"
+            "/ip/dns/cache/flush\n"
+            ":if ($conadlist) do={ /ip/dns/adlist/print }\n"
+            ":put (\"Listo: \" . $sitio . \" bloqueado con subdominios, cache \" . [/ip/dns/get cache-size] . \" KiB. Verifica con nslookup \" . $sitio . \" 192.168.88.1\")\n"
+            "}"),
+        "notas": [
+            "Mirá el log con /log/print where topics~\"dns\": si dice max cache size reached, subí la caché, borrá la adlist y agregala de nuevo.",
+            "Solo bloquea a los equipos que usan el DNS del router: combinalo con el script de DNS transparente.",
+            "El corte por firewall con FWD y address-list no está en el script: es para casos puntuales, probalo a mano como en el laboratorio.",
+            "En versiones anteriores a 7.15 la terminal puede rechazar el script entero por el comando adlist: actualizá primero.",
+        ],
+    },
+}
+
+json.dump(M, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+print("ok", OUT)

@@ -1,0 +1,38 @@
+{
+ "insertar": [
+  {
+   "id": "36",
+   "despues_de": "4"
+  }
+ ],
+ "lecciones": {
+  "36": {
+   "objetivos": [
+    "Al terminar vas a poder agrupar VLANs, bridges, puertos y túneles en interface lists que funcionan como zonas, con include para las listas compuestas.",
+    "Al terminar vas a poder dibujar la matriz de zonas de un edificio y traducirla a reglas de forward con in-interface-list y out-interface-list, e input por zona.",
+    "Al terminar vas a poder sumar una VLAN, una PPPoE o un túnel a una zona sin tocar una regla del firewall."
+   ],
+   "conecta": "En la lección anterior escribiste reglas sueltas, cada una en su cadena y en su lugar; ahora las ordenás por zonas, sobre las VLAN que separaste por sistema.",
+   "sigue": "Con las zonas armadas, en la próxima sumás el juego de reglas de protección que va en cada cliente: invalid, ICMP, admins y bloqueo de quien prueba contraseñas.",
+   "requisitos": [
+    "4",
+    "5"
+   ]
+  },
+  "4": {
+   "objetivos": [
+    "Al terminar vas a poder decir por qué cadena pasa un paquete (input, forward u output) y dónde actúan el dst-nat y el src-nat.",
+    "Al terminar vas a poder escribir reglas con accept, drop, reject, jump y log, ubicarlas con place-before y diagnosticarlas con print stats, reset-counters, el log y Torch.",
+    "Al terminar vas a poder resolver casos de obra: WinBox solo desde la oficina, NVR solo a su nube y NTP, cámaras sin internet e invitados con horario."
+   ],
+   "conecta": "En la lección anterior limitaste los servicios desde /ip/service; ahora hacés lo mismo desde el firewall, que además los oculta, y ves cómo recorre el router cada paquete.",
+   "sigue": "Las reglas sueltas andan bien hasta que el sitio tiene cinco VLAN. En la próxima agrupás interfaces en zonas y escribís el firewall como una matriz de quién habla con quién.",
+   "requisitos": [
+    "23"
+   ]
+  },
+  "33": {
+   "conecta": "En la lección anterior ordenaste el firewall por zonas; ahora sumás las reglas que protegen al router y a la LAN en cualquier cliente, tenga zonas o no: invalid, ICMP limitado, admins y bloqueo por intentos."
+  }
+ }
+}

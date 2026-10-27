@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Umbral 10: estados, período de calma y escalamiento</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS FILAS · LECCIÓN 6</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Umbral 10: estados, período de calma y escalamiento</text>
+<rect x="90" y="200" width="595.0" height="46" rx="10" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2" opacity="1"/>
+<rect x="685.0" y="200" width="255.0" height="46" rx="10" fill="#FFF4DE" stroke="#B45309" stroke-width="2" opacity="1"/>
+<rect x="940.0" y="200" width="170.0" height="46" rx="10" fill="#FCEAE6" stroke="#D2492F" stroke-width="2" opacity="1"/>
+<text x="387.5" y="230.0" font-family="Familjen Grotesk" font-size="18" font-weight="700" fill="#0E8F5E" text-anchor="middle">OK</text>
+<text x="812.5" y="230.0" font-family="Familjen Grotesk" font-size="18" font-weight="700" fill="#B45309" text-anchor="middle">ALTO</text>
+<text x="1025.0" y="230.0" font-family="Familjen Grotesk" font-size="18" font-weight="700" fill="#D2492F" text-anchor="middle">LLENO</text>
+<path d="M90.0 250.0L90.0 260.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<text x="90.0" y="282.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">0</text>
+<path d="M175.0 250.0L175.0 260.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<text x="175.0" y="282.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">1</text>
+<path d="M260.0 250.0L260.0 260.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<text x="260.0" y="282.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">2</text>
+<path d="M345.0 250.0L345.0 260.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<text x="345.0" y="282.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">3</text>
+<path d="M430.0 250.0L430.0 260.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<text x="430.0" y="282.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">4</text>
+<path d="M515.0 250.0L515.0 260.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<text x="515.0" y="282.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">5</text>
+<path d="M600.0 250.0L600.0 260.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<text x="600.0" y="282.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">6</text>
+<path d="M685.0 250.0L685.0 260.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<text x="685.0" y="282.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">7</text>
+<path d="M770.0 250.0L770.0 260.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<text x="770.0" y="282.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">8</text>
+<path d="M855.0 250.0L855.0 260.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<text x="855.0" y="282.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">9</text>
+<path d="M940.0 250.0L940.0 260.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<text x="940.0" y="282.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">10</text>
+<path d="M1025.0 250.0L1025.0 260.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<text x="1025.0" y="282.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">11</text>
+<path d="M1110.0 250.0L1110.0 260.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<text x="1110.0" y="282.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">12</text>
+<text x="685.0" y="186.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#B45309" text-anchor="middle">70 % = 7</text>
+<text x="940.0" y="186.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">umbral = 10</text>
+<text x="600.0" y="312.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">personas en la zona (aforo)</text>
+<path d="M90.0 440.0L1110.0 440.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<rect x="68.8" y="389" width="182.4" height="30" rx="15" fill="#FCEAE6"/><text x="160.0" y="410.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">llega a 10: avisa</text>
+<rect x="160" y="452" width="300" height="22" rx="6" fill="#17A8D4" stroke="#17A8D4" stroke-width="0" opacity="0.25"/>
+<text x="310.0" y="498.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">cooldown: no repite el aviso</text>
+<rect x="160" y="510" width="700" height="14" rx="6" fill="#B45309" stroke="#B45309" stroke-width="0" opacity="0.25"/>
+<text x="510.0" y="548.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#B45309" text-anchor="middle">sigue sobre el umbral 5 minutos</text>
+<rect x="807.4" y="389" width="265.2" height="30" rx="15" fill="#FCEAE6"/><text x="940.0" y="410.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">escalamiento al supervisor</text>
+<circle cx="160" cy="440" r="7" fill="#D2492F"/><circle cx="860" cy="440" r="7" fill="#D2492F"/>
+</svg>

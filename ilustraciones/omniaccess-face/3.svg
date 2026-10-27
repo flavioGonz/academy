@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>El aviso trae la MAC; la foto la busca el servidor</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS FACE · LECCIÓN 3</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">El aviso trae la MAC; la foto la busca el servidor</text>
+<rect x="40" y="126" width="260" height="62" rx="12" fill="#011E38"/>
+<text x="170.0" y="152.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#FFFFFF" text-anchor="middle">Terminal facial</text>
+<text x="170.0" y="175.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#9FC3E3" text-anchor="middle">192.0.2.21 · MAC …53:21</text>
+<path d="M170 190V560" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="6 6"/>
+<rect x="490" y="126" width="260" height="62" rx="12" fill="#011E38"/>
+<text x="620.0" y="152.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#FFFFFF" text-anchor="middle">Servidor de eventos</text>
+<text x="620.0" y="175.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#9FC3E3" text-anchor="middle">192.0.2.10 · puerto 10000</text>
+<path d="M620 190V560" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="6 6"/>
+<rect x="900" y="126" width="260" height="62" rx="12" fill="#011E38"/>
+<text x="1030.0" y="152.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#FFFFFF" text-anchor="middle">Monitor Facial</text>
+<text x="1030.0" y="175.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#9FC3E3" text-anchor="middle">navegador del puesto</text>
+<path d="M1030 190V560" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="6 6"/>
+<path d="M178.0 232.0L612.0 232.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<text x="395.0" y="220.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#04223D" text-anchor="middle">GET /api/webhooks/akuvox?event=face_valid&amp;mac=…</text>
+<circle cx="194" cy="256" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="194.0" y="262.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<circle cx="644" cy="354" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="644.0" y="360.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<path d="M612.0 420.0L178.0 420.0" fill="none" stroke="#6E88A1" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 8" marker-end="url(#a-gray)"/>
+<text x="395.0" y="408.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#04223D" text-anchor="middle">pide la foto al registro del equipo (usuario y clave de API)</text>
+<circle cx="644" cy="420" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="644.0" y="426.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<path d="M178.0 462.0L612.0 462.0" fill="none" stroke="#6E88A1" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 8" marker-end="url(#a-gray)"/>
+<text x="395.0" y="450.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">devuelve la imagen</text>
+<path d="M628.0 540.0L1022.0 540.0" fill="none" stroke="#0E8F5E" stroke-width="3" stroke-linecap="round" marker-end="url(#a-ok)"/>
+<text x="825.0" y="528.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#04223D" text-anchor="middle">evento + foto en tiempo real</text>
+<circle cx="644" cy="564" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="644.0" y="570.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<rect x="672" y="290" width="330" height="93" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="672" y="302" width="5" height="69" rx="2.5" fill="#B45309"/><text x="698.0" y="324.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="698.0" dy="0.0">Busca el equipo por la MAC. Si no</tspan><tspan x="698.0" dy="20.2">coincide, prueba por IP; si tampoco,</tspan><tspan x="698.0" dy="20.2">el evento se descarta.</tspan></text>
+<rect x="40" y="584" width="600" height="72" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="40" y="596" width="5" height="48" rx="2.5" fill="#0A63B8"/><text x="66.0" y="618.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="66.0" dy="0.0">La Action URL no lleva la imagen: sin camino de vuelta al terminal, hay</tspan><tspan x="66.0" dy="20.2">evento sin foto.</tspan></text>
+</svg>

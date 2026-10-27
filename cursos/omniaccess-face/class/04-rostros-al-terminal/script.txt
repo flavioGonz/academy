@@ -1,0 +1,17 @@
+A: Lección cuatro: que el terminal conozca a la gente.
+B: Acá es donde la gente cree que con guardar la ficha ya está.
+A: Y no está. Son dos cosas distintas. La ficha, en Usuarios y Residentes, guarda los datos y la foto. Pero el terminal reconoce con su propia memoria. Si la cara no se copia, el equipo no sabe quién es.
+B: ¿Y cómo se copia?
+A: En la misma ficha, al final, hay una sección que se llama "A qué equipos se manda". Ahí marcás los terminales de rostro. Cuando guardás, el cajón te muestra los pasos uno por uno: crear la ficha, subir la foto, enviar el rostro a tal terminal.
+B: ¿Y si el terminal dice que no?
+A: El cajón queda abierto con el error: "el terminal no aceptó el rostro". No se cierra como si nada.
+B: Bien. ¿Y qué foto sirve?
+A: Las cinco fuentes de fabricantes dicen lo mismo: de frente, una sola cara, luz pareja, sin lentes oscuros ni gorro. En el peso no se ponen de acuerdo: Speco pide menos de setenta kilobytes, Hikvision entre cuarenta y doscientos. Para Akuvox, la documentación del sistema dice JPG de menos de doscientos y al menos seiscientos cuarenta por cuatrocientos ochenta.
+B: ¿Y cómo sé qué tiene el terminal de verdad?
+A: Memoria Flash. Está en el menú de cada terminal facial, en Dispositivos. Te muestra el directorio de la memoria física, con foto. Hikvision tiene algo parecido al importar: una opción para verificar con el propio equipo que la foto se reconoce.
+B: ¿Y el botón grande de volcar todo?
+A: Cuidado ahí. Volcar Base de Datos a Equipo manda a todas las personas con foto o tarjeta. En un barrio con portería de servicio y de residentes, terminás con proveedores en la entrada de residentes.
+B: Uf, eso se ve.
+A: Se ve en el historial. ¿Laboratorio? Veinte minutos. Creá una persona de prueba con foto buena, marcá el terminal en "A qué equipos se manda", guardá, mirá los pasos y después buscala en Memoria Flash, Directorio. El contador Faces de la lista sube uno.
+B: Y recién ahí la probás en la puerta.
+A: Eso. Está enrolada cuando está en la memoria del terminal.

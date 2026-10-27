@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>WLAN Optimization de madrugada, lejos del reinicio</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMADA · PASO 6</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">WLAN Optimization de madrugada, lejos del reinicio</text>
+<rect x="48" y="124" width="1104" height="42" rx="10" fill="#03213C"/><text x="64.0" y="150.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">Network Config &gt; Network Settings &gt; WLAN &gt; WLAN Optimization</text>
+<circle cx="48" cy="124" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="130.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text>
+<path d="M80 300H1120" stroke="#6E88A1" stroke-width="2"/>
+<path d="M80.0 292V308" stroke="#6E88A1" stroke-width="2"/>
+<text x="80.0" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">0:00</text>
+<path d="M253.3 292V308" stroke="#6E88A1" stroke-width="2"/>
+<text x="253.3" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">1:00</text>
+<path d="M426.7 292V308" stroke="#6E88A1" stroke-width="2"/>
+<text x="426.7" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">2:00</text>
+<path d="M600.0 292V308" stroke="#6E88A1" stroke-width="2"/>
+<text x="600.0" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">3:00</text>
+<path d="M773.3 292V308" stroke="#6E88A1" stroke-width="2"/>
+<text x="773.3" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">4:00</text>
+<path d="M946.7 292V308" stroke="#6E88A1" stroke-width="2"/>
+<text x="946.7" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">5:00</text>
+<path d="M1120.0 292V308" stroke="#6E88A1" stroke-width="2"/>
+<text x="1120.0" y="334.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">6:00</text>
+<rect x="686.6666666666667" y="216" width="86.66666666666652" height="64" rx="10" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<text x="730.0" y="204.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#D2492F" text-anchor="middle">3:30 optimización</text>
+<rect x="513.3333333333334" y="228" width="43.33333333333326" height="52" rx="10" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="530.7" y="204.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="middle">reinicio de AP</text>
+<path d="M556.7 254H686.7" stroke="#0E8F5E" stroke-width="2.5" marker-start="url(#a-ok)" marker-end="url(#a-ok)"/>
+<text x="620.8" y="246.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">10 min o más</text>
+<text x="80.0" y="384.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">Horarios de ejemplo: lo que importa es que no coincidan.</text>
+<rect x="48" y="414" width="352" height="124" rx="14" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/><rect x="48" y="426" width="5" height="100" rx="2.5" fill="#D2492F"/><text x="74.0" y="448.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="74.0" dy="0.0">Corta el servicio</tspan></text><text x="74.0" y="474.9" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Mientras escanea, los clientes se</tspan><tspan x="74.0" dy="21.6">quedan sin internet varios minutos.</tspan><tspan x="74.0" dy="21.6">En horario de trabajo, nunca.</tspan></text>
+<rect x="424" y="414" width="352" height="124" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="424" y="426" width="5" height="100" rx="2.5" fill="#B45309"/><text x="450.0" y="448.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="450.0" dy="0.0">Separada del reinicio</tspan></text><text x="450.0" y="474.9" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="450.0" dy="0.0">Los AP tienen que estar conectados</tspan><tspan x="450.0" dy="21.6">durante la optimización: por eso, al</tspan><tspan x="450.0" dy="21.6">menos 10 minutos del reinicio.</tspan></text>
+<rect x="800" y="414" width="352" height="124" rx="14" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/><rect x="800" y="426" width="5" height="100" rx="2.5" fill="#0E8F5E"/><text x="826.0" y="448.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="826.0" dy="0.0">Volver atrás</tspan></text><text x="826.0" y="474.9" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="826.0" dy="0.0">Si el resultado no convence,</tspan><tspan x="826.0" dy="21.6">Optimization Record Detail &gt; Apply</tspan><tspan x="826.0" dy="21.6">Previous Settings.</tspan></text>
+</svg>

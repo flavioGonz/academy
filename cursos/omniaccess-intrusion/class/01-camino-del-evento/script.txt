@@ -1,0 +1,17 @@
+A: Arrancamos con OmniAccess Intrusión. Y la primera pregunta es fácil y la erra todo el mundo: ¿quién detecta al que salta el cerco?
+B: Y, OmniAccess, ¿no? Para eso lo instalamos.
+A: No. Detecta la cámara. O el NVR, si es Dahua. OmniAccess recibe el aviso, lo guarda, le pide la foto a la cámara y te lo pone en rojo en el monitor.
+B: Ah, mirá. O sea que si la cámara no avisa, OmniAccess no se entera de nada.
+A: Exacto. Y el aviso llega por dos caminos. Una cámara Hikvision empuja el evento al servidor de alarma de OmniAccess, al puerto diez mil. Con un NVR Dahua es al revés: OmniAccess se suscribe al NVR y se queda escuchando.
+B: ¿Y ONVIF? Porque el cliente siempre pregunta si es compatible ONVIF.
+A: En esta versión, por ONVIF no entra ninguna intrusión. Ojo con eso. Lo que sí: una cámara de otra marca grabada en un NVR Dahua llega igual, porque el que analiza es el NVR.
+B: ¿Y el movimiento? La detección de movimiento de siempre.
+A: Se descarta apenas llega. Lo dejaron afuera a propósito porque generaba miles de eventos y de fotos y saturaba todo. Acá cuenta la analítica: cruce de línea, intrusión de zona, entra a zona y sale de zona.
+B: Tiene sentido. ¿Las fuentes dicen lo mismo?
+A: Las cinco que miramos separan cruce, intrusión y movimiento como eventos distintos. Y la guía de Home Assistant agrega un detalle: Hikvision solo manda los eventos que tienen tildado notificar al centro de vigilancia.
+B: [risas] Ese tilde me hizo perder una tarde entera.
+A: Lo vamos a ver. El laboratorio de hoy es de lápiz: entrás a Dispositivos, vista Intrusión, y por cada cámara anotás quién detecta y por dónde avisa. Hikvision, push. NVR Dahua, suscripción. Cámara Dahua metida en un NVR Hikvision, sin vía.
+B: ¿Sin vía? ¿Cómo sin vía?
+A: El NVR Hikvision no analiza canales de otra marca. Ahí se configura en la propia cámara o se pasa a un NVR Dahua. El sistema te lo dice con esas palabras.
+B: Diez minutos y ya sé dónde buscar.
+A: Esa es la idea: primero saber quién detecta y por dónde avisa. Después tocás.

@@ -1,0 +1,20 @@
+A: Lección ocho. Prometimos en la uno que íbamos a ver cómo se bloquea de verdad.
+B: El ex empleado que entraba igual.
+A: Ese. Pero arranquemos por algo más amable: las visitas frecuentes. La niñera, el obrero que hace la reforma tres meses, la suegra que viene todos los martes.
+B: ¿Esos van como residentes?
+A: No, en Usuarios y Residentes hay una pestaña Visitas, con su botón Nueva visita. Foto, unidad, y en "A qué equipos se manda" marcás el terminal. Igual que un residente, pero queda separado.
+B: ¿Y tiene fecha de vencimiento?
+A: En la ficha facial no hay vencimiento automático. Lo que funciona es anotar hasta cuándo va y hacer la baja cuando termina.
+B: ¿Y cómo es la baja?
+A: Acá está el corazón de la lección. El terminal reconoce con su memoria. Entonces, para que deje de abrir, hay que sacar la cara de ahí: Dispositivos, el terminal, Memoria Flash, Directorio, buscás a la persona y eliminás. Te dice "rostro eliminado correctamente".
+B: ¿Y si borro la ficha en OmniAccess, no alcanza?
+A: No. Borrar la ficha borra la ficha. La cara sigue en el terminal y la foto sigue guardada. Por eso el orden: primero el equipo, después la ficha.
+B: Uf. Entonces el bloqueo del ex empleado...
+A: Mismo camino. Sacarlo del terminal. El Modo Face cambia cómo se registra, la puerta la decide la memoria del equipo.
+B: ¿Y lo de los pases con QR que tienen los barrios?
+A: Ojo con eso. Invitados existe, pero en esta versión aparece solo con el módulo LPR. Y si un Akuvox lee un QR, llega como código QR válido, sin cruzarse con esas invitaciones.
+B: Mejor no prometerlo.
+A: Mejor confirmarlo en cada instalación. Y pensá en el ciclo de vida: la Unidad Reguladora, en su dictamen sobre biometría, pide analizar el ciclo de vida de los datos. Alta, uso, baja, borrado.
+B: ¿Laboratorio?
+A: Veinte minutos. Dás de alta un obrero de prueba como visita, lo mandás al terminal, probás, y después hacés la baja en orden: Memoria Flash, eliminar, probás que ya no abre, y recién ahí la ficha.
+B: Primero el terminal, después la ficha.

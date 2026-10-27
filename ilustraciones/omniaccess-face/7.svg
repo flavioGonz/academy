@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Primero el consentimiento, después la foto</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS FACE · LECCIÓN 7</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Primero el consentimiento, después la foto</text>
+<rect x="48" y="140" width="196" height="170" rx="14" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="2"/>
+<g transform="translate(68 158) scale(1.5)" fill="none" stroke="#0E8F5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z"/></g>
+<text x="68.0" y="236.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Consentimiento</text>
+<text x="68.0" y="262.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">leer el texto y anotar</text>
+<circle cx="220" cy="140" r="17" fill="#0E8F5E" stroke="#FFFFFF" stroke-width="3"/><text x="220.0" y="146.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<path d="M246.0 225.0L272.0 225.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="274" y="140" width="196" height="170" rx="14" fill="#FFFFFF" stroke="#D2492F" stroke-width="2"/>
+<g transform="translate(294 158) scale(1.5)" fill="none" stroke="#D2492F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></g>
+<text x="294.0" y="236.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Evento Denegado</text>
+<text x="294.0" y="262.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">ficha → Registrar</text>
+<circle cx="446" cy="140" r="17" fill="#D2492F" stroke="#FFFFFF" stroke-width="3"/><text x="446.0" y="146.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<path d="M472.0 225.0L498.0 225.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="500" y="140" width="196" height="170" rx="14" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<g transform="translate(520 158) scale(1.5)" fill="none" stroke="#0A63B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></g>
+<text x="520.0" y="236.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Foto revisada</text>
+<text x="520.0" y="262.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">de frente, luz pareja</text>
+<circle cx="672" cy="140" r="17" fill="#0A63B8" stroke="#FFFFFF" stroke-width="3"/><text x="672.0" y="146.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<path d="M698.0 225.0L724.0 225.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="726" y="140" width="196" height="170" rx="14" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<g transform="translate(746 158) scale(1.5)" fill="none" stroke="#0A63B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="7" rx="1.5"/><rect x="4" y="14" width="16" height="7" rx="1.5"/><path d="M7.5 6.5h.01M7.5 17.5h.01"/></g>
+<text x="746.0" y="236.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Al terminal</text>
+<text x="746.0" y="262.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">A qué equipos se manda</text>
+<circle cx="898" cy="140" r="17" fill="#0A63B8" stroke="#FFFFFF" stroke-width="3"/><text x="898.0" y="146.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<path d="M924.0 225.0L950.0 225.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="952" y="140" width="196" height="170" rx="14" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="2"/>
+<g transform="translate(972 158) scale(1.5)" fill="none" stroke="#0E8F5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g>
+<text x="972.0" y="236.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Permitido</text>
+<text x="972.0" y="262.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">con su nombre</text>
+<circle cx="1124" cy="140" r="17" fill="#0E8F5E" stroke="#FFFFFF" stroke-width="3"/><text x="1124.0" y="146.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<rect x="48" y="344" width="1104" height="200" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/><text x="66.0" y="374.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Ley 18.331: lo que conviene saber en portería</text>
+<text x="72.0" y="404.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">Art. 4, literal Ñ</text>
+<text x="260.0" y="404.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">La cara usada para identificar es un dato biométrico (agregado por la Ley 19.924, 2020).</text>
+<text x="72.0" y="444.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">Art. 9</text>
+<text x="260.0" y="444.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">Consentimiento libre, previo, expreso e informado, y documentado.</text>
+<text x="72.0" y="484.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">Art. 18 bis</text>
+<text x="260.0" y="484.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">Con biometría, evaluación de impacto previa (según la URCDP, Dictamen 3/023).</text>
+<text x="72.0" y="524.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0E8F5E" text-anchor="start">Alternativa</text>
+<text x="260.0" y="524.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">Quien no acepta entra con tarjeta, PIN o portería, sin castigo.</text>
+<rect x="48" y="568" width="1104" height="72" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="580" width="5" height="48" rx="2.5" fill="#0A63B8"/><text x="74.0" y="602.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">La evaluación de impacto y la inscripción de la base las resuelve el responsable (administración) con su asesor; el guardia lee, anota</tspan><tspan x="74.0" dy="20.2">y ofrece la alternativa.</tspan></text>
+</svg>

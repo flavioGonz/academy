@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Hasta 30°, 4 a 8 m y la patente de 130 a 300 px</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS LPR</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Hasta 30°, 4 a 8 m y la patente de 130 a 300 px</text>
+<path d="M90 540H850.0" stroke="#6E88A1" stroke-width="2"/>
+<rect x="144" y="309.0" width="12" height="231.0" fill="#6E88A1"/>
+<g transform="translate(146 315.0) scale(0.9)"><rect x="0" y="-14" width="74" height="30" rx="7" fill="#011E38"/><rect x="70" y="-10" width="14" height="22" rx="3" fill="#0B3A66"/><path d="M-6 -20 H82" stroke="#011E38" stroke-width="5" stroke-linecap="round"/><circle cx="62" cy="1" r="5" fill="#17A8D4"/></g>
+<path d="M600.0 518 q0 -31 28 -34 l37 -31 h97 l32 31 q37 0 37 34 v10 z" fill="#5B6F84"/><path d="M671 484 l14 -24 h76 l23 24 z" fill="#C2D4E6"/><circle cx="646" cy="530" r="17" fill="#04223D"/><circle cx="784" cy="530" r="17" fill="#04223D"/>
+<rect x="592.0" y="481.0" width="10" height="28" rx="2" fill="#FFFFFF" stroke="#04223D" stroke-width="2"/>
+<path d="M220 315.0L592.0 495.0" stroke="#0E8F5E" stroke-width="3" stroke-dasharray="9 7"/>
+<path d="M370 315.0 A150 150 0 0 1 359.3 370.7" fill="none" stroke="#0E8F5E" stroke-width="2.5"/>
+<path d="M220 315.0H400" stroke="#6E88A1" stroke-width="1.5" stroke-dasharray="4 4"/>
+<path d="M116 315.0V540" stroke="#0A63B8" stroke-width="2" marker-end="url(#a-blue)" marker-start="url(#a-blue)"/>
+<text x="106.0" y="427.5" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="end">H 2,5 m</text>
+<path d="M150 566H592.0" stroke="#0A63B8" stroke-width="2" marker-end="url(#a-blue)" marker-start="url(#a-blue)"/>
+<text x="375.0" y="592.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="middle">D 5 m</text>
+<text x="384.0" y="349.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0E8F5E" text-anchor="start">22° (máx. 30°)</text>
+<text x="560.0" y="600.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="middle">punto donde el auto frena</text>
+<rect x="860" y="130" width="292" height="250" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="880.0" y="162.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Vista de arriba</text>
+<rect x="900" y="200" width="212" height="110" rx="4" fill="#E6EEF6" stroke="#6E88A1" stroke-width="1.5"/>
+<path d="M900 255H1112" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="14 10"/>
+<circle cx="884" cy="214" r="9" fill="#011E38"/>
+<path d="M884 214L1060 226" stroke="#0E8F5E" stroke-width="2.5" stroke-dasharray="7 6"/>
+<path d="M884 214L1112 214" stroke="#6E88A1" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="1006.0" y="344.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="middle">un carril por cámara</text>
+<text x="1006.0" y="366.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="middle">ángulo horizontal ≤ 30°</text>
+<rect x="860" y="404" width="292" height="75" rx="14" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/><rect x="860" y="416" width="5" height="51" rx="2.5" fill="#0E8F5E"/><text x="886.0" y="438.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="886.0" dy="0.0">Patente de 130 a 300 px de</tspan><tspan x="886.0" dy="21.6">ancho; lo ideal, 150 a 200.</tspan></text>
+</svg>

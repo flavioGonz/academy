@@ -1,0 +1,48 @@
+{
+ "slug": "omniaccess-intrusion",
+ "title": "OmniAccess Intrusión: perímetro con analítica de cámara",
+ "vendor": "Infratec",
+ "tagline": "De la línea dibujada en la cámara a la alarma atendida: cruces y zonas que avisan cuando importa.",
+ "description": "Al terminar vas a poder configurar el cruce de línea y la zona de intrusión en cámaras Hikvision y NVR Dahua, dar de alta las cámaras en OmniAccess con su aviso, revisar el horario de armado y dejar sonando las pantallas del puesto. Como operador, vas a atender una alarma de punta a punta con la foto, el análisis, el vivo y la grabación, dejar el registro limpio, coordinar al guardia y, como técnico, bajar las falsas alarmas con números y diagnosticar cuando un evento no llega.",
+ "level": "Inicial a intermedio",
+ "audience": "Técnicos que instalan y mantienen OmniAccess en barrios privados, edificios y empresas, y operadores del puesto de monitoreo o la garita.",
+ "prerequisites": [
+  "Direccionamiento IP, puertos y firewall básico",
+  "Haber entrado a la web de una cámara Hikvision o de un NVR",
+  "Saber qué es un NVR y cómo graba los canales",
+  "Usuario del panel de OmniAccess con permiso del monitor de intrusión (para la parte de operación)"
+ ],
+ "outcomes": [
+  "Explicar quién detecta y por dónde llega cada evento: push de la cámara Hikvision al servidor de alarma o suscripción al NVR Dahua",
+  "Dibujar línea y zona con sentido, sensibilidad y objetivo desde el calibrador de OmniAccess o la web de la cámara",
+  "Dar de alta e importar cámaras de intrusión, configurar y probar el servidor de alarma, y verificar el horario de armado de cada regla",
+  "Dejar las pantallas de pared, el mapa y el monitor avisando, y explicarle al cliente qué avisos hay en esta versión",
+  "Atender una alarma con la ficha, el análisis, el vivo, la grabación y el seguimiento visual, y dejar el registro corregido",
+  "Bajar las falsas alarmas un cambio por vez y diagnosticar de la cámara al monitor cuando un evento no llega"
+ ],
+ "version_note": "Escrito en octubre de 2026 sobre el código de OmniAccess de la rama de desarrollo más reciente; el módulo de intrusión no tiene manual propio. Aplica a cámaras Hikvision con cruce de línea e intrusión por ISAPI (AcuSense para el objetivo persona o vehículo) y a NVR Dahua con IVS por suscripción eventManager; en esta versión no hay ingesta por ONVIF. El editor de horario de armado desde OmniAccess, la verificación por visión (omni-vision), la alerta global en el panel y los avisos de intrusión por Telegram, WhatsApp o push no están activos en esta versión: el curso enseña lo que funciona. El menú Monitor Intrusión aparece con el módulo LPR y fuera del modo Filas, según cómo esté configurado tu sistema.",
+ "arcs": [
+  {"title": "Entender el sistema", "why": "Antes de tocar una cámara hay que saber quién detecta, por dónde llega el aviso y qué hace OmniAccess con él.", "lessons": [1]},
+  {"title": "Instalar y configurar", "why": "Es el trabajo del técnico en obra: la regla en la cámara, el alta con el aviso, el horario en que avisa y dónde suena.", "lessons": [2, 3, 4, 5]},
+  {"title": "Operar", "why": "Es el turno del operador: decidir si es real, mirar el vivo y la grabación, dejar registro y coordinar al guardia.", "lessons": [6, 7, 8]},
+  {"title": "Afinar y diagnosticar", "why": "Con el sistema andando, el trabajo es que avise solo cuando importa y saber dónde mirar cuando no avisa.", "lessons": [9, 10]}
+ ],
+ "splits": [
+  {"topic": "Push o suscripción", "sides": "cctvcamerapros y Hikvision empujan el evento desde la cámara al servidor; alarmserver y el script de Dahua se suscriben al equipo y escuchan.", "decide": "Lo decide la marca del equipo que analiza: OmniAccess usa push con cámaras Hikvision y suscripción al NVR con Dahua."},
+  {"topic": "Sensibilidad o clasificación", "sides": "Trassir y Milesight ponen la sensibilidad como perilla principal; un foro de ipcamtalk muestra que sin clasificación de objeto ninguna perilla frena gatos y pájaros.", "decide": "Con cámara que clasifica, primero objetivo persona; sin clasificación, reubicar y achicar la zona antes de tocar la sensibilidad."},
+  {"topic": "Filtrar en el sitio o verificar con una persona", "sides": "Davantis prefiere decidir en el sitio con análisis continuo; las centrales de Security Sales verifican con video y con el cliente.", "decide": "OmniAccess deja la decisión en el operador con la foto y los indicios; el ajuste en la cámara baja el ruido antes de que llegue."}
+ ],
+ "sources_count": 30,
+ "lessons": [
+  {"n": 1, "dir": "01-camino-del-evento", "handle": "Camino del evento", "summary": "Quién detecta, por dónde llega el aviso (push Hikvision o suscripción Dahua) y qué se descarta."},
+  {"n": 2, "dir": "02-regla-en-camara", "handle": "Regla en cámara", "summary": "Línea, zona, sentido, sensibilidad y objetivo con el calibrador, escritos en la cámara."},
+  {"n": 3, "dir": "03-alta-y-aviso", "handle": "Alta y aviso", "summary": "Alta o importación desde el NVR, servidor de alarma, prueba y el tilde de notificar al centro."},
+  {"n": 4, "dir": "04-horario-de-armado", "handle": "Horario de armado", "summary": "El horario de cada regla vive en la cámara; OmniAccess lo lee y el mapa tiene el suyo."},
+  {"n": 5, "dir": "05-avisos-y-pantallas", "handle": "Avisos y pantallas", "summary": "Dónde suena la intrusión: monitor, mapa y pantallas de pared; qué avisos no hay en esta versión."},
+  {"n": 6, "dir": "06-atender-la-alarma", "handle": "Atender la alarma", "summary": "Aceptar, leer el análisis, confirmar real o falsa y resolver la cámara en atención."},
+  {"n": 7, "dir": "07-vivo-y-grabacion", "handle": "Vivo y grabación", "summary": "Vivo SD y HD, PTZ, seguimiento visual, grabación del NVR y clip por descarga o WhatsApp."},
+  {"n": 8, "dir": "08-registro-y-guardia", "handle": "Registro y guardia", "summary": "Historial, evidencia, corrección de una detección, retención y coordinación del guardia."},
+  {"n": 9, "dir": "09-menos-falsas-alarmas", "handle": "Menos falsas alarmas", "summary": "Instalación, regla, objetivo y medición con el análisis: un cambio por vez."},
+  {"n": 10, "dir": "10-cuando-no-llega", "handle": "Cuando no llega", "summary": "Diagnóstico de la cámara al monitor: armado, vinculación, servidor, red, alta, foto, grabación y hora."}
+ ]
+}

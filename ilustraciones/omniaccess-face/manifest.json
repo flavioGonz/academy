@@ -1,0 +1,445 @@
+{
+ "1": {
+  "fig": {
+   "file": "1.svg",
+   "alt": "A la izquierda, en la pared, una persona frente al terminal facial, que dispara su relé hacia la cerradura. A la derecha, en el servidor, el aviso por Action URL llega al servidor de eventos en el puerto 10000, pasa por el Modo Face (Lista Blanca o Negra), se guarda la foto y se muestra en el Monitor Facial. Una nota dice que cambiar el Modo Face no traba ni libera la puerta.",
+   "caption": "El terminal decide y abre; OmniAccess recibe el aviso, lo clasifica y lo guarda."
+  },
+  "steps": [
+   {
+    "file": "1-paso3.svg",
+    "step": 3,
+    "alt": "Ventana de Configuración con la ruta Modos, Modos (LPR / Face / Cola), Modo Face y las tres opciones: Lista Negra, identificado denegado; Lista Blanca, identificado permitido; Aprendizaje, deshabilitado. Debajo, una tabla donde la columna Puerta dice siempre la decide el terminal.",
+    "caption": "Las tres opciones cambian el registro; ninguna cambia quién abre la puerta.",
+    "after": "Leé las tres opciones del Modo Face"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Decisión local del terminal",
+    "para_que": "Un terminal facial tiene que abrir en un segundo y seguir abriendo aunque se corte la red. Por eso compara la cara con su propia memoria, con su propio umbral, y dispara su relé sin esperar a nadie.",
+    "como": "Lo que el terminal reconoce depende de lo que tiene cargado en memoria y de su configuración de reconocimiento. OmniAccess le carga las caras y le pide aperturas a pedido, pero la decisión de cada pasada es del equipo.",
+    "ejemplo": "Se cae el enlace entre la portería y el servidor durante una tormenta: los residentes siguen entrando por cara, y el monitor se queda sin eventos hasta que vuelve la red."
+   },
+   {
+    "name": "Modo Face (Lista Blanca y Lista Negra)",
+    "para_que": "Sirve para que OmniAccess clasifique lo que el terminal informa: en Lista Blanca, lo identificado se registra permitido; en Lista Negra, lo identificado se registra denegado. Es la misma idea que el modo LPR, aplicada a rostros.",
+    "como": "Se elige en Configuración, Modos, pestaña Modo Face. La propia pantalla aclara que la cámara controla la apertura física: el modo cambia el registro y cómo se ve en el monitor.",
+    "ejemplo": "En un edificio de oficinas en Ciudad Vieja usan Lista Blanca: cada empleado reconocido figura en verde. Si un día alguien pasa a Lista Negra para bloquear a un ex empleado, el monitor lo pinta en rojo, pero el terminal le abre igual hasta que le sacan la cara de la memoria."
+   },
+   {
+    "name": "Módulos y modos de OmniAccess",
+    "para_que": "OmniAccess es una familia: LPR para matrículas, Face para rostros, Filas para aforo, y Guardias como capa aparte. Cada instalación prende lo que usa, y el menú se arma según eso.",
+    "como": "Los módulos son valores de configuración (MODULE_LPR, MODULE_FACE, MODULE_QUEUE, MODULE_GUARD). Activar un modo recarga la aplicación con su interfaz: en Face, el Monitor en Vivo abre el Monitor Facial y aparece Dispositivos Faciales.",
+    "ejemplo": "En un barrio con barrera LPR y portería peatonal facial, están prendidos LPR y Face: el guardia ve Invitados (que viene con LPR) y también los dispositivos faciales."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEl reconocimiento facial por computadora arrancó en los años sesenta con trabajos que medían a mano distancias entre ojos, nariz y boca sobre fotos. Durante décadas fue tema de laboratorio. Lo que lo trajo a la portería fue la combinación de cámaras baratas, procesadores dentro del propio equipo y algoritmos entrenados con millones de caras: hoy un terminal de pared compara un rostro contra miles en menos de un segundo, sin salir del equipo.\n\nEn paralelo, el control de acceso pasó de la tarjeta al software. Primero fueron controladoras que decidían solas y guardaban su registro; después aparecieron plataformas que juntan varios equipos, guardan fotos y muestran todo en una pantalla. OmniAccess, de Infratec, es una de esas plataformas, y nació para matrículas antes de sumar rostros.\n\n### Cómo funciona\n\nHay dos lugares y cada uno hace su parte:\n\n- **El terminal facial** (Akuvox o Hikvision) detecta una cara, la compara con las que tiene en su memoria y, si supera su umbral, dispara el relé. Esa decisión es local.\n- **OmniAccess** recibe un aviso por la red cada vez que pasa algo (una URL que el terminal llama, al puerto `10000` del servidor de eventos), busca la foto del momento en el registro del equipo, le pone Permitido o Denegado según el Modo Face y lo muestra en el Monitor Facial.\n\nPor eso el Modo Face es una regla de registro, no de apertura. Si el terminal reconoce a alguien y abre, OmniAccess puede anotarlo como denegado (Lista Negra), pero la puerta ya se abrió. Para que alguien no entre, lo que cuenta es la memoria del terminal: qué caras tiene cargadas.\n\nEsto tiene una ventaja grande: si se corta la red, la puerta sigue funcionando. Y una consecuencia que conviene explicarle al cliente desde el primer día: los bloqueos se hacen en el equipo, y el sistema es el que deja constancia."
+ },
+ "2": {
+  "fig": {
+   "file": "2.svg",
+   "alt": "Vista de costado: pared con el terminal y su cámara a una altura acotada de 1,30 a 1,48 m. Frente al terminal, a unos 0,5 m, una silueta de 1,55 m y otra punteada de 1,90 m, con líneas de visión hacia la cámara. Detrás de las personas, una ventana con sol marcada como problema. A la derecha, notas sobre el contraluz y sobre las alturas que dan distintas fuentes.",
+   "caption": "Altura según el modelo, persona a medio metro, y nada de sol detrás de ella."
+  },
+  "steps": [
+   {
+    "file": "2-paso3.svg",
+    "step": 3,
+    "alt": "Tabla de prueba con filas persona más baja, persona más alta y con sol de la tarde, y columnas 30 cm, 50 cm y 1 m, cada celda con la pregunta reconoce. Al lado, dos miniaturas de rostro: una bien iluminada con tilde verde y una oscura a contraluz con cruz roja.",
+    "caption": "Una grilla simple: dos personas, tres distancias y la hora del sol.",
+    "after": "Pará a cada persona a unos 50 cm"
+   },
+   {
+    "file": "2-paso4.svg",
+    "step": 4,
+    "alt": "Dos plantas de un hall. En la de la izquierda, marcada con cruz roja, el terminal está en la pared de enfrente de la puerta de vidrio y la persona queda con el sol de la tarde a la espalda. En la de la derecha, marcada con tilde verde, el terminal está en una pared lateral, la persona tiene detrás una pared sin vidrio y hay una luz de frente.",
+    "caption": "Lo que importa es qué queda detrás de la persona cuando mira al terminal.",
+    "after": "Mirá qué hay detrás de la persona"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Altura de montaje",
+    "para_que": "La cámara del terminal ve un rango de alturas a una distancia dada. Si va muy alta, la gente baja no entra en el cuadro; si va muy baja, la alta se tiene que agachar. La altura correcta es la que cubre el rango de estaturas de quienes usan esa puerta.",
+    "como": "Se toma de la ficha del modelo y se mide hasta la cámara. Las fuentes dan números distintos (1,1 m ClockRite, 1,30 m Control iD, cámara a 1,48 m en Synerion), así que se valida con la persona más baja y la más alta del lugar.",
+    "ejemplo": "En un colegio de Carrasco, el terminal de la entrada de alumnos va más bajo que el de la sala de profesores: los usuarios no son los mismos."
+   },
+   {
+    "name": "Contraluz",
+    "para_que": "La cámara ajusta la exposición a lo más brillante del cuadro. Si detrás de la persona hay una ventana o una puerta de vidrio con sol, la cara queda oscura y el algoritmo no encuentra rasgos.",
+    "como": "Se evita al elegir la pared: que detrás de quien mira al terminal haya pared y no vidrio. Si no se puede, ayuda el WDR del equipo y una luz frontal pareja.",
+    "ejemplo": "Un hall de edificio en Pocitos con puerta de vidrio al oeste: a las cinco de la tarde el terminal empieza a fallar. Moverlo a la pared lateral resuelve más que cualquier ajuste."
+   },
+   {
+    "name": "WDR (amplio rango dinámico)",
+    "para_que": "Sirve para escenas con zonas muy claras y muy oscuras a la vez. Combina o ajusta la imagen para que se vean detalles en las dos.",
+    "como": "Se activa en el menú de imagen del terminal (en Hikvision, junto a los parámetros biométricos, recomendado para exterior). No reemplaza una buena ubicación: la mejora, pero con sol directo de frente a la cámara sigue costando.",
+    "ejemplo": "Una portería peatonal con alero, donde la calle queda muy clara y el interior en sombra: con WDR la cara se ve pareja a media mañana."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLos primeros terminales faciales para control de acceso se instalaban como relojes de personal, adentro y con luz de oficina. Cuando empezaron a ir a porterías, halls y accesos al aire libre, apareció el problema que hoy se repite en todas las guías de instalación: la luz. Los fabricantes respondieron con luces de relleno en el frente del equipo, cámaras con WDR y ajustes de exposición. Synerion, por ejemplo, cuenta que desde la versión 1.10.0 de su firmware mide la exposición en el centro del cuadro para que el cielo o una lámpara no la arruinen.\n\nLa altura también se fue acomodando. Cada fabricante da un número distinto porque cada cámara tiene su lente y su ángulo, pero todos persiguen lo mismo: ver de frente a la mayor cantidad de personas, a la distancia natural a la que alguien se para frente a una puerta.\n\n### Cómo funciona\n\nEl terminal hace dos cosas seguidas: **detectar** una cara en la imagen y **compararla** con su memoria. Las dos dependen de la imagen.\n\n- La detección busca un patrón de rostro en un rango de tamaños. Por eso hay una distancia ideal (alrededor de 50 cm en varias fuentes): más lejos, la cara queda chica; más cerca, se sale del cuadro.\n- La comparación extrae rasgos (distancias y formas) y los mide contra cada cara cargada. Si la cara viene girada, oscura o cortada, los rasgos salen distintos y la similitud baja.\n\nLa exposición manda: la cámara ajusta el brillo a lo que domina el cuadro. Con una ventana atrás, ajusta para la ventana y la cara queda en sombra. Por eso el orden de trabajo es siempre el mismo: ubicación y luz primero, ajustes del equipo después, y el umbral al final."
+ },
+ "3": {
+  "fig": {
+   "file": "3.svg",
+   "alt": "Diagrama de secuencia con tres columnas: terminal facial (192.0.2.21), servidor de eventos (192.0.2.10, puerto 10000) y Monitor Facial. Paso 1, el terminal manda un GET a /api/webhooks/akuvox con event=face_valid y la MAC. Paso 2, el servidor busca el equipo por la MAC, si no por IP, y si no lo encuentra descarta el evento. Paso 3, el servidor le pide la foto al registro del terminal y el terminal la devuelve. Paso 4, el evento con foto llega al monitor.",
+   "caption": "La Action URL avisa; la foto viaja en un segundo pedido, del servidor al terminal."
+  },
+  "steps": [
+   {
+    "file": "3-paso2.svg",
+    "step": 2,
+    "alt": "Formulario de alta con los campos Tipo Acceso Facial, Fabricante Akuvox, Modelo Hardware, Host / IP 192.0.2.21, Hardware ID (MAC) 00:00:5E:00:53:21 resaltado, Usuario Manager, API Password, Sentido del Flujo ENTRADA y Ubicación Física Portería peatonal. Notas al costado explican la MAC, las credenciales de API y el sentido.",
+    "caption": "La MAC une cada aviso con el equipo; el usuario de API permite traer la foto.",
+    "after": "2. En OmniAccess:"
+   },
+   {
+    "file": "3-paso4.svg",
+    "step": 4,
+    "alt": "Ventana del Configurador de Action URLs con filas Valid Face, Invalid Face, Relay Output y System Boot, cada una con su URL al puerto 10000 y variables como $mac y $user_name, y un botón Copiar URL por evento. Debajo, una tabla de variables y una nota sobre variables que quedan sin reemplazar.",
+    "caption": "Una URL por evento, con variables que el terminal completa al avisar.",
+    "after": "Abrí el menú de la fila y copiá la URL"
+   },
+   {
+    "file": "3-paso6.svg",
+    "step": 6,
+    "alt": "Tabla del registro de Webhooks con dos avisos de fuente Akuvox: uno con dispositivo Portería peatonal y tilde verde, y otro con Dispositivo Desconocido y una MAC distinta, con cruz roja. Notas: bien, el servidor encontró el equipo; mal, corregir el Hardware ID.",
+    "caption": "Si el aviso dice Dispositivo Desconocido, la MAC cargada no coincide.",
+    "after": "Pasá una cara enrolada frente al equipo"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Action URL",
+    "para_que": "Es la forma en que el terminal avisa que pasó algo sin que nadie le pregunte: llama a una URL por cada evento (rostro válido o inválido, tarjeta, relé, arranque). Evita que el servidor tenga que consultar al equipo todo el tiempo.",
+    "como": "OmniAccess arma las URL en el Configurador de Action URLs (menú de la fila del equipo, Webhooks (Action URL)) y se pegan en el terminal. Todas apuntan al servidor de eventos, puerto `10000`, ruta `/api/webhooks/akuvox`. Dónde se cargan en cada familia de Akuvox lo cubre el curso Porteros IP Akuvox.",
+    "ejemplo": "En una portería de Barrio Ejemplo se cargan Valid Face, Invalid Face y Relay Output: el monitor muestra quién pasó, quién no fue reconocido y cuándo se abrió la puerta."
+   },
+   {
+    "name": "La MAC como identidad del equipo",
+    "para_que": "Cuando llega un aviso, el servidor necesita saber de qué terminal viene para asignarle sentido (Entrada o Salida), ubicación y credenciales. La MAC viaja en cada aviso como variable `$mac`.",
+    "como": "Se carga en el campo Hardware ID (MAC) del dispositivo. El servidor la compara sin dos puntos ni guiones; si no coincide, prueba por la IP de origen, y si no puede identificar el equipo, descarta el evento.",
+    "ejemplo": "Se cambia un terminal roto por uno nuevo y nadie actualiza la MAC: el equipo abre, pero el monitor queda en blanco. En Webhooks aparece como Dispositivo Desconocido."
+   },
+   {
+    "name": "La foto viaja aparte",
+    "para_que": "La Action URL es un pedido corto con texto; no lleva imagen. Para tener la foto del momento, el servidor se la pide al terminal después del aviso.",
+    "como": "El servidor usa el usuario y la clave de API cargados en el dispositivo y busca en el registro del equipo (doorlog) la entrada que coincide con la persona. Si no llega al terminal o la clave está mal, el evento queda sin foto.",
+    "ejemplo": "Un firewall que deja pasar del terminal al servidor pero no del servidor al terminal: los eventos llegan con nombre y sin foto."
+   },
+   {
+    "name": "Apertura a pedido (botón Relé)",
+    "para_que": "Hay aperturas que no dependen de una cara: un proveedor sin enrolar, una emergencia, una prueba de instalación. Para eso OmniAccess puede pedirle al terminal que dispare su relé.",
+    "como": "En Dispositivos, cada fila tiene un botón Relé. Con Akuvox usa la API del equipo (relé 1, unos 5 segundos) y prueba formatos más viejos si el primero falla; con Hikvision usa su API. Otras marcas no tienen disparo remoto en esta versión.",
+    "ejemplo": "En la puesta en marcha, el técnico toca Relé desde la notebook y confirma de una que la cerradura está bien cableada al relé del terminal."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLos equipos IP aprendieron temprano a avisar por HTTP. Los teléfonos IP y los porteros ya tenían Action URL para notificar llamadas y aperturas a otros sistemas. En la web, la misma idea tomó el nombre de webhook a fines de la década de 2000: en vez de preguntar cada tanto si pasó algo, el que tiene la novedad llama a una URL del que la necesita.\n\nEn control de acceso eso cambió la arquitectura. Antes la plataforma tenía que leer el registro de cada controladora cada cierto tiempo; con avisos, el evento aparece en pantalla en el momento. Akuvox ofrece las dos variantes: Action URL locales en cada equipo y, en su nube Smart Access, reglas que disparan webhooks hacia otros sistemas.\n\n### Cómo funciona\n\nUn aviso de OmniAccess Face es un pedido HTTP con los datos en la URL:\n\n```text\nGET /api/webhooks/akuvox?event=face_valid&mac=<MAC>&user=<nombre>&userid=<id>\n```\n\nEl terminal reemplaza cada `$variable` por el dato real antes de mandarlo. Del lado del servidor, en el puerto `10000`:\n\n1. Lee el tipo de evento y lo normaliza (por ejemplo, `relay_open` pasa a puerta abierta).\n2. Busca el equipo por la MAC. Sin equipo, no hay evento.\n3. Va a buscar la foto al registro del terminal con las credenciales del dispositivo.\n4. Guarda el evento con su foto y lo empuja en tiempo real a los monitores abiertos.\n\nSon dos caminos de red distintos: del terminal al servidor para el aviso, y del servidor al terminal para la foto y para el botón Relé. Cuando algo falla, la primera pregunta es cuál de los dos caminos está cortado."
+ },
+ "4": {
+  "fig": {
+   "file": "4.svg",
+   "alt": "A la izquierda, la ficha de Ana Ejemplo con foto y la sección A qué equipos se manda, con Portería peatonal tildada y Portería de servicio sin tildar. Una flecha Enviar el rostro, con ID de 9 dígitos y nombre, tarjeta, PIN y foto, llega al terminal Portería peatonal. A la derecha, la ventana Memoria Flash, Directorio, lee la memoria del equipo y muestra a Ana con foto. Notas: la persona está enrolada cuando aparece en el Directorio; cuidado con Volcar Base de Datos a Equipo.",
+   "caption": "La ficha guarda; la copia enrola; Memoria Flash lo confirma."
+  },
+  "steps": [
+   {
+    "file": "4-paso1.svg",
+    "step": 1,
+    "alt": "Cinco miniaturas de foto de rostro: de frente con luz pareja (tilde verde), de costado, oscura o a contraluz, con lentes oscuros y con dos caras (las cuatro con cruz roja). Debajo, una tabla de requisitos para Akuvox: JPG, menos de 200 KB, al menos 640 por 480, una sola cara centrada de frente.",
+    "caption": "Una foto que sirve se reconoce a la primera; las otras cuatro dan problemas.",
+    "after": "Sacá la foto: de frente, a la altura"
+   },
+   {
+    "file": "4-paso4.svg",
+    "step": 4,
+    "alt": "Ventana Memoria Flash del terminal Portería peatonal, pestaña Directorio, Identidades en memoria física, con tres filas con ID de 9 dígitos, nombre y si tienen rostro y tag; resaltada la de Ana Ejemplo. Debajo, una tabla con los botones Inyectar Usuarios y Volcar Base de Datos a Equipo.",
+    "caption": "Si está en el Directorio, está en el terminal.",
+    "after": "Abrí la memoria del equipo y buscala"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Enrolar no es guardar la ficha",
+    "para_que": "OmniAccess y el terminal tienen memorias separadas. La ficha vive en la base del sistema; el terminal reconoce con lo que tiene en la suya. Enrolar es que la cara llegue a la memoria del equipo.",
+    "como": "En la ficha de la persona, la sección A qué equipos se manda tiene los Terminales de rostro. Al guardar, el cajón muestra un paso por terminal (Enviar el rostro a ...) y queda abierto si alguno falla.",
+    "ejemplo": "Una administración carga 40 residentes en una tarde sin marcar terminales: al otro día nadie entra por cara. Con Memoria Flash se ve enseguida que el equipo está vacío."
+   },
+   {
+    "name": "La foto de alta",
+    "para_que": "Es la referencia contra la que el terminal compara cada pasada. Si la referencia es mala, todas las comparaciones salen bajas, aunque la luz de la puerta sea perfecta.",
+    "como": "De frente, una sola cara, luz pareja, sin lentes oscuros ni gorro. Cada fabricante pone su límite de formato y peso; para Akuvox desde OmniAccess, JPG de menos de 200 KB y al menos 640 por 480.",
+    "ejemplo": "Una foto sacada del documento escaneado, chica y con reflejo: el terminal la acepta, pero la persona tiene que pasar tres veces. Con una foto nueva tomada en la portería, pasa a la primera."
+   },
+   {
+    "name": "Memoria Flash y el ID de 9 dígitos",
+    "para_que": "Hace falta una forma de ver qué tiene el terminal de verdad, sin entrar a su web. Memoria Flash lee la memoria física del equipo y la muestra en OmniAccess.",
+    "como": "Se abre desde el menú de la fila del terminal facial. El Directorio lista identidades con su ID, nombre y si tienen rostro y tag. Ese ID lo calcula OmniAccess a partir de la ficha para no duplicar personas: conviene no tocarlo a mano en el equipo.",
+    "ejemplo": "Un técnico renombra a mano a una persona en la web del terminal; después, al reenviarla desde OmniAccess, aparece duplicada. Respetar el ID evita el lío."
+   },
+   {
+    "name": "Volcar e importar",
+    "para_que": "Al poner en marcha un terminal nuevo o al heredar uno ya cargado, hace falta mover muchas identidades de una vez, en un sentido o en el otro.",
+    "como": "Volcar Base de Datos a Equipo (Modo Sobrescritura) manda al terminal a todas las personas de la base con foto o tarjeta. Descargar Equipo a App (Modo Importación Inteligente) trae al sistema lo que el equipo tiene y la base no, y deja asignarlo a una unidad.",
+    "ejemplo": "Un barrio que ya tenía un terminal cargado a mano: con Descargar Equipo a App se traen sus 120 identidades a OmniAccess en vez de cargarlas de nuevo."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLa foto de identificación tiene reglas desde mucho antes del control de acceso. Los pasaportes con chip llevaron a normalizar la foto de la cara: la norma ISO/IEC 19794-5, de 2005, fijó cómo tiene que ser una imagen facial para que la puedan comparar máquinas (de frente, expresión neutra, luz pareja, fondo uniforme). Los terminales faciales heredaron esa lógica, aunque cada fabricante pone sus propios límites de tamaño y peso.\n\nLa sincronización también tiene historia: las controladoras de tarjeta ya guardaban su propia lista de credenciales para seguir funcionando sin servidor. Los terminales faciales hacen lo mismo con las caras, y por eso cualquier plataforma tiene que copiarles la información y poder leer qué tienen.\n\n### Cómo funciona\n\nCuando se marca un terminal en la ficha y se guarda, OmniAccess:\n\n1. Calcula un ID numérico de 9 dígitos a partir del identificador interno de la persona. Siempre da el mismo número para la misma persona, así un reenvío actualiza en lugar de duplicar.\n2. Crea o actualiza el usuario en el terminal con nombre, tarjetas y PIN.\n3. Manda la foto codificada en base64 al módulo de rostros del equipo.\n\nEl terminal procesa la foto y guarda una plantilla de rasgos. Si la foto no tiene una cara usable, la rechaza y el cajón muestra el error.\n\nMemoria Flash hace el camino inverso: le pide al equipo su lista de usuarios y de rostros, las cruza y muestra qué tiene cada identidad. OmniAccess guarda un espejo de esa lectura (qué está solo en el equipo y qué ya está sincronizado), útil para auditar. La regla práctica sale sola: la verdad está en el terminal, y Memoria Flash es la forma de mirarla."
+ },
+ "5": {
+  "fig": {
+   "file": "5.svg",
+   "alt": "Tres columnas conectadas por flechas: 1, Grupo de Acceso, en OmniAccess, personas por equipos igual a quién pasa por dónde (Gestión, Grupos de Acceso); 2, La copia, de OmniAccess al terminal, A qué equipos se manda copia la cara (Ficha, Terminales de rostro); 3, El horario, en el terminal, OmniAccess manda con horario siempre y el horario por persona se pone en el equipo. Abajo, una nota sobre lo que OmniAccess hace y no hace en esta versión.",
+   "caption": "Permiso, copia y horario viven en lugares distintos."
+  },
+  "steps": [
+   {
+    "file": "5-paso5.svg",
+    "step": 5,
+    "alt": "Tres tarjetas en secuencia: horario manual en el terminal (Ana, lunes a viernes de 8:00 a 17:00, en verde), cambio en la ficha y reenvío (OmniAccess actualiza a Ana en el equipo, en azul) y horario después del reenvío (puede volver a siempre, 1001, en rojo). Notas: confirmar el horario después de cada reenvío y anotarlo en la ficha de la obra.",
+    "caption": "Un reenvío puede devolver el horario a siempre: se revisa cada vez.",
+    "after": "cambiá algo de la ficha de Ana"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Grupo de Acceso",
+    "para_que": "Ordena quién pasa por dónde sin tener que pensar persona por persona: un grupo junta personas y equipos, y la ficha de cada persona muestra a qué equipos alcanza su grupo.",
+    "como": "Se crea en Gestión, Grupos de Acceso, Crear grupo, con nombre, personas y equipos. En esta versión el grupo documenta el permiso; la copia de la cara al terminal se sigue haciendo desde A qué equipos se manda.",
+    "ejemplo": "En un barrio arman Residentes, Proveedores con horario y Personal Club House: el administrador ve de un vistazo quién debería pasar por la portería de servicio."
+   },
+   {
+    "name": "Horario en el terminal",
+    "para_que": "Hay personas que solo deben entrar en ciertos días y horas. Como la decisión de apertura es del terminal, el horario que se cumple es el que el equipo tiene asignado a esa persona.",
+    "como": "OmniAccess manda a cada persona con el horario siempre del Akuvox (el 1001). El horario por persona se crea y se asigna en el propio terminal; cómo hacerlo está en el curso Porteros IP Akuvox, lección Usuarios y horarios.",
+    "ejemplo": "La persona de limpieza de un edificio en Cordón entra de lunes a viernes de 8 a 17: el horario se carga en el terminal y se prueba un sábado a la mañana."
+   },
+   {
+    "name": "El reenvío que pisa",
+    "para_que": "Conviene saber qué hace el sistema cuando actualiza a alguien que ya existe en el terminal, para no perder ajustes hechos a mano.",
+    "como": "Al reenviar una ficha, OmniAccess intenta crear la persona y, si ya existe, la actualiza con sus datos y el horario siempre. Por eso, después de un reenvío, se revisa en la web del equipo si el horario sigue asignado.",
+    "ejemplo": "Se corrige el apellido de la persona de limpieza en OmniAccess y se reenvía: el domingo entra sin problema porque el horario volvió a siempre. La revisión después del reenvío lo hubiera evitado."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLos grupos y los horarios son tan viejos como el control de acceso electrónico. Las controladoras de tarjeta trabajaban con niveles de acceso (qué lectoras) y franjas horarias (cuándo), y cada credencial quedaba asociada a un nivel. Esa lógica pasó a las plataformas: en vez de configurar persona por persona, se arman grupos y se les asigna un permiso.\n\nCon los terminales faciales la pregunta es dónde vive cada cosa. Algunos sistemas guardan el horario en el servidor y lo copian al equipo; otros dejan que el equipo lo maneje. En esta versión de OmniAccess Face el modelo de horarios por grupo existe en la base, pero ninguna pantalla lo usa para rostros, y el envío al terminal no lo traslada.\n\n### Cómo funciona\n\nHay tres piezas separadas:\n\n- **Grupo de Acceso**: personas por equipos. Queda en OmniAccess y se ve en la ficha de la persona. Sirve para ordenar y documentar.\n- **Copia**: la sección A qué equipos se manda manda la cara, el nombre, las tarjetas y el PIN al terminal elegido. Es lo que hace que el equipo reconozca.\n- **Horario**: el terminal decide si abre según el horario asignado a esa persona. OmniAccess la manda con el horario siempre (`1001` en Akuvox).\n\nEl punto delicado es el reenvío. El envío primero intenta crear la persona; si ya existe, la actualiza con todos sus datos, incluido el horario siempre. Un horario cargado a mano en el equipo puede volver a siempre sin que nadie lo note.\n\nLa práctica que sale de esto es simple: documentar en la ficha de la obra quién tiene horario en el terminal, y revisarlo cada vez que se reenvía esa persona."
+ },
+ "6": {
+  "fig": {
+   "file": "6.svg",
+   "alt": "Esquema del Monitor Facial: encabezado con el título, el indicador LIVE y los filtros Todos, Permitidos y Denegados. Tres columnas: Entrada, con video en vivo o foto cada 5 segundos y miniaturas; en el centro, el último evento grande (Ana Ejemplo, Lote 12, Portería peatonal, Autorizado, Entrada) y las capturas recientes, una con borde rojo; Salida, con el cartel Sin señal si no hay video configurado. Notas sobre el borde rojo y el indicador LIVE u OFFLINE.",
+   "caption": "Entrada a la izquierda, Salida a la derecha, lo último en el centro."
+  },
+  "steps": [
+   {
+    "file": "6-paso4.svg",
+    "step": 4,
+    "alt": "Tabla de lectura de la ficha del evento: nombre más Autorizado, reconocido y vinculado, nada que hacer; nombre más No registrado (resaltada), el terminal reconoció pero OmniAccess no halló la ficha, anotar para el técnico; Desconocido en ámbar, el terminal no reconoció, atender en persona. Notas sobre qué foto se muestra y sobre no tratar como intruso a un vecino con No registrado.",
+    "caption": "Tres lecturas posibles de un evento, y qué hace el guardia con cada una.",
+    "after": "Tocá Denegados. Elegí un evento"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Monitor Facial",
+    "para_que": "Le da al guardia una sola pantalla con lo que pasa en las puertas faciales: quién entró, quién salió y quién fue rechazado, con foto.",
+    "como": "Se abre desde Monitor en Vivo con el modo Face activo. Muestra los eventos de rostro de las últimas 24 horas en tres columnas (Entrada, centro y Salida) según el sentido cargado en cada terminal, con filtros Todos, Permitidos y Denegados.",
+    "ejemplo": "En la garita de un barrio, el guardia deja el monitor en pantalla completa: cuando alguien pasa por la peatonal, la columna Entrada se ilumina y el centro muestra el nombre y el lote."
+   },
+   {
+    "name": "LIVE u OFFLINE",
+    "para_que": "El monitor recibe los eventos empujados por el servidor en tiempo real. Si esa conexión se corta, la pantalla deja de actualizarse aunque el sistema siga funcionando.",
+    "como": "El indicador de arriba dice LIVE en verde mientras la conexión está viva y OFFLINE en rojo si se cayó. Se recarga la página y, si sigue, se revisa la red del puesto. El estado de cada terminal se mira en Dispositivos, no acá.",
+    "ejemplo": "Un puesto con wifi inestable queda en OFFLINE durante la noche: el guardia cree que no pasó nadie. El indicador rojo era la pista."
+   },
+   {
+    "name": "Ficha del evento",
+    "para_que": "Cada foto del monitor es una puerta a los detalles: quién era, con qué similitud, si quedó vinculado a una persona del sistema, y qué hacer con eso.",
+    "como": "Se toca la foto. La ficha muestra persona o Desconocido, similitud, Autorizado o No registrado, y acciones: Registrar (alta con la foto), Exportar (ZIP con foto, datos y clip si hay canal NVR) y ver la grabación del momento.",
+    "ejemplo": "La administración pide la evidencia de un ingreso de anoche: desde la ficha del evento, Exportar baja el ZIP listo para mandar."
+   },
+   {
+    "name": "Video en vivo de la columna",
+    "para_que": "Ver en vivo lo que mira el terminal ayuda a entender un evento dudoso o a atender a alguien en la puerta.",
+    "como": "Si el servidor de video tiene un stream configurado para ese terminal, la columna lo muestra; si no, muestra una foto cada 5 segundos o Sin señal. Los eventos llegan igual: el video es un agregado que se configura aparte.",
+    "ejemplo": "En una instalación nueva la columna dice Sin señal: el técnico no tocó nada de eventos, solo falta dar de alta el video del terminal en el servidor de video."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLos primeros monitores de control de acceso eran listas de texto que se refrescaban cada tantos segundos. Dos cambios los volvieron pantallas en vivo. El primero fue WebSocket, estandarizado en 2011 (RFC 6455), que permite que el servidor empuje datos al navegador sin que este pregunte. El segundo fue poder mostrar video de cámaras en el navegador sin plugins, con servidores intermedios como go2rtc que convierten los streams de las cámaras a formatos que el navegador entiende.\n\nLas notificaciones al celular llegaron por otro camino: la Push API permite que una aplicación web reciba mensajes aunque no esté abierta, siempre que el usuario lo autorice.\n\n### Cómo funciona\n\nCuando el servidor de eventos guarda un evento facial, lo emite por WebSocket a todos los monitores abiertos. El Monitor Facial:\n\n1. Al abrir, carga los eventos de rostro de las últimas 24 horas.\n2. Queda escuchando y agrega cada evento nuevo arriba.\n3. Lo ubica en Entrada o Salida según el sentido del terminal, y en el centro muestra el último.\n4. Elige la foto: primero la captura del momento, si no la foto de la ficha, si no la imagen del evento.\n\nEl color sale de la decisión registrada: verde Permitido, rojo Denegado. El nombre sale de la ficha vinculada o, si no hay ficha, del nombre que mandó el terminal; si no hay ninguno, dice Desconocido. Por eso conviene leer la ficha antes de actuar: Denegado con nombre y No registrado cuenta una historia distinta que Desconocido.\n\nLa app Control Facial del celular muestra los mismos eventos y permite activar notificaciones; en la versión revisada, el servidor no envía avisos push por eventos faciales."
+ },
+ "7": {
+  "fig": {
+   "file": "7.svg",
+   "alt": "Cinco tarjetas en secuencia: 1 Consentimiento, leer el texto y anotar; 2 Evento Denegado, ficha y Registrar; 3 Foto revisada, de frente y luz pareja; 4 Al terminal, A qué equipos se manda; 5 Permitido, con su nombre. Debajo, un cuadro de la Ley 18.331: artículo 4 literal Ñ, la cara usada para identificar es un dato biométrico, agregado por la Ley 19.924 de 2020; artículo 9, consentimiento libre, previo, expreso, informado y documentado; artículo 18 bis, evaluación de impacto previa según la URCDP; alternativa con tarjeta, PIN o portería.",
+   "caption": "El consentimiento va antes de la foto, y siempre hay una alternativa."
+  },
+  "steps": [
+   {
+    "file": "7-paso1.svg",
+    "step": 1,
+    "alt": "Tarjeta con el texto de consentimiento de ejemplo de Barrio Ejemplo: para qué se usa la foto, dónde se guarda, cómo pedir la baja y la alternativa con tarjeta o portería, con una línea para anotar quién lo leyó, la fecha y si acepta. Notas: qué tiene que decir el texto y que el texto real lo define la administración.",
+    "caption": "Para qué, quién lo guarda, cómo pedir la baja y qué alternativa hay.",
+    "after": "Leele el texto de consentimiento"
+   },
+   {
+    "file": "7-paso5.svg",
+    "step": 5,
+    "alt": "A la izquierda, la captura de la puerta, de costado, con cruz roja; una flecha Cambiar lleva a una foto nueva de frente con tilde verde. A la derecha, una lista con tildes: de frente, una sola cara, luz pareja, sin lentes oscuros ni gorro, JPG de menos de 200 KB.",
+    "caption": "Registrar trae la captura como punto de partida; si no cumple, se cambia.",
+    "after": "Mirá la foto con ojo crítico"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Dato biométrico (Ley 18.331)",
+    "para_que": "La ley uruguaya distingue los datos que identifican a una persona por sus rasgos físicos, porque no se pueden cambiar como una clave: si se filtran, se filtran para siempre.",
+    "como": "El artículo 4, literal Ñ, define dato biométrico e incluye el reconocimiento de imagen; lo agregó la Ley 19.924 en diciembre de 2020. Según la URCDP (Dictamen 3/023), cuando se usan datos biométricos corresponde tener en cuenta el consentimiento del artículo 9 y hacer una evaluación de impacto previa (artículo 18 bis), e inscribir la base.",
+    "ejemplo": "Un barrio que pone reconocimiento facial en la portería: la administración, como responsable de la base, hace la evaluación de impacto con su asesor y la inscribe; IES deja el sistema configurado para respetarla."
+   },
+   {
+    "name": "Consentimiento informado",
+    "para_que": "Que la persona sepa qué se hace con su cara antes de dársela, y que quede constancia. Es la regla general de la Ley 18.331 para tratar datos personales.",
+    "como": "Se lee un texto corto (para qué, quién lo guarda, cómo pedir la baja, qué alternativa hay), la persona acepta y se anota quién, cuándo y quién lo leyó. Si no acepta, entra con tarjeta, PIN o por portería, sin castigo. Esto no es asesoramiento legal: el texto y la base los define el responsable con su asesor.",
+    "ejemplo": "La niñera de una familia del barrio prefiere no dar su cara: se le da una tarjeta para la peatonal y entra igual que antes."
+   },
+   {
+    "name": "Registrar desde el evento",
+    "para_que": "Ahorra tiempo en portería: la persona ya pasó por el terminal, su captura ya está en el sistema, y se puede usar como punto de partida para el alta.",
+    "como": "En la ficha de un evento, Registrar abre Usuarios & Residentes con una ficha nueva y la foto de la captura cargada. Se revisa la calidad (si no sirve, Cambiar), se completan nombre y unidad, se marca el terminal y se guarda.",
+    "ejemplo": "Un jardinero nuevo pasa, sale Denegado, el guardia toca Registrar, le saca una foto mejor con la tablet y en cinco minutos ya entra por cara."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nUruguay tiene ley de protección de datos personales desde 2008: la Ley 18.331, del 11 de agosto de ese año, que creó la Unidad Reguladora y de Control de Datos Personales (URCDP). La ley puso el consentimiento previo e informado como regla general y protegió especialmente los datos sensibles.\n\nCon la llegada de la biometría a trámites y accesos, la ley se fue ajustando. En diciembre de 2020, la Ley 19.924 agregó al artículo 4 el literal Ñ con la definición de dato biométrico, que menciona expresamente el reconocimiento de imagen. Y la URCDP, al dictaminar sobre proyectos de biometría facial (por ejemplo, el Dictamen 3/023 de 2023 sobre la fe de vida del BPS), recordó que el artículo 18 bis pide una evaluación de impacto previa y que la base se inscribe.\n\nAfuera la discusión es parecida. Bajo el reglamento europeo, una nota de CSO Online advierte que en una relación de trabajo el consentimiento difícilmente es libre si no hay una alternativa igual de cómoda y sin castigo.\n\n### Cómo funciona\n\nEn portería, el alta de una persona en Face tiene un orden:\n\n1. **Informar y pedir consentimiento.** Texto corto, constancia de quién, cuándo y quién leyó. Si no acepta, alternativa.\n2. **Foto.** De frente, una cara, luz pareja. Si se parte de la captura del evento (Registrar), se revisa y se cambia si hace falta.\n3. **Ficha y envío.** Nombre, unidad y el terminal en A qué equipos se manda.\n4. **Prueba.** Que pase y salga Permitido con su nombre.\n\nLas tareas de fondo (evaluación de impacto, inscripción de la base, texto definitivo) son del responsable de la base, normalmente la administración, con su asesor. El técnico y el guardia aportan lo práctico: que el consentimiento quede registrado, que exista la alternativa y que la foto se use solo para lo que se dijo."
+ },
+ "8": {
+  "fig": {
+   "file": "8.svg",
+   "alt": "Arriba, cuatro pasos: Alta (nueva visita, foto y terminal), Uso (hasta la fecha anotada), 1 Terminal (Memoria Flash, eliminar, en rojo) y 2 Ficha (decidir conservar o borrar). Debajo, una tabla: eliminar en Memoria Flash borra la cara del terminal y deja de abrir; borrar la ficha deja la cara en el terminal, sigue abriendo y borra los eventos del historial; cambiar el Modo Face deja la cara y sigue abriendo. Notas sobre el bloqueo real y sobre conservar el historial.",
+   "caption": "Solo sacar la cara del terminal impide que abra; borrar la ficha borra su historial."
+  },
+  "steps": [
+   {
+    "file": "8-paso3.svg",
+    "step": 3,
+    "alt": "Ventana Memoria Flash, Directorio, del terminal Portería peatonal: búsqueda Obrero Ejemplo, fila resaltada con ID de 9 dígitos y la acción eliminar, y el resultado Rostro eliminado correctamente. Al lado, el terminal con una franja roja que ya no lo reconoce. Notas sobre la prueba siguiente y sobre tocar la ficha recién después.",
+    "caption": "La baja empieza en la memoria del terminal.",
+    "after": "Simulá el fin del trabajo"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Bloqueo real en Face",
+    "para_que": "Cuando la administración pide que alguien no entre más, el pedido es sobre la puerta. Y la puerta la decide la memoria del terminal.",
+    "como": "Se abre Memoria Flash del terminal, Directorio, se busca a la persona y se elimina. Después se prueba con la persona (o con su foto, en laboratorio) que el terminal ya no abre. Cambiar el Modo Face o moverla de grupo no alcanza.",
+    "ejemplo": "Un ex empleado de mantenimiento en un edificio de oficinas: se lo saca de los dos terminales en Memoria Flash y se deja constancia en la ficha. Al día siguiente intenta pasar y sale como rostro desconocido."
+   },
+   {
+    "name": "Visita frecuente",
+    "para_que": "Hay personas que no son residentes pero vienen seguido por un tiempo: niñeras, obreros de una reforma, familiares. Conviene que entren por cara mientras dure, y que dejen de entrar cuando termine.",
+    "como": "Se dan de alta en la pestaña Visitas (Nueva visita) con foto, unidad y terminal. Como en Face no hay vencimiento automático, se anota hasta cuándo va y se hace la baja en la fecha. Invitados, con pases por QR o matrícula, aparece con el módulo LPR y no se cruza con el terminal facial en esta versión.",
+    "ejemplo": "Una reforma de tres meses en un lote: el capataz y dos obreros se cargan como visitas con fecha de fin en observaciones, y la administración agenda la baja."
+   },
+   {
+    "name": "Borrar la ficha tiene costo",
+    "para_que": "Borrar parece la forma prolija de terminar, pero en OmniAccess la ficha arrastra cosas que a veces se necesitan después.",
+    "como": "Borrar una persona no saca su cara del terminal y, además, la base borra junto con ella sus eventos del Historial. Si la administración necesita conservar ese historial (un reclamo, una auditoría), se deja la ficha sin terminales marcados.",
+    "ejemplo": "Se borra la ficha de un proveedor que terminó, y a la semana aparece un reclamo por un faltante: sus ingresos ya no están en el Historial. Dejar la ficha sin terminales lo hubiera evitado."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEn el control de acceso con tarjetas, dar de baja era fácil de entender: se pedía la tarjeta de vuelta o se la anulaba en la controladora. Con la biometría la credencial es la persona, no se devuelve. La baja pasó a ser un trabajo de sistema: borrar la plantilla de la cara del equipo que la usa para abrir.\n\nLos reguladores de datos agregaron otra mirada: el ciclo de vida. La URCDP, en su Dictamen 3/023 sobre un proyecto de biometría facial, recomienda analizar el ciclo de vida de los datos además de la seguridad. Y fabricantes como Synerion incluyen en el propio terminal un consentimiento con un período de retención definido.\n\n### Cómo funciona\n\nEn OmniAccess Face hay tres lugares donde vive algo de la persona:\n\n- **La memoria del terminal**: su cara, nombre, tarjetas y PIN. Es lo que abre.\n- **La ficha en OmniAccess**: datos, foto de alta, grupos y relación con sus eventos.\n- **El almacenamiento de fotos**: la foto de alta y las capturas de cada evento.\n\nCada acción toca solo una parte:\n\n| Acción | Terminal | Ficha y eventos | Fotos |\n|---|---|---|---|\n| Eliminar en Memoria Flash | se borra | quedan | quedan |\n| Borrar la ficha | queda | se borran | quedan |\n| Cambiar el Modo Face | queda | cambia el registro | quedan |\n\nPor eso la baja ordenada es: primero el terminal, probar que no abre, y después decidir qué pasa con la ficha. Las fotos tienen su propio ciclo, que se maneja con la retención del almacenamiento (lección 9)."
+ },
+ "9": {
+  "fig": {
+   "file": "9.svg",
+   "alt": "Tres bloques: 1 La pregunta, con filtros Tipo Rostros, Resultado Denegados, Sentido Entrada, Rango lunes a hoy y el botón Exportar (Excel / PDF); 2 Los huecos, con un terminal que guarda su propio registro aunque se corte la red y la ruta Auditoría Hardware, Sincronizar memoria; 3 El Bucket FACE, con capturas y fotos de alta en el mismo bucket. Notas: los eventos traídos llevan SINCRO_HW; la regla de días se aplica a todo el bucket.",
+   "caption": "Filtros para la pregunta, sincronización para los huecos, cuidado con la retención."
+  },
+  "steps": [
+   {
+    "file": "9-paso1.svg",
+    "step": 1,
+    "alt": "Barra de filtros del Historial con Rostros seleccionado (y RFID), Denegados seleccionado (entre Todos y Permitidos), Entrada seleccionado (entre Ambos y Salida) y un rango lunes 00:00 a hoy. Debajo, la búsqueda Portería peatonal y el botón Exportar (Excel / PDF). Notas sobre empezar por la pregunta y sobre las 24 horas del monitor.",
+    "caption": "Cada filtro contesta una parte de la pregunta.",
+    "after": "Armá el reporte de la pregunta"
+   },
+   {
+    "file": "9-paso4.svg",
+    "step": 4,
+    "alt": "Ventana de Configuración, Sistema, Almacenamiento, con Bucket FACE y Días de retención antes de borrar, 0 igual a nunca. Debajo, una tabla: 0 no borra nada; 30 borra capturas y fotos de alta a los 30 días; 365 guarda un año pero las fotos de alta viejas también se van. Notas sobre decidir con el responsable y sobre la regla de vencimiento de MinIO.",
+    "caption": "El número de días afecta a todo lo que está en el bucket.",
+    "after": "4. Revisá la retención:"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Historial de Acceso",
+    "para_que": "El Monitor Facial muestra 24 horas; las preguntas de la administración suelen ser de días o semanas. El Historial guarda todo y permite recortarlo.",
+    "como": "Menú, Historial de Acceso. En modo Face arranca con el filtro Rostros; se suman Permitidos o Denegados, Entrada o Salida, un rango de fecha y hora y una búsqueda por persona, lote o equipo. Exportar (Excel / PDF) baja el resultado.",
+    "ejemplo": "La comisión del barrio pregunta cuántas veces fue rechazado alguien en la peatonal en octubre: tres filtros, un rango y el Excel sale en dos minutos."
+   },
+   {
+    "name": "Sincronizar el doorlog",
+    "para_que": "Si se corta la red, el terminal sigue abriendo y guardando su registro, pero los avisos no llegan. Sin una forma de recuperar eso, el reporte tiene huecos.",
+    "como": "Configuración, Avanzado, Auditoría Hardware: por cada terminal Akuvox, Sincronizar memoria trae los últimos registros del equipo que no están en la base y los guarda como eventos con SINCRO_HW en el detalle.",
+    "ejemplo": "Un corte de fibra de seis horas en un edificio: al volver, el técnico sincroniza la memoria de los dos terminales y el reporte del día queda completo."
+   },
+   {
+    "name": "Retención del Bucket FACE",
+    "para_que": "Las fotos ocupan espacio y son datos personales: guardarlas para siempre no es gratis ni necesario. Una regla de retención las borra solas pasado un tiempo.",
+    "como": "Configuración, Sistema, Almacenamiento, Bucket FACE, Días de retención antes de borrar (0 es nunca). Por debajo es una regla de vencimiento de MinIO sobre el bucket entero: en ese bucket están las capturas y también las fotos de alta, y se borran juntas.",
+    "ejemplo": "Alguien pone 30 días para no guardar capturas de más: a los dos meses, las fichas cargadas al principio quedan sin foto y no se pueden reenviar al terminal. Antes de poner el número, se resguardan las fotos de alta."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLos sistemas de video y de acceso siempre tuvieron que decidir cuánto guardar. Con grabadores, la retención la ponía el disco: cuando se llenaba, se pisaba lo más viejo. Con el almacenamiento de objetos (el modelo S3, que MinIO implementa en servidores propios), la retención pasó a ser una regla explícita: los objetos de un bucket vencen a tantos días de creados y el sistema los borra solo.\n\nLa protección de datos le dio a esa decisión otro peso. La URCDP, en su Dictamen 3/023 sobre biometría facial, recomienda analizar el ciclo de vida de los datos. Y varios fabricantes de terminales piden un período de retención al momento del consentimiento.\n\n### Cómo funciona\n\nLos reportes de OmniAccess Face salen de tres fuentes:\n\n- **Eventos por aviso**: cada Action URL que llega se guarda con su foto. Es lo normal.\n- **Eventos sincronizados**: Auditoría Hardware lee los últimos registros del doorlog del terminal Akuvox y crea los que falten, comparando la hora con una tolerancia de unos segundos para no duplicar.\n- **Exportación**: el Historial aplica los filtros sobre la base y exporta a Excel o PDF.\n\nLas fotos van a MinIO, al Bucket FACE. Ahí conviven las capturas de los eventos y las fotos de alta de las personas. La retención se configura en días para todo el bucket:\n\n```text\nmc ilm rule add ALIAS/face --expire-days 30\n```\n\nEs el equivalente de lo que hace la pantalla de Almacenamiento: a los 30 días de creado, cualquier objeto del bucket se borra, sea captura o foto de alta. Por eso la retención se decide con el responsable de los datos y con un plan para resguardar las fotos de alta."
+ },
+ "10": {
+  "fig": {
+   "file": "10.svg",
+   "alt": "Cuatro franjas numeradas: 1, llega el aviso, se mira con el ícono Push y Configuración Sistema Webhooks, si falla URL al puerto 10000, firewall o MAC; 2, trae foto, ícono Pull, contadores y hora, si falla usuario y clave de API, autenticación o red de vuelta; 3, se vincula con la ficha, Autorizado o No registrado, si falla nombre idéntico y soporte de Infratec; 4, el terminal reconoce, Desconocido para alguien enrolado, si falla luz, foto de alta y después el umbral. Abajo: capas 1 a 3 en OmniAccess, capa 4 en el terminal.",
+   "caption": "Cuatro preguntas, en orden, cada una con dónde mirar y qué corregir."
+  },
+  "steps": [
+   {
+    "file": "10-paso3.svg",
+    "step": 3,
+    "alt": "Tres tarjetas con miniatura de rostro: nombre correcto más Autorizado, vinculado, tilde verde; nombre correcto más No registrado, capa 3, el terminal reconoció y OmniAccess no halló la ficha; Desconocido, capa 4, el terminal no reconoció, cruz roja. Nota sobre por qué aparece No registrado con Akuvox en la versión revisada.",
+    "caption": "Lo que dice la ficha del evento indica la capa.",
+    "after": "Capa 3, ¿se vincula?"
+   },
+   {
+    "file": "10-paso4.svg",
+    "step": 4,
+    "alt": "Gráfico con dos curvas según el umbral del terminal: las falsas aceptaciones bajan al subir el umbral y los falsos rechazos suben; se cruzan en un punto de trabajo marcado. Notas: no hay valor universal según Hikvision, AWS y NIST; primero luz y foto, y probar con varias personas por las diferencias demográficas que encontró NIST.",
+    "caption": "Mover el umbral cambia qué error se comete, no cuántos.",
+    "after": "Capa 4, ¿reconoce?"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Diagnóstico por capas",
+    "para_que": "Una falla facial tiene muchas causas posibles. Ir por capas evita cambiar cosas al azar: cada capa se verifica en un lugar concreto y descarta una parte del problema.",
+    "como": "Aviso (Push azul y registro de Webhooks), foto (Pull verde, credenciales, reloj), vínculo (Autorizado o No registrado en la ficha del evento) y reconocimiento (luz, foto de alta, umbral del terminal). Se pasa a la siguiente capa solo cuando la anterior está bien.",
+    "ejemplo": "Llaman porque el monitor no muestra nada de la peatonal: Push apagado, Webhooks vacío. Era el firewall nuevo del edificio cortando el puerto 10000. Diez minutos en vez de una mañana."
+   },
+   {
+    "name": "Vínculo con la ficha",
+    "para_que": "Para que un evento muestre la unidad de la persona y se cuente bien en los reportes, OmniAccess tiene que asociarlo a su ficha.",
+    "como": "Con Hikvision, el servidor busca la ficha por el nombre exacto que manda el terminal. Con Akuvox, busca una credencial de rostro con ese nombre; en la versión revisada, las fichas creadas desde Usuarios & Residentes no la generan y, con Lista Blanca, el evento queda Denegado aunque la puerta abrió. Se verifica el nombre idéntico y, si persiste, se reporta a soporte de Infratec.",
+    "ejemplo": "Un residente aparece Denegado y No registrado cada mañana aunque entra: el técnico confirma que el terminal lo reconoce y deja el caso con evidencia (evento, hora y terminal) para soporte."
+   },
+   {
+    "name": "Umbral de coincidencia",
+    "para_que": "El terminal compara cada cara con su memoria y obtiene una similitud. El umbral decide desde qué similitud acepta. Es el equilibrio entre dejar pasar a un parecido y no dejar pasar a quien corresponde.",
+    "como": "Se ajusta en el terminal (en Hikvision, nivel de seguridad 1:N y 1:1). Subirlo baja las falsas aceptaciones y sube los falsos rechazos. AWS da como ejemplo 80 % para fotos familiares y 99 % para uso policial: no hay un valor universal.",
+    "ejemplo": "En un acceso a una sala de servidores conviene un umbral alto aunque alguien tenga que pasar dos veces; en la peatonal de un barrio, uno intermedio con buena luz da la mejor experiencia."
+   },
+   {
+    "name": "Diferencias demográficas y antisuplantación",
+    "para_que": "Ningún algoritmo es igual de preciso con todas las personas, y ninguno es inmune a una foto o una pantalla. Saberlo evita conclusiones apuradas.",
+    "como": "NIST evaluó 189 algoritmos de 99 desarrolladores en 2019 y encontró diferencias según edad, sexo u origen en la mayoría, aunque los mejores también eran los más parejos. Por eso se prueba con varias personas. La detección de vida ayuda pero no es infalible: si el lugar pide más seguridad, cara más tarjeta o PIN.",
+    "ejemplo": "En la prueba de entrega de un edificio se hacen pasar diez personas distintas, no solo el técnico: aparece que a dos les cuesta a cierta hora y se corrige la luz antes de entregar."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nMedir qué tan bien reconoce un algoritmo es un problema con historia propia. NIST, el instituto de estándares de Estados Unidos, evalúa algoritmos de reconocimiento facial desde el año 2000 en su programa FRVT, que hoy se llama FRTE. Ahí se fijaron las dos medidas que usa toda la industria: la tasa de falsas coincidencias (FMR, aceptar a un impostor) y la de falsas no coincidencias (FNMR, rechazar a la persona correcta).\n\nEn diciembre de 2019 NIST publicó un estudio (NISTIR 8280) con 189 algoritmos de 99 desarrolladores y más de 18 millones de imágenes: la mayoría mostró diferencias demográficas, en algunos casos de 10 a 100 veces en falsos positivos según el grupo. El mismo estudio mostró que los algoritmos más precisos eran también los más parejos.\n\n### Cómo funciona\n\nCada pasada produce una similitud entre la cara y cada plantilla de la memoria. El terminal toma la mejor y la compara con su umbral:\n\n- Similitud mayor o igual al umbral: identifica y abre.\n- Menor: no identifica (rostro desconocido).\n\nCon un umbral alto, casi nadie ajeno pasa (FMR baja), pero los rechazos legítimos suben (FNMR alta). Con uno bajo, al revés. Mover el umbral no reduce el error total: lo cambia de lado. Lo que sí lo reduce es mejorar las imágenes, es decir, la luz en la puerta y la foto de alta.\n\nEn OmniAccess Face el diagnóstico se ordena en cuatro capas, y las tres primeras no tienen nada que ver con el umbral: si el aviso no llega, si no hay foto o si el evento no se vincula con la ficha, tocar el terminal no resuelve nada. Por eso el umbral queda para el final, y se prueba con varias personas distintas."
+ }
+}

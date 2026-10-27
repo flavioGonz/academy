@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Mandá al guardia más cercano, con cuatro datos</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS INTRUSIÓN · LECCIÓN 8 · PASO 6</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Mandá al guardia más cercano, con cuatro datos</text>
+<rect x="48" y="140" width="660" height="440" rx="16" fill="#25352A"/>
+<path d="M48 380H708" stroke="#55626B" stroke-width="24"/>
+<path d="M380 140V580" stroke="#55626B" stroke-width="20"/>
+<path d="M60 162H696" stroke="#8FA3B5" stroke-width="3" stroke-dasharray="10 6"/>
+<path d="M430 170L620 170" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+<text x="525.0" y="200.0" font-family="Instrument Sans" font-size="15" font-weight="700" fill="#FFB4B4" text-anchor="middle">Perímetro Norte 12</text>
+<circle cx="300" cy="280" r="15" fill="#0E8F5E" stroke="#fff" stroke-width="3"/>
+<text x="322.0" y="286.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="start">Guardia 1</text>
+<circle cx="150" cy="500" r="15" fill="#94A3B8" stroke="#fff" stroke-width="3"/>
+<text x="172.0" y="506.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="start">Guardia 2</text>
+<circle cx="540" cy="520" r="15" fill="#94A3B8" stroke="#fff" stroke-width="3"/>
+<text x="562.0" y="526.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="start">Guardia 3</text>
+<path d="M312 268L432 184" stroke="#0E8F5E" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#a-ok)"/>
+<circle cx="250" cy="280" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="250.0" y="286.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text>
+<rect x="740" y="140" width="412" height="290" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><text x="760.0" y="172.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#0E8F5E" text-anchor="start">Por radio</text><text x="760.0" y="196.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">posición cada 10 s en el Mapa</text>
+<circle cx="772" cy="226" r="13" fill="#0E8F5E"/>
+<text x="772.0" y="231.0" font-family="Familjen Grotesk" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="796.0" y="232.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#04223D" text-anchor="start">Cámara: Perímetro Norte 12</text>
+<circle cx="772" cy="278" r="13" fill="#0E8F5E"/>
+<text x="772.0" y="283.0" font-family="Familjen Grotesk" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="796.0" y="284.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#04223D" text-anchor="start">Lugar: cerco norte, entre lotes 14 y 16</text>
+<circle cx="772" cy="330" r="13" fill="#0E8F5E"/>
+<text x="772.0" y="335.0" font-family="Familjen Grotesk" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="796.0" y="336.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#04223D" text-anchor="start">Qué se vio: una persona cruzando</text>
+<circle cx="772" cy="382" r="13" fill="#0E8F5E"/>
+<text x="772.0" y="387.0" font-family="Familjen Grotesk" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="796.0" y="388.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#04223D" text-anchor="start">Hace cuánto: 40 segundos</text>
+<rect x="740" y="450" width="412" height="72" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="740" y="462" width="5" height="48" rx="2.5" fill="#B45309"/><text x="766.0" y="484.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="766.0" dy="0.0">La tablet del guardia no recibe la intrusión en</tspan><tspan x="766.0" dy="20.2">esta versión: el puesto avisa.</tspan></text>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Anotá quién detecta y por dónde avisa</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS INTRUSIÓN · LECCIÓN 1 · PASO 3</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Anotá quién detecta y por dónde avisa</text>
+<text x="48.0" y="150.0" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.2">CÁMARA</text>
+<text x="470.0" y="150.0" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.2">DETECTA</text>
+<text x="690.0" y="150.0" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.2">CÓMO LLEGA A OMNIACCESS</text>
+<rect x="48" y="170" width="1104" height="100" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<rect x="48" y="184" width="6" height="72" rx="3" fill="#0E8F5E"/>
+<text x="72.0" y="226.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="72.0" dy="0.0">Hikvision directa o en NVR Hikvision</tspan></text>
+<text x="470.0" y="226.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#41627F" text-anchor="start">la cámara</text>
+<text x="690.0" y="226.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="690.0" dy="0.0">push al servidor de alarma :10000</tspan></text>
+<circle cx="1118" cy="220" r="18" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><g transform="translate(1106 208)" fill="none" stroke="#0E8F5E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g>
+<rect x="48" y="288" width="1104" height="100" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<rect x="48" y="302" width="6" height="72" rx="3" fill="#0E8F5E"/>
+<text x="72.0" y="344.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="72.0" dy="0.0">Cualquier marca en NVR Dahua</tspan></text>
+<text x="470.0" y="344.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#41627F" text-anchor="start">el NVR Dahua</text>
+<text x="690.0" y="344.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="690.0" dy="0.0">OmniAccess se suscribe al NVR</tspan></text>
+<circle cx="1118" cy="338" r="18" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><g transform="translate(1106 326)" fill="none" stroke="#0E8F5E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g>
+<rect x="48" y="406" width="1104" height="100" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/>
+<rect x="48" y="420" width="6" height="72" rx="3" fill="#D2492F"/>
+<text x="72.0" y="462.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="72.0" dy="0.0">Dahua en NVR Hikvision</tspan></text>
+<text x="470.0" y="462.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#D2492F" text-anchor="start">nadie avisa</text>
+<text x="690.0" y="450.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="690.0" dy="0.0">sin vía: configurar en la cámara o pasarla a</tspan><tspan x="690.0" dy="23.0">un NVR Dahua</tspan></text>
+<circle cx="1118" cy="456" r="18" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/><g transform="translate(1106 444)" fill="none" stroke="#D2492F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></g>
+<rect x="48" y="540" width="1104" height="54" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="552" width="5" height="30" rx="2.5" fill="#0A63B8"/><text x="74.0" y="574.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">La marca de la cámara sola no alcanza: importa quién la graba. El NVR Hikvision no analiza canales de otra marca.</tspan></text>
+</svg>

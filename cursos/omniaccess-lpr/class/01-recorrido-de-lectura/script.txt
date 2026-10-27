@@ -1,0 +1,20 @@
+A: Lección uno, y arrancamos por el viaje de una patente. Desde que el auto cruza la línea hasta que el guardia lo ve en pantalla.
+B: ¿Y cuánto dura ese viaje?
+A: Según el Manual del Operador, entre uno y tres segundos. Si tarda más de diez de forma habitual, algo está degradado.
+B: Bien. Contame los tramos.
+A: Primero la cámara. La cámara ANPR lee la matrícula ella sola, a bordo. No manda video para que otro lea: manda el resultado.
+B: ¿Y cómo lo manda?
+A: Por HTTP. Un mensaje con un XML adentro, la matrícula, la confianza, la dirección MAC, la hora, y las fotos: la escena completa y el recorte de la patente.
+B: ¿A dónde va?
+A: Al servidor OmniAccess que está en el predio, al puerto diez mil, que es el receptor de eventos. Ahí se decide si es Autorizado o Denegado.
+B: Y se guarda.
+A: La foto va al almacenamiento de objetos, el evento a la base, y el servidor lo empuja al Monitor LPR en vivo. Las fuentes que leímos describen el mismo camino: capturar, leer, enviar, validar contra una lista.
+B: Che, ¿y si se corta internet?
+A: Ese es el detalle lindo. Todo esto corre adentro del barrio. Sin internet se sigue leyendo, decidiendo y grabando. Lo único que se demora son los avisos de afuera, tipo Telegram.
+B: Mirá vos. ¿Y esto de leer patentes de dónde salió?
+A: Del Reino Unido. La rama científica de la policía británica lo inventó en mil novecientos setenta y seis, y en el setenta y nueve ya probaban prototipos en el túnel de Dartford buscando autos robados.
+B: [risas] Y ahora lo tenemos en la garita de un barrio en Canelones.
+A: Exacto. Para el laboratorio, en una instalación de prueba: abrí la ruta de salud del receptor en el puerto diez mil, dejá abierta la pantalla de Webhooks en Configuración, Sistema, pasá un auto y cronometrá hasta que aparece en el Monitor LPR.
+B: Y después abrís la ficha, pestaña Datos, y ves qué mandó la cámara.
+A: Eso. Dibujás los cinco tramos en una hoja con el tiempo al lado.
+B: Así, cuando algo falla, ya sabés en qué tramo buscar.

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Rebote y ventana anti doble conteo, en una línea de tiempo</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS FILAS · LECCIÓN 5 · PASO 5</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Rebote y ventana anti doble conteo, en una línea de tiempo</text>
+<rect x="48" y="130" width="1104" height="190" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="162.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Rebote de la zona · 1 s</text>
+<path d="M100.0 250.0L1100.0 250.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<rect x="160" y="228" width="90" height="44" rx="8" fill="#FCEAE6" stroke="#D2492F" stroke-width="2" opacity="1"/>
+<text x="205.0" y="300.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">0,5 s adentro</text>
+<text x="205.0" y="218.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">no suma</text>
+<rect x="520" y="228" width="420" height="44" rx="8" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2" opacity="1"/>
+<path d="M700.0 228.0L700.0 272.0" stroke="#0E8F5E" stroke-width="3" fill="none"/>
+<text x="730.0" y="300.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="start">pasado 1 s adentro: suma 1</text>
+<text x="610.0" y="218.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">persona en la zona</text>
+<rect x="48" y="345" width="1104" height="200" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="377.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Ventana anti doble conteo · 20 s</text>
+<path d="M100.0 470.0L1100.0 470.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<rect x="144.0" y="419" width="72.0" height="30" rx="15" fill="#E3F5EC"/><text x="180.0" y="440.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">entra</text>
+<circle cx="180" cy="470" r="7" fill="#41627F"/>
+<rect x="448.6" y="419" width="62.8" height="30" rx="15" fill="#E5F0FB"/><text x="480.0" y="440.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#41627F" text-anchor="middle">sale</text>
+<circle cx="480" cy="470" r="7" fill="#41627F"/>
+<rect x="628.8" y="419" width="182.4" height="30" rx="15" fill="#FFF4DE"/><text x="720.0" y="440.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#B45309" text-anchor="middle">vuelve a los 10 s</text>
+<circle cx="720" cy="470" r="7" fill="#41627F"/>
+<rect x="180" y="486" width="820" height="20" rx="6" fill="#17A8D4" stroke="#17A8D4" stroke-width="0" opacity="0.25"/>
+<text x="590.0" y="530.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">dentro de la ventana: cuenta una sola entrada</text>
+<circle cx="48" cy="130" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="136.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<rect x="48" y="565" width="1104" height="52" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="48" y="577" width="5" height="28" rx="2.5" fill="#B45309"/><text x="74.0" y="599.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Rebote alto: más estable pero más lento. Rebote bajo: más sensible pero más ruidoso. Empezá por el sugerido.</tspan></text>
+</svg>

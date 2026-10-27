@@ -1,0 +1,35 @@
+[
+  {
+    "q": "Un depósito tiene IP fija como principal y PPPoE de respaldo. ¿Cómo dejás la ruta del PPPoE?",
+    "options": [
+      "add-default-route=yes con default-route-distance=1",
+      "add-default-route=no y ninguna ruta",
+      "add-default-route=yes con default-route-distance=2, sin testigos propios",
+      "Una ruta estática al gateway del PPPoE con distancia 1"
+    ],
+    "answer": 2,
+    "why": "El respaldo solo trabaja cuando las recursivas de la fija caen; con distancia 2 espera. En distancia 1 repartiría tráfico con la principal."
+  },
+  {
+    "q": "El PPPoE pasó a ser el principal. La central de monitoreo entra al NVR por la IP fija y la conexión no abre, aunque el dst-nat cuenta paquetes. ¿Qué falta?",
+    "options": [
+      "Marcar la conexión que entra por ether1 y rutear sus respuestas por una tabla con gateway de la fija",
+      "Cambiar el puerto del NVR",
+      "Sacar el masquerade",
+      "Agregar la IP de la central a los testigos"
+    ],
+    "answer": 0,
+    "why": "El pedido entra por la fija pero la respuesta sigue la ruta por defecto y sale por el PPPoE con otra IP. mark-connection por interfaz de entrada y mark-routing hacia la tabla por-fija la devuelven por donde entró."
+  },
+  {
+    "q": "Agregaste las marcas para la IP fija. El NVR ya abre desde afuera, pero WinBox a la IP fija del router no responde. ¿Qué regla falta?",
+    "options": [
+      "Una regla en la cadena forward",
+      "Un dst-nat al puerto 8291",
+      "Bajar la distancia de la tabla por-fija",
+      "La mark-routing en la cadena output para las conexiones marcadas"
+    ],
+    "answer": 3,
+    "why": "Las respuestas del propio router no pasan por prerouting desde la LAN: salen por output. Sin la marca ahí, el router contesta por la ruta por defecto."
+  }
+]

@@ -1,0 +1,605 @@
+{
+ "1": {
+  "fig": {
+   "file": "1.svg",
+   "alt": "Arriba, Site Manager en unifi.ui.com, rotulado como la puerta y no el cerebro: conecta y no guarda configuración. Abajo, tres sitios, cada uno con su controlador: un Cloud Gateway UCG o UDM que es el controlador del local, un CloudKey como consola aparte y un UniFi OS Server en una VM 10.10.10.5 para sucursales con gateway UXG o de terceros. Dos notas: si cae internet el sitio se gestiona en local; si cae el controlador los equipos siguen con la última configuración pero no se puede cambiar, adoptar ni ver estadísticas.",
+   "caption": "Site Manager solo conecta: la configuración vive en el controlador de cada sitio."
+  },
+  "steps": [
+   {
+    "file": "1-paso3.svg",
+    "step": 3,
+    "after": "el instalador indica la dirección",
+    "alt": "Una notebook conectada por https a una VM Ubuntu 24.04 con UniFi OS Server, IP de ejemplo 10.10.10.5, 2 vCPU, 2 GB de RAM y 10 GB libres. A la derecha tres pasos: leer la dirección con IP y puerto que muestra el instalador, crear el admin local con contraseña propia anotada en la ficha, y entrar a UniFi Network anotando las versiones de UniFi OS y de Network. Nota: Network 11 pide UniFi OS 6.0 o superior.",
+    "caption": "Dirección del instalador, admin local propio y las dos versiones anotadas."
+   },
+   {
+    "file": "1-paso4.svg",
+    "step": 4,
+    "after": "Anotá en tu planilla: versión de UniFi",
+    "alt": "Dos tablas de quién es el host de cada equipo. Con UniFi OS Server central: gateway UXG o de terceros, switches y AP en UniFi OS Server 10.10.10.5. Con Cloud Gateway: el UCG es el controlador y host de switches y AP. Dos cruces rojas: un UDM o UCG no se gestiona desde un UniFi OS Server externo, y un mismo equipo no puede estar en dos controladores. Aviso: no clonar la VM del server, los clones comparten tokens de Site Manager.",
+    "caption": "Cada equipo tiene un solo host, y se decide antes de cotizar."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Controlador y Site Manager",
+    "para_que": "UniFi separa dos cosas que mucha gente mezcla: dónde vive la configuración y desde dónde la mirás. El controlador (Cloud Gateway, CloudKey, UniFi OS Server o el hosting oficial) guarda redes, WiFi, puertos y equipos adoptados. Site Manager en unifi.ui.com existe para que un técnico llegue a todos esos controladores desde un solo lugar.",
+    "como": "Cada sitio tiene su controlador y Site Manager arma una conexión directa entre vos y ese controlador. Si se corta internet, el sitio se gestiona en local; si se cae el controlador, la red sigue con la última configuración pero no podés cambiar, adoptar ni ver estadísticas hasta que vuelva.",
+    "ejemplo": "Un cliente en Ciudad de la Costa se queda sin fibra un sábado. Desde Site Manager no lo ves, pero el WiFi del local sigue andando y, si vas al sitio, entrás al UCG por la red local como siempre."
+   },
+   {
+    "name": "Un equipo, un solo host",
+    "para_que": "Un AP o un switch recibe su configuración de un único controlador. La regla existe para que no haya dos cerebros dando órdenes distintas al mismo equipo, y es la que define qué controlador conviene vender.",
+    "como": "Un UDM o un UCG corre su propio Network: es el controlador del sitio y no se gestiona desde un UniFi OS Server externo. Si querés un server central para muchas sucursales, el gateway del sitio tiene que ser un UXG o uno de terceros. Un CloudKey que corre Protect puede convivir, pero no gestionar los mismos switches y AP que ya maneja el server.",
+    "ejemplo": "Una cadena de diez farmacias con un MikroTik en cada local: UniFi OS Server en la oficina de IES y los AP de cada farmacia adoptados ahí. Un bar con un solo local: un UCG y listo, sin servidor que mantener."
+   },
+   {
+    "name": "UniFi OS Server",
+    "para_que": "Es el reemplazo oficial del Network Server de siempre, el controlador que se instalaba en Windows o en una VM. Ubiquiti lo creó para que el self-hosted tenga lo mismo que sus consolas: Fabrics, SSO y Site Magic, que el Network Server no tenía.",
+    "como": "Es gratis y corre en Ubuntu 24.04 o Debian 13 con Podman, en Windows con WSL 2 o en macOS 13.1, con 2 GB de RAM y 10 GB libres como mínimo. No está soportado dentro de una VM Hyper-V ni como servicio de Windows. Network 10.6 es la última versión del Network Server: lo nuevo de Network 11 viene por UniFi OS Server o por una consola.",
+    "ejemplo": "Un controlador viejo en una VM de Windows con quince sitios se queda en Network 10.6 y no recibe más versiones. El camino es levantar UniFi OS Server en Linux, migrar con un backup y no clonar esa VM para otro cliente."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nUbiquiti nació en 2005 y su línea UniFi trajo una idea que en ese momento era de equipos caros: muchos AP y switches configurados desde un solo software, el controlador, en lugar de entrar equipo por equipo. Durante años ese controlador fue una aplicación que el integrador instalaba donde podía: una PC con Windows, una VM o un CloudKey, el pequeño servidor dedicado de la marca.\n\nDespués llegaron las consolas con UniFi OS, como el Dream Machine y los Cloud Gateway: router y controlador en la misma caja, con aplicaciones (Network, Protect, Access, Talk) sobre un mismo sistema. El controlador suelto pasó a llamarse Network Server y quedó atrás en funciones.\n\nEn 2026 Ubiquiti cerró esa etapa. Según su anuncio del 18 de septiembre, UniFi Network 10.6 es la última versión del Network Server. Las notas de Network 11.0.97 lo dicen sin vueltas: se quita el soporte al Network Server y el reemplazo oficial es UniFi OS Server. Network 11 además pide UniFi OS 6.0 o superior y migra su base de datos a PostgreSQL.\n\n### Cómo funciona\n\nEl controlador guarda la configuración del sitio (redes, WiFi, puertos, firewall) y la empuja a cada equipo adoptado. Los equipos se reportan al controlador por una dirección llamada URL de inform. Si el controlador desaparece, cada equipo conserva lo último que recibió: el WiFi sigue, pero nadie puede cambiar nada.\n\nSite Manager, en `unifi.ui.com`, no guarda configuración. Es un portal que arma una conexión directa entre el administrador y el controlador de cada sitio. Por eso un sitio sin internet se sigue gestionando en local, y un sitio cuyo controlador murió no se arregla desde la nube.\n\nLa regla del host único cierra el esquema. Un equipo responde a un solo controlador, y un Cloud Gateway (UDM, UCG) es su propio controlador. Si el plan es un servidor central para muchos sitios, el gateway de cada uno tiene que ser un UXG o de terceros. Elegirlo bien antes de cotizar evita una migración a los seis meses."
+ },
+ "2": {
+  "fig": {
+   "file": "2.svg",
+   "alt": "Un AP nuevo o reseteado y tres condiciones en fila antes del botón Adopt: libre de otro controlador, con reset de fábrica y borrado del controlador viejo; firmware compatible, porque el desfase es la falla más común según LazyAdmin; y que llegue al controlador, en L2 misma red y un solo DHCP. Abajo, el orden en obra: reset, misma red, firmware y recién ahí sospechar del controlador.",
+   "caption": "Libre, con firmware compatible y en la misma red: recién ahí adopta."
+  },
+  "steps": [
+   {
+    "file": "2-paso2.svg",
+    "step": 2,
+    "after": "Conectá el AP al mismo switch y VLAN",
+    "alt": "Un switch de laboratorio con una sola VLAN: el puerto 1 va al controlador, el puerto 3 al AP con PoE y el puerto 5 al router de laboratorio con DHCP 192.168.88.0/24. A la derecha, en rojo, un segundo DHCP, el módem o router del cliente, que hace que el AP tome IP de otro rango y no vea al controlador.",
+    "caption": "Mismo switch, misma VLAN y un solo servidor DHCP en esa red."
+   },
+   {
+    "file": "2-paso3.svg",
+    "step": 3,
+    "after": "Buscá la IP que tomó el AP",
+    "alt": "Terminal con ssh ubnt@192.168.88.20, usuario y clave de fábrica ubnt, y el comando info. Muestra Model, Version, IP Address 192.168.88.20 y Status Not Adopted con http://unifi:8080/inform. Al lado de cada línea, qué mirar: si es el equipo que pensás, el firmware para comparar con el controlador, si quedó en la red del controlador y a qué URL de inform apunta.",
+    "caption": "Con info sabés modelo, firmware, IP y a qué inform apunta antes de adoptar."
+   },
+   {
+    "file": "2-paso5.svg",
+    "step": 5,
+    "after": "y no actualiza solo, bajá el firmware",
+    "alt": "Tres filas de estado y qué hacer. Pending Adoption: Adopt, queda adoptado. Pending Adoption (Update Required): Adopt and Upgrade y, si no actualiza solo, upgrade por SSH. Adopta y pasa a offline con el controlador en una PC: revisar el firewall de esa PC. Abajo, el comando upgrade con la URL del firmware del modelo.",
+    "caption": "Cada estado tiene su salida: Adopt, Adopt and Upgrade o el firewall de la PC."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Adopción",
+    "para_que": "Adoptar es que el controlador tome un equipo como propio: le carga la configuración del sitio, le cambia las credenciales de fábrica y lo empieza a monitorear. Existe para que un AP sacado de la caja pase a ser parte de una red administrada sin configurarlo a mano.",
+    "como": "En capa 2 el equipo reseteado aparece solo en Devices como pendiente y se toca Adopt. Para que pase tienen que darse tres cosas: que no esté en otro controlador, que su firmware no esté demasiado lejos del controlador y que llegue a él. Si falla, el orden es reset, misma red, firmware y recién después el controlador.",
+    "ejemplo": "Llegás a una clínica en Tres Cruces con tres AP nuevos. Los conectás al mismo switch que el UCG, aparecen pendientes, Adopt, y en diez minutos están emitiendo los SSID del sitio."
+   },
+   {
+    "name": "Reset de fábrica y readopción",
+    "para_que": "Un equipo que estuvo en otro controlador sigue buscando a su host viejo. El reset borra esa memoria y lo deja listo para un controlador nuevo; borrarlo del controlador viejo evita que ese controlador lo reclame.",
+    "como": "Botón de reset 10 segundos con el equipo encendido, o `set-default` por SSH. Si el equipo estaba adoptado en otro lado, primero se elimina de ese controlador y después se resetea. Para reemplazar un equipo roto conservando su configuración existe Set replacement device.",
+    "ejemplo": "Un caso en los comentarios de LazyAdmin: después de un corte de luz, tres equipos reseteados no volvían. La respuesta fue eliminarlos primero del controlador y recién después readoptarlos."
+   },
+   {
+    "name": "Desfase de firmware",
+    "para_que": "El controlador y el equipo tienen que entenderse. Según LazyAdmin es la causa más común de una adopción fallida: un AP con firmware muy viejo contra un controlador nuevo, o al revés.",
+    "como": "Con `info` por SSH ves la versión del equipo. Si queda en Pending Adoption (Update Required), probá Adopt and Upgrade; si no actualiza solo, bajá el firmware de tu modelo de la página de descargas de Ubiquiti y corré `upgrade <url>` por SSH.",
+    "ejemplo": "Un AP que estuvo dos años en un estante no adopta en el controlador de un hotel en Punta del Este. `info` muestra un firmware viejo; lo actualizás por SSH y adopta a la primera."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLos equipos UniFi salen de fábrica sin configuración propia: esperan que un controlador los adopte. Para que eso funcione sin tocar nada, Ubiquiti usa desde hace años el mismo esquema: el equipo reseteado se anuncia en la red local y busca un controlador en una dirección por defecto, `http://unifi:8080/inform`.\n\nEse diseño es cómodo cuando el controlador está en la misma red y frágil cuando no. Por eso las guías de practicantes, como la de LazyAdmin, repiten las mismas cuatro condiciones: el equipo no está en otro controlador, la URL de inform es correcta, el firmware no es demasiado viejo y el controlador está al día. HostiFi suma el caso de los equipos que piden actualizar antes de adoptar.\n\n### Cómo funciona\n\n1. **Descubrimiento en capa 2.** El AP reseteado toma IP por DHCP y avisa que existe en la red local. Los equipos UniFi usan TCP 8080 y UDP 10001 para hablar con el controlador, según un comentario en la guía de VLAN de LazyAdmin sobre reglas que rompían la adopción. Si el controlador está en la misma red, lo ve y lo muestra como pendiente.\n2. **Adopt.** Al adoptar, el controlador le entrega la configuración del sitio, su propia URL de inform y credenciales nuevas para SSH (las de Device Authentication del sitio). Desde ahí el equipo ya no acepta `ubnt / ubnt`.\n3. **Inform periódico.** El equipo se reporta al controlador por esa URL para recibir cambios y mandar estadísticas.\n\nCuando algo falla, `info` por SSH es la radiografía: modelo, versión, IP y estado con la URL de inform. Si la IP es de otra red, hay dos DHCP o el equipo está en otra VLAN. Si la versión es muy vieja, es el desfase de firmware. Si adopta y pasa a offline mientras sigue respondiendo, algo en el camino (como el firewall de la PC del controlador) corta el inform.\n\nUn solo DHCP importa porque el descubrimiento en capa 2 depende de que equipo y controlador compartan red: un módem del cliente repartiendo IP manda al AP a otro rango donde nadie lo ve."
+ },
+ "3": {
+  "fig": {
+   "file": "3.svg",
+   "alt": "A la izquierda, la oficina 10.10.10.0/24 con UniFi OS Server 10.10.10.5, nombre unifi.example.com. A la derecha, un sitio remoto 192.168.88.0/24 con un MikroTik que entrega DHCP y DNS, una notebook y un AP 192.168.88.20. Tres caminos al AP: A option 43 y B DNS unifi en verde, C set-inform por SSH en ámbar. El AP se reporta a http://unifi.example.com:8080/inform. Notas: A y B sobreviven reinicios; C puede volver a unifi:8080/inform.",
+   "caption": "Option 43 y DNS los entrega la red del sitio; set-inform queda en la memoria del equipo."
+  },
+  "steps": [
+   {
+    "file": "3-paso1.svg",
+    "step": 1,
+    "after": "Opción A, DHCP option 43 en RouterOS 7",
+    "alt": "El comando /ip dhcp-server option add name=unifi-inform code=43 value=0x01040A0A0A05 y sus seis bytes en cajas: 01 es la subopción 1, 04 el largo de 4 bytes, y 0A 0A 0A 05 son 10, 10, 10 y 5, la IP 10.10.10.5. Notas: con 10.10.10.20 sería 0x01040A0A0A14; con gateway UniFi el dato va en el campo Option 43 Application Host Address.",
+    "caption": "Subopción, largo y los cuatro números de la IP en hexadecimal."
+   },
+   {
+    "file": "3-paso4.svg",
+    "step": 4,
+    "after": "Opción C, plan B por SSH",
+    "alt": "La URL http://unifi.example.com:8080/inform en cuatro piezas: http y no https, nombre DNS mejor que IP, puerto 8080 y terminación /inform. Cruz roja para https o un puerto distinto de 8080. Debajo, la secuencia por SSH: set-inform, info, Adopt en el controlador y set-inform una vez más. Notas: Sikich avisa que a veces hay que repetirlo; lo hecho por SSH puede perderse tras un reinicio.",
+    "caption": "La URL exacta, y set-inform dos veces si queda pendiente."
+   },
+   {
+    "file": "3-paso5.svg",
+    "step": 5,
+    "after": "Controlador en VM con NAT",
+    "alt": "Un controlador dentro de una VM con NAT o un contenedor, con IP interna, alcanzable desde afuera como unifi.example.com. Ventana Settings > System > Advanced con Inform Host unifi.example.com y Override marcado. Sin Override el AP recibe la IP interna y no llega; con Override recibe un nombre alcanzable. Aviso: abrir el 8080 solo hacia las IP de los sitios o por VPN.",
+    "caption": "Override hace que el controlador anuncie la dirección por la que de verdad se lo alcanza."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "URL de inform",
+    "para_que": "Es la dirección a la que cada equipo UniFi se reporta para recibir configuración y mandar estadísticas. Existe porque el equipo no tiene forma de adivinar dónde está su controlador cuando no comparten red.",
+    "como": "Empieza en `http://`, sigue el nombre del controlador y termina en `:8080/inform`. HostiFi recomienda usar siempre el nombre DNS y no la IP, así si el controlador cambia de IP alcanza con cambiar el DNS. Con https o con otro puerto los equipos quedan sin controlador.",
+    "ejemplo": "Un técnico copia una URL con https y el puerto de la web: los AP de un local en Maldonado quedan en el limbo. Con `http://unifi.example.com:8080/inform` vuelven."
+   },
+   {
+    "name": "DHCP option 43 y DNS unifi",
+    "para_que": "Son las formas de que la propia red del sitio le diga al equipo dónde está el controlador, cada vez que arranca. El soporte de Ubiquiti las recomienda porque lo configurado por SSH puede perderse en un reinicio o una actualización.",
+    "como": "La option 43 lleva la IP en hexadecimal: `01` (subopción), `04` (largo) y los cuatro bytes de la IP. En RouterOS 7 se crea con `/ip dhcp-server option add` y se asigna a la red; con gateway UniFi va en Option 43 Application Host Address. La alternativa es que el nombre `unifi` resuelva al controlador en el DNS del sitio.",
+    "ejemplo": "En una cadena de tiendas con MikroTik propio en cada local, la option 43 queda en el DHCP del router y cualquier AP reseteado aparece solo en el controlador de la oficina."
+   },
+   {
+    "name": "set-inform e Inform Host con Override",
+    "para_que": "`set-inform` es el plan B cuando el DHCP del sitio no es tuyo: le escribís la URL al equipo por SSH. Inform Host resuelve el otro lado: un controlador detrás de NAT o en contenedor que anuncia una IP interna que nadie puede alcanzar.",
+    "como": "Por SSH: `set-inform http://<controlador>:8080/inform`, adoptás en el controlador y repetís el comando una vez más si queda pendiente. En el controlador, Settings > System > Advanced, Inform Host con el nombre alcanzable y Override marcado. El 8080 se expone solo hacia las IP de tus sitios o por VPN.",
+    "ejemplo": "Un restaurante en Pocitos con router del proveedor: entrás por SSH, `set-inform`, y anotás en la planilla que ese sitio hay que mirarlo después de cada actualización."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nDHCP se publicó como RFC 2131 en 1997 y, el mismo año, la RFC 2132 definió sus opciones: datos extra que el servidor entrega junto con la IP. La opción 43 quedó reservada para \"información específica del fabricante\": cada marca decide qué va adentro. Ubiquiti la usa para decirle a sus equipos dónde está el controlador.\n\nEn la práctica de los integradores conviven tres caminos. En un hilo del foro de Lawrence Systems, el soporte de Ubiquiti recomienda la opción 43 para la adopción en capa 3, porque los cambios hechos por SSH pueden desaparecer al reiniciar. En el mismo hilo, Tom Lawrence cuenta que usa `set-inform` con todos sus clientes sin problemas, y otro usuario reporta equipos que vuelven a `unifi:8080/inform` tras un reinicio en sitios sin gateway UniFi. Sikich, por su parte, usa `set-inform` para migrar de controlador.\n\n### Cómo funciona\n\nCuando el equipo no comparte red con el controlador, no hay descubrimiento local: necesita la URL de inform. Hay tres maneras de dársela:\n\n- **Option 43.** El equipo pide IP y en la respuesta del DHCP viene la IP del controlador en hexadecimal. Para 10.10.10.5 el valor es `0x01040A0A0A05`: subopción 1, largo 4 y los bytes `0A 0A 0A 05`. Llega en cada arranque.\n- **DNS.** El equipo reseteado busca `unifi` por defecto. Si el DNS del sitio resuelve ese nombre al controlador, lo encuentra.\n- **set-inform.** Se escribe a mano por SSH. Funciona, pero vive en la memoria del equipo.\n\nEl inform viaja por HTTP al puerto 8080. Por eso el 8080 del controlador tiene que ser alcanzable desde el sitio, idealmente solo desde las IP de tus sitios o por una VPN. Y si el controlador está detrás de NAT o en un contenedor, conoce su IP interna, no la pública: con Inform Host y Override le decís qué nombre anunciar, para que cada equipo reciba una dirección a la que pueda llegar.\n\nLa regla del foro resume la decisión: si el DHCP del sitio es tuyo, option 43 o DNS; si no, `set-inform` y control después de cada actualización."
+ },
+ "4": {
+  "fig": {
+   "file": "4.svg",
+   "alt": "Un técnico con la cuenta de la empresa entra a Site Manager en unifi.ui.com, que ve todas las consolas y servidores de la cuenta. Abajo, tres sitios con Remote Management activo (Cliente A con UCG, Cliente B con CloudKey, Oficina con UniFi OS Server) conectados hacia arriba por salida TCP 443 y 8883, más DNS UDP 53 y NTP UDP 123. Nota: no hace falta abrir puertos de entrada.",
+   "caption": "Cada consola sale hacia Site Manager; no se abre ningún puerto de entrada."
+  },
+  "steps": [
+   {
+    "file": "4-paso2.svg",
+    "step": 2,
+    "after": "Si no aparece en Site Manager, desde",
+    "alt": "Cuatro causas numeradas: Remote Management apagado en Settings > Control Plane > Console; salida TCP 443 u 8883 bloqueada; DNS UDP 53 o NTP UDP 123 bloqueados; o se entró con otra cuenta UI. A la derecha, desde una PC de esa red, Test-NetConnection unifi.ui.com -Port 443 con TcpTestSucceeded True y Resolve-DnsName unifi.ui.com.",
+    "caption": "Cuatro causas, y dos comandos para descartar salida y DNS desde una PC del sitio."
+   },
+   {
+    "file": "4-paso4.svg",
+    "step": 4,
+    "after": "Invitá a un compañero como administrador",
+    "alt": "La cuenta UI de la empresa, dueña de las consolas de los clientes A, B y C. Debajo, Técnico 1 con rol solo ver y Técnico 2 con rol solo el sitio B. En rojo, una consola en la cuenta personal de un técnico. Nota: Fabrics agrupan sitios con los mismos administradores y roles desde abril de 2026, y MSP Groups dan acceso al equipo del integrador desde julio de 2026.",
+    "caption": "Las consolas son de la empresa; los técnicos entran con su rol."
+   },
+   {
+    "file": "4-paso5.svg",
+    "step": 5,
+    "after": "Abrí una planilla de sitios",
+    "alt": "Planilla de sitios con columnas Cliente, Host, UniFi OS, Network, Dueño, Admins y Último backup, y tres filas de ejemplo: Cliente A con UCG, Cliente B con CloudKey y Oficina con UniFi OS Server, todas con dueño la empresa. Notas: la versión de Network dice qué notas leer, el dueño es siempre la empresa y la fecha del último backup dice si se puede actualizar hoy.",
+    "caption": "Una fila por cliente, con versión, dueño y último backup."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Remote Management y puertos de salida",
+    "para_que": "Para que un integrador vea los sitios de sus clientes sin abrir puertos en cada router. La consola llama hacia afuera y Site Manager usa esa conexión para llegar a ella.",
+    "como": "En la consola, Settings > Control Plane > Console, Remote Management activo y asociada a la cuenta UI correcta. Necesita salida TCP 443 y 8883, DNS (UDP 53) y NTP (UDP 123). La lista sale de una sola fuente (UniHosted, que cita el artículo oficial), así que conviene confirmarla en cada sitio.",
+    "ejemplo": "Un cliente con firewall estricto en el Centro no aparece en Site Manager. `Test-NetConnection unifi.ui.com -Port 443` da False: se habilita la salida y la consola aparece."
+   },
+   {
+    "name": "Cuenta de la empresa y roles",
+    "para_que": "Las consolas quedan asociadas a una cuenta UI. Si esa cuenta es la personal de un técnico, el acceso al cliente se va con él. La cuenta de la empresa con administradores por rol separa quién es dueño de quién entra.",
+    "como": "Cada consola de cliente se asocia a la cuenta UI de la empresa y los técnicos se invitan como administradores con rol limitado: solo ver, o solo ciertos sitios. Para muchos clientes, Fabrics agrupan sitios bajo los mismos administradores, roles y políticas, y MSP Groups dan acceso al personal del integrador.",
+    "ejemplo": "Si un técnico que llevaba veinte sitios deja la empresa y entraba con rol sobre la cuenta de la empresa, se le quita el acceso y todos los sitios siguen a mano."
+   },
+   {
+    "name": "Blueprints y Drift Inspector",
+    "para_que": "Con muchos sitios configurados igual, el problema deja de ser configurar y pasa a ser saber cuál se apartó. Blueprints empuja configuración por plantilla y Drift Inspector muestra qué sitio se desvió.",
+    "como": "Llegaron con Network 10.6.101 en Site Manager: se arma una plantilla, se aplica a los sitios y el inspector marca las diferencias para resolverlas. No reemplaza la planilla de sitios: la complementa.",
+    "ejemplo": "Una cadena de doce locales con el mismo plan de SSID y VLAN: Drift Inspector marca el único local donde alguien cambió el ancho de canal a mano."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nDurante años, administrar muchos clientes UniFi era tener muchos controladores sueltos o uno grande con muchos sitios adentro, y entrar a cada uno con su dirección. Ubiquiti fue sumando una capa en la nube: Site Manager, en `unifi.ui.com`, que muestra todas las consolas y servidores de una cuenta y conecta al técnico con cada uno.\n\nEn 2026 esa capa creció para integradores. Los Fabrics (antes llamados Organizations) quedaron disponibles en abril y agrupan sitios con los mismos administradores, roles y políticas, con SSO opcional. Los MSP Groups llegaron en julio para dar acceso al personal del integrador. Con Network 10.6.101 aparecieron los Blueprints con Drift Inspector. Según la documentación de Ubiquiti citada por UniHosted, un Cloud Gateway por sitio y un servidor central son \"functionally and administratively equivalent\" en Site Manager.\n\n### Cómo funciona\n\nSite Manager no guarda configuración: arma una conexión directa entre el administrador y el controlador de cada sitio. En la misma red local se conecta directo; desde afuera pasa por la nube de Ubiquiti.\n\nLo importante para el instalador es el sentido de la conexión. La consola sale hacia afuera; nadie entra. Por eso no hace falta abrir puertos de entrada, pero sí permitir la salida:\n\n- **TCP 443:** HTTPS, el canal web cifrado.\n- **TCP 8883:** el puerto que la IANA registra para MQTT sobre TLS, un protocolo liviano de mensajes.\n- **UDP 53:** DNS, para encontrar los servidores por nombre (RFC 1034 y 1035, de 1987).\n- **UDP 123:** NTP, para tener la hora bien (RFC 5905, de 2010). Sin hora correcta, los certificados TLS no validan y la conexión cifrada no se arma.\n\nSi un sitio no aparece, el orden de revisión es el de la lista: Remote Management, salida 443 y 8883, DNS y NTP, y la cuenta con la que entraste. La lista sale de una sola fuente que cita el artículo oficial, así que conviene confirmarla en el sitio con `Test-NetConnection` y `Resolve-DnsName`.\n\nLa otra mitad es administrativa: la consola pertenece a una cuenta. Si es la cuenta de la empresa, los técnicos van y vienen con su rol; si es la de un técnico, el cliente se va con él."
+ },
+ "5": {
+  "fig": {
+   "file": "5.svg",
+   "alt": "Comparación. A la izquierda, en rojo, una red plana 192.168.1.0/24 con PCs y NVR, cámaras y un celular invitado juntos: el invitado llega a las PCs y al NVR. A la derecha, en verde, un gateway UniFi con DHCP por red y zonas que reparte tres redes: Staff VLAN 10 10.10.10.0/24 en Internal, Invitados VLAN 20 192.168.20.0/24 en Hotspot y CCTV VLAN 30 192.168.30.0/24 en Internal o una zona CCTV.",
+   "caption": "Una red por función, cada una con su VLAN, su DHCP y su zona."
+  },
+  "steps": [
+   {
+    "file": "5-paso1.svg",
+    "step": 1,
+    "after": "Create New, tres veces",
+    "alt": "Ventana Settings > Networks > Create New con Name CCTV, Router gateway UniFi, Zone Internal o CCTV resaltado, VLAN ID 30, subred 192.168.30.0/24 y DHCP del gateway activo. Al lado, la tabla de las tres redes: Staff 10, Invitados 20 en Hotspot y CCTV 30 en zona propia. Notas: una VLAN sin DHCP deja al cliente sin IP; si no aparece Zone, el sitio sigue en el firewall clásico.",
+    "caption": "Nombre, VLAN, subred, DHCP y zona, tres veces."
+   },
+   {
+    "file": "5-paso3.svg",
+    "step": 3,
+    "after": "Abrí la Zone Matrix",
+    "alt": "Zone Matrix con filas de origen y columnas de destino Internal, Gateway, DMZ y Hotspot. Fila Hotspot: Allow Return hacia Internal y Gateway, Block All hacia DMZ y Hotspot. Fila Internal: Allow All hacia Hotspot. Notas: Allow Return solo deja responder a conexiones que empezaron del otro lado; según WunderTech una zona propia llega libre al gateway y no a las otras zonas salvo que escribas políticas.",
+    "caption": "Fila es origen, columna es destino: Hotspot solo responde hacia Internal."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "VLAN por función",
+    "para_que": "Una red plana pone en el mismo lugar a las PCs, las cámaras y el celular del invitado: si algo entra por un lado, llega a todo. La VLAN separa redes sobre el mismo cable y el mismo switch, para que cada función tenga su propio espacio.",
+    "como": "En Settings > Networks se crea una red por función con VLAN ID, subred y DHCP propio: Staff 10, Invitados 20, CCTV 30. Una VLAN sin DHCP es uno de los errores típicos: la red existe y el cliente no recibe IP. Al AP le llega un trunk con todas y el NVR va en un puerto de la 30.",
+    "ejemplo": "Un café en Cordón con todo en 192.168.1.0/24: el día que un celular infectado se conecta al WiFi de clientes, ve el NVR. Con tres VLANs, ese celular queda en la 20 y el NVR en la 30."
+   },
+   {
+    "name": "Firewall por zonas",
+    "para_que": "Con el firewall clásico, UniFi permitía tráfico entre VLANs por defecto y había que escribir reglas red por red. Las zonas agrupan redes con el mismo nivel de confianza y definen la política entre grupos, así una red nueva hereda el comportamiento de su zona.",
+    "como": "Cada red va a una zona: Internal, Hotspot, DMZ o una propia. Existe desde Network 9.0 y Network 11.0 migra todos los sitios automáticamente. Si el formulario de la red no muestra Zone, el sitio sigue en el firewall clásico y se actualiza desde Policy Engine.",
+    "ejemplo": "Actualizás a Network 11 la consola de una inmobiliaria con reglas clásicas. Las reglas se migran solas, pero ese mismo día abrís la matriz y confirmás que invitados sigue sin llegar a las PCs."
+   },
+   {
+    "name": "Zone Matrix",
+    "para_que": "Es la foto de qué puede hablar con qué. Existe para que no tengas que leer reglas una por una para saber si el invitado llega al NVR.",
+    "como": "Las filas son el origen y las columnas el destino. En la fila Hotspot, Internal tiene que decir Allow Return (solo responde a lo que empezó Internal) y DMZ, Hotspot y zonas propias Block All. Una zona propia, como CCTV, según WunderTech llega libre al gateway y no a las demás salvo que escribas políticas: ahí va la política del NVR a las cámaras.",
+    "ejemplo": "En un edificio en Pocitos con zona CCTV propia, la matriz muestra que las cámaras no llegan a Internal; una política deja que el NVR las alcance y nada más."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nAntes de las VLAN, separar redes era separar cables y switches. El estándar IEEE 802.1Q, de 1998, cambió eso: agrega a cada trama Ethernet una etiqueta de 4 bytes con un número de VLAN de 12 bits, de modo que por el mismo cable viajan redes distintas y el switch sabe a cuál pertenece cada trama. Con 12 bits hay 4094 VLAN utilizables.\n\nSeparar en capa 2 resuelve la mitad del problema. La otra mitad es decidir qué pasa entre redes cuando el tráfico llega al router. Durante años UniFi lo resolvió con el firewall clásico, que según LazyAdmin permitía el tráfico entre VLANs por defecto: había que acordarse de escribir los bloqueos. Ubiquiti presentó el firewall por zonas con Network 9.0 (9.0.108 según WunderTech), y las notas de Network 11.0.97 dicen que todos los sitios se migran automáticamente a él.\n\n### Cómo funciona\n\nUna red en UniFi es tres cosas juntas: una VLAN, una subred con su DHCP y una zona.\n\n- **VLAN.** El gateway y los switches marcan el tráfico con el número. Un SSID se asigna a una red y sale por su VLAN.\n- **DHCP propio.** Cada VLAN es un dominio aparte: si no tiene DHCP, el cliente se asocia y no recibe IP. Network 10.6.101 activa DHCP Guarding por defecto en redes nuevas.\n- **Zona.** El gateway rutea entre redes, y la zona decide si ese ruteo se permite. Internal es la red de confianza; Hotspot, la de invitados; DMZ, servicios expuestos; y podés crear las tuyas.\n\nLa política entre zonas se lee en la Zone Matrix: la fila es el origen y la columna el destino. \"Allow Return\" significa que esa zona solo puede contestar conexiones que empezaron del otro lado; \"Block All\" corta todo; \"Allow All\" deja pasar.\n\nThe Hook Up muestra que hay matices: deja sus cámaras en la red principal para no pasar once flujos 4K por el router entre VLANs, y lo compensa con reglas y MAC fija por puerto. Es una decisión de carga y de dónde está el NVR, no un atajo: si el NVR está en la misma VLAN que las cámaras, el video no pasa por el router."
+ },
+ "6": {
+  "fig": {
+   "file": "6.svg",
+   "alt": "Un switch UniFi con tres puertos. Uplink al gateway u otro switch y puerto del AP: llevan tramas sin etiqueta y etiquetadas 20 y 30, con nativa Staff o gestión y etiquetadas Allow All. Puerto de la cámara: solo tramas sin etiqueta que caen en la VLAN 30; una trama etiquetada 10 se descarta, con nativa CCTV VLAN 30 y etiquetadas Block All. Debajo: por defecto un puerto UniFi acepta todas las VLAN etiquetadas.",
+   "caption": "Uplinks y AP llevan todas las VLAN; el puerto de la cámara, una sola."
+  },
+  "steps": [
+   {
+    "file": "6-paso1.svg",
+    "step": 1,
+    "after": "Port Manager > elegí el switch",
+    "alt": "Ventana Port Manager > switch > puerto de la cámara con Native VLAN / Network CCTV VLAN 30, Tagged VLAN Management Block All resaltado y PoE Power Cycle en el paso 3. A la derecha la cámara recibe su red sin etiqueta, toma IP de 192.168.30.0/24 y no puede pedir otra VLAN. Notas: Native VLAN dice en qué red caen las tramas sin etiqueta; Block All descarta las que llegan etiquetadas.",
+    "caption": "El puerto de la cámara, con los valores que se cargan en el paso 2."
+   },
+   {
+    "file": "6-paso5.svg",
+    "step": 5,
+    "after": "hay un switch de terceros",
+    "alt": "Gateway UniFi conectado a un switch de terceros administrable y de ahí a un AP. En el puerto del switch de terceros hacia el AP: gestión del AP sin etiqueta y las VLAN de los SSID etiquetadas, por ejemplo 20 y 30. Caso de LazyAdmin: con la VLAN del AP etiquetada el AP no anduvo. Aviso: un switch no administrable en el camino descarta o pierde las etiquetas.",
+    "caption": "En el switch del medio, la gestión del AP sin etiqueta y los SSID etiquetados."
+   },
+   {
+    "file": "6-paso6.svg",
+    "step": 6,
+    "after": "Prueba: enchufá una notebook",
+    "alt": "Una notebook en el puerto de la cámara de un switch. Resultado esperado en verde: recibe 192.168.30.x, cae en la VLAN de cámaras. En rojo: no llega a Staff 10.10.10.0/24. Abajo, capas extra para puertos expuestos: MAC fija de la cámara para cámaras de terceros, y Lock Port to UniFi Device en Network 10.6.101 con switch en firmware 7.6 o superior para cámaras UniFi.",
+    "caption": "La notebook cae en la VLAN de cámaras y no llega a Staff."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "VLAN nativa y etiquetadas",
+    "para_que": "Un puerto de switch puede llevar varias VLAN a la vez. Las tramas etiquetadas dicen a qué VLAN van; las sin etiqueta caen en la VLAN nativa del puerto. Separar las dos cosas permite que un AP lleve muchas redes y una cámara, una sola.",
+    "como": "En Port Manager, Native VLAN / Network define la red de lo que llega sin etiqueta y Tagged VLAN Management qué etiquetas acepta: Allow All, algunas o Block All. Por defecto un puerto UniFi acepta todas las etiquetadas, que está bien para uplinks y AP.",
+    "ejemplo": "El AP de un hotel en Colonia emite tres SSID: el puerto lleva gestión sin etiqueta y las VLAN 20 y 30 etiquetadas, y cada SSID sale por la suya."
+   },
+   {
+    "name": "Puerto de equipo final con Block All",
+    "para_que": "Una cámara o un equipo IoT necesita una sola red. Si su puerto acepta todas las etiquetadas, cualquiera que enchufe una notebook configurada con VLAN puede saltar a otra red.",
+    "como": "Native VLAN = la red del equipo (CCTV, VLAN 30) y Tagged VLAN Management = Block All. Después, Power Cycle del puerto PoE para que la cámara renueve IP y verificar que tome una de 192.168.30.0/24. Cambiar la nativa de un AP o un uplink puede dejar sin gestión lo que cuelga de ahí: se empieza por un equipo final.",
+    "ejemplo": "En el estacionamiento de un supermercado en Las Piedras alguien arranca una cámara y enchufa una notebook al cable. Con nativa 30 y Block All, cae en la red de cámaras y nada más."
+   },
+   {
+    "name": "Seguridad de puerto en lugares expuestos",
+    "para_que": "La VLAN nativa limita a qué red cae un intruso, pero igual entra a esa red. Atar el puerto al equipo que corresponde evita que entre cualquier otro.",
+    "como": "Para cámaras de terceros, MAC fija en el puerto, como hace The Hook Up. Para equipos UniFi, Lock Port to UniFi Device en Port Manager, desde Network 10.6.101 y con switch en firmware 7.6 o superior.",
+    "ejemplo": "Las cámaras exteriores de un barrio privado en Canelones quedan con MAC fija: si alguien enchufa otra cosa al cable, el puerto no la deja pasar."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEl estándar IEEE 802.1Q, de 1998, definió la etiqueta de VLAN y, con ella, dos tipos de tráfico en un mismo puerto: el etiquetado, que dice a qué VLAN pertenece, y el sin etiqueta, que el switch asigna a una VLAN por defecto del puerto, la nativa. De ahí salen los dos perfiles clásicos: el puerto troncal (trunk), que lleva muchas VLAN etiquetadas, y el puerto de acceso, que lleva una sola sin etiqueta.\n\nEn UniFi la idea es la misma con otros nombres. Port Manager muestra Native VLAN / Network para la nativa y Tagged VLAN Management para decidir qué etiquetadas se aceptan. Para lugares expuestos, Network 10.6.101 sumó Lock Port to UniFi Device, con switches en firmware 7.6 o superior.\n\n### Cómo funciona\n\nCuando una trama entra a un puerto, el switch se pregunta si trae etiqueta:\n\n- **Sin etiqueta:** la asigna a la VLAN nativa del puerto. Una cámara no sabe nada de VLAN: manda tramas comunes y caen en la nativa.\n- **Con etiqueta:** si el puerto acepta esa VLAN, la deja pasar a esa red; si está en Block All, la descarta.\n\nPor eso el puerto de un equipo final se configura con la nativa de su red y Block All: la cámara funciona igual y nadie puede pedir otra VLAN desde ese cable. El AP, en cambio, necesita el trunk: su gestión va en la nativa y cada SSID sale etiquetado por su VLAN. El uplink a otro switch también lleva todas.\n\nEl camino tiene que ser coherente de punta a punta. Un switch de terceros entre el gateway y el AP tiene que llevar las mismas VLAN, con la gestión del AP sin etiqueta si así la espera el AP: un lector de LazyAdmin no logró que su AP anduviera hasta dejarla sin etiquetar. Un switch no administrable en el medio descarta o pierde las etiquetas, según UniHosted.\n\nLa VLAN nativa limita el daño, pero no impide que alguien entre a esa red. En puertos que dan a la calle se suma una capa más: MAC fija o el bloqueo del puerto al equipo UniFi. Si alguien desconecta la cámara, lo que enchufe en su lugar no pasa."
+ },
+ "7": {
+  "fig": {
+   "file": "7.svg",
+   "alt": "Dos paneles. 2.4 GHz: curvas de los canales 1 a 11, con 1, 6 y 11 resaltados y sin superponerse; los del medio se pisan con dos de ellos. 5 GHz: el bloque de canales 36 a 48 como cuatro canales de 20 MHz, dos de 40 MHz (36 + 40 y 44 + 48) o uno solo de 80 MHz. Nota: punto de partida 80 MHz en una casa, 40 MHz en una oficina y 20 MHz en alta densidad.",
+   "caption": "En 2.4 GHz solo 1, 6 y 11; en 5 GHz, cada salto de ancho deja la mitad de canales."
+  },
+  "steps": [
+   {
+    "file": "7-paso1.svg",
+    "step": 1,
+    "after": "AirView > Environment: mirá qué canales",
+    "alt": "Ventana UniFi Devices > AP > AirView > Environment con un gráfico ilustrativo de uso de vecinos: canales 36 a 48 con barras altas, saturados, y 52 a 64 con barras bajas, DFS y más limpios, como en el caso de std.rocks. Notas: el escaneo Full desconecta a los clientes de esa radio, hacerlo fuera de horario; sin análisis en tiempo real, Airtime Scan.",
+    "caption": "Antes de elegir, mirá qué usan los vecinos y hacelo fuera de horario."
+   },
+   {
+    "file": "7-paso2.svg",
+    "step": 2,
+    "after": "Fijá anchos para todos los AP",
+    "alt": "Ventana Settings > WiFi > Default WiFi Speeds > Custom con 2.4 GHz en 20 MHz, 5 GHz según el lugar y 6 GHz en 160 MHz. Tres tarjetas para 5 GHz: 80 MHz casa con pocos vecinos, 40 MHz oficina y 20 MHz con más de 30 clientes por AP. Notas: después Apply to All APs y Apply Changes; Channel AI no toca el ancho, por eso se fija antes.",
+    "caption": "El ancho se fija por banda antes de correr Channel AI."
+   },
+   {
+    "file": "7-paso5.svg",
+    "step": 5,
+    "after": "querés probar DFS",
+    "alt": "Canales de 5 GHz según std.rocks: 36 a 48 sin DFS, 52 a 64 y 100 a 140 DFS. Secuencia: AP en canal DFS 64 limpio, aparece un radar meteorológico o militar, el AP deja el canal en el acto y los clientes se cortan. Notas: usar DFS si los bajos están saturados y no hay eventos de radar; si Time Machine muestra cambios por radar, volver a los canales bajos.",
+    "caption": "DFS suma canales limpios, a cambio de dejarlos cuando aparece un radar."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Canales que no se superponen en 2.4 GHz",
+    "para_que": "En 2.4 GHz los canales están separados 5 MHz pero cada uno ocupa 20 MHz, así que se pisan entre sí. Usar solo 1, 6 y 11 evita que dos AP cercanos se interfieran parcialmente, que es peor que compartir el mismo canal.",
+    "como": "2.4 GHz siempre en 20 MHz y, si fijás el canal a mano, solo 1, 6 u 11. La banda está cargada de Bluetooth, periféricos e IoT: conviene usarla solo para lo que la necesita.",
+    "ejemplo": "LazyAdmin cuenta que muchos hubs Zigbee usan por defecto el canal 11 de Zigbee, que cae en la parte baja de la banda, y pone el WiFi en 6 y 11 para darle aire. En una casa domótica en Carrasco, la misma idea evita que el WiFi tape a los sensores."
+   },
+   {
+    "name": "Ancho de canal según densidad",
+    "para_que": "Un canal más ancho da más velocidad a un cliente, pero ocupa más espectro y deja menos canales para repartir entre AP y vecinos. En un lugar con muchos clientes y vecinos, el ancho grande hace que todo choque.",
+    "como": "En Settings > WiFi > Default WiFi Speeds > Custom: 2.4 GHz en 20, 5 GHz en 80 para casa con pocos vecinos, 40 para oficina y 20 con más de 30 clientes por AP, 6 GHz en 160. Apply to All APs. HostiFi dice que 40 MHz alcanza para 250 a 400 Mbps.",
+    "ejemplo": "La oficina de std.rocks, con unos 300 equipos y 10 AP, bajó 5 GHz a 20 MHz y las quejas de lentitud bajaron. Un call center en el Centro se parece mucho más a esa oficina que a una casa."
+   },
+   {
+    "name": "Channel AI",
+    "para_que": "Elegir canales a mano queda viejo cuando cambian los vecinos. Channel AI es la herramienta de UniFi que mira el entorno y propone un plan de canales para todos los AP de una banda.",
+    "como": "Llegó con Network 9.5 y necesita al menos dos AP activos: AirView > Channel AI > banda > Optimize > revisar > Apply Changes, banda por banda. Desde 10.6.97 puede correr de noche con las radios que elijas. No toca el ancho, así que va después de fijarlo. HostiFi desconfía de Auto y prefiere escanear y planificar: con un vecino fijo y fuerte, canal manual.",
+    "ejemplo": "En un colegio en Malvín con ocho AP, fijás 40 MHz, corrés Channel AI en 5 GHz y al día siguiente comparás el airtime en Time Machine."
+   },
+   {
+    "name": "Canales DFS",
+    "para_que": "En 5 GHz hay canales compartidos con radares (meteorológicos, militares). DFS es la regla que permite usarlos si el AP se corre cuando detecta uno. Suman espectro limpio donde los canales bajos están saturados.",
+    "como": "Se habilitan en Default WiFi Speeds > Custom > Extended 5 GHz Spectrum (DFS). Si aparece un radar, el AP abandona el canal al instante y los clientes se cortan. LazyAdmin los evita; std.rocks los usa porque están limpios: mirá el registro y, si hay cambios por radar, volvé a 36 a 48.",
+    "ejemplo": "En un hotel en La Barra pasás a DFS porque 36 a 48 están llenos de vecinos. Si al día siguiente Time Machine muestra saltos de canal por radar, volvés a los canales bajos."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEl primer estándar 802.11 es de 1997. En 1999 llegaron 802.11b, en 2.4 GHz, y 802.11a, en 5 GHz. En 2.4 GHz los canales se numeraron cada 5 MHz, pero cada transmisión ocupa unos 20 MHz: por eso, entre el 1 y el 11, solo 1, 6 y 11 no se pisan.\n\nEl ancho de canal fue creciendo para dar más velocidad: 802.11n (2009) introdujo los canales de 40 MHz, 802.11ac (2013) los de 80 y 160 MHz en 5 GHz, y WiFi 6E abrió la banda de 6 GHz, donde UniFi sugiere 160 MHz. La regla de DFS vino de la enmienda 802.11h, de 2003, que agregó la detección de radar y el control de potencia en 5 GHz.\n\nEn UniFi, la optimización automática pasó por varios nombres: Channel Optimization, Daily Spectrum Optimizer y, desde Network 9.5, Channel AI. Network 10.6.97 sumó la corrida nocturna con elección de radios.\n\n### Cómo funciona\n\nEn un canal WiFi transmite un equipo por vez: todos escuchan antes de hablar y esperan si el aire está ocupado. El tiempo de aire, el airtime, se reparte entre todos los que comparten ese canal, sean tuyos o del vecino.\n\nUn canal de 80 MHz ocupa lo mismo que cuatro de 20: el bloque 36, 40, 44 y 48 es un solo canal de 80. Más ancho da más velocidad a cada cliente cuando el aire está libre, pero deja menos canales distintos para repartir entre AP. En una oficina llena, cuatro AP en 20 MHz pueden quedar en canales distintos; en 80 MHz, se pisan.\n\nPor eso el orden del laboratorio es:\n\n1. **Mirar** el entorno con AirView > Environment o un Airtime Scan (Full saca a los clientes de esa radio).\n2. **Fijar el ancho** por banda según clientes y vecinos.\n3. **Elegir canales** con Channel AI o a mano tras el escaneo.\n4. **Verificar** al día siguiente en Time Machine, incluidos los cambios por radar si usás DFS.\n\nEl ancho se elige por la cantidad de clientes y vecinos, no por lo que dice la caja."
+ },
+ "8": {
+  "fig": {
+   "file": "8.svg",
+   "alt": "Dos escenas con AP 1 y AP 2. Arriba a la izquierda, todo al máximo: cada AP llega a todo el local y un celular junto al AP 2 sigue conectado al AP 1 con una línea roja punteada. A la derecha, potencia baja: celdas chicas que apenas se solapan y el celular conectado al AP 2 en verde. Notas: cliente pegajoso con reintentos y airtime gastado; con potencia baja cada uno queda en su AP.",
+   "caption": "Con potencia alta el celular se queda en el AP lejano; con potencia baja se pasa al cercano."
+  },
+  "steps": [
+   {
+    "file": "8-paso1.svg",
+    "step": 1,
+    "after": "Elegí tres puntos del local",
+    "alt": "Planta de un local con AP 1 y AP 2 y tres puntos de una caminata: A cerca del AP 1, B entre los dos y C cerca del AP 2. A la derecha una tabla para completar con punto, señal en dBm y AP, y la app WiFiman en el celular. Nota: es la línea de base para comparar en el paso 4.",
+    "caption": "Antes de tocar nada, señal y AP en tres puntos."
+   },
+   {
+    "file": "8-paso2.svg",
+    "step": 2,
+    "after": "En UniFi Network: AirView > Radios",
+    "alt": "Ventana AirView > Radios con 2.4 GHz en Low, 5 GHz en Medium (Low si hay un AP por ambiente) y 6 GHz en High. Al lado, por qué: 2.4 GHz atraviesa más paredes y Purple cita diseños 3 a 6 dB por debajo de 5 GHz; 5 GHz media si un AP cubre varios ambientes; 6 GHz alcanza menos. Excepción: con un solo AP, potencia alta.",
+    "caption": "Puntos de partida por banda, a ajustar AP por AP."
+   },
+   {
+    "file": "8-paso4.svg",
+    "step": 4,
+    "after": "Repetí la caminata",
+    "alt": "Escala de señal del celular en dBm de -50 a -80: hasta -65 recomendado en verde, de -65 a -70 hasta el mínimo en ámbar, por debajo de -70 en rojo. Resultado esperado: A sigue en el AP 1, B es la zona de traspaso, C ya pasó al AP 2 con -65 o mejor. Notas: un punto por debajo de -70 es candidato a un AP más; bajar potencia AP por AP y caminando.",
+    "caption": "En el punto C, el celular en el AP 2 con -65 dBm o mejor."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Cliente pegajoso",
+    "para_que": "El celular decide a qué AP conectarse y suele quedarse con el que ya tiene mientras la señal le parezca buena. Con los AP al máximo, el AP lejano se sigue viendo fuerte y el celular no busca otro aunque tenga uno al lado.",
+    "como": "Bajando la potencia, al acercarte a otro AP el lejano se debilita y el cercano queda fuerte: el celular se pasa. Por eso LazyAdmin llama a la potencia mal configurada probablemente la causa número uno de problemas de WiFi.",
+    "ejemplo": "\"Tengo tres AP y en la sala de reuniones anda horrible, con señal llena\": el celular de la sala sigue pegado al AP de la recepción."
+   },
+   {
+    "name": "Enlace asimétrico y airtime",
+    "para_que": "El AP puede gritar más fuerte que un celular. A potencia alta el AP llega lejos, pero el celular no le contesta con la misma fuerza: la conexión se llena de reintentos y velocidades bajas.",
+    "como": "Un cliente con señal pobre usa velocidades bajas y retransmite, así que ocupa el aire mucho más tiempo para mandar lo mismo. Como el airtime se comparte, frena a todos los demás clientes de ese AP. Ubiquiti trata -70 dBm como mínimo y recomienda -65 o mejor, según WunderTech.",
+    "ejemplo": "En un local de Ciudad Vieja, una notebook en el depósito con -78 dBm hace que los celulares del salón anden lentos aunque tengan señal perfecta."
+   },
+   {
+    "name": "Más AP con menos potencia",
+    "para_que": "Subirle potencia a todos para cubrir un rincón agranda el problema del cliente pegajoso en todo el local. Agregar un AP chico resuelve el rincón sin romper el resto.",
+    "como": "Con varios AP, punto de partida 2.4 GHz baja, 5 GHz entre baja y media, 6 GHz alta; con un solo AP, alta. Se cambia AP por AP, caminando con WiFiman, y si un punto queda por debajo de -70 dBm se anota como candidato a AP adicional o se sube un nivel solo ese AP.",
+    "ejemplo": "Un consultorio en Pocitos con un rincón sin señal: en vez de llevar los tres AP a High, se suma uno en el pasillo y los tres quedan en Medium."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLa potencia de transmisión fue durante años la perilla que todos subían: más potencia parecía más cobertura. La enmienda 802.11h, de 2003, ya incluía control de potencia (TPC) junto con DFS, pensando en que no siempre conviene transmitir al máximo.\n\nEn redes con varios AP la práctica fue llegando a lo contrario del instinto. LazyAdmin llama a la potencia mal configurada \"probablemente la causa número uno\" de los problemas de WiFi. std.rocks lo cuenta desde una oficina con unos 300 equipos: bajar potencia fue parte de lo que ordenó la red. Cinco de cinco fuentes del curso coinciden; el único matiz, que nota WunderTech, es que con un solo AP sí conviene alta.\n\n### Cómo funciona\n\nEl roaming lo decide el cliente, y la mayoría de los clientes se quedan con su AP mientras la señal parezca aceptable. Si los AP están al máximo, el lejano siempre parece aceptable.\n\nEl otro lado es la asimetría. Un AP transmite con más potencia que un celular. A potencia alta el celular escucha bien al AP, pero el AP escucha mal al celular: hay reintentos y la velocidad baja para que el enlace aguante. Un cliente lento ocupa el canal más tiempo para mandar lo mismo, y como el aire se comparte, todos los del AP lo pagan.\n\nAlgunas cuentas para leer las mediciones:\n\n- **dBm es logarítmico.** Cada 3 dB es el doble o la mitad de potencia; -65 dBm es mucho mejor que -70.\n- **Umbrales.** Ubiquiti trata -70 dBm como mínimo y recomienda -65 o mejor (según WunderTech). Purple cita -67 dBm en el borde de celda para voz.\n- **Bandas.** 2.4 GHz atraviesa más paredes: va más baja, y Purple menciona diseños con 2.4 GHz entre 3 y 6 dB por debajo de 5 GHz. 6 GHz alcanza menos: va alta.\n\nEl método del laboratorio es medir, cambiar y volver a medir en los mismos puntos. Si un punto queda débil, la respuesta es un AP más, no subirle a todos."
+ },
+ "9": {
+  "fig": {
+   "file": "9.svg",
+   "alt": "Escala de perillas de roaming de la más suave a la más dura, con una barra de verde a rojo de informa a patea: 802.11k neighbor reports, le pasa la lista de AP vecinos, sin interruptor propio; BSS Transition 802.11v, sugiere un AP mejor, siempre activado; Band steering del SSID, empuja de 2.4 a 5 GHz, preferir no forzar; Fast Roaming 802.11r, acelera la reautenticación, solo si probaste cada equipo; Mínimo RSSI, desconecta bajo un umbral, al final y suave.",
+   "caption": "De informar a patear: cuanto más dura la perilla, más prueba necesita."
+  },
+  "steps": [
+   {
+    "file": "9-paso2.svg",
+    "step": 2,
+    "after": "Conectá uno de cada tipo de equipo",
+    "alt": "Ventana del SSID Prueba-FT en Settings > WiFi > Advanced Manual con BSS Transition On, Fast Roaming On resaltado, Band Steering preferir 5 GHz, Minimum RSSI Off y Security WPA2/WPA3 o WPA2. Al lado, un inventario de ejemplo: celular y notebook conectan, lector de código viejo no conecta, impresora y terminal de pago a probar. Nota con el caso de Purple: lectores sin conexión en 9 de 40 locales.",
+    "caption": "Un equipo de cada tipo al SSID de prueba, antes de tocar producción."
+   },
+   {
+    "file": "9-paso4.svg",
+    "step": 4,
+    "after": "historial de conexión y roaming",
+    "alt": "Dos líneas de tiempo de una caminata con llamada. Bien: AP 1 y luego AP 2 con un roam en el borde de la celda. Mal: AP 1, un tramo sin red y después AP 2, una desconexión y reconexión por hueco de cobertura o por un equipo que no tolera la función. Nota: el historial de conexión y roaming está desde Network 10.5.",
+    "caption": "Cada paso de AP tiene que ser un roam, no una desconexión."
+   },
+   {
+    "file": "9-paso5.svg",
+    "step": 5,
+    "after": "Si algún equipo no conectó",
+    "alt": "Un AP con dos SSID. SSID principal en la red Staff: BSS Transition On, Fast Roaming On, WPA2/WPA3, celulares y notebooks probados. SSID de legado en su propia VLAN: Fast Roaming Off, WPA2 sin PMF obligatorio, lectores, impresoras y sensores, sin acceso a los sistemas del staff.",
+    "caption": "Lo que no tolera Fast Roaming va a un SSID de legado en su propia VLAN."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "BSS Transition (802.11v)",
+    "para_que": "El AP no puede mover a un cliente, pero puede avisarle que hay un AP mejor. BSS Transition es ese aviso: una sugerencia que el cliente acepta o ignora.",
+    "como": "Viene activado y se deja así en todos los SSID: un cliente que no lo entiende lo ignora. También hace que band steering y el mínimo RSSI se comporten mejor. Handoff Suggestions (antes Roaming Assistant) es la versión suave que avisa al cliente cuando baja de un umbral, -70 dBm según Ubiquiti.",
+    "ejemplo": "En un hotel en Punta del Este, los teléfonos del personal reciben la sugerencia al caminar por el pasillo y se pasan al AP siguiente sin cortar."
+   },
+   {
+    "name": "Fast Roaming (802.11r)",
+    "para_que": "Cada vez que un cliente cambia de AP tiene que volver a autenticarse. Con 802.1X eso es un intercambio completo con el servidor RADIUS en medio de una llamada. Fast Roaming deriva las claves por adelantado para que el cambio sea de pocas tramas.",
+    "como": "Se activa por SSID. Ubiquiti lo recomienda (según WunderTech), LazyAdmin dice que suele hacer más mal que bien y Purple lo limita a SSID Enterprise de voz y video. Algunos drivers viejos no se conectan a un SSID que lo anuncia: se prueba con cada tipo de equipo en un SSID nuevo antes de tocar producción.",
+    "ejemplo": "El caso ilustrativo de Purple: una cadena de 40 locales activa Fast Roaming en todos los SSID y los lectores de código de barras viejos dejan de conectar en 9. Se vuelve atrás en una hora y los lectores van a un SSID sin FT."
+   },
+   {
+    "name": "Mínimo RSSI",
+    "para_que": "Es la perilla dura: el AP desconecta al cliente cuando su señal baja de un umbral, para obligarlo a buscar otro AP.",
+    "como": "Va al final y suave: unos dB por debajo del borde de diseño y solo donde caminando comprobaste que hay otro AP que cubre. std.rocks usa -70 dBm como regla en oficina; WunderTech cita que Ubiquiti no lo recomienda fuera de alta densidad. Si no hay otro AP, el cliente se cae; un cliente expulsado muchas veces puede terminar rechazando ese AP.",
+    "ejemplo": "En un depósito en Paysandú con AP separados por estanterías, activarlo sin caminar antes puede dejar a los lectores entrando y saliendo de la red en los pasillos."
+   },
+   {
+    "name": "SSID de legado",
+    "para_que": "Equipos viejos que no toleran Fast Roaming o WPA3 (que exige PMF) no tienen que frenar las mejoras del resto. Un SSID aparte los deja andando sin bajar el nivel de todos.",
+    "como": "Un SSID sin Fast Roaming y con WPA2, en su propia VLAN, para lectores, impresoras y sensores que fallaron en la prueba. Va en VLAN aparte para que lo que no pudo subir de seguridad no llegue a los sistemas del staff.",
+    "ejemplo": "En una clínica en el Cordón, las tablets de enfermería quedan en el SSID con Fast Roaming y los tensiómetros WiFi viejos en un SSID de legado en la VLAN 40."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEl 802.11 original dejó el roaming librado al cliente: el celular decide cuándo cambiar de AP y a cuál. Las enmiendas que vinieron después no le quitaron esa decisión, le dieron información y velocidad.\n\n- **802.11k (2008):** el AP le manda al cliente un informe de vecinos, la lista de AP cercanos y sus canales, para que escanee menos.\n- **802.11r (2008):** Fast BSS Transition (FT). Las claves para el próximo AP se derivan por adelantado; un roam FT usa el algoritmo de autenticación número 2 en lugar de Open System.\n- **802.11v (2011):** BSS Transition Management, la sugerencia de \"hay un AP mejor\".\n- **802.11w (2009):** protección de las tramas de gestión (PMF), que WPA3, de 2018, hace obligatoria. WPA2 es de 2004, con 802.11i.\n\nEn UniFi, Fast Roaming es 802.11r y BSS Transition es 802.11v. 802.11k no tiene un interruptor propio; Purple sugiere confirmarlo con una captura. El mínimo RSSI no es un estándar: es una función de cada fabricante.\n\n### Cómo funciona\n\nEl roaming es una decisión del cliente. Muchos equipos recién buscan otro AP cuando la señal ya es mala; las funciones del AP intentan que esa decisión llegue a tiempo:\n\n1. **Informar (802.11k):** con la lista de vecinos, el cliente escanea pocos canales y decide más rápido.\n2. **Sugerir (802.11v):** el AP le propone uno mejor; el cliente puede ignorarlo.\n3. **Acelerar (802.11r):** cuando decide, el cambio se completa en pocas tramas. En redes 802.1X evita un intercambio completo con RADIUS en cada roam; Purple cita la ITU-T G.114, que recomienda menos de 150 ms de demora en un sentido para la voz.\n4. **Patear (mínimo RSSI):** desconecta bajo un umbral. Sin otro AP cerca, el cliente se cae.\n\nEl riesgo crece con cada paso. Algunos drivers viejos no saben leer lo que anuncia un SSID con FT y no se conectan; los que no soportan PMF no entran a WPA3. Por eso el orden es arreglar primero canal y potencia, activar BSS Transition, probar Fast Roaming en un SSID nuevo con un equipo de cada tipo, y dejar el mínimo RSSI para el final. Lo que no tolera las funciones va a un SSID de legado en su propia VLAN."
+ },
+ "10": {
+  "fig": {
+   "file": "10.svg",
+   "alt": "Un celular invitado 192.168.20.x en la zona Hotspot, VLAN 20, conectado al gateway UniFi con zonas. Del gateway sale una flecha verde a Internet con Allow Internet Access y una flecha roja cortada hacia la zona Internal, donde están la impresora 10.10.10.50 y el NVR y las cajas de la red Staff. Abajo, las Post-Authorization Restrictions de fábrica: 10.0.0.0/8, 172.16.0.0/12 y 192.168.0.0/16.",
+   "caption": "La zona Hotspot y las restricciones dejan salir a internet y nada más."
+  },
+  "steps": [
+   {
+    "file": "10-paso2.svg",
+    "step": 2,
+    "after": "tipo Hotspot > Captive Portal",
+    "alt": "Dos paneles. Solo contraseña, WiFi tipo Standard: el invitado entra con la clave; la zona Hotspot trae la landing page activada, hay que desmarcar Show Landing Page en el Hotspot Portal o aparece un portal que nadie pidió. Portal cautivo, WiFi tipo Hotspot > Captive Portal: vouchers con vencimiento, usos y límite; contraseña, Stripe, Facebook o RADIUS; portal externo con Pre-Authorization Allowances.",
+    "caption": "Standard para solo contraseña, Hotspot para portal: el aislamiento lo da la zona."
+   },
+   {
+    "file": "10-paso3.svg",
+    "step": 3,
+    "after": "Hotspot Portal (desde el aviso bajo Zone",
+    "alt": "Flujo del invitado: se conecta al SSID Invitados, ve el portal, ingresa el voucher y navega con su límite. Debajo, un voucher de laboratorio con vencimiento 1 día, 1 uso y límite 10 Mbps de bajada y 5 Mbps de subida. Nota: Hotspot Portal > Authentication, activar Vouchers y generar uno.",
+    "caption": "Un voucher de un día y un uso, con velocidad acotada."
+   },
+   {
+    "file": "10-paso5.svg",
+    "step": 5,
+    "after": "Desde un celular: conectate",
+    "alt": "Un celular con el navegador apuntando a 10.10.10.50 y un indicador de carga: se vence el tiempo. A la derecha, en verde, navega por internet y la impresora no responde: aislado. En rojo, si la página de la impresora abre: revisar que la red esté en zona Hotspot y las Post-Authorization Restrictions del paso 4.",
+    "caption": "Si la impresora no responde desde el celular, quedó aislado."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Zona Hotspot",
+    "para_que": "Es la forma de decir \"esta red es de invitados\" con el firewall por zonas. Reemplaza al viejo tipo Guest Network: el aislamiento viene de la zona y no de una casilla por red.",
+    "como": "En Settings > Networks, Zone = Hotspot con su VLAN y Allow Internet Access. La opción Isolate Network queda gris porque la zona hace ese trabajo. En la Zone Matrix, la fila Hotspot dice Allow Return hacia Internal y Block All hacia DMZ, Hotspot y zonas propias. En sitios con firewall clásico el Guest Network sigue existiendo.",
+    "ejemplo": "La red de invitados de un estudio jurídico en el Centro va en la VLAN 20, zona Hotspot: los clientes en la sala de espera navegan y no ven el servidor de expedientes."
+   },
+   {
+    "name": "Landing page y tipos de WiFi",
+    "para_que": "El WiFi tiene tres tipos: Standard (solo contraseña), Hotspot (portal cautivo o Passpoint) e IoT. El portal existe para vouchers, términos o pago; la trampa es que la zona Hotspot trae la landing page activada aunque no la quieras.",
+    "como": "Si el WiFi va Standard en una red de zona Hotspot, en el Hotspot Portal desmarcá Show Landing Page. Si querés portal, Hotspot > Captive Portal y elegí el método: vouchers, contraseña, Stripe, Facebook, RADIUS o portal externo, con Pre-Authorization Allowances para sus dominios.",
+    "ejemplo": "Le das la clave del WiFi a un bar en Pocitos y a la noche llaman porque a los clientes les aparece una página de bienvenida: era la landing page activada por defecto."
+   },
+   {
+    "name": "Post-Authorization Restrictions",
+    "para_que": "Aun autenticado, el invitado no tiene que llegar a direcciones privadas. Estas restricciones bloquean los tres rangos privados después de que el invitado pasa el portal.",
+    "como": "Vienen cargadas con 10.0.0.0/8, 172.16.0.0/12 y 192.168.0.0/16 en Authorization Access. Se revisan en cada sitio y se confirman con la prueba del celular: abrir la IP de una impresora o NAS interno tiene que vencer el tiempo.",
+    "ejemplo": "En un hotel en Colonia, desde el WiFi de huéspedes intentás `http://10.10.10.50`: no carga. Recién ahí se entrega la red."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLa RFC 1918, de 1996, reservó tres rangos de direcciones privadas para usar dentro de cualquier red: 10.0.0.0/8, 172.16.0.0/12 y 192.168.0.0/16. Son los mismos que UniFi carga de fábrica en las Post-Authorization Restrictions: un invitado puede salir a internet, pero no llegar a nada que viva en esos rangos.\n\nEl portal cautivo nació con los hotspots públicos de hoteles, aeropuertos y cafés: la primera página que abre el navegador es la del lugar, y recién después de aceptar o pagar hay internet. En UniFi el WiFi de invitados cambió de lugar con el firewall por zonas: desde Network 9.0, según WunderTech y la ayuda de Ubiquiti que cita, una red es de invitados al ponerla en la zona Hotspot, y el viejo tipo Guest Network solo queda en sitios con firewall clásico. Al pasar a UniFi OS Server, el portal cambia del puerto 8843 al 8444.\n\n### Cómo funciona\n\nEl aislamiento tiene tres capas que se suman:\n\n1. **Zona Hotspot.** En la Zone Matrix, Hotspot hacia Internal es Allow Return: el invitado solo puede contestar conexiones que empezó un equipo de adentro, nunca iniciarlas. Internal hacia Hotspot es Allow All.\n2. **Post-Authorization Restrictions.** Después de pasar el portal, los tres rangos privados quedan bloqueados para el invitado.\n3. **Client Device Isolation** (opcional en el WiFi): evita que dos invitados en el mismo AP se vean entre sí.\n\nEl portal se dispara de dos formas: por el WiFi (tipo Hotspot > Captive Portal) o por la red, si está en zona Hotspot y la landing page está activa. Esa segunda es la trampa: un WiFi Standard en zona Hotspot muestra un portal hasta que desmarcás Show Landing Page.\n\nCon portal, el navegador del invitado es redirigido a la página de autenticación. Con HTTPS Redirection pueden aparecer advertencias de certificado; el campo Domain hace que la redirección use un nombre (FQDN) que coincida con el certificado. Pre-Authorization Allowances deja pasar, antes de autenticar, los dominios que el portal o el proveedor de pago necesitan.\n\nNada de esto se da por bueno hasta probarlo: celular en el WiFi de invitados, navegar, y abrir la IP de una impresora o NAS interno. Tiene que vencer el tiempo."
+ },
+ "11": {
+  "fig": {
+   "file": "11.svg",
+   "alt": "Seis etapas en zigzag: 1 backup con dos copias fuera del equipo, 2 notas de versión, 3 solo Official y no Release Candidate ni Beta, 4 esperar 2 a 3 semanas como HostiFi, 5 un sitio piloto y 6 el resto por tandas. Notas: desde Network 10.5 se puede revertir firmware y aplicación y Test and Confirm deshace un cambio si se pierde conexión; HostiFi saltó la 7.5.174 por redes WiFi que no se emitían.",
+   "caption": "Backup, notas, Official, espera, piloto y recién ahí el resto."
+  },
+  "steps": [
+   {
+    "file": "11-paso1.svg",
+    "step": 1,
+    "after": "Bajá un backup manual",
+    "alt": "La consola en Settings > System > Backups genera un backup .unf que se guarda en dos copias fuera del equipo: una en la notebook o un NAS y otra en otro lugar fuera del sitio. Debajo, lo que lleva (configuración, dispositivos y clientes, redes, WiFi, reglas y nombres) y lo que no lleva (video de Protect y logs locales).",
+    "caption": "Dos copias fuera del equipo; el backup no lleva video ni logs."
+   },
+   {
+    "file": "11-paso3.svg",
+    "step": 3,
+    "after": "Restore > subir archivo",
+    "alt": "Flujo de restauración: consola de laboratorio con Network versión X, archivo .unf subido con Restore, UniFi OS Server en la VM con versión X o superior, reinicio y login con el usuario del día del backup. Debajo, si los equipos quedan Disconnected porque cambió la IP del controlador: option 43, DNS unifi o set-inform al controlador nuevo. Nota: Network 10.6.101 corrigió un caso en que se perdía MC-LAG al restaurar.",
+    "caption": "Misma versión o superior, login del backup y re-apuntar los equipos si cambió la IP."
+   },
+   {
+    "file": "11-paso6.svg",
+    "step": 6,
+    "after": "Abrí las notas de versión de la próxima",
+    "alt": "Las notas de UniFi Network 11.0.97 en tres columnas. Versión mínima: UniFi OS 6.0 o superior, la actualización puede tardar hasta 20 minutos. Qué se elimina: soporte a USG, 10.6 fue la última; el Network Server, reemplazado por UniFi OS Server; el historial de estadísticas. Qué se migra: la base de datos a PostgreSQL y todos los sitios al firewall por zonas.",
+    "caption": "Versión mínima, qué se elimina y qué se migra, antes de tocar nada."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Backup fuera del equipo",
+    "para_que": "Un backup que vive solo en la consola se pierde con la consola. Existe para volver atrás de una actualización, recuperar un borrado o migrar a otro hardware.",
+    "como": "Settings > System > Backups: backup manual (archivo .unf o el de UniFi OS) y autobackup activo. Dos copias recientes fuera del equipo. Lleva configuración, dispositivos y clientes; no lleva video de Protect ni logs. Al restaurar, misma versión o superior, el controlador reinicia y se entra con el usuario que existía cuando se hizo.",
+    "ejemplo": "Se quema el CloudKey de una escribanía en Maldonado. Con el .unf en la notebook y en la nube, en una hora el sitio vuelve a estar gestionado desde un UniFi OS Server."
+   },
+   {
+    "name": "Canales de versión y espera",
+    "para_que": "Ubiquiti publica en tres canales: Official, Release Candidate y Beta o Early Access. Esperar a que una versión sea Official y unas semanas más deja que otros encuentren las fallas primero.",
+    "como": "Solo Official en clientes. HostiFi espera 2 a 3 semanas desde el pase a Official, prueba en servidores internos y mira los foros; si encuentra un problema grave, saltea la versión. El firmware de los equipos se programa por sitio y por equipo (HostiFi lo ubica en Settings > Services > Scheduled Upgrades).",
+    "ejemplo": "HostiFi saltó la 7.5.174 porque había redes WiFi que no se emitían. Con más de 500.000 equipos en sus servidores, se enteran rápido."
+   },
+   {
+    "name": "Notas de versión y sitio piloto",
+    "para_que": "Un salto mayor puede sacar soporte o cambiar cosas de fondo. Leer la nota antes evita descubrirlo en producción, y el sitio piloto limita el daño si algo sale mal.",
+    "como": "Abrí la nota en community.ui.com, sección Releases, y anotá versión mínima de UniFi OS, qué se elimina y qué se migra. Actualizá un sitio piloto, esperá, y recién después el resto por tandas. Desde Network 10.5 hay revert de firmware y aplicación, y Test and Confirm deshace un cambio si perdés conexión.",
+    "ejemplo": "La nota de 11.0.97 dice que se quita USG: un cliente con USG se queda en 10.6 hasta cambiar el gateway, y lo sabés antes de tocar nada."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nLas actualizaciones de UniFi traen correcciones de seguridad y funciones nuevas, pero también cambios de fondo. HostiFi, que gestiona actualizaciones para sus clientes desde agosto de 2018 (empezando con Network 5.8.28), armó un proceso que se volvió referencia: solo versiones Official, 2 a 3 semanas de espera, pruebas internas y lectura de foros. Con ese proceso saltearon la 7.5.174, que tenía redes WiFi que no se emitían.\n\nUbiquiti fue sumando redes de seguridad. Network 10.5 trajo SafeOps: Test and Confirm, que deshace un cambio si perdés conexión, auto-recuperación de equipos y revert de versión de firmware y aplicación. Network 10.6.101 agregó una confirmación al actualizar todos los equipos que muestra cuántos clientes se pueden cortar.\n\nNetwork 11.0 es el ejemplo de por qué leer las notas: pide UniFi OS 6.0, migra la base de datos a PostgreSQL con un motor de estadísticas nuevo que borra el historial, quita el soporte a USG y al Network Server, y pasa todos los sitios al firewall por zonas.\n\n### Cómo funciona\n\nEl backup de UniFi es un archivo (`.unf` o el de UniFi OS) con la configuración, los dispositivos y los clientes del sitio. No lleva el video de Protect ni los logs locales. Restaurar tiene tres reglas:\n\n1. **Misma versión o superior.** Un backup no se carga en un controlador más viejo que el que lo generó.\n2. **Credenciales del backup.** Después de restaurar se entra con el usuario que existía cuando se hizo.\n3. **Re-apuntar si cambió la IP.** Los equipos buscan la URL de inform vieja: option 43, DNS o `set-inform` con la nueva.\n\nRestaurar tampoco es infalible: Network 10.6.101 corrigió un caso en que se perdía la configuración MC-LAG. Después de restaurar, se revisa.\n\nLas etapas reparten el riesgo en el tiempo. El backup es el punto de vuelta atrás; la nota dice si el salto es posible; la espera deja que otros encuentren las fallas; el piloto muestra el problema en un solo cliente; y recién después se actualiza el resto. La regla del curso es corta: antes de actualizar, backup, siempre, y un sitio piloto antes que el resto."
+ },
+ "12": {
+  "fig": {
+   "file": "12.svg",
+   "alt": "Tres líneas de tiempo del historial de un cliente. Roam en el borde de la celda, en verde: AP 1 y luego AP 2, así tiene que verse. Desconexión y reconexión, en rojo: AP 1, un tramo sin red y AP 2, hueco de cobertura. Ping-pong entre dos AP, en ámbar: AP 1, AP 2, AP 1, AP 2 alternando, potencia pareja de más entre esos dos.",
+   "caption": "Roam en el borde, hueco de cobertura o ping-pong: el historial dice cuál es."
+  },
+  "steps": [
+   {
+    "file": "12-paso3.svg",
+    "step": 3,
+    "after": "¿hubo cambio de canal",
+    "alt": "Ventana UniFi Devices > AP > AirView > Radios > Time Machine con una línea de 24 horas y eventos ilustrativos: cambio de canal, cambio de potencia y cambio de configuración. Debajo, tres preguntas: si hubo cambio de canal por Channel AI, Auto o un radar en DFS; si cambió la potencia; si cambió la configuración. Nota del paso 4: Time Machine del puerto del AP con el filtro de clientes que flapean.",
+    "caption": "Time Machine muestra qué cambió en la radio en las últimas 24 horas."
+   },
+   {
+    "file": "12-paso5.svg",
+    "step": 5,
+    "after": "Escribí en tres líneas qué pasó",
+    "alt": "Ciclo de cinco tarjetas: mirar el historial y Time Machine, escribir qué pasó en tres líneas, un solo cambio, probar con una caminata o el mismo cliente y preguntar si mejoró; si sí, se sigue con el siguiente. Notas: si empeora, volver lo último que se tocó o a los valores por defecto (LazyAdmin); donde se pueda, cable (std.rocks).",
+    "caption": "Mirar, escribir, un cambio, probar; si empeora, volver atrás."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Historial de conexión y roaming",
+    "para_que": "\"El WiFi anda mal\" no dice nada. El historial del cliente muestra a qué AP estuvo conectado, cuándo se movió y con qué señal, y convierte una queja en un dato.",
+    "como": "Llegó con Client Observability en Network 10.5: Client Devices > el cliente > historial de conexión y roaming. Se buscan tres patrones de Purple: roams en el borde de la celda (bien), desconexión y reconexión (hueco de cobertura) y ping-pong entre dos AP (potencia pareja de más).",
+    "ejemplo": "El caso ilustrativo de Purple: un hotel con teléfonos IP tenía 6 desconexiones en 10 minutos en la misma caminata; ajustando potencia y roaming pasó a cero, todo como roams."
+   },
+   {
+    "name": "Time Machine de radios y puertos",
+    "para_que": "Muchos problemas de hoy son un cambio de ayer. Time Machine guarda uso, cambios de configuración y eventos de las últimas 24 horas, para ver si alguien o algo tocó la radio o el puerto.",
+    "como": "En AirView > Radios > Time Machine (serie 10.6) mirás cambios de canal, de potencia y de configuración. En Port Manager, el Time Machine del puerto con el filtro de clientes que flapean muestra si el uplink se cayó y volvió. Network 11 suma una alarma de conexión de cliente y captura de paquetes desde el panel de la radio.",
+    "ejemplo": "Una inmobiliaria en Punta Carretas se queja desde la tarde. Time Machine muestra un cambio de canal por radar a las 15 h: el AP estaba en DFS y conviene volver a los canales bajos."
+   },
+   {
+    "name": "Un cambio por vez",
+    "para_que": "Cambiar tres cosas juntas puede arreglar el problema sin saber cuál lo arregló, o crear uno nuevo sin saber cuál lo causó. Un cambio por vez deja cada prueba con una sola explicación.",
+    "como": "Escribí en tres líneas qué pasó y cuál es el único cambio a probar; probalo y compará con lo anotado. Si empeora, volvé lo último que tocaste; LazyAdmin agrega que volver a los valores por defecto muchas veces es el primer paso. Fast Roaming, WPA3 de MLO y mínimo RSSI son los sospechosos habituales con equipos viejos.",
+    "ejemplo": "En un local en Tres Cruces bajás la potencia de un AP, caminás y comparás el historial antes de tocar el canal. Y si se puede tender un cable al puesto fijo, cable: el WiFi comparte el aire entre todos."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nDurante años el diagnóstico de WiFi en UniFi fue mirar la foto del momento: quién está conectado ahora, con qué señal. Lo que pasó hace una hora quedaba a la memoria del cliente. Ubiquiti fue llenando ese hueco en 2026.\n\nNetwork 10.5 trajo Client Observability, con historial de conexión y correlación, y el historial de roaming WiFi por cliente; Lawrence Systems lo mostró en su video de esa versión. La serie 10.6 sumó Time Machine para las radios (uso, cambios de configuración y eventos de las últimas 24 horas) y para los puertos, con un filtro de clientes que se conectan y desconectan seguido. Network 11.0 agregó una alarma de conexión de cliente y captura de paquetes desde el panel de la radio.\n\n### Cómo funciona\n\nEl método tiene dos mitades: mirar y cambiar.\n\n**Mirar.** El historial del cliente se lee buscando los tres patrones que describe Purple:\n\n- **Roam en el borde de la celda:** el cliente pasa de un AP a otro cuando la señal del primero baja. Es lo esperado.\n- **Desconexión y reconexión:** el cliente perdió la red antes de encontrar otro AP. Es un hueco de cobertura, o un equipo que no tolera una función como Fast Roaming.\n- **Ping-pong:** el cliente va y viene entre dos AP. Los dos le llegan con potencia pareja de más.\n\nDespués, el Time Machine de la radio responde si hubo un cambio de canal, de potencia o de configuración en las últimas 24 horas, y el del puerto si el uplink se cayó. Para la señal, Ubiquiti trata -70 dBm como mínimo y recomienda -65 dBm o mejor, según WunderTech.\n\n**Cambiar.** Con lo visto, se escribe en tres líneas qué pasó y cuál es el único cambio a probar. WunderTech lo resume: cambiá una cosa, probala y después la siguiente. Si algo se rompe, se vuelve lo último que se tocó; LazyAdmin agrega que volver a los valores por defecto muchas veces es el primer paso, y que con canales en Auto el sistema puede necesitar un día para asentarse.\n\nY un límite honesto que marca std.rocks: el WiFi comparte el aire entre todos y ninguna optimización arregla todo. Donde se pueda tender, cable."
+ }
+}

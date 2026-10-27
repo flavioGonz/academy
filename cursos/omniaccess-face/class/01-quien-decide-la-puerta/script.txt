@@ -1,0 +1,19 @@
+A: Arrancamos el curso de OmniAccess Face. Soy Lucía.
+B: Y yo Martín. Lección uno, y es una pregunta que parece tonta: ¿quién abre la puerta?
+A: Y la respuesta que más se equivoca en obra es "el sistema".
+B: ¿No es el sistema?
+A: No. El que abre es el terminal facial. El Akuvox o el Hikvision que está en la pared reconoce la cara, compara con su propia memoria y dispara el relé. Todo ahí adentro, en un segundo.
+B: ¿Y OmniAccess qué hace, entonces?
+A: Se entera. El terminal le avisa por la red, OmniAccess guarda el evento, va a buscar la foto, le pone Permitido o Denegado y lo muestra en el Monitor Facial.
+B: Pará. ¿Y ese Permitido o Denegado de dónde sale?
+A: Del Modo Face. Está en Configuración, Modos, pestaña Modo Face. Tiene Lista Blanca, donde lo identificado se registra permitido, y Lista Negra, donde lo identificado se registra denegado. Hay una tercera, Aprendizaje, pero está deshabilitada.
+B: O sea que si paso a Lista Negra, el terminal deja de abrir.
+A: Eso es lo que todos piensan. [risas] Y la misma pantalla lo aclara con una frase: la cámara controla la apertura física.
+B: Uf. O sea, cambia el registro, no la puerta.
+A: Exacto. Y no es una rareza de OmniAccess. La documentación de Hikvision pone el umbral de coincidencia en el propio terminal, y Akuvox, cuando ofrece reglas automáticas, las arma sobre eventos que ya decidió el equipo.
+B: Dame un caso.
+A: Barrio Ejemplo. El administrador pide "bloqueá a este ex empleado". El guardia lo marca y se queda tranquilo. Al otro día el tipo entra igual, porque su cara seguía en la memoria del terminal.
+B: Clásico. ¿Qué probamos hoy?
+A: Diez minutos en una demo. Entrá a Configuración, Modos, Modo Face. Leé las tres opciones y buscá la frase de la apertura física. Después mirá cómo cambió el menú: el Monitor en Vivo pasa a ser el Monitor Facial y aparece Dispositivos Faciales.
+B: Y lo de bloquear de verdad lo vemos más adelante.
+A: En la lección ocho. Por ahora quedate con esto: el terminal abre, OmniAccess cuenta.

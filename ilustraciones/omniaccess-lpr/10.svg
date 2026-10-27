@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Lista de vigilancia: tres categorías, tres efectos</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS LPR</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Lista de vigilancia: tres categorías, tres efectos</text>
+<rect x="48" y="130" width="352" height="320" rx="16" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/><text x="68.0" y="162.0" font-family="Familjen Grotesk" font-size="22" font-weight="600" fill="#D2492F" text-anchor="start">Lista negra</text>
+<rect x="139.0" y="182.0" width="170.0" height="56.1" rx="6" fill="#FFFFFF" stroke="#04223D" stroke-width="2.5"/><rect x="141.0" y="184.0" width="166.0" height="11.2" rx="4" fill="#0A63B8"/><text x="224.0" y="228.0" font-family="JetBrains Mono" font-size="24" font-weight="700" fill="#04223D" text-anchor="middle">SAB 2024</text>
+<text x="70.0" y="294.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">Toda lectura queda Denegada.</text>
+<text x="70.0" y="324.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">Rojo con sonido en el monitor.</text>
+<text x="70.0" y="354.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">Pasa a la lista de bloqueo</text>
+<text x="70.0" y="384.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">de las lectoras.</text>
+<rect x="424" y="130" width="352" height="320" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><text x="444.0" y="162.0" font-family="Familjen Grotesk" font-size="22" font-weight="600" fill="#0E8F5E" text-anchor="start">VIP / Autorizado</text>
+<rect x="515.0" y="182.0" width="170.0" height="56.1" rx="6" fill="#FFFFFF" stroke="#04223D" stroke-width="2.5"/><rect x="517.0" y="184.0" width="166.0" height="11.2" rx="4" fill="#0A63B8"/><text x="600.0" y="228.0" font-family="JetBrains Mono" font-size="24" font-weight="700" fill="#04223D" text-anchor="middle">SBA 1234</text>
+<text x="446.0" y="294.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">Se destaca en verde.</text>
+<text x="446.0" y="324.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">No cambia lo que decide</text>
+<text x="446.0" y="354.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">la barrera.</text>
+<text x="446.0" y="384.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start"></text>
+<rect x="800" y="130" width="352" height="320" rx="16" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/><text x="820.0" y="162.0" font-family="Familjen Grotesk" font-size="22" font-weight="600" fill="#B45309" text-anchor="start">En búsqueda</text>
+<rect x="891.0" y="182.0" width="170.0" height="56.1" rx="6" fill="#FFFFFF" stroke="#04223D" stroke-width="2.5"/><rect x="893.0" y="184.0" width="166.0" height="11.2" rx="4" fill="#0A63B8"/><text x="976.0" y="228.0" font-family="JetBrains Mono" font-size="24" font-weight="700" fill="#04223D" text-anchor="middle">SCD 5678</text>
+<text x="822.0" y="294.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">Avisa cuando aparece,</text>
+<text x="822.0" y="324.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">sin bloquear.</text>
+<text x="822.0" y="354.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">El motivo es obligatorio:</text>
+<text x="822.0" y="384.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">lo ve el guardia en la captura.</text>
+<text x="48.0" y="496.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">Se carga desde el escudo del Monitor LPR o con el botón Lista negra de la ficha.</text>
+<text x="48.0" y="528.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">La matrícula va como la lee la cámara: SAB2024, sin espacios ni guiones.</text>
+<text x="48.0" y="560.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">Con Avisa manda Telegram al detectarla; En silencio, solo se ve en el monitor.</text>
+<text x="48.0" y="606.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">Un usuario con rol de bloqueado arrastra sus matrículas. La lista negra le gana a cualquier pase de invitado.</text>
+</svg>

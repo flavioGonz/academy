@@ -1,0 +1,19 @@
+A: Lección nueve: suena la alerta. ¿Y ahora qué?
+B: El momento de la verdad del operador.
+A: Exacto. Cuando una fila pasa el umbral, OmniAccess avisa por varios lados a la vez. En cualquier pantalla del panel aparece abajo a la derecha un recuadro rojo, Alerta de aforo, con el video en vivo de esa fila, el número contra el límite y un texto: Acción requerida, verificá en vivo y abrí otra caja o despejá la zona.
+B: ¿Y suena?
+A: Suena un tono corto. Lo podés silenciar desde el mismo recuadro, y con la cruz lo descartás. Si la fila baja y vuelve a subir, aparece de nuevo.
+B: ¿Y fuera del panel?
+A: Le llega al supervisor por Telegram o WhatsApp con la foto o el clip, y una notificación en la app de filas del celular.
+B: ¿Primer paso entonces?
+A: Mirar la imagen antes de reaccionar. Ningún contador es perfecto: un fabricante de contadores pone ejemplos clarísimos, el que deja el carro y se va, el que se agacha. Diez segundos de video te dicen si es cola de verdad.
+B: ¿Y si es real?
+A: Lo que pide el recuadro: otra caja, o reordenar. Y si en cinco minutos sigue arriba del umbral, OmniAccess manda solo un aviso de escalamiento por Telegram para el supervisor.
+B: ¿Hay alertas que no son de gente?
+A: Sí, dos tipos. Si la cámara manda por ONVIF que la escena cambió de golpe, o que la imagen está muy clara o muy oscura, llega Cámara movida o tapada, o Imagen demasiado clara u oscura. Ahí el aforo no es confiable.
+B: ¿Y si la cámara se cae?
+A: A las dos fallas seguidas del sondeo, OmniAccess abre un corte de cámara. Se ve en la línea de tiempo del monitor y en los reportes. Cuando vuelve, cierra el corte con su duración y retoma el último aforo.
+B: Laboratorio.
+A: Práctica guiada: forzá una alerta con el umbral de prueba, seguí los pasos del recuadro, y después desenchufá la cámara medio minuto y buscá el corte en el monitor.
+B: Quince minutos.
+A: Y la próxima alerta la atendés con la imagen en la mano, no con el número solo.

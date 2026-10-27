@@ -1,0 +1,20 @@
+A: Lección nueve. Hasta ahora miramos lecturas sueltas. Hoy miramos patrones.
+B: ¿Patrones como cuáles?
+A: Tres. El primero, la permanencia. Cuando un auto sale por una cámara de salida, la ficha te dice cuánto estuvo adentro desde su última entrada.
+B: Siempre que las cámaras tengan bien puesto el sentido.
+A: Exacto, por eso insistimos tanto en el alta. Si una cámara de salida quedó como entrada, la permanencia no aparece.
+B: ¿El segundo?
+A: El merodeo. La misma matrícula pasa tres veces o más en treinta minutos, y no es un residente autorizado. Salta una alerta que dice Merodeo, abajo a la izquierda del monitor, y queda anotado en la bitácora: cuántas pasadas y por cuántos accesos.
+B: ¿Tres en treinta es fijo?
+A: Son los valores por defecto. Se ajustan en la configuración del sistema, no hay pantalla propia todavía. Y un detalle fino: el manual dice por el mismo acceso, pero el código cuenta pasadas por cualquier acceso.
+B: O sea que el que da la vuelta al barrio y entra por el otro portón también suma.
+A: También. ¿Y el tercero? Plazas de Parking, Anomalías de presencia. Autos no identificados que entraron y no salieron, vehículos del barrio adentro hace más de cuatro días, y lotes sin movimiento hace veintiún días.
+B: [risas] La casa vacía.
+A: Posible casa vacía, dice la pantalla. Un dato que al guardia de la noche le importa mucho.
+B: ¿Y cuándo escalo un merodeo?
+A: Cuando el historial y la grabación lo confirman. Una lectura habla de un vehículo, no de una persona. Puede ser un repartidor buscando una dirección.
+B: Me gusta. ¿Laboratorio?
+A: En una instalación de prueba mandás tres lecturas de una matrícula que no está en el padrón, separadas por treinta segundos, que es más que el antirrebote. Con la tercera aparece la alerta.
+B: Y después abrís la ficha y mirás el perfil.
+A: Y antes mirás una permanencia real y las anomalías de presencia. Al final escribís en la bitácora qué harías.
+B: Así se pasa de ver lecturas a ver lo que está pasando.

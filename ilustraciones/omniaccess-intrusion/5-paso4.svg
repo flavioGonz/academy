@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Dibujá la línea de la cámara sobre el cerco del mapa</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS INTRUSIÓN · LECCIÓN 5 · PASO 4</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Dibujá la línea de la cámara sobre el cerco del mapa</text>
+<rect x="48" y="140" width="760" height="440" rx="16" fill="#25352A"/>
+<path d="M48 400H808" stroke="#55626B" stroke-width="26"/>
+<path d="M420 140V580" stroke="#55626B" stroke-width="22"/>
+<rect x="80" y="180" width="120" height="90" rx="6" fill="#33463A" stroke="#4E6355"/>
+<rect x="230" y="180" width="120" height="90" rx="6" fill="#33463A" stroke="#4E6355"/>
+<rect x="480" y="180" width="120" height="90" rx="6" fill="#33463A" stroke="#4E6355"/>
+<rect x="630" y="180" width="120" height="90" rx="6" fill="#33463A" stroke="#4E6355"/>
+<rect x="80" y="440" width="120" height="100" rx="6" fill="#33463A" stroke="#4E6355"/>
+<rect x="230" y="440" width="120" height="100" rx="6" fill="#33463A" stroke="#4E6355"/>
+<rect x="480" y="440" width="120" height="100" rx="6" fill="#33463A" stroke="#4E6355"/>
+<rect x="630" y="440" width="120" height="100" rx="6" fill="#33463A" stroke="#4E6355"/>
+<path d="M60 160H796" stroke="#8FA3B5" stroke-width="3" stroke-dasharray="10 6"/>
+<text x="796.0" y="152.0" font-family="Instrument Sans" font-size="14" font-weight="600" fill="#C9D6E2" text-anchor="end">cerco</text>
+<circle cx="560" cy="300" r="12" fill="#60a5fa" stroke="#fff" stroke-width="3"/>
+<path d="M560 300L470 175L650 175z" fill="rgba(96,165,250,0.18)" stroke="rgba(96,165,250,0.6)"/>
+<text x="578.0" y="326.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="start">Perímetro Norte 12</text>
+<path d="M480 168L640 168" stroke="#3b82f6" stroke-width="6" stroke-linecap="round"/>
+<circle cx="480" cy="168" r="8" fill="#fff" stroke="#3b82f6" stroke-width="3"/>
+<circle cx="640" cy="168" r="8" fill="#fff" stroke="#3b82f6" stroke-width="3"/>
+<circle cx="470" cy="205" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="470.0" y="211.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<rect x="180" y="510" width="500" height="50" rx="12" fill="#fff" stroke="#C2D4E6"/>
+<text x="200.0" y="541.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#04223D" text-anchor="start">Cruce · Perímetro Norte 12 · 2 pts</text>
+<rect x="560" y="518" width="104" height="34" rx="10" fill="#011E38"/><text x="612.0" y="540.4" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">Finalizar</text>
+<rect x="840" y="140" width="312" height="200" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="860.0" y="172.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Mapa → Editar mapa</text><text x="860.0" y="196.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">video → Cruces de línea</text>
+<circle cx="865" cy="220.1" r="4.5" fill="#17A8D4"/><text x="880.0" y="225.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="880.0" dy="0.0">Dibujar: dos puntos</tspan></text><circle cx="865" cy="250.3" r="4.5" fill="#17A8D4"/><text x="880.0" y="255.2" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="880.0" dy="0.0">Sugerir: según el rumbo de la</tspan><tspan x="880.0" dy="20.2">cámara</tspan></text><circle cx="865" cy="300.8" r="4.5" fill="#17A8D4"/><text x="880.0" y="305.8" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="880.0" dy="0.0">Horario: aviso del mapa</tspan></text>
+<rect x="840" y="360" width="312" height="93" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="840" y="372" width="5" height="69" rx="2.5" fill="#B45309"/><text x="866.0" y="394.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="866.0" dy="0.0">Sin esta línea, el recuadro «Dónde</tspan><tspan x="866.0" dy="20.2">fue el cruce» del análisis no</tspan><tspan x="866.0" dy="20.2">tiene qué mostrar.</tspan></text>
+</svg>

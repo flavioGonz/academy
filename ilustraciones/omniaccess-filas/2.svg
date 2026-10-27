@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Ubicá la cámara arriba de la fila, no de frente</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">OMNIACCESS FILAS · LECCIÓN 2</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Ubicá la cámara arriba de la fila, no de frente</text>
+<rect x="48" y="130" width="540" height="400" rx="16" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/><text x="68.0" y="162.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#D2492F" text-anchor="start">De frente, a la altura de la gente</text>
+<path d="M70.0 470.0L566.0 470.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<rect x="70" y="230" width="170" height="84" rx="16" fill="#FFFFFF" stroke="#D2492F" stroke-width="3"/><g transform="translate(90 256.0) scale(1.35)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 15 5l2 5-12 3.5z"/><path d="m17 10 3.5 1.5M9 13l1 4M6 17h8"/></g><text x="134.0" y="268.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Cámara</text><text x="134.0" y="291.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">frontal</text>
+<circle cx="300" cy="420.4" r="9.9" fill="#0A63B8"/><path d="M284 452.4a16 16 0 0 1 32 0z" fill="#0A63B8"/>
+<circle cx="360" cy="420.4" r="9.9" fill="#6E88A1"/><path d="M344 452.4a16 16 0 0 1 32 0z" fill="#6E88A1"/>
+<circle cx="420" cy="420.4" r="9.9" fill="#6E88A1"/><path d="M404 452.4a16 16 0 0 1 32 0z" fill="#6E88A1"/>
+<circle cx="480" cy="420.4" r="9.9" fill="#6E88A1"/><path d="M464 452.4a16 16 0 0 1 32 0z" fill="#6E88A1"/>
+<circle cx="540" cy="420.4" r="9.9" fill="#6E88A1"/><path d="M524 452.4a16 16 0 0 1 32 0z" fill="#6E88A1"/>
+<path d="M240.0 272.0L540.0 410.0" stroke="#D2492F" stroke-width="2" fill="none" stroke-dasharray="6 6"/>
+<path d="M240.0 272.0L300.0 400.0" stroke="#D2492F" stroke-width="2" fill="none" stroke-dasharray="6 6"/>
+<text x="318.0" y="500.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="middle">la primera tapa a las de atrás</text>
+<circle cx="552" cy="166" r="18" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/><g transform="translate(540 154)" fill="none" stroke="#D2492F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></g>
+<rect x="612" y="130" width="540" height="400" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><text x="632.0" y="162.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#0E8F5E" text-anchor="start">Desde arriba, a más de 3 m</text>
+<path d="M634.0 470.0L1130.0 470.0" stroke="#6E88A1" stroke-width="2" fill="none"/>
+<rect x="800" y="190" width="170" height="84" rx="16" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="3"/><g transform="translate(820 216.0) scale(1.35)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 15 5l2 5-12 3.5z"/><path d="m17 10 3.5 1.5M9 13l1 4M6 17h8"/></g><text x="864.0" y="228.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Cámara</text><text x="864.0" y="251.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">cenital</text>
+<circle cx="700" cy="420.4" r="9.9" fill="#0A63B8"/><path d="M684 452.4a16 16 0 0 1 32 0z" fill="#0A63B8"/>
+<circle cx="780" cy="420.4" r="9.9" fill="#0A63B8"/><path d="M764 452.4a16 16 0 0 1 32 0z" fill="#0A63B8"/>
+<circle cx="860" cy="420.4" r="9.9" fill="#0A63B8"/><path d="M844 452.4a16 16 0 0 1 32 0z" fill="#0A63B8"/>
+<circle cx="940" cy="420.4" r="9.9" fill="#0A63B8"/><path d="M924 452.4a16 16 0 0 1 32 0z" fill="#0A63B8"/>
+<circle cx="1020" cy="420.4" r="9.9" fill="#0A63B8"/><path d="M1004 452.4a16 16 0 0 1 32 0z" fill="#0A63B8"/>
+<path d="M885.0 274.0 L680.0 455.0 L1080.0 455.0 L885.0 274.0" fill="#0E8F5E" stroke="#0E8F5E" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" opacity="0.15"/>
+<path d="M1110.0 270.0L1110.0 462.0" stroke="#0E8F5E" stroke-width="2" fill="none" marker-end="url(#a-ok)"/>
+<path d="M1110.0 462.0L1110.0 270.0" stroke="#0E8F5E" stroke-width="2" fill="none" marker-end="url(#a-ok)"/>
+<text x="1100.0" y="360.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0E8F5E" text-anchor="end">&gt; 3 m</text>
+<text x="720.0" y="500.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="start">se ve y se separa a cada persona</text>
+<circle cx="1116" cy="166" r="18" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><g transform="translate(1104 154)" fill="none" stroke="#0E8F5E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g>
+<rect x="48" y="552" width="1104" height="72" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="564" width="5" height="48" rx="2.5" fill="#0A63B8"/><text x="74.0" y="586.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Según Bosch: más de 3 m de altura, nada que refleje, pasillos rectos, hasta 64 personas en escena. Un objeto tapado más del 50 % no se</tspan><tspan x="74.0" dy="20.2">cuenta.</tspan></text>
+</svg>

@@ -1,17 +1,15 @@
-A: Lección once: dos WAN. Fibra y un 4G de respaldo, por ejemplo, en un local que no puede quedarse sin cobrar.
-B: Y el caso más traicionero: el módem de la fibra prendido, con luz verde, pero sin internet.
-A: Ese es el centro de la lección. Si la ruta por defecto apunta al gateway del módem y solo chequea que el módem responda, el router nunca se entera de que internet se cayó.
-B: ¿Y cómo lo ve?
-A: Con rutas recursivas. La documentación de MikroTik lo arma así: elegís un host testigo en internet por cada enlace, por ejemplo un DNS público, y hacés una ruta barra treinta y dos a ese testigo por el gateway del ISP uno. Después, la ruta por defecto no apunta al módem: apunta al testigo, con check-gateway igual a ping y distancia uno. El ISP dos, lo mismo con otro testigo y distancia dos.
-B: Entonces si el testigo deja de responder por el ISP uno, se cae esa ruta y sale por el dos.
-A: Exacto. Dos de las tres fuentes que lo tratan coinciden. La documentación suma algo: un solo testigo por enlace es frágil, así que conviene dos, y el cambio completo se hace solo cuando no responde ninguno.
+A: Lección once: dos WAN. La base para las tres que vienen, que son las combinaciones de obra: PPPoE con DHCP, IP fija con PPPoE e IP fija con DHCP.
+B: ¿Failover o balanceo?
+A: En casi todas las obras, failover. La fibra trabaja y el 4G espera. El balanceo con PCC reparte conexiones, pero suma tablas y marcas.
+B: Bien. ¿Y cómo pone cada WAN su ruta por defecto?
+A: La IP fija la escribís vos. El cliente DHCP la instala con default route distance, y el PPPoE con add default route y su propia distancia. Si dejás dos en distancia uno, el router reparte tráfico sin que lo pidas.
+B: Y el respaldo con distancia dos y check gateway, listo.
+A: Ahí está la trampa. Check gateway le hace ping al próximo salto, el módem. Con la fibra cortada en la calle, el módem contesta y el router no conmuta. Cuatro de cinco fuentes coinciden en la salida: rutas recursivas. Dos testigos por proveedor, uno uno uno uno y nueve nueve nueve nueve por la fibra, y la ruta por defecto apunta al testigo.
 B: ¿Y quién discrepa?
-A: MKController, un practicante que vende una plataforma de gestión. Según ellos, check-gateway tarda entre veinte y treinta segundos en conmutar y no ve pérdidas parciales, solo un enlace muerto. Proponen sumar Netwatch, que permite intervalos propios y scripts.
-B: Para un local con cámaras, medio minuto está bien. Para un call center, no.
-A: Dos detalles más: las dos salidas en la lista WAN, para el masquerade, y el testigo del respaldo se alcanza por el respaldo. Si no, la prueba no dice nada.
-B: ¿Y cómo lo probás?
-A: Tirando del cable y cronometrando, o mejor, cortando internet aguas arriba con el módem prendido.
-B: Laboratorio de veinte minutos, entonces.
-A: Rutas testigo, defaults recursivas, segunda WAN en la lista, un ping continuo desde una PC, y cortás el ISP uno. Contás cuántos pings se pierden.
-B: Y anotás el número en el legajo.
-A: Porque un failover que no probaste desenchufando no existe.
+A: MKController, que vende una plataforma de gestión: dice que tarda de veinte a treinta segundos y propone Netwatch. Y un hilo de dos mil quince, con RouterOS seis, no logró la recursiva por PPPoE; en la siete anda.
+B: ¿Qué más se rompe?
+A: Tres cosas. El masquerade tiene que cubrir las dos salidas. Las conexiones viejas: en el foro, un técnico con PPPoE y LTE perdía el ping al volver la fibra hasta borrar las conexiones. Y lo que entra de afuera: un port forward por la segunda WAN responde por la primera si no marcás la conexión.
+B: [suspiro] Mucho para un respaldo.
+A: Por eso el laboratorio: testigos, recursivas, lista WAN, simulás el corte descartando los pings a los testigos, contás pings perdidos al irte y al volver, y armás la marca para lo que entra por el 4G.
+B: Y la prueba de verdad, cortando la fibra de la pared.
+A: Porque un failover que no probaste cortando y volviendo, no existe.

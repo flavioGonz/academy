@@ -1,0 +1,17 @@
+A: Lección treinta y seis: zonas. Pensá en un edificio con cámaras, control de acceso, la administración y el WiFi de invitados. ¿Cuántas reglas escribís?
+B: Una por cada VLAN y cada cosa que quiero permitir. Muchas.
+A: Eso escala mal. En el foro, en dos mil dieciocho, alguien hizo la cuenta: con tres VLAN son seis reglas para separarlas, con cuatro doce, con cinco veinte.
+B: [risas] Y el que viene después no entiende nada.
+A: La salida es pensar en zonas, como los firewalls comerciales. Una zona es un grupo de interfaces con el mismo nivel de confianza. En MikroTik eso es una interface list: la de fábrica ya trae LAN y WAN, y vos sumás GESTION, ADMIN, CCTV, ACCESOS, INVITADOS y VPN.
+B: ¿Y las reglas?
+A: Se escriben como una tabla de "de, a". En forward, una regla por casillero permitido, con in interface list y out interface list: administración hacia internet, sí; invitados hacia internet, sí; cámaras y accesos, solo NTP. En input, qué ve cada zona del router: gestión todo, el resto DNS y DHCP. Y un drop al final.
+B: ¿Y si mañana agregan cámaras en otro piso?
+A: Creás la VLAN, la metés en la lista CCTV y listo. No tocás ni una regla. Las fuentes coinciden en eso: la documentación, un artículo de dos mil veinticuatro sobre zonas en MikroTik, Fortinet y Cisco.
+B: ¿Nadie discute?
+A: En el foro, este septiembre, un veterano dice que partas de la configuración por defecto y no armes grupos y subgrupos. Y otro avisa que WinBox no muestra lo que entra a una lista por include.
+B: Dos cuidados, entonces.
+A: Y uno más: el drop final se come los port forwarding si no permitís lo dst-nateado. A un usuario del foro le pasó.
+B: ¿Y el laboratorio?
+A: Veinticinco minutos. En el banco, cada zona es un puerto suelto; en obra, una VLAN, y las reglas son las mismas. Escribís la matriz, creás las listas, las reglas, probás con la notebook en cada puerto, y al final sumás una VLAN nueva a una zona sin tocar el firewall.
+B: Lo nuevo va a la lista, no al firewall.
+A: Exacto.

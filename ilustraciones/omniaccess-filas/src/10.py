@@ -1,0 +1,32 @@
+from _fil import *
+
+# ---------- 10.svg: dos caminos para el reporte
+c = Canvas("OmniAccess Filas · Lección 10", "Del dato del día al reporte del gerente")
+db = c.add(Generic(48, 300, "Eventos de la fila", "Aforo · Entrada · Salida", icon="server", w=310))
+r1 = c.add(Generic(470, 160, "Reportes de Afluencia", "hora · día · semana · mes", icon="laptop", w=330))
+r2 = c.add(Generic(470, 430, "Reporte programado", "diario o semanal", icon="bell", w=330))
+o1 = c.add(Generic(900, 160, "Excel o PDF", "marca del cliente", icon="card", w=252))
+o2 = c.add(Generic(900, 430, "Telegram", "resumen", icon="phone", w=252))
+c.add(Arrow(db.right(-14), r1.left()))
+c.add(Arrow(db.right(14), r2.left()))
+c.add(Arrow(r1.right(), o1.left()))
+c.add(Arrow(r2.right(), o2.left()))
+c.add(Note(470, 270, 682, "Cada período trae su tabla de cortes de conexión de cámara: los huecos tienen explicación.", kind="info", size=15))
+c.add(text(470, 548, "pico y su hora · promedio · alertas · lecturas · cortes · horas críticas", 15, 600, BLUE, FM))
+c.add(Note(48, 580, 1104, "En esta versión el resumen programado sale por el Telegram configurado aunque se elija otro canal, y cuenta solo el canal Aforo.", kind="warn", size=15))
+save(c, "10.svg")
+
+# ---------- 10-paso5.svg: zona horaria del servidor
+c = Canvas("OmniAccess Filas · Lección 10 · Paso 5", "El reporte se programa con el reloj del servidor")
+c.add(panel(48, 140, 520, 250, "Servidor en UTC", kind="alert"))
+c.add(text(308, 250, "22:00", 54, 700, ALERT, FM, anchor="middle"))
+c.add(text(308, 300, "hora del servidor", 16, 500, INK2, FM, anchor="middle"))
+c.add(text(308, 350, "= 19:00 en Uruguay", 20, 700, ALERT, FM, anchor="middle"))
+c.add(panel(632, 140, 520, 250, "Servidor en America/Montevideo", kind="ok"))
+c.add(text(892, 250, "22:00", 54, 700, OK, FM, anchor="middle"))
+c.add(text(892, 300, "hora del servidor", 16, 500, INK2, FM, anchor="middle"))
+c.add(text(892, 350, "= 22:00 en Uruguay", 20, 700, OK, FM, anchor="middle"))
+c.add(Step(48, 140, 5))
+c.add(Terminal(48, 420, 720, ["$ timedatectl | grep \"Time zone\"", ("Time zone: America/Montevideo (-03, -0300)", "#9BE7C4"), "$ crontab -l | grep report/tick"], title="servidor de la fila"))
+c.add(Note(800, 420, 352, "Cambiar la zona horaria afecta a todo el servidor: se coordina antes.", kind="warn", size=15))
+save(c, "10-paso5.svg")

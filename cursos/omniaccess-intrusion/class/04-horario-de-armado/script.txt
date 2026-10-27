@@ -1,0 +1,18 @@
+A: Lección cuatro: el horario de armado. La falla más cara que conozco en un perímetro.
+B: ¿Más que una cámara caída?
+A: Peor, porque la cámara está viva. Graba, se ve en el monitor, todo verde. Pero de noche no avisa porque alguien la dejó armada de ocho a dieciocho.
+B: Uf. Y nadie se da cuenta hasta que entran.
+A: Exacto. Hikvision lo dice en su soporte: el evento solo funciona con el horario activo, y el error común es armarlo de día y apagarlo de noche.
+B: ¿Y no es lo mismo que el horario de grabación?
+A: No. Grabación es cuándo graba. Armado es cuándo la regla avisa. En un foro, un instalador quería intrusión de noche por los faros de los autos y movimiento de día, y mezclaba los dos horarios. No entendía qué pasaba.
+B: ¿Las fuentes coinciden?
+A: Cuatro de cuatro: sin horario de armado, la regla no avisa. Y en OmniAccess está escrito igual: fuera del horario la cámara sigue grabando, pero no avisa nada, ni cruce, ni zona, ni foto.
+B: ¿Y dónde lo veo sin entrar cámara por cámara?
+A: En la vista de pared Intrusión. Cada canal dice línea y zona con su horario en palabras, tipo L a D, veintidós a seis, con un puntito verde si está armada ahora o ámbar si no. Lo relee cada cinco minutos.
+B: ¿Y lo cambio desde ahí?
+A: En esta versión, no. Se lee en OmniAccess y se cambia en la web de la cámara o del NVR. Y ojo con el mapa: cada línea dibujada en el mapa tiene su propio horario, pero ese solo calla el mapa. La cámara avisa igual y queda en el historial.
+B: [risas] Dos horarios distintos con el mismo nombre. Clásico.
+A: Por eso el laboratorio: abrís la vista de pared, leés el armado de tres cámaras, entrás a la web de Perímetro Sur siete y armás la línea de veintidós a seis todos los días. Esperás cinco minutos y tiene que aparecer en pantalla.
+B: ¿Y si dice armado sin dato?
+A: La cámara no contestó la lectura. Eso ya es un aviso.
+B: Regla: el horario se mira en cada cámara, de noche, antes de entregar.

@@ -1,0 +1,21 @@
+A: Lección nueve. La administración del barrio manda el mensaje clásico del lunes.
+B: "¿Me pasás quién entró la semana pasada?"
+A: Ese. Y la respuesta buena empieza por otra pregunta: ¿qué querés saber exactamente? Porque el Historial de Acceso responde con filtros.
+B: ¿Cuáles?
+A: Tipo, que en modo Face arranca en Rostros. Resultado: permitidos o denegados. Sentido: entrada o salida. Un rango de fecha y hora. Y una búsqueda por persona, lote o equipo.
+B: ¿Y después?
+A: Exportar, Excel o PDF. En cinco minutos tenés "rechazados en la portería peatonal, de lunes a hoy".
+B: ¿Y si se cortó la red el miércoles?
+A: Buena. El terminal siguió abriendo y guardando en su propia memoria, pero no pudo avisar. Para eso está Auditoría Hardware, en Configuración, Avanzado. Elegís el terminal, Sincronizar memoria, y trae los registros que no llegaron. Te dice cuántos sincronizó, y en el historial quedan marcados como sincronización de hardware.
+B: Entonces el reporte no tiene huecos.
+A: Exacto. Y ahora la parte que nadie mira: cuánto tiempo se guardan las fotos.
+B: Eso está en Almacenamiento.
+A: Configuración, Sistema, Almacenamiento, Bucket FACE: días de retención antes de borrar, cero es nunca. Por debajo es una regla de vencimiento de MinIO, que borra los objetos a tantos días de creados.
+B: ¿Cuál es la trampa?
+A: Que en ese bucket están las capturas y también las fotos de alta. La regla se aplica a todo el bucket. Si alguien pone treinta días pensando en las capturas, a los treinta días las fichas viejas se quedan sin foto.
+B: Uf. Y después querés reenviar a alguien al terminal y no hay foto.
+A: Tal cual. La Unidad Reguladora, en su dictamen sobre biometría, pide justamente analizar el ciclo de vida de los datos. No es poner un número porque sí.
+B: ¿Qué hacemos hoy?
+A: Veinte minutos. Armá el reporte de denegados de la semana y exportalo. Después sincronizá la memoria de un terminal desde Auditoría Hardware. Y al final mirá la retención del Bucket FACE y anotá quién la decidió.
+B: El reporte empieza por la pregunta.
+A: Y la retención, por saber qué se borra.

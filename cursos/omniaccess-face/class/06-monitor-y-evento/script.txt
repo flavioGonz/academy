@@ -1,0 +1,21 @@
+A: Lección seis. Cambiamos de lado del mostrador: ahora habla el guardia.
+B: El que mira la pantalla todo el día.
+A: Ese. Su pantalla es el Monitor Facial. En modo Face, Monitor en Vivo abre directo ahí.
+B: Describímela, que en el auto no la veo.
+A: Tres columnas. A la izquierda Entrada, a la derecha Salida, cada una con el video del terminal si está configurado y las fotos de lo que pasó. En el medio, grande, el último evento con nombre, unidad y equipo, y abajo las capturas recientes.
+B: ¿Y cuánto para atrás?
+A: Veinticuatro horas. Arriba tenés un cartelito que dice LIVE en verde o OFFLINE en rojo, que es si tu pantalla está conectada al servidor, y los filtros: todos, permitidos, denegados.
+B: Los denegados se ven fácil, supongo.
+A: Con un borde rojo que late. Y acá viene lo importante: un denegado no es automáticamente un intruso.
+B: ¿Cómo que no?
+A: Abrí la ficha. Tocás la foto y te dice si tiene nombre o si dice desconocido, la similitud, si figura autorizado o no registrado. Y a veces ves a un vecino de toda la vida, con su nombre, marcado denegado y no registrado, y la puerta se abrió.
+B: ¿Y eso qué es?
+A: Es alguien que el terminal reconoció y dejó pasar, pero que en OmniAccess no quedó atado a su ficha. Eso lo resuelve el técnico, lo vemos en diagnóstico. El guardia lo anota y no sale corriendo.
+B: [risas] Bueno, saber eso ya ahorra un mal momento.
+A: Y en la misma ficha están Registrar, para dar de alta a la persona, y Exportar, que baja un zip con la foto y los datos, y un clip si la cámara tiene canal en el grabador.
+B: ¿Y si en la columna dice sin señal?
+A: Falta el video en vivo, que se configura aparte. Los eventos siguen llegando igual.
+B: ¿Qué practicamos?
+A: Quince minutos en una demo. Abrí el monitor, mirá que diga LIVE, pasá una cara y seguila por las tres zonas. Después filtrá denegados, abrí uno y contestá: nombre, similitud, autorizado o no, y qué foto es.
+B: Y probá Exportar.
+A: Eso. Antes de actuar sobre un denegado, la ficha y la foto.
