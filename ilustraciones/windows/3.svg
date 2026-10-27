@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>¿Hay alguien, atiende el servicio, qué nombre ve?</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">WINDOWS</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">¿Hay alguien, atiende el servicio, qué nombre ve?</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<rect x="48" y="128" width="1104" height="102" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="84" cy="179" r="18" fill="#17A8D4"/><text x="84.0" y="185.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="116.0" y="170.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">¿Hay alguien?</text>
+<text x="116.0" y="202.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">La red llega al equipo.</text>
+<rect x="400" y="158" width="500" height="40" rx="10" fill="#03213C"/><text x="416.0" y="183.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">ping · arp -a</text>
+<rect x="982.0" y="165.0" width="150.0" height="28" rx="14.0" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="1.5"/><text x="1057.0" y="185.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#0E8F5E" text-anchor="middle">MAC en la tabla</text>
+<rect x="48" y="246" width="1104" height="102" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="84" cy="297" r="18" fill="#17A8D4"/><text x="84.0" y="303.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="116.0" y="288.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">¿El servicio atiende?</text>
+<text x="116.0" y="320.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">El puerto exacto responde.</text>
+<rect x="400" y="276" width="500" height="40" rx="10" fill="#03213C"/><text x="416.0" y="301.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">Test-NetConnection 192.168.88.20 -Port 554</text>
+<rect x="914.8" y="283.0" width="217.2" height="28" rx="14.0" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="1.5"/><text x="1023.4" y="303.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#0E8F5E" text-anchor="middle">TcpTestSucceeded : True</text>
+<rect x="48" y="364" width="1104" height="102" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="84" cy="415" r="18" fill="#17A8D4"/><text x="84.0" y="421.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="116.0" y="406.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">¿Qué nombre ve la app?</text>
+<text x="116.0" y="438.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">Igual que una aplicación de Windows.</text>
+<rect x="400" y="394" width="500" height="40" rx="10" fill="#03213C"/><text x="416.0" y="419.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">Resolve-DnsName vms-lab</text>
+<rect x="998.8" y="401.0" width="133.2" height="28" rx="14.0" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="1.5"/><text x="1065.4" y="421.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#0E8F5E" text-anchor="middle">192.168.88.50</text>
+<rect x="48" y="488" width="540" height="150" rx="16" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/><text x="68.0" y="520.0" font-family="Familjen Grotesk" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">Get-NetTCPConnection -State Listen</text>
+<text x="72.0" y="552.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#0A63B8" text-anchor="start">0.0.0.0</text>
+<text x="176.0" y="552.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">escucha en todas las placas</text>
+<text x="72.0" y="590.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#0A63B8" text-anchor="start">192.168.88.10</text>
+<text x="236.0" y="590.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">solo en esa placa</text>
+<rect x="612" y="488" width="540" height="124" rx="14" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/><rect x="612" y="500" width="5" height="100" rx="2.5" fill="#0E8F5E"/><text x="638.0" y="522.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="638.0" dy="0.0">Regla</tspan></text><text x="638.0" y="549.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="638.0" dy="0.0">No digas &quot;no hay red&quot; hasta probar el puerto exacto del</tspan><tspan x="638.0" dy="21.6">servicio: el ping dice que hay alguien, no que el servicio</tspan><tspan x="638.0" dy="21.6">atiende.</tspan></text>
+</svg>

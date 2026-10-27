@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Equipo offline: subí la escalera desde abajo</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">HIKCENTRAL</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Equipo offline: subí la escalera desde abajo</text>
+<rect x="48" y="502" width="600" height="76" rx="14" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<circle cx="82" cy="540" r="18" fill="#17A8D4"/><text x="82.0" y="546.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="112.0" y="536.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Físico</text>
+<text x="112.0" y="562.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">cable, enlace, alimentación</text>
+<text x="688.0" y="546.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#0A63B8" text-anchor="start">luces del puerto, PoE</text>
+<rect x="88" y="412" width="600" height="76" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="122" cy="450" r="18" fill="#17A8D4"/><text x="122.0" y="456.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="152.0" y="446.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">IP y gateway</text>
+<text x="152.0" y="472.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">dirección, máscara, gateway</text>
+<text x="728.0" y="456.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#0A63B8" text-anchor="start">ping 192.168.88.1 y al equipo</text>
+<rect x="128" y="322" width="600" height="76" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="162" cy="360" r="18" fill="#17A8D4"/><text x="162.0" y="366.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="192.0" y="356.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">DNS</text>
+<text x="192.0" y="382.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">si usa dominio o Hik-Connect</text>
+<text x="768.0" y="366.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#0A63B8" text-anchor="start">Resolve-DnsName dev.hik-connect.com</text>
+<rect x="168" y="232" width="600" height="76" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="202" cy="270" r="18" fill="#17A8D4"/><text x="202.0" y="276.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="232.0" y="266.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Servicio habilitado</text>
+<text x="232.0" y="292.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">Platform Access, ISUP, ONVIF</text>
+<text x="808.0" y="276.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#0A63B8" text-anchor="start">la casilla activada en el equipo</text>
+<rect x="208" y="142" width="600" height="76" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="242" cy="180" r="18" fill="#17A8D4"/><text x="242.0" y="186.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<text x="272.0" y="176.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Puertos</text>
+<text x="272.0" y="202.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">contra la Communication Matrix</text>
+<text x="848.0" y="186.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#0A63B8" text-anchor="start">Test-NetConnection -Port 7660</text>
+<path d="M30 574V146" stroke="#17A8D4" stroke-width="4" marker-end="url(#a-cyan)"/>
+<text x="48.0" y="628.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Si el escalón 2 falla, no tiene sentido mirar puertos. Anotá en qué escalón quedó.</text>
+</svg>

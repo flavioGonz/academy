@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>E-map para un plano fijo, GIS para un mapa vivo</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">HIKCENTRAL · PASO 6</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">E-map para un plano fijo, GIS para un mapa vivo</text>
+<rect x="48" y="124" width="540" height="400" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="156.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">E-map</text><text x="68.0" y="180.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">imagen estática: el plano de la planta</text>
+<rect x="72" y="200" width="492" height="230" rx="10" fill="#E5F0FB" stroke="#C2D4E6" stroke-width="2"/>
+<path d="M92 220H544V410H92Z M300 220V330 M300 330H544 M92 330H220" fill="none" stroke="#6E88A1" stroke-width="3"/>
+<text x="110.0" y="252.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#6E88A1" text-anchor="start">Nave 1</text>
+<text x="320.0" y="252.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#6E88A1" text-anchor="start">Nave 2</text>
+<text x="110.0" y="362.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#6E88A1" text-anchor="start">Oficinas</text>
+<circle cx="180" cy="290" r="12" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="260" cy="300" r="12" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="420" cy="290" r="12" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="160" cy="390" r="12" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/>
+<text x="72.0" y="466.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">Cargás un JPG del plano y ubicás cada cámara</text>
+<text x="72.0" y="490.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">como punto caliente (hot spot).</text>
+<rect x="612" y="124" width="540" height="400" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="632.0" y="156.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">GIS</text><text x="632.0" y="180.0" font-family="JetBrains Mono" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">mapa geográfico con datos en tiempo real</text>
+<rect x="636" y="200" width="492" height="230" rx="10" fill="#EAF4EC" stroke="#C2D4E6" stroke-width="2"/>
+<path d="M650 400 C720 330,800 360,870 300 S1020 240,1110 220" fill="none" stroke="#FFFFFF" stroke-width="10"/>
+<path d="M700 220 L760 420" fill="none" stroke="#FFFFFF" stroke-width="8"/>
+<circle cx="740" cy="345" r="12" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="900" cy="290" r="12" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="1040" cy="250" r="12" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/>
+<text x="636.0" y="466.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">Para sitios repartidos en una ciudad o una ruta:</text>
+<text x="636.0" y="490.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">dónde está cada sede, cada cámara y cada alarma.</text>
+<rect x="48" y="548" width="1104" height="54" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="560" width="5" height="30" rx="2.5" fill="#0A63B8"/><text x="74.0" y="582.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Una cámara entra una sola vez en cada mapa y puede ser punto caliente en hasta 6 mapas (FAQ V2.5.500).</tspan></text>
+</svg>

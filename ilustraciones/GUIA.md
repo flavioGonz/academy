@@ -77,3 +77,29 @@ Reglas del script:
 - **Idempotente y seguro**: que se pueda pegar dos veces sin duplicar (`:if ([:len [/interface/bridge/find name=$nombre]] = 0) do={ … }`, o `find` + `set`), con `comment="ies-<algo>"` en lo que crea para encontrarlo después, y sin cortar el acceso de quien lo pega (por ejemplo, no deshabilitar admin si no existe otro usuario full, no sacar del bridge el puerto por donde se entra sin avisar). Si un paso es riesgoso, que el script lo deje comentado con `#` y una explicación.
 - Comentarios en español rioplatense, cortos. Al final, un `:put "Listo: …"` con lo que quedó hecho y un comando de verificación sugerido.
 - 15 a 60 líneas. Si la lección es conceptual (por ejemplo elegir canal de actualización), el script puede ser de diagnóstico o verificación (imprimir estado, comparar versiones) en vez de configurar.
+
+## Ilustraciones y animaciones de la Teoría (pedido de Nico, octubre 2026)
+"La teoría también debe tener ilustraciones y animaciones." Cada lección lleva **1 o 2 figuras dentro de la pestaña Teoría**, insertadas después del párrafo que explican. Al menos una por lección es una **animación** cuando la teoría describe algo que pasa en el tiempo (un paquete que viaja, un intercambio de mensajes, un cambio de estado, un antes y después, una secuencia de pasos de un protocolo). Si el concepto es estructural (capas, una tabla, una jerarquía), una ilustración fija alcanza.
+
+**Qué dibujar:** el mecanismo de "Cómo funciona", no una repetición de la ilustración principal ni de los pasos del laboratorio. Ejemplos: el intercambio INVITE → 100 → 180 → 200 → ACK de SIP; el DORA de DHCP; un paquete que entra por input o por forward; la RIB que elige y la FIB que reenvía; el DTMF por RFC 4733 contra SIP INFO; el relé que se energiza y la cerradura que libera; la cadena de NAT de ida y vuelta; el timeline de Safe Mode.
+
+**Animaciones:** con la biblioteca `/home/claude/ies-training/tools/anim.py` (leé su docstring). Ejemplo completo y de referencia: `/home/claude/ies-training/ilustraciones/mikrotik/src/anim_27_rib_fib.py` y su resultado `site2/ilustraciones/mikrotik/27-rib-fib.svg`.
+- SVG animado con CSS, sin scripts, fuentes embebidas (lo hace la biblioteca), ciclo de 12 a 30 s, 3 a 5 tiempos con la leyenda numerada (`a.steps(...)`), texto mínimo 15 px, mismos colores con significado.
+- Se guarda directo en `/home/claude/ies-training/site2/ilustraciones/<slug>/<id>-t<N>.svg` (no pasa por render_svg). Script en `ilustraciones/<slug>/src/anim_<id>_<tema>.py`.
+- Revisión obligatoria: `a.write(..., preview=[…porcentajes…])` deja un PNG por instante y el cuadro fijo (`-fijo.png`, el de "reducir movimiento"). Miralos todos con Read: nada superpuesto, nada cortado, el cuadro fijo tiene que entenderse solo. Borrá los PNG de vista previa del sitio si quedaron en `site2/` (deben quedar en `ilustraciones/<slug>/`).
+- Peso: menos de 120 KB por animación.
+
+**Ilustraciones fijas de teoría:** igual que las demás (ilus.py, render_svg.py), con nombre `<id>-t<N>.svg` → `site2/ilustraciones/<slug>/<id>-t<N>.webp`.
+
+**En el manifest**, campo `teoria_figs` en la entrada de la lección:
+```json
+"teoria_figs": [
+  {"file": "27-t1.svg", "after": "texto exacto de un párrafo de teoria_md", "alt": "descripción completa, incluido lo que pasa en cada tiempo", "caption": "Una línea: qué mirar en la animación."},
+  {"file": "27-t2.webp", "after": "…", "alt": "…", "caption": "…"}
+]
+```
+- `file`: el nombre tal cual está en `site2/ilustraciones/<slug>/` (`.svg` animada o `.webp` fija).
+- `after`: un fragmento de 15 a 60 caracteres que exista una sola vez en `teoria_md` (de esa lección, en el manifest) y que esté dentro del párrafo después del cual va la figura. Nunca dentro de un título `###`.
+- Si la entrada de la lección está en otro manifest, podés escribir el tuyo aparte (`manifest-teoria-<desde>-<hasta>.json`): los manifests se combinan por campo.
+
+**Vista previa confiable (corrección del 27/10):** pausar las animaciones por JavaScript a veces deja pintado un cuadro viejo. `anim.py` ya saca cada cuadro fijando el instante por CSS en una página nueva. Para revisar animaciones ya generadas: `python3 /home/claude/ies-training/tools/anim_preview.py <svg> [más] --pct 10,35,60,85` (deja `_rev-<nombre>-<pct>.png` y `-fijo.png` en `ilustraciones/<slug>/`). Además, `a.group(...)` con solo movimiento ahora se ve mientras corre aunque `still=0`.

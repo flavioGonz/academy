@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Actualizar sí: con calendario, aviso y backup antes</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">WINDOWS</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Actualizar sí: con calendario, aviso y backup antes</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<rect x="48" y="128" width="256" height="230" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<circle cx="82" cy="168" r="18" fill="#0E8F5E"/><text x="82.0" y="174.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="110.0" y="175.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#0E8F5E" text-anchor="start">Backup restaurable</text>
+<text x="68.0" y="222.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="start"><tspan x="68.0" dy="0.0">wbadmin -allCritical</tspan></text>
+<text x="68.0" y="296.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="68.0" dy="0.0">la única marcha atrás real</tspan></text>
+<path d="M306.0 243.0C316.0 243.0,316.0 243.0,326.0 243.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="328" y="128" width="256" height="230" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="362" cy="168" r="18" fill="#17A8D4"/><text x="362.0" y="174.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="390.0" y="175.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Momento elegido</text>
+<text x="348.0" y="222.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="start"><tspan x="348.0" dy="0.0">horas activas · ventana</tspan></text>
+<text x="348.0" y="296.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="348.0" dy="0.0">nada de reinicios sorpresa</tspan></text>
+<path d="M586.0 243.0C596.0 243.0,596.0 243.0,606.0 243.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="608" y="128" width="256" height="230" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="642" cy="168" r="18" fill="#17A8D4"/><text x="642.0" y="174.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="670.0" y="175.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Aviso en servidores</text>
+<text x="628.0" y="222.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="start"><tspan x="628.0" dy="0.0">avisar para instalar y</tspan><tspan x="628.0" dy="20.2">reiniciar</tspan></text>
+<text x="628.0" y="296.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="628.0" dy="0.0">opción 7 de Microsoft</tspan></text>
+<path d="M866.0 243.0C876.0 243.0,876.0 243.0,886.0 243.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="888" y="128" width="256" height="230" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="922" cy="168" r="18" fill="#17A8D4"/><text x="922.0" y="174.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="950.0" y="175.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Verificar</text>
+<text x="908.0" y="222.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="start"><tspan x="908.0" dy="0.0">Get-HotFix · evento 1074</tspan></text>
+<text x="908.0" y="296.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="908.0" dy="0.0">qué entró y quién reinició</tspan></text>
+<rect x="48" y="384" width="540" height="150" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="416.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Ciclo validado con el VMS</text>
+<text x="72.0" y="446.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="72.0" dy="0.0">Bosch pide para su VMS un ciclo de actualización de 6 meses</tspan><tspan x="72.0" dy="21.6">como máximo. Lo que diga el fabricante del VMS instalado va</tspan><tspan x="72.0" dy="21.6">primero.</tspan></text>
+<rect x="612" y="384" width="540" height="150" rx="16" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/><text x="632.0" y="416.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#D2492F" text-anchor="start">Noviembre de 2024</text>
+<text x="636.0" y="446.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="636.0" dy="0.0">Servidores con Windows Server 2022 amanecieron actualizados</tspan><tspan x="636.0" dy="21.6">a 2025, sin licencia, por una actualización mal clasificada.</tspan><tspan x="636.0" dy="21.6">Sin backup, quedaba reinstalar o pagar.</tspan></text>
+<rect x="48" y="558" width="1104" height="54" rx="14" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/><rect x="48" y="570" width="5" height="30" rx="2.5" fill="#0E8F5E"/><text x="74.0" y="592.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Antes de actualizar, backup. Siempre.</tspan></text>
+</svg>

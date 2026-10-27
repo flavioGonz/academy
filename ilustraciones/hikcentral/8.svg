@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Evento o alarma: ¿alguien la va a atender?</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">HIKCENTRAL</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Evento o alarma: ¿alguien la va a atender?</text>
+<rect x="48" y="132" width="180" height="100" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="66.0" y="168.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Disparador</text>
+<text x="66.0" y="196.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start"><tspan x="66.0" dy="0.0">Camera Offline,</tspan><tspan x="66.0" dy="20.2">Alarm Input</tspan></text>
+<text x="236.0" y="188.0" font-family="Instrument Sans" font-size="22" font-weight="700" fill="#6E88A1" text-anchor="middle">+</text>
+<rect x="244" y="132" width="180" height="100" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="262.0" y="168.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Fuente</text>
+<text x="262.0" y="196.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start"><tspan x="262.0" dy="0.0">qué cámaras o</tspan><tspan x="262.0" dy="20.2">entradas</tspan></text>
+<text x="432.0" y="188.0" font-family="Instrument Sans" font-size="22" font-weight="700" fill="#6E88A1" text-anchor="middle">+</text>
+<rect x="440" y="132" width="180" height="100" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="458.0" y="168.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Horario</text>
+<text x="458.0" y="196.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start"><tspan x="458.0" dy="0.0">cuándo se recibe</tspan></text>
+<text x="628.0" y="188.0" font-family="Instrument Sans" font-size="22" font-weight="700" fill="#6E88A1" text-anchor="middle">+</text>
+<rect x="636" y="132" width="180" height="100" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="654.0" y="168.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Acciones</text>
+<text x="654.0" y="196.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start"><tspan x="654.0" dy="0.0">grabar, bloquear,</tspan><tspan x="654.0" dy="20.2">avisar</tspan></text>
+<text x="832.0" y="188.0" font-family="Instrument Sans" font-size="26" font-weight="700" fill="#6E88A1" text-anchor="middle">=</text>
+<rect x="860" y="132" width="292" height="100" rx="14" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="880.0" y="172.0" font-family="Familjen Grotesk" font-size="22" font-weight="600" fill="#0A63B8" text-anchor="start">Evento</text>
+<text x="880.0" y="202.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">queda registrado</text>
+<path d="M1006.0 236.0C1006.0 264.6,1006.0 259.4,1006.0 288.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="860" y="292" width="292" height="140" rx="14" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<text x="880.0" y="330.0" font-family="Familjen Grotesk" font-size="22" font-weight="600" fill="#D2492F" text-anchor="start">Alarma</text>
+<text x="880.0" y="360.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">Trigger Alarm: on</text>
+<text x="880.0" y="388.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">con prioridad y destinatarios</text>
+<text x="880.0" y="412.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">que la reciben en clientes y móvil</text>
+<rect x="48" y="268" width="780" height="164" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="300.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Menos ruido</text>
+<text x="72.0" y="330.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Ignore Repetitive Events · 30 s</text>
+<text x="72.0" y="356.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">iguales de la misma fuente en 30 s cuentan como uno</text>
+<text x="72.0" y="394.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Delay Alarm · cámara offline</text>
+<text x="72.0" y="420.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">si vuelve dentro del plazo, no avisa</text>
+<rect x="48" y="460" width="540" height="124" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="48" y="472" width="5" height="100" rx="2.5" fill="#B45309"/><text x="74.0" y="494.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="74.0" dy="0.0">Ojo con la cantidad</tspan></text><text x="74.0" y="521.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Más de 20 eventos con imagen por segundo hacia el Web</tspan><tspan x="74.0" dy="21.6">Client lo traban (FAQ). El ruido también pesa en la</tspan><tspan x="74.0" dy="21.6">plataforma.</tspan></text>
+<rect x="612" y="460" width="540" height="102" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="612" y="472" width="5" height="78" rx="2.5" fill="#0A63B8"/><text x="638.0" y="494.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="638.0" dy="0.0">Ejemplo</tspan></text><text x="638.0" y="521.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="638.0" dy="0.0">Cámara caída: evento para mantenimiento. Puerta forzada de</tspan><tspan x="638.0" dy="21.6">noche: alarma para el guardia.</tspan></text>
+<text x="48.0" y="638.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#0A63B8" text-anchor="start">Si nadie la va a atender, no es alarma: es evento.</text>
+</svg>

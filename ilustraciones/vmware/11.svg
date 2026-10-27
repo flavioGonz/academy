@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>&quot;Anda lento&quot;: una tecla por sospechoso en esxtop</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">VMWARE</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">&quot;Anda lento&quot;: una tecla por sospechoso en esxtop</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<rect x="48" y="124" width="540" height="180" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<rect x="68" y="149" width="52.0" height="44" rx="9" fill="#C2D4E6"/><rect x="68" y="146" width="52.0" height="44" rx="9" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/><text x="94.0" y="175.9" font-family="JetBrains Mono" font-size="22" font-weight="600" fill="#04223D" text-anchor="middle">c</text>
+<text x="136.0" y="176.0" font-family="Familjen Grotesk" font-size="21" font-weight="600" fill="#04223D" text-anchor="start">CPU</text>
+<rect x="278" y="148" width="290" height="38" rx="10" fill="#E5F0FB" stroke="#17A8D4" stroke-width="1.5"/>
+<text x="423.0" y="173.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#0A63B8" text-anchor="middle">%RDY</text>
+<text x="68.0" y="228.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">tiempo que la VM esperó una CPU física libre</text>
+<text x="68.0" y="264.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#B45309" text-anchor="start"><tspan x="68.0" dy="0.0">alto = fila de CPU, no falta de vCPU</tspan></text>
+<rect x="612" y="124" width="540" height="180" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<rect x="632" y="149" width="52.0" height="44" rx="9" fill="#C2D4E6"/><rect x="632" y="146" width="52.0" height="44" rx="9" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/><text x="658.0" y="175.9" font-family="JetBrains Mono" font-size="22" font-weight="600" fill="#04223D" text-anchor="middle">m</text>
+<text x="700.0" y="176.0" font-family="Familjen Grotesk" font-size="21" font-weight="600" fill="#04223D" text-anchor="start">Memoria</text>
+<rect x="842" y="148" width="290" height="38" rx="10" fill="#E5F0FB" stroke="#17A8D4" stroke-width="1.5"/>
+<text x="987.0" y="173.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#0A63B8" text-anchor="middle">MCTLSZ · SWCUR</text>
+<text x="632.0" y="228.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">balloon y swap del host</text>
+<text x="632.0" y="264.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#B45309" text-anchor="start"><tspan x="632.0" dy="0.0">si crecen, al host le falta memoria</tspan></text>
+<rect x="48" y="324" width="540" height="180" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<rect x="68" y="349" width="52.0" height="44" rx="9" fill="#C2D4E6"/><rect x="68" y="346" width="52.0" height="44" rx="9" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/><text x="94.0" y="375.9" font-family="JetBrains Mono" font-size="22" font-weight="600" fill="#04223D" text-anchor="middle">u</text>
+<text x="136.0" y="376.0" font-family="Familjen Grotesk" font-size="21" font-weight="600" fill="#04223D" text-anchor="start">Disco</text>
+<rect x="278" y="348" width="290" height="38" rx="10" fill="#E5F0FB" stroke="#17A8D4" stroke-width="1.5"/>
+<text x="423.0" y="373.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#0A63B8" text-anchor="middle">DAVG · KAVG · GAVG</text>
+<text x="68.0" y="428.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">latencia del almacenamiento y del host</text>
+<text x="68.0" y="464.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#B45309" text-anchor="start"><tspan x="68.0" dy="0.0">DAVG alto: storage · KAVG alto: cola del host</tspan></text>
+<rect x="612" y="324" width="540" height="180" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<rect x="632" y="349" width="52.0" height="44" rx="9" fill="#C2D4E6"/><rect x="632" y="346" width="52.0" height="44" rx="9" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="1.5"/><text x="658.0" y="375.9" font-family="JetBrains Mono" font-size="22" font-weight="600" fill="#04223D" text-anchor="middle">n</text>
+<text x="700.0" y="376.0" font-family="Familjen Grotesk" font-size="21" font-weight="600" fill="#04223D" text-anchor="start">Red</text>
+<rect x="842" y="348" width="290" height="38" rx="10" fill="#E5F0FB" stroke="#17A8D4" stroke-width="1.5"/>
+<text x="987.0" y="373.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#0A63B8" text-anchor="middle">%DRPTX · %DRPRX</text>
+<text x="632.0" y="428.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">paquetes descartados</text>
+<text x="632.0" y="464.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#B45309" text-anchor="start"><tspan x="632.0" dy="0.0">mayores a cero: mirar NIC y vSwitch</tspan></text>
+<rect x="48" y="530" width="540" height="102" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="542" width="5" height="78" rx="2.5" fill="#0A63B8"/><text x="74.0" y="564.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="74.0" dy="0.0">Sin número mágico</tspan></text><text x="74.0" y="591.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Ninguna fuente da un umbral universal: compará contra los</tspan><tspan x="74.0" dy="21.6">valores de un día normal del mismo cliente.</tspan></text>
+<rect x="612" y="530" width="540" height="102" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="612" y="542" width="5" height="78" rx="2.5" fill="#0A63B8"/><text x="638.0" y="564.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="638.0" dy="0.0">Los logs del host</tspan></text><text x="638.0" y="591.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="638.0" dy="0.0">Y antes de opinar, vmkernel.log y vmkwarning.log en</tspan><tspan x="638.0" dy="21.6">/var/run/log.</tspan></text>
+</svg>

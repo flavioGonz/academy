@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Qué deja cada comando en la VM 9000</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">PROXMOX VE · PASO 2</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Qué deja cada comando en la VM 9000</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<circle cx="48" cy="124" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="130.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<rect x="80" y="128" width="620" height="48" rx="10" fill="#03213C"/><text x="96.0" y="157.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">qm create 9000 … --scsihw virtio-scsi-single --agent 1</text>
+<path d="M708 152 H748" stroke="#17A8D4" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-cyan)"/>
+<rect x="756" y="128" width="396" height="48" rx="10" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="774.0" y="158.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">VM vacía: CPU, RAM, red VirtIO y agente</text>
+<rect x="80" y="202" width="620" height="48" rx="10" fill="#03213C"/><text x="96.0" y="231.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">qm set 9000 --scsi0 local-lvm:0,import-from=…qcow2</text>
+<path d="M708 226 H748" stroke="#17A8D4" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-cyan)"/>
+<rect x="756" y="202" width="396" height="48" rx="10" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="774.0" y="232.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">scsi0: el disco de la imagen cloud</text>
+<rect x="80" y="276" width="620" height="48" rx="10" fill="#03213C"/><text x="96.0" y="305.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">qm set 9000 --ide2 local-lvm:cloudinit</text>
+<path d="M708 300 H748" stroke="#17A8D4" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-cyan)"/>
+<rect x="756" y="276" width="396" height="48" rx="10" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="774.0" y="306.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">ide2: el CD de cloud-init</text>
+<rect x="80" y="350" width="620" height="48" rx="10" fill="#03213C"/><text x="96.0" y="379.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">qm set 9000 --boot order=scsi0</text>
+<path d="M708 374 H748" stroke="#17A8D4" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-cyan)"/>
+<rect x="756" y="350" width="396" height="48" rx="10" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="774.0" y="380.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">arranca del disco importado</text>
+<rect x="80" y="424" width="620" height="48" rx="10" fill="#03213C"/><text x="96.0" y="453.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">qm set 9000 --serial0 socket --vga serial0</text>
+<path d="M708 448 H748" stroke="#17A8D4" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-cyan)"/>
+<rect x="756" y="424" width="396" height="48" rx="10" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="774.0" y="454.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">consola serie: la piden las imágenes cloud</text>
+<rect x="80" y="498" width="620" height="48" rx="10" fill="#03213C"/><text x="96.0" y="527.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">qm template 9000</text>
+<path d="M708 522 H748" stroke="#17A8D4" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-cyan)"/>
+<rect x="756" y="498" width="396" height="48" rx="10" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="774.0" y="528.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#0E8F5E" text-anchor="start">la convierte en plantilla</text>
+<text x="80.0" y="608.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">Los … son las mismas opciones del laboratorio, abreviadas para que entren en la imagen.</text>
+</svg>

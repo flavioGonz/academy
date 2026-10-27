@@ -783,7 +783,9 @@
    "aliases": [
     "dstnat",
     "port forwarding",
-    "reenvío de puertos"
+    "reenvío de puertos",
+    "port forward",
+    "DNAT"
    ],
    "cat": "Redes",
    "short": "Regla de NAT que cambia el destino de un paquete: lo que llega a la IP pública en un puerto se manda a un equipo interno.",
@@ -1023,7 +1025,7 @@
    ],
    "cat": "Redes",
    "short": "El sistema de filtrado de paquetes del núcleo Linux; iptables es su herramienta clásica.",
-   "long": "Se popularizó con Linux 2.4, en 2001. De ahí heredó RouterOS las cadenas input, forward y output y el seguimiento de conexiones.",
+   "long": "Se popularizó con Linux 2.4, en 2001. De ahí heredó RouterOS las cadenas input, forward y output y el seguimiento de conexiones. En Debian se escribe hoy con nftables, y en Ubuntu ufw es la capa simple por encima.",
    "case": false
   },
   {
@@ -1507,7 +1509,7 @@
    ],
    "cat": "Redes",
    "short": "El software que crea y corre máquinas virtuales sobre un servidor físico.",
-   "long": "Ejemplos: Proxmox, VMware ESXi, Hyper-V. Sobre él puede correr un CHR.",
+   "long": "Ejemplos: Proxmox, VMware ESXi, Hyper-V. Sobre él puede correr un CHR. Tipo 1 (ESXi, Proxmox VE) va directo sobre el hardware; tipo 2 corre arriba de un sistema operativo, como un programa.",
    "case": false
   },
   {
@@ -3785,7 +3787,9 @@
    "term": "SDK",
    "aliases": [
     "puerto SDK",
-    "puerto de servidor"
+    "puerto de servidor",
+    "Hikvision Private Protocol",
+    "protocolo privado Hikvision"
    ],
    "cat": "Video",
    "short": "En equipos Hikvision, el puerto de servidor (8000 por defecto) por el que hablan la app y el software cliente.",
@@ -4847,7 +4851,8 @@
    "id": "mfa",
    "term": "MFA",
    "aliases": [
-    "2FA"
+    "2FA",
+    "segundo factor"
    ],
    "cat": "Seguridad",
    "short": "Autenticación de varios factores: además de la clave, un código o una aplicación del celular.",
@@ -5045,7 +5050,8 @@
    "term": "SSO",
    "aliases": [
     "Single Sign-On",
-    "inicio de sesión único"
+    "inicio de sesión único",
+    "vCenter Single Sign-On"
    ],
    "cat": "Seguridad",
    "short": "Single Sign-On: entrar a varios sistemas con una sola cuenta del proveedor de identidad de la empresa.",
@@ -5083,7 +5089,7 @@
    ],
    "cat": "Web e integración",
    "short": "Protocolo liviano de mensajes publicar y suscribir; sobre TLS usa el puerto 8883.",
-   "long": "Nació en 1999 para enlaces de poco ancho de banda y hoy es común en IoT. La IANA registra el puerto 8883 para MQTT sobre TLS; es uno de los puertos de salida que necesita una consola UniFi para Site Manager.",
+   "long": "Nació en 1999 para enlaces de poco ancho de banda y hoy es común en IoT. La IANA registra el puerto 8883 para MQTT sobre TLS; es uno de los puertos de salida que necesita una consola UniFi para Site Manager. En Paradox, IP180 e IP150M lo usan para hablar con Swan y con el conversor IPC10.",
    "year": 1999,
    "case": true
   },
@@ -5884,6 +5890,3957 @@
    "short": "Access points enlazados por radio entre sí, sin cable de datos, a partir de uno cableado (Root AP).",
    "long": "Sirve para extender cobertura, no capacidad: cada salto resta rendimiento. En Omada admite hasta 3 saltos y 4 downlinks por uplink, con señal del uplink entre -40 y -62 dBm.",
    "case": false
+  },
+  {
+   "id": "hikcentral",
+   "term": "HikCentral Professional",
+   "aliases": [
+    "HikCentral",
+    "HikCentral Pro",
+    "HCP"
+   ],
+   "cat": "Video",
+   "short": "La plataforma central de Hikvision para video, control de acceso, alarmas, asistencia y mapas, instalada en un servidor propio.",
+   "long": "Es el producto grande de la familia HikCentral; HikCentral Lite y HikCentral Access Control cubren sitios chicos. Tuvo una línea V1.x, después la V2.x y hoy la V3.x. Se arma en capas: el SYS gestiona, el Streaming Gateway o Server reenvía video, el Web Client configura y el Control Client opera.",
+   "case": true
+  },
+  {
+   "id": "sys-hikcentral",
+   "term": "SYS",
+   "aliases": [
+    "System Management Service",
+    "servidor SYS"
+   ],
+   "cat": "Video",
+   "short": "System Management Service: el servicio central de HikCentral Professional, que autentica, guarda la configuración y gestiona los dispositivos.",
+   "long": "Usa una base de datos PostgreSQL y trae adentro un Streaming Gateway. Se controla desde Service Manager. Su licencia queda atada a la instalación: antes de cambiar hardware o migrar la VM, se desactiva.",
+   "case": true
+  },
+  {
+   "id": "streaming-gateway",
+   "term": "Streaming Gateway",
+   "aliases": [],
+   "cat": "Video",
+   "short": "El reenviador de video que viene dentro del SYS de HikCentral: toma el flujo del equipo y lo reparte entre los clientes.",
+   "long": "Según el FAQ V2.5.500 sirve hasta 200 cámaras reenviadas; por encima se instala un Streaming Server. Escucha el 554 (RTSP) y el 559, que usa el Web Client para el vivo en Chrome y Firefox.",
+   "case": true
+  },
+  {
+   "id": "streaming-server",
+   "term": "Streaming Server",
+   "aliases": [
+    "Stream Server",
+    "servidor de streaming"
+   ],
+   "cat": "Video",
+   "short": "Servicio de HikCentral que se instala aparte para reenviar video cuando el Streaming Gateway del SYS no alcanza.",
+   "long": "Nunca va en la misma PC que el SYS. Concentra los pedidos de los clientes y reduce las conexiones directas contra los NVR, lo que también ayuda con el error maximum number of streams.",
+   "case": true
+  },
+  {
+   "id": "control-client",
+   "term": "Control Client",
+   "aliases": [],
+   "cat": "Video",
+   "short": "El programa de HikCentral que se instala en el puesto de monitoreo para operar: vivo, PTZ, reproducción y alarmas.",
+   "long": "Tiene que ser exactamente de la misma versión que el SYS; si no, el login falla con VSM217. No corre en máquina virtual.",
+   "case": true
+  },
+  {
+   "id": "web-client",
+   "term": "Web Client",
+   "aliases": [],
+   "cat": "Video",
+   "short": "La interfaz de HikCentral en el navegador, donde se configura el sistema: equipos, áreas, grabación, eventos, personas y roles.",
+   "long": "Se entra por la IP del SYS, por HTTP o HTTPS; el primer ingreso obliga a crear la contraseña de admin. En los navegadores que no son Internet Explorer toma el vivo por el puerto 559 del gateway.",
+   "case": true
+  },
+  {
+   "id": "service-manager",
+   "term": "Service Manager",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "La herramienta del servidor HikCentral que muestra cada servicio con su estado y su puerto, y permite arrancarlos, pararlos o cambiar el puerto.",
+   "long": "Se abre con clic derecho y Ejecutar como administrador. Un puerto en rojo indica que otro proceso ya lo usa. Tiene Auto Recover Database Exception, para cortes de luz.",
+   "case": true
+  },
+  {
+   "id": "vsm217",
+   "term": "VSM217",
+   "aliases": [
+    "error VSM217",
+    "VSM"
+   ],
+   "cat": "Video",
+   "short": "Error de login del Control Client de HikCentral cuando su versión no coincide con la del SYS.",
+   "long": "Se resuelve instalando en el puesto el Control Client de la misma versión que el SYS. Aparece típico después de actualizar el servidor y olvidar los puestos.",
+   "case": true
+  },
+  {
+   "id": "isup",
+   "term": "ISUP",
+   "aliases": [
+    "EHome",
+    "Hikvision ISUP Protocol",
+    "ISUP 5.0"
+   ],
+   "cat": "Video",
+   "short": "Protocolo de Hikvision, antes llamado EHome, con el que el equipo se registra en la plataforma en lugar de esperar que la plataforma lo llame.",
+   "long": "El equipo abre la conexión hacia el SYS, puerto 7660, con un Device ID y una clave (obligatoria en ISUP 5.0). Como sale desde el sitio, pasa el NAT sin abrir puertos hacia el equipo. En HikCentral se habilita con Allow ISUP Registration.",
+   "case": true
+  },
+  {
+   "id": "hik-connect",
+   "term": "Hik-Connect",
+   "aliases": [
+    "Hik-Connect DDNS"
+   ],
+   "cat": "Video",
+   "short": "El servicio en la nube de Hikvision para acceder a equipos con IP dinámica, por número de serie y código de verificación.",
+   "long": "En HikCentral es una forma de alta. Sus límites: esos equipos no graban en Hybrid SAN ni en Cloud Storage. Necesita DNS que resuelva y los puertos STUN 6002, 6800, 8555, 9010 y 9020 sin bloquear.",
+   "case": true
+  },
+  {
+   "id": "pstor",
+   "term": "pStor",
+   "aliases": [
+    "pStor Cluster"
+   ],
+   "cat": "Video",
+   "short": "Servicio de almacenamiento de Hikvision que administra discos locales o lógicos de un servidor para grabar en el centro.",
+   "long": "pStor Cluster agrupa varios pStor. Según el FAQ V2.5.500, el clúster no hace grabación por movimiento ni miniaturas, y pStor, clúster y SYS van en el mismo dominio de red y la misma zona horaria.",
+   "case": true
+  },
+  {
+   "id": "san",
+   "term": "SAN",
+   "aliases": [
+    "Storage Area Network",
+    "red de almacenamiento"
+   ],
+   "cat": "Redes",
+   "short": "Storage Area Network: red dedicada que lleva los discos a equipos de almacenamiento compartidos por varios servidores.",
+   "long": "Usa protocolos como Fibre Channel o iSCSI. En HikCentral aparece como Hybrid SAN, el equipo de almacenamiento de Hikvision para grabar en el centro.",
+   "case": true
+  },
+  {
+   "id": "hybrid-san",
+   "term": "Hybrid SAN",
+   "aliases": [
+    "Hybrid Storage Area Network"
+   ],
+   "cat": "Video",
+   "short": "Equipo de almacenamiento de Hikvision que HikCentral puede usar como destino central de grabación.",
+   "long": "Según el FAQ, los equipos agregados por dominio o por Hik-Connect no pueden grabar en Hybrid SAN. La grabación central necesita ancho de banda sostenido desde cada sitio.",
+   "case": true
+  },
+  {
+   "id": "cloud-storage-server",
+   "term": "Cloud Storage Server",
+   "aliases": [
+    "Cloud Storage"
+   ],
+   "cat": "Video",
+   "short": "Servidor de almacenamiento de Hikvision que HikCentral puede usar como destino de grabación.",
+   "long": "Tiene los mismos límites que Hybrid SAN para equipos agregados por dominio o Hik-Connect, y tiene que estar en la misma zona horaria que la plataforma para que la búsqueda de video coincida.",
+   "case": true
+  },
+  {
+   "id": "gis",
+   "term": "GIS",
+   "aliases": [
+    "Geographic Information System",
+    "mapa GIS"
+   ],
+   "cat": "Herramientas",
+   "short": "Geographic Information System: un mapa geográfico con datos; en HikCentral, el mapa vivo para ubicar sitios, cámaras y alarmas.",
+   "long": "La idea la impulsó Roger Tomlinson en Canadá en los años sesenta. En HikCentral se usa para sitios repartidos en una ciudad o una ruta; para el plano de un edificio está el E-map.",
+   "case": true
+  },
+  {
+   "id": "e-map",
+   "term": "E-map",
+   "aliases": [
+    "mapa electrónico"
+   ],
+   "cat": "Video",
+   "short": "En HikCentral, una imagen fija, por ejemplo el plano de una planta, con cámaras y puertas ubicadas como puntos calientes.",
+   "long": "Se carga un JPG y se arrastran los recursos. Según el FAQ, una cámara entra una sola vez por mapa y puede ser punto caliente en hasta 6 mapas.",
+   "case": true
+  },
+  {
+   "id": "vista-publica",
+   "term": "vista pública",
+   "aliases": [
+    "vistas públicas",
+    "vista privada",
+    "vistas privadas"
+   ],
+   "cat": "Video",
+   "short": "Mosaico guardado de cámaras en HikCentral: la pública la ve cualquier usuario; la privada, solo quien la creó.",
+   "long": "La pública es para el puesto de monitoreo; la privada, para cada operador. Los grupos de vistas permiten rotación automática en el Control Client.",
+   "case": false
+  },
+  {
+   "id": "delay-alarm",
+   "term": "Delay Alarm",
+   "aliases": [],
+   "cat": "Video",
+   "short": "Opción de los eventos de HikCentral que espera un plazo antes de avisar; en cámara offline, si vuelve antes, no hay aviso.",
+   "long": "Sirve para que mantenimiento vea las cámaras realmente caídas y no las que parpadean por un corte de segundos. Se combina con Ignore Repetitive Events.",
+   "case": true
+  },
+  {
+   "id": "ignore-repetitive",
+   "term": "Ignore Repetitive Events",
+   "aliases": [
+    "Ignore Repetitive"
+   ],
+   "cat": "Video",
+   "short": "Opción de los eventos de HikCentral que cuenta como uno los eventos iguales de la misma fuente dentro de un plazo.",
+   "long": "Con 30 segundos, cinco rebotes de un contacto dentro de ese plazo son un solo evento. Baja el ruido en pantalla y la carga del Web Client.",
+   "case": true
+  },
+  {
+   "id": "pre-evento",
+   "term": "pre-evento",
+   "aliases": [
+    "pre evento",
+    "post evento",
+    "post-evento",
+    "pre-alarma"
+   ],
+   "cat": "Video",
+   "short": "Segundos de video grabados antes (pre) y después (post) de un disparo, para que el clip muestre lo que pasó.",
+   "long": "Es posible porque la cámara graba en un buffer continuo. En HikCentral se define en la acción Trigger Recording, y con Lock Video Files el clip no se sobrescribe por N días. La cámara necesita calendario de grabación.",
+   "case": false
+  },
+  {
+   "id": "nivel-de-acceso",
+   "term": "nivel de acceso",
+   "aliases": [
+    "niveles de acceso",
+    "Access Level"
+   ],
+   "cat": "Control de acceso",
+   "short": "Un grupo de puertas con una plantilla de horario que se asigna a personas o departamentos.",
+   "long": "Responde dónde y cuándo; la persona y su credencial responden quién. En HikCentral nada llega a la puerta hasta aplicar el nivel a los dispositivos.",
+   "case": false
+  },
+  {
+   "id": "apply-initial",
+   "term": "Apply (Initial)",
+   "aliases": [
+    "aplicado inicial"
+   ],
+   "cat": "Control de acceso",
+   "short": "Modo de aplicar niveles de acceso en HikCentral que borra todo lo que tiene la controladora y lo vuelve a escribir.",
+   "long": "Durante el proceso los dispositivos quedan offline y nadie pasa por esos puntos de acceso: se hace fuera de horario y con aviso al cliente. Sin marcarlo, se aplican solo los cambios y las puertas siguen funcionando.",
+   "case": true
+  },
+  {
+   "id": "punto-de-marca",
+   "term": "punto de marca",
+   "aliases": [
+    "puntos de marca",
+    "Attendance Checkpoint"
+   ],
+   "cat": "Control de acceso",
+   "short": "Lectora que cuenta para la asistencia, como entrada, salida o ambas.",
+   "long": "En HikCentral se define en Attendance Checkpoint. Las mismas lectoras de control de acceso hacen de reloj; las que no son punto de marca siguen controlando la puerta, pero no suman horas.",
+   "case": false
+  },
+  {
+   "id": "man-hour",
+   "term": "Man-Hour Shift",
+   "aliases": [
+    "Man-Hour",
+    "turno Man-Hour"
+   ],
+   "cat": "Control de acceso",
+   "short": "Tipo de turno de asistencia de HikCentral que no exige ventanas de entrada y salida y mide horas.",
+   "long": "Es más flexible que el turno Normal. El modo de cálculo más usado es primera entrada y última salida. La plataforma calcula con la hora del servidor.",
+   "case": true
+  },
+  {
+   "id": "communication-matrix",
+   "term": "Communication Matrix",
+   "aliases": [
+    "matriz de puertos",
+    "matriz de comunicación"
+   ],
+   "cat": "Redes",
+   "short": "El documento oficial de HikCentral que lista cada puerto: origen, destino, protocolo y para qué se usa.",
+   "long": "Según la V2.4.1: 80 y 443 del SYS para los clientes, 7660 para registro ISUP, 7332 para alarmas ISUP, 8555 para archivos ISUP, 554 y 559 del Streaming Gateway, 16000 y 16001 para stream ISUP. Cada prueba de puerto se valida contra la matriz de la versión instalada.",
+   "case": true
+  },
+  {
+   "id": "hot-spare",
+   "term": "hot spare",
+   "aliases": [
+    "Mirror Hot Spare",
+    "servidor de respaldo"
+   ],
+   "cat": "Herramientas",
+   "short": "Un segundo servidor listo para tomar el lugar del principal si este falla.",
+   "long": "En HikCentral se decide al instalar, en modo personalizado: Normal o Mirror Hot Spare, con servidor principal y de respaldo. Según la Quick Start Guide, se arma con el soporte técnico del fabricante.",
+   "case": false
+  },
+  {
+   "id": "rbac",
+   "term": "RBAC",
+   "aliases": [
+    "Role-Based Access Control",
+    "control de acceso basado en roles"
+   ],
+   "cat": "Seguridad",
+   "short": "Role-Based Access Control: los permisos se dan a roles y los roles a personas.",
+   "long": "Lo describieron Ferraiolo y Kuhn, del NIST, en 1992, y se estandarizó como ANSI INCITS 359 en 2004. En HikCentral, un rol a medida define vigencia, horario de permisos, áreas visibles y permisos de recursos.",
+   "year": 1992,
+   "case": true
+  },
+  {
+   "id": "pem",
+   "term": ".pem",
+   "aliases": [
+    "PEM",
+    "archivo .pem"
+   ],
+   "cat": "Seguridad",
+   "short": "Formato de texto para certificados y claves, con bloques BEGIN y END en Base64.",
+   "long": "Viene del correo seguro de los noventa (RFC 1421, de 1993). HikCentral lo pide para instalar un certificado HTTPS propio: el certificado firmado por una CA y su clave privada en un solo archivo.",
+   "year": 1993,
+   "case": false
+  },
+  {
+   "id": "ca",
+   "term": "CA",
+   "aliases": [
+    "autoridad certificante",
+    "Certificate Authority",
+    "autoridad de certificación"
+   ],
+   "cat": "Seguridad",
+   "short": "Certificate Authority: la entidad que firma certificados para que los navegadores y equipos confíen en ellos.",
+   "long": "Puede ser pública o interna de la empresa. Un certificado embebido, sin firma de una CA de confianza, hace que el navegador muestre No seguro.",
+   "case": true
+  },
+  {
+   "id": "nic",
+   "term": "NIC",
+   "aliases": [
+    "Network Interface Card",
+    "placa de red"
+   ],
+   "cat": "Redes",
+   "short": "Network Interface Card: la placa de red de una computadora o servidor.",
+   "long": "La guía de requisitos de HikCentral pide NIC gigabit para el SYS, porque el servidor mueve video además de datos de gestión.",
+   "case": true
+  },
+  {
+   "id": "pid",
+   "term": "PID",
+   "aliases": [
+    "Process ID",
+    "identificador de proceso"
+   ],
+   "cat": "Herramientas",
+   "short": "Process ID: el número con que el sistema operativo identifica a cada proceso en ejecución.",
+   "long": "En Windows, netstat -ano muestra el PID dueño de cada puerto y tasklist lo traduce al nombre del programa. En Linux, ps aux y pgrep lo muestran, kill PID le manda una señal y el PID 1 es systemd.",
+   "case": true
+  },
+  {
+   "id": "netstat",
+   "term": "netstat",
+   "aliases": [
+    "netstat -ano"
+   ],
+   "cat": "Herramientas",
+   "short": "Comando que lista las conexiones y los puertos en escucha de un equipo.",
+   "long": "En Windows, netstat -ano agrega el PID del proceso dueño; filtrado con findstr :80 dice quién tiene el puerto 80. Con tasklist | findstr <PID> se ve qué programa es.",
+   "case": false
+  },
+  {
+   "id": "powershell",
+   "term": "PowerShell",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "La consola y lenguaje de comandos de Windows, con comandos (cmdlets) de la forma Verbo-Sustantivo.",
+   "long": "En el curso de HikCentral se usa para verificar el instalador (Get-FileHash), la hora (Get-Date, Get-TimeZone) y los puertos (Get-NetTCPConnection, Test-NetConnection).",
+   "case": true
+  },
+  {
+   "id": "test-netconnection",
+   "term": "Test-NetConnection",
+   "aliases": [
+    "TcpTestSucceeded"
+   ],
+   "cat": "Herramientas",
+   "short": "Comando de PowerShell que prueba si un puerto TCP de otro equipo contesta.",
+   "long": "Llegó con Windows 8.1 y Windows Server 2012 R2. Con -Port 7660, por ejemplo, TcpTestSucceeded True dice que el camino y el servicio están; False, que algo en el medio lo corta.",
+   "case": true
+  },
+  {
+   "id": "robocopy",
+   "term": "robocopy",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "Robust File Copy: comando de Windows para copiar carpetas completas con reintentos.",
+   "long": "Viene de serie desde Windows Vista y Server 2008. En el curso se usa para copiar los backups de HikCentral fuera del servidor: /E copia subcarpetas, /R y /W fijan reintentos y espera.",
+   "case": false
+  },
+  {
+   "id": "aws",
+   "term": "AWS",
+   "aliases": [
+    "Amazon Web Services",
+    "AWS EC2"
+   ],
+   "cat": "Redes",
+   "short": "Amazon Web Services: la nube de Amazon, donde se pueden alquilar servidores virtuales (EC2).",
+   "long": "HikCentral Professional admite el SYS en AWS o Azure con limitaciones: al activar la licencia se elige ese entorno, y en la nube no se conectan pStor ni Streaming Server externos.",
+   "case": true
+  },
+  {
+   "id": "ntfs",
+   "term": "NTFS",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "NT File System: el sistema de archivos estándar de los discos de Windows.",
+   "long": "Aparece en el curso de HikCentral como opción incorrecta de una pregunta: el formato del disco no es la causa de las fallas de instalación que ahí se analizan.",
+   "case": true
+  },
+  {
+   "id": "ie",
+   "term": "IE",
+   "aliases": [
+    "Internet Explorer"
+   ],
+   "cat": "Web e integración",
+   "short": "Internet Explorer, el navegador de Microsoft, retirado en 2022.",
+   "long": "En HikCentral era el caso especial para el vivo en la web: en los demás navegadores el Web Client usa el puerto 559 del gateway, que tiene que estar abierto en el firewall.",
+   "year": 2022,
+   "case": true
+  },
+  {
+   "id": "rfc1421",
+   "term": "RFC 1421",
+   "aliases": [
+    "RFC1421"
+   ],
+   "cat": "RFC",
+   "short": "Privacy-Enhanced Mail (PEM): el formato de texto con bloques BEGIN y END que hoy se usa para certificados y claves.",
+   "long": "Es de 1993 y buscaba cifrar y firmar el correo electrónico. Ese uso no prosperó, pero su forma de escribir datos binarios en Base64 entre líneas BEGIN y END quedó como el formato .pem de certificados, que luego ordenó la RFC 7468 de 2015.",
+   "year": 1993,
+   "case": true
+  },
+  {
+   "id": "osi",
+   "term": "modelo OSI",
+   "aliases": [
+    "OSI",
+    "capas OSI"
+   ],
+   "cat": "Normas",
+   "short": "Modelo de referencia de siete capas para describir una red, de la física a la de aplicación.",
+   "long": "ISO lo publicó como norma ISO 7498 en 1984. En soporte se usa como método: diagnosticar de abajo arriba, porque cada capa que funciona descarta todo lo que tiene debajo.",
+   "year": 1984,
+   "case": false
+  },
+  {
+   "id": "eol",
+   "term": "EOL",
+   "aliases": [
+    "resistencia de fin de línea",
+    "fin de línea",
+    "End Of Line",
+    "resistencia EOL",
+    "FLM-420-EOL4W",
+    "FLM-320-EOL4W-S",
+    "módulo de fin de línea"
+   ],
+   "cat": "Alarmas",
+   "short": "End Of Line: la resistencia que va al final del cable de una zona para que la central supervise el cableado.",
+   "long": "Con la EOL, la central espera medir un valor fijo: en Paradox, 1 kΩ. Si mide circuito abierto, la zona se abrió o el cable se cortó; si mide 0 Ω, alguien unió los cables y aparece la falla de tamper y cableado. Va en el extremo del detector, no en la bornera. En las SP+ se activa para toda la central en la sección [706] opción 2. Otras marcas usan otros valores, como 5,6 kΩ en DSC.",
+   "case": true
+  },
+  {
+   "id": "atz",
+   "term": "ATZ",
+   "aliases": [
+    "Advanced Technology Zone",
+    "duplicación de zona",
+    "zona doble"
+   ],
+   "cat": "Alarmas",
+   "short": "Advanced Technology Zone: duplicación de zona de Paradox, dos detectores en una sola entrada.",
+   "long": "Cada detector lleva su propia resistencia (1 kΩ y 2,2 kΩ en los dibujos de la guía EVOHD+) y la central reconoce cuál abrió por el valor que mide, con un número de zona propio para cada uno. En la serie plus solo lo admite la SP6000+; se activa en [705] opción 1 y la opción 2 elige serie o paralelo.",
+   "case": true
+  },
+  {
+   "id": "pgm",
+   "term": "PGM",
+   "aliases": [
+    "salida programable",
+    "salidas programables",
+    "PGM1",
+    "PGM2"
+   ],
+   "cat": "Alarmas",
+   "short": "Salida programable de una central de alarma: se activa con un evento y sirve para mover un relé.",
+   "long": "En Paradox cada PGM tiene evento de activación y de desactivación (grupo, subgrupo y partición) o un tiempo. Las de placa son de baja corriente, 100 a 150 mA según la guía SP+: para un portón, una luz o una sirena extra se usa un relé externo. De fábrica, la PGM1 se activa con el botón B de cualquier control.",
+   "case": true
+  },
+  {
+   "id": "tbl",
+   "term": "TBL",
+   "aliases": [
+    "pantalla de fallas",
+    "tecla TBL"
+   ],
+   "cat": "Alarmas",
+   "short": "La tecla de fallas (trouble) de los teclados Paradox: muestra los grupos de fallas de la central.",
+   "long": "Cada número encendido es un grupo y abre su submenú: 2 energía (2.1 batería, 2.2 AC, 2.3 sobrecarga AUX), 3 campana, 4 comunicación, 5 tamper y cableado de zona, 8 pérdida de reloj, 10 supervisión de módulos. Es lo primero que se mira cuando un cliente dice que la alarma pita.",
+   "case": true
+  },
+  {
+   "id": "aux",
+   "term": "AUX",
+   "aliases": [
+    "salida auxiliar"
+   ],
+   "cat": "Alarmas",
+   "short": "Salida auxiliar de la central: alimenta teclados, módulos y detectores.",
+   "long": "Tiene un límite de corriente con protección sin fusible. En la SP5500+ corta a 1,1 A y el manual pide no pasar de 700 mA en total; si corta por sobrecarga, se sacan todas las cargas al menos 10 segundos antes de reconectar. Lo que alimenta una fuente externa no cuenta.",
+   "case": true
+  },
+  {
+   "id": "bell",
+   "term": "BELL",
+   "aliases": [
+    "salida de campana",
+    "BELL+",
+    "BELL-"
+   ],
+   "cat": "Alarmas",
+   "short": "Salida de campana de la central: da 12 V en alarma para la sirena.",
+   "long": "En las SP+ soporta una sirena de 30 W o dos de 20 W y corta si pasa de 3 A. La central la supervisa: si no hay nada conectado aparece la falla de campana, que se evita con una resistencia de 1 kΩ entre BELL+ y BELL-.",
+   "case": true
+  },
+  {
+   "id": "tamper",
+   "term": "tamper",
+   "aliases": [
+    "antisabotaje",
+    "sabotaje",
+    "tamper switch"
+   ],
+   "cat": "Alarmas",
+   "short": "Protección contra sabotaje: avisa que alguien abrió un equipo o tocó un cable, aunque la alarma esté desarmada.",
+   "long": "Puede ser un pulsador en la tapa de un gabinete, un detector o un módulo, o la supervisión del cableado de una zona con EOL. En Paradox, TBL lo muestra en el grupo 5 (zona) o 6 (módulo), y la sección [705] define si da solo falla o alarma.",
+   "case": false
+  },
+  {
+   "id": "contact-id",
+   "term": "Contact ID",
+   "aliases": [
+    "CID",
+    "Ademco Contact ID",
+    "SIA DC-05"
+   ],
+   "cat": "Normas",
+   "short": "Formato de reporte de alarmas a la receptora: abonado, calificador, código de evento, partición y zona.",
+   "long": "Nació en Ademco y la Security Industry Association lo publicó como norma SIA DC-05 en 1999. Un mensaje lleva abonado, tipo 18, calificador (1 evento nuevo, 3 restauración), código de evento de tres dígitos (130 es robo), partición, zona o usuario y un dígito de control. En Paradox SP y MG se elige con 4 en la sección [810], y los módulos MQTT reportan solo en Contact ID.",
+   "year": 1999,
+   "case": true
+  },
+  {
+   "id": "sia",
+   "term": "SIA",
+   "aliases": [
+    "Security Industry Association",
+    "formato SIA",
+    "SIA DC-03"
+   ],
+   "cat": "Normas",
+   "short": "Security Industry Association: la asociación de la industria de seguridad de Estados Unidos, y su formato de reporte de alarmas.",
+   "long": "Publica normas como Contact ID (DC-05) y el formato SIA (DC-03), más descriptivo. En Paradox SP y MG el formato SIA es el 5 de la sección [810], pero la guía de programación aclara que no está soportado por IP ni GPRS; el receptor legado IPR512 sí lo acepta.",
+   "case": true
+  },
+  {
+   "id": "abonado",
+   "term": "abonado",
+   "aliases": [
+    "número de abonado",
+    "cuenta de abonado"
+   ],
+   "cat": "Alarmas",
+   "short": "El número con el que la receptora de monitoreo identifica a cada cliente.",
+   "long": "Lo da la empresa de monitoreo. En Paradox va en cada partición y en cada canal: [811] y [812] por teléfono, [918] y [919] por IP, en hexadecimal. Un abonado copiado de otra obra hace que los eventos lleguen al cliente equivocado.",
+   "case": false
+  },
+  {
+   "id": "receptora",
+   "term": "receptora",
+   "aliases": [
+    "receptora de alarmas",
+    "estación receptora",
+    "CMS"
+   ],
+   "cat": "Alarmas",
+   "short": "El equipo de la empresa de monitoreo que recibe los eventos de las centrales y los pasa al software del operador.",
+   "long": "Para dar de alta una central, la receptora le da al instalador el abonado, la IP y el puerto, la contraseña (en legado) y el perfil de supervisión. En Paradox, las legado son IPR512 e IPRS-7 y las de módulos MQTT, IPC10 y VIPC20. CMS (Central Monitoring Station) es el nombre en inglés de la central de monitoreo.",
+   "case": false
+  },
+  {
+   "id": "perfil-supervision",
+   "term": "perfil de supervisión",
+   "aliases": [
+    "perfil de sondeo"
+   ],
+   "cat": "Alarmas",
+   "short": "Cada cuánto el módulo de comunicación se reporta a la receptora aunque no haya eventos.",
+   "long": "Si el módulo deja de reportarse en ese tiempo, la receptora avisa que el abonado se cayó. En Paradox se carga en [934]; con IPC10 los perfiles son fijos: 01 = 1200 s, 02 = 600 s, 03 = 300 s, 04 = 90 s. En el IPR512 los define la receptora.",
+   "case": false
+  },
+  {
+   "id": "particion",
+   "term": "partición",
+   "aliases": [
+    "particiones",
+    "particionado"
+   ],
+   "cat": "Alarmas",
+   "short": "Una parte de la central que se arma y desarma por separado, con sus zonas y usuarios.",
+   "long": "Sirve para dos usos en el mismo lugar, como una casa y un taller. En Paradox se activa en [700] opción 1; las SP+ tienen dos particiones y la EVOHD+ ocho. El tercer dígito de cada zona la asigna: 1, 2 o 3 para ambas.",
+   "case": false
+  },
+  {
+   "id": "codigo-instalador",
+   "term": "código de instalador",
+   "aliases": [
+    "installer code"
+   ],
+   "cat": "Alarmas",
+   "short": "El código que abre la programación de la central.",
+   "long": "En Paradox SP y MG es 0000 de fábrica y se cambia en [397]; en EVO es 000000. Al estar en manuales públicos, se cambia el primer día y se guarda en el sistema de gestión, nunca en el gabinete.",
+   "case": false
+  },
+  {
+   "id": "bloqueo-instalador",
+   "term": "bloqueo de instalador",
+   "aliases": [
+    "installer lock"
+   ],
+   "cat": "Alarmas",
+   "short": "Traba la programación de la central para que el reseteo por botón no la borre.",
+   "long": "En Paradox SP y MG se activa con 147 en [395] y se quita con 000; al energizar, el LED de estado destella rápido seis segundos. Ata la central a quien tiene el código: se usa solo si está en el contrato con el cliente.",
+   "case": false
+  },
+  {
+   "id": "bloqueo-teclado",
+   "term": "bloqueo de teclado",
+   "aliases": [
+    "keypad lockout"
+   ],
+   "cat": "Alarmas",
+   "short": "Bloquea los teclados un tiempo después de varios códigos inválidos y lo reporta.",
+   "long": "En Paradox SP y MG, [717] fija la cantidad de intentos y [716] los minutos de bloqueo; 000 lo deja apagado, como viene de fábrica. Frena a quien prueba códigos al azar.",
+   "case": false
+  },
+  {
+   "id": "codigo-coaccion",
+   "term": "código de coacción",
+   "aliases": [
+    "coacción",
+    "duress"
+   ],
+   "cat": "Alarmas",
+   "short": "Un código que desarma como cualquier otro, pero avisa en silencio a monitoreo que el usuario está siendo obligado.",
+   "long": "En Paradox SP y MG es la opción 8 del usuario, en las secciones [404] a [432].",
+   "case": false
+  },
+  {
+   "id": "retardo-entrada",
+   "term": "retardo de entrada",
+   "aliases": [
+    "demora de entrada",
+    "entry delay"
+   ],
+   "cat": "Alarmas",
+   "short": "El tiempo que da la zona de la puerta para llegar al teclado y desarmar.",
+   "long": "En Paradox SP y MG la zona de la puerta se define 01 y el tiempo está en [710], 45 s de fábrica. La demora de salida, al armar, está en [745] y [746], 60 s de fábrica.",
+   "case": false
+  },
+  {
+   "id": "zona-seguimiento",
+   "term": "zona de seguimiento",
+   "aliases": [
+    "zona seguidora"
+   ],
+   "cat": "Alarmas",
+   "short": "Zona que espera si antes se abrió una de retardo y dispara al instante si se activa sola.",
+   "long": "Es la definición 05 en Paradox SP y MG, típica del detector que cuida el teclado: cuando el cliente entra por la puerta, toma el retardo de entrada; si alguien entra por otro lado, dispara enseguida.",
+   "case": false
+  },
+  {
+   "id": "intellizone",
+   "term": "Intellizone",
+   "aliases": [],
+   "cat": "Alarmas",
+   "short": "Función de Paradox contra falsas alarmas: la zona espera una confirmación dentro de un tiempo antes de disparar.",
+   "long": "Es la opción 6 de la zona en SP y MG; el tiempo de espera está en [713], 48 s de fábrica.",
+   "case": true
+  },
+  {
+   "id": "retardo-transmision",
+   "term": "retardo de transmisión",
+   "aliases": [
+    "transmission delay"
+   ],
+   "cat": "Alarmas",
+   "short": "La alarma suena pero no se reporta a monitoreo si el usuario desarma a tiempo.",
+   "long": "En Paradox SP y MG es la opción 7 de la zona y el tiempo va en [833]. Sirve en entradas con falsas alarmas frecuentes por error del usuario.",
+   "case": false
+  },
+  {
+   "id": "stayd",
+   "term": "StayD",
+   "aliases": [
+    "modo StayD"
+   ],
+   "cat": "Alarmas",
+   "short": "Modo de Paradox que mantiene armado el perímetro mientras la gente está en casa.",
+   "long": "Con StayD activo no se entra a programación: hay que apagarlo y tener las particiones desarmadas. Conviene anotar en la ficha de la obra si se usa.",
+   "case": true
+  },
+  {
+   "id": "babyware",
+   "term": "BabyWare",
+   "aliases": [],
+   "cat": "Alarmas",
+   "short": "El software de Paradox para PC que lee y escribe la programación de la central.",
+   "long": "Conecta local con el cable 307USB o un CV4USB al conector serie, o remoto por módulo IP o PCS. Pide el ID de panel ([910]) y la contraseña de PC ([911]), que tienen que coincidir con la cuenta. Sirve para sacar una copia completa antes de cambiar nada.",
+   "case": true
+  },
+  {
+   "id": "blueeye",
+   "term": "BlueEye",
+   "aliases": [
+    "app BlueEye"
+   ],
+   "cat": "Alarmas",
+   "short": "La app de Paradox para clientes e instaladores, que reemplaza a Insite Gold.",
+   "long": "Conecta con la central por Swan o, en módulos legado, por IP estática sin Swan. Pide el código de PC, el mismo de BabyWare, y en MG y SP cada 0 se escribe como A. Su menú instalador configura módulos IP y crea sitios Swan. No soporta las cámaras HD78 y HD88.",
+   "case": true
+  },
+  {
+   "id": "swan",
+   "term": "Swan",
+   "aliases": [
+    "servidor Swan",
+    "sitio Swan",
+    "Swan 4G"
+   ],
+   "cat": "Alarmas",
+   "short": "El servidor de Paradox que conecta la app con el módulo de la central, con un sitio por suscripción.",
+   "long": "El módulo sale a internet y se anota en Swan; la app llega a través de él sin abrir puertos. El sitio tiene días de suscripción y fecha de renovación. Con IP150M, según su manual, sin sitio Swan pago no hay ninguna comunicación. El proyecto PAI lo desaconseja citando una vulnerabilidad documentada.",
+   "case": true
+  },
+  {
+   "id": "insite-gold",
+   "term": "Insite Gold",
+   "aliases": [],
+   "cat": "Alarmas",
+   "short": "La app anterior de Paradox, reemplazada por BlueEye.",
+   "long": "Los sitios se pasan a BlueEye con el ID de sitio y el correo de Swan. Los módulos MQTT (IP180, IP150M) no conectan con Insite Gold.",
+   "case": true
+  },
+  {
+   "id": "turn-paradox",
+   "term": "TURN",
+   "aliases": [
+    "módulos legado",
+    "generación legado"
+   ],
+   "cat": "Alarmas",
+   "short": "Como llama Paradox a su generación legado de comunicadores: IP150, IP150+, PCS hasta V7.",
+   "long": "Reportan a receptoras IPR512 o IPRS-7, conectan por Swan o IP estática y admiten Insite Gold y BlueEye. No se mezclan con módulos MQTT en la misma central. Ojo: en redes, TURN también es un protocolo para atravesar NAT; acá es el nombre de una generación de productos.",
+   "case": true
+  },
+  {
+   "id": "ip150",
+   "term": "IP150",
+   "aliases": [
+    "IP150+",
+    "IP150M",
+    "IP150+MQ"
+   ],
+   "cat": "Alarmas",
+   "short": "Módulo de comunicación IP de Paradox para centrales SP, MG y EVO.",
+   "long": "El IP150 y el IP150+ son legado (TURN). El IP150+MQ y el IP150M (IP150 con firmware V6.50) son MQTT: reportan solo a IPC10 y solo con BlueEye. Pasar a IP150M es irreversible y exige sitio Swan pago. Desde el firmware 5.3.0, el IP150+ se configura desde el menú instalador de BlueEye. Su puerto de software es el 10000.",
+   "case": true
+  },
+  {
+   "id": "ip180",
+   "term": "IP180",
+   "aliases": [],
+   "cat": "Alarmas",
+   "short": "Módulo de comunicación MQTT de Paradox, con Ethernet y Wi-Fi.",
+   "long": "Reporta solo Contact ID a IPC10 o VIPC20, solo con BlueEye, y va en el serie 1 de las centrales plus. Necesita salida por TCP 8883 y 443 y UDP 53, 123 y 5683. Sin Ethernet abre un punto de acceso propio en 192.168.180.1 para cargar el Wi-Fi.",
+   "case": true
+  },
+  {
+   "id": "ipc10",
+   "term": "IPC10",
+   "aliases": [
+    "VIPC20"
+   ],
+   "cat": "Alarmas",
+   "short": "Conversor receptor de Paradox para módulos MQTT: recibe sus eventos y los pasa al software de monitoreo.",
+   "long": "Maneja hasta 5000 cuentas y guarda 20 000 eventos si cae el software. Entrega en MLR2-DG, Ademco 685 o CID-TCP, se alimenta por PoE y no usa contraseña de receptor. Sus perfiles de supervisión son fijos, de 1200 s a 90 s.",
+   "case": true
+  },
+  {
+   "id": "ipr512",
+   "term": "IPR512",
+   "aliases": [
+    "IPRS-7"
+   ],
+   "cat": "Alarmas",
+   "short": "Receptor IP legado de Paradox para módulos TURN.",
+   "long": "Atiende hasta 512 centrales, acepta Contact ID y SIA, tiene dos WAN y hasta 32 perfiles de sondeo, y entrega al software de monitoreo emulando receptoras conocidas. Usa contraseña de receptor (123456 de fábrica en la central). Los módulos MQTT no reportan a él.",
+   "case": true
+  },
+  {
+   "id": "pcs",
+   "term": "PCS",
+   "aliases": [
+    "PCS250",
+    "PCS265",
+    "PCS265 LTE",
+    "comunicador PCS"
+   ],
+   "cat": "Alarmas",
+   "short": "Comunicadores celulares de Paradox.",
+   "long": "Los PCS250, 260 y 265, y el PCS265 LTE o V7, son legado (TURN); el PCS265 V8 es MQTT. En las centrales plus suelen ir de respaldo en el serie 2, de la misma generación que el módulo principal.",
+   "case": true
+  },
+  {
+   "id": "digiplex",
+   "term": "Digiplex",
+   "aliases": [
+    "bus Digiplex"
+   ],
+   "cat": "Alarmas",
+   "short": "El nombre del bus de cuatro hilos y de la familia EVO de Paradox.",
+   "long": "En la EVOHD+ el bus Digiplex admite hasta 254 módulos y 914 m de cable en total, en estrella o en cadena. Antes de conectar un módulo se saca la red y la batería; en ambientes ruidosos, cable blindado con la malla a tierra de un solo lado.",
+   "case": true
+  },
+  {
+   "id": "evo",
+   "term": "EVO",
+   "aliases": [
+    "EVO192",
+    "EVOHD+",
+    "Digiplex EVO"
+   ],
+   "cat": "Alarmas",
+   "short": "La familia de centrales grandes de Paradox, con control de acceso.",
+   "long": "Se programa manteniendo el 0, con código de instalador de seis dígitos (000000 de fábrica) y secciones de cuatro dígitos. La EVOHD+ tiene 8 zonas en placa, hasta 192 por bus, 8 particiones y 999 usuarios.",
+   "case": true
+  },
+  {
+   "id": "spectra",
+   "term": "Spectra",
+   "aliases": [
+    "SP+",
+    "SP5500+",
+    "SP6000+",
+    "SP7000+",
+    "Spectra SP"
+   ],
+   "cat": "Alarmas",
+   "short": "La familia de centrales SP de Paradox; las plus son SP5500+, SP6000+ y SP7000+.",
+   "long": "Se programan con ENTER, código de instalador (0000) y secciones de tres dígitos, con el mismo mapa que Magellan. Las SP+ tienen 32 zonas, 32 usuarios, 2 particiones y hasta 15 módulos en el bus. SP4000 y SP65 son la gama baja, con otro procedimiento de reseteo.",
+   "case": true
+  },
+  {
+   "id": "magellan",
+   "term": "Magellan",
+   "aliases": [
+    "MG",
+    "MG5050",
+    "MG+"
+   ],
+   "cat": "Alarmas",
+   "short": "La familia de centrales MG de Paradox, con el mismo mapa de secciones que Spectra.",
+   "long": "Se programa igual que las SP: ENTER, código de instalador y secciones de tres dígitos. Por eso un instructivo de monitoreo para MG5050 sirve también para una SP6000.",
+   "case": true
+  },
+  {
+   "id": "m25",
+   "term": "M25",
+   "aliases": [
+    "M25 LTE",
+    "línea M"
+   ],
+   "cat": "Alarmas",
+   "short": "La consola de la línea M de Paradox: PoE, batería de litio, Wi-Fi, Ethernet y LTE.",
+   "long": "Según su ficha: 200 zonas, 10 particiones, inalámbrico M y hasta 45 dispositivos por Ethernet, sin bus de cuatro hilos; se programa por BlueEye o software web y reporta directo a la receptora en hasta 4 canales. Los servicios de app van con Swan 4G por suscripción.",
+   "case": true
+  },
+  {
+   "id": "zx8",
+   "term": "ZX8",
+   "aliases": [
+    "ZX82",
+    "expansor ZX8"
+   ],
+   "cat": "Alarmas",
+   "short": "Expansor de 8 zonas cableadas de Paradox que va en el bus.",
+   "long": "Consume 31 mA según la guía SP+. Si se lo saca del bus, queda la falla de supervisión de módulo (TBL 10) hasta borrarla en [955]. En las SP+, la primera zona de cada ZX8 puede usarse como entrada de tamper.",
+   "case": true
+  },
+  {
+   "id": "307usb",
+   "term": "307USB",
+   "aliases": [
+    "CV4USB"
+   ],
+   "cat": "Alarmas",
+   "short": "Cable de Paradox del conector serie de la central al USB de la PC, para BabyWare.",
+   "long": "La notebook lo ve como un puerto COM. Va al conector serie de 4 pines de la central, no a los bornes del bus.",
+   "case": true
+  },
+  {
+   "id": "pai",
+   "term": "PAI",
+   "aliases": [
+    "Paradox Alarm Interface"
+   ],
+   "cat": "Herramientas",
+   "short": "Paradox Alarm Interface: software libre para integrar centrales Paradox con sistemas de domótica.",
+   "long": "Se conecta al IP150 o al puerto serie. Su documentación desaconseja Swan y recomienda no actualizar EVO a firmware 7.50 o superior si se usa conexión serie. Es un proyecto que compite con la app oficial.",
+   "case": true
+  },
+  {
+   "id": "pir",
+   "term": "PIR",
+   "aliases": [
+    "Passive Infrared",
+    "sensor PIR",
+    "detector PIR"
+   ],
+   "cat": "Alarmas",
+   "short": "Passive Infrared: el detector de movimiento infrarrojo pasivo de las alarmas.",
+   "long": "Detecta el cambio de calor que produce una persona al moverse en su campo. El que cuida el teclado suele programarse como zona de seguimiento.",
+   "case": true
+  },
+  {
+   "id": "led",
+   "term": "LED",
+   "aliases": [
+    "Light-Emitting Diode",
+    "diodo emisor de luz"
+   ],
+   "cat": "Electricidad",
+   "short": "Light-Emitting Diode: diodo que emite luz; en los equipos, la luz que indica un estado.",
+   "long": "En la placa de una SP+, el LED de estado destella una vez por segundo si todo está normal y se prende un segundo y se apaga otro si hay alguna falla.",
+   "case": true
+  },
+  {
+   "id": "rx-tx",
+   "term": "RX/TX",
+   "aliases": [
+    "RX",
+    "TX"
+   ],
+   "cat": "Electricidad",
+   "short": "Recepción y transmisión: las líneas o luces que muestran datos que entran y salen.",
+   "long": "En un módulo IP de Paradox, el LED RX/TX titilando indica que el módulo habla con la central por el serie: es el primer paso del diagnóstico cuando no reporta.",
+   "case": true
+  },
+  {
+   "id": "gprs",
+   "term": "GPRS",
+   "aliases": [
+    "General Packet Radio Service"
+   ],
+   "cat": "Redes",
+   "short": "General Packet Radio Service: la transmisión de datos por paquetes de la red celular 2G.",
+   "long": "Fue de los primeros caminos de datos celulares para comunicadores de alarma. En Paradox SP y MG, SIA no está soportado por GPRS ni IP: se usa Contact ID.",
+   "case": true
+  },
+  {
+   "id": "apn",
+   "term": "APN",
+   "aliases": [
+    "Access Point Name"
+   ],
+   "cat": "Redes",
+   "short": "Access Point Name: el nombre que define por dónde sale a internet un equipo con chip celular.",
+   "long": "Lo da la operadora o el proveedor del chip. En Paradox, la tabla de estados de [935] muestra \"sin APN\" en el grupo 3 cuando falta en un comunicador celular.",
+   "case": true
+  },
+  {
+   "id": "en-50131",
+   "term": "EN 50131",
+   "aliases": [
+    "EN 50131-1"
+   ],
+   "cat": "Normas",
+   "short": "La serie europea de normas para sistemas de alarma de intrusión y atraco.",
+   "long": "Define requisitos de los equipos y del sistema, incluida la protección contra sabotaje. La guía SP+ pide, para cumplirla, un gabinete metálico aprobado con tamper.",
+   "case": true
+  },
+  {
+   "id": "va",
+   "term": "VA",
+   "aliases": [
+    "voltampere",
+    "voltamperes"
+   ],
+   "cat": "Electricidad",
+   "short": "Voltampere: la unidad de potencia aparente, la que se usa para dimensionar transformadores.",
+   "long": "Paradox pide para sus centrales un transformador de 16,5 Vac y 40 VA como mínimo.",
+   "case": true
+  },
+  {
+   "id": "agm",
+   "term": "AGM",
+   "aliases": [
+    "Absorbent Glass Mat"
+   ],
+   "cat": "Electricidad",
+   "short": "Absorbent Glass Mat: batería de plomo sellada con el electrolito absorbido en fibra de vidrio.",
+   "long": "Junto con las de gel, son las baterías selladas de 12 V que respaldan las centrales de alarma, sin mantenimiento y sin riesgo de derrame en el gabinete.",
+   "case": true
+  },
+  {
+   "id": "coap",
+   "term": "CoAP",
+   "aliases": [
+    "Constrained Application Protocol",
+    "COAP"
+   ],
+   "cat": "Web e integración",
+   "short": "Constrained Application Protocol: protocolo web liviano sobre UDP para equipos chicos, por el puerto 5683.",
+   "long": "Lo publicó el IETF en la RFC 7252, de 2014. En Paradox, IP180 e IP150M piden salida por UDP 5683 entre sus puertos.",
+   "year": 2014,
+   "case": true
+  },
+  {
+   "id": "oasis",
+   "term": "OASIS",
+   "aliases": [
+    "Organization for the Advancement of Structured Information Standards"
+   ],
+   "cat": "Normas",
+   "short": "Organización internacional sin fines de lucro que publica estándares abiertos, como MQTT.",
+   "long": "Estandarizó MQTT en 2014 con la versión 3.1.1 y publicó la versión 5.0 en 2019.",
+   "case": true
+  },
+  {
+   "id": "hexadecimal",
+   "term": "hexadecimal",
+   "aliases": [
+    "hexa",
+    "base 16"
+   ],
+   "cat": "Herramientas",
+   "short": "Sistema de numeración en base 16: dígitos del 0 al 9 y letras de la A a la F.",
+   "long": "En Paradox SP y MG se usa para ID de panel, abonados y contraseñas. Como el teclado no tiene letras, la tecla 0 vale A y las teclas de función dan B a F; por eso en BlueEye un código de PC 6089 se escribe 6A89.",
+   "case": false
+  },
+  {
+   "id": "esxi",
+   "term": "ESXi",
+   "aliases": [
+    "VMware ESXi",
+    "ESX",
+    "ESX Server"
+   ],
+   "cat": "Virtualización",
+   "short": "El hipervisor tipo 1 de VMware: se instala directo sobre el servidor, sin otro sistema operativo debajo.",
+   "long": "ESX Server salió en 2001 y desde vSphere 5.0, en 2011, queda solo ESXi. Su núcleo es el VMkernel y trae sus propios drivers, por eso el hardware tiene que estar en la Broadcom Compatibility Guide. ESXi 8 pide 2 núcleos, 8 GB de RAM y un disco de arranque persistente; vSphere 8 pierde soporte general el 11 de octubre de 2027.",
+   "case": true,
+   "year": 2001
+  },
+  {
+   "id": "vsphere",
+   "term": "vSphere",
+   "aliases": [
+    "VMware vSphere"
+   ],
+   "cat": "Virtualización",
+   "short": "La plataforma de virtualización de VMware: los hosts ESXi más vCenter, que los gestiona juntos.",
+   "long": "Desde 2024 se vende solo por suscripción y por núcleo, dentro de VVF o VCF; Standard y Enterprise Plus llegan hasta 8.0 Update 3. vSphere 9 retira las baselines de Lifecycle Manager y usa hardware virtual versión 22.",
+   "case": true
+  },
+  {
+   "id": "vcenter",
+   "term": "vCenter",
+   "aliases": [
+    "vCenter Server",
+    "VCSA",
+    "vCenter Server Appliance",
+    "VirtualCenter"
+   ],
+   "cat": "Virtualización",
+   "short": "El servidor que gestiona varios hosts ESXi juntos y habilita clúster, vMotion, HA y DRS.",
+   "long": "Nació como VirtualCenter en 2003. Hoy se instala como appliance, la VCSA, que en vSphere 8 pide 14 GB de RAM en el tamaño Tiny. El acceso pasa por vCenter Single Sign-On, con el dominio vsphere.local por defecto. Viene incluido en las suscripciones; el ESXi gratuito no se puede gestionar con vCenter.",
+   "case": true
+  },
+  {
+   "id": "vmkernel",
+   "term": "VMkernel",
+   "aliases": [],
+   "cat": "Virtualización",
+   "short": "El núcleo de ESXi: maneja CPU, memoria, discos y placas de red y los reparte entre las VMs.",
+   "long": "Al no haber un sistema operativo debajo, el VMkernel trae sus propios drivers. Sus mensajes quedan en /var/run/log/vmkernel.log, y en esxtop KAVG mide el tiempo que una operación de disco pasa adentro de él.",
+   "case": true
+  },
+  {
+   "id": "vmk",
+   "term": "vmk",
+   "aliases": [
+    "adaptador VMkernel",
+    "adaptadores VMkernel",
+    "vmk0",
+    "vmk1"
+   ],
+   "cat": "Virtualización",
+   "short": "Adaptador VMkernel: una IP del propio host ESXi, para gestión, vMotion, almacenamiento o backup.",
+   "long": "La documentación pide uno por tipo de tráfico, cada uno en su port group, su VLAN y su subred. vmk0 es el de gestión que crea la instalación. Se prueban con vmkping -I vmkN, y con -d -s 8972 se verifica MTU 9000 de punta a punta.",
+   "case": false
+  },
+  {
+   "id": "vswitch",
+   "term": "vSwitch",
+   "aliases": [
+    "vSwitch estándar",
+    "switch virtual",
+    "standard switch"
+   ],
+   "cat": "Virtualización",
+   "short": "El switch virtual adentro de un host ESXi: une las placas de las VMs y los vmk con las placas físicas.",
+   "long": "Cada host tiene sus vSwitch estándar; vSwitch0 lo crea la instalación con la red de gestión. Los uplinks son las vmnic y las VMs se conectan a port groups. Con dos uplinks a dos bocas distintas, un cable suelto no corta el servicio.",
+   "case": false
+  },
+  {
+   "id": "port-group",
+   "term": "port group",
+   "aliases": [
+    "port groups",
+    "grupo de puertos"
+   ],
+   "cat": "Virtualización",
+   "short": "El enchufe virtual de un vSwitch, con su VLAN ID: las VMs y los vmk se conectan ahí.",
+   "long": "VLAN ID 0 es sin etiqueta, la VLAN nativa del switch físico. El vSwitch pone y saca la etiqueta 802.1Q según el port group, así que la VM no necesita saber de VLAN. Management Network es el port group de gestión y se cambia solo con consola fuera de banda abierta.",
+   "case": false
+  },
+  {
+   "id": "vmnic",
+   "term": "vmnic",
+   "aliases": [
+    "vmnic0",
+    "vmnic2",
+    "uplink del vSwitch"
+   ],
+   "cat": "Virtualización",
+   "short": "El nombre que ESXi le da a cada placa de red física del servidor: vmnic0, vmnic1 y así.",
+   "long": "Las vmnic son los uplinks de los vSwitch. esxcli network nic list las muestra con su estado y velocidad. Conviene que cada vSwitch tenga dos, conectadas a bocas distintas del switch físico.",
+   "case": false
+  },
+  {
+   "id": "datastore",
+   "term": "datastore",
+   "aliases": [
+    "datastores",
+    "datastore1"
+   ],
+   "cat": "Virtualización",
+   "short": "El almacenamiento donde ESXi guarda las VMs: una carpeta por VM con su configuración y sus discos.",
+   "long": "Puede ser VMFS, sobre un disco local o una LUN, o NFS, montado desde un NAS. esxcli storage filesystem list muestra cada uno con su tamaño y su libre. Si un datastore con discos thin se llena, las VMs se detienen.",
+   "case": false
+  },
+  {
+   "id": "vmfs",
+   "term": "VMFS",
+   "aliases": [
+    "Virtual Machine File System",
+    "VMFS-6"
+   ],
+   "cat": "Virtualización",
+   "short": "Virtual Machine File System: el sistema de archivos de ESXi, pensado para que varios hosts compartan el mismo disco.",
+   "long": "Se arma sobre un disco local o una LUN de una SAN o de iSCSI. Cada host bloquea solo los archivos de sus VMs, y eso es lo que permite vMotion y HA con almacenamiento compartido. La versión actual, VMFS-6, llegó con vSphere 6.5 en 2016.",
+   "case": true
+  },
+  {
+   "id": "nfs",
+   "term": "NFS",
+   "aliases": [
+    "Network File System",
+    "NFS 3",
+    "NFS 4.1"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Network File System: el protocolo para compartir archivos por red que ESXi usa para montar datastores desde un NAS.",
+   "long": "Lo creó Sun Microsystems en 1984. ESXi soporta NFS 3 y 4.1, por un vmk de almacenamiento, y lo monta con esxcli storage nfs add. En NFS sin aceleración por hardware los discos de las VMs solo pueden ser thin.",
+   "case": true,
+   "year": 1984
+  },
+  {
+   "id": "iscsi",
+   "term": "iSCSI",
+   "aliases": [
+    "Internet SCSI",
+    "Software iSCSI Adapter"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "SCSI sobre IP: lleva comandos de disco por una red Ethernet para que funcione como una SAN.",
+   "long": "Se estandarizó en 2004. En ESXi se usa el adaptador de software sobre un vmk dedicado, con MTU 9000 de punta a punta si hay jumbo frames, y con dos placas se arma multipathing.",
+   "case": true,
+   "year": 2004
+  },
+  {
+   "id": "scsi",
+   "term": "SCSI",
+   "aliases": [
+    "Small Computer System Interface",
+    "VirtIO SCSI"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Small Computer System Interface: la familia de comandos con la que un sistema habla con sus discos.",
+   "long": "En virtualización es también un tipo de controlador de disco virtual. Al migrar una VM Linux de ESXi a Proxmox VE se prueba primero el disco en VirtIO SCSI; iSCSI lleva estos comandos por la red.",
+   "case": true
+  },
+  {
+   "id": "sata",
+   "term": "SATA",
+   "aliases": [
+    "Serial ATA"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Serial ATA: la interfaz de disco más común en PCs, también disponible como controlador de disco virtual.",
+   "long": "Al importar una VM Windows de ESXi a Proxmox VE se arranca con el disco en SATA, porque Windows ya trae ese driver; después de instalar los drivers VirtIO se cambia.",
+   "case": true
+  },
+  {
+   "id": "lun",
+   "term": "LUN",
+   "aliases": [
+    "Logical Unit Number",
+    "LUNs"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Logical Unit Number: un disco lógico que una SAN o un equipo iSCSI le presenta a un servidor.",
+   "long": "En ESXi una LUN se formatea con VMFS y queda como datastore, que varios hosts pueden compartir. En backups, el modo SAN usa un proxy físico que lee la LUN directo.",
+   "case": true
+  },
+  {
+   "id": "jumbo-frame",
+   "term": "jumbo frame",
+   "aliases": [
+    "jumbo frames",
+    "tramas jumbo",
+    "MTU 9000"
+   ],
+   "cat": "Redes",
+   "short": "Trama Ethernet más grande que los 1500 bytes estándar, típicamente de 9000, usada en redes de almacenamiento.",
+   "long": "No es parte formal de Ethernet, así que hay que configurarla igual en cada salto: vmk, vSwitch, switch físico y NAS. Se prueba con vmkping -d -s 8972: 8972 de datos más 28 de encabezados dan 9000. Un solo salto en 1500 da cortes intermitentes.",
+   "case": false
+  },
+  {
+   "id": "snapshot",
+   "term": "snapshot",
+   "aliases": [
+    "snapshots",
+    "instantánea"
+   ],
+   "cat": "Virtualización",
+   "short": "Foto del estado de una VM para volver atrás: congela el disco base y manda lo nuevo a un disco delta.",
+   "long": "No es backup: si se pierde el disco base, el delta solo no restaura nada. La KB de Broadcom permite hasta 32 en cadena, pero recomienda 2 o 3 por VM y ninguno por más de 72 horas. Se crean y borran con vim-cmd vmsvc/snapshot.create y snapshot.removeall. En Proxmox VE, sobre LVM-thin o ZFS, el snapshot es copy-on-write: instantáneo, y vive en el mismo pool que el disco.",
+   "case": false
+  },
+  {
+   "id": "disco-delta",
+   "term": "disco delta",
+   "aliases": [
+    "delta disk",
+    "-000001.vmdk"
+   ],
+   "cat": "Virtualización",
+   "short": "El archivo que recibe todo lo que la VM escribe mientras existe un snapshot (-00000N.vmdk).",
+   "long": "Crece mientras el snapshot exista y depende del disco base. Los que deja un backup fallido pueden no verse en el Snapshot Manager: se buscan con find /vmfs/volumes/datastore1/ -name \"*-0000*.vmdk\".",
+   "case": false
+  },
+  {
+   "id": "consolidacion",
+   "term": "consolidación",
+   "aliases": [
+    "consolidar",
+    "consolidate",
+    "disks consolidation"
+   ],
+   "cat": "Virtualización",
+   "short": "Fundir los discos delta de los snapshots con el disco base, para que la VM vuelva a tener un solo disco.",
+   "long": "Es lo que pasa al borrar un snapshot. No se cancela una consolidación en curso. El aviso \"Virtual machine disks consolidation is needed\" aparece cuando quedan deltas, por ejemplo de backups nocturnos fallidos.",
+   "case": false
+  },
+  {
+   "id": "thin",
+   "term": "thin provisioning",
+   "aliases": [
+    "thin",
+    "disco thin"
+   ],
+   "cat": "Virtualización",
+   "short": "Disco virtual que reserva solo lo que la VM escribió y crece a demanda hasta su tamaño máximo.",
+   "long": "Permite prometer más espacio del que tiene el datastore. Si el datastore se llena con las VMs corriendo, las VMs se detienen. ls -lh del -flat.vmdk muestra lo provisionado y du -h lo ocupado.",
+   "case": false
+  },
+  {
+   "id": "thick",
+   "term": "thick provisioning",
+   "aliases": [
+    "thick",
+    "thick lazy zeroed",
+    "thick eager zeroed"
+   ],
+   "cat": "Virtualización",
+   "short": "Disco virtual que aparta todo su tamaño en el datastore desde que se crea.",
+   "long": "Lazy zeroed pone cada bloque en cero la primera vez que se usa; eager zeroed lo hace todo al crear, tarda más y es el que pide Fault Tolerance. Un disco se puede pasar de thin a thick con Storage vMotion.",
+   "case": false
+  },
+  {
+   "id": "ovf",
+   "term": "OVF",
+   "aliases": [
+    "Open Virtualization Format",
+    "OVA",
+    ".ova",
+    ".ovf"
+   ],
+   "cat": "Virtualización",
+   "short": "Open Virtualization Format: formato abierto de la DMTF para entregar VMs armadas; un OVA es lo mismo en un solo archivo.",
+   "long": "Los fabricantes de software de video, acceso o telefonía entregan sus servidores así. En ESXi entran por Deploy OVF Template, que crea la VM con su hardware; copiar el archivo al datastore no lo instala.",
+   "case": true
+  },
+  {
+   "id": "vmware-tools",
+   "term": "VMware Tools",
+   "aliases": [],
+   "cat": "Virtualización",
+   "short": "Drivers y servicios que van dentro de cada VM para que el host pueda administrarla bien.",
+   "long": "Traen el driver de balloon, permiten snapshots con quiesce y le dan a HA el latido de la VM. vim-cmd vmsvc/get.guest muestra toolsRunningStatus y toolsVersionStatus. Antes de migrar una VM a Proxmox VE se desinstalan.",
+   "case": false
+  },
+  {
+   "id": "balloon",
+   "term": "balloon",
+   "aliases": [
+    "ballooning",
+    "MCTL",
+    "MCTLSZ",
+    "driver de balloon"
+   ],
+   "cat": "Virtualización",
+   "short": "Mecanismo por el que el host le pide memoria a una VM a través de VMware Tools cuando le falta.",
+   "long": "En esxtop, pantalla m, la columna MCTLSZ muestra cuánto recuperó. Si MCTL? dice que no hay driver, falta instalar VMware Tools. Si el balloon y el swap del host (SWCUR) crecen, al host le falta memoria.",
+   "case": false
+  },
+  {
+   "id": "swcur",
+   "term": "SWCUR",
+   "aliases": [
+    "swap del host"
+   ],
+   "cat": "Virtualización",
+   "short": "Columna de esxtop (pantalla m) con la memoria de una VM que el host mandó a swap.",
+   "long": "Junto con MCTLSZ, el balloon, indica que al host le falta memoria física. Que crezca es peor que el balloon: el swap del host va a disco.",
+   "case": true
+  },
+  {
+   "id": "vmotion",
+   "term": "vMotion",
+   "aliases": [
+    "Storage vMotion"
+   ],
+   "cat": "Virtualización",
+   "short": "Mover una VM encendida de un host a otro sin apagarla, copiando su memoria y su estado.",
+   "long": "Salió en 2003. Copia la memoria en pasadas cada vez más chicas y cambia de host en un instante; si solo cambia el host, el disco tiene que estar en un datastore compartido. Viaja sin cifrar por un vmk de vMotion en una red solo de hosts. Storage vMotion mueve los discos.",
+   "case": true,
+   "year": 2003
+  },
+  {
+   "id": "vsphere-ha",
+   "term": "vSphere HA",
+   "aliases": [
+    "HA",
+    "High Availability"
+   ],
+   "cat": "Virtualización",
+   "short": "Función del clúster que reinicia en otros hosts las VMs de un host que se cayó.",
+   "long": "Llegó en 2006. No evita el corte: lo acorta a lo que tardan las VMs en arrancar. Los hosts se vigilan entre sí y funciona aunque vCenter esté caído. Crear el clúster es libre; activar HA depende de la licencia.",
+   "case": true,
+   "year": 2006
+  },
+  {
+   "id": "drs",
+   "term": "DRS",
+   "aliases": [
+    "Distributed Resource Scheduler",
+    "vSphere DRS"
+   ],
+   "cat": "Virtualización",
+   "short": "Distributed Resource Scheduler: reparte la carga de CPU y memoria del clúster moviendo VMs con vMotion.",
+   "long": "Necesita vCenter y licencia. Niveles Manual, Partially Automated y Fully Automated; en clústeres chicos conviene arrancar en manual o parcial y mirar qué recomienda. También vacía un host que entra en modo mantenimiento.",
+   "case": true,
+   "year": 2006
+  },
+  {
+   "id": "evc",
+   "term": "EVC",
+   "aliases": [
+    "Enhanced vMotion Compatibility"
+   ],
+   "cat": "Virtualización",
+   "short": "Enhanced vMotion Compatibility: iguala lo que ven las VMs en un clúster con CPUs de generaciones distintas.",
+   "long": "Se configura en el clúster para que vMotion funcione entre hosts con procesadores diferentes.",
+   "case": true
+  },
+  {
+   "id": "vadp",
+   "term": "VADP",
+   "aliases": [
+    "vSphere APIs for Data Protection",
+    "APIs de protección de datos"
+   ],
+   "cat": "Virtualización",
+   "short": "vSphere APIs for Data Protection: las APIs con las que los productos de backup copian VMs encendidas sin agente.",
+   "long": "Llegaron con vSphere 4 en 2009. Un job pide un snapshot, copia los bloques por NBD, HotAdd o SAN y borra el snapshot. El ESXi gratuito no las expone: ahí solo queda un agente dentro de cada VM.",
+   "case": true,
+   "year": 2009
+  },
+  {
+   "id": "cbt",
+   "term": "CBT",
+   "aliases": [
+    "Changed Block Tracking"
+   ],
+   "cat": "Virtualización",
+   "short": "Changed Block Tracking: registro de los bloques de un disco que cambiaron desde el último backup.",
+   "long": "Con CBT, un backup incremental de una VM copia solo lo cambiado en lugar del disco entero. Trabaja junto con VADP.",
+   "case": true
+  },
+  {
+   "id": "nbd",
+   "term": "NBD",
+   "aliases": [
+    "NBDSSL",
+    "modo red"
+   ],
+   "cat": "Virtualización",
+   "short": "Modo de transporte de backup que copia los discos por la red de gestión del host (NBDSSL es la variante cifrada).",
+   "long": "Es el más simple y el más lento: una guía vieja de Veeam habla de 10 a 20 MB/s en 1 GbE. Para restaurar rápido conviene un proxy virtual con HotAdd.",
+   "case": true
+  },
+  {
+   "id": "hotadd",
+   "term": "HotAdd",
+   "aliases": [
+    "Hot-Add",
+    "hot add"
+   ],
+   "cat": "Virtualización",
+   "short": "Modo de transporte de backup en el que un proxy virtual del mismo host monta el disco de la VM para copiarlo.",
+   "long": "Evita pasar por la red de gestión y acorta las restauraciones. No funciona con discos IDE.",
+   "case": false
+  },
+  {
+   "id": "vddk",
+   "term": "VDDK",
+   "aliases": [
+    "Virtual Disk Development Kit"
+   ],
+   "cat": "Virtualización",
+   "short": "Virtual Disk Development Kit: la librería de VMware para leer y escribir discos de VMs, que usan herramientas de migración y backup.",
+   "long": "En agosto y septiembre de 2026 Broadcom retiró sus descargas públicas. El importador ESXi de Proxmox VE no depende de ella; para productos de backup, ninguna fuente leída confirma el impacto.",
+   "case": true
+  },
+  {
+   "id": "regla-3-2-1",
+   "term": "regla 3-2-1",
+   "aliases": [
+    "3-2-1"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Tres copias de los datos, en dos medios distintos, con una fuera del sitio.",
+   "long": "Cubre la pérdida de un equipo, de un medio o del sitio entero. No reemplaza la prueba: un backup cuenta cuando se restauró al menos una vez en un lugar aislado y se sabe cuánto tardó.",
+   "case": false
+  },
+  {
+   "id": "vvf",
+   "term": "VVF",
+   "aliases": [
+    "vSphere Foundation",
+    "VMware vSphere Foundation"
+   ],
+   "cat": "Virtualización",
+   "short": "VMware vSphere Foundation: la suscripción de Broadcom con vSphere, vCenter y una base de vSAN.",
+   "long": "Se licencia por núcleo físico con mínimo de 16 por CPU. Incluye 0,25 TiB de vSAN por núcleo. Es uno de los caminos que Broadcom recomienda al terminar vSphere 8.",
+   "case": true
+  },
+  {
+   "id": "vcf",
+   "term": "VCF",
+   "aliases": [
+    "VMware Cloud Foundation",
+    "Cloud Foundation"
+   ],
+   "cat": "Virtualización",
+   "short": "VMware Cloud Foundation: la suscripción con el stack completo de Broadcom, con NSX, vSAN y automatización.",
+   "long": "Se licencia por núcleo físico con mínimo de 16 por CPU e incluye 1 TiB de vSAN por núcleo. VCF 9.0 salió el 17 de junio de 2025 con ESXi y vCenter 9.0.",
+   "case": true
+  },
+  {
+   "id": "nsx",
+   "term": "NSX",
+   "aliases": [
+    "VMware NSX"
+   ],
+   "cat": "Virtualización",
+   "short": "La plataforma de redes y seguridad virtuales de VMware, incluida en VCF.",
+   "long": "Al decidir entre renovar o migrar, se pregunta si el cliente usa de verdad NSX, vSAN o DRS: si solo usa el hipervisor, la cuenta cambia.",
+   "case": true
+  },
+  {
+   "id": "vsan",
+   "term": "vSAN",
+   "aliases": [
+    "VMware vSAN"
+   ],
+   "cat": "Virtualización",
+   "short": "El almacenamiento de VMware que junta los discos locales de los hosts en un datastore compartido.",
+   "long": "VVF incluye 0,25 TiB por núcleo y VCF 1 TiB por núcleo. El importador ESXi de Proxmox VE no puede importar discos que estén en vSAN.",
+   "case": false
+  },
+  {
+   "id": "compatibility-guide",
+   "term": "Broadcom Compatibility Guide",
+   "aliases": [
+    "Compatibility Guide",
+    "HCL",
+    "Hardware Compatibility List"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "La lista oficial de CPU, NIC, controladoras y servidores soportados en cada versión de ESXi (la ex HCL).",
+   "long": "Es la única forma de tener una configuración soportada. ESXi 8 dejó afuera CPUs como Sandy Bridge y Haswell, y ESXi 9 deja afuera Skylake y anteriores. Parámetros como allowLegacyCPU fuerzan la instalación, solo en laboratorio.",
+   "case": true
+  },
+  {
+   "id": "dcui",
+   "term": "DCUI",
+   "aliases": [
+    "Direct Console User Interface"
+   ],
+   "cat": "Virtualización",
+   "short": "Direct Console User Interface: la pantalla de consola de un host ESXi, en el monitor del servidor o por iLO o iDRAC.",
+   "long": "Con F2 > Configure Management Network se elige la placa, la VLAN, la IP fija, el DNS y el hostname. Es el camino para recuperar un host que quedó sin acceso por la red.",
+   "case": true
+  },
+  {
+   "id": "osdata",
+   "term": "OSDATA",
+   "aliases": [
+    "ESX-OSData"
+   ],
+   "cat": "Virtualización",
+   "short": "La partición de ESXi donde van el scratch y los logs, en el disco de arranque.",
+   "long": "Si el host arranca de SD o USB, OSDATA se crea en un disco en memoria y lo que guarda se pierde al reiniciar; por eso ESXi 8 pide un disco persistente de 32 GB como mínimo y 128 GB como óptimo.",
+   "case": true
+  },
+  {
+   "id": "uefi",
+   "term": "UEFI",
+   "aliases": [
+    "Unified Extensible Firmware Interface"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Unified Extensible Firmware Interface: el firmware de arranque que reemplazó al BIOS clásico.",
+   "long": "ESXi 8 recomienda arrancar en modo UEFI. En el mismo menú se habilitan VT-x o AMD-V y NX/XD.",
+   "case": true
+  },
+  {
+   "id": "raid",
+   "term": "RAID",
+   "aliases": [
+    "RAID 1",
+    "Redundant Array of Independent Disks"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Redundant Array of Independent Disks: varios discos que la controladora presenta como uno, con redundancia.",
+   "long": "En RAID 1 dos discos guardan lo mismo: si uno falla, el otro sigue. Es lo que se recomienda para el disco de arranque de ESXi.",
+   "case": true
+  },
+  {
+   "id": "vt-x",
+   "term": "VT-x",
+   "aliases": [
+    "VT",
+    "AMD-V",
+    "Intel VT",
+    "virtualización por hardware"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Las extensiones de virtualización de Intel (VT-x) y AMD (AMD-V) dentro del procesador.",
+   "long": "Llegaron entre 2005 y 2006. Con ellas el código de las VMs corre directo en la CPU y solo las instrucciones sensibles pasan por el hipervisor. ESXi 8 las exige habilitadas en BIOS, junto con NX/XD.",
+   "case": true
+  },
+  {
+   "id": "nx-xd",
+   "term": "NX/XD",
+   "aliases": [
+    "NX",
+    "XD",
+    "No-Execute",
+    "Execute Disable"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Bit de protección de memoria del procesador (NX en AMD, XD en Intel) que ESXi exige habilitado en BIOS.",
+   "long": "Marca zonas de memoria como no ejecutables. Si está deshabilitado, el instalador de ESXi 8 no sigue.",
+   "case": true
+  },
+  {
+   "id": "vlcm",
+   "term": "vSphere Lifecycle Manager",
+   "aliases": [
+    "vLCM",
+    "Lifecycle Manager",
+    "Update Manager"
+   ],
+   "cat": "Virtualización",
+   "short": "La herramienta de vCenter que actualiza los hosts ESXi de un clúster llevándolos a una imagen.",
+   "long": "Llegó con vSphere 7 en 2020 y reemplazó a Update Manager; en vSphere 9 se retiran las baselines y queda el modelo de imágenes. Sus pasos: Check Compliance, Remediation Pre-check, Stage y Remediate.",
+   "case": true,
+   "year": 2020
+  },
+  {
+   "id": "modo-mantenimiento",
+   "term": "modo mantenimiento",
+   "aliases": [
+    "maintenance mode",
+    "maintenanceMode"
+   ],
+   "cat": "Virtualización",
+   "short": "Estado de un host ESXi sin VMs corriendo, listo para parchearlo o repararlo.",
+   "long": "Con DRS, al entrar en mantenimiento las VMs se mueven solas con vMotion; sin DRS se mueven a mano o se apagan. Por esxcli: esxcli system maintenanceMode set -e true.",
+   "case": false
+  },
+  {
+   "id": "esxtop",
+   "term": "esxtop",
+   "aliases": [],
+   "cat": "Virtualización",
+   "short": "El monitor de rendimiento de ESXi por SSH: CPU, memoria, disco y red de cada VM y del host.",
+   "long": "Teclas c, m, u, v y n para cada pantalla, distinguiendo mayúsculas. El modo batch, esxtop -b -a -d 5 -n 12, guarda un minuto en CSV para comparar con un día normal.",
+   "case": false
+  },
+  {
+   "id": "rdy",
+   "term": "%RDY",
+   "aliases": [
+    "RDY",
+    "CPU ready",
+    "ready time"
+   ],
+   "cat": "Virtualización",
+   "short": "Columna de esxtop con el tiempo que una VM estuvo lista para correr esperando una CPU física libre.",
+   "long": "Alto indica fila de CPU: hay más vCPU que núcleos disponibles. Agregar vCPU a esa VM suele empeorarlo. No hay umbral universal: se compara con un día normal del mismo host.",
+   "case": true
+  },
+  {
+   "id": "used",
+   "term": "%USED",
+   "aliases": [
+    "USED"
+   ],
+   "cat": "Virtualización",
+   "short": "Columna de esxtop (pantalla c) con el uso de CPU física de cada VM.",
+   "long": "Se lee junto con %RDY: una VM puede usar poco y esperar mucho si el host está saturado.",
+   "case": true
+  },
+  {
+   "id": "davg",
+   "term": "DAVG",
+   "aliases": [
+    "DAVG/cmd"
+   ],
+   "cat": "Virtualización",
+   "short": "Columna de esxtop con la latencia del dispositivo de almacenamiento, en milisegundos por operación.",
+   "long": "Si DAVG es alto, el problema está en el storage: controladora, red de almacenamiento, NAS o SAN. GAVG = DAVG + KAVG.",
+   "case": true
+  },
+  {
+   "id": "kavg",
+   "term": "KAVG",
+   "aliases": [
+    "KAVG/cmd"
+   ],
+   "cat": "Virtualización",
+   "short": "Columna de esxtop con el tiempo que una operación de disco pasa dentro del VMkernel del host.",
+   "long": "Debería estar cerca de cero. Si sube, hay encolamiento en el host y no en el almacenamiento.",
+   "case": true
+  },
+  {
+   "id": "gavg",
+   "term": "GAVG",
+   "aliases": [
+    "GAVG/cmd"
+   ],
+   "cat": "Virtualización",
+   "short": "Columna de esxtop con la latencia de disco que siente la VM: la suma de DAVG y KAVG.",
+   "long": "Separar GAVG en sus dos partes evita culpar al host por un almacenamiento lento, o al revés.",
+   "case": true
+  },
+  {
+   "id": "drptx",
+   "term": "%DRPTX",
+   "aliases": [
+    "DRPTX",
+    "%DRPRX",
+    "DRPRX"
+   ],
+   "cat": "Virtualización",
+   "short": "Columnas de esxtop (pantalla n) con el porcentaje de paquetes descartados al transmitir y al recibir.",
+   "long": "Valores mayores a cero en una VM o un vmk piden revisar la placa física, el vSwitch y el switch.",
+   "case": true
+  },
+  {
+   "id": "vmkernel-log",
+   "term": "vmkernel.log",
+   "aliases": [
+    "vmkwarning.log",
+    "hostd.log",
+    "/var/run/log"
+   ],
+   "cat": "Virtualización",
+   "short": "Los logs del host ESXi, en /var/run/log: vmkernel.log del núcleo, vmkwarning.log con sus advertencias y hostd.log del agente.",
+   "long": "Son el primer lugar para buscar errores de discos, rutas, red o drivers. En vCenter el equivalente es vpxd. Si el host arranca de SD o USB, viven en memoria y se pierden al reiniciar.",
+   "case": false
+  },
+  {
+   "id": "vsphere-local",
+   "term": "vsphere.local",
+   "aliases": [
+    "administrator@vsphere.local"
+   ],
+   "cat": "Virtualización",
+   "short": "El dominio por defecto de vCenter Single Sign-On; administrator@vsphere.local es su administrador inicial.",
+   "long": "Al desplegar vCenter solo ese usuario puede entrar: es la llave maestra. Va al gestor de contraseñas de la empresa y cada técnico usa su propio usuario con un rol acotado. El dominio se elige al instalar.",
+   "case": false
+  },
+  {
+   "id": "vtpm",
+   "term": "vTPM",
+   "aliases": [
+    "TPM virtual"
+   ],
+   "cat": "Virtualización",
+   "short": "Chip TPM virtual de una VM, que por ejemplo usa BitLocker en Windows para guardar sus claves.",
+   "long": "No se migra de VMware a Proxmox VE: antes de importar una VM Windows con BitLocker hay que tener a mano sus claves de recuperación.",
+   "case": true
+  },
+  {
+   "id": "erp",
+   "term": "ERP",
+   "aliases": [
+    "Enterprise Resource Planning"
+   ],
+   "cat": "Web e integración",
+   "short": "Enterprise Resource Planning: el sistema de gestión de una empresa (facturación, stock, contabilidad).",
+   "long": "En los clientes chicos suele ser una de las pocas VMs críticas junto al grabador de video: entra en la cuenta de qué funciones de VMware se usan de verdad.",
+   "case": true
+  },
+  {
+   "id": "tarjeta-sd",
+   "term": "tarjeta SD",
+   "aliases": [
+    "SD",
+    "microSD",
+    "tarjeta microSD"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Memoria flash en formato tarjeta. En servidores se usaba para arrancar ESXi.",
+   "long": "En ESXi 8 SD y USB quedan solo para el arranque y están en retirada: OSDATA no puede ir ahí, y los logs se pierden al reiniciar.",
+   "case": false
+  },
+  {
+   "id": "ide",
+   "term": "IDE",
+   "aliases": [
+    "Integrated Drive Electronics"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Integrated Drive Electronics: interfaz de disco vieja, que también existe como controlador de disco virtual.",
+   "long": "En backups de VMware, el modo HotAdd no funciona con discos IDE: esas VMs se copian por NBD o se pasan a otro controlador.",
+   "case": true
+  },
+  {
+   "id": "dmtf",
+   "term": "DMTF",
+   "aliases": [
+    "Distributed Management Task Force"
+   ],
+   "cat": "Normas",
+   "short": "Distributed Management Task Force: organización que publica estándares de gestión de sistemas, como OVF.",
+   "long": "Gracias a OVF, un fabricante puede entregar una VM armada que se importa en distintos hipervisores.",
+   "case": true
+  },
+  {
+   "id": "umds",
+   "term": "UMDS",
+   "aliases": [
+    "Update Manager Download Service"
+   ],
+   "cat": "Virtualización",
+   "short": "Update Manager Download Service: baja los parches de VMware en un equipo con internet para usarlos donde vCenter no tiene salida.",
+   "long": "Con Lifecycle Manager, si vCenter no tiene internet, los paquetes se bajan con UMDS o se importan a mano.",
+   "case": true
+  },
+  {
+   "id": "avenar",
+   "term": "AVENAR",
+   "aliases": [
+    "AVENAR panel",
+    "AVENAR panel 2000",
+    "AVENAR panel 8000",
+    "AVENAR keypad 8000",
+    "FPE-2000",
+    "FPE-8000"
+   ],
+   "cat": "Incendio",
+   "short": "La línea vigente de centrales de incendio modulares de Bosch: AVENAR panel 2000 (hasta 4 lazos) y 8000 (hasta 32 lazos), con su teclado remoto.",
+   "long": "El 2000 admite 6 módulos y viene como kit; el 8000 admite 46 módulos en riel. La licencia viene grabada en el controlador: SPC es standard y PPC es premium, que habilita BMS, panel jerárquico, voz y, en el 2000, la red. Las redes solo AVENAR corren firmware 4.x.",
+   "case": true
+  },
+  {
+   "id": "fpa-bosch",
+   "term": "FPA",
+   "aliases": [
+    "FPA-5000",
+    "FPA-1200",
+    "MPC"
+   ],
+   "cat": "Incendio",
+   "short": "La generación anterior de centrales de incendio Bosch: FPA-5000 para redes y FPA-1200 para sitios chicos.",
+   "long": "Comparten el lazo LSN con AVENAR. Una red con al menos un FPA corre toda el mismo firmware 3.x, que salió de mantenimiento a fines de 2025. Se puede modernizar cambiando solo el controlador por uno AVENAR.",
+   "case": true
+  },
+  {
+   "id": "lsn",
+   "term": "LSN",
+   "aliases": [
+    "Local Security Network",
+    "LSN improved",
+    "LSN classic",
+    "LSNi",
+    "lazo LSN"
+   ],
+   "cat": "Incendio",
+   "short": "Local Security Network: el bus de campo de Bosch que lleva alimentación y datos a detectores, pulsadores, sirenas y módulos por un solo par.",
+   "long": "LSN improved admite 254 elementos por módulo de lazo; con un solo elemento classic baja a 127 y sin T-tap. El módulo LSN 0300 A da 300 mA y hasta 1600 m; el LSN 1500 A, hasta 1500 mA y 3000 m. Cada elemento trae aislador entre b1 y b2.",
+   "case": true
+  },
+  {
+   "id": "t-tap",
+   "term": "T-tap",
+   "aliases": [
+    "derivación T-tap",
+    "derivaciones"
+   ],
+   "cat": "Incendio",
+   "short": "Derivación en cualquier punto de una línea LSN improved, que permite ramas sin volver al panel.",
+   "long": "Solo es posible con dirección manual (perillas 001 a 254) y con T-tap marcado en FSP-5000-RPS. Nunca se arman mallas: una derivación no vuelve a unirse con otra parte del lazo.",
+   "case": false
+  },
+  {
+   "id": "aislador-corto",
+   "term": "aislador de cortocircuito",
+   "aliases": [
+    "aislador",
+    "aisladores",
+    "short-circuit isolator",
+    "EN 54-17"
+   ],
+   "cat": "Incendio",
+   "short": "Componente que abre la línea a ambos lados de un corto, para que el resto del lazo siga funcionando.",
+   "long": "En LSN viene integrado en cada elemento, entre b1 y b2. Ante un corto, el panel parte el lazo en dos ramales alimentados desde cada extremo. La norma de producto europea es EN 54-17, de 2005.",
+   "case": false
+  },
+  {
+   "id": "clases-circuito",
+   "term": "clase A, B y X",
+   "aliases": [
+    "clase A",
+    "clase B",
+    "clase X",
+    "Class A",
+    "Class B",
+    "Class X"
+   ],
+   "cat": "Incendio",
+   "short": "Clasificación de NFPA 72 que describe qué pasa con la detección ante una falla del cableado.",
+   "long": "Clase B pierde lo que queda detrás de un corte; clase A vuelve al panel y sobrevive a un corte; clase X sobrevive también a un corto gracias a los aisladores. La norma no impone una clase: la elige el proyecto o la autoridad.",
+   "case": true
+  },
+  {
+   "id": "fsp-5000-rps",
+   "term": "FSP-5000-RPS",
+   "aliases": [
+    "RPS",
+    "Remote Programming System",
+    "FSP"
+   ],
+   "cat": "Herramientas",
+   "short": "El programa de Bosch para configurar, validar y descargar las centrales FPA y AVENAR desde una laptop.",
+   "long": "Se baja de la extranet de Bosch. A octubre de 2026 la versión vigente es la 5.15.28, en Windows 11 24H2 de 64 bits. La cuenta de configuración 4.8 agregó Uruguay como país. Antes de cada descarga conviene Set Panel Time y un chequeo de consistencia sin errores.",
+   "case": true
+  },
+  {
+   "id": "ssd-bosch",
+   "term": "Safety Systems Designer",
+   "aliases": [
+    "SSD"
+   ],
+   "cat": "Herramientas",
+   "short": "La herramienta de planificación de Bosch que calcula largos de lazo, energía, baterías y cantidades.",
+   "long": "Bosch la exige para planificar instalaciones AVENAR nuevas con zonas de energía (versión 3.6 o más). La cuenta de banco del manual sirve para detectar un lazo en el límite; el cálculo de obra se hace en SSD.",
+   "case": true
+  },
+  {
+   "id": "pna",
+   "term": "PNA",
+   "aliases": [
+    "número de nodo",
+    "nodo físico"
+   ],
+   "cat": "Incendio",
+   "short": "Número de nodo físico de un panel Bosch en la red, cargado en el panel y en RPS.",
+   "long": "En las redes Ethernet de Bosch, la IP por defecto es 192.168.1.x con x igual al PNA. Tiene que coincidir en el panel, en la IP y en la configuración de RPS.",
+   "case": true
+  },
+  {
+   "id": "bcm-bosch",
+   "term": "BCM",
+   "aliases": [
+    "FPE-8000-BCM",
+    "BCM-0000-B",
+    "módulo de baterías"
+   ],
+   "cat": "Incendio",
+   "short": "El módulo de fuente y baterías de las centrales Bosch modulares.",
+   "long": "Desde el 02/05/2026 la obra nueva usa el FPE-8000-BCM con zonas de energía; no se mezcla con el BCM-0000-B en un mismo panel. Pide firmware 4.7.0, RPS 5.14.17 y SSD 3.6 o más.",
+   "case": true
+  },
+  {
+   "id": "zona-energia",
+   "term": "zona de energía",
+   "aliases": [
+    "zonas de energía",
+    "energy zone"
+   ],
+   "cat": "Incendio",
+   "short": "Parte de un panel AVENAR con su propio FPE-8000-BCM y sus baterías, separada del resto.",
+   "long": "Las zonas se separan quitando el cable rojo entre dos rieles largos, y los módulos de alto consumo van al lado del BCM. Si falla un BCM o sus baterías, las otras zonas siguen funcionando.",
+   "case": false
+  },
+  {
+   "id": "flm",
+   "term": "FLM",
+   "aliases": [
+    "FLM-420",
+    "FLM-430",
+    "FLM-420/4-CON",
+    "FLM-430-I2M1",
+    "FLM-430-I4R2",
+    "FLM-420-RLE-S",
+    "FLM-420-NAC"
+   ],
+   "cat": "Incendio",
+   "short": "Los módulos de interfaz de Bosch que conectan entradas, salidas y zonas convencionales al lazo LSN.",
+   "long": "Por ejemplo, el FLM-430-I2M1 tiene 2 entradas y 1 salida supervisada, el FLM-420/4-CON conecta dos zonas convencionales y el FLM-420-RLE-S controla extinción. Cada entrada programada como alarma consume un punto del panel.",
+   "case": true
+  },
+  {
+   "id": "avenar-detector-4000",
+   "term": "AVENAR detector 4000",
+   "aliases": [
+    "FAP-425",
+    "FAH-425",
+    "FAP",
+    "FAH",
+    "DOTC",
+    "DOTCO",
+    "FAP-425-DOT-R",
+    "FAP-425-DOTC-R"
+   ],
+   "cat": "Incendio",
+   "short": "La serie vigente de detectores puntuales Bosch para LSN, con nueve variantes ópticas, térmicas y multisensor.",
+   "long": "Van del térmico FAH-425-T-R al multisensor FAP-425-DOTCO-R. Las letras dicen los sensores: O óptico, DO doble óptico, T térmico, C químico (CO); -R indica perillas de dirección. Todos traen aislador. El firmware 4.8 es el último que soporta la serie 400 anterior.",
+   "case": true
+  },
+  {
+   "id": "fnx-425u",
+   "term": "FNX-425U",
+   "aliases": [
+    "FNX",
+    "FNM-420",
+    "FNM"
+   ],
+   "cat": "Incendio",
+   "short": "Sirenas y balizas Bosch que se alimentan y comandan desde el lazo LSN.",
+   "long": "La FNX-425U admite hasta 84 por lazo si hay detectores y 127 si no. Desde el firmware 4.8.1 reporta horas, batería y avería a NEXOSPACE. Una sirena no consume punto de alarma.",
+   "case": true
+  },
+  {
+   "id": "fmc-420",
+   "term": "FMC-420RW",
+   "aliases": [
+    "FMC",
+    "pulsador manual",
+    "pulsador de incendio"
+   ],
+   "cat": "Incendio",
+   "short": "Pulsador manual de alarma de incendio Bosch para el lazo LSN.",
+   "long": "Consume un punto de alarma. Nunca lleva retardo: un pulsador anula cualquier alarma demorada. La IT-11 uruguaya de 2010 pide pulsador a no más de 30 m.",
+   "case": true
+  },
+  {
+   "id": "nac",
+   "term": "NAC",
+   "aliases": [
+    "Notification Appliance Circuit",
+    "línea NAC"
+   ],
+   "cat": "Incendio",
+   "short": "Notification Appliance Circuit: el circuito que alimenta sirenas y balizas convencionales.",
+   "long": "En Bosch, por ejemplo, la línea NAC del FLM-420-NAC; su cable cuenta en el tope de 500 m de cable no aislado. En EN 54-2, silenciar avisadores es manual: un temporizador de duración solo vale para señales que no son EN 54.",
+   "case": true
+  },
+  {
+   "id": "punto-alarma",
+   "term": "punto de alarma",
+   "aliases": [
+    "puntos de alarma",
+    "punto lógico",
+    "puntos lógicos"
+   ],
+   "cat": "Incendio",
+   "short": "Cada elemento o entrada que puede dar alarma en un panel Bosch, contado para límites y redundancia.",
+   "long": "Desde la cuenta 4.5 se separan los puntos de alarma, que deciden si hace falta controlador redundante, de los puntos lógicos, con tope de 4096 en panel solo y 2048 por panel en red. EN 54-2 limita a 512 los detectores y pulsadores que puede dejar fuera una falla.",
+   "case": false
+  },
+  {
+   "id": "direccion-logica",
+   "term": "dirección lógica",
+   "aliases": [
+    "zona lógica",
+    "grupo y subdirección",
+    "subdirección"
+   ],
+   "cat": "Incendio",
+   "short": "El nombre estable de un elemento en un panel Bosch: grupo y subdirección, como 3.4.",
+   "long": "Se elige en RPS, sin repetir. El panel la muestra en cada mensaje junto con el tipo y la ubicación, y las integraciones la heredan. La dirección física, en cambio, es el lugar en el lazo.",
+   "case": false
+  },
+  {
+   "id": "matriz-causa-efecto",
+   "term": "matriz de causa y efecto",
+   "aliases": [
+    "matriz causa efecto",
+    "matriz de control"
+   ],
+   "cat": "Incendio",
+   "short": "Tabla que define qué efecto produce cada causa en un sistema de incendio, antes de programarlo.",
+   "long": "Filas con causas (detectores, pulsadores, entradas técnicas) y columnas con efectos (sirenas, puertas, ventilación, transmisión). Es parte del proyecto, la firma el técnico responsable y cada cruce se programa como una regla.",
+   "case": false
+  },
+  {
+   "id": "modo-revision",
+   "term": "modo revisión",
+   "aliases": [
+    "walk test",
+    "walktest",
+    "revision mode",
+    "walk test secuencial",
+    "walk test simultáneo"
+   ],
+   "cat": "Incendio",
+   "short": "Estado de prueba de una zona en un panel Bosch: el detector se prepara para responder al estímulo de prueba.",
+   "long": "Con aerosol, el detector dispara en hasta 10 s (hasta 20 s en multisensor). En walk test simultáneo, la alarma aparece solo si dispararon todos los sensores. Un detector en revisión no da alarma de fuego normal: la zona sale de revisión al terminar.",
+   "case": false
+  },
+  {
+   "id": "alarma-demorada",
+   "term": "alarma demorada",
+   "aliases": [
+    "prealarma",
+    "preseñal",
+    "alarma confirmada",
+    "modo día",
+    "modo noche",
+    "día y noche"
+   ],
+   "cat": "Incendio",
+   "short": "Estrategia para investigar una alarma de detector antes de evacuar, con un tiempo máximo.",
+   "long": "BS 5839-1 limita la demora a 6 minutos y un pulsador la anula; la IT-11 uruguaya de 2010 admite preseñal de hasta 2 minutos en locales concurridos. En modo noche el primer detector va directo a alarma general. Solo con acuerdo de la autoridad y del proyecto firmado.",
+   "case": false
+  },
+  {
+   "id": "en-54",
+   "term": "EN 54",
+   "aliases": [
+    "EN54",
+    "EN 54-2",
+    "EN 54-4",
+    "EN 54-5",
+    "EN 54-7",
+    "EN 54-13",
+    "EN 54-29"
+   ],
+   "cat": "Normas",
+   "short": "La serie de normas europeas de producto para detección y alarma de incendio, del comité CEN/TC 72.",
+   "long": "Empezó en los años setenta: EN 54-1 y EN 54-5 salieron en 1976. Cada parte cubre un tipo de equipo: EN 54-2 central, EN 54-4 fuente, EN 54-7 humo, EN 54-5 calor, EN 54-13 compatibilidad. Dice cómo se ensaya un equipo, no dónde va.",
+   "year": 1976,
+   "case": true
+  },
+  {
+   "id": "nfpa-72",
+   "term": "NFPA 72",
+   "aliases": [
+    "NFPA",
+    "National Fire Alarm and Signaling Code"
+   ],
+   "cat": "Normas",
+   "short": "El código estadounidense de alarma de incendio y señalización de la NFPA.",
+   "long": "Se revisa por ediciones; la de 2013 sumó la preverificación por la central de monitoreo, con 90 s como máximo. Define las clases A, B y X y el cálculo de baterías con 24 h de reposo y 5 min de alarma. En Uruguay se usa como referencia.",
+   "case": true
+  },
+  {
+   "id": "dnb",
+   "term": "DNB",
+   "aliases": [
+    "Dirección Nacional de Bomberos",
+    "Bomberos"
+   ],
+   "cat": "Normas",
+   "short": "Dirección Nacional de Bomberos de Uruguay: la autoridad que habilita los sistemas de protección contra incendio.",
+   "long": "Registra técnicos y empresas, recibe los trámites y publica los instructivos técnicos, como la IT-11 de detección y alarma. En julio de 2026 abrió la consulta pública de una nueva IT11.",
+   "case": true
+  },
+  {
+   "id": "decreto-372-023",
+   "term": "Decreto 372/023",
+   "aliases": [
+    "372/023",
+    "decreto de habilitaciones"
+   ],
+   "cat": "Normas",
+   "short": "Decreto uruguayo que reglamenta las habilitaciones de Bomberos, vigente desde enero de 2024.",
+   "long": "El proyecto lo redacta y firma un técnico registrado, que ingresa el trámite bajo declaración jurada; los sistemas de detección los suministran, instalan, ponen en marcha y mantienen empresas registradas ante la DNB. Prevé multas de 10 a 200 UR para empresas.",
+   "year": 2023,
+   "case": true
+  },
+  {
+   "id": "it-11",
+   "term": "IT-11",
+   "aliases": [
+    "IT11",
+    "instructivo técnico 11"
+   ],
+   "cat": "Normas",
+   "short": "El instructivo técnico de Bomberos de Uruguay para sistemas de detección y alarma de incendio.",
+   "long": "La vigente es del 17/11/2010 y remite a UNIT 962. Pide, entre otras cosas, 24 h de batería en reposo y 15 min en alarma, y pulsador a no más de 30 m. Su revisión está en consulta pública con vigencia prevista en 2027; el borrador no se usa hasta que rija.",
+   "year": 2010,
+   "case": true
+  },
+  {
+   "id": "unit-uy",
+   "term": "UNIT",
+   "aliases": [
+    "Instituto Uruguayo de Normas Técnicas",
+    "UNIT 962"
+   ],
+   "cat": "Normas",
+   "short": "Instituto Uruguayo de Normas Técnicas, el organismo de normalización de Uruguay.",
+   "long": "La IT-11 de Bomberos remite a la norma UNIT 962 para detección y alarma de incendio.",
+   "case": true
+  },
+  {
+   "id": "tecnico-registrado",
+   "term": "técnico registrado",
+   "aliases": [
+    "técnicos registrados",
+    "empresa registrada",
+    "empresas registradas"
+   ],
+   "cat": "Normas",
+   "short": "Profesional registrado ante la DNB que redacta y firma el proyecto de protección contra incendio.",
+   "long": "Según el Decreto 372/023, ingresa el trámite y verifica las medidas. La instalación y el mantenimiento los hacen empresas registradas. Cuando el proyecto y el manual no coinciden, se consulta al técnico registrado.",
+   "case": false
+  },
+  {
+   "id": "vds",
+   "term": "VdS",
+   "aliases": [
+    "VdS 2496",
+    "VdS 2540",
+    "VdS 3860"
+   ],
+   "cat": "Normas",
+   "short": "Organismo alemán de certificación de seguridad, cuyas directivas usa Bosch en extinción, redes y autotest.",
+   "long": "VdS 2496 define la interfaz de control de extinción (FLM-420-RLE-S); VdS 2540 pide fibra en las redes de paneles en Alemania. Son referencias técnicas, no exigencias uruguayas.",
+   "case": true
+  },
+  {
+   "id": "bs-5839",
+   "term": "BS 5839-1",
+   "aliases": [
+    "BS 5839",
+    "BS"
+   ],
+   "cat": "Normas",
+   "short": "Código británico de práctica para sistemas de detección y alarma de incendio en edificios.",
+   "long": "Limita la alarma demorada a 6 minutos y deja que un pulsador la anule. Su anexo E trae el ejemplo de la habitación de hotel con ducha, donde frente al vapor queda mejor el detector de CO.",
+   "case": true
+  },
+  {
+   "id": "fia",
+   "term": "FIA",
+   "aliases": [
+    "Fire Industry Association"
+   ],
+   "cat": "Normas",
+   "short": "Fire Industry Association: la asociación británica de la industria de protección contra incendio.",
+   "long": "Propone elegir el detector en dos pasos, riesgo de fuego y fenómenos engañosos, y describe estrategias contra falsas alarmas, con la advertencia de que todo filtrado demora la respuesta a un fuego real.",
+   "case": true
+  },
+  {
+   "id": "bre",
+   "term": "BRE",
+   "aliases": [
+    "Building Research Establishment",
+    "BRE Group"
+   ],
+   "cat": "Normas",
+   "short": "Organismo británico de investigación de la construcción, autor de ensayos de detectores.",
+   "long": "En 2018 publicó ensayos con 35 multisensores y 2 ópticos: ante fuegos rindieron parecido; ante tostadas, vapor, polvo y aerosol, los multisensores dispararon más tarde.",
+   "case": true
+  },
+  {
+   "id": "cen",
+   "term": "CEN",
+   "aliases": [
+    "Comité Europeo de Normalización",
+    "CEN/TC 72"
+   ],
+   "cat": "Normas",
+   "short": "Comité Europeo de Normalización, que publica las normas EN.",
+   "long": "Su comité técnico CEN/TC 72 prepara la serie EN 54 de detección y alarma de incendio.",
+   "case": true
+  },
+  {
+   "id": "co-monoxido",
+   "term": "CO",
+   "aliases": [
+    "monóxido de carbono",
+    "sensor de CO",
+    "celda de CO"
+   ],
+   "cat": "Incendio",
+   "short": "Monóxido de carbono: gas que aparece temprano en fuegos latentes y que miden los detectores químicos.",
+   "long": "En el AVENAR detector 4000 lo mide la celda química de los DOTC y DOTCO (en el DOTCO, de 10 años). Según la hoja de datos, también reacciona a hidrógeno y monóxido de nitrógeno.",
+   "case": true
+  },
+  {
+   "id": "bms",
+   "term": "BMS",
+   "aliases": [
+    "Building Management System",
+    "sistema de gestión del edificio"
+   ],
+   "cat": "Web e integración",
+   "short": "Building Management System: el sistema que supervisa las instalaciones de un edificio desde un puesto central.",
+   "long": "Un panel AVENAR se integra por OPC, FSI o BACnet, con licencia premium en cada panel visible. Si Ethernet se usa solo para eso, se desactiva la comunicación panel a panel por TCP/IP.",
+   "case": true
+  },
+  {
+   "id": "opc",
+   "term": "OPC",
+   "aliases": [
+    "servidor OPC",
+    "OPC server"
+   ],
+   "cat": "Web e integración",
+   "short": "Estándar de intercambio de datos industriales; en Bosch, el servidor que expone los paneles al BMS.",
+   "long": "El servidor OPC es un nodo más de la red de incendio y separa la red del cliente de la de los paneles.",
+   "case": true
+  },
+  {
+   "id": "bacnet",
+   "term": "BACnet",
+   "aliases": [
+    "ASHRAE 135"
+   ],
+   "cat": "Web e integración",
+   "short": "Protocolo de comunicación para automatización de edificios, publicado por ASHRAE como norma 135.",
+   "long": "La primera versión es de 1995. Es una de las interfaces con las que un panel AVENAR premium se integra a un BMS.",
+   "year": 1995,
+   "case": false
+  },
+  {
+   "id": "fsi-bosch",
+   "term": "FSI",
+   "aliases": [
+    "Fire System Interface"
+   ],
+   "cat": "Web e integración",
+   "short": "Interfaz de Bosch para integrar sus paneles de incendio con sistemas de gestión.",
+   "long": "Aparece junto con OPC y BACnet entre las integraciones a BMS, que requieren licencia premium en cada panel.",
+   "case": true
+  },
+  {
+   "id": "ugm",
+   "term": "UGM",
+   "aliases": [
+    "UGM-2040",
+    "panel jerárquico"
+   ],
+   "cat": "Incendio",
+   "short": "Panel jerárquico de Bosch que concentra varias centrales de incendio.",
+   "long": "La conexión a un UGM es una de las funciones que habilita la licencia premium del AVENAR.",
+   "case": true
+  },
+  {
+   "id": "can-bus",
+   "term": "CAN",
+   "aliases": [
+    "CAN bus",
+    "Controller Area Network",
+    "CAN1",
+    "CAN2"
+   ],
+   "cat": "Redes",
+   "short": "Controller Area Network: bus de comunicación que Bosch presentó en 1986 para los autos.",
+   "long": "Los controladores AVENAR traen dos interfaces CAN para armar redes de paneles, como alternativa o complemento de Ethernet.",
+   "year": 1986,
+   "case": true
+  },
+  {
+   "id": "ti-bosch",
+   "term": "TI",
+   "aliases": [
+    "Technical Information",
+    "hoja técnica",
+    "TI 2715",
+    "TI 2716",
+    "TI 2739"
+   ],
+   "cat": "Incendio",
+   "short": "Technical Information: las hojas técnicas numeradas con que Bosch anuncia versiones, cambios y fallas conocidas.",
+   "long": "Por ejemplo, la TI 2715 de 2026 trae el firmware 4.8.1, la 2716 lanza las zonas de energía y la 2739 explica la falla de validación de autonomía de RPS con su truco temporal.",
+   "case": true
+  },
+  {
+   "id": "ur-uy",
+   "term": "UR",
+   "aliases": [
+    "Unidad Reajustable"
+   ],
+   "cat": "Normas",
+   "short": "Unidad Reajustable: unidad de cuenta uruguaya que se usa, entre otras cosas, para fijar multas.",
+   "long": "El Decreto 372/023 fija multas de 10 a 200 UR para empresas.",
+   "case": true
+  },
+  {
+   "id": "sau",
+   "term": "SAU",
+   "aliases": [
+    "Sociedad de Arquitectos del Uruguay"
+   ],
+   "cat": "Normas",
+   "short": "Sociedad de Arquitectos del Uruguay.",
+   "long": "En el curso aparece como el sitio donde se leyó el texto de la IT-11 de Bomberos.",
+   "case": true
+  },
+  {
+   "id": "html",
+   "term": "HTML",
+   "aliases": [
+    "HyperText Markup Language"
+   ],
+   "cat": "Web e integración",
+   "short": "HyperText Markup Language: el lenguaje de las páginas web.",
+   "long": "En el curso aparece porque la ayuda de FSP-5000-RPS pasó a formato HTML desde la versión 5.15.27.",
+   "case": true
+  },
+  {
+   "id": "proxmox-ve",
+   "term": "Proxmox VE",
+   "aliases": [
+    "Proxmox",
+    "PVE",
+    "Proxmox Virtual Environment"
+   ],
+   "cat": "Virtualización",
+   "short": "Plataforma de virtualización de código abierto basada en Debian: máquinas virtuales KVM y contenedores LXC con una web de gestión.",
+   "long": "La desarrolla Proxmox Server Solutions, en Viena; el proyecto empezó en 2007 y la primera versión estable salió en 2008. La 9.0 salió en agosto de 2025 sobre Debian 13 y la rama vigente es la 9.2. Suma clúster, alta disponibilidad, firewall y backups sin herramientas externas.",
+   "case": true
+  },
+  {
+   "id": "pbs",
+   "term": "PBS",
+   "aliases": [
+    "Proxmox Backup Server"
+   ],
+   "cat": "Virtualización",
+   "short": "Proxmox Backup Server: servidor de backups para Proxmox VE con backups incrementales, deduplicación y verificación.",
+   "long": "Salió en 2020, escrito en Rust. Guarda cada backup como un índice de trozos que se comparten entre backups y entre VM. Se mantiene con prune, garbage collection y verify. Su web va en el puerto 8007.",
+   "case": true
+  },
+  {
+   "id": "kvm",
+   "term": "KVM",
+   "aliases": [
+    "Kernel-based Virtual Machine"
+   ],
+   "cat": "Virtualización",
+   "short": "Kernel-based Virtual Machine: módulo del kernel Linux que usa VT-x o AMD-V para correr máquinas virtuales.",
+   "long": "Entró al kernel Linux 2.6.20 en 2007. Junto con QEMU es el motor de las VM de Proxmox VE: KVM ejecuta el código del invitado en el CPU real y QEMU arma el hardware virtual. No confundir con un KVM switch de teclado, video y mouse.",
+   "case": true
+  },
+  {
+   "id": "qemu",
+   "term": "QEMU",
+   "aliases": [],
+   "cat": "Virtualización",
+   "short": "Emulador y virtualizador de código abierto que arma el hardware virtual de cada VM.",
+   "long": "Lo empezó Fabrice Bellard en 2003. En Proxmox VE cada VM es un proceso QEMU con su VMID; con KVM, las vCPU corren directo en el procesador y QEMU atiende discos, placas y consola.",
+   "case": true
+  },
+  {
+   "id": "lxc",
+   "term": "LXC",
+   "aliases": [
+    "contenedor LXC",
+    "contenedores LXC",
+    "Linux Containers",
+    "CT"
+   ],
+   "cat": "Virtualización",
+   "short": "Linux Containers: contenedores de sistema que comparten el kernel del host y aíslan procesos, red y archivos.",
+   "long": "Apareció en 2008 y Proxmox lo usa desde la versión 4.0, cuando reemplazó a OpenVZ. Arranca en segundos y gasta poco, pero solo corre Linux. El default en Proxmox es el contenedor no privilegiado, donde el root de adentro es un usuario sin poder del host.",
+   "case": true
+  },
+  {
+   "id": "zfs",
+   "term": "ZFS",
+   "aliases": [
+    "OpenZFS"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Sistema de archivos y gestor de discos que verifica cada bloque con checksums, comprime, hace snapshots, RAID por software y replicación.",
+   "long": "Lo creó Sun Microsystems y salió en 2005; hoy lo mantiene el proyecto OpenZFS. Proxmox lo trae de fábrica desde 2014. Pide RAM para su caché (ARC), mejor ECC, y discos directos por HBA: nunca encima de una RAID por hardware con caché.",
+   "case": true
+  },
+  {
+   "id": "lvm-thin",
+   "term": "LVM-thin",
+   "aliases": [
+    "LVM",
+    "thin pool",
+    "local-lvm",
+    "lvmthin"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Variante de LVM que reserva espacio recién cuando se escribe: un disco de 32 GB con 3 GB de datos ocupa 3 GB.",
+   "long": "Es el almacenamiento que deja el instalador de Proxmox VE con ext4 o xfs, el thin pool data que la web muestra como local-lvm. Permite snapshots y linked clones. No verifica datos ni hace RAID: se apoya en lo que tenga debajo.",
+   "case": true
+  },
+  {
+   "id": "arc",
+   "term": "ARC",
+   "aliases": [
+    "Adaptive Replacement Cache",
+    "zfs_arc_max"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "La caché de lectura de ZFS en memoria RAM.",
+   "long": "Desde Proxmox VE 8.1 el instalador la limita al 10 % de la RAM con tope de 16 GiB. La regla oficial es 2 GiB más 1 GiB por TiB de pool. El límite se fija en bytes en /etc/modprobe.d/zfs.conf.",
+   "case": true
+  },
+  {
+   "id": "hba",
+   "term": "HBA",
+   "aliases": [
+    "Host Bus Adapter",
+    "modo IT"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Host Bus Adapter: controladora que entrega los discos directos al sistema, sin armar RAID.",
+   "long": "Es lo que pide ZFS. Muchas controladoras RAID se pueden pasar a modo IT para comportarse como HBA.",
+   "case": true
+  },
+  {
+   "id": "ssd-datacenter",
+   "term": "SSD de datacenter",
+   "aliases": [
+    "SSD de consumo"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Disco de estado sólido, sin partes móviles.",
+   "long": "Para Proxmox, y sobre todo para ZFS, la guía oficial desaconseja los SSD de consumo y prefiere los de datacenter, con protección contra cortes de energía (PLP) y más resistencia al desgaste.",
+   "case": true
+  },
+  {
+   "id": "plp",
+   "term": "PLP",
+   "aliases": [
+    "Power Loss Protection"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Power Loss Protection: capacitores en un SSD que le permiten terminar de guardar lo que tiene en caché si se corta la luz.",
+   "long": "Es típica de los SSD de datacenter. Con PLP el disco puede confirmar escrituras más rápido sin riesgo de perderlas, algo que ZFS aprovecha.",
+   "case": true
+  },
+  {
+   "id": "ecc",
+   "term": "ECC",
+   "aliases": [
+    "memoria ECC",
+    "Error-Correcting Code"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Memoria RAM que detecta y corrige errores de bits.",
+   "long": "La guía de Proxmox la recomienda para ZFS, que confía en la RAM para su caché y sus checksums.",
+   "case": true
+  },
+  {
+   "id": "ha-proxmox",
+   "term": "HA de Proxmox",
+   "aliases": [
+    "ha-manager",
+    "alta disponibilidad"
+   ],
+   "cat": "Virtualización",
+   "short": "Alta disponibilidad: si un nodo de un clúster cae, sus VMs arrancan solas en otro nodo.",
+   "long": "En Proxmox VE se maneja con ha-manager desde la versión 4.0. Exige tres votos de quórum, almacenamiento compartido o replicación, y fencing por watchdog. En la 9, los grupos de HA pasaron a reglas de afinidad y la 9.2 sumó el disarm para mantenimiento.",
+   "case": true
+  },
+  {
+   "id": "fencing",
+   "term": "fencing",
+   "aliases": [
+    "self-fencing"
+   ],
+   "cat": "Virtualización",
+   "short": "Asegurar que un nodo con falla esté apagado antes de arrancar sus servicios en otro nodo.",
+   "long": "Evita que dos nodos escriban a la vez el mismo disco de una VM, lo que la destruiría. Proxmox lo hace con un watchdog: el nodo que pierde el quórum se reinicia solo a los 60 segundos.",
+   "case": true
+  },
+  {
+   "id": "watchdog",
+   "term": "watchdog",
+   "aliases": [
+    "softdog",
+    "watchdog-mux"
+   ],
+   "cat": "Virtualización",
+   "short": "Temporizador que reinicia el equipo si el software no lo renueva a tiempo.",
+   "long": "Se usa en sistemas críticos desde los primeros microcontroladores. En Proxmox VE, ha-manager lo renueva mientras el nodo tiene quórum; puede ser el watchdog de hardware de la placa o el softdog del kernel.",
+   "case": false
+  },
+  {
+   "id": "quorum",
+   "term": "quórum",
+   "aliases": [
+    "quorum",
+    "Quorate"
+   ],
+   "cat": "Virtualización",
+   "short": "La mayoría de votos que un clúster necesita para poder cambiar algo.",
+   "long": "En Proxmox VE cada nodo vota y sin mayoría el clúster pasa a solo lectura: no se crean ni arrancan VMs. Con dos nodos, perder uno es perder la mayoría; por eso se suma un QDevice.",
+   "case": false
+  },
+  {
+   "id": "corosync",
+   "term": "corosync",
+   "aliases": [],
+   "cat": "Virtualización",
+   "short": "Motor de comunicación de clúster que entrega los mensajes a todos los nodos en orden y cuenta los votos del quórum.",
+   "long": "Nació del proyecto OpenAIS. Pide latencia menor a 5 ms, red propia y un segundo enlace; usa UDP 5405 a 5412. Sobre él, Proxmox replica /etc/pve.",
+   "case": false
+  },
+  {
+   "id": "qdevice",
+   "term": "QDevice",
+   "aliases": [
+    "corosync-qdevice",
+    "corosync-qnetd",
+    "qnetd"
+   ],
+   "cat": "Virtualización",
+   "short": "Voto externo para un clúster: un servicio en un tercer equipo que no corre VMs, solo vota.",
+   "long": "Se instala corosync-qnetd en el tercer equipo y corosync-qdevice en los nodos, y se configura con pvecm qdevice setup. Va por TCP y puede estar en otra sede. Se recomienda en clústeres pares.",
+   "case": true
+  },
+  {
+   "id": "pmxcfs",
+   "term": "pmxcfs",
+   "aliases": [
+    "Proxmox Cluster File System",
+    "/etc/pve"
+   ],
+   "cat": "Virtualización",
+   "short": "El sistema de archivos de clúster de Proxmox: una base de datos replicada por corosync que se ve como /etc/pve.",
+   "long": "Guarda la configuración de todas las VM y nodos, y la copia a todo el clúster en tiempo real. Sin quórum queda en solo lectura.",
+   "case": false
+  },
+  {
+   "id": "migracion-en-vivo",
+   "term": "migración en vivo",
+   "aliases": [
+    "live migration",
+    "online migration",
+    "qm migrate"
+   ],
+   "cat": "Virtualización",
+   "short": "Mover una VM encendida de un nodo a otro sin cortar el servicio.",
+   "long": "La memoria se copia en pasadas mientras la VM corre, cada vez solo lo que cambió, hasta que el resto se manda en milisegundos. Con almacenamiento compartido el disco no viaja; con disco local se agrega --with-local-disks.",
+   "case": false
+  },
+  {
+   "id": "vzdump",
+   "term": "vzdump",
+   "aliases": [],
+   "cat": "Virtualización",
+   "short": "La herramienta de backup de Proxmox VE: guarda configuración y discos de una VM o contenedor en un archivo completo.",
+   "long": "Tiene modos stop, suspend y snapshot. El nombre viene de la época de OpenVZ. Los archivos quedan como vzdump-qemu-VMID-fecha.vma.zst.",
+   "case": false
+  },
+  {
+   "id": "copy-on-write",
+   "term": "copy-on-write",
+   "aliases": [
+    "CoW"
+   ],
+   "cat": "Virtualización",
+   "short": "Técnica de almacenamiento que escribe los cambios en bloques nuevos y deja los viejos intactos.",
+   "long": "Es lo que hace instantáneos a los snapshots y los linked clones: no se copia nada hasta que algo cambia. Los backups de QEMU usan una idea hermana, copy-before-write: antes de pisar un bloque, se copia el viejo al backup.",
+   "case": false
+  },
+  {
+   "id": "virtio",
+   "term": "VirtIO",
+   "aliases": [
+    "virtio-win",
+    "VirtIO SCSI single",
+    "paravirtualización"
+   ],
+   "cat": "Virtualización",
+   "short": "Dispositivos virtuales pensados para VM: el invitado sabe que es virtual y habla con el host por colas compartidas.",
+   "long": "Rinden mucho más que emular hardware real. Linux trae los drivers; Windows los necesita desde el ISO virtio-win, en la versión que la wiki de Proxmox marca sin problemas. Hoy es una especificación de OASIS.",
+   "case": true
+  },
+  {
+   "id": "guest-agent",
+   "term": "guest agent",
+   "aliases": [
+    "QEMU guest agent",
+    "qemu-guest-agent"
+   ],
+   "cat": "Virtualización",
+   "short": "Servicio dentro de la VM que atiende pedidos del host: apagado limpio, IPs y congelar el disco antes de un backup.",
+   "long": "Se activa con qm set VMID --agent 1, se instala adentro y se prueba con qm agent VMID ping. En Windows viene con virtio-win-guest-tools.",
+   "case": false
+  },
+  {
+   "id": "cloud-init",
+   "term": "cloud-init",
+   "aliases": [],
+   "cat": "Virtualización",
+   "short": "Programa que configura una VM en su primer arranque: usuario, claves SSH, red y disco.",
+   "long": "Lo creó Canonical para las nubes públicas. En Proxmox VE lee sus datos de un CD que genera el propio Proxmox; se completa con ciuser, sshkeys e ipconfig0.",
+   "case": false
+  },
+  {
+   "id": "linked-clone",
+   "term": "linked clone",
+   "aliases": [
+    "full clone",
+    "clon enlazado"
+   ],
+   "cat": "Virtualización",
+   "short": "Clon de VM que lee de la plantilla y guarda aparte solo sus cambios.",
+   "long": "Es casi instantáneo y ocupa poco, pero depende de la plantilla: si se borra, se rompe. Un full clone copia todo el disco y queda independiente; es lo que va a producción.",
+   "case": false
+  },
+  {
+   "id": "bond",
+   "term": "bond",
+   "aliases": [
+    "bonding",
+    "LACP",
+    "802.3ad"
+   ],
+   "cat": "Redes",
+   "short": "Varias placas de red unidas como una sola, para redundancia y más ancho de banda.",
+   "long": "Con LACP (IEEE 802.3ad, de 2000) el switch negocia el grupo; si no lo soporta, active-backup. En Proxmox VE el bridge va encima del bond.",
+   "case": false
+  },
+  {
+   "id": "vlan-aware",
+   "term": "VLAN aware",
+   "aliases": [
+    "bridge VLAN-aware",
+    "bridge-vlan-aware"
+   ],
+   "cat": "Redes",
+   "short": "Bridge de Linux que maneja VLAN por puerto: un solo bridge lleva todas las VLAN y cada VM pone su tag.",
+   "long": "En Proxmox VE se tilda en vmbr0 y en el archivo queda bridge-vlan-aware yes y bridge-vids 2-4094. Reemplaza al modo viejo de un bridge por VLAN.",
+   "case": true
+  },
+  {
+   "id": "vmid",
+   "term": "VMID",
+   "aliases": [
+    "CTID"
+   ],
+   "cat": "Virtualización",
+   "short": "Número que identifica una VM o un contenedor en Proxmox VE.",
+   "long": "Es único en todo el clúster y aparece en los archivos de configuración (/etc/pve/qemu-server/100.conf), en los backups y en los puertos tap del bridge.",
+   "case": true
+  },
+  {
+   "id": "deb822",
+   "term": "deb822",
+   "aliases": [
+    ".sources"
+   ],
+   "cat": "Herramientas",
+   "short": "Formato de los repositorios de apt en bloques de campos (Types, URIs, Suites, Components), en archivos .sources.",
+   "long": "Desde Debian 13 apt se queja del formato viejo de una línea. Un repositorio se deshabilita con Enabled: no, y apt modernize-sources migra los archivos .list.",
+   "case": false
+  },
+  {
+   "id": "totp",
+   "term": "TOTP",
+   "aliases": [
+    "Time-based One-Time Password"
+   ],
+   "cat": "Seguridad",
+   "short": "Código de un solo uso que cambia cada 30 segundos, generado por una app del celular.",
+   "long": "Lo define la RFC 6238, de 2011. Es uno de los segundos factores de Proxmox VE, junto con WebAuthn y las claves de recuperación.",
+   "case": true
+  },
+  {
+   "id": "rfc6238",
+   "term": "RFC 6238",
+   "aliases": [
+    "RFC6238"
+   ],
+   "cat": "RFC",
+   "short": "TOTP: el algoritmo de contraseñas de un solo uso basadas en la hora.",
+   "long": "Extiende el HOTP de la RFC 4226 usando la hora como contador, en general en pasos de 30 segundos. Es lo que usan las apps de autenticación del celular.",
+   "case": true,
+   "year": 2011
+  },
+  {
+   "id": "webauthn",
+   "term": "WebAuthn",
+   "aliases": [
+    "llave de seguridad",
+    "Web Authentication"
+   ],
+   "cat": "Seguridad",
+   "short": "Estándar del W3C para iniciar sesión con una llave de seguridad o el lector biométrico del equipo.",
+   "long": "En Proxmox VE es uno de los segundos factores. Conviene registrar más de uno para no quedar afuera si se pierde la llave.",
+   "case": true
+  },
+  {
+   "id": "ipmi",
+   "term": "IPMI",
+   "aliases": [
+    "iKVM",
+    "consola fuera de banda"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Interfaz de gestión de la placa del servidor: consola, encendido y apagado aunque el sistema operativo no responda.",
+   "long": "Es la red de rescate cuando un cambio de red o un firewall deja al host inaccesible, y la consola recomendada para un upgrade mayor.",
+   "case": true
+  },
+  {
+   "id": "ipset",
+   "term": "IPSet",
+   "aliases": [
+    "IPSet management",
+    "ipset"
+   ],
+   "cat": "Seguridad",
+   "short": "Lista de direcciones IP con nombre que usan las reglas del firewall.",
+   "long": "En Proxmox VE, el IPSet llamado management define desde qué IPs se puede administrar el host: cargarlo antes de habilitar el firewall evita quedarse afuera.",
+   "case": true
+  },
+  {
+   "id": "prune",
+   "term": "prune",
+   "aliases": [
+    "prune job"
+   ],
+   "cat": "Virtualización",
+   "short": "Tarea de PBS que aplica la retención: borra los índices de los backups que sobran.",
+   "long": "No libera espacio por sí sola: los trozos de datos siguen hasta la garbage collection. La retención se puede probar en el Prune Simulator.",
+   "case": false
+  },
+  {
+   "id": "garbage-collection",
+   "term": "garbage collection",
+   "aliases": [
+    "GC"
+   ],
+   "cat": "Virtualización",
+   "short": "Tarea de PBS que borra los trozos que ya no usa ningún backup y libera el espacio.",
+   "long": "Respeta un período de gracia de 24 horas y 5 minutos. Semanal es un buen punto de partida; diaria si el datastore se llena rápido.",
+   "case": false
+  },
+  {
+   "id": "verify-job",
+   "term": "verify job",
+   "aliases": [
+    "verify"
+   ],
+   "cat": "Virtualización",
+   "short": "Tarea de PBS que relee los backups y compara sus checksums para detectar corrupción.",
+   "long": "Conviene un job frecuente para lo nuevo y reverificar todo al menos una vez por mes. Si un ransomware cifra backups, el verify falla y sirve de alarma.",
+   "case": false
+  },
+  {
+   "id": "ceph",
+   "term": "Ceph",
+   "aliases": [],
+   "cat": "Servidores y almacenamiento",
+   "short": "Almacenamiento distribuido que reparte los datos entre varios servidores.",
+   "long": "Proxmox VE puede correrlo en los mismos nodos del clúster: pide al menos tres servidores, mejor idénticos, y red dedicada de 10 Gbps o más.",
+   "case": true
+  },
+  {
+   "id": "tmux",
+   "term": "tmux",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "Programa que mantiene una sesión de terminal viva aunque se corte la conexión SSH.",
+   "long": "Para un upgrade mayor de Proxmox se trabaja dentro de tmux: si se corta la red, el upgrade sigue y te volvés a conectar a la misma sesión.",
+   "case": false
+  },
+  {
+   "id": "vss",
+   "term": "VSS",
+   "aliases": [
+    "Volume Shadow Copy"
+   ],
+   "cat": "Herramientas",
+   "short": "Servicio de Windows que congela los datos para sacar copias consistentes.",
+   "long": "El guest agent de Proxmox lo usa en VM Windows para que el backup en modo snapshot salga consistente.",
+   "case": true
+  },
+  {
+   "id": "oci",
+   "term": "OCI",
+   "aliases": [
+    "imágenes OCI"
+   ],
+   "cat": "Virtualización",
+   "short": "Open Container Initiative: el formato estándar de imágenes de contenedores de aplicación, como las de Docker.",
+   "long": "Proxmox VE puede crear contenedores desde imágenes OCI como tecnología en preview; para Docker en producción, la recomendación sigue siendo una VM.",
+   "case": true
+  },
+  {
+   "id": "realm",
+   "term": "realm",
+   "aliases": [
+    "realms",
+    "PAM",
+    "realm pve"
+   ],
+   "cat": "Seguridad",
+   "short": "En Proxmox VE, el lugar contra el que se valida un usuario: PAM, PVE, LDAP o Active Directory.",
+   "long": "PAM son los usuarios del sistema Linux (como root@pam); PVE guarda contraseñas propias de Proxmox y es lo más cómodo en instalaciones chicas (tecnico@pve). El realm va después de la arroba en el nombre de usuario.",
+   "case": false
+  },
+  {
+   "id": "cifs",
+   "term": "CIFS",
+   "aliases": [
+    "SMB",
+    "recurso compartido de Windows"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Protocolo de Windows para compartir carpetas por la red.",
+   "long": "En Proxmox VE se agrega como almacenamiento de tipo archivo, igual que NFS, para backups e ISOs.",
+   "case": true
+  },
+  {
+   "id": "rdp",
+   "term": "RDP",
+   "aliases": [
+    "Remote Desktop Protocol",
+    "escritorio remoto de Windows"
+   ],
+   "cat": "Redes",
+   "short": "Remote Desktop Protocol: el protocolo del escritorio remoto de Windows, en el puerto TCP 3389.",
+   "long": "Nació con Windows NT 4.0 Terminal Server Edition, en 1998. Da control total del equipo: por eso el 3389 nunca se abre a internet. Se entra por VPN o gateway de escritorio remoto, con NLA activa y la regla del firewall limitada a la subred de gestión.",
+   "case": true
+  },
+  {
+   "id": "nla",
+   "term": "NLA",
+   "aliases": [
+    "Network Level Authentication",
+    "autenticación a nivel de red"
+   ],
+   "cat": "Seguridad",
+   "short": "Network Level Authentication: el escritorio remoto pide las credenciales antes de crear la sesión.",
+   "long": "Llegó con Windows Vista y Server 2008 y viene activada en todas las versiones soportadas. Usa CredSSP sobre TLS. El error \"requiere NLA\" casi siempre es DNS, controlador de dominio, relación de confianza u hora, y conectar por IP en vez de nombre puede impedir Kerberos.",
+   "case": true
+  },
+  {
+   "id": "credssp",
+   "term": "CredSSP",
+   "aliases": [
+    "Credential Security Support Provider"
+   ],
+   "cat": "Seguridad",
+   "short": "Credential Security Support Provider: el mecanismo con el que NLA manda las credenciales antes de abrir la sesión de escritorio remoto.",
+   "long": "Viaja dentro del canal TLS del escritorio remoto. Según el caso, autentica con Kerberos o con NTLM.",
+   "case": true
+  },
+  {
+   "id": "laps",
+   "term": "Windows LAPS",
+   "aliases": [
+    "LAPS",
+    "Local Administrator Password Solution"
+   ],
+   "cat": "Seguridad",
+   "short": "Local Administrator Password Solution: una contraseña de administrador local única, aleatoria y rotada para cada equipo.",
+   "long": "El equipo la genera y la guarda en Active Directory o Entra ID, donde solo la leen las cuentas autorizadas. Evita el movimiento lateral con una clave repetida. Viene integrado en Windows 11 y Server 2019 a 2025 con las actualizaciones de abril de 2023; el LAPS heredado de 2015 quedó en desuso.",
+   "case": true
+  },
+  {
+   "id": "iops",
+   "term": "IOPS",
+   "aliases": [
+    "operaciones de entrada y salida por segundo"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Operaciones de entrada y salida por segundo que hace un disco.",
+   "long": "En Windows es el contador Disk Transfers/sec. Se mira junto con la latencia (Avg. Disk sec/Transfer) y la cola (Avg. Disk Queue Length): cola es aproximadamente IOPS por latencia.",
+   "case": true
+  },
+  {
+   "id": "dsrm",
+   "term": "DSRM",
+   "aliases": [
+    "Directory Services Restore Mode",
+    "modo de restauración de servicios de directorio"
+   ],
+   "cat": "Seguridad",
+   "short": "Directory Services Restore Mode: el modo de arranque de emergencia de un controlador de dominio, con su propia contraseña.",
+   "long": "La contraseña se define al crear el controlador de dominio y existe desde Active Directory en Windows 2000. Nunca se escribe en texto plano en un script ni en un ticket.",
+   "case": true
+  },
+  {
+   "id": "bios",
+   "term": "BIOS",
+   "aliases": [
+    "Basic Input/Output System"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Basic Input/Output System: el firmware que arranca la placa madre antes que el sistema operativo.",
+   "long": "En los equipos actuales su lugar lo ocupa UEFI, aunque en obra se le sigue diciendo BIOS. Ahí está la opción de vuelta tras corte, Restore on AC Power Loss o After Power Failure: en un servidor con UPS conviene Power On.",
+   "case": true
+  },
+  {
+   "id": "acpi",
+   "term": "ACPI",
+   "aliases": [
+    "Advanced Configuration and Power Interface"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Advanced Configuration and Power Interface: la norma con la que el sistema operativo maneja la energía del equipo.",
+   "long": "La presentaron Intel, Microsoft y Toshiba en 1996. Define los estados S3 (suspensión), S4 (hibernación) y S5 (apagado) que Windows configura con powercfg.",
+   "case": true,
+   "year": 1996
+  },
+  {
+   "id": "tpm",
+   "term": "TPM",
+   "aliases": [
+    "Trusted Platform Module"
+   ],
+   "cat": "Seguridad",
+   "short": "Trusted Platform Module: un chip de seguridad de la placa madre que guarda claves.",
+   "long": "BitLocker le confía la llave del disco: el TPM mide el arranque y solo la entrega si el BIOS, el firmware y el cargador son los mismos. Si algo cambió, Windows pide la clave de recuperación.",
+   "case": true
+  },
+  {
+   "id": "bitlocker",
+   "term": "BitLocker",
+   "aliases": [
+    "manage-bde"
+   ],
+   "cat": "Seguridad",
+   "short": "El cifrado de disco de Windows: sin la llave, los datos no se leen aunque se roben el disco.",
+   "long": "Llegó con Windows Vista en 2007. Ante un cambio de BIOS, firmware o hardware pide la clave de recuperación de 48 dígitos, que se guarda fuera del equipo: ni el soporte de Microsoft la recupera. Antes de tocar el BIOS se suspende con Suspend-BitLocker -RebootCount 1.",
+   "case": true
+  },
+  {
+   "id": "active-directory",
+   "term": "Active Directory",
+   "aliases": [
+    "AD",
+    "AD DS",
+    "Active Directory Domain Services"
+   ],
+   "cat": "Seguridad",
+   "short": "El directorio de Microsoft que centraliza usuarios, equipos y permisos de un dominio Windows.",
+   "long": "Llegó con Windows 2000. Además de cuentas, guarda cosas que se consultan en obra: la autorización de un DHCP de Windows, claves de BitLocker y contraseñas de Windows LAPS.",
+   "case": true
+  },
+  {
+   "id": "controlador-dominio",
+   "term": "controlador de dominio",
+   "aliases": [
+    "controladores de dominio",
+    "domain controller"
+   ],
+   "cat": "Seguridad",
+   "short": "El servidor que corre Active Directory y valida las credenciales del dominio.",
+   "long": "Si no responde, falla el inicio de sesión con cuentas del dominio y NLA rechaza el escritorio remoto: por eso cada equipo tiene un administrador local recuperable. Tiene su propia contraseña de emergencia, la DSRM.",
+   "case": false
+  },
+  {
+   "id": "ubr",
+   "term": "UBR",
+   "aliases": [
+    "Update Build Revision"
+   ],
+   "cat": "Herramientas",
+   "short": "Update Build Revision: el número que sube con cada parche acumulado de Windows.",
+   "long": "Se lee en el registro, en HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion, junto con EditionID, DisplayVersion y CurrentBuild. Build y UBR juntos, como 26100 y el UBR, dicen exactamente qué parche tiene el equipo.",
+   "case": true
+  },
+  {
+   "id": "uac",
+   "term": "UAC",
+   "aliases": [
+    "User Account Control",
+    "Control de cuentas de usuario"
+   ],
+   "cat": "Seguridad",
+   "short": "User Account Control: el aviso de Windows que pide confirmar antes de que un programa use permisos de administrador.",
+   "long": "Llegó con Windows Vista. Aun con una cuenta de administrador, los programas corren con permisos comunes hasta que se aprueba la elevación, como al abrir PowerShell como administrador.",
+   "case": true
+  },
+  {
+   "id": "kerberos",
+   "term": "Kerberos",
+   "aliases": [],
+   "cat": "Seguridad",
+   "short": "Protocolo de autenticación por tickets que usa Active Directory.",
+   "long": "Nació en el MIT y es el método por defecto de los dominios Windows desde Windows 2000. Necesita encontrar el controlador de dominio por DNS y relojes con pocos minutos de diferencia, y trabaja con nombres: conectando por IP, Windows suele caer a NTLM.",
+   "case": true
+  },
+  {
+   "id": "ntlm",
+   "term": "NTLM",
+   "aliases": [
+    "NT LAN Manager"
+   ],
+   "cat": "Seguridad",
+   "short": "NT LAN Manager: el método de autenticación de Windows anterior a Kerberos, que sigue como respaldo.",
+   "long": "Aparece, por ejemplo, cuando se conecta a un equipo por IP en vez de por nombre. En dominios con reglas estrictas puede no alcanzar, y el escritorio remoto con NLA falla.",
+   "case": true
+  },
+  {
+   "id": "firma-smb",
+   "term": "firma SMB",
+   "aliases": [
+    "SMB signing",
+    "RequireSecuritySignature"
+   ],
+   "cat": "Seguridad",
+   "short": "Un sello en cada mensaje SMB que prueba quién lo mandó y que nadie lo cambió en el camino.",
+   "long": "Desde Windows 11 24H2 y en Windows Server 2025 es obligatoria en todas las conexiones salientes. Un NAS o grabador que no firma deja de abrir, y parece una falla de red. Se ve con Get-SmbClientConfiguration.",
+   "case": false
+  },
+  {
+   "id": "acceso-invitado",
+   "term": "acceso invitado",
+   "aliases": [
+    "invitado SMB",
+    "guest access",
+    "EnableInsecureGuestLogons"
+   ],
+   "cat": "Seguridad",
+   "short": "Entrar a una carpeta compartida sin usuario ni contraseña.",
+   "long": "Windows 11 Pro 24H2 ya no lo hace. Como no hay credencial, tampoco se puede firmar la sesión. La carpeta del NAS o grabador se abre con un usuario y una contraseña propios de ese equipo.",
+   "case": false
+  },
+  {
+   "id": "inicio-rapido",
+   "term": "inicio rápido",
+   "aliases": [
+    "Fast Startup"
+   ],
+   "cat": "Herramientas",
+   "short": "Fast Startup: al apagar, Windows guarda el núcleo en disco para arrancar más rápido.",
+   "long": "Llegó con Windows 8. En un equipo 24/7 no aporta: puede hacer fallar Wake on LAN y que actualizaciones no terminen de aplicarse. powercfg /hibernate off lo apaga junto con la hibernación.",
+   "case": false
+  },
+  {
+   "id": "monitor-confiabilidad",
+   "term": "Monitor de confiabilidad",
+   "aliases": [
+    "perfmon /rel",
+    "Reliability Monitor"
+   ],
+   "cat": "Herramientas",
+   "short": "Herramienta de Windows que resume la salud del equipo en un índice de 1 a 10 por día.",
+   "long": "Se abre con perfmon /rel. Pone en la misma columna las fallas de aplicaciones y de Windows y las instalaciones y actualizaciones de cada día: la caída del índice y el cambio que la causó aparecen juntos. El historial se exporta a XML.",
+   "case": true
+  },
+  {
+   "id": "visor-eventos",
+   "term": "Visor de eventos",
+   "aliases": [
+    "Event Viewer",
+    "eventvwr"
+   ],
+   "cat": "Herramientas",
+   "short": "La consola de Windows que muestra los registros de eventos, como System y Application.",
+   "long": "Cada evento tiene origen, Id, nivel (1 crítico, 2 error, 3 advertencia, 4 información) y fecha. Desde PowerShell se consulta con Get-WinEvent. Los registros tienen tamaño máximo: cuando se llenan, se pisan los más viejos.",
+   "case": true
+  },
+  {
+   "id": "get-winevent",
+   "term": "Get-WinEvent",
+   "aliases": [
+    "FilterHashtable"
+   ],
+   "cat": "Herramientas",
+   "short": "Comando de PowerShell que lee los registros de eventos de Windows.",
+   "long": "Con -FilterHashtable (LogName, Id, Level, StartTime) el filtro lo aplica el servicio de registro y es mucho más rápido que Where-Object. El 1074 dice quién pidió un reinicio y el 6008 marca un apagado inesperado. Reemplaza a Get-EventLog, que no existe en PowerShell 7.",
+   "case": true
+  },
+  {
+   "id": "perfil-red",
+   "term": "perfil de red",
+   "aliases": [
+    "perfiles de red",
+    "perfil del firewall",
+    "NetworkCategory"
+   ],
+   "cat": "Seguridad",
+   "short": "La categoría de cada placa para el Firewall de Windows: Dominio, Privado o Público.",
+   "long": "Una regla de firewall solo actúa en los perfiles que tiene asignados. Se ve con Get-NetConnectionProfile y una red propia se pasa a Privada con Set-NetConnectionProfile. Dominio lo pone Windows cuando la placa llega a un controlador de dominio.",
+   "case": false
+  },
+  {
+   "id": "horas-activas",
+   "term": "horas activas",
+   "aliases": [
+    "active hours"
+   ],
+   "cat": "Herramientas",
+   "short": "El horario en que Windows Update no reinicia el equipo.",
+   "long": "De fábrica van de 8 a 17 y el rango máximo es de 18 horas. Fuera de ese horario, si no hay sesiones locales ni de escritorio remoto activas, Windows reinicia solo. En servidores, Microsoft sugiere avisar antes de instalar y de reiniciar.",
+   "case": false
+  },
+  {
+   "id": "movimiento-lateral",
+   "term": "movimiento lateral",
+   "aliases": [
+    "lateral movement"
+   ],
+   "cat": "Seguridad",
+   "short": "Saltar de un equipo a otro de la red con una credencial robada.",
+   "long": "Pasa cuando todos los equipos comparten la misma contraseña de administrador local: quien la saca de uno entra a todos. Windows LAPS lo corta con una contraseña distinta por equipo.",
+   "case": false
+  },
+  {
+   "id": "pathping",
+   "term": "pathping",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "Comando de Windows que traza la ruta a un destino y mide pérdida y demora en cada salto.",
+   "long": "Combina ping y tracert. Por defecto hace 100 consultas por salto y resuelve nombres; -n, -q 10 y -h 5 lo aceleran. La pérdida que aparece en un salto y sigue hasta el destino marca el tramo con problemas.",
+   "case": true
+  },
+  {
+   "id": "nslookup",
+   "term": "nslookup",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "Comando que consulta directamente a un servidor DNS.",
+   "long": "No usa el resolvedor de Windows: ignora el archivo hosts y la caché, y a un nombre sin punto final le agrega los sufijos de búsqueda antes de probarlo tal cual. Sirve para comparar con Resolve-DnsName y aislar fallas del resolvedor.",
+   "case": true
+  },
+  {
+   "id": "resolve-dnsname",
+   "term": "Resolve-DnsName",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "Comando de PowerShell que resuelve un nombre como lo haría una aplicación de Windows.",
+   "long": "Usa el resolvedor del sistema, con archivo hosts, caché y DNS. Con -DnsOnly y -Server consulta un servidor concreto. Llegó con Windows 8 y Server 2012.",
+   "case": true
+  },
+  {
+   "id": "archivo-hosts",
+   "term": "archivo hosts",
+   "aliases": [
+    "C:\\Windows\\System32\\drivers\\etc\\hosts"
+   ],
+   "cat": "Redes",
+   "short": "Archivo de texto de Windows con pares IP y nombre que le ganan al DNS.",
+   "long": "Es heredero de la lista de nombres de ARPANET, anterior al DNS. Resolve-DnsName y las aplicaciones lo leen; nslookup no. Se edita como administrador y conviene anotar en el informe cualquier línea que se deje.",
+   "case": false
+  },
+  {
+   "id": "wbadmin",
+   "term": "wbadmin",
+   "aliases": [
+    "Windows Server Backup",
+    "Windows-Server-Backup"
+   ],
+   "cat": "Herramientas",
+   "short": "El comando de Copias de seguridad de Windows Server.",
+   "long": "Reemplazó a NTBackup en Windows Server 2008. wbadmin start backup -backupTarget:E: -allCritical -quiet guarda lo necesario para restaurar el sistema; get versions lista las copias y start recovery restaura. -recreateDisks borra datos.",
+   "case": true
+  },
+  {
+   "id": "powercfg",
+   "term": "powercfg",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "Comando de Windows que configura la energía: suspensión, hibernación, disco y monitor.",
+   "long": "powercfg /change con un tiempo en 0 quiere decir nunca. /hibernate off apaga la hibernación y el inicio rápido; /requests y /lastwake muestran qué mantiene despierto o despertó al equipo.",
+   "case": true
+  },
+  {
+   "id": "sc-exe",
+   "term": "sc.exe",
+   "aliases": [],
+   "cat": "Herramientas",
+   "short": "Comando de Windows que configura servicios: tipo de inicio y recuperación ante fallas.",
+   "long": "sc.exe config nombre start= delayed-auto y sc.exe failure nombre reset= 86400 actions= restart/180000, con el espacio después del igual obligatorio. En PowerShell hay que escribir sc.exe: sc a secas es Set-Content.",
+   "case": true
+  },
+  {
+   "id": "inicio-retrasado",
+   "term": "Automático retrasado",
+   "aliases": [
+    "delayed-auto",
+    "inicio retrasado"
+   ],
+   "cat": "Herramientas",
+   "short": "Tipo de inicio de un servicio de Windows que arranca un rato después de los automáticos.",
+   "long": "Llegó con Windows Vista y Server 2008. Sirve para servicios que dependen de la red o de una base de datos, como un VMS: se configura con sc.exe config nombre start= delayed-auto.",
+   "case": false
+  },
+  {
+   "id": "recuperacion-servicio",
+   "term": "recuperación ante fallas",
+   "aliases": [
+    "recuperación del servicio"
+   ],
+   "cat": "Herramientas",
+   "short": "Lo que Windows hace solo cuando un servicio termina mal: reiniciarlo, correr un programa o reiniciar el equipo.",
+   "long": "Se define por número de falla con una espera en milisegundos y un tiempo de reset del contador en segundos, con sc.exe failure. failureflag 1 hace que también actúe si el servicio se detiene con error.",
+   "case": false
+  },
+  {
+   "id": "tarea-programada",
+   "term": "tarea programada",
+   "aliases": [
+    "tareas programadas",
+    "Programador de tareas",
+    "AtStartup"
+   ],
+   "cat": "Herramientas",
+   "short": "Algo que Windows corre solo según un disparador, como al iniciar el sistema.",
+   "long": "Con disparador AtStartup, cuenta SYSTEM y -RunLevel Highest corre al encender sin que nadie inicie sesión. Sin carpeta de inicio, el script deja sus archivos en C:\\Windows\\System32.",
+   "case": false
+  },
+  {
+   "id": "restore-ac-power-loss",
+   "term": "Restore on AC Power Loss",
+   "aliases": [
+    "After Power Failure"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Opción del BIOS que decide si el equipo se enciende solo cuando vuelve la energía.",
+   "long": "Power On enciende siempre; Last State, solo si estaba prendido; Power Off lo deja apagado. Con una UPS que apaga el equipo en orden, Last State no vuelve: conviene Power On, sabiendo que también enciende lo que se apagó a propósito.",
+   "case": true
+  },
+  {
+   "id": "ley-little",
+   "term": "ley de Little",
+   "aliases": [
+    "Little's law"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "En una fila estable, el largo promedio es el ritmo de llegada por el tiempo que pasa cada uno en el sistema.",
+   "long": "John Little la demostró en 1961. Para un disco: cola aproximadamente igual a IOPS por latencia. Por eso latencia y cola suben juntas cuando el disco no da abasto.",
+   "case": false,
+   "year": 1961
+  },
+  {
+   "id": "microsoft-defender",
+   "term": "Microsoft Defender",
+   "aliases": [
+    "Defender",
+    "Add-MpPreference"
+   ],
+   "cat": "Seguridad",
+   "short": "El antivirus integrado en Windows.",
+   "long": "Las exclusiones se ven con Get-MpPreference, se agregan con Add-MpPreference y se quitan con Remove-MpPreference. En un servidor de VMS se excluye solo lo que pide el fabricante, como la base de grabación, nunca un disco entero.",
+   "case": true
+  },
+  {
+   "id": "windows-update",
+   "term": "Windows Update",
+   "aliases": [
+    "Patch Tuesday"
+   ],
+   "cat": "Herramientas",
+   "short": "El servicio que descarga e instala las actualizaciones de Windows.",
+   "long": "Existe desde 1998, y desde octubre de 2003 los parches salen el segundo martes de cada mes, el Patch Tuesday. Muchas actualizaciones terminan al reiniciar; las horas activas y, en servidores, el aviso antes de instalar y reiniciar controlan ese momento.",
+   "case": true
+  },
+  {
+   "id": "llmnr",
+   "term": "LLMNR",
+   "aliases": [
+    "Link-Local Multicast Name Resolution"
+   ],
+   "cat": "Redes",
+   "short": "Link-Local Multicast Name Resolution: resolución de nombres por multicast dentro de la red local, sin servidor DNS.",
+   "long": "Windows la prueba cuando el DNS no encuentra un nombre. Resolve-DnsName la tiene en cuenta; nslookup no, porque solo pregunta al servidor DNS.",
+   "case": true
+  },
+  {
+   "id": "mdns",
+   "term": "mDNS",
+   "aliases": [
+    "multicast DNS"
+   ],
+   "cat": "Redes",
+   "short": "Multicast DNS: los equipos de la red local responden por su nombre sin un servidor DNS.",
+   "long": "Es el mecanismo de los nombres terminados en .local. En Windows forma parte del resolvedor del sistema junto con el archivo hosts, la caché y LLMNR.",
+   "case": true
+  },
+  {
+   "id": "dora",
+   "term": "DORA",
+   "aliases": [
+    "Discover, Offer, Request, Ack"
+   ],
+   "cat": "Redes",
+   "short": "Discover, Offer, Request y Ack: los cuatro mensajes con los que un equipo obtiene IP por DHCP.",
+   "long": "El Discover va por broadcast porque el equipo todavía no tiene IP. Con una reserva, el servidor ofrece siempre la misma IP a esa MAC. Si hay dos DHCP en la red, los dos contestan y el equipo se queda con la primera oferta.",
+   "case": true
+  },
+  {
+   "id": "winrm",
+   "term": "WinRM",
+   "aliases": [
+    "Windows Remote Management",
+    "WINRM"
+   ],
+   "cat": "Herramientas",
+   "short": "Windows Remote Management: el servicio con el que se administra Windows a distancia por PowerShell.",
+   "long": "Test-NetConnection lo acepta como nombre en -CommonTCPPort para probar si el puerto responde.",
+   "case": true
+  },
+  {
+   "id": "systemd",
+   "term": "systemd",
+   "aliases": [
+    "systemctl",
+    "unidad de systemd",
+    "multi-user.target"
+   ],
+   "cat": "Linux",
+   "short": "El sistema de arranque y de servicios de Debian y Ubuntu: es el primer proceso, el PID 1.",
+   "long": "Lo presentaron Lennart Poettering y Kay Sievers en 2010; Debian lo usa por defecto desde Jessie (2015). Lee unidades declarativas: un .service dice cómo arrancar un programa y un .target es un estado del sistema, como multi-user.target. systemctl start lo levanta ahora y systemctl enable lo engancha al arranque.",
+   "case": true,
+   "year": 2010
+  },
+  {
+   "id": "journald",
+   "term": "journald",
+   "aliases": [
+    "journalctl",
+    "systemd-journald",
+    "journal de systemd"
+   ],
+   "cat": "Linux",
+   "short": "El registro de systemd: guarda lo que dicen los servicios y el arranque, cada línea con su unidad y su prioridad.",
+   "long": "Se lee con journalctl: -u filtra por servicio, -p err por gravedad, -b -1 trae el arranque anterior y -f muestra en vivo. Vive en /var/log/journal y crece hasta su tope: SystemMaxUse en un archivo de /etc/systemd/journald.conf.d lo limita.",
+   "case": true
+  },
+  {
+   "id": "systemd-timer",
+   "term": "timer de systemd",
+   "aliases": [
+    "timers de systemd",
+    "OnCalendar",
+    "systemctl list-timers"
+   ],
+   "cat": "Linux",
+   "short": "Una tarea programada de systemd: un .timer que dice cuándo correr un .service.",
+   "long": "Son dos archivos: el .service dice qué hacer y el .timer cuándo (OnCalendar). Persistent=true corre la ejecución perdida si el equipo estaba apagado, y el resultado queda en el journal. Se habilita el .timer, no el servicio. Para algo simple de una línea, cron sigue alcanzando.",
+   "case": true
+  },
+  {
+   "id": "cron",
+   "term": "cron",
+   "aliases": [
+    "crontab",
+    "/etc/cron.d"
+   ],
+   "cat": "Linux",
+   "short": "El programador de tareas clásico de Unix: corre comandos a horas fijas.",
+   "long": "Una línea tiene cinco campos de tiempo (minuto, hora, día, mes, día de la semana) y el comando; en /etc/crontab y /etc/cron.d se agrega el usuario. Si la salida no se redirige o no hay MAILTO, los errores se pierden. Si el equipo estaba apagado a esa hora, la tarea no corre.",
+   "case": true
+  },
+  {
+   "id": "grub",
+   "term": "GRUB",
+   "aliases": [
+    "GRand Unified Bootloader",
+    "cargador de arranque"
+   ],
+   "cat": "Linux",
+   "short": "El cargador de arranque de Debian y Ubuntu: carga el kernel y el initramfs.",
+   "long": "Lo lanza el firmware (BIOS o UEFI). El Debian Handbook recomienda protegerlo con contraseña, porque desde su menú se puede arrancar con init=/bin/sh y entrar como root sin clave.",
+   "case": true
+  },
+  {
+   "id": "initramfs",
+   "term": "initramfs",
+   "aliases": [
+    "initrd"
+   ],
+   "cat": "Linux",
+   "short": "Un sistema de archivos mínimo en RAM que el kernel usa para encontrar y montar el disco raíz.",
+   "long": "Lo carga el cargador de arranque junto con el kernel. Trae los módulos y scripts justos para el disco, RAID, LVM o cifrado; con la raíz montada, le pasa el control a systemd.",
+   "case": true
+  },
+  {
+   "id": "apt",
+   "term": "apt",
+   "aliases": [
+    "apt-get",
+    "apt update",
+    "apt upgrade",
+    "apt full-upgrade"
+   ],
+   "cat": "Linux",
+   "short": "El gestor de paquetes de Debian y Ubuntu: baja listas de repositorios, resuelve dependencias e instala.",
+   "long": "apt update baja las listas, apt upgrade instala lo nuevo sin quitar paquetes y apt full-upgrade puede quitar paquetes, por eso se reserva para el salto de versión. apt es para usar a mano y apt-get para scripts. Todo queda en /var/log/apt/history.log.",
+   "case": true
+  },
+  {
+   "id": "dpkg",
+   "term": "dpkg",
+   "aliases": [
+    "paquete .deb",
+    "dpkg-reconfigure"
+   ],
+   "cat": "Linux",
+   "short": "El instalador de bajo nivel de Debian: instala un paquete .deb, sin resolver dependencias.",
+   "long": "apt lo usa por debajo. dpkg-reconfigure vuelve a hacer las preguntas de configuración de un paquete instalado, como la de activar unattended-upgrades. Un .deb suelto con dependencias se instala con apt install ./archivo.deb.",
+   "case": true
+  },
+  {
+   "id": "unattended-upgrades",
+   "term": "unattended-upgrades",
+   "aliases": [
+    "actualizaciones automáticas",
+    "20auto-upgrades",
+    "Automatic-Reboot"
+   ],
+   "cat": "Linux",
+   "short": "El paquete que aplica solo las actualizaciones de seguridad, una vez por día.",
+   "long": "Ubuntu lo trae instalado; en Debian 13 se verifica y, si falta, se instala. 20auto-upgrades lo activa con dos valores en \"1\" y 50unattended-upgrades define orígenes, exclusiones y reinicio. Automatic-Reboot viene en \"false\": o se fija una hora de madrugada o se reinicia en una ventana acordada. La marca de reinicio pendiente es /var/run/reboot-required.",
+   "case": true
+  },
+  {
+   "id": "lts",
+   "term": "LTS",
+   "aliases": [
+    "Long Term Support"
+   ],
+   "cat": "Linux",
+   "short": "Long Term Support: una versión con soporte extendido de actualizaciones.",
+   "long": "Ubuntu publica una LTS cada dos años, en abril: 24.04 y 26.04, con cinco años de soporte estándar (26.04 hasta abril de 2031). Para servidores de clientes conviene una LTS.",
+   "case": true
+  },
+  {
+   "id": "debian",
+   "term": "Debian",
+   "aliases": [
+    "trixie",
+    "Debian 13"
+   ],
+   "cat": "Linux",
+   "short": "Distribución Linux comunitaria, base de Ubuntu y de muchos appliances.",
+   "long": "Nació en 1993. Debian 13 trixie salió en agosto de 2025 y tiene soporte regular hasta agosto de 2028. En los repositorios conviene usar el nombre (trixie) y no stable, para que el equipo no salte de versión solo cuando salga la próxima.",
+   "case": true,
+   "year": 1993
+  },
+  {
+   "id": "ubuntu-server",
+   "term": "Ubuntu Server",
+   "aliases": [
+    "Ubuntu",
+    "Ubuntu 24.04",
+    "Ubuntu 26.04"
+   ],
+   "cat": "Linux",
+   "short": "La edición para servidores de Ubuntu, la distribución de Canonical basada en Debian.",
+   "long": "Ubuntu 26.04 LTS salió en abril de 2026 y trae cambios que rompen guías viejas: sudo-rs en lugar de sudo, apt-key eliminado, /tmp en memoria, OpenSSH 10.2 y chrony con NTS para la hora.",
+   "case": true
+  },
+  {
+   "id": "sudo",
+   "term": "sudo",
+   "aliases": [
+    "sudo-rs",
+    "sudoers",
+    "visudo"
+   ],
+   "cat": "Linux",
+   "short": "Comando para ejecutar otro comando como root (u otro usuario), sin compartir la clave de root.",
+   "long": "Se configura en sudoers, que se edita con visudo y se valida con visudo -c. En Ubuntu 26.04 es sudo-rs, reescrito en Rust: sudo -E se ignora con un aviso. Dar sudo sin contraseña (NOPASSWD) solo tiene sentido en una estación de un único usuario.",
+   "case": true
+  },
+  {
+   "id": "root",
+   "term": "root",
+   "aliases": [
+    "superusuario"
+   ],
+   "cat": "Linux",
+   "short": "El usuario administrador de Linux, con todos los permisos.",
+   "long": "No confundir con la raíz del árbol, /: /root es solo la carpeta personal de root. Por SSH conviene PermitRootLogin no y trabajar con un usuario propio y sudo.",
+   "case": true
+  },
+  {
+   "id": "permisos-unix",
+   "term": "permisos de Unix",
+   "aliases": [
+    "chmod",
+    "chown",
+    "rwx",
+    "permisos octales"
+   ],
+   "cat": "Linux",
+   "short": "Lectura, escritura y ejecución (r, w, x) para el dueño, el grupo y el resto de cada archivo.",
+   "long": "En números, r=4, w=2 y x=1, sumados por categoría: 755 para directorios y programas, 644 para datos, 600 para secretos. chmod los cambia y chown cambia dueño y grupo. En un directorio, x es poder entrar. 777 deja escribir a cualquiera: lo que falta casi siempre es arreglar dueño y grupo.",
+   "case": true
+  },
+  {
+   "id": "setgid",
+   "term": "setgid",
+   "aliases": [
+    "setuid",
+    "SUID",
+    "sticky bit"
+   ],
+   "cat": "Linux",
+   "short": "Bits especiales de permisos: setgid en un directorio hace que lo creado adentro herede el grupo de la carpeta.",
+   "long": "Es el 2 de 2770, y ls -l lo muestra como una s en el lugar de la x del grupo. El sticky bit, como en /tmp, impide borrar archivos ajenos. setuid hace que un programa corra con los permisos de su dueño: es riesgoso, y find / -perm /4000 lista los que lo tienen.",
+   "case": true
+  },
+  {
+   "id": "umask",
+   "term": "umask",
+   "aliases": [],
+   "cat": "Linux",
+   "short": "La máscara que define los permisos con que nacen los archivos y directorios nuevos.",
+   "long": "Con umask 0022, un archivo nace 644 y un directorio 755. Se fija en /etc/login.defs o pam_umask, o por sesión en ~/.bashrc.",
+   "case": true
+  },
+  {
+   "id": "uuid",
+   "term": "UUID",
+   "aliases": [
+    "Universally Unique Identifier"
+   ],
+   "cat": "Herramientas",
+   "short": "Universally Unique Identifier: un identificador único, como el que lleva cada sistema de archivos.",
+   "long": "lsblk -f y blkid muestran el UUID de cada disco. En /etc/fstab se usa UUID=... y nunca /dev/sdX, porque los nombres del kernel cambian según el orden en que aparecen los discos al arrancar.",
+   "case": true
+  },
+  {
+   "id": "fstab",
+   "term": "fstab",
+   "aliases": [
+    "/etc/fstab",
+    "nofail"
+   ],
+   "cat": "Linux",
+   "short": "El archivo que dice qué disco se monta en qué carpeta al arrancar.",
+   "long": "Cada línea tiene seis campos: qué (UUID=...), dónde, tipo, opciones, dump y orden de chequeo. nofail deja arrancar aunque el disco falte y x-systemd.device-timeout=5 evita esperarlo 90 segundos. Un error puede dejar el equipo en modo emergencia: se valida con findmnt -x antes de reiniciar.",
+   "case": true
+  },
+  {
+   "id": "tmpfs",
+   "term": "tmpfs",
+   "aliases": [],
+   "cat": "Linux",
+   "short": "Sistema de archivos que vive en la memoria RAM y se vacía al reiniciar.",
+   "long": "En Ubuntu 26.04, /tmp es tmpfs con tope de la mitad de la RAM: un dump grande ahí ocupa memoria. Para archivos grandes temporales conviene /var/tmp.",
+   "case": true
+  },
+  {
+   "id": "inodo",
+   "term": "inodo",
+   "aliases": [
+    "inodos",
+    "inode",
+    "df -i"
+   ],
+   "cat": "Linux",
+   "short": "La ficha que el sistema de archivos guarda por cada archivo; hay una cantidad fija.",
+   "long": "Millones de archivos chicos pueden agotar los inodos antes que el espacio: el disco dice lleno aunque df -h muestre lugar. df -i lo muestra.",
+   "case": false
+  },
+  {
+   "id": "logrotate",
+   "term": "logrotate",
+   "aliases": [],
+   "cat": "Linux",
+   "short": "Herramienta que rota, comprime y borra los logs de texto viejos de /var/log.",
+   "long": "Los programas que escriben su propio archivo de log dependen de logrotate para no llenar el disco; el journal de systemd tiene su propio tope.",
+   "case": true
+  },
+  {
+   "id": "lsof",
+   "term": "lsof",
+   "aliases": [
+    "fuser"
+   ],
+   "cat": "Linux",
+   "short": "Lista los archivos abiertos por los procesos.",
+   "long": "lsof -p PID muestra lo que tiene abierto un proceso y fuser -v archivo dice qué proceso usa un archivo. Sirve cuando df y du no coinciden: un archivo borrado que un proceso sigue usando no libera su espacio.",
+   "case": true
+  },
+  {
+   "id": "grep",
+   "term": "grep",
+   "aliases": [
+    "grep -rn"
+   ],
+   "cat": "Linux",
+   "short": "Busca texto dentro de archivos o en la salida de otro comando.",
+   "long": "-r recorre carpetas y -n agrega el número de línea. Con el truco del corchete, ps aux | grep \"[s]shd\", grep no aparece en su propia búsqueda.",
+   "case": true
+  },
+  {
+   "id": "yaml",
+   "term": "YAML",
+   "aliases": [
+    "YAML Ain't Markup Language"
+   ],
+   "cat": "Web e integración",
+   "short": "Formato de texto para configuración basado en sangrías, usado por netplan y Docker Compose.",
+   "long": "La sangría es la estructura: dos espacios por nivel, nunca tabulaciones, y un espacio después de los dos puntos. Un error de sangría o una clave mal escrita, como adresses, hace fallar todo el archivo.",
+   "case": true
+  },
+  {
+   "id": "netplan",
+   "term": "netplan",
+   "aliases": [
+    "netplan try",
+    "netplan apply"
+   ],
+   "cat": "Linux",
+   "short": "La configuración de red de Ubuntu Server: archivos YAML en /etc/netplan.",
+   "long": "netplan generate valida, netplan apply aplica sin vuelta y netplan try aplica y vuelve solo a lo anterior si no confirmás con Enter en 120 segundos, la red de seguridad para cambios remotos. Los archivos van con permisos 600.",
+   "case": true
+  },
+  {
+   "id": "iproute2",
+   "term": "iproute2",
+   "aliases": [
+    "ip addr",
+    "ip route",
+    "ip neigh",
+    "ip -br addr"
+   ],
+   "cat": "Linux",
+   "short": "Las herramientas de red actuales de Linux: ip para interfaces, direcciones y rutas, y ss para conexiones.",
+   "long": "Reemplazan a net-tools: ifconfig pasa a ip addr, route a ip route, arp a ip neigh y netstat a ss. ip -br addr muestra una línea por interfaz y ss -tlnp lo que escucha y en qué dirección.",
+   "case": true
+  },
+  {
+   "id": "net-tools",
+   "term": "net-tools",
+   "aliases": [
+    "ifconfig"
+   ],
+   "cat": "Linux",
+   "short": "Las herramientas de red viejas de Linux: ifconfig, route, arp y netstat.",
+   "long": "Muchos servidores ya no las traen. Sus equivalentes en iproute2 son ip addr, ip route, ip neigh y ss.",
+   "case": true
+  },
+  {
+   "id": "ufw",
+   "term": "ufw",
+   "aliases": [
+    "Uncomplicated Firewall"
+   ],
+   "cat": "Linux",
+   "short": "Uncomplicated Firewall: la forma simple de configurar el firewall de host en Ubuntu.",
+   "long": "Viene instalado y deshabilitado. El orden seguro es default deny incoming, allow desde la red de gestión al 22 y recién ahí enable. Ojo: los puertos que publica Docker pasan por al lado de sus reglas.",
+   "case": true
+  },
+  {
+   "id": "nftables",
+   "term": "nftables",
+   "aliases": [
+    "nft",
+    "/etc/nftables.conf"
+   ],
+   "cat": "Linux",
+   "short": "El sucesor de iptables para escribir reglas de netfilter, por defecto en Debian.",
+   "long": "Entró al kernel 3.13 en 2014 y Debian lo usa por defecto desde Buster. Las reglas van en /etc/nftables.conf, se validan con nft -c -f y se cargan al arrancar con systemctl enable nftables; lo que se hace con nft en vivo se pierde al reiniciar.",
+   "case": true,
+   "year": 2014
+  },
+  {
+   "id": "docker-user",
+   "term": "DOCKER-USER",
+   "aliases": [],
+   "cat": "Linux",
+   "short": "La cadena de netfilter que Docker deja para que el administrador filtre el tráfico hacia los contenedores.",
+   "long": "Los puertos publicados se redirigen en la tabla nat y pasan por forward, no por input: ufw no los ve. Si un puerto de contenedor tiene que ser público, se filtra por origen en DOCKER-USER; lo preferido es publicar en 127.0.0.1.",
+   "case": true
+  },
+  {
+   "id": "openssh",
+   "term": "OpenSSH",
+   "aliases": [
+    "sshd",
+    "sshd_config",
+    "sshd -t"
+   ],
+   "cat": "Linux",
+   "short": "La implementación libre de SSH que viene en Debian y Ubuntu, cliente y servidor.",
+   "long": "La lanzó el proyecto OpenBSD en 1999. Para la mayoría de las opciones vale el primer valor leído, y los snippets de /etc/ssh/sshd_config.d se leen antes que el archivo principal. sshd -t valida y sshd -T muestra la configuración efectiva. Ubuntu 26.04 trae la versión 10.2.",
+   "case": true,
+   "year": 1999
+  },
+  {
+   "id": "ed25519",
+   "term": "ed25519",
+   "aliases": [
+    "llave ed25519",
+    "id_ed25519"
+   ],
+   "cat": "Linux",
+   "short": "Algoritmo de llave SSH de curva elíptica: llave corta, rápida y recomendada.",
+   "long": "ssh-keygen la genera por defecto. La privada (id_ed25519) queda en tu equipo con 600 y la pública (.pub) se copia al servidor. RSA queda para equipos viejos; DSA ya no existe en OpenSSH 10.",
+   "case": true
+  },
+  {
+   "id": "dsa",
+   "term": "DSA",
+   "aliases": [
+    "Digital Signature Algorithm"
+   ],
+   "cat": "Seguridad",
+   "short": "Digital Signature Algorithm: un tipo de llave SSH viejo, eliminado en OpenSSH 10.0.",
+   "long": "Un equipo viejo que solo acepta llaves DSA no va a hablar con un cliente OpenSSH actual: se usa ed25519 o, si el equipo no la soporta, RSA.",
+   "case": true
+  },
+  {
+   "id": "authorized-keys",
+   "term": "authorized_keys",
+   "aliases": [
+    "ssh-copy-id"
+   ],
+   "cat": "Linux",
+   "short": "El archivo del servidor con las llaves públicas que pueden entrar a un usuario.",
+   "long": "Vive en ~/.ssh/authorized_keys, con ~/.ssh en 700 y el archivo en 600; si los permisos están abiertos, SSH ignora la llave. ssh-copy-id agrega tu pública. Borrar la línea de alguien le quita el acceso sin cambiar ninguna clave.",
+   "case": true
+  },
+  {
+   "id": "persourcepenalties",
+   "term": "PerSourcePenalties",
+   "aliases": [],
+   "cat": "Seguridad",
+   "short": "Opción de OpenSSH, activa por defecto, que penaliza a las direcciones que fallan la autenticación.",
+   "long": "Las rechaza un tiempo después de fallar: es un freno nativo a la fuerza bruta. Con solo llaves y PerSourcePenalties, fail2ban pasa a ser opcional. Los sondeos de monitoreo que abren el 22 y cortan pueden ganarse una penalidad.",
+   "case": true
+  },
+  {
+   "id": "fail2ban",
+   "term": "fail2ban",
+   "aliases": [],
+   "cat": "Seguridad",
+   "short": "Programa que lee logs y bloquea en el firewall las IP que fallan muchas veces.",
+   "long": "Con SSH solo por llave aporta poco y hay quien prefiere no correr como root algo que interpreta logs con datos del atacante; suma si hay contraseñas o paneles web con login expuestos.",
+   "case": true
+  },
+  {
+   "id": "sigterm",
+   "term": "SIGTERM",
+   "aliases": [
+    "SIGKILL",
+    "SIGHUP",
+    "kill -9"
+   ],
+   "cat": "Linux",
+   "short": "Las señales para terminar un proceso: SIGTERM (15) pide terminar; SIGKILL (9) lo saca sin aviso.",
+   "long": "kill PID manda SIGTERM, que el programa puede atrapar para cerrar sus archivos. kill -9 manda SIGKILL, que no se puede atrapar: lo que estaba a medio escribir queda a medias. SIGHUP (1) se usa para pedir que relea la configuración. A un servicio, mejor systemctl restart.",
+   "case": true
+  },
+  {
+   "id": "load-average",
+   "term": "load average",
+   "aliases": [
+    "carga promedio"
+   ],
+   "cat": "Linux",
+   "short": "La carga de un equipo: promedios de 1, 5 y 15 minutos de procesos corriendo o esperando.",
+   "long": "La muestran uptime y top. Se compara con la cantidad de núcleos (nproc): sostenida por encima, el equipo está saturado.",
+   "case": false
+  },
+  {
+   "id": "memavailable",
+   "term": "MemAvailable",
+   "aliases": [
+    "columna available",
+    "buff/cache"
+   ],
+   "cat": "Linux",
+   "short": "La estimación de memoria que se le puede dar a un programa sin ir a swap, contando la caché liberable.",
+   "long": "La sumó el kernel 3.14 en 2014 y free -h la muestra como available. free bajo es normal: Linux usa la RAM que sobra como caché de disco (buff/cache) y la suelta cuando un programa la pide. Muchos monitoreos alertan mirando free y no available.",
+   "case": true
+  },
+  {
+   "id": "swap",
+   "term": "swap",
+   "aliases": [
+    "memoria swap"
+   ],
+   "cat": "Linux",
+   "short": "Espacio en disco que el sistema usa como memoria cuando la RAM no alcanza.",
+   "long": "Es mucho más lento que la RAM: un equipo que usa swap todo el tiempo necesita memoria o tiene un proceso que se la come. available dice cuánto queda antes de llegar a swap.",
+   "case": false
+  },
+  {
+   "id": "tar",
+   "term": "tar",
+   "aliases": [
+    ".tar.gz",
+    "tar czf"
+   ],
+   "cat": "Linux",
+   "short": "Empaqueta carpetas en un solo archivo, comprimido con z (gzip).",
+   "long": "Su nombre viene de tape archive. tar czf crea, tar tzvf lista y tar xzf extrae; con -C elegís dónde, por ejemplo -C /tmp para probar una restauración sin pisar nada.",
+   "case": true
+  },
+  {
+   "id": "rsync",
+   "term": "rsync",
+   "aliases": [],
+   "cat": "Linux",
+   "short": "Copia y sincroniza carpetas, local o a otro equipo, transfiriendo solo lo que cambió.",
+   "long": "Apareció en 1996, de Andrew Tridgell y Paul Mackerras. rsync -av copia con permisos y fechas; -n simula sin copiar. Con enlaces duros entre copias diarias, cada día parece completo y ocupa solo lo que cambió.",
+   "case": true,
+   "year": 1996
+  },
+  {
+   "id": "docker",
+   "term": "Docker",
+   "aliases": [
+    "docker.io",
+    "Docker Engine",
+    "docker run"
+   ],
+   "cat": "Linux",
+   "short": "Plataforma para empaquetar programas en imágenes y correrlos como contenedores aislados.",
+   "long": "Apareció en 2013. Usa funciones del kernel Linux, como los espacios de nombres y los cgroups, y escribe sus propias reglas de netfilter. En Ubuntu, el paquete docker.io lo mantiene Canonical. Un puerto publicado con -p en todas las interfaces pasa por al lado de ufw.",
+   "case": true,
+   "year": 2013
+  },
+  {
+   "id": "docker-volume",
+   "term": "volumen de Docker",
+   "aliases": [
+    "volúmenes de Docker",
+    "docker volume"
+   ],
+   "cat": "Linux",
+   "short": "El lugar donde Docker guarda los datos que tienen que sobrevivir al contenedor.",
+   "long": "Vive en /var/lib/docker/volumes. El contenedor se puede borrar y recrear desde la imagen; los datos del volumen siguen. docker volume inspect muestra su Mountpoint.",
+   "case": false
+  },
+  {
+   "id": "rsa",
+   "term": "RSA",
+   "aliases": [
+    "Rivest-Shamir-Adleman",
+    "RSA 4096"
+   ],
+   "cat": "Seguridad",
+   "short": "Algoritmo clásico de llave pública, usado en SSH, certificados y firmas.",
+   "long": "En SSH queda como alternativa para equipos viejos que no aceptan ed25519; Ubuntu sugiere RSA de 4096 bits en ese caso.",
+   "case": true
+  },
+  {
+   "id": "gnu",
+   "term": "GNU",
+   "aliases": [
+    "GNU's Not Unix",
+    "herramientas GNU"
+   ],
+   "cat": "Linux",
+   "short": "Proyecto de software libre que aportó las herramientas básicas que acompañan al kernel Linux.",
+   "long": "Lo inició Richard Stallman en 1983. Las distribuciones juntan el kernel Linux con herramientas GNU como bash, grep, tar y las coreutils; por eso se habla también de GNU/Linux.",
+   "case": true,
+   "year": 1983
+  },
+  {
+   "id": "smart",
+   "term": "SMART",
+   "aliases": [
+    "smartctl",
+    "S.M.A.R.T."
+   ],
+   "cat": "Herramientas",
+   "short": "Self-Monitoring, Analysis and Reporting Technology: el autodiagnóstico que traen los discos.",
+   "long": "smartctl -a /dev/sda muestra la salud del disco y smartd la vigila. Sirve para cambiar un disco antes de que falle.",
+   "case": true
   }
  ]
 }

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>El largo del código se decide antes de cargar usuarios</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">PARADOX · PASO 6</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">El largo del código se decide antes de cargar usuarios</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<circle cx="48" cy="140" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="146.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text>
+<text x="80.0" y="148.0" font-family="Instrument Sans" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">[701] opción 1: códigos de 4 o de 6 dígitos</text>
+<text x="80.0" y="232.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="start">Antes · 4 dígitos</text>
+<rect x="80" y="250" width="52" height="70" rx="10" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="106.0" y="297.0" font-family="JetBrains Mono" font-size="30" font-weight="700" fill="#0A63B8" text-anchor="middle">1</text>
+<rect x="142" y="250" width="52" height="70" rx="10" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="168.0" y="297.0" font-family="JetBrains Mono" font-size="30" font-weight="700" fill="#0A63B8" text-anchor="middle">2</text>
+<rect x="204" y="250" width="52" height="70" rx="10" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="230.0" y="297.0" font-family="JetBrains Mono" font-size="30" font-weight="700" fill="#0A63B8" text-anchor="middle">3</text>
+<rect x="266" y="250" width="52" height="70" rx="10" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="292.0" y="297.0" font-family="JetBrains Mono" font-size="30" font-weight="700" fill="#0A63B8" text-anchor="middle">4</text>
+<path d="M350.0 285.0C410.0 285.0,410.0 285.0,470.0 285.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<text x="380.0" y="272.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#41627F" text-anchor="start">pasás a 6</text>
+<text x="500.0" y="232.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="start">Después · 6 dígitos</text>
+<rect x="500" y="250" width="52" height="70" rx="10" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="526.0" y="297.0" font-family="JetBrains Mono" font-size="30" font-weight="700" fill="#0A63B8" text-anchor="middle">1</text>
+<rect x="562" y="250" width="52" height="70" rx="10" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="588.0" y="297.0" font-family="JetBrains Mono" font-size="30" font-weight="700" fill="#0A63B8" text-anchor="middle">2</text>
+<rect x="624" y="250" width="52" height="70" rx="10" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="650.0" y="297.0" font-family="JetBrains Mono" font-size="30" font-weight="700" fill="#0A63B8" text-anchor="middle">3</text>
+<rect x="686" y="250" width="52" height="70" rx="10" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="712.0" y="297.0" font-family="JetBrains Mono" font-size="30" font-weight="700" fill="#0A63B8" text-anchor="middle">4</text>
+<rect x="748" y="250" width="52" height="70" rx="10" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/>
+<text x="774.0" y="297.0" font-family="JetBrains Mono" font-size="30" font-weight="700" fill="#B45309" text-anchor="middle">1</text>
+<rect x="810" y="250" width="52" height="70" rx="10" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/>
+<text x="836.0" y="297.0" font-family="JetBrains Mono" font-size="30" font-weight="700" fill="#B45309" text-anchor="middle">2</text>
+<text x="752.0" y="352.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#B45309" text-anchor="middle">la central repite los dos primeros</text>
+<rect x="48" y="400" width="540" height="124" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="48" y="412" width="5" height="100" rx="2.5" fill="#B45309"/><text x="74.0" y="434.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="74.0" dy="0.0">El llamado del lunes</tspan></text><text x="74.0" y="460.9" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">El usuario sigue tecleando 1234 y no anda: su código ahora</tspan><tspan x="74.0" dy="21.6">es 123412. Si el cambio es inevitable, avisale a cada</tspan><tspan x="74.0" dy="21.6">usuario su código nuevo.</tspan></text>
+<rect x="612" y="400" width="540" height="124" rx="14" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/><rect x="612" y="412" width="5" height="100" rx="2.5" fill="#D2492F"/><text x="638.0" y="434.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="638.0" dy="0.0">En obra</tspan></text><text x="638.0" y="460.9" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="638.0" dy="0.0">Con la central en servicio, cambiar el largo o el</tspan><tspan x="638.0" dy="21.6">particionado afecta a todos: coordinalo con el cliente y</tspan><tspan x="638.0" dy="21.6">con monitoreo.</tspan></text>
+</svg>

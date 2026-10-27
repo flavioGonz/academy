@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Cada falla vive en una capa: ubicala primero</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">HIKCENTRAL</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Cada falla vive en una capa: ubicala primero</text>
+<rect x="48" y="124" width="640" height="92" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="72.0" y="164.0" font-family="Familjen Grotesk" font-size="21" font-weight="600" fill="#04223D" text-anchor="start">Clientes</text>
+<text x="72.0" y="194.0" font-family="JetBrains Mono" font-size="16" font-weight="400" fill="#6E88A1" text-anchor="start">Web Client configura · Control Client opera · Mobile</text>
+<path d="M700 170.0H744" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="5 5"/>
+<rect x="752" y="138" width="400" height="64" rx="14" fill="#FFF4DE" stroke="#B45309" stroke-width="1.5"/>
+<text x="774.0" y="176.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#B45309" text-anchor="start">VSM217: Control Client de otra versión</text>
+<rect x="48" y="230" width="640" height="92" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="72.0" y="270.0" font-family="Familjen Grotesk" font-size="21" font-weight="600" fill="#04223D" text-anchor="start">Streaming Server</text>
+<text x="72.0" y="300.0" font-family="JetBrains Mono" font-size="16" font-weight="400" fill="#6E88A1" text-anchor="start">otra máquina, solo si hace falta</text>
+<path d="M700 276.0H744" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="5 5"/>
+<rect x="752" y="244" width="400" height="64" rx="14" fill="#FFF4DE" stroke="#B45309" stroke-width="1.5"/>
+<text x="774.0" y="282.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#B45309" text-anchor="start">Se suma con más de 200 cámaras</text>
+<rect x="48" y="336" width="640" height="92" rx="16" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="72.0" y="376.0" font-family="Familjen Grotesk" font-size="21" font-weight="600" fill="#FFFFFF" text-anchor="start">SYS + Streaming Gateway</text>
+<text x="72.0" y="406.0" font-family="JetBrains Mono" font-size="16" font-weight="400" fill="#9FC3E3" text-anchor="start">gestión, usuarios, base de datos y video</text>
+<path d="M700 382.0H744" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="5 5"/>
+<rect x="752" y="350" width="400" height="64" rx="14" fill="#FFF4DE" stroke="#B45309" stroke-width="1.5"/>
+<text x="774.0" y="388.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#B45309" text-anchor="start">Puerto en rojo en Service Manager</text>
+<rect x="48" y="442" width="640" height="92" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="72.0" y="482.0" font-family="Familjen Grotesk" font-size="21" font-weight="600" fill="#04223D" text-anchor="start">Equipos</text>
+<text x="72.0" y="512.0" font-family="JetBrains Mono" font-size="16" font-weight="400" fill="#6E88A1" text-anchor="start">cámaras, NVR, controladoras</text>
+<path d="M700 488.0H744" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="5 5"/>
+<rect x="752" y="456" width="400" height="64" rx="14" fill="#FFF4DE" stroke="#B45309" stroke-width="1.5"/>
+<text x="774.0" y="494.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#B45309" text-anchor="start">Cámara offline en la plataforma</text>
+<text x="752.0" y="116.0" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.5">SÍNTOMA TÍPICO DE ESA CAPA</text>
+<text x="48.0" y="560.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">El Streaming Gateway viene dentro del SYS y, según el FAQ, sirve hasta 200 cámaras reenviadas.</text>
+<text x="48.0" y="592.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">Por eso el Streaming Server va en otra máquina: nunca junto al SYS.</text>
+<text x="48.0" y="636.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#0A63B8" text-anchor="start">Antes de diagnosticar: equipo, SYS, streaming o cliente.</text>
+</svg>

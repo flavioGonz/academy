@@ -1,0 +1,15 @@
+# Brief: ilustraciones y animaciones de la Teoría (lecciones ya publicadas)
+
+Nico (dueño de IES) pidió: "la Teoría también debe tener ilustraciones y animaciones". Las lecciones ya tienen su `teoria_md` (en los manifests de `/home/claude/ies-training/ilustraciones/<slug>/manifest*.json`; combinados por campo, el último en orden alfabético gana) y su ilustración principal y de pasos. Ahora falta la figura dentro de la teoría.
+
+1. Leé la sección "Ilustraciones y animaciones de la Teoría" al final de `/home/claude/ies-training/ilustraciones/GUIA.md`, la biblioteca `/home/claude/ies-training/tools/anim.py` y el ejemplo completo `/home/claude/ies-training/ilustraciones/mikrotik/src/anim_27_rib_fib.py` (resultado: `site2/ilustraciones/mikrotik/27-rib-fib.svg`; mirá sus PNG `_anim27-*.png`).
+2. Para cada lección de tu rango: leé su `teoria_md` combinado (scriptito con glob de manifests en orden, `update` por campo) y su tarjeta `card.md` en `/home/claude/claudemy/<slug>/class/`. Elegí qué mecanismo de "Cómo funciona" se entiende mejor viéndolo. Hacé **1 o 2 figuras**, al menos **una animada** por lección cuando hay algo que pasa en el tiempo (casi siempre lo hay); si no, una ilustración fija bien pensada.
+3. No repitas la ilustración principal ni las de pasos de la misma lección (están en `site2/ilustraciones/<slug>/<id>*.webp`; miralas antes). La teoría explica el porqué: el protocolo, el flujo, los estados.
+4. Exactitud: lo que dibujás sale de la teoría o la tarjeta de esa lección. Nada inventado. Español rioplatense, frases cortas, sin guiones largos.
+5. Archivos: animaciones en `/home/claude/ies-training/site2/ilustraciones/<slug>/<id>-t1.svg` (y `-t2`), scripts en `/home/claude/ies-training/ilustraciones/<slug>/src/anim_<id>_<tema>.py`, vistas previas PNG en `/home/claude/ies-training/ilustraciones/<slug>/_t<id>-*.png` (nunca en site2). Fijas: `ilustraciones/<slug>/<id>-t<N>.svg` + render_svg.py (con `flock /home/claude/ies-training/render.lock`).
+6. Revisá cada animación en sus instantes y en el cuadro fijo con Read. Corregí superposiciones, textos cortados, flechas que no llegan, elementos que aparecen fuera de tiempo. Menos de 120 KB cada una.
+7. Manifest propio: `/home/claude/ies-training/ilustraciones/<slug>/manifest-teoria-<desde>-<hasta>.json` con solo `{"<id>": {"teoria_figs": [...]}}`. Validá que cada `after` aparezca una sola vez en el teoria_md combinado y que no esté en un título.
+8. Prueba: `python3 /home/claude/ies-training/tools/enriquecer.py /home/claude/ies-training/site2/data/<slug>.json <slug> /tmp/claude-0/<slug>-tf-<desde>.json --solo <ids separados por coma>` → `teoria_figs` = cantidad esperada, `faltan=[]`, `sin_ancla=[]`.
+9. No despliegues nada ni edites card.md, quiz.json, script.txt, course.json, otros manifests, glosario ni ilus.py/anim.py (si a anim.py le falta algo, escribí tus ayudantes en tu propio `src/_anim_<slug>.py`).
+
+Reportá: por lección, qué figura hiciste (animada o fija, qué muestra), archivos, prueba y lo que no pudiste confirmar.

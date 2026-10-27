@@ -1,0 +1,148 @@
+{
+  "1": {
+    "teoria_figs": [
+      {
+        "file": "1-t1.svg",
+        "after": "El IP Scanner funciona por descubrimiento en la red local",
+        "alt": "Animación en cinco tiempos sobre la red 192.168.88.0/24 con portero, router y PC con IP Scanner. 1: al encender, el portero, todavía sin IP, manda un DHCPDISCOVER por broadcast que llega a toda la red. 2: el router le ofrece una IP del rango, 192.168.88.X, y el portero la toma con su gateway 192.168.88.1. 3: el IP Scanner de la PC manda una consulta en la red local buscando equipos Akuvox. 4: el portero contesta con modelo, IP y MAC y aparece en la lista de resultados; con esa IP se entra por navegador con admin / admin una sola vez. 5: con el firewall de la PC activo, la respuesta llega y se descarta, y el IP Scanner queda sin resultados. Nota: sin pantalla, la IP se anuncia por voz, por código en el teclado, por menú con PIN de sistema o con el IP Scanner; el firewall se pausa solo mientras escanea.",
+        "caption": "Seguí la IP: el DHCP se la da al portero y el IP Scanner la encuentra si nada bloquea la respuesta."
+      }
+    ]
+  },
+  "2": {
+    "teoria_figs": [
+      {
+        "file": "2-t1.svg",
+        "after": "La actualización por web sube el archivo al equipo",
+        "alt": "Animación en cuatro tiempos con la web del portero en System > Basic > Select File > Upgrade, el portero E16 V2 y su página Product Information. 1: la pestaña del navegador sube el archivo 216.30.10.121.rom al equipo; la transferencia vive en la pestaña, por eso no se cierra ni se refresca. 2: el portero verifica el archivo y lo graba en su memoria. 3: al terminar, reinicia y la web no responde por un momento. 4: la versión nueva, 216.30.10.121, aparece en Product Information y se anota en la ficha del equipo. Notas: si se cierra o se refresca la pestaña a mitad de camino, la transferencia se corta; 216.30.10.121 se lee como E16 V2, logo Akuvox, rama 10 con alta seguridad y versión 121.",
+        "caption": "La pestaña sostiene la subida; el resto lo hace el equipo hasta reiniciar con la versión nueva."
+      }
+    ]
+  },
+  "3": {
+    "teoria_figs": [
+      {
+        "file": "3-t1.svg",
+        "after": "y desde ese momento el audio y el video viajan por RTP",
+        "alt": "Animación en cinco tiempos sobre dos líneas de vida, portero 192.168.88.21 y monitor 192.168.88.31. 1: el portero manda INVITE a sip:192.168.88.31:5060 con una oferta SDP, los codecs de audio y video y el puerto donde espera el medio. 2: el monitor responde 180 Ringing, está sonando. 3: el residente atiende y el monitor responde 200 OK con su propio SDP. 4: el portero confirma con ACK y el audio y el video viajan por RTP sobre UDP directo entre las dos IP, en los dos sentidos. 5: el monitor manda la tecla de apertura como DTMF dentro de la llamada y el portero dispara el relé.",
+        "caption": "Cada mensaje SIP tiene su tiempo; después del ACK, el medio va directo entre las dos IP."
+      }
+    ]
+  },
+  "4": {
+    "teoria_figs": [
+      {
+        "file": "4-t1.svg",
+        "after": "Un electroimán así cableado libera al abrir",
+        "alt": "Animación en cuatro tiempos con dos circuitos iguales salvo el borne: a la izquierda una cerradura cableada en COM y NO (fail-secure), a la derecha un electroimán en COM y NC (fail-safe), los dos con fuente de 12 V aparte. 1: en reposo el COM toca el NC; la cerradura tiene 0 V y está trabada, el electroimán tiene 12 V y sostiene la puerta. 2: el portero activa el relé por PIN, tarjeta, DTMF, HTTP o botón y el COM pasa al NO; la cerradura recibe 12 V y abre, el electroimán queda en 0 V y libera. 3: pasa el tiempo configurado en Access Control > Relay y el COM vuelve al NC; las dos quedan trabadas. 4: se corta la fuente; la cerradura en NO sigue trabada y el electroimán en NC queda libre.",
+        "caption": "Mirá el mismo relé moviendo dos cargas distintas, y qué pasa con cada una cuando se corta la luz."
+      },
+      {
+        "file": "4-t2.svg",
+        "after": "El diodo en antiparalelo, con el cátodo al positivo",
+        "alt": "Animación en tres tiempos de un circuito con fuente de 12 V aparte, el contacto del relé y la bobina de un electroimán, con un gráfico de la tensión en la bobina. 1: con el contacto cerrado la corriente circula de la fuente al contacto, a la bobina y vuelve a la fuente. 2: sin diodo, el contacto se abre; como la corriente de la bobina no puede cortarse de golpe, la tensión en sus bornes salta y aparece un arco en el contacto; en el gráfico se ve el salto. 3: con un diodo en antiparalelo sobre la bobina, con el cátodo al positivo, al abrir el contacto la corriente sigue girando por la bobina y el diodo hasta apagarse, sin arco; en el gráfico la tensión baja a cero sin salto.",
+        "caption": "Sin diodo, la bobina descarga en el contacto; con diodo, la corriente gira y se apaga sin arco."
+      }
+    ]
+  },
+  "5": {
+    "teoria_figs": [
+      {
+        "file": "5-t1.svg",
+        "after": "busca dónde está registrada la 202 y la hace sonar",
+        "alt": "Animación en cinco tiempos con tres líneas de vida: portero extensión 201, central 192.168.88.10 puerto 5060 y monitor extensión 202. 1: el portero manda REGISTER diciendo que la 201 está en su IP y puerto. 2: la central contesta 401 Unauthorized con un desafío. 3: el portero repite el REGISTER con un resumen digest calculado con su clave y la central responde 200 OK; la tabla de registros suma la 201. 4: al apretar el botón, el portero manda el INVITE para la 202 a la central. 5: la central busca en su tabla dónde está registrada la 202 y le manda el INVITE al monitor, que suena. Notas: el registro vence y se renueva cada período de registro; con un prefijo de más la central no encuentra destino.",
+        "caption": "Primero el registro con desafío; después la central usa esa tabla para encontrar a la 202."
+      }
+    ]
+  },
+  "6": {
+    "teoria_figs": [
+      {
+        "file": "6-t1.svg",
+        "after": "el DTMF Mode fija cuántos dígitos espera",
+        "alt": "Animación en cuatro tiempos. A la izquierda el monitor, a la derecha el portero, unidos por dos carriles: la señalización SIP y el RTP del audio. 1: con DTMF Type RFC2833, el monitor manda las teclas 7, 3 y 1 como eventos dentro del RTP, por el mismo camino que el audio, y el portero las guarda. 2: con los 3 dígitos que fija el DTMF Mode, el portero compara 731 con el código del Relay A: coinciden. 3: la lista blanca, Only Contacts List, confirma que quien llama está en contactos y el portero dispara el relé A. 4: si el monitor pasa a SIP INFO, las teclas viajan por la señalización; el portero espera RFC 2833, no las escucha y la puerta no abre aunque la llamada ande.",
+        "caption": "Los dígitos tienen que llegar por el canal que el portero escucha; si no, la llamada anda y la puerta no."
+      }
+    ]
+  },
+  "7": {
+    "teoria_figs": [
+      {
+        "file": "7-t1.svg",
+        "after": "presenta una credencial, el portero busca el usuario",
+        "alt": "Animación en cuatro tiempos con el recorrido de una credencial: credencial, de quién es, si está en horario y qué relé dispara; abajo la ficha del usuario y su horario. 1: un martes a las 10:00 se marca el PIN privado 482913 y el portero lo encuentra en Directory > User: es de Prueba Tres, con Relay A y horario Lun a Vie 08 a 18. 2: las 10:00 caen dentro del horario y el portero dispara el Relay A. 3: el mismo PIN a las 19:30 queda fuera del horario y se rechaza. 4: con el PIN público no se busca usuario ni horario: cualquiera que lo sepa abre a cualquier hora.",
+        "caption": "El PIN privado pasa por usuario y horario; el PIN público se saltea los dos."
+      }
+    ]
+  },
+  "8": {
+    "teoria_figs": [
+      {
+        "file": "8-t1.svg",
+        "after": "en HTTP sin TLS, todo lo que viaja",
+        "alt": "Animación en cuatro tiempos con monitor, PC de laboratorio, portero 1 con Relay A código 731 portón y Relay B código 732 hall, y portero 2 en 192.168.88.21. 1: durante la llamada el monitor manda 732; el portero 1 compara con los códigos de sus relés y dispara solo el relé B; el portero 2 no está en la llamada y no se entera. 2: la PC abre una conexión TCP al puerto 80 del portero 2 y manda GET /fcgi/OpenDoor?action=OpenDoor&DoorNum=1 con el usuario abre-lab y su clave en el encabezado de autenticación. 3: el portero 2 valida la credencial y dispara el relé A, sin ninguna llamada; DoorNum=1 es el relé A y DoorNum=2 el relé B. 4: como HTTP no lleva TLS, otro equipo en la misma red puede leer el usuario y la clave; por eso el comando vive solo en la red de porteros y nunca con admin.",
+        "caption": "El DTMF vive dentro de una llamada; el HTTP no necesita llamada, pero su credencial viaja legible."
+      }
+    ]
+  },
+  "9": {
+    "teoria_figs": [
+      {
+        "file": "9-t1.svg",
+        "after": "El video llega en paquetes RTP, por UDP o intercalado",
+        "alt": "Animación en cinco tiempos con dos líneas de vida: el NVR y el portero 192.168.88.21 en el puerto 554. 1: el NVR abre una conexión TCP al 554 y pide DESCRIBE rtsp://192.168.88.21/live/ch00_1, el stream secundario de 512 kbps. 2: con la autorización RTSP activada, el portero responde 401 con un desafío Digest. 3: el NVR repite el DESCRIBE con un resumen calculado con la clave de su usuario y el desafío; la clave no viaja. 4: el portero responde 200 OK describiendo el stream, H.264 a 25 fps, y el NVR pide SETUP y PLAY. 5: el video llega al NVR en paquetes RTP, por UDP o intercalados en la misma conexión TCP. Nota: con ONVIF el NVR consulta /onvif/device_service, ve los perfiles y obtiene las URL RTSP sin escribirlas.",
+        "caption": "El 401 es parte del camino normal: con Digest el NVR prueba la clave sin mandarla."
+      }
+    ]
+  },
+  "10": {
+    "teoria_figs": [
+      {
+        "file": "10-t1.svg",
+        "after": "Lo local no pasa por ningún servidor externo",
+        "alt": "Animación en cinco tiempos con cuatro líneas de vida: monitor, portero, nube SmartPlus y app del celular; entre el portero y la nube pasa el WAN del edificio. 1: el visitante aprieta y el portero, con la cuenta SIP 1 tomada por SmartPlus, llama al número SIP del departamento en la nube. 2: la nube busca los dispositivos del residente y manda una notificación al celular. 3: la app se despierta, se conecta a la nube y el audio y el video viajan a través de ella. 4: se corta el WAN; la llamada a SmartPlus falla en el primer paso, la app no suena y tampoco se pueden generar llaves temporales nuevas. 5: lo local sigue andando: el portero llama al monitor dentro del edificio, el residente atiende y abre, y el PIN y la tarjeta se validan en el propio portero, que dispara el relé.",
+        "caption": "Sin WAN se cae el camino por la nube; el monitor, el PIN, la tarjeta y el relé siguen en el edificio."
+      }
+    ]
+  },
+  "11": {
+    "teoria_figs": [
+      {
+        "file": "11-t1.svg",
+        "after": "El escaneo valida las capas.",
+        "alt": "Animación en cuatro tiempos con la PC de la red de usuarios a la izquierda, el firewall de la VLAN en el medio y el portero 10.10.10.21 a la derecha, con tres puertos de ejemplo: TCP 80, 23 y 554. 1: nmap -sS manda un SYN a cada puerto; los del 80 y el 23 llegan al portero y el del 554 queda en el firewall. 2: el 80 contesta SYN-ACK y nmap lo marca abierto: desde la red de usuarios es un hueco. 3: el 23 contesta RST y nmap lo marca cerrado: el SYN pasó pero no hay servicio. 4: del 554 no vuelve nada porque el firewall descartó el SYN, y nmap lo marca filtrado. Nota: desde la red de usuarios lo esperado es que todo figure filtrado; -sU prueba UDP y es más lento porque un puerto UDP abierto no responde.",
+        "caption": "Tres respuestas posibles a un SYN: desde la red de usuarios, lo único correcto es el silencio."
+      }
+    ]
+  },
+  "12": {
+    "teoria_figs": [
+      {
+        "file": "12-t1.svg",
+        "after": "se guarda en un buffer de 1 MB dentro del equipo",
+        "alt": "Animación en cuatro tiempos sobre la lista de paquetes de captura.pcap. 1: sin filtro, la captura muestra diez paquetes mezclados, ARP, DNS y SIP, y el registro se pierde entre el tráfico de fondo. 2: se aplica el filtro sip.Method == \"REGISTER\" || sip.Status-Code == 401 || sip.Status-Code == 403 y quedan cuatro: REGISTER, 401 Unauthorized con nonce, REGISTER con resumen y 403 Forbidden. 3: el primer 401 es normal: la central manda el nonce y pide credencial. 4: después del REGISTER con resumen llega otro rechazo, la falla: la clave está mal y la central registra Failed to authenticate. Nota: en un registro sano el 200 OK no entra en este filtro, así que después del REGISTER con resumen no aparece ningún rechazo.",
+        "caption": "El filtro deja cuatro paquetes de diez; el que importa es el rechazo que llega después del resumen."
+      }
+    ]
+  },
+  "13": {
+    "teoria_figs": [
+      {
+        "file": "13-t1.svg",
+        "after": "el cliente las saca de la URL y las manda en el encabezado",
+        "alt": "Animación en cuatro tiempos con una barra de URL arriba, el cliente, un proxy si lo hay y el portero 192.168.88.21, y debajo de cada uno su registro. 1: con el formato viejo la URL es http://192.168.88.21/fcgi/do?action=OpenDoor&UserName=abre-lab&Password=Ejemplo-Http-2026&DoorNum=1 y la clave viaja como parámetro. 2: esa URL completa, con la clave, queda escrita en el historial del cliente, en el log del proxy y en el log del portero. 3: con el formato nuevo, http://abre-lab:Ejemplo-Http-2026@192.168.88.21/fcgi/OpenDoor?action=OpenDoor&DoorNum=1, el cliente saca usuario y clave de la URL y los manda en el encabezado de autenticación; en los registros del proxy y del portero queda la ruta sin la clave. 4: el portero valida la credencial y dispara el relé; algunos firmwares responden 0 si abrió y -1 si falló la credencial. Nota: con la alta seguridad encendida Akuvox ya no acepta /fcgi/do; curl -u manda lo mismo que usuario:clave@ en la URL.",
+        "caption": "Con el formato viejo la clave queda escrita en cada registro; con el nuevo viaja aparte."
+      }
+    ]
+  },
+  "14": {
+    "teoria_figs": [
+      {
+        "file": "14-t1.svg",
+        "after": "La clave nunca viaja tal cual.",
+        "alt": "Animación en cinco tiempos con dos líneas de vida: el cliente, un script con pylocal-akuvox, y el portero con la HTTP API en modo Digest. 1: el cliente pide el recurso sin credencial. 2: el portero responde 401 con un desafío que incluye un nonce. 3: el cliente calcula el hash de usuario, clave, nonce y pedido y repite el pedido con ese resumen, con el usuario api-lab. 4: el portero hace la misma cuenta con la clave que tiene guardada; coincide y responde con modelo y firmware. 5: con una clave mala el resumen no coincide y el portero rechaza el pedido: error de autenticación. Al costado, los otros modos: con Digest la clave nunca viaja tal cual; Basic manda usuario:clave en Base64 en cada pedido, y YXBpLWxhYjpFamVtcGxvLUFwaS0yMDI2 se decodifica como api-lab:Ejemplo-Api-2026; con Allowlist no hay usuario y el portero compara la IP de origen con su lista.",
+        "caption": "Digest prueba la clave con un hash; Basic la manda en Base64, que se decodifica en un paso."
+      }
+    ]
+  }
+}

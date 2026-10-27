@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Lo que el servidor tiene que cumplir para ESXi 8</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">VMWARE</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Lo que el servidor tiene que cumplir para ESXi 8</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<rect x="48" y="128" width="352" height="176" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="90" cy="172" r="24" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<g fill="none" stroke="#0A63B8" stroke-width="2"><rect x="79" y="161" width="22" height="22" rx="3"/><path d="M84 156v5M90 156v5M96 156v5M84 183v5M90 183v5M96 183v5"/></g>
+<text x="128.0" y="180.0" font-family="Familjen Grotesk" font-size="20" font-weight="600" fill="#04223D" text-anchor="start">CPU</text>
+<text x="74.0" y="232.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#04223D" text-anchor="start">2 núcleos como mínimo</text>
+<text x="74.0" y="262.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">en la Compatibility Guide</text>
+<rect x="424" y="128" width="352" height="176" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="466" cy="172" r="24" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<g transform="translate(452 158) scale(1.15)" fill="none" stroke="#0A63B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></g>
+<text x="504.0" y="180.0" font-family="Familjen Grotesk" font-size="20" font-weight="600" fill="#04223D" text-anchor="start">BIOS</text>
+<text x="450.0" y="232.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#04223D" text-anchor="start">VT-x o AMD-V habilitado</text>
+<text x="450.0" y="262.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">NX/XD habilitado · UEFI</text>
+<rect x="800" y="128" width="352" height="176" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="842" cy="172" r="24" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<g transform="translate(828 158) scale(1.15)" fill="none" stroke="#0A63B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="7" rx="1.5"/><rect x="4" y="14" width="16" height="7" rx="1.5"/><path d="M7.5 6.5h.01M7.5 17.5h.01"/></g>
+<text x="880.0" y="180.0" font-family="Familjen Grotesk" font-size="20" font-weight="600" fill="#04223D" text-anchor="start">Memoria</text>
+<text x="826.0" y="232.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#04223D" text-anchor="start">8 GB como mínimo</text>
+<text x="826.0" y="262.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">12 GB para producción</text>
+<rect x="48" y="324" width="352" height="176" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="90" cy="368" r="24" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<g transform="translate(76 354) scale(1.15)" fill="none" stroke="#0A63B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-3 3-3 15 0 18M12 3c3 3 3 15 0 18"/></g>
+<text x="128.0" y="376.0" font-family="Familjen Grotesk" font-size="20" font-weight="600" fill="#04223D" text-anchor="start">Red</text>
+<text x="74.0" y="428.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#04223D" text-anchor="start">una NIC gigabit soportada</text>
+<text x="74.0" y="458.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">mejor dos (lección 3)</text>
+<rect x="424" y="324" width="352" height="176" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<circle cx="466" cy="368" r="24" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<g transform="translate(452 354) scale(1.15)" fill="none" stroke="#0E8F5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g>
+<text x="504.0" y="376.0" font-family="Familjen Grotesk" font-size="20" font-weight="600" fill="#0E8F5E" text-anchor="start">Disco de arranque</text>
+<text x="450.0" y="428.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#04223D" text-anchor="start">persistente: 32 GB mínimo</text>
+<text x="450.0" y="458.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">128 GB óptimo, en RAID 1</text>
+<rect x="800" y="324" width="352" height="176" rx="16" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<circle cx="842" cy="368" r="24" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<g transform="translate(828 354) scale(1.15)" fill="none" stroke="#D2492F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></g>
+<text x="880.0" y="376.0" font-family="Familjen Grotesk" font-size="20" font-weight="600" fill="#D2492F" text-anchor="start">SD o USB</text>
+<text x="826.0" y="428.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#04223D" text-anchor="start">solo para arranque, en retirada</text>
+<text x="826.0" y="458.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">no sirven para OSDATA</text>
+<rect x="48" y="540" width="540" height="124" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="552" width="5" height="100" rx="2.5" fill="#0A63B8"/><text x="74.0" y="574.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="74.0" dy="0.0">Antes de todo</tspan></text><text x="74.0" y="601.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Primero el modelo: CPU, NIC y controladora en la Broadcom</tspan><tspan x="74.0" dy="21.6">Compatibility Guide (la ex HCL). Si no está, no hay</tspan><tspan x="74.0" dy="21.6">soporte.</tspan></text>
+<rect x="612" y="540" width="540" height="102" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="612" y="552" width="5" height="78" rx="2.5" fill="#B45309"/><text x="638.0" y="574.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="638.0" dy="0.0">Mirando adelante</tspan></text><text x="638.0" y="601.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="638.0" dy="0.0">ESXi 9 deja afuera CPUs Skylake y anteriores: si el cliente</tspan><tspan x="638.0" dy="21.6">piensa actualizar, chequeá también la 9.0.</tspan></text>
+</svg>

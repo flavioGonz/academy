@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>start lo levanta hoy; enable, después de cada corte</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">LINUX</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">start lo levanta hoy; enable, después de cada corte</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<rect x="48" y="124" width="540" height="300" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="156.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Dos órdenes distintas</text>
+<rect x="72" y="178" width="492" height="104" rx="12" fill="#E5F0FB" stroke="#17A8D4" stroke-width="2"/>
+<text x="92.0" y="212.0" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="#0A63B8" text-anchor="start">systemctl start ssh</text>
+<text x="92.0" y="240.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">Lo arranca ahora. Si se corta la luz,</text>
+<text x="92.0" y="262.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">al volver no arranca solo.</text>
+<rect x="72" y="296" width="492" height="104" rx="12" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="92.0" y="330.0" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="#0E8F5E" text-anchor="start">systemctl enable ssh</text>
+<text x="92.0" y="358.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">Lo engancha al arranque (multi-user.target):</text>
+<text x="92.0" y="380.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">vuelve solo después de cada reinicio.</text>
+<rect x="48" y="446" width="540" height="97" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="458" width="5" height="73" rx="2.5" fill="#0A63B8"/><text x="74.0" y="480.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Un servicio que tiene que volver tras un corte (accesos,</tspan><tspan x="74.0" dy="21.6">grabación, SSH) lleva start y enable. Se revisa con</tspan><tspan x="74.0" dy="21.6">systemctl is-enabled.</tspan></text>
+<rect x="612" y="124" width="540" height="466" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><text x="632.0" y="156.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#0E8F5E" text-anchor="start">Servicio caído: el método</text>
+<circle cx="650" cy="208" r="18" fill="#17A8D4"/><text x="650.0" y="214.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="684.0" y="204.0" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="#04223D" text-anchor="start">systemctl status ssh</text>
+<text x="684.0" y="230.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">¿activo, caído, desde cuándo?</text>
+<path d="M650 230V278" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="650" cy="304" r="18" fill="#17A8D4"/><text x="650.0" y="310.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="684.0" y="300.0" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="#04223D" text-anchor="start">journalctl -u ssh -n 20</text>
+<text x="684.0" y="326.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">el error real, con archivo y línea</text>
+<path d="M650 326V374" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="650" cy="400" r="18" fill="#17A8D4"/><text x="650.0" y="406.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="684.0" y="396.0" font-family="Instrument Sans" font-size="18" font-weight="700" fill="#04223D" text-anchor="start">Arreglo</text>
+<text x="684.0" y="422.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">corregís lo que dice el log</text>
+<path d="M650 422V470" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="650" cy="496" r="18" fill="#0E8F5E"/><text x="650.0" y="502.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="684.0" y="492.0" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="#04223D" text-anchor="start">systemctl status ssh</text>
+<text x="684.0" y="518.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">confirmás que quedó active (running)</text>
+<text x="636.0" y="566.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#0E8F5E" text-anchor="start">Reiniciar a ciegas borra la pista: primero se lee.</text>
+</svg>

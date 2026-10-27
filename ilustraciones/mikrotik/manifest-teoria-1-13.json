@@ -1,0 +1,168 @@
+{
+ "1": {
+  "teoria_figs": [
+   {
+    "file": "1-t1.svg",
+    "after": "la MAC solo sirve en el mismo segmento",
+    "alt": "Animación en cuatro tiempos. 1: el router de laboratorio se anuncia con tramas de capa 2 y aparece en Neighbors de WinBox con su MAC AA:BB:CC:00:11:22 e IP 0.0.0.0. 2: clic en la IP: WinBox intenta TCP al puerto 8291, pero sin una IP de la misma red no hay ruta y no llega. 3: clic en la MAC: la trama llega directo al router y entrás sin IP. 4: para un equipo detrás del router, la trama no cruza el router: la MAC solo sirve en el mismo segmento.",
+    "caption": "Por IP necesitás ruteo hasta el 8291; por MAC alcanza con estar en el mismo segmento, y no más allá."
+   }
+  ]
+ },
+ "2": {
+  "teoria_figs": [
+   {
+    "file": "2-t1.svg",
+    "after": "Con cuentas personales, ese registro dice quién fue",
+    "alt": "Animación en cuatro tiempos con el usuario mesa.ayuda del grupo monitoreo (local, ssh, winbox, read y test; sin write, reboot ni policy). 1: entra por WinBox desde 192.168.88.10: pasa el control de address 192.168.88.0/24 y la política winbox; el log anota user mesa.ayuda logged in from 192.168.88.10 via winbox. 2: pide /ip/address/print, que necesita read: se ejecuta. 3: pide /system/reboot, que necesita reboot: el grupo no la tiene y el router lo rechaza. 4: intenta entrar desde 203.0.113.25: no coincide con address y el login no se acepta.",
+    "caption": "Cada pedido pasa por tres controles: desde dónde (address), cómo entra y qué puede hacer."
+   }
+  ]
+ },
+ "3": {
+  "teoria_figs": [
+   {
+    "file": "3-t1.svg",
+    "after": "Por eso MikroTik prefiere el firewall y deja",
+    "alt": "Animación en cuatro tiempos con dos routers: uno solo con available-from=192.168.88.0/24 en WinBox (TCP 8291) y otro que además tiene un drop en input para lo que viene de internet. 1: un escáner prueba el 8291 del primero y el paquete llega al servicio. 2: el servicio contesta y después corta; el escáner anota el puerto como abierto. 3: en el segundo, el drop en input descarta el paquete antes de llegar al servicio. 4: sin respuesta, el escáner no tiene nada que anotar.",
+    "caption": "available-from contesta y corta, así que el puerto se ve abierto; el drop en input no contesta nada."
+   }
+  ]
+ },
+ "4": {
+  "teoria_figs": [
+   {
+    "file": "4-t1.svg",
+    "after": "vuelve sola a la cadena que la llamó",
+    "alt": "Animación en cuatro tiempos sobre tres cadenas: input resumida (accept established,related,untracked; jump a gestion-wan para WAN tcp 22 y 8291; drop all not coming from LAN), gestion-wan (accept src-address-list=admins) y output (un passthrough de laboratorio). 1: un WinBox nuevo desde 203.0.113.25, que está en admins, coincide con el jump y en gestion-wan el accept decide. 2: un WinBox desde otra IP salta a gestion-wan, nadie decide y vuelve a input debajo del jump. 3: sigue bajando y el drop de la defconf lo descarta. 4: un ping del router pasa por output: el passthrough suma y deja seguir y al final de la cadena el paquete pasa.",
+    "caption": "Seguí el paquete regla por regla: accept, drop y jump deciden; passthrough anota; al final de la cadena, pasa."
+   },
+   {
+    "file": "4-t2.svg",
+    "after": "puede quedar quieto aunque haya tráfico",
+    "alt": "Animación en cuatro tiempos. Arriba, el camino normal de la LAN a la WAN: connection tracking, filter forward (fasttrack-connection y accept established) y colas; abajo, el camino rápido. 1: los primeros paquetes de la conexión pasan por el camino normal y el contador de forward sube. 2: fasttrack-connection marca la conexión establecida. 3: los paquetes siguientes van por el camino rápido, que saltea firewall, connection tracking y colas: el contador de forward queda quieto y sube la fila special dummy rule to show fasttrack counters. 4: el accept que acompaña a fasttrack atiende lo que siga por el camino normal.",
+    "caption": "Con FastTrack, el tráfico establecido saltea las reglas: lo cuenta la fila de fasttrack, no las de forward."
+   }
+  ]
+ },
+ "5": {
+  "teoria_figs": [
+   {
+    "file": "5-t1.svg",
+    "after": "Sin esas dos cosas, una tabla bien hecha igual deja pasar",
+    "alt": "Animación en cuatro tiempos sobre un MikroTik con bridge y vlan-filtering: ether2 access con PVID 20, ether4 trunk hacia un switch del piso, el puerto bridge hacia el CPU y vlan20-cctv con 10.10.20.1/24. 1: la cámara manda una trama sin etiqueta y ether2 le asigna la VLAN 20. 2: la trama viaja etiquetada con 20 por el trunk y sale sin etiqueta por el access del otro switch. 3: hacia el router sube por el puerto bridge, tagged en la VLAN 20, y la recibe vlan20-cctv. 4: una trama etiquetada que llega a un access se descarta por frame-types e ingress-filtering. Abajo, la entrada de la tabla con tagged=bridge,ether4 untagged=ether2,ether3 vlan-ids=20.",
+    "caption": "Mirá dónde aparece y desaparece la etiqueta 20, y por qué bridge tiene que estar como tagged."
+   }
+  ]
+ },
+ "6": {
+  "teoria_figs": [
+   {
+    "file": "6-t1.svg",
+    "after": "los certificados y las claves SSH no se exportan nunca",
+    "alt": "Animación en cuatro tiempos. A la izquierda, partes de la configuración; a la derecha, el archivo antes.rsc de /export file=antes. 1: el export escribe comandos agrupados por menú (/ip address, /system identity) y una primera línea con fecha y versión, que aparece en todo diff. 2: el servicio www en el puerto 80 sigue de fábrica y no se escribe. 3: la contraseña del usuario, los certificados y las claves SSH no se exportan nunca. 4: el usuario y la clave del PPPoE solo aparecen con /export show-sensitive.",
+    "caption": "El export guarda solo lo cambiado, por menú; las contraseñas de usuario nunca, y las de PPPoE o WiFi solo con show-sensitive."
+   }
+  ]
+ },
+ "7": {
+  "teoria_figs": [
+   {
+    "file": "7-t1.svg",
+    "after": "cuando el sistema no arranca o se perdió la contraseña",
+    "alt": "Animación en cuatro tiempos sobre una línea de tiempo con el botón de reset apretado desde que se da energía. 1: el equipo arranca con el RouterBOOT de respaldo, que nunca se actualiza. 2: a unos 5 segundos el LED titila: si soltás, se resetea la configuración. 3: 5 segundos más, LED fijo: si soltás, modo CAP. 4: 5 segundos más, el LED se apaga: si soltás, busca un servidor Netinstall, que reinstala RouterOS por red desde una PC conectada por cable.",
+    "caption": "Un solo botón, cuatro resultados: lo que pasa depende de cuándo lo soltás, y el LED te avisa."
+   }
+  ]
+ },
+ "8": {
+  "teoria_figs": [
+   {
+    "file": "8-t1.svg",
+    "after": "cada uno queda atado a su dirección",
+    "alt": "Animación en cinco tiempos con la interfaz wg-gestion (UDP 13231, 10.10.10.1/24) y dos peers: notebook-lucia con allowed-address 10.10.10.2/32 y notebook-pablo con 10.10.10.3/32. 1: llega un paquete cifrado con la clave del peer notebook-lucia. 2: adentro, el origen es 10.10.10.2, su allowed-address: se acepta. 3: la respuesta a 10.10.10.2 sale por ese peer, cifrada para Lucía. 4: si por ese peer llegara un paquete con origen 10.10.10.3, no corresponde y se descarta. 5: un escáner sin clave conocida manda al UDP 13231 y el router lo descarta sin contestar.",
+    "caption": "La clave dice quién es; allowed-address dice qué IP puede usar, de ida y de vuelta."
+   },
+   {
+    "file": "8-t2.svg",
+    "after": "manda un paquete chico cada 25 segundos para mantenerla",
+    "alt": "Animación en cuatro tiempos con una notebook detrás del NAT de un módem o un 4G y el router del cliente en 203.0.113.10, UDP 13231. 1: la notebook manda datos y el NAT anota la asociación como abierta. 2: sin tráfico WireGuard no manda nada y a los pocos minutos el NAT la olvida. 3: lo que manda el router desde afuera llega al NAT, que ya no sabe a quién entregarlo, y se pierde. 4: con PersistentKeepalive = 25, un paquete chico cada 25 segundos mantiene la asociación abierta y lo del router llega.",
+    "caption": "Sin tráfico, el NAT del medio olvida el túnel; el keepalive de 25 s lo mantiene vivo."
+   }
+  ]
+ },
+ "9": {
+  "teoria_figs": [
+   {
+    "file": "9-t1.svg",
+    "after": "manda una actualización por minuto",
+    "alt": "Animación en cuatro tiempos con un MikroTik con WAN 192.168.1.2 detrás del NAT de un módem que sale con 203.0.113.10, y el servidor cloud2.mikrotik.com. 1: con ddns-enabled=yes el router manda una actualización por UDP 15252 y al pasar por el módem el origen cambia a 203.0.113.10. 2: el servidor actualiza <serie>.sn.mynetname.net a 203.0.113.10 con TTL de 60 segundos. 3: esa IP vuelve como public-address y, como no coincide con la WAN, hay un NAT antes. 4: como no ve su IP pública en sus interfaces, el router repite la actualización una vez por minuto.",
+    "caption": "El servidor anota la IP desde la que le llegás: comparala con tu WAN para saber si hay un NAT antes."
+   },
+   {
+    "file": "9-t2.svg",
+    "after": "el relay pasa tráfico cifrado que no puede leer",
+    "alt": "Animación en cuatro tiempos con un MikroTik con WAN 100.64.12.34 detrás del CGNAT del proveedor, el relay de MikroTik más cercano y un celular con Back To Home. 1: una conexión entrante no llega: el CGNAT no sabe a cuál de sus clientes mandarla. 2: el router abre una conexión saliente hacia el relay. 3: el celular se conecta al mismo relay, que une las dos puntas. 4: el tráfico viaja cifrado del celular al router pasando por el relay; las claves WireGuard están solo en las puntas.",
+    "caption": "Detrás de CGNAT nadie entra: el router llama al relay y el celular se encuentra con él ahí."
+   }
+  ]
+ },
+ "10": {
+  "teoria_figs": [
+   {
+    "file": "10-t1.svg",
+    "after": "conviene borrar las conexiones existentes a ese puerto",
+    "alt": "Animación en cuatro tiempos. La central 203.0.113.25 manda al puerto 8000 de 203.0.113.10 y el NVR está en 192.168.88.50. 1: el primer paquete pasa por la regla dstnat (WAN, dst-port 8000, nvr-permitidos) y su destino cambia a 192.168.88.50:8000. 2: la decisión queda guardada en la tabla de conexiones. 3: los paquetes siguientes usan lo guardado, sin mirar las reglas. 4: si cambiás la regla, la conexión abierta sigue igual hasta que la borrás con /ip/firewall/connection/remove.",
+    "caption": "Solo el primer paquete pasa por el NAT; el resto sigue la tabla de conexiones."
+   },
+   {
+    "file": "10-t2.svg",
+    "after": "deshace las dos traducciones",
+    "alt": "Animación en cinco tiempos con una PC 192.168.88.20 y un NVR 192.168.88.50 en la misma LAN y el router con IP pública 203.0.113.10 y LAN 192.168.88.1. 1: la PC manda a 203.0.113.10:8000. 2: el dst-nat cambia el destino a 192.168.88.50:8000. 3: sin hairpin, el NVR contesta directo desde 192.168.88.50 y la PC, que esperaba a 203.0.113.10, lo descarta. 4: con masquerade desde la LAN hacia el NVR, el origen pasa a 192.168.88.1 y el NVR le contesta al router. 5: el router deshace las dos traducciones y la PC recibe la respuesta de 203.0.113.10:8000.",
+    "caption": "Seguí las direcciones de origen y destino en cada tramo: sin masquerade, la respuesta vuelve por el atajo equivocado."
+   }
+  ]
+ },
+ "11": {
+  "teoria_figs": [
+   {
+    "file": "11-t1.svg",
+    "after": "si cualquier tramo se corta, la ruta cae",
+    "alt": "Animación en cuatro tiempos. Arriba, Router (ether1 203.0.113.10), módem de fibra (gateway 203.0.113.9), internet del ISP1 y testigo 1.1.1.1. Abajo, las rutas: 1.1.1.1/32 por 203.0.113.9 con scope=10; 0.0.0.0/0 por 1.1.1.1 con target-scope=11 y distance=1; 0.0.0.0/0 por 8.8.8.8 con distance=2. 1: para llegar a 1.1.1.1 sirve la /32 porque scope 10 es menor o igual a 11. 2: cada 10 segundos check-gateway hace ping al testigo y recorre todo el camino. 3: se corta internet detrás del módem; el módem sigue vivo pero el ping no vuelve. 4: tras dos fallas la ruta del ISP1 queda inactiva y pasa a activa la del ISP2.",
+    "caption": "Con el testigo como gateway, check-gateway mira hasta internet y no solo hasta el módem."
+   },
+   {
+    "file": "11-t2.svg",
+    "after": "quedan inservibles por el otro hasta que vencen",
+    "alt": "Animación en cuatro tiempos con un teléfono SIP 192.168.88.30 y un router con masquerade por dos salidas: ISP1 por ether1 con 203.0.113.10 e ISP2 por un router 4G con ether2 en 192.168.8.2. 1: una llamada sale por el ISP1 y conntrack la guarda traducida a 203.0.113.10. 2: cae internet del ISP1 sin que baje la interfaz y las rutas pasan al ISP2. 3: la llamada sigue con su traducción vieja y sale por el ISP2 con origen 203.0.113.10: no sirve. 4: las conexiones nuevas salen traducidas a 192.168.8.2; la vieja queda hasta que vence o se borra, lo que corta las llamadas en curso.",
+    "caption": "Las rutas cambian al instante, pero las conexiones ya armadas conservan su traducción vieja."
+   }
+  ]
+ },
+ "12": {
+  "teoria_figs": [
+   {
+    "file": "12-t1.svg",
+    "after": "escribe una línea por cada paquete que descarta",
+    "alt": "Animación en cuatro tiempos. Una cámara 192.168.88.50 manda tráfico que entra por bridge, pasa por el firewall en forward (drop invalid con log=yes y log-prefix DROP-INV) y sale a internet. 1: Torch en el bridge agrupa lo que entra en flujos con su tasa. 2: Torch ve los paquetes antes del firewall y muestra también el flujo que después se descarta. 3: Torch no sabe qué hizo el firewall; la regla de drop con log=yes escribe una línea DROP-INV por cada paquete descartado. 4: mientras Torch corre, FastTrack se apaga y la CPU trabaja más.",
+    "caption": "Torch mira la interfaz antes del firewall; para saber qué se descarta, el log de la regla."
+   },
+   {
+    "file": "12-t2.svg",
+    "after": "te dicen si hay camino y hasta qué salto llega",
+    "alt": "Animación en cuatro tiempos con el router, un primer salto (tu gateway), un segundo salto del proveedor y el destino 8.8.8.8. 1: sale un paquete con TTL 1; el primer salto lo descarta y avisa; la lista anota el salto 1. 2: con TTL 2 pasa el primero y se termina en el segundo, que avisa; se anota el salto 2. 3: con TTL 3 llega a 8.8.8.8, que contesta. 4: si el camino se corta después del segundo salto, el tercero queda sin respuesta y la lista muestra hasta dónde llega.",
+    "caption": "traceroute sube el TTL de a uno y anota quién avisa que se le terminó."
+   }
+  ]
+ },
+ "13": {
+  "teoria_figs": [
+   {
+    "file": "13-t1.svg",
+    "after": "el router llega a su vecino pero no a internet",
+    "alt": "Animación en cinco tiempos. 1: en 203.0.113.10/29 el último octeto es 00001010; 5 bits completan los 29 de red y quedan 3 bits: 8 direcciones. 2: el vecindario va de .8 (red) a .15 (broadcast); de .9 a .14 son usables, con .9 gateway y .10 el MikroTik. 3: el gateway .9 está en la ruta conectada 203.0.113.8/29 y se alcanza directo por ether1. 4: para 1.1.1.1 no hay ruta más específica y 0.0.0.0/0 lo manda al gateway 203.0.113.9. 5: sin la ruta por defecto, el router llega al vecino pero no a internet.",
+    "caption": "La máscara dice quién es vecino; la ruta por defecto lleva todo lo demás al gateway."
+   }
+  ]
+ }
+}

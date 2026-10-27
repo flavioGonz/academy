@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>La noche del PBS: prune, backup, verify y GC</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">PROXMOX VE</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">La noche del PBS: prune, backup, verify y GC</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<path d="M80 214 H1120" stroke="#C2D4E6" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="48.0" y="140.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">Horario de ejemplo, de la guía de Hake Hardware</text>
+<circle cx="72" cy="214" r="12" fill="#0A63B8"/>
+<text x="56.0" y="188.0" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="#0A63B8" text-anchor="start">21:30</text>
+<rect x="48" y="244" width="264" height="200" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="68.0" y="280.0" font-family="Instrument Sans" font-size="20" font-weight="700" fill="#04223D" text-anchor="start">Prune</text>
+<text x="68.0" y="312.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="68.0" dy="0.0">Borra el índice de los</tspan><tspan x="68.0" dy="21.6">backups que la retención no</tspan><tspan x="68.0" dy="21.6">guarda. Todavía no libera</tspan><tspan x="68.0" dy="21.6">espacio.</tspan></text>
+<circle cx="352" cy="214" r="12" fill="#0E8F5E"/>
+<text x="336.0" y="188.0" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="#0E8F5E" text-anchor="start">22:00</text>
+<rect x="328" y="244" width="264" height="200" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="348.0" y="280.0" font-family="Instrument Sans" font-size="20" font-weight="700" fill="#04223D" text-anchor="start">Backup</text>
+<text x="348.0" y="312.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="348.0" dy="0.0">Proxmox VE manda los</tspan><tspan x="348.0" dy="21.6">backups nuevos al</tspan><tspan x="348.0" dy="21.6">datastore.</tspan></text>
+<circle cx="632" cy="214" r="12" fill="#0A63B8"/>
+<text x="616.0" y="188.0" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="#0A63B8" text-anchor="start">01:00</text>
+<rect x="608" y="244" width="264" height="200" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="628.0" y="280.0" font-family="Instrument Sans" font-size="20" font-weight="700" fill="#04223D" text-anchor="start">Verify</text>
+<text x="628.0" y="312.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="628.0" dy="0.0">Relee y compara checksums.</tspan><tspan x="628.0" dy="21.6">Si un ransomware cifra</tspan><tspan x="628.0" dy="21.6">backups, falla y avisa.</tspan></text>
+<circle cx="912" cy="214" r="12" fill="#B45309"/>
+<text x="896.0" y="188.0" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="#B45309" text-anchor="start">dom 02:00</text>
+<rect x="888" y="244" width="264" height="200" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="908.0" y="280.0" font-family="Instrument Sans" font-size="20" font-weight="700" fill="#04223D" text-anchor="start">Garbage collection</text>
+<text x="908.0" y="312.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="908.0" dy="0.0">Borra los trozos que ya</tspan><tspan x="908.0" dy="21.6">nadie usa, con un día de</tspan><tspan x="908.0" dy="21.6">gracia. Ahí se libera.</tspan></text>
+<rect x="48" y="462" width="1104" height="75" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="474" width="5" height="51" rx="2.5" fill="#0A63B8"/><text x="74.0" y="496.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Retención generosa al principio: siempre se puede achicar, pero no se recrean backups del pasado. Y una copia fuera del sitio</tspan><tspan x="74.0" dy="21.6">con un sync job (regla 3-2-1).</tspan></text>
+<rect x="48" y="548" width="1104" height="74" rx="14" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<circle cx="88" cy="585" r="18" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><g transform="translate(76 573)" fill="none" stroke="#0E8F5E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g>
+<text x="120.0" y="578.0" font-family="Instrument Sans" font-size="18" font-weight="700" fill="#0E8F5E" text-anchor="start">Usuario con rol DatastoreBackup: puede crear backups, no borrarlos</text>
+<text x="120.0" y="604.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">Si alguien toma el host Proxmox VE, no puede borrar las copias del PBS.</text>
+</svg>

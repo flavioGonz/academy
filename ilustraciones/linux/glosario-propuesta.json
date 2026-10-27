@@ -1,0 +1,584 @@
+{
+ "nota": "Propuesta para el curso Linux. terms: entradas nuevas completas. alias_agregar: alias nuevos para entradas existentes. modificar: campos a reemplazar en entradas existentes. Probada sobre una copia combinada con glosario_check.py. Categoría nueva: Linux.",
+ "terms": [
+  {
+   "id": "systemd",
+   "term": "systemd",
+   "aliases": [
+    "systemctl",
+    "unidad de systemd",
+    "multi-user.target"
+   ],
+   "cat": "Linux",
+   "short": "El sistema de arranque y de servicios de Debian y Ubuntu: es el primer proceso, el PID 1.",
+   "long": "Lo presentaron Lennart Poettering y Kay Sievers en 2010; Debian lo usa por defecto desde Jessie (2015). Lee unidades declarativas: un .service dice cómo arrancar un programa y un .target es un estado del sistema, como multi-user.target. systemctl start lo levanta ahora y systemctl enable lo engancha al arranque.",
+   "case": true,
+   "year": 2010
+  },
+  {
+   "id": "journald",
+   "term": "journald",
+   "aliases": [
+    "journalctl",
+    "systemd-journald",
+    "journal de systemd"
+   ],
+   "cat": "Linux",
+   "short": "El registro de systemd: guarda lo que dicen los servicios y el arranque, cada línea con su unidad y su prioridad.",
+   "long": "Se lee con journalctl: -u filtra por servicio, -p err por gravedad, -b -1 trae el arranque anterior y -f muestra en vivo. Vive en /var/log/journal y crece hasta su tope: SystemMaxUse en un archivo de /etc/systemd/journald.conf.d lo limita.",
+   "case": true
+  },
+  {
+   "id": "systemd-timer",
+   "term": "timer de systemd",
+   "aliases": [
+    "timers de systemd",
+    "OnCalendar",
+    "systemctl list-timers"
+   ],
+   "cat": "Linux",
+   "short": "Una tarea programada de systemd: un .timer que dice cuándo correr un .service.",
+   "long": "Son dos archivos: el .service dice qué hacer y el .timer cuándo (OnCalendar). Persistent=true corre la ejecución perdida si el equipo estaba apagado, y el resultado queda en el journal. Se habilita el .timer, no el servicio. Para algo simple de una línea, cron sigue alcanzando.",
+   "case": true
+  },
+  {
+   "id": "cron",
+   "term": "cron",
+   "aliases": [
+    "crontab",
+    "/etc/cron.d"
+   ],
+   "cat": "Linux",
+   "short": "El programador de tareas clásico de Unix: corre comandos a horas fijas.",
+   "long": "Una línea tiene cinco campos de tiempo (minuto, hora, día, mes, día de la semana) y el comando; en /etc/crontab y /etc/cron.d se agrega el usuario. Si la salida no se redirige o no hay MAILTO, los errores se pierden. Si el equipo estaba apagado a esa hora, la tarea no corre.",
+   "case": true
+  },
+  {
+   "id": "grub",
+   "term": "GRUB",
+   "aliases": [
+    "GRand Unified Bootloader",
+    "cargador de arranque"
+   ],
+   "cat": "Linux",
+   "short": "El cargador de arranque de Debian y Ubuntu: carga el kernel y el initramfs.",
+   "long": "Lo lanza el firmware (BIOS o UEFI). El Debian Handbook recomienda protegerlo con contraseña, porque desde su menú se puede arrancar con init=/bin/sh y entrar como root sin clave.",
+   "case": true
+  },
+  {
+   "id": "initramfs",
+   "term": "initramfs",
+   "aliases": [
+    "initrd"
+   ],
+   "cat": "Linux",
+   "short": "Un sistema de archivos mínimo en RAM que el kernel usa para encontrar y montar el disco raíz.",
+   "long": "Lo carga el cargador de arranque junto con el kernel. Trae los módulos y scripts justos para el disco, RAID, LVM o cifrado; con la raíz montada, le pasa el control a systemd.",
+   "case": true
+  },
+  {
+   "id": "apt",
+   "term": "apt",
+   "aliases": [
+    "apt-get",
+    "apt update",
+    "apt upgrade",
+    "apt full-upgrade"
+   ],
+   "cat": "Linux",
+   "short": "El gestor de paquetes de Debian y Ubuntu: baja listas de repositorios, resuelve dependencias e instala.",
+   "long": "apt update baja las listas, apt upgrade instala lo nuevo sin quitar paquetes y apt full-upgrade puede quitar paquetes, por eso se reserva para el salto de versión. apt es para usar a mano y apt-get para scripts. Todo queda en /var/log/apt/history.log.",
+   "case": true
+  },
+  {
+   "id": "dpkg",
+   "term": "dpkg",
+   "aliases": [
+    "paquete .deb",
+    "dpkg-reconfigure"
+   ],
+   "cat": "Linux",
+   "short": "El instalador de bajo nivel de Debian: instala un paquete .deb, sin resolver dependencias.",
+   "long": "apt lo usa por debajo. dpkg-reconfigure vuelve a hacer las preguntas de configuración de un paquete instalado, como la de activar unattended-upgrades. Un .deb suelto con dependencias se instala con apt install ./archivo.deb.",
+   "case": true
+  },
+  {
+   "id": "unattended-upgrades",
+   "term": "unattended-upgrades",
+   "aliases": [
+    "actualizaciones automáticas",
+    "20auto-upgrades",
+    "Automatic-Reboot"
+   ],
+   "cat": "Linux",
+   "short": "El paquete que aplica solo las actualizaciones de seguridad, una vez por día.",
+   "long": "Ubuntu lo trae instalado; en Debian 13 se verifica y, si falta, se instala. 20auto-upgrades lo activa con dos valores en \"1\" y 50unattended-upgrades define orígenes, exclusiones y reinicio. Automatic-Reboot viene en \"false\": o se fija una hora de madrugada o se reinicia en una ventana acordada. La marca de reinicio pendiente es /var/run/reboot-required.",
+   "case": true
+  },
+  {
+   "id": "lts",
+   "term": "LTS",
+   "aliases": [
+    "Long Term Support"
+   ],
+   "cat": "Linux",
+   "short": "Long Term Support: una versión con soporte extendido de actualizaciones.",
+   "long": "Ubuntu publica una LTS cada dos años, en abril: 24.04 y 26.04, con cinco años de soporte estándar (26.04 hasta abril de 2031). Para servidores de clientes conviene una LTS.",
+   "case": true
+  },
+  {
+   "id": "debian",
+   "term": "Debian",
+   "aliases": [
+    "trixie",
+    "Debian 13"
+   ],
+   "cat": "Linux",
+   "short": "Distribución Linux comunitaria, base de Ubuntu y de muchos appliances.",
+   "long": "Nació en 1993. Debian 13 trixie salió en agosto de 2025 y tiene soporte regular hasta agosto de 2028. En los repositorios conviene usar el nombre (trixie) y no stable, para que el equipo no salte de versión solo cuando salga la próxima.",
+   "case": true,
+   "year": 1993
+  },
+  {
+   "id": "ubuntu-server",
+   "term": "Ubuntu Server",
+   "aliases": [
+    "Ubuntu",
+    "Ubuntu 24.04",
+    "Ubuntu 26.04"
+   ],
+   "cat": "Linux",
+   "short": "La edición para servidores de Ubuntu, la distribución de Canonical basada en Debian.",
+   "long": "Ubuntu 26.04 LTS salió en abril de 2026 y trae cambios que rompen guías viejas: sudo-rs en lugar de sudo, apt-key eliminado, /tmp en memoria, OpenSSH 10.2 y chrony con NTS para la hora.",
+   "case": true
+  },
+  {
+   "id": "sudo",
+   "term": "sudo",
+   "aliases": [
+    "sudo-rs",
+    "sudoers",
+    "visudo"
+   ],
+   "cat": "Linux",
+   "short": "Comando para ejecutar otro comando como root (u otro usuario), sin compartir la clave de root.",
+   "long": "Se configura en sudoers, que se edita con visudo y se valida con visudo -c. En Ubuntu 26.04 es sudo-rs, reescrito en Rust: sudo -E se ignora con un aviso. Dar sudo sin contraseña (NOPASSWD) solo tiene sentido en una estación de un único usuario.",
+   "case": true
+  },
+  {
+   "id": "root",
+   "term": "root",
+   "aliases": [
+    "superusuario"
+   ],
+   "cat": "Linux",
+   "short": "El usuario administrador de Linux, con todos los permisos.",
+   "long": "No confundir con la raíz del árbol, /: /root es solo la carpeta personal de root. Por SSH conviene PermitRootLogin no y trabajar con un usuario propio y sudo.",
+   "case": true
+  },
+  {
+   "id": "permisos-unix",
+   "term": "permisos de Unix",
+   "aliases": [
+    "chmod",
+    "chown",
+    "rwx",
+    "permisos octales"
+   ],
+   "cat": "Linux",
+   "short": "Lectura, escritura y ejecución (r, w, x) para el dueño, el grupo y el resto de cada archivo.",
+   "long": "En números, r=4, w=2 y x=1, sumados por categoría: 755 para directorios y programas, 644 para datos, 600 para secretos. chmod los cambia y chown cambia dueño y grupo. En un directorio, x es poder entrar. 777 deja escribir a cualquiera: lo que falta casi siempre es arreglar dueño y grupo.",
+   "case": true
+  },
+  {
+   "id": "setgid",
+   "term": "setgid",
+   "aliases": [
+    "setuid",
+    "SUID",
+    "sticky bit"
+   ],
+   "cat": "Linux",
+   "short": "Bits especiales de permisos: setgid en un directorio hace que lo creado adentro herede el grupo de la carpeta.",
+   "long": "Es el 2 de 2770, y ls -l lo muestra como una s en el lugar de la x del grupo. El sticky bit, como en /tmp, impide borrar archivos ajenos. setuid hace que un programa corra con los permisos de su dueño: es riesgoso, y find / -perm /4000 lista los que lo tienen.",
+   "case": true
+  },
+  {
+   "id": "umask",
+   "term": "umask",
+   "aliases": [],
+   "cat": "Linux",
+   "short": "La máscara que define los permisos con que nacen los archivos y directorios nuevos.",
+   "long": "Con umask 0022, un archivo nace 644 y un directorio 755. Se fija en /etc/login.defs o pam_umask, o por sesión en ~/.bashrc.",
+   "case": true
+  },
+  {
+   "id": "uuid",
+   "term": "UUID",
+   "aliases": [
+    "Universally Unique Identifier"
+   ],
+   "cat": "Herramientas",
+   "short": "Universally Unique Identifier: un identificador único, como el que lleva cada sistema de archivos.",
+   "long": "lsblk -f y blkid muestran el UUID de cada disco. En /etc/fstab se usa UUID=... y nunca /dev/sdX, porque los nombres del kernel cambian según el orden en que aparecen los discos al arrancar.",
+   "case": true
+  },
+  {
+   "id": "fstab",
+   "term": "fstab",
+   "aliases": [
+    "/etc/fstab",
+    "nofail"
+   ],
+   "cat": "Linux",
+   "short": "El archivo que dice qué disco se monta en qué carpeta al arrancar.",
+   "long": "Cada línea tiene seis campos: qué (UUID=...), dónde, tipo, opciones, dump y orden de chequeo. nofail deja arrancar aunque el disco falte y x-systemd.device-timeout=5 evita esperarlo 90 segundos. Un error puede dejar el equipo en modo emergencia: se valida con findmnt -x antes de reiniciar.",
+   "case": true
+  },
+  {
+   "id": "tmpfs",
+   "term": "tmpfs",
+   "aliases": [],
+   "cat": "Linux",
+   "short": "Sistema de archivos que vive en la memoria RAM y se vacía al reiniciar.",
+   "long": "En Ubuntu 26.04, /tmp es tmpfs con tope de la mitad de la RAM: un dump grande ahí ocupa memoria. Para archivos grandes temporales conviene /var/tmp.",
+   "case": true
+  },
+  {
+   "id": "inodo",
+   "term": "inodo",
+   "aliases": [
+    "inodos",
+    "inode",
+    "df -i"
+   ],
+   "cat": "Linux",
+   "short": "La ficha que el sistema de archivos guarda por cada archivo; hay una cantidad fija.",
+   "long": "Millones de archivos chicos pueden agotar los inodos antes que el espacio: el disco dice lleno aunque df -h muestre lugar. df -i lo muestra.",
+   "case": false
+  },
+  {
+   "id": "logrotate",
+   "term": "logrotate",
+   "aliases": [],
+   "cat": "Linux",
+   "short": "Herramienta que rota, comprime y borra los logs de texto viejos de /var/log.",
+   "long": "Los programas que escriben su propio archivo de log dependen de logrotate para no llenar el disco; el journal de systemd tiene su propio tope.",
+   "case": true
+  },
+  {
+   "id": "lsof",
+   "term": "lsof",
+   "aliases": [
+    "fuser"
+   ],
+   "cat": "Linux",
+   "short": "Lista los archivos abiertos por los procesos.",
+   "long": "lsof -p PID muestra lo que tiene abierto un proceso y fuser -v archivo dice qué proceso usa un archivo. Sirve cuando df y du no coinciden: un archivo borrado que un proceso sigue usando no libera su espacio.",
+   "case": true
+  },
+  {
+   "id": "grep",
+   "term": "grep",
+   "aliases": [
+    "grep -rn"
+   ],
+   "cat": "Linux",
+   "short": "Busca texto dentro de archivos o en la salida de otro comando.",
+   "long": "-r recorre carpetas y -n agrega el número de línea. Con el truco del corchete, ps aux | grep \"[s]shd\", grep no aparece en su propia búsqueda.",
+   "case": true
+  },
+  {
+   "id": "yaml",
+   "term": "YAML",
+   "aliases": [
+    "YAML Ain't Markup Language"
+   ],
+   "cat": "Web e integración",
+   "short": "Formato de texto para configuración basado en sangrías, usado por netplan y Docker Compose.",
+   "long": "La sangría es la estructura: dos espacios por nivel, nunca tabulaciones, y un espacio después de los dos puntos. Un error de sangría o una clave mal escrita, como adresses, hace fallar todo el archivo.",
+   "case": true
+  },
+  {
+   "id": "netplan",
+   "term": "netplan",
+   "aliases": [
+    "netplan try",
+    "netplan apply"
+   ],
+   "cat": "Linux",
+   "short": "La configuración de red de Ubuntu Server: archivos YAML en /etc/netplan.",
+   "long": "netplan generate valida, netplan apply aplica sin vuelta y netplan try aplica y vuelve solo a lo anterior si no confirmás con Enter en 120 segundos, la red de seguridad para cambios remotos. Los archivos van con permisos 600.",
+   "case": true
+  },
+  {
+   "id": "iproute2",
+   "term": "iproute2",
+   "aliases": [
+    "ip addr",
+    "ip route",
+    "ip neigh",
+    "ip -br addr"
+   ],
+   "cat": "Linux",
+   "short": "Las herramientas de red actuales de Linux: ip para interfaces, direcciones y rutas, y ss para conexiones.",
+   "long": "Reemplazan a net-tools: ifconfig pasa a ip addr, route a ip route, arp a ip neigh y netstat a ss. ip -br addr muestra una línea por interfaz y ss -tlnp lo que escucha y en qué dirección.",
+   "case": true
+  },
+  {
+   "id": "net-tools",
+   "term": "net-tools",
+   "aliases": [
+    "ifconfig"
+   ],
+   "cat": "Linux",
+   "short": "Las herramientas de red viejas de Linux: ifconfig, route, arp y netstat.",
+   "long": "Muchos servidores ya no las traen. Sus equivalentes en iproute2 son ip addr, ip route, ip neigh y ss.",
+   "case": true
+  },
+  {
+   "id": "ufw",
+   "term": "ufw",
+   "aliases": [
+    "Uncomplicated Firewall"
+   ],
+   "cat": "Linux",
+   "short": "Uncomplicated Firewall: la forma simple de configurar el firewall de host en Ubuntu.",
+   "long": "Viene instalado y deshabilitado. El orden seguro es default deny incoming, allow desde la red de gestión al 22 y recién ahí enable. Ojo: los puertos que publica Docker pasan por al lado de sus reglas.",
+   "case": true
+  },
+  {
+   "id": "nftables",
+   "term": "nftables",
+   "aliases": [
+    "nft",
+    "/etc/nftables.conf"
+   ],
+   "cat": "Linux",
+   "short": "El sucesor de iptables para escribir reglas de netfilter, por defecto en Debian.",
+   "long": "Entró al kernel 3.13 en 2014 y Debian lo usa por defecto desde Buster. Las reglas van en /etc/nftables.conf, se validan con nft -c -f y se cargan al arrancar con systemctl enable nftables; lo que se hace con nft en vivo se pierde al reiniciar.",
+   "case": true,
+   "year": 2014
+  },
+  {
+   "id": "docker-user",
+   "term": "DOCKER-USER",
+   "aliases": [],
+   "cat": "Linux",
+   "short": "La cadena de netfilter que Docker deja para que el administrador filtre el tráfico hacia los contenedores.",
+   "long": "Los puertos publicados se redirigen en la tabla nat y pasan por forward, no por input: ufw no los ve. Si un puerto de contenedor tiene que ser público, se filtra por origen en DOCKER-USER; lo preferido es publicar en 127.0.0.1.",
+   "case": true
+  },
+  {
+   "id": "openssh",
+   "term": "OpenSSH",
+   "aliases": [
+    "sshd",
+    "sshd_config",
+    "sshd -t"
+   ],
+   "cat": "Linux",
+   "short": "La implementación libre de SSH que viene en Debian y Ubuntu, cliente y servidor.",
+   "long": "La lanzó el proyecto OpenBSD en 1999. Para la mayoría de las opciones vale el primer valor leído, y los snippets de /etc/ssh/sshd_config.d se leen antes que el archivo principal. sshd -t valida y sshd -T muestra la configuración efectiva. Ubuntu 26.04 trae la versión 10.2.",
+   "case": true,
+   "year": 1999
+  },
+  {
+   "id": "ed25519",
+   "term": "ed25519",
+   "aliases": [
+    "llave ed25519",
+    "id_ed25519"
+   ],
+   "cat": "Linux",
+   "short": "Algoritmo de llave SSH de curva elíptica: llave corta, rápida y recomendada.",
+   "long": "ssh-keygen la genera por defecto. La privada (id_ed25519) queda en tu equipo con 600 y la pública (.pub) se copia al servidor. RSA queda para equipos viejos; DSA ya no existe en OpenSSH 10.",
+   "case": true
+  },
+  {
+   "id": "dsa",
+   "term": "DSA",
+   "aliases": [
+    "Digital Signature Algorithm"
+   ],
+   "cat": "Seguridad",
+   "short": "Digital Signature Algorithm: un tipo de llave SSH viejo, eliminado en OpenSSH 10.0.",
+   "long": "Un equipo viejo que solo acepta llaves DSA no va a hablar con un cliente OpenSSH actual: se usa ed25519 o, si el equipo no la soporta, RSA.",
+   "case": true
+  },
+  {
+   "id": "authorized-keys",
+   "term": "authorized_keys",
+   "aliases": [
+    "ssh-copy-id"
+   ],
+   "cat": "Linux",
+   "short": "El archivo del servidor con las llaves públicas que pueden entrar a un usuario.",
+   "long": "Vive en ~/.ssh/authorized_keys, con ~/.ssh en 700 y el archivo en 600; si los permisos están abiertos, SSH ignora la llave. ssh-copy-id agrega tu pública. Borrar la línea de alguien le quita el acceso sin cambiar ninguna clave.",
+   "case": true
+  },
+  {
+   "id": "persourcepenalties",
+   "term": "PerSourcePenalties",
+   "aliases": [],
+   "cat": "Seguridad",
+   "short": "Opción de OpenSSH, activa por defecto, que penaliza a las direcciones que fallan la autenticación.",
+   "long": "Las rechaza un tiempo después de fallar: es un freno nativo a la fuerza bruta. Con solo llaves y PerSourcePenalties, fail2ban pasa a ser opcional. Los sondeos de monitoreo que abren el 22 y cortan pueden ganarse una penalidad.",
+   "case": true
+  },
+  {
+   "id": "fail2ban",
+   "term": "fail2ban",
+   "aliases": [],
+   "cat": "Seguridad",
+   "short": "Programa que lee logs y bloquea en el firewall las IP que fallan muchas veces.",
+   "long": "Con SSH solo por llave aporta poco y hay quien prefiere no correr como root algo que interpreta logs con datos del atacante; suma si hay contraseñas o paneles web con login expuestos.",
+   "case": true
+  },
+  {
+   "id": "sigterm",
+   "term": "SIGTERM",
+   "aliases": [
+    "SIGKILL",
+    "SIGHUP",
+    "kill -9"
+   ],
+   "cat": "Linux",
+   "short": "Las señales para terminar un proceso: SIGTERM (15) pide terminar; SIGKILL (9) lo saca sin aviso.",
+   "long": "kill PID manda SIGTERM, que el programa puede atrapar para cerrar sus archivos. kill -9 manda SIGKILL, que no se puede atrapar: lo que estaba a medio escribir queda a medias. SIGHUP (1) se usa para pedir que relea la configuración. A un servicio, mejor systemctl restart.",
+   "case": true
+  },
+  {
+   "id": "load-average",
+   "term": "load average",
+   "aliases": [
+    "carga promedio"
+   ],
+   "cat": "Linux",
+   "short": "La carga de un equipo: promedios de 1, 5 y 15 minutos de procesos corriendo o esperando.",
+   "long": "La muestran uptime y top. Se compara con la cantidad de núcleos (nproc): sostenida por encima, el equipo está saturado.",
+   "case": false
+  },
+  {
+   "id": "memavailable",
+   "term": "MemAvailable",
+   "aliases": [
+    "columna available",
+    "buff/cache"
+   ],
+   "cat": "Linux",
+   "short": "La estimación de memoria que se le puede dar a un programa sin ir a swap, contando la caché liberable.",
+   "long": "La sumó el kernel 3.14 en 2014 y free -h la muestra como available. free bajo es normal: Linux usa la RAM que sobra como caché de disco (buff/cache) y la suelta cuando un programa la pide. Muchos monitoreos alertan mirando free y no available.",
+   "case": true
+  },
+  {
+   "id": "swap",
+   "term": "swap",
+   "aliases": [
+    "memoria swap"
+   ],
+   "cat": "Linux",
+   "short": "Espacio en disco que el sistema usa como memoria cuando la RAM no alcanza.",
+   "long": "Es mucho más lento que la RAM: un equipo que usa swap todo el tiempo necesita memoria o tiene un proceso que se la come. available dice cuánto queda antes de llegar a swap.",
+   "case": false
+  },
+  {
+   "id": "tar",
+   "term": "tar",
+   "aliases": [
+    ".tar.gz",
+    "tar czf"
+   ],
+   "cat": "Linux",
+   "short": "Empaqueta carpetas en un solo archivo, comprimido con z (gzip).",
+   "long": "Su nombre viene de tape archive. tar czf crea, tar tzvf lista y tar xzf extrae; con -C elegís dónde, por ejemplo -C /tmp para probar una restauración sin pisar nada.",
+   "case": true
+  },
+  {
+   "id": "rsync",
+   "term": "rsync",
+   "aliases": [],
+   "cat": "Linux",
+   "short": "Copia y sincroniza carpetas, local o a otro equipo, transfiriendo solo lo que cambió.",
+   "long": "Apareció en 1996, de Andrew Tridgell y Paul Mackerras. rsync -av copia con permisos y fechas; -n simula sin copiar. Con enlaces duros entre copias diarias, cada día parece completo y ocupa solo lo que cambió.",
+   "case": true,
+   "year": 1996
+  },
+  {
+   "id": "docker",
+   "term": "Docker",
+   "aliases": [
+    "docker.io",
+    "Docker Engine",
+    "docker run"
+   ],
+   "cat": "Linux",
+   "short": "Plataforma para empaquetar programas en imágenes y correrlos como contenedores aislados.",
+   "long": "Apareció en 2013. Usa funciones del kernel Linux, como los espacios de nombres y los cgroups, y escribe sus propias reglas de netfilter. En Ubuntu, el paquete docker.io lo mantiene Canonical. Un puerto publicado con -p en todas las interfaces pasa por al lado de ufw.",
+   "case": true,
+   "year": 2013
+  },
+  {
+   "id": "docker-volume",
+   "term": "volumen de Docker",
+   "aliases": [
+    "volúmenes de Docker",
+    "docker volume"
+   ],
+   "cat": "Linux",
+   "short": "El lugar donde Docker guarda los datos que tienen que sobrevivir al contenedor.",
+   "long": "Vive en /var/lib/docker/volumes. El contenedor se puede borrar y recrear desde la imagen; los datos del volumen siguen. docker volume inspect muestra su Mountpoint.",
+   "case": false
+  },
+  {
+   "id": "rsa",
+   "term": "RSA",
+   "aliases": [
+    "Rivest-Shamir-Adleman",
+    "RSA 4096"
+   ],
+   "cat": "Seguridad",
+   "short": "Algoritmo clásico de llave pública, usado en SSH, certificados y firmas.",
+   "long": "En SSH queda como alternativa para equipos viejos que no aceptan ed25519; Ubuntu sugiere RSA de 4096 bits en ese caso.",
+   "case": true
+  },
+  {
+   "id": "gnu",
+   "term": "GNU",
+   "aliases": [
+    "GNU's Not Unix",
+    "herramientas GNU"
+   ],
+   "cat": "Linux",
+   "short": "Proyecto de software libre que aportó las herramientas básicas que acompañan al kernel Linux.",
+   "long": "Lo inició Richard Stallman en 1983. Las distribuciones juntan el kernel Linux con herramientas GNU como bash, grep, tar y las coreutils; por eso se habla también de GNU/Linux.",
+   "case": true,
+   "year": 1983
+  },
+  {
+   "id": "smart",
+   "term": "SMART",
+   "aliases": [
+    "smartctl",
+    "S.M.A.R.T."
+   ],
+   "cat": "Herramientas",
+   "short": "Self-Monitoring, Analysis and Reporting Technology: el autodiagnóstico que traen los discos.",
+   "long": "smartctl -a /dev/sda muestra la salud del disco y smartd la vigila. Sirve para cambiar un disco antes de que falle.",
+   "case": true
+  }
+ ],
+ "alias_agregar": {
+  "dst-nat": [
+   "DNAT"
+  ]
+ },
+ "modificar": {
+  "netfilter": {
+   "long": "Se popularizó con Linux 2.4, en 2001. De ahí heredó RouterOS las cadenas input, forward y output y el seguimiento de conexiones. En Debian se escribe hoy con nftables, y en Ubuntu ufw es la capa simple por encima."
+  },
+  "pid": {
+   "long": "En Windows, netstat -ano muestra el PID dueño de cada puerto y tasklist lo traduce al nombre del programa. En Linux, ps aux y pgrep lo muestran, kill PID le manda una señal y el PID 1 es systemd."
+  }
+ }
+}

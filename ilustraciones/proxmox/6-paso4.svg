@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>cat /proc/self/uid_map: el root de adentro no es root</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">PROXMOX VE · PASO 4</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">cat /proc/self/uid_map: el root de adentro no es root</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<circle cx="48" cy="124" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="130.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<rect x="48" y="124" width="560" height="108" rx="12" fill="#03213C"/><text x="64.0" y="146.0" font-family="JetBrains Mono" font-size="13" font-weight="500" fill="#7FA6C9" text-anchor="start" letter-spacing="1.5">ADENTRO DEL CT 300</text><text x="64.0" y="178.4" font-family="JetBrains Mono" font-size="18" font-weight="500" fill="#D9E9F8" text-anchor="start"># cat /proc/self/uid_map</text><text x="64.0" y="212.4" font-family="JetBrains Mono" font-size="18" font-weight="500" fill="#7FE0B0" text-anchor="start">         0     100000      65536</text>
+<text x="640.0" y="152.0" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="#0E8F5E" text-anchor="start">0</text>
+<text x="740.0" y="152.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">uid adentro del contenedor</text>
+<text x="640.0" y="186.0" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="#0E8F5E" text-anchor="start">100000</text>
+<text x="740.0" y="186.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">el uid que le corresponde en el host</text>
+<text x="640.0" y="220.0" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="#0E8F5E" text-anchor="start">65536</text>
+<text x="740.0" y="220.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">cuántos uid se mapean en fila</text>
+<rect x="48" y="290" width="500" height="220" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="72.0" y="326.0" font-family="Familjen Grotesk" font-size="20" font-weight="600" fill="#0E8F5E" text-anchor="start">Contenedor 300</text>
+<text x="72.0" y="372.0" font-family="JetBrains Mono" font-size="30" font-weight="700" fill="#04223D" text-anchor="start">root</text>
+<text x="72.0" y="402.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#41627F" text-anchor="start">uid 0</text>
+<text x="72.0" y="470.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">uid 1 → 100001 … uid 65535 → 165535</text>
+<path d="M548 386 H640" stroke="#0E8F5E" stroke-width="5" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-ok)"/>
+<rect x="648" y="290" width="504" height="220" rx="16" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="672.0" y="326.0" font-family="Familjen Grotesk" font-size="20" font-weight="600" fill="#FFFFFF" text-anchor="start">Host Proxmox</text>
+<text x="672.0" y="372.0" font-family="JetBrains Mono" font-size="30" font-weight="700" fill="#FFFFFF" text-anchor="start">uid 100000</text>
+<text x="672.0" y="402.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#9FC3E3" text-anchor="start">un usuario sin privilegios</text>
+<text x="672.0" y="470.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#7FE0B0" text-anchor="start">no puede tocar archivos del host</text>
+<rect x="48" y="534" width="1104" height="75" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="546" width="5" height="51" rx="2.5" fill="#0A63B8"/><text x="74.0" y="568.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">En el host, pct config 300 | grep unprivileged tiene que mostrar unprivileged: 1. En un contenedor privilegiado, el root de</tspan><tspan x="74.0" dy="21.6">adentro sería el root del host.</tspan></text>
+</svg>

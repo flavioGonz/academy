@@ -1,0 +1,134 @@
+{
+  "1": {
+    "teoria_figs": [
+      {
+        "file": "1-t1.svg",
+        "after": "Después de 5 intentos fallidos de login",
+        "alt": "Animación en cinco tiempos con un navegador a la izquierda y la UCM6300 en 192.168.88.20 a la derecha. 1: se escribe la IP sola; el pedido llega al puerto 80, la central redirige al 8089 y la página se abre por HTTPS en https://192.168.88.20:8089. 2: primer ingreso con usuario admin y la contraseña única de la etiqueta trasera; entra, y la contraseña se cambia ahí mismo, de 10 a 30 caracteres. Nota: los equipos fabricados desde enero de 2017 traen contraseña única; admin/admin es de equipos anteriores. 3: un barrido prueba contraseñas (admin, 1234, 123456, password, admin123) y el contador de intentos fallidos sube de 1 a 5. 4: al quinto fallo la central bloquea el login durante 5 minutos. 5: pasados los 5 minutos vuelve a aceptar intentos de login. Nota: la UCM6510 hasta la versión 1.0.20.52 no limitaba los intentos de login (CVE-2025-28172); por eso firmware al día, con backup antes.",
+        "caption": "Seguí el contador: al quinto fallo la web se cierra 5 minutos, y por eso importa tener el firmware al día."
+      }
+    ]
+  },
+  "2": {
+    "teoria_figs": [
+      {
+        "file": "2-t1.svg",
+        "after": "la central responde 401 pidiendo credenciales",
+        "alt": "Animación en cinco tiempos con dos líneas de vida, el teléfono de la extensión 1001 y la UCM en 192.168.88.20. 1: el teléfono manda REGISTER 1001 sin credenciales. 2: la central responde 401 con un desafío que trae un número a resolver, el nonce. 3: el teléfono hace un cálculo con su contraseña, el nonce y el pedido, y repite el REGISTER con el resultado. 4: la central hace la misma cuenta con la clave que tiene guardada; coincide y responde 200 OK: el teléfono queda registrado. 5: un barrido desde internet prueba claves una tras otra contra la 1001 (1001, 1234, 123456) y todas fallan, porque la contraseña aleatoria de 10 caracteres o más no se adivina. Al costado: por la red viajan el número, el nonce y el resultado, nunca la contraseña; Concurrent Registrations limita cuántos equipos pueden tener la cuenta registrada a la vez, 3 de fábrica y hasta 10.",
+        "caption": "Mirá qué viaja en cada mensaje: el número, el desafío y el resultado, nunca la contraseña."
+      }
+    ]
+  },
+  "3": {
+    "teoria_figs": [
+      {
+        "file": "3-t1.svg",
+        "after": "lo aplica y registra su cuenta",
+        "alt": "Animación en cuatro tiempos con dos líneas de vida, un teléfono GRP26xx reseteado de fábrica y la UCM con Zero Config, y un panel con el armado del XML. 1, descubrimiento: el teléfono manda SUBSCRIBE a una dirección multicast de la LAN y la UCM contesta NOTIFY con la URL del XML; con la UCM en Route la URL también puede llegar en la opción 66 del DHCP. 2, armado: la UCM junta Model Template, Global Template y Global Policy (español y hora de Montevideo), de mayor a menor prioridad, y la cuenta asignada, cuenta 1 con la extensión 1001, en el XML del teléfono. 3, entrega: el teléfono pide el XML por TFTP, HTTP o HTTPS, lo recibe y lo aplica. 4, registro: el teléfono manda REGISTER 1001, la UCM responde 200 OK y la extensión queda registrada. Nota: lo que se configuró a mano en el teléfono queda por encima de cualquier plantilla.",
+        "caption": "Del SUBSCRIBE al 200 OK: el teléfono encuentra a la UCM, baja el XML armado con las plantillas y registra."
+      }
+    ]
+  },
+  "4": {
+    "teoria_figs": [
+      {
+        "file": "4-t1.svg",
+        "after": "las rutas pueden pasar al troncal de failover",
+        "alt": "Animación en cuatro tiempos con la interna 1001, la UCM con heartbeat activo, el troncal principal Proveedor_Lab y un segundo troncal configurado como failover de la ruta. 1: la UCM manda OPTIONS al proveedor cada 60 segundos y el proveedor contesta 200 OK; el troncal figura registrado. 2: una llamada de la 1001 sale por el troncal principal. 3: el proveedor deja de contestar y los OPTIONS quedan sin respuesta. 4: la UCM da el troncal principal por caído y la siguiente llamada sale por el troncal de failover. Notas: en Advanced Settings del troncal, Enable Heartbeat Detection en Sí y Heartbeat Frequency en 60; OPTIONS sirve para preguntar qué soporta el otro equipo y, de paso, si está vivo.",
+        "caption": "Mientras el proveedor contesta los OPTIONS el troncal sirve; cuando deja de contestar, la ruta usa el failover."
+      }
+    ]
+  },
+  "5": {
+    "teoria_figs": [
+      {
+        "file": "5-t1.svg",
+        "after": "el principal, y si no responde en 32 segundos",
+        "alt": "Animación en cinco tiempos con cinco etapas en fila: patrón, privilegio, PIN, Strip y troncal, y un número que las recorre. 1: la interna 1001 marca 929001007 y coincide con el patrón _9NXXXXXXX de la ruta nacional. 2: la 1001 tiene privilegio National y la ruta pide National: pasa. 3: la ruta nacional no pide PIN; Strip 1 saca el 9 y al proveedor va 29001007. 4: el troncal principal contesta 503 y la central prueba el troncal de failover, que toma la llamada. 5: la interna 1002, con privilegio Local, marca 00 y un número del exterior; coincide con _00X. de la ruta internacional, que pide International y PIN; el nivel no alcanza y la central rechaza la llamada, que no llega al PIN, al Strip ni al troncal. Abajo, la tabla de rutas y la regla de failover: sin respuesta en 32 segundos, o respuesta 403, 407, 408, 503 o 603 del principal.",
+        "caption": "Seguí el número por las cinco etapas: una llamada sale por el failover y la otra se frena en el privilegio."
+      }
+    ]
+  },
+  "6": {
+    "teoria_figs": [
+      {
+        "file": "6-t1.svg",
+        "after": "pierde 065544 y llega a la 1007",
+        "alt": "Animación en cinco tiempos sobre una llamada entrante por un troncal SIP, con el ejemplo oficial de Grandstream. 1: entra el INVITE sip:0655441007@203.0.113.10; con DID Mode en Request-line la UCM lee el número de la primera línea (la otra opción es el encabezado To). 2: lo compara con las rutas entrantes del troncal y coincide con el patrón _0655441XXX, destino By DID, Strip 6. 3: Strip 6 tacha los seis primeros caracteres, 065544, y lo que queda, 1007, es la interna. 4: con la condición de horario Office Time/Holiday en horario, la llamada va a la interna 1007, que suena. 5: fuera de horario, la misma ruta manda la llamada al buzón de voz. Nota: si el número llega en otro formato, como 59829… o +598…, cambian el patrón y el Strip, por eso se mira el número real en el CDR; la lista negra global de entrantes acepta números y también Anonymous.",
+        "caption": "El número llamado se lee, se compara, pierde lo que dice el Strip, y el horario decide a dónde va."
+      }
+    ]
+  },
+  "7": {
+    "teoria_figs": [
+      {
+        "file": "7-t1.svg",
+        "after": "al terminar las repeticiones la central cuelga",
+        "alt": "Animación en cinco tiempos del IVR 7000 como máquina de estados: bienvenida, espera de una tecla con Response Timeout de 10 segundos y decisión por evento y horario, con cuatro destinos a la derecha. 1: entra la llamada, suena el prompt y la central espera una tecla. 2: quien llama marca 1 en horario de oficina y la condición Office Time manda la llamada a Ring Group ventas. 3: marca la misma tecla 1 fuera de horario y la llamada va al buzón de la 1001 (Voicemail 1001). 4: no marca nada; la central espera 10 segundos, repite el prompt 3 veces y manda la llamada al destino de Timeout, Ring Group recepción. 5: marca 9, una tecla sin evento, y la llamada va al destino de Invalid, también Ring Group recepción. La tecla 2 va siempre a la Extension 1002. Nota: si Timeout o Invalid quedan vacíos, al terminar las repeticiones la central cuelga.",
+        "caption": "Cada llamada termina en un destino: la tecla con su horario, el silencio en Timeout y la tecla mala en Invalid."
+      },
+      {
+        "file": "7-t2.svg",
+        "after": "no llegan como sonido sino como eventos RFC 4733",
+        "alt": "Animación en cuatro tiempos. 1: en un teclado Touch-Tone, de 1963, se aprieta la tecla 1; se resaltan su fila y su columna, y cada una aporta un tono: por la línea viaja la suma de los dos. 2: una máquina reconoce el par de tonos y sabe que fue la tecla 1; así nace el IVR. 3: en la UCM la tecla ya no viaja como sonido: por el RTP entre el teléfono y la central pasan paquetes de voz y, entre ellos, un evento RFC 4733 que dice tecla 1. 4: el IVR 7000 lee el evento: qué tecla fue y cuánto duró. Notas: el evento RFC 4733 es un paquete RTP especial que viaja por el mismo camino que la voz; la RFC 2833, de 2000, lo definió y la RFC 4733, de 2006, la reemplazó, por eso la UCM muestra RFC4733.",
+        "caption": "Antes la tecla era un par de tonos; en la UCM es un paquete RTP que dice qué tecla fue."
+      }
+    ]
+  },
+  "8": {
+    "teoria_figs": [
+      {
+        "file": "8-t1.svg",
+        "after": "después de cada llamada, el agente descansa 10 s",
+        "alt": "Animación en cuatro tiempos con una línea de tiempo de 0 a 100 segundos y tres filas: la llamada en la cola, el agente 1001 y el agente 1002, con los valores de fábrica. 1: entra una llamada, espera con música y suena el 1001 durante 30 segundos (Agent Ring Time); no atiende. 2: la central espera 5 segundos (Retry Time) y prueba con el siguiente, el 1002, que suena y atiende a los 45 segundos; la llamada sale de la fila. 3: el 1002 habla con quien llamó. 4: al cortar, el 1002 descansa 10 segundos (Agent Rest Time) y recién después queda libre para otra llamada. Nota: pasado Max Queue Length, o si la cola queda sin agentes, la llamada va al Failover Destination.",
+        "caption": "Seguí el cabezal: 30 s sonando, 5 s de espera, el siguiente atiende y después descansa 10 s."
+      }
+    ]
+  },
+  "9": {
+    "teoria_figs": [
+      {
+        "file": "9-t1.svg",
+        "after": "STUN le informa su IP y puerto públicos",
+        "alt": "Animación en cuatro tiempos con el interno remoto en internet, el router de la oficina con IP pública 203.0.113.10 y la UCM en 192.168.88.20 dentro de la LAN. El router reenvía UDP 5060 y UDP 10000 a 20000 a la UCM y tiene el SIP ALG apagado. 1: el remoto manda REGISTER a 203.0.113.10 puerto 5060 y el router lo reenvía a la UCM. 2: con NAT activo en la extensión, la UCM responde 200 OK a la IP y el puerto de origen real del paquete. 3: en la llamada, la UCM manda un INVITE con SDP que anuncia su External Host: c=IN IP4 203.0.113.10 y m=audio 10044 RTP/AVP 8 0; a un interno de 192.168.88.0/24 le anunciaría 192.168.88.20. 4: el remoto manda el RTP a 203.0.113.10, a un puerto entre 10000 y 20000, el router lo reenvía a la UCM, y el audio viaja en los dos sentidos.",
+        "caption": "Registro, respuesta, SDP y audio: todo cruza por los dos reenvíos del router hacia la UCM."
+      }
+    ]
+  },
+  "10": {
+    "teoria_figs": [
+      {
+        "file": "10-t1.svg",
+        "after": "se escucha en un sentido y no en el otro",
+        "alt": "Animación en cinco tiempos con dos líneas de vida, la UCM en 192.168.88.20 y un remoto en 198.51.100.7; arriba la señalización SIP y abajo el audio RTP en los dos sentidos. 1: la UCM manda INVITE con SDP; c=IN IP4 203.0.113.10 dice a qué IP mandar el audio y m=audio 10044 RTP/AVP 8 0 a qué puerto, con PCMA o PCMU. 2: el remoto responde 200 OK con su SDP y la UCM cierra con ACK. 3: cada lado manda RTP a lo que anunció el otro, unos 50 paquetes por segundo con G.711 a 20 ms, y el audio va y viene. 4: si la UCM anuncia su IP privada, c=IN IP4 192.168.88.20, el remoto manda el audio a esa dirección por internet y no llega; el audio de la UCM al remoto sí llega. 5: audio de un lado: el remoto escucha a la oficina y la oficina no escucha al remoto. Causas: falta External Host o un SIP ALG reescribió el SDP; un puerto RTP sin reenviar da el mismo síntoma.",
+        "caption": "Arriba SIP arregla la llamada, abajo viaja el audio; con una IP privada en el c= se pierde un sentido."
+      },
+      {
+        "file": "10-t2.svg",
+        "after": "De ahí el corte fijo cerca del medio minuto",
+        "alt": "Animación en cuatro tiempos. Arriba, el otro extremo, un router con SIP ALG activo y la UCM; abajo, una línea de tiempo de 0 a 35 segundos con tres filas: 200 OK, ACK y audio. 1: la UCM atiende y manda 200 OK; el otro lado responde ACK, pero el ALG lo rompe y no pasa el router. 2: sin ACK, la UCM repite el 200 OK y sigue esperando; cada ACK que vuelve se pierde igual. 3: mientras tanto la llamada anda y se habla sin problema. 4: a los 32 segundos, el Timer H, 64 veces T1 de 500 ms, vence sin ACK y la UCM corta la llamada. Nota: un corte fijo cerca del medio minuto se confirma en la captura buscando el 200 OK repetido y el ACK que falta.",
+        "caption": "El 200 OK se repite porque el ACK nunca llega; a los 32 s vence el Timer H y la UCM corta."
+      }
+    ]
+  },
+  "11": {
+    "teoria_figs": [
+      {
+        "file": "11-t1.svg",
+        "after": "el privilegio y el PIN impiden que llame afuera",
+        "alt": "Animación en cuatro tiempos con cuatro capas en columnas, de afuera hacia adentro: router, que solo abre puertos con motivo; Geo-IP, que deja pasar solo los países que se usan; Fail2ban, que banea al que insiste; y rutas, con privilegio y PIN; al final, la UCM. 1: alguien prueba SSH, puerto 22, desde internet y se frena en el router: el puerto está cerrado. 2: llega un REGISTER desde un país que no se usa y Geo-IP lo descarta. 3: un barrido falla REGISTER tres veces seguidas; Fail2ban banea esa IP 600 segundos y el siguiente intento ya no pasa. 4: con una extensión robada, un INVITE a un número internacional pasa router, Geo-IP y Fail2ban, pero la ruta lo frena: el nivel de la extensión no alcanza y no tiene el PIN. Nota: la administración va aparte: web solo para la lista blanca, de hasta 10 IPs; 5 fallos de login son 5 minutos de bloqueo; SSH y AMI apagados.",
+        "caption": "Cada intento muere en una capa distinta; la extensión robada pasa tres y la frena la ruta."
+      }
+    ]
+  },
+  "12": {
+    "teoria_figs": [
+      {
+        "file": "12-t1.svg",
+        "after": "La tecla OpenDoor manda un mensaje SIP con esos datos",
+        "alt": "Animación en cinco tiempos con dos teléfonos GRP del grupo 6000 (recepción y seguridad), la UCM, el portero GDS3710 registrado como extensión 8001 y la cerradura conectada a su salida. 1: tocan el timbre; el GDS3710 manda un INVITE al 6000 y la UCM hace sonar a los dos teléfonos del grupo; atiende recepción. 2: recepción marca 4829# y cada tecla viaja como evento RFC 4733 hasta el portero. 3: el GDS compara con su Remote PIN, 4829; coincide, activa la salida configurada en Open Door y la cerradura se libera. 4: con un PIN equivocado, 1234#, no coincide: la salida queda en reposo y la cerradura trabada. 5: sin atender, la tecla OpenDoor del GRP manda un mensaje SIP (MESSAGE) con el PIN; el portero lo compara, coincide y abre. Notas: en el GRP, el servicio GDS guarda el número del portero, 8001, y el mismo PIN para OpenDoor; conviene probar con la puerta abierta o con alguien del lado de adentro.",
+        "caption": "La puerta abre solo si el PIN coincide, llegue por DTMF durante la llamada o en el mensaje de OpenDoor."
+      }
+    ]
+  }
+}

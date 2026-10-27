@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Filtros de journalctl para obra</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">LINUX · PASO 4</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Filtros de journalctl para obra</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<rect x="48" y="124" width="540" height="148" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="156.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Errores del arranque anterior</text>
+<rect x="68" y="174" width="500" height="40" rx="10" fill="#03213C"/><text x="84.0" y="199.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">sudo journalctl -b -1 -p err</text>
+<text x="68.0" y="248.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">Qué pasó antes del corte o del reinicio.</text>
+<rect x="612" y="124" width="540" height="148" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="632.0" y="156.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Un servicio, la última hora</text>
+<rect x="632" y="174" width="500" height="40" rx="10" fill="#03213C"/><text x="648.0" y="199.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">sudo journalctl -u ssh -S &quot;1 hour ago&quot;</text>
+<text x="632.0" y="248.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">Lo de esa unidad desde un momento.</text>
+<rect x="48" y="290" width="540" height="148" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="322.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">En vivo</text>
+<rect x="68" y="340" width="500" height="40" rx="10" fill="#03213C"/><text x="84.0" y="365.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">sudo journalctl -f</text>
+<text x="68.0" y="414.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">Como tail -f: ves llegar cada línea. Ctrl+C sale.</text>
+<rect x="612" y="290" width="540" height="148" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="632.0" y="322.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Cuánto ocupa</text>
+<rect x="632" y="340" width="500" height="40" rx="10" fill="#03213C"/><text x="648.0" y="365.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">sudo du -sh /var/log/journal</text>
+<text x="632.0" y="414.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">El journal crece: en Disco lleno se le pone tope.</text>
+<text x="48.0" y="470.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Prioridades: -p err muestra err y todo lo más grave</text>
+<rect x="48" y="490" width="128" height="50" rx="10" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<text x="112.0" y="522.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#D2492F" text-anchor="middle">0 emerg</text>
+<rect x="187" y="490" width="128" height="50" rx="10" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<text x="251.0" y="522.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#D2492F" text-anchor="middle">1 alert</text>
+<rect x="326" y="490" width="128" height="50" rx="10" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<text x="390.0" y="522.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#D2492F" text-anchor="middle">2 crit</text>
+<rect x="465" y="490" width="128" height="50" rx="10" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<text x="529.0" y="522.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#D2492F" text-anchor="middle">3 err</text>
+<rect x="604" y="490" width="128" height="50" rx="10" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="668.0" y="522.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="middle">4 warning</text>
+<rect x="743" y="490" width="128" height="50" rx="10" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="807.0" y="522.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="middle">5 notice</text>
+<rect x="882" y="490" width="128" height="50" rx="10" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="946.0" y="522.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="middle">6 info</text>
+<rect x="1021" y="490" width="128" height="50" rx="10" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="1085.0" y="522.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="middle">7 debug</text>
+<path d="M48 554H593" stroke="#D2492F" stroke-width="3"/>
+<text x="48.0" y="580.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#D2492F" text-anchor="start">lo que ves con -p err</text>
+</svg>

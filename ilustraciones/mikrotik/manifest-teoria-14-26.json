@@ -1,0 +1,138 @@
+{
+ "14": {
+  "teoria_figs": [
+   {
+    "file": "14-t1.svg",
+    "after": "A mitad del lease el cliente pide renovar al mismo servidor",
+    "alt": "Animación en cinco tiempos entre el cliente DHCP del MikroTik en ether1 y el servidor del módem. 1: el cliente manda Discover por broadcast. 2: el servidor contesta Offer con una dirección. 3: el cliente pide esa oferta con Request y el servidor confirma con Ack; el estado pasa a bound. 4: se instala lo que vino en el Ack: dirección y máscara dinámicas en ether1, ruta por defecto por el gateway de la opción 3 con distancia 1, DNS de la opción 6 si use-peer-dns=yes, NTP de la opción 42 si use-peer-ntp=yes, y el tiempo de lease. 5: a mitad del lease el cliente pide renovar al mismo servidor; si nadie contesta y el lease vence, se borran la dirección y las rutas dinámicas.",
+    "caption": "Los cuatro mensajes de DHCP y lo que instala el Ack. Mirá cómo el estado pasa a bound y qué se borra si el lease vence."
+   }
+  ]
+ },
+ "15": {
+  "teoria_figs": [
+   {
+    "file": "15-t1.svg",
+    "after": "Por eso masquerade y la lista WAN tienen que apuntar",
+    "alt": "Animación en cinco tiempos entre el MikroTik (cliente PPPoE en ether1) y el concentrador del proveedor. 1: el cliente manda PADI por broadcast y el concentrador contesta PADO con su ac-name, el que muestra scan; si no aparece ningún ac-name, nadie contestó y una causa posible es una VLAN. 2: el cliente pide con PADR y el concentrador confirma con PADS y un número de sesión; aparece la interfaz lógica pppoe-antel sobre ether1. 3: dentro de la sesión, PPP negocia el enlace con LCP. 4: el cliente se autentica con usuario y contraseña y el concentrador asigna la IP por IPCP. 5: la IP queda en pppoe-antel, no en ether1, que es solo el puerto físico; por eso masquerade y la lista WAN apuntan a pppoe-antel. Cada sesión nueva puede traer otra IP.",
+    "caption": "Primero el descubrimiento PPPoE, después PPP dentro de la sesión. Mirá en qué interfaz queda la IP."
+   }
+  ]
+ },
+ "16": {
+  "teoria_figs": [
+   {
+    "file": "16-t1.svg",
+    "after": "no instala una versión más vieja al reiniciar",
+    "alt": "Animación en cuatro tiempos. 1: Download deja la versión nueva preparada en Files y el router sigue con la de siempre; Download&Install en cambio reinicia sola. 2: al reiniciar, antes que RouterOS corre RouterBOOT, el cargador del equipo. 3: al arrancar, RouterOS aplica el .npk que está en la raíz de Files; el que está dentro de una carpeta se ignora. El equipo queda con la versión nueva. 4: si en la raíz hay un .npk más viejo, al reiniciar no se instala; /system/package/downgrade le indica que use los .npk anteriores y reinicia. Si algo no se instaló, /log/print dice por qué.",
+    "caption": "Los paquetes se aplican en el arranque: mirá qué .npk se toma, cuál se ignora y cuándo hace falta downgrade."
+   }
+  ]
+ },
+ "17": {
+  "teoria_figs": [
+   {
+    "file": "17-t1.svg",
+    "after": "volver de stable a long-term sin subir archivos",
+    "alt": "Animación en cuatro tiempos con un equipo, las cuatro listas de versiones (long-term, stable, testing, development) y un eje de versiones de más vieja a más nueva. 1: con channel=long-term, Check for Updates consulta la lista de long-term y latest-version coincide con la instalada. 2: con channel=stable consulta la lista de stable y latest-version es más nueva; la versión instalada no cambia. 3: de vuelta en long-term, todo sigue igual: cambiar de canal no instaló nada. 4: otro equipo que tiene la versión de stable pasa a long-term; latest-version es más vieja que la instalada e Install la instala igual, o sea baja de versión. Antes, backup.",
+    "caption": "Cambiar de canal solo cambia la lista que se consulta. Mirá la versión instalada: se mueve recién con Install."
+   }
+  ]
+ },
+ "18": {
+  "teoria_figs": [
+   {
+    "file": "18-t1.svg",
+    "after": "en un minuto los demás preguntan de nuevo y ven la nueva",
+    "alt": "Animación en cinco tiempos. 1: el MikroTik, con ether1 192.168.1.2 detrás del NAT de un módem, manda su aviso a cloud2.mikrotik.com por UDP 15252; el NAT cambia el origen a 203.0.113.10. 2: la nube anota la IP desde la que llegó el paquete: public-address es 203.0.113.10, la del equipo que hace NAT, no la de ether1. 3: un técnico resuelve el nombre <serie>.sn.mynetname.net y recibe 203.0.113.10 con TTL de 60 segundos, que guarda en cache. 4: el NAT pasa a salir como 203.0.113.25; detrás de NAT el router no ve el cambio y manda un aviso por minuto, que lleva la IP nueva a la nube (force-update lo manda en el acto). 5: vence el TTL, el técnico pregunta de nuevo y recibe 203.0.113.25. El nombre sigue a la IP, pero llegar a un servicio depende del firewall.",
+    "caption": "La nube anota el origen que ve, no la IP de ether1. Mirá cómo el aviso de cada minuto y el TTL de 60 s llevan la IP nueva al técnico."
+   }
+  ]
+ },
+ "19": {
+  "teoria_figs": [
+   {
+    "file": "19-t1.svg",
+    "after": "borrar su clave es darlo de baja",
+    "alt": "Animación en cinco tiempos. A la izquierda tres equipos, cada uno con su par de claves: tecnico-lucia, invitado y un equipo desconocido. A la derecha el MikroTik con back-to-home-vpn 192.168.216.1/24 y la lista de claves públicas que conoce, cada una con su IP del túnel. 1: el router guarda la clave pública de tecnico-lucia y la de invitado. 2: llega un paquete con la clave de tecnico-lucia, es conocida, entra al túnel y vuelve la respuesta. 3: llega un paquete con una clave que no está en la lista: el router lo ignora y no responde. 4: se borra el usuario invitado; su clave sale de la lista y su próximo paquete se ignora. 5: revoked-and-disabled borra todas las claves; ni siquiera tecnico-lucia entra, y al reactivar hay claves y puerto nuevos y cada equipo se configura otra vez.",
+    "caption": "Para WireGuard, un usuario es una clave pública. Mirá qué pasa con una clave conocida, una desconocida y una borrada."
+   }
+  ]
+ },
+ "20": {
+  "teoria_figs": [
+   {
+    "file": "20-t1.svg",
+    "after": "así el camino sigue abierto y el hub puede llegar al sitio",
+    "alt": "Animación en cinco tiempos con el router del sitio (wg-central 10.10.10.2), el NAT o CGNAT del proveedor y el CHR (wg-hub 198.51.100.20, puerto 13231). 1: el sitio manda un paquete al CHR y el NAT anota la conexión: IP interna, puerto e IP externa. 2: el CHR contesta por el mismo camino y el NAT lo deja pasar; el CHR no inicia nada. 3: sin tráfico, la anotación vence; el hub intenta llegar al sitio y el NAT descarta el paquete. 4: con persistent-keepalive=25s el sitio manda un paquete chico cada 25 segundos y la anotación se renueva. 5: con la anotación viva, el hub llega al sitio: WinBox a 10.10.10.2 entra por el camino abierto. El sitio lleva endpoint y keepalive; el hub no lleva endpoint.",
+    "caption": "El NAT del proveedor solo deja volver lo que el sitio abrió. Mirá la barra de vida de la anotación con y sin keepalive."
+   }
+  ]
+ },
+ "21": {
+  "teoria_figs": [
+   {
+    "file": "21-t1.svg",
+    "after": "El perfil puede dar DNS.",
+    "alt": "Animación en cuatro tiempos entre una notebook con el cliente nativo y el MikroTik 203.0.113.10. 1: IPsec negocia por IKE en UDP 500, con la clave precompartida (ipsec-secret), y acuerda cómo cifrar; con un NAT en el medio pasa a UDP 4500. Se forma la capa IPsec. 2: con el canal cifrado, los datos viajan en ESP, el protocolo IP 50, o dentro de UDP 4500 si hay NAT-T. 3: dentro del canal cifrado se arma el túnel L2TP por UDP 1701. 4: por último PPP: el cliente manda usuario y contraseña del /ppp/secret con service=l2tp y recibe una IP del pool 192.168.89.x y los DNS del perfil. Queda conectado.",
+    "caption": "Al conectar, cada capa se arma dentro de la anterior: IPsec, después L2TP, al final PPP."
+   }
+  ]
+ },
+ "22": {
+  "teoria_figs": [
+   {
+    "file": "22-t1.svg",
+    "after": "Si las redes no son espejo exacto, la fase 2 no se arma.",
+    "alt": "Animación en cuatro tiempos entre el Sitio A (MikroTik, LAN 192.168.88.0/24) y el Sitio B (otra marca, LAN 10.10.10.0/24). 1: en la fase 1, por UDP 500 (4500 con NAT), acuerdan cifrado, hash y grupo DH y se autentican con clave o certificado; queda un canal seguro y cada lado ve al otro en active-peers. 2: en la fase 2, por ese canal, acuerdan la proposal (ESP, cifrado, hash, PFS y lifetime) y crean dos SA de un solo sentido, cada una con su SPI: una de ida A a B y otra de vuelta; installed-sa muestra dos por router. 3: un paquete de 192.168.88.x a 10.10.10.x coincide con la policy de A (src 192.168.88.0/24, dst 10.10.10.0/24) y sale cifrado en ESP por la SA de ida. 4: la respuesta vuelve por la SA de vuelta; la policy de B es la misma con las redes al revés, un espejo exacto.",
+    "caption": "Fase 1 arma el canal seguro; fase 2 crea dos SA, una por sentido. Mirá cómo la policy de cada lado elige qué se cifra."
+   }
+  ]
+ },
+ "23": {
+  "teoria_figs": [
+   {
+    "file": "23-t1.svg",
+    "after": "el router se da cuenta cuando la conexión muere",
+    "alt": "Animación en cuatro tiempos con dos sesiones, el historial /system/history y una línea de tiempo. 1: entrás en Safe Mode desde WinBox; agregás un bridge port, el cambio se aplica en el acto y queda marcado con F. 2: mientras tanto, desde otra sesión, otro técnico agrega una regla de NAT; también queda marcada. 3: deshabilitás ether2 y tu sesión se corta; no hay temporizador propio: el router espera a que la conexión muera, de segundos a unos 9 minutos según el caso. 4: la conexión murió de forma anormal y RouterOS deshace todo lo marcado con F, tus cambios y el de la otra sesión.",
+    "caption": "Safe Mode no cuenta tiempo: espera a que tu sesión muera y deshace todo lo marcado con F, también lo de otra sesión."
+   }
+  ]
+ },
+ "24": {
+  "teoria_figs": [
+   {
+    "file": "24-t1.svg",
+    "after": "una regla nueva no se aplica a conexiones viejas",
+    "alt": "Animación en cinco tiempos entre la app (198.51.100.20), el MikroTik (ether1 203.0.113.10) y el NVR 192.168.88.50. 1: llega el primer paquete a 203.0.113.10:18000; en la cadena dstnat, antes de la ruta, el destino pasa a 192.168.88.50:8000 y el contador de la regla sube a 1. 2: recién ahí el ruteo decide: ya no es para el router, va por forward, que lo deja pasar por la marca connection-nat-state=dstnat, y llega al NVR. 3: connection tracking guarda la traducción de esa conexión. 4: el NVR contesta desde 192.168.88.50:8000; el router hace el cambio inverso y la app ve que le contesta 203.0.113.10:18000. 5: el resto de los paquetes de la conexión se traducen con lo guardado, sin recorrer las reglas de NAT: el contador sigue en 1.",
+    "caption": "Solo el primer paquete recorre dstnat. Mirá el contador de la regla y la traducción que guarda connection tracking."
+   }
+  ]
+ },
+ "25": {
+  "teoria_figs": [
+   {
+    "file": "25-t1.svg",
+    "after": "la inunda a todos los puertos del bridge",
+    "alt": "Animación en cuatro tiempos con un bridge, sus puertos ether2 a ether5 y un equipo en cada uno (A, C, B y D), más la tabla de hosts. 1: A le manda una trama a B; el bridge anota MAC A en ether2 y, como no conoce MAC B, la inunda por todos los demás puertos. 2: B contesta; el bridge anota MAC B en ether4 y, como conoce MAC A, manda la trama solo por ether2. 3: A vuelve a mandarle a B y la trama sale solo por ether4; C y D no se enteran. 4: C manda un broadcast, por ejemplo un pedido DHCP; el bridge anota MAC C en ether3, lo manda a todos los puertos y también sube al router, que atiende en el bridge.",
+    "caption": "Mirá cómo se llena la tabla de hosts y cuándo la trama sale por un solo puerto."
+   }
+  ]
+ },
+ "26": {
+  "teoria_figs": [
+   {
+    "file": "26-t1.svg",
+    "after": "si no, lo manda a un gateway",
+    "alt": "Animación en cinco tiempos sobre la dirección 10.10.20.1/24 en ether5. 1: la máscara /24 marca los primeros 24 bits como red y los 8 restantes como hosts. 2: la dirección (00001010.00001010.00010100.00000001) AND la máscara (255.255.255.0) da la red 10.10.20.0; los hosts van de .1 a .254 y 10.10.20.255 es el broadcast. 3: con solo cargar la IP aparece la ruta conectada DAc 10.10.20.0/24 por ether5 con distancia 0. 4: un destino 10.10.20.50 AND /24 da 10.10.20.0, cae en la red y el router lo busca directo por ARP. 5: un destino 10.10.30.5 AND /24 da 10.10.30.0, es otra red y el router lo manda a un gateway.",
+    "caption": "El AND entre dirección y máscara da la red. Con eso el router decide: ARP directo o gateway."
+   },
+   {
+    "file": "26-t2.svg",
+    "after": "así el equipo empieza de nuevo sin esperar",
+    "alt": "Animación en cinco tiempos con tres líneas de vida: un equipo en ether5, el MikroTik con el servidor dhcp-cctv y los otros equipos de ether5. 1: una cámara nueva manda Discover por broadcast. 2: antes del Offer, RouterOS prueba la dirección 10.10.20.100 con ARP y ping; nadie contesta, está libre. 3: el servidor manda Offer con 10.10.20.100, la cámara pide con Request y el servidor confirma con Ack y el lease; queda con 10.10.20.100. 4: llega una notebook que pide 192.168.1.50, la dirección que tenía en otra red; con authoritative=yes el servidor contesta NAK enseguida. 5: la notebook empieza de nuevo con un Discover, sin esperar, y recibe un Offer de esta red.",
+    "caption": "Desde el lado del servidor: la prueba con ARP y ping antes del Offer, y el NAK de authoritative=yes."
+   }
+  ]
+ }
+}

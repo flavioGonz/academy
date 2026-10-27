@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>En incendio, ¿quién decide qué?</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">BOSCH INCENDIO</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">En incendio, ¿quién decide qué?</text>
+<rect x="48" y="130" width="680" height="74" rx="14" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="70.0" y="162.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#FFFFFF" text-anchor="start">Autoridad: Bomberos (DNB)</text>
+<text x="70.0" y="186.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#9FC3E3" text-anchor="start">Decreto 372/023 · IT-11 vigente (2010, remite a UNIT 962)</text>
+<rect x="48" y="218" width="640" height="74" rx="14" fill="#E5F0FB" stroke="#17A8D4" stroke-width="2"/>
+<text x="70.0" y="250.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Proyecto firmado</text>
+<text x="70.0" y="274.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">lo redacta y firma el técnico registrado</text>
+<rect x="48" y="306" width="600" height="74" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="70.0" y="338.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Normas de referencia</text>
+<text x="70.0" y="362.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">EN 54 y NFPA 72: explican equipos y buenas prácticas</text>
+<rect x="48" y="394" width="560" height="74" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="70.0" y="426.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Manual del fabricante</text>
+<text x="70.0" y="450.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">cómo funciona y se instala el AVENAR</text>
+<rect x="48" y="482" width="520" height="74" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="70.0" y="514.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Este curso</text>
+<text x="70.0" y="538.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">te ayuda a entender, no decide nada</text>
+<path d="M26 556V140" stroke="#0A63B8" stroke-width="3" marker-end="url(#a-blue)"/>
+<text x="48.0" y="590.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">Cuanto más arriba, más manda.</text>
+<text x="770.0" y="140.0" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.5">QUIÉN HACE QUÉ (DECRETO 372/023)</text>
+<rect x="770" y="156" width="382" height="124" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="790.0" y="188.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Técnico registrado</text>
+<text x="790.0" y="220.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="790.0" dy="0.0">redacta el proyecto, ingresa el trámite</tspan><tspan x="790.0" dy="21.6">y verifica las medidas</tspan></text>
+<rect x="770" y="296" width="382" height="124" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><text x="790.0" y="328.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#0E8F5E" text-anchor="start">Empresa registrada</text>
+<text x="790.0" y="360.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="790.0" dy="0.0">suministra, instala, pone en marcha y</tspan><tspan x="790.0" dy="21.6">mantiene el sistema</tspan></text>
+<rect x="770" y="436" width="382" height="124" rx="16" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/><text x="790.0" y="468.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#B45309" text-anchor="start">Propietario</text>
+<text x="790.0" y="500.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="790.0" dy="0.0">responde por mantener el sistema en</tspan><tspan x="790.0" dy="21.6">condiciones</tspan></text>
+<text x="48.0" y="640.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#0A63B8" text-anchor="start">Si el proyecto y el manual no coinciden, se para y se consulta al técnico registrado.</text>
+</svg>

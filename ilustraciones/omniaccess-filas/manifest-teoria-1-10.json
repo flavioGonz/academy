@@ -1,0 +1,102 @@
+{
+  "1": {
+    "teoria_figs": [
+      {
+        "file": "1-t1.svg",
+        "after": "En el servidor hay tres procesos que sostienen el flujo",
+        "alt": "Animación en cuatro tiempos, como diagrama de secuencia con cinco columnas: la cámara Bosch con IVA Pro, omniaccess-web (sondeo ONVIF), omniaccess-webhooks (en vivo), los navegadores (Monitor, kiosko) y dispatch-worker (avisos). Tiempo 1: con aforo 7, omniaccess-web pregunta con PullMessages y vuelve sin cambios; después la cámara cuenta y el aforo de la zona de la fila pasa a 8. Tiempo 2: 5 segundos después vuelve a preguntar y llega Changed con Aforo 8; lo guarda como evento de fila con canal Aforo, valor 8 y la hora. Tiempo 3: el evento pasa a omniaccess-webhooks, que lo reenvía en vivo a los navegadores abiertos, que muestran Aforo 8. Tiempo 4: el aforo llegó al umbral de 8, se arma un despacho y dispatch-worker lo manda por Telegram, WhatsApp o push, con reintentos. Al pie: todo esto corre en el Modo Cola; si el número está mal se mira la cámara, si no llega se mira el camino.",
+        "caption": "Seguí el número: la cámara cuenta, web pregunta y guarda, webhooks lo muestra y el worker avisa."
+      }
+    ]
+  },
+  "2": {
+    "teoria_figs": [
+      {
+        "file": "2-t1.svg",
+        "after": "convierte cada entrada o salida en un acumulado propio",
+        "alt": "Animación en tres tiempos. A la izquierda, una vista cenital con la caja arriba y la zona de la fila como polígono punteado de hasta 16 puntos; a la derecha, los canales de OmniAccess: Aforo (ocupación, sube y baja), Entrada y Salida (acumulados propios). Tiempo 1: hay cuatro personas dentro del polígono; la tarea de ocupación cuenta 4 y Aforo marca 4, Entrada 0 y Salida 0. Tiempo 2: una persona cruza el borde hacia adentro; es un evento de entrada, Entrada suma 1 y el Aforo pasa a 5. Tiempo 3: una persona sale por el borde hacia la caja; es un evento de salida, Salida suma 1 y el Aforo vuelve a 4. Al pie: escribir una configuración IVA nueva reinicia los contadores de la cámara, y la precisión depende sobre todo de la geometría.",
+        "caption": "El aforo sube y baja; Entrada y Salida solo suman, un cruce por vez."
+      }
+    ]
+  },
+  "3": {
+    "teoria_figs": [
+      {
+        "file": "3-t1.svg",
+        "after": "el pull se calla para no contar doble",
+        "alt": "Animación en cinco tiempos sobre una línea de tiempo no proporcional entre omniaccess-web, arriba, y la cámara Bosch, abajo. Tiempo 1: a los 0 s OmniAccess manda CreatePullPointSubscription; la suscripción dura 300 s y la cámara responde con los valores marcados Initialized, por ejemplo Aforo 3. Tiempo 2: cada 5 s pregunta con PullMessages; a los 5 s vuelve vacío y a los 10 s vuelve Changed con Aforo 4. Tiempo 3: antes de los 300 s, antes de que venza, OmniAccess renueva la suscripción por 300 s más. Tiempo 4: más tarde, en un momento t, el sondeo vuelve vacío; a t más 5 s y a t más 10 s falla; con dos fallas seguidas se abre un corte de cámara. Tiempo 5: el push es opcional; la cámara manda Notify a /api/onvif/notify y, mientras entrega, el pull se calla para no contar doble. Al pie: cada mensaje trae tópico, fuente, nombre de la regla y datos; Deleted avisa que la propiedad desapareció.",
+        "caption": "Crear, preguntar cada 5 s, renovar antes de los 300 s; dos fallas seguidas abren un corte."
+      }
+    ]
+  },
+  "4": {
+    "teoria_figs": [
+      {
+        "file": "4-t1.svg",
+        "after": "lee el mismo stream por el RTSP local de go2rtc",
+        "alt": "Animación en cinco tiempos con cuatro cajas en fila: el navegador (Filas, Monitor), el proxy inverso que deriva /go2rtc/ al puerto 1984, go2rtc (API en el 1984 y RTSP en el 8554) y la cámara Bosch 192.0.2.10. Tiempo 1: el navegador pide GET /go2rtc/api/stream.mp4?src=bosch_192_0_2_10. Tiempo 2: el proxy inverso deriva /go2rtc/ al puerto 1984, la API de go2rtc. Tiempo 3: go2rtc busca en go2rtc.yaml el stream bosch_192_0_2_10 con su URL rtsp de la cámara y toma el RTSP. Tiempo 4: vuelven fragmentos de MP4 por HTTP hasta el navegador, que queda pegado al vivo; si el video falla hay reintentos y después una captura cada 5 segundos. Tiempo 5: dispatch-worker lee el mismo stream por el RTSP local del puerto 8554 para mantener un anillo de unos 80 segundos, del que sale el clip de cada alerta. Al pie: una sola conexión a la cámara alimenta el vivo y el clip; si falta el stream en go2rtc.yaml, faltan los dos.",
+        "caption": "El pedido pasa por el proxy hasta go2rtc, que toma la cámara una vez y sirve al navegador y al worker."
+      }
+    ]
+  },
+  "5": {
+    "teoria_figs": [
+      {
+        "file": "5-t1.svg",
+        "after": "sugiere un rebote: 1 segundo si son 4 o menos",
+        "alt": "Animación en cuatro tiempos. Arriba, un minuto de lecturas crudas del canal Aforo, con valores entre 2 y 4; abajo, una escala de cambios por minuto con el rebote que sugiere: hasta 4, 1 s; más de 4, 1,5 s; más de 8, 2 s; más de 15, 2,5 s; más de 30, 3 s. Tiempo 1: la pestaña Señal toma las lecturas crudas del canal Aforo y aparece una señal que salta seguido. Tiempo 2: cada salto de valor se marca con un punto rojo y el contador llega a 18 cambios. Tiempo 3: 18 cambios por minuto caen en el tramo de más de 15 y la sugerencia es un rebote de 2,5 s. Tiempo 4: con la fila tranquila la señal cambia 3 veces en el minuto, cae en el tramo de hasta 4 y la sugerencia es 1 s. Al pie: la ventana puede ser de 10, 30 o 60 minutos; más de 8 cambios por minuto ya es parpadeo de más.",
+        "caption": "Cuantos más cambios por minuto, más largo el rebote sugerido."
+      }
+    ]
+  },
+  "6": {
+    "teoria_figs": [
+      {
+        "file": "6-t1.svg",
+        "after": "Para no disparar dos veces en el mismo minuto",
+        "alt": "Animación en cuatro tiempos. Arriba, las llamadas del cron a schedule/tick, una por minuto. Abajo a la izquierda, la lógica de schedule/tick con la hora de Uruguay (UTC-3) y el horario Apertura Caja 1, activo, con reseteo, de lunes a sábado con apertura a las 08:00, y tres preguntas: si el día coincide, si la apertura es esta hora y si ya reseteó en este minuto. A la derecha, los canales de la Fila Caja 1. Tiempo 1: a las 07:59 el día coincide pero la apertura no es esa hora: nada que hacer. Aforo 3, Entrada 128, Salida 125. Tiempo 2: a las 08:00 el día coincide, la apertura es esa hora y todavía no reseteó: pone en cero los acumulados, graba un evento con valor 0 en Aforo, Entrada y Salida y guarda la hora del último reseteo, 08:00. Tiempo 3: otra llamada en el mismo minuto encuentra que ya reseteó a las 08:00 y no repite. Tiempo 4: llega el próximo evento de la cámara y el Aforo vuelve a su valor real, 4, porque la ocupación la mide la cámara. Al pie: todo contador acumulado necesita un punto de partida; en OmniAccess, la apertura del día.",
+        "caption": "A la hora de apertura todo vuelve a cero una sola vez; el aforo lo repone la cámara."
+      }
+    ]
+  },
+  "7": {
+    "teoria_figs": [
+      {
+        "file": "7-t1.svg",
+        "after": "al quinto intento queda Fallido",
+        "alt": "Animación en cinco tiempos. Arriba a la izquierda, dispatch-worker con cuatro lugares; arriba a la derecha, la lista de Despachos con su estado; abajo, la línea de intentos del despacho #104. Tiempo 1: una alerta crea despachos en la cola dispatch y el worker toma cuatro a la vez: #101 push, #102 WhatsApp, #103 push y #104 Telegram, que pasan de Pendiente a Procesando. Tiempo 2: #101, #102 y #103 quedan Enviado; #104 falla y vuelve a Pendiente. Tiempo 3: #104 se reintenta tras esperas de 5, 10, 20 y 40 segundos, en los segundos 0, 5, 15, 35 y 75; al quinto intento queda Fallido. Tiempo 4: #105, con canal email, pasa por el worker y termina en Canal no soportado, porque en esta versión no hay envío por correo. Tiempo 5: el botón Reintentar del #104 crea un despacho nuevo, #106, copia del #104, Pendiente, con el mismo contenido. Al pie: cada espera es el retardo base por 2 elevado al intento menos uno.",
+        "caption": "Cuatro a la vez, esperas que se duplican y un registro de cómo terminó cada despacho."
+      }
+    ]
+  },
+  "8": {
+    "teoria_figs": [
+      {
+        "file": "8-t1.svg",
+        "after": "lo que sale es lo que entra",
+        "alt": "Animación en cuatro tiempos sobre un eje de 0 a 26 minutos. Arriba, ocho personas como barras horizontales desde que llegan a la fila hasta que se van; abajo, columnas con cuántas personas había en cada minuto. Tiempo 1: aparecen las barras, una por persona. Tiempo 2: al lado de cada barra se lee su largo en minutos (6, 8, 6, 9, 7, 7, 8 y 9); sumados dan 60 persona por minuto. Tiempo 3: una línea roja barre el tiempo y deja debajo las columnas de cuántas había en cada momento; sumadas dan también 60 persona por minuto: la misma área. Tiempo 4: por eso L es igual a lambda por W, y OmniAccess despeja la espera, W igual a L sobre lambda, con L el aforo actual y lambda las salidas de los últimos 15 minutos divididas 15; el kiosko muestra ~N min, menos de 1 o un guion. Al pie: vale con la fila estable; si llega mucha gente de golpe, el número se queda corto.",
+        "caption": "La misma área contada de dos maneras: por persona y por momento. De ahí sale W = L / λ."
+      }
+    ]
+  },
+  "9": {
+    "teoria_figs": [
+      {
+        "file": "9-t1.svg",
+        "after": "sale una sola vez el aviso de escalamiento por Telegram",
+        "alt": "Animación en cinco tiempos. A la izquierda, el aforo de la Fila Caja 1 durante 16 minutos con el umbral de 8 como línea roja punteada; a la derecha, el panel de Filas del operador; abajo, los avisos. Tiempo 1: a los 2 minutos el aforo llega a 9, por encima del umbral; aparece el recuadro Alerta de aforo con video en vivo, Excede umbral 9 / 8 y Acción requerida, y salen los avisos a navegadores, despachos, Telegram y push. Tiempo 2: el operador descarta el recuadro; la fila sigue en 9. Tiempo 3: a los 7 minutos se cumplen 5 minutos sobre el umbral y sale una sola vez el escalamiento por Telegram. Tiempo 4: a los 10 minutos el aforo baja a 6, debajo del umbral, y el episodio se cierra. Tiempo 5: a los 13 minutos la fila vuelve a 9 y el recuadro aparece otra vez. Al pie: silenciar o descartar no cambia la fila; primero se mira la imagen y después se decide.",
+        "caption": "Un episodio empieza al pasar el umbral y termina al bajar; el escalamiento sale una vez por episodio."
+      }
+    ]
+  },
+  "10": {
+    "teoria_figs": [
+      {
+        "file": "10-t1.svg",
+        "after": "que es la última lectura del intervalo",
+        "alt": "Animación en cuatro tiempos. Arriba, las lecturas del canal Aforo de la Fila Caja 1 entre las 09:00 y las 12:00, con dos cortes de cámara marcados entre las 11:20 y las 11:40 y desde las 11:50. Abajo, la tabla del reporte con intervalo, máximo, promedio, lecturas y aforo exacto. Tiempo 1: aparecen las lecturas como puntos, en hora de Uruguay. Tiempo 2: líneas punteadas las agrupan en intervalos de una hora: 09:00 a 10:00, 10:00 a 11:00 y 11:00 a 12:00. Tiempo 3: se marca la última lectura de cada intervalo y se completa la tabla: de 09:00 a 10:00, máximo 7, promedio 5,0, 8 lecturas, exacto 6; de 10:00 a 11:00, máximo 9, promedio 6,5, 8 lecturas, exacto 5; de 11:00 a 12:00, máximo 4, promedio 3,2, 5 lecturas, exacto 3. Tiempo 4: debajo aparecen los cortes de cámara: de 11:20 a 11:40, 20 minutos, y desde las 11:50, que sigue abierto. Al pie: el aforo exacto es la última lectura del intervalo, no el promedio.",
+        "caption": "Cada intervalo resume sus lecturas en cuatro números; los cortes van aparte."
+      }
+    ]
+  }
+}

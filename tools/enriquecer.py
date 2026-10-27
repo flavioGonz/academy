@@ -71,6 +71,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("curso"); ap.add_argument("slug"); ap.add_argument("salida")
     ap.add_argument("--solo", default=""); ap.add_argument("--reemplazar-pasos", action="store_true")
+    ap.add_argument("--campos", default="fig,auto,teoria,teoria_figs,concepts,steps", help="qué aplicar (para no pisar lo editado en el panel): fig,auto,teoria,teoria_figs,concepts,steps")
     ap.add_argument("--rerender", action="store_true", help="regenera con pandoc el html de idea, impacto, quién lo dice, laboratorio y teoría de todas las lecciones")
     a = ap.parse_args()
     c = json.load(open(a.curso, encoding="utf-8"))
@@ -79,6 +80,7 @@ def main():
         for k, v in json.load(open(f, encoding="utf-8")).items():
             man.setdefault(k, {}).update(v)  # varios manifests pueden aportar campos a la misma lección
     solo = {x.strip() for x in a.solo.split(",") if x.strip()}
+    campos = {x.strip() for x in a.campos.split(",") if x.strip()}
     by = {str(l.get("id", l["n"])): l for l in c["lessons"]}
     rep = {"fig": 0, "concepts": 0, "steps": 0, "faltan": [], "sin_ancla": []}
     for lid, m in man.items():
@@ -87,20 +89,20 @@ def main():
         l = by.get(str(lid))
         if not l:
             rep["faltan"].append(f"lección {lid} no está en el curso"); continue
-        if m.get("fig"):
+        if m.get("fig") and "fig" in campos:
             src, ok = webp(a.slug, m["fig"]["file"])
             if ok:
                 l["fig"] = {"src": src, "alt": m["fig"].get("alt", ""), "caption": m["fig"].get("caption", "")}; rep["fig"] += 1
             else:
                 rep["faltan"].append(src)
-        if m.get("script_rsc"):
+        if m.get("script_rsc") and "auto" in campos:
             au = dict(m["script_rsc"]); au["codigo"] = rsc_ascii(au.get("codigo", ""))
             l["auto"] = au; rep["scripts"] = rep.get("scripts", 0) + 1
-        if m.get("teoria_md"):
+        if m.get("teoria_md") and "teoria" in campos:
             l["theory_md"] = m["teoria_md"].strip()
             l["theory"] = md(l["theory_md"])
             rep["teoria"] = rep.get("teoria", 0) + 1
-        for tf in m.get("teoria_figs", []):  # figuras o animaciones dentro de la teoría, después del párrafo con "after"
+        for tf in (m.get("teoria_figs", []) if "teoria_figs" in campos else []):  # figuras o animaciones dentro de la teoría, después del párrafo con "after"
             src = f"ilustraciones/{a.slug}/{tf['file']}"
             if not (ROOT / "site2" / src).exists():
                 rep["faltan"].append(src); continue
@@ -116,7 +118,7 @@ def main():
             paras.insert(k + 1, f'<figure class="lab-fig th-fig"><img src="{src}" alt="{alt}" loading="lazy" width="1200" height="675"><figcaption>{cap}</figcaption></figure>')
             l["theory_md"] = "\n\n".join(paras); l["theory"] = md(l["theory_md"])
             rep["teoria_figs"] = rep.get("teoria_figs", 0) + 1
-        if m.get("concepts"):
+        if m.get("concepts") and "concepts" in campos:
             prevpics = {k.get("name", "").strip().lower(): k.get("pics") for k in l.get("concepts", []) if k.get("pics")}
             l["concepts"] = [{k: x.get(k, "") for k in ("name", "para_que", "como", "ejemplo")} for x in m["concepts"] if x.get("name")]
             for k in l["concepts"]:
@@ -127,7 +129,7 @@ def main():
         if a.reemplazar_pasos:
             lab = re.sub(r'\n*<figure class="lab-fig">.*?</figure>\n*', "\n\n", lab, flags=re.S)
         changed = False
-        for st in sorted(m.get("steps", []), key=lambda s: s.get("step", 0)):
+        for st in (sorted(m.get("steps", []), key=lambda s: s.get("step", 0)) if "steps" in campos else []):
             src, ok = webp(a.slug, st["file"])
             if not ok:
                 rep["faltan"].append(src); continue

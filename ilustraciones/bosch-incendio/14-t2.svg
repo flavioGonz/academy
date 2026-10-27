@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Después de un cambio: 100 % de lo afectado y 10 % del resto</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">BOSCH INCENDIO · PRUEBAS</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Después de un cambio: 100 % de lo afectado y 10 % del resto</text>
+<text x="48.0" y="150.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">300 iniciadores no afectados</text>
+<rect x="48" y="170" width="225.0" height="50" rx="8" fill="#E5F0FB" stroke="#C2D4E6" stroke-width="1.5"/>
+<rect x="48" y="170" width="22.5" height="50" rx="8" fill="#0A63B8" stroke="#0A63B8" stroke-width="0"/>
+<text x="293.0" y="204.0" font-family="JetBrains Mono" font-size="20" font-weight="700" fill="#0A63B8" text-anchor="start">probás 30</text>
+<text x="48.0" y="252.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">10 % = 30</text>
+<text x="48.0" y="340.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">800 iniciadores no afectados</text>
+<rect x="48" y="360" width="600.0" height="50" rx="8" fill="#E5F0FB" stroke="#C2D4E6" stroke-width="1.5"/>
+<rect x="48" y="360" width="37.5" height="50" rx="8" fill="#0A63B8" stroke="#0A63B8" stroke-width="0"/>
+<text x="668.0" y="394.0" font-family="JetBrains Mono" font-size="20" font-weight="700" fill="#0A63B8" text-anchor="start">probás 50</text>
+<text x="48.0" y="442.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">10 % = 80, pero el tope es 50</text>
+<rect x="900" y="150" width="252" height="300" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="920.0" y="188.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#0E8F5E" text-anchor="start">Lo afectado</text>
+<text x="920.0" y="240.0" font-family="JetBrains Mono" font-size="40" font-weight="700" fill="#0E8F5E" text-anchor="start">100 %</text>
+<text x="920.0" y="290.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="920.0" dy="0.0">Todo lo que tocó el</tspan><tspan x="920.0" dy="21.6">cambio de software se</tspan><tspan x="920.0" dy="21.6">prueba completo.</tspan></text>
+<rect x="48" y="540" width="1104" height="81" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="552" width="5" height="57" rx="2.5" fill="#0A63B8"/><text x="74.0" y="574.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="74.0" dy="0.0">De dónde sale</tspan></text><text x="74.0" y="601.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Regla de la guía de Minnesota basada en NFPA 72. Si el proyecto o la autoridad piden más, manda lo que pidan.</tspan></text>
+</svg>

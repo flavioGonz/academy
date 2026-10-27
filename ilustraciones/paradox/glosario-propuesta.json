@@ -1,0 +1,618 @@
+{
+ "nota": "Propuesta para el curso Paradox. terms: entradas nuevas completas. alias_agregar: alias nuevos para entradas existentes. modificar: campos a reemplazar en entradas existentes. Probada sobre una copia combinada con glosario_check.py.",
+ "terms": [
+  {
+   "id": "eol",
+   "term": "EOL",
+   "aliases": [
+    "resistencia de fin de línea",
+    "fin de línea",
+    "End Of Line",
+    "resistencia EOL"
+   ],
+   "cat": "Alarmas",
+   "short": "End Of Line: la resistencia que va al final del cable de una zona para que la central supervise el cableado.",
+   "long": "Con la EOL, la central espera medir un valor fijo: en Paradox, 1 kΩ. Si mide circuito abierto, la zona se abrió o el cable se cortó; si mide 0 Ω, alguien unió los cables y aparece la falla de tamper y cableado. Va en el extremo del detector, no en la bornera. En las SP+ se activa para toda la central en la sección [706] opción 2. Otras marcas usan otros valores, como 5,6 kΩ en DSC.",
+   "case": true
+  },
+  {
+   "id": "atz",
+   "term": "ATZ",
+   "aliases": [
+    "Advanced Technology Zone",
+    "duplicación de zona",
+    "zona doble"
+   ],
+   "cat": "Alarmas",
+   "short": "Advanced Technology Zone: duplicación de zona de Paradox, dos detectores en una sola entrada.",
+   "long": "Cada detector lleva su propia resistencia (1 kΩ y 2,2 kΩ en los dibujos de la guía EVOHD+) y la central reconoce cuál abrió por el valor que mide, con un número de zona propio para cada uno. En la serie plus solo lo admite la SP6000+; se activa en [705] opción 1 y la opción 2 elige serie o paralelo.",
+   "case": true
+  },
+  {
+   "id": "pgm",
+   "term": "PGM",
+   "aliases": [
+    "salida programable",
+    "salidas programables",
+    "PGM1",
+    "PGM2"
+   ],
+   "cat": "Alarmas",
+   "short": "Salida programable de una central de alarma: se activa con un evento y sirve para mover un relé.",
+   "long": "En Paradox cada PGM tiene evento de activación y de desactivación (grupo, subgrupo y partición) o un tiempo. Las de placa son de baja corriente, 100 a 150 mA según la guía SP+: para un portón, una luz o una sirena extra se usa un relé externo. De fábrica, la PGM1 se activa con el botón B de cualquier control.",
+   "case": true
+  },
+  {
+   "id": "tbl",
+   "term": "TBL",
+   "aliases": [
+    "pantalla de fallas",
+    "tecla TBL"
+   ],
+   "cat": "Alarmas",
+   "short": "La tecla de fallas (trouble) de los teclados Paradox: muestra los grupos de fallas de la central.",
+   "long": "Cada número encendido es un grupo y abre su submenú: 2 energía (2.1 batería, 2.2 AC, 2.3 sobrecarga AUX), 3 campana, 4 comunicación, 5 tamper y cableado de zona, 8 pérdida de reloj, 10 supervisión de módulos. Es lo primero que se mira cuando un cliente dice que la alarma pita.",
+   "case": true
+  },
+  {
+   "id": "aux",
+   "term": "AUX",
+   "aliases": [
+    "salida auxiliar"
+   ],
+   "cat": "Alarmas",
+   "short": "Salida auxiliar de la central: alimenta teclados, módulos y detectores.",
+   "long": "Tiene un límite de corriente con protección sin fusible. En la SP5500+ corta a 1,1 A y el manual pide no pasar de 700 mA en total; si corta por sobrecarga, se sacan todas las cargas al menos 10 segundos antes de reconectar. Lo que alimenta una fuente externa no cuenta.",
+   "case": true
+  },
+  {
+   "id": "bell",
+   "term": "BELL",
+   "aliases": [
+    "salida de campana",
+    "BELL+",
+    "BELL-"
+   ],
+   "cat": "Alarmas",
+   "short": "Salida de campana de la central: da 12 V en alarma para la sirena.",
+   "long": "En las SP+ soporta una sirena de 30 W o dos de 20 W y corta si pasa de 3 A. La central la supervisa: si no hay nada conectado aparece la falla de campana, que se evita con una resistencia de 1 kΩ entre BELL+ y BELL-.",
+   "case": true
+  },
+  {
+   "id": "tamper",
+   "term": "tamper",
+   "aliases": [
+    "antisabotaje",
+    "sabotaje",
+    "tamper switch"
+   ],
+   "cat": "Alarmas",
+   "short": "Protección contra sabotaje: avisa que alguien abrió un equipo o tocó un cable, aunque la alarma esté desarmada.",
+   "long": "Puede ser un pulsador en la tapa de un gabinete, un detector o un módulo, o la supervisión del cableado de una zona con EOL. En Paradox, TBL lo muestra en el grupo 5 (zona) o 6 (módulo), y la sección [705] define si da solo falla o alarma.",
+   "case": false
+  },
+  {
+   "id": "contact-id",
+   "term": "Contact ID",
+   "aliases": [
+    "CID",
+    "Ademco Contact ID",
+    "SIA DC-05"
+   ],
+   "cat": "Normas",
+   "short": "Formato de reporte de alarmas a la receptora: abonado, calificador, código de evento, partición y zona.",
+   "long": "Nació en Ademco y la Security Industry Association lo publicó como norma SIA DC-05 en 1999. Un mensaje lleva abonado, tipo 18, calificador (1 evento nuevo, 3 restauración), código de evento de tres dígitos (130 es robo), partición, zona o usuario y un dígito de control. En Paradox SP y MG se elige con 4 en la sección [810], y los módulos MQTT reportan solo en Contact ID.",
+   "year": 1999,
+   "case": true
+  },
+  {
+   "id": "sia",
+   "term": "SIA",
+   "aliases": [
+    "Security Industry Association",
+    "formato SIA",
+    "SIA DC-03"
+   ],
+   "cat": "Normas",
+   "short": "Security Industry Association: la asociación de la industria de seguridad de Estados Unidos, y su formato de reporte de alarmas.",
+   "long": "Publica normas como Contact ID (DC-05) y el formato SIA (DC-03), más descriptivo. En Paradox SP y MG el formato SIA es el 5 de la sección [810], pero la guía de programación aclara que no está soportado por IP ni GPRS; el receptor legado IPR512 sí lo acepta.",
+   "case": true
+  },
+  {
+   "id": "abonado",
+   "term": "abonado",
+   "aliases": [
+    "número de abonado",
+    "cuenta de abonado"
+   ],
+   "cat": "Alarmas",
+   "short": "El número con el que la receptora de monitoreo identifica a cada cliente.",
+   "long": "Lo da la empresa de monitoreo. En Paradox va en cada partición y en cada canal: [811] y [812] por teléfono, [918] y [919] por IP, en hexadecimal. Un abonado copiado de otra obra hace que los eventos lleguen al cliente equivocado.",
+   "case": false
+  },
+  {
+   "id": "receptora",
+   "term": "receptora",
+   "aliases": [
+    "receptora de alarmas",
+    "estación receptora",
+    "CMS"
+   ],
+   "cat": "Alarmas",
+   "short": "El equipo de la empresa de monitoreo que recibe los eventos de las centrales y los pasa al software del operador.",
+   "long": "Para dar de alta una central, la receptora le da al instalador el abonado, la IP y el puerto, la contraseña (en legado) y el perfil de supervisión. En Paradox, las legado son IPR512 e IPRS-7 y las de módulos MQTT, IPC10 y VIPC20. CMS (Central Monitoring Station) es el nombre en inglés de la central de monitoreo.",
+   "case": false
+  },
+  {
+   "id": "perfil-supervision",
+   "term": "perfil de supervisión",
+   "aliases": [
+    "perfil de sondeo"
+   ],
+   "cat": "Alarmas",
+   "short": "Cada cuánto el módulo de comunicación se reporta a la receptora aunque no haya eventos.",
+   "long": "Si el módulo deja de reportarse en ese tiempo, la receptora avisa que el abonado se cayó. En Paradox se carga en [934]; con IPC10 los perfiles son fijos: 01 = 1200 s, 02 = 600 s, 03 = 300 s, 04 = 90 s. En el IPR512 los define la receptora.",
+   "case": false
+  },
+  {
+   "id": "particion",
+   "term": "partición",
+   "aliases": [
+    "particiones",
+    "particionado"
+   ],
+   "cat": "Alarmas",
+   "short": "Una parte de la central que se arma y desarma por separado, con sus zonas y usuarios.",
+   "long": "Sirve para dos usos en el mismo lugar, como una casa y un taller. En Paradox se activa en [700] opción 1; las SP+ tienen dos particiones y la EVOHD+ ocho. El tercer dígito de cada zona la asigna: 1, 2 o 3 para ambas.",
+   "case": false
+  },
+  {
+   "id": "codigo-instalador",
+   "term": "código de instalador",
+   "aliases": [
+    "installer code"
+   ],
+   "cat": "Alarmas",
+   "short": "El código que abre la programación de la central.",
+   "long": "En Paradox SP y MG es 0000 de fábrica y se cambia en [397]; en EVO es 000000. Al estar en manuales públicos, se cambia el primer día y se guarda en el sistema de gestión, nunca en el gabinete.",
+   "case": false
+  },
+  {
+   "id": "bloqueo-instalador",
+   "term": "bloqueo de instalador",
+   "aliases": [
+    "installer lock"
+   ],
+   "cat": "Alarmas",
+   "short": "Traba la programación de la central para que el reseteo por botón no la borre.",
+   "long": "En Paradox SP y MG se activa con 147 en [395] y se quita con 000; al energizar, el LED de estado destella rápido seis segundos. Ata la central a quien tiene el código: se usa solo si está en el contrato con el cliente.",
+   "case": false
+  },
+  {
+   "id": "bloqueo-teclado",
+   "term": "bloqueo de teclado",
+   "aliases": [
+    "keypad lockout"
+   ],
+   "cat": "Alarmas",
+   "short": "Bloquea los teclados un tiempo después de varios códigos inválidos y lo reporta.",
+   "long": "En Paradox SP y MG, [717] fija la cantidad de intentos y [716] los minutos de bloqueo; 000 lo deja apagado, como viene de fábrica. Frena a quien prueba códigos al azar.",
+   "case": false
+  },
+  {
+   "id": "codigo-coaccion",
+   "term": "código de coacción",
+   "aliases": [
+    "coacción",
+    "duress"
+   ],
+   "cat": "Alarmas",
+   "short": "Un código que desarma como cualquier otro, pero avisa en silencio a monitoreo que el usuario está siendo obligado.",
+   "long": "En Paradox SP y MG es la opción 8 del usuario, en las secciones [404] a [432].",
+   "case": false
+  },
+  {
+   "id": "retardo-entrada",
+   "term": "retardo de entrada",
+   "aliases": [
+    "demora de entrada",
+    "entry delay"
+   ],
+   "cat": "Alarmas",
+   "short": "El tiempo que da la zona de la puerta para llegar al teclado y desarmar.",
+   "long": "En Paradox SP y MG la zona de la puerta se define 01 y el tiempo está en [710], 45 s de fábrica. La demora de salida, al armar, está en [745] y [746], 60 s de fábrica.",
+   "case": false
+  },
+  {
+   "id": "zona-seguimiento",
+   "term": "zona de seguimiento",
+   "aliases": [
+    "zona seguidora"
+   ],
+   "cat": "Alarmas",
+   "short": "Zona que espera si antes se abrió una de retardo y dispara al instante si se activa sola.",
+   "long": "Es la definición 05 en Paradox SP y MG, típica del detector que cuida el teclado: cuando el cliente entra por la puerta, toma el retardo de entrada; si alguien entra por otro lado, dispara enseguida.",
+   "case": false
+  },
+  {
+   "id": "intellizone",
+   "term": "Intellizone",
+   "aliases": [],
+   "cat": "Alarmas",
+   "short": "Función de Paradox contra falsas alarmas: la zona espera una confirmación dentro de un tiempo antes de disparar.",
+   "long": "Es la opción 6 de la zona en SP y MG; el tiempo de espera está en [713], 48 s de fábrica.",
+   "case": true
+  },
+  {
+   "id": "retardo-transmision",
+   "term": "retardo de transmisión",
+   "aliases": [
+    "transmission delay"
+   ],
+   "cat": "Alarmas",
+   "short": "La alarma suena pero no se reporta a monitoreo si el usuario desarma a tiempo.",
+   "long": "En Paradox SP y MG es la opción 7 de la zona y el tiempo va en [833]. Sirve en entradas con falsas alarmas frecuentes por error del usuario.",
+   "case": false
+  },
+  {
+   "id": "stayd",
+   "term": "StayD",
+   "aliases": [
+    "modo StayD"
+   ],
+   "cat": "Alarmas",
+   "short": "Modo de Paradox que mantiene armado el perímetro mientras la gente está en casa.",
+   "long": "Con StayD activo no se entra a programación: hay que apagarlo y tener las particiones desarmadas. Conviene anotar en la ficha de la obra si se usa.",
+   "case": true
+  },
+  {
+   "id": "babyware",
+   "term": "BabyWare",
+   "aliases": [],
+   "cat": "Alarmas",
+   "short": "El software de Paradox para PC que lee y escribe la programación de la central.",
+   "long": "Conecta local con el cable 307USB o un CV4USB al conector serie, o remoto por módulo IP o PCS. Pide el ID de panel ([910]) y la contraseña de PC ([911]), que tienen que coincidir con la cuenta. Sirve para sacar una copia completa antes de cambiar nada.",
+   "case": true
+  },
+  {
+   "id": "blueeye",
+   "term": "BlueEye",
+   "aliases": [
+    "app BlueEye"
+   ],
+   "cat": "Alarmas",
+   "short": "La app de Paradox para clientes e instaladores, que reemplaza a Insite Gold.",
+   "long": "Conecta con la central por Swan o, en módulos legado, por IP estática sin Swan. Pide el código de PC, el mismo de BabyWare, y en MG y SP cada 0 se escribe como A. Su menú instalador configura módulos IP y crea sitios Swan. No soporta las cámaras HD78 y HD88.",
+   "case": true
+  },
+  {
+   "id": "swan",
+   "term": "Swan",
+   "aliases": [
+    "servidor Swan",
+    "sitio Swan",
+    "Swan 4G"
+   ],
+   "cat": "Alarmas",
+   "short": "El servidor de Paradox que conecta la app con el módulo de la central, con un sitio por suscripción.",
+   "long": "El módulo sale a internet y se anota en Swan; la app llega a través de él sin abrir puertos. El sitio tiene días de suscripción y fecha de renovación. Con IP150M, según su manual, sin sitio Swan pago no hay ninguna comunicación. El proyecto PAI lo desaconseja citando una vulnerabilidad documentada.",
+   "case": true
+  },
+  {
+   "id": "insite-gold",
+   "term": "Insite Gold",
+   "aliases": [],
+   "cat": "Alarmas",
+   "short": "La app anterior de Paradox, reemplazada por BlueEye.",
+   "long": "Los sitios se pasan a BlueEye con el ID de sitio y el correo de Swan. Los módulos MQTT (IP180, IP150M) no conectan con Insite Gold.",
+   "case": true
+  },
+  {
+   "id": "turn-paradox",
+   "term": "TURN",
+   "aliases": [
+    "módulos legado",
+    "generación legado"
+   ],
+   "cat": "Alarmas",
+   "short": "Como llama Paradox a su generación legado de comunicadores: IP150, IP150+, PCS hasta V7.",
+   "long": "Reportan a receptoras IPR512 o IPRS-7, conectan por Swan o IP estática y admiten Insite Gold y BlueEye. No se mezclan con módulos MQTT en la misma central. Ojo: en redes, TURN también es un protocolo para atravesar NAT; acá es el nombre de una generación de productos.",
+   "case": true
+  },
+  {
+   "id": "ip150",
+   "term": "IP150",
+   "aliases": [
+    "IP150+",
+    "IP150M",
+    "IP150+MQ"
+   ],
+   "cat": "Alarmas",
+   "short": "Módulo de comunicación IP de Paradox para centrales SP, MG y EVO.",
+   "long": "El IP150 y el IP150+ son legado (TURN). El IP150+MQ y el IP150M (IP150 con firmware V6.50) son MQTT: reportan solo a IPC10 y solo con BlueEye. Pasar a IP150M es irreversible y exige sitio Swan pago. Desde el firmware 5.3.0, el IP150+ se configura desde el menú instalador de BlueEye. Su puerto de software es el 10000.",
+   "case": true
+  },
+  {
+   "id": "ip180",
+   "term": "IP180",
+   "aliases": [],
+   "cat": "Alarmas",
+   "short": "Módulo de comunicación MQTT de Paradox, con Ethernet y Wi-Fi.",
+   "long": "Reporta solo Contact ID a IPC10 o VIPC20, solo con BlueEye, y va en el serie 1 de las centrales plus. Necesita salida por TCP 8883 y 443 y UDP 53, 123 y 5683. Sin Ethernet abre un punto de acceso propio en 192.168.180.1 para cargar el Wi-Fi.",
+   "case": true
+  },
+  {
+   "id": "ipc10",
+   "term": "IPC10",
+   "aliases": [
+    "VIPC20"
+   ],
+   "cat": "Alarmas",
+   "short": "Conversor receptor de Paradox para módulos MQTT: recibe sus eventos y los pasa al software de monitoreo.",
+   "long": "Maneja hasta 5000 cuentas y guarda 20 000 eventos si cae el software. Entrega en MLR2-DG, Ademco 685 o CID-TCP, se alimenta por PoE y no usa contraseña de receptor. Sus perfiles de supervisión son fijos, de 1200 s a 90 s.",
+   "case": true
+  },
+  {
+   "id": "ipr512",
+   "term": "IPR512",
+   "aliases": [
+    "IPRS-7"
+   ],
+   "cat": "Alarmas",
+   "short": "Receptor IP legado de Paradox para módulos TURN.",
+   "long": "Atiende hasta 512 centrales, acepta Contact ID y SIA, tiene dos WAN y hasta 32 perfiles de sondeo, y entrega al software de monitoreo emulando receptoras conocidas. Usa contraseña de receptor (123456 de fábrica en la central). Los módulos MQTT no reportan a él.",
+   "case": true
+  },
+  {
+   "id": "pcs",
+   "term": "PCS",
+   "aliases": [
+    "PCS250",
+    "PCS265",
+    "PCS265 LTE",
+    "comunicador PCS"
+   ],
+   "cat": "Alarmas",
+   "short": "Comunicadores celulares de Paradox.",
+   "long": "Los PCS250, 260 y 265, y el PCS265 LTE o V7, son legado (TURN); el PCS265 V8 es MQTT. En las centrales plus suelen ir de respaldo en el serie 2, de la misma generación que el módulo principal.",
+   "case": true
+  },
+  {
+   "id": "digiplex",
+   "term": "Digiplex",
+   "aliases": [
+    "bus Digiplex"
+   ],
+   "cat": "Alarmas",
+   "short": "El nombre del bus de cuatro hilos y de la familia EVO de Paradox.",
+   "long": "En la EVOHD+ el bus Digiplex admite hasta 254 módulos y 914 m de cable en total, en estrella o en cadena. Antes de conectar un módulo se saca la red y la batería; en ambientes ruidosos, cable blindado con la malla a tierra de un solo lado.",
+   "case": true
+  },
+  {
+   "id": "evo",
+   "term": "EVO",
+   "aliases": [
+    "EVO192",
+    "EVOHD+",
+    "Digiplex EVO"
+   ],
+   "cat": "Alarmas",
+   "short": "La familia de centrales grandes de Paradox, con control de acceso.",
+   "long": "Se programa manteniendo el 0, con código de instalador de seis dígitos (000000 de fábrica) y secciones de cuatro dígitos. La EVOHD+ tiene 8 zonas en placa, hasta 192 por bus, 8 particiones y 999 usuarios.",
+   "case": true
+  },
+  {
+   "id": "spectra",
+   "term": "Spectra",
+   "aliases": [
+    "SP+",
+    "SP5500+",
+    "SP6000+",
+    "SP7000+",
+    "Spectra SP"
+   ],
+   "cat": "Alarmas",
+   "short": "La familia de centrales SP de Paradox; las plus son SP5500+, SP6000+ y SP7000+.",
+   "long": "Se programan con ENTER, código de instalador (0000) y secciones de tres dígitos, con el mismo mapa que Magellan. Las SP+ tienen 32 zonas, 32 usuarios, 2 particiones y hasta 15 módulos en el bus. SP4000 y SP65 son la gama baja, con otro procedimiento de reseteo.",
+   "case": true
+  },
+  {
+   "id": "magellan",
+   "term": "Magellan",
+   "aliases": [
+    "MG",
+    "MG5050",
+    "MG+"
+   ],
+   "cat": "Alarmas",
+   "short": "La familia de centrales MG de Paradox, con el mismo mapa de secciones que Spectra.",
+   "long": "Se programa igual que las SP: ENTER, código de instalador y secciones de tres dígitos. Por eso un instructivo de monitoreo para MG5050 sirve también para una SP6000.",
+   "case": true
+  },
+  {
+   "id": "m25",
+   "term": "M25",
+   "aliases": [
+    "M25 LTE",
+    "línea M"
+   ],
+   "cat": "Alarmas",
+   "short": "La consola de la línea M de Paradox: PoE, batería de litio, Wi-Fi, Ethernet y LTE.",
+   "long": "Según su ficha: 200 zonas, 10 particiones, inalámbrico M y hasta 45 dispositivos por Ethernet, sin bus de cuatro hilos; se programa por BlueEye o software web y reporta directo a la receptora en hasta 4 canales. Los servicios de app van con Swan 4G por suscripción.",
+   "case": true
+  },
+  {
+   "id": "zx8",
+   "term": "ZX8",
+   "aliases": [
+    "ZX82",
+    "expansor ZX8"
+   ],
+   "cat": "Alarmas",
+   "short": "Expansor de 8 zonas cableadas de Paradox que va en el bus.",
+   "long": "Consume 31 mA según la guía SP+. Si se lo saca del bus, queda la falla de supervisión de módulo (TBL 10) hasta borrarla en [955]. En las SP+, la primera zona de cada ZX8 puede usarse como entrada de tamper.",
+   "case": true
+  },
+  {
+   "id": "307usb",
+   "term": "307USB",
+   "aliases": [
+    "CV4USB"
+   ],
+   "cat": "Alarmas",
+   "short": "Cable de Paradox del conector serie de la central al USB de la PC, para BabyWare.",
+   "long": "La notebook lo ve como un puerto COM. Va al conector serie de 4 pines de la central, no a los bornes del bus.",
+   "case": true
+  },
+  {
+   "id": "pai",
+   "term": "PAI",
+   "aliases": [
+    "Paradox Alarm Interface"
+   ],
+   "cat": "Herramientas",
+   "short": "Paradox Alarm Interface: software libre para integrar centrales Paradox con sistemas de domótica.",
+   "long": "Se conecta al IP150 o al puerto serie. Su documentación desaconseja Swan y recomienda no actualizar EVO a firmware 7.50 o superior si se usa conexión serie. Es un proyecto que compite con la app oficial.",
+   "case": true
+  },
+  {
+   "id": "pir",
+   "term": "PIR",
+   "aliases": [
+    "Passive Infrared",
+    "sensor PIR",
+    "detector PIR"
+   ],
+   "cat": "Alarmas",
+   "short": "Passive Infrared: el detector de movimiento infrarrojo pasivo de las alarmas.",
+   "long": "Detecta el cambio de calor que produce una persona al moverse en su campo. El que cuida el teclado suele programarse como zona de seguimiento.",
+   "case": true
+  },
+  {
+   "id": "led",
+   "term": "LED",
+   "aliases": [
+    "Light-Emitting Diode",
+    "diodo emisor de luz"
+   ],
+   "cat": "Electricidad",
+   "short": "Light-Emitting Diode: diodo que emite luz; en los equipos, la luz que indica un estado.",
+   "long": "En la placa de una SP+, el LED de estado destella una vez por segundo si todo está normal y se prende un segundo y se apaga otro si hay alguna falla.",
+   "case": true
+  },
+  {
+   "id": "rx-tx",
+   "term": "RX/TX",
+   "aliases": [
+    "RX",
+    "TX"
+   ],
+   "cat": "Electricidad",
+   "short": "Recepción y transmisión: las líneas o luces que muestran datos que entran y salen.",
+   "long": "En un módulo IP de Paradox, el LED RX/TX titilando indica que el módulo habla con la central por el serie: es el primer paso del diagnóstico cuando no reporta.",
+   "case": true
+  },
+  {
+   "id": "gprs",
+   "term": "GPRS",
+   "aliases": [
+    "General Packet Radio Service"
+   ],
+   "cat": "Redes",
+   "short": "General Packet Radio Service: la transmisión de datos por paquetes de la red celular 2G.",
+   "long": "Fue de los primeros caminos de datos celulares para comunicadores de alarma. En Paradox SP y MG, SIA no está soportado por GPRS ni IP: se usa Contact ID.",
+   "case": true
+  },
+  {
+   "id": "apn",
+   "term": "APN",
+   "aliases": [
+    "Access Point Name"
+   ],
+   "cat": "Redes",
+   "short": "Access Point Name: el nombre que define por dónde sale a internet un equipo con chip celular.",
+   "long": "Lo da la operadora o el proveedor del chip. En Paradox, la tabla de estados de [935] muestra \"sin APN\" en el grupo 3 cuando falta en un comunicador celular.",
+   "case": true
+  },
+  {
+   "id": "en-50131",
+   "term": "EN 50131",
+   "aliases": [
+    "EN 50131-1"
+   ],
+   "cat": "Normas",
+   "short": "La serie europea de normas para sistemas de alarma de intrusión y atraco.",
+   "long": "Define requisitos de los equipos y del sistema, incluida la protección contra sabotaje. La guía SP+ pide, para cumplirla, un gabinete metálico aprobado con tamper.",
+   "case": true
+  },
+  {
+   "id": "va",
+   "term": "VA",
+   "aliases": [
+    "voltampere",
+    "voltamperes"
+   ],
+   "cat": "Electricidad",
+   "short": "Voltampere: la unidad de potencia aparente, la que se usa para dimensionar transformadores.",
+   "long": "Paradox pide para sus centrales un transformador de 16,5 Vac y 40 VA como mínimo.",
+   "case": true
+  },
+  {
+   "id": "agm",
+   "term": "AGM",
+   "aliases": [
+    "Absorbent Glass Mat"
+   ],
+   "cat": "Electricidad",
+   "short": "Absorbent Glass Mat: batería de plomo sellada con el electrolito absorbido en fibra de vidrio.",
+   "long": "Junto con las de gel, son las baterías selladas de 12 V que respaldan las centrales de alarma, sin mantenimiento y sin riesgo de derrame en el gabinete.",
+   "case": true
+  },
+  {
+   "id": "coap",
+   "term": "CoAP",
+   "aliases": [
+    "Constrained Application Protocol",
+    "COAP"
+   ],
+   "cat": "Web e integración",
+   "short": "Constrained Application Protocol: protocolo web liviano sobre UDP para equipos chicos, por el puerto 5683.",
+   "long": "Lo publicó el IETF en la RFC 7252, de 2014. En Paradox, IP180 e IP150M piden salida por UDP 5683 entre sus puertos.",
+   "year": 2014,
+   "case": true
+  },
+  {
+   "id": "oasis",
+   "term": "OASIS",
+   "aliases": [
+    "Organization for the Advancement of Structured Information Standards"
+   ],
+   "cat": "Normas",
+   "short": "Organización internacional sin fines de lucro que publica estándares abiertos, como MQTT.",
+   "long": "Estandarizó MQTT en 2014 con la versión 3.1.1 y publicó la versión 5.0 en 2019.",
+   "case": true
+  },
+  {
+   "id": "hexadecimal",
+   "term": "hexadecimal",
+   "aliases": [
+    "hexa",
+    "base 16"
+   ],
+   "cat": "Herramientas",
+   "short": "Sistema de numeración en base 16: dígitos del 0 al 9 y letras de la A a la F.",
+   "long": "En Paradox SP y MG se usa para ID de panel, abonados y contraseñas. Como el teclado no tiene letras, la tecla 0 vale A y las teclas de función dan B a F; por eso en BlueEye un código de PC 6089 se escribe 6A89.",
+   "case": false
+  }
+ ],
+ "alias_agregar": {
+  "dst-nat": [
+   "port forward"
+  ]
+ },
+ "modificar": {
+  "mqtt": {
+   "long": "Nació en 1999 para enlaces de poco ancho de banda y hoy es común en IoT. La IANA registra el puerto 8883 para MQTT sobre TLS; es uno de los puertos de salida que necesita una consola UniFi para Site Manager. En Paradox, IP180 e IP150M lo usan para hablar con Swan y con el conversor IPC10."
+  }
+ }
+}

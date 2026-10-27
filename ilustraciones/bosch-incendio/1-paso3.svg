@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Contá los módulos del riel y anotá cuáles son de lazo</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">BOSCH INCENDIO · PASO 3</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Contá los módulos del riel y anotá cuáles son de lazo</text>
+<rect x="48" y="150" width="1104" height="230" rx="14" fill="#E9EFF5" stroke="#C2D4E6" stroke-width="2"/>
+<text x="70.0" y="178.0" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="1.5">RIEL DEL PANEL (EJEMPLO)</text>
+<rect x="70" y="196" width="160" height="160" rx="10" fill="#FFFFFF" stroke="#B45309" stroke-width="2.5"/>
+<rect x="84" y="212" width="132" height="10" rx="5" fill="#B45309" stroke="#B45309" stroke-width="0"/>
+<text x="150.0" y="268.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="middle">FPE-8000-BCM</text>
+<text x="150.0" y="296.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#B45309" text-anchor="middle">baterías</text>
+<rect x="250" y="196" width="160" height="160" rx="10" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2.5"/>
+<rect x="264" y="212" width="132" height="10" rx="5" fill="#0A63B8" stroke="#0A63B8" stroke-width="0"/>
+<text x="330.0" y="268.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="middle">LSN 1500 A</text>
+<text x="330.0" y="296.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#0A63B8" text-anchor="middle">lazo</text>
+<circle cx="330" cy="334" r="15" fill="#0A63B8"/><text x="330.0" y="339.4" font-family="Familjen Grotesk" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<rect x="430" y="196" width="160" height="160" rx="10" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2.5"/>
+<rect x="444" y="212" width="132" height="10" rx="5" fill="#0A63B8" stroke="#0A63B8" stroke-width="0"/>
+<text x="510.0" y="268.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="middle">LSN 1500 A</text>
+<text x="510.0" y="296.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#0A63B8" text-anchor="middle">lazo</text>
+<circle cx="510" cy="334" r="15" fill="#0A63B8"/><text x="510.0" y="339.4" font-family="Familjen Grotesk" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<rect x="610" y="196" width="160" height="160" rx="10" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2.5"/>
+<rect x="624" y="212" width="132" height="10" rx="5" fill="#0A63B8" stroke="#0A63B8" stroke-width="0"/>
+<text x="690.0" y="268.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="middle">LSN 0300 A</text>
+<text x="690.0" y="296.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#0A63B8" text-anchor="middle">lazo</text>
+<circle cx="690" cy="334" r="15" fill="#0A63B8"/><text x="690.0" y="339.4" font-family="Familjen Grotesk" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<rect x="790" y="196" width="160" height="160" rx="10" fill="#FFFFFF" stroke="#6E88A1" stroke-width="2.5"/>
+<rect x="804" y="212" width="132" height="10" rx="5" fill="#6E88A1" stroke="#6E88A1" stroke-width="0"/>
+<text x="870.0" y="268.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="middle">IOS 0020 A</text>
+<text x="870.0" y="296.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">otro</text>
+<rect x="970" y="196" width="160" height="160" rx="10" fill="none" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="6 6"/>
+<text x="1050.0" y="282.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#6E88A1" text-anchor="middle">libre</text>
+<rect x="48" y="410" width="680" height="118" rx="12" fill="#03213C"/><text x="64.0" y="432.0" font-family="JetBrains Mono" font-size="13" font-weight="500" fill="#7FA6C9" text-anchor="start" letter-spacing="1.5">FICHA</text><text x="64.0" y="459.6" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">Módulos: LSN 0300 A x 1  LSN 1500 A x 2  BCM x 1</text><text x="64.0" y="485.6" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">         otros: IOS 0020 A</text><text x="64.0" y="511.6" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">Cada módulo LSN: un lazo o hasta dos ramales</text>
+<rect x="760" y="410" width="392" height="145" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="760" y="422" width="5" height="121" rx="2.5" fill="#0A63B8"/><text x="786.0" y="444.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="786.0" dy="0.0">El de baterías también cuenta</tspan></text><text x="786.0" y="470.9" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="786.0" dy="0.0">En obra nueva desde el 02/05/2026 el</tspan><tspan x="786.0" dy="21.6">módulo de baterías es el FPE-8000-BCM,</tspan><tspan x="786.0" dy="21.6">que no se mezcla con el BCM-0000-B en un</tspan><tspan x="786.0" dy="21.6">mismo panel.</tspan></text>
+</svg>

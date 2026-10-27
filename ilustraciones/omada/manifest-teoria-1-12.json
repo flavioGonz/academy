@@ -1,0 +1,122 @@
+{
+  "1": {
+    "teoria_figs": [
+      {
+        "file": "1-t1.svg",
+        "after": "como el portal cautivo, deja de autenticar",
+        "alt": "Animación en cuatro tiempos. 1: el controlador guarda la configuración del sitio (redes y VLAN, WiFi, puertos, ACL, portal) y la empuja al gateway, al switch y al EAP por los puertos de Omada, del UDP 29810 al TCP 29817. 2: cada equipo queda con lo que recibió y los clientes navegan sin pasar por el controlador. 3: el controlador se cae y la red sigue andando con la última configuración. 4: un cambio nuevo no llega a ningún equipo y un celular nuevo no puede autenticarse en el portal.",
+        "caption": "Mirá qué sigue andando y qué se frena cuando el controlador desaparece."
+      }
+    ]
+  },
+  "2": {
+    "teoria_figs": [
+      {
+        "file": "2-t1.svg",
+        "after": "se puede borrar y recrear sin perder nada",
+        "alt": "Animación en cuatro tiempos dentro de una VM Linux con Docker. 1: el contenedor omada-controller corre y escribe sitio, SSID y equipos en el volumen omada-data, montado en /opt/tplink/EAPController/data. 2: se borra el contenedor, por ejemplo para cambiar de imagen, y el volumen queda intacto. 3: un contenedor nuevo monta el mismo volumen; tarda de 1 a 2 minutos y unos 1,9 GB de RAM en arrancar y vuelve con toda la configuración. 4: un puerto nuevo puesto en las variables del compose se ignora porque manda lo guardado en la base; con WEB_CONFIG_OVERRIDE=true se aplica.",
+        "caption": "El contenedor se borra y se recrea; la configuración vive en el volumen."
+      }
+    ]
+  },
+  "3": {
+    "teoria_figs": [
+      {
+        "file": "3-t1.svg",
+        "after": "es sospechoso habitual",
+        "alt": "Animación en cuatro tiempos sobre los cuatro momentos de la adopción: anuncio por broadcast al UDP 29810, respuesta y Pending, adopción con Device Account y gestión en Connected. 1: el EAP pasa los cuatro y queda Connected; las credenciales de fábrica se reemplazan por las de Device Account. 2: el equipo nunca aparece en Devices porque el anuncio no llegó; está en otra VLAN o subred. 3: aparece pero falla con username or password is incorrect porque ya tenía dueño; se resuelve con Retry y la clave de la web local o la Device Account del otro controlador. 4: aparece pero does not respond to adopt commands porque el camino está roto: tags de VLAN, un loop o un firewall. El reset queda como último recurso.",
+        "caption": "Cada síntoma corta la adopción en un momento distinto, y apunta a una causa distinta."
+      }
+    ]
+  },
+  "4": {
+    "teoria_figs": [
+      {
+        "file": "4-t1.svg",
+        "after": "Llega con cada concesión nueva",
+        "alt": "Diagrama de mensajes animado entre el EAP en la VLAN 20 (10.10.10.x), el router que da DHCP en esa VLAN y el controlador en 192.168.88.10. 1: el broadcast del EAP al UDP 29810 muere en el router, que no lo deja cruzar. 2: el EAP pide IP por DHCP y la respuesta trae la option 138, 0xC0A8580A, que es 192.168.88.10 en hexadecimal. 3: el EAP llama directo al controlador por unicast, el router lo rutea y el equipo aparece en Pending. 4: la opción llega con cada concesión nueva; un EAP que ya tenía IP no pide nada y no se entera hasta renovar, por ejemplo desconectándolo y reconectándolo.",
+        "caption": "La option 138 viaja en la respuesta DHCP; después el EAP llama directo al controlador."
+      }
+    ]
+  },
+  "5": {
+    "teoria_figs": [
+      {
+        "file": "5-t1.svg",
+        "after": "cada usuario lleva un rol MSP y un rol Customer",
+        "alt": "Animación en cuatro tiempos sobre el árbol de Omada: MSP opcional, cliente con su vista Global y dos sitios, Central y Sucursal, cada uno con un solo gateway más switch y EAP. 1: se marcan las capas; un sitio adopta un solo gateway, el roaming es dentro del sitio y Auto IPsec une sitios. 2: Main Administrator alcanza todo en su vista. 3: Administrator alcanza sitios, redes y equipos, pero no migra clientes, no hace backups automáticos y ve las licencias solo para lectura. 4: el usuario viewer-sucursal con rol Viewer ve solo el sitio Sucursal, mira estado y ajustes y no cambia nada; Central no le aparece.",
+        "caption": "El mismo árbol de cliente y sitios, visto por tres roles distintos."
+      }
+    ]
+  },
+  "6": {
+    "teoria_figs": [
+      {
+        "file": "6-t1.svg",
+        "after": "Si cualquiera de los tres tramos falla, no hay IP",
+        "alt": "Animación en cuatro tiempos: cámara, switch y gateway ER con la VLAN 20 (10.10.20.1). 1: la cámara manda un pedido DHCP sin etiqueta hasta el puerto 5. 2: el switch lo mete en la VLAN 20 porque es la nativa del puerto y por el uplink lo manda con la etiqueta 802.1Q de 4 bytes, que lleva el número de VLAN en 12 bits. 3: el gateway lo recibe en su interfaz de la VLAN 20 y responde desde el DHCP de esa red, también etiquetado. 4: en el puerto 5 el switch saca la etiqueta y la cámara recibe una IP 10.10.20.x. Abajo se ven las tres patas (puerto con VLAN 20 nativa, uplink con VLAN 20 tagueada, gateway con interfaz y DHCP) y la trama por dentro, con y sin etiqueta.",
+        "caption": "Seguí el pedido DHCP de la cámara: la etiqueta 20 aparece y desaparece en el switch."
+      }
+    ]
+  },
+  "7": {
+    "teoria_figs": [
+      {
+        "file": "7-t1.svg",
+        "after": "nunca llega a actuar",
+        "alt": "Animación en cuatro tiempos de una Gateway ACL con dos reglas: 1 Deny de Invitados a Redes-Internas (192.168.88.0/24 y 10.10.20.0/24) y 2 Permit general. 1: un paquete de una notebook invitada (10.10.30.x) a 192.168.88.1 llega al gateway y se compara con la regla 1. 2: coincide con la deny, se descarta, la regla 2 ni se mira y no llega a la oficina. 3: un paquete a 1.1.1.1 no coincide con la regla 1, pasa a la 2, permit, y sale a internet. 4: con el orden al revés, el permit general atrapa primero al paquete a 192.168.88.1, que llega a la oficina, y la deny nunca actúa. Abajo, la verificación: ping al propio gateway responde, a 192.168.88.1 no responde y a 1.1.1.1 responde.",
+        "caption": "Seguí cada paquete por la lista: la primera regla que coincide decide."
+      }
+    ]
+  },
+  "8": {
+    "teoria_figs": [
+      {
+        "file": "8-t1.svg",
+        "after": "achica la celda sin dejar huecos",
+        "alt": "Animación en cuatro tiempos con dos EAP vecinos y sus celdas superpuestas. 1: los dos están en el canal 6, se escuchan y se turnan: la barra de tiempo de aire se llena alternando EAP 1 y EAP 2. 2: cada uno espera al otro aunque tenga pocos clientes y usa la mitad del aire. 3: con canales que no se pisan, 1 y 6, cada EAP tiene su propio aire y las dos barras se llenan a la vez; en 2.4 GHz se usan 1, 6 u 11 a 20 MHz. 4: la potencia baja de 28 a 25 dBm, que es la mitad porque 3 dB menos es la mitad, y las celdas se achican sin dejar huecos; si un punto queda por debajo de -70 dBm, un escalón más en ese AP.",
+        "caption": "Mismo canal: se turnan. Canales distintos: hablan a la vez. Después, la potencia."
+      }
+    ]
+  },
+  "9": {
+    "teoria_figs": [
+      {
+        "file": "9-t1.svg",
+        "after": "el problema no es de roaming sino de potencia",
+        "alt": "Animación en cuatro tiempos con dos EAP del mismo SSID, Roaming-Lab, y un celular que camina del EAP 1 al EAP 2, con una barra de señal del EAP asociado y una marca del umbral propio del cliente. 1: el cliente camina y la señal baja, pero sigue arriba del umbral. 2: con 802.11k sabe qué vecinos hay y con 802.11v el EAP le sugiere otro; ninguna obliga al cliente. 3: la señal baja del umbral y el cliente salta al EAP 2; con 802.11r las claves ya estaban listas. 4: con el EAP 1 a máxima potencia la celda es enorme, la señal nunca baja del umbral y el cliente sigue pegado al EAP 1 aunque esté al lado del EAP 2: es un problema de potencia.",
+        "caption": "Mirá la barra de señal: el cliente salta cuando cruza su propio umbral."
+      }
+    ]
+  },
+  "10": {
+    "teoria_figs": [
+      {
+        "file": "10-t1.svg",
+        "after": "para los que tienen que navegar sin portal",
+        "alt": "Animación en cinco tiempos con tres clientes del SSID Huespedes-Lab, el EAP con el estado de cada cliente, el controlador que sirve el portal por 8088 o 8843 e internet. 1: el huésped A pide una web, no está autenticado, el EAP lo retiene y lo manda al portal. 2: A ingresa el voucher, el controlador lo valida, A pasa a autenticado y navega hasta que vence el código. 3: el huésped B, sin autenticar, llega a la web del negocio porque está en Pre-Authentication Access, pero cualquier otra web queda retenida. 4: el equipo de prueba, exceptuado por MAC en Authentication-Free Client, navega sin portal. 5: con el controlador apagado el voucher de B no se valida y B sigue sin entrar.",
+        "caption": "Qué deja pasar el EAP según el estado de cada cliente, y qué pasa sin controlador."
+      }
+    ]
+  },
+  "11": {
+    "teoria_figs": [
+      {
+        "file": "11-t1.svg",
+        "after": "el router nunca mandaría nada al túnel",
+        "alt": "Animación en cuatro tiempos entre ER Central (WAN 203.0.113.10, LAN 10.10.10.0/24) y ER Sucursal (WAN 203.0.113.20, LAN 10.10.20.0/24). 1: los gateways intercambian IKE por UDP 500, se autentican con clave o certificado y acuerdan cómo cifrar. 2: si detectan un NAT en el medio pasan a UDP 4500, NAT Traversal. 3: se arma el túnel y un paquete de la PC de la Central a 10.10.20.1 viaja cifrado como ESP, dentro de UDP 4500 si hay NAT, hasta la LAN de la Sucursal. 4: el ER Central decide por destino: lo de su LAN 10.10.10.x lo entrega local y lo de la subred remota 10.10.20.x lo mete en el túnel; si las dos LAN fueran iguales nada iría al túnel.",
+        "caption": "Primero IKE por UDP 500 (o 4500 con NAT), después ESP cifrado por el túnel."
+      }
+    ]
+  },
+  "12": {
+    "teoria_figs": [
+      {
+        "file": "12-t1.svg",
+        "after": "Si se hace Forget antes, los equipos quedan sin controlador",
+        "alt": "Animación en cuatro tiempos con el controlador viejo, el nuevo de la misma versión y tres equipos: EAP 1, EAP 2 y un switch. 1: se exporta el backup .cfg y se importa en el destino, que ahora conoce los equipos como importados; la versión tiene que ser la misma Major.Minor.Patch. 2: los equipos reciben la nueva dirección, por IP o Inform URL, y uno por uno quedan Connected en el destino y migrados en el viejo. 3: recién con todos Connected en el destino se hace Forget en el viejo. 4: al revés, con Forget antes de tiempo en el viejo, los equipos quedan sin controlador y el destino los tiene solo importados.",
+        "caption": "Mirá el estado de los equipos en cada controlador durante la migración."
+      }
+    ]
+  }
+}

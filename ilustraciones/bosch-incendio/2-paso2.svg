@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Instructivo aplicable: el que rige hoy</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">BOSCH INCENDIO · PASO 2</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Instructivo aplicable: el que rige hoy</text>
+<path d="M80 300H1120" stroke="#C2D4E6" stroke-width="4"/>
+<circle cx="130" cy="300" r="13" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="4"/>
+<text x="130.0" y="268.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#0E8F5E" text-anchor="middle">2010</text>
+<text x="130.0" y="346.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="middle">IT-11 de Bomberos</text>
+<text x="130.0" y="372.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">vigente, remite a UNIT 962</text>
+<circle cx="430" cy="300" r="13" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="4"/>
+<text x="430.0" y="268.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#0E8F5E" text-anchor="middle">enero 2024</text>
+<text x="430.0" y="346.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="middle">Decreto 372/023</text>
+<text x="430.0" y="372.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">rige habilitaciones y registros</text>
+<circle cx="760" cy="300" r="13" fill="#FFFFFF" stroke="#B45309" stroke-width="4"/>
+<text x="760.0" y="268.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#B45309" text-anchor="middle">31/07/2026</text>
+<text x="760.0" y="346.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="middle">Consulta pública</text>
+<text x="760.0" y="372.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">borrador de la nueva IT11</text>
+<circle cx="1040" cy="300" r="13" fill="#FFFFFF" stroke="#6E88A1" stroke-width="4"/>
+<text x="1040.0" y="268.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#6E88A1" text-anchor="middle">2027</text>
+<text x="1040.0" y="346.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="middle">Vigencia prevista</text>
+<text x="1040.0" y="372.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">recién ahí se usa</text>
+<rect x="48" y="410" width="1104" height="112" rx="14" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="72.0" y="446.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#0E8F5E" text-anchor="start">Lo que pide la IT-11 vigente, entre otras cosas</text>
+<text x="72.0" y="480.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">24 h de batería en reposo · 15 min en alarma · pulsador a no más de 30 m · preseñal de hasta 2 min en locales concurridos</text>
+<text x="72.0" y="506.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">La versión exacta la cita el proyecto: si cita otra, se anota en la ficha.</text>
+<rect x="48" y="546" width="1104" height="81" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="48" y="558" width="5" height="57" rx="2.5" fill="#B45309"/><text x="74.0" y="580.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="74.0" dy="0.0">Borrador no es norma</tspan></text><text x="74.0" y="607.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">La DNB aclaró que los borradores en consulta no autorizan su uso en proyectos hasta que entren en vigencia.</tspan></text>
+</svg>

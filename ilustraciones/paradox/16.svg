@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>El parque cableado y la línea M, lado a lado</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">PARADOX</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">El parque cableado y la línea M, lado a lado</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<rect x="48" y="124" width="540" height="380" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="156.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Parque SP, MG y EVO</text>
+<path d="M68 170H568" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="72.0" y="200.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="start">Conexión</text>
+<text x="188.0" y="200.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">bus de 4 hilos y zonas cableadas</text>
+<path d="M68 232H568" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="72.0" y="262.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="start">Energía</text>
+<text x="188.0" y="262.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">transformador y batería de plomo o gel</text>
+<path d="M68 294H568" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="72.0" y="324.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="start">Programa</text>
+<text x="188.0" y="324.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">teclado por secciones, BabyWare</text>
+<path d="M68 356H568" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="72.0" y="386.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="start">Comunica</text>
+<text x="188.0" y="386.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">módulo IP o PCS, legado o MQTT</text>
+<path d="M68 418H568" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="72.0" y="448.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="start">Serie</text>
+<text x="188.0" y="448.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">desde 7.50, solo dispositivos Paradox</text>
+<rect x="612" y="124" width="540" height="380" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><text x="632.0" y="156.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#0E8F5E" text-anchor="start">Línea M · M25 / M25 LTE</text>
+<path d="M632 170H1132" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="636.0" y="200.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="start">Conexión</text>
+<text x="752.0" y="200.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">inalámbrico M y hasta 45 por Ethernet</text>
+<path d="M632 232H1132" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="636.0" y="262.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="start">Energía</text>
+<text x="752.0" y="262.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">PoE y batería de litio interna</text>
+<path d="M632 294H1132" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="636.0" y="324.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="start">Programa</text>
+<text x="752.0" y="324.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">BlueEye o software web</text>
+<path d="M632 356H1132" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="636.0" y="386.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="start">Comunica</text>
+<text x="752.0" y="386.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">Wi-Fi, Ethernet, LTE; hasta 4 canales</text>
+<path d="M632 418H1132" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="636.0" y="448.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#6E88A1" text-anchor="start">Capacidad</text>
+<text x="752.0" y="448.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#04223D" text-anchor="start">200 zonas, 10 particiones</text>
+<rect x="48" y="526" width="540" height="124" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="48" y="538" width="5" height="100" rx="2.5" fill="#B45309"/><text x="74.0" y="560.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="74.0" dy="0.0">La actualización que corta integraciones</tspan></text><text x="74.0" y="587.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Desde firmware 7.50 el puerto serie trabaja solo con</tspan><tspan x="74.0" dy="21.6">dispositivos Paradox. Para terceros, código de desbloqueo</tspan><tspan x="74.0" dy="21.6">oficial pago: 5 USD por central.</tspan></text>
+<rect x="612" y="526" width="540" height="124" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="612" y="538" width="5" height="100" rx="2.5" fill="#0A63B8"/><text x="638.0" y="560.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="638.0" dy="0.0">Evidencia fina</tspan></text><text x="638.0" y="587.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="638.0" dy="0.0">Los datos de la M25 salen solo de su ficha de producto. Los</tspan><tspan x="638.0" dy="21.6">servicios de app van con Swan 4G por suscripción: probala</tspan><tspan x="638.0" dy="21.6">en banco antes de ofrecerla.</tspan></text>
+</svg>

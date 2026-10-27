@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>vzdump: qué le pedís y qué archivo deja</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">PROXMOX VE · PASO 1</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">vzdump: qué le pedís y qué archivo deja</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<circle cx="48" cy="124" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="130.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<rect x="80" y="132" width="330" height="48" rx="10" fill="#03213C" stroke="#03213C" stroke-width="2"/>
+<text x="98.0" y="163.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#D9E9F8" text-anchor="start">vzdump 100</text>
+<path d="M418 156 H456" stroke="#17A8D4" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-cyan)"/>
+<text x="468.0" y="163.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">la VM a respaldar</text>
+<rect x="80" y="196" width="330" height="48" rx="10" fill="#03213C" stroke="#03213C" stroke-width="2"/>
+<text x="98.0" y="227.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#7FE0B0" text-anchor="start">--mode snapshot</text>
+<path d="M418 220 H456" stroke="#17A8D4" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-cyan)"/>
+<text x="468.0" y="227.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">sin apagarla; con el agente congela el disco</text>
+<rect x="80" y="260" width="330" height="48" rx="10" fill="#03213C" stroke="#03213C" stroke-width="2"/>
+<text x="98.0" y="291.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#D9E9F8" text-anchor="start">--compress zstd</text>
+<path d="M418 284 H456" stroke="#17A8D4" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-cyan)"/>
+<text x="468.0" y="291.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">compresión rápida</text>
+<rect x="80" y="324" width="330" height="48" rx="10" fill="#03213C" stroke="#03213C" stroke-width="2"/>
+<text x="98.0" y="355.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#D9E9F8" text-anchor="start">--storage local</text>
+<path d="M418 348 H456" stroke="#17A8D4" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-cyan)"/>
+<text x="468.0" y="355.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">destino: /var/lib/vz/dump</text>
+<text x="48.0" y="418.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Lo que aparece en /var/lib/vz/dump/:</text>
+<rect x="56.400000000000006" y="436" width="107.19999999999999" height="46" rx="10" fill="#FFFFFF" stroke="#41627F" stroke-width="2"/>
+<text x="110.0" y="467.0" font-family="JetBrains Mono" font-size="22" font-weight="700" fill="#41627F" text-anchor="middle">vzdump</text>
+<text x="110.0" y="510.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#41627F" text-anchor="middle">prefijo</text>
+<rect x="243.0" y="436" width="94.0" height="46" rx="10" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<text x="290.0" y="467.0" font-family="JetBrains Mono" font-size="22" font-weight="700" fill="#0A63B8" text-anchor="middle">-qemu</text>
+<text x="290.0" y="510.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">qemu: VM · lxc: CT</text>
+<rect x="409.6" y="436" width="80.8" height="46" rx="10" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="2"/>
+<text x="450.0" y="467.0" font-family="JetBrains Mono" font-size="22" font-weight="700" fill="#0E8F5E" text-anchor="middle">-100</text>
+<text x="450.0" y="510.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">VMID</text>
+<rect x="553.2" y="436" width="133.6" height="46" rx="10" fill="#FFFFFF" stroke="#B45309" stroke-width="2"/>
+<text x="620.0" y="467.0" font-family="JetBrains Mono" font-size="22" font-weight="700" fill="#B45309" text-anchor="middle">-&lt;fecha&gt;</text>
+<text x="620.0" y="510.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#B45309" text-anchor="middle">fecha y hora</text>
+<rect x="759.6" y="436" width="80.8" height="46" rx="10" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<text x="800.0" y="467.0" font-family="JetBrains Mono" font-size="22" font-weight="700" fill="#0A63B8" text-anchor="middle">.vma</text>
+<text x="800.0" y="510.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">formato</text>
+<rect x="909.6" y="436" width="80.8" height="46" rx="10" fill="#FFFFFF" stroke="#41627F" stroke-width="2"/>
+<text x="950.0" y="467.0" font-family="JetBrains Mono" font-size="22" font-weight="700" fill="#41627F" text-anchor="middle">.zst</text>
+<text x="950.0" y="510.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#41627F" text-anchor="middle">compresión</text>
+<rect x="48" y="534" width="1104" height="75" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="546" width="5" height="51" rx="2.5" fill="#0A63B8"/><text x="74.0" y="568.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">En modo snapshot la VM sigue andando. El modo stop la apaga un momento y da la máxima consistencia: se elige cuando la</tspan><tspan x="74.0" dy="21.6">consistencia manda.</tspan></text>
+</svg>

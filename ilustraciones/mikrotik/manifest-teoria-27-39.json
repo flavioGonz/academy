@@ -1,0 +1,144 @@
+{
+ "27": {
+  "teoria_figs": [
+   {
+    "file": "27-rib-fib.svg",
+    "after": "**RIB y FIB.**",
+    "alt": "Animación en cinco tiempos: las rutas entran a la RIB, por destino gana la de menor distancia y pasa a la FIB, un paquete a 10.20.5.7 coincide con la /16 y la /24 y gana la /24, cae el ISP A y la FIB pasa al ISP B, vuelve el ISP A y recupera su lugar.",
+    "caption": "RIB y FIB en movimiento: la RIB guarda todas las rutas candidatas; la FIB, solo las ganadoras. Mirá qué cambia en cada una cuando cae el ISP A."
+   },
+   {
+    "file": "27-t1.svg",
+    "after": "Cada router decide solo por su tabla",
+    "alt": "Animación en cinco tiempos. 1: la PC de la sucursal, 192.168.88.254, manda un paquete al servidor 192.168.20.15 de la central; la sucursal lo encuentra en su tabla, ruta 192.168.20.0/24 por l2tp-central. 2: el paquete cruza el túnel L2TP y la central lo entrega al servidor por su red conectada. 3: el servidor contesta, pero la central no tiene ruta a 192.168.88.0/24; la respuesta sale por la ruta por defecto hacia el ISP y no vuelve. 4: se agrega en la central la ruta 192.168.88.0/24 con gateway la interfaz del túnel. 5: la respuesta vuelve por el túnel y llega a la PC.",
+    "caption": "Ida y vuelta: la sucursal llega a la central, pero la respuesta se pierde hasta que la central tiene su ruta hacia la sucursal."
+   }
+  ]
+ },
+ "28": {
+  "teoria_figs": [
+   {
+    "file": "28-t1.svg",
+    "after": "Primero se arma IPsec; después pasa L2TP por adentro",
+    "alt": "Animación en cinco tiempos. 1: con use-ipsec=yes, el cliente L2TP de la sucursal crea solo el peer y la policy de IPsec hacia la central, 203.0.113.10. 2: IKE negocia las claves por UDP 500, o UDP 4500 si hay NAT en el medio. 3: con IPsec arriba, todo viaja cifrado en ESP. 4: adentro, L2TP arma el túnel y la sesión por UDP 1701. 5: adentro de L2TP, PPP autentica con usuario y contraseña; en la sucursal aparece la interfaz l2tp-central con 10.255.1.2 y una ruta /32 hacia 10.255.1.1.",
+    "caption": "Las tres capas se arman en orden: primero IPsec, después L2TP por adentro y al final PPP, que trae la IP del túnel."
+   }
+  ]
+ },
+ "29": {
+  "teoria_figs": [
+   {
+    "file": "29-t1.svg",
+    "after": "Traceroute manda la primera sonda con TTL 1",
+    "alt": "Animación en cuatro tiempos. El MikroTik manda sondas hacia 1.1.1.1 con TTL creciente. 1: la sonda con TTL 1 llega al primer router, 203.0.113.1, que le resta uno, llega a cero, la descarta y contesta tiempo excedido. 2: con TTL 2 pasa el primero y contesta el segundo, 203.0.113.6. 3: con TTL 3 contesta el tercero, 198.51.100.1. 4: con TTL 4 la sonda llega al destino, que contesta. Abajo se arma la tabla de saltos, uno por sonda.",
+    "caption": "Cada sonda sale con un TTL más: el router donde llega a cero avisa, y así aparece cada salto."
+   },
+   {
+    "file": "29-t2.svg",
+    "after": "hasta que conteste encontrás la MTU del camino",
+    "alt": "Animación en cuatro tiempos. Camino: MikroTik, enlace Ethernet con MTU 1500, un router del camino y un enlace PPPoE con MTU 1492 hasta 1.1.1.1. 1: ping con size=1500 y do-not-fragment sale entero. 2: el router del camino no puede pasarlo por el PPPoE y, en vez de partirlo, contesta fragmentation needed. 3: con size=1492 el paquete pasa entero y el destino contesta. 4: la MTU del camino es 1492; en RouterOS size incluye el encabezado IP de 20 bytes y el ICMP de 8, así que quedan 1464 de datos.",
+    "caption": "Con do-not-fragment nadie parte el paquete: bajás size hasta que pase y esa es la MTU del camino."
+   }
+  ]
+ },
+ "30": {
+  "teoria_figs": [
+   {
+    "file": "30-t1.svg",
+    "after": "SERVFAIL es un problema hacia arriba",
+    "alt": "Animación en cinco tiempos. 1: la notebook pregunta por example.org al router por UDP 53; el router busca en sus estáticas y en la caché y no lo encuentra. 2: pregunta a sus servidores de arriba, primero los de servers, 1.1.1.1; los dynamic-servers del proveedor van después. 3: guarda la respuesta, A 192.0.2.80, durante su TTL de 300 segundos y se la contesta a la notebook: NOERROR. 4: el celular pregunta lo mismo y el router contesta desde la caché, sin salir a internet. 5: una consulta por exampel.org, mal escrito, vuelve como NXDOMAIN. Abajo, los tres estados: NOERROR, NXDOMAIN y SERVFAIL.",
+    "caption": "El router primero mira estáticas y caché; si no lo tiene, pregunta arriba y guarda la respuesta por su TTL."
+   }
+  ]
+ },
+ "31": {
+  "teoria_figs": [
+   {
+    "file": "31-t1.svg",
+    "after": "deja afuera al servidor DNS propio",
+    "alt": "Animación en cinco tiempos. 1: una tele con el DNS clavado manda una consulta de 192.168.88.40 a 8.8.8.8 puerto 53, que entra al router por el bridge. 2: en la cadena dstnat, la regla redirect cambia el destino por 192.168.88.1 puerto 53; se cumplen in-interface-list=LAN, dst-address-type=!local y src-address-list=!dns-libre; 8.8.8.8 no recibe nada. 3: contesta el resolver del router, con sus estáticas y bloqueos. 4: a la vuelta el router deshace el cambio y el origen pasa a ser 8.8.8.8:53. 5: una consulta que ya iba a 192.168.88.1 no cumple dst-address-type=!local y no se toca.",
+    "caption": "Mirá el encabezado: a la ida cambia el destino, a la vuelta se deshace, y la tele cree que le contestó 8.8.8.8."
+   }
+  ]
+ },
+ "32": {
+  "teoria_figs": [
+   {
+    "file": "32-t1.svg",
+    "after": "puede obtener otras direcciones que las que usan los equipos",
+    "alt": "Animación en cinco tiempos. 1: la notebook pregunta por example.org y la estática FWD del router deja que la consulta siga hacia arriba. 2: arriba contestan 192.0.2.21; el router se la pasa a la notebook y la anota en la address-list por el tiempo del TTL. 3: la notebook conecta a 192.0.2.21 y la regla de forward con dst-address-list la rechaza. 4: la otra forma es poner el nombre directo en una address-list; el router lo resuelve por su cuenta y, con DNS por turnos, le toca 192.0.2.35. 5: la notebook conecta a 192.0.2.21, que no está en esa lista, y la conexión pasa.",
+    "caption": "La FWD con address-list anota la IP que les tocó a los equipos; el nombre directo en la lista puede anotar otra."
+   }
+  ]
+ },
+ "33": {
+  "teoria_figs": [
+   {
+    "file": "33-t1.svg",
+    "after": "después el drop de invalid",
+    "alt": "Animación en cuatro tiempos sobre la cadena input, con cinco reglas en orden: accept de established, related y untracked; drop de invalid; accept de ICMP; accept de la lista admins; drop de lo que no viene de la LAN. 1: un paquete nuevo desde internet al puerto 22 baja regla por regla y lo descarta el drop final. 2: un paquete nuevo desde la lista admins coincide en la regla 4, se acepta y la conexión entra a la tabla como new. 3: el paquete siguiente de esa conversación ya es established y sale en la primera regla. 4: un paquete que no encaja con ninguna conexión es invalid y lo descarta la regla 2.",
+    "caption": "Cada paquete baja por las reglas hasta la primera que coincide; la tabla de conexiones decide si es new, established o invalid."
+   }
+  ]
+ },
+ "34": {
+  "teoria_figs": [
+   {
+    "file": "34-t1.svg",
+    "after": "el vecino lo borra al instante",
+    "alt": "Animación en cuatro tiempos sobre la tabla /ip/neighbor del router, con dos vecinos: sw-rack en ether3 y hap-oficina en ether4. 1: cada vecino manda un anuncio LLDP con TTL de 121 segundos y aparece en la tabla con su contador lleno. 2: a los 30 segundos llega el anuncio siguiente y el contador vuelve a 121. 3: se corta el cable del switch; no llegan más anuncios y a los 121 segundos sw-rack se borra. 4: hap-oficina hace un reinicio ordenado y manda un anuncio dying-gasp con TTL 0; el router lo borra al instante. Abajo: el TTL es discover-interval por 4 más 1.",
+    "caption": "Cada anuncio renueva el contador; sin anuncios el vecino vence a los 121 s, y con dying-gasp se va en el momento."
+   }
+  ]
+ },
+ "35": {
+  "teoria_figs": [
+   {
+    "file": "35-t1.svg",
+    "after": "si alguno pasa su umbral",
+    "alt": "Animación en cinco tiempos de una sonda Netwatch de tipo icmp hacia una cámara, 192.168.88.60. Cada prueba manda 10 paquetes, uno cada 50 milisegundos, y falla si la pérdida supera thr-loss-percent, 85%. 1: la sonda arranca en unknown; vuelven los 10 paquetes y pasa a up, sin aviso si está ignore-initial-up. 2: se pierden 3 de 10, 30%, y sigue up sin correr nada. 3: se pierden los 10, la prueba falla, pasa a down y corre el down-script una vez. 4: la prueba siguiente falla otra vez; sigue down y el script no se repite. 5: vuelven los 10 paquetes, pasa a up y corre el up-script.",
+    "caption": "Una pérdida suelta no cambia el estado; los scripts corren solo cuando la sonda pasa de up a down o de down a up."
+   }
+  ]
+ },
+ "36": {
+  "teoria_figs": [
+   {
+    "file": "36-t1.svg",
+    "after": "Por eso el orden en obra es VLAN primero, zonas después",
+    "alt": "Animación en cinco tiempos. Listas: CCTV con ether3, SISTEMAS con include de CCTV y ACCESOS, WAN con ether1. 1: el NVR manda NTP a internet y el paquete entra por ether3, que está en CCTV y, por include, en SISTEMAS. 2: en la decisión de ruteo se conoce la salida, ether1, que está en WAN. 3: en forward la regla in-interface-list=SISTEMAS out-interface-list=WAN, udp 123, accept, coincide y el paquete pasa. 4: un paquete para el router mismo va a input, donde no hay interfaz de salida; la regla solo usa in-interface-list. 5: dos cámaras de la misma red del bridge se hablan por el switch sin pasar por el router y ninguna regla las ve.",
+    "caption": "La lista de entrada se sabe al llegar; la de salida, recién después del ruteo. Y lo que no pasa por el router, ninguna zona lo ve."
+   }
+  ]
+ },
+ "37": {
+  "teoria_figs": [
+   {
+    "file": "37-t1.svg",
+    "after": "Los dos cortes recorren caminos distintos",
+    "alt": "Animación en cinco tiempos sobre la tabla de rutas: /32 a los testigos 1.1.1.1 y 9.9.9.9 por pppoe-antel, dos rutas por defecto recursivas por esos testigos en distancia 1 y la ruta del DHCP del 4G, gateway 192.168.8.1, en distancia 2. 1: normal, las recursivas activas y el 4G espera. 2: se cae la sesión; las /32 quedan inactivas, las recursivas no resuelven su gateway y entra el 4G; masquerade borra las conexiones de pppoe-antel. 3: la sesión sigue sin internet; solo los pings de check-gateway lo detectan, las recursivas quedan inactivas y entra el 4G. 4: con add-default-route=yes la ruta automática seguiría activa y no habría failover. 5: vuelve la fibra; lo armado por el 4G sigue en conntrack.",
+    "caption": "Sesión caída o PPPoE arriba sin internet: dos caminos distintos en la tabla que terminan en el mismo failover."
+   }
+  ]
+ },
+ "38": {
+  "teoria_figs": [
+   {
+    "file": "38-t1.svg",
+    "after": "Limitar la regla de FastTrack",
+    "alt": "Animación en cinco tiempos, con el PPPoE como principal en la tabla main y la IP fija 203.0.113.10 en ether1. 1: entra por ether1 una conexión nueva de la central, 198.51.100.50, al puerto 8443, que va por dst-nat al NVR; mangle le pone mark-connection entra-fija y la marca queda en conntrack. 2: el NVR responde; su paquete llega desde la LAN con la conexión marcada y mangle le pone mark-routing por-fija. 3: la tabla por-fija la saca por 203.0.113.9, por la IP fija. 4: si la conexión entra en FastTrack, saltea el mangle, usa main y la respuesta sale por el PPPoE con otra IP. 5: con FastTrack limitado a connection-mark=no-mark, la conexión marcada sigue por la fija.",
+    "caption": "La marca de conexión recuerda por dónde entró; la de ruteo manda cada respuesta a su tabla, salvo que FastTrack la saltee."
+   }
+  ]
+ },
+ "39": {
+  "teoria_figs": [
+   {
+    "file": "39-t1.svg",
+    "after": "Si la ruta de una tabla queda inactiva",
+    "alt": "Animación en cuatro tiempos. PCC con both-addresses:2 toma las direcciones de origen y destino, calcula un hash y se queda con el resto de dividirlo por 2. 1: la conexión de la PC .10 a 198.51.100.20 da resto 0, marca pcc-fija, tabla por-fija, por ether1. 2: la de la PC .11 a 198.51.100.40 da resto 1, marca pcc-4g, tabla por-4g, por ether2. 3: otra conexión de la PC .10 a 198.51.100.20 da el mismo resto y va otra vez por la fija. 4: el gateway de por-4g no responde a check-gateway; su ruta queda inactiva y la búsqueda sigue en main. Los restos del ejemplo son ilustrativos.",
+    "caption": "PCC reparte conexiones, no paquetes: el mismo par cliente servidor siempre cae en el mismo enlace."
+   }
+  ]
+ }
+}

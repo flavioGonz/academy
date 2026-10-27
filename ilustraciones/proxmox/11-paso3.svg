@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Firewall en este orden, y una puerta trasera abierta</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">PROXMOX VE · PASO 3</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Firewall en este orden, y una puerta trasera abierta</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<circle cx="48" cy="124" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="130.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<rect x="80" y="136" width="640" height="90" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="116" cy="181" r="18" fill="#17A8D4"/><text x="116.0" y="187.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">a</text>
+<text x="150.0" y="174.0" font-family="Instrument Sans" font-size="19" font-weight="700" fill="#04223D" text-anchor="start">Abrí una sesión SSH al nodo</text>
+<text x="150.0" y="202.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">y dejala abierta: es tu salida si algo falla</text>
+<rect x="80" y="244" width="640" height="90" rx="14" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="116" cy="289" r="18" fill="#17A8D4"/><text x="116.0" y="295.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">b</text>
+<text x="150.0" y="282.0" font-family="Instrument Sans" font-size="19" font-weight="700" fill="#04223D" text-anchor="start">IPSet management</text>
+<text x="150.0" y="310.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">Datacenter → Firewall → IPSet: tu IP, por ejemplo 10.10.10.50</text>
+<rect x="80" y="352" width="640" height="90" rx="14" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<circle cx="116" cy="397" r="18" fill="#0E8F5E"/><text x="116.0" y="403.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">c</text>
+<text x="150.0" y="390.0" font-family="Instrument Sans" font-size="19" font-weight="700" fill="#04223D" text-anchor="start">Firewall: Yes</text>
+<text x="150.0" y="418.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">Datacenter → Firewall → Options, recién ahora</text>
+<rect x="760" y="136" width="392" height="306" rx="16" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="784.0" y="174.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#FFFFFF" text-anchor="start">Desde la sesión SSH</text>
+<text x="784.0" y="212.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#9FC3E3" text-anchor="start">¿Compila sin errores?</text>
+<rect x="784" y="226" width="344" height="40" rx="10" fill="#03213C"/><text x="800.0" y="251.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">pve-firewall status</text>
+<text x="784.0" y="300.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#9FC3E3" text-anchor="start">¿Quedaste afuera de la web?</text>
+<rect x="784" y="314" width="344" height="40" rx="10" fill="#03213C"/><text x="800.0" y="339.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#FFD38A" text-anchor="start">pve-firewall stop</text>
+<text x="784.0" y="388.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#9FC3E3" text-anchor="start">Y revisás las reglas con calma.</text>
+<rect x="80" y="474" width="1072" height="102" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="80" y="486" width="5" height="78" rx="2.5" fill="#B45309"/><text x="106.0" y="508.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="106.0" dy="0.0">Por qué este orden</tspan></text><text x="106.0" y="535.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="106.0" dy="0.0">En un servidor remoto sin consola fuera de banda, un firewall mal configurado te deja sin acceso. Hubo quien tuvo que</tspan><tspan x="106.0" dy="21.6">arrancar en modo rescate y editar la base de configuración de Proxmox para volver a entrar.</tspan></text>
+</svg>

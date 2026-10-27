@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Probalo como el cliente: dos recorridos, dos resultados</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">PARADOX · PASO 4</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Probalo como el cliente: dos recorridos, dos resultados</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<text x="48.0" y="140.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Paso 3 · Entra por la puerta</text>
+<rect x="48" y="158" width="236" height="92" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="66.0" y="194.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Abre la puerta</text>
+<text x="66.0" y="222.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">zona 1 · retardo 45 s</text>
+<path d="M288.0 204.0C301.0 204.0,301.0 204.0,314.0 204.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="320" y="158" width="236" height="92" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="338.0" y="194.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Camina frente al PIR</text>
+<text x="338.0" y="222.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">zona 2 · seguimiento: espera</text>
+<path d="M560.0 204.0C573.0 204.0,573.0 204.0,586.0 204.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="592" y="158" width="236" height="92" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="610.0" y="194.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Desarma</text>
+<text x="610.0" y="222.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">en el teclado, a tiempo</text>
+<path d="M832.0 204.0C845.0 204.0,845.0 204.0,858.0 204.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="864" y="158" width="288" height="92" rx="12" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="882.0" y="194.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#0E8F5E" text-anchor="start"><tspan x="882.0" dy="0.0">Sin alarma</tspan></text>
+<text x="48.0" y="320.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Paso 4 · El PIR primero, sin abrir la puerta</text>
+<rect x="48" y="338" width="236" height="92" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="66.0" y="374.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Armado</text>
+<text x="66.0" y="402.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">la puerta sigue cerrada</text>
+<path d="M288.0 384.0C301.0 384.0,301.0 384.0,314.0 384.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="320" y="338" width="236" height="92" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="338.0" y="374.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Se activa el PIR</text>
+<text x="338.0" y="402.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">zona 2 · nadie abrió antes</text>
+<path d="M560.0 384.0C573.0 384.0,573.0 384.0,586.0 384.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="592" y="338" width="560" height="92" rx="12" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<text x="610.0" y="374.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#D2492F" text-anchor="start"><tspan x="610.0" dy="0.0">Alarma al instante: alguien entró por otro lado</tspan></text>
+<circle cx="48" cy="340" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="346.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<rect x="48" y="500" width="1104" height="75" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="512" width="5" height="51" rx="2.5" fill="#0A63B8"/><text x="74.0" y="534.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Si en una obra hay falsas alarmas en la entrada, la opción 7 de la zona 1 (retardo de transmisión) suena pero no reporta si se</tspan><tspan x="74.0" dy="21.6">desarma a tiempo; el tiempo va en [833]. Con monitoreo, avisá antes de cada prueba.</tspan></text>
+</svg>

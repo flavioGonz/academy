@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Antes de actualizar el BIOS, suspendé BitLocker</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">WINDOWS · PASO 4</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Antes de actualizar el BIOS, suspendé BitLocker</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<circle cx="65" cy="141" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="65.0" y="147.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<rect x="94" y="122" width="560" height="40" rx="10" fill="#03213C"/><text x="110.0" y="147.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">Suspend-BitLocker -MountPoint C: -RebootCount 1</text>
+<rect x="48" y="190" width="252" height="110" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="68.0" y="232.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Suspender</text>
+<text x="68.0" y="262.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start">por un reinicio</text>
+<path d="M304.0 245.0C316.0 245.0,316.0 245.0,328.0 245.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="332" y="190" width="252" height="110" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="352.0" y="232.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Actualizar BIOS</text>
+<text x="352.0" y="262.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start">o firmware</text>
+<path d="M588.0 245.0C600.0 245.0,600.0 245.0,612.0 245.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="616" y="190" width="252" height="110" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="636.0" y="232.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#0E8F5E" text-anchor="start">Reinicio</text>
+<text x="636.0" y="262.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start">arranca sin pedir clave</text>
+<path d="M872.0 245.0C884.0 245.0,884.0 245.0,896.0 245.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="900" y="190" width="252" height="110" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="920.0" y="232.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#0E8F5E" text-anchor="start">Se reanuda solo</text>
+<text x="920.0" y="262.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start">vuelve a proteger</text>
+<rect x="48" y="336" width="1104" height="150" rx="16" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<circle cx="86" cy="376" r="18" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/><g transform="translate(74 364)" fill="none" stroke="#D2492F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></g>
+<text x="118.0" y="383.0" font-family="Familjen Grotesk" font-size="20" font-weight="600" fill="#D2492F" text-anchor="start">Sin suspender</text>
+<text x="72.0" y="424.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="72.0" dy="0.0">Un cambio de BIOS, firmware o hardware puede hacer que al arrancar aparezca la pantalla de recuperación de BitLocker. Ahí solo</tspan><tspan x="72.0" dy="21.6">sirve la clave guardada fuera del equipo.</tspan></text>
+<rect x="48" y="512" width="1104" height="54" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="524" width="5" height="30" rx="2.5" fill="#0A63B8"/><text x="74.0" y="546.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">-RebootCount 1: la protección vuelve sola después del primer reinicio. Tené la clave de recuperación a mano igual.</tspan></text>
+</svg>

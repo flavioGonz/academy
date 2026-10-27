@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Un solo árbol: dónde vive cada cosa</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">LINUX</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Un solo árbol: dónde vive cada cosa</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<rect x="48" y="300" width="92" height="64" rx="14" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="94.0" y="343.0" font-family="JetBrains Mono" font-size="34" font-weight="700" fill="#FFFFFF" text-anchor="middle">/</text>
+<text x="94.0" y="392.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">la raíz</text>
+<path d="M140 332C176 332 170 163 206 163" fill="none" stroke="#C2D4E6" stroke-width="2.5"/>
+<rect x="206" y="132" width="128" height="62" rx="12" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="270.0" y="171.0" font-family="JetBrains Mono" font-size="20" font-weight="700" fill="#0A63B8" text-anchor="middle">/etc</text>
+<text x="354.0" y="158.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">configuración del sistema</text>
+<text x="354.0" y="182.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">ssh/sshd_config · netplan/ · fstab</text>
+<path d="M140 332C176 332 170 241 206 241" fill="none" stroke="#C2D4E6" stroke-width="2.5"/>
+<rect x="206" y="210" width="128" height="62" rx="12" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="270.0" y="249.0" font-family="JetBrains Mono" font-size="20" font-weight="700" fill="#0A63B8" text-anchor="middle">/var</text>
+<text x="354.0" y="236.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">lo que cambia con el uso</text>
+<text x="354.0" y="260.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">log/journal · cache/apt · lib/docker</text>
+<path d="M140 332C176 332 170 319 206 319" fill="none" stroke="#C2D4E6" stroke-width="2.5"/>
+<rect x="206" y="288" width="128" height="62" rx="12" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="270.0" y="327.0" font-family="JetBrains Mono" font-size="20" font-weight="700" fill="#0A63B8" text-anchor="middle">/home</text>
+<text x="354.0" y="314.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">carpetas de los usuarios</text>
+<text x="354.0" y="338.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">/home/tecnico</text>
+<path d="M140 332C176 332 170 397 206 397" fill="none" stroke="#C2D4E6" stroke-width="2.5"/>
+<rect x="206" y="366" width="128" height="62" rx="12" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/>
+<text x="270.0" y="405.0" font-family="JetBrains Mono" font-size="20" font-weight="700" fill="#B45309" text-anchor="middle">/root</text>
+<text x="354.0" y="392.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#B45309" text-anchor="start">carpeta personal del administrador</text>
+<text x="354.0" y="416.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">no es la raíz del sistema</text>
+<path d="M140 332C176 332 170 475 206 475" fill="none" stroke="#C2D4E6" stroke-width="2.5"/>
+<rect x="206" y="444" width="128" height="62" rx="12" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="270.0" y="483.0" font-family="JetBrains Mono" font-size="20" font-weight="700" fill="#0A63B8" text-anchor="middle">/srv</text>
+<text x="354.0" y="470.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">datos que sirve el equipo</text>
+<text x="354.0" y="494.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">/srv/obra · /srv/backup</text>
+<path d="M140 332C176 332 170 553 206 553" fill="none" stroke="#C2D4E6" stroke-width="2.5"/>
+<rect x="206" y="522" width="128" height="62" rx="12" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="270.0" y="561.0" font-family="JetBrains Mono" font-size="20" font-weight="700" fill="#0A63B8" text-anchor="middle">/tmp</text>
+<text x="354.0" y="548.0" font-family="Instrument Sans" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">temporales</text>
+<text x="354.0" y="572.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="start">se vacía; en Ubuntu 26.04 vive en RAM</text>
+<rect x="800" y="132" width="352" height="318" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><text x="820.0" y="164.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#0E8F5E" text-anchor="start">Leer sin tocar nada</text>
+<rect x="822.0" y="175.0" width="51.0" height="29" rx="14.5" fill="#011E38" stroke="#FFFFFF" stroke-width="1.5"/><text x="847.5" y="196.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">pwd</text>
+<text x="960.0" y="195.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">dónde estoy</text>
+<rect x="822.0" y="217.0" width="78.0" height="29" rx="14.5" fill="#011E38" stroke="#FFFFFF" stroke-width="1.5"/><text x="861.0" y="238.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">ls -la</text>
+<text x="960.0" y="237.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">qué hay, con dueños</text>
+<rect x="822.0" y="259.0" width="60.0" height="29" rx="14.5" fill="#011E38" stroke="#FFFFFF" stroke-width="1.5"/><text x="852.0" y="280.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">less</text>
+<text x="960.0" y="279.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">leer un archivo</text>
+<rect x="822.0" y="301.0" width="60.0" height="29" rx="14.5" fill="#011E38" stroke="#FFFFFF" stroke-width="1.5"/><text x="852.0" y="322.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">find</text>
+<text x="960.0" y="321.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">buscar por nombre</text>
+<rect x="822.0" y="343.0" width="96.0" height="29" rx="14.5" fill="#011E38" stroke="#FFFFFF" stroke-width="1.5"/><text x="870.0" y="364.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">grep -rn</text>
+<text x="960.0" y="363.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">buscar texto adentro</text>
+<rect x="822.0" y="385.0" width="33.0" height="29" rx="14.5" fill="#011E38" stroke="#FFFFFF" stroke-width="1.5"/><text x="838.5" y="406.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">|</text>
+<text x="960.0" y="405.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">encadenar comandos</text>
+<rect x="800" y="474" width="352" height="97" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="800" y="486" width="5" height="73" rx="2.5" fill="#0A63B8"/><text x="826.0" y="508.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="826.0" dy="0.0">Todo es /algo: no hay disco C ni D.</tspan><tspan x="826.0" dy="21.6">Un disco extra se monta en una</tspan><tspan x="826.0" dy="21.6">carpeta, como /srv/datos.</tspan></text>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>755, 644, 600: cómo se leen los permisos</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">LINUX</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">755, 644, 600: cómo se leen los permisos</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<rect x="48" y="124" width="470" height="300" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="156.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Cada letra vale un número</text>
+<rect x="72" y="178" width="52" height="44" rx="10" fill="#E5F0FB" stroke="#17A8D4" stroke-width="2"/>
+<text x="98.0" y="208.0" font-family="JetBrains Mono" font-size="22" font-weight="700" fill="#0A63B8" text-anchor="middle">r</text>
+<text x="140.0" y="208.0" font-family="JetBrains Mono" font-size="20" font-weight="600" fill="#6E88A1" text-anchor="start">=</text>
+<text x="178.0" y="208.0" font-family="JetBrains Mono" font-size="22" font-weight="700" fill="#04223D" text-anchor="middle">4</text>
+<text x="214.0" y="207.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">leer</text>
+<rect x="72" y="234" width="52" height="44" rx="10" fill="#E5F0FB" stroke="#17A8D4" stroke-width="2"/>
+<text x="98.0" y="264.0" font-family="JetBrains Mono" font-size="22" font-weight="700" fill="#0A63B8" text-anchor="middle">w</text>
+<text x="140.0" y="264.0" font-family="JetBrains Mono" font-size="20" font-weight="600" fill="#6E88A1" text-anchor="start">=</text>
+<text x="178.0" y="264.0" font-family="JetBrains Mono" font-size="22" font-weight="700" fill="#04223D" text-anchor="middle">2</text>
+<text x="214.0" y="263.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">escribir</text>
+<rect x="72" y="290" width="52" height="44" rx="10" fill="#E5F0FB" stroke="#17A8D4" stroke-width="2"/>
+<text x="98.0" y="320.0" font-family="JetBrains Mono" font-size="22" font-weight="700" fill="#0A63B8" text-anchor="middle">x</text>
+<text x="140.0" y="320.0" font-family="JetBrains Mono" font-size="20" font-weight="600" fill="#6E88A1" text-anchor="start">=</text>
+<text x="178.0" y="320.0" font-family="JetBrains Mono" font-size="22" font-weight="700" fill="#04223D" text-anchor="middle">1</text>
+<text x="214.0" y="319.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">ejecutar o entrar</text>
+<path d="M72 352H494" stroke="#DDE8F2" stroke-width="1.5"/>
+<text x="72.0" y="388.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">rwx = 4+2+1 = 7</text>
+<text x="300.0" y="388.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">r-x = 4+1 = 5</text>
+<text x="72.0" y="412.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">rw- = 4+2 = 6</text>
+<text x="300.0" y="412.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">r-- = 4</text>
+<rect x="48" y="446" width="470" height="160" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="478.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Tres cifras, tres categorías</text>
+<rect x="80" y="498" width="110" height="56" rx="12" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<text x="135.0" y="536.0" font-family="JetBrains Mono" font-size="28" font-weight="700" fill="#0A63B8" text-anchor="middle">7</text>
+<text x="135.0" y="584.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0A63B8" text-anchor="middle">dueño (u)</text>
+<rect x="226" y="498" width="110" height="56" rx="12" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="2"/>
+<text x="281.0" y="536.0" font-family="JetBrains Mono" font-size="28" font-weight="700" fill="#0E8F5E" text-anchor="middle">5</text>
+<text x="281.0" y="584.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">grupo (g)</text>
+<rect x="372" y="498" width="110" height="56" rx="12" fill="#FFFFFF" stroke="#B45309" stroke-width="2"/>
+<text x="427.0" y="536.0" font-family="JetBrains Mono" font-size="28" font-weight="700" fill="#B45309" text-anchor="middle">5</text>
+<text x="427.0" y="584.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#B45309" text-anchor="middle">resto (o)</text>
+<rect x="546" y="124" width="606" height="482" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="566.0" y="156.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Los que vas a ver siempre</text>
+<rect x="570" y="176" width="558" height="66" rx="12" fill="#F7FAFD" stroke="#C2D4E6" stroke-width="2"/>
+<text x="590.0" y="218.0" font-family="JetBrains Mono" font-size="24" font-weight="700" fill="#0A63B8" text-anchor="start">755</text>
+<text x="678.0" y="218.0" font-family="JetBrains Mono" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">rwxr-xr-x</text>
+<text x="870.0" y="217.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">directorios y programas</text>
+<rect x="570" y="258" width="558" height="66" rx="12" fill="#F7FAFD" stroke="#C2D4E6" stroke-width="2"/>
+<text x="590.0" y="300.0" font-family="JetBrains Mono" font-size="24" font-weight="700" fill="#0A63B8" text-anchor="start">644</text>
+<text x="678.0" y="300.0" font-family="JetBrains Mono" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">rw-r--r--</text>
+<text x="870.0" y="299.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">archivos de datos</text>
+<rect x="570" y="340" width="558" height="66" rx="12" fill="#F7FAFD" stroke="#C2D4E6" stroke-width="2"/>
+<text x="590.0" y="382.0" font-family="JetBrains Mono" font-size="24" font-weight="700" fill="#0A63B8" text-anchor="start">600</text>
+<text x="678.0" y="382.0" font-family="JetBrains Mono" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">rw-------</text>
+<text x="870.0" y="381.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">secretos: llaves, claves</text>
+<rect x="570" y="422" width="558" height="66" rx="12" fill="#F7FAFD" stroke="#C2D4E6" stroke-width="2"/>
+<text x="590.0" y="464.0" font-family="JetBrains Mono" font-size="24" font-weight="700" fill="#0A63B8" text-anchor="start">2770</text>
+<text x="678.0" y="464.0" font-family="JetBrains Mono" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">rwxrws---</text>
+<text x="870.0" y="463.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">carpeta compartida de un grupo</text>
+<rect x="570" y="504" width="558" height="66" rx="12" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<text x="590.0" y="546.0" font-family="JetBrains Mono" font-size="24" font-weight="700" fill="#D2492F" text-anchor="start">777</text>
+<text x="678.0" y="546.0" font-family="JetBrains Mono" font-size="19" font-weight="600" fill="#D2492F" text-anchor="start">rwxrwxrwx</text>
+<text x="870.0" y="545.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#D2492F" text-anchor="start">cualquiera escribe: nunca</text>
+</svg>

@@ -1,0 +1,108 @@
+{
+  "1": {
+    "teoria_figs": [
+      {
+        "file": "1-t1.svg",
+        "after": "el canal se pone rojo en segundos",
+        "alt": "Animación en cuatro tiempos, como diagrama de secuencia con cuatro columnas: la cámara, que analiza su video; OmniAccess, con el proceso de webhooks en el puerto 10000; MinIO, con el bucket intrusion; y las pantallas (Monitor, Mapa, pared). Tiempo 1: la regla se cumple y la cámara manda el evento por HTTP al puerto 10000. Tiempo 2: OmniAccess clasifica el evento (Cruce de línea, Intrusión, Entra a zona o Sale de zona), busca la cámara por IP o MAC y guarda la detección. Tiempo 3: en paralelo, pide la foto a la cámara en /ISAPI/Streaming/channels/101/picture, la recibe y la sube al bucket, y avisa por socket a las pantallas: el canal se pone rojo en segundos. Tiempo 4: llega un evento de movimiento simple y se descarta, no se guarda ni se muestra. Al pie: con un NVR Dahua, OmniAccess mantiene abierta una suscripción al NVR y recibe los eventos de todos sus canales.",
+        "caption": "Mirá el orden: primero la detección guardada; la foto y el aviso a las pantallas salen en paralelo."
+      }
+    ]
+  },
+  "2": {
+    "teoria_figs": [
+      {
+        "file": "2-t1.svg",
+        "after": "La zona es un polígono de tres puntos o más",
+        "alt": "Animación en cuatro tiempos con dos paneles. A la izquierda, lo que guarda la cámara: un cuadrado con escala de 0 a 1000 y el origen abajo a la izquierda, con una línea entre los puntos (250, 800) y (750, 300). A la derecha, el cuadro de la cámara como lo ve el calibrador. Tiempo 1: la cámara guarda los puntos de 0 a 1000 con el origen abajo a la izquierda. Tiempo 2: el calibrador invierte la altura (y del cuadro igual a 1000 menos y de la cámara) y dibuja la misma línea sobre el cuadro, con el lado A abajo y el B arriba. Tiempo 3: una persona camina de A hacia B; cada círculo punteado es su posición en un cuadro; cuando pasa al otro lado de la línea aparece el evento de cruce de A a B. Tiempo 4: aparece una zona de cuatro puntos; la persona entra, una barra de permanencia se llena y recién entonces sale el evento de zona. Al pie: cuánto tiene que quedarse depende de la sensibilidad y, en otras marcas, del tiempo mínimo y el tamaño.",
+        "caption": "La línea es un segmento en coordenadas; el evento sale cuando el objeto cambia de lado."
+      },
+      {
+        "file": "2-t2.svg",
+        "after": "Así no se pisan otros campos que la cámara tenga",
+        "alt": "Animación en tres tiempos entre el calibrador de OmniAccess, a la izquierda, y la cámara Hikvision, a la derecha. Tiempo 1: el calibrador pide GET /ISAPI/Smart/LineDetection/1 y la cámara devuelve el XML completo de la regla, que aparece en el centro con cinco filas: geometría, sentido, sensibilidad, objetivo y otros campos de la cámara. Tiempo 2: se resaltan las cuatro filas que el calibrador toca y la sensibilidad cambia de 40 a 60. Tiempo 3: el calibrador manda PUT del mismo XML; los otros campos vuelven a la cámara igual, con un tilde verde: no se pisan. Al pie: con un NVR Dahua, la misma pantalla escribe la regla IVS en el NVR; para la zona se usa FieldDetection/1.",
+        "caption": "El calibrador lee el XML, toca solo lo suyo y lo devuelve entero."
+      }
+    ]
+  },
+  "3": {
+    "teoria_figs": [
+      {
+        "file": "3-t1.svg",
+        "after": "Si falta, el sistema lo dice con todas las letras",
+        "alt": "Animación en cuatro tiempos entre el servidor OmniAccess, con su host de eventos 192.0.2.10, y una cámara Hikvision. Tiempo 1: el servidor pide la lista de hosts de la cámara con GET /ISAPI/Event/notification/httpHosts y la cámara la devuelve; la tabla tiene el host 1, de otro sistema, en 198.51.100.20 puerto 8080, y el host 2 libre, con IP 0.0.0.0. Tiempo 2: el servidor busca uno con su IP y puerto; el host 1 no es OmniAccess y el host 2 se marca como lugar libre. Tiempo 3: escribe el host 2 con 192.0.2.10, puerto 10000, ruta /api/webhooks/hikvision, HTTP, XML y sin autenticación. Tiempo 4: si se toca el botón otra vez, el servidor lo encuentra en la lista y no escribe nada. Nota: si no hay lugar con IP 0.0.0.0, usa el siguiente número; el host de eventos es un dato del servidor y, si falta, el sistema lo avisa y no escribe nada.",
+        "caption": "El botón lee la lista de la cámara antes de escribir: por eso tocarlo dos veces no duplica nada."
+      }
+    ]
+  },
+  "4": {
+    "teoria_figs": [
+      {
+        "file": "4-t1.svg",
+        "after": "Esa lectura se guarda cinco minutos",
+        "alt": "Animación en cinco tiempos. A la izquierda, el horario de la regla de línea en la cámara: siete días, del 1 (lunes) al 7 (domingo), cada uno con un bloque de 00:00 a 06:00 y otro de 22:00 a 24:00. En el centro, OmniAccess con la hora del servidor; a la derecha, la vista de pared del canal. Abajo, una línea de 24 horas con los tramos armados de 00:00 a 06:00 y de 22:00 a 24:00. Tiempo 1: OmniAccess pide el horario con GET a lineDetection-1 y la cámara devuelve los bloques por día. Tiempo 2: se resaltan el bloque de 22:00 a 24:00 de un día y el de 00:00 a 06:00 del siguiente; OmniAccess los junta en 22:00 a 06:00 y la pantalla muestra L–D 22:00–06:00. La lectura queda guardada 5 minutos. Tiempo 3: con la hora del servidor, a las 15:00, el punto es ámbar: desarmada ahora, fuera de horario no avisa. Tiempo 4: otra consulta de estado antes de 5 minutos la contesta la memoria, sin pedido a la cámara. Tiempo 5: a las 23:00 la hora cae dentro del horario: punto verde, armada, avisa si hay cruce.",
+        "caption": "La cámara guarda el horario partido; OmniAccess lo junta y lo compara con la hora del servidor."
+      }
+    ]
+  },
+  "5": {
+    "teoria_figs": [
+      {
+        "file": "5-t1.svg",
+        "after": "por eso la pantalla pide un toque",
+        "alt": "Animación en cuatro tiempos. A la izquierda, el servidor con una detección nueva; a la derecha, tres pantallas: Monitor Intrusión, Mapa y Pantalla de pared o Rotación. Tiempo 1: el servidor emite la detección por socket y llega al instante al Monitor y al Mapa. Tiempo 2: en el Monitor Intrusión el canal Perímetro Norte 12 se pone rojo con Cruce de línea y sube al primer lugar de la lista. Tiempo 3: en el Mapa la línea dibujada titila, suena un pitido (con otro tono si es persona) y una voz dice Persona en Perímetro Norte 12; solo pasa si la línea está dibujada y en su horario. Tiempo 4: la pantalla de pared no recibe el socket: pregunta el estado cada pocos segundos y suena según el ajuste de Monitores (sin sonido, un tono o repetir hasta que se acepte). El audio del navegador necesita un toque en la página o Chrome en kiosco con autoplay.",
+        "caption": "Monitor y Mapa reciben al instante por socket; la pared pregunta cada pocos segundos."
+      }
+    ]
+  },
+  "6": {
+    "teoria_figs": [
+      {
+        "file": "6-t1.svg",
+        "after": "Resolver la saca de esa lista",
+        "alt": "Animación en cuatro tiempos. A la izquierda, el Monitor Intrusión de la cámara Perímetro Norte 12 con tres cruces de línea a las 02:11:40, 02:12:05 y 02:12:30, y los botones Confirmar real y Falsa alarma. Tiempo 1: cada detección nace pendiente, con acknowledged igual a false. Tiempo 2: la página se recarga, la lista se vacía un instante y vuelven las pendientes de las últimas 6 horas. Tiempo 3: se toca Confirmar real y las tres pasan a real; a la derecha se guarda la hora de la decisión, 02:14:10, y con la detección de las 02:11:40 da un tiempo de reacción de 2 min 30 s. Tiempo 4: la cámara aparece en la lista En atención; al tocar Resolver sale de la lista y queda resuelta. Era falsa alarma, además, corrige el registro. Al pie: cerrar el navegador no pierde la alarma, porque lo pendiente está guardado en la base.",
+        "caption": "Una decisión cierra todo lo pendiente de la cámara y deja la hora para medir la reacción."
+      }
+    ]
+  },
+  "7": {
+    "teoria_figs": [
+      {
+        "file": "7-t1.svg",
+        "after": "Si no hay vínculo con un canal, la pestaña lo dice",
+        "alt": "Animación en cuatro tiempos. A la izquierda, tres operadores con su navegador; en el centro, el servidor OmniAccess con go2rtc (flujo liviano y de alta resolución, en /go2rtc/api/stream.mp4) y la reproducción con el mapeo de canales; a la derecha, la cámara Perímetro Norte 12 y el NVR, que graba en H.265. Tiempo 1: los tres operadores abren Vivo y piden el video al servidor, no a la cámara. Tiempo 2: go2rtc toma el video de la cámara por una sola conexión, no importa cuántos miren. Tiempo 3: el operador 3 abre la pestaña Grabación; el servidor busca en el mapeo que Perímetro Norte 12 graba en el canal D5 del NVR y le pide el tramo; el NVR lo devuelve en H.265. Tiempo 4: el servidor lo transcodifica a algo que el navegador reproduce y lo entrega. Sin vínculo con un canal, la pestaña lo dice. Al pie: por eso puede andar el vivo y no la grabación, salen de lugares distintos.",
+        "caption": "El vivo sale de go2rtc y la grabación del NVR: por eso puede fallar uno y el otro no."
+      }
+    ]
+  },
+  "8": {
+    "teoria_figs": [
+      {
+        "file": "8-t1.svg",
+        "after": "Las detecciones siguen en la base, pero sin su imagen",
+        "alt": "Animación en cuatro tiempos con cuatro tarjetas de Evidencia de la cámara Perímetro Norte 12, con foto y hora: 22:41:05, 23:05:12, 01:12:40 y 03:30:18. Tiempo 1: las cuatro están Pendientes. Tiempo 2: la acción del canal Falsa alarma decide por cámara y las cuatro pendientes pasan a Falsa. Tiempo 3: desde la ficha de la detección de las 01:12:40 se corrige con Era real y solo esa pasa a Real; las otras siguen Falsas. Tiempo 4: pasan los días de retención; la regla de vencimiento del bucket intrusion borra las fotos y cada tarjeta muestra sin imagen, pero las detecciones siguen en la base con hora, cámara, tipo y decisión. Al pie: Historial y Evidencia muestran la misma tabla.",
+        "caption": "El canal decide por cámara, la ficha corrige de a una y la retención solo borra fotos."
+      }
+    ]
+  },
+  "9": {
+    "teoria_figs": [
+      {
+        "file": "9-t1.svg",
+        "after": "la solución pasa por achicar la zona o mover la línea",
+        "alt": "Animación en cuatro tiempos sobre el cuadro de una cámara que no clasifica objetos: un cerco con un portón arriba y césped abajo. A la derecha, los ajustes de la regla y la lista de detecciones. Tiempo 1: con una zona grande sobre todo el césped y sensibilidad 80, un gato cruza y dispara un evento, que queda como falsa. Tiempo 2: con la sensibilidad bajada a 40, el gato vuelve a cruzar y vuelve a disparar. Tiempo 3: la zona se achica a la entrada del portón; el gato cruza el césped por afuera y no hay evento. Tiempo 4: una persona camina hacia el portón, entra a la zona chica y dispara un evento real. Al pie: con clasificación la cámara descarta lo que no es persona o vehículo; sin ella decide la geometría. Después, una semana de datos para ver en el Análisis si bajó el porcentaje de falsas.",
+        "caption": "Sin clasificación, bajar la sensibilidad no frena al gato; achicar la zona sí."
+      }
+    ]
+  },
+  "10": {
+    "teoria_figs": [
+      {
+        "file": "10-t1.svg",
+        "after": "con relojes corridos el clip del NVR no coincide",
+        "alt": "Animación en cuatro tiempos. A la izquierda, la cámara 192.0.2.31 con MAC 00:00:5E:00:53:31 y el NVR con el canal D5; en el centro, el servidor OmniAccess con la lista de Dispositivos; a la derecha, el Monitor Intrusión y la ficha de la detección con foto y clip. Tiempo 1: llega el evento con la IP y la MAC; el servidor encuentra Perímetro Norte 12 en Dispositivos y el canal se pinta de rojo. Tiempo 2: si en Dispositivos la cámara figura con otra IP (192.0.2.99) y sin MAC, no coincide: la detección entra sin cámara y no hay ningún canal en rojo. Tiempo 3: el servidor pide la foto a la cámara por el puerto 80 con el usuario y la clave de la cámara y la ficha muestra la foto propia; con la clave del NVR la cámara rechaza y no hay foto propia. Tiempo 4: el servidor pide al NVR el clip de las 02:11:40 en el canal D5; el reloj del NVR está corrido 2 minutos (02:13:40) y el clip muestra otro momento. Al pie: para que llegue completo hacen falta la foto con la clave propia, la grabación con NVR y canal y los relojes en hora; y antes que nada, la cámara dada de alta con la IP o la MAC que manda en el evento.",
+        "caption": "Que llegue no alcanza: la cámara en Dispositivos, su clave propia, NVR y canal, y la hora."
+      }
+    ]
+  }
+}

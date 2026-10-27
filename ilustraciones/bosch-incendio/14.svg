@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Avisá y aislá antes; rehabilitá todo después</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">BOSCH INCENDIO</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Avisá y aislá antes; rehabilitá todo después</text>
+<rect x="48" y="130" width="352" height="360" rx="16" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2.5"/>
+<rect x="48" y="130" width="352" height="54" rx="16" fill="#0A63B8" stroke="#0A63B8" stroke-width="0"/>
+<rect x="48" y="164" width="352" height="20" rx="0" fill="#0A63B8" stroke="#0A63B8" stroke-width="0"/>
+<text x="70.0" y="166.0" font-family="Familjen Grotesk" font-size="21" font-weight="600" fill="#FFFFFF" text-anchor="start">Antes</text>
+<rect x="70" y="210" width="22" height="22" rx="5" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<text x="104.0" y="227.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="104.0" dy="0.0">Monitoreo avisado: empresa, hora,</tspan><tspan x="104.0" dy="20.2">operador</tspan></text>
+<rect x="70" y="262" width="22" height="22" rx="5" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<text x="104.0" y="279.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="104.0" dy="0.0">Responsable y ocupantes avisados</tspan></text>
+<rect x="70" y="314" width="22" height="22" rx="5" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<text x="104.0" y="331.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="104.0" dy="0.0">Salidas deshabilitadas en el panel</tspan></text>
+<rect x="70" y="366" width="22" height="22" rx="5" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<text x="104.0" y="383.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="104.0" dy="0.0">Extinción bloqueada por su empresa</tspan></text>
+<rect x="70" y="418" width="22" height="22" rx="5" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<text x="104.0" y="435.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="104.0" dy="0.0">Zona en modo revisión</tspan></text>
+<path d="M402.0 310.0C412.0 310.0,412.0 310.0,422.0 310.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="424" y="130" width="352" height="360" rx="16" fill="#FFFFFF" stroke="#B45309" stroke-width="2.5"/>
+<rect x="424" y="130" width="352" height="54" rx="16" fill="#B45309" stroke="#B45309" stroke-width="0"/>
+<rect x="424" y="164" width="352" height="20" rx="0" fill="#B45309" stroke="#B45309" stroke-width="0"/>
+<text x="446.0" y="166.0" font-family="Familjen Grotesk" font-size="21" font-weight="600" fill="#FFFFFF" text-anchor="start">Durante</text>
+<rect x="446" y="210" width="22" height="22" rx="5" fill="#FFFFFF" stroke="#B45309" stroke-width="2"/>
+<text x="480.0" y="227.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="480.0" dy="0.0">Se prueba lo planificado</tspan></text>
+<rect x="446" y="262" width="22" height="22" rx="5" fill="#FFFFFF" stroke="#B45309" stroke-width="2"/>
+<text x="480.0" y="279.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="480.0" dy="0.0">Nada que mueva algo puede activarse</tspan></text>
+<rect x="446" y="314" width="22" height="22" rx="5" fill="#FFFFFF" stroke="#B45309" stroke-width="2"/>
+<text x="480.0" y="331.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="480.0" dy="0.0">Cada prueba con hora y resultado</tspan></text>
+<path d="M778.0 310.0C788.0 310.0,788.0 310.0,798.0 310.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="800" y="130" width="352" height="360" rx="16" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="2.5"/>
+<rect x="800" y="130" width="352" height="54" rx="16" fill="#0E8F5E" stroke="#0E8F5E" stroke-width="0"/>
+<rect x="800" y="164" width="352" height="20" rx="0" fill="#0E8F5E" stroke="#0E8F5E" stroke-width="0"/>
+<text x="822.0" y="166.0" font-family="Familjen Grotesk" font-size="21" font-weight="600" fill="#FFFFFF" text-anchor="start">Después</text>
+<rect x="822" y="210" width="22" height="22" rx="5" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="2"/>
+<text x="856.0" y="227.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="856.0" dy="0.0">Zona fuera de modo revisión</tspan></text>
+<rect x="822" y="262" width="22" height="22" rx="5" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="2"/>
+<text x="856.0" y="279.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="856.0" dy="0.0">Todas las salidas rehabilitadas</tspan></text>
+<rect x="822" y="314" width="22" height="22" rx="5" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="2"/>
+<text x="856.0" y="331.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="856.0" dy="0.0">Panel en reposo, sin deshabilitados</tspan></text>
+<rect x="822" y="366" width="22" height="22" rx="5" fill="#FFFFFF" stroke="#0E8F5E" stroke-width="2"/>
+<text x="856.0" y="383.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="856.0" dy="0.0">Monitoreo avisado del fin</tspan></text>
+<rect x="48" y="516" width="1104" height="104" rx="14" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/>
+<circle cx="96" cy="568" r="14" fill="#B45309"/>
+<text x="130.0" y="558.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#B45309" text-anchor="start">LED amarillo fijo en el panel: hay algo deshabilitado</text>
+<text x="130.0" y="588.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">Antes de irte, ese LED tiene que estar apagado: si no, el edificio quedó sin una función de seguridad.</text>
+</svg>

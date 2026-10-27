@@ -722,13 +722,21 @@
 
   /* ---------- script para automatizar lo aprendido ---------- */
   const autoFill = (a, vals) => (a.codigo || "").replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, k) => vals[k] ?? m);
+  /* cada curso pega su script en otra terminal: extensión, resaltado, fin de línea y consejo */
+  const AUTO_KIND = {
+    routeros: {ext: "rsc", lang: "routeros", crlf: true, nota: "Pegalo en New Terminal de WinBox o por SSH. Probalo antes en un equipo de banco y en Safe Mode (Ctrl+X)."},
+    bash: {ext: "sh", lang: "bash", crlf: false, nota: "Pegalo en la terminal del equipo (por SSH, como root o con sudo). Probalo antes en un equipo de prueba."},
+    esxi: {ext: "sh", lang: "bash", crlf: false, nota: "Pegalo en la shell del host ESXi por SSH (habilitá SSH solo mientras lo usás). Probalo antes en un host de laboratorio."},
+    powershell: {ext: "ps1", lang: "powershell", crlf: true, nota: "Pegalo en PowerShell abierto como administrador. Probalo antes en un equipo de prueba."},
+  };
+  const autoKind = (l, slug) => AUTO_KIND[l.auto?.lang] || AUTO_KIND[{linux: "bash", proxmox: "bash", vmware: "esxi", windows: "powershell"}[slug]] || AUTO_KIND.routeros;
   function autoBox(l, slug) {
-    const a = l.auto, vars = a.variables || [];
+    const a = l.auto, vars = a.variables || [], K = autoKind(l, slug);
     return `<section class="auto" data-auto>
       <div class="auto-h"><span class="auto-ic">${icon("terminal")}</span><div><span class="k">Script para automatizar lo aprendido</span><h3>${esc(a.titulo || "Script de la lección")}</h3>${a.descripcion ? `<p>${esc(a.descripcion)}</p>` : ""}</div></div>
       ${vars.length ? `<div class="auto-vars"><span class="k">Completá tus datos antes de copiar</span><div class="av-grid">${vars.map(v => `<label><span>${esc(v.detalle || v.nombre)}</span><input data-v="${esc(v.nombre)}" value="${esc(v.valor || "")}" spellcheck="false" autocomplete="off"></label>`).join("")}</div></div>` : ""}
-      <pre class="auto-code" data-lang="routeros"><code class="language-routeros"></code></pre>
-      <div class="row auto-act"><button class="btn" type="button" data-copy>${icon("doc")}Copiar script</button><button class="btn ghost" type="button" data-dl>${icon("download")}Descargar .rsc</button><span class="note">Pegalo en New Terminal de WinBox o por SSH. Probalo antes en un equipo de banco y en Safe Mode (Ctrl+X).</span></div>
+      <pre class="auto-code" data-lang="${K.lang}"><code class="language-${K.lang}"></code></pre>
+      <div class="row auto-act"><button class="btn" type="button" data-copy>${icon("doc")}Copiar script</button><button class="btn ghost" type="button" data-dl>${icon("download")}Descargar .${K.ext}</button><span class="note">${K.nota}</span></div>
       ${(a.notas || []).length ? `<ul class="auto-notas">${a.notas.map(x => `<li>${mdLite(x)}</li>`).join("")}</ul>` : ""}
     </section>`;
   }
@@ -738,7 +746,8 @@
     const paint = () => { $(".auto-code code", box).textContent = autoFill(l.auto, vals()); };
     $$("[data-v]", box).forEach(i => i.addEventListener("input", paint)); paint();
     $("[data-copy]", box).onclick = async e => { const b = e.currentTarget; try { await navigator.clipboard.writeText(autoFill(l.auto, vals())); b.lastChild.textContent = "Copiado"; } catch { const r = document.createRange(); r.selectNodeContents($(".auto-code", box)); getSelection().removeAllRanges(); getSelection().addRange(r); b.lastChild.textContent = "Seleccionado: Ctrl+C"; } setTimeout(() => b.lastChild.textContent = "Copiar script", 1800); };
-    $("[data-dl]", box).onclick = () => { const blob = new Blob([autoFill(l.auto, vals()).replace(/\n/g, "\r\n")], {type: "text/plain"}); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `ies-${slug}-leccion-${l.n}.rsc`; document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); };
+    const K = autoKind(l, slug);
+    $("[data-dl]", box).onclick = () => { const txt = autoFill(l.auto, vals()); const blob = new Blob([K.crlf ? txt.replace(/\n/g, "\r\n") : txt], {type: "text/plain"}); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `ies-${slug}-leccion-${l.n}.${K.ext}`; document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); };
   }
 
   /* ---------- contenido solo para registrados ---------- */

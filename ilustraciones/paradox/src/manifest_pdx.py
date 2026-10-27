@@ -1,0 +1,736 @@
+"""Genera /home/claude/ies-training/ilustraciones/paradox/manifest.json (figuras, pasos, conceptos, teoría y figuras de teoría)."""
+import json
+
+M = {}
+
+
+def L(lid, fig, steps, concepts, teoria, tfig):
+    M[lid] = {"fig": fig, "steps": steps, "concepts": concepts, "teoria_md": teoria.strip(), "teoria_figs": tfig}
+
+
+def C(name, para_que, como, ejemplo):
+    return {"name": name, "para_que": para_que, "como": como, "ejemplo": ejemplo}
+
+
+# =====================================================================================  1
+L("1",
+  {"file": "1.svg", "alt": "Cuatro columnas, una por familia de centrales Paradox. SP y SP+, Spectra (SP5500+, SP6000+, SP7000+): se entra con ENTER y 0000, secciones de 3 dígitos, instalador de fábrica 0000. MG y MG+, Magellan (MG5050): igual que SP. EVO y EVOHD+, Digiplex EVO: se mantiene el 0 y se teclea 000000, secciones de 4 dígitos. M25 y M25 LTE, línea M: se programa con la app BlueEye o software web, sin secciones. Notas: SP y MG usan el mismo mapa de secciones; si el código no es el de fábrica, no se prueban códigos al azar porque los teclados se pueden bloquear y avisar a monitoreo.",
+   "caption": "La forma de entrar, el largo de la sección y el código de fábrica cambian por familia."},
+  [{"file": "1-paso3.svg", "step": 3, "after": "En SP o MG, leé la versión de firmware",
+    "alt": "Secuencia ENTER, 0000 (código de instalador) y sección 980, en una SP o MG desarmada y con StayD apagado. Debajo, la central muestra la versión de a un dígito: primer, segundo y tercer dígito, cada uno con dos pitidos, separados por ENTER. Recuadro verde: tres pitidos indican que terminó la versión, se anota completa en la ficha. CLEAR sale de programación. Nota: en EVO la entrada es otra y la sección de versión se busca en su propia guía.",
+    "caption": "Cada ENTER muestra un dígito; tres pitidos dicen que terminó."},
+   {"file": "1-paso4.svg", "step": 4, "after": "Anotá en la ficha de la obra: modelo",
+    "alt": "Ficha de la obra con cinco campos de ejemplo: modelo de la placa SP6000+, versión de la sección 980, teclados K32LCD+ por uno, comunicación IP150, IP180 o PCS, y StayD sí o no. A la derecha, en rojo, el aviso del paso 5: si es SP4000 o SP65, marcarla en rojo porque su reseteo es distinto al del resto de SP y MG. Nota: el modelo y la versión dicen qué manual abrir; con StayD activo no se entra a programación y los módulos definen cómo reporta.",
+    "caption": "Modelo, versión, teclados, comunicación y StayD, antes de tocar una sección."}],
+  [C("Familia de central",
+     "Paradox tiene varias líneas en el parque instalado y cada una se programa distinto. Saber cuál tenés adelante evita perder la visita probando secuencias de otra familia o, peor, bloquear el teclado con intentos fallidos.",
+     "Se lee el modelo serigrafiado en la placa con la tapa abierta. SP y MG se programan igual: ENTER, código de cuatro dígitos y secciones de tres. EVO y EVOHD+ se entran manteniendo el 0, con código de seis dígitos y secciones de cuatro. La línea M no tiene secciones: va por BlueEye o software web.",
+     "Te llaman de un local en el Cordón: \"la alarma Paradox no deja programar\". Abrís el gabinete, la placa dice EVOHD+, y el técnico anterior estaba apretando ENTER. Con mantener el 0 entrás a la primera."),
+   C("Versión de firmware ([980])",
+     "La versión dice qué funciones tiene la central y qué cambios trae una actualización. En Paradox es especialmente importante porque desde el firmware 7.50 el puerto serie dejó de atender dispositivos de terceros.",
+     "En SP y MG, con ENTER, código de instalador y [980], la central muestra la versión de a un dígito: dos pitidos por dígito, ENTER para el siguiente y tres pitidos al terminar. Se anota completa en la ficha, junto con el modelo, teclados y módulos.",
+     "Antes de actualizar el módulo IP de una SP6000 en un consultorio de Pocitos, leés la [980] y la anotás. Si después algo cambia, sabés de qué versión partiste."),
+   C("Código de instalador de fábrica",
+     "Es la llave que abre toda la programación. Viene con un valor publicado en el manual (0000 en SP y MG, 000000 en EVO) para que el instalador pueda entrar la primera vez.",
+     "Se usa una vez y se cambia el primer día. Si una central ya instalada no acepta el de fábrica, no conviene probar códigos al azar: el bloqueo de teclado puede trabarla y reportarlo a monitoreo. El camino es el cliente y el instalador anterior.",
+     "Tomás el mantenimiento de un edificio en el Centro. La central no acepta 0000: en lugar de probar, pedís por escrito al administrador los códigos del instalador anterior.")],
+  """
+### Un poco de historia
+
+Paradox Security Systems es un fabricante canadiense de alarmas, con sede en Quebec, y su parque instalado en la región es enorme: Spectra (SP) y Magellan (MG) en casas y comercios, y Digiplex EVO en obras más grandes, con control de acceso. Las tres familias convivieron durante años con la misma lógica de programación por teclado: secciones numeradas y datos que se cargan tecla por tecla.
+
+Las versiones plus (SP5500+, SP6000+, SP7000+) mantuvieron el mismo mapa de secciones que las SP y las MG, y por eso un instructivo de monitoreo sirve para las dos familias. La EVOHD+ siguió el camino de EVO, con secciones de cuatro dígitos. La línea M, con la M25, cambia el modelo: consola con PoE, sin bus de cuatro hilos y programada desde BlueEye o un software web.
+
+### Cómo funciona
+
+Cada central guarda su configuración en secciones. En SP y MG son de tres dígitos: la [710] es el retardo de entrada 1, la [980] muestra la versión. En EVO son de cuatro dígitos y la numeración es otra. Por eso un número de sección solo tiene sentido dentro de su familia.
+
+La entrada a programación también cambia. En SP y MG se aprieta ENTER y se teclea el código de instalador, 0000 de fábrica. En EVO se mantiene apretado el 0 y se teclea el código de seis dígitos, 000000 de fábrica. Para entrar, las particiones tienen que estar desarmadas y StayD apagado.
+
+Adentro, la central espera una sección; al teclearla, espera el dato. ENTER antes de cargar muestra el valor actual sin tocarlo, y CLEAR sale.
+
+La versión de firmware se lee en SP y MG en la [980], de a un dígito con ENTER: dos pitidos por dígito y tres al terminar. Junto con el modelo serigrafiado en la placa, esa versión es lo primero que va a la ficha de la obra. Con esos dos datos abrís el manual correcto a la primera.
+
+La gama baja tiene su propia excepción: SP4000 y SP65 se resetean distinto al resto de SP y MG, y conviene marcarlo en la ficha desde el primer día.
+""",
+  [{"file": "1-t1.svg", "after": "Por eso un número de sección solo tiene sentido",
+    "alt": "Animación en cuatro tiempos con dos filas, SP y MG arriba, EVO abajo. 1: en SP y MG se entra con ENTER; en EVO se mantiene el 0. 2: aparece el código de instalador, 0000 en SP y MG, 000000 en EVO. 3: la sección tiene tres dígitos en SP y MG (ejemplo 710) y cuatro en EVO (ejemplo 4000). 4: adentro se carga el dato o se mira con ENTER, y CLEAR sale.",
+    "caption": "Las dos secuencias de entrada, armadas tecla por tecla."}])
+
+# =====================================================================================  2
+L("2",
+  {"file": "2.svg", "alt": "Una central SP+ o MG conectada por el bus de 4 hilos a tres módulos: un teclado K32LCD+ en el grupo 1, un expansor ZX8 en el grupo 2 y un teclado K35 en el grupo 3, cada grupo seguido de TBL. A la derecha, los límites: SP+ hasta 15 módulos, 76 m por módulo y 230 m en total; EVOHD+ hasta 254 módulos y 914 m en total. Notas: rojo y negro llevan la alimentación del auxiliar y los otros dos hilos los datos; se suma un grupo chico sin energía, se energiza y se mira TBL. En EVO, la sección 4000 lista los módulos que la central ve.",
+   "caption": "El bus alimenta y comunica: se arma de a un grupo, mirando TBL después de cada uno."},
+  [{"file": "2-paso2.svg", "step": 2, "after": "Conectá el teclado a los cuatro bornes",
+    "alt": "Dos borneras de cuatro bornes, la de la central arriba y la del teclado abajo, rotuladas más, menos, datos y datos. Cuatro cables unen cada borne con el del mismo nombre: rojo al más, negro al menos y dos cables de datos. Notas: rojo es más y negro es menos, la alimentación que sale del auxiliar; los dos de datos van borne a borne según la serigrafía. Aviso: los nombres de los bornes de datos cambian según el modelo y el dibujo es genérico; red de 16,5 Vac y batería afuera mientras se cablea.",
+    "caption": "Mismo nombre de borne en los dos extremos, con red y batería afuera."},
+   {"file": "2-paso4.svg", "step": 4, "after": "Desenergizá otra vez, sumá el ZX8",
+    "alt": "Cuatro pasos en fila: desenergizá con red y batería afuera, sumá el ZX8 al bus borne a borne, energizá y mirá TBL buscando una falla nueva. En verde, lo esperable en una central nueva: grupo 8 pérdida de reloj y grupo 3 campana si no hay sirena, que se resuelven con fecha y hora y con sirena o 1 kΩ en BELL. En ámbar, cualquier otra falla nueva es del ZX8 o de su cableado. Aviso: con el sistema en servicio, avisar a monitoreo antes de desenergizar.",
+    "caption": "Una falla nueva después de sumar un módulo es de ese módulo."},
+   {"file": "2-paso5.svg", "step": 5, "after": "Asigná la zona del teclado (SP+)",
+    "alt": "Un teclado K32+ o K32LCD+ y su entrada de zona, con dos bornes rotulados zona y menos, cableados a un contacto. Secuencia: ENTER, 0000, mantener 3 segundos la tecla de acción, 05 y ENTER: 05 es el número de zona, de dos dígitos. Nota en ámbar: si después se aprende un inalámbrico en la zona 05, pisa a la de teclado, y una de teclado pisa a una cableada con el mismo número. Nota: en EVO la zona de teclado admite un solo detector, no reconoce tamper y sigue la EOL de la central.",
+    "caption": "La entrada del teclado vale como una zona más, con su propio número."}],
+  [C("Bus de 4 hilos",
+     "Antes del bus, cada teclado o expansor necesitaba su propio cableado hasta la central. Con cuatro hilos compartidos, uno par para alimentar y otro para datos, se cuelgan muchos módulos en un solo recorrido.",
+     "Rojo y negro llevan la alimentación del auxiliar y los otros dos hilos los datos, borne a borne según la serigrafía. Las SP+ admiten hasta 15 módulos; la EVOHD+, hasta 254 y 914 m de cable en total. Todo lo que cuelga del bus suma consumo al AUX.",
+     "En una casa de dos plantas en Carrasco, un teclado en la entrada, otro en el dormitorio y un ZX8 en el garaje comparten el mismo bus de cuatro hilos que sale de la central."),
+   C("Puesta en marcha de a grupos",
+     "Cuando una obra se energiza entera de una vez y aparece una falla de bus, no hay forma de saber de dónde viene. Sumar de a grupos convierte una búsqueda a ciegas en una sola pregunta: ¿qué conecté recién?",
+     "Sin energía (red y batería afuera) se suma un grupo chico, se energiza y se mira TBL. En una central nueva solo deberían aparecer pérdida de reloj y, sin sirena, campana. Cualquier otra falla es del último grupo. Si sacás un módulo a propósito, su falla se borra en [955].",
+     "En un depósito con tres ZX8, el segundo grupo muestra una falla nueva en TBL. Revisás solo ese ZX8 y encontrás un hilo de datos flojo, sin recorrer los otros 200 m."),
+   C("Zona de teclado",
+     "Cada teclado trae una entrada de zona para aprovechar el cable que ya llega hasta ahí: un contacto de la puerta de al lado no necesita otro recorrido hasta la central.",
+     "En SP+ se asigna con ENTER, código de instalador, mantener tres segundos la tecla de acción y el número de zona en dos dígitos. Ojo con los números repetidos: un inalámbrico pisa a una zona de teclado o cableada, y una de teclado pisa a una cableada.",
+     "La puerta de servicio de un apartamento está al lado del teclado de la cocina: el contacto va a la entrada del teclado como zona 05, sin tirar cable hasta el placard de la central.")],
+  """
+### Un poco de historia
+
+Las primeras centrales de alarma tenían todo en la placa: zonas, sirena y un teclado cableado con muchos hilos. A medida que las obras crecieron, hizo falta sumar teclados y zonas lejos de la central sin tirar un cable por cada cosa. La respuesta de la industria fue el bus: unos pocos hilos compartidos que alimentan y comunican a todos los módulos.
+
+En Paradox, el bus de cuatro hilos une teclados, expansores como el ZX8 y otros módulos. En EVO se llama bus Digiplex y escala mucho más: la guía de la EVOHD+ habla de hasta 254 módulos y 914 m de cable en total, en estrella o en cadena. Las SP+ admiten hasta 15 módulos, con 76 m como máximo entre un módulo y la central y 230 m de cable en total.
+
+### Cómo funciona
+
+Dos de los cuatro hilos son la alimentación: rojo para el más y negro para el menos, que salen del auxiliar. Los otros dos llevan los datos: la central habla con cada módulo y sabe cuáles están. Si uno deja de responder, aparece la falla de supervisión de módulo, el grupo 10 de TBL.
+
+Eso explica la regla de conectar sin energía y de a grupos. La guía de la EVOHD+ lo dice así: se conecta un grupo chico con un teclado, se energiza y se miran las fallas; solo deberían aparecer pérdida de reloj y campana ausente, y cualquier otra cosa es cableado. Recién ahí se suma el grupo siguiente.
+
+Una falla de un módulo que sacaste a propósito no se va con un reset: se borra en [955]. En EVO, la sección [4000] lista los módulos que la central ve.
+
+Cada teclado suma además una entrada de zona. La central arma su tabla de zonas con cableadas, de teclado e inalámbricas, y si dos caen en el mismo número una pisa a la otra: la inalámbrica gana sobre la de teclado y la cableada, y la de teclado sobre la cableada.
+
+En ambientes con mucho ruido eléctrico, la guía pide cable blindado con la malla a tierra de un solo lado.
+""",
+  [{"file": "2-t1.svg", "after": "la central habla con cada módulo y sabe cuáles están",
+    "alt": "Animación en cuatro tiempos de una central con cuatro hilos de bus y tres módulos colgados. 1: los hilos rojo y negro llevan la alimentación del auxiliar a todos. 2: por los dos hilos de datos un mensaje va de la central a cada módulo y vuelve. 3: se suma un cuarto módulo y la central lo reconoce. 4: el expansor deja de responder, se marca en rojo y la central muestra TBL grupo 10, que se borra en la sección 955 si el módulo sale para siempre.",
+    "caption": "Energía para todos por rojo y negro; datos con cada módulo por los otros dos."}])
+
+# =====================================================================================  3
+L("3",
+  {"file": "3.svg", "alt": "Tres paneles con el mismo lazo de zona entre los bornes Z y COM: un contacto normalmente cerrado y una resistencia de 1 kΩ al final. Normal, en verde: contacto cerrado, la central ve 1 kΩ, zona cerrada. Abierta, en ámbar: puerta abierta o cable cortado, la central ve circuito abierto, alarma si está armada. En corto, en rojo: un puente une los cables, la central ve 0 Ω y muestra falla de tamper y cableado, grupo 5 de TBL. Notas: sin EOL un corto se ve igual que una zona cerrada; en Paradox la EOL es de 1 kΩ y se activa en la sección 706 opción 2, los 5,6 kΩ de otras marcas no aplican.",
+   "caption": "Con 1 kΩ al final, la central distingue normal, abierta y en corto."},
+  [{"file": "3-paso2.svg", "step": 2, "after": "Zona simple con EOL: cableá un contacto",
+    "alt": "Bornera de la central con Z1 y COM. El cable de zona va hasta un contacto magnético normalmente cerrado en la puerta, a varios metros, y en el extremo del detector una resistencia de 1 kΩ en serie con el contacto vuelve a COM. Notas: con la resistencia en el extremo, un corto en cualquier punto del recorrido le saca la resistencia a la central; medí la resistencia con el tester antes de usarla y mirá la figura Single Zone Input Connections de la guía.",
+    "caption": "La resistencia al final del cable, en el detector, para que todo el recorrido quede vigilado."},
+   {"file": "3-paso4.svg", "step": 4, "after": "Zona doble (solo SP6000+ o EVO)",
+    "alt": "Bornera con Z1 y COM y un solo par de cables hacia un lazo ATZ, dibujado según la figura Double Zone Connections: detector 1 con contacto NC y 1 kΩ, detector 2 con contacto NC y 2,2 kΩ. Secuencia ENTER, 0000, 705, 1, ENTER: la opción 1 enciende ATZ y la opción 2 encendida elige paralelo, apagada serie, que es la de fábrica. Nota: en la serie plus solo la SP6000+ lo admite; la central reconoce cada detector por su resistencia y le da un número de zona propio, que se anota en el paso 5.",
+    "caption": "Dos detectores en el mismo par, cada uno con su valor de resistencia."}],
+  [C("Resistencia de fin de línea (EOL)",
+     "Una zona sin resistencia solo sabe si el lazo está cerrado o abierto. Un intruso que puentea los cables la deja \"cerrada\" para siempre. La EOL le da a la central un valor esperado, y cualquier cosa distinta es una falla.",
+     "En Paradox es de 1 kΩ y se activa para toda la central en [706] opción 2. Va en el extremo del detector, en serie con el contacto NC, para que todo el cable quede supervisado. Activarla con zonas sin resistencia pone todas en falla: se hace en banco o con el cableado listo.",
+     "En un comercio de Ciudad Vieja alguien puentea los cables de la zona de la vidriera detrás del cielorraso. Con EOL, la central ve 0 Ω, marca tamper y cableado de zona en TBL y lo reporta."),
+   C("ATZ, duplicación de zona",
+     "Permite poner dos detectores en una sola entrada de la placa, cuando faltan entradas y no se quiere sumar un expansor.",
+     "Se activa en [705] opción 1, solo en la SP6000+ dentro de la serie plus, y en EVO. Cada detector lleva su resistencia (1 kΩ y 2,2 kΩ en el dibujo de la guía EVOHD+) y la central los reconoce como dos zonas. La opción 2 elige serie o paralelo. Conviene anotar en la planilla qué número de zona marca cada uno.",
+     "Una casa en Atlántida con la SP6000+ llena: la puerta y la ventana del mismo ambiente comparten un par con ATZ, y cada una aparece con su número de zona en el teclado."),
+   C("Tamper y zonas de fuego",
+     "El tamper avisa que alguien abrió o saboteó un equipo o un cable, aunque la central esté desarmada. La zona de fuego tiene sus propias reglas porque no puede quedar fuera de servicio.",
+     "En [705] opciones 3 y 4 se define si un tamper da solo falla, alarma audible desarmado o sigue el tipo de alarma armado; la opción 5 hace que los tampers de zonas anuladas igual se vean. Las zonas de fuego son normalmente abiertas, con EOL, y no se pueden anular.",
+     "En el depósito de un supermercado, un tamper en una zona anulada por obra igual aparece en TBL gracias a [705] opción 5, y el encargado sabe que alguien tocó ese detector.")],
+  """
+### Un poco de historia
+
+Las primeras zonas de alarma eran lazos simples: un contacto normalmente cerrado y dos cables. La central solo miraba si había continuidad. Era fácil de cablear y fácil de engañar: un puente entre los dos cables dejaba la zona \"cerrada\" aunque abrieran la puerta. La industria respondió con la resistencia de fin de línea, que le da a la central un valor que espera ver.
+
+Cada fabricante eligió sus valores. TremTech explica el concepto con 5,6 kΩ, que es un valor de DSC y no aplica a Paradox. En Paradox la EOL es de 1 kΩ, y con ATZ aparecen dos valores, 1 kΩ y 2,2 kΩ en los dibujos de la guía EVOHD+. La serie europea de normas EN 50131, que la guía SP+ cita para el gabinete con tamper, pone justamente la supervisión del cableado y el sabotaje en el centro.
+
+### Cómo funciona
+
+La central no ve el contacto: mide la resistencia del lazo entre la entrada de zona y COM. Con la EOL de 1 kΩ en el extremo del detector, en serie con el contacto NC, hay tres lecturas posibles. Si mide 1 kΩ, la zona está normal. Si mide circuito abierto, la puerta se abrió o el cable se cortó, y armada es alarma. Si mide 0 Ω, alguien unió los cables, y aparece la falla de tamper y cableado de zona, el grupo 5 de TBL.
+
+Sin resistencia, la lectura normal y el corto son iguales: cero ohm. Por eso un lazo sin EOL no supervisa el cableado.
+
+La posición importa. Si la resistencia queda en la bornera de la central, el cable hasta el detector queda afuera de la supervisión: un puente en el medio del recorrido no cambia nada. En el extremo del detector, cualquier corto en el recorrido le saca la resistencia a la central.
+
+En las SP+ la EOL es una opción global, [706] opción 2: todas las zonas usan resistencia o ninguna. Activarla con zonas sin resistencia pone todas en falla, así que se hace en banco o con todo el cableado preparado.
+
+Con ATZ, dos detectores comparten el par y cada uno tiene su valor. La central reconoce cuál abrió por la resistencia que mide y le asigna un número de zona propio.
+""",
+  [{"file": "3-t1.svg", "after": "y aparece la falla de tamper y cableado de zona, el grupo 5",
+    "alt": "Animación en cuatro tiempos de un lazo de zona con contacto normalmente cerrado y resistencia de 1 kΩ al final. 1: contacto cerrado, la central mide 1 kΩ y la zona está normal. 2: se abre la puerta, el lazo queda abierto y, armada, es alarma. 3: un puente une los cables, la central mide 0 Ω y muestra falla de tamper y cableado de zona, grupo 5 de TBL. 4: sin resistencia, el mismo puente se ve como una zona cerrada y el sabotaje pasa inadvertido.",
+    "caption": "Lo que mide la central en cada caso: 1 kΩ, abierto o 0 Ω."}])
+
+# =====================================================================================  4
+L("4",
+  {"file": "4.svg", "alt": "Diagrama de energía. Entran a la central un transformador de 16,5 Vac y 40 VA mínimo, en un toma sin llave, y una batería de 12 V y 7 Ah (4 Ah admitida en SP+), que al revés quema el fusible. Salen el AUX, para teclados, módulos y sensores, con hasta 700 mA en total en la SP5500+, y BELL, para una sirena de 12 V o una resistencia de 1 kΩ, que corta si pasa de 3 A. Abajo, la escala de la batería en SP+ sin red: 10,5 V falla de batería, 9,1 V desconexión de protección y 8,5 V se apaga. Nota: si AUX corta por sobrecarga, sacar todas las cargas al menos 10 segundos antes de reconectar.",
+   "caption": "Lo que entra, lo que cuelga del auxiliar y los umbrales de batería en SP+."},
+  [{"file": "4-paso2.svg", "step": 2, "after": "Compará la suma con el límite",
+    "alt": "Barra de consumos sobre una escala en mA: K32LCD+ por dos, 172 mA; TM70 más zumbador, 330 mA; ZX8, 31 mA; IP150+, 100 mA. La suma sin detectores es 633 mA y una línea roja marca el límite de 700 mA de la SP5500+: quedan 67 mA para 6 detectores, unos 11 mA cada uno. Notas: si te pasás, parte de las cargas va a una fuente auxiliar aparte, que no cuenta en el AUX; la guía lista 1000 mA de auxiliar para la SP6000+ y 1500 mA para la SP7000+; las PGM alimentadas del AUX también entran en la cuenta.",
+    "caption": "La suma del ejemplo deja apenas 67 mA para los detectores."},
+   {"file": "4-paso3.svg", "step": 3, "after": "Autonomía aproximada: horas",
+    "alt": "Fórmula: horas igual a Ah de la batería dividido por el consumo de la central más la suma del AUX, en amperes. Dos ejemplos de la EVOHD+: 7 Ah dividido 0,100 más 0,130 A da unas 30 horas; y de la tabla del manual, 17 Ah dividido 0,100 más 0,470 A da también unas 30 horas. Nota: es una cuenta aproximada, la batería pierde capacidad con los años y el consumo sube cuando suena todo.",
+    "caption": "Una cuenta simple que dice cuántas horas aguanta sin red."},
+   {"file": "4-paso4.svg", "step": 4, "after": "Si no hay sirena conectada, poné",
+    "alt": "Bornera de la salida de campana con BELL+ y BELL-, y una resistencia de 1 kΩ conectada entre los dos. A la derecha, sin nada en BELL aparece TBL 3, campana desconectada, en ámbar; con 1 kΩ la falla desaparece, en verde. Notas: con sirena, más a BELL+ y menos a BELL-, 12 V en alarma para una sirena de 30 W o dos de 20 W, corta si pasa de 3 A; después medir la batería con el tester y revisar polaridad antes de cerrar.",
+    "caption": "Sin sirena, 1 kΩ en BELL evita la falla de campana."}],
+  [C("Presupuesto del auxiliar (AUX)",
+     "La salida auxiliar alimenta teclados, módulos y detectores, y tiene un límite. Si se pasa, la protección la corta y todo lo que cuelga se apaga, justo cuando más se necesita.",
+     "Se suman los consumos máximos de la tabla de la guía y los de los sensores, de su hoja. En la SP5500+ el manual pide no pasar de 700 mA. Si no entra, parte de las cargas va a una fuente aparte. Si AUX corta, se sacan todas las cargas al menos 10 segundos antes de reconectar.",
+     "En una oficina en Tres Cruces con dos K32LCD+, un TM70, un ZX8, un IP150+ y diez PIR, la suma pasa los 700 mA: los PIR del fondo van a una fuente auxiliar con su propia batería."),
+   C("Autonomía de batería",
+     "La batería es lo que mantiene la alarma andando en un corte de luz. Sin la cuenta, la central puede apagarse a mitad de la noche y dejar la casa sin protección y sin aviso.",
+     "Horas = Ah de la batería / (consumo de la central + suma del AUX, en amperes). El manual de la EVOHD+ da 7 Ah con 130 mA de accesorios para unas 30 h. En SP+, la batería da falla a 10,5 V, se desconecta para protegerse a 9,1 V y la central se apaga a 8,5 V.",
+     "Una chacra en Canelones con cortes largos en invierno: la cuenta da 12 horas con 7 Ah, y la batería pasa a 17 Ah para llegar al día siguiente."),
+   C("Resistencia en la salida de campana",
+     "La central supervisa la salida de campana para saber si la sirena está conectada. Sin nada en BELL, la falla de campana queda fija en el teclado y tapa otras fallas.",
+     "Si la obra no lleva sirena en BELL, una resistencia de 1 kΩ entre BELL+ y BELL- le muestra a la central una carga y la falla de campana (grupo 3) desaparece. Con sirena, se respeta la polaridad: más a BELL+ y menos a BELL-.",
+     "En un local monitoreado sin sirena exterior por pedido del cliente, la resistencia de 1 kΩ en BELL deja el TBL limpio y la primera falla real se ve enseguida.")],
+  """
+### Un poco de historia
+
+La batería de plomo y ácido es de 1859, obra del francés Gaston Planté, y todavía hoy es la que respalda casi todas las centrales de alarma. La versión sellada, de gel o AGM, permitió meterla en un gabinete cerrado sin mantenimiento. Paradox pide una de 12 V y 7 Ah, o 4 Ah en las SP+, de plomo y ácido o de gel.
+
+El transformador es la otra mitad: 16,5 Vac y 40 VA como mínimo, en un toma sin llave, porque un cliente que apaga la luz del placard no debería apagar la alarma. La línea M cambia la ecuación: la M25 se alimenta por PoE y trae batería de litio interna.
+
+### Cómo funciona
+
+La central convierte la alterna del transformador en continua, alimenta la placa y sus salidas, y carga la batería. Cuando se corta la red, la batería toma el relevo sin que nada se apague. La falla de AC se ve enseguida en TBL, en el grupo 2, pero se reporta a monitoreo recién después del retardo de [839], 15 minutos de fábrica.
+
+A partir de ahí la batería se descarga a un ritmo que depende de todo lo que cuelga. En SP+ hay tres umbrales: a 10,5 V aparece la falla de batería; a 9,1 V la central desconecta la batería para protegerla; a 8,5 V la central se apaga y todas las salidas se cierran.
+
+De la central salen dos alimentaciones. AUX alimenta teclados, módulos y detectores, con una protección sin fusible: en la SP5500+ corta a 1,1 A, y el manual pide que la suma no pase de 700 mA. BELL da 12 V solo en alarma, para una sirena de 30 W o dos de 20 W, y corta si pasa de 3 A. La suma de BELL y AUX también tiene un límite por modelo.
+
+La autonomía sale de dividir: horas = Ah de la batería / (consumo de la central + suma del AUX). Con 7 Ah y 230 mA en total da unas 30 horas, igual que la tabla del manual de la EVOHD+. Cuanto más consumo, menos horas.
+
+Una batería al revés quema el fusible de batería: se verifica la polaridad antes de cerrar el gabinete.
+""",
+  [{"file": "4-t1.svg", "after": "a 8,5 V la central se apaga y todas las salidas se cierran",
+    "alt": "Animación en cuatro tiempos con transformador, batería, central y un voltímetro de batería. 1: con red, el transformador alimenta y carga la batería. 2: se corta la red, la batería sostiene la central y aparece TBL 2.2, falla de AC. 3: la batería baja a 10,5 V y aparece TBL 2.1, falla de batería. 4: a 9,1 V hay desconexión de protección y a 8,5 V la central se apaga.",
+    "caption": "El corte de luz paso a paso, con los umbrales de la SP+."}])
+
+# =====================================================================================  5
+L("5",
+  {"file": "5.svg", "alt": "Arriba, la secuencia de programación de SP y MG: ENTER para entrar, 0000 código de instalador, 710 sección de 3 dígitos y 045 dato. Tres tarjetas con los tipos de dato: decimal de 000 a 255, para tiempos y cantidades, por ejemplo 710 en 045 es un retardo de entrada de 45 s; hexadecimal, donde la tecla 0 vale A, para ID, abonados y contraseñas, con B a F en teclas de función; y opciones 1 a 8, donde cada tecla prende o apaga una opción y ENTER guarda, con un ejemplo de las opciones 1, 2, 3 y 8 encendidas. Abajo, ENTER apenas entrás a la sección muestra sin cambiar, en verde; CLEAR sale sin guardar lo tecleado, en ámbar.",
+   "caption": "ENTER, código, sección y dato, con tres formas de cargar el dato."},
+  [{"file": "5-paso1.svg", "step": 1, "after": "Leé un valor sin tocarlo",
+    "alt": "Secuencia ENTER, 0000 y sección 710, el retardo de entrada 1. Después, tres ENTER seguidos muestran en pantalla los dígitos 0, 4 y 5, uno por vez. Recuadro verde: 045 son 45 segundos, el valor de fábrica, y no se cambió nada. CLEAR sale. Notas: si se sigue con ENTER la central pasa a la sección siguiente; si se teclea un número antes del primer ENTER, se está escribiendo el dato.",
+    "caption": "ENTER primero: la sección se muestra dígito por dígito sin cambiar nada."},
+   {"file": "5-paso2.svg", "step": 2, "after": "Cambiá el código de instalador por uno propio",
+    "alt": "Tres tarjetas de llaves, marcadas con los pasos 2, 3 y 4. Sección 397, código de instalador: fábrica 0000, queda uno propio de la obra, de 4 o 6 dígitos, ni 0000, ni 1234, ni una fecha. Sección 399, maestro del sistema: fábrica 1234, queda uno propio del cliente, no se puede borrar, solo cambiar. Sección 398, mantenimiento: vacío de fábrica, solo si hace falta, programa casi todo menos comunicación (815 a 817, 910, 911, 918 a 949) y códigos. Debajo, la secuencia ENTER, 0000, 397 y código nuevo, y la nota de anotar los códigos en el sistema de gestión y nunca en el gabinete.",
+    "caption": "Instalador, maestro y mantenimiento: ninguno queda con el valor del manual."}],
+  [C("Modo visualización",
+     "Programar por teclado es escribir a ciegas: no hay pantalla con la configuración completa. El modo visualización deja mirar el valor de una sección antes de tocarlo, y así no se pisa nada sin querer.",
+     "Al entrar a una sección, ENTER antes de cargar muestra el primer dígito; cada ENTER muestra el siguiente y sigue a las secciones siguientes. CLEAR sale sin cambiar. Si se teclea un número antes del primer ENTER, se está escribiendo el dato.",
+     "Antes de cambiar el retardo de entrada de un apartamento en Malvín, mirás la [710] con ENTER: dice 045. Anotás el valor y recién ahí lo cambiás."),
+   C("Tres formas de cargar un dato",
+     "Cada sección guarda un tipo de dato distinto: tiempos, códigos o interruptores. Tres métodos de carga permiten usar el mismo teclado numérico para todo.",
+     "Decimal, de 000 a 255, para tiempos y cantidades. Hexadecimal, donde la tecla 0 vale A y las teclas de función dan B a F, para ID de panel, abonados y contraseñas. Opciones 1 a 8: cada tecla prende o apaga una opción y ENTER guarda.",
+     "En la misma visita cargás un retardo en decimal (045), un abonado en hexadecimal (1A01) y prendés la opción 2 de la [706] para EOL: tres secciones, tres formas."),
+   C("Códigos de fábrica",
+     "Vienen publicados en el manual para que cualquiera pueda poner en marcha la central la primera vez. Por eso mismo, si quedan, cualquiera con el manual puede entrar.",
+     "El primer día se cambian el de instalador en [397] (0000 de fábrica), el maestro del sistema en [399] (1234, que no se puede borrar) y, si se usa, el de mantenimiento en [398], que no toca comunicación ni códigos. Van a la ficha del sistema de gestión, no al gabinete.",
+     "En un foro, alguien sugiere entrar a una central ajena \"con los códigos de defecto\". Si los de tu cartera están cambiados, ese atajo no sirve con tus clientes.")],
+  """
+### Un poco de historia
+
+La programación por secciones viene de una época en que los teclados de alarma tenían luces o, con suerte, una pantalla de dos líneas, sin menús. La solución fue numerar cada parámetro: un número de sección y un dato, como una tabla que se recorre de memoria o con la hoja de programación al lado. Paradox mantuvo ese esquema en Spectra, Magellan y EVO, y lo documenta en guías de programación con hojas para anotar cada sección.
+
+Con el tiempo aparecieron teclados táctiles como el TM50 y el TM70, que los manuales recomiendan para programar, y software como BabyWare. Pero el teclado por secciones sigue siendo la herramienta que siempre está: no depende de una notebook ni de internet.
+
+### Cómo funciona
+
+En SP y MG, ENTER y el código de instalador llevan a la espera de sección. Ahí se teclean tres dígitos y la central entra a esa sección, esperando el dato. Para entrar a programación, las particiones tienen que estar desarmadas y StayD apagado, y en SP+ el teclado sale solo a los cinco minutos sin actividad.
+
+El dato se carga de tres formas, según la sección. Decimal, de 000 a 255, para tiempos: la [710] en 045 son 45 segundos. Hexadecimal, para valores con letras: la tecla 0 vale A y las teclas de función dan B a F, así un abonado 1A01 se teclea con el 0 como A. Y opciones de 1 a 8: cada tecla prende o apaga una opción, y ENTER guarda.
+
+Dos teclas evitan los accidentes. ENTER apenas entrás a una sección, antes de teclear nada, muestra el valor actual dígito por dígito y avanza sin cambiar: es el modo visualización. CLEAR sale de la sección sin guardar lo que tecleaste.
+
+Los códigos tienen jerarquía. El de instalador ([397], 0000 de fábrica) abre todo. El de mantenimiento ([398], vacío) programa casi todo menos comunicación ([815] a [817], [910], [911], [918] a [949]) y códigos de usuario. El maestro del sistema ([399], 1234) es del cliente: no se borra, solo se cambia. En EVO todo esto existe con otra forma de entrar: mantener el 0, código de seis dígitos y secciones de cuatro.
+""",
+  [{"file": "5-t1.svg", "after": "es el modo visualización",
+    "alt": "Animación en cuatro tiempos de la pantalla de un teclado. 1: con ENTER y el código de instalador la central espera una sección, con ARM y STAY titilando. 2: se teclea 710 y se entra a la sección del retardo de entrada 1. 3: ENTER antes de cargar muestra el valor 045, 45 segundos, sin cambiarlo. 4: CLEAR vuelve a la espera de sección sin guardar nada. Al costado, los tres tipos de dato: decimal, hexadecimal con el 0 como A y opciones de 1 a 8.",
+    "caption": "Entrar, mirar y salir sin cambiar nada."}])
+
+# =====================================================================================  9
+L("9",
+  {"file": "9.svg", "alt": "Una notebook con BabyWare conectada a la central por el cable 307USB al serie, y una conexión remota punteada por internet a través de un módulo IP o PCS. Dentro de la central, las dos llaves: sección 910 ID de panel y 911 contraseña de PC, hexadecimales. En rojo: si no coinciden, BabyWare no conecta. Notas: el reseteo por botón vuelve todo a fábrica salvo el ID de panel y la contraseña de PC; el módulo IP atiende una conexión a la vez según usuarios de un foro de domótica. Abajo: BabyWare también es la copia de la central.",
+   "caption": "Por cable o por módulo IP, BabyWare entra con el ID de panel y la contraseña de PC."},
+  [{"file": "9-paso1.svg", "step": 1, "after": "Conectá el 307USB al conector serie",
+    "alt": "Notebook con BabyWare en un puerto COM, cable USB al 307USB o CV4USB, y de ahí cuatro hilos a la ficha del conector serie de 4 pines de la placa de la central, dibujo genérico, que no son los bornes del bus. Notas: por cable se entra aunque la central no tenga módulo IP ni internet; al terminar, desconectar, porque el tamper de la caja y la sesión abierta son dos alertas para monitoreo.",
+    "caption": "El cable 307USB va al conector serie de 4 pines, no al bus."},
+   {"file": "9-paso3.svg", "step": 3, "after": "En BabyWare, creá una cuenta nueva",
+    "alt": "Dos ventanas: la central con 910 ID de panel 1A2B y 911 contraseña de PC 3C4D, y la cuenta nueva de BabyWare con ID de panel 1A2B, contraseña de PC 3C4D y conexión directa por el COM del 307USB. Flechas verdes: iguales. Valores de ejemplo, cargados en hexadecimal. Debajo, los pasos 4, 5 y 7: conectar y leer toda la programación, guardar la cuenta con nombre de la obra y fecha, y anotar las llaves en la ficha. Nota: según la guía SP+, BabyWare obliga a cambiar 0000 en la primera conexión; otros manuales siguen citando 0000.",
+    "caption": "La cuenta de BabyWare tiene que tener las mismas dos llaves que la central."}],
+  [C("ID de panel y contraseña de PC",
+     "Son las llaves del software, separadas del código de instalador. Existen para que nadie con un cable o una conexión remota entre a leer o cambiar la central sin conocerlas.",
+     "Se cargan en [910] y [911], en hexadecimal, y la cuenta de BabyWare tiene que tener los mismos valores. El reseteo por botón no las borra. Según la guía SP+, BabyWare obliga a cambiar 0000 en la primera conexión; aun así, conviene tratarlas siempre como cambiadas y anotarlas en la ficha.",
+     "Un técnico recibe una MG5050 sin código de instalador: con BabyWare, ID de panel y contraseña de PC de fábrica, entra y lo cambia. Si en tu cartera esas llaves están cambiadas, ese atajo no existe para un extraño."),
+   C("Copia de la central",
+     "Antes de cambiar una sola sección, conviene tener cómo volver atrás. La copia en BabyWare guarda la programación completa en la PC.",
+     "Se conecta, se hace la recepción completa y se guarda la cuenta con el nombre de la obra y la fecha. Esa es la referencia para comparar y, si algo sale mal, para devolver la central a como estaba.",
+     "Antes de reprogramar las zonas de una clínica en el Prado, leés la central entera con BabyWare. Una semana después el cliente pregunta cómo estaba la zona 12: la respuesta está en la copia."),
+   C("Una conexión a la vez",
+     "El módulo IP no es un servidor con muchas sesiones: según usuarios que integran Paradox con domótica, atiende una conexión por vez.",
+     "Si una integración o la app están conectadas, BabyWare remoto queda afuera, y al revés. Por eso BabyWare se desconecta al terminar, y antes de entrar por el módulo conviene saber si hay algo más usándolo.",
+     "No podés entrar por IP a la central de una casa con domótica: la integración del cliente tiene tomada la conexión. Coordinás con quien la mantiene para pausarla mientras trabajás.")],
+  """
+### Un poco de historia
+
+Cuando las centrales empezaron a tener muchas secciones, programarlas a mano en cada visita se volvió lento y propenso a errores. Los fabricantes sumaron un software para PC que lee y escribe toda la programación de una vez. En Paradox ese software es BabyWare, que se conecta por cable al puerto serie de la central o de forma remota por un módulo IP o un comunicador PCS.
+
+Con el cable vino una pregunta de seguridad: si cualquiera con un cable puede leer la central, ¿quién protege la configuración? La respuesta fueron dos llaves propias del software, el ID de panel y la contraseña de PC, que no son el código de instalador. La guía SP+ agrega que BabyWare obliga a cambiarlas si siguen en 0000; los manuales del IP180 y de BlueEye siguen citando 0000 como valor de fábrica.
+
+### Cómo funciona
+
+El cable 307USB, o el CV4USB, va del conector serie de 4 pines de la central al USB de la notebook, y BabyWare lo ve como un puerto COM. Al conectar, BabyWare presenta el ID de panel y la contraseña de PC de la cuenta. La central los compara con sus secciones [910] y [911]. Si coinciden, acepta la sesión; si no, no conecta.
+
+Con la sesión abierta, la recepción completa trae toda la programación a la PC. Guardada con el nombre de la obra y la fecha, es la copia de la central antes de cualquier cambio.
+
+Esas dos llaves tienen una propiedad que conviene recordar: el reseteo por botón vuelve todo a fábrica salvo el ID de panel y la contraseña de PC, y no borra el buffer de eventos. Quien las conoce puede entrar aunque la central se haya reseteado.
+
+Por el módulo IP la lógica es la misma, con un detalle práctico: el módulo atiende una conexión a la vez. Una sesión de BabyWare abierta deja afuera a la app o a una integración, y una integración conectada deja afuera a BabyWare.
+
+La contraseña de PC reaparece más adelante: es el mismo código que pide BlueEye para entrar a un sitio.
+""",
+  [{"file": "9-t1.svg", "after": "Si coinciden, acepta la sesión; si no, no conecta.",
+    "alt": "Animación en cuatro tiempos entre BabyWare en una notebook y la central. 1: BabyWare llama con ID de panel 1A2B y contraseña de PC 3C4D, valores de ejemplo. 2: la central compara con sus secciones 910 y 911, coinciden y acepta. 3: una barra muestra la recepción completa de la programación, que queda guardada con el nombre de la obra y la fecha. 4: con la sesión abierta, una app o integración que entra por el módulo IP queda afuera.",
+    "caption": "Las dos llaves, la copia y por qué una sesión ocupa el lugar."}])
+
+# =====================================================================================  6
+L("6",
+  {"file": "6.svg", "alt": "Planta de una casa tipo con living y entrada, dormitorio y caja de medidores afuera. Marcas numeradas: 1 la puerta principal, 2 un PIR en la esquina del living cuyo cono cubre el teclado junto a la puerta, 3 las ventanas, 4 la tapa de medidores. A la derecha, las definiciones: 01 retardo de entrada 1, la puerta da tiempo a desarmar; 05 seguimiento, el PIR que ve el teclado espera si antes se abrió la puerta; 08 instantánea, ventanas y perímetro disparan al instante; 16 robo 24 h, la tapa de medidores armada siempre; 11 fuego, normalmente abierta con EOL, no se puede anular.",
+   "caption": "Cada zona toma su definición del recorrido que hace el cliente al entrar."},
+  [{"file": "6-paso1.svg", "step": 1, "after": "Programá cada zona (definición",
+    "alt": "Secuencia de una zona: sección 001, luego 01 definición, 1 partición, opciones 1 a 8 y ENTER. Debajo, las opciones de fábrica 1, 2, 3 y 8 encendidas. Partición 1, 2, o 3 para ambas; ENTER guarda y avanza a la zona siguiente. Tabla: 001 con 01 1 puerta principal retardo de entrada 1; 002 con 05 1 PIR del living seguimiento; 003 con 08 1 ventanas instantánea; 004 con 16 1 tapa de medidores robo 24 h.",
+    "caption": "Dos dígitos de definición, uno de partición y las opciones."},
+   {"file": "6-paso4.svg", "step": 4, "after": "Armá otra vez y activá primero el PIR",
+    "alt": "Dos recorridos. Paso 3, entra por la puerta: abre la puerta, zona 1 con retardo de 45 s; camina frente al PIR, zona 2 de seguimiento que espera; desarma a tiempo en el teclado: sin alarma, en verde. Paso 4, el PIR primero sin abrir la puerta: armado con la puerta cerrada; se activa el PIR de la zona 2 sin que nadie abriera antes: alarma al instante, en rojo. Nota: contra falsas alarmas en la entrada, la opción 7 de la zona 1 activa el retardo de transmisión, con el tiempo en 833; con monitoreo, avisar antes de cada prueba.",
+    "caption": "El mismo PIR espera o dispara según si antes se abrió la puerta."}],
+  [C("Retardo de entrada (01)",
+     "Al llegar a casa, el cliente necesita tiempo para caminar hasta el teclado y desarmar. Sin retardo, la puerta dispararía cada vez que vuelve.",
+     "La zona de la puerta principal se define 01. El tiempo está en [710], 45 s de fábrica, y la salida en [745] y [746] por partición, 60 s. Se revisan con ENTER antes de tocarlos.",
+     "Una señora mayor en el Buceo tarda en llegar al teclado: se sube el retardo de entrada en [710] en lugar de cambiar la puerta a otro tipo de zona."),
+   C("Seguimiento (05)",
+     "El PIR que cubre el teclado ve al cliente cada vez que entra. Si fuera instantáneo, dispararía antes de que llegue a desarmar.",
+     "El seguimiento espera si antes se abrió una zona de retardo: toma ese tiempo como propio. Si se activa solo, sin que nadie abriera la puerta, dispara al instante, porque alguien entró por otro lado.",
+     "En una casa en Shangrilá, un ladrón entra por la ventana del fondo y camina por el living: el PIR de seguimiento dispara al instante porque la puerta de entrada nunca se abrió."),
+   C("Intellizone y retardo de transmisión",
+     "Una alarma que suena por nada cansa al cliente y a monitoreo. Paradox suma dos herramientas para filtrar falsas alarmas sin dejar de proteger.",
+     "Intellizone (opción 6 de la zona) espera una confirmación dentro de un tiempo, 48 s de fábrica en [713]. El retardo de transmisión (opción 7, tiempo en [833]) hace sonar pero no reporta si el cliente desarma a tiempo.",
+     "En un comercio de 18 de Julio, los empleados disparan la entrada casi todas las mañanas: con retardo de transmisión en la zona 1, suena, desarman, y monitoreo no recibe el evento.")],
+  """
+### Un poco de historia
+
+Las primeras centrales tenían pocas zonas y casi todas eran iguales: se abría algo y sonaba. El problema apareció enseguida con la puerta de entrada. Había que dar tiempo para salir después de armar y para llegar al teclado al volver, sin dejar la casa desprotegida en ese rato. De ahí salieron los tipos de zona: retardo, seguimiento, instantánea y 24 horas.
+
+Las SP+ traen 26 definiciones de zona, y además permiten crear plantillas propias. En la práctica, cuatro o cinco resuelven casi todas las casas: 01 retardo de entrada, 05 seguimiento, 08 instantánea, 11 fuego y 16 robo 24 h.
+
+### Cómo funciona
+
+En SP y MG cada zona es una sección de [001] a [032]. Lleva dos dígitos de definición, un dígito de partición (1, 2 o 3 para ambas) y las opciones de 1 a 8, con la 1, 2, 3 y 8 encendidas de fábrica.
+
+Los tiempos hacen el resto. Al armar corre la demora de salida, 60 s de fábrica en [745], y el cliente sale por la puerta sin disparar. Terminada la demora, la partición queda armada. Al volver, la puerta, zona 01, arranca el retardo de entrada, 45 s en [710]. El PIR que ve el teclado, zona 05, toma ese mismo retardo porque antes se abrió la puerta. Si el cliente desarma a tiempo, no pasa nada.
+
+El seguimiento cambia de comportamiento según el orden. Si el PIR se activa sin que antes se abra una zona de retardo, dispara al instante: alguien entró por otro lado. Una ventana, zona 08, dispara siempre al instante con la partición armada. La tapa de medidores, zona 16, está armada las 24 horas. Una zona de fuego no se puede anular.
+
+Contra falsas alarmas hay dos herramientas. Intellizone espera una segunda confirmación dentro de un tiempo, 48 s de fábrica en [713]. El retardo de transmisión suena pero no reporta si se desarma a tiempo, con el tiempo en [833]. Además, una zona se apaga sola tras 5 alarmas, según [712].
+
+El criterio es simple: el tipo de zona sale del recorrido de entrada, no de la costumbre.
+""",
+  [{"file": "6-t1.svg", "after": "Si el cliente desarma a tiempo, no pasa nada.",
+    "alt": "Animación en cuatro tiempos sobre una línea de tiempo. 1: el cliente arma y corre la demora de salida de 60 segundos, sección 745. 2: termina la demora y la casa queda armada. 3: vuelve, abre la puerta de la zona 01 y arranca el retardo de entrada de 45 segundos, sección 710. 4: pasa frente al PIR de seguimiento, zona 05, que espera porque antes se abrió la puerta, y desarma a tiempo: no hay alarma.",
+    "caption": "Demora de salida, retardo de entrada y seguimiento en una sola línea de tiempo."}])
+
+# =====================================================================================  7
+L("7",
+  {"file": "7.svg", "alt": "Dos zonas punteadas. Partición 1, casa: zonas 1 a 4 con datos 01 1, 05 1, 08 1 y 16 1. Partición 2, taller: zona 5 puerta del taller 01 2 y zona 6 ventana del taller 08 2; el tercer dígito de cada zona dice la partición, 1, 2, o 3 para ambas. El maestro del sistema, con particiones 1 y 2, tiene flechas a las dos; el usuario 005 del taller, solo partición 2, tiene flecha solo al taller. Nota en ámbar: el particionado se prende en la sección 700 opción 1; si después se apaga, todo pasa a partición 1 y las zonas asignadas a la 2 dejan de funcionar.",
+   "caption": "Cada usuario arma y desarma solo la partición que le corresponde."},
+  [{"file": "7-paso3.svg", "step": 3, "after": "Usuario 005, empleado del taller",
+    "alt": "Secuencia CLEAR, 405, SLEEP, 2, ENTER. Tres filas con las ocho opciones del usuario: partición 1, partición 2, anular, Stay, forzado, solo armar, solo PGM y coacción. De fábrica encendidas la 1, 3, 4 y 5; después de la tecla SLEEP, todas apagadas; después de la tecla 2, solo la partición 2. Resultado en verde: arma y desarma el taller y no la casa, sin anular, sin Stay, sin forzado. Nota: secciones 404 a 432, una por usuario; la 405 es la del usuario 005.",
+    "caption": "SLEEP apaga todas las opciones y la tecla 2 deja solo la partición del taller."},
+   {"file": "7-paso6.svg", "step": 6, "after": "Decidí el largo de código",
+    "alt": "Sección 701 opción 1, códigos de 4 o de 6 dígitos. Antes, con 4 dígitos, el código 1234; al pasar a 6 dígitos, queda 123412: la central repite los dos primeros, marcados en ámbar. Notas: el usuario sigue tecleando 1234 y no anda; con la central en servicio, cambiar el largo o el particionado afecta a todos y se coordina con el cliente y con monitoreo.",
+    "caption": "Al pasar a 6 dígitos, 1234 se convierte en 123412."}],
+  [C("Partición",
+     "Una partición divide una central en sistemas que se arman por separado. Sirve cuando en el mismo lugar hay dos usos con horarios distintos, como una casa y un taller.",
+     "Se activa en [700] opción 1: las SP+ tienen dos particiones y la EVOHD+, ocho. El tercer dígito de cada zona la asigna: 1, 2, o 3 para ambas; una zona de ambas se arma cuando las dos están armadas. Si se apaga el particionado, las zonas de la partición 2 dejan de funcionar.",
+     "Vivienda adelante y peluquería atrás en una casa de La Teja: la peluquería se arma a las 20 y la casa recién a la noche, cada una con su código."),
+   C("Opciones de usuario",
+     "No todos los que tienen código necesitan las mismas facultades. Las opciones limitan qué puede hacer cada código, para que un empleado no pueda, por ejemplo, anular zonas.",
+     "Se cargan en [404] a [432]: 1 y 2 particiones, 3 anular, 4 Stay/Sleep, 5 forzado, 6 solo armar, 7 solo PGM y 8 coacción. De fábrica vienen encendidas la 1, 3, 4 y 5; SLEEP las apaga todas y después se prenden solo las necesarias.",
+     "Al empleado del taller le dejás solo la opción 2. Una noche intenta anular la ventana que no cierra bien: no puede, y le avisa al dueño, que la arregla."),
+   C("Largo de código",
+     "Los códigos pueden ser de 4 o de 6 dígitos. Seis dígitos dan muchas más combinaciones, pero cambiarlo con la central andando deja a los usuarios sin poder entrar.",
+     "Se elige en [701] opción 1, antes de cargar usuarios. Al pasar a 6, la central completa con los dos primeros dígitos: 1234 pasa a 123412. Si el cambio es inevitable, se avisa a cada usuario su código nuevo.",
+     "Un lunes llaman de una oficina en la Aguada: nadie puede desarmar. El viernes alguien pasó la central a 6 dígitos; el 1234 de la recepcionista ahora es 123412.")],
+  """
+### Un poco de historia
+
+Las particiones nacieron para resolver un problema muy concreto: una sola central para dos lugares que no abren y cierran a la misma hora. Antes, la alternativa era poner dos centrales o dejar zonas anuladas a mano. Con particiones, la misma placa maneja dos sistemas, cada uno con su armado, sus tiempos y sus usuarios.
+
+En Paradox, las SP+ manejan dos particiones y la EVOHD+ ocho, con 999 usuarios. Las SP+ tienen un maestro del sistema, un maestro por partición y 29 usuarios más, cada uno con sus opciones.
+
+### Cómo funciona
+
+El particionado se prende en [700] opción 1. A partir de ahí, cada zona dice a qué partición pertenece con el tercer dígito de su sección: 1, 2, o 3 para ambas. Si el particionado se apaga, todo pasa a partición 1 y las zonas asignadas a la 2 dejan de funcionar.
+
+Cuando alguien teclea un código, la central no mira solo si es válido: busca las opciones de ese usuario en su sección, de [404] a [432]. Las opciones 1 y 2 dicen qué particiones puede armar y desarmar. La 3 permite anular zonas, la 4 armar en Stay o Sleep, la 5 el armado forzado, la 6 solo armar, la 7 solo activar PGM y la 8 marca el código de coacción. Un usuario sin partición 1 en un sistema no particionado queda deshabilitado.
+
+Así, el usuario 005 con solo la opción 2 arma y desarma el taller y no puede tocar la casa. El maestro, con las dos particiones, arma las dos. Una zona asignada a ambas, como el pasillo compartido, se arma recién cuando las dos particiones están armadas.
+
+Los tiempos también son por partición: salida en [745] y [746], corte de sirena en [747] y [748].
+
+El largo de código, 4 o 6 dígitos en [701] opción 1, vale para todos. Por eso se decide antes de cargar usuarios: al pasar a 6, la central completa cada código con sus dos primeros dígitos, y 1234 pasa a 123412.
+""",
+  [{"file": "7-t1.svg", "after": "busca las opciones de ese usuario en su sección",
+    "alt": "Animación en cuatro tiempos con un teclado, las opciones de usuario y las dos particiones. 1: el usuario 005 teclea su código. 2: la central lee sus opciones en la sección 405: solo la opción 2, partición 2, está encendida. 3: se arma el taller y la casa sigue desarmada. 4: el maestro, con particiones 1 y 2, arma las dos.",
+    "caption": "Lo que arma un código lo deciden sus opciones."}])
+
+# =====================================================================================  8
+L("8",
+  {"file": "8.svg", "alt": "Cadena de izquierda a derecha: un evento, con grupo, subgrupo y partición, activa la PGM de la placa, de 100 a 150 mA; la PGM alimenta la bobina de un relé externo de 12 V con bornes COM, NO y NC; el contacto del relé maneja la carga, un portón o una luz. Dos recuadros: se apaga por evento de desactivación, por ejemplo la falla de AC que se restaura, o por tiempo, secciones 281 a 296, 5 s de fábrica; de fábrica, la PGM1 se activa con el botón B de cualquier control (08/99/99) y la PGM2 con el C, partición 01, 02 o 99 para ambas. Aviso: la PGM solo mueve la bobina; portón, luz o sirena extra van por el contacto del relé.",
+   "caption": "La PGM solo mueve la bobina; la carga va por el contacto del relé."},
+  [{"file": "8-paso1.svg", "step": 1, "after": "Portón (PGM1): conectá la bobina",
+    "alt": "Bornera de la central con AUX+ y PGM1. AUX+ va al más de la bobina de un relé de 12 V con bobina menor a 100 mA, y PGM1 al otro lado de la bobina. El contacto seco del relé, COM y NO, va a los bornes del pulsador de la placa del portón, según esa placa. Nota en ámbar: el puente PGM de la placa elige si la PGM da negativo o 12 V; el dibujo es con PGM a negativo y bobina al AUX+. Debajo, sección 281 en 002, pulso de 2 s, y 220 con 06 08 01 para probar con la tecla de utilidad 1. Aviso en rojo: probar con el motor desconectado.",
+    "caption": "La PGM1 maneja la bobina; el contacto seco hace de pulsador del portón."},
+   {"file": "8-paso2.svg", "step": 2, "after": "Luz de falla de AC (PGM2)",
+    "alt": "Arriba, sección 222 con 44 01 99, activación por nueva falla de AC, y 223 con 45 01 99, desactivación por AC restaurada. Línea de tiempo: corte de red, la falla ya se ve en TBL 2.2, luz apagada; pasa el retardo de la sección 839, 15 min de fábrica o 1 en el banco, y la PGM2 se enciende; vuelve la red, falla restaurada, y la luz se apaga sola. Notas: con 282 en 000 la PGM2 no tiene tiempo y queda prendida hasta el evento de desactivación; bajar 839 a 001 solo para probar y devolverlo después.",
+    "caption": "Un evento prende la luz y otro la apaga; el retardo de [839] manda."}],
+  [C("PGM, salida programable",
+     "La central sabe cosas que otros equipos necesitan: si hay falla de AC, si se armó, si alguien apretó el botón B. La PGM convierte esos eventos en una señal eléctrica para mover otra cosa.",
+     "Cada PGM tiene evento de activación ([220], [222]...) y de desactivación ([221], [223]...), con grupo, subgrupo y partición (01, 02 o 99 para ambas), o un tiempo en [281] a [296], 5 s de fábrica. Las de placa son de baja corriente: 100 a 150 mA según la guía.",
+     "En una casa en el Prado, la PGM2 prende una luz piloto en la cocina cuando hay falla de AC, para que la familia sepa que la alarma está en batería."),
+   C("Relé externo y contacto seco",
+     "Una PGM no puede mover un motor ni alimentar una sirena grande. El relé separa los mundos: la PGM solo energiza la bobina y el contacto maneja la carga con su propia alimentación.",
+     "La bobina del relé, de 12 V y por debajo de 100 mA, va a la PGM; el contacto seco, COM y NO, va a la entrada que se quiere manejar. El puente PGM de la placa define si la salida da negativo o 12 V. Si la bobina se alimenta del AUX, entra en la cuenta de 700 mA.",
+     "El portón de un garaje en Punta Gorda abre con el botón B del control: la PGM1 cierra el relé 2 segundos y la placa del portón lo ve como su pulsador de siempre."),
+   C("Evento de activación y temporizador",
+     "Algunas salidas tienen que durar un pulso, como la orden de abrir un portón; otras tienen que seguir un estado, como una luz de falla. El temporizador y el evento de desactivación resuelven los dos casos.",
+     "Con tiempo en [281] (base en segundos o minutos según [261]) la PGM vuelve sola: 002 son 2 s. Con 000, la PGM espera su evento de desactivación. Un evento de falla de AC respeta el retardo de [839], 15 minutos de fábrica.",
+     "Para el portón cargás 002 en [281]; para la luz de falla de AC dejás [282] en 000 y usás los eventos 44/01 y 45/01: uno prende, el otro apaga.")],
+  """
+### Un poco de historia
+
+El relé es uno de los inventos más viejos de la electricidad aplicada: nació en la década de 1830, en los tiempos del telégrafo, para que una corriente chica pudiera controlar otra más grande. Casi dos siglos después, sigue siendo la pieza que une una central de alarma con un portón, una luz o una sirena extra.
+
+Las salidas programables, PGM, aparecieron cuando las centrales empezaron a saber más que \"alarma sí o no\". En las SP+ hay dos o cuatro PGM en placa, según el modelo, y la guía de programación trae una tabla larga de eventos que pueden activarlas: armado de partición, falla de AC, pérdida de reloj, botones del control remoto y muchos más.
+
+### Cómo funciona
+
+Una PGM espera su evento de activación, que se define con tres datos: grupo, subgrupo y partición. De fábrica, la PGM1 se activa con el botón B de cualquier control (08/99/99) y la PGM2 con el C. El 99 vale para cualquiera; en partición, 01, 02 o 99 para ambas.
+
+Cuando llega el evento, la PGM se activa. Es una salida de estado sólido de 100 a 150 mA, y un puente en la placa elige si da negativo o 12 V. Esa corriente alcanza para la bobina de un relé, no para un motor. La bobina mueve el contacto del relé: COM y NO se cierran, y la placa del portón lo ve como si alguien apretara su pulsador.
+
+Para volver, hay dos caminos. Con tiempo, en [281] a [296], la PGM se apaga sola: 002 son 2 segundos, un pulso limpio. Con tiempo en 000, la PGM sigue activa hasta su evento de desactivación: por ejemplo, la falla de AC (44/01) la prende y la AC restaurada (45/01) la apaga.
+
+Los eventos de falla de AC respetan el retardo de reporte de [839], 15 minutos de fábrica: la luz no se prende con cada microcorte. Para probar en el banco se baja a 1 minuto y después se devuelve al valor acordado con monitoreo.
+
+Un portón que abre por la alarma es un riesgo físico: la prueba se hace con el motor desconectado y el cliente sabe cómo se activa.
+""",
+  [{"file": "8-t1.svg", "after": "Cuando llega el evento, la PGM se activa.",
+    "alt": "Animación en cuatro tiempos de izquierda a derecha: control, PGM1, relé y placa del portón. 1: llega el evento de activación, botón B de cualquier control, 08/99/99. 2: la PGM1 se activa y energiza la bobina del relé. 3: el contacto seco entre COM y NO se cierra y la placa del portón lo ve como su pulsador: abre. 4: termina el pulso de 2 segundos de la sección 281, la PGM vuelve sola y el contacto se abre.",
+    "caption": "Evento, PGM, relé y un pulso de 2 segundos."}])
+
+# =====================================================================================  10
+L("10",
+  {"file": "10.svg", "alt": "Dos columnas. Legado, TURN: módulos IP150 V1 a V5, IP150+ V4 y V5, PCS250, 260 y 265, PCS265 LTE y V7; receptora IPR512 o IPRS-7; formato Contact ID o SIA con asterisco; app Insite Gold o BlueEye; acceso por Swan o IP estática. MQTT, en verde: IP180, IP150+MQ V6, IP150M V6.50 y PCS265 V8; receptora IPC10 o VIPC20; solo Contact ID; solo BlueEye; Swan, sin IP estática. Notas: central plus con el principal en el serie 1 y el respaldo en el serie 2, de la misma generación; SIA no va por IP ni GPRS y el IPR512 legado lo acepta. En rojo: pasar un IP150 a IP150M V6.50 es irreversible y exige sitio Swan pago para toda comunicación.",
+   "caption": "La generación del módulo define receptora, formato, app y forma de acceso."},
+  [{"file": "10-paso5.svg", "step": 5, "after": "Pasale al informático la lista de salida",
+    "alt": "Un IP180 o IP150M en la red del cliente conectado a un firewall que permite solo salida, con seis flechas verdes: TCP 8883 MQTT para Swan e IPC10, TCP 443 firmware, UDP 53 DNS, UDP 123 hora NTP, UDP 5683 según el manual, y 465 o 587 para correo si se usa. Debajo, los comandos de PowerShell Resolve-DnsName paradox.com y Test-NetConnection paradox.com -Port 443, desde una notebook en la misma red. Nota: el 8883 de salida no se prueba así; pedir al informático que confirme la regla.",
+    "caption": "La lista de salida que el informático tiene que habilitar."},
+   {"file": "10-paso6.svg", "step": 6, "after": "el módulo principal va al serie 1",
+    "alt": "Dos paneles con una central plus. Bien, en verde: IP180 en el serie 1 como principal y PCS265 V8 en el serie 2 como respaldo, las dos MQTT. Mal, en rojo: IP180 en el serie 1 y PCS265 LTE V7 en el serie 2, MQTT con legado, que no se mezclan. Nota: el manual del IP180 dice no mezclar dispositivos de reporte MQTT con versiones legado en la misma central.",
+    "caption": "Principal y respaldo, siempre de la misma generación."}],
+  [C("Generación TURN (legado)",
+     "Es la familia de comunicadores con la que creció el parque instalado: IP150, IP150+, PCS. Reportan a receptoras IPR512 o IPRS-7 y conectan la app por Swan o por IP estática.",
+     "Se identifica por la etiqueta o, en BlueEye, en los detalles del sitio. Admite Insite Gold y BlueEye, y desde el firmware 5.3.0 el IP150+ se configura desde el menú instalador de BlueEye. Con receptora legado se usa contraseña de receptor.",
+     "Un cliente en Las Piedras tiene un IP150+ reportando a un IPR512 de su empresa de monitoreo: mientras la receptora sea legado, el módulo legado es el correcto."),
+   C("Generación MQTT",
+     "Es la nueva familia: IP180, IP150+MQ, IP150M, PCS265 V8. El módulo abre él mismo la conexión de salida y por ahí viaja todo, sin puertos de entrada.",
+     "Reporta solo Contact ID a IPC10 o VIPC20, solo con BlueEye y sin IP estática. Necesita salida por TCP 8883 y 443, UDP 53, 123 y 5683, y el correo. No se mezcla con legado en la misma central: principal y respaldo, misma generación.",
+     "En una obra nueva en Punta del Este, la empresa de monitoreo tiene IPC10: se instala un IP180 y se le pide al informático la lista de salida antes del día de la conexión."),
+   C("Actualización irreversible a IP150M",
+     "Un IP150 puede pasar a MQTT con el firmware V6.50 y quedar como IP150M. Parece una mejora, pero cambia las reglas del juego para el cliente.",
+     "Según su manual, la actualización es irreversible, Insite Gold deja de conectar y toda comunicación, incluido BabyWare remoto, exige un sitio Swan pago. Antes de hacerla, se acuerda con el cliente y con monitoreo.",
+     "Un técnico actualiza el IP150 de un cliente \"para tenerlo al día\" y al día siguiente la app vieja no conecta y le piden una suscripción: la charla con el cliente tenía que ser antes.")],
+  """
+### Un poco de historia
+
+Los primeros comunicadores de alarma usaban la línea telefónica: la central discaba a la receptora y mandaba el evento. Con internet llegaron los módulos IP, como el IP150, y los comunicadores celulares PCS. Paradox los conectó a sus receptoras IP (IPR512, IPRS-7) y a su servidor Swan, que pone en contacto la app con el módulo. Esa es la generación que su documentación llama TURN, o legado.
+
+La generación nueva usa MQTT, un protocolo de mensajería liviano creado en 1999 por Andy Stanford-Clark, de IBM, y Arlen Nipper para monitorear equipos remotos con enlaces pobres. OASIS lo estandarizó en 2014 con la versión 3.1.1, y la 5.0 es de 2019. El puerto 8883 es el de MQTT sobre TLS. En Paradox, IP180, IP150+MQ, IP150M y PCS265 V8 son MQTT, y reportan a un conversor IPC10 o VIPC20.
+
+### Cómo funciona
+
+En MQTT el módulo es el que llama. Abre una conexión de salida cifrada, por TCP 8883, hacia el servidor: Swan para la app, el IPC10 para el monitoreo. La conexión queda abierta y por ella viajan los eventos y los pedidos. Como la inicia el módulo, no hace falta abrir puertos de entrada ni tener IP estática: alcanza con que el firewall deje salir.
+
+La lista de salida del IP180 y el IP150M es corta: TCP 8883 para MQTT, TCP 443 para firmware, UDP 53 para DNS, UDP 123 para la hora, UDP 5683 y el puerto del correo si se usa.
+
+El IPC10 recibe los eventos y los pasa al software de monitoreo en formatos que ese software entiende, como MLR2-DG, Ademco 685 o CID-TCP. Con módulos MQTT el formato es solo Contact ID.
+
+Las dos generaciones no conviven en la misma central. En una central plus, el módulo principal va al serie 1 y el de respaldo al serie 2, de la misma generación. Y pasar un IP150 a IP150M, con el firmware V6.50, es irreversible y exige sitio Swan pago para toda comunicación.
+""",
+  [{"file": "10-t1.svg", "after": "Como la inicia el módulo, no hace falta abrir puertos",
+    "alt": "Animación en cuatro tiempos. 1: el módulo IP180 abre conexiones de salida por TCP 8883 hacia Swan y hacia el IPC10, atravesando el firewall. 2: las conexiones quedan abiertas y la entrada del firewall sigue cerrada. 3: un evento sale por la conexión al IPC10, que lo pasa en Contact ID al software de monitoreo. 4: la app BlueEye llega a través de Swan, por la misma conexión que abrió el módulo.",
+    "caption": "El módulo MQTT sale y mantiene la conexión; nadie entra."}])
+
+# =====================================================================================  11
+L("11",
+  {"file": "11.svg", "alt": "Flujo de izquierda a derecha: la central con abonado 1A01, por serie al módulo IP (IP150+ o IP180), en Contact ID a la receptora (IPR512 o IPC10) y de ahí al operador de monitoreo. Debajo, lo que viaja en cada evento: abonado 1A01, evento alarma de robo, partición 1, zona 003. Recuadro de supervisión: el módulo se reporta cada tanto y si calla, avisa. Notas: en la sección 810, 4 es Contact ID y 5 SIA, y por IP o GPRS SIA no va; la receptora da abonado, IP y puerto, contraseña solo en legado y perfil de supervisión.",
+   "caption": "El abonado y el formato convierten un evento en un cliente con nombre."},
+  [{"file": "11-paso1.svg", "step": 1, "after": "Formato y abonados:",
+    "alt": "Arriba, sección 810 en 44, Contact ID en los dos teléfonos. Grilla de dos por dos: partición 1 por teléfono en 811 y por IP en 918; partición 2 por teléfono en 812 y por IP en 919; las cuatro con el abonado 1A01. Notas: 812 y 919 se cargan aunque la central no esté particionada; 1A01 es de ejemplo y un abonado de otra obra hace que el evento llegue al cliente equivocado.",
+    "caption": "Cuatro secciones de abonado: cada partición, por teléfono y por IP."},
+   {"file": "11-paso2.svg", "step": 2, "after": "Receptor IP 1 (cada número de la IP",
+    "alt": "La sección 929 con 203 000 113 010 se convierte en la IP 203.0.113.10: cada número con tres dígitos. Lista: 930 puerto, el que indique la receptora; 933 contraseña, solo IPR512, el IPC10 no la usa; 934 perfil de supervisión, por ejemplo 02; 935 ARM registra el módulo y muestra el estado. Tabla de perfiles del IPC10: 01 1200 s, 02 600 s resaltado, 03 300 s, 04 90 s. Nota: menos segundos hace que la receptora se entere antes si el módulo cae; en el IPR512 los perfiles los define la receptora, en el IPC10 son fijos.",
+    "caption": "IP de a tres dígitos, puerto, perfil y ARM para registrar."}],
+  [C("Contact ID",
+     "Es el idioma en que la central le cuenta a la receptora qué pasó. Un formato común permite que centrales y receptoras de distintas marcas se entiendan.",
+     "En SP y MG se elige en [810], un dígito por teléfono: 4 es Contact ID, 5 es SIA. Por IP o GPRS, SIA no está soportado, e IP180 e IP150M reportan solo Contact ID. Cada evento lleva abonado, código de evento, partición y zona.",
+     "Monitoreo recibe 1A01, 130, partición 01, zona 003: robo en la ventana del dormitorio de la casa de Sayago. El operador llama al cliente sabiendo exactamente qué pasó."),
+   C("Abonado por partición y canal",
+     "El abonado es el número con el que la receptora identifica al cliente. Si falta o está mal, el evento llega a nadie o, peor, al cliente equivocado.",
+     "Va en cada partición y en cada canal: [811] y [812] por teléfono, [918] y [919] por IP, aunque la central no esté particionada. Se carga en hexadecimal y lo da la empresa de monitoreo, nunca se copia de otra obra.",
+     "Un técnico copia la programación de una obra a otra y se olvida del abonado: el disparo de un local en el Cerro le aparece a monitoreo como de un cliente de Malvín."),
+   C("Perfil de supervisión",
+     "La receptora necesita saber si el módulo sigue vivo aunque no haya eventos. El perfil define cada cuánto se reporta el módulo; si deja de hacerlo, la receptora avisa.",
+     "Se carga en [934]. Con IPC10 los perfiles son fijos: 01 = 1200 s, 02 = 600 s, 03 = 300 s, 04 = 90 s. En el IPR512 los define la receptora, con tiempo de sondeo y período de gracia. Además, una prueba automática diaria ([840] y [850]) confirma el canal.",
+     "Un banco pide saber en minutos si un local se queda sin comunicación: con perfil 04, la receptora se entera en 90 segundos.")],
+  """
+### Un poco de historia
+
+Contact ID nació en Ademco como un formato para mandar eventos de alarma por la línea telefónica con tonos DTMF, y la Security Industry Association (SIA) lo publicó como norma en 1999, la SIA DC-05. Su rival histórico es el formato SIA, de la norma SIA DC-03, más descriptivo. Las dos convivieron durante décadas en las receptoras de monitoreo.
+
+Cuando la comunicación pasó a IP y celular, los fabricantes mantuvieron el contenido de Contact ID dentro de sus propios transportes. En Paradox, el receptor legado IPR512 acepta Contact ID y SIA; la guía de programación SP+ aclara que SIA no está soportado por IP ni GPRS, y los módulos MQTT reportan solo Contact ID al IPC10.
+
+### Cómo funciona
+
+Un mensaje Contact ID tiene campos fijos. El abonado identifica al cliente; el tipo de mensaje es 18; el calificador dice si es un evento nuevo (1) o una restauración (3); el código de evento dice qué pasó, por ejemplo 130 es robo; después vienen la partición, la zona o el usuario, y un dígito de control. Para el operador, eso se lee como \"robo en el abonado 1A01, partición 1, zona 3\".
+
+La receptora confirma que recibió el mensaje. Si no hay confirmación, la central vuelve a intentar, y si sigue sin poder, aparece la falla de comunicación en TBL.
+
+Para que todo eso funcione, la receptora le da al instalador cuatro datos: abonado por partición, IP y puerto, contraseña (solo en legado) y perfil. En SP y MG van en [918] y [919] los abonados IP, en [929] la IP con cada número de tres dígitos, en [930] el puerto, en [933] la contraseña y en [934] el perfil. Con [935] y ARM el módulo se registra.
+
+El perfil es la supervisión: cada cuánto el módulo se reporta aunque no haya eventos. Con IPC10 son fijos, de 1200 s a 90 s. Además, la prueba automática diaria, [840] y [850], manda un evento de test a una hora fija para confirmar que el canal está vivo.
+""",
+  [{"file": "11-t1.svg", "after": "\"robo en el abonado 1A01, partición 1, zona 3\"",
+    "alt": "Animación en cuatro tiempos. 1: con la central armada se abre la ventana de la zona 3. 2: la central arma el mensaje Contact ID campo por campo: abonado 1A01, tipo 18, calificador 1 de evento nuevo, código 130 de robo, partición 01, zona 003 y un dígito de control. 3: el mensaje viaja a la receptora, que confirma la recepción. 4: el operador ve en su software robo en el abonado 1A01, partición 1, zona 3.",
+    "caption": "Un evento de robo, armado campo por campo y entregado al operador."}])
+
+# =====================================================================================  12
+L("12",
+  {"file": "12.svg", "alt": "La app BlueEye en el celular del cliente llega al módulo IP de la central por dos caminos. Arriba, por Swan, servidor de Paradox, con suscripción: el módulo sale a internet y se conecta a Swan, y el sitio tiene días de suscripción y fecha de renovación. Abajo, punteado, por un router con port forward, solo con módulos legado: sin Swan, directo al módulo; con IP150 de firmware 1.xx o 4.0.4 pide la clave de fábrica y no conviene exponerlo así. Franja verde: el monitoreo va por su propio canal a la receptora y no depende de la app ni de la suscripción.",
+   "caption": "La app va por Swan o por IP estática; el monitoreo, siempre por su canal."},
+  [{"file": "12-paso2.svg", "step": 2, "after": "Si el sitio no existe: tres puntos",
+    "alt": "Ruta en BlueEye: Menú, Entorno instalador, My Other Paradox Systems, tres puntos y Create Swan System. Ventana Create Swan System con número de serie de la central, nombre del sitio de la obra y correo del sitio. En ámbar, antes de crear: módulo conectado a la central y a internet, cuenta de instalador de paradox.com aprobada por el distribuidor, y borrar el sitio de la app no lo borra del servidor Swan. Nota: después se entra con el código de PC y se anotan suscripción, renovación y quién paga.",
+    "caption": "Crear el sitio exige un módulo conectado a la central y a internet."},
+   {"file": "12-paso3.svg", "step": 3, "after": "Entrá al sitio con el código de PC",
+    "alt": "El código de PC 6089 de BabyWare, sección 911, se escribe 6A89 en BlueEye en MG y SP: el 0 pasa a A, resaltado en ámbar. Es el mismo código de PC de BabyWare. Notas: si el código no entra, revisar los ceros antes que nada; es la misma llave que protege BabyWare, si quedó de fábrica también la app queda abierta.",
+    "caption": "Mismo código de PC que BabyWare, con cada 0 escrito como A."}],
+  [C("Swan",
+     "Es el servidor de Paradox que pone en contacto la app con el módulo de la central, sin abrir puertos en el router del cliente. A cambio, el sitio tiene una suscripción.",
+     "El sitio se crea desde el menú instalador de BlueEye, con el módulo conectado a la central y a internet. Tiene días de suscripción y fecha de renovación, que van a la ficha junto con quién paga. Con IP150M, según su manual, sin Swan pago no hay ninguna comunicación.",
+     "Un cliente en Solymar pregunta por qué le cobran la app: le mostrás en la ficha la fecha de renovación de su sitio Swan y qué pasa si no renueva."),
+   C("IP estática sin Swan",
+     "Es el camino viejo: la app va directo al módulo, por la red local o con un port forward desde afuera. Sigue existiendo para módulos legado y clientes que no quieren suscripción.",
+     "En BlueEye se usa \"Use Static IP without Swan\", se busca el IP150 o IP150+ y se cargan IP y puerto. Con firmware 1.xx o 4.0.4, el módulo exige su contraseña de fábrica: un port forward ahí deja el módulo expuesto con una clave pública. Conviene VPN o actualizar antes.",
+     "En una casa de campo con IP150+ y sin suscripción, la app entra por la VPN del router de la casa y no por un puerto abierto a internet."),
+   C("Monitoreo independiente de la app",
+     "La app es una comodidad del cliente; el monitoreo es la seguridad. Si dependen del mismo servicio, una suscripción vencida puede dejar a la casa sin aviso.",
+     "El reporte va por su canal propio a la receptora (IPR512 o IPC10), programado en la central, y la app va por Swan o IP estática. Se anota en la ficha qué canal y qué receptora usa el monitoreo.",
+     "El sitio Swan de un cliente vence en enero y la app deja de andar; esa misma noche hay un intento de robo y monitoreo lo recibe igual, porque reporta por su canal a la receptora.")],
+  """
+### Un poco de historia
+
+Durante años la app de Paradox fue Insite Gold. Su soporte hoy la da por reemplazada por BlueEye, y explica cómo pasar los sitios viejos con el ID de sitio y el correo de Swan; BlueEye no soporta las cámaras HD78 y HD88 que se veían en Insite Gold. En paralelo, Paradox fue moviendo la configuración de los módulos a la app: desde el firmware 5.3.0, el IP150+ se configura desde el menú instalador de BlueEye y no por su web.
+
+Las fuentes no coinciden en todo. Paradox empuja Swan como camino por defecto; su propio soporte sigue documentando la IP estática con port forward para módulos legado; y el proyecto PAI, un software libre que se conecta a las centrales, desaconseja Swan citando una vulnerabilidad documentada.
+
+### Cómo funciona
+
+Con Swan, el módulo sale a internet y se anota en el servidor de Paradox; el IP150+ lo sondea cada 15 minutos, según su ficha. Cuando el cliente abre BlueEye, la app le pide el sitio a Swan y Swan la conecta con el módulo. No hace falta abrir puertos en el router, pero el sitio necesita suscripción vigente. Si vence, se cortan los servicios de app por Swan.
+
+Sin Swan, la app va directo al módulo: en la red local con su IP y puerto, o desde afuera con un port forward al puerto de software del módulo. Solo existe en módulos legado. Con IP150 de firmware 1.xx o 4.0.4 exige la contraseña de fábrica \"paradox\", y un port forward ahí deja el módulo expuesto.
+
+En los dos casos BlueEye pide el código de PC, que es el mismo de BabyWare; en MG y SP cada 0 se escribe como A, así que 6089 se ingresa 6A89.
+
+El monitoreo va aparte: la central reporta a la receptora por su propio canal, en Contact ID. Por eso la ficha separa tres cosas: el sitio Swan (ID, correo, vencimiento, quién paga), cómo conecta la app y por qué canal reporta el monitoreo. Con IP150M hay una excepción: según su manual, sin Swan pago no hay ninguna comunicación.
+""",
+  [{"file": "12-t1.svg", "after": "Si vence, se cortan los servicios de app por Swan.",
+    "alt": "Animación en cuatro tiempos con la app BlueEye, el servidor Swan, el módulo IP, la central y la receptora. 1: el módulo sale a internet y se anota en Swan. 2: la app pide el sitio a Swan, que la conecta con el módulo. 3: vence la suscripción y la conexión de la app se corta. 4: el reporte Contact ID de la central a la receptora sigue por su propio canal. Aviso: con el IP150M, según su manual, sin Swan pago no hay ninguna comunicación.",
+    "caption": "La app depende de Swan; el monitoreo, de su propio canal."}])
+
+# =====================================================================================  13
+L("13",
+  {"file": "13.svg", "alt": "Un teclado con la tecla TBL encendida y los números 2, 3 y 8 iluminados. Al lado, los diez grupos de fallas: 1 batería baja de inalámbricos; 2 energía, con 2.1 batería, 2.2 AC y 2.3 sobrecarga AUX; 3 campana; 4 comunicación; 5 tamper y cableado de zona; 6 tamper de módulo; 7 lazo de fuego; 8 pérdida de reloj; 9 supervisión de inalámbricos; 10 supervisión de módulos del bus, que se limpia en la sección 955. Abajo: cada número abre su submenú y en un K32LCD+ la falla aparece en texto.",
+   "caption": "Cada número encendido en TBL es un grupo de fallas con su submenú."},
+  [{"file": "13-paso2.svg", "step": 2, "after": "Si dejás el ZX8 afuera definitivamente",
+    "alt": "Tres pasos: sacás el ZX8 del bus y aparece TBL 10, supervisión de módulo, en ámbar; un reset no la borra, la falla sigue ahí, en rojo; la sección 955 borra la falla de módulos del bus, en verde. Secuencia ENTER, 0000 y 955, solo si el módulo sale para siempre. Notas: la falla de AC se ve en TBL apenas se corta la red pero se reporta a monitoreo después del retardo de la sección 839, 15 min de fábrica; la pérdida de reloj, grupo 8, se resuelve cargando fecha y hora desde el menú rápido o desde BabyWare.",
+    "caption": "Un módulo quitado a propósito deja una falla que solo borra [955]."},
+   {"file": "13-paso3.svg", "step": 3, "after": "Mirá el LED de estado de la placa",
+    "alt": "Cuatro patrones del LED de estado de la placa, en cuadritos de un cuarto de segundo durante 4 segundos. Un destello por segundo: normal, en verde. Un segundo encendido y uno apagado: hay alguna falla, mirá TBL, en ámbar. Encendido fijo: la central está usando la línea telefónica. Rápido durante 6 segundos al energizar: bloqueo de instalador activo. Según la guía SP+.",
+    "caption": "El ritmo del LED de la placa dice si hay falla antes de mirar el teclado."}],
+  [C("Pantalla de fallas (TBL)",
+     "La central sabe qué le pasa y lo dice con pitidos que el cliente no entiende. TBL traduce esos pitidos en un número de grupo, y eso resuelve muchas llamadas por teléfono.",
+     "Al apretar TBL se encienden los grupos con fallas; cada número abre su submenú. Los que más aparecen: 2 energía (2.1 batería, 2.2 AC, 2.3 sobrecarga AUX), 3 campana, 4 comunicación, 5 tamper o cableado de zona, 8 pérdida de reloj y 10 módulo del bus sin respuesta.",
+     "Llama un cliente de Paso Molino porque la alarma pita. Le pedís que apriete TBL: se enciende el 2, y en el submenú el 2. Hubo un corte de luz en la cuadra; cuando vuelve la red, la falla se va sola."),
+   C("Sección [955]",
+     "Cuando se saca un módulo del bus a propósito, la central lo sigue buscando y muestra la falla de supervisión. Un reset no la borra, porque para la central el módulo debería estar.",
+     "ENTER, código de instalador y [955] limpian las fallas de módulos de bus. Se usa solo cuando el módulo sale para siempre; si el módulo debería estar, la falla es un aviso real y hay que buscar el problema.",
+     "Al reformar una casa en Atahualpa sacás un ZX8 que quedó sin zonas. El TBL 10 no se va con nada hasta que entrás a [955]."),
+   C("LED de estado de la placa",
+     "Es la forma más rápida de saber si la central tiene alguna falla sin tocar el teclado, por ejemplo al abrir el gabinete.",
+     "Un destello por segundo es normal; un segundo encendido y uno apagado indica alguna falla; encendido fijo, la central usa la línea telefónica; destello rápido durante 6 segundos al energizar, bloqueo de instalador activo.",
+     "Abrís el gabinete de una central en un depósito y el LED titila un segundo sí y uno no: antes de ir al teclado ya sabés que hay algo para mirar en TBL.")],
+  """
+### Un poco de historia
+
+Las centrales viejas avisaban de una falla con un pitido y una luz, y el técnico tenía que adivinar el resto. Con más sensores, módulos y comunicadores, hizo falta un diagnóstico propio: la central se supervisa a sí misma y muestra qué le falta. En Paradox eso es la tecla TBL, de \"trouble\", y la pantalla de fallas organizada en grupos.
+
+Los teclados con pantalla, como el K32LCD+, muestran la falla en texto y se recorren con las flechas. En los de luces, los números encendidos son los grupos. La lógica es la misma en los dos.
+
+### Cómo funciona
+
+La central revisa todo el tiempo lo que puede medir: la red de alterna, la tensión de la batería, la salida de campana, el consumo del AUX, la comunicación, el cableado de las zonas, los tampers, el reloj y los módulos del bus. Cuando algo sale de lo normal, enciende su grupo en TBL y, según lo programado, lo reporta.
+
+Al apretar TBL se ven los grupos; cada número abre su submenú. El 2 es energía: 2.1 batería de la central, 2.2 falla de AC, 2.3 sobrecarga del AUX. El 3 es campana, el 4 comunicación, el 5 tamper y cableado de zona, el 6 tamper de módulo, el 7 lazo de fuego, el 8 pérdida de reloj, el 9 supervisión de inalámbricos y el 10 supervisión de módulos.
+
+Algunas fallas se van solas: cuando vuelve la red, la falla de AC se restaura. Otras no. La de un módulo quitado del bus queda hasta borrarla en [955], y un reset no la limpia. La pérdida de reloj se resuelve cargando fecha y hora.
+
+Ver una falla y reportarla no son lo mismo. La falla de AC se ve en TBL apenas se corta la red, pero la central espera el retardo de [839], 15 minutos de fábrica, antes de mandarla a monitoreo. Así cada microcorte no se convierte en una llamada.
+
+El LED de estado de la placa resume todo: un destello por segundo es normal; un segundo encendido y uno apagado, hay alguna falla.
+""",
+  [{"file": "13-t1.svg", "after": "Así cada microcorte no se convierte en una llamada.",
+    "alt": "Animación en cuatro tiempos con un teclado y una línea de tiempo. 1: se corta la red, TBL enciende el grupo 2 y el LED de estado pasa a un segundo encendido y uno apagado. 2: en el submenú aparece la falla de AC y la central espera el retardo de la sección 839, 15 minutos de fábrica. 3: pasado el retardo, la central reporta la falla de AC a monitoreo. 4: vuelve la red, la falla se restaura sola, TBL se apaga y el LED vuelve a un destello por segundo.",
+    "caption": "La falla de AC se ve enseguida y se reporta recién después de [839]."}])
+
+# =====================================================================================  14
+L("14",
+  {"file": "14.svg", "alt": "Cuatro pasos de diagnóstico de la central hacia el monitoreo: 1 serie, el LED RX y TX del módulo titilando dice que habla con la central; 2 red, cable, IP del módulo y salida a internet; 3 puertos, salida abierta TCP 8883 y 443 en módulos MQTT y el puerto de la receptora en legado; 4 receptora, registro, abonado y perfil, a veces el abonado atado a otra MAC. Debajo, la sección 935, estado del registro IP o GPRS: grupo 2 error del módulo, grupo 3 programación incompleta, grupo 4 error de registro. Nota: reiniciar el módulo desde BlueEye tarda hasta 5 min con firmware 4.xx o 15 min con 5.xx.",
+   "caption": "De la central hacia afuera: serie, red, puertos y receptora."},
+  [{"file": "14-paso1.svg", "step": 1, "after": "1. Leé el estado:",
+    "alt": "Secuencia ENTER, 0000 y 935. Tabla de la guía SP+: grupo 1 estado de registro, apagado sin registrar, titila registrando, fijo OK; grupo 2 error del módulo, 7 sin módulo, 8 cable desenchufado, 9 sin IP o red GPRS; grupo 3 error de programación, 7 sin IP, 8 sin puerto, 9 sin abonado, 10 sin APN; grupo 4 error de registro, 7 no conecta, 8 perfil, 9 formato, 10 otra MAC. Debajo, las pruebas de los pasos 2, 3 y 4: desenchufar el cable, borrar el puerto en 930 y poner un perfil inexistente en 934. Después de cada prueba se vuelve todo a normal y, sin errores, ARM en 935 registra.",
+    "caption": "Cada grupo de [935] apunta a una parte distinta de la cadena."},
+   {"file": "14-paso7.svg", "step": 7, "after": "después de cambiar un módulo, pedile",
+    "alt": "Un módulo viejo con MAC A, quemado, quedó registrado en la receptora con el abonado 1A01 atado a la MAC A. Un módulo nuevo con MAC B y la misma programación intenta registrarse con ARM, en rojo, y la receptora lo rechaza. Mensaje: sección 935, grupo 4, submenú 10, abonado registrado con otra MAC. Nota en verde: no se arregla en la central; se pide a monitoreo que libere el abonado del módulo anterior y se vuelve a registrar con ARM.",
+    "caption": "Con un módulo nuevo, la receptora puede seguir atada a la MAC vieja."}],
+  [C("Orden de diagnóstico",
+     "Cuando una central no reporta, la tentación es reiniciar todo. Seguir un orden fijo, de la central hacia afuera, evita saltear la causa y perder horas.",
+     "Primero el serie: el LED RX/TX del módulo tiene que titilar. Después la red: cable, IP y salida a internet. Después los puertos de salida. Y al final la receptora: registro, abonado y perfil. Con el número de [935] y una llamada a monitoreo se llega a la causa.",
+     "Monitoreo avisa que un abonado de Colón no reporta hace dos días. El LED RX/TX titila, el cable está, pero [935] marca grupo 2, submenú 9: el router del cliente cambió de rango y el módulo quedó sin IP."),
+   C("Estado del registro ([935])",
+     "El registro es el acuerdo entre el módulo y la receptora. La sección [935] muestra en qué estado está y, si falla, por qué.",
+     "Grupo 1: apagado sin registrar, titila registrando, fijo OK. Grupo 2: errores del módulo. Grupo 3: programación incompleta (sin IP, sin puerto, sin abonado, sin APN). Grupo 4: errores de registro (no conecta, perfil o formato inválido, abonado con otra MAC). Sin errores, ARM registra.",
+     "Después de programar una central nueva, [935] marca grupo 3, submenú 8: falta el puerto en [930]. Lo cargás, ARM, y el grupo 1 queda fijo."),
+   C("Abonado atado a la MAC",
+     "La receptora asocia cada abonado al módulo que se registró, por su MAC. Así evita que otro equipo reporte en nombre de un cliente.",
+     "Al cambiar un módulo, el nuevo tiene otra MAC y la receptora lo rechaza: aparece \"abonado registrado con otra MAC\" en [935]. No se arregla en la central: monitoreo libera el abonado del módulo anterior y se vuelve a registrar.",
+     "Cambiás un IP150+ quemado por uno nuevo en un comercio de Goes. Antes de salir, llamás a monitoreo para liberar el abonado; en dos minutos queda registrado.")],
+  """
+### Un poco de historia
+
+En la época de la línea telefónica, el diagnóstico era sencillo: había tono o no había. Con el reporte por IP aparecieron más eslabones: el serie entre la central y el módulo, la red del cliente, el firewall, internet y la receptora. Cada eslabón puede fallar por su lado, y por eso las guías de Paradox traen una tabla de estados de registro y el menú instalador de BlueEye permite reiniciar el módulo a distancia.
+
+La identificación por MAC es parte de esa historia: cada placa de red trae una dirección única de 48 bits asignada de fábrica, y las receptoras IP la usan para atar un abonado a un equipo concreto.
+
+### Cómo funciona
+
+El reporte por IP empieza con un registro. Con ARM en [935], el módulo se presenta ante la receptora con el abonado, el perfil y el formato programados, y la receptora valida todo, incluida la MAC del módulo. Mientras se registra, el grupo 1 titila; registrado, queda fijo.
+
+Si algo falla, [935] dice dónde. El grupo 2 habla del módulo: sin módulo, cable desenchufado, sin IP o sin red GPRS. El grupo 3 habla de la programación: sin IP de receptora, sin puerto, sin abonado o sin APN. El grupo 4 habla del registro: no conecta, perfil o formato inválido, o abonado registrado con otra MAC.
+
+Registrado el módulo, empieza la supervisión: el módulo se reporta según el perfil, por ejemplo cada 600 segundos con el perfil 02 del IPC10. Si deja de hacerlo, la receptora avisa que el abonado se cayó.
+
+De ahí sale el orden de diagnóstico, de la central hacia afuera: serie, red, puertos y receptora. Dos detalles de campo completan el cuadro. Reiniciar el módulo desde BlueEye puede tardar hasta 5 minutos con firmware 4.xx o 15 con 5.xx, hasta el próximo sondeo. Y un IP180 sin Ethernet abre su propio punto de acceso, IP180 más el número de serie en 192.168.180.1, para cargarle el Wi-Fi: no se deja así en obra.
+""",
+  [{"file": "14-t1.svg", "after": "Mientras se registra, el grupo 1 titila",
+    "alt": "Animación en cuatro tiempos con la tabla de estado de la sección 935, el módulo IP y la receptora. 1: con ARM el módulo pide registrarse y el grupo 1 titila. 2: la receptora valida abonado 1A01, perfil 02, formato Contact ID y la MAC del módulo. 3: registrado, el grupo 1 queda fijo. 4: el módulo se reporta periódicamente según el perfil, cada 600 segundos con el perfil 02 del IPC10; si deja de hacerlo, la receptora avisa.",
+    "caption": "Registro, validación y supervisión, como los muestra [935]."}])
+
+# =====================================================================================  15
+L("15",
+  {"file": "15.svg", "alt": "Tabla de las llaves de una SP+ con su valor de fábrica, cada una con un punto rojo: código de instalador 397, 0000; código de mantenimiento 398, vacío; maestro del sistema 399, 1234; ID de panel 910, 0000 con asterisco; contraseña de PC 911, 0000 con asterisco; instalador del software BabyWare 927, admin; contraseña de receptor IP legado 933, 123456; contraseña del módulo IP150 en app o web, paradox en firmware viejo. Notas: todos esos valores están en manuales públicos; dos protecciones, bloqueo de teclado (717 intentos, 716 minutos) y bloqueo de instalador (395 en 147, solo si está en el contrato); la ficha va al sistema de gestión, nunca al gabinete.",
+   "caption": "Ocho llaves con valor de fábrica publicado: todas se cambian antes de entregar."},
+  [{"file": "15-paso3.svg", "step": 3, "after": "Configurá el bloqueo de teclado",
+    "alt": "Sección 717 en 005, cinco intentos inválidos, y 716 en 010, diez minutos de bloqueo. Cinco recuadros rojos de código inválido, del 1 al 5, y una flecha a un recuadro oscuro: teclados bloqueados 10 minutos y la central lo reporta. Notas: frena al que prueba códigos de memoria o de manual y avisa a monitoreo; 000 lo deja apagado, como de fábrica; los valores son de ejemplo y se acuerdan con el cliente.",
+    "caption": "Cinco códigos inválidos y los teclados quedan bloqueados diez minutos."},
+   {"file": "15-paso4.svg", "step": 4, "after": "Decidí con el responsable comercial",
+    "alt": "Dos paneles sobre el reseteo por botón. Sin bloqueo, sección 395 en 000: vuelve todo a fábrica salvo ID de panel y contraseña de PC, y el buffer de eventos no se borra. Con bloqueo, 395 en 147, en ámbar: el reseteo no borra la programación y al energizar el LED de estado destella rápido durante 6 segundos. Notas: se usa solo si está en el contrato con el cliente; con una central ajena bloqueada, el camino es el cliente y el instalador anterior, y si el bloqueo está apagado, reseteo con autorización escrita.",
+    "caption": "Con [395] en 147, el reseteo por botón deja de borrar la programación."}],
+  [C("Llaves de fábrica",
+     "Cada llave viene con un valor conocido para que el equipo funcione la primera vez. El problema es que esos valores están en manuales públicos, al alcance de cualquiera.",
+     "Una SP+ tiene varias: instalador [397] 0000, mantenimiento [398] vacío, maestro [399] 1234, ID de panel [910] y contraseña de PC [911], instalador del software BabyWare [927] admin, receptor IP legado [933] 123456 y la del módulo IP150. Se miran con ENTER, se cambian y se anotan en la ficha del sistema de gestión.",
+     "Al entregar una obra en Pocitos, recorrés la ficha llave por llave y ninguna queda con el valor del manual. El cliente firma la entrega con esa ficha archivada en IES."),
+   C("Bloqueo de teclado",
+     "Sin límite, cualquiera puede probar códigos en el teclado hasta acertar. El bloqueo frena ese intento y avisa a monitoreo.",
+     "En [717] se cargan los intentos inválidos permitidos y en [716] los minutos de bloqueo; 000 lo deja apagado, como viene de fábrica. Pasado el límite, los teclados se bloquean y la central lo reporta.",
+     "En una casa en Lagomar, un adolescente prueba fechas de cumpleaños en el teclado: al quinto intento los teclados se bloquean diez minutos y monitoreo llama a los padres."),
+   C("Bloqueo de instalador",
+     "Protege la programación de una central contra el reseteo por botón: con el bloqueo puesto, resetear ya no la borra. Es una herramienta comercial, no solo técnica.",
+     "Se activa con 147 en [395] y se quita con 000. Al energizar, el LED de estado destella rápido seis segundos. Se usa solo si está en el contrato: ata la central a quien tiene el código. Con una central ajena bloqueada, el camino es el cliente y el instalador anterior.",
+     "Un cliente cambia de empresa y la central tiene bloqueo de instalador. No se buscan atajos: con su autorización, se piden los códigos a la empresa anterior.")],
+  """
+### Un poco de historia
+
+Las claves de fábrica son un problema viejo de toda la electrónica conectada. En 2016 la botnet Mirai infectó cientos de miles de cámaras y routers probando, justamente, usuarios y contraseñas de fábrica. Las alarmas tienen el mismo riesgo con otra forma: los códigos están en manuales públicos, y en foros hay quien sugiere entrar a una central ajena \"con los códigos de fábrica\".
+
+Paradox fue sumando defensas: el bloqueo de teclado, el bloqueo de instalador y, según la guía SP+, BabyWare obliga a cambiar el ID de panel y la contraseña de PC si siguen en 0000. Los manuales del IP180 y de BlueEye siguen citando 0000 como valor de fábrica, así que conviene no confiar en que alguien ya lo cambió.
+
+### Cómo funciona
+
+Una SP+ no tiene una llave: tiene varias, cada una para una puerta distinta. El código de instalador ([397]) abre la programación. El de mantenimiento ([398]) abre casi todo, menos comunicación y códigos. El maestro ([399]) es del cliente. El ID de panel y la contraseña de PC ([910] y [911]) abren BabyWare y BlueEye. La contraseña de instalador del software ([927]), la del receptor IP legado ([933], 123456 de fábrica) y la del módulo IP150 (\"paradox\" en firmware viejo) completan la lista.
+
+Dos protecciones actúan sobre los intentos. El bloqueo de teclado cuenta los códigos inválidos: al llegar al número de [717], bloquea los teclados los minutos de [716] y lo reporta. Con 000 queda apagado.
+
+El bloqueo de instalador actúa sobre el reseteo. Sin bloqueo, el reseteo por botón vuelve todo a fábrica salvo el ID de panel y la contraseña de PC. Con 147 en [395], el reseteo deja de borrar la programación, y al energizar el LED de estado destella rápido seis segundos. SP4000 y SP65 tienen otro procedimiento de reseteo, por puente, que también exige el bloqueo apagado.
+
+La regla de entrega es una sola: ninguna central sale de obra con un código de fábrica, y la ficha con las llaves nuevas va al sistema de gestión, nunca dentro del gabinete.
+""",
+  [{"file": "15-t1.svg", "after": "bloquea los teclados los minutos de [716]",
+    "alt": "Animación en cuatro tiempos con un teclado, un contador de intentos y monitoreo. 1: alguien prueba códigos y cada inválido suma uno. 2: llega a los 5 intentos de la sección 717. 3: los teclados se bloquean 10 minutos, sección 716, y la central reporta el bloqueo a monitoreo. 4: termina el bloqueo y el código correcto desarma.",
+    "caption": "El contador de intentos, el bloqueo y el aviso a monitoreo."}])
+
+# =====================================================================================  16
+L("16",
+  {"file": "16.svg", "alt": "Comparación en dos columnas. Parque SP, MG y EVO: bus de 4 hilos y zonas cableadas; transformador y batería de plomo o gel; programación por teclado por secciones y BabyWare; comunicación por módulo IP o PCS, legado o MQTT; desde 7.50 el serie atiende solo dispositivos Paradox. Línea M, M25 y M25 LTE, en verde: inalámbrico M y hasta 45 dispositivos por Ethernet; PoE y batería de litio interna; BlueEye o software web; Wi-Fi, Ethernet y LTE con hasta 4 canales; 200 zonas y 10 particiones. Notas: desde 7.50, para terceros hay un código de desbloqueo oficial pago, 5 USD por central; los datos de la M25 salen solo de su ficha y los servicios de app van con Swan 4G por suscripción.",
+   "caption": "Lo que cambia entre el parque cableado y la línea M."},
+  [{"file": "16-paso2.svg", "step": 2, "after": "Reglas para decidir:",
+    "alt": "Árbol de decisión. Pregunta: ¿hay integración serie de terceros que el cliente usa? Si sí, en ámbar, con firmware menor a 7.50: no actualizar sin plan y, si hace falta, presupuestar el desbloqueo oficial de 5 USD desde BlueEye, menú instalador, tres puntos, Unlock Panel; se carga con TM50, TM70, K641+ o K32LCD+, en MG y SP+ con ENTER, código de instalador, 300 y el código, y en EVO manteniendo 0, código, 3000 y el código. Si no, en verde: actualizar avisando al cliente. Abajo: obra nueva sin cableado, evaluar la M25 en banco; obra con cableado y bus, SP+ o EVO siguen siendo la opción natural; anotar la decisión y quién la aprobó.",
+    "caption": "La decisión se toma por sitio, sabiendo qué integración se puede cortar."}],
+  [C("Bloqueo del puerto serie (7.50)",
+     "Desde el firmware 7.50, primero en EVO y después en las plus, Paradox reserva el puerto serie para sus propios dispositivos. Una integración de terceros que usaba el serie deja de funcionar al actualizar.",
+     "Antes de actualizar se revisa si hay integración serie. Si la hay, se presupuesta el código de desbloqueo oficial, 5 USD por central, que se compra en BlueEye (Unlock Panel) y se carga en [300] en MG y SP+ o en [3000] en EVO, desde un teclado que admita letras. PAI recomienda directamente no actualizar EVO a 7.50 si se usa el serie.",
+     "Una casa en Carrasco tiene domótica que lee la EVO192 por el serie. Antes de actualizar, el presupuesto incluye el desbloqueo, y la domótica sigue andando al día siguiente."),
+   C("Línea M (M25)",
+     "Es la propuesta nueva de Paradox para obras sin cableado: consola con PoE, batería de litio, Wi-Fi, Ethernet y LTE, sin bus de cuatro hilos.",
+     "Según su ficha, maneja 200 zonas y 10 particiones, inalámbrico M y hasta 45 dispositivos por Ethernet, se programa desde BlueEye o software web y reporta directo a la receptora en hasta 4 canales. Los servicios de app van con Swan 4G por suscripción. La evidencia es fina: conviene probarla en banco antes de ofrecerla.",
+     "Una oficina nueva en un edificio corporativo de Buceo no quiere canalizar cables: la M25 se evalúa en banco, con la receptora de la empresa de monitoreo, antes de cotizarla."),
+   C("Decisión por sitio",
+     "No hay una regla única para todo el parque: cada sitio tiene su firmware, su módulo, su integración y su receptora. Decidir por sitio evita cortar algo que el cliente usa.",
+     "Se arma una tabla con central y firmware, módulo y generación, integración serie, receptora y app, y para cada sitio se decide: actualizar, desbloquear, migrar o dejar. La decisión y quién la aprobó quedan anotadas.",
+     "En la cartera de IES, tres sitios con EVO, SP6000+ y una obra nueva: uno se actualiza con desbloqueo, otro se deja como está y para la obra nueva se evalúa la M25.")],
+  """
+### Un poco de historia
+
+El puerto serie es de las interfaces más viejas de la electrónica: la norma RS-232 es de 1960. Durante décadas fue la puerta por la que las centrales de alarma hablaban con módulos, software y sistemas de terceros, como la domótica. En Paradox, ese serie atendía tanto a sus módulos IP como a integraciones externas, y proyectos de software libre como PAI se conectaban por ahí.
+
+El firmware 7.50 cambió eso: primero en EVO y después en las plus, el serie pasó a trabajar solo con dispositivos Paradox, con un código de desbloqueo oficial pago para terceros. Al mismo tiempo, Paradox presentó la línea M: la M25 se alimenta por PoE, la tecnología de IEEE 802.3af de 2003, y su versión LTE usa la red celular de cuarta generación.
+
+### Cómo funciona
+
+En una central con firmware anterior a 7.50, cualquier equipo que hable el protocolo por el serie puede conectarse. Desde 7.50, la central atiende por el serie solo a dispositivos Paradox: los módulos IP y PCS siguen funcionando, pero una integración de terceros se corta. Para recuperarla, se compra un código de desbloqueo en BlueEye, con Unlock Panel en el menú instalador, a 5 USD por central, y se carga en [300] en MG y SP+ o en [3000] en EVO, desde un TM50, TM70, K641+ o K32LCD+, que admiten letras.
+
+Las fuentes discrepan sobre qué hacer: Paradox ofrece el desbloqueo; PAI recomienda no actualizar EVO a 7.50 o más si se usa conexión serie. La salida práctica es decidir por sitio: si hay integración serie que el cliente usa, no se actualiza sin plan; si hay que actualizar, se presupuesta el desbloqueo antes.
+
+La M25 cambia la arquitectura: no hay bus de cuatro hilos. Los dispositivos se suman por radio, con hasta 75 nodos inalámbricos, o por Ethernet, hasta 45, por autoaprendizaje, QR o número de serie. Reporta directo a la receptora en hasta 4 canales sin depender de la nube, y los servicios de app van por Swan 4G con suscripción.
+
+En obra nueva sin cableado, la M25 se evalúa en banco; con cableado y bus existentes, SP+ o EVO siguen siendo la opción natural.
+""",
+  [{"file": "16-t1.svg", "after": "pero una integración de terceros se corta",
+    "alt": "Animación en cuatro tiempos. 1: con firmware anterior a 7.50, una integración de terceros funciona por el puerto serie. 2: con firmware 7.50 o más, el serie solo atiende dispositivos Paradox y la integración se corta; los módulos Paradox siguen andando. 3: se compra en BlueEye, con Unlock Panel, el código de desbloqueo, 5 dólares por central. 4: cargado en la sección 300 de MG y SP+ o 3000 de EVO, la integración vuelve a funcionar.",
+    "caption": "Qué se corta en 7.50 y cómo vuelve con el desbloqueo oficial."}])
+
+# ------------------------------------------------------------------ salida y chequeos
+import re
+order = [str(i) for i in range(1, 17)]
+out = "/home/claude/ies-training/ilustraciones/paradox/manifest.json"
+json.dump({k: M[k] for k in order}, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+s = json.dumps(M, ensure_ascii=False)
+print("ok", out, len(M), "lecciones · guiones largos:", "—" in s or "–" in s)
+for k in order:
+    t = M[k]["teoria_md"]
+    w = len(re.findall(r"\w+", t))
+    bad = [f["after"] for f in M[k]["teoria_figs"] if t.count(f["after"]) != 1 or not (15 <= len(f["after"]) <= 60)]
+    print(k, "palabras", w, "conceptos", len(M[k]["concepts"]), "teoria_figs mal:" if bad else "", bad if bad else "",
+          "" if "### Un poco de historia" in t and "### Cómo funciona" in t else "SIN SUBTITULOS")

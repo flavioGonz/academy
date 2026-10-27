@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>IP fija por consola: cuatro pasos y verificar</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">WINDOWS</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">IP fija por consola: cuatro pasos y verificar</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<rect x="48" y="128" width="200" height="250" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="80" cy="166" r="18" fill="#17A8D4"/><text x="80.0" y="172.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="106.0" y="173.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Ver la placa</text>
+<rect x="60" y="200" width="176" height="36" rx="10" fill="#03213C"/><text x="76.0" y="222.6" font-family="JetBrains Mono" font-size="13" font-weight="500" fill="#D9E9F8" text-anchor="start">Get-NetAdapter</text>
+<text x="64.0" y="270.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="64.0" dy="0.0">nombre e índice</tspan></text>
+<path d="M250.0 300.0C260.0 300.0,260.0 300.0,270.0 300.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="272" y="128" width="200" height="250" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="304" cy="166" r="18" fill="#17A8D4"/><text x="304.0" y="172.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="330.0" y="173.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Limpiar</text>
+<rect x="284" y="200" width="176" height="36" rx="10" fill="#03213C"/><text x="300.0" y="222.6" font-family="JetBrains Mono" font-size="13" font-weight="500" fill="#D9E9F8" text-anchor="start">Remove-NetIPAddress</text>
+<text x="288.0" y="270.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="288.0" dy="0.0">y Remove-NetRoute</tspan><tspan x="288.0" dy="20.2">0.0.0.0/0</tspan></text>
+<path d="M474.0 300.0C484.0 300.0,484.0 300.0,494.0 300.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="496" y="128" width="200" height="250" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="528" cy="166" r="18" fill="#17A8D4"/><text x="528.0" y="172.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="554.0" y="173.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Asignar</text>
+<rect x="508" y="200" width="176" height="36" rx="10" fill="#03213C"/><text x="524.0" y="222.6" font-family="JetBrains Mono" font-size="13" font-weight="500" fill="#D9E9F8" text-anchor="start">New-NetIPAddress</text>
+<text x="512.0" y="270.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="512.0" dy="0.0">-PrefixLength 24</tspan><tspan x="512.0" dy="20.2">-DefaultGateway</tspan></text>
+<path d="M698.0 300.0C708.0 300.0,708.0 300.0,718.0 300.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="720" y="128" width="200" height="250" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="752" cy="166" r="18" fill="#17A8D4"/><text x="752.0" y="172.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="778.0" y="173.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">DNS aparte</text>
+<rect x="732" y="200" width="176" height="36" rx="10" fill="#03213C"/><text x="748.0" y="222.6" font-family="JetBrains Mono" font-size="13" font-weight="500" fill="#D9E9F8" text-anchor="start">Set-DnsClient…</text>
+<text x="736.0" y="270.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="736.0" dy="0.0">ServerAddresses</tspan><tspan x="736.0" dy="20.2">10.10.10.1</tspan></text>
+<path d="M922.0 300.0C932.0 300.0,932.0 300.0,942.0 300.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="944" y="128" width="200" height="250" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<circle cx="976" cy="166" r="18" fill="#0E8F5E"/><text x="976.0" y="172.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<text x="1002.0" y="173.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#0E8F5E" text-anchor="start">Verificar</text>
+<rect x="956" y="200" width="176" height="36" rx="10" fill="#03213C"/><text x="972.0" y="222.6" font-family="JetBrains Mono" font-size="13" font-weight="500" fill="#D9E9F8" text-anchor="start">Get-NetIPAddress</text>
+<text x="960.0" y="270.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="960.0" dy="0.0">y Get-NetRoute</tspan><tspan x="960.0" dy="20.2">0.0.0.0/0</tspan></text>
+<rect x="48" y="404" width="540" height="110" rx="16" fill="#E5F0FB" stroke="#0A63B8" stroke-width="2"/>
+<text x="72.0" y="444.0" font-family="JetBrains Mono" font-size="18" font-weight="600" fill="#0A63B8" text-anchor="start">-PrefixLength 24</text>
+<text x="270.0" y="444.0" font-family="JetBrains Mono" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">= máscara 255.255.255.0</text>
+<text x="72.0" y="484.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">New-NetIPAddress no toma la máscara en decimal.</text>
+<rect x="612" y="404" width="540" height="110" rx="16" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<text x="636.0" y="444.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#D2492F" text-anchor="start">Sin limpiar: dos gateways</text>
+<text x="636.0" y="484.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">El tráfico sale por donde quiere.</text>
+<rect x="48" y="540" width="1104" height="75" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="48" y="552" width="5" height="51" rx="2.5" fill="#B45309"/><text x="74.0" y="574.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Hacelo desde la consola de la VM o del servidor: cambiar la IP por escritorio remoto te desconecta. Después, el script queda en</tspan><tspan x="74.0" dy="21.6">el informe de obra y sirve igual en Server Core.</tspan></text>
+</svg>

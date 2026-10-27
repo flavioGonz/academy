@@ -1,0 +1,212 @@
+{
+  "curso": {
+    "objetivo": "Al terminar el curso vas a poder dejar en marcha y sostener los Windows que corren VMS, controladoras y puestos de monitoreo: identificar qué Windows es, diagnosticar red, puertos y nombres por consola, configurar IP, firewall y escritorio remoto sin exponer el servidor, dejar servicios y energía listos para funcionar 24/7, explicar una falla con el registro de eventos, medir el disco que graba, actualizar con un backup restaurable y guardar las llaves fuera del equipo.",
+    "recorrido": "Arrancás por saber qué Windows tenés adelante y si la red llega, de tu placa hacia afuera: ARP, el puerto exacto del servicio, el nombre que ve la aplicación y la IP fija bien puesta. Con la red en orden, cerrás el servidor: firewall por perfil y con origen limitado, escritorio remoto solo por VPN y con NLA, servicios que se levantan solos y un equipo que no duerme y vuelve tras un corte. Al final, lo que pasa cuando algo falla: qué cambió según el registro, si el disco da abasto, cómo actualizar sin quedarte sin marcha atrás y dónde viven las llaves que te dejan entrar cuando todo lo demás falla."
+  },
+  "modulos": [
+    {
+      "title": "Qué Windows es y si la red llega",
+      "why": "Antes de tocar un servidor hay que saber qué Windows es y si la red llega. Va de tu propia placa hacia afuera: versión, capas, puertos y nombres, y la IP fija bien puesta. La mayoría de los \"no veo las cámaras\" se resuelven en este módulo.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder anotar edición, versión y build de un Windows y reconocer cuándo la firma SMB o el fin del invitado explican una falla.",
+        "Al terminar el módulo vas a poder diagnosticar por capas con ipconfig, ping, ARP, pathping, Test-NetConnection y Resolve-DnsName.",
+        "Al terminar el módulo vas a poder dejar un servidor con IP fija por consola, verificada, y entender un DHCP de Windows Server con reservas."
+      ],
+      "lessons": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "title": "Un servidor que no se cae solo",
+      "why": "Un VMS o una controladora viven años encendidos. Primero se cierra la puerta (firewall por perfil y escritorio remoto sin exponer) y después se asegura que el servidor se levante solo: servicios con recuperación, tareas al inicio, energía en nunca y BIOS que vuelve tras un corte.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder crear reglas de firewall por puerto o programa, con origen limitado y en el perfil correcto, con respaldo antes.",
+        "Al terminar el módulo vas a poder dejar el escritorio remoto solo por VPN, con NLA y limitado a la subred de gestión.",
+        "Al terminar el módulo vas a poder configurar servicios con inicio retrasado y recuperación, tareas al inicio sin sesión y un equipo 24/7 que vuelve solo tras un corte."
+      ],
+      "lessons": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ]
+    },
+    {
+      "title": "Cuando algo falla",
+      "why": "Con la base en su lugar, toca diagnosticar con datos, mantener sin romper y cuidar las llaves. Va de explicar una falla con el registro de eventos a medir el disco, actualizar con backup y guardar las claves fuera del equipo. Es lo que separa al que cambia piezas del que encuentra la causa.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder explicar un reinicio o una falla con el Monitor de confiabilidad y Get-WinEvent filtrado.",
+        "Al terminar el módulo vas a poder medir latencia, IOPS y cola del disco de grabación y cargar las exclusiones del antivirus que pide el fabricante.",
+        "Al terminar el módulo vas a poder actualizar con calendario y un backup restaurable, y dejar administrador local, BitLocker y DSRM con sus llaves fuera del equipo."
+      ],
+      "lessons": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ]
+    }
+  ],
+  "lecciones": {
+    "1": {
+      "objetivos": [
+        "Al terminar vas a poder leer edición, versión, build y parche de un Windows con winver y por consola.",
+        "Al terminar vas a poder revisar si el cliente SMB exige firma y si permite el acceso invitado.",
+        "Al terminar vas a poder explicar por qué un NAS o grabador viejo deja de abrir con 24H2 sin culpar a la red."
+      ],
+      "sigue": "Con el Windows identificado, la próxima revisa si la red llega, capa por capa desde tu propia placa.",
+      "requisitos": []
+    },
+    "2": {
+      "objetivos": [
+        "Al terminar vas a poder revisar tu placa, el gateway y la tabla ARP en ese orden.",
+        "Al terminar vas a poder distinguir un equipo apagado de uno que solo bloquea el ping.",
+        "Al terminar vas a poder usar pathping para encontrar el salto donde se pierden paquetes."
+      ],
+      "conecta": "En Versión primero viste que no todo \"no abre\" es la red. Acá aprendés a probar la red de verdad, de tu placa hacia afuera.",
+      "sigue": "Con el equipo vivo, la próxima prueba si el servicio atiende en su puerto y qué nombre ve la aplicación.",
+      "requisitos": [
+        "1"
+      ]
+    },
+    "3": {
+      "objetivos": [
+        "Al terminar vas a poder probar el puerto exacto de un servicio con Test-NetConnection.",
+        "Al terminar vas a poder ver qué programa escucha cada puerto de tu equipo y en qué placa.",
+        "Al terminar vas a poder comparar Resolve-DnsName y nslookup y saber cuál reproduce a la aplicación."
+      ],
+      "conecta": "En Capa por capa confirmaste que el equipo está vivo con ARP. Acá subís un escalón: el servicio y el nombre.",
+      "sigue": "Con la red diagnosticada, la próxima deja la IP del servidor fija y verificada, por consola.",
+      "requisitos": [
+        "2"
+      ]
+    },
+    "4": {
+      "objetivos": [
+        "Al terminar vas a poder poner una IP fija por PowerShell limpiando antes la IP y la ruta viejas.",
+        "Al terminar vas a poder verificar IP, ruta por defecto y DNS, y volver a DHCP.",
+        "Al terminar vas a poder montar un ámbito de DHCP de prueba con una reserva por MAC y saber cuándo hay que autorizarlo."
+      ],
+      "conecta": "En Capa por capa empezaste por ipconfig /all para ver la placa. Acá esa placa queda configurada por consola y documentada.",
+      "sigue": "La red del servidor quedó en orden. El próximo módulo la cierra, empezando por el firewall y sus perfiles.",
+      "requisitos": [
+        "2"
+      ]
+    },
+    "5": {
+      "objetivos": [
+        "Al terminar vas a poder ver el perfil de cada placa y el estado del firewall.",
+        "Al terminar vas a poder crear una regla de entrada por puerto con origen y perfiles limitados.",
+        "Al terminar vas a poder ver qué abre una regla con sus filtros y respaldar el firewall antes de tocarlo."
+      ],
+      "conecta": "En Probá el puerto viste que un False por tiempo suele ser un firewall. Acá aprendés cómo decide ese firewall.",
+      "sigue": "Con las reglas entendidas, la próxima aplica lo mismo a la puerta más peligrosa: el escritorio remoto.",
+      "requisitos": [
+        "3",
+        "4"
+      ]
+    },
+    "6": {
+      "objetivos": [
+        "Al terminar vas a poder comprobar que NLA está activa.",
+        "Al terminar vas a poder limitar las reglas de escritorio remoto a la subred de gestión sin cortarte.",
+        "Al terminar vas a poder diagnosticar el error \"requiere NLA\" por sus causas reales: DNS, dominio y hora."
+      ],
+      "conecta": "En Perfil y regla creaste reglas con origen limitado. Acá esa misma idea se aplica a las reglas de RDP.",
+      "sigue": "El servidor quedó cerrado. La próxima se ocupa de que sus servicios se levanten solos.",
+      "requisitos": [
+        "5"
+      ]
+    },
+    "7": {
+      "objetivos": [
+        "Al terminar vas a poder poner un servicio en automático retrasado con sc.exe.",
+        "Al terminar vas a poder configurar y probar la recuperación ante fallas de un servicio.",
+        "Al terminar vas a poder crear una tarea al inicio que corre como SYSTEM sin sesión iniciada."
+      ],
+      "conecta": "En RDP sin exponer cerraste la entrada al servidor. Acá te asegurás de que lo que corre adentro no dependa de que alguien entre.",
+      "sigue": "Con los servicios en orden, la próxima asegura que el equipo no se duerma y vuelva solo después de un corte.",
+      "requisitos": [
+        "6"
+      ]
+    },
+    "8": {
+      "objetivos": [
+        "Al terminar vas a poder dejar suspensión, hibernación y apagado de disco en nunca con powercfg.",
+        "Al terminar vas a poder apagar el inicio rápido y ver qué mantiene despierto al equipo.",
+        "Al terminar vas a poder elegir entre Last State y Power On en el BIOS y confirmar un corte con el evento 6008."
+      ],
+      "conecta": "En Que se levante los servicios arrancan solos. Acá te asegurás de que el equipo esté encendido para que eso pase.",
+      "sigue": "El servidor ya no se cae solo. El próximo módulo empieza cuando algo falla igual: qué cambió y quién reinició.",
+      "requisitos": [
+        "7"
+      ]
+    },
+    "9": {
+      "objetivos": [
+        "Al terminar vas a poder encontrar en el Monitor de confiabilidad el día de la falla y qué se instaló.",
+        "Al terminar vas a poder buscar con Get-WinEvent quién reinició (1074) y los apagados inesperados (6008).",
+        "Al terminar vas a poder filtrar errores y críticos por fecha con FilterHashtable y saber cuánto historial guarda el log."
+      ],
+      "conecta": "En Nunca dormir confirmaste un corte con el evento 6008. Acá recorrés el registro entero para explicar cualquier reinicio.",
+      "sigue": "Con el registro leído, la próxima mide la pieza que más trabaja en un servidor de video: el disco que graba.",
+      "requisitos": [
+        "8"
+      ]
+    },
+    "10": {
+      "objetivos": [
+        "Al terminar vas a poder medir latencia, IOPS y cola de un disco con Get-Counter.",
+        "Al terminar vas a poder interpretar esos números contra los umbrales de la lección y comparar reposo con carga.",
+        "Al terminar vas a poder cargar y quitar exclusiones de Defender según la guía del fabricante del VMS."
+      ],
+      "conecta": "En Qué cambió explicaste una falla con eventos. Acá la explicás con números del disco.",
+      "sigue": "Con el servidor medido, la próxima lo mantiene al día sin perder la marcha atrás: actualizaciones con backup.",
+      "requisitos": [
+        "9"
+      ]
+    },
+    "11": {
+      "objetivos": [
+        "Al terminar vas a poder ajustar las horas activas y saber cuándo reinicia Windows después de actualizar.",
+        "Al terminar vas a poder ver qué actualizaciones entraron y quién reinició por ellas.",
+        "Al terminar vas a poder hacer un backup de los volúmenes críticos con wbadmin y confirmar que sirve."
+      ],
+      "conecta": "En Qué cambió usaste el evento 1074 para saber quién reinició. Acá lo usás para controlar los reinicios por actualizaciones.",
+      "sigue": "Con el backup hecho, la última lección cuida las llaves que te dejan entrar cuando todo lo demás falla.",
+      "requisitos": [
+        "9"
+      ]
+    },
+    "12": {
+      "objetivos": [
+        "Al terminar vas a poder revisar BitLocker y guardar la clave de recuperación fuera del equipo.",
+        "Al terminar vas a poder suspender BitLocker antes de tocar el BIOS sin quedar bloqueado.",
+        "Al terminar vas a poder revisar quién es administrador local y explicar para qué sirven LAPS y la contraseña DSRM."
+      ],
+      "conecta": "En RDP sin exponer viste que, si NLA falla, se entra con el administrador local o por consola. Acá esa cuenta y las demás llaves quedan en orden.",
+      "cierre": "Con esto recorriste Windows para técnicos de campo de punta a punta: qué Windows es, si la red llega, un servidor cerrado que se levanta solo y, cuando algo falla, eventos, disco, backup y llaves. La ficha del equipo, los scripts de cada lección y la planilla de obra son tu kit para el próximo servidor.",
+      "requisitos": [
+        "6",
+        "11"
+      ]
+    }
+  },
+  "avisos": [
+    {
+      "id": "5",
+      "archivo": "script.txt",
+      "texto": "A: Arco dos. Ya tenemos red.",
+      "sugerencia": "A: Módulo dos. Ya tenemos red."
+    },
+    {
+      "id": "9",
+      "archivo": "script.txt",
+      "texto": "A: Arco tres, cuando algo falla.",
+      "sugerencia": "A: Módulo tres, cuando algo falla."
+    }
+  ]
+}

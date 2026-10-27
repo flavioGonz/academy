@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Horas activas: Windows reinicia fuera de ese rango</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">WINDOWS · PASO 1</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Horas activas: Windows reinicia fuera de ese rango</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<circle cx="65" cy="141" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="65.0" y="147.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="94.0" y="147.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#41627F" text-anchor="start">Configuración &gt; Windows Update &gt; Opciones avanzadas &gt; Horas activas</text>
+<rect x="80" y="220" width="1040" height="70" rx="12" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<rect x="427" y="220" width="390" height="70" rx="12" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="621.7" y="262.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#0E8F5E" text-anchor="middle">horas activas: no reinicia</text>
+<text x="231.7" y="262.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#6E88A1" text-anchor="middle">puede reiniciar</text>
+<text x="968.3" y="262.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#6E88A1" text-anchor="middle">puede reiniciar</text>
+<path d="M80 292V302" stroke="#6E88A1" stroke-width="2"/>
+<text x="80.0" y="324.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="middle">00:00</text>
+<path d="M253 292V302" stroke="#6E88A1" stroke-width="2"/>
+<text x="253.3" y="324.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="middle">04:00</text>
+<path d="M427 292V302" stroke="#6E88A1" stroke-width="2"/>
+<text x="426.7" y="324.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="middle">08:00</text>
+<path d="M600 292V302" stroke="#6E88A1" stroke-width="2"/>
+<text x="600.0" y="324.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="middle">12:00</text>
+<path d="M773 292V302" stroke="#6E88A1" stroke-width="2"/>
+<text x="773.3" y="324.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="middle">16:00</text>
+<path d="M947 292V302" stroke="#6E88A1" stroke-width="2"/>
+<text x="946.7" y="324.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="middle">20:00</text>
+<path d="M1120 292V302" stroke="#6E88A1" stroke-width="2"/>
+<text x="1120.0" y="324.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#6E88A1" text-anchor="middle">24:00</text>
+<text x="426.7" y="208.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">8:00</text>
+<text x="816.7" y="208.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#0E8F5E" text-anchor="middle">17:00</text>
+<rect x="48" y="360" width="540" height="102" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="372" width="5" height="78" rx="2.5" fill="#0A63B8"/><text x="74.0" y="394.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="74.0" dy="0.0">Valores</tspan></text><text x="74.0" y="420.9" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">De fábrica van de 8 a 17 y el rango máximo es de 18 horas.</tspan><tspan x="74.0" dy="21.6">Ajustalas al horario de operación del cliente.</tspan></text>
+<rect x="612" y="360" width="540" height="124" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="612" y="372" width="5" height="100" rx="2.5" fill="#B45309"/><text x="638.0" y="394.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="638.0" dy="0.0">Sin sesión, reinicia</tspan></text><text x="638.0" y="420.9" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="638.0" dy="0.0">Solo cuenta como usuario conectado una sesión local o de</tspan><tspan x="638.0" dy="21.6">escritorio remoto activa: sin nadie, el equipo se reinicia</tspan><tspan x="638.0" dy="21.6">cuando le toca.</tspan></text>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Una regla dice qué entra, desde dónde y cuándo</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">WINDOWS · PASO 4</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Una regla dice qué entra, desde dónde y cuándo</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<circle cx="65" cy="141" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="65.0" y="147.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="94.0" y="147.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#41627F" text-anchor="start">New-NetFirewallRule -DisplayName &#x27;LAB VMS web 8443&#x27; …</text>
+<rect x="48" y="180" width="560" height="60" rx="10" fill="#03213C"/><text x="64.0" y="215.6" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#D9E9F8" text-anchor="start">-Direction Inbound -Action Allow</text>
+<path d="M614.0 210.0C637.0 210.0,637.0 210.0,660.0 210.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="668" y="180" width="484" height="76" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="690.0" y="212.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Qué hace</text>
+<text x="690.0" y="238.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">permite lo que entra</text>
+<rect x="48" y="272" width="560" height="60" rx="10" fill="#03213C"/><text x="64.0" y="307.6" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#D9E9F8" text-anchor="start">-Protocol TCP -LocalPort 8443</text>
+<path d="M614.0 302.0C637.0 302.0,637.0 302.0,660.0 302.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="668" y="272" width="484" height="76" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<text x="690.0" y="304.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Qué abre</text>
+<text x="690.0" y="330.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">un puerto concreto, no todo</text>
+<rect x="48" y="364" width="560" height="60" rx="10" fill="#03213C"/><text x="64.0" y="399.6" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#D9E9F8" text-anchor="start">-RemoteAddress LocalSubnet</text>
+<path d="M614.0 394.0C637.0 394.0,637.0 394.0,660.0 394.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="668" y="364" width="484" height="76" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="690.0" y="396.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#0E8F5E" text-anchor="start">Desde dónde</text>
+<text x="690.0" y="422.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">solo la subred local del equipo</text>
+<rect x="48" y="456" width="560" height="60" rx="10" fill="#03213C"/><text x="64.0" y="491.6" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#D9E9F8" text-anchor="start">-Profile Private,Domain</text>
+<path d="M614.0 486.0C637.0 486.0,637.0 486.0,660.0 486.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="668" y="456" width="484" height="76" rx="16" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/>
+<text x="690.0" y="488.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#B45309" text-anchor="start">Cuándo</text>
+<text x="690.0" y="514.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">solo con esos perfiles activos</text>
+<rect x="48" y="556" width="1104" height="54" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="568" width="5" height="30" rx="2.5" fill="#0A63B8"/><text x="74.0" y="590.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Para una regla por programa, en vez de puerto va -Program con la ruta completa del ejecutable. Nunca &quot;todo a todos&quot;.</tspan></text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Una tarea que corre al arrancar, sin nadie conectado</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">WINDOWS · PASO 4</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Una tarea que corre al arrancar, sin nadie conectado</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<circle cx="65" cy="141" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="65.0" y="147.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="94.0" y="147.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#41627F" text-anchor="start">Register-ScheduledTask -TaskName &#x27;Lab arranque&#x27; -TaskPath &#x27;\Lab\&#x27;</text>
+<text x="48.0" y="212.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Acción</text>
+<rect x="190" y="184" width="560" height="40" rx="10" fill="#03213C"/><text x="206.0" y="208.9" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#D9E9F8" text-anchor="start">powershell.exe -File C:\Lab\arranque.ps1</text>
+<text x="774.0" y="210.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">con -NoProfile y -ExecutionPolicy Bypass</text>
+<text x="48.0" y="304.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Carpeta</text>
+<rect x="190" y="276" width="560" height="40" rx="10" fill="#03213C"/><text x="206.0" y="300.9" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#D9E9F8" text-anchor="start">-WorkingDirectory &#x27;C:\Lab&#x27;</text>
+<text x="774.0" y="302.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#B45309" text-anchor="start">sin esto, escribe en System32</text>
+<text x="48.0" y="396.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Disparador</text>
+<rect x="190" y="368" width="560" height="40" rx="10" fill="#03213C"/><text x="206.0" y="392.9" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#D9E9F8" text-anchor="start">New-ScheduledTaskTrigger -AtStartup</text>
+<text x="774.0" y="394.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">al encender, sin esperar sesión</text>
+<text x="48.0" y="488.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Cuenta</text>
+<rect x="190" y="460" width="560" height="40" rx="10" fill="#03213C"/><text x="206.0" y="484.9" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#D9E9F8" text-anchor="start">-User &#x27;NT AUTHORITY\SYSTEM&#x27; -RunLevel Highest</text>
+<text x="774.0" y="486.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start">como SYSTEM, con privilegios altos</text>
+<rect x="48" y="550" width="1104" height="75" rx="14" fill="#FFFFFF" stroke="#DDE8F2" stroke-width="1.5"/><rect x="48" y="562" width="5" height="51" rx="2.5" fill="#0A63B8"/><text x="74.0" y="584.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Para probar: reiniciá la VM sin iniciar sesión, esperá un minuto, entrá y mirá C:\Lab\arranque.log. Al terminar, Unregister-</tspan><tspan x="74.0" dy="21.6">ScheduledTask.</tspan></text>
+</svg>

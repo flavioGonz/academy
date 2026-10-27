@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>¿Dónde cae a 15 V? Con 2 mA, cerca de 1100 m</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">BOSCH INCENDIO · PASO 4</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">¿Dónde cae a 15 V? Con 2 mA, cerca de 1100 m</text>
+<rect x="130" y="360.0" width="730" height="200.0" fill="#FCEAE6" opacity=".7"/>
+<path d="M130 560.0H860" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="118.0" y="565.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#6E88A1" text-anchor="end">0 V</text>
+<path d="M130 360.0H860" stroke="#D2492F" stroke-width="2.5"/>
+<text x="118.0" y="365.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#D2492F" text-anchor="end">15 V</text>
+<path d="M130 160.0H860" stroke="#C2D4E6" stroke-width="1.5"/>
+<text x="118.0" y="165.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#6E88A1" text-anchor="end">30 V</text>
+<text x="130.0" y="586.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">0 m</text>
+<text x="312.5" y="586.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">400 m</text>
+<text x="495.0" y="586.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">800 m</text>
+<text x="677.5" y="586.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">1200 m</text>
+<text x="860.0" y="586.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#6E88A1" text-anchor="middle">1600 m</text>
+<text x="140.0" y="386.0" font-family="Instrument Sans" font-size="15" font-weight="600" fill="#D2492F" text-anchor="start">zona de avería: menos de 15 V</text>
+<polyline points="130.0,176.8 152.8,179.6 175.6,182.5 198.4,185.3 221.2,188.1 244.1,191.0 266.9,193.8 289.7,196.6 312.5,199.4 335.3,202.3 358.1,205.1 380.9,207.9 403.8,210.8 426.6,213.6 449.4,216.4 472.2,219.3 495.0,222.1 517.8,224.9 540.6,227.8 563.4,230.6 586.2,233.4 609.1,236.3 631.9,239.1 654.7,241.9 677.5,244.7 700.3,247.6 723.1,250.4 745.9,253.2 768.8,256.1 791.6,258.9 814.4,261.7 837.2,264.6 860.0,267.4" fill="none" stroke="#0E8F5E" stroke-width="4"/>
+<text x="870.0" y="272.4" font-family="JetBrains Mono" font-size="16" font-weight="700" fill="#0E8F5E" text-anchor="start">0,5 mA</text>
+<polyline points="130.0,202.0 152.8,209.1 175.6,216.2 198.4,223.2 221.2,230.3 244.1,237.4 266.9,244.5 289.7,251.5 312.5,258.6 335.3,265.7 358.1,272.8 380.9,279.9 403.8,286.9 426.6,294.0 449.4,301.1 472.2,308.2 495.0,315.2 517.8,322.3 540.6,329.4 563.4,336.5 586.2,343.6 609.1,350.6 631.9,357.7 654.7,364.8 677.5,371.9 700.3,378.9 723.1,386.0 745.9,393.1 768.8,400.2 791.6,407.2 814.4,414.3 837.2,421.4 860.0,428.5" fill="none" stroke="#B45309" stroke-width="4"/>
+<text x="870.0" y="433.5" font-family="JetBrains Mono" font-size="16" font-weight="700" fill="#B45309" text-anchor="start">2 mA</text>
+<circle cx="639.2" cy="360.0" r="8" fill="#B45309"/>
+<text x="625.2" y="394.0" font-family="JetBrains Mono" font-size="16" font-weight="700" fill="#B45309" text-anchor="end">unos 1116 m</text>
+<path d="M860.0 160V560" stroke="#6E88A1" stroke-width="2" stroke-dasharray="6 6"/>
+<text x="852.0" y="150.0" font-family="Instrument Sans" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="end">largo máximo LSN 0300 A</text>
+<rect x="960" y="160" width="192" height="150" rx="16" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><text x="980.0" y="192.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#0E8F5E" text-anchor="start">0,5 mA</text><text x="980.0" y="222.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start">no llega a 15 V</text><text x="980.0" y="243.8" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start">antes de 1600 m:</text><text x="980.0" y="265.5" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start">manda el largo</text>
+<rect x="960" y="330" width="192" height="150" rx="16" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/><text x="980.0" y="362.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#B45309" text-anchor="start">2 mA</text><text x="980.0" y="392.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start">cruza 15 V a</text><text x="980.0" y="413.8" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start">unos 1116 m:</text><text x="980.0" y="435.5" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#41627F" text-anchor="start">manda la tensión</text>
+<text x="48.0" y="630.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#41627F" text-anchor="start">60 elementos, cuenta de banco. Si da más largo que el gráfico del manual, confiá en el gráfico y en SSD.</text>
+</svg>

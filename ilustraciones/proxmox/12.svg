@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Cuando algo anda mal: diagnóstico en orden</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">PROXMOX VE</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Cuando algo anda mal: diagnóstico en orden</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<rect x="48" y="130" width="204" height="196" rx="16" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<circle cx="82" cy="166" r="18" fill="#17A8D4"/><text x="82.0" y="172.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="110.0" y="173.0" font-family="Instrument Sans" font-size="18" font-weight="700" fill="#04223D" text-anchor="start">Quórum</text>
+<rect x="62" y="200" width="176" height="40" rx="8" fill="#03213C" stroke="#03213C" stroke-width="2"/>
+<text x="74.0" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">pvecm status</text>
+<text x="66.0" y="272.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="66.0" dy="0.0">¿Quorate: Yes?</tspan></text>
+<path d="M254 228 H270" stroke="#6E88A1" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-gray)"/>
+<rect x="272" y="130" width="204" height="196" rx="16" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<circle cx="306" cy="166" r="18" fill="#17A8D4"/><text x="306.0" y="172.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="334.0" y="173.0" font-family="Instrument Sans" font-size="18" font-weight="700" fill="#04223D" text-anchor="start">Logs</text>
+<rect x="286" y="200" width="176" height="40" rx="8" fill="#03213C" stroke="#03213C" stroke-width="2"/>
+<text x="298.0" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">journalctl -b</text>
+<text x="290.0" y="272.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="290.0" dy="0.0">corosync y pve-cluster</tspan><tspan x="290.0" dy="20.2">desde el arranque</tspan></text>
+<path d="M478 228 H494" stroke="#6E88A1" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-gray)"/>
+<rect x="496" y="130" width="204" height="196" rx="16" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<circle cx="530" cy="166" r="18" fill="#17A8D4"/><text x="530.0" y="172.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="558.0" y="173.0" font-family="Instrument Sans" font-size="18" font-weight="700" fill="#04223D" text-anchor="start">Locks</text>
+<rect x="510" y="200" width="176" height="40" rx="8" fill="#03213C" stroke="#03213C" stroke-width="2"/>
+<text x="522.0" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">grep &#x27;^lock:&#x27;</text>
+<text x="514.0" y="272.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="514.0" dy="0.0">¿una VM quedó trabada?</tspan></text>
+<path d="M702 228 H718" stroke="#6E88A1" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-gray)"/>
+<rect x="720" y="130" width="204" height="196" rx="16" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<circle cx="754" cy="166" r="18" fill="#17A8D4"/><text x="754.0" y="172.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="782.0" y="173.0" font-family="Instrument Sans" font-size="18" font-weight="700" fill="#04223D" text-anchor="start">Storage</text>
+<rect x="734" y="200" width="176" height="40" rx="8" fill="#03213C" stroke="#03213C" stroke-width="2"/>
+<text x="746.0" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">pvesm status</text>
+<text x="738.0" y="272.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="738.0" dy="0.0">¿todo active?</tspan></text>
+<path d="M926 228 H942" stroke="#6E88A1" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-gray)"/>
+<rect x="944" y="130" width="204" height="196" rx="16" fill="#F7FAFD" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="7 6"/>
+<circle cx="978" cy="166" r="18" fill="#6E88A1"/><text x="978.0" y="172.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<text x="1006.0" y="173.0" font-family="Instrument Sans" font-size="18" font-weight="700" fill="#04223D" text-anchor="start">Firewall</text>
+<rect x="958" y="200" width="176" height="40" rx="8" fill="#03213C" stroke="#03213C" stroke-width="2"/>
+<text x="970.0" y="226.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#D9E9F8" text-anchor="start">pve-firewall</text>
+<text x="962.0" y="272.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start"><tspan x="962.0" dy="0.0">status, si hay</tspan><tspan x="962.0" dy="20.2">sospecha</tspan></text>
+<text x="48.0" y="380.0" font-family="Familjen Grotesk" font-size="21" font-weight="600" fill="#04223D" text-anchor="start">Upgrade mayor de 8 a 9</text>
+<circle cx="72" cy="424" r="18" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><g transform="translate(60 412)" fill="none" stroke="#0E8F5E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g><text x="102.0" y="430.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">Backup probado de todo</text>
+<circle cx="632" cy="424" r="18" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><g transform="translate(620 412)" fill="none" stroke="#0E8F5E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g><text x="662.0" y="430.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">pve8to9 --full antes, durante y después</text>
+<circle cx="72" cy="476" r="18" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><g transform="translate(60 464)" fill="none" stroke="#0E8F5E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g><text x="102.0" y="482.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">SSH con tmux o IPMI, nunca la consola de la GUI</text>
+<circle cx="632" cy="476" r="18" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/><g transform="translate(620 464)" fill="none" stroke="#0E8F5E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></g><text x="662.0" y="482.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#04223D" text-anchor="start">Un nodo por vez, verificando antes de seguir</text>
+<rect x="48" y="534" width="1104" height="81" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="48" y="546" width="5" height="57" rx="2.5" fill="#B45309"/><text x="74.0" y="568.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="74.0" dy="0.0">La trampa silenciosa</tspan></text><text x="74.0" y="595.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">En Proxmox VE 9, /etc/sysctl.conf ya no se lee: lo que estaba ahí se pierde en el próximo reinicio. Va en /etc/sysctl.d/.</tspan></text>
+</svg>

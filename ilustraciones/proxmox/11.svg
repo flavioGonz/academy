@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Quién entra y cómo: usuarios, 2FA y firewall</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">PROXMOX VE</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Quién entra y cómo: usuarios, 2FA y firewall</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<rect x="48" y="122" width="352" height="400" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<g transform="translate(70 140) scale(1.3)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></g>
+<text x="110.0" y="166.0" font-family="Instrument Sans" font-size="19" font-weight="700" fill="#04223D" text-anchor="start">Un usuario por persona</text>
+<path d="M68 190H380" stroke="#DDE8F2" stroke-width="1.5"/>
+<rect x="68" y="214" width="312" height="80" rx="12" fill="#E5F0FB" stroke="#C2D4E6" stroke-width="2"/>
+<text x="84.0" y="246.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0A63B8" text-anchor="start">tecnico@pve</text>
+<text x="84.0" y="274.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">PVEAuditor: mira, no toca</text>
+<rect x="68" y="312" width="312" height="80" rx="12" fill="#E5F0FB" stroke="#C2D4E6" stroke-width="2"/>
+<text x="84.0" y="344.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0A63B8" text-anchor="start">operador@pve</text>
+<text x="84.0" y="372.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">PVEVMUser: consola, encendido, backup</text>
+<rect x="68" y="410" width="312" height="80" rx="12" fill="#E5F0FB" stroke="#C2D4E6" stroke-width="2"/>
+<text x="84.0" y="442.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0A63B8" text-anchor="start">root@pam</text>
+<text x="84.0" y="470.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">solo el administrador</text>
+<rect x="424" y="122" width="352" height="400" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<g transform="translate(446 140) scale(1.3)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="m11 12 8.5-8.5M16 7l2.5 2.5"/></g>
+<text x="486.0" y="166.0" font-family="Instrument Sans" font-size="19" font-weight="700" fill="#04223D" text-anchor="start">Segundo factor</text>
+<path d="M444 190H756" stroke="#DDE8F2" stroke-width="1.5"/>
+<rect x="444" y="214" width="312" height="80" rx="12" fill="#E5F0FB" stroke="#C2D4E6" stroke-width="2"/>
+<text x="460.0" y="246.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0A63B8" text-anchor="start">TOTP</text>
+<text x="460.0" y="274.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">código de la app del celular</text>
+<rect x="444" y="312" width="312" height="80" rx="12" fill="#E5F0FB" stroke="#C2D4E6" stroke-width="2"/>
+<text x="460.0" y="344.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0A63B8" text-anchor="start">WebAuthn</text>
+<text x="460.0" y="372.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">llave de seguridad</text>
+<rect x="444" y="410" width="312" height="80" rx="12" fill="#E5F0FB" stroke="#C2D4E6" stroke-width="2"/>
+<text x="460.0" y="442.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0A63B8" text-anchor="start">Recovery keys</text>
+<text x="460.0" y="470.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">guardadas en el gestor</text>
+<rect x="800" y="122" width="352" height="400" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<g transform="translate(822 140) scale(1.3)" fill="none" stroke="#0A63B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z"/></g>
+<text x="862.0" y="166.0" font-family="Instrument Sans" font-size="19" font-weight="700" fill="#04223D" text-anchor="start">Firewall sin quedarse afuera</text>
+<path d="M820 190H1132" stroke="#DDE8F2" stroke-width="1.5"/>
+<rect x="820" y="214" width="312" height="80" rx="12" fill="#E5F0FB" stroke="#C2D4E6" stroke-width="2"/>
+<text x="836.0" y="246.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0A63B8" text-anchor="start">Sesión SSH abierta</text>
+<text x="836.0" y="274.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">antes de habilitar</text>
+<rect x="820" y="312" width="312" height="80" rx="12" fill="#E5F0FB" stroke="#C2D4E6" stroke-width="2"/>
+<text x="836.0" y="344.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0A63B8" text-anchor="start">IPSet management</text>
+<text x="836.0" y="372.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">IPs de administración</text>
+<rect x="820" y="410" width="312" height="80" rx="12" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="836.0" y="442.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0E8F5E" text-anchor="start">Firewall: Yes</text>
+<text x="836.0" y="470.0" font-family="Instrument Sans" font-size="15" font-weight="500" fill="#41627F" text-anchor="start">recién al final</text>
+<rect x="48" y="546" width="1104" height="54" rx="14" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/><rect x="48" y="558" width="5" height="30" rx="2.5" fill="#0E8F5E"/><text x="74.0" y="580.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Con usuarios personales, el log dice quién hizo cada cambio. Con más de un factor, perder el celular no te deja afuera.</tspan></text>
+</svg>

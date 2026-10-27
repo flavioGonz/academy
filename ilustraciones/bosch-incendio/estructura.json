@@ -1,0 +1,278 @@
+{
+  "curso": {
+    "objetivo": "Al terminar el curso vas a poder relevar un panel AVENAR o FPA y saber qué permite ampliar, diseñar lazos LSN con direcciones, topología, caída de tensión y baterías defendibles, elegir y programar detectores AVENAR 4000, armar zonas, reglas, retardos y redes con FSP-5000-RPS, y probar y mantener el sistema con aviso, aislamiento y registros, sabiendo siempre que mandan la autoridad y el proyecto firmado.",
+    "recorrido": "Arrancás conociendo el sistema: qué panel tenés adelante, quién decide en una obra uruguaya y cómo se comporta el lazo LSN ante una falla. Con eso diseñás el campo: tensión suficiente al final del lazo, el detector correcto para cada ambiente, pulsadores, sirenas y módulos contados, y una batería que aguante. Después lo programás en FSP-5000-RPS: la primera configuración, zonas y reglas, el modo de cada detector y los retardos de día y noche. Cerrás con lo que separa un sistema habilitado de uno que funciona a los cinco años: red de paneles, pruebas seguras y mantenimiento registrado."
+  },
+  "modulos": [
+    {
+      "title": "Conocer el sistema",
+      "why": "Antes de tocar una central hace falta saber qué familia es, quién manda en el diseño y cómo se comporta el lazo ante una falla. Va del panel a la normativa, de la normativa al lazo y del lazo a sus fallas. Termina con un lazo LSN entendido de punta a punta, en banco.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder relevar modelo, licencia, firmware y módulos de un panel AVENAR o FPA.",
+        "Al terminar el módulo vas a poder ubicar quién decide qué en una obra según el Decreto 372/023 y la IT-11.",
+        "Al terminar el módulo vas a poder cablear y direccionar un lazo LSN y explicar qué pasa ante un corte o un corto."
+      ],
+      "lessons": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "title": "Diseñar el campo",
+      "why": "Con el lazo entendido, se decide qué va en cada lugar y se asegura que tenga tensión y energía. El orden va de la física del lazo a los equipos y de los equipos a la batería que los sostiene. Termina con un lazo calculado, un inventario de puntos y una autonomía defendible.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder estimar la tensión al final de un lazo y reconocer cuándo está en el límite.",
+        "Al terminar el módulo vas a poder elegir el detector por riesgo y por fenómeno engañoso, y contar los puntos de pulsadores, sirenas y módulos.",
+        "Al terminar el módulo vas a poder calcular baterías con la norma que pida el proyecto y planificar zonas de energía."
+      ],
+      "lessons": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ]
+    },
+    {
+      "title": "Programar con FSP-5000-RPS",
+      "why": "El panel hace lo que dice su configuración. Primero la configuración base y el orden de cada descarga; después las zonas y reglas que salen de la matriz; después el modo de cada detector y los retardos. Termina con un proyecto que se puede descargar, leer y defender.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder crear una configuración con cuenta 4.8 y descargarla con copia, Set Panel Time y consistencia sin errores.",
+        "Al terminar el módulo vas a poder pasar una matriz de causa y efecto firmada a direcciones lógicas y reglas.",
+        "Al terminar el módulo vas a poder auditar el modo de cada detector y diseñar día y noche sin retardos sobre pulsadores."
+      ],
+      "lessons": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ]
+    },
+    {
+      "title": "Conectar, probar y mantener",
+      "why": "Lo que separa un sistema habilitado de uno que funciona a los cinco años: una red de paneles que no queda expuesta, pruebas que no terminan en una evacuación y mantenimientos que dejan evidencia. Termina con tu hoja de prueba y tu plantilla de informe listas.",
+      "objetivos": [
+        "Al terminar el módulo vas a poder planificar una red de paneles dedicada con PNA, IP, RSTP y acceso remoto seguro.",
+        "Al terminar el módulo vas a poder probar detectores con aviso, aislamiento, modo revisión y walk test.",
+        "Al terminar el módulo vas a poder registrar un mantenimiento con hora del panel, baterías y valores de contaminación."
+      ],
+      "lessons": [
+        "13",
+        "14",
+        "15",
+        "16"
+      ]
+    }
+  ],
+  "lecciones": {
+    "1": {
+      "objetivos": [
+        "Al terminar vas a poder reconocer un AVENAR 2000, un AVENAR 8000, un keypad 8000 y sus antecesores FPA.",
+        "Al terminar vas a poder leer la licencia en la etiqueta y el firmware en la pantalla del controlador.",
+        "Al terminar vas a poder decidir si una red queda en 3.x o puede ir a 4.x."
+      ],
+      "sigue": "Ya sabés qué panel tenés. La próxima responde quién decide cómo se usa: la autoridad, el proyecto y el técnico registrado.",
+      "requisitos": []
+    },
+    "2": {
+      "objetivos": [
+        "Al terminar vas a poder explicar qué hacen el técnico registrado, la empresa registrada y el propietario según el Decreto 372/023.",
+        "Al terminar vas a poder armar la ficha normativa de una obra con el instructivo vigente.",
+        "Al terminar vas a poder actuar ante una diferencia entre el proyecto y el manual."
+      ],
+      "conecta": "En Mapa AVENAR relevaste el equipo. Acá ves quién decide qué se hace con él.",
+      "sigue": "Con las reglas claras, la próxima baja al cable: el lazo LSN y sus direcciones.",
+      "requisitos": [
+        "1"
+      ]
+    },
+    "3": {
+      "objetivos": [
+        "Al terminar vas a poder cablear un lazo LSN con b por los aisladores y a común.",
+        "Al terminar vas a poder direccionar en automático o en manual con las perillas.",
+        "Al terminar vas a poder explicar los límites de elementos, corriente y largo de cada módulo."
+      ],
+      "conecta": "En Mapa AVENAR contaste los módulos LSN del riel. Acá ves qué cuelga de cada uno.",
+      "sigue": "El lazo ya tiene direcciones. La próxima lo pone a prueba: qué pasa con un corte o un corto.",
+      "requisitos": [
+        "1"
+      ]
+    },
+    "4": {
+      "objetivos": [
+        "Al terminar vas a poder mostrar en banco que un lazo sobrevive a un corte y un ramal no.",
+        "Al terminar vas a poder explicar las clases A, B y X y el papel de los aisladores.",
+        "Al terminar vas a poder detectar ramales de un elemento y mallas que rompen el aislamiento."
+      ],
+      "conecta": "En Lazo LSN cableaste b entrando por b1 y saliendo por b2. Acá ves por qué: ahí está el aislador.",
+      "sigue": "El sistema quedó entendido. El próximo módulo empieza a diseñar el campo, por la tensión del lazo.",
+      "requisitos": [
+        "3"
+      ]
+    },
+    "5": {
+      "objetivos": [
+        "Al terminar vas a poder calcular la tensión al final de un lazo con la cuenta de banco del manual.",
+        "Al terminar vas a poder encontrar el largo donde la tensión cae a 15 V.",
+        "Al terminar vas a poder sumar el cable no aislado contra el tope de 500 m."
+      ],
+      "conecta": "En Lazo LSN viste los largos máximos de cada módulo. Acá ves que el consumo también limita.",
+      "sigue": "El lazo tiene tensión. La próxima elige qué detector va en cada lugar.",
+      "requisitos": [
+        "3"
+      ]
+    },
+    "6": {
+      "objetivos": [
+        "Al terminar vas a poder elegir un detector en dos pasos: riesgo de fuego y fenómenos engañosos.",
+        "Al terminar vas a poder distinguir las nueve variantes AVENAR detector 4000 por sus sensores.",
+        "Al terminar vas a poder detectar serie 400 instalada antes de actualizar firmware."
+      ],
+      "conecta": "En Lazo LSN direccionaste FAP-425-O-R. Acá ves cuándo conviene otro de la misma familia.",
+      "sigue": "Los detectores están elegidos. La próxima suma lo demás que cuelga del lazo: pulsadores, sirenas y módulos.",
+      "requisitos": [
+        "2"
+      ]
+    },
+    "7": {
+      "objetivos": [
+        "Al terminar vas a poder contar los puntos de alarma de una obra, entrada por entrada.",
+        "Al terminar vas a poder explicar para qué sirve el fin de línea en una zona supervisada.",
+        "Al terminar vas a poder marcar las salidas que mueven algo y su forma de aislarlas."
+      ],
+      "conecta": "En Quince voltios viste que sirenas y módulos consumen más. Acá los contás y los ubicás.",
+      "sigue": "Todo lo que va en el lazo está contado. La próxima calcula la energía para sostenerlo sin red.",
+      "requisitos": [
+        "5"
+      ]
+    },
+    "8": {
+      "objetivos": [
+        "Al terminar vas a poder calcular baterías con dos variantes y saber cuál pide el proyecto.",
+        "Al terminar vas a poder planificar zonas de energía con FPE-8000-BCM.",
+        "Al terminar vas a poder probar por separado la falta de red y la de batería."
+      ],
+      "conecta": "En Entradas y salidas contaste sirenas y módulos. Acá pesan en la corriente de alarma.",
+      "sigue": "El campo quedó diseñado. El próximo módulo lo programa, empezando por la primera configuración en RPS.",
+      "requisitos": [
+        "7"
+      ]
+    },
+    "9": {
+      "objetivos": [
+        "Al terminar vas a poder crear una configuración con cuenta 4.8, país Uruguay y un lazo en manual.",
+        "Al terminar vas a poder leer el chequeo de consistencia: errores, advertencias y pistas.",
+        "Al terminar vas a poder seguir el checklist de cada descarga, con Set Panel Time."
+      ],
+      "conecta": "En Lazo LSN autodetectaste en RPS y en Zona de energía viste su validación de autonomía. Acá lo abrís desde cero.",
+      "sigue": "La configuración existe. La próxima le da nombres y lógica: zonas lógicas y reglas.",
+      "requisitos": [
+        "3",
+        "8"
+      ]
+    },
+    "10": {
+      "objetivos": [
+        "Al terminar vas a poder distinguir la dirección física de la lógica y asignar grupos sin repetir.",
+        "Al terminar vas a poder escribir una matriz de causa y efecto con sus tres marcas.",
+        "Al terminar vas a poder traducir cada cruce a una regla por evento, por estado o con contador."
+      ],
+      "conecta": "En Primer proyecto creaste los diez detectores. Acá les das nombre lógico y reglas.",
+      "sigue": "Las reglas deciden qué pasa con una alarma. La próxima decide cuándo un detector da alarma: su modo.",
+      "requisitos": [
+        "9"
+      ]
+    },
+    "11": {
+      "objetivos": [
+        "Al terminar vas a poder leer el lugar de instalación programado de cada FAP-425.",
+        "Al terminar vas a poder marcar los detectores que quedaron en modo de fábrica sin decisión.",
+        "Al terminar vas a poder explicar por qué el multisensor rechaza falsas alarmas y qué cuesta."
+      ],
+      "conecta": "En Elegir detector elegiste el modelo por ambiente. Acá ese ambiente se programa.",
+      "sigue": "Los detectores tienen su modo. La próxima decide qué pasa con su alarma de día y de noche.",
+      "requisitos": [
+        "6",
+        "9"
+      ]
+    },
+    "12": {
+      "objetivos": [
+        "Al terminar vas a poder diseñar en papel la respuesta de modo día y modo noche.",
+        "Al terminar vas a poder verificar que ningún retardo caiga sobre un pulsador ni supere el proyecto.",
+        "Al terminar vas a poder distinguir un retardo del panel de la verificación del monitoreo."
+      ],
+      "conecta": "En Zonas y reglas marcaste cruces solo en modo noche. Acá se diseña ese modo.",
+      "sigue": "El panel quedó programado. El último módulo lo conecta, lo prueba y lo mantiene, empezando por la red.",
+      "requisitos": [
+        "10"
+      ]
+    },
+    "13": {
+      "objetivos": [
+        "Al terminar vas a poder planificar una red de paneles con PNA, IP y anillo RSTP.",
+        "Al terminar vas a poder ubicar conversores a fibra donde el cobre pasa de 100 m.",
+        "Al terminar vas a poder conectar BMS y acceso remoto sin exponer la red de incendio."
+      ],
+      "conecta": "En Mapa AVENAR viste licencias y ramas de firmware. Acá deciden qué se puede unir.",
+      "sigue": "La red está planificada. La próxima arma la prueba segura: avisar y aislar antes de disparar nada.",
+      "requisitos": [
+        "1",
+        "9"
+      ]
+    },
+    "14": {
+      "objetivos": [
+        "Al terminar vas a poder armar la hoja de prueba con aviso al monitoreo y a ocupantes.",
+        "Al terminar vas a poder aislar cada salida real de la obra con su responsable.",
+        "Al terminar vas a poder cerrar una prueba sin dejar nada deshabilitado."
+      ],
+      "conecta": "En Entradas y salidas marcaste en rojo lo que mueve algo. Acá esas salidas se aíslan antes de probar.",
+      "sigue": "Con la prueba asegurada, la próxima prueba los detectores de verdad.",
+      "requisitos": [
+        "7"
+      ]
+    },
+    "15": {
+      "objetivos": [
+        "Al terminar vas a poder probar un óptico en modo revisión y anotar los segundos.",
+        "Al terminar vas a poder hacer un walk test secuencial en un multisensor.",
+        "Al terminar vas a poder decidir cuándo una prueba va fuera de revisión."
+      ],
+      "conecta": "En Aislar y avisar armaste la hoja de prueba; en Día y noche viste las dependencias. Acá se usan las dos.",
+      "sigue": "Probaste el sistema. La última lección convierte cada visita en un registro útil.",
+      "requisitos": [
+        "14",
+        "12"
+      ]
+    },
+    "16": {
+      "objetivos": [
+        "Al terminar vas a poder armar el calendario de mantenimiento con lo que pida el proyecto.",
+        "Al terminar vas a poder interpretar el valor óptico de contaminación de un FAP-425.",
+        "Al terminar vas a poder completar un informe con hora del panel, baterías, pruebas y firmas."
+      ],
+      "conecta": "Usa todo lo anterior: la hora de Primer proyecto, las baterías de Zona de energía y las pruebas de Probar detectores.",
+      "cierre": "Con esto recorriste un sistema AVENAR completo: del panel y la norma al lazo, del lazo a la configuración y de la configuración a la prueba y el mantenimiento. La ficha normativa, el cálculo de caída, el inventario de puntos, el checklist de descarga, la hoja de prueba y la plantilla de informe son tu kit para la próxima obra.",
+      "requisitos": [
+        "8",
+        "15"
+      ]
+    }
+  },
+  "avisos": [
+    {
+      "id": "3",
+      "archivo": "card.md",
+      "texto": "En RPS, lanzá la autodetección del lazo",
+      "sugerencia": "En RPS (lo vas a ver en detalle en Primer proyecto), lanzá la autodetección del lazo"
+    },
+    {
+      "id": "4",
+      "archivo": "card.md",
+      "texto": "probá los tres detectores con aerosol en modo revisión",
+      "sugerencia": "probá los tres detectores con aerosol en modo revisión (el método completo está en Probar detectores)"
+    }
+  ]
+}

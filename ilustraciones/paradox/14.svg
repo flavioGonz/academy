@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Cuando no reporta: de la central hacia afuera</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">PARADOX</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Cuando no reporta: de la central hacia afuera</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<rect x="48" y="140" width="258" height="250" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="84" cy="180" r="20" fill="#17A8D4"/><text x="84.0" y="186.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="116.0" y="188.0" font-family="Familjen Grotesk" font-size="22" font-weight="600" fill="#04223D" text-anchor="start">Serie</text>
+<text x="70.0" y="236.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="70.0" dy="0.0">LED RX/TX del módulo</tspan><tspan x="70.0" dy="21.6">titilando: habla con la</tspan><tspan x="70.0" dy="21.6">central.</tspan></text>
+<path d="M310.0 265.0C319.0 265.0,319.0 265.0,328.0 265.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="330" y="140" width="258" height="250" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="366" cy="180" r="20" fill="#17A8D4"/><text x="366.0" y="186.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="398.0" y="188.0" font-family="Familjen Grotesk" font-size="22" font-weight="600" fill="#04223D" text-anchor="start">Red</text>
+<text x="352.0" y="236.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="352.0" dy="0.0">Cable, IP del módulo y</tspan><tspan x="352.0" dy="21.6">salida a internet.</tspan></text>
+<path d="M592.0 265.0C601.0 265.0,601.0 265.0,610.0 265.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="612" y="140" width="258" height="250" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="648" cy="180" r="20" fill="#17A8D4"/><text x="648.0" y="186.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="680.0" y="188.0" font-family="Familjen Grotesk" font-size="22" font-weight="600" fill="#04223D" text-anchor="start">Puertos</text>
+<text x="634.0" y="236.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="634.0" dy="0.0">Salida abierta: TCP 8883 y</tspan><tspan x="634.0" dy="21.6">443 en módulos MQTT; el</tspan><tspan x="634.0" dy="21.6">puerto de la receptora en</tspan><tspan x="634.0" dy="21.6">legado.</tspan></text>
+<path d="M874.0 265.0C883.0 265.0,883.0 265.0,892.0 265.0" fill="none" stroke="#0A63B8" stroke-width="3" stroke-linecap="round" marker-end="url(#a-blue)"/>
+<rect x="894" y="140" width="258" height="250" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="930" cy="180" r="20" fill="#17A8D4"/><text x="930.0" y="186.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="962.0" y="188.0" font-family="Familjen Grotesk" font-size="22" font-weight="600" fill="#04223D" text-anchor="start">Receptora</text>
+<text x="916.0" y="236.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="916.0" dy="0.0">Registro, abonado y</tspan><tspan x="916.0" dy="21.6">perfil. A veces, el</tspan><tspan x="916.0" dy="21.6">abonado atado a otra MAC.</tspan></text>
+<text x="48.0" y="128.0" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#6E88A1" text-anchor="start" letter-spacing="2">CENTRAL</text>
+<text x="1152.0" y="128.0" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#6E88A1" text-anchor="end" letter-spacing="2">MONITOREO</text>
+<rect x="48" y="420" width="1104" height="92" rx="14" fill="#03213C" stroke="#03213C" stroke-width="2"/>
+<text x="72.0" y="458.0" font-family="JetBrains Mono" font-size="20" font-weight="600" fill="#D9E9F8" text-anchor="start">[935]  estado del registro IP/GPRS</text>
+<text x="72.0" y="490.0" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#9FC3E3" text-anchor="start">grupo 2 = error del módulo · grupo 3 = programación incompleta · grupo 4 = error de registro</text>
+<rect x="48" y="534" width="1104" height="75" rx="14" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="1.5"/><rect x="48" y="546" width="5" height="51" rx="2.5" fill="#0E8F5E"/><text x="74.0" y="568.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="74.0" dy="0.0">Reiniciar a ciegas no dice nada. Con el número del teclado y una llamada a monitoreo, llegás a la causa. Reiniciar el módulo</tspan><tspan x="74.0" dy="21.6">desde BlueEye tarda hasta 5 min (firmware 4.xx) o 15 min (5.xx).</tspan></text>
+</svg>

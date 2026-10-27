@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Alta disponibilidad: tres requisitos y un freno</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">PROXMOX VE</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Alta disponibilidad: tres requisitos y un freno</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<rect x="48" y="122" width="352" height="190" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="84" cy="162" r="18" fill="#17A8D4"/><text x="84.0" y="168.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="114.0" y="169.0" font-family="Instrument Sans" font-size="19" font-weight="700" fill="#04223D" text-anchor="start">Tres votos</text>
+<text x="72.0" y="214.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="72.0" dy="0.0">Tres nodos, o dos y un QDevice. Sin</tspan><tspan x="72.0" dy="21.6">quórum, la HA no mueve nada.</tspan></text>
+<rect x="424" y="122" width="352" height="190" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="460" cy="162" r="18" fill="#17A8D4"/><text x="460.0" y="168.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="490.0" y="169.0" font-family="Instrument Sans" font-size="19" font-weight="700" fill="#04223D" text-anchor="start">Almacenamiento compartido</text>
+<text x="448.0" y="214.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="448.0" dy="0.0">NFS, iSCSI, Ceph, o replicación ZFS.</tspan><tspan x="448.0" dy="21.6">Con disco local, la VM queda en el</tspan><tspan x="448.0" dy="21.6">nodo caído.</tspan></text>
+<rect x="800" y="122" width="352" height="190" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/>
+<circle cx="836" cy="162" r="18" fill="#17A8D4"/><text x="836.0" y="168.1" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="866.0" y="169.0" font-family="Instrument Sans" font-size="19" font-weight="700" fill="#04223D" text-anchor="start">Fencing por watchdog</text>
+<text x="824.0" y="214.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="824.0" dy="0.0">El nodo aislado se reinicia solo</tspan><tspan x="824.0" dy="21.6">antes de que la VM arranque en otro</tspan><tspan x="824.0" dy="21.6">lado.</tspan></text>
+<text x="48.0" y="360.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">Cuando cae un nodo</text>
+<rect x="48" y="378" width="340" height="64" rx="14" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<text x="218.0" y="417.0" font-family="Instrument Sans" font-size="17" font-weight="700" fill="#D2492F" text-anchor="middle">pve1 cae o queda aislado</text>
+<path d="M392 410 H420" stroke="#6E88A1" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-gray)"/>
+<rect x="424" y="378" width="340" height="64" rx="14" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/>
+<text x="594.0" y="417.0" font-family="Instrument Sans" font-size="17" font-weight="700" fill="#B45309" text-anchor="middle">pierde quórum: su watchdog lo reinicia</text>
+<path d="M768 410 H796" stroke="#6E88A1" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-gray)"/>
+<rect x="800" y="378" width="340" height="64" rx="14" fill="#E3F5EC" stroke="#0E8F5E" stroke-width="2"/>
+<text x="970.0" y="417.0" font-family="Instrument Sans" font-size="17" font-weight="700" fill="#0E8F5E" text-anchor="middle">la VM arranca en pve2</text>
+<rect x="48" y="476" width="1104" height="146" rx="16" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="72.0" y="514.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#FFFFFF" text-anchor="start">El freno, desde Proxmox VE 9.2</text>
+<text x="72.0" y="548.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#9FC3E3" text-anchor="start">Antes de tocar la red o corosync:</text>
+<rect x="72" y="562" width="460" height="40" rx="10" fill="#03213C"/><text x="88.0" y="587.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#FFD38A" text-anchor="start">ha-manager crm-command disarm-ha freeze</text>
+<text x="612.0" y="548.0" font-family="Instrument Sans" font-size="16" font-weight="500" fill="#9FC3E3" text-anchor="start">Terminado el mantenimiento:</text>
+<rect x="612" y="562" width="360" height="40" rx="10" fill="#03213C"/><text x="628.0" y="587.2" font-family="JetBrains Mono" font-size="15" font-weight="500" fill="#7FE0B0" text-anchor="start">ha-manager crm-command arm-ha</text>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Cada parte de EN 54 mira una pieza del sistema</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">BOSCH INCENDIO · NORMAS</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Cada parte de EN 54 mira una pieza del sistema</text>
+<rect x="450" y="250" width="300" height="150" rx="16" fill="#011E38" stroke="#011E38" stroke-width="2"/>
+<text x="600.0" y="300.0" font-family="Familjen Grotesk" font-size="22" font-weight="600" fill="#FFFFFF" text-anchor="middle">Central</text>
+<text x="600.0" y="330.0" font-family="JetBrains Mono" font-size="17" font-weight="600" fill="#17A8D4" text-anchor="middle">EN 54-2</text>
+<text x="600.0" y="370.0" font-family="JetBrains Mono" font-size="16" font-weight="500" fill="#9FC3E3" text-anchor="middle">fuente: EN 54-4</text>
+<circle cx="70" cy="180" r="26" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2.5"/><circle cx="70" cy="180" r="16.6" fill="#E5F0FB" stroke="#C2D4E6" stroke-width="1.5"/><circle cx="70" cy="180" r="4.4" fill="#C2D4E6"/>
+<text x="110.0" y="176.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Humo puntual</text>
+<text x="110.0" y="200.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">EN 54-7</text>
+<path d="M310 180L450 325" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="5 5"/>
+<circle cx="70" cy="330" r="26" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2.5"/><circle cx="70" cy="330" r="16.6" fill="#E5F0FB" stroke="#C2D4E6" stroke-width="1.5"/><circle cx="70" cy="330" r="4.4" fill="#C2D4E6"/>
+<text x="110.0" y="326.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Calor puntual</text>
+<text x="110.0" y="350.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">EN 54-5</text>
+<path d="M310 330L450 325" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="5 5"/>
+<circle cx="70" cy="480" r="26" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2.5"/><circle cx="70" cy="480" r="16.6" fill="#E5F0FB" stroke="#C2D4E6" stroke-width="1.5"/><circle cx="70" cy="480" r="4.4" fill="#C2D4E6"/>
+<text x="110.0" y="476.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Multisensor humo y calor</text>
+<text x="110.0" y="500.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="start">EN 54-29</text>
+<path d="M310 480L450 325" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="5 5"/>
+<rect x="1107.0" y="157.0" width="46" height="46" rx="8" fill="#D2492F" stroke="#D2492F" stroke-width="2"/><rect x="1116.2" y="166.2" width="27.6" height="27.6" rx="4" fill="#FFFFFF"/><rect x="1122.6" y="177.2" width="14.7" height="5.5" rx="2" fill="#D2492F"/>
+<text x="1090.0" y="176.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="end">Pulsador</text>
+<text x="1090.0" y="200.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="end">EN 54-11</text>
+<path d="M890 180L750 325" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="5 5"/>
+<circle cx="1117" cy="330" r="4.5" fill="#FFFFFF" stroke="#41627F" stroke-width="2.5"/><circle cx="1141" cy="330" r="4.5" fill="#FFFFFF" stroke="#41627F" stroke-width="2.5"/><path d="M1119 330H1139" stroke="#41627F" stroke-width="3" stroke-linecap="round"/>
+<text x="1090.0" y="326.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="end">Aislador de corto</text>
+<text x="1090.0" y="350.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="end">EN 54-17</text>
+<path d="M890 330L750 325" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="5 5"/>
+<rect x="1106.0" y="456.0" width="48" height="48" rx="13.4" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2.5"/><rect x="1116.6" y="450.0" width="26.9" height="12" rx="6" fill="#FCEAE6" stroke="#D2492F" stroke-width="1.5"/><circle cx="1130" cy="484" r="10.6" fill="none" stroke="#6E88A1" stroke-width="2.5"/><circle cx="1130" cy="484" r="3.4" fill="#6E88A1"/>
+<text x="1090.0" y="476.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#04223D" text-anchor="end">Sirena</text>
+<text x="1090.0" y="500.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#0A63B8" text-anchor="end">EN 54-3</text>
+<path d="M890 480L750 325" stroke="#C2D4E6" stroke-width="2" stroke-dasharray="5 5"/>
+<rect x="370" y="440" width="460" height="64" rx="14" fill="#E5F0FB" stroke="#17A8D4" stroke-width="2"/>
+<text x="600.0" y="470.0" font-family="Instrument Sans" font-size="17" font-weight="600" fill="#0A63B8" text-anchor="middle">EN 54-13: que todo funcione junto</text>
+<text x="600.0" y="494.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="middle">compatibilidad entre componentes</text>
+<text x="48.0" y="600.0" font-family="Instrument Sans" font-size="17" font-weight="500" fill="#41627F" text-anchor="start">Son normas de producto: dicen cómo se ensaya cada equipo. Dónde va cada uno lo dice el proyecto.</text>
+</svg>

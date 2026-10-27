@@ -1,0 +1,772 @@
+{
+ "nota": "Propuesta para el curso VMware. terms: entradas nuevas completas. alias_agregar: alias nuevos para entradas existentes. modificar: campos a reemplazar en entradas existentes. Probada sobre una copia combinada con glosario_check.py. Categorías nuevas: Virtualización y Servidores y almacenamiento.",
+ "terms": [
+  {
+   "id": "esxi",
+   "term": "ESXi",
+   "aliases": [
+    "VMware ESXi",
+    "ESX",
+    "ESX Server"
+   ],
+   "cat": "Virtualización",
+   "short": "El hipervisor tipo 1 de VMware: se instala directo sobre el servidor, sin otro sistema operativo debajo.",
+   "long": "ESX Server salió en 2001 y desde vSphere 5.0, en 2011, queda solo ESXi. Su núcleo es el VMkernel y trae sus propios drivers, por eso el hardware tiene que estar en la Broadcom Compatibility Guide. ESXi 8 pide 2 núcleos, 8 GB de RAM y un disco de arranque persistente; vSphere 8 pierde soporte general el 11 de octubre de 2027.",
+   "case": true,
+   "year": 2001
+  },
+  {
+   "id": "vsphere",
+   "term": "vSphere",
+   "aliases": [
+    "VMware vSphere"
+   ],
+   "cat": "Virtualización",
+   "short": "La plataforma de virtualización de VMware: los hosts ESXi más vCenter, que los gestiona juntos.",
+   "long": "Desde 2024 se vende solo por suscripción y por núcleo, dentro de VVF o VCF; Standard y Enterprise Plus llegan hasta 8.0 Update 3. vSphere 9 retira las baselines de Lifecycle Manager y usa hardware virtual versión 22.",
+   "case": true
+  },
+  {
+   "id": "vcenter",
+   "term": "vCenter",
+   "aliases": [
+    "vCenter Server",
+    "VCSA",
+    "vCenter Server Appliance",
+    "VirtualCenter"
+   ],
+   "cat": "Virtualización",
+   "short": "El servidor que gestiona varios hosts ESXi juntos y habilita clúster, vMotion, HA y DRS.",
+   "long": "Nació como VirtualCenter en 2003. Hoy se instala como appliance, la VCSA, que en vSphere 8 pide 14 GB de RAM en el tamaño Tiny. El acceso pasa por vCenter Single Sign-On, con el dominio vsphere.local por defecto. Viene incluido en las suscripciones; el ESXi gratuito no se puede gestionar con vCenter.",
+   "case": true
+  },
+  {
+   "id": "vmkernel",
+   "term": "VMkernel",
+   "aliases": [],
+   "cat": "Virtualización",
+   "short": "El núcleo de ESXi: maneja CPU, memoria, discos y placas de red y los reparte entre las VMs.",
+   "long": "Al no haber un sistema operativo debajo, el VMkernel trae sus propios drivers. Sus mensajes quedan en /var/run/log/vmkernel.log, y en esxtop KAVG mide el tiempo que una operación de disco pasa adentro de él.",
+   "case": true
+  },
+  {
+   "id": "vmk",
+   "term": "vmk",
+   "aliases": [
+    "adaptador VMkernel",
+    "adaptadores VMkernel",
+    "vmk0",
+    "vmk1"
+   ],
+   "cat": "Virtualización",
+   "short": "Adaptador VMkernel: una IP del propio host ESXi, para gestión, vMotion, almacenamiento o backup.",
+   "long": "La documentación pide uno por tipo de tráfico, cada uno en su port group, su VLAN y su subred. vmk0 es el de gestión que crea la instalación. Se prueban con vmkping -I vmkN, y con -d -s 8972 se verifica MTU 9000 de punta a punta.",
+   "case": false
+  },
+  {
+   "id": "vswitch",
+   "term": "vSwitch",
+   "aliases": [
+    "vSwitch estándar",
+    "switch virtual",
+    "standard switch"
+   ],
+   "cat": "Virtualización",
+   "short": "El switch virtual adentro de un host ESXi: une las placas de las VMs y los vmk con las placas físicas.",
+   "long": "Cada host tiene sus vSwitch estándar; vSwitch0 lo crea la instalación con la red de gestión. Los uplinks son las vmnic y las VMs se conectan a port groups. Con dos uplinks a dos bocas distintas, un cable suelto no corta el servicio.",
+   "case": false
+  },
+  {
+   "id": "port-group",
+   "term": "port group",
+   "aliases": [
+    "port groups",
+    "grupo de puertos"
+   ],
+   "cat": "Virtualización",
+   "short": "El enchufe virtual de un vSwitch, con su VLAN ID: las VMs y los vmk se conectan ahí.",
+   "long": "VLAN ID 0 es sin etiqueta, la VLAN nativa del switch físico. El vSwitch pone y saca la etiqueta 802.1Q según el port group, así que la VM no necesita saber de VLAN. Management Network es el port group de gestión y se cambia solo con consola fuera de banda abierta.",
+   "case": false
+  },
+  {
+   "id": "vmnic",
+   "term": "vmnic",
+   "aliases": [
+    "vmnic0",
+    "vmnic2",
+    "uplink del vSwitch"
+   ],
+   "cat": "Virtualización",
+   "short": "El nombre que ESXi le da a cada placa de red física del servidor: vmnic0, vmnic1 y así.",
+   "long": "Las vmnic son los uplinks de los vSwitch. esxcli network nic list las muestra con su estado y velocidad. Conviene que cada vSwitch tenga dos, conectadas a bocas distintas del switch físico.",
+   "case": false
+  },
+  {
+   "id": "datastore",
+   "term": "datastore",
+   "aliases": [
+    "datastores",
+    "datastore1"
+   ],
+   "cat": "Virtualización",
+   "short": "El almacenamiento donde ESXi guarda las VMs: una carpeta por VM con su configuración y sus discos.",
+   "long": "Puede ser VMFS, sobre un disco local o una LUN, o NFS, montado desde un NAS. esxcli storage filesystem list muestra cada uno con su tamaño y su libre. Si un datastore con discos thin se llena, las VMs se detienen.",
+   "case": false
+  },
+  {
+   "id": "vmfs",
+   "term": "VMFS",
+   "aliases": [
+    "Virtual Machine File System",
+    "VMFS-6"
+   ],
+   "cat": "Virtualización",
+   "short": "Virtual Machine File System: el sistema de archivos de ESXi, pensado para que varios hosts compartan el mismo disco.",
+   "long": "Se arma sobre un disco local o una LUN de una SAN o de iSCSI. Cada host bloquea solo los archivos de sus VMs, y eso es lo que permite vMotion y HA con almacenamiento compartido. La versión actual, VMFS-6, llegó con vSphere 6.5 en 2016.",
+   "case": true
+  },
+  {
+   "id": "nfs",
+   "term": "NFS",
+   "aliases": [
+    "Network File System",
+    "NFS 3",
+    "NFS 4.1"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Network File System: el protocolo para compartir archivos por red que ESXi usa para montar datastores desde un NAS.",
+   "long": "Lo creó Sun Microsystems en 1984. ESXi soporta NFS 3 y 4.1, por un vmk de almacenamiento, y lo monta con esxcli storage nfs add. En NFS sin aceleración por hardware los discos de las VMs solo pueden ser thin.",
+   "case": true,
+   "year": 1984
+  },
+  {
+   "id": "iscsi",
+   "term": "iSCSI",
+   "aliases": [
+    "Internet SCSI",
+    "Software iSCSI Adapter"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "SCSI sobre IP: lleva comandos de disco por una red Ethernet para que funcione como una SAN.",
+   "long": "Se estandarizó en 2004. En ESXi se usa el adaptador de software sobre un vmk dedicado, con MTU 9000 de punta a punta si hay jumbo frames, y con dos placas se arma multipathing.",
+   "case": true,
+   "year": 2004
+  },
+  {
+   "id": "scsi",
+   "term": "SCSI",
+   "aliases": [
+    "Small Computer System Interface",
+    "VirtIO SCSI"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Small Computer System Interface: la familia de comandos con la que un sistema habla con sus discos.",
+   "long": "En virtualización es también un tipo de controlador de disco virtual. Al migrar una VM Linux de ESXi a Proxmox VE se prueba primero el disco en VirtIO SCSI; iSCSI lleva estos comandos por la red.",
+   "case": true
+  },
+  {
+   "id": "sata",
+   "term": "SATA",
+   "aliases": [
+    "Serial ATA"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Serial ATA: la interfaz de disco más común en PCs, también disponible como controlador de disco virtual.",
+   "long": "Al importar una VM Windows de ESXi a Proxmox VE se arranca con el disco en SATA, porque Windows ya trae ese driver; después de instalar los drivers VirtIO se cambia.",
+   "case": true
+  },
+  {
+   "id": "lun",
+   "term": "LUN",
+   "aliases": [
+    "Logical Unit Number",
+    "LUNs"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Logical Unit Number: un disco lógico que una SAN o un equipo iSCSI le presenta a un servidor.",
+   "long": "En ESXi una LUN se formatea con VMFS y queda como datastore, que varios hosts pueden compartir. En backups, el modo SAN usa un proxy físico que lee la LUN directo.",
+   "case": true
+  },
+  {
+   "id": "jumbo-frame",
+   "term": "jumbo frame",
+   "aliases": [
+    "jumbo frames",
+    "tramas jumbo",
+    "MTU 9000"
+   ],
+   "cat": "Redes",
+   "short": "Trama Ethernet más grande que los 1500 bytes estándar, típicamente de 9000, usada en redes de almacenamiento.",
+   "long": "No es parte formal de Ethernet, así que hay que configurarla igual en cada salto: vmk, vSwitch, switch físico y NAS. Se prueba con vmkping -d -s 8972: 8972 de datos más 28 de encabezados dan 9000. Un solo salto en 1500 da cortes intermitentes.",
+   "case": false
+  },
+  {
+   "id": "snapshot",
+   "term": "snapshot",
+   "aliases": [
+    "snapshots",
+    "instantánea"
+   ],
+   "cat": "Virtualización",
+   "short": "Foto del estado de una VM para volver atrás: congela el disco base y manda lo nuevo a un disco delta.",
+   "long": "No es backup: si se pierde el disco base, el delta solo no restaura nada. La KB de Broadcom permite hasta 32 en cadena, pero recomienda 2 o 3 por VM y ninguno por más de 72 horas. Se crean y borran con vim-cmd vmsvc/snapshot.create y snapshot.removeall.",
+   "case": false
+  },
+  {
+   "id": "disco-delta",
+   "term": "disco delta",
+   "aliases": [
+    "delta disk",
+    "-000001.vmdk"
+   ],
+   "cat": "Virtualización",
+   "short": "El archivo que recibe todo lo que la VM escribe mientras existe un snapshot (-00000N.vmdk).",
+   "long": "Crece mientras el snapshot exista y depende del disco base. Los que deja un backup fallido pueden no verse en el Snapshot Manager: se buscan con find /vmfs/volumes/datastore1/ -name \"*-0000*.vmdk\".",
+   "case": false
+  },
+  {
+   "id": "consolidacion",
+   "term": "consolidación",
+   "aliases": [
+    "consolidar",
+    "consolidate",
+    "disks consolidation"
+   ],
+   "cat": "Virtualización",
+   "short": "Fundir los discos delta de los snapshots con el disco base, para que la VM vuelva a tener un solo disco.",
+   "long": "Es lo que pasa al borrar un snapshot. No se cancela una consolidación en curso. El aviso \"Virtual machine disks consolidation is needed\" aparece cuando quedan deltas, por ejemplo de backups nocturnos fallidos.",
+   "case": false
+  },
+  {
+   "id": "thin",
+   "term": "thin provisioning",
+   "aliases": [
+    "thin",
+    "disco thin"
+   ],
+   "cat": "Virtualización",
+   "short": "Disco virtual que reserva solo lo que la VM escribió y crece a demanda hasta su tamaño máximo.",
+   "long": "Permite prometer más espacio del que tiene el datastore. Si el datastore se llena con las VMs corriendo, las VMs se detienen. ls -lh del -flat.vmdk muestra lo provisionado y du -h lo ocupado.",
+   "case": false
+  },
+  {
+   "id": "thick",
+   "term": "thick provisioning",
+   "aliases": [
+    "thick",
+    "thick lazy zeroed",
+    "thick eager zeroed"
+   ],
+   "cat": "Virtualización",
+   "short": "Disco virtual que aparta todo su tamaño en el datastore desde que se crea.",
+   "long": "Lazy zeroed pone cada bloque en cero la primera vez que se usa; eager zeroed lo hace todo al crear, tarda más y es el que pide Fault Tolerance. Un disco se puede pasar de thin a thick con Storage vMotion.",
+   "case": false
+  },
+  {
+   "id": "ovf",
+   "term": "OVF",
+   "aliases": [
+    "Open Virtualization Format",
+    "OVA",
+    ".ova",
+    ".ovf"
+   ],
+   "cat": "Virtualización",
+   "short": "Open Virtualization Format: formato abierto de la DMTF para entregar VMs armadas; un OVA es lo mismo en un solo archivo.",
+   "long": "Los fabricantes de software de video, acceso o telefonía entregan sus servidores así. En ESXi entran por Deploy OVF Template, que crea la VM con su hardware; copiar el archivo al datastore no lo instala.",
+   "case": true
+  },
+  {
+   "id": "vmware-tools",
+   "term": "VMware Tools",
+   "aliases": [],
+   "cat": "Virtualización",
+   "short": "Drivers y servicios que van dentro de cada VM para que el host pueda administrarla bien.",
+   "long": "Traen el driver de balloon, permiten snapshots con quiesce y le dan a HA el latido de la VM. vim-cmd vmsvc/get.guest muestra toolsRunningStatus y toolsVersionStatus. Antes de migrar una VM a Proxmox VE se desinstalan.",
+   "case": false
+  },
+  {
+   "id": "balloon",
+   "term": "balloon",
+   "aliases": [
+    "ballooning",
+    "MCTL",
+    "MCTLSZ",
+    "driver de balloon"
+   ],
+   "cat": "Virtualización",
+   "short": "Mecanismo por el que el host le pide memoria a una VM a través de VMware Tools cuando le falta.",
+   "long": "En esxtop, pantalla m, la columna MCTLSZ muestra cuánto recuperó. Si MCTL? dice que no hay driver, falta instalar VMware Tools. Si el balloon y el swap del host (SWCUR) crecen, al host le falta memoria.",
+   "case": false
+  },
+  {
+   "id": "swcur",
+   "term": "SWCUR",
+   "aliases": [
+    "swap del host"
+   ],
+   "cat": "Virtualización",
+   "short": "Columna de esxtop (pantalla m) con la memoria de una VM que el host mandó a swap.",
+   "long": "Junto con MCTLSZ, el balloon, indica que al host le falta memoria física. Que crezca es peor que el balloon: el swap del host va a disco.",
+   "case": true
+  },
+  {
+   "id": "vmotion",
+   "term": "vMotion",
+   "aliases": [
+    "Storage vMotion"
+   ],
+   "cat": "Virtualización",
+   "short": "Mover una VM encendida de un host a otro sin apagarla, copiando su memoria y su estado.",
+   "long": "Salió en 2003. Copia la memoria en pasadas cada vez más chicas y cambia de host en un instante; si solo cambia el host, el disco tiene que estar en un datastore compartido. Viaja sin cifrar por un vmk de vMotion en una red solo de hosts. Storage vMotion mueve los discos.",
+   "case": true,
+   "year": 2003
+  },
+  {
+   "id": "vsphere-ha",
+   "term": "vSphere HA",
+   "aliases": [
+    "HA",
+    "High Availability"
+   ],
+   "cat": "Virtualización",
+   "short": "Función del clúster que reinicia en otros hosts las VMs de un host que se cayó.",
+   "long": "Llegó en 2006. No evita el corte: lo acorta a lo que tardan las VMs en arrancar. Los hosts se vigilan entre sí y funciona aunque vCenter esté caído. Crear el clúster es libre; activar HA depende de la licencia.",
+   "case": true,
+   "year": 2006
+  },
+  {
+   "id": "drs",
+   "term": "DRS",
+   "aliases": [
+    "Distributed Resource Scheduler",
+    "vSphere DRS"
+   ],
+   "cat": "Virtualización",
+   "short": "Distributed Resource Scheduler: reparte la carga de CPU y memoria del clúster moviendo VMs con vMotion.",
+   "long": "Necesita vCenter y licencia. Niveles Manual, Partially Automated y Fully Automated; en clústeres chicos conviene arrancar en manual o parcial y mirar qué recomienda. También vacía un host que entra en modo mantenimiento.",
+   "case": true,
+   "year": 2006
+  },
+  {
+   "id": "evc",
+   "term": "EVC",
+   "aliases": [
+    "Enhanced vMotion Compatibility"
+   ],
+   "cat": "Virtualización",
+   "short": "Enhanced vMotion Compatibility: iguala lo que ven las VMs en un clúster con CPUs de generaciones distintas.",
+   "long": "Se configura en el clúster para que vMotion funcione entre hosts con procesadores diferentes.",
+   "case": true
+  },
+  {
+   "id": "vadp",
+   "term": "VADP",
+   "aliases": [
+    "vSphere APIs for Data Protection",
+    "APIs de protección de datos"
+   ],
+   "cat": "Virtualización",
+   "short": "vSphere APIs for Data Protection: las APIs con las que los productos de backup copian VMs encendidas sin agente.",
+   "long": "Llegaron con vSphere 4 en 2009. Un job pide un snapshot, copia los bloques por NBD, HotAdd o SAN y borra el snapshot. El ESXi gratuito no las expone: ahí solo queda un agente dentro de cada VM.",
+   "case": true,
+   "year": 2009
+  },
+  {
+   "id": "cbt",
+   "term": "CBT",
+   "aliases": [
+    "Changed Block Tracking"
+   ],
+   "cat": "Virtualización",
+   "short": "Changed Block Tracking: registro de los bloques de un disco que cambiaron desde el último backup.",
+   "long": "Con CBT, un backup incremental de una VM copia solo lo cambiado en lugar del disco entero. Trabaja junto con VADP.",
+   "case": true
+  },
+  {
+   "id": "nbd",
+   "term": "NBD",
+   "aliases": [
+    "NBDSSL",
+    "modo red"
+   ],
+   "cat": "Virtualización",
+   "short": "Modo de transporte de backup que copia los discos por la red de gestión del host (NBDSSL es la variante cifrada).",
+   "long": "Es el más simple y el más lento: una guía vieja de Veeam habla de 10 a 20 MB/s en 1 GbE. Para restaurar rápido conviene un proxy virtual con HotAdd.",
+   "case": true
+  },
+  {
+   "id": "hotadd",
+   "term": "HotAdd",
+   "aliases": [
+    "Hot-Add",
+    "hot add"
+   ],
+   "cat": "Virtualización",
+   "short": "Modo de transporte de backup en el que un proxy virtual del mismo host monta el disco de la VM para copiarlo.",
+   "long": "Evita pasar por la red de gestión y acorta las restauraciones. No funciona con discos IDE.",
+   "case": false
+  },
+  {
+   "id": "vddk",
+   "term": "VDDK",
+   "aliases": [
+    "Virtual Disk Development Kit"
+   ],
+   "cat": "Virtualización",
+   "short": "Virtual Disk Development Kit: la librería de VMware para leer y escribir discos de VMs, que usan herramientas de migración y backup.",
+   "long": "En agosto y septiembre de 2026 Broadcom retiró sus descargas públicas. El importador ESXi de Proxmox VE no depende de ella; para productos de backup, ninguna fuente leída confirma el impacto.",
+   "case": true
+  },
+  {
+   "id": "regla-3-2-1",
+   "term": "regla 3-2-1",
+   "aliases": [
+    "3-2-1"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Tres copias de los datos, en dos medios distintos, con una fuera del sitio.",
+   "long": "Cubre la pérdida de un equipo, de un medio o del sitio entero. No reemplaza la prueba: un backup cuenta cuando se restauró al menos una vez en un lugar aislado y se sabe cuánto tardó.",
+   "case": false
+  },
+  {
+   "id": "vvf",
+   "term": "VVF",
+   "aliases": [
+    "vSphere Foundation",
+    "VMware vSphere Foundation"
+   ],
+   "cat": "Virtualización",
+   "short": "VMware vSphere Foundation: la suscripción de Broadcom con vSphere, vCenter y una base de vSAN.",
+   "long": "Se licencia por núcleo físico con mínimo de 16 por CPU. Incluye 0,25 TiB de vSAN por núcleo. Es uno de los caminos que Broadcom recomienda al terminar vSphere 8.",
+   "case": true
+  },
+  {
+   "id": "vcf",
+   "term": "VCF",
+   "aliases": [
+    "VMware Cloud Foundation",
+    "Cloud Foundation"
+   ],
+   "cat": "Virtualización",
+   "short": "VMware Cloud Foundation: la suscripción con el stack completo de Broadcom, con NSX, vSAN y automatización.",
+   "long": "Se licencia por núcleo físico con mínimo de 16 por CPU e incluye 1 TiB de vSAN por núcleo. VCF 9.0 salió el 17 de junio de 2025 con ESXi y vCenter 9.0.",
+   "case": true
+  },
+  {
+   "id": "nsx",
+   "term": "NSX",
+   "aliases": [
+    "VMware NSX"
+   ],
+   "cat": "Virtualización",
+   "short": "La plataforma de redes y seguridad virtuales de VMware, incluida en VCF.",
+   "long": "Al decidir entre renovar o migrar, se pregunta si el cliente usa de verdad NSX, vSAN o DRS: si solo usa el hipervisor, la cuenta cambia.",
+   "case": true
+  },
+  {
+   "id": "vsan",
+   "term": "vSAN",
+   "aliases": [
+    "VMware vSAN"
+   ],
+   "cat": "Virtualización",
+   "short": "El almacenamiento de VMware que junta los discos locales de los hosts en un datastore compartido.",
+   "long": "VVF incluye 0,25 TiB por núcleo y VCF 1 TiB por núcleo. El importador ESXi de Proxmox VE no puede importar discos que estén en vSAN.",
+   "case": false
+  },
+  {
+   "id": "compatibility-guide",
+   "term": "Broadcom Compatibility Guide",
+   "aliases": [
+    "Compatibility Guide",
+    "HCL",
+    "Hardware Compatibility List"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "La lista oficial de CPU, NIC, controladoras y servidores soportados en cada versión de ESXi (la ex HCL).",
+   "long": "Es la única forma de tener una configuración soportada. ESXi 8 dejó afuera CPUs como Sandy Bridge y Haswell, y ESXi 9 deja afuera Skylake y anteriores. Parámetros como allowLegacyCPU fuerzan la instalación, solo en laboratorio.",
+   "case": true
+  },
+  {
+   "id": "dcui",
+   "term": "DCUI",
+   "aliases": [
+    "Direct Console User Interface"
+   ],
+   "cat": "Virtualización",
+   "short": "Direct Console User Interface: la pantalla de consola de un host ESXi, en el monitor del servidor o por iLO o iDRAC.",
+   "long": "Con F2 > Configure Management Network se elige la placa, la VLAN, la IP fija, el DNS y el hostname. Es el camino para recuperar un host que quedó sin acceso por la red.",
+   "case": true
+  },
+  {
+   "id": "osdata",
+   "term": "OSDATA",
+   "aliases": [
+    "ESX-OSData"
+   ],
+   "cat": "Virtualización",
+   "short": "La partición de ESXi donde van el scratch y los logs, en el disco de arranque.",
+   "long": "Si el host arranca de SD o USB, OSDATA se crea en un disco en memoria y lo que guarda se pierde al reiniciar; por eso ESXi 8 pide un disco persistente de 32 GB como mínimo y 128 GB como óptimo.",
+   "case": true
+  },
+  {
+   "id": "uefi",
+   "term": "UEFI",
+   "aliases": [
+    "Unified Extensible Firmware Interface"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Unified Extensible Firmware Interface: el firmware de arranque que reemplazó al BIOS clásico.",
+   "long": "ESXi 8 recomienda arrancar en modo UEFI. En el mismo menú se habilitan VT-x o AMD-V y NX/XD.",
+   "case": true
+  },
+  {
+   "id": "raid",
+   "term": "RAID",
+   "aliases": [
+    "RAID 1",
+    "Redundant Array of Independent Disks"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Redundant Array of Independent Disks: varios discos que la controladora presenta como uno, con redundancia.",
+   "long": "En RAID 1 dos discos guardan lo mismo: si uno falla, el otro sigue. Es lo que se recomienda para el disco de arranque de ESXi.",
+   "case": true
+  },
+  {
+   "id": "vt-x",
+   "term": "VT-x",
+   "aliases": [
+    "VT",
+    "AMD-V",
+    "Intel VT",
+    "virtualización por hardware"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Las extensiones de virtualización de Intel (VT-x) y AMD (AMD-V) dentro del procesador.",
+   "long": "Llegaron entre 2005 y 2006. Con ellas el código de las VMs corre directo en la CPU y solo las instrucciones sensibles pasan por el hipervisor. ESXi 8 las exige habilitadas en BIOS, junto con NX/XD.",
+   "case": true
+  },
+  {
+   "id": "nx-xd",
+   "term": "NX/XD",
+   "aliases": [
+    "NX",
+    "XD",
+    "No-Execute",
+    "Execute Disable"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Bit de protección de memoria del procesador (NX en AMD, XD en Intel) que ESXi exige habilitado en BIOS.",
+   "long": "Marca zonas de memoria como no ejecutables. Si está deshabilitado, el instalador de ESXi 8 no sigue.",
+   "case": true
+  },
+  {
+   "id": "vlcm",
+   "term": "vSphere Lifecycle Manager",
+   "aliases": [
+    "vLCM",
+    "Lifecycle Manager",
+    "Update Manager"
+   ],
+   "cat": "Virtualización",
+   "short": "La herramienta de vCenter que actualiza los hosts ESXi de un clúster llevándolos a una imagen.",
+   "long": "Llegó con vSphere 7 en 2020 y reemplazó a Update Manager; en vSphere 9 se retiran las baselines y queda el modelo de imágenes. Sus pasos: Check Compliance, Remediation Pre-check, Stage y Remediate.",
+   "case": true,
+   "year": 2020
+  },
+  {
+   "id": "modo-mantenimiento",
+   "term": "modo mantenimiento",
+   "aliases": [
+    "maintenance mode",
+    "maintenanceMode"
+   ],
+   "cat": "Virtualización",
+   "short": "Estado de un host ESXi sin VMs corriendo, listo para parchearlo o repararlo.",
+   "long": "Con DRS, al entrar en mantenimiento las VMs se mueven solas con vMotion; sin DRS se mueven a mano o se apagan. Por esxcli: esxcli system maintenanceMode set -e true.",
+   "case": false
+  },
+  {
+   "id": "esxtop",
+   "term": "esxtop",
+   "aliases": [],
+   "cat": "Virtualización",
+   "short": "El monitor de rendimiento de ESXi por SSH: CPU, memoria, disco y red de cada VM y del host.",
+   "long": "Teclas c, m, u, v y n para cada pantalla, distinguiendo mayúsculas. El modo batch, esxtop -b -a -d 5 -n 12, guarda un minuto en CSV para comparar con un día normal.",
+   "case": false
+  },
+  {
+   "id": "rdy",
+   "term": "%RDY",
+   "aliases": [
+    "RDY",
+    "CPU ready",
+    "ready time"
+   ],
+   "cat": "Virtualización",
+   "short": "Columna de esxtop con el tiempo que una VM estuvo lista para correr esperando una CPU física libre.",
+   "long": "Alto indica fila de CPU: hay más vCPU que núcleos disponibles. Agregar vCPU a esa VM suele empeorarlo. No hay umbral universal: se compara con un día normal del mismo host.",
+   "case": true
+  },
+  {
+   "id": "used",
+   "term": "%USED",
+   "aliases": [
+    "USED"
+   ],
+   "cat": "Virtualización",
+   "short": "Columna de esxtop (pantalla c) con el uso de CPU física de cada VM.",
+   "long": "Se lee junto con %RDY: una VM puede usar poco y esperar mucho si el host está saturado.",
+   "case": true
+  },
+  {
+   "id": "davg",
+   "term": "DAVG",
+   "aliases": [
+    "DAVG/cmd"
+   ],
+   "cat": "Virtualización",
+   "short": "Columna de esxtop con la latencia del dispositivo de almacenamiento, en milisegundos por operación.",
+   "long": "Si DAVG es alto, el problema está en el storage: controladora, red de almacenamiento, NAS o SAN. GAVG = DAVG + KAVG.",
+   "case": true
+  },
+  {
+   "id": "kavg",
+   "term": "KAVG",
+   "aliases": [
+    "KAVG/cmd"
+   ],
+   "cat": "Virtualización",
+   "short": "Columna de esxtop con el tiempo que una operación de disco pasa dentro del VMkernel del host.",
+   "long": "Debería estar cerca de cero. Si sube, hay encolamiento en el host y no en el almacenamiento.",
+   "case": true
+  },
+  {
+   "id": "gavg",
+   "term": "GAVG",
+   "aliases": [
+    "GAVG/cmd"
+   ],
+   "cat": "Virtualización",
+   "short": "Columna de esxtop con la latencia de disco que siente la VM: la suma de DAVG y KAVG.",
+   "long": "Separar GAVG en sus dos partes evita culpar al host por un almacenamiento lento, o al revés.",
+   "case": true
+  },
+  {
+   "id": "drptx",
+   "term": "%DRPTX",
+   "aliases": [
+    "DRPTX",
+    "%DRPRX",
+    "DRPRX"
+   ],
+   "cat": "Virtualización",
+   "short": "Columnas de esxtop (pantalla n) con el porcentaje de paquetes descartados al transmitir y al recibir.",
+   "long": "Valores mayores a cero en una VM o un vmk piden revisar la placa física, el vSwitch y el switch.",
+   "case": true
+  },
+  {
+   "id": "vmkernel-log",
+   "term": "vmkernel.log",
+   "aliases": [
+    "vmkwarning.log",
+    "hostd.log",
+    "/var/run/log"
+   ],
+   "cat": "Virtualización",
+   "short": "Los logs del host ESXi, en /var/run/log: vmkernel.log del núcleo, vmkwarning.log con sus advertencias y hostd.log del agente.",
+   "long": "Son el primer lugar para buscar errores de discos, rutas, red o drivers. En vCenter el equivalente es vpxd. Si el host arranca de SD o USB, viven en memoria y se pierden al reiniciar.",
+   "case": false
+  },
+  {
+   "id": "vsphere-local",
+   "term": "vsphere.local",
+   "aliases": [
+    "administrator@vsphere.local"
+   ],
+   "cat": "Virtualización",
+   "short": "El dominio por defecto de vCenter Single Sign-On; administrator@vsphere.local es su administrador inicial.",
+   "long": "Al desplegar vCenter solo ese usuario puede entrar: es la llave maestra. Va al gestor de contraseñas de la empresa y cada técnico usa su propio usuario con un rol acotado. El dominio se elige al instalar.",
+   "case": false
+  },
+  {
+   "id": "vtpm",
+   "term": "vTPM",
+   "aliases": [
+    "TPM virtual"
+   ],
+   "cat": "Virtualización",
+   "short": "Chip TPM virtual de una VM, que por ejemplo usa BitLocker en Windows para guardar sus claves.",
+   "long": "No se migra de VMware a Proxmox VE: antes de importar una VM Windows con BitLocker hay que tener a mano sus claves de recuperación.",
+   "case": true
+  },
+  {
+   "id": "erp",
+   "term": "ERP",
+   "aliases": [
+    "Enterprise Resource Planning"
+   ],
+   "cat": "Web e integración",
+   "short": "Enterprise Resource Planning: el sistema de gestión de una empresa (facturación, stock, contabilidad).",
+   "long": "En los clientes chicos suele ser una de las pocas VMs críticas junto al grabador de video: entra en la cuenta de qué funciones de VMware se usan de verdad.",
+   "case": true
+  },
+  {
+   "id": "tarjeta-sd",
+   "term": "tarjeta SD",
+   "aliases": [
+    "SD",
+    "microSD",
+    "tarjeta microSD"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Memoria flash en formato tarjeta. En servidores se usaba para arrancar ESXi.",
+   "long": "En ESXi 8 SD y USB quedan solo para el arranque y están en retirada: OSDATA no puede ir ahí, y los logs se pierden al reiniciar.",
+   "case": false
+  },
+  {
+   "id": "ide",
+   "term": "IDE",
+   "aliases": [
+    "Integrated Drive Electronics"
+   ],
+   "cat": "Servidores y almacenamiento",
+   "short": "Integrated Drive Electronics: interfaz de disco vieja, que también existe como controlador de disco virtual.",
+   "long": "En backups de VMware, el modo HotAdd no funciona con discos IDE: esas VMs se copian por NBD o se pasan a otro controlador.",
+   "case": true
+  },
+  {
+   "id": "dmtf",
+   "term": "DMTF",
+   "aliases": [
+    "Distributed Management Task Force"
+   ],
+   "cat": "Normas",
+   "short": "Distributed Management Task Force: organización que publica estándares de gestión de sistemas, como OVF.",
+   "long": "Gracias a OVF, un fabricante puede entregar una VM armada que se importa en distintos hipervisores.",
+   "case": true
+  },
+  {
+   "id": "umds",
+   "term": "UMDS",
+   "aliases": [
+    "Update Manager Download Service"
+   ],
+   "cat": "Virtualización",
+   "short": "Update Manager Download Service: baja los parches de VMware en un equipo con internet para usarlos donde vCenter no tiene salida.",
+   "long": "Con Lifecycle Manager, si vCenter no tiene internet, los paquetes se bajan con UMDS o se importan a mano.",
+   "case": true
+  }
+ ],
+ "alias_agregar": {
+  "sso": [
+   "vCenter Single Sign-On"
+  ]
+ },
+ "modificar": {
+  "hipervisor": {
+   "long": "Ejemplos: Proxmox, VMware ESXi, Hyper-V. Sobre él puede correr un CHR. Tipo 1 (ESXi, Proxmox VE) va directo sobre el hardware; tipo 2 corre arriba de un sistema operativo, como un programa."
+  }
+ }
+}

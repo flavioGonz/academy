@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>De la licencia perpetua a la suscripción por núcleo</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">VMWARE</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">De la licencia perpetua a la suscripción por núcleo</text>
+<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>
+<path d="M70 330H1130" stroke="#C2D4E6" stroke-width="6" stroke-linecap="round"/>
+<circle cx="110" cy="330" r="13" fill="#FFFFFF" stroke="#0A63B8" stroke-width="4"/>
+<path d="M110 316V290" stroke="#0A63B8" stroke-width="2" stroke-dasharray="4 4"/>
+<rect x="48" y="140" width="232" height="150" rx="14" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<text x="64.0" y="172.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0A63B8" text-anchor="start">2001</text>
+<text x="64.0" y="202.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="64.0" dy="0.0">ESX Server</tspan></text>
+<text x="64.0" y="248.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="64.0" dy="0.0">el hipervisor de VMware</tspan><tspan x="64.0" dy="18.9">sobre el servidor</tspan></text>
+<circle cx="300" cy="330" r="13" fill="#FFFFFF" stroke="#0A63B8" stroke-width="4"/>
+<path d="M300 344V370" stroke="#0A63B8" stroke-width="2" stroke-dasharray="4 4"/>
+<rect x="184.0" y="370" width="232" height="150" rx="14" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<text x="200.0" y="402.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0A63B8" text-anchor="start">2011</text>
+<text x="200.0" y="432.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="200.0" dy="0.0">vSphere 5.0</tspan></text>
+<text x="200.0" y="478.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="200.0" dy="0.0">queda solo ESXi, sin</tspan><tspan x="200.0" dy="18.9">consola de servicio</tspan></text>
+<circle cx="490" cy="330" r="13" fill="#FFFFFF" stroke="#0A63B8" stroke-width="4"/>
+<path d="M490 316V290" stroke="#0A63B8" stroke-width="2" stroke-dasharray="4 4"/>
+<rect x="374.0" y="140" width="232" height="150" rx="14" fill="#FFFFFF" stroke="#0A63B8" stroke-width="2"/>
+<text x="390.0" y="172.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#0A63B8" text-anchor="start">nov. 2023</text>
+<text x="390.0" y="202.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="390.0" dy="0.0">Broadcom compra VMware</tspan></text>
+<circle cx="680" cy="330" r="13" fill="#FFFFFF" stroke="#B45309" stroke-width="4"/>
+<path d="M680 344V370" stroke="#B45309" stroke-width="2" stroke-dasharray="4 4"/>
+<rect x="564.0" y="370" width="232" height="150" rx="14" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/>
+<text x="580.0" y="402.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#B45309" text-anchor="start">feb. 2024</text>
+<text x="580.0" y="432.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="580.0" dy="0.0">Solo suscripción</tspan></text>
+<text x="580.0" y="478.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="580.0" dy="0.0">por núcleo, mínimo 16 por</tspan><tspan x="580.0" dy="18.9">CPU; vCenter incluido</tspan></text>
+<circle cx="870" cy="330" r="13" fill="#FFFFFF" stroke="#B45309" stroke-width="4"/>
+<path d="M870 316V290" stroke="#B45309" stroke-width="2" stroke-dasharray="4 4"/>
+<rect x="754.0" y="140" width="232" height="150" rx="14" fill="#FFF4DE" stroke="#B45309" stroke-width="2"/>
+<text x="770.0" y="172.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#B45309" text-anchor="start">abr. 2025</text>
+<text x="770.0" y="202.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="770.0" dy="0.0">ESXi gratuito 8.0 U3e</tspan></text>
+<text x="770.0" y="248.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="770.0" dy="0.0">sin vCenter, sin VADP, sin</tspan><tspan x="770.0" dy="18.9">soporte</tspan></text>
+<circle cx="1070" cy="330" r="13" fill="#FFFFFF" stroke="#D2492F" stroke-width="4"/>
+<path d="M1070 344V370" stroke="#D2492F" stroke-width="2" stroke-dasharray="4 4"/>
+<rect x="920" y="370" width="232" height="150" rx="14" fill="#FCEAE6" stroke="#D2492F" stroke-width="2"/>
+<text x="936.0" y="402.0" font-family="JetBrains Mono" font-size="17" font-weight="700" fill="#D2492F" text-anchor="start">11/10/2027</text>
+<text x="936.0" y="432.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="start"><tspan x="936.0" dy="0.0">Fin de soporte de</tspan><tspan x="936.0" dy="23.0">vSphere 8</tspan></text>
+<text x="936.0" y="478.0" font-family="Instrument Sans" font-size="14" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="936.0" dy="0.0">sin parches ni soporte</tspan><tspan x="936.0" dy="18.9">técnico</tspan></text>
+<text x="48.0" y="640.0" font-family="Instrument Sans" font-size="15" font-weight="400" fill="#6E88A1" text-anchor="start">Fechas de la KB de Broadcom, Thomas-Krenn e Introserv; 2001 y 2011 son historia conocida del producto.</text>
+</svg>

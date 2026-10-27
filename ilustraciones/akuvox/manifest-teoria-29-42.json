@@ -1,0 +1,154 @@
+{
+  "29": {
+    "teoria_figs": [
+      {
+        "file": "29-t1.svg",
+        "after": "El portero no se entera: para él es una sola llamada",
+        "alt": "Diagrama de escalera animado entre el E21 (extensión 801), la central IP, el interno 200 y el respaldo. Tiempo 1: el E21 manda un INVITE a la central con destino 200. Tiempo 2: la central hace sonar el interno 200 y el E21 recibe 180. Tiempo 3: pasan 20 segundos sin respuesta; la central manda CANCEL al 200 y un INVITE nuevo al respaldo. Tiempo 4: el respaldo atiende con 200 OK, la central le pasa 200 OK al E21 y queda la voz. El E21 solo vio INVITE, 180 y 200 OK.",
+        "caption": "Mirá la columna del E21: ve una sola llamada mientras la central cancela un intento y abre otro."
+      },
+      {
+        "file": "29-t2.svg",
+        "after": "antes de que alguien lo necesite de verdad",
+        "alt": "Animación del registro SIP del E21. Tiempo 1: el E21 manda REGISTER, la central responde 200 OK y la extensión 801 queda disponible. Tiempo 2: el E21 renueva el registro cada tanto. Tiempo 3: se corta el cable o la energía y el registro no se renueva. Tiempo 4: la central muestra el 801 como no disponible y el monitoreo avisa que hay que revisarlo.",
+        "caption": "El estado del 801 en la central cambia antes de que alguien apriete el botón."
+      }
+    ]
+  },
+  "30": {
+    "teoria_figs": [
+      {
+        "file": "30-t1.svg",
+        "after": "Un relé es un interruptor movido por un electroimán",
+        "alt": "Animación de un relé por dentro con el circuito de banco. Tiempo 1: en reposo la bobina no tiene corriente, el resorte mantiene el contacto abierto y la lámpara de 12 V está apagada. Tiempo 2: el monitor energiza la bobina y el electroimán atrae la armadura. Tiempo 3: el contacto cierra el circuito de la fuente y la lámpara prende. Tiempo 4: la bobina se apaga, el resorte abre el contacto y la lámpara se apaga. La bobina y el contacto son circuitos aislados.",
+        "caption": "El monitor solo mueve la bobina; el contacto cierra el circuito de la fuente y la lámpara."
+      }
+    ]
+  },
+  "31": {
+    "teoria_figs": [
+      {
+        "file": "31-t1.svg",
+        "after": "es un techo pensado para cargas resistivas",
+        "alt": "Animación con dos circuitos, uno con lámpara (carga resistiva) y otro con electroimán (carga inductiva). Tiempo 1: contactos cerrados, la corriente circula por las dos cargas. Tiempo 2: los contactos abren; arco corto con la lámpara y arco mayor con el electroimán, porque se descarga la energía del campo. Tiempo 3: con el uso, el contacto de la carga inductiva se gasta o se pega. Tiempo 4: con un diodo en el electroimán de continua el arco vuelve a ser chico; la otra opción es un relé auxiliar.",
+        "caption": "Compará el tamaño del arco al abrir: por eso la tabla es un techo para carga resistiva."
+      }
+    ]
+  },
+  "32": {
+    "teoria_figs": [
+      {
+        "file": "32-t1.svg",
+        "after": "revisá la potencia total en la ficha del switch",
+        "alt": "Animación de un switch PoE y un monitor X937 unidos por un UTP. Tiempo 1: el switch mide la resistencia de firma en el par. Tiempo 2: el monitor indica su clase, cuánta potencia va a pedir. Tiempo 3: el switch aplica unos 48 V y el X937 enciende. Tiempo 4: con un puerto 802.3af, hasta 15,4 W, el X937 parpadea y queda inestable o no enciende. Abajo: el X937 pide PoE+ 802.3at o fuente de 12 V 2 A, y hay que sumar consumos contra la potencia total del switch.",
+        "caption": "El switch pregunta antes de dar energía; en un puerto 802.3af el X937 no tiene suficiente."
+      }
+    ]
+  },
+  "33": {
+    "teoria_figs": [
+      {
+        "file": "33-t1.svg",
+        "after": "Todo pasa en la puerta, sin servidor de por medio",
+        "alt": "Animación del A08 por dentro, en cuatro etapas: lee la credencial, la busca en la lista de usuarios, revisa el horario y activa el relé A de la cerradura. Tiempos 1 a 3: una tarjeta válida, dentro del horario, recorre las etapas y la cerradura se libera. Tiempo 4: la misma tarjeta fuera de horario se frena en la etapa de horario, el relé no se activa y la cerradura queda trabada. No hay servidor en el camino.",
+        "caption": "Seguí la tarjeta por las cuatro etapas: la decisión se toma en el terminal de la puerta."
+      }
+    ]
+  },
+  "34": {
+    "teoria_figs": [
+      {
+        "file": "34-t1.svg",
+        "after": "Las entradas hacen el camino inverso",
+        "alt": "Animación del WR01 con tres orígenes y un portón en el relé 1. Tiempo 1: un pedido HTTP con usuario y clave abre el relé 1. Tiempo 2: un celular presenta su credencial por Bluetooth, el WR01 la encuentra en su lista y abre. Tiempo 3: la cámara LPR manda una patente autorizada y abre. Tiempo 4: el pulsador avisa por la entrada 1. Abajo, el registro del WR01 suma una línea por cada evento.",
+        "caption": "Tres caminos distintos terminan en el mismo relé y todos dejan su línea en el registro."
+      }
+    ]
+  },
+  "35": {
+    "teoria_figs": [
+      {
+        "file": "35-t1.svg",
+        "after": "la corriente de la cerradura no pasa por la controladora",
+        "alt": "Animación con una pared entre la puerta 3, afuera, y el tablero, adentro. Tiempo 1: el lector manda el número de la tarjeta por Wiegand a la controladora A094 o A095. Tiempo 2: la controladora verifica usuario, permiso a la puerta 3 y horario. Tiempo 3: activa el relé 3 y la cerradura se libera. Tiempo 4: afuera solo quedan lector y cerradura; lo que decide y lo que abre está en el tablero. Abajo: la energía se calcula por puerta.",
+        "caption": "Afuera solo se lee y se traba; la decisión y el relé quedan del lado de adentro."
+      }
+    ]
+  },
+  "36": {
+    "teoria_figs": [
+      {
+        "file": "36-t1.svg",
+        "after": "durante el tiempo configurado (Hold Delay)",
+        "alt": "Animación del flujo de ascensor. Tiempo 1: el usuario pasa su tarjeta y el terminal lo valida. Tiempo 2: el terminal busca sus pisos permitidos, el piso 3. Tiempo 3: manda un pedido HTTP al EC33, configurado como Server 1 (Unlock), con el usuario y la clave de Open Relay via HTTP, y además el Device Location, planta baja. Tiempo 4: el EC33 activa solo el relé del piso 3 mientras se vacía la barra del Hold Delay y después vuelve a reposo.",
+        "caption": "Los cuatro pasos de la teoría en orden, hasta que el Hold Delay se vacía."
+      },
+      {
+        "file": "36-t2.svg",
+        "after": "el usuario elige entre los pisos liberados",
+        "alt": "Animación con dos cableados del mismo relé del EC33. Paralelo: el relé está en paralelo con el botón del piso 3; tiempo 1, la tarjeta es válida y el relé cierra; tiempo 2, para el control es como apretar el botón y la cabina sube directo al 3. Serie: el relé está en serie con el común de la botonera; tiempo 3, con la tarjeta válida quedan libres solo los pisos permitidos, en el ejemplo el 2 y el 3; tiempo 4, el usuario aprieta el 3 y la cabina sube.",
+        "caption": "En paralelo el ascensor va solo al piso; en serie el usuario elige entre los liberados."
+      }
+    ]
+  },
+  "37": {
+    "teoria_figs": [
+      {
+        "file": "37-t1.svg",
+        "after": "Un par en mal estado da fallas intermitentes",
+        "alt": "Animación de un par existente entre el portero y el apartamento 301, dentro de una cañería. Tiempo 1: continuidad, una señal recorre cada conductor de punta a punta. Tiempo 2: aislación entre los dos conductores, sin fuga. Tiempo 3: aislación hacia tierra o la cañería, sin fuga. Tiempo 4: un par dañado, con un corte en un conductor y una fuga a la cañería en el otro, que da fallas intermitentes.",
+        "caption": "Las tres medidas que hacen falta antes de cotizar sobre un par viejo."
+      }
+    ]
+  },
+  "38": {
+    "teoria_figs": [
+      {
+        "file": "38-t1.svg",
+        "after": "un cable propio para la PC",
+        "alt": "Animación de un switch PoE conectado al puerto 1 de un R49G, con la PC del guardia en el puerto 2. Tiempo 1: el puerto 1 recibe red y energía. Tiempo 2: el tráfico de la PC cruza el switch interno del teléfono y la PC navega. Tiempo 3: el R49G se reinicia, por ejemplo por una actualización, y la PC queda sin red. Tiempo 4: el teléfono vuelve, la PC navega otra vez y aparece la opción de un cable propio para la PC en puestos críticos.",
+        "caption": "Cuando el teléfono se reinicia, la PC que cuelga de él se queda sin red."
+      }
+    ]
+  },
+  "39": {
+    "teoria_figs": [
+      {
+        "file": "39-t1.svg",
+        "after": "500 mA en el R29 V1.1 y 1 A en el X915S",
+        "alt": "Animación con dos gráficos de tensión en el tiempo, para una cerradura NC en Always y una NO en Triggered by Open Relay. Tiempo 1, reposo: la NC tiene 12 V y está trabada; la NO tiene 0 V y está trabada. Tiempo 2, abrir: la NC baja a 0 V y se libera; la NO sube a 12 V y se libera. Tiempo 3, el relé vuelve: las dos trabadas. Tiempo 4, sin energía: la NC se libera y la NO queda trabada.",
+        "caption": "Seguí el cursor: la NC abre cuando le falta tensión, la NO cuando la recibe."
+      }
+    ]
+  },
+  "40": {
+    "teoria_figs": [
+      {
+        "file": "40-t1.svg",
+        "after": "Por eso se define un administrador por equipo",
+        "alt": "Animación con dos paneles, nube SmartPlus y servidor local. Tiempo 1: en la nube, la conexión sale del edificio y no se abren puertos. Tiempo 2: la app del residente llega a los equipos a través de la nube. Tiempo 3: se corta internet; las funciones de nube se detienen y el servidor local sigue andando. Tiempo 4: el servidor local pide energía, respaldos y actualizaciones.",
+        "caption": "El mismo corte de internet en los dos modelos: dónde vive la base de datos decide qué sigue andando."
+      }
+    ]
+  },
+  "41": {
+    "teoria_figs": [
+      {
+        "file": "41-t1.svg",
+        "after": "para que le sirvan el PoE o la fuente existentes",
+        "alt": "Animación sobre un equipo viejo. Tiempo 1: en el firmware A.B.C.D se resalta el bloque A, 111, un E11, portero. Tiempo 2: se resalta el bloque C; de 10 en adelante es la rama de alta seguridad, que cifra la comunicación, los comandos de apertura y el guardado de contraseñas. Tiempo 3: un reemplazo vigente del mismo tipo pasa la tabla de métodos de acceso. Tiempo 4: pasa la tabla de alimentación y llega a reemplazo con datos.",
+        "caption": "Del firmware al reemplazo: identificar el equipo y pasar el candidato por las dos tablas."
+      }
+    ]
+  },
+  "42": {
+    "teoria_figs": [
+      {
+        "file": "42-t1.svg",
+        "after": "el portero y el monitor siguen hablando por SIP en la LAN",
+        "alt": "Animación con portero, monitor, nube SmartPlus, app del residente y el estado de la cuenta de la app. Tiempo 1: el portero usa la cuenta SIP 1 para SmartPlus y sale a la nube por puertos salientes 443, 5070, 8501, 9999 y RTP. Tiempo 2: llega una visita; suena el monitor por SIP en la LAN y la app por la nube. Tiempo 3: la cuenta está vencida; el monitor suena, la app no. Tiempo 4: se renueva en Subscription y la app vuelve a sonar.",
+        "caption": "Lo que vence es la cuenta de la app: la llamada en la LAN no depende de ella."
+      }
+    ]
+  }
+}
