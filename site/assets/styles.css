@@ -1050,16 +1050,7 @@ body:has(.ebar) .foot{padding-bottom:90px}
 .theory img{max-width:100%;border-radius:12px;border:1px solid var(--line);margin:12px 0}
 .theory h3::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--cyan);margin-right:10px;vertical-align:middle;transform:translateY(-2px)}
 .lab-body.theory{padding:6px 18px;font-size:15.5px}
-.pics{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-.pics figure{margin:0;flex:0 1 220px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper)}
-.pics img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;cursor:zoom-in}
-.pics figcaption{font-size:13px;color:var(--ink-2);padding:6px 10px;line-height:1.4}
 .concept .pics{margin-top:0}
-.pics-ed{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;align-items:stretch}
-.pics-ed figure{position:relative;margin:0;width:180px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper)}
-.pics-ed img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
-.pics-ed figcaption{padding:4px 6px;font-size:13px}
-.pics-ed figcaption .ie{margin:0;padding:2px 6px;font-size:13px}
 .pic-x{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(1,30,56,.75);color:#fff;font-size:16px;line-height:1;cursor:pointer}
 .pic-add{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;border:1.5px dashed var(--line-2);border-radius:10px;padding:5px 10px;font-size:13px;font-weight:600;color:var(--ink-3);cursor:pointer;background:transparent}
 .pic-add svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
@@ -1289,3 +1280,66 @@ body:has(.ebar) .foot{padding-bottom:90px}
 .anims>.k{display:block;margin-bottom:10px}
 .anims .lab-fig img{width:100%;height:auto;display:block;cursor:zoom-in}
 .anims.ed figcaption{display:flex;gap:10px;align-items:center;justify-content:space-between}
+
+/* ---- fotos subidas: centradas, del ancho del texto y del mismo tamaño que las ilustraciones ---- */
+.pics{display:grid;gap:14px;margin:14px 0 6px}
+.pics figure{margin:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--paper);box-shadow:var(--sh-s)}
+.pics img{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:var(--ground);cursor:zoom-in}
+.pics figcaption{font-size:14px;color:var(--ink-2);padding:10px 16px;line-height:1.45;background:var(--ground);border-top:1px solid var(--line)}
+.lab-fig img,.lab-fig video{aspect-ratio:16/9;object-fit:contain;background:var(--ground)}
+.lab-body .lab-fig video,.theory .lab-fig video{width:100%;height:auto;display:block;margin:0;border:0;border-radius:0}
+.ideas .lab-fig,.ideas-p .lab-fig{margin:12px 0 6px}
+.ideas .lab-fig img{width:100%;height:auto;display:block;margin:0;border:0;border-radius:0;max-height:none}
+/* ---- editor: fotos de ideas y conceptos ---- */
+.pics-ed{display:grid;gap:14px;margin-top:12px}
+.pe{position:relative;margin:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--paper);box-shadow:var(--sh-s)}
+.pe-m{position:relative}
+.pe img{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:var(--ground);cursor:zoom-in}
+.pe figcaption{padding:8px 12px;background:var(--ground);border-top:1px solid var(--line);font-size:14px}
+.pe figcaption .ie{margin:0;padding:2px 6px;font-size:14px}
+.pe-t,.mt{position:absolute;top:10px;right:10px;display:flex;gap:6px;opacity:0;transform:translateY(-4px);transition:opacity .18s,transform .18s;z-index:3}
+.pe:hover .pe-t,.pe:focus-within .pe-t,.edit-mode .lab-fig:hover>.mt,.edit-mode .embed:hover>.mt{opacity:1;transform:none}
+.edit-mode .lab-fig,.edit-mode .embed{position:relative}
+.pe-b{width:34px;height:34px;border-radius:10px;border:0;background:rgba(1,30,56,.8);color:#fff;display:grid;place-items:center;cursor:pointer;font-size:15px;font-weight:700;backdrop-filter:blur(6px)}
+.pe-b svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.pe-b:hover{background:var(--blue)}
+.pe-b.danger:hover{background:#c8323c}
+.pe-b:disabled{opacity:.35;cursor:default;background:rgba(1,30,56,.8)}
+.fc-add{display:block;width:100%;border:0;border-top:1px dashed var(--line-2);background:var(--ground);color:var(--ink-3);font-family:inherit;font-size:13px;font-weight:600;padding:8px;cursor:pointer}
+.fc-add:hover{color:var(--blue);background:var(--blue-soft)}
+.addbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:9px 12px;border:1.5px dashed var(--line-2);border-radius:14px;color:var(--ink-3);font-size:13px;transition:border-color .18s,background .18s,color .18s}
+.ab-l{display:inline-flex;align-items:center;gap:6px;margin-right:auto}
+.ab-l svg,.ab-b svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+.ab-b{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line-2);background:#fff;border-radius:9px;padding:6px 10px;font-family:inherit;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer}
+.ab-b:hover{border-color:var(--blue);color:var(--blue)}
+.ptarget .addbar{border-color:var(--cyan);background:var(--blue-soft);color:var(--blue)}
+/* herramientas de cada paso del laboratorio y de cada párrafo de la teoría */
+.pt-tools{float:right;display:inline-flex;gap:4px;margin:0 0 4px 8px;opacity:0;transition:opacity .15s}
+#labPrev li:hover>.pt-tools,#labPrev li.ptarget>.pt-tools,.th-b:hover>.pt-tools{opacity:1}
+.pt-tools button{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line-2);background:#fff;border-radius:8px;padding:4px 7px;font-family:inherit;font-size:11px;font-weight:700;color:var(--ink-3);cursor:pointer}
+.pt-tools button svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.pt-tools button:hover{color:var(--blue);border-color:var(--blue)}
+.th-b{position:relative;border-radius:10px;padding:2px 8px;margin:0 -8px;transition:background .15s}
+.th-b .pt-tools{position:absolute;top:-14px;right:8px;float:none;margin:0;z-index:4;padding:4px;border-radius:10px;background:#fff;box-shadow:0 6px 18px -6px rgba(1,30,56,.3)}
+.th-b:hover{background:rgba(10,99,184,.035)}
+.th-b.ptarget{box-shadow:0 0 0 2px var(--cyan);background:var(--blue-soft)}
+/* soltar archivos y subida en curso */
+.drop-on{outline:3px dashed var(--cyan)!important;outline-offset:4px;border-radius:14px}
+.drop-on .addbar{border-color:var(--blue);color:var(--blue);background:var(--blue-soft)}
+.up-on{position:relative}
+.up-ph{position:absolute;right:12px;bottom:12px;z-index:6;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:rgba(1,30,56,.88);color:#fff;font-size:13px;font-weight:600;box-shadow:var(--sh-s);animation:ctxIn .15s ease-out}
+.up-ph b{font-variant-numeric:tabular-nums;min-width:34px;text-align:right}
+/* menú contextual del editor */
+.ctx{position:absolute;z-index:300;min-width:260px;max-width:320px;padding:6px;border-radius:14px;background:var(--paper);border:1px solid var(--line);box-shadow:0 18px 50px -12px rgba(1,30,56,.38);animation:ctxIn .12s ease-out}
+@keyframes ctxIn{from{opacity:0;transform:translateY(-4px) scale(.98)}to{opacity:1;transform:none}}
+.ctx button{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;padding:8px 10px;border-radius:9px;font-family:inherit;font-size:14px;font-weight:500;line-height:1.2;color:var(--ink);cursor:pointer;text-align:left}
+.ctx button:hover,.ctx button:focus-visible{background:var(--blue-soft);color:var(--blue);outline:none}
+.ctx button:disabled{opacity:.4;cursor:default;background:none;color:var(--ink)}
+.ctx button svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;flex:none}
+.ctx .ctx-i{width:16px;text-align:center;font-weight:800;font-size:11px;flex:none}
+.ctx kbd{margin-left:auto;font-size:11px;color:var(--ink-3);border:1px solid var(--line);border-radius:5px;padding:2px 5px;background:var(--ground)}
+.ctx hr{border:0;border-top:1px solid var(--line);margin:5px 4px}
+.ctx-n{margin:6px 10px 3px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.gm-paste{margin-top:10px;width:100%;justify-content:center}
+.pics-ed .addbar{display:none}
+.edit-mode li:hover .addbar,.edit-mode .concept:hover .addbar,.ptarget .addbar,.drop-on .addbar,.pics-ed:focus-within .addbar{display:flex;animation:ctxIn .15s ease-out}

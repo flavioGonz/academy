@@ -424,7 +424,8 @@
     ["#p-resumen", "#p-teoria", "#p-laboratorio .lab-body"].forEach(sel => glossify($(sel)));
     wireAuto(l, slug);
     // ampliar ilustraciones e imágenes del laboratorio
-    const zoomPics = [...$$(".l-fig img"), ...$$(".anims img"), ...$$(".pics img"), ...$$(".lab-body img"), ...$$(".theory img")];
+    ["#p-resumen .ideas", "#p-teoria", "#p-laboratorio .lab-body"].forEach(sel => figurize($(sel)));
+    const zoomPics = [...$$(".l-fig img"), ...$$(".anims img"), ...$$(".pics img"), ...$$(".ideas img"), ...$$(".lab-body img"), ...$$(".theory img")];
     zoomPics.forEach((im, ix) => { im.style.cursor = "zoom-in"; (im.closest(".zoom") || im).addEventListener("click", () => lightbox(zoomPics.map(x => ({url: x.getAttribute("src"), texto: x.closest("figure")?.querySelector("figcaption")?.textContent || x.alt, tipo: /\.gif$/i.test(x.src) ? "gif" : "imagen"})), ix)); });
 
     // quiz
@@ -562,6 +563,39 @@
     document.title = `${l.handle} · ${c.title} · IES Training`;
   }
 
+  /* imágenes del portapapeles (botón "Pegar"; pide permiso al navegador la primera vez) */
+  async function clipImages() {
+    if (!navigator.clipboard?.read) return [];
+    try {
+      const out = [];
+      for (const it of await navigator.clipboard.read()) {
+        const t = it.types.find(x => /^image\/(png|jpeg|webp|gif)$/.test(x)) || it.types.find(x => x.startsWith("image/"));
+        if (t) { const b = await it.getType(t); out.push(new File([b], `portapapeles.${(t.split("/")[1] || "png").replace("jpeg", "jpg")}`, {type: b.type || t})); }
+      }
+      return out;
+    } catch { return []; }
+  }
+  // imágenes sueltas de un texto (Markdown ![..](..) o img.inl) pasan a figura centrada, del mismo tamaño que las ilustraciones
+  const GENERIC_ALT = /^(foto|imagen|captura|descripción de la (foto|imagen))$/i;
+  function figurize(root) {
+    if (!root) return;
+    // figuras que arma pandoc con ![..](..): mismo estilo; el pie genérico ("foto") no se muestra
+    $$("figure:not(.lab-fig)", root).forEach(fg => { if (fg.closest(".pics, .pics-ed, .l-fig, .gm, .caps") || !fg.querySelector("img, video")) return; fg.classList.add("lab-fig", "ufig"); const fc = fg.querySelector("figcaption"); if (fc && GENERIC_ALT.test(fc.textContent.trim())) fc.remove(); });
+    $$("img", root).forEach(im => {
+      if (im.closest("figure, .fx-media, .gm, .caps, .pics-ed, .ctx")) return;
+      const p = im.parentElement;
+      const alone = p && p.tagName === "P" && [...p.childNodes].every(n => n === im || n.nodeName === "BR" || (n.nodeType === 3 && !n.textContent.trim()));
+      const fig = document.createElement("figure"); fig.className = "lab-fig ufig";
+      const alt = (im.getAttribute("alt") || "").trim();
+      im.classList.remove("inl");
+      if (alone) p.replaceWith(fig);
+      else if (p && p.tagName === "P") { p.after(fig); im.remove(); }  // imagen metida en medio de un párrafo: va debajo del párrafo
+      else im.replaceWith(fig);
+      fig.append(im);
+      if (alt && !GENERIC_ALT.test(alt)) { const fc = document.createElement("figcaption"); fc.textContent = alt; fig.append(fc); }
+    });
+  }
+
   /* ---------- armador de GIF: pegá capturas una tras otra ---------- */
   function gifMaker() {
     return new Promise(resolve => {
@@ -571,6 +605,7 @@
         <div class="gm-h"><div><span class="k">Armar GIF</span><h2>Pegá capturas, una por paso</h2><p>Sacá una captura (Win+Shift+S), volvé acá y pegala con <b>Ctrl+V</b>. Repetí con cada paso. También podés arrastrar o elegir archivos.</p></div><button class="gm-x" type="button" aria-label="Cerrar">×</button></div>
         <div class="gm-body"><div class="gm-left">
           <label class="gm-drop" tabindex="0">${icon("image")}<b>Pegá con Ctrl+V o arrastrá capturas</b><span>o elegí archivos</span><input type="file" accept="image/png,image/jpeg,image/webp" multiple hidden></label>
+          <button class="btn ghost sm gm-paste" type="button">${icon("clip")}Pegar la captura copiada</button>
           <ol class="gm-strip"></ol></div>
           <div class="gm-right"><div class="gm-prev"><span class="note">La vista previa aparece cuando haya capturas.</span></div>
             <div class="gm-opts"><label>Ancho<select data-o="w"><option value="640">640 px</option><option value="960" selected>960 px</option><option value="1200">1200 px</option></select></label>
@@ -591,17 +626,11 @@
       };
       const play = () => { clearTimeout(playT); if (!frames.length) { prev.innerHTML = `<span class="note">La vista previa aparece cuando haya capturas.</span>`; return; } let k = 0; const step = () => { prev.innerHTML = `<img src="${frames[k % frames.length].url}" alt="Vista previa"><span class="gm-n">${(k % frames.length) + 1}/${frames.length}</span>`; k++; playT = setTimeout(step, delay * 1000); }; step(); };
       const add = async files => { for (const f of files) { if (!/^image\/(png|jpeg|webp)$/.test(f.type)) continue; try { const bmp = await createImageBitmap(f); frames.push({bmp, url: URL.createObjectURL(f)}); } catch {} } paint(); };
-      fmtHook = async (file, el) => {
-      const pt = el.closest?.("[data-pt]");
-      if (el.id === "labMd") return addPhoto(file, "lab");
-      if (el.id === "thMd") return addPhoto(file, "theory");
-      if (pt && /^([ik]|fig$)/.test(pt.dataset.pt)) return addPhoto(file, pt.dataset.pt);
-      try { const j = await uploadInline(slug, l, file); el.focus(); document.execCommand("insertText", false, `\n![foto](${j.captura.url})\n`); toast("Imagen agregada"); } catch (err) { toast(err.message); }
-    };
     const onPaste = e => { const fs = [...(e.clipboardData?.items || [])].filter(i => i.kind === "file" && /^image\//.test(i.type)).map(i => i.getAsFile()).filter(Boolean); if (!fs.length) return; e.preventDefault(); e.stopImmediatePropagation(); add(fs); };
       const onKey = e => { if (e.key === "Escape") close(null); };
       document.addEventListener("paste", onPaste, true); document.addEventListener("keydown", onKey);
       const drop = $(".gm-drop", ov), inp = $("input[type=file]", ov);
+      $(".gm-paste", ov).onclick = async () => { const fs = await clipImages(); if (fs.length) add(fs); else toast("No hay ninguna imagen copiada. Sacá una captura (Win+Shift+S) y volvé a tocar."); };
       inp.onchange = () => { add([...inp.files]); inp.value = ""; };
       ["dragenter", "dragover"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add("over"); }));
       ["dragleave", "drop"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove("over"); }));
@@ -718,6 +747,7 @@
         <section class="pl" id="pdGlos" hidden><h2>Glosario</h2><dl></dl></section>
       </div>`;
     document.title = `${n ? ls[0].handle + " · " : ""}${c.title} · PDF · IES Training`;
+    figurize($(".print-doc"));
     $("#doPrint").onclick = () => print();
     const doc = $(".print-doc"); await glossify(doc);
     const used = [...new Set($$(".gl", doc).map(x => x.dataset.g))].map(id => GLOS.byId[id]).filter(Boolean).sort((a, b) => a.term.localeCompare(b.term, "es", {numeric: true}));
@@ -854,7 +884,7 @@
           <section class="panel" id="p-laboratorio" hidden>
             <div class="card lab">
               <div class="lab-h"><h2>Laboratorio</h2><div class="row"><label class="sel-s"><span class="sr">Tipo</span><select id="labE">${["Rápido", "Foco", "Campo", "Admin"].map(x => `<option ${l.lab.energy === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><label class="min-in"><input id="labM" type="number" min="0" max="240" value="${l.lab.minutes ?? ""}"> min</label></div></div>
-              <div class="lab-tools"><label class="btn ghost sm">${icon("upload")}Imagen, GIF o video<input type="file" id="insF" accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm" hidden></label>
+              <div class="lab-tools"><label class="btn ghost sm">${icon("upload")}Imagen, GIF o video<input type="file" id="insF" accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm" multiple hidden></label>
                 <button class="btn ghost sm" type="button" id="insGif">GIF con capturas</button><button class="btn ghost sm" type="button" id="insY">${icon("link")}YouTube o Vimeo</button><button class="btn ghost sm" type="button" data-wrap="code">\`código\`</button><button class="btn ghost sm" type="button" data-block="routeros">Bloque de comandos</button><button class="btn ghost sm" type="button" data-block="warn">⚠️ Advertencia</button><span class="note" id="insS" role="status"></span></div>
               <div class="lab-split"><label class="lab-src"><span class="sr">Pasos en Markdown</span><textarea id="labMd" spellcheck="true">${esc(l.lab.md || "")}</textarea></label><div class="lab-body" id="labPrev" aria-live="polite"></div></div>
             </div>
@@ -870,7 +900,7 @@
           <section class="panel" id="p-fuentes" hidden><div class="card pad"><div id="srcs"></div><button class="btn ghost sm" type="button" id="addS">${icon("plus")}Agregar fuente</button></div></section>
         </div>
         <aside class="card side ed-help"><div class="side-h"><h2>Cómo editar</h2></div>
-          <ul class="help-l"><li>Hacé clic sobre cualquier texto y escribí: se edita en el lugar, con el mismo aspecto que ve el alumno.</li><li>El laboratorio se escribe a la izquierda y se ve a la derecha tal como queda.</li><li><b>Fotos:</b> hacé clic en una idea, un concepto o un paso del laboratorio (a la derecha) y pegá con Ctrl+V, o usá el botón de cámara de ese punto.</li><li>Nada se publica hasta que tocás <b>Guardar cambios</b>. Cada guardado queda en el historial del curso.</li></ul>
+          <ul class="help-l"><li>Hacé clic sobre cualquier texto y escribí: se edita en el lugar, con el mismo aspecto que ve el alumno.</li><li>El laboratorio se escribe a la izquierda y se ve a la derecha tal como queda.</li><li><b>Fotos, GIF y videos en cualquier punto:</b> hacé clic en una idea, un concepto, un paso del laboratorio o un párrafo de la teoría y pegá con <kbd>Ctrl</kbd>+<kbd>V</kbd>, o arrastrá los archivos encima. También con los botones de cada punto o con <b>clic derecho</b> (Pegar, Subir, Armar GIF, Video).</li><li>Clic derecho sobre una foto: ver grande, pie, reemplazar, ordenar o quitar. <kbd>Shift</kbd> + clic derecho abre el menú del navegador.</li><li>Nada se publica hasta que tocás <b>Guardar cambios</b>. Cada guardado queda en el historial del curso.</li></ul>
           <p class="note">Lección ${pos}: ${l.idea_md.filter(x => x.trim()).length} ideas, ${l.concepts.length} conceptos, ${l.quiz.length} preguntas, ${l.sources.length} fuentes.</p></aside>
       </div>`;
     document.title = `Editar: ${l.handle} · IES Training`;
@@ -967,7 +997,7 @@
       $("#ideas").innerHTML = l.idea_md.map((x, i) => `<li data-pt="i${i}"><i></i><div>${ie(x, "Una idea en una línea", "", "span", true)}${picsEd(l.idea_pics[i], `i${i}`)}</div>${l.idea_md.length > 1 ? `<button class="mini del" type="button" data-deli="${i}" aria-label="Quitar línea">×</button>` : ""}</li>`).join("");
       $$("#ideas > li > div > .ie").forEach((el, i) => bind(el, v => l.idea_md[i] = v));
       $$("[data-deli]").forEach(b => b.onclick = () => { l.idea_md.splice(+b.dataset.deli, 1); l.idea_pics.splice(+b.dataset.deli, 1); mark(); paintIdeas(); });
-      wirePics($("#ideas"), paintIdeas);
+      wirePics($("#ideas"));
     };
     paintIdeas();
     $("#addIdea").onclick = () => { if (l.idea_md.length < 6) { l.idea_md.push(""); l.idea_pics.push([]); paintIdeas(); $$("#ideas > li > div > .ie").pop().focus(); } };
@@ -975,7 +1005,7 @@
     const paintK = () => {
       $("#conc").innerHTML = l.concepts.map(conceptEd).join("") || `<p class="note">Todavía no hay conceptos. Sumá uno por cada idea que un técnico nuevo necesita entender: para qué se creó, cómo se usa y un ejemplo.</p>`;
       $$("#conc .concept").forEach(card => { card.dataset.pt = `k${card.dataset.ki}`; const k = l.concepts[+card.dataset.ki]; const [nm, a, b2, c2] = $$(".ie", card); bind(nm, v => k.name = v); bind(a, v => k.para_que = v); bind(b2, v => k.como = v); bind(c2, v => k.ejemplo = v); });
-      wirePics($("#conc"), paintK);
+      wirePics($("#conc"));
       $$("[data-delk]").forEach(b => b.onclick = () => { if (!b.dataset.armed) { b.dataset.armed = 1; b.textContent = "¿Quitar?"; return; } l.concepts.splice(+b.dataset.delk, 1); mark(); paintK(); });
     };
     paintK();
@@ -988,20 +1018,28 @@
       $$("#labPrev pre").forEach(pre => { const lang = (pre.querySelector("code")?.className.match(/language-(\w+)/) || [])[1]; if (lang) pre.dataset.lang = lang; });
       $$("#labPrev ol > li").forEach((li, k) => {
         li.dataset.pt = `s${k}`; li.classList.toggle("ptarget", target === `s${k}`);
-        const b = document.createElement("button"); b.type = "button"; b.className = "step-cam"; b.title = "Agregar una foto a este paso"; b.innerHTML = `${icon("image")}<span>Foto a este paso</span>`;
-        b.onclick = e => { e.stopPropagation(); setTarget(`s${k}`); $("#stepF").click(); };
-        li.prepend(b);
+        li.insertAdjacentHTML("afterbegin", ptTools());
       });
+      mediaTools($("#labPrev"), "lab");
     };
     ta.addEventListener("input", () => { l.lab.md = ta.value; mark(); prevLab(); grow(); });
     prevLab(); setTimeout(grow, 0);
     $("#labE").onchange = e => { l.lab.energy = e.target.value; mark(); };
     $("#labM").oninput = e => { l.lab.minutes = e.target.value === "" ? null : +e.target.value; mark(); };
-    // ---- fotos por punto: ideas (i<n>), conceptos (k<n>), pasos del laboratorio (s<n>), texto del laboratorio o de la teoría
+    // ---- medios en cualquier punto de la lección ----
+    // destinos (data-pt): fig ilustración principal · i<n> idea · k<n> concepto · s<n> paso del laboratorio · t<n> párrafo de la teoría
+    // y lab / theory (en el cursor del texto Markdown). Se llega pegando (Ctrl+V), arrastrando, con los botones de cada punto o con clic derecho.
+    const ac = new AbortController(), signal = ac.signal;
+    window.addEventListener("hashchange", () => ac.abort(), {once: true});
     function setTarget(key) { target = key; $$("[data-pt]").forEach(x => x.classList.toggle("ptarget", x.dataset.pt === key)); }
-    main.addEventListener("focusin", e => { const pt = e.target.closest("[data-pt]"); if (pt) setTarget(pt.dataset.pt); else if (e.target.id === "labMd") setTarget("lab"); else if (e.target.id === "thMd") setTarget("theory"); });
-    main.addEventListener("click", e => { const pt = e.target.closest("#labPrev [data-pt]"); if (pt) setTarget(pt.dataset.pt); });
-    const stepFig = (k, u, cap) => `<figure class="lab-fig"><img src="${u}" alt="${esc(cap)}" loading="lazy"><figcaption>${esc(cap)}</figcaption></figure>`;
+    const keyOf = el => { if (!el?.closest || el.closest(".ctx")) return null; if (el.closest("#figBox")) return "fig"; if (el.closest("#labMd")) return "lab"; if (el.closest("#thMd")) return "theory"; const pt = el.closest("[data-pt]"); return pt ? pt.dataset.pt : null; };
+    const elOf = key => key === "lab" ? $("#labMd")?.parentElement : key === "theory" ? $("#thMd")?.parentElement : $(`[data-pt="${key}"]`);
+    const MD_KEY = k => k === "lab" || k === "theory" || /^[st]\d/.test(k || "");
+    const ACC = k => MD_KEY(k) ? "image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm" : "image/png,image/jpeg,image/webp,image/gif";
+    const WHERE = k => ({fig: "la ilustración principal", lab: "el laboratorio, donde está el cursor", theory: "la teoría, donde está el cursor"})[k] || ({i: "esta idea", k: "este concepto", s: "este paso", t: "este párrafo"})[k?.[0]] || "";
+    main.addEventListener("focusin", e => { const k = keyOf(e.target); if (k) setTarget(k); }, {signal});
+    main.addEventListener("click", e => { const k = keyOf(e.target); if (k && k !== target) setTarget(k); }, {signal});
+    const figHTML = (u, cap = "", video = false) => `<figure class="lab-fig">${video ? `<video src="${u}" controls muted playsinline preload="metadata"></video>` : `<img src="${u}" alt="${esc(cap)}" loading="lazy">`}${cap ? `<figcaption>${esc(cap)}</figcaption>` : ""}</figure>`;
     const insertAfterStep = (md, k, html) => {
       const ls = md.split("\n"); let fence = false; const nums = [];
       ls.forEach((ln, i) => { if (/^\s*```/.test(ln)) fence = !fence; else if (!fence && /^\d+\.\s/.test(ln)) nums.push(i); });
@@ -1011,46 +1049,194 @@
       while (j > nums[k] + 1 && !ls[j - 1].trim()) j--;
       return [...ls.slice(0, j), "", html, "", ...ls.slice(j)].join("\n");
     };
+    // bloques de la teoría: separados por una línea en blanco, sin cortar bloques de código
+    const thBlocks = md => { const out = []; let cur = [], fence = false; (md || "").split("\n").forEach(ln => { if (/^\s*```/.test(ln)) fence = !fence; if (!fence && !ln.trim()) { if (cur.length) { out.push(cur.join("\n")); cur = []; } } else cur.push(ln); }); if (cur.length) out.push(cur.join("\n")); return out; };
+    const embedHTML = u => { const yt = u.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/), vm = u.match(/vimeo\.com\/(?:video\/)?(\d{5,12})/);
+      return yt || vm ? `<div class="embed"><iframe src="${yt ? `https://www.youtube-nocookie.com/embed/${yt[1]}` : `https://player.vimeo.com/video/${vm[1]}`}" title="Video" allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>` : null; };
+    // pone un bloque HTML en un destino de texto (laboratorio, teoría, paso o párrafo)
+    function putHTML(key, html) {
+      if (key === "lab") insert(`\n\n${html}\n\n`);
+      else if (key === "theory") thInsert(`\n\n${html}\n\n`);
+      else if (key[0] === "s") { ta.value = insertAfterStep(ta.value, +key.slice(1), html); l.lab.md = ta.value; mark(); prevLab(); grow(); }
+      else if (key[0] === "t") { const b = thBlocks(th.value); b.splice(Math.min(+key.slice(1) + 1, b.length), 0, html); th.value = b.join("\n\n"); th.dispatchEvent(new Event("input")); }
+    }
+    // indicador de subida sobre el punto de destino
+    const busy = (key, on, p) => {
+      const el = elOf(key); if (!el) return; let b = el.querySelector(":scope > .up-ph");
+      if (!on) { b?.remove(); el.classList.remove("up-on"); return; }
+      if (!b) { b = document.createElement("div"); b.className = "up-ph"; b.innerHTML = `<i class="fx-spin"></i><span>Subiendo</span><b></b>`; el.append(b); el.classList.add("up-on"); }
+      if (p != null) b.querySelector("b").textContent = `${p}%`;
+    };
     async function addPhoto(file, key = target) {
+      if (!key) { toast("Elegí dónde va: hacé clic en la idea, el concepto, el paso o el párrafo, y volvé a pegar o soltar."); return; }
       if (key === "fig") return setFig(file);
-      if (!key) { toast("Hacé clic en la idea, el concepto, el paso o la ilustración donde va la foto y volvé a pegar."); return; }
-      if (!/^image\//.test(file.type)) { toast("Solo imágenes (PNG, JPG, WebP o GIF)."); return; }
-      const st = $("#insS"); toast("Subiendo foto…");
+      const video = /^video\//.test(file.type);
+      if (!MEDIA_OK.test(file.type)) { toast("Formato no admitido: imágenes PNG, JPG, WebP o GIF, y videos MP4 o WebM."); return; }
+      if (video && !MD_KEY(key)) { toast("Los videos van en el laboratorio o en la teoría. Acá podés poner una imagen o un GIF."); return; }
+      busy(key, true, 0);
       try {
-        const j = await uploadInline(slug, l, file, p => { if (st) st.textContent = `Subiendo… ${p}%`; }); if (st) st.textContent = "";
+        const j = await uploadInline(slug, l, file, p => busy(key, true, p));
         const u = j.captura.url;
-        if (key === "lab") { insert(`\n\n![Descripción de la foto](${u})\n\n`); }
-        else if (key === "theory") { thInsert(`\n\n![Descripción de la foto](${u})\n\n`); }
-        else if (key[0] === "s") { const k = +key.slice(1); ta.value = insertAfterStep(ta.value, k, stepFig(k, u, `Paso ${k + 1}: describí qué muestra la foto`)); l.lab.md = ta.value; mark(); prevLab(); grow(); }
-        else { const arr = ptArr(key); if (!arr) return; arr.push({src: u, caption: ""}); mark(); key[0] === "i" ? paintIdeas() : paintK(); setTarget(key); }
-        toast("Foto agregada");
-      } catch (err) { if (st) st.textContent = ""; toast(err.message); }
+        if (MD_KEY(key)) putHTML(key, figHTML(u, "", video));
+        else { const arr = ptArr(key); if (!arr) return; arr.push({src: u, caption: ""}); mark(); key[0] === "i" ? paintIdeas() : paintK(); }
+        setTarget(key); toast(video ? "Video agregado" : file.type === "image/gif" ? "GIF agregado" : "Foto agregada");
+      } catch (err) { toast(err.message); }
+      finally { busy(key, false); }
     }
-    function picsEd(arr, key) {
-      return `<div class="pics-ed" data-pk="${key}">${(arr || []).map((x, i) => `<figure><img src="${esc(x.src)}" alt=""><figcaption>${ie(x.caption, "Qué muestra la foto", "", "span")}</figcaption><button class="pic-x" type="button" data-px="${i}" aria-label="Quitar foto">×</button></figure>`).join("")}
-        <label class="pic-add" title="Agregar foto (o hacé clic acá y pegá con Ctrl+V)">${icon("image")}<span>Foto</span><input type="file" accept="image/png,image/jpeg,image/webp,image/gif" multiple hidden></label></div>`;
+    const addFiles = async (files, key = target) => { for (const f of files) await addPhoto(f, key); };
+    fmtHook = async (file, el) => addPhoto(file, keyOf(el) || target);
+    const pickFiles = (accept, multiple = true) => new Promise(res => { const i = document.createElement("input"); i.type = "file"; i.accept = accept; i.multiple = multiple; i.onchange = () => res([...i.files]); i.click(); });
+    async function act(a, key, editable) {
+      if (!key) return;
+      setTarget(key);
+      if (a === "file") { const fs = await pickFiles(ACC(key), key !== "fig"); if (!fs.length) return; key === "fig" ? setFig(fs[0]) : addFiles(fs, key); }
+      else if (a === "paste") {
+        const fs = await clipImages();
+        if (fs.length) { key === "fig" ? setFig(fs[0]) : addFiles(fs, key); return; }
+        const txt = editable ? await navigator.clipboard?.readText?.().catch(() => "") : "";
+        if (txt) { editable.focus(); if (editable.tagName === "TEXTAREA") { editable.setRangeText(txt, editable.selectionStart, editable.selectionEnd, "end"); editable.dispatchEvent(new Event("input")); } else document.execCommand("insertText", false, txt); return; }
+        toast("No hay ninguna imagen copiada (o el navegador no dejó leerla). Copiá una captura con Win+Shift+S, hacé clic acá y pegá con Ctrl+V.");
+      }
+      else if (a === "gif") { const f = await gifMaker(); if (f) key === "fig" ? setFig(f) : addPhoto(f, key); }
+      else if (a === "video") { const u = prompt("Pegá el enlace de YouTube o Vimeo"); if (!u) return; const h = embedHTML(u.trim()); if (!h) { toast("Ese enlace no es de YouTube ni de Vimeo."); return; } putHTML(MD_KEY(key) ? key : "lab", h); toast("Video agregado"); }
     }
-    function wirePics(root, repaint) {
-      $$(".pics-ed", root).forEach(box => {
-        const key = box.dataset.pk, arr = ptArr(key);
-        $$("figcaption .ie", box).forEach((el, i) => bind(el, v => { arr[i].caption = v; }));
-        $$("[data-px]", box).forEach(b => b.onclick = () => { arr.splice(+b.dataset.px, 1); mark(); repaint(); });
-        $("input[type=file]", box).onchange = async e => { for (const f of [...e.target.files]) await addPhoto(f, key); };
+    // fotos de ideas y conceptos: ver, pie, reemplazar, ordenar, quitar
+    async function picAct(a, key, i) {
+      const arr = ptArr(key); if (!arr || !arr[i]) return; const rp = () => { key[0] === "i" ? paintIdeas() : paintK(); setTarget(key); };
+      if (a === "zoom") { lightbox(arr.map(x => ({url: x.src, texto: x.caption, tipo: /\.gif$/i.test(x.src) ? "gif" : "imagen"})), i); return; }
+      if (a === "up" && i > 0) [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]];
+      else if (a === "dn" && i < arr.length - 1) [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]];
+      else if (a === "del") arr.splice(i, 1);
+      else if (a === "cap") { const v = prompt("Pie de la foto: qué mirar", arr[i].caption || ""); if (v === null) return; arr[i].caption = v.trim(); }
+      else if (a === "rep") { const [f] = await pickFiles(ACC(key), false); if (!f) return; busy(key, true, 0); try { const j = await uploadInline(slug, l, f, p => busy(key, true, p)); arr[i].src = j.captura.url; } catch (err) { toast(err.message); return; } finally { busy(key, false); } }
+      else return;
+      mark(); rp(); if (a === "del") toast("Foto quitada: si fue sin querer, Deshacer en la barra de abajo");
+    }
+    // medios dentro del texto del laboratorio o de la teoría
+    const mdEl = where => where === "lab" ? ta : th;
+    const reEsc = x => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const mdFind = (md, src) => { const e = reEsc(src);
+      for (const r of [new RegExp(`<figure\\b(?:(?!</figure>)[\\s\\S])*?${e}(?:(?!</figure>)[\\s\\S])*?</figure>`), new RegExp(`!\\[[^\\]]*\\]\\(${e}\\)`), new RegExp(`<video\\b[^>]*${e}[^>]*>\\s*</video>`), new RegExp(`<div class="embed">(?:(?!</div>)[\\s\\S])*?${e}[^>]*>\\s*</iframe>\\s*</div>`)]) { const mm = md.match(r); if (mm) return {i: mm.index, s: mm[0]}; }
+      return null; };
+    const mdSet = (where, v) => { const el = mdEl(where); el.value = v.replace(/\n{3,}/g, "\n\n"); el.dispatchEvent(new Event("input")); };
+    async function mediaAct(a, where, src) {
+      const md = mdEl(where).value, f = mdFind(md, src); if (!f) { toast("No encontré ese medio en el texto."); return; }
+      const cut = rep => md.slice(0, f.i) + rep + md.slice(f.i + f.s.length);
+      if (a === "zoom") { lightbox([{url: src, texto: "", tipo: /\.gif$/i.test(src) ? "gif" : "imagen"}], 0); return; }
+      if (a === "del") { mdSet(where, cut("")); toast("Quitado: si fue sin querer, Deshacer en la barra de abajo"); return; }
+      if (a === "cap") {
+        const fc = f.s.match(/<figcaption>([\s\S]*?)<\/figcaption>/), pre = (fc?.[1].match(/^\s*<b>[^<]*<\/b>\s*/) || [""])[0];
+        const now = fc ? fc[1].slice(pre.length).replace(/<[^>]+>/g, "").trim() : (f.s.match(/^!\[([^\]]*)\]/)?.[1] || "");
+        const v = prompt("Pie de la imagen: qué mirar", GENERIC_ALT.test(now) ? "" : now); if (v === null) return;
+        const cap = v.trim() || pre ? `<figcaption>${pre}${esc(v.trim())}</figcaption>` : "";
+        const nx = f.s.startsWith("<figure") ? (fc ? f.s.replace(fc[0], cap) : f.s.replace(/<\/figure>$/, `${cap}</figure>`)) : f.s.startsWith("![") ? figHTML(src, v.trim()) : `<figure class="lab-fig">${f.s}${cap}</figure>`;
+        mdSet(where, cut(nx)); return;
+      }
+      if (a === "rep") { const [file] = await pickFiles(ACC(where), false); if (!file) return; toast("Subiendo…"); try { const j = await uploadInline(slug, l, file); mdSet(where, cut(f.s.split(src).join(j.captura.url))); toast("Reemplazado"); } catch (err) { toast(err.message); } }
+    }
+    // barra de cada medio en la vista previa del laboratorio y de la teoría
+    function mediaTools(root, where) {
+      figurize(root);
+      $$("figure, .embed", root).forEach(fg => {
+        const md = fg.querySelector("img, video, iframe"); if (!md || fg.querySelector(":scope > .mt")) return;
+        const src = md.getAttribute("src"); fg.dataset.src = src; fg.dataset.where = where;
+        fg.insertAdjacentHTML("beforeend", `<span class="mt">${md.tagName === "IMG" ? `<button type="button" class="pe-b" data-ma="cap" title="Editar el pie">✎</button><button type="button" class="pe-b" data-ma="rep" title="Reemplazar">${icon("upload")}</button>` : ""}<button type="button" class="pe-b danger" data-ma="del" title="Quitar">${icon("trash")}</button></span>`);
+        if (md.tagName === "IMG" && !fg.querySelector("figcaption")) fg.insertAdjacentHTML("beforeend", `<button type="button" class="fc-add" data-ma="cap">+ Agregar un pie</button>`);
       });
     }
-    document.body.insertAdjacentHTML("beforeend", `<input type="file" id="stepF" accept="image/png,image/jpeg,image/webp,image/gif" hidden>`);
-    $("#stepF").onchange = async e => { const f = e.target.files[0]; e.target.value = ""; if (f) await addPhoto(f, target); };
-    const onPaste = e => {
-      if (e.defaultPrevented || !location.hash.endsWith("/editar")) return;
-      const f = [...(e.clipboardData?.items || [])].find(i => i.kind === "file" && /^image\//.test(i.type))?.getAsFile();
-      if (!f) return;
-      e.preventDefault(); addPhoto(f);
+    function picsEd(arr, key) {
+      return `<div class="pics-ed" data-pk="${key}">${(arr || []).map((x, i) => `<figure class="pe" data-pi="${i}"><div class="pe-m"><img src="${esc(x.src)}" alt="">
+          <span class="pe-t"><button type="button" class="pe-b" data-pa="up" ${i === 0 ? "disabled" : ""} title="Mover antes">↑</button><button type="button" class="pe-b" data-pa="dn" ${i === arr.length - 1 ? "disabled" : ""} title="Mover después">↓</button><button type="button" class="pe-b" data-pa="rep" title="Reemplazar">${icon("upload")}</button><button type="button" class="pe-b danger" data-pa="del" title="Quitar">${icon("trash")}</button></span></div>
+          <figcaption>${ie(x.caption, "Pie de la foto: qué mirar (opcional)", "", "span")}</figcaption></figure>`).join("")}
+        <div class="addbar" data-ab="${key}"><span class="ab-l">${icon("image")}Arrastrá, pegá con Ctrl+V o</span><button type="button" class="ab-b" data-aa="file">${icon("upload")}Subir</button><button type="button" class="ab-b" data-aa="paste">${icon("clip")}Pegar</button><button type="button" class="ab-b" data-aa="gif">GIF</button></div></div>`;
+    }
+    function wirePics(root) {
+      $$(".pics-ed", root).forEach(box => { const arr = ptArr(box.dataset.pk); $$("figcaption .ie", box).forEach((el, i) => bind(el, v => { arr[i].caption = v; })); });
+    }
+    function ptTools() { return `<span class="pt-tools"><button type="button" data-aa="file" title="Subir foto, GIF o video acá">${icon("image")}</button><button type="button" data-aa="paste" title="Pegar la imagen copiada">${icon("clip")}</button><button type="button" data-aa="gif" title="Armar un GIF con capturas">GIF</button></span>`; }
+    // clics de las barras (delegados: sirven para todo lo que se vuelve a pintar)
+    main.addEventListener("click", e => {
+      const b = e.target.closest("[data-aa]");
+      if (b) { e.preventDefault(); e.stopPropagation(); act(b.dataset.aa, b.closest("[data-ab]")?.dataset.ab || keyOf(b)); return; }
+      const pb = e.target.closest("[data-pa]");
+      if (pb) { e.stopPropagation(); picAct(pb.dataset.pa, pb.closest("[data-pk]").dataset.pk, +pb.closest("[data-pi]").dataset.pi); return; }
+      const mb = e.target.closest("[data-ma]");
+      if (mb) { e.preventDefault(); e.stopPropagation(); const fg = mb.closest("[data-src]"); mediaAct(mb.dataset.ma, fg.dataset.where, fg.dataset.src); return; }
+      const im = e.target.closest(".pe img");
+      if (im) { const fg = im.closest("[data-pi]"); picAct("zoom", fg.closest("[data-pk]").dataset.pk, +fg.dataset.pi); }
+    }, {signal});
+    // arrastrar y soltar en cualquier punto
+    let dropEl = null;
+    const isFiles = e => [...(e.dataTransfer?.types || [])].includes("Files");
+    const dropMark = el => { if (dropEl === el) return; dropEl?.classList.remove("drop-on"); dropEl = el; el?.classList.add("drop-on"); };
+    main.addEventListener("dragover", e => { if (!isFiles(e) || e.target.closest("#figBox")) return; e.preventDefault(); const k = keyOf(e.target); e.dataTransfer.dropEffect = k ? "copy" : "none"; dropMark(k ? elOf(k) : null); }, {signal});
+    main.addEventListener("dragleave", e => { if (!e.relatedTarget || !main.contains(e.relatedTarget)) dropMark(null); }, {signal});
+    main.addEventListener("drop", e => {
+      if (!isFiles(e) || e.target.closest("#figBox")) return; e.preventDefault(); const k = keyOf(e.target); dropMark(null);
+      if (!k) { toast("Soltala sobre una idea, un concepto, un paso del laboratorio o un párrafo de la teoría."); return; }
+      addFiles([...e.dataTransfer.files], k);
+    }, {signal});
+    document.addEventListener("dragover", e => { if (isFiles(e)) e.preventDefault(); }, {signal});  // que soltar fuera de un destino no abra el archivo
+    document.addEventListener("drop", e => { if (isFiles(e) && !main.contains(e.target)) e.preventDefault(); }, {signal});
+    // menú contextual (clic derecho); Shift + clic derecho deja el del navegador
+    const ctx = document.createElement("div"); ctx.className = "ctx"; ctx.hidden = true; ctx.setAttribute("role", "menu"); document.body.append(ctx);
+    signal.addEventListener("abort", () => ctx.remove());
+    const ctxClose = () => { ctx.hidden = true; };
+    const ctxOpen = (x, y, items) => {
+      ctx.innerHTML = items.map((it, i) => it === "-" ? "<hr>" : it.note ? `<p class="ctx-n">${it.note}</p>` : `<button type="button" role="menuitem" data-ci="${i}" ${it.off ? "disabled" : ""}>${it.icon ? icon(it.icon) : `<span class="ctx-i">${it.glyph || ""}</span>`}<span>${it.label}</span>${it.kbd ? `<kbd>${it.kbd}</kbd>` : ""}</button>`).join("");
+      ctx.hidden = false; const w = ctx.offsetWidth, h = ctx.offsetHeight;
+      ctx.style.left = Math.max(8, Math.min(x, innerWidth - w - 8)) + scrollX + "px"; ctx.style.top = Math.max(8, Math.min(y, innerHeight - h - 8)) + scrollY + "px";
+      $$("[data-ci]", ctx).forEach(b => b.onclick = () => { ctxClose(); items[+b.dataset.ci].run(); });
+      $("[data-ci]:not([disabled])", ctx)?.focus({preventScroll: true});
     };
-    document.addEventListener("paste", onPaste);
-    window.addEventListener("hashchange", () => { document.removeEventListener("paste", onPaste); $("#stepF")?.remove(); }, {once: true});
+    ctx.addEventListener("keydown", e => { const bs = $$("[data-ci]:not([disabled])", ctx), i = bs.indexOf(document.activeElement); if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); bs[(i + (e.key === "ArrowDown" ? 1 : -1) + bs.length) % bs.length]?.focus(); } });
+    document.addEventListener("pointerdown", e => { if (!ctx.hidden && !ctx.contains(e.target)) ctxClose(); }, {capture: true, signal});
+    document.addEventListener("keydown", e => { if (e.key === "Escape") ctxClose(); }, {signal});
+    window.addEventListener("scroll", ctxClose, {passive: true, signal});
+    main.addEventListener("contextmenu", e => {
+      if (e.shiftKey) return;
+      const t = e.target, key = keyOf(t);
+      const media = t.closest("#labPrev [data-src], #thPrev [data-src]"), pic = t.closest(".pics-ed [data-pi]");
+      if (!key && !media && !pic) return;
+      e.preventDefault();
+      const editable = t.closest(".ie, textarea"), sel = getSelection().toString(), items = [];
+      if (pic) {
+        const k = pic.closest("[data-pk]").dataset.pk, i = +pic.dataset.pi, n = ptArr(k)?.length || 0;
+        items.push({note: "Esta foto"}, {icon: "image", label: "Ver grande", run: () => picAct("zoom", k, i)}, {glyph: "✎", label: "Editar el pie", run: () => picAct("cap", k, i)}, {icon: "upload", label: "Reemplazar por otra…", run: () => picAct("rep", k, i)},
+          {glyph: "↑", label: "Mover antes", off: i === 0, run: () => picAct("up", k, i)}, {glyph: "↓", label: "Mover después", off: i >= n - 1, run: () => picAct("dn", k, i)}, {icon: "trash", label: "Quitar la foto", run: () => picAct("del", k, i)}, "-");
+      } else if (media) {
+        const w = media.dataset.where, s = media.dataset.src, img = !!media.querySelector("img");
+        items.push({note: img ? "Esta imagen" : "Este video"});
+        if (img) items.push({icon: "image", label: "Ver grande", run: () => mediaAct("zoom", w, s)}, {glyph: "✎", label: "Editar el pie", run: () => mediaAct("cap", w, s)}, {icon: "upload", label: "Reemplazar por otra…", run: () => mediaAct("rep", w, s)});
+        items.push({icon: "trash", label: img ? "Quitar la imagen" : "Quitar el video", run: () => mediaAct("del", w, s)}, "-");
+      }
+      if (sel && editable) items.push({glyph: "⧉", label: "Copiar", kbd: "Ctrl+C", run: () => document.execCommand("copy")});
+      if (key) {
+        items.push({note: `Agregar en ${WHERE(key)}`},
+          {icon: "clip", label: editable ? "Pegar (imagen o texto)" : "Pegar la imagen copiada", kbd: "Ctrl+V", run: () => act("paste", key, editable)},
+          {icon: "upload", label: MD_KEY(key) ? "Subir imagen, GIF o video…" : "Subir imagen o GIF…", run: () => act("file", key)},
+          {glyph: "GIF", label: "Armar un GIF con capturas…", run: () => act("gif", key)});
+        if (MD_KEY(key)) items.push({glyph: "▶", label: "Video de YouTube o Vimeo…", run: () => act("video", key)});
+        if (key === "fig" && l.fig) items.push("-", {icon: "trash", label: "Quitar la ilustración principal", run: () => $("#figX")?.click()});
+      }
+      items.push("-", {note: "Menú del navegador: Shift + clic derecho"});
+      if (key) setTarget(key);
+      ctxOpen(e.clientX, e.clientY, items);
+    }, {signal});
+    // pegar con Ctrl+V en el punto elegido
+    const onPaste = e => {
+      if (e.defaultPrevented) return;
+      const fs = [...(e.clipboardData?.items || [])].filter(i => i.kind === "file" && MEDIA_OK.test(i.type)).map(i => i.getAsFile()).filter(Boolean);
+      if (!fs.length) return;
+      e.preventDefault(); const k = keyOf(document.activeElement) || target; k === "fig" ? setFig(fs[0]) : addFiles(fs, k);
+    };
+    document.addEventListener("paste", onPaste, {signal});
     // teoría
     const th = $("#thMd");
-    const thPrev = () => { $("#thPrev").innerHTML = th.value.trim() ? mdBlock(m, th.value) : ""; };
+    const thPrev = () => {
+      $("#thPrev").innerHTML = thBlocks(th.value).map((b, i) => `<div class="th-b${target === `t${i}` ? " ptarget" : ""}" data-pt="t${i}">${ptTools()}${mdBlock(m, b)}</div>`).join("");
+      mediaTools($("#thPrev"), "theory");
+    };
     const thGrow = () => { th.style.height = "auto"; th.style.height = Math.max(360, th.scrollHeight + 4) + "px"; };
     th.addEventListener("input", () => { l.theory_md = th.value; mark(); thPrev(); thGrow(); });
     const thInsert = txt => { const a = th.selectionStart ?? th.value.length, b = th.selectionEnd ?? a; th.value = th.value.slice(0, a) + txt + th.value.slice(b); th.dispatchEvent(new Event("input")); };
@@ -1058,22 +1244,9 @@
     const insert = (txt, sel = 0) => { const a = ta.selectionStart ?? ta.value.length, b = ta.selectionEnd ?? a; ta.value = ta.value.slice(0, a) + txt + ta.value.slice(b); ta.selectionStart = ta.selectionEnd = a + txt.length - sel; ta.dispatchEvent(new Event("input")); ta.focus(); };
     $$("[data-wrap]").forEach(b => b.onclick = () => { const a = ta.selectionStart, z = ta.selectionEnd; const t = ta.value.slice(a, z) || "comando"; insert("`" + t + "`"); });
     $$("[data-block]").forEach(b => b.onclick = () => b.dataset.block === "warn" ? insert("\n⚠️ ") : insert("\n```routeros\n\n```\n", 5));
-    const addMedia = async f0 => {
-      if (!MEDIA_OK.test(f0.type)) { toast("Formato no admitido."); return; }
-      const st = $("#insS");
-      try { const j = await uploadInline(slug, l, f0, p => st.textContent = `Subiendo… ${p}%`); st.textContent = ""; const u = j.captura.url;
-        insert(j.captura.tipo === "video" ? `\n\n<video src="${u}" controls muted playsinline preload="metadata"></video>\n\n` : `\n\n![Descripción de la imagen](${u})\n\n`); toast("Medio insertado"); }
-      catch (err) { st.textContent = ""; toast(err.message); }
-    };
-    $("#insF").onchange = e => { const f = e.target.files[0]; e.target.value = ""; if (f) addMedia(f); };
-    $("#insGif").onclick = async () => { const f = await gifMaker(); if (f) addMedia(f); };
-    ta.addEventListener("paste", e => { const f = [...(e.clipboardData?.items || [])].find(i => i.kind === "file" && MEDIA_OK.test(i.type))?.getAsFile(); if (f) { e.preventDefault(); addMedia(f); } });
-    $("#insY").onclick = () => {
-      const u = prompt("Pegá el enlace de YouTube o Vimeo"); if (!u) return;
-      const yt = u.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/), vm = u.match(/vimeo\.com\/(?:video\/)?(\d{5,12})/);
-      if (!yt && !vm) { toast("Ese enlace no es de YouTube ni de Vimeo."); return; }
-      insert(`\n\n<div class="embed"><iframe src="${yt ? `https://www.youtube-nocookie.com/embed/${yt[1]}` : `https://player.vimeo.com/video/${vm[1]}`}" title="Video" allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>\n\n`);
-    };
+    $("#insF").onchange = e => { const fs = [...e.target.files]; e.target.value = ""; addFiles(fs, "lab"); };
+    $("#insGif").onclick = () => act("gif", "lab");
+    $("#insY").onclick = () => act("video", "lab");
     // script para automatizar
     const au = () => (l.auto = l.auto || {titulo: "", descripcion: "", variables: [], codigo: "", notas: []});
     const paintV = () => { const a = au(); $("#auV").innerHTML = a.variables.map((v, i) => `<div class="src-ed2"><input data-vi="${i}" data-f="nombre" value="${esc(v.nombre)}" placeholder="NOMBRE" spellcheck="false"><input data-vi="${i}" data-f="valor" value="${esc(v.valor)}" placeholder="Valor por defecto"><input data-vi="${i}" data-f="detalle" value="${esc(v.detalle || "")}" placeholder="Qué es"><button class="mini del" type="button" data-vdel="${i}">×</button></div>`).join("");
