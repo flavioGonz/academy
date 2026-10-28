@@ -1284,3 +1284,8 @@ body:has(.ebar) .foot{padding-bottom:90px}
 @media (max-width:640px){.fx-b span{display:none}.fx-b{padding:0 10px}}
 .l-fig.figx{border-style:solid}
 .fx-prog[hidden],.fx-state[hidden]{display:none}
+
+.anims{margin:22px 0 6px}
+.anims>.k{display:block;margin-bottom:10px}
+.anims .lab-fig img{width:100%;height:auto;display:block;cursor:zoom-in}
+.anims.ed figcaption{display:flex;gap:10px;align-items:center;justify-content:space-between}

@@ -1,0 +1,108 @@
+{
+ "prioridad": 1,
+ "modulos_nuevos": [
+  {
+   "title": "Líneas analógicas por FXO",
+   "why": "Muchos comercios siguen con líneas de cobre de Antel, y es donde la UCM se parece menos a una central SIP: no hay mensaje de corte, no llega número llamado y el identificador depende de la línea. Va después de Quién atiende porque usa sus grupos, el IVR y las rutas. Termina con una línea de Antel sonando en un teléfono, un grupo o un IVR, y con un método para cuando no anda.",
+   "objetivos": [
+    "Al terminar el módulo vas a poder medir una línea de Antel, conectarla a un FXO y crear su troncal analógica sabiendo cuándo conviene una por línea.",
+    "Al terminar el módulo vas a poder cargar los tonos de Uruguay, la detección de corte y el identificador de llamadas, y ajustar impedancia y ganancias.",
+    "Al terminar el módulo vas a poder llevar cada línea a un teléfono, un grupo o un IVR y diagnosticar la que no entra, no corta o hace loop."
+   ],
+   "lessons": [
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18"
+   ],
+   "antes_de": "Fuera de la oficina y cuando algo falla"
+  }
+ ],
+ "lecciones": {
+  "13": {
+   "objetivos": [
+    "Al terminar vas a poder explicar qué da el FXS de Antel (tensión, timbre, tono) y qué hace el FXO de la UCM.",
+    "Al terminar vas a poder medir la línea en reposo y descolgada con un multímetro y probarla con un teléfono.",
+    "Al terminar vas a poder encontrar lo que cuelga del mismo par y armar la ficha de la línea antes de enchufarla."
+   ],
+   "conecta": "Hasta acá todo entraba por el troncal SIP de Troncal registrado. En muchos comercios también hay líneas de cobre de Antel, y su camino arranca antes de la central: en el par que llega a la roseta.",
+   "sigue": "La línea ya tiene su ficha y está enchufada al FXO1. La próxima le dice a la central que existe: la troncal analógica.",
+   "requisitos": [
+    "1"
+   ]
+  },
+  "14": {
+   "objetivos": [
+    "Al terminar vas a poder crear una troncal analógica en Analog Trunks con un nombre que no expone el número real.",
+    "Al terminar vas a poder elegir entre una troncal por línea y varias FXO en una, y qué hacen Ascend, Poll y Descend.",
+    "Al terminar vas a poder leer los colores de los FXO y el estado de las troncales en el Dashboard, y dejar FXO Opermode y PCMA."
+   ],
+   "conecta": "En Qué trae el par la línea quedó medida y enchufada, con el FXO1 en gris en el Dashboard: la central la ve, pero todavía no sabe qué hacer con ella.",
+   "sigue": "Las troncales están, pero todavía no saben cuándo el otro cortó. La próxima carga los tonos de Uruguay y la detección de corte.",
+   "requisitos": [
+    "13"
+   ]
+  },
+  "15": {
+   "objetivos": [
+    "Al terminar vas a poder cargar los tonos de Uruguay (425 Hz, ocupado 500/500) en Tone Settings con Custom.",
+    "Al terminar vas a poder correr PSTN Detection con una o dos líneas y activar la polaridad solo si aparece.",
+    "Al terminar vas a poder grabar la línea con Analog Record Trace y medir en Audacity el tono que manda al cortar."
+   ],
+   "conecta": "En Troncal analógica la línea quedó como troncal. Ahora falta lo que en SIP viene solo: saber cuándo terminó la llamada.",
+   "sigue": "Las llamadas ya cortan bien. La próxima se ocupa de lo que el cliente ve y escucha: el número del que llama, el volumen y el eco.",
+   "requisitos": [
+    "14"
+   ]
+  },
+  "16": {
+   "objetivos": [
+    "Al terminar vas a poder confirmar si la línea tiene la identificación de número llamante de Antel con un teléfono con pantalla.",
+    "Al terminar vas a poder probar Caller ID Scheme con Auto-Detect y uno por uno hasta que aparezca el número.",
+    "Al terminar vas a poder detectar la impedancia con ACIM y ajustar RX y TX sin agrandar el eco."
+   ],
+   "conecta": "En Tonos y corte la línea aprendió a reconocer el ocupado de 425 Hz. El identificador viaja por el mismo par y también depende de un esquema que hay que acertar.",
+   "sigue": "La línea entra, corta, muestra el número y suena bien. Falta lo principal: que suene donde tiene que sonar.",
+   "requisitos": [
+    "14"
+   ]
+  },
+  "17": {
+   "objetivos": [
+    "Al terminar vas a poder explicar por qué una llamada analógica arranca en la extensión s y qué significa que se quede ahí.",
+    "Al terminar vas a poder crear una ruta entrante por troncal hacia una extensión, un grupo, un IVR con horario o un fax.",
+    "Al terminar vas a poder armar una ruta saliente con los números de Uruguay y failover, sabiendo qué número ve el que recibe."
+   ],
+   "conecta": "Con la troncal, los tonos y el identificador listos, se vuelve a lo que ya armaste en Patrón y privilegio, IVR con horario y Grupo o cola, ahora para las líneas de Antel.",
+   "sigue": "Con eso una línea de Antel termina sonando en un teléfono, un grupo o un IVR. La última del módulo es para cuando no anda: no entra, no corta o el puerto parpadea.",
+   "requisitos": [
+    "14",
+    "5",
+    "7",
+    "8"
+   ]
+  },
+  "18": {
+   "objetivos": [
+    "Al terminar vas a poder seguir un método de la ficha a la configuración ante una línea que no entra, no corta o hace loop.",
+    "Al terminar vas a poder cambiar el par de puerto para separar una falla de la línea de una de la central.",
+    "Al terminar vas a poder grabar el puerto, leer el syslog de chan_dahdi y reclamar a Antel con los datos que pide."
+   ],
+   "conecta": "En Hasta que suene cada línea quedó con su ruta y su destino, y en Qué trae el par armaste la ficha de la línea sana. Las dos cosas son la base del diagnóstico.",
+   "sigue": "Con las líneas de Antel resueltas, la oficina queda completa por dentro. El último módulo sale de la oficina, empezando por el teléfono del gerente en su casa.",
+   "requisitos": [
+    "13",
+    "14",
+    "17"
+   ]
+  },
+  "12": {
+   "sigue": "Con eso la oficina queda completa adentro con el troncal SIP. El próximo módulo suma las líneas de cobre de Antel que todavía tienen muchos comercios, empezando por qué llega por el par."
+  },
+  "9": {
+   "conecta": "Con el troncal y las líneas de Antel sonando donde corresponde, la oficina atiende todo lo que entra. Ahora sale afuera: en Extensión sólida dejaste NAT activado y Direct Media apagado sin que todavía hiciera falta, y con un teléfono fuera de la oficina esos dos ajustes se vuelven imprescindibles."
+  }
+ }
+}

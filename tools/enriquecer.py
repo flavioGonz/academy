@@ -8,6 +8,7 @@
   * fig  -> lesson.fig = {src: ilustraciones/<slug>/<id>.webp, alt, caption}
   * concepts -> lesson.concepts (reemplaza los anteriores; conserva fotos ya cargadas si el nombre coincide)
   * teoria_md -> lesson.theory_md y lesson.theory (html)
+  * anims -> lesson.anims (animaciones SVG del Resumen, "Cómo se ve en la red"; suma las que faltan)
   * steps -> inserta <figure class="lab-fig"> en lab.md al final del paso que contiene "after"
              (antes del paso siguiente), y regenera lab.html con pandoc (mismo md() que build.py).
 - Verifica que cada imagen exista en site2/ilustraciones/<slug>/<archivo>.webp.
@@ -36,8 +37,13 @@ def rsc_ascii(code):
 
 
 def webp(slug, f):
+    # el manifest nombra la fuente (.svg); en el sitio va el .webp. Si no hay .webp pero el .svg está en site2,
+    # es una animación (tools/anim.py) y se usa tal cual.
+    d = ROOT / "site2" / "ilustraciones" / slug
     name = Path(f).with_suffix(".webp").name
-    p = ROOT / "site2" / "ilustraciones" / slug / name
+    if f.endswith(".svg") and not (d / name).exists() and (d / Path(f).name).exists():
+        name = Path(f).name
+    p = d / name
     return f"ilustraciones/{slug}/{name}", p.exists()
 
 
@@ -62,6 +68,17 @@ def insert_step(lab, anchor, html):
         elif not fence and (NUM.match(ln) or ln.startswith("⚠️")):
             break
         j += 1
+    # el paso también termina en el primer párrafo sin sangría después de una línea en blanco ("Errores típicos…")
+    if True:
+        fence, k = False, idx + 1
+        while k < j:
+            ln = lines[k]
+            if ln.strip().startswith("```"):
+                fence = not fence
+            elif not fence and ln.strip() and not ln[0].isspace() and not lines[k - 1].strip() and not ln.startswith("<figure"):
+                j = k
+                break
+            k += 1
     while j > idx + 1 and not lines[j - 1].strip():
         j -= 1
     return "\n".join(lines[:j] + ["", html, ""] + lines[j:])
@@ -71,14 +88,20 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("curso"); ap.add_argument("slug"); ap.add_argument("salida")
     ap.add_argument("--solo", default=""); ap.add_argument("--reemplazar-pasos", action="store_true")
-    ap.add_argument("--campos", default="fig,auto,teoria,teoria_figs,concepts,steps", help="qué aplicar (para no pisar lo editado en el panel): fig,auto,teoria,teoria_figs,concepts,steps")
+    ap.add_argument("--campos", default="fig,auto,teoria,teoria_figs,concepts,steps,anims", help="qué aplicar (para no pisar lo editado en el panel): fig,auto,teoria,teoria_figs,concepts,steps,anims")
     ap.add_argument("--rerender", action="store_true", help="regenera con pandoc el html de idea, impacto, quién lo dice, laboratorio y teoría de todas las lecciones")
     a = ap.parse_args()
     c = json.load(open(a.curso, encoding="utf-8"))
     man = {}
-    for f in sorted(glob.glob(str(ROOT / "ilustraciones" / a.slug / "manifest*.json"))):
+    for f in sorted(glob.glob(str(ROOT / "ilustraciones" / a.slug / "manifest*.json")), key=lambda x: (Path(x).name.startswith("manifest-anims"), x)):  # los de animaciones, al final
+        suma = Path(f).name.startswith("manifest-anims")  # los de animaciones suman a los pasos y figuras de teoría existentes
         for k, v in json.load(open(f, encoding="utf-8")).items():
-            man.setdefault(k, {}).update(v)  # varios manifests pueden aportar campos a la misma lección
+            e = man.setdefault(k, {})
+            for kk, vv in v.items():
+                if suma and isinstance(vv, list) and isinstance(e.get(kk), list):
+                    e[kk] = e[kk] + vv
+                else:
+                    e[kk] = vv  # en los demás, el manifest posterior reemplaza el campo
     solo = {x.strip() for x in a.solo.split(",") if x.strip()}
     campos = {x.strip() for x in a.campos.split(",") if x.strip()}
     by = {str(l.get("id", l["n"])): l for l in c["lessons"]}
@@ -118,6 +141,18 @@ def main():
             paras.insert(k + 1, f'<figure class="lab-fig th-fig"><img src="{src}" alt="{alt}" loading="lazy" width="1200" height="675"><figcaption>{cap}</figcaption></figure>')
             l["theory_md"] = "\n\n".join(paras); l["theory"] = md(l["theory_md"])
             rep["teoria_figs"] = rep.get("teoria_figs", 0) + 1
+        if m.get("anims") and "anims" in campos:  # animaciones del Resumen ("Cómo se ve en la red"); suma las que falten, no quita
+            cur = l.get("anims", [])
+            for an in m["anims"]:
+                src = f"ilustraciones/{a.slug}/{an['file']}"
+                if not (ROOT / "site2" / src).exists():
+                    rep["faltan"].append(src); continue
+                if any(x.get("src") == src for x in cur):
+                    continue
+                cur.append({"src": src, "alt": an.get("alt", ""), "caption": an.get("caption", "")})
+                rep["anims"] = rep.get("anims", 0) + 1
+            if cur:
+                l["anims"] = cur[:4]
         if m.get("concepts") and "concepts" in campos:
             prevpics = {k.get("name", "").strip().lower(): k.get("pics") for k in l.get("concepts", []) if k.get("pics")}
             l["concepts"] = [{k: x.get(k, "") for k in ("name", "para_que", "como", "ejemplo")} for x in m["concepts"] if x.get("name")]

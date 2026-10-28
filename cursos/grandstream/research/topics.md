@@ -24,3 +24,12 @@ Cómo se enseña (lo que miré antes de armar el mapa):
 - T14 Exponer SIP o usar VPN: puertos abiertos, TLS, listas blancas por IP
 - T15 Porteros GDS37xx y GSC conectados a la UCM: cuenta SIP, botón de timbre, PIN remoto por DTMF, video en el teléfono
 - T16 Troubleshooting: audio unidireccional, captura Ethernet, syslog, codecs, pruebas de troncal
+
+## Módulo agregado en octubre de 2026: Líneas analógicas por FXO
+Cómo se enseña: la guía "Manage Analog Lines" de Grandstream (troncal, rutas, ACIM, PSTN Detection, Analog Record Trace, SLA), el manual del UCM630x y del UCM630xA, la lista de tonos nacionales de la UIT (E.180) y la documentación de Asterisk/DAHDI, que es el motor analógico de la UCM.
+- T17 La línea analógica: FXS y FXO, tensión en reposo y descolgado, timbre, RJ11, equipos en paralelo, qué ofrece Antel
+- T18 Troncal analógica en el UCM: canales FXO, una troncal por línea o grupo, selección de línea saliente, estados en el Dashboard, Opermode y PCMA
+- T19 Tonos de Uruguay y detección de corte: tonos E.180, Tone Country y Custom, busy detection, polaridad, current disconnect, ring timeout, PSTN Detection
+- T20 Identificador de llamadas, ganancias y eco: esquemas FSK y DTMF, Antel, ACIM, RX y TX, cancelador de eco, fax
+- T21 De la línea al destino: extensión s, ruta entrante por troncal, extensión, grupo o IVR, ruta saliente con varias líneas, numeración de Uruguay, desvíos de Antel
+- T22 Diagnóstico de líneas analógicas: Dashboard, Active Calls, CDR, Analog Record Trace, syslog chan_dahdi, multímetro, teléfono de prueba, cambio de par, reclamo a Antel

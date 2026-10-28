@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un teléfono con pantalla en la misma línea de Antel muestra el número, pero la UCM marca las entrantes como Undetected. ¿Qué cambiás?",
+  "options": [
+   "Pedís a Antel que active el identificador",
+   "Subís TX Gain a +12 dB",
+   "Cambiás DAHDI Out Line Selection",
+   "Probás Caller ID Scheme en Auto-Detect y, si no, los esquemas ETSI uno por uno"
+  ],
+  "answer": 3,
+  "why": "Si el teléfono lo muestra, el servicio está; lo que no coincide es el esquema con el que la UCM intenta leerlo. Viene en Bellcore/Telcordia."
+ },
+ {
+  "q": "Con el esquema Bellcore, un IVR que atiende al instante pierde el número del que llama. ¿Por qué?",
+  "options": [
+   "Porque el IVR no acepta caller ID",
+   "Porque Bellcore manda el número entre el primer y el segundo timbre, y si se atiende antes no llega",
+   "Porque Bellcore solo funciona con fax",
+   "Porque el IVR usa PCMU"
+  ],
+  "answer": 1,
+  "why": "En Bellcore el número viaja por FSK entre el primer y el segundo timbre; atender antes corta esa ventana."
+ },
+ {
+  "q": "Las llamadas por la línea analógica tienen eco y volumen bajo. Según la guía de Grandstream, ¿qué ajustás primero?",
+  "options": [
+   "La impedancia (ACIM) en Analog Hardware, con su detección automática",
+   "TX Gain al máximo",
+   "Busy Tone Count",
+   "El codec de las extensiones a G.722"
+  ],
+  "answer": 0,
+  "why": "La guía atribuye la mayoría de los problemas de eco, ruido y volumen a la impedancia mal configurada; las ganancias se tocan después."
+ }
+]

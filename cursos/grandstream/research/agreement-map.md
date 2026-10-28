@@ -233,3 +233,115 @@ Abreviaturas solo para leer rápido; las urls van completas en cada tema.
 - WP8xx (teléfonos WiFi): ninguna página propia; se tratan como cualquier terminal SIP aprovisionable.
 - Calidad de voz (jitter, QoS, VLAN de voz): casi sin cobertura en lo leído.
 - Foro oficial de Grandstream: no fue accesible desde el entorno (certificado); los casos de foro vienen de 3CX, FreePBX, Netgate y Wazo.
+
+# Módulo Líneas analógicas por FXO (lecciones 13 a 18, notas b:)
+Páginas con notas en este módulo: 25 (24 nuevas y el manual del UCM630x). Antel no publica parámetros eléctricos ni el esquema de identificador: todo lo de la línea en sí queda como "medilo en la instalación".
+
+## TH32 El FXS da tensión y timbre; el FXO se comporta como un teléfono
+- Sub-topic: T17
+- Agree: 4 of 4. Notes: b:N1, b:N3, b:N9, b:N55. Urls: https://www.patton.com/technotes/what-are-fxs-and-fxo/ https://wiki.innovaphone.com/?i=11277 https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/ https://documentation.grandstream.com/wp-content/uploads/2026/10/HT80x-V2-–-Administration-Guide.pdf
+- Disagree: none found
+- Level: foundation
+- Best story: FXS con FXS o FXO con FXO "is a senseless connection" (https://wiki.innovaphone.com/?i=11277)
+
+## TH33 Medí la línea antes de enchufarla: tensión en reposo, al descolgar y quién más está en el par
+- Sub-topic: T17 (also T22)
+- Agree: 4 of 5. Notes: b:N2, b:N3, b:N4, b:N5, b:N11. Urls: https://www.patton.com/technotes/what-are-fxs-and-fxo/ https://wiki.innovaphone.com/?i=11277 https://www.sandman.com/firealarm-bul.html https://community.asterisk.org/t/functioning-pstn-line-with-red-alarm/65892
+- Disagree: los valores cambian según la fuente (50 V, 24 a 70 V, 48 V); ninguna fuente da los de Antel.
+- Level: foundation
+- Best story: panel de alarma que entra en falla cada vez que alguien descuelga en la línea compartida (https://www.sandman.com/firealarm-bul.html)
+
+## TH34 Una troncal por línea para rutear por número; varias FXO en una troncal para salir por la primera libre
+- Sub-topic: T18 (also T21)
+- Agree: 3 of 3. Notes: b:N12, b:N13, b:N16, b:N42. Urls: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/ https://documentation.grandstream.com/knowledge-base/manage-analog-lines/ https://community.asterisk.org/t/receiving-calls-from-pstn-s-extension-or-dialed-number/40772
+- Disagree: none found (la decisión es de diseño; ninguna fuente impone una forma)
+- Level: core
+- Best story: Ascend toma siempre el puerto 1 si está libre (https://documentation.grandstream.com/knowledge-base/manage-analog-lines/)
+
+## TH35 Leé el estado de cada FXO en el Dashboard antes de tocar la configuración
+- Sub-topic: T18 (also T22)
+- Agree: 2 of 2. Notes: b:N10, b:N14. Urls: https://documentation.grandstream.com/knowledge-base/manage-analog-lines/ https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/
+- Disagree: la guía dice verde para listo; en el firmware actual se ve azul (observación del caso, no fuente)
+- Level: foundation
+- Best story: gris es "conectado pero no configurado" (https://documentation.grandstream.com/knowledge-base/manage-analog-lines/)
+
+## TH36 Ajustá país de la línea y códec: FXO Opermode, ACIM y PCMA fuera de Norteamérica
+- Sub-topic: T18 (also T20)
+- Agree: 3 of 3. Notes: b:N17, b:N18, b:N38, b:N35. Urls: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/ https://documentation.grandstream.com/knowledge-base/manage-analog-lines/ https://techdocs.audiocodes.com/multi-service-business-routers/mediant-500-msbr/user-manual/version-720/Content/UM/Debugging%20a%20Caller%20ID%20Detection%20on%20FXO.htm
+- Disagree: none found
+- Level: core
+- Best story: PCMA "unless already known" para todo lo que no es Norteamérica (https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/)
+
+## TH37 Cargá los tonos de Uruguay: todo es 425 Hz y lo que cambia es la cadencia
+- Sub-topic: T19
+- Agree: 2 of 2. Notes: b:N19, b:N20, b:N22. Urls: https://www.itu.int/dms_pub/itu-t/opb/sp/T-SP-E.180-2010-PDF-S.pdf https://www.3amsystems.com/World_Tone_Database?q=Uruguay
+- Disagree: none found (thin evidence: la lista UIT es de 2010 y nadie confirma la red actual de Antel)
+- Level: core
+- Best story: ocupado 425 Hz 0,5/0,5 y llamada 425 Hz 1/4 (https://www.itu.int/dms_pub/itu-t/opb/sp/T-SP-E.180-2010-PDF-S.pdf)
+
+## TH38 Elegí el método de corte que usa tu línea, y medilo en vez de adivinarlo
+- Sub-topic: T19
+- Agree: 5 of 7. Notes: b:N21, b:N23, b:N25, b:N26, b:N27, b:N30, b:N8. Urls: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/ https://documentation.grandstream.com/knowledge-base/manage-analog-lines/ https://en.wikipedia.org/wiki/Answer_supervision https://help.yeastar.com/en/p-series/administrator-guide/analog-fxo-trunk-settings.html https://wiki.innovaphone.com/?i=11277
+- Disagree: https://community.asterisk.org/t/asterisk-hangsup-when-busydetect-yes/44836: busy detection cortó llamadas buenas; https://lists.digium.com/pipermail/asterisk-users/2010-July/251933.html: el patrón explícito empeoró la detección.
+- Level: core
+- Best story: PSTN Detection con una llamada real de un minuto (https://documentation.grandstream.com/knowledge-base/manage-analog-lines/)
+
+## TH39 Pedí el identificador a Antel y después probá esquemas hasta que el número aparezca
+- Sub-topic: T20
+- Agree: 5 of 6. Notes: b:N31, b:N32, b:N33, b:N34, b:N35, b:N36. Urls: https://antel.com.uy/personas/servicios/telefonia-fija/identificacion-de-numero-llamante https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/ https://en.wikipedia.org/wiki/Caller_ID https://techdocs.audiocodes.com/multi-service-business-routers/mediant-500-msbr/user-manual/version-720/Content/UM/Debugging%20a%20Caller%20ID%20Detection%20on%20FXO.htm https://help.yeastar.com/en/p-series/administrator-guide/analog-fxo-trunk-settings.html
+- Disagree: ninguna fuente dice qué esquema usa Antel; Wikipedia no lista a Uruguay.
+- Level: core
+- Best story: "Failed to decode CallerID" mientras el teléfono con display sí lo mostraba (https://lists.digium.com/pipermail/asterisk-users/2010-July/251933.html)
+
+## TH40 Eco, ruido o volumen: primero impedancia (ACIM), después ganancias
+- Sub-topic: T20
+- Agree: 2 of 3. Notes: b:N38, b:N39, b:N35. Urls: https://documentation.grandstream.com/knowledge-base/manage-analog-lines/ https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/
+- Disagree: none found (thin evidence)
+- Level: core
+- Best story: none
+
+## TH41 En analógico no hay DID: la ruta entrante es por troncal y siempre con destino
+- Sub-topic: T21 (also T22)
+- Agree: 4 of 4. Notes: b:N41, b:N42, b:N43, b:N44. Urls: https://docs.asterisk.org/Configuration/Dialplan/Special-Dialplan-Extensions/ https://community.asterisk.org/t/receiving-calls-from-pstn-s-extension-or-dialed-number/40772 https://documentation.grandstream.com/knowledge-base/manage-analog-lines/ https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/
+- Disagree: none found
+- Level: core
+- Best story: "When an analog call comes into Asterisk, the call is sent to the s extension" (https://docs.asterisk.org/Configuration/Dialplan/Special-Dialplan-Extensions/)
+
+## TH42 Salida por varias líneas: patrón de Uruguay, orden de puertos y failover; el número que se ve es el de la línea
+- Sub-topic: T21
+- Agree: 3 of 3. Notes: b:N13, b:N45, b:N46, b:N47. Urls: https://documentation.grandstream.com/knowledge-base/manage-analog-lines/ https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/ https://en.wikipedia.org/wiki/Telephone_numbers_in_Uruguay
+- Disagree: none found
+- Level: core
+- Best story: Outbound Route CID "does not apply to analog trunks" (https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/)
+
+## TH43 Revisá los servicios de Antel de la línea: desvíos, correo de voz y llamada en espera
+- Sub-topic: T21 (also T22)
+- Agree: 3 of 3. Notes: b:N48, b:N49, b:N50. Urls: https://antel.com.uy/personas/servicios/telefonia-fija/transferencia-temporal-incondicional https://antel.com.uy/personas/servicios/telefonia-fija/correo-de-voz https://antel.com.uy/personas/servicios/telefonia-fija/llamada-en-espera
+- Disagree: none found (thin evidence: solo el proveedor)
+- Level: core
+- Best story: con la transferencia activa se escucha "un tono de libre distinto del normal" (https://antel.com.uy/personas/servicios/telefonia-fija/transferencia-temporal-incondicional)
+
+## TH44 Diagnosticá de la ficha a la configuración, y cambiá el par de puerto para separar línea de equipo
+- Sub-topic: T22
+- Agree: 6 of 8. Notes: b:N11, b:N35, b:N51, b:N52, b:N53, b:N5, b:N24. Urls: https://community.asterisk.org/t/functioning-pstn-line-with-red-alarm/65892 https://techdocs.audiocodes.com/multi-service-business-routers/mediant-500-msbr/user-manual/version-720/Content/UM/Debugging%20a%20Caller%20ID%20Detection%20on%20FXO.htm https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/ https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/ https://community.freepbx.org/t/polarity-switch-causing-false-call-backs/35199 https://www.sandman.com/firealarm-bul.html
+- Disagree: none found
+- Level: advanced
+- Best story: entrantes fantasma por la inversión de polaridad al colgar (https://community.freepbx.org/t/polarity-switch-causing-false-call-backs/35199)
+
+## TH45 Para reclamar a Antel, llevá datos: número, síntoma, horario y lo que mediste
+- Sub-topic: T22
+- Agree: 1 of 1. Notes: b:N54. Urls: https://antel.com.uy/atencion-telefonica
+- Disagree: none found (thin evidence)
+- Level: foundation
+- Best story: none
+
+## Divisiones del módulo
+- Busy Tone Count alto o bajo: Grandstream lo sube para evitar cortes al azar; Yeastar avisa que muy alto no detecta; Asterisk muestra falsos positivos. Se decide con PSTN Detection y probando colgar del otro lado.
+- Patrón de ocupado explícito o no: Grandstream y Yeastar lo usan; un caso de Asterisk detectó mejor sin él. Se decide midiendo el tono real con Analog Record Trace.
+- Inversión de polaridad para cortar: útil donde la red la manda; en DAHDI generó cortes al atender y entrantes fantasma. Se activa solo si PSTN Detection la encuentra.
+
+## Huecos del módulo
+- Antel no publica tensión de la línea, frecuencia de timbre, esquema de identificador ni método de corte: todo eso queda para medir y probar en la instalación.
+- La lista de tonos de la UIT es de 2010; no hay confirmación de que la red actual de Antel (incluidas las líneas que entrega desde equipos en la casa del cliente) use los mismos.
+- URSEC: no se encontró una norma técnica pública de la interfaz de línea analógica.
+- El foro oficial de Grandstream y la base de conocimiento de Yeastar (Cloudflare) no se pudieron leer; los casos de foro son de Asterisk, FreePBX y listas de Digium.

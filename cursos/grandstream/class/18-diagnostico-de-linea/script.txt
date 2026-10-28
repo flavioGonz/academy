@@ -1,0 +1,20 @@
+A: Lección dieciocho. Diagnóstico de línea. Un caso real, sin nombres: un comercio con dos líneas de Antel en FXO uno y FXO dos de una UCM6304A.
+B: Te escucho.
+A: Un día la línea dos no recibe llamadas. Al otro, el FXO dos entra en loop: cada diez segundos se pone naranja y se libera.
+B: Uf. ¿Y la central qué mostraba?
+A: En el Dashboard, el FXO dos naranja con cero llamadas activas. Y en Active Calls, una llamada por la línea dos con destino ese, y otra por la línea uno con número Undetected que sí llegaba a recepción.
+B: ¿Cuál es el culpable?
+A: No lo sabemos con certeza, y está bien decirlo. Hay un método, de la ficha a la configuración. Desconectás el FXO dos y medís el par: si en reposo da tensión de descolgado, algo en paralelo tomó la línea. En un foro de Asterisk, un FXO figuraba en uso porque no veía la tensión correcta.
+B: ¿Y si la tensión está bien?
+A: Teléfono de prueba: tono y una llamada desde el celular. Después desconectás alarma, posnet y fax.
+B: ¿Y si sigue?
+A: Cambiás los pares. La línea dos al FXO uno y la uno al dos. Si el loop sigue a la línea, es la línea o algo en ella. Si se queda en el puerto, es la central.
+B: Clarísimo. ¿Y el destino ese?
+A: Lo más probable es que entró sin encontrar ruta: revisás la ruta entrante de la línea dos. Y una hipótesis: el ritmo de diez segundos se parece al Ring Timeout de ocho. La central toma algo por timbre, no vuelve a sonar y da la llamada por cortada.
+B: ¿Algo que toma por timbre?
+A: En FreePBX documentaron llamadas fantasma por una inversión de polaridad al colgar. Por eso grabás: Analog Record Trace en el FXO dos durante dos o tres ciclos, y syslog de chan dahdi.
+B: ¿Y cuándo llamo a Antel?
+A: Cuando el problema sigue a la línea. Ciento veintiuno, las veinticuatro horas, con número, síntoma, horario y lo que mediste.
+B: Laboratorio de campo, entonces.
+A: Veinticinco minutos: recorrés el método en el banco.
+B: Así el próximo loop lo resolvés en una visita, no en tres.

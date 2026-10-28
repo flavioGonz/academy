@@ -1,0 +1,35 @@
+[
+ {
+  "q": "El FXO2 se ocupa y se libera cada unos 10 segundos. Cambiás los pares: la línea 2 al FXO1 y la línea 1 al FXO2. Ahora el que hace el loop es el FXO1. ¿Qué indica?",
+  "options": [
+   "Que el puerto FXO2 de la UCM está dañado",
+   "Que la falla sigue a la línea 2: es la línea o algo conectado en ella",
+   "Que hay que reiniciar la central",
+   "Que falta el Caller ID Scheme"
+  ],
+  "answer": 1,
+  "why": "Si al cambiar de puerto la falla se va con la línea, el problema está en la línea (o en equipos en paralelo), no en el puerto."
+ },
+ {
+  "q": "En el Dashboard el FXO2 está naranja pero Active Calls muestra cero llamadas. Desconectás el FXO2 y medís el par en reposo: da pocos voltios, como un teléfono descolgado. ¿Qué buscás?",
+  "options": [
+   "Un error en la ruta saliente",
+   "Un problema de codec",
+   "El esquema de identificador",
+   "Un equipo en paralelo que tiene tomada la línea: alarma, posnet, fax o un teléfono descolgado"
+  ],
+  "answer": 3,
+  "why": "Con la central desconectada, una tensión de descolgado en reposo indica que otro equipo del par tiene la línea tomada."
+ },
+ {
+  "q": "Vas a reclamar a Antel por la línea 2. ¿Qué datos llevás para que el reclamo no vuelva con 'la línea está bien'?",
+  "options": [
+   "Número, síntoma, horarios, tensión medida, prueba con teléfono y que la falla siguió a la línea al cambiar de puerto",
+   "Solo el número de la línea",
+   "La contraseña de admin de la UCM",
+   "La versión de firmware del teléfono GRP"
+  ],
+  "answer": 0,
+  "why": "Mediciones y pruebas que separan línea de central son lo que el servicio técnico necesita para tomar el reclamo."
+ }
+]

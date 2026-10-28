@@ -5098,7 +5098,10 @@
    "term": "ITU-T",
    "aliases": [
     "ITU",
-    "G.114"
+    "G.114",
+    "UIT",
+    "UIT-T",
+    "E.180"
    ],
    "cat": "Normas",
    "short": "El sector de normas de telecomunicaciones de la Unión Internacional de Telecomunicaciones.",
@@ -10017,6 +10020,263 @@
    "cat": "Telefonía IP",
    "short": "El mensaje SIP que anula una llamada que todavía no fue atendida.",
    "long": "Lo manda quien llamó, o la central, cuando ya no quiere que ese destino siga sonando: por ejemplo, cuando otro miembro de un grupo atendió primero. Está definido en RFC 3261.",
+   "case": true
+  },
+  {
+   "id": "fxo",
+   "term": "FXO",
+   "aliases": [
+    "puerto FXO",
+    "Foreign eXchange Office",
+    "FXO port"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Foreign eXchange Office: el puerto que se conecta a una línea analógica y se comporta como un teléfono, descuelga y cuelga.",
+   "long": "No da tensión ni timbre: los recibe de la línea. Por eso la línea de Antel, que es un FXS, va a un FXO de la central (en el UCM6304A hay cuatro, RJ11). FXO con FXO no funciona.",
+   "case": true
+  },
+  {
+   "id": "fxs",
+   "term": "FXS",
+   "aliases": [
+    "puerto FXS",
+    "Foreign eXchange Subscriber",
+    "FXS port"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Foreign eXchange Subscriber: el puerto que alimenta una línea analógica, da tensión, timbre y tono, y donde se conecta un teléfono o un fax.",
+   "long": "La línea que llega de la central de Antel es un FXS; en la UCM y en los ATA HT80x, los FXS son para teléfonos analógicos y faxes. En la UCM630x, ante un corte de luz, el FXS1 queda conectado al FXO1 y el FXS2 al FXO2 (lifeline).",
+   "case": true
+  },
+  {
+   "id": "pots",
+   "term": "POTS",
+   "aliases": [
+    "línea analógica",
+    "Plain Old Telephone Service",
+    "línea de cobre"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Plain Old Telephone Service: la línea telefónica analógica de dos hilos de cobre que lleva a la vez tensión, timbre, tonos y voz.",
+   "long": "En reposo hay tensión continua en el par; al descolgar se cierra el lazo y circula corriente. Antel no publica los valores de su línea: se miden con un multímetro antes de conectar una central.",
+   "case": true
+  },
+  {
+   "id": "pstn",
+   "term": "PSTN",
+   "aliases": [
+    "RTPC",
+    "red telefónica pública conmutada",
+    "Public Switched Telephone Network"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Public Switched Telephone Network: la red telefónica pública de los operadores, como Antel, a la que se llega por líneas analógicas, digitales o SIP.",
+   "long": "En la UCM aparece en PSTN Detection, la herramienta que llama por la línea para medir el tono de ocupado, la inversión de polaridad y el corte de corriente.",
+   "case": true
+  },
+  {
+   "id": "dahdi",
+   "term": "DAHDI",
+   "aliases": [
+    "Digium Asterisk Hardware Device Interface",
+    "Zaptel",
+    "chan_dahdi"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Digium Asterisk Hardware Device Interface: la capa de Asterisk que maneja los puertos analógicos FXS y FXO; antes se llamaba Zaptel.",
+   "long": "Como la UCM es un Asterisk, las llamadas por FXO aparecen en Active Calls como canales DAHDI (por ejemplo DAHDI/o2), la selección de línea se llama DAHDI Out Line Selection y el módulo de syslog de las llamadas analógicas es chan_dahdi.",
+   "case": true
+  },
+  {
+   "id": "fsk",
+   "term": "FSK",
+   "aliases": [
+    "Frequency-Shift Keying",
+    "Bell 202",
+    "V.23"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Frequency-Shift Keying: modulación que alterna entre dos frecuencias para mandar datos; el identificador de llamadas la usa para mandar el número.",
+   "long": "En el esquema Bellcore, el número viaja con FSK Bell 202 a 1200 bits por segundo entre el primer y el segundo timbre; en los esquemas ETSI se usa FSK V.23, después del timbre o antes de él tras una señal de aviso.",
+   "case": true
+  },
+  {
+   "id": "caller-id",
+   "term": "Caller ID",
+   "aliases": [
+    "identificador de llamadas",
+    "identificación de número llamante",
+    "CLID",
+    "CLIP",
+    "Caller ID Scheme"
+   ],
+   "cat": "Telefonía IP",
+   "short": "El número del que llama, que la red manda por la línea para que el teléfono o la central lo muestre.",
+   "long": "En una línea analógica de Antel es un servicio que se contrata aparte, la identificación de número llamante. Hay varios esquemas (Bellcore, ETSI-FSK, ETSI-DTMF, con aviso o sin él) y la UCM tiene que usar el mismo que la línea: si no coincide, el número llega como Undetected.",
+   "case": true
+  },
+  {
+   "id": "inversion-de-polaridad",
+   "term": "inversión de polaridad",
+   "aliases": [
+    "Polarity Reversal",
+    "LR",
+    "line reversal",
+    "Enable Polarity Reversal"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Cambio del sentido de la tensión entre los dos hilos de la línea que algunas redes usan para avisar que se atendió o que se cortó.",
+   "long": "En la UCM, Enable Polarity Reversal toma una inversión durante la llamada como corte (de fábrica en No) y Polarity on Answer Delay ignora la que llega en los primeros 600 ms. Activada en una línea que no la usa para eso, corta llamadas buenas; mal manejada, puede generar entrantes fantasma.",
+   "case": false
+  },
+  {
+   "id": "current-disconnect",
+   "term": "Current Disconnect",
+   "aliases": [
+    "corte de corriente",
+    "Loop Current Disconnect",
+    "corte de lazo",
+    "Current Disconnect Threshold"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Señal de corte en una línea analógica: la red interrumpe la tensión un instante para avisar que el otro colgó.",
+   "long": "La UCM revisa la caída de tensión cada 200 ms de fábrica (Current Disconnect Threshold, de 50 a 3000 ms). Es uno de los tres métodos de corte junto con el tono de ocupado y la inversión de polaridad; cuál usa la línea se mide con PSTN Detection.",
+   "case": true
+  },
+  {
+   "id": "busy-detection",
+   "term": "Busy Detection",
+   "aliases": [
+    "detección de ocupado",
+    "Busy Tone Count",
+    "busydetect"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Detección del tono de ocupado en una línea analógica para darse cuenta de que el otro cortó y liberar el puerto.",
+   "long": "La UCM compara lo que escucha con el Busy Tone configurado y cuelga después de Busy Tone Count tonos (2 de fábrica; el manual sugiere 4, 6 u 8). Con los tonos de fábrica de Estados Unidos no reconoce el ocupado uruguayo de 425 Hz.",
+   "case": true
+  },
+  {
+   "id": "etsi",
+   "term": "ETSI",
+   "aliases": [
+    "European Telecommunications Standards Institute",
+    "ETSI EN 300 659"
+   ],
+   "cat": "Normas",
+   "short": "European Telecommunications Standards Institute: el organismo europeo de normas de telecomunicaciones.",
+   "long": "Su norma EN 300 659-1 define el identificador de llamadas en líneas analógicas con FSK V.23 o DTMF, después del timbre o antes de él con una señal de aviso. De ahí salen las variantes ETSI del Caller ID Scheme de la UCM.",
+   "year": 1988,
+   "case": true
+  },
+  {
+   "id": "dtas",
+   "term": "DTAS",
+   "aliases": [
+    "DT-AS",
+    "Dual Tone Alerting Signal"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Dual Tone Alerting Signal: tono doble que la red manda antes del timbre para avisar que viene el identificador de llamadas.",
+   "long": "Es una de las tres señales de aviso de los esquemas ETSI antes del timbre, junto con la inversión de línea (LR) y el pulso de timbre (RP). En la UCM: ETSI-FSK Prior to Ringing with DTAS y ETSI-DTMF Prior to Ringing with DTAS.",
+   "case": true
+  },
+  {
+   "id": "rp-as",
+   "term": "RP-AS",
+   "aliases": [
+    "RP",
+    "Ringing Pulse Alerting Signal",
+    "pulso de timbre"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Ringing Pulse Alerting Signal: un timbre corto que la red manda antes del timbre normal para avisar que viene el identificador.",
+   "long": "Es una de las señales de aviso de los esquemas ETSI antes del timbre. En la UCM aparece como ETSI-FSK Prior to Ringing with RP y ETSI-DTMF Prior to Ringing with RP.",
+   "case": true
+  },
+  {
+   "id": "acim",
+   "term": "ACIM",
+   "aliases": [
+    "ACIM Settings",
+    "impedancia AC del FXO"
+   ],
+   "cat": "Telefonía IP",
+   "short": "El ajuste de impedancia de alterna del FXO para que coincida con la de la línea y no haya eco, ruido ni volumen raro.",
+   "long": "En la UCM está en PBX Settings > Interface Settings > Analog Hardware, en las opciones de cada FXO: se elige el valor o se detecta con la línea libre (algoritmos ERL o Pr). La guía de Grandstream lo pone antes de tocar las ganancias RX y TX.",
+   "case": true
+  },
+  {
+   "id": "erl",
+   "term": "ERL",
+   "aliases": [
+    "Echo Return Loss",
+    "pérdida de retorno de eco"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Echo Return Loss: cuánto se atenúa la voz que rebota en la línea y vuelve como eco; cuanto más alto, menos eco.",
+   "long": "En la UCM es uno de los dos algoritmos para detectar el ACIM de un FXO (el otro es Pr): busca el valor de impedancia que deja menos eco en esa línea.",
+   "case": true
+  },
+  {
+   "id": "sla-telefonia",
+   "term": "SLA",
+   "aliases": [
+    "Shared Line Appearance",
+    "SLA Mode",
+    "SLA Station"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Shared Line Appearance: una tecla con luz en varios teléfonos que muestra y toma una línea analógica, como en un sistema de teclas.",
+   "long": "En la UCM se activa con SLA Mode en la troncal analógica: la troncal queda dedicada a las estaciones SLA, saltea las rutas entrantes y salientes, apaga la inversión de polaridad y admite una sola línea. No confundir con SLA de servicios (Service Level Agreement).",
+   "case": true
+  },
+  {
+   "id": "pcm",
+   "term": "PCM",
+   "aliases": [
+    "Pulse-Code Modulation",
+    "modulación por impulsos codificados"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Pulse-Code Modulation: el audio digitalizado en muestras, la base del G.711 y de los archivos crudos de una grabación.",
+   "long": "La Analog Record Trace de la UCM se abre en Audacity como PCM de 16 bits con signo, mono, a 8000 muestras por segundo, que es la frecuencia de muestreo de la telefonía.",
+   "case": true
+  },
+  {
+   "id": "lifeline",
+   "term": "lifeline",
+   "aliases": [
+    "paso directo ante corte de luz"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Conexión directa entre un FXS y un FXO que se activa cuando se corta la energía, para que un teléfono analógico siga usando la línea.",
+   "long": "En la UCM630x y UCM630xA, el FXS1 pasa al FXO1 y el FXS2 al FXO2. Un teléfono analógico en el FXS1 sigue andando por la línea del FXO1 aunque la central esté apagada.",
+   "case": false
+  },
+  {
+   "id": "extension-s",
+   "term": "extensión s",
+   "aliases": [
+    "s extension",
+    "start extension",
+    "extensión de arranque"
+   ],
+   "cat": "Telefonía IP",
+   "short": "La extensión de Asterisk donde arrancan las llamadas analógicas, porque por la línea no llega número llamado.",
+   "long": "En la UCM, una llamada por FXO entra a s y la ruta entrante de su troncal le da destino. Si en Active Calls una llamada se queda en s, lo más probable es que su troncal no tenga ruta entrante o que el patrón no coincida.",
+   "case": true
+  },
+  {
+   "id": "analog-record-trace",
+   "term": "Analog Record Trace",
+   "aliases": [
+    "grabación analógica",
+    "A Key Dial-up FXO"
+   ],
+   "cat": "Herramientas",
+   "short": "Herramienta de la UCM que graba el audio de un puerto FXO o FXS para diagnosticar identificador, tonos o cortes.",
+   "long": "Está en Maintenance > Signaling Troubleshooting: se elige el puerto, Start, se reproduce la falla, Stop y Download. El archivo se mide en Audacity (16 bits, mono, 8000 Hz). Contiene conversaciones reales: se guarda solo mientras dura el diagnóstico.",
    "case": true
   }
  ]

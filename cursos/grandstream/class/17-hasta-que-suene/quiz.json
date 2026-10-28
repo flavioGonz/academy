@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Llamás a la línea 2 desde un celular y en Active Calls la llamada aparece por Antel_Linea2 con destino s. ¿Qué revisás?",
+  "options": [
+   "El codec de la troncal",
+   "Que la troncal Antel_Linea2 tenga una ruta entrante con un patrón que coincida y un destino",
+   "El Caller ID Scheme",
+   "La contraseña de la extensión 1001"
+  ],
+  "answer": 1,
+  "why": "Las llamadas analógicas entran a la extensión s; si quedan ahí es porque no encontraron ruta entrante o destino para esa troncal."
+ },
+ {
+  "q": "El cliente quiere que las salidas muestren siempre el número principal, aunque salgan por la línea 2. ¿Qué le decís?",
+  "options": [
+   "Que se configura en Outbound Route CID",
+   "Que alcanza con cambiar el nombre de la troncal",
+   "Que en analógico el que recibe ve el número de la línea por la que sale; Outbound Route CID no aplica a analógicas",
+   "Que se activa con DID Mode"
+  ],
+  "answer": 2,
+  "why": "El manual aclara que Outbound Route CID no aplica a troncales analógicas: el número lo pone la línea de Antel."
+ },
+ {
+  "q": "¿Qué patrón saliente toma los celulares de Uruguay?",
+  "options": [
+   "_09XXXXXXX",
+   "_2XXXXXXX",
+   "_9X.",
+   "_00X."
+  ],
+  "answer": 0,
+  "why": "Los celulares tienen 9 cifras que empiezan con 09; los fijos tienen 8 y empiezan con 2 (Montevideo) o 4 (resto del país)."
+ }
+]

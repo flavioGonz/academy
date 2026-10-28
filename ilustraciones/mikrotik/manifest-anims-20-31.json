@@ -1,0 +1,253 @@
+{
+ "3": {
+  "anims": [
+   {
+    "file": "3-r1.svg",
+    "alt": "Animación en cuatro tiempos. A la izquierda la red del proveedor de un shopping, con el router de otro local y la notebook de otro técnico; al centro el hAP del cliente con ether1 hacia esa red y el bridge hacia la LAN; a la derecha la notebook del técnico en ether2. 1: antes del cambio, el hAP manda su anuncio de descubrimiento (MNDP) por los dos lados y el otro técnico lo ve en Neighbors con identity, versión y placa. 2: desde la red del proveedor se abre WinBox por MAC, sin IP, y el router pide usuario y contraseña. 3: con mac-winbox allowed-interface-list=LAN y discover-interface-list=LAN, el anuncio sale solo hacia la LAN, el acceso por MAC desde ether1 no contesta y del lado del proveedor deja de aparecer. 4: adentro no cambia nada: la notebook en ether2 lo ve en Neighbors y entra por MAC.",
+    "caption": "Del lado del proveedor, el router deja de anunciarse y de atender por MAC; adentro, todo sigue igual."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "3-l1.svg",
+    "after": "Auditoría de equipo heredado",
+    "alt": "Animación en cuatro tiempos con un router heredado, ya actualizado pero con la configuración que dejó un atacante, y del lado de afuera el servidor del atacante, un cliente que usa el router de proxy e internet. Adentro del router hay cinco piezas: una tarea del scheduler, un script desconocido, SOCKS habilitado en el puerto 5678, una regla de input que acepta el 5678 y un cliente L2TP llamado lvpn. 1: la tarea del scheduler hace fetch a un dominio ajeno y baja un script. 2: el script prende SOCKS en el 5678 y la regla que lo acepta. 3: desde afuera mandan pedidos al 5678 y salen a internet con la IP pública del cliente; el cliente L2TP lvpn llama solo hacia el atacante. 4: los cinco prints de la auditoría del paso 3 marcan cada una de esas piezas; lo que nadie reconoce va al legajo, se deshabilita y se cambian todas las contraseñas.",
+    "caption": "Lo que pasa en el router tomado: scheduler que baja un script, SOCKS en el 5678 y un L2TP propio; cada print muestra una pieza."
+   }
+  ]
+ },
+ "4": {
+  "anims": [
+   {
+    "file": "4-r1.svg",
+    "alt": "Animación en cuatro tiempos con el camino del paquete en el router: internet, prerouting con conntrack y dst-nat, la decisión de ruteo, input (para el router) o forward (a través), postrouting con src-nat y el NVR en 192.168.88.50 puerto 8000. Arriba, el encabezado del paquete; abajo, los contadores de dos reglas. 1: desde un celular llega un paquete de 198.51.100.7 a 203.0.113.10 puerto 18000. 2: en prerouting, el dst-nat cambia el destino a 192.168.88.50 puerto 8000. 3: la decisión de ruteo ve que el destino no es del router y lo manda a forward; la regla chain=input dst-port=18000 nunca coincide y queda en 0. 4: el paquete sigue por forward y postrouting hasta el NVR, y la regla chain=forward dst-address=192.168.88.50 dst-port=8000 es la que suma.",
+    "caption": "El dst-nat cambia el destino antes de decidir el camino: lo publicado se cuenta en forward, nunca en input."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "4-l1.svg",
+    "after": "Mirá el camino del paquete con tres contadores",
+    "alt": "Animación en cuatro tiempos con la notebook en ether2 (192.168.88.10), el router de banco y 1.1.1.1 en internet. Adentro del router, el propio router y tres contadores passthrough: lab: cuenta input, lab: cuenta forward y lab: cuenta output. 1: el ping de la notebook a 192.168.88.1 va al router y el contador de input pasa a 1. 2: el ping a la IP de ether1 también es para el router y input pasa a 2. 3: el ping a 1.1.1.1 atraviesa el router y suma en forward. 4: el /ping 1.1.1.1 desde la terminal del router lo genera el propio router y suma en output.",
+    "caption": "Lo que pasa en la red en este paso: cada ping suma en input, forward u output según a quién va y quién lo genera."
+   },
+   {
+    "step": 6,
+    "file": "4-l2.svg",
+    "after": "Ejemplo 3: el NVR sale solo a NTP",
+    "alt": "Animación en cuatro tiempos con el NVR (192.168.88.50) y una cámara (192.168.88.101) a la izquierda, internet a la derecha y cuatro reglas de forward en orden: accept lab: NVR a NTP (UDP 123), accept lab: NVR a su nube, reject lab: NVR resto con icmp-admin-prohibited y drop lab: camaras sin internet. 1: el NVR pide la hora por UDP 123, coincide la primera regla y el paquete sale a internet. 2: el NVR abre una página web por TCP 443 y baja hasta la regla de reject. 3: el router le devuelve un ICMP admin prohibited y la conexión falla al instante. 4: la cámara manda un SYN, el drop lo descarta sin contestar y la cámara reintenta varias veces sin respuesta.",
+    "caption": "Lo que pasa en el cable: NTP sale, la web del NVR recibe un ICMP de rechazo al instante y la cámara reintenta contra un drop mudo."
+   }
+  ]
+ },
+ "36": {
+  "anims": [
+   {
+    "file": "36-r1.svg",
+    "alt": "Animación en cuatro tiempos. A la izquierda, el router con cinco zonas: ADMIN (vlan10-admin), GESTION (bridge), INVITADOS (ether5), CCTV (ether3, con el NVR en 10.10.20.50) y WAN (ether1). A la derecha, la matriz de zonas: GESTION llega a todas; ADMIN sale a WAN y llega solo al NVR; CCTV sale a WAN solo por NTP; INVITADOS solo sale a WAN. Abajo, el log con el prefijo ZONA-DROP. 1: un paquete de ADMIN al NVR por 443 coincide con el casillero ámbar y pasa. 2: una cámara sale a NTP y pasa; cuando pide una web, no coincide con nada y la corta el drop final, que deja una línea en el log. 3: un paquete de INVITADOS hacia la red de cámaras no tiene casillero: drop final y otra línea ZONA-DROP. 4: la notebook en GESTION llega a CCTV, WAN y ADMIN.",
+    "caption": "Cada paquete entre zonas busca su casillero en la matriz; lo que no tiene casillero cae en el drop final y queda en el log."
+   }
+  ],
+  "steps": [
+   {
+    "step": 6,
+    "file": "36-l1.svg",
+    "after": "Una red nueva, sin tocar reglas",
+    "alt": "Animación en cuatro tiempos con una PC de administración en vlan10-admin (10.10.10.20), las listas de interfaces y cinco reglas de forward: GESTION a todas, ADMIN a WAN, INVITADOS a WAN, ADMIN al NVR y el drop final entre zonas con log ZONA-DROP. 1: la VLAN 10 ya tiene IP pero no está en ninguna zona; la lista ADMIN está vacía. 2: la PC pide internet, el paquete baja por todas las reglas sin coincidir y lo corta el drop final. 3: con /interface/list/member/add list=ADMIN interface=vlan10-admin la interfaz entra a ADMIN y, por include, también a CLIENTES, que tiene DNS y DHCP del router. 4: el mismo paquete coincide con lab: ADMIN a WAN y sale; las reglas no cambiaron.",
+    "caption": "Lo que pasa en la red en este paso: sin zona cae en el drop final; con un member/add hereda la política de ADMIN."
+   }
+  ]
+ },
+ "33": {
+  "anims": [
+   {
+    "file": "33-r1.svg",
+    "alt": "Animación en cuatro tiempos con cuatro orígenes en internet a la izquierda, el router en el centro con las reglas de input (DNS no desde WAN, accept established y related, drop invalid, accept ICMP, drop all not coming from LAN) y las de forward (fasttrack, accept established y related, drop invalid, drop all from WAN not DSTNATed), y a la derecha una PC (192.168.88.20) y un NVR publicado (192.168.88.50:8000). 1: vuelve la respuesta de una descarga de la PC; es established, la toma la primera regla de forward y llega a la PC. 2: un bot prueba el DNS del router y lo corta la regla DNS no desde WAN; otro prueba SSH y lo corta drop all not coming from LAN; ninguno recibe respuesta. 3: una conexión nueva desde la WAN hacia 192.168.88.20 sin port forwarding la corta drop all from WAN not DSTNATed. 4: el celular del dueño entra a la IP pública por el 8000; como tiene dst-nat, el drop de forward no le aplica y llega al NVR.",
+    "caption": "Mirá en qué regla de fábrica termina cada cosa que llega por la WAN, y por qué lo publicado pasa igual."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "33-l2.svg",
+    "after": "Ping desde WAN con límite",
+    "alt": "Animación en cuatro tiempos con la notebook WAN (192.0.2.50) que hace ping a la IP WAN del router y la cadena input con seis reglas: accept established, related y untracked; drop invalid; las dos nuevas del paso 2, ping WAN limitado con limit=5,10:packet y ping WAN excedido con icmp-options=8:0; accept ICMP de fábrica y drop all not coming from LAN. A la derecha, los contadores de las dos reglas nuevas. 1: un ping suelto coincide con ping WAN limitado y vuelve el echo reply. 2: llega una ráfaga de pings y los primeros entran por el límite de 5 por segundo con ráfaga de 10. 3: lo que pasa del límite no coincide con la regla limitada, baja a ping WAN excedido y se descarta sin respuesta. 4: un ICMP de otro tipo, como fragmentación necesaria (tipo 3), no es 8:0: las dos reglas nuevas no lo tocan y sigue como antes.",
+    "caption": "Lo que pasa en el cable: el ping suelto contesta, la ráfaga que excede el límite baja al drop y el resto del ICMP no se toca."
+   },
+   {
+    "step": 5,
+    "file": "33-l1.svg",
+    "after": "abrí y cerrá `ssh admin@<IP WAN del router>` cuatro veces",
+    "alt": "Animación en cuatro tiempos con la notebook WAN (192.0.2.50) que abre conexiones SSH al router, las cuatro address-lists con su timeout (connection1 5m, connection2 15m, connection3 1h y bruteforce_blacklist 1d) y una columna de resultado. 1: la primera conexión no está en ninguna lista, entra a connection1 y se acepta, con hasta 9 intentos de clave. 2: la segunda, como ya estaba en connection1, sube a connection2 y se acepta. 3: la tercera sube a connection3 y se acepta; van 27 intentos posibles. 4: la cuarta pasa a bruteforce_blacklist por un día y el accept ya no la deja pasar: la descarta el drop. Abajo, dos notas: la lista admins va primero para no bloquearte, y las reglas de lista anotan y dejan seguir, por eso van en orden inverso y terminan en un drop.",
+    "caption": "Lo que pasa en la red en este paso: cada conexión SSH nueva sube un escalón de lista hasta la lista negra."
+   }
+  ]
+ },
+ "30": {
+  "anims": [
+   {
+    "file": "30-r1.svg",
+    "alt": "Animación en cuatro tiempos con tres líneas de vida: la notebook (192.168.88.10), el router como resolver con caché (192.168.88.1) y los servidores de arriba (1.1.1.1 y 9.9.9.9). Abajo, la salida de nslookup en la notebook. 1: la notebook pregunta por mikrotik.com, el router no lo tiene en caché, pregunta arriba y vuelve NOERROR con la dirección. 2: pregunta por mikrotk.com, mal escrito; arriba contestan NXDOMAIN y nslookup dice Non-existent domain. 3: con el enlace caído, el router pregunta a servers y a dynamic-servers, nadie contesta, y le responde SERVFAIL a la notebook: Server failed. 4: resumen: NOERROR, el nombre existe; NXDOMAIN, no existe o está bloqueado; SERVFAIL, el router no consiguió respuesta de arriba.",
+    "caption": "NXDOMAIN es un problema del nombre; SERVFAIL, del camino hacia arriba. Mirá quién contesta en cada caso."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "30-l1.svg",
+    "after": "Comprobá que el 53 está cerrado hacia afuera",
+    "alt": "Animación en cuatro tiempos con tres líneas de vida: afuera (la notebook en la red de ether1 o un atacante en internet), el router con WAN 203.0.113.10 y una víctima en 198.51.100.99. 1: desde la red de ether1, nslookup le pregunta por mikrotik.com a la IP WAN del router, al puerto 53. 2: la regla de input drop all not coming from LAN la descarta y nslookup da DNS request timed out, que es el resultado correcto. 3: si nada frenara el 53, el router contestaría a cualquiera, porque allow-remote-requests=yes atiende en todas sus direcciones: queda como resolver abierto. 4: un atacante manda consultas chicas con el origen falso de la víctima y el router le manda a ella respuestas mucho más grandes.",
+    "caption": "Lo que pasa en el cable: la consulta desde la WAN muere en input; sin esa regla el router sería un resolver abierto."
+   },
+   {
+    "step": 5,
+    "file": "30-l2.svg",
+    "after": "DoH, con el log abierto en otra terminal",
+    "alt": "Animación en cuatro tiempos con cuatro líneas de vida: la notebook (192.168.88.10), el router con use-doh-server, los servers comunes (1.1.1.1 y 9.9.9.9 por el puerto 53) y el servidor DoH cloudflare-dns.com. Abajo, el log con el tema dns. 1: el router pregunta a servers la dirección de cloudflare-dns.com. 2: abre una conexión TLS al puerto 443 del servidor DoH y, con verify-doh-cert=yes, valida su certificado. 3: la notebook le pregunta al router por el 53 como siempre; el router manda la consulta cifrada por HTTPS, recibe la respuesta y le contesta NOERROR. 4: el servidor DoH deja de responder: el router no vuelve a servers, la notebook recibe SERVFAIL y el log muestra DoH server connection error: timeout connecting.",
+    "caption": "Lo que pasa en la red en este paso: el router resuelve el servidor DoH con servers, abre HTTPS y, si se cae, la LAN recibe SERVFAIL."
+   }
+  ]
+ },
+ "31": {
+  "anims": [
+   {
+    "file": "31-r1.svg",
+    "alt": "Animación en cuatro tiempos con tres equipos de la LAN (una tele con DNS fijo 8.8.8.8, un servidor en la lista dns-libre y un celular con DoH), el router con su resolver y una adlist que bloquea ads.example.net, y del lado de internet 8.8.8.8 y un servidor DoH. 1: sin reglas de NAT, la tele le pregunta a 8.8.8.8 por ads.example.net, Google le contesta y la publicidad carga: el bloqueo del router no la alcanza. 2: con el redirect de udp y tcp 53, la misma consulta la desvía el router a su resolver, que contesta 0.0.0.0 con origen 8.8.8.8, y la tele no nota el cambio. 3: el servidor está en dns-libre, así que su consulta sale directo a su DNS. 4: el celular con DoH va cifrado por el 443 al servidor DoH; no es tráfico al 53 y la regla no lo ve.",
+    "caption": "La tele le pregunta a 8.8.8.8 y le contesta el router; el servidor de dns-libre sale directo y el DoH pasa igual."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "31-l1.svg",
+    "after": "Repetí la prueba del paso 2 y mirá los contadores",
+    "alt": "Animación en cuatro tiempos con la notebook en ether2 (192.168.88.254), el router con el redirect y su resolver, y 8.8.8.8. Abajo, la salida de nslookup y los contadores de las reglas DNS transparente udp y tcp. 1: antes de las reglas, la consulta por prueba-dns.lan va a 8.8.8.8 y Google contesta NXDOMAIN. 2: con las reglas, la misma consulta a 8.8.8.8:53 cae en el redirect del router, que cambia el destino por el propio router y no la deja salir a internet; el contador udp pasa a 1. 3: el resolver tiene la estática y contesta 192.168.88.77; a la vuelta el origen vuelve a ser 8.8.8.8. 4: nslookup muestra prueba-dns.lan con 192.168.88.77: contestó el router aunque la notebook le preguntó a Google.",
+    "caption": "Lo que pasa en el cable: la consulta a 8.8.8.8 cae en el redirect y el resolver del router contesta 192.168.88.77."
+   },
+   {
+    "step": 6,
+    "file": "31-l2.svg",
+    "after": "Paliativos para DoH",
+    "alt": "Animación en cuatro tiempos con tres líneas de vida: un equipo de la LAN, el router con su resolver y su firewall, e internet con servidores DoT (853) y DoH (443). 1: Firefox, antes de prender DoH por su cuenta, pregunta por use-application-dns.net. 2: el router tiene una estática type=NXDOMAIN para ese nombre y contesta NXDOMAIN, así que Firefox no activa DoH solo y sigue con el DNS del sistema por el 53. 3: un celular con DNS privado prueba TCP 853; la regla de forward lo rechaza con ICMP admin prohibited y el equipo vuelve a preguntar por UDP 53, donde lo toma el redirect. 4: un equipo con DoH configurado a mano va por HTTPS 443 a 1.1.1.1: para el firewall es una web más; Torch con port=443 lo muestra.",
+    "caption": "Lo que pasa en la red en este paso: el canario frena el DoH automático de Firefox, el 853 se rechaza y el DoH a mano pasa por el 443."
+   }
+  ]
+ },
+ "32": {
+  "anims": [
+   {
+    "file": "32-r1.svg",
+    "alt": "Animación en cuatro tiempos con la notebook que usa el DNS del router, el router con una adlist y una estática, y los servidores de arriba. Abajo, la configuración: la adlist del archivo adlist-prueba.txt con example.net y ads.example.net, y la estática example.com type=NXDOMAIN match-subdomain=yes. 1: la notebook pregunta por example.net, que está en la adlist; el router contesta 0.0.0.0 con TTL de 2 segundos sin preguntar arriba, y el navegador no llega a ningún lado. 2: pregunta por www.example.net, que no está en la lista; el router pregunta arriba y vuelve la dirección real: la adlist bloquea solo el nombre exacto. 3: pregunta por example.com y el router contesta NXDOMAIN por la estática. 4: con match-subdomain=yes, www.example.com también da NXDOMAIN.",
+    "caption": "La adlist bloquea el nombre exacto; la estática NXDOMAIN con match-subdomain cubre el dominio y todo lo de abajo."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "32-l1.svg",
+    "after": "Una excepción y una pausa",
+    "alt": "Animación en cuatro tiempos con la notebook (192.168.88.254), el router con la adlist y sus estáticas, y los servidores de arriba. Abajo, los dos comandos del paso 4 y una barra de pausa. 1: example.net está en la adlist y el router contesta 0.0.0.0. 2: con /ip/dns/static/add name=example.net type=FWD, la consulta por example.net sigue hacia arriba y vuelve la dirección real. 3: con /ip/dns/adlist/pause duration=10m, ninguna adlist bloquea mientras corre la pausa: ads.example.net también resuelve. 4: cuando la pausa vence, las adlists vuelven solas y ads.example.net vuelve a dar 0.0.0.0.",
+    "caption": "Lo que pasa en la red en este paso: la FWD deja pasar un nombre de la adlist y la pausa apaga todas un rato."
+   }
+  ]
+ },
+ "9": {
+  "anims": [
+   {
+    "file": "9-r1.svg",
+    "alt": "Animación en cuatro tiempos con el celular del técnico, el DNS de IP Cloud (sn.mynetname.net) y el router del cliente con WAN 203.0.113.10. Abajo, el /ip/cloud/print con dns-name y public-address. 1: el celular pregunta por <serie>.sn.mynetname.net y la nube contesta 203.0.113.10 con TTL de 60 segundos. 2: con esa IP, el celular prueba WinBox al puerto 8291 y el paquete llega al router. 3: la regla de input drop all not coming from LAN lo descarta y WinBox no recibe respuesta: el nombre no abrió nada. 4: lo que sí entra es lo que tiene su regla, como el túnel WireGuard por UDP 13231, aceptado en input; con el túnel arriba, WinBox va por adentro.",
+    "caption": "El nombre DDNS lleva el paquete hasta el router, pero quien decide si entra es el firewall."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "9-l1.svg",
+    "after": "Decidí con esta tabla",
+    "alt": "Animación en cuatro tiempos con tres columnas. IP pública directa: el MikroTik tiene WAN 203.0.113.10 y public-address es la misma. NAT del módem: el módem del proveedor tiene 203.0.113.20 y hace NAT; la WAN del MikroTik es 192.168.1.2. CGNAT: la WAN del MikroTik es 100.64.12.34, dentro de 100.64.0.0/10. 1: en la primera, un paquete de afuera llega hasta el router: se puede publicar con cuidado y un dst-nat alcanza. 2: en la segunda, el paquete muere en el módem: hace falta modo bridge o el reenvío también en el módem. 3: en la tercera, muere en el CGNAT, que no sabe a cuál de sus clientes darlo: no hay port forwarding posible. 4: detrás de CGNAT, el camino lo abre el router hacia afuera, con un túnel saliente o Back To Home.",
+    "caption": "Lo que pasa en la red en cada caso: hasta dónde llega un paquete de afuera con IP directa, NAT del módem o CGNAT."
+   }
+  ]
+ },
+ "18": {
+  "anims": [
+   {
+    "file": "18-r1.svg",
+    "alt": "Animación en cuatro tiempos con un MikroTik con dos WAN: ether1 al ISP A principal (203.0.113.10, distance=1) y ether2 al ISP B de respaldo (198.51.100.40, distance=2); a la derecha cloud2.mikrotik.com por UDP 15252 y un técnico que resuelve el nombre. Abajo, a qué IP apunta <serie>.sn.mynetname.net. 1: el aviso a la nube sale por la ruta principal y la nube anota 203.0.113.10. 2: se cae el ISP A y la ruta por defecto pasa al ISP B. 3: el aviso siguiente sale por el ISP B, la nube anota 198.51.100.40 y public-address cambia. 4: con TTL de 60 segundos, al minuto el técnico ya resuelve la IP nueva.",
+    "caption": "Con dos WAN, el aviso a la nube sale por la ruta activa y el nombre sigue a esa IP en un minuto."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "18-l1.svg",
+    "after": "Hora: NTP en vez de la hora aproximada",
+    "alt": "Animación en cuatro tiempos con tres líneas de vida: el router con su cliente NTP, IP Cloud con update-time y el servidor pool.ntp.org. Abajo a la izquierda, el reloj del router. 1: al arrancar, con el cliente NTP apagado, el router toma una hora aproximada de la nube. 2: con NTP, el router manda la consulta y anota T1; el servidor anota T2 al recibirla y T3 al contestar. 3: la respuesta llega al router en T4, y con los cuatro tiempos calcula la demora, (T4 − T1) − (T3 − T2), y el desfase, ((T2 − T1) + (T3 − T4)) / 2: el viaje de ida y vuelta se descuenta. 4: el reloj queda ajustado, con los comandos del paso 3: cliente NTP con pool.ntp.org y update-time=no.",
+    "caption": "Lo que pasa en el cable: el intercambio NTP con sus cuatro marcas de tiempo, contra la hora aproximada de la nube."
+   }
+  ]
+ },
+ "8": {
+  "anims": [
+   {
+    "file": "8-r1.svg",
+    "alt": "Animación en cuatro tiempos con la notebook del técnico en 4G, el router del cliente con WAN 203.0.113.10 y un escáner en internet. Abajo, tres reglas de input: accept UDP 13231 (wireguard), accept TCP 8291 con in-interface=wg-gestion (winbox por tunel) y defconf: drop all not coming from LAN. 1: el escáner prueba WinBox al 8291 en la WAN; ninguna regla lo acepta y lo descarta el drop final, sin respuesta. 2: el escáner manda basura al UDP 13231; la regla wireguard lo deja pasar, pero WireGuard no reconoce ninguna clave y lo descarta en silencio. 3: la notebook del técnico, que es un peer con su clave, hace el handshake por UDP 13231 y el router contesta. 4: dentro del túnel, WinBox a 10.10.10.1 entra por la interfaz wg-gestion y lo acepta la regla winbox por tunel.",
+    "caption": "De afuera solo entra el túnel: el escáner no recibe nada y WinBox llega por wg-gestion."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "8-l2.svg",
+    "after": "Configuración de la notebook (solo la red de gestión",
+    "alt": "Animación en cuatro tiempos con la notebook por dentro (WinBox, el navegador, la decisión de AllowedIPs, la interfaz del túnel y la salida 4G) y, afuera, el router del cliente en 203.0.113.10:13231 y un sitio web en 198.51.100.200. 1: un paquete de WinBox a 10.10.10.1 está dentro de AllowedIPs = 10.10.10.0/24 y va a la interfaz del túnel. 2: WireGuard lo cifra y lo manda dentro de un UDP al Endpoint 203.0.113.10:13231; por fuera solo se ve ese UDP. 3: un paquete del navegador a 198.51.100.200 no está en AllowedIPs y sale directo por el 4G. 4: con AllowedIPs = 0.0.0.0/0, la web también iría por el túnel y saldría a internet por el cliente.",
+    "caption": "Lo que pasa en la notebook: lo que va a 10.10.10.0/24 entra al túnel; el resto sale por tu conexión, salvo con 0.0.0.0/0."
+   },
+   {
+    "step": 5,
+    "file": "8-l1.svg",
+    "after": "Activá el túnel, mirá `last-handshake`",
+    "alt": "Animación en cuatro tiempos con dos líneas de vida, la notebook (10.10.10.2, en 4G) y el router (wg-gestion, 10.10.10.1), y a la derecha la salida de /interface/wireguard/peers/print. 1: al activar el túnel, la notebook manda Handshake Initiation por UDP a 203.0.113.10:13231. 2: el router conoce la clave pública del peer notebook-lucia y contesta Handshake Response. 3: hay sesión: last-handshake pasa de nunca a 0s y current-endpoint-address y current-endpoint-port muestran 198.51.100.77 y 40312, la IP pública del 4G desde la que llegó la notebook. 4: WinBox a 10.10.10.1 viaja cifrado como datos, rx y tx suben, y si no hay tráfico la notebook manda un keepalive cada 25 segundos.",
+    "caption": "Lo que pasa en el cable al activar: Handshake Initiation y Response, y cómo cambian last-handshake y el endpoint."
+   }
+  ]
+ },
+ "19": {
+  "anims": [
+   {
+    "file": "19-r1.svg",
+    "alt": "Animación en cuatro tiempos con un celular en datos móviles, el router con la interfaz back-to-home-vpn (192.168.216.1/24) y LAN 192.168.88.1, el NVR en 192.168.88.50 y un relay de MikroTik. Arriba, /ip/cloud/print con vpn-relay-ipv4-status y a qué resuelve vpn-dns-name. 1: con IP pública, el estado es reachable directly y el nombre <serie>.vpn.mynetname.net resuelve a la IP pública del router. 2: el túnel WireGuard va directo del celular al router; el celular usa 192.168.216.2. 3: detrás de CGNAT, el estado pasa a reachable via relay: el nombre resuelve al relay, el router mantiene abierta su conexión con él y el tráfico pasa cifrado, sin que el relay pueda leerlo. 4: el usuario tiene allow-lan=yes y client-allowed-address=192.168.88.0/24, así que el paquete del celular llega al NVR.",
+    "caption": "El celular entra directo si el router tiene IP pública, o por el relay si está detrás de CGNAT; cifrado en los dos casos."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "19-l1.svg",
+    "after": "Usuario de solo internet, para comparar",
+    "alt": "Animación en cuatro tiempos con dos usuarios de Back To Home, tecnico-lucia (allow-lan=yes, 192.168.216.2) e invitado (allow-lan=no, 192.168.216.3); el router con las reglas dinámicas (drop en forward de la lista back-to-home-lan-restricted-peers hacia la lista LAN, y masquerade de lo que sale del túnel); y a la derecha el NVR en el bridge (192.168.88.50), un equipo en ether5 (10.10.50.20) que no está en la lista LAN, e internet. 1: tecnico-lucia pide el NVR y llega. 2: invitado pide el NVR; está en la lista de restringidos y la regla dinámica lo corta hacia la lista LAN. 3: invitado pide una web y sale a internet a través del router con masquerade. 4: invitado llega al equipo de ether5 porque esa red no está en la lista LAN: la restricción depende de esa lista.",
+    "caption": "Lo que pasa en la red en este paso: la regla dinámica corta hacia la lista LAN a los de solo internet, y solo hacia esa lista."
+   }
+  ]
+ },
+ "20": {
+  "anims": [
+   {
+    "file": "20-r1.svg",
+    "alt": "Animación en cuatro tiempos con un CHR en un VPS (198.51.100.20, interfaz wg-hub) y su tabla de peers con allowed-address y endpoint, tres sitios detrás de CGNAT (sitio-a 10.10.10.2, sitio-b 10.10.10.3, sitio-c 10.10.10.4) y la notebook del técnico (10.10.10.10). 1: cada sitio abre su túnel saliente con un handshake hacia 198.51.100.20:13231, atravesando su CGNAT. 2: el hub no llama a nadie: anota como current-endpoint la IP pública del CGNAT desde la que le llegó cada peer, y persistent-keepalive=25s en los sitios mantiene abierto cada CGNAT. 3: la notebook se conecta al hub como un peer más. 4: WinBox a 10.10.10.3 va de la notebook al hub, que lo manda por el peer sitio-b porque tiene ese /32 en allowed-address, y llega al sitio B.",
+    "caption": "Los sitios sin IP pública llaman al CHR y el hub aprende de dónde viene cada uno; vos entrás a cualquiera por su IP de túnel."
+   }
+  ],
+  "steps": [
+   {
+    "step": 1,
+    "file": "20-l1.svg",
+    "after": "Endurecé el CHR antes de cualquier otra cosa",
+    "alt": "Animación en cuatro tiempos con tu notebook en la oficina (203.0.113.50), el CHR recién instalado en 198.51.100.20 y escáneres de internet. Abajo, los usuarios del CHR. 1: el CHR arranca con admin sin contraseña en una IP pública: si un escáner llega antes que vos, entra. 2: desde tu sesión creás el usuario tecnico-lucia con su clave. 3: abrís otra sesión con tecnico-lucia, comprobás que entra y recién ahí deshabilitás admin; si lo hacés al revés, te podés quedar afuera. 4: un escáner prueba admin y no entra porque está deshabilitado; además, WinBox y SSH quedan con available-from para la oficina y el túnel, y se apagan telnet, ftp, www, api y api-ssl.",
+    "caption": "Lo que pasa en este paso: tu usuario se crea y se prueba antes de deshabilitar admin, en una IP pública que ya están escaneando."
+   }
+  ]
+ }
+}

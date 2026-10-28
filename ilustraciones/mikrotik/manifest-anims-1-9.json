@@ -1,0 +1,178 @@
+{
+ "1": {
+  "anims": [
+   {
+    "file": "1-r1.svg",
+    "alt": "Animación en cuatro tiempos con el hAP de la obra (ether1 WAN, ether2 a ether5 en el bridge de la lista LAN) y la notebook del técnico con WinBox. 1: la notebook está en ether1. No aparece nada en Neighbors porque el router solo se anuncia en la lista LAN (discover-interface-list=LAN); el intento por MAC no entra porque mac-winbox solo escucha en la lista LAN, y el intento por IP al puerto 8291 lo descarta la regla de input drop all not coming from LAN. 2: la notebook pasa a ether2; llega el anuncio MNDP y en Neighbors aparece el equipo con MAC AA:BB:CC:00:11:22, IP 192.168.88.1 e identidad MikroTik. 3: clic en la MAC, usuario admin y Connect: la sesión abre en capa 2, sin depender de la IP. 4: antes del primer cambio, /export file=inicial deja inicial.rsc en Files y el archivo baja a la notebook para el legajo del cliente.",
+    "caption": "En ether1 no aparece ni deja entrar; en ether2 se anuncia, entrás por la MAC y lo primero es el export."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "1-l1.svg",
+    "after": "Volvé a entrar y verificá que la regla no está",
+    "alt": "Animación en cuatro tiempos con la terminal, la tabla /ip/firewall/filter y /system/history. 1: Ctrl+X muestra Safe Mode taken y el prompt pasa a SAFE. 2: se agrega la regla forward passthrough con comment prueba-safe; se aplica en el acto y en el historial aparece filter rule added con la marca F. 3: Ctrl+D cierra la sesión descartando; RouterOS deshace lo marcado con F y la regla desaparece de la tabla. 4: al volver a entrar, /ip/firewall/filter/print where comment=prueba-safe no muestra resultados. Para quedarse con un cambio se sale con Ctrl+X otra vez o con /quit. Safe Mode guarda hasta 100 acciones.",
+    "caption": "Lo que pasa por dentro: la regla se aplica con F, Ctrl+D la deshace y el print ya no la encuentra."
+   }
+  ]
+ },
+ "23": {
+  "anims": [
+   {
+    "file": "23-r1.svg",
+    "alt": "Animación en cuatro tiempos entre la notebook de la oficina (198.51.100.20), internet y el router de un depósito a 40 km (ether1 203.0.113.10/29). 1: la sesión WinBox va y vuelve; en la terminal, Ctrl+X muestra Safe Mode taken y el prompt pasa a SAFE. 2: con /ip/route/set se cambia el gateway de la ruta por defecto 0.0.0.0/0 a 203.0.113.99 en vez de 203.0.113.9; el cambio se aplica en el acto, queda marcado con F en /system/history y la ruta queda inactiva porque .99 no está en la red 203.0.113.8/29. 3: los pedidos de WinBox siguen llegando, pero las respuestas no tienen ruta: la sesión se congela y el router espera a que muera, hasta unos 9 minutos. 4: la sesión murió y RouterOS deshace el cambio marcado con F; la ruta por defecto vuelve a 203.0.113.9 y la oficina reconecta. Sin Safe Mode, el error obligaba a viajar al depósito.",
+    "caption": "Un gateway mal escrito corta la sesión remota; Safe Mode espera que muera y deshace el cambio."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "23-l1.svg",
+    "after": "Ahora un cambio bueno, confirmado",
+    "alt": "Animación en cuatro tiempos con la terminal, el historial y una tabla de salidas. 1: con Ctrl+X aparece Safe Mode taken; /system/identity/set name=LAB-SAFE se aplica en el acto, el prompt ya muestra LAB-SAFE y el cambio queda marcado con F en /system/history. 2: Ctrl+X otra vez, o soltar el botón Safe Mode de WinBox, confirma: el prompt pierde SAFE y el nombre queda LAB-SAFE. 3: /quit es una salida normal y el cambio también queda. 4: Ctrl+D sale descartando, y una sesión que se corta también deshace: al volver a entrar el nombre es otra vez MikroTik. Conviene confirmar después de cada cambio verificado.",
+    "caption": "Lo que pasa por dentro: Ctrl+X y /quit conservan el cambio; Ctrl+D o una sesión cortada lo deshacen."
+   }
+  ]
+ },
+ "6": {
+  "anims": [
+   {
+    "file": "6-r1.svg",
+    "alt": "Animación en cuatro tiempos con el router del cliente (sus archivos en Files) y la notebook del técnico. 1: antes de tocar, /export file=antes deja antes.rsc, de texto, y /system/backup/save name=antes con contraseña deja antes.backup, binario. 2: el cambio, /system/identity/set name=LAB-MT01, y la foto de después con /export file=despues, que deja despues.rsc. 3: los dos .rsc bajan a la notebook por WinBox, Files; diff antes.rsc despues.rsc muestra la línea de fecha que siempre cambia, marcada con < y >, y el cambio real marcado con >: /system identity y set name=LAB-MT01. 4: para volver atrás en el mismo equipo, /system/backup/load name=antes.backup con su contraseña pide confirmar, reinicia y el identity vuelve a MikroTik. En otro modelo el .backup puede no encajar: para migrar se usa el export con un import revisado.",
+    "caption": "Export y backup antes, export después, diff en la notebook y el .backup para volver atrás."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "6-l1.svg",
+    "after": "Probá un import en seco",
+    "alt": "Animación en cuatro tiempos con el archivo despues.rsc, la terminal del equipo de prueba y su configuración. 1: /import file-name=despues.rsc verbose=yes dry-run recorre el archivo línea por línea y no aplica nada. 2: la simulación termina y la configuración del equipo sigue sin cambios. 3: el import real con verbose=yes, en un equipo que no tiene ether5, aplica las primeras líneas y para en add bridge=bridge interface=ether5, mostrando dónde falló. 4: lo anterior ya se aplicó, porque el import ejecuta línea por línea; se corrige la interfaz en el .rsc, por ejemplo a ether4, y se prueba otra vez en seco. Conviene el import real en un equipo de prueba y en la misma versión de RouterOS.",
+    "caption": "Lo que pasa por dentro: dry-run recorre el archivo sin aplicar nada; el import real para en la línea que falla."
+   }
+  ]
+ },
+ "2": {
+  "anims": [
+   {
+    "file": "2-r1.svg",
+    "alt": "Animación en cuatro tiempos con tres técnicos de la oficina (Lucía, Pedro y Juan), el router del cliente y su log. 1: los tres entran con el usuario admin desde la misma IP de la oficina, 198.51.100.20; el log anota tres veces user admin logged in from 198.51.100.20 via winbox. 2: uno de ellos agrega una regla y /system/history la anota como filter rule added por admin: no hay forma de saber quién fue. 3: con un usuario por técnico, el log dice user lucia.tecnico logged in y user pedro.tecnico logged in, y el historial anota filter rule added por pedro.tecnico. 4: Juan deja la empresa y alcanza con /user/disable juan.tecnico: su intento queda como login failure for user juan.tecnico from 198.51.100.20 via winbox, y Lucía y Pedro siguen entrando con sus propias claves, sin cambiar nada en sus cuentas.",
+    "caption": "Con admin compartido, el log y el historial no dicen quién fue; con un usuario por técnico sí, y dar de baja a uno no toca a los demás."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "2-l1.svg",
+    "after": "Cerrá WinBox y entrá con",
+    "alt": "Animación en cuatro tiempos con la ventana de login de WinBox, el router de banco, /user/print y la terminal. 1: se crea lucia.tecnico en el grupo full y se cierra WinBox; admin sigue habilitado. 2: en una sesión nueva entrás con lucia.tecnico; el router acepta y el log anota user lucia.tecnico logged in from 192.168.88.10 via winbox. 3: recién ahí, /user/disable admin; en /user/print admin aparece con la X de deshabilitado. 4: el otro caso: si lucia.tecnico no entraba, el log dice login failure, y como admin seguía habilitado volvías a entrar con admin y corregías la clave. Al revés, deshabilitar admin sin probar te puede dejar afuera, con reset o Netinstall como única salida.",
+    "caption": "Lo que pasa por dentro: tu usuario entra en una sesión nueva y recién ahí se deshabilita admin."
+   }
+  ]
+ },
+ "25": {
+  "anims": [
+   {
+    "file": "25-r1.svg",
+    "alt": "Animación en cuatro tiempos con el router de la obra: la CPU arriba, el switch chip en el medio y los puertos ether2 a ether5 con una PC de oficina, un AP WiFi, las cámaras y el NVR. 1: hay dos bridges: bridge con ether2 y ether3, con la marca H, y bridge-cctv con ether4 y ether5, sin H, porque fuera de los CRS1xx/2xx el chip hace hardware offloading para un solo bridge. 2: el video de las cámaras al NVR sube del chip a la CPU y vuelve a bajar; cpu-used llega al 100 % y la grabación tiene cortes. 3: queda un solo bridge con los cuatro puertos y la marca H, y las cámaras y el NVR van en la VLAN 20. 4: el switch chip lleva el video de ether4 a ether5 sin pasar por la CPU, que queda baja. Aclaración: que la VLAN se haga por hardware depende del chip de cada modelo, según la tabla de la documentación.",
+    "caption": "Con dos bridges el video sube a la CPU; con uno solo y VLAN, lo conmuta el switch chip."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "25-l1.svg",
+    "after": "Sacá ether5 del bridge y dale una red propia",
+    "alt": "Animación en cuatro tiempos entre la notebook (10.10.50.2/24) y el router con ether5 fuera del bridge (10.10.50.1/24), con las reglas de input de la configuración por defecto a la derecha. 1: la notebook pregunta por ARP la MAC de 10.10.50.1 y el router contesta. 2: el ping llega a input, pasa por accept established,related y drop invalid sin coincidir y lo acepta la regla 3, accept ICMP; el router contesta. 3: WinBox manda un SYN al puerto 8291; recorre las reglas y coincide con la 5, drop all not coming from LAN, porque ether5 no está en la lista LAN; el SYN se repite y no hay SYN-ACK. 4: hasta sumar ether5 a la lista LAN con /interface/list/member/add list=LAN interface=ether5, WinBox no entra por ese puerto.",
+    "caption": "Lo que pasa en la red: el ping entra por accept ICMP y el SYN de WinBox muere en drop all not coming from LAN."
+   }
+  ]
+ },
+ "26": {
+  "anims": [
+   {
+    "file": "26-r1.svg",
+    "alt": "Animación en cuatro tiempos con tres líneas de vida: la notebook (192.168.88.254/24 en la LAN del bridge), el MikroTik (192.168.88.1 en bridge y 10.10.20.1 en ether5) y una cámara (10.10.20.100/24 en ether5). 1: la notebook ve que 10.10.20.100 no es de 192.168.88.0/24 y manda el paquete a su gateway, el router. 2: el router mira sus rutas conectadas, DAc 192.168.88.0/24 por bridge y DAc 10.10.20.0/24 por ether5, y usa la segunda; no hizo falta agregar ninguna ruta. 3: como la red está conectada, pregunta por ARP en ether5 quién tiene 10.10.20.100 y la cámara contesta con su MAC. 4: el router entrega el paquete en ether5, la cámara contesta y la respuesta vuelve a la notebook. Ninguna regla de la configuración por defecto corta el tráfico de la LAN a ether5.",
+    "caption": "La notebook llega a la cámara por el router: ruta conectada por ether5 y ARP antes de entregar."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "26-l1.svg",
+    "after": "Una red nueva para cámaras en ether5",
+    "alt": "Animación en cuatro tiempos entre una cámara en ether5 (10.10.20.100) y el router (10.10.20.1/24 en ether5), con las reglas de input de la configuración por defecto. 1: la cámara manda una consulta DNS por UDP 53 a 10.10.20.1. 2: en input no coincide con accept established,related, drop invalid, accept ICMP ni accept to local loopback, y cae en la 5, drop all not coming from LAN, porque ether5 no está en la lista LAN: la cámara no resuelve. 3: /interface/list/member/add list=LAN interface=ether5 suma ether5 a la lista LAN, junto al bridge. 4: la misma consulta ya no coincide con el drop y el DNS del router, que en la configuración por defecto acepta pedidos remotos, contesta. Lo mismo vale para WinBox y otros servicios del router.",
+    "caption": "Lo que pasa en la red: sin ether5 en la lista LAN, la consulta DNS de la cámara al router se descarta."
+   },
+   {
+    "step": 5,
+    "file": "26-l2.svg",
+    "after": "Conectá una cámara o la notebook en DHCP a ether5",
+    "alt": "Animación en cuatro tiempos con una cámara (MAC AA:BB:CC:00:20:64) en ether5 y el servidor dhcp-cctv del router (pool .100 a .199). 1: la cámara pide dirección con Discover, Offer, Request y Ack, y recibe 10.10.20.100. 2: en /ip/dhcp-server/lease/print where server=dhcp-cctv aparece con la marca D, dinámico y bound; si vence y se libera, la dirección vuelve al pool y la puede tomar otro equipo. 3: /ip/dhcp-server/lease/make-static [find address=10.10.20.100] saca la D: el lease queda estático, reservado para esa MAC. 4: la cámara se reinicia, vuelve a pedir y recibe otra vez 10.10.20.100. Las IP fijas van del .2 al .99, fuera del pool.",
+    "caption": "Lo que pasa en la red: la cámara toma dirección, el lease aparece con D y make-static lo vuelve reserva."
+   }
+  ]
+ },
+ "14": {
+  "anims": [
+   {
+    "file": "14-r1.svg",
+    "alt": "Animación en cuatro tiempos con la cadena NVR (192.168.88.20), MikroTik, módem del proveedor en modo router (WAN 203.0.113.45), internet y el celular del cliente. 1: el módem entrega por DHCP 192.168.1.10 a ether1 y el cliente DHCP queda bound. 2: un paquete del NVR sale con src 192.168.88.20, el NAT del MikroTik lo cambia a 192.168.1.10 y el NAT del módem a 203.0.113.45. 3: /ip/dhcp-client/print detail muestra address=192.168.1.10/24 y /ip/cloud/print muestra public-address 203.0.113.45: no coinciden, hay doble NAT; si la address estuviera en 100.64.0.0/10 sería CGNAT. 4: el celular intenta llegar a 203.0.113.45 y el pedido muere en el módem, que no sabe a quién pasarlo; nunca llega a ether1. Las salidas son Back To Home o un túnel a un concentrador.",
+    "caption": "Con el módem en modo router hay dos NAT: compará address con public-address antes de prometer acceso remoto."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "14-l1.svg",
+    "after": "Pedí un lease nuevo sin esperar",
+    "alt": "Animación en cuatro tiempos entre el cliente DHCP del MikroTik en ether1 y el servidor DHCP del módem (192.168.1.1), con el estado del cliente y una barra del lease. 1: el cliente está bound con 192.168.1.10/24 y el lease va corriendo; sin renew, renueva solo al llegar a la mitad. 2: /ip/dhcp-client/renew [find interface=ether1] hace que pida al mismo servidor, con un Request, renovar esa dirección. 3: el servidor contesta Ack y el lease vuelve a empezar con la misma dirección. 4: si la renovación no sale, el cliente arranca el pedido de cero con un Discover por broadcast, como si no tuviera dirección, y el estado pasa a searching; si el lease vence, se borran la dirección y la ruta dinámica.",
+    "caption": "Lo que pasa en la red: renew pide al mismo servidor, el Ack reinicia el lease; si no contesta nadie, arranca de cero."
+   }
+  ]
+ },
+ "13": {
+  "anims": [
+   {
+    "file": "13-r1.svg",
+    "alt": "Animación en cuatro tiempos con cuatro líneas de vida: una PC de la LAN (192.168.88.10), el MikroTik (ether1 203.0.113.10/29), el gateway del proveedor (203.0.113.9) e internet (1.1.1.1). 1: la PC hace ping a 1.1.1.1 y se lo manda a su gateway, el MikroTik. 2: el router busca en /ip/route: no hay ruta más específica y 0.0.0.0/0 apunta a 203.0.113.9, que está dentro de la ruta conectada 203.0.113.8/29 de ether1. 3: antes de entregarlo, pregunta por ARP en ether1 quién tiene 203.0.113.9 y el gateway contesta con su MAC; si no contesta, el problema es de cable, máscara o VLAN. 4: el paquete sale con origen 203.0.113.10 por el masquerade de la configuración por defecto, llega a 1.1.1.1, la respuesta vuelve a 203.0.113.10 y el router se la devuelve a 192.168.88.10.",
+    "caption": "El primer paquete con IP fija: ruta por defecto al .9, ARP en ether1 y salida con 203.0.113.10."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "13-l1.svg",
+    "after": "Verificá por capas",
+    "alt": "Animación en cuatro tiempos con tres líneas de vida: el MikroTik (ether1 203.0.113.10/29), el gateway del proveedor (203.0.113.9) y 1.1.1.1, que es un destino de internet y también el DNS del router. 1: /ping 203.0.113.9: el gateway, vecino en el /29, contesta; queda probada la capa de cable, máscara y VLAN. 2: /ping 1.1.1.1 sale por la ruta por defecto 0.0.0.0/0 vía .9 y vuelve: ruta y proveedor bien. 3: :resolve mikrotik.com manda una consulta DNS por UDP 53 a 1.1.1.1 y recibe la dirección: DNS bien. 4: el ejemplo de falla: el gateway contesta pero el ping a 1.1.1.1 no vuelve; el problema es la ruta por defecto o el proveedor, y el DNS ni se llega a probar. Se cierra mirando que la ruta por defecto esté activa.",
+    "caption": "Lo que pasa en la red: ping al gateway, ping a 1.1.1.1 y consulta DNS; la primera que falla dice la capa."
+   }
+  ]
+ },
+ "15": {
+  "anims": [
+   {
+    "file": "15-r1.svg",
+    "alt": "Animación en cuatro tiempos con la cadena PC de la LAN (192.168.88.10), MikroTik, ONT en modo puente y Antel. Dentro del MikroTik, pppoe-antel con 203.0.113.77 y ether1 como puerto físico. 1: el PPPoE marcó y la IP pública, local-address 203.0.113.77, quedó en pppoe-antel, no en ether1. 2: el propio router hace ping a 1.1.1.1: sale con origen 203.0.113.77 y le contestan. 3: un paquete de la PC sale por pppoe-antel, pero la regla de masquerade dice out-interface=ether1 y no coincide; el paquete sale con origen privado 192.168.88.10 y nadie le contesta. 4: con la regla en out-interface-list=WAN y /interface/list/member/add list=WAN interface=pppoe-antel, el origen pasa a 203.0.113.77 y la respuesta vuelve a la PC. En la configuración por defecto el masquerade ya usa la lista WAN: alcanza con sumar pppoe-antel a la lista.",
+    "caption": "Con PPPoE la IP vive en pppoe-antel: si el masquerade sigue mirando a ether1, la LAN no navega."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "15-l1.svg",
+    "after": "MSS: mirá si el perfil PPP",
+    "alt": "Animación en cuatro tiempos entre una PC de la LAN (MTU 1500), el MikroTik con pppoe-antel (MTU 1492) y un servidor web, con el tramo PPPoE marcado en 1492. 1: la PC abre una conexión y su SYN anuncia MSS=1460, pensado para 1500 bytes; sin regla, el SYN pasa igual. 2: el servidor manda segmentos de 1460 más 40 de cabeceras, 1500 bytes, que no entran en el tramo de 1492; si nadie avisa por ICMP, se pierden y la página carga a medias. 3: con la regla de mangle change-mss new-mss=clamp-to-pmtu para los SYN que salen por pppoe-antel, el SYN sale con MSS=1452. 4: el servidor manda segmentos de 1452 más 40, 1492 bytes, que pasan, y los datos llegan a la PC. Antes de agregar la regla conviene ver si el perfil PPP ya trae change-tcp-mss.",
+    "caption": "Lo que pasa en la red: con MSS 1460 los segmentos no entran en 1492; change-mss deja el SYN en 1452."
+   },
+   {
+    "step": 6,
+    "file": "15-l2.svg",
+    "after": "Reconectá (",
+    "alt": "Animación en cuatro tiempos entre el cliente pppoe-antel del MikroTik, sobre ether1, y el concentrador de Antel. 1: /interface/pppoe-client/disable pppoe-antel: el cliente cierra la sesión con PADT y la interfaz queda sin dirección. 2: enable: vuelve el descubrimiento, PADI por broadcast, PADO, PADR y PADS, que trae un número de sesión nuevo. 3: dentro de la sesión se negocia LCP, se autentica y el concentrador asigna la IP por IPCP, en el ejemplo 198.51.100.140. 4: el monitor muestra local-address 198.51.100.140 en vez de 203.0.113.77: la IP cambió, así que el acceso remoto se resuelve con DDNS o con un túnel.",
+    "caption": "Lo que pasa en la red: PADT, descubrimiento de nuevo, IPCP y una local-address que puede cambiar."
+   }
+  ]
+ }
+}

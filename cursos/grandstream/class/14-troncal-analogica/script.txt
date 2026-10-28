@@ -1,0 +1,18 @@
+A: Lección catorce. Troncal analógica. La línea ya tiene su ficha y está en el FXO uno. Ahora la central tiene que saber que existe.
+B: Y en el Dashboard el puerto está gris.
+A: Gris es conectado pero sin configurar, según la guía de líneas analógicas de Grandstream. Vas a Extension Trunk, Analog Trunks, creás una troncal nueva, marcás los canales FXO y le ponés un nombre.
+B: ¿Qué nombre? Yo siempre pongo el número de la línea.
+A: Tentador, pero ese nombre aparece en rutas, en el Dashboard y en las capturas que mandás por WhatsApp. Antel guion bajo Línea uno, Antel guion bajo Línea dos, y el número va en la ficha.
+B: Bien. ¿Y una troncal por línea o todas juntas?
+A: Esa es la decisión. Si metés FXO uno y FXO dos en la misma troncal, para salir la central toma la primera libre: eso es Ascend, el de fábrica. Poll alterna y Descend arranca por la última.
+B: Perfecto para salir. ¿Y para entrar?
+A: Ahí está el detalle. En analógico no llega número llamado, así que la ruta entrante se arma por troncal. Si las dos líneas van a lugares distintos, por ejemplo la del local al grupo y la del fax a su extensión, necesitás una troncal por línea.
+B: O sea: una por línea si entran distinto, una para todas si son iguales.
+A: Exacto. Las tres fuentes que lo tratan coinciden. Y dos ajustes de fábrica para mirar en Analog Hardware: el país en FXO Opermode, y PCMA Override. El manual dice que fuera de Norteamérica se asume PCMA, y viene en PCMU.
+B: ¿Pide reinicio?
+A: Pide reinicio. Hacelo antes de entregar, no con el comercio abierto.
+B: ¿Y cómo sé que quedó bien?
+A: El FXO pasa a libre en el Dashboard y la troncal aparece como disponible. En la guía vieja libre es verde; en el firmware actual lo vas a ver azul. Naranja es en uso.
+B: Laboratorio de quince minutos, entonces.
+A: Creás las dos troncales, mirás los colores, desconectás un cable y descolgás un teléfono en paralelo para ver cómo lo muestra la central.
+B: Así cuando el cliente llame diciendo que está naranja, ya sabés qué significa.

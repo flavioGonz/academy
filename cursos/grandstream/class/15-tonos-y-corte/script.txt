@@ -1,0 +1,18 @@
+A: Lección quince. Tonos y corte. El problema más típico de una línea analógica: el cliente cuelga y la central no se entera.
+B: Y la línea queda tomada, el que llama después da ocupado, y el buzón graba dos minutos de tono.
+A: Eso. En SIP el corte es un mensaje. En analógico, la central lo adivina de tres maneras: escuchando el tono de ocupado, notando una inversión de polaridad o un corte breve de tensión. Grandstream, Yeastar y Wikipedia nombran las mismas tres.
+B: ¿Y Antel cuál usa?
+A: No lo publica. Wikipedia dice que en muchos países de Sudamérica se usa el tono. Y acá viene lo lindo: según la lista de tonos de la Unión Internacional de Telecomunicaciones, en Uruguay casi todo es cuatrocientos veinticinco hercios.
+B: ¿Todo?
+A: Invitación a marcar, continuo. Ocupado, medio segundo sí, medio segundo no. Tono de llamada, un segundo sí y cuatro no. Misma frecuencia, distinta cadencia.
+B: Y la UCM viene con tonos de Estados Unidos.
+A: Viene con Estados Unidos: cuatrocientos ochenta y seiscientos veinte. Así no detecta nada. Buscás Uruguay en Tone Country, y si no está, Custom, con efe uno igual cuatrocientos veinticinco y cadencia quinientos barra quinientos.
+B: ¿Y la cantidad de tonos antes de cortar?
+A: Busy Tone Count viene en dos. El manual dice que con cuatro, seis u ocho anda mejor, aunque corta más tarde. Yeastar avisa que muy alto puede no detectar nunca, y en un foro de Asterisk la detección cortaba salientes a los tres timbres.
+B: [suspiro] O sea que no hay número mágico.
+A: No. Por eso la UCM trae PSTN Detection: una llamada real de un minuto que mide el ocupado, la polaridad y el corte de corriente. Con dos líneas es automático; con una, llama a tu celular.
+B: ¿Y la polaridad la activo por las dudas?
+A: No por las dudas. Solo si la detección la encuentra. Activada sin que la red la mande, corta llamadas buenas.
+B: Laboratorio.
+A: Veinte minutos: cargás los tonos de Uruguay, corrés PSTN Detection y colgás desde el celular mirando cuánto tarda el FXO en volver a libre.
+B: Y si no vuelve, grabás la línea y medís el tono en vez de seguir probando a ciegas.

@@ -1,0 +1,189 @@
+{
+ "27": {
+  "anims": [
+   {
+    "file": "27-r1.svg",
+    "alt": "Animación en cuatro tiempos. Una PC de la oficina, 192.168.88.20, el router 192.168.88.1 y dos próximos saltos: el router del depósito en la misma LAN, 192.168.88.250, con la red 10.20.30.0/24 detrás, y el gateway del proveedor 203.0.113.1 por ether1. Abajo, la tabla /ip/route y un panel con la IP de origen, la IP de destino y la MAC de destino del paquete. 1: la PC quiere llegar a 10.20.30.5, que no es de su /24, y se lo entrega al router. 2: coinciden 0.0.0.0/0 y 10.20.30.0/24 y gana la /24 por más específica; su gateway .250 está en la red conectada del bridge. 3: el router pregunta por ARP la MAC de .250 y el paquete sale hacia el depósito: la IP destino sigue siendo 10.20.30.5, solo cambia la MAC de destino. 4: un paquete a 8.8.8.8 solo coincide con 0.0.0.0/0 y sale por ether1 hacia 203.0.113.1.",
+    "caption": "Mirá el panel del paquete: la ruta elige a quién entregarlo, pero la IP de destino nunca cambia."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "27-l1.svg",
+    "after": "Ruta a una red remota por un equipo de la LAN que no existe",
+    "alt": "Animación en cuatro tiempos. A la izquierda el router de banco con el bridge 192.168.88.1/24, la notebook en ether2 y un recuadro punteado para 192.168.88.250, que no existe; a la derecha la terminal. 1: se agrega la ruta 10.20.30.0/24 por 192.168.88.250 y el print la muestra con As, activa, porque .250 cae dentro de la red conectada. 2: con /ping 10.20.30.1 el router pide por ARP, en broadcast, la MAC de .250; la notebook lo recibe y lo ignora. 3: nadie contesta, el router insiste y el ping se descarta sin salir: sent=3 received=0 packet-loss=100%. 4: la ruta sigue activa porque nadie probó el gateway; en el paso 3, check-gateway=ping lo prueba.",
+    "caption": "Lo que pasa en la red en este paso: el router pregunta por ARP quién es .250, nadie contesta y el ping no llega a salir, aunque la ruta figure activa."
+   }
+  ]
+ },
+ "11": {
+  "anims": [
+   {
+    "file": "11-r1.svg",
+    "alt": "Animación en cuatro tiempos de un local con dos salidas: las cajas y PCs en 192.168.88.0/24, el router con masquerade por ether1 y ether2, el módem de fibra con gateway 203.0.113.9 y el router 4G con gateway 192.168.8.1, ambos hacia internet, donde están los testigos 1.1.1.1 y 9.9.9.9. Abajo, el estado de las rutas por defecto del ISP1 con distance=1 y del ISP2 con distance=2, y una fila de pings de una PC del local a 1.0.0.1. 1: todo sale por la fibra y check-gateway le hace ping al testigo, que contesta. 2: una obra corta la fibra afuera; el módem sigue contestando, pero los pings al testigo quedan sin respuesta y la fila de pings se pone roja. 3: tras dos pruebas perdidas las rutas del ISP1 quedan inactivas y el tráfico sale por el 4G. 4: vuelve la fibra, el testigo contesta y el ISP1 recupera el lugar; conviene contar de nuevo los pings al volver.",
+    "caption": "El módem sigue vivo y aun así conmuta: lo que se prueba es el testigo en internet. Abajo, los pings que vas a contar para el legajo."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "11-l1.svg",
+    "after": "Simulá internet caída con el módem vivo",
+    "alt": "Animación en cuatro tiempos del paso 5. El router por dentro: check-gateway, la cadena output con las dos reglas del laboratorio que descartan ICMP hacia 1.1.1.1 y 9.9.9.9, y la cadena forward sin reglas del corte. A la izquierda la notebook en ether3; a la derecha el módem del ISP1, el router 4G e internet. Abajo, las pruebas perdidas y el estado de las rutas. 1: las reglas van en output y solo tocan lo que genera el router; un ping de la notebook a 1.0.0.1 sale por el ISP1 y vuelve. 2: check-gateway hace ping al testigo y output lo descarta: una prueba perdida. 3: la notebook pasa por forward y sus pings siguen saliendo por el ISP1, que anda. 4: la segunda prueba se pierde, las rutas del ISP1 quedan inactivas, entra la del ISP2 y lo nuevo sale por el 4G.",
+    "caption": "Lo que pasa en la red en este paso: las reglas en output descartan solo los pings de check-gateway; lo que mide el corte simulado es el cambio de rutas."
+   }
+  ]
+ },
+ "37": {
+  "anims": [
+   {
+    "file": "37-r1.svg",
+    "alt": "Animación en cuatro tiempos. Arriba, el router con pppoe-antel por ether1, el ONT de Antel en modo puente y el concentrador PPPoE, con la sesión dibujada entre el router y el concentrador. En el medio, la dirección de pppoe-antel y por dónde sale el local. Abajo, dos formas de escribir la ruta al testigo: así, 1.1.1.1/32 con gateway=pppoe-antel; así no, con gateway=198.51.100.1. 1: sesión arriba con address 203.0.113.45 y network 198.51.100.1; las dos rutas activas, el local sale por la fibra. 2: a la madrugada la sesión se cae, las rutas quedan inactivas y el local sale por el 4G en distancia 2. 3: la sesión vuelve e IPCP entrega otra dirección, 203.0.113.80, y otro extremo, 198.51.100.9; la ruta por pppoe-antel vuelve sola. 4: la escrita con la IP vieja queda inactiva porque ese extremo ya no existe.",
+    "caption": "Después de una reconexión cambia la IP del otro extremo: la ruta por el nombre de la interfaz sigue valiendo, la de la IP vieja no."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "37-l1.svg",
+    "after": "DHCP de respaldo con distancia 2 y sin DNS del 4G",
+    "alt": "Animación en cuatro tiempos del paso 3. El router con el cliente DHCP en ether2 y el router 4G, servidor DHCP en 192.168.8.1. 1: el cliente pide por broadcast, DISCOVER, y el 4G contesta OFFER. 2: REQUEST y ACK; el ACK trae, de ejemplo, la dirección 192.168.8.100/24, la opción 3 router 192.168.8.1, la opción 6 DNS 192.168.8.1 y la opción 51 con el tiempo del préstamo. 3: la dirección va a /ip/address en ether2, el router a una ruta 0.0.0.0/0 por 192.168.8.1 con distance=2 que espera mientras las recursivas del PPPoE estén activas, y el DNS no se suma por use-peer-dns=no. 4: /ip/dhcp-client/print detail muestra status=bound, la dirección y el gateway; una 192.168.x es doble NAT y una 100.64.x es CGNAT: por el 4G sale todo y no entra nada.",
+    "caption": "Lo que pasa en la red en este paso: el ACK del 4G trae dirección, gateway y DNS, y cada dato va a un lugar distinto; la ruta queda esperando en distancia 2."
+   },
+   {
+    "step": 8,
+    "file": "37-l2.svg",
+    "after": "Netwatch que limpia las conexiones UDP",
+    "alt": "Animación en cuatro tiempos del paso 8. El router con una sonda Netwatch simple a 9.9.9.9 cada 10 segundos, la fibra por pppoe-antel y el router 4G por ether2. Abajo, las rutas que mira ese ping: 9.9.9.9/32 por pppoe-antel en distancia 1, 9.9.9.9/32 blackhole en distancia 20 y la ruta por defecto del 4G en distancia 2, y el estado de Netwatch. 1: normal, el ping va por pppoe-antel, vuelve y Netwatch está up. 2: con la sesión caída y sin la blackhole, el ping saldría por el 4G, volvería y Netwatch daría up de mentira, y el up-script borraría las conexiones UDP con la fibra caída. 3: con la blackhole activa, el ping se descarta y Netwatch queda down sin correr nada. 4: vuelve la fibra, Netwatch pasa a up y el up-script borra lo UDP que quedó armado por el 4G.",
+    "caption": "Lo que pasa en la red en este paso: sin la /32 por pppoe-antel, el testigo se vería por el 4G; la blackhole en distancia 20 lo impide."
+   }
+  ]
+ },
+ "38": {
+  "anims": [
+   {
+    "file": "38-r1.svg",
+    "alt": "Animación en cuatro tiempos. A la izquierda el NVR 192.168.88.20:443; en el centro el router con la IP fija 203.0.113.10 en ether1, la principal, y pppoe-respaldo con una IP dinámica de ejemplo, 192.0.2.45; a la derecha, por internet, la central de monitoreo 198.51.100.50, en la lista monitoreo, y otro equipo 198.51.100.200. Abajo, la regla de dst-nat. 1: la central manda un SYN a 203.0.113.10:8443; la regla atada a ether1, a la IP fija, al puerto y a la lista coincide, va al NVR y el SYN-ACK vuelve por la fija: abre. 2: el otro equipo prueba el mismo puerto; no está en la lista, no hay dst-nat y el input de fábrica lo descarta. 3: la central prueba por la IP del PPPoE; la regla no coincide y se descarta. 4: así no: con in-interface-list=WAN lo que entra por el PPPoE llega al NVR, pero la respuesta sale por la fija con la IP del PPPoE y se pierde.",
+    "caption": "Tres pedidos al mismo puerto: solo abre el de la central por la IP fija. Al final, por qué la lista WAN entera no sirve."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "38-l1.svg",
+    "after": "NAT, MSS y DNS",
+    "alt": "Animación en cuatro tiempos del paso 4. Una PC de la oficina, el router con la regla de mangle change-mss y un servidor, unidos por pppoe-respaldo con MTU 1492. En el medio, la regla chain=forward out-interface=pppoe-respaldo protocol=tcp tcp-flags=syn action=change-mss new-mss=clamp-to-pmtu; abajo, el tamaño del paquete IP, no a escala. 1: el SYN de la PC anuncia MSS 1460, que es 1500 menos 40 de encabezados. 2: al salir por pppoe-respaldo la regla lo baja a 1452, que es 1492 menos 40. 3: el servidor manda segmentos de 1452 de datos; con 20 de IP y 20 de TCP el paquete mide 1492 y entra entero. 4: sin la regla mandaría 1460, el paquete mediría 1500, 8 bytes de más, y si el aviso ICMP no llega se pierde y las páginas cargan a medias.",
+    "caption": "Lo que pasa en la red en este paso: el SYN que sale por el PPPoE cambia de MSS 1460 a 1452 y el servidor manda paquetes que entran en 1492."
+   }
+  ]
+ },
+ "39": {
+  "anims": [
+   {
+    "file": "39-r1.svg",
+    "alt": "Animación en cuatro tiempos con la IP fija caída y el local saliendo por el 4G. En fila: la PC, el MikroTik con masquerade, el router 4G con su NAT, el CGNAT del operador y un servidor de internet, 192.0.2.80. 1: el paquete cambia de origen tres veces: 192.168.88.20, 192.168.8.100 por el masquerade, 100.64.12.34 por el NAT del 4G y 198.51.100.77 por el CGNAT; el servidor solo ve 198.51.100.77. 2: la respuesta vuelve y cada NAT deshace su traducción hasta la PC. 3: la central de monitoreo manda un SYN a 198.51.100.77:8443 y el CGNAT, que no tiene ninguna conexión que coincida, lo descarta. 4: con Back To Home, el router y el celular del técnico abren conexiones hacia el relay de MikroTik y el relay los une. Direcciones de ejemplo.",
+    "caption": "Por el 4G el paquete cambia de origen tres veces: la respuesta encuentra el camino, pero nada de afuera puede entrar."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "39-l1.svg",
+    "after": "Mirá cómo cambia lo que ve la nube",
+    "alt": "Animación en cuatro tiempos del paso 5. El router con /ip/cloud, ether1 con la IP fija 203.0.113.10 y ether2 por el 4G, y el servidor cloud2.mikrotik.com, al que pregunta por UDP 15252. Abajo, /ip/cloud/print y el nombre <serie>.sn.mynetname.net en el DNS. 1: con la fija activa, /ip/cloud/force-update manda el pedido por ether1. 2: la nube contesta con la dirección desde la que lo recibió: public-address 203.0.113.10 y el nombre apunta ahí. 3: con el corte simulado las rutas de la fija quedan inactivas y el pedido sale por ether2. 4: la nube lo ve llegar desde 198.51.100.77, una IP de ejemplo del 4G; public-address cambia y el nombre la sigue con TTL de 60 segundos. Esa IP sirve para salir, no para que la central entre.",
+    "caption": "Lo que pasa en la red en este paso: la nube anota la dirección de origen del pedido; cuando el router sale por el 4G, public-address y el nombre lo siguen."
+   }
+  ]
+ },
+ "29": {
+  "anims": [
+   {
+    "file": "29-r1.svg",
+    "alt": "Animación en cinco tiempos de un cliente que dice que no anda internet. Arriba, en fila: la notebook de la LAN 192.168.88.254, el router con la terminal, el gateway del proveedor 203.0.113.1, internet con 1.1.1.1 y el DNS del router, 198.51.100.53, de ejemplo. Abajo, la escalera de cuatro escalones y lo que ya se sabe. 1: /ping 192.168.88.254 contesta: cable, puerto y bridge bien. 2: /ping 203.0.113.1 contesta: la WAN llega. 3: /ping 1.1.1.1 contesta: la ruta por defecto anda. 4: /ping mikrotik.com no llega a salir: el router le pregunta el nombre a su DNS, no hay respuesta y la terminal dice resolve failed. 5: anda el escalón 3 y falla el 4: el problema es el DNS, mirá /ip/dns.",
+    "caption": "La escalera en una obra: contestan la LAN, el gateway y 1.1.1.1, y el nombre no se resuelve. El primer escalón que falla dice dónde mirar."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "29-l1.svg",
+    "after": "Probá el camino de la LAN con",
+    "alt": "Animación en cuatro tiempos del paso 4. El router por dentro, con la LAN 192.168.88.1, la regla srcnat defconf: masquerade y ether1 con 203.0.113.10; afuera, el proveedor e internet con 1.1.1.1; abajo, la terminal. 1: /ping 1.1.1.1 sale con origen 203.0.113.10 y vuelve. 2: con src-address=192.168.88.1 masquerade cambia el origen a 203.0.113.10; la respuesta vuelve y conntrack la devuelve a 192.168.88.1. 3: con el masquerade deshabilitado el ping normal sigue andando. 4: el ping con src-address=192.168.88.1 sale con una IP privada y la respuesta no tiene cómo volver: sent=3 received=0 packet-loss=100%.",
+    "caption": "Lo que pasa en la red en este paso: mirá el origen de cada ping; sin masquerade, el de la LAN sale con 192.168.88.1 y no vuelve."
+   }
+  ]
+ },
+ "35": {
+  "anims": [
+   {
+    "file": "35-r1.svg",
+    "alt": "Animación en cuatro tiempos con el router y el NVR del local, 192.168.88.50, y dos sondas de Netwatch: una simple, con ping, y una tcp-conn al puerto 554. Debajo, el estado de cada sonda y el log. 1: NVR sano; el ping vuelve y el saludo TCP se completa con SYN, SYN-ACK y ACK: las dos sondas en up. 2: se cae el servicio de video y el 554 queda cerrado; el ping sigue volviendo y la sonda simple no se entera, mientras el SYN al 554 recibe RST. 3: la sonda tcp-conn pasa a down y corre el down-script una vez: aviso en el log y mail; la prueba siguiente también falla y no se repite. 4: vuelve el servicio, el saludo se completa, la sonda pasa a up y corre el up-script.",
+    "caption": "Un NVR prendido no es un NVR que graba: el ping sigue contestando y solo la sonda al 554 se da cuenta."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "35-l1.svg",
+    "after": "Aviso a Telegram (token del bot y chat de ejemplo",
+    "alt": "Animación en cuatro tiempos del paso 4. Netwatch con la sonda nvr, las políticas con las que corre un script de Netwatch como el usuario *sys, read, write, test y reboot, sin ftp, y a la derecha api.telegram.org y el celular del técnico. Abajo, el up-script con /tool/fetch mode=https address=api.telegram.org y check-certificate=yes. 1: el NVR vuelve y Netwatch corre el up-script. 2: sin output=none, fetch quiere guardar la respuesta en un archivo, eso pide la política ftp y el script no corre: desde RouterOS 7.13 no llega nada y no queda error a la vista. 3: con output=none no guarda nada, alcanza con las cuatro políticas y sale el pedido HTTPS. 4: llega el aviso al celular; después de cada actualización conviene probarlo desenchufando el NVR.",
+    "caption": "Lo que pasa en el router en este paso: el script corre con permisos acotados, y output=none es lo que deja salir el fetch a Telegram."
+   }
+  ]
+ },
+ "34": {
+  "anims": [
+   {
+    "file": "34-r1.svg",
+    "alt": "Animación en cuatro tiempos. En el centro el hAP del local, identity hap-local, con ether1 hacia una red ajena del proveedor o del shopping, ether2 a la notebook con WinBox, ether3 al switch del rack, que habla LLDP, y ether5 a una cámara. Abajo, lo que ve la red ajena en Neighbors y la tabla /ip/neighbor del router. 1: con discover-interface-list=static el router se anuncia por todos los puertos, también por ether1. 2: la red ajena ve hap-local, MikroTik, la versión y la IP 203.0.113.10; el router ve al switch y al router del proveedor. 3: con la lista descubrir, solo ether2 y ether3 se anuncian; afuera la entrada todavía figura hasta que vence. 4: por ether1 el router ya no habla ni escucha; adentro, el switch sigue en /ip/neighbor.",
+    "caption": "Cada anuncio cuenta nombre, versión e IP: mirá por qué puertos salen antes y después de la lista descubrir."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "34-l1.svg",
+    "after": "Solo lo que llega por LLDP",
+    "alt": "Animación en cuatro tiempos del paso 2. El switch del rack, de otra marca, manda una trama LLDP al router por ether3; los switches estándar no la reenvían, así que la ve solo el vecino directo. 1: el encabezado Ethernet lleva destino 01:80:C2:00:00:0E, origen la MAC del switch y EtherType 0x88CC. 2: adentro, los TLV obligatorios: Chassis ID con la MAC del switch, Port ID con su puerto y TTL, de ejemplo 120 segundos. 3: después los opcionales: System Name sw-rack, Capabilities bridge y Mgmt Address 192.168.88.2, y al final End. 4: con eso la tabla muestra interface=ether3,bridge, identity=sw-rack, address=192.168.88.2, system-caps=bridge y discovered-by=lldp.",
+    "caption": "Lo que pasa en la red en este paso: la trama LLDP del switch se desarma en TLV y cada uno llena un campo de la tabla de vecinos."
+   }
+  ]
+ },
+ "12": {
+  "anims": [
+   {
+    "file": "12-r1.svg",
+    "alt": "Animación en cuatro tiempos. A la izquierda la cámara de la entrada, 192.168.88.50, y una PC, 192.168.88.20; en el centro el router con bridge, masquerade y ether1; a la derecha internet con la nube de la app, 198.51.100.30, y una web, 192.0.2.80. Abajo, Torch en bridge y Torch en ether1. 1: la cámara sube video y la PC navega; entran al bridge cada uno con su IP y salen por ether1 con la del router, 203.0.113.10. 2: Torch en bridge muestra una fila por equipo con su tasa. 3: Torch en ether1 muestra las dos filas con origen 203.0.113.10. 4: la cámara se corta a ratos; en el bridge la fila de 192.168.88.50 cae a cero y se sabe que es la cámara o su cable; en ether1 una fila cae, pero las dos son 203.0.113.10.",
+    "caption": "Las mismas dos conexiones vistas de los dos lados del NAT: en el bridge sabés quién es quién, en ether1 no."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "12-l1.svg",
+    "after": "Capturar: 30 segundos a archivo.",
+    "alt": "Animación en cuatro tiempos del paso 3. La cámara 192.168.88.50 y una PC 192.168.88.20 entran al bridge del router, donde corre el sniffer con ip-address=192.168.88.50/32; a la derecha internet, el archivo camara.pcap y Wireshark. Abajo, la terminal y Wireshark. 1: se configura file-name=camara.pcap con file-limit=10000KiB y se arranca en interface=bridge; el archivo pesa 24 bytes, solo la cabecera. 2: pasa el tráfico de los dos hacia internet, pero solo se copian los paquetes de 192.168.88.50 y el archivo crece. 3: con stop y /file/print el archivo pesa, de ejemplo, 18.2KiB; si pesara 24 bytes no habría capturado nada. 4: en Wireshark, con filtro dns, se ve la consulta de la cámara por un nombre de ejemplo, nube.ejemplo.com, y la respuesta.",
+    "caption": "Lo que pasa en la red en este paso: el tráfico sigue su camino y el sniffer copia al archivo solo lo de la cámara."
+   }
+  ]
+ },
+ "5": {
+  "anims": [
+   {
+    "file": "5-r1.svg",
+    "alt": "Animación en cuatro tiempos en un edificio. Arriba el MikroTik con un bridge y vlan-filtering=yes, con vlan10-datos y vlan20-cctv, y la regla chain=forward in-interface=vlan20-cctv out-interface=vlan10-datos action=drop. En el medio, el switch del piso con un trunk de las VLAN 10, 20 y 99 y tres bocas access: la cámara 10.10.20.60 y el NVR 10.10.20.50 en la VLAN 20, y la PC 10.10.10.25 en la VLAN 10. La cámara está infectada. 1: la cámara manda un broadcast; llega al NVR y, etiquetado con 20, al router, pero no a la PC. 2: el video entre NVR y cámara va directo por el switch, sin pasar por el router. 3: la cámara intenta llegar a la PC; va a su gateway por el trunk con etiqueta 20 y la regla de forward la descarta. 4: una notebook enchufada en la boca de la cámara cae en la VLAN 20 por el PVID.",
+    "caption": "Mirá hasta dónde llega cada trama: dentro de la VLAN 20 todo directo; para cruzar a la oficina, por el router y su firewall."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "5-l1.svg",
+    "after": "Revisá la tabla antes de activar y después activá",
+    "alt": "Animación en cuatro tiempos del paso 4. El router por dentro: el bridge con ether2 y ether3 en PVID 20 y ether4 de trunk, ether5 fuera del bridge, y el CPU del router con el bridge en la VLAN 1 con 192.168.88.1, vlan20-cctv con 10.10.20.1 y ether5 con 10.255.255.1. A la izquierda, una notebook en ether2 con WinBox a 192.168.88.1 y la notebook de rescate en ether5. 1: con vlan-filtering=no el PVID no tiene efecto y ether2 llega a 192.168.88.1. 2: se ejecuta /interface/bridge/set bridge vlan-filtering=yes. 3: lo que entra por ether2 ahora es VLAN 20 y llega por vlan20-cctv, no a la IP del bridge: la sesión por ether2 se corta. 4: ether5 está fuera del bridge y la sesión de rescate sigue.",
+    "caption": "Lo que pasa en el router en este paso: con el filtrado activo, lo de ether2 entra como VLAN 20 y deja de llegar a 192.168.88.1; ether5 sigue."
+   }
+  ]
+ }
+}

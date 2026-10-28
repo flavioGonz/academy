@@ -1,0 +1,107 @@
+{
+ "10": {
+  "anims": [
+   {"file": "10-r1.svg",
+    "alt": "Animación en cuatro tiempos con la central de monitoreo 203.0.113.25 (en la address-list nvr-permitidos), un escáner de internet 198.51.100.66, el MikroTik con ether1 203.0.113.10 y el NVR 192.168.88.50 en TCP 8000. 1: la central manda un SYN a 203.0.113.10:8000; la regla dstnat (in-interface-list=WAN, dst-port=8000, src-address-list=nvr-permitidos) coincide y el destino pasa a 192.168.88.50:8000. 2: el NVR contesta con SYN-ACK y el router deshace el cambio: la central ve a 203.0.113.10:8000. 3: el escáner prueba el 8000; no está en la lista, la regla no se aplica, el paquete sigue dirigido al router y la regla de input defconf: drop all not coming from LAN lo descarta. 4: prueba el 8291 y el 80 del router; no hay nada publicado y no recibe respuesta.",
+    "caption": "Mirá la regla: el mismo SYN al 8000 entra o se descarta según el origen esté o no en nvr-permitidos."}
+  ],
+  "steps": [
+   {"step": 4, "file": "10-l1.svg", "after": "Probá desde el celular con datos móviles",
+    "alt": "Animación en cuatro tiempos con un celular con datos móviles (198.51.100.77), el MikroTik 203.0.113.10 y el NVR 192.168.88.50. 1: el SYN al 8000 llega, el origen no está en nvr-permitidos, no hay dst-nat e input lo descarta; el contador de la regla queda en 0. 2: el celular reintenta el SYN y nunca vuelve un SYN-ACK: la app dice que no conecta. 3: el técnico agrega 198.51.100.77 a nvr-permitidos. 4: en el nuevo intento la regla coincide, el contador sube a 1, el SYN llega al NVR y vuelve el SYN-ACK. El contador se mira con /ip/firewall/nat/print stats where comment=\"NVR central\" y cuenta conexiones.",
+    "caption": "Lo que pasa en la red en este paso: sin estar en la lista el SYN muere en input y el contador no se mueve; con la IP en la lista, sube a 1 y conecta."}
+  ]
+ },
+ "24": {
+  "anims": [
+   {"file": "24-r1.svg",
+    "alt": "Animación en cuatro tiempos con la oficina IES 198.51.100.20 (en nvr-permitidos), un celular 198.51.100.77 fuera de la lista, el MikroTik con ether1 203.0.113.10 y dos NVR: NVR1 192.168.88.50 (8000 SDK y 554 RTSP) y NVR2 192.168.88.51 (8000). 1: iVMS-4200 pide 203.0.113.10:18000 y el dst-nat lo manda a 192.168.88.50:8000. 2: VLC pide el 18554 y va al NVR1, al 554. 3: la app del NVR2 pide el 18001 y va a 192.168.88.51:8000. 4: el celular pide el 18000; ninguna regla coincide, el paquete queda dirigido al router e input lo descarta.",
+    "caption": "Una sola IP pública: el puerto de afuera elige el equipo y el puerto de adentro, y solo para los orígenes de la lista."}
+  ],
+  "steps": [
+   {"step": 6, "file": "24-l1.svg", "after": "Mirá los contadores mientras probás",
+    "alt": "Animación en cuatro tiempos con tres casos de una app 198.51.100.20 que llama a 203.0.113.10:18000. 1: sube y conecta: el contador del dst-nat pasa de 0 a 1 y el SYN-ACK del NVR vuelve por el MikroTik. 2: no sube: el SYN se pierde en un módem sin reenvío (doble NAT) o en el CGNAT, o llega con un origen fuera de nvr-permitidos. 3: sube y no conecta: el NVR tiene como gateway otro router, 192.168.88.254, y su respuesta no pasa por el MikroTik, así que nadie deshace el cambio. 4: la regla: sin contador, buscá antes del MikroTik; con contador, en el NVR o en forward.",
+    "caption": "Lo que pasa en la red en este paso: el contador dice si el SYN llegó al MikroTik; si llegó y no conecta, la respuesta se va por otro lado."}
+  ]
+ },
+ "21": {
+  "anims": [
+   {"file": "21-r1.svg",
+    "alt": "Animación en cinco tiempos con la notebook del encargado en su casa (192.168.1.34), el router de la casa con NAT (sale con 198.51.100.7), el MikroTik 203.0.113.10 y el NVR 192.168.88.50, y abajo el paquete por dentro. 1: adentro va el pedido de la app, de 192.168.89.10 (la IP del túnel) a 192.168.88.50. 2: la notebook lo envuelve: PPP, L2TP por UDP 1701, cifrado en ESP y, como hay NAT, dentro de UDP 4500, con IP de afuera de 192.168.1.34 a 203.0.113.10. 3: el router de la casa cambia solo el origen de afuera a 198.51.100.7; lo cifrado no lo toca. 4: el MikroTik acepta el UDP 4500 en input, descifra, el UDP 1701 vuelve a pasar por input y saca L2TP y PPP. 5: queda el paquete original, que va por forward al NVR.",
+    "caption": "Seguí las capas: cada una se agrega por fuera en la notebook y se saca en el MikroTik, y el NAT de la casa solo toca la de afuera."}
+  ],
+  "steps": [
+   {"step": 3, "file": "21-l1.svg", "after": "Input, arriba del drop de la configuración por defecto",
+    "alt": "Animación en cuatro tiempos sobre la cadena input, que se lee de arriba hacia abajo: accept established, related y untracked; drop invalid; accept ICMP; la regla nueva L2TP IPsec (UDP 500, 4500 y 1701); la regla nueva ESP; y defconf: drop all not coming from LAN. 1: llega IKE por UDP 500, baja hasta L2TP IPsec y pasa. 2: con NAT todo sigue en UDP 4500, misma regla; sin NAT los datos llegan en ESP y los acepta la regla ESP. 3: después de descifrar, el L2TP por UDP 1701 vuelve a entrar a input y también pasa. 4: si las reglas nuevas quedan debajo del drop, el UDP 500 se descarta antes y el cliente no conecta.",
+    "caption": "Lo que pasa en la red en este paso: cada paquete del cliente baja por input hasta la primera regla que coincide; las aperturas tienen que estar antes del drop."},
+   {"step": 6, "file": "21-l2.svg", "after": "Diagnóstico en el router",
+    "alt": "Animación en cuatro tiempos con una notebook 198.51.100.7 que se conecta al MikroTik 203.0.113.10, tres barras de capas (IPsec, L2TP, PPP) y los comandos /ip/ipsec/active-peers/print, /ppp/active/print y /log/print where topics~\"ipsec|l2tp\". 1: con la clave IPsec mal o UDP 500/4500 cerrado, IPsec no arma y los dos primeros comandos quedan vacíos. 2: IPsec y L2TP arman pero PPP rechaza usuario o contraseña: active-peers muestra la notebook establecida y /ppp/active sigue vacío. 3: todo arriba: el peer establecido y la sesión de encargado por l2tp con 192.168.89.10. 4: el log cuenta lo mismo con el motivo; se lee de afuera hacia adentro.",
+    "caption": "Lo que pasa en la red en este paso: active-peers dice si armó IPsec y /ppp/active si llegaron L2TP y PPP; el primero vacío marca la capa que falla."}
+  ]
+ },
+ "28": {
+  "anims": [
+   {"file": "28-r1.svg",
+    "alt": "Animación en cinco tiempos con el hAP de la sucursal (WAN 100.72.15.4, LAN 192.168.88.0/24), el CGNAT del proveedor con la IP compartida 198.51.100.40 y la central 203.0.113.10 con LAN 10.10.1.0/24. 1: la sucursal llama: IKE sale por UDP 500 hacia 203.0.113.10 y el CGNAT anota la traducción. 2: la central contesta; en el hAP la respuesta llega como established y la primera regla de input la deja pasar sin abrir puertos. 3: se arma IPsec por UDP 4500 y adentro L2TP y PPP: aparece l2tp-central con 10.255.1.2. 4: una conexión nueva desde internet hacia la sucursal muere en el CGNAT. 5: por el túnel, la central llega a 192.168.88.0/24 con la ruta gateway=10.255.1.2.",
+    "caption": "La conexión la abre la sucursal: la respuesta entra como established y el túnel sirve aunque desde afuera no se pueda entrar."}
+  ],
+  "steps": [
+   {"step": 5, "file": "28-l1.svg", "after": "la alternativa es NAT hacia el túnel",
+    "alt": "Animación en cuatro tiempos con una PC 192.168.88.20 de la sucursal, el hAP con l2tp-central 10.255.1.2, el túnel, la central 10.255.1.1 que no podés tocar y un servidor 10.10.1.1. 1: la PC hace ping a 10.10.1.1 y el masquerade del hAP (srcnat out-interface=l2tp-central) cambia el origen a 10.255.1.2. 2: la central entrega el ping con origen 10.255.1.2, la otra punta del túnel, que ya conoce. 3: la respuesta vuelve a 10.255.1.2 por el túnel, el hAP deshace el cambio y el eco llega a la PC. 4: la contra: desde la central nadie puede abrir una conexión a 192.168.88.50, porque la central no tiene ruta a 192.168.88.0/24.",
+    "caption": "Lo que pasa en la red en este paso: para la central toda la sucursal es 10.255.1.2; la vuelta funciona, pero desde allá no se puede iniciar."},
+   {"step": 7, "file": "28-l2.svg", "after": "todo sale por la central. Mirá la tabla",
+    "alt": "Animación en cuatro tiempos con la tabla de rutas de la sucursal y el camino hAP, ISP 192.168.1.1, central 203.0.113.10 y una web 198.51.100.80. 1: con add-default-route=yes aparecen 0.0.0.0/0 por l2tp-central y 203.0.113.10/32 por 192.168.1.1, junto a 10.255.1.1/32 por l2tp-central y 192.168.88.0/24 en el bridge. 2: la PC va a 198.51.100.80; gana 0.0.0.0/0 y el paquete viaja por adentro del túnel (hace falta el NAT del paso 5 o que la central lo haga). 3: los paquetes del propio túnel, UDP 4500 hacia 203.0.113.10, coinciden con la /32, que gana por máscara más larga, y salen por el ISP. 4: esa /32 evita que el túnel se meta en sí mismo; después se vuelve a add-default-route=no.",
+    "caption": "Lo que pasa en la red en este paso: la navegación entra al túnel por la ruta por defecto, y el túnel mismo sale por el ISP gracias a la /32."}
+  ]
+ },
+ "22": {
+  "anims": [
+   {"file": "22-r1.svg",
+    "alt": "Animación en cuatro tiempos dentro del MikroTik del sitio A (203.0.113.10), con las etapas forward (con fasttrack-connection), srcnat (con masquerade) y la policy (src 192.168.88.0/24, dst 10.10.10.0/24, encrypt), y el sitio B 198.51.100.20 con el servidor 10.10.10.5. 1: con las fases 1 y 2 arriba, la PC 192.168.88.20 hace ping a 10.10.10.5 y llega a srcnat. 2: el masquerade cambia el origen a 203.0.113.10; la policy ya no coincide y el paquete sale sin cifrar y se pierde. 3: con la regla accept no NAT al tunel arriba de todo, el origen queda, la policy coincide y viaja en ESP de 203.0.113.10 a 198.51.100.20. 4: con FastTrack, los paquetes siguientes toman el atajo sin mirar la policy y se escapan; un accept para el túnel arriba de fasttrack-connection lo evita.",
+    "caption": "Seguí el orden dentro del router: si el origen ya cambió o FastTrack tomó el atajo, la policy no ve el paquete y no se cifra."}
+  ],
+  "steps": [
+   {"step": 5, "file": "22-l1.svg", "after": "Diagnóstico:",
+    "alt": "Animación en cuatro tiempos entre el sitio A (203.0.113.10, LAN 192.168.88.0/24) y el sitio B (198.51.100.20, LAN 10.10.10.0/24), con lo que muestran en A tres comandos. 1: fase 1: /ip/ipsec/active-peers/print muestra a 198.51.100.20 con state=established. 2: fase 2: en /ip/ipsec/policy/print detail ph2-state pasa de no-phase2 a established y /ip/ipsec/installed-sa/print muestra dos SA, una de ida y una de vuelta. 3: con un ping a 10.10.10.5 sube current-bytes en las dos SA. 4: si sube solo la de ida, B recibe pero su respuesta no vuelve por el túnel: la falla está del otro lado (firewall, bypass de NAT o gateway de los equipos de B).",
+    "caption": "Lo que pasa en la red en este paso: primero el peer, después ph2-state, y con tráfico los bytes de las dos SA; si sube solo una, mirá el otro lado."},
+   {"step": 6, "file": "22-l2.svg", "after": "Qué significa cada síntoma",
+    "alt": "Animación en cuatro tiempos entre el sitio A (203.0.113.10) y el sitio B (198.51.100.20) con IKEv2, y el log con topics ipsec. 1: A manda IKE_SA_INIT por UDP 500 y nadie contesta; reintenta. El log dice phase1 negotiation failed due to time up: comunicación (UDP 500 o 4500, IP del peer, NAT en el medio). 2: B contesta NO_PROPOSAL_CHOSEN: A propone AES-256, SHA-256 y DH 14 y B solo acepta DH 2. El log dice no suitable proposal o NO-PROPOSAL-CHOSEN: comparar la tabla. 3: con todo igual, IKE_SA_INIT va y vuelve e IKE_AUTH autentica y crea las primeras SA: active-peers established y dos SA. 4: time up significa que no se hablan; no proposal, que no se entienden.",
+    "caption": "Lo que pasa en la red en este paso: time up es un pedido sin respuesta; no proposal es una respuesta que dice que los parámetros no coinciden."}
+  ]
+ },
+ "7": {
+  "anims": [
+   {"file": "7-r1.svg",
+    "alt": "Animación en cinco tiempos con la notebook del técnico, el RouterBOARD del cliente con los campos RouterOS, upgrade-firmware y current-firmware, y el servidor de actualizaciones de MikroTik; abajo, la secuencia backup, RouterOS, reinicio, RouterBOOT, reinicio y verificar. 1: el .backup y el export quedan en Files y se bajan a la notebook. 2: check-for-updates consulta al servidor por HTTPS (TCP 443, desde 7.23) qué hay en el canal; si el 443 está cortado, no ve versiones. 3: install baja los paquetes, reinicia e instala; RouterOS y upgrade-firmware pasan a la versión nueva y current-firmware sigue vieja. 4: /system/routerboard/upgrade graba RouterBOOT y el segundo reinicio lo activa. 5: current-firmware igual a upgrade-firmware; se revisa el log y se anota en el legajo.",
+    "caption": "Mirá los tres campos: RouterOS cambia con el primer reinicio y current-firmware recién con el segundo."}
+  ],
+  "steps": [
+   {"step": 4, "file": "7-l1.svg", "after": "Después del reinicio, actualizá el bootloader",
+    "alt": "Animación en cuatro tiempos con el RouterOS instalado, la memoria del RouterBOARD (RouterBOOT principal y de respaldo), la cadena de arranque energía, RouterBOOT, RouterOS y /system/routerboard/print. 1: después de install, el RouterOS nuevo trae su RouterBOOT (upgrade-firmware) pero arranca el viejo: current-firmware y upgrade-firmware no coinciden. 2: /system/routerboard/upgrade lo graba en el RouterBOOT principal; lo que corre no cambia. 3: con /system/reboot arranca el RouterBOOT nuevo y después RouterOS; current-firmware pasa a ser igual a upgrade-firmware. 4: el RouterBOOT de respaldo nunca se actualiza: con el botón de reset apretado al dar energía, el equipo arranca con él.",
+    "caption": "Lo que pasa dentro del equipo en este paso: upgrade solo graba el RouterBOOT principal; el reinicio lo pone a correr y el de respaldo queda intacto."}
+  ]
+ },
+ "16": {
+  "anims": [
+   {"file": "16-r1.svg",
+    "alt": "Animación en cinco tiempos con una PC con internet, un hAP ax con architecture-name=arm64 y su arranque, y una tabla de revisión por paquete. 1: en la PC se bajan de mikrotik.com routeros y wifi-qcom de la misma versión, para arm64. 2: se arrastran a la raíz de Files con WinBox y se reinicia. 3: al arrancar, cada .npk se revisa: que sea un paquete de MikroTik, de la arquitectura del equipo y de la misma versión; los dos pasan y se instalan. 4: un .npk de otra arquitectura, mipsbe, no se instala y el log dice por qué. 5: si se sube routeros sin el wifi-qcom de la misma versión, el wifi-qcom viejo no acompaña y el equipo arranca sin WiFi.",
+    "caption": "Mirá la tabla: en el arranque cada .npk tiene que ser de MikroTik, de la arquitectura del equipo y de la misma versión que routeros."}
+  ],
+  "steps": [
+   {"step": 3, "file": "16-l1.svg", "after": "Instalá un paquete extra que no uses",
+    "alt": "Animación en cinco tiempos con la terminal, la lista de paquetes (routeros instalado y zerotier), el servidor de MikroTik y el router. 1: /system/package/print muestra zerotier con X A: deshabilitado y disponible, no instalado. 2: /system/package/enable zerotier deja el cambio marcado; todavía no se instala nada. 3: /system/package/apply-changes baja el paquete del servidor de MikroTik y reinicia. 4: al arrancar zerotier queda instalado y /log/print where topics~\"system\" lo confirma. 5: uninstall y otra vez apply-changes lo marcan para quitar y se quita en el arranque siguiente.",
+    "caption": "Lo que pasa en el equipo en este paso: enable y uninstall solo marcan; apply-changes reinicia y el cambio se aplica en el arranque."}
+  ]
+ },
+ "17": {
+  "anims": [
+   {"file": "17-r1.svg",
+    "alt": "Animación en cuatro tiempos con el servidor de MikroTik y sus listas long-term, stable, testing y development, y cuatro equipos: el banco de IES con channel=testing, dos routers de un cliente con channel=long-term y un equipo con channel=stable. 1: sale una versión en testing y solo la ve el banco, donde se prueba. 2: sale una en stable; el equipo en stable la ve en latest-version, pero no se instala sola. 3: los routers del cliente consultan long-term y no hay cambios. 4: si el equipo en stable tiene el script automático del scheduler, baja e instala la versión nueva sin que nadie la pruebe: en clientes, mejor no.",
+    "caption": "Cada equipo consulta solo la lista de su canal: lo nuevo llega primero al banco, y a los clientes en long-term solo con arreglos."}
+  ],
+  "steps": [
+   {"step": 2, "file": "17-l1.svg", "after": "Compará lo que ofrece cada canal sin instalar nada",
+    "alt": "Animación en cuatro tiempos con los comandos del paso 2, el router, el servidor de MikroTik y los valores channel, installed-version y latest-version. 1: set channel=long-term cambia una preferencia en el router; no sale nada a la red. 2: check-for-updates consulta la lista de long-term (por HTTPS, TCP 443, desde 7.23) y guarda latest-version. 3: set channel=stable y check-for-updates consultan otra lista; latest-version pasa a ser la última de stable. 4: print muestra lo guardado: installed-version no se movió y no se instaló nada.",
+    "caption": "Lo que pasa en la red en este paso: solo check-for-updates sale a consultar; set channel y print trabajan con lo que el router ya tiene."}
+  ]
+ }
+}

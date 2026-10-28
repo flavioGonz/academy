@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Llegás a un comercio y querés conectar la línea de Antel al UCM6304A. ¿A qué puerto va el par que viene de la roseta?",
+  "options": [
+   "A un FXS, porque la línea es de un abonado",
+   "A un FXO, porque la línea de Antel ya da tensión y timbre",
+   "Al puerto LAN con un adaptador RJ11 a RJ45",
+   "A cualquiera de los dos, la UCM detecta el tipo"
+  ],
+  "answer": 1,
+  "why": "La línea de la central pública se comporta como un FXS; del lado de la UCM va un FXO, que actúa como un teléfono. FXS con FXS no funciona."
+ },
+ {
+  "q": "Con el UCM desconectado medís la línea en reposo y te da un valor bajo, parecido al de un teléfono descolgado. ¿Qué sospechás primero?",
+  "options": [
+   "Que el FXO del UCM está quemado",
+   "Que falta configurar el Caller ID Scheme",
+   "Que algo en paralelo en el mismo par está descolgado (alarma, posnet, un teléfono)",
+   "Que la línea tiene identificador de llamadas"
+  ],
+  "answer": 2,
+  "why": "Al descolgar, la tensión cae a pocos voltios. Si ya está baja con el UCM desconectado, otro equipo en el par está tomando la línea."
+ },
+ {
+  "q": "El cliente quiere ver en los teléfonos quién llama por la línea de Antel. ¿Qué confirmás antes de tocar la central?",
+  "options": [
+   "Que la línea tenga contratada la identificación de número llamante",
+   "Que la UCM tenga PCMU",
+   "Que el teléfono sea GRP2614 o superior",
+   "Que la línea sea de fibra"
+  ],
+  "answer": 0,
+  "why": "Antel vende la identificación de número llamante como una facilidad aparte; sin ella no llega número, por más que la central esté bien configurada."
+ }
+]

@@ -1,0 +1,16 @@
+A: Lección trece. Qué trae el par. Arrancamos un módulo nuevo: las líneas de Antel que todavía llegan en cobre a muchos comercios.
+B: La carnicería de la esquina, con dos líneas, una alarma y el posnet colgados del mismo par.
+A: Esa misma. Y antes de tocar la central conviene entender quién hace qué. La línea que viene de Antel es un FXS: da la tensión, el timbre y el tono. El puerto de la UCM es un FXO: se porta como un teléfono, descuelga y cuelga.
+B: O sea que FXS con FXS no anda.
+A: No anda. Ni FXO con FXO. Las cuatro fuentes que leímos sobre esto coinciden en el esquema. Donde no coinciden es en los números: Patton habla de unos cincuenta voltios de continua, innovaphone dice que en la red pública puede llegar a setenta, y el timbre es alterna de unos setenta voltios.
+B: ¿Y Antel qué dice?
+A: Antel no publica esos valores. Así que la regla es medir. Multímetro en continua sobre los dos contactos del medio del RJ once, con la central desconectada. Anotás la tensión en reposo, descolgás un teléfono de prueba y mirás cómo cae.
+B: ¿Cuánto tiene que caer?
+A: Sandman, que escribe para técnicos de telefonía, cuenta que baja de unos cuarenta y ocho a entre cuatro y dieciocho voltios, según lo lejos que estés de la central. Y tiene una historia buenísima: un panel de alarma que entraba en falla cada vez que alguien descolgaba en la misma línea.
+B: [risas] Clásico. La alarma compartida.
+A: Por eso, además de medir, recorrés el par: alarma, posnet, fax, algún teléfono olvidado en el depósito. Todo lo que está en paralelo descuelga sin avisarte.
+B: ¿Y el identificador de llamadas?
+A: Es una facilidad que se contrata aparte en Antel, la identificación de número llamante. Si no está contratada, la central no va a ver ningún número, por más que la configures bien.
+B: Entonces el laboratorio es de campo.
+A: Veinte minutos: medís reposo y descolgado, probás tono y timbre con un teléfono, anotás qué hay en paralelo y recién ahí enchufás al FXO uno.
+B: Y cuando algo falle, ya tenés la foto de cómo estaba la línea sana.

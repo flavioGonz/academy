@@ -105,6 +105,14 @@ function normalize_course(array $c, string $slug): array {
         // fotos de cada idea (alineadas con idea_md) y teoría
         $ip = array_map('pics_ok', array_slice((array)($l['idea_pics'] ?? []), 0, 6));
         if (array_filter($ip)) $L['idea_pics'] = $ip;
+        // animaciones del resumen (SVG de ilustraciones/)
+        $an = [];
+        foreach (array_slice((array)($l['anims'] ?? []), 0, 4) as $a) {
+            $src = (string)($a['src'] ?? '');
+            if (!preg_match('#^ilustraciones/[A-Za-z0-9_/-]+\.(svg|webp|gif)$#', $src) || str_contains($src, '..')) continue;
+            $an[] = ['src' => $src, 'alt' => s($a['alt'] ?? '', 1200), 'caption' => s($a['caption'] ?? '', 300)];
+        }
+        if ($an) $L['anims'] = $an;
         $obj = array_values(array_filter(array_map(fn($x) => s($x, 300), array_slice((array)($l['objetivos'] ?? []), 0, 5)), 'strlen'));
         if ($obj) $L['objetivos'] = $obj;
         foreach (['conecta', 'sigue'] as $f) if (s($l[$f] ?? '', 800) !== '') $L[$f] = s($l[$f], 800);

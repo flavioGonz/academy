@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+<title>Medí el par con la central desconectada</title>
+<defs><marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0A63B8"/></marker><marker id="a-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17A8D4"/></marker><marker id="a-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6E88A1"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8F5E"/></marker><marker id="a-alert" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D2492F"/></marker><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E6EEF6" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="675" fill="#F7FAFD"/>
+<rect width="1200" height="675" fill="url(#grid)" opacity=".7"/>
+<text x="48.0" y="56.0" font-family="JetBrains Mono" font-size="14" font-weight="500" fill="#17A8D4" text-anchor="start" letter-spacing="2.2">GRANDSTREAM · PASO 1</text>
+<text x="48.0" y="94.0" font-family="Familjen Grotesk" font-size="32" font-weight="600" fill="#04223D" text-anchor="start">Medí el par con la central desconectada</text>
+<rect x="48" y="132" width="420" height="230" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="68.0" y="164.0" font-family="Familjen Grotesk" font-size="17" font-weight="600" fill="#04223D" text-anchor="start">Ficha RJ11: se usan los contactos 3 y 4</text>
+<rect x="118" y="180" width="280" height="150" rx="10" fill="#0B1A28"/>
+<text x="150.0" y="210.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#7FA6C9" text-anchor="middle">1</text>
+<rect x="142" y="224" width="16" height="48" rx="3" fill="#3A4A5C"/>
+<text x="194.0" y="210.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#7FA6C9" text-anchor="middle">2</text>
+<rect x="186" y="224" width="16" height="48" rx="3" fill="#3A4A5C"/>
+<text x="238.0" y="210.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#E7C66A" text-anchor="middle">3</text>
+<rect x="230" y="224" width="16" height="48" rx="3" fill="#E7C66A"/>
+<text x="282.0" y="210.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#E7C66A" text-anchor="middle">4</text>
+<rect x="274" y="224" width="16" height="48" rx="3" fill="#E7C66A"/>
+<text x="326.0" y="210.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#7FA6C9" text-anchor="middle">5</text>
+<rect x="318" y="224" width="16" height="48" rx="3" fill="#3A4A5C"/>
+<text x="370.0" y="210.0" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#7FA6C9" text-anchor="middle">6</text>
+<rect x="362" y="224" width="16" height="48" rx="3" fill="#3A4A5C"/>
+<rect x="170" y="400" width="176" height="200" rx="20" fill="#F2B233" stroke="#B57F12" stroke-width="2"/><rect x="184" y="416" width="148" height="62" rx="8" fill="#DCE8D2" stroke="#7A8F6B" stroke-width="2"/><text x="258.0" y="458.0" font-family="JetBrains Mono" font-size="26" font-weight="700" fill="#1E2B16" text-anchor="middle">__ V</text><circle cx="258.0" cy="532" r="32" fill="#2B2B2B"/><path d="M258.0 532l18 -20" stroke="#F2B233" stroke-width="5" stroke-linecap="round"/><text x="258.0" y="590.0" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#2B2B2B" text-anchor="middle">V CC</text>
+<path d="M226.32 400 C226.32 336.0 238 336.0 238 272" fill="none" stroke="#D2492F" stroke-width="4" stroke-linecap="round"/><circle cx="238" cy="272" r="6" fill="#D2492F"/>
+<path d="M289.68 400 C289.68 336.0 282 336.0 282 272" fill="none" stroke="#2B2B2B" stroke-width="4" stroke-linecap="round"/><circle cx="282" cy="272" r="6" fill="#2B2B2B"/>
+<circle cx="48" cy="132" r="17" fill="#17A8D4" stroke="#FFFFFF" stroke-width="3"/><text x="48.0" y="138.0" font-family="Familjen Grotesk" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<rect x="520" y="132" width="632" height="150" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="540.0" y="164.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Reposo, todo colgado</text>
+<text x="540.0" y="204.0" font-family="JetBrains Mono" font-size="22" font-weight="600" fill="#04223D" text-anchor="start">Anotá: ____ V</text>
+<text x="540.0" y="240.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="540.0" dy="0.0">Referencia de las fuentes: de 24 a 70 V; muchas líneas andan cerca de</tspan><tspan x="540.0" dy="21.6">48 V.</tspan></text>
+<rect x="520" y="300" width="632" height="150" rx="16" fill="#FFFFFF" stroke="#C2D4E6" stroke-width="2"/><text x="540.0" y="332.0" font-family="Familjen Grotesk" font-size="18" font-weight="600" fill="#04223D" text-anchor="start">Descolgado, con el teléfono de prueba</text>
+<text x="540.0" y="372.0" font-family="JetBrains Mono" font-size="22" font-weight="600" fill="#04223D" text-anchor="start">Anotá: ____ V</text>
+<text x="540.0" y="408.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="540.0" dy="0.0">Cae a pocos voltios: entre 4 y 18 V según la distancia a la central</tspan><tspan x="540.0" dy="21.6">(Sandman).</tspan></text>
+<rect x="520" y="470" width="632" height="75" rx="14" fill="#FFF4DE" stroke="#FFF4DE" stroke-width="1.5"/><rect x="520" y="482" width="5" height="51" rx="2.5" fill="#B45309"/><text x="546.0" y="504.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="546.0" dy="0.0">Si en reposo ya da valores de descolgado, algo en paralelo tiene</tspan><tspan x="546.0" dy="21.6">tomada la línea.</tspan></text>
+<rect x="520" y="560" width="632" height="75" rx="14" fill="#FCEAE6" stroke="#FCEAE6" stroke-width="1.5"/><rect x="520" y="572" width="5" height="51" rx="2.5" fill="#D2492F"/><text x="546.0" y="594.0" font-family="Instrument Sans" font-size="16" font-weight="400" fill="#41627F" text-anchor="start"><tspan x="546.0" dy="0.0">Con la línea sonando hay unos 70 V de alterna: no toques los</tspan><tspan x="546.0" dy="21.6">contactos.</tspan></text>
+</svg>

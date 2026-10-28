@@ -1,0 +1,18 @@
+A: Lección diecisiete. Hasta que suene. Este es el objetivo del módulo: de la línea de Antel a un teléfono, un grupo o un IVR sonando.
+B: Las troncales ya están, los tonos cargados, el número aparece. ¿Qué falta?
+A: Decirle a la central a dónde va cada llamada. En Cada DID mirábamos el número llamado. Por una línea analógica ese número no llega.
+B: ¿Y entonces qué mira?
+A: La documentación de Asterisk, el motor de la UCM, lo dice así: toda llamada analógica entra a una extensión que se llama ese, de start. Es el punto de arranque.
+B: Ah, por eso a veces en Active Calls ves una llamada que va a ese.
+A: Exacto. Esa llamada entró y todavía no tiene destino. Si queda ahí, lo más probable es que la ruta entrante no exista o no coincida. Por eso la ruta se arma por troncal: elegís Antel Línea uno, un patrón que acepte cualquier cosa, guion bajo punto, y un destino por defecto.
+B: ¿Y el destino?
+A: Lo que ya armamos: el grupo seis mil o el IVR siete mil con su horario. La guía de Grandstream pone ese ejemplo: en horario al IVR, fuera de horario a una interna.
+B: ¿Y la segunda línea?
+A: Su propia ruta, con su destino. Si es el fax, directo a la extensión del fax.
+B: Bien. ¿Y para salir por dos líneas?
+A: Una ruta saliente con los patrones de Uruguay: fijos de ocho cifras con dos o cuatro adelante, celulares cero nueve más siete cifras. Antel Línea uno y de failover la dos. O una troncal con las dos, que toma la primera libre.
+B: ¿Y qué número ve el que recibe?
+A: El de la línea. El manual lo aclara: el Caller ID de la ruta saliente no aplica a troncales analógicas. Si sale por la línea dos, ve el número de la línea dos.
+B: [risas] Eso hay que decírselo al cliente antes, no después.
+A: Antes. Laboratorio de veinticinco minutos: dos rutas entrantes, una saliente con failover, llamadas con un celular, y desenchufás la línea uno para ver si sale por la dos.
+B: Y cuando suena en el teléfono correcto, el módulo cumplió.

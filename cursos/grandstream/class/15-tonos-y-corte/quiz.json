@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Las llamadas por la línea de Antel no se cortan cuando el otro cuelga y el FXO queda tomado. La troncal tiene Tone Country en Estados Unidos. ¿Qué cambiás primero?",
+  "options": [
+   "Las ganancias RX y TX",
+   "Los tonos: Uruguay o Custom con 425 Hz y cadencia 500/500, o PSTN Detection",
+   "El Caller ID Scheme a Auto-Detect",
+   "DAHDI Out Line Selection a Poll"
+  ],
+  "answer": 1,
+  "why": "Con tonos de Estados Unidos (480 y 620 Hz) la UCM no reconoce el ocupado uruguayo de 425 Hz, que es la señal de corte más común en la región."
+ },
+ {
+  "q": "Activaste Enable Polarity Reversal en una línea donde PSTN Detection no la encontró. ¿Qué riesgo corrés?",
+  "options": [
+   "Ninguno, si la red no la manda no pasa nada",
+   "Que se pierda el identificador de llamadas",
+   "Que la central corte llamadas buenas cuando aparece una inversión que no significa corte",
+   "Que la línea quede sin tono"
+  ],
+  "answer": 2,
+  "why": "Con la opción activa, una inversión de polaridad se toma como corte. Se activa solo si la línea la usa para eso."
+ },
+ {
+  "q": "Subiste Busy Tone Count a 8 y ahora algunas llamadas no se cortan nunca. ¿Qué pasó?",
+  "options": [
+   "La central espera tantos tonos que, si la red manda pocos, no llega a detectar el corte",
+   "Busy Tone Count no tiene relación con el corte",
+   "Hay que reiniciar para que tome el valor",
+   "El valor máximo es 2"
+  ],
+  "answer": 0,
+  "why": "Un conteo alto reduce cortes al azar pero tarda más; si la red deja de mandar ocupado antes, el corte no se detecta. Yeastar avisa de este caso."
+ }
+]

@@ -316,6 +316,7 @@
             ${(l.objetivos || []).length || l.conecta ? `<div class="card route-box">${l.conecta ? `<p class="conecta"><span class="k">De dónde venimos</span>${esc(l.conecta)}</p>` : ""}${(l.objetivos || []).length ? `<div class="objs"><span class="k">En esta lección vas a</span><ul>${l.objetivos.map(o => `<li>${icon("check")}<span>${esc(o)}</span></li>`).join("")}</ul></div>` : ""}</div>` : ""}
             <span class="k">La idea, en tres líneas</span>
             <ul class="ideas" style="margin-top:12px">${l.idea.map((x, ii) => `<li><i></i><span>${x}${pics((l.idea_pics || [])[ii])}</span></li>`).join("")}</ul>
+            ${animsHTML(l)}
             <div class="kv">
               <div class="card"><span class="k">Qué mejora en la obra</span><p>${l.impact}</p></div>
               <div class="card"><span class="k">Quién lo dice</span><p>${l.who}</p></div>
@@ -423,7 +424,7 @@
     ["#p-resumen", "#p-teoria", "#p-laboratorio .lab-body"].forEach(sel => glossify($(sel)));
     wireAuto(l, slug);
     // ampliar ilustraciones e imágenes del laboratorio
-    const zoomPics = [...$$(".l-fig img"), ...$$(".pics img"), ...$$(".lab-body img"), ...$$(".theory img")];
+    const zoomPics = [...$$(".l-fig img"), ...$$(".anims img"), ...$$(".pics img"), ...$$(".lab-body img"), ...$$(".theory img")];
     zoomPics.forEach((im, ix) => { im.style.cursor = "zoom-in"; (im.closest(".zoom") || im).addEventListener("click", () => lightbox(zoomPics.map(x => ({url: x.getAttribute("src"), texto: x.closest("figure")?.querySelector("figcaption")?.textContent || x.alt, tipo: /\.gif$/i.test(x.src) ? "gif" : "imagen"})), ix)); });
 
     // quiz
@@ -455,6 +456,8 @@
     }));
   }
 
+  // animaciones del resumen: cómo se ve en la red lo que explica la lección
+  const animsHTML = l => (l.anims || []).length ? `<section class="anims"><span class="k">Cómo se ve en la red</span>${l.anims.map(a => `<figure class="lab-fig"><img src="${esc(a.src)}" alt="${esc(a.alt || "")}" loading="lazy" width="1200" height="675">${a.caption ? `<figcaption>${esc(a.caption)}</figcaption>` : ""}</figure>`).join("")}</section>` : "";
   // fotos asociadas a un punto de la lección (idea, concepto)
   const pics = arr => (arr || []).length ? `<span class="pics">${arr.map(x => `<figure><img src="${esc(x.src)}" alt="${esc(x.caption || "")}" loading="lazy">${x.caption ? `<figcaption>${esc(x.caption)}</figcaption>` : ""}</figure>`).join("")}</span>` : "";
 
@@ -693,6 +696,7 @@
       ${l.conecta ? `<p class="conecta"><b>De dónde venimos.</b> ${esc(l.conecta)}</p>` : ""}
       ${l.fig ? `<figure class="l-fig"><img src="${esc(l.fig.src)}" alt="${esc(l.fig.alt || "")}">${l.fig.caption ? `<figcaption>${esc(l.fig.caption)}</figcaption>` : ""}</figure>` : ""}
       <h3>La idea, en tres líneas</h3><ul class="ideas-p">${(l.idea || []).map((x, i) => `<li>${x}${pics((l.idea_pics || [])[i])}</li>`).join("")}</ul>
+      ${animsHTML(l)}
       <p><b>Qué mejora en la obra.</b> ${l.impact || ""}</p><p><b>Quién lo dice.</b> ${l.who || ""}</p>
       ${l.theory ? `<h3>Historia y teoría</h3><div class="theory-p">${l.theory}</div>` : ""}
       ${(l.concepts || []).length ? `<h3>Los conceptos, con ejemplos</h3>${l.concepts.map(k => `<div class="concept-p"><h4>${esc(k.name)}</h4><p><b>Para qué se creó.</b> ${mdLite(k.para_que)}</p><p><b>Cómo se usa.</b> ${mdLite(k.como)}</p><p><b>Ejemplo en obra.</b> ${mdLite(k.ejemplo)}</p>${pics(k.pics)}</div>`).join("")}` : ""}
@@ -832,6 +836,7 @@
             <span class="k">La idea, en tres líneas</span>
             <ul class="ideas ed" id="ideas"></ul>
             <div class="row" style="margin:-6px 0 18px"><button class="mini" type="button" id="addIdea">+ Agregar línea</button><span class="note">Admite \`código\` y **negrita**.</span></div>
+            <div id="animsEd"></div>
             <div class="kv">
               <div class="card"><span class="k">Qué mejora en la obra</span>${ie(l.impact_md, "Una línea: qué mejora en obra o soporte", "p", "p", true)}</div>
               <div class="card"><span class="k">Quién lo dice</span>${ie(l.who_md, "N de M fuentes coinciden; quién discrepa…", "p", "p", true)}</div>
@@ -951,6 +956,12 @@
       f.addEventListener("click", e => { if (!e.target.closest(".ie,.fx-tools")) f.focus(); });
     }
     paintFig();
+    const paintAnims = () => {
+      const box = $("#animsEd"); if (!box) return;
+      box.innerHTML = (l.anims || []).length ? `<section class="anims ed"><span class="k">Cómo se ve en la red · animaciones</span>${l.anims.map((a, ai2) => `<figure class="lab-fig"><img src="${esc(a.src)}" alt="${esc(a.alt || "")}" loading="lazy" width="1200" height="675"><figcaption>${esc(a.caption || "")} <button class="mini del" type="button" data-dela="${ai2}">Quitar</button></figcaption></figure>`).join("")}</section>` : "";
+      $$("[data-dela]", box).forEach(b => b.onclick = () => { if (!b.dataset.armed) { b.dataset.armed = 1; b.textContent = "¿Quitar?"; return; } l.anims.splice(+b.dataset.dela, 1); if (!l.anims.length) delete l.anims; mark(); paintAnims(); });
+    };
+    paintAnims();
     // ideas
     const paintIdeas = () => {
       $("#ideas").innerHTML = l.idea_md.map((x, i) => `<li data-pt="i${i}"><i></i><div>${ie(x, "Una idea en una línea", "", "span", true)}${picsEd(l.idea_pics[i], `i${i}`)}</div>${l.idea_md.length > 1 ? `<button class="mini del" type="button" data-deli="${i}" aria-label="Quitar línea">×</button>` : ""}</li>`).join("");

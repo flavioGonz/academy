@@ -1,0 +1,322 @@
+# Notes: batch b (módulo Líneas analógicas por FXO)
+Pages read: 25 (24 nuevas más el manual del UCM630x que ya estaba en raw/). With notes: 25. Skipped: 0.
+Nota de alcance: Antel no publica en su web tensiones, esquema de identificador ni tipo de desconexión de su línea analógica. Lo que se dice de Antel sale solo de sus páginas de servicios; lo eléctrico sale de fuentes generales y queda como "según la línea, medilo".
+
+## T17 La línea analógica: FXS, FXO y lo que llega por el par
+- b:N1. El FXS da tensión, timbre y tono de invitación a marcar; el FXO recibe ese servicio y solo indica descolgado y colgado cerrando el lazo. FXS con FXS o FXO con FXO no funciona.
+  - Source: https://www.patton.com/technotes/what-are-fxs-and-fxo/  Quote: "An FXS interface points to the subscriber"
+  - Kind: definition
+  - Level: foundation
+  - Bias: vende gateways (SmartNode)
+- b:N2. Patton da como referencia unos 50 V de continua que el FXS entrega en la línea (their claim).
+  - Source: https://www.patton.com/technotes/what-are-fxs-and-fxo/  Quote: "FXS devices supply approximately 50 volts DC power to the line."
+  - Kind: number
+  - Level: foundation
+  - Bias: vende gateways
+- b:N3. En reposo un FXS muestra típicamente 24, 32 o 48 V y en la red pública hasta 70 V de continua; se mide con un multímetro para saber si "algo llega". El timbre es alterna, típicamente 25 o 50 Hz y unos 70 V (their claim).
+  - Source: https://wiki.innovaphone.com/?i=11277  Quote: "in the public telephone network up to 70 volts direct current"
+  - Kind: number
+  - Level: foundation
+  - Bias: fabricante de gateways
+- b:N4. Al descolgar, la tensión cae de unos 48 V a entre 4 y 18 V según la corriente de lazo, que depende de la distancia a la central: más de 30 mA cerca, hasta 23 mA lejos (their claim).
+  - Source: https://www.sandman.com/firealarm-bul.html  Quote: "the voltage drops from maybe 48VDC, to 4 to 18VDC"
+  - Kind: number
+  - Level: foundation
+  - Also: T22
+  - Bias: vende servicios de telefonía
+- b:N5. Compartir la línea con un panel de alarma provoca fallas: el panel ve caer la tensión cuando alguien descuelga en paralelo. La solución que propone es no compartir la línea.
+  - Source: https://www.sandman.com/firealarm-bul.html  Quote: "Stop sharing the phone line with the alarm panel!"
+  - Kind: story
+  - Level: core
+  - Also: T22
+  - Bias: none
+- b:N6. RJ11 usa los dos contactos del medio (3 y 4) para el par a/b; con equipos modernos la polaridad a/b da igual, "pero no siempre".
+  - Source: https://wiki.innovaphone.com/?i=11277  Quote: "A RJ-11 has the a/b in the middle contacts (3-4)."
+  - Kind: definition
+  - Level: foundation
+  - Bias: none
+- b:N7. Líneas largas: la resistencia del cable baja la tensión al descolgar; si la corriente cae bajo un umbral, el equipo cree que colgaste. Síntomas: suena, atendés y ocupado, o un timbre corto.
+  - Source: https://wiki.innovaphone.com/?i=11277  Quote: "the phone rings, you pick up and get busy"
+  - Kind: mistake
+  - Level: core
+  - Also: T22
+  - Bias: none
+- b:N8. Muchas líneas públicas ya no mandan la señal de liberación (una interrupción corta de la tensión) porque del lado del proveedor hay un ATA; el FXO tiene que adivinar el corte.
+  - Source: https://wiki.innovaphone.com/?i=11277  Quote: "an ATA typically cannot deliver the reverse release"
+  - Kind: rule of thumb
+  - Level: core
+  - Also: T19
+  - Bias: none
+- b:N9. El UCM6304A tiene 4 puertos FXS y 4 FXO RJ11, con lifeline ante corte de energía (FXS1 pasa a FXO1, FXS2 a FXO2). El UCM6300A no tiene FXO ni troncales analógicas.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/  Quote: "Please note that the UCM6300A model does not support analog trunks."
+  - Kind: definition
+  - Level: foundation
+  - Also: T18
+  - Bias: none
+- b:N10. La guía de Grandstream: conectar las líneas desde la roseta a los FXO; el puerto aparece gris "conectado pero no configurado" hasta que se crea la troncal.
+  - Source: https://documentation.grandstream.com/knowledge-base/manage-analog-lines/  Quote: "connected but not configured"
+  - Kind: technique
+  - Level: foundation
+  - Also: T18
+  - Bias: none
+- b:N11. En una placa DAHDI, la alarma roja en un FXO significa que no detecta la tensión correcta; el canal figura "In Use". La lectura con la línea fue TIP -44 V; sin cable, 1 V.
+  - Source: https://community.asterisk.org/t/functioning-pstn-line-with-red-alarm/65892  Quote: "the card cannot detect the proper voltage level for the line"
+  - Kind: story
+  - Level: core
+  - Also: T22
+  - Bias: none
+
+## T18 Troncal analógica en el UCM
+- b:N12. Extension/Trunk > Analog Trunks > Create New Analog Trunk: se eligen los canales FXO (UCM6304: 4) y un Trunk Name único que aparece en rutas entrantes y salientes.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "Select the channel for the analog trunk."
+  - Kind: technique
+  - Level: foundation
+  - Bias: none
+- b:N13. Una troncal puede ser una línea o varias; DAHDI Out Line Selection decide por cuál sale: Ascend (la primera libre, por defecto), Poll (alterna) o Descend (la última libre).
+  - Source: https://documentation.grandstream.com/knowledge-base/manage-analog-lines/  Quote: "it will always try to use the first idle FXO port"
+  - Kind: definition
+  - Level: core
+  - Bias: none
+- b:N14. Estados en el Dashboard: FXO gris conectado sin configurar, verde listo, naranja en uso (guía de analógicas). El manual de la serie A lista connected, waiting, busy, not configured y disconnected.
+  - Source: https://documentation.grandstream.com/knowledge-base/manage-analog-lines/  Quote: "in orange color, it indicates the trunk is used"
+  - Kind: definition
+  - Level: foundation
+  - Also: T22
+  - Bias: none
+- b:N15. SLA Mode dedica la troncal a estaciones SLA (teclas de línea en teléfonos), saltea rutas entrantes y salientes, apaga la inversión de polaridad y solo se soporta con una línea por troncal.
+  - Source: https://documentation.grandstream.com/knowledge-base/manage-analog-lines/  Quote: "SLA mode is supported on trunks with one PSTN line only."
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: none
+- b:N16. Max Incoming Calls y Max Outgoing Calls limitan llamadas simultáneas por troncal; 0 es sin límite.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/  Quote: "The default value 0 means no limit."
+  - Kind: definition
+  - Level: core
+  - Bias: none
+- b:N17. FXO Opermode (PBX Settings > Interface Settings > Analog Hardware) fija por país impedancia, umbral de timbre, corriente mínima de lazo y ajuste de tensión TIP/RING; viene en Estados Unidos.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "as predefined for your country's analog line characteristics"
+  - Kind: technique
+  - Level: core
+  - Also: T20
+  - Bias: none
+- b:N18. PCMA Override: Norteamérica PCMU, el resto del mundo PCMA salvo que se sepa otra cosa; viene en PCMU y pide reinicio.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "All other countries, unless already known, should be assumed to be PCMA."
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: none
+
+## T19 Tonos de Uruguay y detección de corte
+- b:N19. Tonos de Uruguay en la lista UIT (E.180, situación al 1/5/2010): ocupado 425 Hz 0,5 s on 0,5 s off; congestión 425 Hz 0,25/0,25; invitación a marcar I 425 Hz continuo; invitación a marcar II 450 Hz 0,7 on 0,8 off 0,2 on 0,3 off; llamada 425 Hz 1,0 on 4,0 off; espera 425 Hz 0,2/0,2/0,2/4,4; especial de información 950/1400/1800 Hz.
+  - Source: https://www.itu.int/dms_pub/itu-t/opb/sp/T-SP-E.180-2010-PDF-S.pdf  Quote: "Tono de ocupado - 425 0.5 on 0.5 off"
+  - Kind: number
+  - Level: core
+  - Bias: none
+- b:N20. La base de tonos de 3am Systems repite para Uruguay ocupado 425 Hz 0,5/0,5, congestión 425 Hz 0,25/0,25 e invitación a marcar 425 Hz continuo.
+  - Source: https://www.3amsystems.com/World_Tone_Database?q=Uruguay  Quote: "Uruguay Busy tone 425 0.5 on 0.5 off"
+  - Kind: number
+  - Level: core
+  - Bias: vende un servicio premium de la base
+- b:N21. Busy Detection (sí por defecto) detecta el corte del otro lado por tono de ocupado; Busy Tone Count 2 por defecto, mejores resultados con 4, 6 u 8 a costa de cortar más tarde.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "Better results might be achieved if set to 4, 6, or even 8."
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: none
+- b:N22. Tone Country viene en Estados Unidos; con Custom se escribe el tono con la sintaxis f1=val@nivel,c=on/off en ms. Por defecto f1=480@-50,f2=620@-50,c=500/500.
+  - Source: https://documentation.grandstream.com/knowledge-base/manage-analog-lines/  Quote: "f1=val[@level][,f2=val[@level]],c=on1/off1"
+  - Kind: template
+  - Level: core
+  - Bias: none
+- b:N23. PSTN Detection detecta tono de ocupado, inversión de polaridad y corte de corriente con una llamada real de un minuto: Auto Detect con dos líneas, Semi-auto con una (llamando a un celular).
+  - Source: https://documentation.grandstream.com/knowledge-base/manage-analog-lines/  Quote: "The detecting call will be answered and up for about 1 minute."
+  - Kind: technique
+  - Level: core
+  - Bias: none
+- b:N24. Si la detección falla, se graba el audio con Maintenance > Signaling Troubleshooting > Analog Record Trace, se abre el .raw en Audacity (16 bit, mono, 8000 Hz) y se miden cadencia y frecuencia. En su ejemplo: 436 Hz y c=330/330.
+  - Source: https://documentation.grandstream.com/knowledge-base/manage-analog-lines/  Quote: "Signed 16bit PCM"
+  - Kind: technique
+  - Level: advanced
+  - Also: T22
+  - Bias: none
+- b:N25. Inversión de polaridad: si está activa, una inversión durante la llamada se toma como corte (en algunos países la red corta así); viene en No. Polarity on Answer Delay 600 ms ignora la inversión que llega enseguida de atender.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "a polarity reversal is used for signaling the disconnection"
+  - Kind: definition
+  - Level: core
+  - Bias: none
+- b:N26. Current Disconnect Threshold: cada cuánto mira la UCM una caída de tensión en la línea, 200 ms por defecto (50 a 3000). Ring Timeout: 8000 ms por defecto, cuánto espera sin timbre para dar por cortada una llamada entrante no atendida.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "considers a non-ringing line with Hangup activity"
+  - Kind: number
+  - Level: core
+  - Also: T22
+  - Bias: none
+- b:N27. En muchos países de Sudamérica la supervisión de corte en líneas analógicas es por tono (disconnect tone), y en Norteamérica por un intervalo sin tensión.
+  - Source: https://en.wikipedia.org/wiki/Answer_supervision  Quote: "Used in many South American countries on analog loop start trunks"
+  - Kind: definition
+  - Level: core
+  - Bias: none
+- b:N28. Busy detection con falsos positivos: una salida que se corta a los tres timbres porque la central tomó la llamada como ocupado; más busycount alarga el tiempo. Sin documento del corte del proveedor no hay cómo afinarlo.
+  - Source: https://community.asterisk.org/t/asterisk-hangsup-when-busydetect-yes/44836  Quote: "the outbound call hangups after the 3 rings"
+  - Kind: mistake
+  - Level: advanced
+  - Bias: none
+- b:N29. Un caso donde busypattern=500,500 impedía detectar el corte y sin el patrón funcionó con busydetect, busycount 3 y callprogress.
+  - Source: https://lists.digium.com/pipermail/asterisk-users/2010-July/251933.html  Quote: "If i specify busypatten=500,500 then asterisk does not recognize hang up signal."
+  - Kind: story
+  - Level: advanced
+  - Also: T20
+  - Bias: none
+- b:N30. Yeastar ofrece tres métodos de detección de corte (tono de ocupado, inversión de polaridad, corte de corriente de lazo) y avisa que un Busy Count muy alto puede impedir detectar.
+  - Source: https://help.yeastar.com/en/p-series/administrator-guide/analog-fxo-trunk-settings.html  Quote: "PBX may fail to detect the busy tone if the value of Busy Count is too high."
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: fabricante de centrales
+
+## T20 Identificador de llamadas, ganancia y eco
+- b:N31. Antel vende "Identificación de número llamante" como facilidad con tarifa mensual (114 pesos al leer la página), para ver el número entrante fijo o móvil; pide un aparato homologado. No dice qué esquema usa.
+  - Source: https://antel.com.uy/personas/servicios/telefonia-fija/identificacion-de-numero-llamante  Quote: "podrás visualizar el número del servicio de la llamada entrante"
+  - Kind: definition
+  - Level: foundation
+  - Bias: proveedor del servicio
+- b:N32. Esquemas de caller ID en la UCM: Bellcore/Telcordia (por defecto), ETSI-FSK durante o antes del timbre (DTAS, LR, RP), ETSI-DTMF en las mismas variantes, SIN 227-BT, NTT y Auto-Detect si no se sabe.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "If you are not sure which scheme to choose, please select \"Auto Detect\"."
+  - Kind: definition
+  - Level: core
+  - Bias: none
+- b:N33. Bellcore manda el número con FSK Bell 202 entre el primer y el segundo timbre; si se atiende muy rápido no llega. ETSI EN 300 659-1 define V.23 después del timbre, V.23 antes del timbre tras una señal de alerta (tono doble, pulso corto o inversión de línea) y DTMF.
+  - Source: https://en.wikipedia.org/wiki/Caller_ID  Quote: "If the telephone call is answered too quickly after the first ring"
+  - Kind: definition
+  - Level: core
+  - Bias: none
+- b:N34. La tabla de países por estándar no incluye a Uruguay; Brasil figura con Bellcore FSK, ETSI FSK y DTMF, y a veces dos proveedores del mismo país usan estándares distintos.
+  - Source: https://en.wikipedia.org/wiki/Caller_ID  Quote: "Sometimes individual service providers within a country use different standards."
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: none
+- b:N35. Para depurar caller ID en FXO: que el esquema del equipo coincida con el de la línea, cuántos timbres esperar antes de detectar, coeficientes del país correctos (una señal distorsionada no se reconoce) y probar un teléfono con display en la misma línea.
+  - Source: https://techdocs.audiocodes.com/multi-service-business-routers/mediant-500-msbr/user-manual/version-720/Content/UM/Debugging%20a%20Caller%20ID%20Detection%20on%20FXO.htm  Quote: "verify that it displays the caller ID"
+  - Kind: test
+  - Level: core
+  - Also: T22
+  - Bias: fabricante de gateways
+- b:N36. Si una entrante no muestra número, primero confirmar con el proveedor que la línea tiene el servicio; después el modo (después del timbre, después de inversión, antes del timbre) y la señalización.
+  - Source: https://help.yeastar.com/en/p-series/administrator-guide/analog-fxo-trunk-settings.html  Quote: "you need to confirm with your service provider if the line has enabled Caller ID feature"
+  - Kind: technique
+  - Level: core
+  - Bias: fabricante de centrales
+- b:N37. Error típico en DAHDI cuando el esquema no coincide: "No start bit found in fsk data" y "Failed to decode CallerID", mientras un teléfono con display muestra el número después del segundo timbre.
+  - Source: https://lists.digium.com/pipermail/asterisk-users/2010-July/251933.html  Quote: "Failed to decode CallerID on channel"
+  - Kind: story
+  - Level: advanced
+  - Bias: none
+- b:N38. Ganancias RX y TX del FXO de -13,5 a +12 dB (0 por defecto). La guía: si hay eco, ruido o volumen bajo, primero ACIM (impedancia) por detección ERL o Pr en Analog Hardware, después ganancias.
+  - Source: https://documentation.grandstream.com/knowledge-base/manage-analog-lines/  Quote: "this is mostly related to impedance parameters not configured correctly"
+  - Kind: technique
+  - Level: core
+  - Bias: none
+- b:N39. Echo Cancellation Mode (NLP): Default, High Noise Level Adjustment, Noise Masking o White Noise Injection; filtros de ruido de baja frecuencia RX y TX en 20, 40, 60 o 200 Hz, apagados por defecto.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "helps to remove/suppress residual echo components"
+  - Kind: definition
+  - Level: advanced
+  - Bias: none
+- b:N40. Fax por línea analógica: en la troncal Fax Detection en No y ruta entrante con destino la extensión del fax (FXS) o una extensión Fax-to-Email.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "Make sure the \"Fax Detection\" option is set to \"NO\"."
+  - Kind: technique
+  - Level: core
+  - Bias: none
+
+## T21 De la línea al destino: rutas entrantes y salientes con analógicas
+- b:N41. En Asterisk, toda llamada analógica entra a la extensión s ("start"); s no es un comodín, es donde arrancan las llamadas analógicas.
+  - Source: https://docs.asterisk.org/Configuration/Dialplan/Special-Dialplan-Extensions/  Quote: "When an analog call comes into Asterisk, the call is sent to the s extension."
+  - Kind: definition
+  - Level: core
+  - Also: T22
+  - Bias: none
+- b:N42. Asterisk no maneja DID en líneas analógicas: por la línea no llega número llamado y se rutea por la línea (el canal), no por número.
+  - Source: https://community.asterisk.org/t/receiving-calls-from-pstn-s-extension-or-dialed-number/40772  Quote: "I don't believe that Asterisk supports DID on analogue lines."
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: none
+- b:N43. La guía de Grandstream: ruta entrante eligiendo la troncal analógica y destino por defecto (IVR, extensión, grupo); con condición de horario, IVR en horario y extensión 1000 fuera.
+  - Source: https://documentation.grandstream.com/knowledge-base/manage-analog-lines/  Quote: "Select Analog Trunk created and Default destination"
+  - Kind: template
+  - Level: core
+  - Bias: none
+- b:N44. Las rutas entrantes llevan un destino por defecto para lo que no coincide con criterios; en el patrón, X es un dígito y el punto acepta uno o más caracteres.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "A default destination can also be set to handle calls that do not match any specific criteria."
+  - Kind: definition
+  - Level: core
+  - Bias: none
+- b:N45. Ruta saliente por la analógica: ejemplo con _9X., Strip 1 y privilegio National; la troncal analógica también sirve de failover de una SIP.
+  - Source: https://documentation.grandstream.com/knowledge-base/manage-analog-lines/  Quote: "Users can set up their Analog Trunk as a failover for another trunk"
+  - Kind: template
+  - Level: core
+  - Bias: none
+- b:N46. Outbound Route CID no aplica a troncales analógicas: el que recibe ve el número de la línea.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "Note: This field does not apply to analog trunks."
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: none
+- b:N47. Numeración de Uruguay desde 2010: fijos de 8 cifras que empiezan con 2 (Montevideo) o 4 (resto), celulares 09 más 7 cifras (9 en total), internacional con 00.
+  - Source: https://en.wikipedia.org/wiki/Telephone_numbers_in_Uruguay  Quote: "On August 29, 2010, all phone numbers were changed 8 digits"
+  - Kind: number
+  - Level: foundation
+  - Bias: none
+- b:N48. Desvíos de Antel que esconden llamadas: Transferencia temporal incondicional se activa con *21*número# y, activa, se escucha un tono de invitación a marcar distinto del normal; el correo de voz desvía en no contesta (*62#) y en ocupado (*69#).
+  - Source: https://antel.com.uy/personas/servicios/telefonia-fija/transferencia-temporal-incondicional  Quote: "escuchará un tono de libre distinto del normal"
+  - Kind: test
+  - Level: core
+  - Also: T22
+  - Bias: proveedor del servicio
+- b:N49. Correo de voz de Antel: gratuito, guarda hasta 10 mensajes por 10 días; *62# activa el desvío en no contesta y *69# en ocupado; #62# y #69# los desactivan.
+  - Source: https://antel.com.uy/personas/servicios/telefonia-fija/correo-de-voz  Quote: "Para activar la transferencia a la casilla en caso de no contesta marcar *62#"
+  - Kind: technique
+  - Level: core
+  - Also: T22
+  - Bias: proveedor del servicio
+- b:N50. Llamada en espera de Antel: sin costo; una segunda entrante recibe un tono mientras hay una comunicación.
+  - Source: https://antel.com.uy/personas/servicios/telefonia-fija/llamada-en-espera  Quote: "recibiendo un tono que indica esta situación"
+  - Kind: definition
+  - Level: core
+  - Also: T19
+  - Bias: proveedor del servicio
+
+## T22 Diagnóstico de líneas analógicas
+- b:N51. Analog Record Trace (Maintenance > Signal Troubleshooting): se elige el puerto con problema, Start, llamada, Stop y Download; sirve por ejemplo para el caller ID de entrantes. "A key Dial-up FXO" llama a un número externo y graba.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/  Quote: "If the issue happens on FXO 1, select FXO port 1 to record the trace."
+  - Kind: technique
+  - Level: core
+  - Bias: none
+- b:N52. Syslog: el módulo chan_dahdi es el de las llamadas analógicas; se le suben NOTICE y VERBOSE además de error, solo mientras se diagnostica.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "chan_dahdi: This module is related to analog calls (FXO/FXS)."
+  - Kind: technique
+  - Level: advanced
+  - Bias: none
+- b:N53. Llamadas fantasma: con DAHDI, la inversión de polaridad al colgar disparaba la detección de caller ID y aparecía una entrante falsa; pasaba cuando se juntaban inversión y subida de tensión (de 9 V hablando a 50 V en reposo, their claim).
+  - Source: https://community.freepbx.org/t/polarity-switch-causing-false-call-backs/35199  Quote: "phantom incoming calls"
+  - Kind: story
+  - Level: advanced
+  - Also: T19
+  - Bias: none
+- b:N54. Reclamos de telefonía fija de Antel: 121 desde fijo o celulares de otras compañías, *121 desde móvil Antel, todos los días las 24 horas; Atención Técnica de Empresas 0800 2599.
+  - Source: https://antel.com.uy/atencion-telefonica  Quote: "Reclamos Telefonía Fija"
+  - Kind: definition
+  - Level: foundation
+  - Bias: none
+- b:N55. Un ATA HT80x V2 se puede usar como "línea" de banco: su FXS tiene esquema de caller ID, inversión de polaridad (No por defecto), corte por caída de tensión (Loop Current Disconnect, 200 ms), frecuencia de timbre (20 Hz por defecto) y tonos configurables (vienen en valores de Norteamérica).
+  - Source: https://documentation.grandstream.com/wp-content/uploads/2026/10/HT80x-V2-–-Administration-Guide.pdf  Quote: "Reverses the polarity upon call establishment and termination. Default is No."
+  - Kind: technique
+  - Level: core
+  - Also: T17
+  - Bias: none
+
+## Disagreements seen
+- Detección de corte por tono: el manual de Grandstream sube Busy Tone Count para evitar cortes al azar (https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/), Yeastar avisa que un conteo alto puede impedir detectar (https://help.yeastar.com/en/p-series/administrator-guide/analog-fxo-trunk-settings.html) y un caso de Asterisk muestra el falso positivo sobre el tono de llamada (https://community.asterisk.org/t/asterisk-hangsup-when-busydetect-yes/44836).
+- Patrón de ocupado explícito: Grandstream y Yeastar lo recomiendan para filtrar falsos cortes; en https://lists.digium.com/pipermail/asterisk-users/2010-July/251933.html fijar busypattern=500,500 impidió detectar el corte.
+- Inversión de polaridad: Grandstream la presenta como método de corte en algunos países; en https://community.freepbx.org/t/polarity-switch-causing-false-call-backs/35199 activarla para colgar cortaba al atender y la inversión al colgar generaba entrantes fantasma.
+- Colores del Dashboard: la guía de analógicas dice verde para listo (https://documentation.grandstream.com/knowledge-base/manage-analog-lines/); en el firmware actual de la serie A el puerto libre se ve azul en la captura del caso (observación propia, no fuente).
+
+## Best stories
+- Panel de alarma que entra en falla cuando alguien descuelga en la línea compartida (https://www.sandman.com/firealarm-bul.html).
+- Entrantes fantasma después de colgar por inversión de polaridad (https://community.freepbx.org/t/polarity-switch-causing-false-call-backs/35199).
+- Puerto FXO "In Use" con alarma roja porque no ve tensión: -44 V con la línea, 1 V sin ella (https://community.asterisk.org/t/functioning-pstn-line-with-red-alarm/65892).
+- Busy detection que corta una saliente a los tres timbres (https://community.asterisk.org/t/asterisk-hangsup-when-busydetect-yes/44836).
+- Medir el tono de ocupado con Analog Record Trace y Audacity: 436 Hz, 330/330 ms (https://documentation.grandstream.com/knowledge-base/manage-analog-lines/).

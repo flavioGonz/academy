@@ -1,0 +1,18 @@
+A: Lección dieciséis. Identificador y audio. El cliente mira el teléfono y en vez del número del que llama dice Undetected.
+B: Y te pregunta para qué cambió de central si antes el teléfono de la cocina lo mostraba.
+A: Primera pregunta: ¿la línea tiene el identificador contratado? En Antel es una facilidad aparte, la identificación de número llamante, con tarifa mensual. Si el teléfono viejo lo mostraba, está.
+B: Entonces es la central.
+A: Es el esquema. Hay varias formas de mandar el número por una línea analógica. La norteamericana, Bellcore, lo manda con un módem FSK entre el primer y el segundo timbre. La europea, ETSI, tiene variantes antes del timbre, después del timbre, y hasta con tonos DTMF.
+B: ¿Y cuál usa Antel?
+A: Eso no lo pudimos confirmar en ninguna fuente. Wikipedia tiene una tabla de países y Uruguay no aparece; Brasil figura con tres esquemas distintos.
+B: [risas] Bien latinoamericano.
+A: Así que lo que funciona es probar. La UCM viene en Bellcore. Ponés Auto Detect, llamás desde un celular y mirás el CDR. Si no aparece, vas uno por uno: ETSI FSK durante el timbre, ETSI DTMF, las variantes antes del timbre. AudioCodes sugiere además comparar con un teléfono con pantalla en la misma línea.
+B: ¿Y si atiendo muy rápido?
+A: Con Bellcore, si la llamada se atiende antes del segundo timbre, el número no llega. Por eso un IVR que atiende al instante a veces pierde el identificador.
+B: Bueno, número resuelto. ¿Y el audio? Porque las analógicas siempre tienen eco o se escuchan bajito.
+A: La guía de Grandstream lo dice claro: eco, ruido y volumen bajo casi siempre son impedancia. En Analog Hardware tenés ACIM, con detección automática. Primero eso.
+B: ¿Y después las ganancias?
+A: Después. RX es lo que vos escuchás de la línea, TX lo que mandás. Van de menos trece y medio a más doce decibeles. De a poco y probando.
+B: Laboratorio.
+A: Veinte minutos: Auto Detect, llamada desde el celular, anotás qué esquema muestra el número, corrés la detección de ACIM y ajustás ganancias con una llamada real.
+B: Y el cliente vuelve a ver quién lo llama, igual que en el teléfono de la cocina.

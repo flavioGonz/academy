@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un comercio tiene dos líneas de Antel: una para atención al público y otra exclusiva para el fax. ¿Cómo armás las troncales?",
+  "options": [
+   "Una sola troncal con FXO1 y FXO2 en modo Poll",
+   "Una troncal en SLA Mode con las dos líneas",
+   "No hace falta troncal, alcanza con la ruta entrante",
+   "Una troncal por línea, porque cada una entra a un destino distinto"
+  ],
+  "answer": 3,
+  "why": "En analógico no llega número llamado: la ruta entrante se elige por troncal. Si cada línea va a otro destino, cada una necesita su troncal."
+ },
+ {
+  "q": "Tenés una troncal con FXO1 y FXO2 y DAHDI Out Line Selection en Ascend. Las dos están libres. ¿Por qué línea sale la próxima llamada?",
+  "options": [
+   "Por FXO1, la primera libre",
+   "Por FXO2, la última libre",
+   "Por la que no se usó en la llamada anterior",
+   "Por las dos a la vez"
+  ],
+  "answer": 0,
+  "why": "Ascend, el modo por defecto, empieza siempre por el puerto 1 si está libre; Poll alterna y Descend arranca por el último."
+ },
+ {
+  "q": "Instalás un UCM6304A en Montevideo. ¿Qué valor de PCMA Override corresponde, según el manual?",
+  "options": [
+   "PCMU, que es el de fábrica",
+   "PCMA, porque fuera de Norteamérica se asume A-law",
+   "G.729, para ahorrar ancho de banda",
+   "Ninguno: esa opción es solo para troncales SIP"
+  ],
+  "answer": 1,
+  "why": "El manual indica PCMU para Norteamérica y PCMA para el resto de los países salvo que se sepa otra cosa; el cambio pide reinicio."
+ }
+]
