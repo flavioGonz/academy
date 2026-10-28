@@ -1,0 +1,31 @@
+{
+ "modulos_nuevos": [
+  {
+   "title": "Configuración de porteros",
+   "why": "Todo lo que se configura en la web del portero, sección por sección: cómo se ve, cómo llama y qué hace cada botón.",
+   "objetivos": [
+    "Elegir el theme y la pantalla de inicio del portero táctil",
+    "Configurar los botones de llamada y las llamadas en secuencia o en grupo",
+    "Probar cada botón con un monitor que no atiende y otro que rechaza antes de entregar"
+   ],
+   "lessons": [
+    "44",
+    "45"
+   ],
+   "antes_de": "Cerrar la obra"
+  },
+  {
+   "title": "Configuración de pantallas",
+   "why": "El monitor del residente: cómo se ve, qué botones tiene y qué puede tocar el usuario.",
+   "objetivos": [
+    "Elegir el theme del monitor y armar sus áreas y botones",
+    "Configurar protector, fondo, logo e idioma",
+    "Repetir la configuración en muchos monitores sin hacerlo uno por uno"
+   ],
+   "lessons": [
+    "43"
+   ],
+   "antes_de": "Cerrar la obra"
+  }
+ ]
+}

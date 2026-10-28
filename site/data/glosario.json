@@ -9841,6 +9841,183 @@
    "short": "Self-Monitoring, Analysis and Reporting Technology: el autodiagnóstico que traen los discos.",
    "long": "smartctl -a /dev/sda muestra la salud del disco y smartd la vigila. Sirve para cambiar un disco antes de que falle.",
    "case": true
+  },
+  {
+   "id": "lcd",
+   "term": "LCD",
+   "aliases": [
+    "Liquid Crystal Display",
+    "LCD Language"
+   ],
+   "cat": "Video",
+   "short": "Liquid Crystal Display: la pantalla de cristal líquido de monitores y porteros; en la web de Akuvox, LCD nombra lo que se ve en la pantalla del equipo.",
+   "long": "En los menús de Akuvox aparece como LCD Language (idioma de la pantalla, distinto del idioma de la web) y, en E18, E16, R29 y X915, como la sección Device > LCD, donde están el theme, el reposo y el protector.",
+   "case": true
+  },
+  {
+   "id": "dnd",
+   "term": "DND",
+   "aliases": [
+    "Do Not Disturb",
+    "No molestar"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Do Not Disturb: el modo no molestar de un teléfono o monitor, que deja de sonar ante las llamadas entrantes.",
+   "long": "En los monitores Akuvox es uno de los tipos de área de la pantalla de inicio (por defecto en el área 3 del S567) y su etiqueta no se puede renombrar. Conviene que el residente sepa dónde está: un monitor en DND no suena cuando llama el portero.",
+   "case": true
+  },
+  {
+   "id": "sos",
+   "term": "SOS",
+   "aliases": [
+    "botón SOS"
+   ],
+   "cat": "Alarmas",
+   "short": "Función de emergencia: en los monitores Akuvox, un tipo de área de la pantalla de inicio.",
+   "long": "Se pone o se saca de la pantalla de inicio cambiando el tipo del área en Device > Display Setting, igual que Arming (armado de alarma). Qué hace al tocarlo depende de cómo esté configurado el monitor; antes de dejarlo visible, conviene probarlo y acordar con el cliente a quién le llega el aviso.",
+   "case": true
+  },
+  {
+   "id": "apk",
+   "term": "APK",
+   "aliases": [
+    "Android Package",
+    "Custom APK"
+   ],
+   "cat": "Web e integración",
+   "short": "Android Package: el archivo con el que se instala una aplicación en Android.",
+   "long": "En los monitores Akuvox con Android, Custom APK es un tipo de área de la pantalla de inicio que abre una aplicación de terceros ya instalada; el campo Value se completa solo con la app.",
+   "case": true
+  },
+  {
+   "id": "png",
+   "term": "PNG",
+   "aliases": [
+    "Portable Network Graphics"
+   ],
+   "cat": "Video",
+   "short": "Portable Network Graphics: formato de imagen sin pérdida, con transparencia.",
+   "long": "Lo piden varios equipos Akuvox para íconos, logos de arranque y fondos (por ejemplo, el logo de arranque del C319 en ZIP o PNG hasta 1280x800); para los protectores de pantalla muchos modelos solo aceptan JPG. Conviene mirar la tabla de especificaciones del modelo antes de preparar las imágenes.",
+   "case": true
+  },
+  {
+   "id": "autop",
+   "term": "AutoP",
+   "aliases": [
+    "Auto Provision",
+    "auto-provisioning",
+    "aprovisionamiento automático",
+    "comandos AutoP"
+   ],
+   "cat": "Akuvox",
+   "short": "Auto-provisioning de Akuvox: configurar equipos con comandos del tipo Config.Seccion.Parametro, desde un servidor o desde SmartPlus.",
+   "long": "Cada ajuste de la web tiene su comando, publicado por modelo en planillas de la Knowledge Base (por ejemplo Config.Wallpaper.Url01 para el fondo de un monitor). Los valores no siempre coinciden entre modelos: la pantalla de inicio vale 4 o 5 en el S567 y 0 o 1 en el S562, así que una línea copiada de otro modelo puede dejar otra configuración.",
+   "case": true
+  },
+  {
+   "id": "direct-ip",
+   "term": "Direct IP",
+   "aliases": [
+    "IP directa",
+    "llamada IP directa"
+   ],
+   "cat": "Akuvox",
+   "short": "Llamada de un equipo Akuvox a otro marcando su IP, sin central ni servidor, con los dos en la misma red.",
+   "long": "Se activa en Intercom > Basic > Direct IP (en el E12, Intercom > Call Feature > Direct IP), con el puerto 5060 de fábrica y el mismo valor en las dos puntas. Es el destino más simple que puede tener un botón de portero.",
+   "case": true
+  },
+  {
+   "id": "sequence-call",
+   "term": "Sequence Call",
+   "aliases": [
+    "llamada en secuencia",
+    "llamada secuencial"
+   ],
+   "cat": "Akuvox",
+   "short": "Llamada que prueba una lista de destinos de a uno, en orden, hasta que alguien atiende.",
+   "long": "Si nadie atiende en el Call Timeout, pasa al siguiente; si alguien rechaza, decide When Refused (Call Next sigue, Do Not Call Next corta). En los táctiles el orden sale de la Priority of Call del grupo del directorio; en E12 y la serie R20, de Manager Dial.",
+   "case": true
+  },
+  {
+   "id": "group-call",
+   "term": "Group Call",
+   "aliases": [
+    "llamada de grupo",
+    "llamada en grupo"
+   ],
+   "cat": "Akuvox",
+   "short": "Llamada que hace sonar a la vez todos los destinos de un grupo; el primero que atiende se queda con la llamada.",
+   "long": "Si uno rechaza, When Refused decide: End This Call Only corta solo a ese y End All Calls corta a todos. Con SmartPlus, la casilla Group Call Number(Local) queda vacía para no hacer fallar el grupo de la nube.",
+   "case": true
+  },
+  {
+   "id": "when-refused",
+   "term": "When Refused",
+   "aliases": [
+    "Call Next",
+    "Do Not Call Next",
+    "End This Call Only",
+    "End All Calls"
+   ],
+   "cat": "Akuvox",
+   "short": "Ajuste de Akuvox que dice qué hace el portero cuando un destino rechaza la llamada mientras suena.",
+   "long": "En Sequence Call: Call Next o Do Not Call Next. En Group Call: End This Call Only o End All Calls. No aplica a la llamada que nadie atiende: esa la manejan el Call Timeout y Max Dial Time.",
+   "case": true
+  },
+  {
+   "id": "dial-plan",
+   "term": "Dial Plan",
+   "aliases": [
+    "plan de marcado",
+    "Replace Rule",
+    "Quick Dial by Number Replacement"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Tabla de reglas que cambia un número marcado por otro u otros antes de llamar.",
+   "long": "En Akuvox está en Intercom > Dial Plan: un Prefix corto y hasta cinco Replace (IP o SIP) que suenan a la vez al marcar el prefijo, con la cuenta de salida elegida. El E16 y el E18 admiten 1.000 reglas y el R29, 1.500.",
+   "case": true
+  },
+  {
+   "id": "speed-dial",
+   "term": "Speed Dial",
+   "aliases": [
+    "marcado rápido"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Tecla o botón que llama a un número guardado sin marcarlo.",
+   "long": "En los porteros Akuvox cambia de lugar por modelo: Device > LCD en E16 y E18, Setting > Key/Display en R29 y X915 (también como tecla de Recepción), Intercom > Basic > Speed Dial en el R20K, un número por casilla.",
+   "case": true
+  },
+  {
+   "id": "manager-dial",
+   "term": "Manager Dial",
+   "aliases": [],
+   "cat": "Akuvox",
+   "short": "Menú de los porteros Akuvox de botón y teclado donde se cargan los destinos del pulsador.",
+   "long": "Está en Intercom > Basic > Manager Dial en E12, E13, la serie R20 y otros: Call Type Sequence Call o Group Call, un número IP o SIP por casilla y, en secuencia, el tiempo antes de pasar al siguiente.",
+   "case": true
+  },
+  {
+   "id": "grupo-de-timbrado",
+   "term": "grupo de timbrado",
+   "aliases": [
+    "ring group",
+    "hunt group",
+    "grupo de búsqueda"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Función de una central que reparte una llamada entre varios internos: todos a la vez o uno detrás del otro.",
+   "long": "Es la misma idea que Group Call y Sequence Call de un portero, pero resuelta en la central, que suma desvíos, colas y apps. Con central, el portero llama a una extensión y el reparto lo hace el grupo.",
+   "case": false
+  },
+  {
+   "id": "cancel",
+   "term": "CANCEL",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "El mensaje SIP que anula una llamada que todavía no fue atendida.",
+   "long": "Lo manda quien llamó, o la central, cuando ya no quiere que ese destino siga sonando: por ejemplo, cuando otro miembro de un grupo atendió primero. Está definido en RFC 3261.",
+   "case": true
   }
  ]
 }

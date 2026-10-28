@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Casa en Carrasco con un R29 en el portón: un solo hogar y nadie más. ¿Qué theme le ponés?",
+  "options": [
+   "Building, que es el de fábrica",
+   "Villa",
+   "Gate Mode",
+   "Alphanumeric"
+  ],
+  "answer": 1,
+  "why": "Villa está pensado para una sola vivienda: la visita llama con un toque o elige al residente. Building es para varios apartamentos y Gate Mode depende de una comunidad en SmartPlus."
+ },
+ {
+  "q": "Edificio de 30 apartamentos con un X915: el administrador quiere que la visita vea de entrada la lista de apartamentos, sin pasar por los íconos. ¿Qué tocás?",
+  "options": [
+   "Cambiás el theme a Office",
+   "Subís un protector con la lista de apartamentos",
+   "En Key In Homepage Of The Building Theme, Default Page en Tenants (el directorio)",
+   "Cambiás el idioma de la pantalla"
+  ],
+  "answer": 2,
+  "why": "Dentro del theme Building, Default Page elige qué pantalla aparece al inicio: la de íconos, el directorio (Tenants), el teclado (PIN), la llamada o Temp Key."
+ },
+ {
+  "q": "En una obra sin SmartPlus pusiste Gate Mode en un X912 y la pantalla no muestra edificios para elegir. ¿Por qué?",
+  "options": [
+   "Gate Mode toma los edificios y apartamentos del proyecto de comunidad en SmartPlus, con el portero agregado en el área pública",
+   "Falta reiniciar el portero",
+   "El X912 no tiene pantalla táctil",
+   "Falta cargar el directorio por CSV en el monitor"
+  ],
+  "answer": 0,
+  "why": "Según la Knowledge Base, en Gate Mode el portero va en el Public Area de una comunidad en la nube y muestra solo lo que está cargado ahí; en una obra local conviene Default o Directory."
+ }
+]

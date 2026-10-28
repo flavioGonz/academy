@@ -1,0 +1,80 @@
+{
+ "45": {
+  "fig": {
+   "file": "45.svg",
+   "alt": "Un portero E16 a la izquierda con tres flechas hacia tres carriles. Un destino: una sola llamada a 192.168.88.64 o a la extensión 201, con Direct IP Enabled y Port 5060 o la cuenta de Account > Basic. Sequence Call, de a uno: el monitor 1 no atendió, después de 20 segundos suena el 2 y el 3 espera; rechazo: Call Next sigue, Do Not Call Next corta. Group Call, todos a la vez: suenan los tres, atiende el 2 y los otros dejan de sonar; rechazo: End This Call Only corta solo a ese, End All Calls corta a todos. Al pie: todo en la web del portero, Intercom > Basic, Intercom > Dial Plan e Intercom > Call Feature.",
+   "caption": "El mismo botón puede llamar a uno, a varios en orden o a varios a la vez: lo decide la web del portero."
+  },
+  "steps": [
+   {
+    "file": "45-captura-basic.webp",
+    "step": 2,
+    "alt": "Captura de la web de un E16C V2.0, menú Intercom > Basic. Menú lateral: Homepage, Status, Account, Network, Intercom (Basic, Call Feature, Dial Plan), Surveillance, Access Control, Directory, Device, Setting y System. Bloques: Direct IP con Enabled marcado y Port 5060 (rango 1 a 65535); Key Setting con Reception Enabled marcado, Name RECEPCION y Number 192.168.88.65,192.168.88.64; Sequence Call con When Refused en Do Not Call Next y Call Timeout (Sec) en 20; Group Call con When Refused en End This Call Only; botones Cancel y Submit.",
+    "caption": "Así se ve Intercom > Basic en un E16C V2.0 de obra: Direct IP, la tecla de Recepción con dos destinos y los dos When Refused (las IP se cambiaron por las del laboratorio).",
+    "after": "apretá Recepción en la pantalla"
+   },
+   {
+    "file": "45-paso5.svg",
+    "step": 5,
+    "alt": "Tabla de Directory > User con dos usuarios del grupo Conserjeria: Living, 192.168.88.64, Priority of Call Primary; Cocina, 192.168.88.65, Secondary. Debajo, el bloque Intercom > Basic > Sequence Call con When Refused en Call Next y Call Timeout (Sec) en 20. A la derecha, el living en Sin respuesta y, después de 20 segundos sin atender, la cocina sonando. Notas: con Call Next, si el living rechaza, suena la cocina enseguida; con Do Not Call Next, el rechazo corta ahí y la cocina no suena; la prioridad aparece solo con un grupo creado por vos.",
+    "caption": "La prioridad del grupo pone el orden; Call Timeout y When Refused deciden cuándo se pasa al siguiente.",
+    "after": "Secuencia: en los dos usuarios"
+   },
+   {
+    "file": "45-paso6.svg",
+    "step": 6,
+    "alt": "Un portero con teclado donde se marca 100. Una regla de Intercom > Dial Plan > +Add con Account Auto, Prefix 100 resaltado, Replace 1 192.168.88.64 y Replace 2 192.168.88.65. De la regla salen dos flechas, a la vez, hacia los monitores Living y Cocina, los dos sonando. Notas: hasta 5 números por regla, IP o SIP; 1.000 reglas en E16 y E18, 1.500 en R29 y 500 en R20K; en el X915 el prefijo no acepta asterisco; también se carga en la pantalla en Setting > Replace Rule.",
+    "caption": "Un prefijo corto reemplaza hasta cinco destinos, que suenan todos juntos.",
+    "after": "Marcá 100 en el teclado del portero"
+   },
+   {
+    "file": "45-paso8.svg",
+    "step": 8,
+    "alt": "Tabla: E16 y E18, táctil, destino en Intercom > Basic > Key Setting, varios destinos con grupo y Priority of Call; R29 y X915, táctil, Setting > Key/Display, grupo y Priority of Call; R20K, teclado, Intercom > Basic > Speed Dial, Manager Dial; E12, R20A y E13, un botón, Intercom > Basic > Manager Dial, Call Type Sequence o Group; R20B, botones, un número por pulsador, Manager Dial por pulsador. Notas: grupo de los táctiles en Directory > User > Group y rechazo y tiempo en Intercom > Basic (en el X915, Only Group Call Allowed); en el E12, Direct IP está en Intercom > Call Feature; R20B y R20K suman teclas con Device > Extension Unit desde 320.30.10.116; con SmartPlus, Group Call Number(Local) queda vacío y en el E12 la secuencia local no aparece.",
+    "caption": "La lógica es la misma en toda la línea; cambia la pantalla de la web donde se carga.",
+    "after": "Si el portero es de botón o de teclado"
+   }
+  ],
+  "concepts": [
+   {
+    "name": "Destino del botón",
+    "para_que": "Un botón de portero no sabe a qué monitor llama: guarda un número. Separar el botón del destino permite que el mismo frente sirva para una casa por IP directa o para un edificio con central, cambiando solo lo que se escribe en la web.",
+    "como": "Si el destino es una IP, la llamada sale por Direct IP (Intercom > Basic > Direct IP en E16; Intercom > Call Feature > Direct IP en E12), con el mismo puerto en las dos puntas. Si es un número SIP, sale por la cuenta de Account > Basic; con las dos cuentas registradas, Auto usa la 1. El número se carga en la tecla de Recepción (Key Setting), en el Speed Dial o en el Manager Dial, según la familia.",
+    "ejemplo": "Una casa en Carrasco con un E16 y dos monitores en la misma red: Direct IP en los tres y la tecla de Recepción apuntando a `192.168.88.64`. Si después se suma una central para atender desde el celular, se cambia el número por la extensión `201` y el botón sigue siendo el mismo."
+   },
+   {
+    "name": "Sequence Call y When Refused",
+    "para_que": "Para que la visita no quede sonando en un monitor donde no hay nadie: se prueba un destino, y si no atiende, el siguiente. Akuvox la presenta como la manera de pasar la llamada a otro familiar cuando el dueño no está.",
+    "como": "En E16, E18, R29 y X915 se ajusta en Intercom > Basic > Sequence Call: Call Timeout (Time Out en R29 y X915) es cuánto suena cada uno, y When Refused decide qué pasa si alguien rechaza: Call Next sigue, Do Not Call Next corta. En los táctiles el orden sale de la Priority of Call del grupo del directorio; en E12, R20 y E13 se cargan los números en Manager Dial con Call Type Sequence Call.",
+    "ejemplo": "Un apartamento en Pocitos con living y cocina: living Primary, cocina Secondary, Call Timeout 20 y Call Next. Si la dueña rechaza desde el living porque está ocupada, suena la cocina, donde está la empleada; con Do Not Call Next, la visita quedaría sin respuesta."
+   },
+   {
+    "name": "Group Call y When Refused",
+    "para_que": "Para que la visita llegue a quien esté más cerca sin esperar turnos: suenan todos los monitores del grupo a la vez y el primero que atiende se queda con la llamada.",
+    "como": "El grupo se arma en Directory > User > Group en los táctiles, o con Call Type Group Call en Manager Dial en los de botón. El rechazo se ajusta en Intercom > Basic > Group Call (en el X915, Only Group Call Allowed): End This Call Only corta solo al que rechazó y End All Calls corta a todos. Con SmartPlus, la casilla Group Call Number(Local) queda vacía.",
+    "ejemplo": "Una casa con tres monitores: si el hijo rechaza desde su cuarto y la llamada se corta en toda la casa, el portero está en End All Calls. Con End This Call Only, los otros dos siguen sonando y alguien atiende en el living."
+   },
+   {
+    "name": "Dial Plan",
+    "para_que": "Nadie se acuerda de una IP ni de cinco extensiones. El Dial Plan cambia un número corto por los destinos reales, para marcar fácil desde el teclado del portero o desde la pantalla.",
+    "como": "En Intercom > Dial Plan, +Add: Account (Auto, 1 o 2), Prefix y Replace 1 a 5. Al marcar el prefijo, el portero llama a la vez a todos los Replace. Entran 1.000 reglas en E16 y E18, 1.500 en R29 y 500 en R20K; en E16 y E18 se importan y exportan en .xml. En el X915 el prefijo no acepta asterisco.",
+    "ejemplo": "Una portería con conserje en dos puestos: Prefix `100`, Replace 1 `192.168.88.64` y Replace 2 `192.168.88.65`. La visita marca 100 y suenan los dos puestos; si mañana se cambia un monitor de IP, se corrige la regla y nadie aprende un número nuevo."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\nAntes de la portería IP, el pulsador de un portero cerraba un circuito: un botón, un timbre, un apartamento. Cuando el timbre tuvo que sonar en más de un lugar, la telefonía ya tenía la respuesta: los grupos de timbrado, que hacen sonar varios internos a la vez, y la búsqueda en orden, que prueba un interno después del otro. En inglés, ring group y hunt group.\n\nSIP, publicado como RFC 3261 en 2002, llevó esa idea a la red: un pedido de llamada (el INVITE) puede ir a varios destinos en paralelo o uno detrás del otro, y cuando uno atiende, a los demás se les cancela. Los porteros Akuvox hacen eso adentro del propio equipo, sin central: Sequence Call para ir en orden y Group Call para sonar en todos. Con SmartPlus, la decisión pasa a la app del residente (Contact Preference) y el portero solo guarda qué hacer cuando alguien rechaza.\n\n### Cómo funciona\n**El destino.** El botón no sabe de monitores: guarda un número. Si es una IP, la llamada sale directa por el puerto de Direct IP (5060 de fábrica); si es un número SIP, sale por la cuenta registrada y, con las dos cuentas, Auto usa la 1. Recepción, Speed Dial y Manager Dial son lugares distintos donde se escribe ese número, según la familia.\n\n**No atender no es lo mismo que rechazar.** No atender es dejar sonar: en secuencia corre el Call Timeout, y en cualquier llamada saliente, el Dial Out Time de Max Dial Time. Rechazar es que alguien toque colgar mientras suena: el monitor contesta que no, y ahí decide When Refused.\n\n**Sequence Call.** Llama al primero; si nadie atiende en el Call Timeout, corta y llama al siguiente. Si el primero rechaza, `Call Next` sigue con el próximo y `Do Not Call Next` termina ahí. En los táctiles, el orden sale de la Priority of Call de cada contacto del grupo.\n\n**Group Call.** Llama a todos a la vez y el primero que atiende se queda con la visita. Si uno rechaza, `End This Call Only` corta solo a ese y los demás siguen sonando; `End All Calls` corta a todos.\n\n**Dial Plan.** Es una tabla de reemplazos: si se marca el prefijo, el portero llama a la vez a los números de Replace 1 a 5. Sirve para que la visita marque `100` y suenen dos monitores sin que nadie memorice una IP.\n\n**Los tiempos.** Max Call Time limita la conversación, Max Dial Time cuánto suena sin respuesta y Hang Up After Open Door corta poco después de abrir, para dejar libre el portero. Con central, ninguno debería superar el de la central.",
+  "teoria_figs": [
+   {
+    "file": "45-t1.svg",
+    "after": "el orden sale de la Priority of Call de cada contacto",
+    "alt": "Animación con un portero E16, dos monitores (living, Primary, y cocina, Secondary) y el bloque Sequence Call de la web con Call Timeout 20. Tiempo 1: suena el living. Tiempo 2: pasan 20 segundos sin atender, el living queda en Sin respuesta y suena la cocina. Tiempo 3: con When Refused en Call Next, el living rechaza y la cocina suena enseguida. Tiempo 4: con Do Not Call Next, en ámbar, el living rechaza y la cocina no suena. Al pie del panel: no atender hace correr el tiempo; rechazar lo decide When Refused.",
+    "caption": "Mirá qué pasa con el segundo monitor cuando el primero no atiende y cuando rechaza."
+   },
+   {
+    "file": "45-t2.svg",
+    "after": "`End All Calls` corta a todos.",
+    "alt": "Animación con un portero E16, dos monitores (living y cocina) y el bloque Group Call de la web. Tiempo 1: suenan los dos a la vez. Tiempo 2: atiende la cocina y el living deja de sonar. Tiempo 3: con When Refused en End This Call Only, el living rechaza y la cocina sigue sonando. Tiempo 4: con End All Calls, en ámbar, el living rechaza y la cocina también deja de sonar. En el panel: el grupo se arma en Directory > User > Group en los táctiles, el primero que atiende se queda con la visita y cuánto suena sin respuesta se limita en Call Feature > Max Dial Time.",
+    "caption": "Un mismo rechazo deja sonando a los demás o corta a toda la casa, según When Refused."
+   }
+  ]
+ }
+}

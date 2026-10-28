@@ -1,0 +1,52 @@
+{
+ "insertar": [
+  {
+   "id": "43",
+   "despues_de": "37"
+  },
+  {
+   "id": "44",
+   "despues_de": "27"
+  }
+ ],
+ "lecciones": {
+  "43": {
+   "objetivos": [
+    "Al terminar vas a poder elegir desde la web la pantalla de inicio de un monitor Akuvox: Default o Call List, o Classic y Call List Simple en el C313.",
+    "Al terminar vas a poder sacar, cambiar o renombrar un botón del inicio, como el de alarma, cambiando el tipo de su área.",
+    "Al terminar vas a poder cargar protector, fondo e idioma de pantalla con el formato de cada modelo, y mandar el fondo a muchos monitores por AutoP."
+   ],
+   "conecta": "En Dos hilos terminaste de elegir monitores, por UTP o por el par viejo. Con el monitor ya instalado queda lo que el residente ve todos los días: la pantalla.",
+   "sigue": "Con el apartamento resuelto, el próximo módulo pasa a las puertas internas, empezando por los terminales de control de acceso A0x.",
+   "requisitos": [
+    "15",
+    "30",
+    "31"
+   ]
+  },
+  "44": {
+   "objetivos": [
+    "Al terminar vas a poder elegir el theme de un portero táctil según el lugar (Villa, Building, Office o los que traiga su modelo) en la ruta de menú que corresponde.",
+    "Al terminar vas a poder hacer que el theme Building arranque en íconos, directorio o teclado, con las teclas en español y hasta cuatro idiomas en pantalla.",
+    "Al terminar vas a poder usar el protector como cartelera y reconocer los themes que, sin SmartPlus, no tienen nada para mostrar."
+   ],
+   "conecta": "Con E18 y E16 terminaste de recorrer los porteros con pantalla táctil, del S539 al E16. Todos comparten una decisión que no está en la ficha: qué ve la visita al llegar, cuando se posiciona frente al dispositivo.",
+   "sigue": "De la pantalla táctil pasamos a los de un botón. La próxima ve el E13S y el E12, sin theme que elegir, y por qué el E12 no conviene cuando la cerradura necesita SR01.",
+   "requisitos": [
+    "20",
+    "22",
+    "24",
+    "27"
+   ]
+  },
+  "37": {
+   "sigue": "Con todos los monitores elegidos, la próxima deja lista su pantalla: theme, botones, protector e idioma, uno por uno o por AutoP."
+  },
+  "27": {
+   "sigue": "Con el E16 se completan los porteros táctiles. La próxima elige qué ve la visita en esas pantallas: el theme de cada modelo, la página de inicio y el protector."
+  },
+  "28": {
+   "conecta": "Después de las pantallas táctiles vienen los de un botón. Repiten la regla de E18 y E16, cerradura con fuente propia, y suman una limitación que pega con Relés de afuera: el E12 no tiene RS485."
+  }
+ }
+}

@@ -1,0 +1,159 @@
+# Notes: batch f (themes de pantalla, lecciones 43 y 44)
+Pages read: 17. With notes: 17. Skipped: 0. Además se abrieron las planillas oficiales de comandos AutoP del S567 (567.30.13.702), S562 (562.30.14.610), C313V3 (313.30.15.311) y R29 (29.30.10.123), enlazadas desde las páginas "AutoP Commands (Indoor Monitors)" y "AutoP Commands (Door Phones)" de la Knowledge Base; son .xlsx y el scraper no las guarda, así que se citan como dato del fabricante sin url en las tarjetas.
+
+Nota de lectura: las páginas de la Knowledge Base se guardaron "undated", pero traen fecha propia en su versión .md: tema de porteros 17 de junio de 2026; Screen Display del R29 2 de septiembre de 2026; S539 27 de octubre de 2026; X915 28 de octubre de 2026; E18 10 de abril de 2026; C319 4 de enero de 2026; C313 10 de octubre de 2026; S567 9 de enero de 2026; IT88 14 de abril de 2026; S562 3 de septiembre de 2026; especificaciones de protector 17 de septiembre de 2026; fondo por AutoP 18 de mayo de 2026. No se encontró ninguna página de practicante (foro, blog de integrador) que hable de themes de Akuvox: todo sale del fabricante.
+
+## T27 Pantalla del monitor (theme, íconos, protector, idioma)
+- f:N1. En los monitores Android de la serie C (C319) la pantalla de inicio se elige en `Device > Display Setting > Theme`: Default o Call List.
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-7  Quote: "You can select the Default or Call List home screen display."
+  - Kind: technique
+  - Level: core
+- f:N2. El mismo menú y las mismas dos opciones en el S567, el IT88 y el S562 (este último muestra la imagen como "Classic Home Screen").
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-9 ; https://knowledge.akuvox.com/docs/screen-display-configuration-10 ; https://knowledge.akuvox.com/docs/screen-display-configuration-8
+  - Kind: technique
+  - Level: core
+- f:N3. En el C313 (Linux) el menú cambia: `Device > Key/Display > Home Page Mode`, con Classic o Call List Simple; brillo y reposo también en `Device > Key/Display`, logo en `Device > Logo`, color de barra de estado y área de funciones en `Device > Display Setting` (el equipo se reinicia al guardar).
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-6  Quote: "The device will reboot to make the setting effective"
+  - Kind: technique / mistake
+  - Level: core
+- f:N4. Íconos de inicio por área: `Device > Display Setting` (Home Page Display y More Page Display) con Type, Value, Label e ícono propio de hasta 100x100 en JPG, JPEG o PNG; botón Example para ver la grilla. En el C319 se puede poner Unlock en las cuatro áreas.
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-7  Quote: "You can select Unlock in all four areas."
+  - Kind: technique
+  - Level: core
+- f:N5. En S567 e IT88, Unlock toma un comando de Remote Relay HTTP1 a 10 configurado en `Device > Relay`; vacío, usa Long Press RF Key to Unlock on Idle. Concierge lleva un número de marcado rápido en Value.
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-9
+  - Kind: technique
+  - Level: advanced
+  - Also: T18
+- f:N6. La lista de tipos de ícono del X933 incluye Arming y SOS: DND, Message, Contacts, Call, System Info, Settings, Arming, Lift, SOS, Unlock, Browser, Custom APK, Monitor, Relays, RS485, All Calls, Control4 Unlock y Application. Que un monitor "tenga botón de alarma" depende de qué tipo se puso en cada área. En las planillas AutoP del S567 y del C313 también aparece NA (área vacía).
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-11
+  - Kind: definition
+  - Level: core
+- f:N7. En el equipo: `Settings > Advance` (S567: `Advance Settings`) con el código de sistema por defecto 123456, y `Custom Homepage` para elegir las funciones. En el S567 el usuario mantiene un ícono 3 segundos para cambiarlo y puede sacar o agregar íconos.
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-9  Quote: "enter the default system code 123456"
+  - Kind: technique / mistake
+  - Level: core
+- f:N8. Settings Page Display (`Device > Display Setting > Settings Page Display`) oculta entradas de la pantalla de configuración del residente.
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-7
+  - Kind: technique
+  - Level: core
+- f:N9. Protector de pantalla en `Device > Display Setting > Screen Saver Setting`: Local Pictures, Local Videos o Clock (C313: solo Local Pictures y Clock; S562 suma SDMC Pictures y SDMC + Local Pictures), con Schedule; el reposo (Sleep Time, 15 s a 30 min) en `Display Settings` arranca el protector o apaga la pantalla si el protector está apagado.
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-7 ; https://knowledge.akuvox.com/docs/screen-display-configuration-8
+  - Kind: technique
+  - Level: core
+- f:N10. Formatos del protector por modelo: C319, C316, IT88, S567 y S563 JPG, JPEG o PNG hasta 2 MP, 1280x800, y video; C313 JPG 600K, 800x480; S562 y S565 JPG 256K, 1280x800; X937 1920x1080.
+  - Source: https://knowledge.akuvox.com/docs/screensaver-specifications
+  - Kind: number
+  - Level: core
+- f:N11. Fondo (`Device > Display Setting > Wallpaper`), logo de arranque, logo de la web y logo de la página de login (`Device > Display Setting > Boot Logo`, C319: ZIP o PNG hasta 1280x800; web 252x76; login 182x55).
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-7
+  - Kind: number
+  - Level: core
+- f:N12. S567: Theme Style que se aplica a todas las pantallas y Festival Theme Auto-Switch (cambia protector y fondo en seis fechas: 1/1, 14/2, 22/4, 1/5, 31/10, 25/12). La planilla AutoP del S567 nombra siete estilos: Default, Minimalist, Volumetric, Colorful, Dark, Natural y Luxury (dato de la planilla, no de la página).
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-9
+  - Kind: definition
+  - Level: core
+- f:N13. Teclas de las pantallas de llamada, vista previa y monitoreo: `Device > Display Setting > Softkey in Talking Page`, `Softkey in Call-Preview Page`, `Softkey in Monitor Page`; la tecla de apertura en `Device > Relay > SoftKey In Talking Page` y siguientes.
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-7
+  - Kind: technique
+  - Level: core
+  - Also: T18
+- f:N14. Idioma: en el C319, `Settings > Time & Language` en el equipo y `Device > Time/Lang > LCD Language` en la web; español en la lista; Custom Language para editar textos con un .json.
+  - Source: https://knowledge.akuvox.com/docs/language-and-time-setting-15
+  - Kind: technique
+  - Level: foundation
+- f:N15. Fondo por aprovisionamiento desde la nube: `Config.Wallpaper.Url01` y `Url02` (FTP, TFTP, HTTP o HTTPS; PNG, JPG o JPEG) y `Config.Settings.PICTURE.Wallpaper` para elegir 1 o 2; se carga en SmartPlus (proyecto, AutoP, equipo) y pide reinicio. Ejemplo con un S562.
+  - Source: https://knowledge.akuvox.com/docs/configure-screensaver-on-indoor-monitors-using-autop-commands  Quote: "You need to reboot the device to make the configuration effective."
+  - Kind: technique
+  - Level: advanced
+- f:N16. El clima en la pantalla de inicio sale de la dirección cargada en SmartPlus para el proyecto, con el monitor conectado a la nube y reiniciado después de agregarlo.
+  - Source: https://knowledge.akuvox.com/docs/configure-temperature-display-on-indoor-monitors
+  - Kind: technique
+  - Level: core
+  - Also: T15
+- f:N17. Planillas AutoP: la pantalla de inicio es `Config.Settings.DISPLAYSTYLE.IdleStyle`, pero con valores distintos según modelo: S567 4 Default y 5 Call List; S562 y C313V3 0 Call list simple y 1 Classic. El estilo del S567 es `Config.Settings.THEME.ThemeStyle`. Una misma línea copiada a otro modelo puede dejar otra pantalla. (Fuente: planillas .xlsx de la Knowledge Base, sin página en raw.)
+  - Kind: mistake
+  - Level: advanced
+
+## T28 Pantalla del portero táctil (theme, modo de inicio, protector, idioma)
+- f:N18. Tabla oficial de themes por modelo: S539 y S538 Villa, Building (por defecto), Office, Multi-factor Authentication y Alphanumeric; S535 Villa, Building, Speed Dial y QR Code; S532 Default, Customized Text, Directory y Gate Mode; X916 Intercom (por defecto), VMS y Directory; X915 y R29 Villa, Building, Office y Alphanumeric; X912 Default(Buttons), Directory, Speed Dial, Customized Text y Gate Mode; E18 Default, QR Code y Speed Dial; E16 Default, QR code, Speed Dial y Custom UI.
+  - Source: https://knowledge.akuvox.com/docs/configure-theme-on-akuvox-door-phone
+  - Kind: definition
+  - Level: core
+- f:N19. Ruta: S539, S538, S535, S532, X915, X912 y R29 `Setting > Key/Display > Theme`; X916 `Intercom > Key/Display > Theme`; E18 y E16 `Device > LCD > Theme`.
+  - Source: https://knowledge.akuvox.com/docs/configure-theme-on-akuvox-door-phone
+  - Kind: technique
+  - Level: core
+- f:N20. Gate Mode necesita SmartPlus: el portero va en el Public Area de un proyecto de comunidad y muestra solos los edificios y apartamentos. VMS (X916) ofrece I Have an Appointment y No Appointment, y el segundo necesita SmartPlus.
+  - Source: https://knowledge.akuvox.com/docs/configure-theme-on-akuvox-door-phone  Quote: "the door phone must be added to the Public Area"
+  - Kind: mistake
+  - Level: core
+- f:N21. La guía del R29 (septiembre de 2026) ya lista cinco themes: Villa, Building, Office, Alphanumeric y Parking Lot; Parking Lot solo con el equipo en el área pública de una comunidad de SmartPlus. La guía del S539 (octubre de 2026) también muestra Parking Lot. La nota de themes de junio no lo nombra.
+  - Source: https://knowledge.akuvox.com/docs/screen-display ; https://knowledge.akuvox.com/docs/screen-display-configuration-3
+  - Kind: definition (divergencia entre páginas)
+  - Level: core
+- f:N22. R29: en Villa y Office, `Setting > Key/Display > Key In Homepage Of The Office Theme And Villa Theme`, Display Type Homepage (tres íconos redondos: Contact, PIN y Call), Dial, Contacts o Password; en Building, `Key In Homepage Of The Building Theme`, Home Page con Delivery, Temp Key, PIN, Dial, Contact, Speed Dial y el recuadro de rostro, o una sola pantalla (Delivery, Temp Key, PIN, Dial, Contacts, Slide to Dial).
+  - Source: https://knowledge.akuvox.com/docs/screen-display
+  - Kind: technique
+  - Level: core
+- f:N23. X915 y S539: Villa en `View Control of The Villa Theme`, con Default Page Home Page, Call, Tenants (S539: Directory) o PIN; cambiar de Building a Villa conserva lo elegido. Building con Default Page Home Page (PIN, Call, Directory, Reception y recuadro de rostro), PIN, Tenants, Call o Temp Key.
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-1
+  - Kind: technique
+  - Level: core
+- f:N24. Pantalla de marcado rápido en Villa: `Display Mode of Call Interface (Speed Dial)` con Standard, Auto, 1 Key, 1 Key + Keypad, 2 Keys + Keypad, 4 Keys + Keypad, 8 Keys, 16 Keys y 64 Keys.
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-1 ; https://knowledge.akuvox.com/docs/screen-display-configuration-3
+  - Kind: template
+  - Level: core
+- f:N25. S539: el theme Office funciona con el equipo conectado a Smart Access Cloud.
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-3  Quote: "The Office theme is effective when the device is connected to the Smart Access Cloud."
+  - Kind: mistake
+  - Level: core
+- f:N26. Idiomas en pantalla del theme Building: `Language Setting of The Building Theme` con Visible y Language 1 a 4 (cuatro idiomas a elegir en la pantalla de inicio). Recuadro de rostro con `Facial Recognition Setting` (X915).
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-1
+  - Kind: technique
+  - Level: core
+- f:N27. Idioma general del R29: `Setting > Time/Lang > LCD Language` y `Web Language`; en el equipo `Setting > Language`; textos propios con un .json de menos de 1 MB en `Words of Language Upload`.
+  - Source: https://knowledge.akuvox.com/docs/language-and-time-setting-2
+  - Kind: technique
+  - Level: foundation
+- f:N28. Español figura entre los idiomas de pantalla de S539, S538, S535 y S532 (y de los demás modelos de la tabla), con la versión de firmware de referencia de cada uno (S539 539.30.10.515).
+  - Source: https://knowledge.akuvox.com/docs/languages-supported-by-different-models
+  - Kind: number
+  - Level: foundation
+- f:N29. Teclado del PIN normal o desordenado (Keypad Display Mode Of PIN Interface) para que nadie copie la clave mirando.
+  - Source: https://knowledge.akuvox.com/docs/screen-display
+  - Kind: technique
+  - Level: core
+  - Also: T11
+- f:N30. Protector del R29: `Device > LCD > Standby Interface Display` (Screensaver Time de 5 s a 2 h, Sleep, Wake Mode IR Detection, Manual, Video Detection o Face & Video Detection, Schedule) y hasta 5 imágenes en `Device > Import/Export > Upload Screensaver Picture`, con Play Time de 0 a 120 s. Logo de arranque en `Boot Animation (.png /.zip)`.
+  - Source: https://knowledge.akuvox.com/docs/screen-display
+  - Kind: technique
+  - Level: core
+- f:N31. X915: Screensaver Mode None, Blank o Image; video sin sonido (.mp4, .avi, .3gp hasta 100 MB) en `Device > LCD > Upload Screensaver`; fondo en `Setting > Key/Display > Upload Background` (1 MB, JPG o PNG, 800x1280), que se oculta si se usa Appearance.
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-1
+  - Kind: number
+  - Level: core
+- f:N32. Appearance en el theme Building del R29: Mode Theme o Customization (íconos propios), Resident Theme y Auto Activation por fecha festiva.
+  - Source: https://knowledge.akuvox.com/docs/screen-display
+  - Kind: technique
+  - Level: core
+- f:N33. E18: tres modos en `Device > LCD > Theme`. Default con Function of Call Button (Both, Call Default; Both, Tenants Default; Only Call; Only Tenants) y títulos de página; QR Code con intervalo de 1 a 8 s; Speed Dial con la lista de residentes. Protector en `Device > LCD > Standby Interface Display`, imágenes de 600x1024.
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-4
+  - Kind: technique
+  - Level: core
+- f:N34. Formatos de protector de porteros: S539 1080x1920 y video; S538 y X915 V2.0 800x1280 y video; S535 y R29 800x1280; S532 320x240; X916 2560x1600; X912 480x480; E18 600x1024; E16 720x1280.
+  - Source: https://knowledge.akuvox.com/docs/screensaver-specifications
+  - Kind: number
+  - Level: core
+- f:N35. Planilla AutoP del R29 (29.30.10.123): `Config.DoorSetting.GENERAL.Theme` 0 Villa, 1 Building, 2 Office, 3 Alphanumeric; `Config.DoorSetting.GENERAL.DisplayType` 0 Homepage, 1 Dial, 2 Contact, 3 Password. (Planilla .xlsx de la Knowledge Base, sin página en raw.)
+  - Kind: template
+  - Level: advanced
+
+## Disagreements seen
+- Cuántos themes tiene el R29: cuatro en la nota de themes (https://knowledge.akuvox.com/docs/configure-theme-on-akuvox-door-phone), cinco con Parking Lot en su guía (https://knowledge.akuvox.com/docs/screen-display). No es una contradicción de criterio sino de fecha: manda la lista que muestra la web del equipo con su firmware.
+- Nombres de la pantalla de inicio del monitor: Default y Call List en C319, S567 e IT88; Classic y Call List Simple en C313; el S562 dice Default en el texto y Classic en la imagen (https://knowledge.akuvox.com/docs/screen-display-configuration-8).
+
+## Best stories
+- El portero de comunidad que en Gate Mode muestra solo los edificios y apartamentos cargados en SmartPlus, y que sin nube no tiene qué mostrar: https://knowledge.akuvox.com/docs/configure-theme-on-akuvox-door-phone
+- La misma línea AutoP de pantalla de inicio que vale 4 o 5 en el S567 y 0 o 1 en el S562 (planillas AutoP).
+- El fondo cambiado desde la nube en un S562 que recién toma efecto después del reinicio: https://knowledge.akuvox.com/docs/configure-screensaver-on-indoor-monitors-using-autop-commands

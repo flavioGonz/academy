@@ -309,3 +309,55 @@ Por qué esta parte: completa el catálogo con lo que no es portero ni monitor y
 
 ## Entrega
 41 carpetas class/NN-handle con script.txt (texto opcional "La charla", el audio quedó descartado), card.md y quiz.json, más class/course.json. Las lecciones 1 a 12 no se tocaron.
+
+## Parte 9. Pantallas: monitor y portero (lecciones 43 y 44)
+Por qué esta parte: el cliente juzga el sistema por lo que ve en la pantalla. Con los equipos ya elegidos y andando, falta dejar cada pantalla con los botones, el idioma y la imagen que corresponden a quien la usa. En la ruta lineal, la 43 va después de Dos hilos (cierre de Adentro: monitores y 2 hilos) y la 44 después de E18 y E16 (último de los porteros táctiles en La calle: series R y E). Notas: research/notes/f.md (f:N1 a f:N35).
+
+### 43. Theme del monitor
+- 10 de 10 páginas sobre pantallas de monitor (todas de la Knowledge Base de Akuvox) coinciden en el mecanismo; cambian los nombres por modelo; sin practicantes.
+- Idea: pantalla de inicio en `Device > Display Setting > Theme` (Default o Call List: C319, S567, IT88, X933, S562) o en `Device > Key/Display > Home Page Mode` (Classic o Call List Simple: C313); los botones son el tipo de cada área (Arming, SOS, Unlock, Contacts...), con etiqueta e ícono de hasta 100x100; protector, fondo, logo de arranque, idioma y, en el S567, Theme Style y Festival Theme Auto-Switch.
+- Por qué importa: el pedido "sacame el botón de alarma" se resuelve en dos minutos y se repite igual en todos los apartamentos.
+- Historia: el fondo cambiado desde la nube por AutoP en un S562, que toma efecto al reiniciar (https://knowledge.akuvox.com/docs/configure-screensaver-on-indoor-monitors-using-autop-commands); la línea `Config.Settings.DISPLAYSTYLE.IdleStyle` que vale 4 o 5 en el S567 y 0 o 1 en el S562 (planillas AutoP oficiales, sin página en raw).
+- Laboratorio: Foco, 20 min. Default y Call List, Arming cambiado por Unlock "Portón" con un Remote Relay HTTP de Botón del monitor, Settings Page Display, protector de 1280x800 con horario, pantalla en español, fondo por AutoP si hay SmartPlus.
+- Regla: el botón que sobra no se esconde con el theme: se cambia el tipo del área, y lo que se cambia en un monitor queda anotado para todos.
+- Fuentes: https://knowledge.akuvox.com/docs/screen-display-configuration-7, https://knowledge.akuvox.com/docs/screen-display-configuration-6, https://knowledge.akuvox.com/docs/screen-display-configuration-9, https://knowledge.akuvox.com/docs/screen-display-configuration-10, https://knowledge.akuvox.com/docs/screen-display-configuration-8, https://knowledge.akuvox.com/docs/screen-display-configuration-11, https://knowledge.akuvox.com/docs/screensaver-specifications, https://knowledge.akuvox.com/docs/configure-screensaver-on-indoor-monitors-using-autop-commands, https://knowledge.akuvox.com/docs/configure-temperature-display-on-indoor-monitors, https://knowledge.akuvox.com/docs/language-and-time-setting-15
+
+### 44. Theme del portero
+- 8 de 8 páginas (Knowledge Base de Akuvox) coinciden en elegir el theme en la web del equipo; difieren en la lista por fecha (R29 con 4 themes en la nota de junio y 5 con Parking Lot en su guía de septiembre de 2026); sin practicantes.
+- Idea: tabla oficial de themes por modelo (Villa, Building, Office, Multi-factor Authentication, Alphanumeric, Speed Dial, QR Code, Directory, Customized Text, Gate Mode, Intercom, VMS, Default, Custom UI); ruta `Setting > Key/Display > Theme`, `Intercom > Key/Display > Theme` (X916) o `Device > LCD > Theme` (E18, E16); dentro del theme, página de inicio (íconos, directorio o teclado), nombres de tecla e idiomas en Building; protector y publicidad, fondo, logo.
+- Por qué importa: la visita llama en dos o tres toques y el portero no queda en un theme que necesita la nube en una obra local.
+- Historia: Gate Mode, que muestra edificios y apartamentos del proyecto de comunidad en SmartPlus y sin nube no tiene qué mostrar (https://knowledge.akuvox.com/docs/configure-theme-on-akuvox-door-phone).
+- Laboratorio: Foco, 20 min. Villa y Building en un R29 o X915, página de inicio en directorio y en teclado, teclas en español, dos idiomas, protector de 800x1280 con Play Time, prueba de calle con alguien que no conoce el edificio.
+- Regla: el theme se elige por quién llega a la puerta, y se prueba con alguien que no conoce el edificio.
+- Fuentes: https://knowledge.akuvox.com/docs/configure-theme-on-akuvox-door-phone, https://knowledge.akuvox.com/docs/screen-display, https://knowledge.akuvox.com/docs/screen-display-configuration-1, https://knowledge.akuvox.com/docs/screen-display-configuration-3, https://knowledge.akuvox.com/docs/screen-display-configuration-4, https://knowledge.akuvox.com/docs/screensaver-specifications, https://knowledge.akuvox.com/docs/languages-supported-by-different-models, https://knowledge.akuvox.com/docs/language-and-time-setting-2
+
+### División (pantallas)
+- Lista de themes del R29: la nota de themes (https://knowledge.akuvox.com/docs/configure-theme-on-akuvox-door-phone) da Villa, Building, Office y Alphanumeric; la guía del R29 (https://knowledge.akuvox.com/docs/screen-display) suma Parking Lot. Cómo decidir: vale la lista que muestra la web del equipo con su firmware; los themes de nube solo si el portero está en un proyecto de SmartPlus.
+
+### Huecos (pantallas)
+- Ninguna página de practicante sobre themes de Akuvox: las dos lecciones descansan solo en el fabricante.
+- No hay versión de firmware mínima publicada para cada theme (Parking Lot, Two Column Speed Dial del S535, Custom UI del E16) en las páginas leídas.
+- Los comandos AutoP de theme (`IdleStyle`, `ThemeStyle`, `GENERAL.Theme`) salen de planillas .xlsx que el scraper no guarda; las tarjetas los dan como dato del fabricante sin url.
+- No se encontró cómo elegir el theme del portero desde SmartPlus (solo Gate Mode y Parking Lot dependen de la nube); el theme del monitor tampoco tiene opción documentada en el portal, salvo AutoP.
+- El S567 nombra un "Theme Style" que se aplica a todas las pantallas; los siete estilos (Default, Minimalist, Volumetric, Colorful, Dark, Natural, Luxury) salen de la planilla AutoP, no de la página.
+
+## Parte 10. Configuración de porteros: botones y llamadas (lección 45)
+Por qué esta parte: Nico pidió, dentro de porteros, la configuración de botones y todas las formas de llamada posibles. Con el theme elegido (lección 44), falta que cada botón llame a quien corresponde y que el portero haga lo esperado cuando nadie atiende o alguien rechaza. En la ruta lineal, la 45 va en el módulo nuevo "Configuración de porteros", después de Theme del portero (estructura-extra-modulos-config.json). Notas: research/notes/g.md (g:N1 a g:N25).
+
+### 45. Configuración de botones
+- 12 de 12 páginas de la Knowledge Base de Akuvox coinciden en el mecanismo (TH69, TH70, TH71); cambian el menú por familia y la redacción de End This Call Only. Practicante: hilo de FreePBX con dos terminales que suenan juntos a través de la central.
+- Idea: el destino es una IP (`Intercom > Basic > Direct IP`; E12 en `Intercom > Call Feature > Direct IP`) o un número SIP por la cuenta; la tecla de Recepción (`Intercom > Basic > Key Setting` en E16 y E18), el Speed Dial (R29, X915, R20K) o el Manager Dial (E12, serie R20, E13) cargan el destino; Sequence Call (Call Timeout, When Refused Do Not Call Next o Call Next) contra Group Call (When Refused End This Call Only o End All Calls); en táctiles, grupo del directorio con Priority of Call; Dial Plan con prefijo y hasta 5 reemplazos; Call Feature con Auto Answer, Max Call Time, Max Dial Time y Hang Up After Open Door.
+- Por qué importa: el reclamo "toqué y no sonó en la cocina" o "mi hijo rechazó y se cortó para todos" es un ajuste de When Refused, no una falla del equipo.
+- Historia: el R29 con Time Out de 10 segundos que corta y pasa al siguiente (https://knowledge.akuvox.com/docs/call-setting-9); el R20B con números por pulsador y módulo de expansión (https://knowledge.akuvox.com/docs/calling-feature); la tecla de Recepción de un E16C V2.0 en obra con dos IP separadas por coma (captura de Nico, sin url), contra el ";" que documenta la guía del E18 (https://knowledge.akuvox.com/docs/call-settings-15).
+- Laboratorio: Foco, 25 min. E16 y dos monitores por IP directa: Recepción con dos destinos, grupo en Groups Only, rechazo con End This Call Only y End All Calls, prioridad con Sequence Call de 20 s y Call Next o Do Not Call Next, Dial Plan con prefijo 100, tiempos de Call Feature, y el menú equivalente en E12, R20, R29 y X915.
+- Regla: cada botón se prueba con un monitor que no atiende y otro que rechaza antes de irme de la obra.
+- Fuentes: https://knowledge.akuvox.com/docs/call-settings-10, https://knowledge.akuvox.com/docs/configure-sequence-call, https://knowledge.akuvox.com/docs/configure-group-call, https://knowledge.akuvox.com/docs/contact-list-configuration-4, https://knowledge.akuvox.com/docs/contacts-configuration-13, https://knowledge.akuvox.com/docs/call-settings-7, https://knowledge.akuvox.com/docs/calling-feature, https://knowledge.akuvox.com/docs/call-settings-4, https://knowledge.akuvox.com/docs/call-setting-9, https://knowledge.akuvox.com/docs/call-settings-1, https://knowledge.akuvox.com/docs/call-settings-15, https://knowledge.akuvox.com/docs/intercom-call-configuration-10
+
+### División (botones)
+- Separador de varios números en la tecla de Recepción: la guía del E18 dice ";" (https://knowledge.akuvox.com/docs/call-settings-15); la captura de un E16C V2.0 en obra usa ","; la guía del E16 no lo dice (https://knowledge.akuvox.com/docs/call-settings-10). Cómo decidir: el separador que el firmware de ese equipo acepta al guardar y que hace sonar a los dos destinos en la prueba.
+
+### Huecos (botones)
+- Ninguna página dice si los números de la tecla de Recepción suenan juntos o en orden, ni si el When Refused de Group Call se aplica a esa tecla: el laboratorio lo hace anotar.
+- No hay página que diga qué hace un táctil con un grupo sin prioridades cuando Sequence Call está configurado; lo leído es que el grupo con prioridades se llama en orden y el grupo de Group Call suena junto.
+- El hilo de 3CX sobre un monitor Akuvox en un grupo de timbrado (la vista previa hace que la central dé la llamada por atendida) no entró en raw por ser una página delgada para el scraper; no se cita.
+- Rangos válidos de Call Timeout, Max Call Time y Max Dial Time no figuran en las páginas leídas; la tarjeta no da valores salvo el 20 de la captura.

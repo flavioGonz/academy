@@ -1,0 +1,21 @@
+A: Lección cuarenta y cuatro. Ahora la pantalla del otro lado: la del portero táctil.
+B: La que ve la visita, que nunca leyó el manual.
+A: Justamente. Akuvox lo llama theme y publicó una tabla por modelo. El S539 trae Villa, Building, Office, Multi-factor Authentication y Alphanumeric. El X915 y el R29, Villa, Building, Office y Alphanumeric. El E18, Default, QR Code y Speed Dial.
+B: ¿Y dónde se cambia?
+A: En la mayoría, Setting, Key barra Display, Theme. En el X916, Intercom, Key barra Display, Theme. Y en el E18 y el E16, Device, LCD, Theme.
+B: ¿Cuál va en cada obra?
+A: Villa para una casa: tres íconos, contacto, PIN y llamar. Building, que viene de fábrica, para un edificio: el visitante marca el apartamento o lo busca en el directorio. Office busca empleados o sectores.
+B: ¿Y lo de directorio contra teclado?
+A: Eso es adentro del theme. En Building elegís la página de inicio: la de íconos, o directo al directorio, o directo al teclado. Y le ponés nombre en español a cada tecla.
+B: ¿Coinciden las fuentes?
+A: Ocho páginas, todas de Akuvox, y coinciden en el camino. Donde no coinciden es en la lista: la nota de junio le da cuatro themes al R29, y su guía de septiembre suma un quinto, Parking Lot.
+B: ¿Y cuál vale?
+A: Lo que muestra la web de tu equipo con su firmware. Y ojo: Gate Mode y Parking Lot solo andan con el portero en el área pública de una comunidad en SmartPlus.
+B: ¿Idiomas?
+A: En Building podés poner hasta cuatro idiomas en la pantalla de inicio. Español y portugués en un edificio de Punta del Este, por ejemplo.
+B: [risas] Muy de temporada. ¿Y la publicidad?
+A: Va en el protector. En el R29 subís hasta cinco imágenes de ochocientos por mil doscientos ochenta, cada una con su tiempo en pantalla.
+B: ¿Laboratorio?
+A: Veinte minutos con un R29 o un X915. Pasás de Villa a Building, ponés el directorio como inicio, después el teclado, renombrás las teclas y cargás un protector con el nombre del edificio.
+B: Y al final lo prueba alguien que no conoce el edificio.
+A: Si le cuesta llamar, el theme está mal elegido.

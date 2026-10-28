@@ -1,0 +1,40 @@
+{
+ "prioridad": 1,
+ "lecciones": {
+  "45": {
+   "objetivos": [
+    "Al terminar vas a poder hacer que un botón o la tecla de Recepción llame a una IP directa o a una extensión SIP, en el menú de cada familia: Key Setting, Speed Dial o Manager Dial.",
+    "Al terminar vas a poder elegir entre Sequence Call y Group Call y ajustar Call Timeout y When Refused para que un rechazo o una llamada sin respuesta hagan lo que el cliente espera.",
+    "Al terminar vas a poder usar el Dial Plan y los tiempos de Call Feature (Auto Answer, Max Call Time, Max Dial Time y Hang Up After Open Door) sin pisar los de la central."
+   ],
+   "conecta": "En Theme del portero quedó elegido qué ve la visita. Ahora, qué pasa cuando aprieta: a quién llama el botón, en qué orden y qué hace el portero si nadie atiende o alguien rechaza. Las llamadas por IP de Llamada directa y por central de Cuenta SIP son el punto de partida.",
+   "sigue": "Con la calle configurada, el próximo módulo pasa a la otra punta de la llamada: la pantalla del monitor del residente, con su theme, sus botones y su protector.",
+   "requisitos": [
+    "3",
+    "5",
+    "27",
+    "44"
+   ]
+  },
+  "44": {
+   "conecta": "En los dos módulos de La calle elegiste cada portero, del S539 al E16, y en los siguientes completaste el edificio por dentro. Con todo instalado, los táctiles comparten una decisión que no está en la ficha: qué ve la visita al llegar, cuando se posiciona frente al dispositivo.",
+   "sigue": "Con la pantalla elegida, falta que cada botón llame a quien corresponde. La próxima recorre la tecla de Recepción, Sequence Call, Group Call y el Dial Plan, en los táctiles y en los de un botón."
+  },
+  "43": {
+   "conecta": "Del lado de la calle quedó todo: theme y botones del portero. Ahora la otra punta de la llamada, el monitor que elegiste en Adentro: monitores y 2 hilos, y lo que el residente ve todos los días: la pantalla.",
+   "sigue": "Con porteros y monitores configurados, el último módulo cierra la obra, empezando por el escritorio de guardia y lo que no es portero ni monitor."
+  },
+  "27": {
+   "sigue": "La serie E también tiene los más chicos. La próxima ve el E13S y el E12 de un botón, y por qué el E12 no conviene cuando la cerradura necesita SR01. Qué muestra la pantalla de estos táctiles se configura más adelante, en Configuración de porteros."
+  },
+  "37": {
+   "sigue": "Calle y apartamento resueltos. El próximo módulo pasa a las puertas internas, empezando por los terminales de control de acceso A0x. La pantalla de cada monitor se configura más adelante, en Configuración de pantallas."
+  },
+  "36": {
+   "sigue": "Con calle, apartamento, puertas internas y ascensor resueltos, empieza la configuración fina. El próximo módulo vuelve a los porteros: qué ve la visita en la pantalla y a quién llama cada botón."
+  },
+  "38": {
+   "conecta": "Con cada equipo elegido y configurado, el último módulo cierra la obra. El E21 de los porteros de emergencia llamaba al interno de guardia; acá ese escritorio se resuelve con un equipo de la misma marca."
+  }
+ }
+}

@@ -495,6 +495,35 @@ Fuentes nuevas: research/notes/c.md y d.md. M por subtema nuevo (páginas distin
 - Level: advanced
 - Best story: DoorNum=0 en el C315S, https://www.comfortclick.com/Support/ExampleDetails/Akuvox
 
+## TH69 Un botón con varios destinos: en orden (Sequence Call) o todos juntos (Group Call), y el rechazo decide si sigue
+- Sub-topic: T28
+- Agree: 9 of 9 páginas de llamadas y grupos de la Knowledge Base. Notes: g:N5, g:N6, g:N7, g:N8, g:N11, g:N12, g:N16. Urls: https://knowledge.akuvox.com/docs/call-settings-10, https://knowledge.akuvox.com/docs/configure-sequence-call, https://knowledge.akuvox.com/docs/configure-group-call, https://knowledge.akuvox.com/docs/call-settings-7, https://knowledge.akuvox.com/docs/calling-feature, https://knowledge.akuvox.com/docs/call-settings-4, https://knowledge.akuvox.com/docs/call-setting-9, https://knowledge.akuvox.com/docs/call-settings-1, https://knowledge.akuvox.com/docs/call-settings-15
+- Disagree: la redacción de End This Call Only ("other numbers" contra "the next number", g:N13); el X915 pone el rechazo del grupo en "Only Group Call Allowed" (g:N12).
+- Level: core
+- Best story: R29 con Time Out de 10 segundos que corta y pasa al siguiente, https://knowledge.akuvox.com/docs/call-setting-9
+
+## TH70 El menú depende de la familia: táctiles con grupos del directorio y prioridad; botón y teclado con Manager Dial
+- Sub-topic: T28
+- Agree: 5 of 5. Notes: g:N7, g:N8, g:N14, g:N15, g:N16, g:N22. Urls: https://knowledge.akuvox.com/docs/configure-sequence-call, https://knowledge.akuvox.com/docs/configure-group-call, https://knowledge.akuvox.com/docs/contact-list-configuration-4, https://knowledge.akuvox.com/docs/contacts-configuration-13, https://knowledge.akuvox.com/docs/calling-feature
+- Disagree: none found
+- Level: core
+- Best story: el R20B con números distintos por pulsador y módulo de expansión, https://knowledge.akuvox.com/docs/calling-feature
+
+## TH71 Dial Plan y Call Feature: un número corto para varios destinos y límites que no superen a la central
+- Sub-topic: T28 (also T05)
+- Agree: 6 of 6. Notes: g:N18, g:N19, g:N20, g:N21. Urls: https://knowledge.akuvox.com/docs/call-settings-10, https://knowledge.akuvox.com/docs/call-setting-9, https://knowledge.akuvox.com/docs/call-settings-4, https://knowledge.akuvox.com/docs/call-settings-1, https://knowledge.akuvox.com/docs/call-settings-15, https://knowledge.akuvox.com/docs/call-settings-7
+- Disagree: none found
+- Level: core
+- Best story: hasta 5 números reemplazados por un prefijo y llamados a la vez, https://knowledge.akuvox.com/docs/call-settings-10
+
+## Split (botones)
+- Separador de varios números en la tecla de Recepción: la guía del E18 dice ";" (https://knowledge.akuvox.com/docs/call-settings-15); la captura de un E16C V2.0 en obra usa ","; la guía del E16 no lo dice (https://knowledge.akuvox.com/docs/call-settings-10).
+
+## Coverage gaps (botones)
+- Ninguna página dice si los varios números de la tecla de Recepción suenan juntos o en orden.
+- Ninguna página aclara qué hace un táctil con un grupo sin prioridades cuando también hay Sequence Call configurado; se lee que el grupo con prioridades va en orden y el grupo sin prioridades suena junto.
+- El hilo de 3CX sobre un monitor Akuvox en un grupo de timbrado no entró en raw (página delgada para el scraper).
+
 ## The big splits (ampliación)
 - Alta seguridad encendida o apagada: Akuvox recomienda el formato nuevo con la alta seguridad activa (https://knowledge.akuvox.com/docs/trigger-door-actions-via-http-api-e18); un integrador la apaga para usar la URL vieja con admin (https://forum.logicmachine.net/showthread.php?tid=6156). Gira en torno a compatibilidad del cliente contra exposición de la credencial.
 - Credenciales en la URL: el fabricante las publica así (https://knowledge.akuvox.com/docs/trigger-door-actions-via-http-api-e18); pylocal-akuvox advierte que quedan en logs (https://pylocal-akuvox.readthedocs.io/en/latest/quickstart.html). Gira en torno a dónde se registra la URL.

@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Edificio en Pocitos: el E16 llama al apartamento 302 en secuencia, living primero y cocina después, con Call Timeout de 20 s. La dueña rechaza desde el living y la cocina nunca suena. ¿Qué cambiás?",
+  "options": [
+   "Subís el Call Timeout a 60 segundos",
+   "When Refused de Sequence Call en Call Next",
+   "Activás Auto Answer en Intercom > Call Feature",
+   "Pasás Direct IP al puerto 5062"
+  ],
+  "answer": 1,
+  "why": "El timeout solo cuenta cuando nadie atiende. Con un rechazo manda When Refused: Do Not Call Next corta la secuencia y Call Next pasa al siguiente."
+ },
+ {
+  "q": "Casa en Carrasco con Group Call a tres monitores. Cuando el hijo rechaza desde su cuarto, la llamada se corta en toda la casa. ¿Qué ajuste lo explica?",
+  "options": [
+   "Group Call con When Refused en End All Calls; con End This Call Only los otros siguen sonando",
+   "Max Call Time demasiado corto en Call Feature",
+   "Sequence Call en Do Not Call Next",
+   "Falta registrar la cuenta SIP 2"
+  ],
+  "answer": 0,
+  "why": "En Group Call, End All Calls corta a todos cuando uno rechaza; End This Call Only corta solo a quien rechazó y deja sonando a los demás."
+ },
+ {
+  "q": "Un E12 de un solo pulsador en un local tiene que llamar a tres monitores, uno por vez. ¿Dónde lo configurás?",
+  "options": [
+   "Intercom > Basic > Key Setting, en la tecla de Recepción",
+   "Device > LCD, con el Speed Dial",
+   "Intercom > Basic > Manager Dial, Call Type Sequence Call, un número por casilla",
+   "Directory > User > Group, con Priority of Call"
+  ],
+  "answer": 2,
+  "why": "Según la nota de Sequence Call de Akuvox, los de botón y teclado (E12, E13, serie R20) usan Manager Dial; la tecla de Recepción, el Speed Dial de Device > LCD y los grupos con prioridad son de los táctiles como el E16."
+ }
+]

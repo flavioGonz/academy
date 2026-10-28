@@ -31,3 +31,9 @@ Cómo se enseña: la Knowledge Base de Akuvox trata la apertura por HTTP, la HTT
 - T22 Catálogo de monitores interiores: series S, C, IT y X, Linux o Android, interfaces y relé.
 - T23 Control de acceso, ascensores y 2 hilos: serie A, WR01, controladoras A094 y A095, EC33, sistema de 2 hilos.
 - T24 Teléfonos, accesorios, software y parque instalado: R49G, teléfonos IP, accesorios y módulos, software de PC y apps, modelos que salieron del catálogo.
+
+## Ampliación (octubre de 2026): configuración de porteros, botones y llamadas
+
+Cómo se enseña: cada guía de administrador de la Knowledge Base de Akuvox tiene una página "Call Settings" (Sequence Call, Group Call, Dial Plan, Auto Answer, Max Call Time, Max Dial Time, Hang Up After Open Door, Speed Dial) y otra de contactos; dos notas transversales (Configure Sequence Call y Configure Group Call) separan los táctiles de los de botón y teclado.
+
+- T28 Botones y tipos de llamada: destino por IP directa o por cuenta SIP, tecla de Recepción y Speed Dial, Manager Dial de los de un botón, Sequence Call contra Group Call y qué pasa al rechazar o no atender, Dial Plan, grupos del directorio, límites de tiempo y corte al abrir.

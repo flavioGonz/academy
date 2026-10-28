@@ -1,0 +1,109 @@
+{
+ "terms": [
+  {
+   "id": "direct-ip",
+   "term": "Direct IP",
+   "aliases": [
+    "IP directa",
+    "llamada IP directa"
+   ],
+   "cat": "Akuvox",
+   "short": "Llamada de un equipo Akuvox a otro marcando su IP, sin central ni servidor, con los dos en la misma red.",
+   "long": "Se activa en Intercom > Basic > Direct IP (en el E12, Intercom > Call Feature > Direct IP), con el puerto 5060 de fábrica y el mismo valor en las dos puntas. Es el destino más simple que puede tener un botón de portero.",
+   "case": true
+  },
+  {
+   "id": "sequence-call",
+   "term": "Sequence Call",
+   "aliases": [
+    "llamada en secuencia",
+    "llamada secuencial"
+   ],
+   "cat": "Akuvox",
+   "short": "Llamada que prueba una lista de destinos de a uno, en orden, hasta que alguien atiende.",
+   "long": "Si nadie atiende en el Call Timeout, pasa al siguiente; si alguien rechaza, decide When Refused (Call Next sigue, Do Not Call Next corta). En los táctiles el orden sale de la Priority of Call del grupo del directorio; en E12 y la serie R20, de Manager Dial.",
+   "case": true
+  },
+  {
+   "id": "group-call",
+   "term": "Group Call",
+   "aliases": [
+    "llamada de grupo",
+    "llamada en grupo"
+   ],
+   "cat": "Akuvox",
+   "short": "Llamada que hace sonar a la vez todos los destinos de un grupo; el primero que atiende se queda con la llamada.",
+   "long": "Si uno rechaza, When Refused decide: End This Call Only corta solo a ese y End All Calls corta a todos. Con SmartPlus, la casilla Group Call Number(Local) queda vacía para no hacer fallar el grupo de la nube.",
+   "case": true
+  },
+  {
+   "id": "when-refused",
+   "term": "When Refused",
+   "aliases": [
+    "Call Next",
+    "Do Not Call Next",
+    "End This Call Only",
+    "End All Calls"
+   ],
+   "cat": "Akuvox",
+   "short": "Ajuste de Akuvox que dice qué hace el portero cuando un destino rechaza la llamada mientras suena.",
+   "long": "En Sequence Call: Call Next o Do Not Call Next. En Group Call: End This Call Only o End All Calls. No aplica a la llamada que nadie atiende: esa la manejan el Call Timeout y Max Dial Time.",
+   "case": true
+  },
+  {
+   "id": "dial-plan",
+   "term": "Dial Plan",
+   "aliases": [
+    "plan de marcado",
+    "Replace Rule",
+    "Quick Dial by Number Replacement"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Tabla de reglas que cambia un número marcado por otro u otros antes de llamar.",
+   "long": "En Akuvox está en Intercom > Dial Plan: un Prefix corto y hasta cinco Replace (IP o SIP) que suenan a la vez al marcar el prefijo, con la cuenta de salida elegida. El E16 y el E18 admiten 1.000 reglas y el R29, 1.500.",
+   "case": true
+  },
+  {
+   "id": "speed-dial",
+   "term": "Speed Dial",
+   "aliases": [
+    "marcado rápido"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Tecla o botón que llama a un número guardado sin marcarlo.",
+   "long": "En los porteros Akuvox cambia de lugar por modelo: Device > LCD en E16 y E18, Setting > Key/Display en R29 y X915 (también como tecla de Recepción), Intercom > Basic > Speed Dial en el R20K, un número por casilla.",
+   "case": true
+  },
+  {
+   "id": "manager-dial",
+   "term": "Manager Dial",
+   "aliases": [],
+   "cat": "Akuvox",
+   "short": "Menú de los porteros Akuvox de botón y teclado donde se cargan los destinos del pulsador.",
+   "long": "Está en Intercom > Basic > Manager Dial en E12, E13, la serie R20 y otros: Call Type Sequence Call o Group Call, un número IP o SIP por casilla y, en secuencia, el tiempo antes de pasar al siguiente.",
+   "case": true
+  },
+  {
+   "id": "grupo-de-timbrado",
+   "term": "grupo de timbrado",
+   "aliases": [
+    "ring group",
+    "hunt group",
+    "grupo de búsqueda"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Función de una central que reparte una llamada entre varios internos: todos a la vez o uno detrás del otro.",
+   "long": "Es la misma idea que Group Call y Sequence Call de un portero, pero resuelta en la central, que suma desvíos, colas y apps. Con central, el portero llama a una extensión y el reparto lo hace el grupo.",
+   "case": false
+  },
+  {
+   "id": "cancel",
+   "term": "CANCEL",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "El mensaje SIP que anula una llamada que todavía no fue atendida.",
+   "long": "Lo manda quien llamó, o la central, cuando ya no quiere que ese destino siga sonando: por ejemplo, cuando otro miembro de un grupo atendió primero. Está definido en RFC 3261.",
+   "case": true
+  }
+ ]
+}

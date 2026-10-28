@@ -56,14 +56,27 @@ def main():
     c = json.load(open(a.curso, encoding="utf-8"))
     e = json.load(open(ROOT / "ilustraciones" / a.slug / "estructura.json", encoding="utf-8"))
     by = {str(l.get("id", l["n"])): l for l in c["lessons"]}
-    for xf in sorted((ROOT / "ilustraciones" / a.slug).glob("estructura-extra*.json")):  # lecciones insertadas después (ej. 36 tras la 4) y textos que las enlazan
-        x = json.load(open(xf, encoding="utf-8"))
+    # Extras en tres pasadas, para que el resultado no dependa del nombre del archivo:
+    # 1) insertar y avisos, 2) modulos_nuevos (ganan sobre un insertar viejo que ubicaba la lección en otro módulo),
+    # 3) lecciones, por "prioridad" (de menor a mayor, 0 por defecto) y nombre: la de más prioridad pisa los campos.
+    extras = [(xf, json.load(open(xf, encoding="utf-8"))) for xf in sorted((ROOT / "ilustraciones" / a.slug).glob("estructura-extra*.json"))]
+    for xf, x in extras:  # lecciones insertadas después (ej. 36 tras la 4) y textos que las enlazan
         for ins in x.get("insertar", []):
             for m in e["modulos"]:
                 ls = [str(i) for i in m["lessons"]]
                 if str(ins["despues_de"]) in ls and str(ins["id"]) not in ls:
                     ls.insert(ls.index(str(ins["despues_de"])) + 1, str(ins["id"])); m["lessons"] = ls
         e.setdefault("avisos", []).extend(x.get("avisos", []))
+    for xf, x in extras:
+        for nm in x.get("modulos_nuevos", []):  # módulo nuevo: saca sus lecciones de donde estaban y lo ubica antes de otro
+            ids = [str(i) for i in nm["lessons"]]
+            for m in e["modulos"]:
+                m["lessons"] = [str(i) for i in m["lessons"] if str(i) not in ids]
+            nuevo = {k: nm[k] for k in ("title", "why", "objetivos") if k in nm}; nuevo["lessons"] = ids
+            e["modulos"] = [m for m in e["modulos"] if m["title"] != nm["title"]]
+            pos = next((i for i, m in enumerate(e["modulos"]) if m["title"] == nm.get("antes_de")), len(e["modulos"]))
+            e["modulos"].insert(pos, nuevo)
+    for xf, x in sorted(extras, key=lambda t: (t[1].get("prioridad", 0), t[0].name)):
         for lid, v in x.get("lecciones", {}).items():
             e.setdefault("lecciones", {}).setdefault(str(lid), {}).update(v)
     rep = {"modulos": 0, "lecciones": 0, "avisos_aplicados": 0, "avisos_sin_texto": [], "faltan_en_curso": []}

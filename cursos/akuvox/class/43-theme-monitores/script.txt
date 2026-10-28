@@ -1,0 +1,18 @@
+A: Lección cuarenta y tres. Hoy no abrimos ninguna puerta: hoy miramos la pantalla del monitor.
+B: Ah, el clásico "sacame ese botón de alarma que mi madre lo toca sin querer".
+A: [risas] Ese mismo. Y se resuelve en dos lugares de la web. Primero, el theme: en un C319, un S567 o un IT88 vas a Device, Display Setting, Theme, y elegís Default o Call List.
+B: ¿Y qué cambia?
+A: Default es la pantalla de íconos. Call List pone la lista de contactos para llamar. En el C313, que es Linux, el menú se llama distinto: Device, Key barra Display, Home Page Mode, con Classic o Call List Simple.
+B: O sea que el nombre depende del modelo.
+A: Exacto. Lo segundo son los íconos. En Device, Display Setting, cada área de la pantalla de inicio tiene un tipo: Arming, SOS, Unlock, Contacts, Monitor y varios más. El botón de alarma no es un theme: es Arming puesto en un área.
+B: Entonces lo cambio por otra cosa.
+A: Por ejemplo Unlock, apuntando a un Remote Relay HTTP de los que armaste en Botón del monitor, con la etiqueta Portón.
+B: ¿Quién lo dice?
+A: Diez páginas de la Knowledge Base de Akuvox, de seis monitores distintos, y coinciden en el mecanismo. No encontramos ningún integrador escribiendo de esto, así que es palabra del fabricante.
+B: ¿Y el protector de pantalla?
+A: Screen Saver Setting: fotos, videos o reloj, con horario. El formato cambia: el C313 quiere JPG de ochocientos por cuatrocientos ochenta, el C319 acepta hasta dos megapíxeles a mil doscientos ochenta por ochocientos.
+B: ¿Y si son cuarenta monitores?
+A: Aprovisionamiento. Desde SmartPlus mandás el fondo con Config punto Wallpaper punto Url cero uno, y el monitor lo toma al reiniciar. Pero ojo: en las planillas oficiales, la pantalla de inicio del S567 vale cuatro o cinco, y la del S562 cero o uno.
+B: Uf. Copiar y pegar entre modelos sale caro.
+A: Carísimo. Laboratorio, veinte minutos: cambiás el theme, sacás Arming, ponés Portón, cargás un protector con el nombre del edificio y dejás la pantalla en español.
+B: Y la próxima vez que pidan sacar un botón, son dos minutos.

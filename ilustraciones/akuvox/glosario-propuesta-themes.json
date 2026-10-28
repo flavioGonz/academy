@@ -1,0 +1,78 @@
+{
+ "terms": [
+  {
+   "id": "lcd",
+   "term": "LCD",
+   "aliases": [
+    "Liquid Crystal Display",
+    "LCD Language"
+   ],
+   "cat": "Video",
+   "short": "Liquid Crystal Display: la pantalla de cristal líquido de monitores y porteros; en la web de Akuvox, LCD nombra lo que se ve en la pantalla del equipo.",
+   "long": "En los menús de Akuvox aparece como LCD Language (idioma de la pantalla, distinto del idioma de la web) y, en E18, E16, R29 y X915, como la sección Device > LCD, donde están el theme, el reposo y el protector.",
+   "case": true
+  },
+  {
+   "id": "dnd",
+   "term": "DND",
+   "aliases": [
+    "Do Not Disturb",
+    "No molestar"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Do Not Disturb: el modo no molestar de un teléfono o monitor, que deja de sonar ante las llamadas entrantes.",
+   "long": "En los monitores Akuvox es uno de los tipos de área de la pantalla de inicio (por defecto en el área 3 del S567) y su etiqueta no se puede renombrar. Conviene que el residente sepa dónde está: un monitor en DND no suena cuando llama el portero.",
+   "case": true
+  },
+  {
+   "id": "sos",
+   "term": "SOS",
+   "aliases": [
+    "botón SOS"
+   ],
+   "cat": "Alarmas",
+   "short": "Función de emergencia: en los monitores Akuvox, un tipo de área de la pantalla de inicio.",
+   "long": "Se pone o se saca de la pantalla de inicio cambiando el tipo del área en Device > Display Setting, igual que Arming (armado de alarma). Qué hace al tocarlo depende de cómo esté configurado el monitor; antes de dejarlo visible, conviene probarlo y acordar con el cliente a quién le llega el aviso.",
+   "case": true
+  },
+  {
+   "id": "apk",
+   "term": "APK",
+   "aliases": [
+    "Android Package",
+    "Custom APK"
+   ],
+   "cat": "Web e integración",
+   "short": "Android Package: el archivo con el que se instala una aplicación en Android.",
+   "long": "En los monitores Akuvox con Android, Custom APK es un tipo de área de la pantalla de inicio que abre una aplicación de terceros ya instalada; el campo Value se completa solo con la app.",
+   "case": true
+  },
+  {
+   "id": "png",
+   "term": "PNG",
+   "aliases": [
+    "Portable Network Graphics"
+   ],
+   "cat": "Video",
+   "short": "Portable Network Graphics: formato de imagen sin pérdida, con transparencia.",
+   "long": "Lo piden varios equipos Akuvox para íconos, logos de arranque y fondos (por ejemplo, el logo de arranque del C319 en ZIP o PNG hasta 1280x800); para los protectores de pantalla muchos modelos solo aceptan JPG. Conviene mirar la tabla de especificaciones del modelo antes de preparar las imágenes.",
+   "case": true
+  },
+  {
+   "id": "autop",
+   "term": "AutoP",
+   "aliases": [
+    "Auto Provision",
+    "auto-provisioning",
+    "aprovisionamiento automático",
+    "comandos AutoP"
+   ],
+   "cat": "Akuvox",
+   "short": "Auto-provisioning de Akuvox: configurar equipos con comandos del tipo Config.Seccion.Parametro, desde un servidor o desde SmartPlus.",
+   "long": "Cada ajuste de la web tiene su comando, publicado por modelo en planillas de la Knowledge Base (por ejemplo Config.Wallpaper.Url01 para el fondo de un monitor). Los valores no siempre coinciden entre modelos: la pantalla de inicio vale 4 o 5 en el S567 y 0 o 1 en el S562, así que una línea copiada de otro modelo puede dejar otra configuración.",
+   "case": true
+  }
+ ],
+ "alias_agregar": {},
+ "modificar": {}
+}

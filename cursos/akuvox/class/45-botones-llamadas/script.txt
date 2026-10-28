@@ -1,0 +1,19 @@
+A: Lección cuarenta y cinco. Hoy, qué pasa cuando la visita aprieta el botón.
+B: Suena el monitor. ¿Qué más hay?
+A: Bastante. Primero, a quién llama: una IP, como en Llamada directa, o una extensión por la central, como en Cuenta SIP.
+B: Eso ya lo tenemos andando.
+A: Lo nuevo es el botón con más de un destino. En un E16 está en Intercom, Basic, Key Setting: la tecla de Recepción, con nombre y número. En una obra la vimos con dos IP separadas por coma.
+B: ¿Y suenan los dos juntos?
+A: Eso se prueba, porque la guía del E16 no lo dice, y la del E18 habla de punto y coma. Lo que está clarísimo son los dos modos: Sequence Call y Group Call.
+B: A ver.
+A: Sequence Call llama de a uno. Si no atienden en el Call Timeout, veinte segundos por ejemplo, pasa al siguiente. Group Call hace sonar todos a la vez y el primero que atiende se queda con la visita.
+B: ¿Y si alguien rechaza?
+A: Ahí está el detalle. En secuencia, When Refused en Do Not Call Next corta todo; en Call Next, sigue con el próximo. En grupo, End This Call Only corta solo al que rechazó; End All Calls corta a todos.
+B: [risas] O sea, el hijo que rechaza desde el cuarto le corta la visita a toda la casa.
+A: Exacto, si quedó en End All Calls. Las doce páginas de Akuvox que leímos coinciden; cambia el menú. En los táctiles, la secuencia es un grupo del directorio con prioridad: primario, secundario, terciario. En el E12 o el R20, va en Manager Dial.
+B: ¿Y el Dial Plan?
+A: Un número corto que reemplaza hasta cinco destinos. Marcás cien y suenan los dos monitores. Y en Call Feature ponés cuánto suena una llamada sin respuesta y que corte sola después de abrir.
+B: ¿Laboratorio?
+A: Veinticinco minutos con un E16 y dos monitores. Armás un grupo, rechazás en uno y mirás el otro. Después le das prioridad y dejás correr el tiempo.
+B: Y con SmartPlus, eso lo decide la app.
+A: Sí. La regla: cada botón se prueba con un monitor que no atiende y otro que rechaza.

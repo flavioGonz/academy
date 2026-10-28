@@ -1,0 +1,111 @@
+# Notes: batch g (botones y tipos de llamada, lección 45)
+Pages read: 12 nuevas más 3 ya en raw (guía de llamadas del E16, pantalla del X915, pantalla del R29) y el hilo de FreePBX de vista previa. With notes: 15. Skipped: 1 (hilo de 3CX "3CX and Akuvox IT82 indoor monitor, 3CX thinks call was taken": el scraper lo descarta por delgado, 89 palabras; se leyó en el navegador pero no se cita porque no está en raw).
+
+Nota de lectura: las páginas de la Knowledge Base se guardaron "undated", pero su versión .md trae fecha: Call Settings del E16 25 de febrero de 2026; del E12 8 de julio de 2025; del R20A/B y del R20K 31 de diciembre de 2025; del R29 18 de septiembre de 2025; del X915 18 de agosto de 2025; del E18 9 de enero de 2026; Configure Sequence Call 23 de septiembre de 2026; Configure Group Call 17 de septiembre de 2026; contactos del E16 26 de febrero de 2026; contactos del R29 27 de febrero de 2026; llamadas IP y SIP del E12 8 de julio de 2025.
+
+Referencia de interfaz: captura real enviada por Nico de la web de un E16C V2.0 (Intercom > Basic): Direct IP (Enabled, Port 5060, rango 1~65535), Key Setting (Reception Enabled, Name, Number con dos IP separadas por coma), Sequence Call (When Refused "Do Not Call Next", Call Timeout (Sec) 20), Group Call (When Refused "End This Call Only"), Cancel y Submit. El menú lateral: Homepage, Status, Account, Network, Intercom (Basic, Call Feature, Dial Plan), Surveillance, Access Control, Directory, Device, Setting, System.
+
+## T28 Botones y tipos de llamada (destino, secuencia, grupo, plan de marcado)
+- g:N1. IP directa en E16: `Intercom > Basic > Direct IP`, puerto 5060 por defecto, rango 1 a 65535, igual en los dos extremos. En el E12 la misma opción está en `Intercom > Call Feature > Direct IP`.
+  - Source: https://knowledge.akuvox.com/docs/intercom-call-configuration-8 ; https://knowledge.akuvox.com/docs/intercom-call-configuration-10  Quote: "Enable Direct IP on the Intercom > Call Feature > Direct IP interface."
+  - Kind: technique
+  - Level: core
+- g:N2. Cuenta de salida: con dos cuentas SIP, Auto usa la registrada y, si están las dos, la 1. En el E16 se elige la cuenta por defecto en `Intercom > Call Feature > Dial Type`; en contactos y reglas de Dial Plan se puede fijar Account 1 o 2.
+  - Source: https://knowledge.akuvox.com/docs/intercom-call-configuration-8
+  - Kind: definition
+  - Level: core
+- g:N3. Tecla de Recepción del E16: `Intercom > Basic > Key Setting`, Name y Number (IP o número SIP), para llamar con un toque desde la pantalla de llamada. La página del E16 no dice cómo separar varios números; la del E18 dice "multiple numbers separated by ';'". La captura del E16C V2.0 de Nico tiene dos IP separadas por coma.
+  - Source: https://knowledge.akuvox.com/docs/call-settings-10 ; https://knowledge.akuvox.com/docs/call-settings-15  Quote: "Enter the IP/SIP number, multiple numbers separated by “;”."
+  - Kind: technique / contested
+  - Level: core
+- g:N4. Ninguna página dice si los varios números de la tecla Recepción suenan juntos o en orden. En el X915, el Speed Dial (Reception) admite varios números y, con Dial Out Forward, "si hay varios números configurados, se usa el primero".
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-1  Quote: "If multiple numbers are configured, the first one will be used."
+  - Kind: gap
+  - Level: core
+- g:N5. Sequence Call: marca una lista en un orden fijo hasta que alguien atiende. En E16 y E18: `Intercom > Basic > Sequence Call` con When Refused (Do Not Call Next: deja de llamar; Call Next: sigue con el siguiente) y Call Timeout(Sec), el tiempo antes de pasar al siguiente si no atienden.
+  - Source: https://knowledge.akuvox.com/docs/call-settings-10  Quote: "Call Timeout(Sec): Determine the duration before calling the next number when the previous call is not answered."
+  - Kind: definition / technique
+  - Level: core
+- g:N6. En R29 y X915 el mismo bloque se llama Time Out(Sec), con un ejemplo: con 10, la llamada que no se atiende en 10 segundos se corta y pasa al siguiente número.
+  - Source: https://knowledge.akuvox.com/docs/call-setting-9 ; https://knowledge.akuvox.com/docs/call-settings-1  Quote: "the call that is not answered in 10 seconds will be ended automatically and transferred to the next call number in order."
+  - Kind: example
+  - Level: core
+- g:N7. En los táctiles (S539, S538, S535, X916, X915, R29, E18 y E16) la secuencia local se arma con un grupo propio del directorio y la Priority of Call de cada contacto (Primary, Secondary, Tertiary; en la nota de cómo se configura, Firstly, Secondly, Thirdly). Al llamar al grupo, los contactos se llaman en orden. La prioridad solo aparece si el contacto está en un grupo creado por vos.
+  - Source: https://knowledge.akuvox.com/docs/configure-sequence-call ; https://knowledge.akuvox.com/docs/contact-list-configuration-4  Quote: "When users initiate the group call on the door phone, contacts in the group will be called in sequence."
+  - Kind: technique
+  - Level: core
+- g:N8. En los de botón y teclado (S532, X912, X910, R28, R27, serie R20, serie R25, E12, E13, E21, DB01 y A15) la secuencia local va en `Intercom > Basic > Manager Dial`: Call Type Sequence Call, timeout y un número IP o SIP por casilla. Ejemplo oficial: R20K con 320.30.11.21. El E21 pide 321.30.10.10 o más.
+  - Source: https://knowledge.akuvox.com/docs/configure-sequence-call
+  - Kind: technique
+  - Level: core
+- g:N9. Con SmartPlus, la secuencia se activa sola: el portero solo decide si sigue al rechazar (Call Next o Do Not Call Next) y los números los carga el usuario en la app (`Me > Settings > Call Settings > Contact Preference`). En el E12, con la nube activa, la opción local de Sequence Call no está disponible.
+  - Source: https://knowledge.akuvox.com/docs/configure-sequence-call ; https://knowledge.akuvox.com/docs/call-settings-7  Quote: "When the device is connected to SmartPlus Cloud, the local Sequence Call option will be unavailable."
+  - Kind: mistake
+  - Level: advanced
+  - Also: T11
+- g:N10. La nota de secuencia lista versiones mínimas para la secuencia de nube en comunidades: R29 29.30.10.205, R20 V5.0 320.30.10.230, X915 V2 2915.30.10.205, E18 18.30.10.236, E16 V2 216.30.10.208, E16 V3 416.30.11.206, E12 V2 312.30.10.237, entre otros; app 6.81.0.3 (Android) o 6.81.3 (iOS).
+  - Source: https://knowledge.akuvox.com/docs/configure-sequence-call
+  - Kind: number
+  - Level: advanced
+- g:N11. Group Call: llama a todos los contactos del grupo a la vez; hace sonar todos los monitores del grupo y ahorra llamar uno por uno.
+  - Source: https://knowledge.akuvox.com/docs/configure-group-call  Quote: "The group call feature allows users to call all the contacts simultaneously in a group."
+  - Kind: definition
+  - Level: core
+- g:N12. When Refused del Group Call: End This Call Only (el equipo sigue llamando a los demás) o End All Calls (deja de llamar). En E16, E18 y R29: `Intercom > Basic > Group Call`; en el X915 la página lo pone en `Intercom > Basic > Only Group Call Allowed`.
+  - Source: https://knowledge.akuvox.com/docs/call-settings-10 ; https://knowledge.akuvox.com/docs/call-settings-1 ; https://knowledge.akuvox.com/docs/configure-group-call
+  - Kind: technique
+  - Level: core
+- g:N13. La redacción de End This Call Only cambia según la página: "continue to call other numbers" (E16, E18, X915) y "continue to call the next number" (E12, R20, nota de grupo). Se lee como que corta solo al que rechazó y los demás siguen sonando; ninguna página lo prueba con un caso.
+  - Source: https://knowledge.akuvox.com/docs/call-settings-10 ; https://knowledge.akuvox.com/docs/call-settings-7
+  - Kind: contested
+  - Level: core
+- g:N14. Grupo local en los táctiles: el grupo se crea en `Directory > User > Group` (E16 hasta 1.000 grupos; R29 y X915 hasta 500), el contacto se asigna en `Directory > User` (Phone, Group, Priority of Call, Dial Account) y la visita llama tocando el grupo. La nota de grupo, con el R29 29.30.10.343 de ejemplo, nombra el menú `Contacts > Contacts List`.
+  - Source: https://knowledge.akuvox.com/docs/contact-list-configuration-4 ; https://knowledge.akuvox.com/docs/contacts-configuration-13 ; https://knowledge.akuvox.com/docs/configure-group-call
+  - Kind: technique
+  - Level: core
+- g:N15. Cómo se muestran los grupos: `Directory > Directory Setting`, Contacts Display Mode: All Contacts, Groups Only (se toca el grupo y es una llamada de grupo) o Groups On Entry Page And Their Contacts On Subpage. En R29 y X915, Call Type of Contact Group: Single Call & Group Call, u Only Group Call (Allowed).
+  - Source: https://knowledge.akuvox.com/docs/contact-list-configuration-4 ; https://knowledge.akuvox.com/docs/contacts-configuration-13
+  - Kind: technique
+  - Level: core
+- g:N16. Grupo local en los de botón: `Intercom > Basic > Manager Dial`, Call Type Group Call, un número por casilla y When Refused. En el R20B se configuran varios pulsadores, cada uno con sus números.
+  - Source: https://knowledge.akuvox.com/docs/configure-group-call ; https://knowledge.akuvox.com/docs/calling-feature
+  - Kind: technique
+  - Level: core
+- g:N17. Con SmartPlus, la casilla Group Call Number(Local) va vacía: si tiene números, puede hacer fallar el grupo de la nube.
+  - Source: https://knowledge.akuvox.com/docs/configure-group-call  Quote: "No number should be filled in the Group Call Number(Local) box. Otherwise, it may cause Cloud group call failures."
+  - Kind: mistake
+  - Level: advanced
+  - Also: T11
+- g:N18. Dial Plan (Quick Dial by Number Replacement): `Intercom > Dial Plan`, +Add, Account (Auto, 1 o 2), Prefix y Replace 1 a 5 (IP o SIP). Al marcar el prefijo se llama a todos los Replace a la vez. Reglas: 1.000 en E16 y E18, 1.500 en R29, 500 en R20K; importación y exportación en .xml de hasta 200 KB en E16 y E18; en el X915 el prefijo no acepta "*". También en la pantalla, `Setting > Replace Rule`.
+  - Source: https://knowledge.akuvox.com/docs/call-settings-10 ; https://knowledge.akuvox.com/docs/call-setting-9 ; https://knowledge.akuvox.com/docs/call-settings-4 ; https://knowledge.akuvox.com/docs/call-settings-1  Quote: "All these numbers will be called simultaneously when the caller dials the prefix."
+  - Kind: technique / number
+  - Level: core
+- g:N19. Auto Answer: para SIP se activa en `Account > Advanced > Call`; para IP viene activo de fábrica y se ajusta en `Intercom > Call Feature > Auto Answer` (Auto Answer Delay y Mode audio o video), según E16 y R20K.
+  - Source: https://knowledge.akuvox.com/docs/call-settings-10 ; https://knowledge.akuvox.com/docs/call-settings-4  Quote: "The auto-answer feature for IP calls is enabled by default."
+  - Kind: technique
+  - Level: core
+- g:N20. Límites de tiempo: `Intercom > Call Feature > Max Call Time` (duración máxima de la conversación) y `Max Dial Time` (Dial In Time y Dial Out Time: cuánto suena una llamada entrante o saliente sin respuesta). Con central, no pueden superar los de la central.
+  - Source: https://knowledge.akuvox.com/docs/call-settings-10  Quote: "The max dial time should not exceed the dial duration of SIP server."
+  - Kind: technique / mistake
+  - Level: core
+- g:N21. Hang Up After Open Door: `Intercom > Call Feature`, Type (método de apertura) y Timeout: corta la llamada un tiempo después de abrir, para que el portero quede libre para la siguiente.
+  - Source: https://knowledge.akuvox.com/docs/call-settings-10
+  - Kind: technique
+  - Level: core
+- g:N22. Speed Dial por modelo: E16 y E18 en `Device > LCD` (themes Default y Speed Dial; el E18 acepta varios números separados por ";"); R29 en `Setting > Key/Display`, con Speed Dial Theme de 9 diseños (Standard, Auto, 1 Key, 1 Key + Keypad, 2 Keys + Keypad, 4 Keys + Keypad, 8, 16 y 64 Keys), solo en Villa y Office, con importación .xml; R20K en `Intercom > Basic > Speed Dial`, un número por casilla, y relé disparado por Speed Dial o Manager Dial; R20B, números por pulsador y módulo de expansión en `Device > Extension Unit` desde 320.30.10.116.
+  - Source: https://knowledge.akuvox.com/docs/call-settings-10 ; https://knowledge.akuvox.com/docs/call-settings-15 ; https://knowledge.akuvox.com/docs/call-setting-9 ; https://knowledge.akuvox.com/docs/call-settings-4 ; https://knowledge.akuvox.com/docs/calling-feature
+  - Kind: technique
+  - Level: core
+- g:N23. Push To Hang Up (`Intercom > Basic`) en E12 y R20: apretar el pulsador corta la llamada. Call Event (`Intercom > Basic > Call Event`) en R20: FTP, Email o HTTP al llamar.
+  - Source: https://knowledge.akuvox.com/docs/call-settings-7 ; https://knowledge.akuvox.com/docs/calling-feature
+  - Kind: technique
+  - Level: advanced
+- g:N24. X915: Speed Dial (Reception) en `Setting > Key/Display > Speed Dial Setting`; en obra local llama al número cargado en el valor de la tecla; Dial Out Forward manda cualquier llamada saliente al número de Recepción, con horario o apagado automático.
+  - Source: https://knowledge.akuvox.com/docs/screen-display-configuration-1
+  - Kind: technique
+  - Level: advanced
+- g:N25. Practicante: con un portero Akuvox R20 y teléfonos de video Grandstream, la vista previa anda en llamada directa y no a través de FreePBX; otro integrador logra que un teléfono de escritorio y un monitor suenen juntos con la central y que cualquiera de los dos atienda y abra.
+  - Source: https://community.freepbx.org/t/early-media-doorphone-video-preview/99698  Quote: "Either one can answer the call, have video and 2 way audio and unlock the door."
+  - Kind: story
+  - Level: advanced
+  - Also: T13
