@@ -401,3 +401,43 @@ Base: research/notes/c.md (16 páginas con notas). Evidencia sobre Antel delgada
 ## Huecos de la lección
 - Antel no publica servidor, puertos, codecs, formato de numeración ni la forma física de entrega en FTTH. Tampoco si su servidor contesta los OPTIONS de la central ni desde cuántas IP manda señalización y audio.
 - La guía técnica más completa es de 2018 (actualizada en 2025) y la escribió un integrador; los foros son de 2017 y 2022.
+
+## TH53 Después de las repeticiones, el IVR va al destino de Timeout o de Invalid, o corta
+- Sub-topic: T27 (also T08)
+- Agree: 4 of 4. Notes: d:N3, d:N4, d:N5, d:N7. Urls: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/ https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/ https://documentation.grandstream.com/knowledge-base/how-to-use-ivr/ https://docs.asterisk.org/Configuration/Dialplan/Special-Dialplan-Extensions/
+- Disagree: none found. FreePBX 2.10 cambió los i y t por destinos en desplegables y confundió a un integrador (https://community.freepbx.org/t/ivr-invalid-and-timeout-routing-issues/15994).
+- Level: core
+- Best story: "Invalid extension '3'" y el menú otra vez (https://docs.asterisk.org/Deployment/Basic-PBX-Functionality/Auto-attendant-and-IVR-Menus/Handling-Special-Extensions)
+
+## TH54 Con Dial Other Extensions apagado solo valen las teclas de Key Pressing Events; las teclas numeradas no lo necesitan
+- Sub-topic: T28
+- Agree: 2 of 2. Notes: d:N10, d:N11, d:N12. Urls: https://documentation.grandstream.com/knowledge-base/how-to-use-ivr/ https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/
+- Disagree: ninguna fuente dice qué hace la UCM con un dígito cuando no hay teclas ni marcado de internos; el caso real lo muestra con el aviso apagado.
+- Level: core
+- Best story: none
+
+## TH55 Para "bienvenida y al grupo", Announcement no se saltea y pasa solo al destino
+- Sub-topic: T28
+- Agree: 2 of 2. Notes: d:N13, d:N14. Urls: https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/ https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/
+- Disagree: la guía de IVR no lo menciona; ninguna fuente compara IVR y Announcement.
+- Level: core
+- Best story: none
+
+## TH56 El DTMF de una línea analógica lo detecta el FXO en el audio, y el detector se equivoca para los dos lados
+- Sub-topic: T29 (also T20)
+- Agree: 5 of 5. Notes: d:N16, d:N17, d:N18, d:N19, d:N20, d:N21. Urls: https://en.wikipedia.org/wiki/Falsing https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling https://datatracker.ietf.org/doc/html/rfc4733 https://issues-archive.asterisk.org/ASTERISK-22433 https://community.freepbx.org/t/dtmf-in-ivr-on-analog-lines/14916
+- Disagree: relaxdtmf arregló un caso de FreePBX y no cambió nada en el de Asterisk con dígitos al azar.
+- Level: advanced
+- Best story: "random digits on the IVR" por FXO (https://issues-archive.asterisk.org/ASTERISK-22433)
+
+## TH57 La prueba se cierra con una llamada y el CDR: cuánto esperó el que llamó antes de que lo atiendan
+- Sub-topic: T30 (also T22)
+- Agree: 2 of 2. Notes: d:N23, d:N24, d:N20. Urls: https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/ https://community.asterisk.org/t/my-elastix-stopped-detecting-dtmf-tones-over-digium-fxo-port/43785
+- Disagree: none found
+- Level: core
+- Best story: el registro de DTMF que muestra un 211 convertido en 1 (https://community.asterisk.org/t/my-elastix-stopped-detecting-dtmf-tones-over-digium-fxo-port/43785)
+
+## Huecos de la lección IVR que solo anuncia
+- Grandstream no publica la API del IVR ni el nombre de los prompts del sistema en español; los nombres dial_extension, dial_ringgroup, dial_other_extension, iloop y tloop, y el aviso "Lo siento, no lo entiendo", salen de la configuración leída en el caso.
+- Ninguna fuente dice qué hace la UCM por dentro con un dígito cuando el IVR no tiene teclas, ni cuál es el mínimo de Response Timeout.
+- Ninguna fuente pública de Antel o de URSEC sobre eco o ruido en líneas analógicas que generen DTMF falso.

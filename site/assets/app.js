@@ -102,9 +102,12 @@
 
   /* ---------- datos ---------- */
   let catalog = null; const courses = {};
-  const getCatalog = async () => catalog || (catalog = await (await fetch("data/catalog.json", {cache: "no-cache"})).json());
+  // caché en memoria por 2 minutos: una pestaña abierta mucho tiempo ve lo que se publica después
+  const FRESH = 120000; let catT = 0; const courseT = {};
+  const getCatalog = async () => { if (catalog && Date.now() - catT < FRESH) return catalog; catT = Date.now(); return (catalog = await (await fetch("data/catalog.json", {cache: "no-cache"})).json()); };
   const getCourse = async slug => {
-    if (courses[slug]) return courses[slug];
+    if (courses[slug] && Date.now() - (courseT[slug] || 0) < FRESH) return courses[slug];
+    courseT[slug] = Date.now();
     const r = await fetch(`api/course.php?slug=${encodeURIComponent(slug)}`, {cache: "no-store", credentials: "same-origin"});
     if (!r.ok) { const e = new Error("curso"); e.status = r.status; throw e; }
     return (courses[slug] = (await r.json()).course);

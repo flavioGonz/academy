@@ -1,0 +1,120 @@
+{
+ "nota": "Propuesta para la lección 20 IVR que solo anuncia del curso Grandstream. terms: entradas nuevas completas (term, short, long, cat); alias_agregar: alias para entradas existentes. Solo lo que la lección usa y el glosario no tiene (glosario_check.py no marcó RFC faltantes). No se editó glosario.json.",
+ "terms": [
+  {
+   "id": "talk-off",
+   "term": "talk-off",
+   "aliases": [
+    "talkoff",
+    "falsing",
+    "DTMF falso",
+    "falso DTMF",
+    "dígito falso"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Cuando un detector de tonos toma voz, música, eco o ruido por una tecla DTMF y entrega un dígito que nadie marcó.",
+   "long": "En telecomunicaciones, falsing es cualquier detección de una señal que nadie mandó; talk-off es el caso en que la voz pega justo en las frecuencias del detector. Pasa en las líneas analógicas, donde el FXO busca los tonos dentro del audio. En un IVR se nota como un aviso de opción inválida que suena solo; se ataca sacando al IVR de la dependencia del detector y revisando eco, impedancia y ganancias de la línea.",
+   "case": false
+  },
+  {
+   "id": "twist",
+   "term": "twist",
+   "aliases": [
+    "twist DTMF"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Diferencia de nivel entre los dos tonos de una tecla DTMF; el detector la usa para no confundir voz con teclas.",
+   "long": "Cada tecla DTMF es un tono del grupo bajo (697 a 941 Hz) más uno del grupo alto (1209 a 1633 Hz). La norma limita cuánto puede cambiar el nivel de uno respecto del otro, junto con la duración mínima, el espacio entre dígitos y el desvío de frecuencia. Una línea con niveles muy desparejos puede hacer que el FXO no detecte teclas reales o que detecte de más.",
+   "case": false
+  },
+  {
+   "id": "dial-other-extensions",
+   "term": "Dial Other Extensions",
+   "aliases": [
+    "marcar internos",
+    "marcar internas",
+    "Dial Extensions"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Opción del IVR de la UCM que deja al que llama discar directo un interno, un grupo u otros destinos, además de las teclas del menú.",
+   "long": "Está en Basic Call Features > IVR, sección Dialed Number, y se eligen los destinos permitidos (Extension, Ring Group, Call Queue, External Number y otros). Prendida, el IVR toma cada dígito como el comienzo de un número y espera el Digit Timeout; si el número no existe, va a Invalid. Las teclas de Key Pressing Events funcionan con la opción apagada. En firmwares viejos eran casillas sueltas, como Dial Trunk.",
+   "case": true
+  },
+  {
+   "id": "response-timeout",
+   "term": "Response Timeout",
+   "aliases": [
+    "Response Timeout Prompt",
+    "Response Timeout Prompt Repeats",
+    "Timeout Repeat Loop"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Lo que el IVR de la UCM espera una tecla después del prompt, 10 segundos de fábrica; al vencer suena un aviso y, tras las repeticiones, va al destino de Timeout.",
+   "long": "Response Timeout Prompt es el aviso que suena al vencer y Response Timeout Prompt Repeats cuántas veces se repite (3 de fábrica); al terminar, la llamada va al destino de Timeout de Key Pressing Events o se corta. En un IVR que solo anuncia, un Response Timeout corto, un audio de silencio como aviso y una sola repetición hacen que la llamada pase rápido al grupo.",
+   "case": true
+  },
+  {
+   "id": "digit-timeout",
+   "term": "Digit Timeout",
+   "aliases": [],
+   "cat": "Telefonía IP",
+   "short": "Tiempo que el IVR de la UCM espera entre un dígito y el siguiente antes de dar el número por completo; 3 segundos de fábrica.",
+   "long": "Importa cuando se puede marcar más de un dígito: con Dial Other Extensions prendido o con teclas personalizadas de varios dígitos. Un dígito suelto, aunque sea falso, hace esperar ese tiempo antes de que el IVR busque el número.",
+   "case": true
+  },
+  {
+   "id": "invalid-input-prompt",
+   "term": "Invalid Input Prompt",
+   "aliases": [
+    "Invalid Input Prompt Repeats",
+    "Invalid Repeat Loop",
+    "opción inválida"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Aviso que el IVR de la UCM reproduce cuando llega una tecla o un número que no existe; se repite hasta Invalid Input Prompt Repeats y después va al destino Invalid.",
+   "long": "De fábrica se repite 3 veces. Es el «Lo siento, no lo entiendo» que se escucha cuando al IVR le llega un dígito que no es tecla ni interno, a veces un DTMF falso de una línea analógica. Sin destino Invalid, al terminar las repeticiones la central corta.",
+   "case": true
+  },
+  {
+   "id": "key-pressing-events",
+   "term": "Key Pressing Events",
+   "aliases": [
+    "Standard Key Event",
+    "Custom Key Event"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Pestaña del IVR de la UCM donde se define qué hace cada tecla (0 a 9, *, #), y los destinos de Timeout e Invalid.",
+   "long": "En modo Standard cada tecla admite hasta cinco destinos con condición de horario; en Custom se arman combinaciones de hasta 8 dígitos (hasta 100 por IVR). Una fila de tecla sin destino es una entrada incompleta: no se guarda y conviene quitarla con el ícono menos.",
+   "case": true
+  },
+  {
+   "id": "announcement-ucm",
+   "term": "Announcement",
+   "aliases": [
+    "Advanced Call Features > Announcement"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Función de la UCM que reproduce un audio que no se puede saltear y después pasa la llamada sola a un destino; se elige desde una ruta entrante.",
+   "long": "Está en Advanced Call Features > Announcement, con Name, Prompt y Default Destination (extensión, grupo, cola, IVR, buzón o número externo). No escucha teclas, así que sirve para «bienvenida y al grupo» sin que un DTMF falso cambie nada. No es lo mismo que Announcement Paging ni que Announcement Center.",
+   "case": true
+  },
+  {
+   "id": "custom-prompt",
+   "term": "Custom Prompt",
+   "aliases": [
+    "prompt personalizado",
+    "Voice Prompt"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Audios propios de la UCM (bienvenidas, avisos, silencios) que se suben o graban en PBX Settings > Voice Prompt > Custom Prompt.",
+   "long": "Acepta mp3, wav, ulaw, alaw y gsm hasta 30 MB; el WAV va PCM de 16 bits, mono, 8000 Hz. Un audio subido aparece en cualquier campo de prompt del IVR, por ejemplo como bienvenida o como Response Timeout Prompt, donde un segundo de silencio sirve para callar el aviso de vencimiento.",
+   "case": true
+  }
+ ],
+ "alias_agregar": {
+  "inband": [
+   "DTMF inband",
+   "DTMF en banda"
+  ]
+ }
+}

@@ -69,6 +69,15 @@ Por qué este arco: con la central en pie, el trabajo diario es rutear: quién p
 - Laboratorio: Foco, 15 min.
 - Regla: todo IVR tiene destino para el que no marca nada.
 
+### Lección 20. IVR que solo anuncia (agregada en octubre de 2026)
+- Va después de IVR con horario y antes de Portero en la central: en el portal queda en el módulo "Quién atiende" (orden 8, 7, 20, 12). Sale de un caso real de soporte, anonimizado como "un comercio".
+- 4 de 4 fuentes oficiales en cómo el IVR trata el silencio y la tecla inválida (TH53); 2 de 2 en que con Dial Other Extensions apagado solo valen las teclas (TH54); 2 de 2 manuales con Announcement (TH55); 5 de 5 en que el DTMF de una línea analógica lo detecta el FXO en el audio y se equivoca para los dos lados (TH56). Notas: research/notes/d.md.
+- Idea: bienvenida y derivación sin teclas ni marcar internos, Timeout al grupo, repeticiones en 1, una tecla sin destino no se guarda, aviso de vencimiento con un audio de silencio si molesta; "Lo siento, no lo entiendo" es el aviso de inválido disparado por un dígito que no es tecla ni interno, a veces un DTMF falso de la línea; Announcement como alternativa que no se saltea.
+- Por qué importa: es el pedido más común de un comercio ("que salude y suene"), y el aviso de inválido con tres vueltas hace que el cliente crea que la central anda mal.
+- Historia: el caso real (IVR 7000 con marcar internos prendido, solo i y t al grupo, repeticiones en 3 y una línea analógica con falsos DTMF); "random digits on the IVR" por FXO (https://issues-archive.asterisk.org/ASTERISK-22433); el 211 que llegó como 1 (https://community.asterisk.org/t/my-elastix-stopped-detecting-dtmf-tones-over-digium-fxo-port/43785); teclas que solo se detectaban en el silencio del prompt (https://community.freepbx.org/t/dtmf-in-ivr-on-analog-lines/14916); i y t en Asterisk (https://docs.asterisk.org/Configuration/Dialplan/Special-Dialplan-Extensions/); campos del IVR (https://documentation.grandstream.com/knowledge-base/how-to-use-ivr/) y Announcement (https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/); talk-off (https://en.wikipedia.org/wiki/Falsing).
+- Laboratorio: Foco, 20 min. Bienvenida y silencio en Custom Prompt, IVR con el error, un 5 durante el audio para simular el DTMF falso, CDR, receta, llamada de nuevo, CDR comparado y Announcement si el firmware lo tiene.
+- Regla: un IVR sin teclas no deja marcar internos: el silencio va al grupo, las repeticiones quedan en 1 y ninguna tecla queda sin destino.
+
 ### Lección 8. Grupo o cola
 - 2 de 2 fuentes.
 - Idea: grupo de llamada para "que suene en todos"; cola cuando hay espera, agentes, estrategia y desborde; buzón con PIN no trivial y a correo.
@@ -160,7 +169,10 @@ Por qué este arco: internos remotos, routers ajenos, ataques y porteros son don
 - Login de fábrica. Cómo decidir: mirar la etiqueta; equipos desde enero de 2017 traen contraseña aleatoria.
 - Orden de rutas salientes. Cómo decidir: mirar Outgoing Routing Priority en el equipo y probar con un número que matchee dos rutas.
 
+- Bienvenida y al grupo: IVR o Announcement. La guía de IVR enseña el IVR con menú (https://documentation.grandstream.com/knowledge-base/how-to-use-ivr/); el manual actual suma Announcement, que no se saltea (https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/). Cómo decidir: si el firmware lo tiene y no se piensan opciones, Announcement desde la ruta entrante; si van a venir teclas o el IVR ya existe, IVR sin marcar internos, Timeout al grupo y repeticiones en 1.
+
 ## Huecos
+- Lección 20: Grandstream no publica la API del IVR ni los nombres de sus prompts en español; dial_extension, dial_ringgroup, dial_other_extension, iloop, tloop y el aviso "Lo siento, no lo entiendo" salen de la configuración leída en el caso. Ninguna fuente dice qué hace la UCM con un dígito cuando el IVR no tiene teclas ni el mínimo de Response Timeout: el laboratorio lo hace observar en el banco.
 - Lección 19: Antel no publica servidor, puertos, codecs, formato del número entrante ni del saliente, ni cómo entrega la troncal en FTTH (puerto del ONT, VLAN o equipo aparte); tampoco si su servidor contesta los OPTIONS de la central ni desde cuántas IP manda señalización y audio. La lección enseña a pedirlo en la planilla y a confirmarlo en la primera captura. La guía técnica más completa es de un integrador (2018, actualizada en 2025).
 - Módulo FXO: Antel no publica tensión, frecuencia de timbre, esquema de identificador ni método de corte de su línea; las lecciones 13, 15 y 16 enseñan a medirlo y probarlo. La lista de tonos de la UIT es de 2010. No se encontró norma técnica pública de URSEC sobre la interfaz analógica.
 - GDMS sin guía técnica leída (las páginas cargan con JavaScript); se menciona en lecciones 1 y 3 sin pasos detallados.

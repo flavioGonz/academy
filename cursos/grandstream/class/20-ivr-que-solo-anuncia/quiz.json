@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un IVR que solo pasa la bienvenida y deriva al grupo hace que el que llama escuche \"Lo siento, no lo entiendo\" al final del audio. ¿Qué revisás primero?",
+  "options": [
+   "El codec del troncal, para pasarlo a G.729",
+   "Marcar internos (Dial Other Extensions) y las repeticiones de Timeout e Invalid: apagado y en 1",
+   "El Ring Timeout del grupo, para que suene más tiempo",
+   "Agregar una tecla * sin destino que absorba los dígitos"
+  ],
+  "answer": 1,
+  "why": "Es el aviso de opción inválida: con marcar internos prendido el IVR espera un número, y un dígito que no es tecla ni interno lo dispara. Una tecla sin destino es una entrada incompleta y no se guarda."
+ },
+ {
+  "q": "En una llamada que entra por FXO, el IVR recibe un dígito que nadie marcó. ¿De dónde puede salir?",
+  "options": [
+   "Del Digit Timeout del IVR, que agrega un dígito al vencer",
+   "De la ruta entrante con patrón _X.",
+   "De un DTMF falso: ruido, eco o voz que el detector del FXO toma por un par de tonos",
+   "Del Response Timeout Prompt"
+  ],
+  "answer": 2,
+  "why": "En una línea analógica las teclas llegan como tonos dentro del audio y el FXO las detecta; ruido, eco o voz (talk-off) pueden engañar al detector."
+ },
+ {
+  "q": "El cliente ahora quiere \"1 ventas, 2 administración\" en ese mismo IVR. ¿Qué hacés con marcar internos?",
+  "options": [
+   "Lo dejás apagado y armás las teclas 1 y 2 en Key Pressing Events",
+   "Lo prendés, porque sin eso las teclas no funcionan",
+   "Lo prendés solo para Ring Group",
+   "Lo reemplazás por un Announcement con dos destinos"
+  ],
+  "answer": 0,
+  "why": "Las teclas numeradas funcionan con marcar internos apagado; esa opción sirve para que el que llama disque un interno directo."
+ }
+]

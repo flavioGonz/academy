@@ -40,3 +40,10 @@ Cómo se enseña: la página comercial de Antel (planes TSIP), la guía de imple
 - T24 La troncal por IP en la UCM: Peer SIP Trunk, OPTIONS de Antel, modo Dual, rutas estáticas, topologías y NAT
 - T25 Numeración de Uruguay y caller ID con Antel: patrones salientes, formato entrante, número de salida
 - T26 Diagnóstico de la troncal SIP: captura, respuestas 401, 403, 404, 408 y 484, pruebas de entrega
+
+## Lección agregada en octubre de 2026: IVR que solo anuncia
+Cómo se enseña: el manual del UCM630x y del UCM630xA (IVR, Announcement, Custom Prompt, CDR), la guía de IVR de Grandstream, la documentación de Asterisk sobre Background(), WaitExten() y las extensiones i y t, y casos de foro de DTMF detectado de más o de menos en líneas analógicas. Notas: research/notes/d.md.
+- T27 El IVR por dentro: Prompt, Digit Timeout, Response Timeout, repeticiones, Timeout e Invalid, Key Pressing Events
+- T28 Marcar internos desde el IVR (Dial Other Extensions) y la alternativa Announcement
+- T29 DTMF falso en líneas analógicas: talk-off, eco, detección en el FXO, inband y RFC 4733
+- T30 Medir y verificar: llamada de prueba, CDR (Action Type, Call Time, Talk Time), Analog Record Trace

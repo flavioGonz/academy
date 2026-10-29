@@ -1,0 +1,27 @@
+{
+ "prioridad": 3,
+ "insertar": [
+  {"id": "20", "despues_de": "7"}
+ ],
+ "lecciones": {
+  "20": {
+   "objetivos": [
+    "Al terminar vas a poder armar un IVR que solo pasa la bienvenida y deriva a un grupo, sin teclas ni marcar internos, con el Timeout al grupo y las repeticiones en 1.",
+    "Al terminar vas a poder explicar de dónde sale el «Lo siento, no lo entiendo»: un dígito que no es tecla ni interno, a veces un DTMF falso de la línea analógica.",
+    "Al terminar vas a poder medir en el CDR cuánto espera el que llama en el IVR y decidir entre el IVR y un Announcement para una bienvenida."
+   ],
+   "conecta": "En IVR con horario cada tecla tenía su destino y el silencio iba a recepción. Muchos comercios no quieren menú: un saludo y que suene el grupo. Ahí el IVR se porta distinto, sobre todo en una línea analógica.",
+   "sigue": "Hay una llamada que no entra por el troncal sino por la puerta. La próxima suma el portero GDS a la central, con el timbre llamando a un grupo como el 6000 que usaste acá.",
+   "requisitos": [
+    "8",
+    "7"
+   ]
+  },
+  "7": {
+   "sigue": "Un pedido muy común no lleva menú: un saludo y que suene el grupo. La próxima arma ese IVR que solo anuncia y resuelve el «Lo siento, no lo entiendo» que aparece con marcar internos prendido."
+  },
+  "12": {
+   "conecta": "En IVR que solo anuncia la llamada terminó en el grupo 6000 y el problema era un DTMF que nadie marcó. El portero también llama al 6000, y acá el DTMF sí importa: un PIN marcado abre la puerta, con el RFC4733 que quedó en Extensión sólida."
+  }
+ }
+}

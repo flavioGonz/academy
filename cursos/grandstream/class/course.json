@@ -18,7 +18,7 @@
     "Aprovisionar teléfonos con Zero Config y crear extensiones con contraseña aleatoria",
     "Registrar un troncal SIP y armar rutas salientes con privilegios y PIN, y entrantes por DID con ByDID y Strip",
     "Conectar la Troncal SIP de Antel por IP con un Peer SIP Trunk, el modo Dual y una ruta estática, con caller ID de la troncal y rutas con el plan de numeración de Uruguay",
-    "Configurar IVR con horarios, grupos de llamada, colas con desborde y buzón de voz",
+    "Configurar IVR con horarios, un IVR que solo anuncia y deriva sin avisos de opción inválida, grupos de llamada, colas con desborde y buzón de voz",
     "Conectar internos remotos y porteros GDS37xx a la central, y cerrarla con Fail2ban, listas blancas y Geo-IP",
     "Diagnosticar audio de un solo lado con Ethernet Capture leyendo el SDP",
     "Conectar líneas analógicas de Antel por FXO, con tonos de Uruguay, identificador y rutas hasta un teléfono, un grupo o un IVR, y diagnosticar la línea que no entra, no corta o hace loop"
@@ -43,6 +43,7 @@
         5,
         6,
         7,
+        20,
         8
       ]
     },
@@ -94,9 +95,14 @@
       "topic": "Detección de corte en líneas analógicas",
       "sides": "El manual de Grandstream sube Busy Tone Count a 4, 6 u 8 para evitar cortes al azar; Yeastar avisa que muy alto no detecta, y en Asterisk la detección de ocupado cortó salientes buenas. La inversión de polaridad corta bien donde la red la manda y genera entrantes fantasma donde no.",
       "decide": "Correr PSTN Detection con la línea real, activar polaridad solo si la detecta y probar colgando del otro lado mirando cuánto tarda el FXO en liberarse."
+    },
+    {
+      "topic": "Bienvenida y al grupo: IVR o Announcement",
+      "sides": "La guía de IVR de Grandstream enseña el IVR con menú; el manual actual suma Advanced Call Features > Announcement, un audio que no se saltea y pasa solo al destino. Ninguna fuente compara las dos.",
+      "decide": "Si el firmware tiene Announcement y no se piensan opciones, Announcement desde la ruta entrante. Si van a venir teclas o el IVR ya existe, IVR sin marcar internos, Timeout al grupo y repeticiones en 1."
     }
   ],
-  "sources_count": 64,
+  "sources_count": 75,
   "lessons": [
     {
       "n": 1,
@@ -211,6 +217,12 @@
       "dir": "19-troncal-sip-antel",
       "handle": "Troncal SIP de Antel",
       "summary": "Peer SIP Trunk por IP, OPTIONS de Antel con 200 OK, modo Dual con ruta estática, caller ID de la troncal y plan de Uruguay."
+    },
+    {
+      "n": 20,
+      "dir": "20-ivr-que-solo-anuncia",
+      "handle": "IVR que solo anuncia",
+      "summary": "Bienvenida y al grupo sin marcar internos, Timeout al grupo, repeticiones en 1, DTMF falso de la línea analógica y Announcement como alternativa."
     }
   ]
 }

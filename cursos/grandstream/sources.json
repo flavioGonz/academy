@@ -77,6 +77,16 @@
   "https://datatracker.ietf.org/doc/html/rfc5626",
   "https://datatracker.ietf.org/doc/html/rfc4028",
   "https://datatracker.ietf.org/doc/html/rfc3264",
-  "https://manual.mikrotik.com/docs/7.25/firewall-and-quality-of-service/firewall/nat"
+  "https://manual.mikrotik.com/docs/7.25/firewall-and-quality-of-service/firewall/nat",
+  "https://documentation.grandstream.com/knowledge-base/how-to-use-ivr/",
+  "https://docs.asterisk.org/Deployment/Basic-PBX-Functionality/Auto-attendant-and-IVR-Menus/Background-and-WaitExten-Applications/",
+  "https://docs.asterisk.org/Deployment/Basic-PBX-Functionality/Auto-attendant-and-IVR-Menus/Handling-Special-Extensions",
+  "https://community.freepbx.org/t/dtmf-in-ivr-on-analog-lines/14916",
+  "https://community.freepbx.org/t/ivr-invalid-and-timeout-routing-issues/15994",
+  "https://community.asterisk.org/t/my-elastix-stopped-detecting-dtmf-tones-over-digium-fxo-port/43785",
+  "https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling",
+  "https://en.wikipedia.org/wiki/Falsing",
+  "https://wiki.ipitomy.com/wiki/Grandstream_FXO_FAQ",
+  "https://issues-archive.asterisk.org/ASTERISK-22433"
  ]
 }

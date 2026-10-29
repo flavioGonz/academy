@@ -1,0 +1,24 @@
+A: Lección veinte. IVR que solo anuncia. Un caso de hoy, en un comercio con líneas analógicas de Antel.
+B: ¿Qué pedía el cliente?
+A: Lo más simple: un saludo y después el grupo de teléfonos. Nada de marque uno.
+B: Y el técnico armó un IVR.
+A: El siete mil, con la bienvenida y el grupo como destino. Pero al terminar el audio, el que llamaba escuchaba "Lo siento, no lo entiendo". A veces tres veces.
+B: [suspiro] Sin haber tocado una tecla.
+A: Exacto. Es el aviso de opción inválida: al IVR le llegó un dígito que no era tecla ni interno.
+B: ¿Y de dónde salió?
+A: De la línea analógica. Esa línea ya venía con ruido y eco, y el detector del FXO a veces lo toma por un tono. Cuando es la voz la que lo engaña, se llama talk-off.
+B: Pero un dígito suelto no rompe todo.
+A: No, se juntaron tres cosas. Marcar internos prendido, Dial Other Extensions: el IVR esperaba que alguien discara un número. Ninguna tecla, solo Timeout e Invalid al grupo. Y las repeticiones en tres.
+B: Agarra el dígito falso, busca un interno, no existe, aviso y vuelta a empezar.
+A: Hasta tres veces antes del grupo.
+B: ¿Qué dicen las fuentes?
+A: Los manuales de la UCM y la guía de IVR de Grandstream coinciden: después de las repeticiones va al destino o corta. Y Asterisk, que está por debajo, manda el dígito que no encuentra a la extensión i, la de inválido. Qué hace la UCM con un dígito sin teclas no lo dice nadie; eso salió de la obra.
+B: ¿La receta?
+A: Marcar internos apagado, Timeout al grupo, repeticiones en uno y ninguna tecla sin destino. Si molesta el aviso de vencimiento, va un audio de silencio.
+B: ¿Y si mañana quieren uno ventas, dos administración?
+A: Teclas numeradas, y marcar internos sigue apagado.
+B: ¿Algo más directo para un saludo?
+A: En el firmware actual, Announcement: un audio que no se saltea y pasa solo al destino.
+B: ¿Laboratorio?
+A: Veinte minutos. IVR con el error, un cinco durante el audio para simular el falso, el arreglo y el CDR para medir cuánto esperó el que llamaba.
+B: Y el saludo vuelve a ser solo un saludo.
