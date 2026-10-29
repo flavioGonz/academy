@@ -1,7 +1,7 @@
 """Lección 2 · Usuarios propios: principal + pasos 2, 3 y 4."""
 from _mt import *
 
-K = "MikroTik · Lección 2"
+K = "MikroTik"
 
 # ------------------------------------------------------------------ 2.svg principal
 c = Canvas(K, "Un usuario por técnico, un grupo por rol")

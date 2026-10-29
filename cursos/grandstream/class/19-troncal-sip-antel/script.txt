@@ -1,0 +1,18 @@
+A: Lección diecinueve. Troncal SIP de Antel. La que más vamos a instalar en clientes nuevos.
+B: Y la que más confunde, porque uno viene de la lección cuatro buscando usuario y contraseña.
+A: Y no hay. La troncal de Antel va por IP. Te entrega un puerto RJ cuarenta y cinco con una IP para tu central, un gateway, la IP de su servidor SIP, los números y los canales. Los planes van de ocho a ciento ochenta llamadas simultáneas, sobre fibra.
+B: O sea que en la UCM no es Register.
+A: No. Es Peer SIP Trunk, con la IP del servidor de Antel en Host Name. Y el latido va al revés: Antel le manda OPTIONS a tu central y espera un doscientos OK.
+B: ¿Eso lo dice Antel?
+A: La página de Antel no publica nada técnico. Lo dicen un integrador uruguayo que escribió una guía y dos foros, uno de 3CX y otro de FreePBX. Los tres coinciden: sin registro, por IP, con OPTIONS de Antel.
+B: ¿Y lo del foro de FreePBX?
+A: [risas] Buenísimo. La central contestaba cuatrocientos uno a cada OPTIONS, porque el troncal esperaba autenticación. Antel pregunta si estás vivo y vos le pedís la contraseña.
+B: Clásico. ¿Y lo conecto al switch del cliente?
+A: Mejor directo. Modo Dual: la red del cliente en un puerto, Antel en el otro, y una ruta estática para que lo de Antel salga por ahí. Sin NAT en el medio, no hay ALG que te rompa el audio.
+B: ¿Y la salida?
+A: Patrones de Uruguay: fijos con dos y con cuatro, celulares con cero nueve, el novecientos once sin PIN. Y siempre un número de la troncal como caller ID; si no, Antel la rechaza o la saca con el número por defecto.
+B: ¿Y el número que entra, cómo llega?
+A: Ninguna fuente lo dice. Una ruta que agarre todo, una llamada desde un celular, y lo mirás en el CDR.
+B: El laboratorio, entonces.
+A: Veinticinco minutos: planilla, modo Dual, ruta, troncal, captura del OPTIONS y las pruebas. Sin troncal real, otra UCM hace de Antel.
+B: Y el día de la obra ya sabés qué pedir antes de tocar nada.

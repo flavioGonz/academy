@@ -1,7 +1,7 @@
 """Lección 9 · Nombre, no puerta: principal + pasos 1 y 3."""
 from _mt import *
 
-K = "MikroTik · Lección 9"
+K = "MikroTik"
 
 # ------------------------------------------------------------------ 9.svg principal
 c = Canvas(K, "El nombre encuentra al router, no le abre la puerta")
@@ -25,7 +25,7 @@ c.add(Cable(p.right(), (RX - 30, 335), kind="alert"))
 c.add(mark(700, 323, ok=False))
 c.add(text(600, 370, "conexión entrante: drop", 15, 600, ALERT, FB))
 c.add(caption(48, 470, "Para entrar de verdad"))
-c.add(card(48, 488, 540, 120, "Túnel (lección 8)", "WireGuard con su puerto abierto en input, o un túnel saliente a un VPS.", kind="ok", icon="tunnel"))
+c.add(card(48, 488, 540, 120, "Túnel (lección 29)", "WireGuard con su puerto abierto en input, o un túnel saliente a un VPS.", kind="ok", icon="tunnel"))
 c.add(card(612, 488, 540, 120, "Back To Home", "WireGuard por los relays de MikroTik. Anda aunque no haya IP pública.", kind="ok", icon="cloud"))
 save(c, "9.svg")
 
@@ -47,7 +47,7 @@ save(c, "9-paso1.svg")
 # ------------------------------------------------------------------ 9-paso3.svg
 c = Canvas(K + " · Paso 3", "IP directa, NAT del módem o CGNAT")
 cases = [("IP pública directa", "ok", ["Internet", "MikroTik"], "203.0.113.10", "203.0.113.10", "=",
-          "Se puede publicar con cuidado (lección 10)."),
+          "Se puede publicar con cuidado (lección 32)."),
          ("NAT del módem", "warn", ["Internet", "Módem · 203.0.113.10", "MikroTik"], "192.168.1.2", "203.0.113.10", "≠",
           "Módem en modo bridge, o reenvío también en el módem."),
          ("CGNAT del proveedor", "alert", ["Internet", "NAT del proveedor", "MikroTik"], "100.64.12.34", "otra IP", "≠",

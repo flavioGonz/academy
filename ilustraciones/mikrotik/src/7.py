@@ -1,7 +1,7 @@
 """Lección 7 · Actualizar en orden: principal + pasos 3 y 4."""
 from _mt import *
 
-K = "MikroTik · Lección 7"
+K = "MikroTik"
 
 # ------------------------------------------------------------------ 7.svg principal
 c = Canvas(K, "Backup, RouterOS, RouterBOOT: en ese orden")

@@ -1,7 +1,7 @@
 """Lección 18 · Cloud a fondo."""
 from _comun_12_22 import *
 
-K = "MikroTik · Lección 18"
+K = "MikroTik"
 
 # ---------------------------------------------------------------- principal
 c = Canvas(K, "DDNS: el nombre sigue a la IP, no abre la puerta")
@@ -18,8 +18,8 @@ c.add(Arrow(cl.bottom(), (805, 296), bend="straight"))
 nb = c.add(Laptop(48, 430, "Técnico", "resuelve el nombre", w=300))
 c.add(Arrow(nb.right(), (554, 340), "1 · resuelve", label_at=.5, label_dy=-6, bend="auto"))
 c.add(Arrow(nb.top(), (rt.x + 150, rt.y + rt.h + 6), "2 · intenta entrar", kind="alert", label_at=.5, label_dy=0, bend="straight"))
-c.add(Note(560, 420, 592, "Llega a la IP, pero el firewall por defecto sigue descartando lo que entra de internet. Publicar un servicio es otra decisión (lección 10).", title="El nombre no abre nada", kind="alert"))
-c.add(Note(48, 560, 1104, "Detrás de CGNAT el nombre apunta a una IP compartida del proveedor: para entrar, Back To Home (lección 19) o un concentrador (lección 20).", kind="warn"))
+c.add(Note(560, 420, 592, "Llega a la IP, pero el firewall por defecto sigue descartando lo que entra de internet. Publicar un servicio es otra decisión (lección 32).", title="El nombre no abre nada", kind="alert"))
+c.add(Note(48, 560, 1104, "Detrás de CGNAT el nombre apunta a una IP compartida del proveedor: para entrar, Back To Home (lección 30) o un concentrador (lección 31).", kind="warn"))
 save(c, "18.svg")
 
 # ---------------------------------------------------------------- paso 5: dos WAN

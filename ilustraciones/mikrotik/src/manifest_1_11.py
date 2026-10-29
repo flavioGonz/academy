@@ -29,7 +29,7 @@ M["1"] = {
     "concepts": [
         {"name": "Entrar por MAC (MAC-WinBox)",
          "para_que": "Sirve para administrar un MikroTik aunque no tenga IP, tenga una IP de otra red o la configuración IP esté rota. WinBox habla con el equipo en capa 2, por su dirección física, así que no depende de ruteo ni de DHCP.",
-         "como": "Conectás la notebook a un puerto LAN, abrís WinBox, vas a Neighbors y hacés clic en la MAC en vez de la IP. Solo funciona dentro del mismo segmento: si hay un router en el medio, la MAC no llega. En producción conviene dejarlo habilitado solo hacia la lista LAN (lección 3).",
+         "como": "Conectás la notebook a un puerto LAN, abrís WinBox, vas a Neighbors y hacés clic en la MAC en vez de la IP. Solo funciona dentro del mismo segmento: si hay un router en el medio, la MAC no llega. En producción conviene dejarlo habilitado solo hacia la lista LAN (lección 20).",
          "ejemplo": "Llegás a un edificio en Pocitos donde otro instalador dejó el router con una IP fija de un rango que nadie anotó. Enchufás la notebook en ether2, lo ves en Neighbors, entrás por la MAC y en un minuto `/ip/address/print` te dice qué IP tiene."},
         {"name": "Configuración por defecto (defconf)",
          "para_que": "MikroTik la incluye para que un equipo salga de la caja funcionando y protegido: ether1 como WAN con cliente DHCP, el resto en un bridge con 192.168.88.1, servidor DHCP y un firewall que bloquea lo que entra por la WAN. Borrarla quita todas esas reglas de seguridad de un saque.",
@@ -37,7 +37,7 @@ M["1"] = {
          "ejemplo": "En un local de cobranzas en Ciudad Vieja ponés un hAP nuevo: dejás la defconf y agregás tus reglas arriba del drop. Si el proveedor después pasa a PPPoE, con `/interface/list/member/add list=WAN interface=pppoe-out1` el firewall sigue protegiendo igual."},
         {"name": "Export inicial: la foto de cómo estaba",
          "para_que": "Deja por escrito cómo estaba el equipo antes de que lo tocaras. Si algo deja de andar, comparás contra ese archivo y ves qué cambió, sin depender de la memoria de nadie.",
-         "como": "Apenas entrás, antes del primer cambio: `/export file=inicial`. Queda un .rsc de texto en Files que bajás a la notebook y guardás en el legajo del cliente. El export común no incluye contraseñas de usuarios (la lección 6 lo profundiza).",
+         "como": "Apenas entrás, antes del primer cambio: `/export file=inicial`. Queda un .rsc de texto en Files que bajás a la notebook y guardás en el legajo del cliente. El export común no incluye contraseñas de usuarios (la lección 3 lo profundiza).",
          "ejemplo": "Te toca un equipo heredado en una clínica de Cordón y el cliente dice que antes andaba la cámara de la puerta. Comparás el `inicial.rsc` del día que lo recibiste con un export de hoy y ves enseguida qué regla de NAT desapareció."},
     ],
     "teoria_md": """### Un poco de historia
@@ -88,7 +88,7 @@ M["2"] = {
          "ejemplo": "La mesa de ayuda que atiende un barrio privado entra con el grupo monitoreo: puede ver si el enlace del portón está caído, pero no puede reiniciar el router en plena hora de entrada de autos."},
         {"name": "Limitar la cuenta por origen (address)",
          "para_que": "Restringe desde qué direcciones puede entrar cada cuenta. Aunque alguien consiga la clave, si no está en la red permitida no entra.",
-         "como": "Agregás `address=` al usuario con la red de gestión o la del túnel VPN, por ejemplo `address=192.168.88.0/24`. Es una segunda capa: el firewall (lección 4) corta antes, la restricción del usuario cubre si algo del firewall falla.",
+         "como": "Agregás `address=` al usuario con la red de gestión o la del túnel VPN, por ejemplo `address=192.168.88.0/24`. Es una segunda capa: el firewall (lección 21) corta antes, la restricción del usuario cubre si algo del firewall falla.",
          "ejemplo": "Un cliente quiere mirar su propio router: le creás una cuenta de monitoreo limitada a la IP de la PC de su oficina. Si esa clave termina en un papelito pegado al monitor, desde afuera de la LAN no sirve."},
         {"name": "El signo $ en las contraseñas",
          "para_que": "En la terminal de RouterOS, un $ dentro de comillas arranca el nombre de una variable. Si la variable no existe, se reemplaza por nada y la contraseña queda más corta, sin ningún aviso.",
@@ -137,7 +137,7 @@ M["3"] = {
     "concepts": [
         {"name": "Servicios IP del router",
          "para_que": "Cada servicio (WinBox, SSH, API, telnet, ftp, www) es una puerta para administrar el router. Existen para dar distintas formas de gestión, pero cada uno que escucha es algo más que se puede escanear y atacar.",
-         "como": "Revisás `/ip/service/print`, apagás lo que no usás y a lo que queda le ponés `available-from` con la red de gestión. Ese filtro corta la conexión pero el puerto se sigue viendo: para esconderlo, drop en la cadena input (lección 4).",
+         "como": "Revisás `/ip/service/print`, apagás lo que no usás y a lo que queda le ponés `available-from` con la red de gestión. Ese filtro corta la conexión pero el puerto se sigue viendo: para esconderlo, drop en la cadena input (lección 21).",
          "ejemplo": "En un depósito con CCTV, el router quedó con telnet y www abiertos desde la instalación. Los apagás y dejás WinBox y SSH solo desde la LAN y la VPN: lo que queda escuchando es solo lo que vos usás."},
         {"name": "MAC server y descubrimiento de vecinos",
          "para_que": "Permiten encontrar y administrar el equipo en capa 2, sin IP. En la LAN te salvan (lección 1); hacia el proveedor no aportan nada y le muestran tu equipo, con nombre y versión, a quien esté del otro lado.",
@@ -440,7 +440,7 @@ M["9"] = {
         {"name": "CGNAT y Back To Home",
          "para_que": "Con CGNAT el proveedor comparte una IP pública entre muchos clientes y nadie de afuera puede iniciar una conexión hacia el router: no hay port forwarding posible. Back To Home lo resuelve con WireGuard a través de relays de MikroTik, siempre abierto desde el router.",
          "como": "Detrás de CGNAT, las opciones son un túnel saliente a un equipo con IP fija o Back To Home (RouterOS 7.12 o posterior, CPU ARM, ARM64 o TILE). Por el relay puede ir más lento, y el tráfico va cifrado de punta a punta.",
-         "ejemplo": "Una casa de playa con internet 4G, con la WAN en 100.64.x.x, quiere ver las cámaras. Le explicás que abrir puertos no va a funcionar y configurás Back To Home o un túnel saliente a un concentrador (lección 20)."},
+         "ejemplo": "Una casa de playa con internet 4G, con la WAN en 100.64.x.x, quiere ver las cámaras. Le explicás que abrir puertos no va a funcionar y configurás Back To Home o un túnel saliente a un concentrador (lección 31)."},
     ],
     "teoria_md": """### Un poco de historia
 
@@ -480,7 +480,7 @@ M["10"] = {
          "ejemplo": "La empresa de monitoreo de un cliente sale siempre por 203.0.113.25. Publicás solo el TCP 8000 del NVR para esa IP, con el comentario revisar 2027-04, y en abril confirmás si sigue siendo la misma."},
         {"name": "Lo que no se publica nunca",
          "para_que": "Los puertos del propio router (80, 443, 8291) y todos los puertos del NVR por las dudas son lo primero que buscan los escaneos automáticos. Exponerlos convierte un acceso puntual en una puerta grande.",
-         "como": "Averiguá qué puerto usa de verdad la app del NVR (8000 es solo un ejemplo) y publicá ese. Para entrar al router desde afuera, VPN (lección 8).",
+         "como": "Averiguá qué puerto usa de verdad la app del NVR (8000 es solo un ejemplo) y publicá ese. Para entrar al router desde afuera, VPN (lección 29).",
          "ejemplo": "Un instalador anterior dejó publicado un rango enorme de puertos hacia el NVR de una clínica porque la app no andaba. Lo reemplazás por una sola regla al puerto real, para la IP de la central, y la app sigue funcionando."},
         {"name": "Connection tracking: limpiar después de cambiar NAT",
          "para_que": "NAT solo mira el primer paquete de cada conexión; después el router recuerda qué hizo con ella. Por eso una regla nueva parece no andar: las conexiones viejas siguen con la decisión anterior.",

@@ -1,7 +1,7 @@
 """Lección 15 · PPPoE con Antel."""
 from _comun_12_22 import *
 
-K = "MikroTik · Lección 15"
+K = "MikroTik"
 
 # ---------------------------------------------------------------- principal: capas de la WAN PPPoE
 c = Canvas(K, "Con PPPoE, la WAN pasa a ser pppoe-antel")

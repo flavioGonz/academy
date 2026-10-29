@@ -1,10 +1,10 @@
 """Lección 44 · Theme del portero: ilustración principal y pasos 3 y 6.
-Todo sale de card.md de la lección 44 y de research/notes/f.md (nota de themes por modelo, guías de pantalla
+Todo sale de card.md de la lección 38 y de research/notes/f.md (nota de themes por modelo, guías de pantalla
 de R29, X915, S539 y E18, especificaciones de protector)."""
 from _theme import *  # noqa
 from _akv import code, panel, pill  # noqa
 
-K = "Akuvox · Lección 44"
+K = "Akuvox"
 
 # ---------------------------------------------------------------- principal
 c = Canvas(K, "Un theme por tipo de acceso")

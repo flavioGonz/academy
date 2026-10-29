@@ -2,7 +2,7 @@ import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/akuvox/s
 from _cat import *
 
 # ---------------------------------------------------------------- 23.svg: X912 y X910
-c = Canvas("Akuvox · Lección 23", "X912 y X910: pantalla antivandálica o un botón")
+c = Canvas("Akuvox", "X912 y X910: pantalla antivandálica o un botón")
 c.add(portero(60, 150, "pantalla", 0.86, "X912", "acero · táctil"))
 c.add(portero(240, 150, "boton", 0.86, "X910", "un botón"))
 c.add(text(181, 450, "X912 también en versión", 15, 400, INK3, FB, anchor="middle"))
@@ -23,7 +23,7 @@ c.add(Note(452, 126 + H + 18, W, "X910 con PoE af anda, pero su salida de 12 V n
 save(c, "23.svg")
 
 # ---------------------------------------------------------------- 23-paso1: sacar la IP
-c = Canvas("Akuvox · Lección 23 · Paso 1", "Cómo te dice la IP cada uno")
+c = Canvas("Akuvox · Paso 1", "Cómo te dice la IP cada uno")
 c.add(text(48, 168, "X912", 22, 700, INK, FD))
 c.add(screen_flow(160, 130, [("ícono de llave", "🔑" if False else "llave"), ("2396", "2396"), ("Dial", "IP")], w=250, h=120, gap=50))
 c.add(text(48, 420, "X910", 22, 700, INK, FD))
@@ -37,7 +37,7 @@ c.add(Note(900, 380, 252, "Paso 2: en la web, el firmware empieza con 912. o 291
 save(c, "23-paso1.svg")
 
 # ---------------------------------------------------------------- 23-paso4: medir con la carga
-c = Canvas("Akuvox · Lección 23 · Paso 4", "Medí los 12 V con la cerradura conectada")
+c = Canvas("Akuvox · Paso 4", "Medí los 12 V con la cerradura conectada")
 c.add(panel(48, 126, 540, 430, "En vacío", "warn"))
 c.add(portero(80, 186, "pantalla", 0.72))
 c.add(tester(330, 170, "12 V", None, None))

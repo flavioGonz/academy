@@ -2,7 +2,7 @@
 """Lección 19 · teoría: el primer bloque del firmware es el código del modelo; la planilla se completa desde la web."""
 from _anim_akuvox_15_28 import *
 
-a = new(24, "AKUVOX · LECCIÓN 19", "El firmware dice qué modelo tenés enfrente")
+a = new(24, "AKUVOX", "El firmware dice qué modelo tenés enfrente")
 a.steps([
     "En la web del equipo, el firmware empieza con el código del modelo: 29 es R29.",
     "915 es X915. El primer bloque alcanza para ubicarlo en la planilla.",

@@ -3,7 +3,7 @@ from _akv import *
 NOLIG = "<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>"
 
 # ---------- 13.svg: el firmware decide la URL
-c = Canvas("Akuvox · Lección 13", "Leé el firmware y después elegí la URL")
+c = Canvas("Akuvox", "Leé el firmware y después elegí la URL")
 c.add(NOLIG)
 c.add(Window(48, 140, 420, 200, "Web del portero", path="Status > Basic > Product Information", rows=[("Firmware", "29.30.10.x")], hl=0))
 c.add(text(68, 300, "tercer bloque: 10", 17, 600, WARN, FM))
@@ -25,7 +25,7 @@ c.add(Note(48, 500, 420, "Apagar la alta seguridad para usar la URL vieja funcio
 save(c, "13.svg")
 
 # ---------- 13-paso3.svg: habilitar Open Relay via HTTP
-c = Canvas("Akuvox · Lección 13 · Paso 3", "Habilitá Open Relay via HTTP con usuario propio")
+c = Canvas("Akuvox · Paso 3", "Habilitá Open Relay via HTTP con usuario propio")
 c.add(Window(48, 140, 620, 300, "Web del portero", path="Intercom > Relay (R29) · Access Control > Relay (E18)",
              rows=[("Open Relay via HTTP", "Enabled"), ("Username", "abre-lab"), ("Password", "Ejemplo-Http-2026"), ("Session Check", "apagado")], hl=3))
 c.add(Step(48, 140, 3))
@@ -35,7 +35,7 @@ c.add(Note(48, 480, 620, "Probalo con una lámpara o una cerradura de banco, no 
 save(c, "13-paso3.svg")
 
 # ---------- 13-paso4.svg: anatomía de la URL
-c = Canvas("Akuvox · Lección 13 · Paso 4", "Cada parte de la URL hace una cosa")
+c = Canvas("Akuvox · Paso 4", "Cada parte de la URL hace una cosa")
 c.add(NOLIG)
 parts = [("http://", "#7FA6C9"), ("abre-lab:Ejemplo-Http-2026", "#F3B562"), ("@192.168.88.21", "#7FD3F0"),
          ("/fcgi/OpenDoor", "#8FE3B5"), ("?action=OpenDoor", "#D9E9F8"), ("&DoorNum=1", "#FF9F8A")]

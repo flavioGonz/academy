@@ -2,7 +2,7 @@
 """Lección 12 · teoría: Torch mira antes del firewall; el log de una regla de drop dice qué se descarta."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=24, kicker="MIKROTIK · LECCIÓN 12 · CÓMO FUNCIONA", title="Torch mira la interfaz; el log dice qué descarta el firewall")
+a = Anim(T=24, kicker="MIKROTIK · CÓMO FUNCIONA", title="Torch mira la interfaz; el log dice qué descarta el firewall")
 a.steps([
     "Torch lee lo que entra por la interfaz y lo agrupa en flujos, con su tasa.",
     "Lo ve antes del firewall: también lo que después se descarta.",

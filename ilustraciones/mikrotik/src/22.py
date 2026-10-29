@@ -1,7 +1,7 @@
 """Lección 22 · IPsec entre marcas."""
 from _comun_12_22 import *
 
-K = "MikroTik · Lección 22"
+K = "MikroTik"
 
 # ---------------------------------------------------------------- principal: fases y policies espejo
 c = Canvas(K, "IPsec: dos fases y policies que se espejan")

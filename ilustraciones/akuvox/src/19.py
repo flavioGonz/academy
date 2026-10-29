@@ -2,7 +2,7 @@ import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/akuvox/s
 from _cat import *
 
 # ---------------------------------------------------------------- 19.svg: qué familia va en cada entrada
-c = Canvas("Akuvox · Lección 19", "¿Qué familia de portero va en cada entrada?")
+c = Canvas("Akuvox", "¿Qué familia de portero va en cada entrada?")
 cols = [("Casa u oficina chica", "boton", "un botón: un destino", ["E13S · E12", "X910", "R20A · R25A"], "house"),
         ("Edificio con varios destinos", "teclado", "teclado o botones", ["R20K · R20K-L", "R20B + MD06/MD12", "R28"], "building"),
         ("Acceso con pantalla y rostro", "pantalla", "pantalla táctil, rostro", ["R29 · S535", "X912", "E18 · E16"], "building"),
@@ -22,11 +22,11 @@ for i, (t, kind, crit, models, pic) in enumerate(cols):
             c.add(text(x + 131, 402 + k * 34, m, 18, 600, INK, FM, anchor="middle"))
 c.add(text(48 + 3 * 280 + 131, 470, "(edificio de categoría)", 15, 400, INK3, FB, anchor="middle"))
 c.add(Note(48, 578, 640, "Orientación para arrancar la cotización: la decisión final sale de la obra y de la ficha de la versión.", kind="info", size=15))
-c.add(Note(708, 578, 444, "Portón con cámara de patentes Hikvision: R29 o X912 (lección 18).", kind="ok", size=15))
+c.add(Note(708, 578, 444, "Portón con cámara de patentes Hikvision: R29 o X912 (lección 19).", kind="ok", size=15))
 save(c, "19.svg")
 
 # ---------------------------------------------------------------- 19-paso2: la planilla y de dónde sale cada columna
-c = Canvas("Akuvox · Lección 19 · Pasos 2 y 3", "Cada columna de la planilla tiene su fuente")
+c = Canvas("Akuvox · Pasos 2 y 3", "Cada columna de la planilla tiene su fuente")
 srcs = [(553, "tabla de alimentación"), (733, "tabla de relé"), (933, "menú de akuvox.com")]
 for x, s in srcs:
     c.add(pill(x, 160, s, BLUE, WHITE, 15, False))
@@ -41,7 +41,7 @@ c.add(Note(612, 440, 540, "\"No está en el menú\" no es \"sin soporte\": antes
 save(c, "19-paso2.svg")
 
 # ---------------------------------------------------------------- 19-paso4: sufijos que cambian funciones
-c = Canvas("Akuvox · Lección 19 · Paso 4", "El sufijo cambia funciones: marcá cada versión")
+c = Canvas("Akuvox · Paso 4", "El sufijo cambia funciones: marcá cada versión")
 rows = [("R29S", "una cámara, sin Bluetooth", "gray"),
         ("R29C-L", "LTE · no acepta PoE", "warn"),
         ("R29C-T", "lector de huella", "cyan"),

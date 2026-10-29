@@ -40,7 +40,7 @@ M["29"] = {
          "ejemplo": "El cliente pide que el E21 del portón peatonal también abra la cerradura: fuente de 12 V al COM del relé, y NO o NC hacia la cerradura según lo que tenga que pasar en un corte de luz (lección 4)."},
         {"name": "La cámara del E21 en el NVR",
          "para_que": "El video de un punto de emergencia sirve después: quién apretó, a qué hora y qué pasaba. Grabarlo en el NVR lo deja junto al resto de la evidencia del edificio.",
-         "como": "Se agrega por ONVIF o por RTSP con un usuario propio, nunca con admin/admin (lección 9). Conviene el stream secundario para la grilla y el principal si se necesita detalle.",
+         "como": "Se agrega por ONVIF o por RTSP con un usuario propio, nunca con admin/admin (lección 10). Conviene el stream secundario para la grilla y el principal si se necesita detalle.",
          "ejemplo": "Un sábado alguien aprieta el E21 del subsuelo y corta; el lunes el administrador pregunta qué pasó. Con la grabación en el NVR se ve que era un chico jugando y el tema se cierra en cinco minutos."},
     ],
     "teoria_md": """### Un poco de historia
@@ -222,7 +222,7 @@ M["33"] = {
     "concepts": [
         {"name": "Credencial según la puerta",
          "para_que": "Cada puerta tiene su riesgo y su tipo de usuario. La familia A0x existe para pagar solo la credencial que hace falta: tarjeta en un depósito, PIN y tarjeta en una oficina, QR para visitas, rostro donde no se quiere que la tarjeta se preste.",
-         "como": "Mirá la tabla de métodos: A01S solo tarjeta, A02S suma PIN, A03S suma Bluetooth, A08S PIN, tarjetas, Bluetooth y QR, y A05C rostro, PIN, 13,56 MHz, Bluetooth y QR. Después cargás cada usuario con su credencial, relé y horario (lección 7).",
+         "como": "Mirá la tabla de métodos: A01S solo tarjeta, A02S suma PIN, A03S suma Bluetooth, A08S PIN, tarjetas, Bluetooth y QR, y A05C rostro, PIN, 13,56 MHz, Bluetooth y QR. Después cargás cada usuario con su credencial, relé y horario (lección 8).",
          "ejemplo": "Oficina en Ciudad Vieja: A08 en la entrada principal con PIN y tarjeta, A01S en el depósito de archivo solo con tarjeta y A05C en la sala de servidores con rostro."},
         {"name": "Tarjetas de 125 kHz y de 13,56 MHz",
          "para_que": "Son dos generaciones de tarjetas de proximidad. Las de 125 kHz son las más antiguas y siguen en muchos edificios; las de 13,56 MHz permiten autenticación con claves y usos como NFC.",
@@ -288,7 +288,7 @@ M["34"] = {
          "ejemplo": "Entrada de vidrio de una clínica en Cordón: el A15 va en el parante, abre con rostro al personal y con QR a los proveedores, y alimenta una cerradura chica desde su borne."},
         {"name": "Un WR01 donde nadie mira",
          "para_que": "El WR01 suele quedar en un gabinete en la vereda o en el poste de una barrera. Si alguien llega a sus bornes, puede activar la carga sin credencial; si llega a su red, puede intentar entrar a su web.",
-         "como": "Gabinete cerrado con llave, cables por dentro, clave web propia desde el primer día y el equipo en la VLAN de porteros (lección 11), sin puertos abiertos hacia internet.",
+         "como": "Gabinete cerrado con llave, cables por dentro, clave web propia desde el primer día y el equipo en la VLAN de porteros (lección 12), sin puertos abiertos hacia internet.",
          "ejemplo": "En un estacionamiento de Tres Cruces, el WR01 de la barrera va en un gabinete con cerradura y su puerto del switch queda en la VLAN de porteros, así un cable enchufado en el poste no llega a la red administrativa."},
     ],
     "teoria_md": """### Un poco de historia
@@ -490,7 +490,7 @@ M["38"] = {
     "concepts": [
         {"name": "Teléfono de video en el escritorio de guardia",
          "para_que": "La guardia necesita atender porteros con imagen sin depender de una PC con software ni de un celular. El R49G es un teléfono de escritorio con pantalla de 7 pulgadas y cámara que Akuvox ubica en la oficina: voz, mensajes, video y control de acceso.",
-         "como": "Se registra como extensión en la central (lección 5) y recibe las llamadas de los porteros como cualquier interno, con el video. La apertura se hace con el método de la obra, por ejemplo DTMF hacia el portero en llamada.",
+         "como": "Se registra como extensión en la central (lección 6) y recibe las llamadas de los porteros como cualquier interno, con el video. La apertura se hace con el método de la obra, por ejemplo DTMF hacia el portero en llamada.",
          "ejemplo": "Portería de un complejo de viviendas en Malvín Norte: un R49G en el mostrador atiende los tres porteros de acceso y el E21 del estacionamiento."},
         {"name": "Puertos Gigabit conmutados",
          "para_que": "Permiten poner la PC del puesto detrás del teléfono y usar un solo cable desde el rack, como se hace con los teléfonos IP de oficina.",
@@ -587,7 +587,7 @@ M["40"] = {
     "concepts": [
         {"name": "SmartPlus y la nube",
          "para_que": "Le da al residente el portero en el celular (ver, hablar, abrir y dar llaves virtuales) sin que el instalador abra puertos en el router del edificio.",
-         "como": "Los equipos y la app se conectan hacia la nube de Akuvox; el instalador configura el proyecto en la plataforma y el administrador carga residentes y accesos. Depende de internet, así que conviene un plan B local (lección 10).",
+         "como": "Los equipos y la app se conectan hacia la nube de Akuvox; el instalador configura el proyecto en la plataforma y el administrador carga residentes y accesos. Depende de internet, así que conviene un plan B local (lección 11).",
          "ejemplo": "Casa en un barrio privado con portero y monitor: SmartPlus para atender desde la oficina, y la llamada directa al monitor como respaldo si se cae internet."},
         {"name": "SDMC, gestión local de comunidades",
          "para_que": "Es para edificios o complejos donde la gestión no puede depender de internet, o donde se quiere todo en un servidor propio.",
@@ -610,7 +610,7 @@ El primero es la nube: los equipos se conectan hacia un servidor del fabricante 
 ### Cómo funciona
 La diferencia de fondo es dónde vive la base de datos de usuarios, accesos y configuración:
 
-- En la nube: los equipos inician la conexión hacia afuera, así que no hace falta abrir puertos en el router del edificio. La gestión es remota y la app del residente anda desde cualquier lugar, pero sin internet las funciones de nube se detienen; por eso existe el plan B local de la lección 10.
+- En la nube: los equipos inician la conexión hacia afuera, así que no hace falta abrir puertos en el router del edificio. La gestión es remota y la app del residente anda desde cualquier lugar, pero sin internet las funciones de nube se detienen; por eso existe el plan B local de la lección 11.
 - En local: el servidor está en el edificio y sigue funcionando sin internet. A cambio, alguien mantiene ese servidor: energía, respaldos y actualizaciones.
 
 Si un equipo recibe configuración de dos lados, cada uno puede pisar lo que hizo el otro y deja de estar claro cuál es la versión buena. Por eso se define un administrador por equipo y se anota en la ficha.
@@ -662,7 +662,7 @@ El E11 tiene además su propia historia. En marzo de 2023, Claroty Team82 public
 El método para un equipo viejo tiene tres tiempos:
 
 1. **Identificar.** El firmware A.B.C.D lo dice: A es el modelo (111 E11, 120 E20, 27 R27, 83 IT83, 115 C315, 310 C310, 92 A092 o A094), B el OEM y C la rama. Con C de 10 o más, el equipo está en la rama de alta seguridad, que cifra la comunicación, los comandos de apertura y el guardado de contraseñas.
-2. **Asegurar.** Mientras siga instalado: firmware al día, clave propia y la VLAN de porteros (lección 11), con salida solo a central y NVR y sin reenvío de puertos desde la WAN.
+2. **Asegurar.** Mientras siga instalado: firmware al día, clave propia y la VLAN de porteros (lección 12), con salida solo a central y NVR y sin reenvío de puertos desde la WAN.
 3. **Reemplazar.** Buscar en el menú vigente un equipo del mismo tipo y verificar dos tablas: la de métodos de acceso, para que acepte las credenciales que el edificio ya usa, y la de alimentación, para que le sirvan el PoE o la fuente existentes.
 
 En soporte hay diferencias que conviene recordar: los equipos tipo IT83 abren por Open Relay via HTTP y no por la API JSON, y en el C315S el relé del monitor se abría con la URL vieja y `DoorNum=0`. SR01, lectura de patentes y otras funciones piden firmwares mínimos que un equipo viejo puede no tener.

@@ -37,6 +37,15 @@ Por qué este arco: antes de rutas y menús, la central tiene que quedar con la 
 - Laboratorio: Foco, 15 min. Troncal de laboratorio, heartbeat 60 s, codecs PCMA y PCMU.
 - Regla: el troncal se prueba con llamada saliente, entrante, caller ID y una tecla en el buzón.
 
+### Lección 19. Troncal SIP de Antel (agregada en octubre de 2026)
+- Va después de Troncal registrado y antes de Patrón y privilegio: en el portal queda en el módulo "Hablar con el mundo" (orden 4, 19, 5, 6).
+- 3 de 3 fuentes que describen la troncal de Antel coinciden en que va por IP, sin registro y con OPTIONS de Antel (TH46); 2 de 2 en lo que entrega (TH47); la página de Antel da planes y condiciones, no datos técnicos (TH48). Notas: research/notes/c.md.
+- Idea: Peer SIP Trunk con el servidor de Antel en Host Name; la UCM contesta 200 OK a los OPTIONS de Antel; modo Dual con la troncal en su propio puerto y ruta estática a las redes de Antel; caller ID de la troncal en toda saliente; patrones de Uruguay.
+- Por qué importa: es la troncal que más instala IES en clientes nuevos, y el error típico es buscar usuario y contraseña o colgarla del switch del cliente detrás de un NAT.
+- Historia: el FreePBX que contestaba 401 a cada OPTIONS de Antel (https://community.freepbx.org/t/antel-sip-trunk-only-options/84614); el técnico de 3CX con ping a la IP de prueba recién al agregar rutas (https://www.3cx.com/community/threads/troncal-sip-antel-and-3cx.50040/); datos, topologías y pruebas en la guía de Simpletech (https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/); planes TSIP8 a TSIP180 (https://antel.com.uy/empresas/internet-y-fija/planes/troncal-sip); plan de numeración (https://www.itu.int/dms_pub/itu-t/oth/02/02/T02020000E00001PDFS.pdf).
+- Laboratorio: Foco, 25 min. Planilla, modo Dual, ruta estática, Peer trunk, captura del OPTIONS, entrante en dos tiempos, saliente con el plan de Uruguay, pruebas de entrega. Sin troncal real: una segunda UCM o un Asterisk hace de Antel (https://documentation.grandstream.com/knowledge-base/how-to-interconnect-multiple-ucm/).
+- Regla: la troncal de Antel se pide por escrito, se conecta directo a la central y se da por terminada con una captura del OPTIONS de Antel con su 200 OK y una saliente con el número de la troncal.
+
 ## Arco 2. Las llamadas van donde tienen que ir
 Por qué este arco: con la central en pie, el trabajo diario es rutear: quién puede marcar qué, a dónde entra cada número, qué escucha el que llama y quién atiende. Al terminar, un cliente tipo pyme queda funcionando.
 
@@ -152,6 +161,7 @@ Por qué este arco: internos remotos, routers ajenos, ataques y porteros son don
 - Orden de rutas salientes. Cómo decidir: mirar Outgoing Routing Priority en el equipo y probar con un número que matchee dos rutas.
 
 ## Huecos
+- Lección 19: Antel no publica servidor, puertos, codecs, formato del número entrante ni del saliente, ni cómo entrega la troncal en FTTH (puerto del ONT, VLAN o equipo aparte); tampoco si su servidor contesta los OPTIONS de la central ni desde cuántas IP manda señalización y audio. La lección enseña a pedirlo en la planilla y a confirmarlo en la primera captura. La guía técnica más completa es de un integrador (2018, actualizada en 2025).
 - Módulo FXO: Antel no publica tensión, frecuencia de timbre, esquema de identificador ni método de corte de su línea; las lecciones 13, 15 y 16 enseñan a medirlo y probarlo. La lista de tonos de la UIT es de 2010. No se encontró norma técnica pública de URSEC sobre la interfaz analógica.
 - GDMS sin guía técnica leída (las páginas cargan con JavaScript); se menciona en lecciones 1 y 3 sin pasos detallados.
 - GSC3570 y altavoces GSC35xx sin fuente propia; la lección 12 se centra en GDS37xx.

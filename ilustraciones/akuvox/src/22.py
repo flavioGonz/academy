@@ -2,7 +2,7 @@ import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/akuvox/s
 from _cat import *
 
 # ---------------------------------------------------------------- 22.svg: X916 y X915
-c = Canvas("Akuvox · Lección 22", "X916 y X915: los Android de acero")
+c = Canvas("Akuvox", "X916 y X915: los Android de acero")
 c.add(portero(60, 140, "pantalla_grande", 0.92, "X916", "13\" · Starlight"))
 c.add(portero(240, 160, "pantalla", 0.84, "X915", "8\""))
 c.add(pill(212, 480, "edificio de categoría", BLUE, SOFT, 15, False))
@@ -20,7 +20,7 @@ c.add(Note(452, 126 + H + 52, W, "El X916 tiene el relé más fuerte de la líne
 save(c, "22.svg")
 
 # ---------------------------------------------------------------- 22-paso3: IP65 o IP66
-c = Canvas("Akuvox · Lección 22 · Paso 3", "¿IP65 o IP66? Vale la ficha de la versión")
+c = Canvas("Akuvox · Paso 3", "¿IP65 o IP66? Vale la ficha de la versión")
 c.add(doc(48, 140, 330, 230, "Guía de selección", ["Porteros · todos los modelos", "X915", ("IP65", "warn")], "warn", None))
 c.add(doc(430, 140, 330, 230, "Ficha X915 V2.0", ["acero inoxidable · 8\"", "PoE+ · Android", ("IP66 · IK10", "ok")], "ok", None))
 c.add(arrow((760, 255), (830, 255), "ok", bend="straight"))
@@ -34,7 +34,7 @@ c.add(Note(48, 460, 1104, "Dos páginas del mismo fabricante, dos números. En u
 save(c, "22-paso3.svg")
 
 # ---------------------------------------------------------------- 22-paso4: alimentación
-c = Canvas("Akuvox · Lección 22 · Paso 4", "¿Cerradura desde el portero? Decidí la fuente")
+c = Canvas("Akuvox · Paso 4", "¿Cerradura desde el portero? Decidí la fuente")
 c.add(box(410, 130, 380, 64, "¿Cerradura desde el portero?", None, "dark", None, 19, center=True))
 c.add(arrow((470, 194), (250, 270), "flow", "no", label_dy=-6))
 c.add(arrow((730, 194), (950, 270), "flow", "sí", label_dy=-6))

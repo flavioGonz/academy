@@ -1,0 +1,27 @@
+{
+ "prioridad": 2,
+ "insertar": [
+  {"id": "19", "despues_de": "4"}
+ ],
+ "lecciones": {
+  "19": {
+   "objetivos": [
+    "Al terminar vas a poder armar la planilla de la Troncal SIP de Antel y crear su Peer SIP Trunk, sin usuario ni contraseña.",
+    "Al terminar vas a poder conectar la troncal a su propio puerto con el modo Dual y una ruta estática, y ver en una captura el OPTIONS de Antel con su 200 OK.",
+    "Al terminar vas a poder armar la entrada y la salida con el plan de Uruguay y el caller ID de la troncal, y leer un 401, 403, 404 o 484 en la captura."
+   ],
+   "conecta": "En Troncal registrado la central se presentó al proveedor con usuario y contraseña. La troncal de Antel, la que más se instala en clientes nuevos, no tiene ni una cosa ni la otra: va por IP y a su propio puerto.",
+   "sigue": "Con la troncal andando, cualquiera podría marcar cualquier cosa. La próxima decide quién puede llamar a dónde con patrones, privilegios y PIN, empezando por el plan de Uruguay que ya usaste acá.",
+   "requisitos": [
+    "1",
+    "4"
+   ]
+  },
+  "4": {
+   "sigue": "El troncal registrado es el de los proveedores con usuario y contraseña. La próxima conecta el que más se instala en Uruguay, la Troncal SIP de Antel, que va por IP y sin registro."
+  },
+  "5": {
+   "conecta": "En Troncal registrado y en Troncal SIP de Antel la central quedó conectada al proveedor, con heartbeat o con los OPTIONS de Antel para saber si sigue viva. Ahora se arman las rutas que la usan."
+  }
+ }
+}

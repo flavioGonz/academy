@@ -1,7 +1,7 @@
 """Lección 11 · Dos WAN: principal + pasos 3 y 5."""
 from _mt import *
 
-K = "MikroTik · Lección 11"
+K = "MikroTik"
 
 # ------------------------------------------------------------------ 11.svg principal
 c = Canvas(K, "Failover que mira más allá del módem")

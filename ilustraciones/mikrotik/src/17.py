@@ -1,7 +1,7 @@
 """Lección 17 · Elegir el canal."""
 from _comun_12_22 import *
 
-K = "MikroTik · Lección 17"
+K = "MikroTik"
 
 # ---------------------------------------------------------------- principal: los cuatro canales
 c = Canvas(K, "Cuatro canales: de lo más probado a lo más nuevo")

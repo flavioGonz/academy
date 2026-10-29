@@ -1,7 +1,7 @@
 from _akv import *
 
 # ---------- 10.svg: qué sigue andando sin internet
-c = Canvas("Akuvox · Lección 10", "Se corta internet: ¿qué sigue andando?")
+c = Canvas("Akuvox", "Se corta internet: ¿qué sigue andando?")
 c.add(Zone(48, 140, 640, 470, "Red local del edificio", OK))
 p = c.add(Generic(80, 190, "Portero", "PIN · tarjeta", icon="bell", w=230))
 m = c.add(Generic(420, 190, "Monitor", "atiende y abre", icon="laptop", w=230))
@@ -23,7 +23,7 @@ c.add(text(950, 580, "sin internet: no llega", 15, 600, ALERT, FB, anchor="middl
 save(c, "10.svg")
 
 # ---------- 10-paso2.svg: cuenta 1 y cuenta 2
-c = Canvas("Akuvox · Lección 10 · Paso 2", "Mirá qué cuenta usa SmartPlus y cuál la central")
+c = Canvas("Akuvox · Paso 2", "Mirá qué cuenta usa SmartPlus y cuál la central")
 c.add(Window(48, 150, 530, 190, "Account > Basic · Account 1", rows=[("Uso", "SmartPlus (nube)"), ("Register Name", "número SIP de SmartPlus"), ("Estado", "registrada en la nube")], hl=0))
 c.add(Window(622, 150, 530, 190, "Account > Basic · Account 2", rows=[("Uso", "central local"), ("Register Name", "201"), ("Server Address", "192.168.88.10")], hl=0))
 c.add(Step(48, 150, 2))
@@ -31,7 +31,7 @@ c.add(Note(48, 380, 1104, "Con SmartPlus activo, la cuenta 1 queda tomada por la
 save(c, "10-paso2.svg")
 
 # ---------- 10-paso4.svg: la tabla de entrega
-c = Canvas("Akuvox · Lección 10 · Paso 4", "Probá fila por fila con el WAN desconectado")
+c = Canvas("Akuvox · Paso 4", "Probá fila por fila con el WAN desconectado")
 rows = [["Llamada portero → monitor", "local", "no"], ["Apertura desde el monitor", "local", "no"], ["PIN / tarjeta en el portero", "local", "no"],
         ["Llamada a la app SmartPlus", "—", "sí"], ["Llave temporal nueva", "—", "sí"]]
 c.add(Table(48, 150, ["Función", "Local", "Necesita internet"], rows, [440, 200, 300], row_h=52))

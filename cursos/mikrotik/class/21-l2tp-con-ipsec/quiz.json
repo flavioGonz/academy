@@ -1,6 +1,6 @@
 [
   {
-    "q": "El servidor L2TP/IPsec funciona desde un Android pero una notebook Windows detrás del router de un hotel no conecta. ¿Qué probás?",
+    "q": "El MikroTik del cliente está detrás del módem del proveedor, con IP privada en ether1 y UDP 500 y 4500 reenviados. Desde un Android el L2TP/IPsec conecta, pero desde una notebook Windows no. ¿Qué probás?",
     "options": [
       "Pasar a PPTP",
       "Cambiar use-ipsec a no",
@@ -8,7 +8,7 @@
       "Poner AssumeUDPEncapsulationContextOnSendRule en 2 en esa notebook y reiniciar"
     ],
     "answer": 3,
-    "why": "Microsoft documenta que Windows por defecto no arma SA de IPsec con NAT-T en esos casos; con el valor 2 se permite que servidor y cliente estén detrás de NAT."
+    "why": "Microsoft documenta que, con el valor de fábrica (0), Windows no arma SA de IPsec con un servidor que está detrás de NAT; con 2 lo permite aunque cliente y servidor estén detrás de NAT. Con el servidor en IP pública no hace falta."
   },
   {
     "q": "¿Qué abrís en input para un servidor L2TP/IPsec?",

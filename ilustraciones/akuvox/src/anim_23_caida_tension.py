@@ -2,7 +2,7 @@
 """Lección 23 · teoría: con alimentación justa, la tensión cae cuando la cerradura pide corriente; se mide con carga."""
 from _anim_akuvox_15_28 import *
 
-a = new(20, "AKUVOX · LECCIÓN 23", "Medí con la cerradura conectada, durante la apertura")
+a = new(20, "AKUVOX", "Medí con la cerradura conectada, durante la apertura")
 a.steps([
     "En reposo no circula corriente: el tester marca 12 V y cualquier fuente parece buena.",
     "Al abrir, la cerradura pide corriente, que sale de la alimentación del portero.",

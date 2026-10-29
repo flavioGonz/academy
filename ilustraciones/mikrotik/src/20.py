@@ -1,7 +1,7 @@
 """Lección 20 · Concentrador CHR."""
 from _comun_12_22 import *
 
-K = "MikroTik · Lección 20"
+K = "MikroTik"
 
 # ---------------------------------------------------------------- principal
 c = Canvas(K, "Concentrador CHR: los sitios llaman al VPS")

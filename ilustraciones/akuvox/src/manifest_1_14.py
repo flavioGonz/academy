@@ -90,7 +90,7 @@ El número se lee A.B.C.D:
 - **C, rama**: 10 o más indica la rama con modo de alta seguridad.
 - **D, versión**: dentro de un mismo A, B y C, el número mayor es el más nuevo.
 
-`216.30.10.121` es entonces un E16 V2, con logo, en la rama de alta seguridad. Ese dato cambia cosas prácticas: en la rama 10 o más, algunos comandos viejos (por ejemplo la URL `/fcgi/do` de la lección 13) dejan de responder con el modo encendido.
+`216.30.10.121` es entonces un E16 V2, con logo, en la rama de alta seguridad. Ese dato cambia cosas prácticas: en la rama 10 o más, algunos comandos viejos (por ejemplo la URL `/fcgi/do` de la lección 14) dejan de responder con el modo encendido.
 
 La actualización por web sube el archivo al equipo, que lo verifica y lo graba en su memoria. Mientras tanto, la pestaña del navegador mantiene la transferencia: por eso la guía pide no cerrarla ni refrescarla. Al terminar, el equipo reinicia y la versión nueva aparece en Product Information, que es donde se confirma y se anota en la ficha.
 
@@ -114,7 +114,7 @@ L(3, ("Arriba, llamada IP directa: portero 192.168.88.21 llama al monitor 192.16
     "Un cliente cambia el router de la casa y el nuevo reparte otro rango: con IP fija en 192.168.88.x los equipos quedan fuera de la red nueva, así que en esa visita conviene acordar el rango con quien instala el router."),
    ("Cuándo sí poner central",
     "La central existe para sumar funciones que la llamada directa no tiene: grupos de timbrado, desvíos a celular, colas, atención desde una portería o desde otra sede.",
-    "Regla práctica: un portero y monitores en la misma red, llamada directa. Si alguien tiene que atender desde afuera o hay muchos destinos, central (lección 5). Cada equipo en el medio es algo más que puede fallar.",
+    "Regla práctica: un portero y monitores en la misma red, llamada directa. Si alguien tiene que atender desde afuera o hay muchos destinos, central (lección 6). Cada equipo en el medio es algo más que puede fallar.",
     "Un edificio de 40 unidades con portería 24 horas y vecinos que quieren atender en el celular necesita central; una casa con un monitor no.")],
   """
 ### Un poco de historia
@@ -129,7 +129,7 @@ Cuando el visitante aprieta el botón, el portero arma un mensaje SIP `INVITE` d
 
 El monitor contesta que está sonando y, cuando el residente atiende, responde `200 OK` con sus propios codecs y puertos. El portero confirma con `ACK` y desde ese momento el audio y el video viajan por RTP, en paquetes UDP, directamente entre las dos IP.
 
-Para abrir, el monitor manda el código DTMF dentro de la llamada (lección 6) y el portero dispara el relé configurado.
+Para abrir, el monitor manda el código DTMF dentro de la llamada (lección 7) y el portero dispara el relé configurado.
 
 Todo esto requiere que cada equipo llegue al otro por IP. En la misma subred no hay routers ni NAT en el medio, así que no hay nada que reescriba direcciones o bloquee el 5060. Si la llamada no entra, lo primero es revisar subred, máscara y que ningún firewall filtre el puerto.
 
@@ -622,7 +622,7 @@ La clave nunca viaja tal cual. Con Basic, en cambio, viaja en cada pedido. Con A
 
 La librería pylocal-akuvox, pensada para Home Assistant, distingue dos caminos: los porteros con API JSON reciben `/api/relay/trig` con la autenticación de la HTTP API (None, AllowList, Basic o Digest), y otros equipos usan Open Relay via HTTP con sus propias credenciales. En el laboratorio, el script en modo `AuthMethod.DIGEST` pide modelo y firmware; con una clave mala, el paso 3 del intercambio falla y aparece el error de autenticación.
 
-Todo esto se apoya en la lección 11: la API solo se habla desde la VLAN de porteros.
+Todo esto se apoya en la lección 12: la API solo se habla desde la VLAN de porteros.
 """)
 
 # ------------------------------------------------------------------ validación

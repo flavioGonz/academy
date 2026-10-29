@@ -10,7 +10,7 @@ sys.path.insert(0, "/home/claude/ies-training/ilustraciones/mikrotik/src")
 from _mt import *  # noqa
 from _mt import text, wrap
 
-K = "MikroTik · Lección 29"
+K = "MikroTik"
 
 # ------------------------------------------------------------ principal: la escalera
 c = Canvas(K, "Escalera de pings: ¿en qué escalón falla?")

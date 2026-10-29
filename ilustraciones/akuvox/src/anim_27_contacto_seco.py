@@ -3,7 +3,7 @@
 import math
 from _anim_akuvox_15_28 import *
 
-a = new(24, "AKUVOX · LECCIÓN 27", "Contacto seco: el relé une COM con NO o con NC")
+a = new(24, "AKUVOX", "Contacto seco: el relé une COM con NO o con NC")
 a.steps([
     "El relé del E16C o E18C es un contacto seco: une o separa, no aporta energía.",
     "En reposo, COM toca NC. Con NO, la cerradura queda sin energía; con NC, el imán tiene.",

@@ -1,0 +1,268 @@
+{
+ "1": {
+  "anims": [
+   {
+    "file": "1-r1.svg",
+    "alt": "Animación en cuatro tiempos con el técnico de IES en la oficina, la nube de TP-Link, la fibra y un hotel en Colonia con gateway ER, dos EAP, el celular de un huésped y la notebook del técnico en la LAN. 1: con un OC300 en el rack y Cloud Access, el técnico entra desde la oficina; la nube es solo la puerta y quien gestiona es el OC300. 2: se corta la fibra; desde la oficina ya no se entra, pero en el lugar la notebook sigue gestionando el OC300 y el portal sigue autenticando al huésped. 3: con Omada Central no hay controlador en el lugar; los equipos le hablan a la nube por internet y el técnico gestiona desde la nube; en Central Standard cada equipo lleva su licencia. 4: se corta la fibra; los equipos siguen con la última configuración que recibieron, pero nadie puede cambiar nada, ni siquiera desde la notebook en el lugar, hasta que vuelva internet.",
+    "caption": "Cortá la fibra y mirá qué sigue andando: con OC300 y Cloud Access, todo en el lugar; con Omada Central, nada se gestiona."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "1-l1.svg",
+    "after": "Si elegiste Central Standard, anotá cuántas licencias",
+    "alt": "Animación en cuatro tiempos con una línea de tiempo del plazo de la licencia, Omada Central Standard, el EAP de un local y el correo del responsable de renovar. 1: se activa la licencia y el plazo empieza a correr aunque todavía no esté asignada; el EAP adoptado sin licencia figura Unactivated y no se gestiona. 2: la licencia se asigna al EAP, que pasa a Connected con gestión, monitoreo, Portal, Fast Roaming y Schedule andando; las desvinculaciones de una licencia son limitadas. 3: 30 días antes del vencimiento llega un aviso por correo y alguien tiene que renovar. 4: la licencia vence; el EAP sigue funcionando con la última configuración, pero se apagan la gestión, el monitoreo, el Portal, Fast Roaming y Schedule hasta renovar.",
+    "caption": "La licencia corre desde que se activa, avisa 30 días antes y, vencida, apaga portal, Fast Roaming y Schedule."
+   }
+  ]
+ },
+ "2": {
+  "anims": [
+   {
+    "file": "2-r1.svg",
+    "alt": "Animación en cuatro tiempos con un EAP de fábrica, la notebook del técnico, un switch y una VM Linux 192.168.88.10 que corre el contenedor omada-controller. 1: con red bridge, la notebook abre https://192.168.88.10:8043; el pedido cruza el NAT de Docker porque el puerto está publicado y la web anda. 2: el EAP anuncia por broadcast al UDP 29810; el broadcast llega a toda la LAN y a eth0 de la VM, pero no cruza el NAT de la red bridge y en Devices no aparece nada. 3: se recrea el contenedor con network_mode: host y queda usando la red de la VM, escuchando 8043 y 29810 sin NAT en el medio. 4: el broadcast llega al 29810 del controlador, que le responde por el mismo puerto, y el EAP aparece en Pending. En Docker Desktop de Windows o macOS la red host no funciona y los equipos llegan con Inform URL.",
+    "caption": "Con red bridge la web abre pero el broadcast del EAP no cruza el NAT de Docker; con red host llega al 29810."
+   }
+  ],
+  "steps": [
+   {
+    "step": 1,
+    "file": "2-l1.svg",
+    "after": "Verificá AVX",
+    "alt": "Animación en cuatro tiempos con la terminal de la VM, la CPU y el contenedor. 1: grep -o -m1 avx /proc/cpuinfo busca la bandera avx entre las que declara la CPU; si no la encuentra, el echo avisa que hay que usar la imagen de la rama 5. 2: imprime avx, la CPU la tiene y se sigue con mbentley/omada-controller:6.2 y el compose del paso 2; el 6.x arranca con unos 1,9 GB de RAM y conviene dejarle 4 GB libres. 3: no imprime nada y el echo avisa SIN AVX; quedan dos caminos: la imagen de la rama 5 o un equipo más nuevo, como una mini PC Intel de sexta generación o posterior. 4: si igual se levanta la 6.x, el MongoDB que pide AVX no arranca, el contenedor se cae y restart: unless-stopped lo vuelve a levantar una y otra vez. En una VM, el hipervisor tiene que pasarle AVX al invitado.",
+    "caption": "Lo que pasa por dentro: sin AVX, el MongoDB del 6.x no arranca y restart lo vuelve a levantar en bucle."
+   },
+   {
+    "step": 3,
+    "file": "2-l2.svg",
+    "after": "Esperá la línea de arranque con la versión",
+    "alt": "Animación en cuatro tiempos con una barra del tiempo de arranque de 0 a 2 minutos, la terminal con docker logs -f omada-controller, el navegador apuntando a https://IP-de-la-VM:8043 y la RAM del contenedor. 1: docker compose up -d deja el contenedor arriba, pero adentro recién empiezan Java y MongoDB; el log va sumando líneas. 2: el navegador al 8043 todavía no responde, porque el servicio sigue arrancando; no es un error. 3: entre 1 y 2 minutos aparece la línea de arranque con la versión, la RAM llega a unos 1,9 GB y la web contesta con el asistente para crear la cuenta local. 4: si se reinicia el contenedor por impaciencia, el log y el arranque vuelven a empezar de cero y la web vuelve a no responder.",
+    "caption": "Lo que pasa por dentro: Java y MongoDB tardan 1 a 2 minutos; el 8043 contesta recién con la línea de la versión."
+   }
+  ]
+ },
+ "3": {
+  "anims": [
+   {
+    "file": "3-r1.svg",
+    "alt": "Diagrama de mensajes animado entre un EAP de fábrica y el controlador, con un panel del estado en Devices y de las credenciales del EAP. 1: el EAP toma IP por DHCP y se presenta por broadcast al UDP 29810; el broadcast no cruza routers, así que solo sirve en la misma VLAN. 2: el controlador escucha el 29810 y responde por el mismo puerto; el EAP aparece en Pending. 3: con Adopt, la adopción y la gestión van por TCP 29814 (con firmware de la época del controlador 4, por TCP 29811 y 29812); el equipo pasa a Connected y la Device Account del sitio reemplaza las credenciales de fábrica admin/admin. 4: ya conectado, el equipo usa también TCP 29815 para información, capturas y estadísticas DPI y TCP 29816 para la terminal remota, los dos desde la 5.9, y TCP 29817 para los datos de monitoreo desde el controlador 6. Todos son puertos del controlador: su firewall o el NAT de adelante tienen que dejar pasar UDP 29810 y TCP 29811 a 29817.",
+    "caption": "Un puerto para cada momento: UDP 29810 para presentarse, TCP 29814 para adoptar y gestionar, y los demás ya Connected."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "3-l1.svg",
+    "after": "Volvé al controlador e intentá adoptarlo",
+    "alt": "Diagrama de mensajes animado entre el técnico, el controlador y un EAP al que se le puso la clave Lab-Omada-2026 en su web local. 1: el técnico toca Adopt y el controlador intenta adoptar el EAP, que ya no tiene la clave de fábrica. 2: el EAP no lo acepta y en Devices aparece Adopt Failed con el mensaje username or password is incorrect: es un problema de credenciales, no de red, y no hace falta resetear. 3: el técnico usa Retry con el usuario admin y la clave Lab-Omada-2026 de la web local; si el equipo venía de otro controlador, la clave sale de Settings, Site, Device Account de aquel. 4: con esas credenciales el EAP acepta, queda Connected y sus credenciales pasan a ser la Device Account del sitio; la web local deja de mandar.",
+    "caption": "Lo que pasa en la red: el EAP rechaza la adopción por clave y Retry con la de la web local lo deja Connected."
+   }
+  ]
+ },
+ "4": {
+  "anims": [
+   {
+    "file": "4-r1.svg",
+    "alt": "Animación en cuatro tiempos con un EAP en la VLAN 20 (10.10.10.x), una PC con Omada Discovery Utility en esa misma subred, la web local del EAP, el router que da DHCP en la VLAN 20 y el controlador en 192.168.88.10. 1: la Discovery Utility ve el EAP por su broadcast al UDP 29810 y con Batch Setting le carga la IP del controlador junto con el usuario y la clave del equipo, de fábrica admin y admin. 2: en la web local del EAP, System Tools > Controller Settings, se escribe la Inform URL, que queda guardada; sirve para un equipo puntual y para Omada Central con la Site URL. 3: el DHCP de la VLAN 20 manda la option 138 con la dirección del controlador junto con la IP; llega con cada concesión nueva. 4: con cualquiera de los tres, el EAP llama por unicast a 192.168.88.10, el router lo rutea y el equipo aparece en Pending. Con NAT en el medio se reenvían TCP y UDP del 29810 al 29817 con el mismo puerto; lo más prolijo es un túnel VPN entre sedes.",
+    "caption": "Discovery Utility, Inform URL u option 138: los tres le dicen al EAP lo mismo y después llama directo."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "4-l1.svg",
+    "after": "Si hay NAT entre sede y controlador",
+    "alt": "Animación en cuatro tiempos con el EAP de una sucursal (Inform URL 203.0.113.10), internet, el router de la central (WAN 203.0.113.10) y el controlador 192.168.88.10, con la regla de virtual server y el encabezado del paquete antes y después del router. 1: el EAP manda UDP 29810 a la IP pública de la central. 2: la regla TCP y UDP 29810 a 29817 cambia el destino a 192.168.88.10 con el mismo puerto y el equipo aparece en Pending; descubrimiento, adopción y gestión no admiten otro puerto de origen. 3: ya adoptado, la gestión va por TCP 29814 y los datos de monitoreo del controlador 6 por TCP 29817, por la misma regla, y el equipo queda Connected. 4: falla típica, una regla vieja que termina en 29816: el TCP 29817 no tiene regla y muere en el router; se corrige con TCP y UDP del 29810 al 29817, y lo más prolijo es un túnel VPN entre sedes con la option 138 apuntando a la IP privada del controlador.",
+    "caption": "Lo que pasa en la red: el router cambia la IP de destino y deja el puerto igual; en el 6 hace falta también el 29817."
+   }
+  ]
+ },
+ "5": {
+  "anims": [
+   {
+    "file": "5-r1.svg",
+    "alt": "Animación en cuatro tiempos con la lista de Pending del controlador, el sitio Central y el lugar para un segundo sitio. 1: en el sitio Central están el ER de la central como gateway, su switch y su EAP con el SSID Oficina; el sitio tiene sus redes, SSID y ACL, y el roaming es entre sus EAP. 2: el ER de la sucursal aparece en Pending; al querer llevarlo al sitio Central no hay lugar, porque Central ya tiene gateway. 3: se crea el sitio Sucursal con región Uruguay y zona horaria America/Montevideo, y el ER de la sucursal se adopta ahí como su gateway. 4: el EAP de la sucursal se adopta en ese sitio; cada sitio tiene sus redes, SSID y roaming, y Auto IPsec une los dos sitios del mismo controlador.",
+    "caption": "El segundo ER no entra en el sitio Central: va en su propio sitio, y Auto IPsec une los dos."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "5-l1.svg",
+    "after": "Cerrá sesión y entrá con ese usuario",
+    "alt": "Diagrama de mensajes animado entre el usuario viewer-sucursal (rol Viewer, solo el sitio Sucursal), tu usuario Administrator, el controlador y el EAP de Sucursal. 1: viewer-sucursal inicia sesión y el controlador arma su vista con rol Viewer y un solo sitio. 2: pide el estado de Sucursal y ve clientes, equipos y ajustes; en su lista de sitios figura solo Sucursal y Central no aparece. 3: intenta cambiar el SSID; como es Viewer el cambio no se aplica y nada viaja al EAP; si pudiera cambiar algo, el rol quedó mal. 4: tu usuario Administrator hace el mismo cambio y el controlador empuja la configuración nueva al EAP de Sucursal; con un usuario por persona, cada cambio queda a nombre de quien lo hizo.",
+    "caption": "Lo que pasa por dentro: el Viewer ve su sitio y su cambio no se aplica; el de un Administrator sí llega al EAP."
+   }
+  ]
+ },
+ "6": {
+  "anims": [
+   {
+    "file": "6-r1.svg",
+    "alt": "Animación en cuatro tiempos con un gateway ER que tiene una interfaz por red (192.168.88.1 por defecto, 10.10.20.1 en la VLAN 20 y 10.10.30.1 en la VLAN 30), un switch JetStream con el uplink en el puerto 1 (perfil All) y tres equipos: una notebook de oficina en el puerto 3 (red por defecto), un EAP con el SSID Invitados en el puerto 4 (perfil All) y una cámara en el puerto 5 (perfil CCTV, VLAN 20 nativa). 1: la trama de la notebook viaja sin etiqueta todo el camino y llega a la interfaz 192.168.88.1; la red por defecto es la nativa del uplink. 2: la trama de la cámara entra sin etiqueta al puerto 5 y el switch la sube por el uplink con la etiqueta 20 hasta 10.10.20.1. 3: el EAP manda el tráfico del SSID Invitados ya etiquetado con la 30 y sigue así por el uplink hasta 10.10.30.1. 4: un broadcast de la notebook queda en la red por defecto: no llega a la cámara ni a la VLAN 30. Si el gateway rutea entre las VLAN, igual se ven; eso se corta con ACL.",
+    "caption": "Mismo uplink, tres redes: cada trama lleva el número de su VLAN y el broadcast no se mezcla."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "6-l1.svg",
+    "after": "Enchufá una notebook en el puerto 5",
+    "alt": "Diagrama de mensajes animado entre la notebook conectada al puerto 5 (perfil CCTV), el switch y el gateway con la interfaz 10.10.20.1 de la VLAN 20. Entre la notebook y el puerto 5 los mensajes van sin etiqueta; por el uplink, con perfil All, van con la etiqueta 20. 1: ipconfig /renew dispara el Discover, que sale sin etiqueta y el switch sube por el uplink con la 20. 2: el DHCP de 10.10.20.1 responde con el Offer de 10.10.20.100, que vuelve con la 20 por el uplink y sin etiqueta en el puerto 5. 3: la notebook manda el Request por esa dirección y el gateway la confirma con el Ack. 4: ipconfig | findstr IPv4 muestra 10.10.20.100: la interfaz y el DHCP del gateway, el uplink y el puerto de acceso andan. La etiqueta la pone y la saca el switch; la notebook nunca ve el número de VLAN.",
+    "caption": "Lo que pasa en la red: el DHCP de la VLAN 20 va sin etiqueta en el puerto 5 y con la 20 por el uplink."
+   },
+   {
+    "step": 5,
+    "file": "6-l2.svg",
+    "after": "Si no agarra IP, revisá en orden",
+    "alt": "Animación en cuatro tiempos con la notebook en el puerto 5, el switch y el gateway ER, y abajo las tres patas de la VLAN para revisar en orden. 1: el gateway no tiene la red CCTV: el Discover llega con la etiqueta 20 y nadie responde, porque no hay interfaz ni DHCP en esa VLAN. 2: el uplink del switch tiene un perfil que no lleva la VLAN 20: el Discover muere en el switch y no llega al gateway. 3: el puerto 5 quedó con la red por defecto: el Discover entra sin etiqueta a esa red y la notebook recibe una IP 192.168.88.x, de otra red, que parece que anda. 4: el orden para revisar es red y DHCP en el gateway (Network Config > Network Settings > LAN), perfil del uplink (All) y perfil del puerto 5 (CCTV); con las tres bien la notebook toma 10.10.20.x. No conviene tocar el perfil del puerto por el que el switch habla con el controlador.",
+    "caption": "Lo que pasa en la red: dónde muere el Discover según qué pata de la VLAN falla."
+   }
+  ]
+ },
+ "7": {
+  "anims": [
+   {
+    "file": "7-r1.svg",
+    "alt": "Animación en cuatro tiempos con la VLAN 30 de invitados (10.10.30.0/24) y una notebook invitada 10.10.30.50, el gateway ER con una interfaz en cada red (10.10.30.1 y 192.168.88.1), internet y la red de la oficina con un NVR en 192.168.88.20. 1: la notebook busca su gateway con un ARP; ese broadcast queda dentro de la VLAN 30 y no llega a la red de la oficina. 2: la notebook pide la web del NVR; como no está en su red, el paquete va al gateway, que lo rutea a la otra VLAN, y la web abre: la VLAN separó el broadcast, no el ruteo. 3: con la Gateway ACL Invitados-sin-interna, Deny desde Invitados hacia el grupo Redes-Internas, el mismo paquete se descarta en el gateway. 4: un paquete a 1.1.1.1 no coincide con la deny y sale a internet: la red de invitados queda aislada de la interna pero con salida. Se verifica con ping.",
+    "caption": "El broadcast queda en la VLAN 30, pero el paquete ruteado llega al NVR hasta que entra la Gateway ACL."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "7-l1.svg",
+    "after": "a la VLAN 30, conectá una notebook",
+    "alt": "Animación en cuatro tiempos con la terminal de una notebook conectada a Invitados-Lab (10.10.30.x) y el camino por el gateway ER, que tiene la Gateway ACL Deny hacia Redes-Internas, hasta la oficina (192.168.88.0/24) o internet (1.1.1.1). 1: ping 10.10.30.1 llega a su propio gateway en su VLAN y responde, lo que es normal. 2: ping 192.168.88.1 coincide con la deny, el pedido se descarta en el gateway y la terminal muestra Tiempo de espera agotado para esta solicitud. 3: ping 1.1.1.1 no coincide con la deny, sale a internet y vuelve con respuesta. 4: si la lista tuviera un permit general arriba de la deny, el ping a 192.168.88.1 respondería porque la deny nunca llega a actuar; hay que subir la deny.",
+    "caption": "Lo que pasa en la red: su gateway responde, la deny descarta el ping a la red interna e internet responde."
+   }
+  ],
+  "teoria_figs": [
+   {
+    "file": "7-t2.svg",
+    "after": "Funciona como lista negra, con permiso por defecto",
+    "alt": "Animación en cuatro tiempos con la red de cámaras en la VLAN 20 (10.10.20.0/24), un switch con su Switch ACL evaluada de arriba hacia abajo, un NVR en la red interna (192.168.88.20) e internet (1.1.1.1). 1: sin reglas, todo pasa: la Switch ACL es una lista negra, con permiso por defecto, y lo que no coincide con nada se permite. 2: con una sola regla Deny de la VLAN 20 a cualquiera, se corta internet pero también el NVR. 3: con la regla 1 Permit de la VLAN 20 hacia el IP Group Redes-Internas y la regla 2 Deny de la VLAN 20 a cualquiera, el paquete al NVR coincide con la 1 y pasa; el paquete a 1.1.1.1 no coincide con la 1, cae en la 2 y se corta. 4: resultado, solo interno: las cámaras llegan al NVR y no salen a internet.",
+    "caption": "La Switch ACL deja pasar todo salvo lo que cortás: permit a lo interno arriba, deny a todo abajo."
+   }
+  ]
+ },
+ "8": {
+  "anims": [
+   {
+    "file": "8-r1.svg",
+    "alt": "Animación en cuatro tiempos con la banda de 2.4 GHz dibujada en frecuencia, canales del 1 al 13 y el espectro que ocupa cada transmisión. 1: los canales están separados 5 MHz pero cada transmisión ocupa unos 20 MHz; solo 1, 6 y 11 no se superponen, y un canal intermedio como el 3 pisa al 1 y al 6. 2: en un consultorio con redes vecinas en 1, 6 y 11, el EAP 1 en el canal 3 y el EAP 2 en el 9, a 20 MHz, pisan a medias a dos redes vecinas cada uno. 3: como estaban configurados, a 40 MHz, cada uno ocupa el doble y además se pisan entre ellos. 4: con el EAP 1 en el canal 1 y el EAP 2 en el 6, a 20 MHz, entre ellos no se pisan y con los vecinos comparten un canal entero, turnándose. Una app de análisis WiFi muestra qué canales usan los vecinos, y la región Uruguay en el sitio define canales y potencia legales.",
+    "caption": "La banda de 2.4 GHz en frecuencia: por qué 3 y 9 se pisan con los vecinos, y 1 y 6 no."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "8-l1.svg",
+    "after": "Medí después desde los mismos tres puntos",
+    "alt": "Animación en cuatro tiempos con la planta de un local, el EAP 1 y el EAP 2 en potencia Medium con sus celdas, tres puntos de medición A, B y C y la planilla del paso 5, con valores de ejemplo. 1: con el celular y una app de análisis WiFi se mide la señal del AP asociado en los mismos tres puntos del paso 1. 2: A da -58 dBm y B -63 dBm con el EAP 1, mejor que -70; C, en la punta, da -74 dBm con el EAP 2: le falta señal. 3: como C lo cubre el EAP 2, se sube un escalón solo su potencia, de Medium a High, en Devices, EAP 2, Config, Radios, y su celda crece. 4: se vuelve a medir C y da -67 dBm; el EAP 1 queda como estaba. Subir todos a High traería de vuelta la interferencia y el cliente pegado al AP lejano.",
+    "caption": "Lo que pasa en la práctica: un punto por debajo de -70 dBm se corrige subiendo un escalón solo el AP que lo cubre."
+   },
+   {
+    "step": 6,
+    "file": "8-l2.svg",
+    "after": "programala para las 3:30",
+    "alt": "Animación en cuatro tiempos con una línea de tiempo de 0 a 6 de la mañana, tres EAP, los clientes del local y el controlador. 1: como ejemplo, a las 3:00 corre el reinicio programado; los AP se reinician, vuelven y quedan Connected, con un corte corto para los clientes. 2: a las 3:30 corre WLAN Optimization: los AP escanean fuera de servicio y los clientes se quedan sin internet varios minutos; por eso va de madrugada. 3: el controlador decide canal, ancho y potencia, los aplica a cada AP y lo deja en Optimization Record; si no convence, Apply Previous Settings vuelve atrás. 4: si la optimización coincide con el reinicio, los AP no están conectados mientras optimiza y el análisis queda a medias: hay que separar las dos tareas al menos 10 minutos.",
+    "caption": "Lo que pasa en la red: mientras optimiza, los AP escanean y los clientes quedan sin internet; lejos del reinicio."
+   }
+  ]
+ },
+ "9": {
+  "anims": [
+   {
+    "file": "9-r1.svg",
+    "alt": "Animación en cuatro tiempos con un switch, un Root AP con cable y tres Mesh AP: dos a un salto y uno a dos saltos, en cadena. 1: el Mesh AP busca un uplink y se engancha al Root AP sin cable, con una señal recomendada entre -40 y -62 dBm. 2: el tráfico de un celular conectado al Mesh AP de dos saltos cruza el aire dos veces, salto 2 y salto 1, antes de llegar al cable. 3: la radio es half-duplex y habla de a uno: el tiempo de aire de un Mesh AP se reparte entre clientes, uplink y downlink, y cada salto resta rendimiento; por eso estrella mejor que cadena, hasta 3 saltos y 4 downlinks por uplink, y un EAP225-Outdoor recomienda 50 a 60 clientes para toda la red mesh. 4: cae el Mesh AP que hacía de uplink y, con Auto Failover, el controlador le elige otro uplink al Mesh AP de dos saltos. Auto Failover viene apagado y necesita el controlador corriendo; sin controlador, el mesh mantiene la cobertura básica.",
+    "caption": "Cada salto de mesh reparte otra vez el tiempo de aire; Auto Failover busca otro uplink si cae uno."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "9-l1.svg",
+    "after": "Caminá de un AP al otro y volvé",
+    "alt": "Animación en cuatro tiempos con un pasillo con el EAP 1 y el EAP 2 (mismo SSID Roaming-Lab y Fast Roaming), una notebook que camina, la terminal con ping -t 192.168.88.1 y la vista Clients. 1: asociada al EAP 1, la notebook recibe una respuesta del gateway por segundo. 2: al caminar hacia el EAP 2 la señal del EAP 1 baja, pero el ping sigue respondiendo; la decisión de cambiar es del cliente. 3: la notebook cambia al EAP 2 y en el salto la terminal muestra un Tiempo de espera agotado para esta solicitud: un corte. 4: en Clients la notebook figura en el EAP 2; se anotan los cortes con k y v, y en el paso 6 se repite con 802.11r. Si nunca cambia de EAP, el problema suele ser la potencia.",
+    "caption": "Lo que pasa en la red: el cliente decide el salto y cada Tiempo de espera agotado es un corte."
+   },
+   {
+    "step": 6,
+    "file": "9-l2.svg",
+    "after": "activado en el SSID",
+    "alt": "Animación en cuatro tiempos con dos diagramas de mensajes entre la notebook y el EAP 2, con WPA2-Personal. 1: sin 802.11r, la notebook hace Authentication y Reassociation Request y Response con el EAP 2. 2: después viene el intercambio de 4 mensajes de claves, EAPOL 1/4 a 4/4, y recién ahí pasan los datos. 3: con 802.11r, Fast BSS Transition, las claves viajan en la autenticación y la reasociación FT y los datos pasan enseguida, sin los 4 mensajes: el salto tarda menos y el ping corta menos. 4: un cliente viejo que no tolera 802.11r cambia de EAP y se queda sin internet: el ping muestra Tiempo de espera agotado una y otra vez. Se deja 802.11r apagado en ese SSID, en Edit SSID, Advanced Settings, o esos equipos van a un SSID aparte.",
+    "caption": "Lo que pasa en el aire: sin 802.11r hay 4 mensajes de claves en cada salto; con 802.11r, no."
+   }
+  ]
+ },
+ "10": {
+  "anims": [
+   {
+    "file": "10-r1.svg",
+    "alt": "Diagrama de mensajes animado entre el celular de un huésped, el EAP del SSID Huespedes-Lab, el controlador que sirve el portal e internet. 1: el huésped pide una web; como no está autenticado, el EAP retiene el pedido y le responde con una redirección al portal. 2: el celular abre la página del portal, que sirve el controlador por el 8843 con HTTPS Redirection (por el 8088 en HTTP), con el logo, la bienvenida y el campo del voucher. 3: el huésped ingresa el voucher; el controlador lo valida, por ejemplo por un día, y habilita a ese cliente en el EAP, que pasa de no autenticado a autenticado; sin controlador corriendo no hay quién valide y los clientes nuevos no entran. 4: el celular va a la web que había pedido, la Landing Page, y navega directo por el EAP, sin pasar por el controlador, hasta que vence el código. El portal no aísla: la VLAN de invitados con su ACL sigue haciendo falta.",
+    "caption": "La web que pidió el huésped queda retenida, el portal la reemplaza y, con el voucher validado, navega directo."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "10-l1.svg",
+    "after": "Authentication > Portal > Create New Portal",
+    "alt": "Animación en cuatro tiempos con la pantalla del celular de un huésped y el camino hasta la página del portal que sirve el controlador. 1: con HTTPS Redirection apagado, el portal se abre por HTTP en el puerto 8088 y el voucher viaja sin cifrar. 2: con HTTPS Redirection activado, el EAP redirige a la página segura del portal en el 8843, cifrada con TLS. 3: con el certificado que trae el controlador, el celular puede mostrar un aviso de conexión no privada, porque no reconoce el certificado para ese nombre. 4: con un certificado propio cargado como un único archivo .pfx con certificado y clave, y el nombre del controlador igual al del certificado, por ejemplo portal.example.com, la página se ve limpia con candado.",
+    "caption": "Lo que pasa en la red: con HTTPS Redirection el portal va por el 8843, y con certificado propio se ve limpio."
+   }
+  ]
+ },
+ "11": {
+  "anims": [
+   {
+    "file": "11-r1.svg",
+    "alt": "Animación en cuatro tiempos con el ER Central (WAN 203.0.113.10) y su controlador 10.10.10.10, internet, el router del proveedor que hace NAT (203.0.113.20) y el ER de la sucursal con IP privada en la WAN (192.168.1.2) y un EAP nuevo en la LAN 10.10.20.0/24. 1: Auto IPsec pide IP pública en la WAN; el IKE por UDP 500 que manda la central muere en el router del proveedor, que no sabe a quién pasarlo. 2: el proveedor abre UDP 500 y 4500 hacia el ER y se arma Manual IPsec con Local ID y Remote ID de tipo Name; los gateways detectan el NAT, pasan a UDP 4500 y el túnel queda arriba. 3: el EAP nuevo pide IP y el DHCP de la sucursal le manda la option 138 con 10.10.10.10, la IP privada del controlador, que solo se alcanza por el túnel. 4: el EAP llama a 10.10.10.10; el paquete viaja cifrado como ESP dentro de UDP 4500 por el túnel y el EAP aparece en Pending, sin puertos de gestión abiertos a internet. Se verifica en VPN Status, Site-to-Site VPN, IPsec.",
+    "caption": "Con el router del proveedor adelante: UDP 500 y 4500 abiertos, Manual IPsec y el EAP adoptado por adentro del túnel."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "11-l1.svg",
+    "after": "cambiá la LAN por defecto de cada uno según la tabla",
+    "alt": "Diagrama de mensajes animado entre una PC de la sucursal y el ER Sucursal. 1: la LAN por defecto del ER pasa de 192.168.0.1/24 a 10.10.20.1/24, según el plan de subredes que no se solapan. 2: la PC sigue con 192.168.0.100 y su gateway 192.168.0.1 ya no existe: un ping no tiene respuesta y no hay salida. 3: al renovar, la PC pide su dirección vieja y el ER responde NAK porque esa red ya no es la suya. 4: la PC arranca de cero con Discover, Offer, Request y Ack y queda con 10.10.20.100. Como hasta que cada cliente renueva queda sin red, el cambio se hace en ventana de mantenimiento; desconectar y reconectar acelera la renovación.",
+    "caption": "Lo que pasa en la red: los clientes quedan en la red vieja hasta renovar; el ER rechaza la IP vieja y reciben una nueva."
+   },
+   {
+    "step": 5,
+    "file": "11-l2.svg",
+    "after": "Desde una PC en la Central",
+    "alt": "Animación en cuatro tiempos con la PC Central (10.10.10.50), el ER Central (WAN 203.0.113.10, LAN 10.10.10.1), internet y el ER Sucursal (WAN 203.0.113.20, LAN 10.10.20.1) unidos por Auto IPsec, y un panel con los encabezados del paquete en el cable. 1: la PC manda el ping a 10.10.20.1; como no es de su LAN, va a su gateway con src 10.10.10.50 y dst 10.10.20.1. 2: el ER Central ve que 10.10.20.0/24 es la subred remota, cifra el paquete y lo mete en ESP; por internet viaja con src 203.0.113.10 y dst 203.0.113.20 y el original va cifrado adentro. 3: el ER Sucursal lo descifra y entrega el paquete original, igual que salió, a 10.10.20.1. 4: la respuesta vuelve por el mismo camino, cifrada, y la terminal muestra Respuesta desde 10.10.20.1. Si no responde, se revisa VPN Status, Site-to-Site VPN, IPsec, y que las LAN no se solapen.",
+    "caption": "Lo que pasa en la red: el ping viaja cifrado como ESP entre las IP públicas y sale igual del otro lado."
+   }
+  ]
+ },
+ "12": {
+  "anims": [
+   {
+    "file": "12-r1.svg",
+    "alt": "Animación en cuatro tiempos con el controlador del cliente en un mini PC (v6.2.10.17), el SFTP de IES en otro equipo, los equipos del sitio (dos EAP, un switch y un ER) y un calendario de la semana con horarios de ejemplo. 1: el domingo a las 3:00, Backup Schedule manda el archivo .cfg de la configuración al SFTP de IES, con Save to File Server. 2: el martes muere el disco del mini PC y con él todo lo que estaba guardado ahí; los equipos quedan sin controlador y siguen con la última configuración, pero nadie puede cambiar nada. 3: se instala un controlador nuevo de la misma versión y en la misma IP y, en el asistente, Restore from Backup File con el .cfg del domingo; la cuenta creada en el asistente se reemplaza por la del backup. 4: los equipos vuelven a Connected con sitios, redes y SSID como estaban.",
+    "caption": "El .cfg semanal en el SFTP de IES: muere el disco, se restaura en un controlador nuevo y todo vuelve a Connected."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "12-l1.svg",
+    "after": "copiá también el volumen de datos con el contenedor detenido",
+    "alt": "Animación en cuatro tiempos con la terminal de la VM en /opt/omada, el contenedor omada-controller, el volumen omada-data y el archivo .tar.gz. 1: docker compose stop le da al contenedor la orden de parar y espera hasta 60 segundos, el stop_grace_period del compose, para que MongoDB termine de escribir y cierre limpio. 2: con el contenedor detenido el volumen queda quieto y sudo tar czf copia todo el contenido de /var/lib/docker/volumes/omada_omada-data/_data a omada-data con la fecha en el nombre; con el contenedor corriendo tar podría copiar la base a mitad de una escritura. 3: docker compose start vuelve a levantar el controlador, que tarda de 1 a 2 minutos; mientras, la red sigue andando. 4: el tar.gz y el docker-compose.yml se guardan juntos fuera de la VM: con eso se rearma el controlador en otro host. Nunca docker compose down -v, que borra el volumen.",
+    "caption": "Lo que pasa por dentro: MongoDB cierra en hasta 60 s, tar copia el volumen quieto y start vuelve a levantar."
+   },
+   {
+    "step": 4,
+    "file": "12-l2.svg",
+    "after": "En el controlador nuevo: en el asistente creá una cuenta local",
+    "alt": "Animación en cuatro tiempos con el asistente del controlador nuevo (v6.2.10.17) y el archivo de backup. 1: en el asistente se elige Create a Local Account y se crea una cuenta de paso. 2: en el paso siguiente, Restore from Backup File con omada-lab_v6.2.10.17_2026-10-27.cfg, de la misma versión que el controlador: entra. 3: la cuenta de paso se reemplaza por la del backup y vuelven los sitios, las redes y los SSID; se verifica entrando con la cuenta de siempre. 4: al revés no: un .cfg de una versión más nueva, por ejemplo 6.3.0.111, no se restaura en un controlador 6.2.10.17. Bajar de versión es reinstalar y restaurar el backup de esa misma versión, por eso se guarda uno por versión con la versión en el nombre.",
+    "caption": "Lo que pasa por dentro: el restore pisa la cuenta del asistente, y un .cfg más nuevo no entra en un controlador más viejo."
+   }
+  ]
+ }
+}

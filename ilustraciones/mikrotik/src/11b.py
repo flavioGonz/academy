@@ -1,7 +1,7 @@
 """Lección 11 (reescrita) · Dos WAN: principal + pasos 3, 5 y 7. Reemplaza las imágenes de src/11.py."""
 from _dw import *
 
-K = "MikroTik · Lección 11"
+K = "MikroTik"
 
 # ------------------------------------------------------------------ 11.svg principal
 c = Canvas(K, "Dos WAN: cada una con su ruta y su distancia")
@@ -56,16 +56,20 @@ save(c, "11-paso3.svg")
 c = Canvas(K + " · Paso 5", "Simulá el corte y mirá qué rutas quedan activas")
 c.add(text(48, 150, "Desde la notebook:", 16, 600, INK2, FB))
 c.add(text(222, 150, "ping -t 1.0.0.1", 16, 600, BLUE, FM))
-seq = ["ok"] * 5 + ["x"] * 6 + ["ok"] * 5
+seq = ["ok"] * 7 + ["sw"] + ["ok"] * 8
 for i, s in enumerate(seq):
     x = 48 + i * 69
     good = s == "ok"
-    c.add(rect(x, 172, 60, 52, OK_BG if good else ALERT_BG, OK if good else ALERT, 1.5, 10))
-    c.add(f'<g transform="translate({x + 18} 186)" fill="none" stroke="{OK if good else ALERT}" stroke-width="2.6" stroke-linecap="round">{ICON["check" if good else "x"]}</g>')
-c.add(f'<path d="M{48 + 5 * 69 - 4} 244v10H{48 + 11 * 69 - 13}v-10" fill="none" stroke="{ALERT}" stroke-width="2"/>')
-c.add(text(48 + 8 * 69 - 8, 280, "los que se pierden hasta conmutar", 16, 600, ALERT, FB, anchor="middle"))
-c.add(text(48 + 2 * 69, 280, "por ISP1", 15, 600, OK, FB, anchor="middle"))
-c.add(text(48 + 13 * 69, 280, "ya por ISP2", 15, 600, OK, FB, anchor="middle"))
+    c.add(rect(x, 172, 60, 52, OK_BG if good else WARN_BG, OK if good else WARN, 1.5, 10))
+    if good:
+        c.add(f'<g transform="translate({x + 18} 186)" fill="none" stroke="{OK}" stroke-width="2.6" stroke-linecap="round">{ICON["check"]}</g>')
+    else:
+        c.add(text(x + 30, 206, "⇄", 22, 700, WARN, FB, anchor="middle"))
+c.add(text(48 + 3 * 69 + 30, 262, "siguen por el ISP1: el drop solo", 15, 600, OK, FB, anchor="middle"))
+c.add(text(48 + 3 * 69 + 30, 284, "frena los pings del router", 15, 600, OK, FB, anchor="middle"))
+c.add(text(48 + 7 * 69 + 30, 262, "conmutan", 15, 600, WARN, FB, anchor="middle"))
+c.add(text(48 + 7 * 69 + 30, 284, "0 o 1 perdido", 14, 500, INK3, FB, anchor="middle"))
+c.add(text(48 + 12 * 69 - 10, 262, "ya por el ISP2", 15, 600, OK, FB, anchor="middle"))
 c.add(caption(48, 330, "/ip/route/print where dst-address=0.0.0.0/0"))
 rows_ = [["gateway=1.1.1.1", "1", ("activa", "pill:ok"), ("inactiva", "pill:alert")],
          ["gateway=9.9.9.9", "1", ("activa", "pill:ok"), ("inactiva", "pill:alert")],
@@ -74,8 +78,8 @@ rows_ = [["gateway=1.1.1.1", "1", ("activa", "pill:ok"), ("inactiva", "pill:aler
 t, h = ctable(48, 346, ["Ruta por defecto", "Dist.", "Antes", "Con el corte"], rows_, [290, 90, 190, 210], row_h=46, col_fonts=[FM, FM, FB, FB])
 c.add(t)
 c.add(Note(860, 346, 292, "El corte simulado descarta los pings del router a 1.1.1.1 y 9.9.9.9. El módem sigue vivo: solo las recursivas lo ven.", kind="warn", size=15))
-c.add(text(860, 560, "Después sacá las reglas", 15, 600, INK2, FB))
-c.add(text(860, 584, "y contá de nuevo al volver.", 15, 600, INK2, FB))
+c.add(text(860, 560, "Los pings perdidos de verdad", 15, 600, INK2, FB))
+c.add(text(860, 584, "se cuentan en el paso 8.", 15, 600, INK2, FB))
 save(c, "11-paso5.svg")
 
 # ------------------------------------------------------------------ 11-paso7.svg

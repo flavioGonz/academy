@@ -1,11 +1,11 @@
 """Lección 10 · NVR con criterio: principal + pasos 2 y 5."""
 from _mt import *
 
-K = "MikroTik · Lección 10"
+K = "MikroTik"
 
 # ------------------------------------------------------------------ 10.svg principal
 c = Canvas(K, "Si publicás el NVR: un puerto, para una lista")
-c.add(Note(48, 124, 1104, "Primera opción: VPN (lección 8). Publicar es para cuando no queda otra, por ejemplo una central de monitoreo que no puede usar túnel.", kind="info", size=15))
+c.add(Note(48, 124, 1104, "Primera opción: VPN (lección 29). Publicar es para cuando no queda otra, por ejemplo una central de monitoreo que no puede usar túnel.", kind="info", size=15))
 cen = c.add(Generic(48, 250, "Central de monitoreo", "203.0.113.25", icon="shield", hl=OK, w=290))
 esc = c.add(Generic(48, 430, "Cualquier otra IP", "escaneos", icon="globe", hl=ALERT, w=290))
 RX, RY, RW = 420, 240, 400

@@ -10,7 +10,7 @@ sys.path.insert(0, "/home/claude/ies-training/ilustraciones/mikrotik/src")
 from _mt import *  # noqa
 from _mt import text, wrap
 
-K = "MikroTik · Lección 30"
+K = "MikroTik"
 
 # ------------------------------------------------------------ principal
 c = Canvas(K, "El DNS del router: sí a la LAN, no a internet")

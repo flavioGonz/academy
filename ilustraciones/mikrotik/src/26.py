@@ -1,7 +1,7 @@
 """Lección 26 · Asignar IP."""
 from _mt import *  # noqa
 
-K = "MikroTik · Lección 26"
+K = "MikroTik"
 
 # ---------------------------------------------------------------- principal
 c = Canvas(K, "Una IP: dirección, máscara e interfaz")

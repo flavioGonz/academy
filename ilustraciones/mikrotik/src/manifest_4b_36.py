@@ -3,7 +3,7 @@ import json
 
 OUT = "/home/claude/ies-training/ilustraciones/mikrotik/"
 
-# ---------------------------------------------------------------- lección 4
+# ---------------------------------------------------------------- lección 21
 TEORIA_4 = """### Un poco de historia
 
 El firewall de RouterOS no es un invento aislado: RouterOS corre sobre Linux y su firewall usa el mismo modelo de cadenas y tablas que netfilter, el marco de filtrado del kernel. Netfilter lo empezó Rusty Russell en 1998, después de haber escrito ipchains, su antecesor. El 26 de agosto de 1999 entró al kernel en desarrollo 2.3.15 y quedó en la versión estable 2.4.0, que salió a comienzos de 2001 con la herramienta iptables.
@@ -58,7 +58,7 @@ SCRIPT_4 = {
         {"nombre": "NUBE_NVR", "valor": "nube.fabricante.example", "detalle": "Nombre o IP de la nube que publica el fabricante del NVR"},
         {"nombre": "CAMARAS", "valor": "192.168.88.101-192.168.88.150", "detalle": "Rango o red de las cámaras"},
     ],
-    "codigo": """# IES Training · MikroTik · Input y forward: reglas de obra (lección 4)
+    "codigo": """# IES Training · MikroTik · Input y forward: reglas de obra (lección 21)
 # Probalo primero en un equipo de banco y en Safe Mode (Ctrl+X).
 # Requiere el firewall por defecto. No borra reglas existentes.
 {
@@ -87,7 +87,7 @@ SCRIPT_4 = {
   /ip/firewall/filter/add chain=forward src-address=$nvr out-interface-list=WAN dst-address-list=nube-nvr action=accept comment="ies-nvr-nube"
   /ip/firewall/filter/add chain=forward src-address=$nvr out-interface-list=WAN action=reject reject-with=icmp-admin-prohibited comment="ies-nvr-resto"
   /ip/firewall/filter/add chain=forward src-address-list=camaras out-interface-list=WAN action=drop comment="ies-camaras-sin-internet" }
-# Si ya hay un drop final de zonas (lección 36), estas reglas van arriba de el
+# Si ya hay un drop final de zonas (lección 22), estas reglas van arriba de el
 :local fin [/ip/firewall/filter/find comment="ies-zona-fin"]
 :if ([:len $fin] > 0) do={
   :foreach c in={"ies-nvr-ntp";"ies-nvr-nube";"ies-nvr-resto";"ies-camaras-sin-internet"} do={
@@ -135,7 +135,7 @@ E4 = {
     "script_rsc": SCRIPT_4,
 }
 
-# ---------------------------------------------------------------- lección 36
+# ---------------------------------------------------------------- lección 22
 TEORIA_36 = """### Un poco de historia
 
 Los primeros firewalls de routers se escribían interfaz por interfaz: una lista de acceso en la entrada de cada puerto. En Cisco IOS, el firewall clásico (CBAC) aplicaba la inspección por interfaz. Con dos o tres redes alcanzaba; con diez, cada servicio nuevo obligaba a tocar varias listas y nadie podía decir de un vistazo qué red hablaba con cuál.
@@ -194,7 +194,7 @@ SCRIPT_36 = {
         {"nombre": "NVR_IP", "valor": "10.10.20.50", "detalle": "IP del NVR que administración puede ver"},
         {"nombre": "PUERTO_VPN", "valor": "13231", "detalle": "Puerto UDP del túnel que se acepta desde WAN"},
     ],
-    "codigo": """# IES Training · MikroTik · Zonas con interface lists (lección 36)
+    "codigo": """# IES Training · MikroTik · Zonas con interface lists (lección 22)
 # Probalo primero en un equipo de banco y en Safe Mode (Ctrl+X).
 # Requiere el firewall por defecto. El drop final queda en ensayo: solo log.
 {

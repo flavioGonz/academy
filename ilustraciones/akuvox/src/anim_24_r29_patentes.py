@@ -2,7 +2,7 @@
 """Lección 24 · teoría: desde el firmware 29.30.10.745 el R29 abre leyendo patentes de cámaras Hikvision y Dahua por la HTTP API."""
 from _anim_akuvox_15_28 import *
 
-a = new(20, "AKUVOX · LECCIÓN 24", "R29 y cámara de patentes: el firmware decide")
+a = new(20, "AKUVOX", "R29 y cámara de patentes: el firmware decide")
 a.steps([
     "Llega un auto. La cámara de patentes (Hikvision o Dahua) lee la patente.",
     "La cámara manda la lectura al R29 por la HTTP API.",

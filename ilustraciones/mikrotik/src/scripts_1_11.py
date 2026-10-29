@@ -127,7 +127,7 @@ S["3"] = {
 :put "Listo: servicios cerrados y gestion limitada. Verifica con /ip/service/print"
 }""",
     "notas": ["Si el script avisa que hay sesiones desde fuera de la red de gestión, no limita WinBox ni SSH: revisá desde dónde estás entrando antes de hacerlo a mano.",
-              "available-from deja el puerto visible: para esconderlo hace falta el drop en input (lección 4).",
+              "available-from deja el puerto visible: para esconderlo hace falta el drop en input (lección 21).",
               "La auditoría solo imprime: lo que nadie reconoce se anota en el legajo y se decide a mano.",
               NOTA_ASCII],
 }

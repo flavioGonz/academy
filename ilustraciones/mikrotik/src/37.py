@@ -1,7 +1,7 @@
 """Lección 37 · Dos WAN: PPPoE + DHCP: principal + pasos 1, 4 y 7."""
 from _dw import *
 
-K = "MikroTik · Lección 37"
+K = "MikroTik"
 
 # ------------------------------------------------------------------ 37.svg principal
 c = Canvas(K, "Fibra por PPPoE principal, 4G por DHCP de respaldo")

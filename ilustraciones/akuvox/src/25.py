@@ -2,7 +2,7 @@ import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/akuvox/s
 from _cat import *
 
 # ---------------------------------------------------------------- 25.svg: R28 y R25
-c = Canvas("Akuvox · Lección 25", "R28 y R25: ¿PIN y 12 V para la cerradura?")
+c = Canvas("Akuvox", "R28 y R25: ¿PIN y 12 V para la cerradura?")
 c.add(portero(60, 150, "pantalla_teclado", 0.8, "R28", "4,3\" no táctil"))
 c.add(portero(210, 150, "boton", 0.8, "R25A", "un botón"))
 c.add(portero(340, 150, "teclado", 0.8, "R25K", None))
@@ -20,7 +20,7 @@ c.add(Note(48, 500, 420, "El R28 da 12 V por un borne propio, sin ocupar el rel�
 save(c, "25.svg")
 
 # ---------------------------------------------------------------- 25-paso1: cómo te dan la IP
-c = Canvas("Akuvox · Lección 25 · Paso 1", "Tres modelos, tres formas de pedir la IP")
+c = Canvas("Akuvox · Paso 1", "Tres modelos, tres formas de pedir la IP")
 items = [("R28", "pantalla_teclado", ["*2396#", "después 1"]),
          ("R25A", "boton", ["mantené el botón", "5 s"]),
          ("R25K", "teclado", ["*3258*", "(como el R20K)"])]
@@ -34,7 +34,7 @@ c.add(Note(48, 566, 1104, "Paso 2: el firmware en la web empieza con 28. (o 228.
 save(c, "25-paso1.svg")
 
 # ---------------------------------------------------------------- 25-paso3: medir con volumen bajo y alto
-c = Canvas("Akuvox · Lección 25 · Paso 3", "R25 con PoE: medí con volumen bajo y alto")
+c = Canvas("Akuvox · Paso 3", "R25 con PoE: medí con volumen bajo y alto")
 c.add(Router(48, 150, "Switch PoE", "802.3af", ports=["1", "2", "3"], hl={"1": CYAN}))
 c.add(portero(420, 150, "boton", 0.8, "R25A", "PoE"))
 c.add(wire([(105, 320), (105, 360), (390, 360), (390, 210), (420, 210)], "data"))
@@ -51,7 +51,7 @@ c.add(Note(48, 430, 540, "Akuvox avisa que con PoE la salida de 12 V del R25 se 
 save(c, "25-paso3.svg")
 
 # ---------------------------------------------------------------- 25-paso4: si la caída afecta
-c = Canvas("Akuvox · Lección 25 · Paso 4", "Si la tensión cae, separá la cerradura")
+c = Canvas("Akuvox · Paso 4", "Si la tensión cae, separá la cerradura")
 c.add(panel(48, 126, 540, 470, "Opción 1: fuente para el portero", "info"))
 c.add(PSU(78, 196, "Fuente", "12 V 1 A", w=200))
 c.add(portero(380, 186, "boton", 0.72, "R25", None))

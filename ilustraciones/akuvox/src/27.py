@@ -2,7 +2,7 @@ import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/akuvox/s
 from _cat import *
 
 # ---------------------------------------------------------------- 27.svg: E18 y E16
-c = Canvas("Akuvox · Lección 27", "E18 y E16: rostro en plástico, cerradura aparte")
+c = Canvas("Akuvox", "E18 y E16: rostro en plástico, cerradura aparte")
 c.add(portero(60, 150, "pantalla", 0.86, "E18", "estándar o LTE"))
 c.add(portero(240, 150, "pantalla", 0.86, "E16", "5\" táctil"))
 c.add(text(212, 460, "Linux · IP65 · Wiegand", 15, 400, INK3, FB, anchor="middle"))
@@ -22,7 +22,7 @@ c.add(Note(452, 126 + H + 44, W, "Sin salida de 12 V en E18C ni E16C: la cerradu
 save(c, "27.svg")
 
 # ---------------------------------------------------------------- 27-paso1: PIN de sistema por firmware
-c = Canvas("Akuvox · Lección 27 · Paso 1", "¿admin o Admin321? Depende del firmware")
+c = Canvas("Akuvox · Paso 1", "¿admin o Admin321? Depende del firmware")
 c.add(portero(80, 140, "pantalla", 0.72))
 c.add(f'<circle cx="134" cy="230" r="34" fill="none" stroke="{WARN}" stroke-width="3" stroke-dasharray="6 5"/>')
 c.add(pill(150, 382, "mantené la pantalla 5 s", BLUE, WHITE, 15, False))
@@ -39,7 +39,7 @@ c.add(Note(300, 430, 852, "Paso 2: el firmware empieza con 18. (E18) o 116. / 21
 save(c, "27-paso1.svg")
 
 # ---------------------------------------------------------------- 27-paso3: cableado con fuente propia
-c = Canvas("Akuvox · Lección 27 · Paso 3", "Sin salida de 12 V: la cerradura lleva su fuente")
+c = Canvas("Akuvox · Paso 3", "Sin salida de 12 V: la cerradura lleva su fuente")
 c.add(portero(60, 150, "pantalla", 0.86, "E16C / E18C", "PoE o fuente propia"))
 r = c.add(Relay(330, 160, "Relé A del portero", "30 V 2 A"))
 c.add(wire([(189, 230), (330, 215)], "relay"))

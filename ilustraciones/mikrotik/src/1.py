@@ -1,7 +1,7 @@
 """Lección 1 · Entrar sin romper: principal + pasos 1, 2 y 4."""
 from _mt import *
 
-K = "MikroTik · Lección 1"
+K = "MikroTik"
 PORTS = ["ether1", "ether2", "ether3", "ether4", "ether5"]
 
 # ------------------------------------------------------------------ 1.svg principal

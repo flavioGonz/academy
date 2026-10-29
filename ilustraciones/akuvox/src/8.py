@@ -1,7 +1,7 @@
 from _akv import *
 
 # ---------- 8.svg: dos relés o dos porteros
-c = Canvas("Akuvox · Lección 8", "¿Dos relés en un portero o dos porteros?")
+c = Canvas("Akuvox", "¿Dos relés en un portero o dos porteros?")
 c.add(panel(48, 130, 540, 480, "Un portero, dos relés", "info"))
 m = c.add(Generic(78, 180, "Monitor", "teclas Portón y Hall", icon="laptop", w=250))
 p = c.add(Generic(78, 400, "Portero", "relés A y B", icon="bell", w=250))
@@ -26,7 +26,7 @@ c.add(text(640, 556, "la otra puerta se abre por HTTP con usuario propio.", 15, 
 save(c, "8.svg")
 
 # ---------- 8-paso2.svg: una tecla por puerta
-c = Canvas("Akuvox · Lección 8 · Paso 2", "Una tecla por puerta en la pantalla del monitor")
+c = Canvas("Akuvox · Paso 2", "Una tecla por puerta en la pantalla del monitor")
 c.add(f'<rect x="48" y="140" width="460" height="300" rx="22" fill="#F1F4F7" stroke="{LINE2}" stroke-width="2"/>')
 c.add(f'<rect x="68" y="160" width="420" height="230" rx="10" fill="#0B1A28"/>')
 c.add(text(88, 196, "Llamada · Portero calle", 16, 600, "#9FC3E3", FB))
@@ -51,7 +51,7 @@ c.add(Note(48, 530, 1104, "Cada tecla manda su código; el portero ve cuál lleg
 save(c, "8-paso2.svg")
 
 # ---------- 8-paso5.svg: comando HTTP
-c = Canvas("Akuvox · Lección 8 · Paso 5", "Abrí por HTTP con un usuario que no es el admin")
+c = Canvas("Akuvox · Paso 5", "Abrí por HTTP con un usuario que no es el admin")
 c.add(Terminal(48, 150, 640, ["PORTERO=192.168.88.21", ("curl -u 'abre-lab:Ejemplo-Http-2026' \\", CYAN),
                                ("  \"$PORTERO/fcgi/OpenDoor?action=OpenDoor&DoorNum=1\"", CYAN)], title="PC DE LABORATORIO"))
 c.add(Step(48, 150, 5))

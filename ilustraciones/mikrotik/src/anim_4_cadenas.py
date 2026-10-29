@@ -2,7 +2,7 @@
 """Lección 4 · teoría: cómo se lee una cadena (deciden / anotan), jump que vuelve y cadena vacía = accept."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=28, kicker="MIKROTIK · LECCIÓN 4 · CÓMO FUNCIONA", title="Las reglas se leen en orden hasta que una decide")
+a = Anim(T=28, kicker="MIKROTIK · CÓMO FUNCIONA", title="Las reglas se leen en orden hasta que una decide")
 a.steps([
     "WinBox desde la oficina (admins): jump a gestion-wan y accept decide.",
     "WinBox desde otra IP: en gestion-wan nadie decide y vuelve a input.",

@@ -2,7 +2,7 @@ import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/akuvox/s
 from _cat import *
 
 # ---------------------------------------------------------------- 21.svg: S535 por módulos, S532 por versiones
-c = Canvas("Akuvox · Lección 21", "S535 se arma por módulos; S532 viene en versiones")
+c = Canvas("Akuvox", "S535 se arma por módulos; S532 viene en versiones")
 c.add(panel(48, 122, 640, 300, "S535 · Linux · 5\" · IP66", "info"))
 c.add(portero(80, 168, "pantalla", 0.82, None, None))
 mods = [("Huella", "key"), ("LTE", "wifi"), ("Lector QR", "card"), ("Lazo de inducción", "bell")]
@@ -24,7 +24,7 @@ c.add(g)
 save(c, "21.svg")
 
 # ---------------------------------------------------------------- 21-paso1: el pedido del S535
-c = Canvas("Akuvox · Lección 21 · Paso 1", "El pedido del S535 lleva cada módulo")
+c = Canvas("Akuvox · Paso 1", "El pedido del S535 lleva cada módulo")
 c.add(doc(48, 130, 520, 380, "Pedido · edificio con huella y LTE", [
     ("1 x S535 (frente)", "blue"), ("1 x módulo de huella", "blue"), ("1 x módulo LTE", "blue"),
     "Alimentación: PoE+ 802.3at en el switch,", "o fuente 12 V (hasta 4 A)",
@@ -39,7 +39,7 @@ c.add(Note(612, 470, 540, "Si el pedido dice solo \"S535\", llega el frente sin 
 save(c, "21-paso1.svg")
 
 # ---------------------------------------------------------------- 21-paso2: S532 y la salida de 12 V
-c = Canvas("Akuvox · Lección 21 · Paso 2", "S532 con cerradura: ¿alcanza el PoE?")
+c = Canvas("Akuvox · Paso 2", "S532 con cerradura: ¿alcanza el PoE?")
 c.add(panel(48, 126, 540, 380, "Solo PoE+", "alert"))
 c.add(Router(76, 186, "Switch PoE", "", ports=["1", "2", "3"], hl={"1": CYAN}))
 c.add(portero(410, 186, "pantalla", 0.62, None, None))
@@ -57,7 +57,7 @@ c.add(Note(48, 530, 1104, "Cerradura de más de 500 mA en el S532 (o de más de 
 save(c, "21-paso2.svg")
 
 # ---------------------------------------------------------------- 21-paso3: cómo se entra a cada uno
-c = Canvas("Akuvox · Lección 21 · Paso 3", "Cada uno se abre con otro código")
+c = Canvas("Akuvox · Paso 3", "Cada uno se abre con otro código")
 c.add(text(48, 180, "S535", 22, 700, INK, FD))
 c.add(screen_flow(160, 150, [("9999 + Dial", "9999"), ("3888 + OK", "3888"), ("System Info", "System Info")], w=250, h=120, gap=50))
 c.add(text(48, 430, "S532", 22, 700, INK, FD))

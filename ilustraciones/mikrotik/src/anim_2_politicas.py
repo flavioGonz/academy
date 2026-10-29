@@ -2,7 +2,7 @@
 """Lección 2 · teoría: address al autenticar, políticas de entrada, políticas de acción y el log con nombre."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=24, kicker="MIKROTIK · LECCIÓN 2 · CÓMO FUNCIONA", title="Cada pedido pasa por los controles del usuario")
+a = Anim(T=24, kicker="MIKROTIK · CÓMO FUNCIONA", title="Cada pedido pasa por los controles del usuario")
 a.steps([
     "mesa.ayuda entra por WinBox desde la LAN: address y winbox, bien.",
     "Pide /ip/address/print: necesita read, y su grupo la tiene.",

@@ -345,3 +345,59 @@ Páginas con notas en este módulo: 25 (24 nuevas y el manual del UCM630x). Ante
 - La lista de tonos de la UIT es de 2010; no hay confirmación de que la red actual de Antel (incluidas las líneas que entrega desde equipos en la casa del cliente) use los mismos.
 - URSEC: no se encontró una norma técnica pública de la interfaz de línea analógica.
 - El foro oficial de Grandstream y la base de conocimiento de Yeastar (Cloudflare) no se pudieron leer; los casos de foro son de Asterisk, FreePBX y listas de Digium.
+
+## Lección agregada en octubre de 2026: Troncal SIP de Antel (TH46 a TH52)
+Base: research/notes/c.md (16 páginas con notas). Evidencia sobre Antel delgada: la página oficial no publica datos técnicos; lo técnico sale de un integrador y de dos foros, coherentes entre sí entre 2017 y 2022.
+
+## TH46 La troncal de Antel es por IP: sin usuario ni contraseña, con OPTIONS de Antel
+- Sub-topic: T23 (also T24)
+- Agree: 3 of 3. Notes: c:N5, c:N7, c:N17. Urls: https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/ https://www.3cx.com/community/threads/troncal-sip-antel-and-3cx.50040/ https://community.freepbx.org/t/antel-sip-trunk-only-options/84614
+- Disagree: none found. La página de Antel no lo dice ni lo contradice.
+- Level: foundation
+- Best story: el FreePBX que contestaba 401 a cada OPTIONS (https://community.freepbx.org/t/antel-sip-trunk-only-options/84614)
+
+## TH47 Antel entrega un puerto RJ45 con IP de cliente, gateway, máscara, servidor SIP, números y canales
+- Sub-topic: T23
+- Agree: 2 of 2. Notes: c:N4, c:N7. Urls: https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/ https://www.3cx.com/community/threads/troncal-sip-antel-and-3cx.50040/
+- Disagree: none found (thin evidence). No se confirmó si en FTTH llega como un puerto del ONT, una VLAN o un equipo aparte.
+- Level: foundation
+- Best story: máscara /30 y una IP de prueba para ping (https://www.3cx.com/community/threads/troncal-sip-antel-and-3cx.50040/)
+
+## TH48 Planes por llamadas simultáneas sobre FTTH y fibra dedicada, con caller ID y número de salida a elección
+- Sub-topic: T23
+- Agree: 1 of 1. Notes: c:N1, c:N2. Urls: https://antel.com.uy/empresas/internet-y-fija/planes/troncal-sip
+- Disagree: Simpletech (2018) también nombra el cobre como medio de acceso; la página actual de Antel habla solo de FTTH y fibra dedicada.
+- Level: foundation
+- Best story: none
+
+## TH49 Conectá la troncal directo a la central y separala de la red del cliente; con NAT en el medio, el contenido SIP no se traduce
+- Sub-topic: T24 (also T12)
+- Agree: 3 of 3. Notes: c:N10, c:N11, c:N12, c:N15. Urls: https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/ https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/ https://didlogic.com/learn/sip-alg-explained/
+- Disagree: Simpletech recomienda un E-SBC si la troncal se mezcla con otras redes; para una pyme con una sola UCM, la conexión directa alcanza.
+- Level: core
+- Best story: el técnico de 3CX que tuvo ping recién al agregar rutas (https://www.3cx.com/community/threads/troncal-sip-antel-and-3cx.50040/)
+
+## TH50 La saliente lleva un número de la troncal como caller ID, o Antel la rechaza o la saca con el número por defecto
+- Sub-topic: T25
+- Agree: 2 of 2. Notes: c:N24, c:N14, c:N1. Urls: https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/ https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/
+- Disagree: none found. Ninguna fuente dice qué código de respuesta usa Antel para el rechazo.
+- Level: core
+- Best story: none
+
+## TH51 El plan de numeración de Uruguay arma la ruta saliente; el número entrante se mira en la primera llamada
+- Sub-topic: T25
+- Agree: 2 of 2 en el plan. Notes: c:N22, c:N23, c:N24. Urls: https://www.itu.int/dms_pub/itu-t/oth/02/02/T02020000E00001PDFS.pdf https://en.wikipedia.org/wiki/Telephone_numbers_in_Uruguay
+- Disagree: ninguna fuente da el formato en que Antel entrega el número llamado ni si acepta 09 o 598 en las salientes.
+- Level: core
+- Best story: 911 es la excepción al formato 1XY (https://www.itu.int/dms_pub/itu-t/oth/02/02/T02020000E00001PDFS.pdf)
+
+## TH52 Diagnóstico de la troncal: captura primero, leer la respuesta SIP, y reclamar con el número de servicio
+- Sub-topic: T26
+- Agree: 3 of 3. Notes: c:N25, c:N26, c:N27, c:N8. Urls: https://en.wikipedia.org/wiki/List_of_SIP_response_codes https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/ https://www.3cx.com/community/threads/troncal-sip-antel-and-3cx.50040/
+- Disagree: none found
+- Level: core
+- Best story: el número de servicio P más cinco dígitos (https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/)
+
+## Huecos de la lección
+- Antel no publica servidor, puertos, codecs, formato de numeración ni la forma física de entrega en FTTH. Tampoco si su servidor contesta los OPTIONS de la central ni desde cuántas IP manda señalización y audio.
+- La guía técnica más completa es de 2018 (actualizada en 2025) y la escribió un integrador; los foros son de 2017 y 2022.

@@ -1,7 +1,7 @@
 """Lección 16 · Paquetes al día."""
 from _comun_12_22 import *
 
-K = "MikroTik · Lección 16"
+K = "MikroTik"
 
 # ---------------------------------------------------------------- principal: paquetes
 c = Canvas(K, "Un paquete principal y extras que se habilitan")

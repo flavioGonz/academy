@@ -1,7 +1,7 @@
 """Lección 35 · Netwatch: principal, paso 2 (desenchufar y leer el log), paso 4 (mail y Telegram) y paso 5 (PoE)."""
 from _mt import *
 
-K = "MikroTik · Lección 35"
+K = "MikroTik"
 
 # ------------------------------------------------------------------ 35.svg
 c = Canvas(K, "Una sonda vigila; al cambiar de estado, un script")

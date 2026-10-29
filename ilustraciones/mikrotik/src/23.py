@@ -1,4 +1,4 @@
-"""Ilustraciones de la lección 23 (Safe Mode) del curso MikroTik.
+"""Ilustraciones de la lección 2 (Safe Mode) del curso MikroTik.
 Fuentes: class/23-safe-mode/card.md, research/notes/d.md
 (manual 7.25 Configuration Management y WinBox, foro oficial)."""
 import sys; sys.path.insert(0, "/home/claude/ies-training/tools")
@@ -14,7 +14,7 @@ def pill(x, y, s, w, kind="gray"):
 
 
 # ------------------------------------------------------------ principal
-c = Canvas("MikroTik · Lección 23", "Safe Mode: un punto de vuelta para tus cambios")
+c = Canvas("MikroTik", "Safe Mode: un punto de vuelta para tus cambios")
 c.add(Terminal(48, 130, 490, [
     "[admin@MikroTik] >   Ctrl+X o F4",
     ("[Safe Mode taken]", "#7FD3F0"),
@@ -34,7 +34,7 @@ c.add(Arrow((548, 410), (670, 430), kind="alert", label="algo falló", label_at=
 c.save(OUT + "23.svg")
 
 # ------------------------------------------------------------ paso 2: dónde se activa
-c = Canvas("MikroTik · Lección 23 · Paso 2", "Activá Safe Mode: el botón o Ctrl+X")
+c = Canvas("MikroTik · Paso 2", "Activá Safe Mode: el botón o Ctrl+X")
 # ventana WinBox genérica
 x, y, w, h = 48, 140, 560, 250
 c.add(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="14" fill="{WHITE}" stroke="{LINE2}" stroke-width="2"/>'
@@ -61,7 +61,7 @@ c.add(Note(48, 440, 1102, "En un enlace malo, el botón puede quedar apretado si
 c.save(OUT + "23-paso2.svg")
 
 # ------------------------------------------------------------ paso 3: corte a propósito
-c = Canvas("MikroTik · Lección 23 · Paso 3", "Cortate a propósito y mirá cómo vuelve solo")
+c = Canvas("MikroTik · Paso 3", "Cortate a propósito y mirá cómo vuelve solo")
 panels = [
     ("1 · Safe Mode activo", "data", None, "<SAFE>", "cyan"),
     ("2 · /interface/disable ether2", "alert", False, "sesión cortada", "alert"),

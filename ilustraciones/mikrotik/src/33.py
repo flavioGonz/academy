@@ -1,7 +1,7 @@
 """Lección 33 · Reglas de protección: principal, paso 3 (DNS cerrado desde WAN) y paso 4 (listas por etapas)."""
 from _mt import *
 
-K = "MikroTik · Lección 33"
+K = "MikroTik"
 
 # ------------------------------------------------------------------ 33.svg
 c = Canvas(K, "Qué frena cada regla de protección")

@@ -1,7 +1,7 @@
 from _akv import *
 
 # ---------- 6.svg: tres maneras de viajar el código
-c = Canvas("Akuvox · Lección 6", "El código 731 puede viajar de tres maneras")
+c = Canvas("Akuvox", "El código 731 puede viajar de tres maneras")
 lanes = [("Inband", "dentro del audio", "warn", "se degrada con G.729", "audio"),
          ("RFC 2833", "evento en paquetes RTP", "ok", "la más compatible", "rtp"),
          ("SIP INFO", "mensaje de señalización", "warn", "la central no siempre lo pasa", "sip")]
@@ -34,7 +34,7 @@ for i, (ttl, sub, kd, verdict, style) in enumerate(lanes):
 save(c, "6.svg")
 
 # ---------- 6-paso4.svg: mismo tipo y mismo código en las tres puntas
-c = Canvas("Akuvox · Lección 6 · Paso 4", "Mismo tipo y mismo código en las tres puntas")
+c = Canvas("Akuvox · Paso 4", "Mismo tipo y mismo código en las tres puntas")
 c.add(Window(48, 140, 352, 250, "Portero", rows=[("DTMF Type", "RFC2833"), ("DTMF Mode", "3 dígitos"), ("Relay A", "731")], hl=2))
 c.add(text(66, 340, "Account > Advanced > DTMF", 15, 500, BLUE, FM))
 c.add(text(66, 364, "Access Control > Relay", 15, 500, BLUE, FM))
@@ -60,7 +60,7 @@ c.add(text(48, 580, "Una punta en SIP INFO y las otras en RFC 2833: atienden, ve
 save(c, "6-paso4.svg")
 
 # ---------- 6-paso6.svg: lista blanca DTMF
-c = Canvas("Akuvox · Lección 6 · Paso 6", "La lista blanca decide quién puede marcar 731")
+c = Canvas("Akuvox · Paso 6", "La lista blanca decide quién puede marcar 731")
 po = c.add(Intercom(520, 150, "Portero", "Only Contacts List"))
 a = c.add(Generic(60, 170, "Monitor 202", "está en contactos", icon="laptop", w=280, hl=OK))
 b = c.add(Generic(60, 390, "Número desconocido", "no está en contactos", icon="phone", w=280, hl=ALERT))

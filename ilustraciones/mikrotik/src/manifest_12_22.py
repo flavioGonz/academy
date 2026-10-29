@@ -205,7 +205,7 @@ M = {
              "ejemplo": "Un local con PPPoE de Antel cambia de IP cada vez que reconecta: en el legajo anotás el dns-name y no la IP, y el monitoreo apunta al nombre."},
             {"name": "El nombre no es un camino",
              "para_que": "Es fácil confundir tener un nombre con poder entrar. El DDNS solo hace que el router sea fácil de encontrar: el firewall por defecto sigue descartando lo que llega de internet, y detrás de CGNAT el nombre apunta a una IP compartida del proveedor.",
-             "como": "Antes de prometer acceso, comparás public-address con la IP de la WAN. Para entrar sin IP pública usás Back To Home (lección 19) o un concentrador (lección 20); publicar un servicio detrás del nombre es otra decisión, con sus reglas (lección 10).",
+             "como": "Antes de prometer acceso, comparás public-address con la IP de la WAN. Para entrar sin IP pública usás Back To Home (lección 30) o un concentrador (lección 31); publicar un servicio detrás del nombre es otra decisión, con sus reglas (lección 32).",
              "ejemplo": "El cliente te pasa el nombre mynetname.net de su router y te pide entrar al NVR desde la oficina: el nombre resuelve, pero detrás hay CGNAT. Le proponés Back To Home en lugar de abrir puertos."},
             {"name": "update-time y NTP",
              "para_que": "Un router sin hora correcta deja logs que no sirven y, con IPsec, puede hacer vencer las SA antes de tiempo. La nube puede poner una hora aproximada al arrancar, pero no reemplaza a NTP.",

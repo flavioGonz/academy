@@ -2,7 +2,7 @@
 """Lección 8 · teoría: el NAT del medio olvida la asociación y PersistentKeepalive = 25 la mantiene."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=24, kicker="MIKROTIK · LECCIÓN 8 · KEEPALIVE", title="PersistentKeepalive: que el NAT no se olvide del túnel")
+a = Anim(T=24, kicker="MIKROTIK · KEEPALIVE", title="PersistentKeepalive: que el NAT no se olvide del túnel")
 a.steps([
     "La notebook manda al router: el NAT del medio anota la asociación.",
     "WireGuard no manda nada si no hay tráfico. A los minutos, el NAT la olvida.",

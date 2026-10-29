@@ -4,7 +4,7 @@
 # Deja en /mnt/user-data/outputs: site-<T>.tgz (código + ilustraciones del curso), <slug>-imp-<T>.json,
 # glosario-<T>.json y pub-<slug>-<T>.sh, e imprime los sha256 para verificar en la PC.
 set -e
-SLUG=$1; SRV=$2; CAMPOS=${3:-fig,auto,teoria,teoria_figs,concepts,steps}; EST=$4
+SLUG=$1; SRV=$2; CAMPOS=${3:-fig,auto,teoria,teoria_figs,concepts,steps,anims}; EST=$4
 R=/home/claude/ies-training; W=/tmp/claude-0/prep; mkdir -p $W
 cd $R
 python3 tools/enriquecer.py $SRV $SLUG $W/$SLUG-e.json --campos $CAMPOS

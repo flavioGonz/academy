@@ -1,120 +1,80 @@
 ---
 name: ies-entrenamientos
-description: Mantener y ampliar el portal de cursos técnicos de IES en https://entrenamientos.ies.com.uy (IES Training) — crear un curso nuevo, sumar lecciones o secciones (partes) a un curso existente, corregir contenido, cambiar el diseño o funciones del portal, administrar usuarios y desplegar en el CT 115 de Proxmox. USAR SIEMPRE que se hable del portal de entrenamientos, IES Training, "los cursos", "la academia", agregar un curso/lección/capítulo/sección/módulo (MikroTik, Grandstream, UniFi, Omada, Akuvox, HikCentral, Paradox, Bosch Incendio, Proxmox, VMware, Windows, Linux u otro fabricante), el panel de administración de cursos, capturas, logos de cursos, o desplegar/actualizar entrenamientos.ies.com.uy — aunque no se nombre el portal explícitamente.
+description: Mantener y ampliar el portal de cursos técnicos de IES en https://entrenamientos.ies.com.uy (IES Training): cursos y lecciones nuevas, módulos, ilustraciones y animaciones, correcciones, el editor y el panel, el repo academy y el despliegue en el CT 115 de Proxmox. USAR SIEMPRE que se hable del portal de entrenamientos, IES Training, "los cursos", "la academia", sumar un curso/lección/capítulo/módulo (MikroTik, Grandstream, UniFi, Omada, Akuvox, HikCentral, OmniAccess, Paradox, Bosch Incendio, Proxmox, VMware, Windows, Linux u otro), animaciones o fotos de lecciones, el panel de administración, o publicar/actualizar entrenamientos.ies.com.uy, aunque no se nombre el portal.
 ---
 
 # IES Training · entrenamientos.ies.com.uy
 
-Portal de cursos técnicos para los instaladores y el soporte de IES (Ingeniería en Seguridad S.R.L., Uruguay). Al 27/10/2026 tiene 12 cursos: MikroTik (22 lecciones), Grandstream, UniFi, Omada, Akuvox (41: base + relés por HTTP + catálogo por tipo de equipo), HikCentral, Paradox (16), Bosch Incendio (16), Proxmox, VMware, Windows y Linux (12 cada uno). Español rioplatense con voseo, sin audio (Nico no lo quiere), estilo visual IES (azules #002F58 / #011E38 / #0A63B8 / #17A8D4, fondo #F3F7FB, Familjen Grotesk + Instrument Sans + JetBrains Mono, "forma IES") con estructura tipo Udemy/Coursera.
+Portal de cursos técnicos para los instaladores y el soporte de IES (Ingeniería en Seguridad S.R.L., Uruguay). Español rioplatense con voseo, sin audio (Nico no lo quiere, tampoco voces sintetizadas), estilo visual IES (azules #002F58 / #011E38 / #0A63B8 / #17A8D4, fondo #F3F7FB, Familjen Grotesk + Instrument Sans + JetBrains Mono) con estructura tipo Udemy/Coursera.
 
-La documentación viva de infraestructura está en el doc del proyecto **Entrenamientos**: `claude/entrenamientos-despliegue.md`. Leelo al empezar y actualizalo al terminar cualquier cambio de infraestructura, cursos o funciones.
+Al 29/10/2026: 16 cursos. MikroTik 39 lecciones, Akuvox 45, Grandstream 19 (con un módulo de líneas analógicas por FXO y la troncal SIP de Antel), UniFi, Omada, HikCentral, Proxmox, VMware, Windows y Linux 12 cada uno, Paradox y Bosch Incendio 16, OmniAccess LPR 12, Face, Intrusión y Filas 10 (los cuatro OmniAccess en borrador). Glosario de unos 900 términos.
+
+**La documentación viva está en el doc del proyecto Entrenamientos: `claude/entrenamientos-despliegue.md`.** Leelo al empezar (estado, infraestructura, pendientes) y actualizalo al terminar.
 
 ## Dónde vive cada cosa
 
 | Qué | Dónde |
 |---|---|
-| Sitio en producción | CT **115** `entrenamientos` en **pve01**, IP 172.26.20.218, nginx + php8.4-fpm. Web `/var/www/entrenamientos` (cursos en `data/*.json`, capturas en `capturas/`, logos en `logos/`) |
-| Datos privados | `/var/www/entrenamientos-data/` en el CT: SQLite `ies-training.sqlite` (usuarios, progreso, auditoría), `sesiones/`, `historial/<curso>/` (últimas 60 versiones) |
-| Respaldos | `/root/respaldos/` en el CT, uno por despliegue (web y datos) |
-| Proxy | NPM 172.26.20.17:81, proxy host **11** → 172.26.20.218:80, cert Let's Encrypt id 12, `client_max_body_size 70m` en advanced |
-| DNS | A `entrenamientos` → 200.40.182.246 en la zona ies.com.uy (skill ies-cpanel) |
-| Herramientas de despliegue | PC de Nico, `C:\Users\usuario\Claude\ies-training\`: `pvex.py` (SSH a pve0X: `run`, `cmd`, `put`), `npmx.py` (API del NPM), plantillas `deploy-site.sh`, `importar.sh` y `diff-curso.sh` (reemplazar `__SHA__`, `__DATOS__`, `__SLUG__`, `__FORZAR__`), `orden-catalogo.sh`, `smoke-admin.sh`, `limites.sh`, `npm-limite.py`, `importar-curso.php`, `crear-admin.php`, `admin-user.sh` |
-| Kit de fuentes | `C:\Users\usuario\Claude\ies-training\kit\ies-entrenamientos-kit.tgz` (copia también en el CT: `/root/kit/ies-entrenamientos-kit.tgz`). Trae `ies-training/site2` (código del sitio), `ies-training/tools` (build, checker, agregar-lecciones, importar-curso, crear-admin), `ies-training/brief-ies.md`, `ies-training/skill/` (esta skill) y los workspaces `claudemy/<slug>/` de cada curso (fuentes en `raw/`, notas, plan, lecciones) |
+| Producción | CT **115** `entrenamientos` en **pve01** (172.26.20.218), nginx + php8.4-fpm + sqlite3 (sin curl: wget). Web `/var/www/entrenamientos` (cursos en `data/*.json`, `capturas/`, `logos/`, `ilustraciones/`); datos privados en `/var/www/entrenamientos-data/` (SQLite, sesiones, `historial/<curso>/` con 60 versiones); respaldos en `/root/respaldos/` (5 de web, 20 de datos) |
+| Acceso | `/data/<curso>.json` da 403 (solo `catalog.json` y `glosario.json` públicos); `/ilustraciones/` y `/capturas/` pasan por `auth_request /api/gate.php` (401 sin sesión). NPM proxy host 11, Let's Encrypt id 12, A en el cPanel |
+| Código y contenido | Repo **público** https://github.com/flavioGonz/academy (rama `main`): `site/` (el sitio), `tools/`, `ilustraciones/` (fuentes .svg y scripts), `cursos/<slug>/` (workspaces claudemy sin `raw/`), `deploy/` (scripts del CT, `sync-repo.sh`), `skill/`, `docs/` |
+| Trabajo en la nube | `/home/claude/ies-training/` (`site2/` = sitio, `tools/`, `ilustraciones/`, briefs) y `/home/claude/claudemy/<slug>/` (workspaces) |
+| PC de Nico | `C:\Users\usuario\Claude\ies-training\`: `pvex.py` (SSH a pve0X: `run`, `cmd`, `put`, `get`), `deploy-site.sh`, `importar-curso.php`, `sync/` (JSON bajados del servidor). Clon del repo en `C:\Users\usuario\Claude\trainer` (el push sale de ahí, con Git Credential Manager) |
 
-La PC de Nico se alcanza con las herramientas del puente (Desktop Commander `start_process` en PowerShell, `device_commit_files`, `device_stage_files`). El CT se opera siempre desde ahí con `python pvex.py ...` (el contenedor de la nube no llega a la red 172.26.20.x).
+La red 172.26.20.x solo se alcanza desde la PC: Desktop Commander `start_process` (PowerShell) o, si se cae, `device_bash` en la VM del escritorio (`cd $HOME/mnt/ies-training && python3 pvex.py …`; paramiko con `pip --user`). Archivos de la nube a la PC con `device_commit_files` (nombre nuevo cada vez, hash verificado con `sha256sum` o `Get-FileHash`); de la PC a la nube con `device_stage_files` (aparecen en `/mnt/user-data/uploads/ies-training/…`). Límite del puente: menos de 30 MB por archivo.
 
-**Fuente de verdad de los cursos: el servidor.** Desde que existe el panel, los cursos se editan en producción. Nunca despliegues `data/` encima (`DATOS=0` siempre, salvo un sitio vacío) y antes de tocar un curso existente bajá su JSON actual.
+## Primer paso en una sesión nueva
 
-## Primer paso en una sesión nueva: restaurar el kit
+Si `/home/claude/ies-training/site2` no existe: `git clone https://github.com/flavioGonz/academy /home/claude/trainer` y armá las carpetas de trabajo desde ahí (`site` → `ies-training/site2`, `tools`, `ilustraciones`, `docs/brief-*.md`; `cursos/<slug>` → `claudemy/<slug>`). `site2/api/config.php` no está en el repo (hay `config.example.php`): para pruebas locales generá uno con un hash de prueba. Hace falta pandoc, Pillow, Playwright (ya instalado) y brotli (`pip install --break-system-packages brotli`) para las animaciones. La skill claudemy vive en `/root/.claude/skills/claudemy/`.
 
-El contenedor de la nube es efímero. Si `/home/claude/ies-training/site2` no existe:
+## Regla de oro: el servidor es la fuente de verdad
 
-1. `device_stage_files` del kit (`C:\Users\usuario\Claude\ies-training\kit\ies-entrenamientos-kit.tgz`) y `tar xzf` en `/home/claude/`.
-2. Si hace falta la skill claudemy (cursos o lecciones nuevas): ya suele estar en `/root/.claude/skills/claudemy/`; si no, clonar `https://github.com/assafkip/claudemy` ahí.
-3. `pip install --break-system-packages markdown` si falta; `pandoc` tiene que existir (`apt-get install -y pandoc` si no).
-4. Para trabajar sobre lo que hay hoy en producción, bajá los JSON vigentes desde la PC: `curl.exe -s -o <slug>.json https://entrenamientos.ies.com.uy/data/<slug>.json` (y `catalog.json`), luego `device_stage_files`.
+Nico edita en el panel (textos, fotos pegadas, pies). Antes de tocar un curso:
+1. Bajalo: `python pvex.py cmd pve01 "pct pull 115 /var/www/entrenamientos/data/<slug>.json /tmp/<slug>.json"` + `python pvex.py get pve01 /tmp/<slug>.json sync/<slug>-<fecha>.json` + `device_stage_files`. Nombres nuevos, sin pisar los anteriores.
+2. Compará con lo último que importaste (`/mnt/user-data/outputs/<slug>-imp-*.json`) campo por campo y respetá lo de Nico. Si su edición choca con un `estructura-extra*.json` (por ejemplo un "conecta"), corregilo también ahí.
+3. Todo cambio sale de ese JSON del servidor, nunca de `build.py` solo.
 
-Al terminar una sesión con cambios, regenerá el kit (ver "Cerrar") para que la próxima vez arranque de lo último.
+## El pipeline de contenido (`/home/claude/ies-training/tools`)
 
-## Arquitectura del sitio (site2)
+- `build.py <slug>`: arma el curso desde `claudemy/<slug>/class/` (orden de catálogo en `ORDER`; un curso nuevo necesita entrada en `META` de app.js).
+- `agregar-lecciones.py <servidor.json> <construido.json> <salida.json> --lecciones N-M`: suma lecciones nuevas sin pisar lo editado, con ids que no chocan.
+- `enriquecer.py <curso.json> <slug> <salida.json> [--solo ids] [--campos ...]`: aplica `ilustraciones/<slug>/manifest*.json`. Campos: `fig` (ilustración principal), `concepts`, `teoria`, `teoria_figs` (figuras o animaciones dentro de la teoría, después del párrafo con `after`), `steps` (figuras del laboratorio, después del paso con `after`; un `.svg` sin `.webp` en `site2` es una animación y va tal cual), `anims` (animaciones del Resumen, bloque "Cómo se ve en la red"), `auto` (script por lección). Los `manifest-anims-*` se leen al final y suman sus pasos. **Nunca `--reemplazar-pasos` sobre un curso editado** (borra las fotos de Nico). Sobre un curso editado, aplicá solo los campos nuevos (`--campos anims,steps,teoria_figs`).
+- `estructura.py <curso.json> <slug> <salida.json>`: módulos lineales, objetivos, conecta/sigue/requisitos, avisos; lee `estructura.json` y `estructura-extra*.json` (`modulos_nuevos` con `antes_de`, `lecciones`, `prioridad`); renumera la apertura de "La charla". Los `avisos_sin_texto` de avisos ya aplicados en el servidor son inofensivos.
+- `prep-publicar.sh <slug> <servidor.json> [campos] [--estructura]`: enriquecer (+ estructura) y arma en `/mnt/user-data/outputs` `site-<T>.tgz` (código + ilustraciones del curso), `<slug>-imp-<T>.json`, `glosario-<T>.json` y `pub-<slug>-<T>.sh` (verifica el md5 del curso en el servidor antes de importar).
+- Glosario: `glosario_check.py <slug>` para ver siglas sin entrada y `glosario_merge.py <propuesta.json>` para sumar sin duplicar.
+- `sin_numero_leccion.py <slug> <curso.json> [--aplicar]`: quita "LECCIÓN N" de los rótulos de ilustraciones y animaciones y pasa las referencias "(lección N)" al número actual. Las ilustraciones nuevas van **sin número de lección en el rótulo** (el n cambia cuando se suman lecciones); si nombran otra lección, por su título.
+- Ilustraciones: `ilus.py` + scripts en `ilustraciones/<slug>/src/`, render con `render_svg.py` (webp en `site2/ilustraciones/<slug>/`). Guía: `ilustraciones/GUIA.md`. Algunas lecciones tienen un script "b" que reemplaza al original (por ejemplo `11b.py` en MikroTik): editá el que genera la versión publicada.
+- Animaciones: `anim.py` (SVG con CSS, sin scripts, fuentes embebidas desde `tools/fonts/`, cuadro fijo con "reducir movimiento"), revisión con `anim_preview.py` (fija cada instante por CSS en una página nueva; mirar 5 o más instantes y el cuadro fijo). No modificar ninguno de los dos desde un encargo.
 
-- `index.html` + `assets/app.js` (SPA con rutas por hash) + `assets/styles.css`. Subí `?v=N` en `index.html` en cada cambio de JS/CSS para romper la caché.
-- Rutas: `#/` inicio, `#/curso/<slug>`, `#/curso/<slug>/<n>` lección (pestañas resumen, laboratorio, quiz, charla, fuentes), `#/aprendizaje`, `#/buscar/<q>`, `#/constancia/<slug>`, `#/ingresar`, `#/registro`, `#/cuenta`, `#/admin` (resumen, usuarios, cursos, actividad), `#/admin/cursos/<slug>`, `#/admin/cursos/<slug>/<id>`, `#/editor`.
-- `META` en app.js da a cada slug su ícono (`glyph`) y categoría (`cat`); `PATHS` arma los recorridos de la portada. **Un curso nuevo necesita su entrada en `META`** (y en un `PATHS` si corresponde) y su slug en `ORDER` de `tools/build.py`.
-- API PHP (todas leen `api/lib.php`, bloqueado por nginx junto con `config.php`): `auth.php` (me, register, login, logout, password, profile), `progress.php`, `admin.php` (users, stats, user, course, history, audit; course_save con control de conflicto por `base`, course_new, catalog_order, restore, user_update/reset/create, `logo`), `capturas.php` (imagen 12 MB, GIF 30 MB, video mp4/webm 60 MB, YouTube/Vimeo; `inline=1` para medios insertados en el texto).
-- Escrituras: POST con encabezado `X-IES: 1` y sesión. Roles: tecnico, editor, admin. El registro siempre crea técnicos; un admin se crea por consola (`admin-user.sh`).
-- Lección = `{id, n, handle, summary, idea[], idea_md[], impact(_md), who(_md), lab{energy, minutes, md, html}, rule, quiz[], sources[], script[]}`. `id` es estable (las capturas cuelgan del id), `n` es la posición y se renumera. Partes = `arcs[{title, why, lessons:[ids]}]`.
-- Panel de administración (`#/admin`, barra lateral azul): **Resumen** con indicadores, gráfico de 30 días (lecciones, activos, registros, laboratorios), tabla de cursos (empezaron, terminaron, avance medio, % de aciertos en quiz, medios, pendientes), ranking de técnicos, cuentas por empresa, preguntas que más se fallan y actividad reciente; **Usuarios** con filtros por rol, búsqueda, orden y exportación CSV; ficha de usuario con anillos de avance por curso y lecciones completadas con fecha; **Cursos** en tarjetas con salud del contenido (qué le falta a cada lección); **Actividad** agrupada por día. Endpoints: `admin.php?a=dashboard` y `?a=courses`. `progress.php` guarda `t` (lección completada) y `tl` (laboratorio) con hora del servidor desde el 27/10/2026.
-- El editor de cursos ya permite: arrastrar lecciones entre partes, logo por curso, editor Markdown con vista previa, insertar imagen/GIF/video/YouTube en el laboratorio, quiz, fuentes, historial y restaurar, borrador, orden del catálogo.
+## Publicar
+1. Paquete y JSON a la PC con nombre nuevo, hash verificado.
+2. Sitio: `deploy-site.sh` copiado a `deploy-now.sh` con el SHA y `DATOS="0"` (nunca se despliega `data/`), `python pvex.py put pve01 site-<T>.tgz /tmp/ies-entrenamientos-site.tgz` y `python pvex.py run pve01 deploy-now.sh`. Prueba `/`, catalog, auth (200) y lib/config (403).
+3. Curso: `put` de `<slug>-imp-<T>.json` a `/tmp/<slug>.json`, de `importar-curso.php` a `/tmp/` y del glosario a `/tmp/glosario.json`; después `python pvex.py run pve01 pub-<slug>-<T>.sh` (corta si el curso cambió en el servidor desde que lo bajaste).
+4. Si cambió JS o CSS, subí `?v=N` en `index.html`.
 
-## Tareas típicas
+## El sitio (site2)
+- SPA `index.html` + `assets/app.js` + `assets/styles.css`; API PHP en `api/` (`admin.php`, `auth.php`, `progress.php`, `capturas.php`, `course.php`, `gate.php`, `lib.php`).
+- **`admin.php` normaliza cada curso al guardar desde el panel: un campo nuevo de lección que no esté en `normalize_course` se pierde la primera vez que Nico guarda.** Al sumar un campo (como `anims`), agregalo ahí.
+- Lección: `{id, n, handle, summary, idea[], idea_md[], idea_pics[], impact(_md), who(_md), lab{energy, minutes, md, html}, rule, quiz[], sources[], script[], fig, concepts[{name, para_que, como, ejemplo, pics}], objetivos, conecta, sigue, requisitos, theory_md, theory, anims[], auto}`. `id` es estable; `n` es la posición.
+- Editor de lección (`#/curso/<slug>/<n>/editar`): fotos, GIF y videos en cualquier punto (ideas, conceptos, pasos del laboratorio, párrafos de la teoría, ilustración principal) pegando con Ctrl+V, arrastrando, con los botones de cada punto o con clic derecho (menú propio; Shift + clic derecho abre el del navegador). El armador de GIF se abre desde cualquier punto. Las fotos se muestran centradas, del ancho del texto y en el mismo marco 16:9 que las ilustraciones (`figurize`).
+- Prueba local antes de publicar: copia de `site2` en el scratchpad, `php -S 127.0.0.1:87xx`, usuario admin de prueba creado con `crear-admin.php`, Playwright (login por la interfaz, la función tocada, capturas de pantalla mirándolas, consola sin errores).
 
-### A. Curso nuevo
-1. Slug en minúsculas con guiones (ej. `bosch-incendio`). Workspace `/home/claude/claudemy/<slug>/`.
-2. Producirlo con el método claudemy adaptado (12 a 16 lecciones; las partes que sean necesarias para no fusionar temas): leé `ies-training/brief-ies.md` (manda sobre la skill claudemy). Para cursos grandes, lanzá un agente en segundo plano por curso con el brief, el slug, el alcance (lecciones y partes) y las fuentes prioritarias; que no rendericen audio. Trucos de fuentes que ya funcionaron: los PDF oficiales se bajan y convierten con `pdftotext` poniendo el mismo encabezado que `scrape.py` (url, título); páginas ASP.NET (akuvox.com) necesitan un extractor propio porque el scraper descarta el `<form>`; support.paradox.com se lee por su API pública de artículos; los CDN de Bosch y algunos foros devuelven 403/404 a scripts: no se esquivan, se buscan otras fuentes y se declara el hueco. El checker valida también las URL dentro de bloques de código: en comandos de ejemplo usá IPs sin `http://` o marcadores tipo `http://<IP_EQUIPO>/`.
-3. Checker: `python3 ies-training/tools/check_lessons_es.py claudemy/<slug>` hasta que pase. Revisá a mano 2 o 3 tarjetas (comandos, rutas de menú, versiones, urls que existan en `raw/`).
-4. `ORDER` en `tools/build.py`, entrada en `META` (y `PATHS`) en app.js. Si el ícono no existe, agregalo al objeto de íconos (SVG de trazo, 24×24).
-5. `python3 ies-training/tools/build.py <slug>` → `site2/data/<slug>.json`.
-6. Si cambió app.js: probar local, empaquetar y desplegar (D). Después importar el curso (E).
+## Contenido: criterios de Nico
+- Técnico, práctico, de obra y soporte en Uruguay (Antel, UTE, normativa local). Nada inventado: lo que no se confirma se dice en la lección ("medilo", "según lo que entregue Antel") y va a Pendientes del doc.
+- Cada lección: idea en tres líneas, impacto, quién lo dice, laboratorio con comandos o menús exactos, regla, quiz de 3 con explicación, fuentes leídas, conceptos con ejemplo, teoría con "Un poco de historia" y "Cómo funciona".
+- **Animaciones:** la teoría lleva ilustraciones y animaciones. En los cursos de redes e infraestructura (MikroTik, Grandstream, UniFi, Omada, Proxmox, Linux) cada lección lleva además una animación en el Resumen ("Cómo se ve en la red": el caso de obra) y 1 o 2 en los pasos del laboratorio donde hay intercambio de protocolo. Brief de referencia: `brief-anims-cursos.md`.
+- Confidencialidad (el portal tiene registro abierto): sin nombres de clientes, IPs internas de IES, números de teléfono, matrículas ni usuarios reales. Las capturas reales se editan con PIL antes de publicar (ejemplo: `ilustraciones/akuvox/src/45_captura.py`). Rangos 192.0.2.x, 198.51.100.x, 203.0.113.x y 192.168.88.x.
+- Lecciones nuevas en cursos grandes: un agente en segundo plano por tramo, con un brief escrito (ejemplos: `brief-omniaccess.md`, `brief-grandstream-fxo.md`, `brief-grandstream-sip-antel.md`) y la prueba de armado al final; el despliegue lo hace la sesión principal.
 
-### B. Sumar lecciones o una sección a un curso existente
-1. Mirá qué cambió desde el panel: `diff-curso.sh` con `__SLUG__` (lista campos del curso y lecciones tocadas, lecciones nuevas o quitadas, partes y logo, comparando con la versión más vieja del historial). Si Nico creó una lección vacía como recordatorio del tema que vas a desarrollar (pasó con "Apertura por comandos HTTP" en Akuvox), reemplazala por el capítulo completo y avisale; si tiene contenido o capturas (`capturas/<slug>/<id>/`), no la toques.
-2. Bajá el JSON vigente del servidor (paso 4 de restaurar) → `<slug>-servidor.json`.
-3. Escribí las lecciones nuevas en `claudemy/<slug>/class/` con números que sigan a los existentes, con el mismo brief y checker; agregá la parte nueva en `class/course.json` (`arcs`) y en `lesson-plan.md`. Investigá con fuentes reales (documentación oficial primero) y sumalas a `sources.json` + scraper.
-4. `python3 ies-training/tools/build.py <slug>` y después
-   `python3 ies-training/tools/agregar-lecciones.py <slug>-servidor.json site2/data/<slug>.json <slug>-nuevo.json --lecciones 13-20 [--parte "Título" --por-que "..."]`.
-   Conserva todo lo editado en el panel, da ids que no chocan y renumera. `--reemplazar` para actualizar lecciones existentes por título. Si los campos generales del curso (descripción, qué vas a aprender, versiones, divisiones, cantidad de fuentes) no fueron tocados en el panel según `diff-curso.sh`, copialos del construido al combinado.
-5. Importar `<slug>-nuevo.json` con `--forzar` (E). El anterior queda en el historial y se puede restaurar desde el panel.
-
-### C. Corregir una lección puntual
-Lo más simple es el panel (`#/admin/cursos/<slug>/<id>`), que guarda historial. Si lo hacés vos por API o importación, igual bajá primero el JSON vigente.
-
-### D. Cambiar el sitio (JS, CSS, PHP) y desplegar
-1. Editar en `/home/claude/ies-training/site2/`. Chequeos: `node -e "new Function(require('fs').readFileSync('assets/app.js','utf8'))"` y `php -l` de cada PHP.
-2. Prueba local aislada: copiar `site2` a una carpeta del scratchpad, crear un admin con `crear-admin.php` (cambiando la ruta del `require`), `php -S 127.0.0.1:87xx` y recorrer con Playwright (login, la función tocada, vista móvil 390 px sin desborde horizontal, consola sin errores). Mirá capturas de pantalla, no solo el DOM.
-3. Paquete: `cd site2 && tar czf /mnt/user-data/outputs/ies-entrenamientos-site.tgz --exclude=./capturas --exclude=./logos --exclude='*.htaccess' .` y `sha256sum`.
-4. `device_commit_files` a `C:\Users\usuario\Claude\ies-training\ies-entrenamientos-site.tgz`. **Ojo:** si volvés a enviar la misma ruta de `/mnt/user-data/outputs/` en la misma sesión, el puente puede escribir la copia anterior; copiá el paquete con un nombre nuevo (ej. `site-<fecha-hora>.tgz`) antes de cada envío y verificá el hash en la PC con `Get-FileHash`. Después, en PowerShell:
-   ```powershell
-   cd C:\Users\usuario\Claude\ies-training
-   (Get-Content deploy-site.sh -Raw).Replace('__SHA__','<sha256>').Replace('__DATOS__','0') | Set-Content -NoNewline -Encoding ascii deploy-now.sh
-   python pvex.py put pve01 ies-entrenamientos-site.tgz /tmp/ies-entrenamientos-site.tgz
-   python pvex.py run pve01 deploy-now.sh
-   ```
-   El script verifica el sha, respalda web y datos, extrae sin `data/`, ajusta permisos, recarga nginx y prueba `/`, `/data/catalog.json`, `/api/auth.php?a=me` (200) y `/api/lib.php`, `/api/config.php` (403).
-5. Verificá desde la PC con `curl.exe` contra https://entrenamientos.ies.com.uy (el `?v=` nuevo en el HTML). Si tocaste la API del panel, `python pvex.py run pve01 smoke-admin.sh` crea una sesión temporal del primer admin dentro del CT, consulta `dashboard`, `courses`, `users` y `audit` (con `wget`: el CT no tiene curl) y la borra.
-
-### E. Importar un curso al servidor
-`build.py` (o `agregar-lecciones.py`) genera el JSON; para subirlo sin tocar los demás cursos, con `importar.sh` (plantilla en la carpeta de la PC):
-```powershell
-cd C:\Users\usuario\Claude\ies-training
-python pvex.py put pve01 <slug>.json /tmp/<slug>.json
-python pvex.py put pve01 importar-curso.php /tmp/importar-curso.php
-(Get-Content importar.sh -Raw).Replace('__SLUG__','<slug>').Replace('__FORZAR__','') | Set-Content -NoNewline -Encoding ascii importar-now.sh
-python pvex.py run pve01 importar-now.sh
-```
-`importar-curso.php` corre como www-data dentro del CT, se niega si el curso ya tiene historial de ediciones del panel (poné `--forzar` en `__FORZAR__` cuando el JSON salió de `agregar-lecciones.py` o revisaste que no se pierde nada), guarda la versión anterior en `historial/`, conserva el logo y actualiza `catalog.json` (un slug nuevo va al final del orden; se cambia desde el panel o con `orden-catalogo.sh`, que hoy ubica paradox y bosch-incendio después de hikcentral: adaptalo para otros slugs). Los archivos se empujan con `--perms 0644` a `/tmp` del CT para que www-data los lea.
-
-### F. Usuarios
-Desde el panel. Por consola: `admin-user.sh` (corre `crear-admin.php "Nombre" correo` como www-data; imprime una contraseña temporal que obliga a cambiarla). Las contraseñas temporales se dan una sola vez en el chat y no se guardan en ningún archivo ni memoria.
-
-## Contenido: criterios que Nico ya pidió
-- Técnico, práctico, orientado a obra y soporte en Uruguay (Antel, UTE, normativa local cuando aplique). Nivel inicial a intermedio salvo que se pida otro.
-- Cada lección: idea en tres líneas, impacto, quién lo dice (acuerdo entre fuentes), laboratorio con comandos o rutas de menú exactos, regla para quedarse, quiz de 3 con explicación, fuentes reales leídas. Versión de firmware/software cuando importe, la vigente a la fecha.
-- Nada inventado: si un dato no se pudo confirmar (ej. VLAN de Antel), la lección lo dice y queda en "Pendientes" del doc del proyecto.
-- Sin audio. Las capturas, GIF y videos los suben los técnicos desde el panel.
+## Repo academy
+`bash /home/claude/trainer-tools/sync.sh` (o `deploy/sync-repo.sh` del repo) rearma `/home/claude/trainer` desde las carpetas de trabajo y deja como `site/data` la última versión importada de cada curso. Después commit, `git bundle create /mnt/user-data/outputs/trainer-inc-<HHMM>.bundle <último>..HEAD`, `device_commit_files` a la PC y en PowerShell `cd C:\Users\usuario\Claude\trainer; git pull --ff-only <bundle> HEAD; git push origin HEAD`. El chequeo de secretos de `sync.sh` marca claves de ejemplo de los laboratorios: revisalas y seguí si son de ejemplo.
 
 ## Credenciales y seguridad
-- No escribas contraseñas, tokens ni la clave de editor en archivos, docs, memoria ni en la línea de comando. `pvex.py` y `npmx.py` toman las credenciales por defecto documentadas en las skills ies-proxmox e ies-nginx-proxy (o variables de entorno). Para DNS usá un token de API de cPanel que Nico genere y revoque después (skill ies-cpanel).
-- La clave de editor existe solo como hash bcrypt en `api/config.php`; para cambiarla, generá una nueva, poné el hash y dásela a Nico en el chat.
-- Cualquier HTML guardado pasa por `clean_html` (sin script, sin on*, iframes solo de youtube-nocookie y player.vimeo).
+- No escribas contraseñas, tokens ni la clave de editor en archivos, docs, memoria ni en la línea de comando. `pvex.py` del repo lee la clave del entorno (`IES_PVE_PASSWORD`).
+- No inicies sesión con credenciales de Nico ni de equipos de clientes: si hace falta entrar a una web (por ejemplo la de un portero), abrí una ventana visible y que Nico escriba el login.
+- Todo HTML guardado pasa por `clean_html` (sin script, sin on*, iframes solo de youtube-nocookie y player.vimeo).
 
 ## Cerrar
-1. Actualizá `claude/entrenamientos-despliegue.md` en el proyecto (cursos y lecciones, funciones nuevas, pendientes).
-2. Regenerá el kit y dejalo en la PC (y en el CT):
-   ```bash
-   cd /home/claude && K=/mnt/user-data/outputs/kit-$(date +%Y%m%d-%H%M).tgz && tar czf $K \
-     --exclude=ies-training/site2/capturas --exclude=ies-training/site2/logos --exclude='__pycache__' \
-     ies-training/site2 ies-training/tools ies-training/brief-ies.md ies-training/skill claudemy && sha256sum $K
-   ```
-   Antes, copiá a `site2/data/` los JSON vigentes del servidor de los cursos que tocaste, para que el kit no quede con una versión vieja. `device_commit_files` de ese archivo (nombre único) a `C:\Users\usuario\Claude\ies-training\kit\ies-entrenamientos-kit.tgz` y compará el hash con `Get-FileHash`. Copia en el CT: `python pvex.py put pve01 kit\ies-entrenamientos-kit.tgz /tmp/kit.tgz` y `python pvex.py cmd pve01 "pct exec 115 -- mkdir -p /root/kit && pct push 115 /tmp/kit.tgz /root/kit/ies-entrenamientos-kit.tgz && rm -f /tmp/kit.tgz"`.
-3. Contale a Nico qué cambió, qué quedó pendiente de su lado (datos de obra a confirmar, pruebas en banco) y que recargue con Ctrl+F5 si cambió el diseño.
+1. Actualizá `claude/entrenamientos-despliegue.md` (cursos, funciones, commits, pendientes).
+2. Sincronizá el repo academy.
+3. Contale a Nico en español qué quedó publicado, qué no se pudo confirmar y qué queda de su lado (datos de obra, pruebas en banco), y que recargue si cambió el diseño.

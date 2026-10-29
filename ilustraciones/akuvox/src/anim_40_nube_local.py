@@ -2,7 +2,7 @@
 """Lección 40 · Teoría · Nube o local: dónde vive la base de datos.
 Sale de teoria_md (Cómo funciona): en la nube los equipos inician la conexión hacia afuera (no se abren
 puertos), la app anda desde cualquier lugar, sin internet las funciones de nube se detienen (plan B de la
-lección 10); en local el servidor sigue sin internet y a cambio alguien lo mantiene (energía, respaldos y
+lección 11); en local el servidor sigue sin internet y a cambio alguien lo mantiene (energía, respaldos y
 actualizaciones); un administrador por equipo."""
 from _anim_akuvox_29_42 import new, out, box, travel, when
 

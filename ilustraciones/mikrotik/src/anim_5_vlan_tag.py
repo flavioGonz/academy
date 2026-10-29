@@ -2,7 +2,7 @@
 """Lección 5 · teoría: la etiqueta 802.1Q que se pone en el access, viaja por el trunk, sube al CPU por el bridge y se filtra en el ingreso."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=26, kicker="MIKROTIK · LECCIÓN 5 · CÓMO FUNCIONA", title="La etiqueta de VLAN: dónde se pone y dónde se saca")
+a = Anim(T=26, kicker="MIKROTIK · CÓMO FUNCIONA", title="La etiqueta de VLAN: dónde se pone y dónde se saca")
 a.steps([
     "La cámara manda sin etiqueta. ether2, access con PVID 20, le asigna la VLAN 20.",
     "Por el trunk viaja etiquetada; en el access del otro switch sale sin etiqueta.",

@@ -5,7 +5,7 @@
 **La idea, en tres líneas**
 - L2TP con IPsec es para cuando del otro lado solo hay el cliente nativo (Windows, macOS, iOS, Android). En el servidor, `use-ipsec=required`: L2TP solo no cifra.
 - Servidor: pool, perfil PPP (`local-address` y `remote-address`), un `secret` por persona con `service=l2tp`. En input: UDP 500, UDP 4500 (NAT-T), UDP 1701 y protocolo ESP.
-- Si Windows no conecta y el celular sí, casi siempre es NAT-T: la clave de registro `AssumeUDPEncapsulationContextOnSendRule` en 2 y reinicio.
+- Si el MikroTik está detrás de NAT (IP privada detrás del módem, con los puertos reenviados) y Windows no conecta pero el celular sí, es NAT-T: la clave de registro `AssumeUDPEncapsulationContextOnSendRule` en 2 y reinicio. Con el MikroTik en IP pública, el valor de fábrica alcanza aunque la notebook esté detrás de NAT.
 
 **Impacto:** le das acceso al encargado o a la central de monitoreo sin instalar nada en su equipo, y sabés por qué falla cuando falla.
 
@@ -33,7 +33,7 @@ En un router de laboratorio con RouterOS 7, configuración por defecto, LAN 192.
 /ip/firewall/filter/print where chain=forward
 /ip/firewall/filter/add chain=forward ipsec-policy=in,ipsec action=accept comment="IPsec fuera de FastTrack" place-before=[find action=fasttrack-connection]
 ```
-5. En una notebook Windows, VPN nueva de tipo L2TP/IPsec con clave precompartida, servidor 203.0.113.10, usuario `encargado`. Si la notebook está detrás de NAT y no conecta, en PowerShell como administrador:
+5. En una notebook Windows, VPN nueva de tipo L2TP/IPsec con clave precompartida, servidor 203.0.113.10, usuario `encargado`. Si conecta, seguí. Si el MikroTik estuviera detrás de NAT (IP privada en ether1 detrás del módem, con UDP 500 y 4500 reenviados) y Windows no conecta, falta NAT-T: en PowerShell como administrador:
 ```powershell
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\PolicyAgent" -Name AssumeUDPEncapsulationContextOnSendRule -PropertyType DWord -Value 2 -Force
 Restart-Computer

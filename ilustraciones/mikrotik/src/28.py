@@ -2,7 +2,7 @@
 from _mt import *  # noqa
 from _comun_12_22 import pipe
 
-K = "MikroTik · Lección 28"
+K = "MikroTik"
 
 # ---------------------------------------------------------------- principal
 c = Canvas(K, "La sucursal llama a la central: L2TP saliente")

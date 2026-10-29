@@ -2,7 +2,7 @@
 """Lección 13 · teoría: la máscara /29 define el vecindario y la ruta por defecto lleva todo lo demás al gateway."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=28, kicker="MIKROTIK · LECCIÓN 13 · CÓMO FUNCIONA", title="La máscara arma el vecindario; la default, el resto")
+a = Anim(T=28, kicker="MIKROTIK · CÓMO FUNCIONA", title="La máscara arma el vecindario; la default, el resto")
 a.steps([
     "203.0.113.10/29: 29 bits de red. Quedan 3 bits: 8 direcciones.",
     "De .8 a .15: .8 es la red, .15 el broadcast, de .9 a .14 se usan.",

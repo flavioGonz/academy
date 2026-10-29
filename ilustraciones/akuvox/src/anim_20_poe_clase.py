@@ -2,7 +2,7 @@
 """Lección 20 · teoría: el switch (PSE) detecta y clasifica al PD antes de dar energía; un puerto af no alcanza para un portero que pide at."""
 from _anim_akuvox_15_28 import *
 
-a = new(24, "AKUVOX · LECCIÓN 20", "PoE: primero detecta, después clasifica, recién ahí da energía")
+a = new(24, "AKUVOX", "PoE: primero detecta, después clasifica, recién ahí da energía")
 a.steps([
     "El switch (PSE) primero detecta si del otro lado hay un equipo PoE (PD).",
     "Lee la clase de potencia que pide el portero. Recién ahí entrega energía.",

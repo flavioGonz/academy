@@ -2,7 +2,7 @@
 """Lección 11 · teoría: ruta recursiva al testigo, check-gateway=ping cada 10 s y conmutación tras dos fallas."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=28, kicker="MIKROTIK · LECCIÓN 11 · CÓMO FUNCIONA", title="check-gateway mira hasta el testigo, no solo el módem")
+a = Anim(T=28, kicker="MIKROTIK · CÓMO FUNCIONA", title="check-gateway mira hasta el testigo, no solo el módem")
 a.steps([
     "La default apunta a 1.1.1.1. Para llegar, sirve la /32 con scope=10 (≤ 11).",
     "Cada 10 s el router hace ping al testigo, y el ping recorre todo el camino.",

@@ -19,7 +19,7 @@ def psu_with_terms(c, x, y, title="Fuente 12 V CC", sub="aparte del portero", w=
 
 
 # ---------- 4.svg: fail-safe vs fail-secure
-c = Canvas("Akuvox · Lección 4", "Sin luz, ¿la puerta queda libre o trabada?")
+c = Canvas("Akuvox", "Sin luz, ¿la puerta queda libre o trabada?")
 cases = [(48, "Fail-safe · COM + NC", "NC", "Electroimán", "libera sin 12 V", "ok", "SIN ENERGÍA: LIBRE", "salida de emergencia"),
          (620, "Fail-secure · COM + NO", "NO", "Cerradura", "abre con 12 V", "warn", "SIN ENERGÍA: TRABADA", "portón de calle, depósito")]
 for x0, ttl, term, lk, lks, kd, state, uso in cases:
@@ -46,7 +46,7 @@ for x0, ttl, term, lk, lks, kd, state, uso in cases:
 save(c, "4.svg")
 
 # ---------- 4-paso2.svg: cableado en NO con fuente aparte y diodo
-c = Canvas("Akuvox · Lección 4 · Paso 2", "Cableá la cerradura al relé con fuente aparte")
+c = Canvas("Akuvox · Paso 2", "Cableá la cerradura al relé con fuente aparte")
 r = c.add(Relay(470, 140, "Relé A del portero", "contacto seco", hl=CYAN))
 c.add(Step(470, 140, 2))
 pp, pn = psu_with_terms(c, 60, 400)
@@ -74,7 +74,7 @@ c.add(Note(800, 140, 350, "El diodo frena el pico de tensión que larga la bobin
 save(c, "4-paso2.svg")
 
 # ---------- 4-paso5.svg: botón de salida y alarmas
-c = Canvas("Akuvox · Lección 4 · Paso 5", "El botón de salida va a una entrada, no al relé")
+c = Canvas("Akuvox · Paso 5", "El botón de salida va a una entrada, no al relé")
 b = c.add(Generic(60, 170, "Pulsador de salida", "NA · del lado de adentro", icon="door", w=300))
 c.add(f'<rect x="60" y="330" width="300" height="120" rx="16" fill="#26323F"/>')
 c.add(text(80, 362, "Portero · bornera", 17, 600, WHITE))

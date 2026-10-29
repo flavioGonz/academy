@@ -33,3 +33,10 @@ Cómo se enseña: la guía "Manage Analog Lines" de Grandstream (troncal, rutas,
 - T20 Identificador de llamadas, ganancias y eco: esquemas FSK y DTMF, Antel, ACIM, RX y TX, cancelador de eco, fax
 - T21 De la línea al destino: extensión s, ruta entrante por troncal, extensión, grupo o IVR, ruta saliente con varias líneas, numeración de Uruguay, desvíos de Antel
 - T22 Diagnóstico de líneas analógicas: Dashboard, Active Calls, CDR, Analog Record Trace, syslog chan_dahdi, multímetro, teléfono de prueba, cambio de par, reclamo a Antel
+
+## Lección agregada en octubre de 2026: Troncal SIP de Antel
+Cómo se enseña: la página comercial de Antel (planes TSIP), la guía de implementación que publicó un integrador uruguayo, hilos de técnicos que la instalaron con 3CX y FreePBX, el manual del UCM630x (Peer SIP Trunk, modo Dual, Static Routes, SIP Settings) y el plan de numeración de Uruguay notificado a la UIT. Notas: research/notes/c.md.
+- T23 Troncal SIP de Antel: planes, qué entrega Antel, red privada, número de servicio, migración de números, reclamos
+- T24 La troncal por IP en la UCM: Peer SIP Trunk, OPTIONS de Antel, modo Dual, rutas estáticas, topologías y NAT
+- T25 Numeración de Uruguay y caller ID con Antel: patrones salientes, formato entrante, número de salida
+- T26 Diagnóstico de la troncal SIP: captura, respuestas 401, 403, 404, 408 y 484, pruebas de entrega

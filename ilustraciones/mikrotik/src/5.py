@@ -1,7 +1,7 @@
 """Lección 5 · VLAN por sistema: principal + pasos 1, 2 y 4."""
 from _mt import *
 
-K = "MikroTik · Lección 5"
+K = "MikroTik"
 V = {10: ("#5B6F84", "datos"), 20: (BLUE, "CCTV"), 30: (CYAN, "acceso"), 99: (NAVY, "gestión")}
 
 

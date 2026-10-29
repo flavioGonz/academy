@@ -1,7 +1,7 @@
 """Lección 21 · L2TP con IPsec."""
 from _comun_12_22 import *
 
-K = "MikroTik · Lección 21"
+K = "MikroTik"
 
 # ---------------------------------------------------------------- principal: capas
 c = Canvas(K, "L2TP/IPsec: tres capas en una sola conexión")

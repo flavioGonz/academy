@@ -2,7 +2,7 @@
 """Lección 17 · teoría: Action URL toma la URL del evento, reemplaza variables y manda un GET que el servidor registra."""
 from _anim_akuvox_15_28 import *
 
-a = new(24, "AKUVOX · LECCIÓN 17", "Action URL: el evento arma la URL y la manda")
+a = new(24, "AKUVOX", "Action URL: el evento arma la URL y la manda")
 a.steps([
     "Se dispara el relé A. El portero toma la URL cargada para ese evento.",
     "Reemplaza las variables: $relay1status vale 1 con el relé abierto.",

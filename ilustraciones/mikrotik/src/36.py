@@ -9,7 +9,7 @@ sys.path.insert(0, "/home/claude/ies-training/ilustraciones/mikrotik/src")
 from _mt import *  # noqa: F401,F403
 from _mt import rect, line, text, wrap, rows, caption, code, save, arrow, mark, pill, GRAY_T, CYAN_T, AMBER_T, GREEN_T, RED_T
 
-K = "MikroTik · Lección 36"
+K = "MikroTik"
 CELL = {"si": (OK_BG, OK), "no": (ALERT_BG, ALERT), "parcial": (WARN_BG, WARN), "self": (GROUND, INK3)}
 
 

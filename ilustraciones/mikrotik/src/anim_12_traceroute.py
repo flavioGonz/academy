@@ -2,7 +2,7 @@
 """Lección 12 · teoría: traceroute manda paquetes con TTL cada vez mayor y anota quién avisa que se le terminó."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=28, kicker="MIKROTIK · LECCIÓN 12 · TRACEROUTE", title="traceroute: un TTL más en cada vuelta")
+a = Anim(T=28, kicker="MIKROTIK · TRACEROUTE", title="traceroute: un TTL más en cada vuelta")
 a.steps([
     "TTL=1: el primer salto lo descarta y avisa. Anotás el salto 1.",
     "TTL=2: pasa el primero y se termina en el segundo. Anotás el salto 2.",

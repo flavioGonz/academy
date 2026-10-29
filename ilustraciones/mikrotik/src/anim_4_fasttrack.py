@@ -2,7 +2,7 @@
 """Lección 4 · teoría: FastTrack saltea firewall, connection tracking y colas; el contador de forward queda quieto."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=24, kicker="MIKROTIK · LECCIÓN 4 · FASTTRACK", title="FastTrack: un atajo para las conexiones establecidas")
+a = Anim(T=24, kicker="MIKROTIK · FASTTRACK", title="FastTrack: un atajo para las conexiones establecidas")
 a.steps([
     "Los primeros paquetes de una conexión pasan por conntrack, filter y colas.",
     "La regla fasttrack-connection marca la conexión, ya establecida.",

@@ -1,7 +1,7 @@
 from _akv import *
 
 # ---------- 3.svg: directa vs central
-c = Canvas("Akuvox · Lección 3", "¿Llamada directa o por central?")
+c = Canvas("Akuvox", "¿Llamada directa o por central?")
 c.add(Zone(48, 140, 1104, 190, "Llamada IP directa · misma red", OK))
 p = c.add(Generic(90, 190, "Portero", "192.168.88.21", icon="bell", w=250))
 m = c.add(Generic(560, 190, "Monitor", "192.168.88.31", icon="laptop", w=250))
@@ -22,7 +22,7 @@ c.add(Note(90, 530, 580, "Cada equipo en el medio es una función más que se pu
 save(c, "3.svg")
 
 # ---------- 3-paso1.svg: IP fija en la misma subred
-c = Canvas("Akuvox · Lección 3 · Paso 1", "IP fija y misma subred en los dos equipos")
+c = Canvas("Akuvox · Paso 1", "IP fija y misma subred en los dos equipos")
 c.add(Zone(48, 150, 760, 300, "192.168.88.0/24", OK))
 r = c.add(Generic(318, 190, "Router", "gw 192.168.88.1", icon="globe", w=220))
 it = c.add(Generic(90, 330, "Portero", "192.168.88.21/24", icon="bell", w=260))
@@ -38,7 +38,7 @@ c.add(Note(48, 490, 1104, "IP fija o reserva DHCP: si el monitor cambia de IP de
 save(c, "3-paso1.svg")
 
 # ---------- 3-paso4.svg: la llamada paso a paso
-c = Canvas("Akuvox · Lección 3 · Paso 4", "Qué pasa cuando el visitante aprieta el botón")
+c = Canvas("Akuvox · Paso 4", "Qué pasa cuando el visitante aprieta el botón")
 xa, xb = 260, 900
 c.add(lifeline(xa, 130, 515, "Portero", "192.168.88.21"))
 c.add(lifeline(xb, 130, 515, "Monitor", "192.168.88.31"))

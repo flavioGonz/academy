@@ -2,7 +2,7 @@ import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/akuvox/s
 from _cat import *
 
 # ---------------------------------------------------------------- 16.svg: relé en la calle o adentro
-c = Canvas("Akuvox · Lección 16", "¿Dónde conviene que esté el relé de la cerradura?")
+c = Canvas("Akuvox", "¿Dónde conviene que esté el relé de la cerradura?")
 
 
 def side(x, title, kind):
@@ -38,7 +38,7 @@ c.add(text(748, 612, "SA = por 12 V · SB = por RS485", 16, 500, INK2, FM))
 save(c, "16.svg")
 
 # ---------------------------------------------------------------- 16-paso1: cableado SR01
-c = Canvas("Akuvox · Lección 16 · Paso 1", "Cableá el SR01 al portero por RS485")
+c = Canvas("Akuvox · Paso 1", "Cableá el SR01 al portero por RS485")
 c.add(Zone(48, 140, 300, 420, "calle"))
 c.add(Zone(390, 140, 762, 420, "adentro"))
 c.add(portero(123, 180, "pantalla", 0.9, "Portero", "192.168.88.21"))
@@ -61,7 +61,7 @@ c.add(Note(48, 584, 1104, "El E12 no tiene RS485: su conexión especial al SR01 
 save(c, "16-paso1.svg")
 
 # ---------------------------------------------------------------- 16-paso2: Security Relay B + tiempos
-c = Canvas("Akuvox · Lección 16 · Pasos 2 y 3", "Habilitá Security Relay B y elegí los tiempos")
+c = Canvas("Akuvox · Pasos 2 y 3", "Habilitá Security Relay B y elegí los tiempos")
 c.add(Window(48, 130, 560, 250, "Portero · web", path="Access Control > Relay > Security Relay",
              rows=[("Security Relay B", "Enabled ✓ (RS485)"), ("Trigger Delay", "0"), ("Hold Delay", "5")], hl=0))
 c.add(Step(608, 130, 2))
@@ -83,7 +83,7 @@ c.add(Note(640, 556, 512, "Trigger Delay 5 haría esperar 5 s antes de activar. 
 save(c, "16-paso2.svg")
 
 # ---------------------------------------------------------------- 16-paso4: qué abre cada DoorNum
-c = Canvas("Akuvox · Lección 16 · Pasos 4 y 5", "¿Qué relé dispara cada DoorNum?")
+c = Canvas("Akuvox · Pasos 4 y 5", "¿Qué relé dispara cada DoorNum?")
 c.add(Terminal(48, 130, 1104, [("PORTERO=192.168.88.21", "#9FC3E3"),
                                  "curl -s -u 'abre-lab:Ejemplo-Http-2026' \"$PORTERO/fcgi/OpenDoor?action=OpenDoor&DoorNum=SB\""], title="PC DE LABORATORIO"))
 rows = [("1", "Relé A", "en el portero", "local", None),

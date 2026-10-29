@@ -1,7 +1,7 @@
 {
  "curso": {
   "objetivo": "Al terminar el curso vas a poder poner en marcha una central UCM6300 cerrada desde el primer día, conectarla al mundo con un troncal SIP o con las líneas analógicas de Antel por FXO y rutas bien armadas, resolver quién atiende cada llamada (incluido el portero) y sostenerla con internos remotos, diagnóstico por captura y defensas en capas.",
-  "recorrido": "Arrancás con la central en la mesa: modo de red, contraseña, backup, extensiones sólidas y teléfonos que se configuran solos. Después la conectás al mundo con un troncal registrado, rutas salientes con privilegio y PIN, y entrantes por DID. Con las llamadas entrando, decidís quién atiende: grupos y colas, el IVR con horario y el portero GDS como una extensión más. Después sumás las líneas analógicas: qué trae el par de Antel, la troncal por FXO, tonos, corte e identificador, hasta que la llamada suene en un teléfono, un grupo o el IVR, y cómo diagnosticar una línea que no anda. Cerrás saliendo de la oficina: internos remotos, el audio de un solo lado diagnosticado con una captura y la central cerrada con Fail2ban, listas blancas y Geo-IP."
+  "recorrido": "Arrancás con la central en la mesa: modo de red, contraseña, backup, extensiones sólidas y teléfonos que se configuran solos. Después la conectás al mundo con un troncal registrado y con la troncal SIP de Antel, rutas salientes con privilegio y PIN, y entrantes por DID. Con las llamadas entrando, decidís quién atiende: grupos y colas, el IVR con horario y el portero GDS como una extensión más. Después sumás las líneas analógicas: qué trae el par de Antel, la troncal por FXO, tonos, corte e identificador, hasta que la llamada suene en un teléfono, un grupo o el IVR, y cómo diagnosticar una línea que no anda. Cerrás saliendo de la oficina: internos remotos, el audio de un solo lado diagnosticado con una captura y la central cerrada con Fail2ban, listas blancas y Geo-IP."
  },
  "modulos": [
   {
@@ -20,9 +20,10 @@
   },
   {
    "title": "Hablar con el mundo",
-   "why": "Con los internos andando, la central sale afuera. Primero el troncal que registra, después quién puede marcar qué y por dónde, y al final a qué interna entra cada número. Termina con una central que hace y recibe llamadas sin abrir la puerta al fraude.",
+   "why": "Con los internos andando, la central sale afuera. Primero el troncal que registra y la troncal SIP de Antel, que va por IP y sin registro; después quién puede marcar qué y por dónde, y al final a qué interna entra cada número. Termina con una central que hace y recibe llamadas sin abrir la puerta al fraude.",
    "objetivos": [
     "Al terminar el módulo vas a poder registrar un troncal SIP, leer su estado en el Dashboard y darlo por terminado con las cuatro pruebas.",
+    "Al terminar el módulo vas a poder conectar la troncal SIP de Antel como Peer SIP Trunk, con la red de Antel en su puerto y su ruta, y probarla con la captura del OPTIONS.",
     "Al terminar el módulo vas a poder escribir patrones salientes con Strip, privilegios, PIN en la ruta internacional y failover.",
     "Al terminar el módulo vas a poder llevar cada DID a su interna con una ruta ByDID, el Strip correcto y el DID Mode del proveedor."
    ],

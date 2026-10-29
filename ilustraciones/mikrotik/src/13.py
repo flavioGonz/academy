@@ -1,7 +1,7 @@
 """Lección 13 · IP fija."""
 from _comun_12_22 import *
 
-K = "MikroTik · Lección 13"
+K = "MikroTik"
 
 # ---------------------------------------------------------------- principal
 c = Canvas(K, "IP fija: cuatro datos del proveedor, tres comandos")

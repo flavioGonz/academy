@@ -1,7 +1,7 @@
 from _akv import *
 
 # ---------- 12.svg: la carpeta del ticket
-c = Canvas("Akuvox · Lección 12", "Antes de tocar nada, juntá la evidencia")
+c = Canvas("Akuvox", "Antes de tocar nada, juntá la evidencia")
 c.add(Table(48, 140, ["Archivo", "De dónde sale", "Qué responde"], [
     ["firmware.txt", "Status > Product Information", "¿qué versión corre?"],
     ["config-export.tgz", "exportar configuración", "¿cómo está configurado?"],
@@ -17,7 +17,7 @@ c.add(Note(48, 510, 1104, "Si cambiás cosas antes de capturar, borrás la pista
 save(c, "12.svg")
 
 # ---------- 12-paso4.svg: la PCAP de 1 MB
-c = Canvas("Akuvox · Lección 12 · Paso 4", "La captura guarda 1 MB: arrancala justo antes")
+c = Canvas("Akuvox · Paso 4", "La captura guarda 1 MB: arrancala justo antes")
 for i, (lab, kd, start, fail_in) in enumerate((("Arrancada temprano", "alert", 0.05, False), ("Arrancada justo antes", "ok", 0.55, True))):
     y = 170 + i * 190
     x0, x1 = 300, 1120
@@ -41,7 +41,7 @@ c.add(Note(80, 500, 1072, "Secuencia: log level 7, PCAP Start, reproducís la fa
 save(c, "12-paso4.svg")
 
 # ---------- 12-paso5.svg: leer el REGISTER en Wireshark
-c = Canvas("Akuvox · Lección 12 · Paso 5", "Qué buscar en la captura cuando no registra")
+c = Canvas("Akuvox · Paso 5", "Qué buscar en la captura cuando no registra")
 c.add("<style>text{font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0}</style>")
 xa, xb = 240, 820
 c.add(lifeline(xa, 130, 440, "Portero", "10.10.10.21"))

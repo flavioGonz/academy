@@ -10,7 +10,7 @@ sys.path.insert(0, "/home/claude/ies-training/ilustraciones/mikrotik/src")
 from _mt import *  # noqa
 from _mt import text, wrap
 
-K = "MikroTik · Lección 32"
+K = "MikroTik"
 
 # ------------------------------------------------------------ principal: tres herramientas
 c = Canvas(K, "Tres formas de bloquear por DNS")

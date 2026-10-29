@@ -2,7 +2,7 @@
 """Lección 8 · teoría: ruteo por clave en WireGuard (allowed-address de ida y de vuelta) y el silencio ante lo desconocido."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=30, kicker="MIKROTIK · LECCIÓN 8 · CÓMO FUNCIONA", title="WireGuard: cada clave queda atada a su dirección")
+a = Anim(T=30, kicker="MIKROTIK · CÓMO FUNCIONA", title="WireGuard: cada clave queda atada a su dirección")
 a.steps([
     "Llega un paquete cifrado al UDP 13231: la clave es la de notebook-lucia.",
     "Adentro viene de 10.10.10.2: es el allowed-address de ese peer. Se acepta.",

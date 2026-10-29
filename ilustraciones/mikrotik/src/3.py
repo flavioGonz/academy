@@ -1,7 +1,7 @@
 """Lección 3 · Cerrar puertas: principal + pasos 1, 2 y 3."""
 from _mt import *
 
-K = "MikroTik · Lección 3"
+K = "MikroTik"
 
 # ------------------------------------------------------------------ 3.svg principal
 c = Canvas(K, "La gestión no mira a internet")
@@ -32,7 +32,7 @@ c.add(Cable(tec.right(), (RX - 6, RY + 330), kind="logical", label="túnel VPN",
 c.add(mark(346, 436, ok=True))
 lan = c.add(Laptop(902, 240, "Notebook en la LAN", "192.168.88.0/24", hl=OK, w=250))
 c.add(Cable((RX + RW + 6, RY + 120), lan.left(), kind="ok"))
-c.add(Note(870, 380, 282, "available-from corta la conexión, pero el puerto se sigue viendo. Para esconderlo: drop en input (lección 4).", kind="warn", size=15))
+c.add(Note(870, 380, 282, "available-from corta la conexión, pero el puerto se sigue viendo. Para esconderlo: drop en input (lección 21).", kind="warn", size=15))
 c.add(Note(48, 560, 1104, "Cada servicio que escucha es una puerta más. Lo que no usás, se apaga; lo que usás, solo desde la LAN o el túnel.", kind="info", size=16))
 save(c, "3.svg")
 

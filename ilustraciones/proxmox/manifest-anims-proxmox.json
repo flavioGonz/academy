@@ -1,0 +1,246 @@
+{
+ "1": {
+  "anims": [
+   {
+    "file": "1-r1.svg",
+    "alt": "Animación en cuatro tiempos con el host pve1 recién instalado, tres servidores de paquetes y la terminal. 1: apt update pide el archivo InRelease a cada repositorio de los .sources; deb.debian.org (trixie y trixie-updates) y security.debian.org (trixie-security) contestan con su InRelease firmado, apt verifica la firma con debian-archive-keyring y la terminal muestra Hit:1, Hit:2 y Hit:3. 2: enterprise.proxmox.com, el repositorio pve-enterprise que viene habilitado, pide la clave de suscripción; sin clave contesta 401 Unauthorized y la terminal muestra Err:4 con 401 Unauthorized. 3: con enterprise en Enabled: no y el archivo proxmox.sources con pve-no-subscription, contesta download.proxmox.com, la firma se verifica con proxmox-archive-keyring y apt update termina sin errores. 4: apt full-upgrade baja pve-manager de download.proxmox.com y los paquetes base de deb.debian.org; pveversion -v muestra pve-manager 9.2.3 y ese dato va a la ficha del cliente.",
+    "caption": "Cada línea de apt update es un servidor que contesta: Debian firma, enterprise sin clave da 401, no-subscription responde."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "1-l1.svg",
+    "after": "migralos y actualizá",
+    "alt": "Animación en cuatro tiempos con un archivo viejo /etc/apt/sources.list.d/repo.list, el archivo nuevo repo.sources y la terminal de pve1. 1: repo.list tiene todo el repositorio en una línea, deb http://download.proxmox.com/debian/pve trixie pve-no-subscription, y apt update avisa que es el formato viejo. 2: apt modernize-sources reparte cada parte en un campo con nombre del bloque deb822: Types: deb, URIs: http://download.proxmox.com/debian/pve, Suites: trixie y Components: pve-no-subscription; repo.list ya no se usa. 3: apt update lee el bloque de repo.sources y consulta el mismo repositorio, sin avisos de formato. 4: para apagar un repositorio sin borrarlo se agrega Enabled: no en su bloque; apt update deja de consultarlo y el bloque queda escrito para volver a habilitarlo, como se hace con pve-enterprise sin suscripción.",
+    "caption": "Lo que pasa en el archivo: la línea vieja se reparte en los campos del bloque deb822, y Enabled: no apaga sin borrar."
+   }
+  ]
+ },
+ "2": {
+  "anims": [
+   {
+    "file": "2-r1.svg",
+    "alt": "Animación en cuatro tiempos con una obra completa: una cámara IP en la VLAN 10 y un teléfono IP en la VLAN 20 conectados a puertos access de un switch; un solo cable trunk va del switch a eno1 del host pve1, donde vmbr0 es VLAN aware con VLAN 2 a 4094; el puerto tap100i0 tiene PVID 10 y lleva a la VM 100 con el VMS, y tap101i0 tiene PVID 20 y lleva a la VM 101 con la central telefónica. 1: la cámara manda video RTSP sin etiqueta y el puerto access 10 del switch la pone en la VLAN 10. 2: por el trunk viaja con tag 10 hasta eno1; vmbr0 la entrega por tap100i0 sin tag a la VM 100. 3: el teléfono manda su registro SIP; por el mismo cable viaja con tag 20 y vmbr0 lo entrega sin tag a la VM 101 por tap101i0. 4: las dos VLAN viajan a la vez por el mismo cable y el mismo bridge, pero la VM 100 no ve la VLAN 20 y la VM 101 no ve la VLAN 10.",
+    "caption": "Dos VLAN por un solo cable: el switch pone el tag, el trunk lo lleva y vmbr0 lo saca al entregar a cada VM."
+   }
+  ],
+  "steps": [
+   {
+    "step": 1,
+    "file": "2-l1.svg",
+    "after": "tildá **VLAN aware**",
+    "alt": "Animación en cuatro tiempos con la ventana Node, System, Network de la GUI, los archivos /etc/network/interfaces.new y /etc/network/interfaces, el host pve1 con su red en vivo y la notebook del técnico con la sesión web en el puerto 8006. 1: al tildar VLAN aware en vmbr0, la GUI guarda el cambio en interfaces.new, con las líneas nuevas bridge-vlan-aware yes y bridge-vids 2-4094; la red del host no cambia. 2: hasta aplicar, el host sigue con el archivo de siempre y la GUI muestra Pending changes con la diferencia. 3: Apply Configuration pasa interfaces.new a interfaces y ifreload -a, de ifupdown2, lo aplica sin reiniciar; vmbr0 pasa a filtrar VLAN. 4: la sesión web del técnico sigue abierta porque la IP de gestión no cambió de VLAN; si cambiara, el trabajo se hace con consola local o IPMI.",
+    "caption": "Lo que pasa en el host: el cambio espera en interfaces.new y Apply lo aplica sin reiniciar ni cortar tu sesión."
+   },
+   {
+    "step": 5,
+    "file": "2-l2.svg",
+    "after": "En el switch, el puerto del host va en trunk",
+    "alt": "Animación en cuatro tiempos con el host pve1 (VM 100 en 192.168.10.20 con VLAN Tag 10, vmbr0 y eno1), el switch con el puerto que va al host y el router gateway de la VLAN 10 en 192.168.10.1, más la consola de la VM. 1: la VM hace ping a 192.168.10.1 y primero pregunta por ARP por su gateway; el bridge le pone tag 10 a la trama al salir por eno1. 2: si el puerto del switch está en access con la VLAN 1, no tiene la VLAN 10 y descarta la trama; el ping muestra Destination Host Unreachable. 3: con el puerto en trunk y las VLAN 10 y 20 permitidas, el switch lee el tag, la trama entra a la VLAN 10 y el ARP llega al gateway. 4: la respuesta vuelve con tag 10 hasta eno1, el bridge la entrega sin tag a la VM y el ping contesta 64 bytes from 192.168.10.1. Para confirmarlo en el switch, la MAC de la VM 100 aparece aprendida en la VLAN 10 del puerto del host.",
+    "caption": "Lo que pasa en el cable: con el puerto en access la trama con tag 10 se descarta; en trunk llega al gateway y vuelve."
+   }
+  ]
+ },
+ "3": {
+  "anims": [
+   {
+    "file": "3-r1.svg",
+    "alt": "Animación en cuatro tiempos con la VM 100, el pool ZFS rpool en mirror y dos discos conectados por HBA, sda y sdb, más la salida de zpool status. 1: la VM lee un archivo; ZFS pide el bloque 7 al disco A y lo verifica contra el checksum que guarda de cada bloque. 2: el disco A devolvió un dato dañado y el checksum no coincide; ZFS lee la copia del bloque 7 en el disco B, que está bien, y en zpool status la columna CKSUM de sda pasa a 1. 3: la VM recibe el dato bueno, ZFS reescribe el bloque 7 en el disco A y zpool status avisa que se intentó corregir el error y que las aplicaciones no se vieron afectadas. 4: si ZFS está encima de una controladora RAID por hardware con caché, ve un solo disco; detecta el dato dañado pero no tiene otra copia para corregirlo. Con RAID por hardware conviene LVM-thin; ZFS va con HBA o controladora en modo IT.",
+    "caption": "ZFS compara cada bloque con su checksum y, con dos discos a la vista, corrige solo; detrás de una RAID no puede."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "3-l1.svg",
+    "after": "Si es LVM-thin, mirá el pool",
+    "alt": "Animación en cuatro tiempos con el thin pool data de 200 GB (local-lvm), los discos de tres VM dibujados con su tamaño asignado y lo escrito, y la salida de lvs con las columnas LV, LSize y Data%. 1: vm-100-disk-0 mide 32 GB pero tiene 3 GB escritos, Data% 9.38; con vm-101-disk-0 de 100 GB al 20 %, el pool está en 11.50 %. 2: la VM 100 escribe 5 GB; recién ahí el pool reserva esos bloques: el disco pasa a 25.00 % y el pool a 14.00 %. 3: se suma vm-102-disk-0 de 120 GB, vacío; lo asignado suma 252 GB en un pool de 200 GB: está sobreasignado y anda mientras lo escrito no pase lo que hay. 4: si todas las VM escriben, el pool llega al 100 % y ninguna VM de ese pool puede escribir más; por eso se vigila el Data% del pool, no solo el de cada disco.",
+    "caption": "Lo que muestra lvs: LSize es lo asignado, Data% lo escrito; sobreasignar anda hasta que el pool se llena."
+   },
+   {
+    "step": 3,
+    "file": "3-l2.svg",
+    "after": "Si es ZFS, mirá la salud del pool",
+    "alt": "Animación en cuatro tiempos con la VM 100, la RAM del host de 64 GiB (16 GiB para la VM 100, 24 GiB para la VM 101 y el ARC de ZFS), un pool ZFS de 4 TiB y la terminal. 1: primera lectura: el dato no está en el ARC, ZFS va al disco, que es lento, y el dato queda guardado en el ARC al volver a la VM. 2: la segunda lectura del mismo dato sale de la RAM y el disco ni se entera. 3: con cada dato nuevo el ARC crece hasta el tope zfs_arc_max, de 6 GiB, y ahí deja de crecer; esa memoria compite con las VM. 4: el tope se lee en bytes con cat /sys/module/zfs/parameters/zfs_arc_max, que muestra 6442450944, y queda fijo en /etc/modprobe.d/zfs.conf con options zfs zfs_arc_max=6442450944; es la regla oficial de 2 GiB de base más 1 GiB por TiB de pool: con 4 TiB, 6 GiB.",
+    "caption": "Lo que pasa en la RAM: el ARC guarda lo leído y crece hasta zfs_arc_max, que se lee y se fija en bytes."
+   }
+  ]
+ },
+ "4": {
+  "anims": [
+   {
+    "file": "4-r1.svg",
+    "alt": "Animación en cuatro tiempos con el host pve1 (qm, la web y vzdump), la VM 100 con Debian y el servicio qemu-guest-agent, y en el medio el canal del agente, el socket /var/run/qemu-server/100.qga. 1: qm agent 100 ping manda guest-ping por el canal y el agente contesta sin error; si el agente no corre adentro, el comando termina en error. 2: el panel Summary pide network-get-interfaces y el agente devuelve eth0 con 10.10.10.100, que aparece en IPs; sin agente la GUI muestra Guest Agent not running. 3: al tocar Shutdown, Proxmox manda guest-shutdown al agente y el sistema cierra sus servicios y se apaga solo, sin depender del botón ACPI; sin el agente corriendo, puede quedar esperando hasta el timeout. 4: antes de un backup, Proxmox manda guest-fsfreeze-freeze, las escrituras quedan en pausa, se marca el instante del backup y guest-fsfreeze-thaw las libera; la VM sigue trabajando y el backup sale consistente.",
+    "caption": "Ping, IPs, apagado y freeze: todo pasa por el canal del agente entre el host y la VM."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "4-l1.svg",
+    "after": "Apagá y prendé la VM desde Proxmox",
+    "alt": "Animación en cuatro tiempos con el archivo /etc/pve/qemu-server/100.conf, el proceso QEMU de la VM 100 con Debian adentro y la terminal de pve1. 1: qm set 100 --agent 1 agrega agent: 1 a la configuración, pero el proceso QEMU que ya corre, con PID 4123, se armó sin el canal del agente; qm agent 100 ping falla porque no hay canal. 2: un reboot desde adentro reinicia Debian dentro del mismo proceso QEMU; el servicio qemu-guest-agent corre, pero sigue sin canal y el ping vuelve a fallar. 3: qm stop 100 termina el proceso y qm start 100 crea uno nuevo, con PID 5871, armado con agent: 1 y con el canal 100.qga. 4: el servicio qemu-guest-agent arranca adentro en estado active (running) y qm agent 100 ping vuelve sin salida, sin error: el agente contestó. Hacen falta las dos mitades: agent: 1 del lado de Proxmox y el paquete qemu-guest-agent adentro.",
+    "caption": "Lo que pasa por dentro: un reboot del invitado no arma el canal del agente; Stop y Start crean un proceso QEMU nuevo."
+   }
+  ]
+ },
+ "5": {
+  "anims": [
+   {
+    "file": "5-r1.svg",
+    "alt": "Animación en cuatro tiempos con la plantilla 9000 (debian13-tpl, solo lectura), la VM 201, el CD de cloud-init en ide2, la terminal de pve1 y la consola xterm.js de la VM. 1: qm clone 9000 201 --full 1 copia completa la plantilla en la VM 201, que nace sin usuario y sin red. 2: qm set 201 con --ciuser tecnico, --sshkeys con la clave pública id_ed25519.pub e --ipconfig0 ip=10.10.10.201/24 deja los datos en la VM; qm resize agrega 10 GB y qm start la arranca; Proxmox genera el CD en formato nocloud con tres partes: user (hostname prueba-ci, usuario tecnico y la clave), network (10.10.10.201/24, gateway 10.10.10.1) y meta (el identificador de la instancia). 3: en el primer arranque cloud-init lee el CD, crea el usuario tecnico, copia la clave en authorized_keys, configura eth0 con 10.10.10.201 y agranda la partición. 4: desde pve1, ssh tecnico@10.10.10.201 entra con la clave, sin contraseña, y aparece el prompt tecnico@prueba-ci.",
+    "caption": "Clon, CD de cloud-init y primer arranque: usuario, clave e IP sin pasar por un instalador."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "5-l1.svg",
+    "after": "Creá la VM base, importá el disco",
+    "alt": "Animación en cuatro tiempos con la imagen /root/debian-13-genericcloud-amd64.qcow2, la configuración de la VM 9000 debian13-tpl, el almacenamiento local-lvm y la terminal. 1: qm create 9000 arma solo el hardware: memory 2048, cores 2, net0 virtio en vmbr0, scsihw virtio-scsi-single y agent 1, todavía sin disco. 2: qm set 9000 --scsi0 local-lvm:0,import-from=/root/... copia la imagen, que ya trae el sistema instalado sin usuario ni red, al thin pool como vm-9000-disk-0, y aparece la línea scsi0. 3: --ide2 local-lvm:cloudinit agrega la unidad cloud-init, el volumen vm-9000-cloudinit; boot order=scsi0 arranca directo del disco y serial0 con vga serial0 deja la consola serie. 4: qm template 9000 convierte la VM en plantilla: el disco pasa a llamarse base-9000-disk-0, queda de solo lectura y la VM ya no se arranca ni se modifica, solo se clona.",
+    "caption": "Lo que pasa en el almacenamiento: la imagen se importa como disco, se suma la unidad cloud-init y qm template deja el disco base de solo lectura."
+   }
+  ]
+ },
+ "6": {
+  "anims": [
+   {
+    "file": "6-r1.svg",
+    "alt": "Animación en cuatro tiempos con el host pve1, su kernel Linux compartido, el contenedor 300 ct-prueba, el bridge vmbr0, la placa eno1 y el router de la LAN con DHCP en 10.10.10.1. 1: pct start 300 no tiene BIOS ni kernel propio: el kernel del host crea los namespaces (pid, su árbol de procesos; net, su eth0; mnt, su sistema de archivos; user, donde root es 100000 afuera) y el cgroup con 512 MB de memoria, y arranca el init del contenedor en segundos. 2: la red es un par veth: eth0 adentro del contenedor y veth300i0 afuera, enchufado en vmbr0 como una placa más. 3: con ip=dhcp el contenedor manda Discover, el router contesta Offer, el contenedor pide Request y recibe Ack con 10.10.10.150/24. 4: en el host, ps muestra los procesos del contenedor, /sbin/init y sshd, como procesos comunes del usuario 100000: afuera no es root.",
+    "caption": "pct start: namespaces y cgroup en el kernel del host, un par veth en vmbr0 y una IP por DHCP."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "6-l1.svg",
+    "after": "Creá un contenedor no privilegiado",
+    "alt": "Animación en cuatro tiempos con la plantilla Debian en local, el rootfs del contenedor 300 y el archivo /etc/pve/lxc/300.conf. 1: pct create 300 local:vztmpl/<plantilla> --unprivileged 1 --memory 512 --rootfs local-lvm:8 arma el disco rootfs vm-300-disk-0 de 8 GB en local-lvm, con formato; el contenedor todavía no arrancó. 2: desempaqueta la plantilla adentro; en la plantilla /etc/passwd, /usr/bin/bash y /root/ son del dueño 0:0, y en el rootfs se escriben con uid y gid más 100000: quedan de 100000:100000. 3: guarda la configuración en /etc/pve/lxc/300.conf con hostname ct-prueba, memory 512, el rootfs y unprivileged: 1, que es lo que confirma pct config 300. 4: adentro, ls -ln /etc/passwd muestra dueño 0, root; desde el host el mismo archivo es del usuario 100000, un usuario sin poder.",
+    "caption": "Lo que pasa en el disco: pct create desempaqueta la plantilla corriendo cada dueño 100000."
+   }
+  ]
+ },
+ "7": {
+  "anims": [
+   {
+    "file": "7-r1.svg",
+    "alt": "Animación en cuatro tiempos con el host pve1 y la VM 100, servidor de archivos, cuyo disco vm-100-disk-0 y un snapshot llamado antes-upgrade viven en local-lvm, sobre el RAID del host, y un NFS de backups en otro equipo. 1: cada noche vzdump 100 --mode snapshot --compress zstd --storage nfs-backups manda la configuración y todos los discos, en un archivo completo vzdump-qemu-100-<fecha>.vma.zst, al NFS. 2: falla el RAID del host; el disco de la VM y el snapshot se pierden juntos, porque el snapshot estaba en el mismo pool y un rollback no sirve; el archivo en el NFS sigue intacto. 3: qmrestore con el archivo del NFS arma otra vez la VM 100 en local-lvm, con discos nuevos; como la VM 100 ya no existe se restaura con su ID, y en una prueba se usa un ID nuevo. Los snapshots no vuelven. 4: qm start 100 y la VM arranca con los datos de anoche; el restore de prueba mensual ya dijo cuánto tarda.",
+    "caption": "El snapshot vivía en el mismo pool y se pierde con el disco; el archivo de vzdump en el NFS rearma la VM."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "7-l1.svg",
+    "after": "Antes de arrancar, desconectá la placa",
+    "alt": "Animación en cuatro tiempos con el host pve1, el bridge vmbr0, la VM 100 en producción (MAC BC:24:11:AA:10:00, IP 10.10.10.100), la VM 900 restaurada, un switch y la PC de un usuario de la 100. 1: qmrestore del archivo vzdump-qemu-100-<fecha>.vma.zst con el ID 900 crea una copia exacta: la configuración trae la misma placa y la misma MAC, y adentro el sistema tiene la misma IP fija; qmrestore --unique daría otra MAC, pero no otra IP. 2: si la 900 arrancara conectada, la PC pregunta por 10.10.10.100 y contestan las dos VM; con dos equipos iguales el bridge y el switch no saben a cuál mandar y la PC se corta con la 100, que está en producción. 3: qm set 900 --net0 virtio,bridge=vmbr0,link_down=1 deja la placa de la 900 desconectada, como un cable desenchufado; la 100 sigue atendiendo sola. 4: qm start 900 arranca la VM aislada; por la consola se verifica que el sistema arranca y los datos están, se anota cuánto tardó el restore y después qm stop 900 y qm destroy 900 la borran.",
+    "caption": "Lo que pasa en la red: la 900 es una copia exacta de la 100; con link_down=1 arranca aislada y no le corta el servicio."
+   }
+  ]
+ },
+ "8": {
+  "anims": [
+   {
+    "file": "8-r1.svg",
+    "alt": "Animación en cuatro tiempos con el host pve1, que guarda en Proxmox Backup Server con el token backup@pbs!pve y el rol DatastoreBackup, el PBS del cliente con el datastore main y un PBS de IES en otra ciudad. 1: cada noche pve1 sube solo los trozos nuevos a main, que guarda los backups vm/100 del lunes, martes y miércoles y vm/101 del martes; el token puede crear backups y leerlos, no borrarlos ni modificarlos. 2: un ransomware toma pve1 y cifra las VM 100 y 101; con el mismo token pide borrar vm/100 y PBS lo rechaza por falta de permiso; tampoco puede sobrescribir, porque PBS no reescribe trozos existentes. 3: un sync job copia el datastore al PBS de IES, fuera del sitio, configurado para no borrar lo que desaparece del origen: es la copia de la regla 3-2-1. 4: el host se reinstala limpio y se restaura desde el backup del martes, anterior al ataque. La retención y el borrado los hace el propio PBS con prune jobs.",
+    "caption": "El token del host sube backups pero no los puede borrar; la copia de afuera y los backups viejos quedan intactos."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "8-l1.svg",
+    "after": "Garbage collection semanal y verify diario",
+    "alt": "Animación en cuatro tiempos con el datastore main y sus trozos guardados en .chunks por su hash, el proceso de verificación con SHA-256 y la lista Content con el estado de cada backup. 1: a la 01:00 corre el verify job verif-main y relee el trozo 3f9a; recalcula su SHA-256, coincide, y el backup vm/100 del martes queda OK. 2: relee el trozo a71c, el hash coincide con el registrado y vm/101 del martes queda verificado. 3: el trozo c02e se degradó en el disco por bit rot; el hash recalculado, 9b41, no coincide con c02e, el backup vm/100 del miércoles queda con la verificación fallida y el job falla y avisa. Lo mismo pasaría si un ransomware cifrara el datastore. 4: con --ignore-verified true --outdated-after 30, vm/101 del lunes, verificado hace 3 días, se saltea; lo verificado hace más de 30 días se vuelve a leer. Conviene verificar diario lo nuevo y todo, como mínimo, una vez al mes.",
+    "caption": "Lo que hace verify: relee cada trozo, compara su SHA-256 y marca fallido el backup con un trozo dañado."
+   },
+   {
+    "step": 4,
+    "file": "8-l2.svg",
+    "after": "En Proxmox VE: **Datacenter",
+    "alt": "Animación en cuatro tiempos entre pve1 con Proxmox VE y un Proxmox Backup Server en 10.10.10.30, puerto 8007, con el datastore main. 1: en Datacenter, Storage, Add, Proxmox Backup Server se cargan el servidor 10.10.10.30, el datastore main, el usuario backup@pbs!pve, como contraseña el secreto del token y la huella del certificado; el secreto lo muestra PBS una sola vez. 2: PVE abre TLS al puerto 8007, PBS presenta su certificado y PVE compara la huella recibida con la cargada; coinciden, así que es ese PBS y no otro equipo. Si no coincidiera, PVE no se conecta. 3: PVE se presenta con backup@pbs!pve y el secreto; PBS revisa el ACL de /datastore/main, donde el token tiene DatastoreBackup: crear y leer sí, borrar no; contesta autorizado. 4: en el backup de prueba suben los trozos nuevos de la VM 100 y en Content de PBS aparece vm/100 con la fecha del backup.",
+    "caption": "Lo que pasa en la conexión: TLS al 8007, PVE compara la huella, entra con el token y PBS revisa DatastoreBackup."
+   }
+  ]
+ },
+ "9": {
+  "anims": [
+   {
+    "file": "9-r1.svg",
+    "alt": "Animación en cuatro tiempos con tres nodos, pve1, pve2 y pve3, de un voto cada uno, conectados a dos redes: link0, el switch de corosync con UDP 5405 a 5412 y latencia menor a 5 ms, y la red de VMs y backups, donde un PBS está haciendo el backup nocturno. 1: los tres nodos se pasan el token de corosync por link0, una y otra vez. 2: si corosync compartiera la red del backup, el tráfico del backup demora el token más que el timeout; cada nodo cree que perdió a los otros aunque estén vivos y la membresía del clúster se rearma. 3: con red propia, el backup va por la red de VMs y el token sigue circulando por link0 sin demoras: los tres nodos ven 3 de 3 votos y hay quórum. 4: se corta link0; como la red de VMs está configurada como link1, de prioridad menor, Kronosnet pasa el tráfico de corosync a link1 y el clúster sigue con 3 de 3.",
+    "caption": "El token de corosync necesita su propia red; con un segundo enlace de menor prioridad, el clúster aguanta un corte."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "9-l1.svg",
+    "after": "Probá crear una VM: no te deja",
+    "alt": "Animación en cuatro tiempos con pve1 en 10.10.10.11, pve2 en 10.10.10.12 y la salida de pvecm status en pve1. 1: los dos nodos se pasan mensajes de corosync; pvecm status muestra Expected votes 2, Total votes 2, Quorum 2, Flags Quorate y Quorate: Yes; /etc/pve acepta lectura y escritura. 2: se apaga pve2 y a pve1 no le llega nada; para pve1 es lo mismo que un cable de corosync cortado. Total votes baja a 1. 3: con Total votes 1 y Quorum 2 no hay mayoría: la línea Quorum dice Activity blocked, Quorate pasa a No y /etc/pve queda en solo lectura; no se crea, no se arranca y la HA no actúa. 4: qm create en pve1 falla con cluster not ready - no quorum?. Es lo que resuelve el QDevice del paso 5 con un tercer voto.",
+    "caption": "Lo que cambia en pvecm status: Total votes 1 con Quorum 2, Quorate: No, y qm create falla."
+   },
+   {
+    "step": 5,
+    "file": "9-l2.svg",
+    "after": "En una tercera máquina Debian",
+    "alt": "Animación en cuatro tiempos con pve1 (10.10.10.11) y pve2 (10.10.10.12) con corosync-qdevice, un tercer equipo Debian (10.10.10.13) con corosync-qnetd, que no corre VMs y solo vota, y la terminal de pve1. 1: se instala corosync-qnetd en el tercer equipo y corosync-qdevice en los dos nodos. 2: pvecm qdevice setup 10.10.10.13 copia la clave SSH del clúster al tercer equipo y arma certificados para que la conexión vaya cifrada; termina con Done. 3: cada nodo habla con el qnetd por TCP 5403 y el QDevice aporta un voto: pvecm status muestra Expected votes 3, Total votes 3, Quorum 2, Flags Quorate Qdevice, y en Membership information los dos nodos con A,V,NMW y una fila Qdevice con 1 voto. 4: en el paso 6 se apaga pve2; pve1 y el QDevice suman 2 de 3 votos, Total votes 2, y el clúster sigue con Quorate: Yes.",
+    "caption": "Lo que pasa en la red: cada nodo habla con el qnetd por TCP 5403 y el clúster espera 3 votos; sin pve2 quedan 2 de 3."
+   }
+  ]
+ },
+ "10": {
+  "anims": [
+   {
+    "file": "10-r1.svg",
+    "alt": "Animación en cuatro tiempos con un clúster de tres nodos, pve1, pve2 y pve3 (master del CRM), el almacenamiento compartido con el disco de la VM y la salida de ha-manager status. 1: la VM de la receptora de alarmas, vm:100, corre en pve1 bajo HA y escribe en el almacenamiento compartido; ha-manager status muestra quorum OK y service vm:100 (pve1, started). 2: falla la fuente de pve1 y el nodo se apaga; ha-manager status muestra lrm pve1 (old timestamp - dead?) y el servicio pasa a fence: la HA espera el plazo del watchdog, 60 segundos, para que pve1 quede cercado y la copia vieja no pueda escribir. 3: con pve1 cercado, el servicio pasa a recovery y el gestor busca un nodo con quórum y menos carga: pve2. 4: la VM arranca en pve2 sobre el mismo disco compartido y queda (pve2, started); la receptora vuelve a funcionar en un par de minutos sin que nadie intervenga.",
+    "caption": "Fuente quemada en pve1: fence, recovery y started en pve2, sin que nadie entre a hacerlo a mano."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "10-l1.svg",
+    "after": "Desarmá la HA como harías antes de tocar corosync",
+    "alt": "Animación en cuatro tiempos con tres nodos, pve1, pve2 (con el CRM master) y pve3, cada uno con su LRM, el switch de corosync y la salida de ha-manager status. 1: con la HA armada el CRM y cada LRM tienen su watchdog abierto y el fencing está en armed; si un nodo pierde el quórum y no renueva su watchdog, a los 60 segundos se reinicia. 2: ha-manager crm-command disarm-ha freeze congela los servicios; cada LRM termina lo suyo y libera su watchdog, que queda released, y al final el CRM libera el suyo: el fencing pasa por disarming y queda disarmed. 3: se cambia el switch de corosync y los nodos pierden el quórum un momento; como no hay watchdogs, ningún nodo se reinicia. Durante esa ventana tampoco hay recuperación automática. 4: ha-manager crm-command arm-ha vuelve a armar: los watchdogs se abren otra vez, el fencing vuelve a armed y los servicios a started. Si el comando de desarme no existe, la versión es anterior a 9.2.",
+    "caption": "Lo que pasa con los watchdogs: disarm-ha freeze los libera, un corte de corosync no reinicia nodos y arm-ha los vuelve a abrir."
+   }
+  ]
+ },
+ "11": {
+  "anims": [
+   {
+    "file": "11-r1.svg",
+    "alt": "Animación en cuatro tiempos con la notebook del técnico, su celular con una app TOTP, la web de Proxmox en https://pve1:8006 y el cálculo del servidor. 1: tecnico@pve entra con usuario, realm Proxmox VE (pve) y clave; Proxmox no lo deja pasar todavía y pide el segundo factor TOTP. 2: la app del celular y el servidor calculan cada uno el mismo código de 6 dígitos con el secreto compartido, que se cargó al escanear el QR del alta, y la hora actual en pasos de 30 segundos, como define la RFC 6238; el técnico escribe 482 917 y coinciden. 3: entra con su ticket; con PVEAuditor asignado en /, que se hereda hacia abajo, ve el árbol completo: pve1, las VM 100 y 101 y local-lvm, con privilegios de lectura como Sys.Audit, VM.Audit y Datastore.Audit. 4: intenta apagar la VM 100 con Shutdown; hace falta VM.PowerMgmt en /vms/100 y PVEAuditor no lo tiene: aparece Permission check failed (/vms/100, VM.PowerMgmt) y la VM no cambia.",
+    "caption": "Clave más código TOTP para entrar, y PVEAuditor para mirar sin poder apagar ni borrar."
+   }
+  ],
+  "steps": [
+   {
+    "step": 1,
+    "file": "11-l1.svg",
+    "after": "Usuario de solo lectura",
+    "alt": "Animación en cuatro tiempos con el árbol de permisos de Proxmox (/, /nodes, /vms, /storage y debajo /nodes/pve1, /vms/100 y /storage/local-lvm), el usuario tecnico@pve y la terminal de pve1. 1: pveum user add tecnico@pve y pveum passwd crean el usuario; existe, pero sin permisos no ve nada. 2: pveum acl modify / --user tecnico@pve --role PVEAuditor asigna el rol en la raíz del árbol. 3: con propagate, el rol se hereda hacia abajo y se pintan /nodes, /vms, /storage y cada nodo, VM y almacenamiento. 4: pveum user permissions tecnico@pve muestra lo que resulta, en resumen: Sys.Audit, VM.Audit y Datastore.Audit en cada ruta, sin VM.PowerMgmt ni privilegios .Allocate: mirar sí, tocar no.",
+    "caption": "Lo que pasa en el árbol de permisos: PVEAuditor asignado en / se hereda a nodos, VMs y almacenamiento."
+   }
+  ]
+ },
+ "12": {
+  "anims": [
+   {
+    "file": "12-r1.svg",
+    "alt": "Animación en cuatro tiempos con la lista de diagnóstico (1 quórum con pvecm status, 2 logs con journalctl -b -u, 3 locks en la configuración, 4 almacenamiento con pvesm status, 5 firewall si hay sospecha), la VM 100 de una mutualista que no arranca y la terminal del nodo. 1: primero el quórum: pvecm status muestra Quorate: Yes, Total votes 3 y Quorum 2; el clúster acepta escrituras. 2: los logs del último arranque de corosync y de pve-cluster no muestran errores ni cambios de membresía. 3: grep -l '^lock:' encuentra /etc/pve/qemu-server/100.conf con lock: backup, de un backup que se cortó con la luz de anoche; las tareas del nodo no muestran nada en curso. 4: qm unlock 100 y qm start 100: la VM queda running. Almacenamiento y firewall no hicieron falta. qm unlock va solo cuando no hay backup, snapshot ni migración en curso sobre esa VM.",
+    "caption": "Quórum, logs, locks: en ese orden aparece el lock que quedó de un backup cortado."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "12-l1.svg",
+    "after": "Si el host viene de la 8, buscá ajustes",
+    "alt": "Animación en cuatro tiempos con los archivos /etc/sysctl.conf, /etc/sysctl.d/*.conf y /usr/lib/sysctl.d/*.conf, el servicio systemd-sysctl, el valor net.ipv4.ip_forward del kernel del host y unas VMs en una red interna vmbr1 que salen a internet a través del host. 1: en Proxmox VE 8, al arrancar systemd-sysctl lee sysctl.conf, que tiene ip_forward = 1, y el host rutea la salida de las VMs. 2: después del upgrade a la 9 y el reinicio, systemd-sysctl ya no lee /etc/sysctl.conf; ip_forward queda en 0, el host deja de rutear sin ningún aviso y las VMs se quedan sin salida. 3: el paso 5 lo encuentra: cat /etc/sysctl.conf | grep -v '^#' | grep . muestra net.ipv4.ip_forward=1, y en /etc/sysctl.d/ no hay nada con ese ajuste. 4: el ajuste se mueve a /etc/sysctl.d/99-ies.conf, sysctl --system lo aplica, systemd-sysctl lo lee en cada arranque y el host vuelve a rutear.",
+    "caption": "Lo que pasa al arrancar en la 9: systemd-sysctl ya no lee sysctl.conf y el ajuste vuelve desde /etc/sysctl.d/."
+   }
+  ]
+ }
+}

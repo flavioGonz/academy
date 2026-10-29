@@ -10,7 +10,7 @@ from ilus import *  # noqa: F401,F403
 from ilus import text, wrap
 
 OUT = "/home/claude/ies-training/ilustraciones/mikrotik/"
-K = "MikroTik · Lección 24"
+K = "MikroTik"
 GREEN_T, RED_T, CYAN_T, GRAY_T, AMBER_T = "#6EE7B7", "#FCA5A5", "#7DD3FC", "#7FA6C9", "#FCD34D"
 
 

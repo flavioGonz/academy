@@ -113,7 +113,7 @@ S["13"] = dict(
     notas=[
         "Si entrás al router por la IP que entrega el DHCP de esa WAN, la sesión se corta al apagar el cliente: pegalo desde la LAN o en Safe Mode.",
         "El masquerade de fábrica sigue andando con IP fija; cambiarlo a src-nat es opcional y no lo hace este script.",
-        "public-address vacío: activá DDNS (lección 18) y volvé a mirar /ip/cloud/print.",
+        "public-address vacío: activá DDNS (lección 28) y volvé a mirar /ip/cloud/print.",
         "Para volver atrás: /ip/address/remove [find comment=\"ies-WAN fija\"], /ip/route/remove [find comment=\"ies-default WAN fija\"] y /ip/dhcp-client/enable [find interface=ether1].",
     ],
 )
@@ -305,7 +305,7 @@ S["17"] = dict(
 }''',
     notas=[
         "Si el cliente tiene varios equipos, pegalo en todos con el mismo canal.",
-        "Para pasar de stable a long-term: con el canal ya cambiado, backup (lección 16) y después instalá a mano la versión que ofrezca.",
+        "Para pasar de stable a long-term: con el canal ya cambiado, backup (lección 38) y después instalá a mano la versión que ofrezca.",
         "No uses el script de actualización automática de la documentación en clientes: instala lo que salga sin que lo pruebes.",
     ],
 )
@@ -346,7 +346,7 @@ S["18"] = dict(
     notas=[
         "Con dos WAN, public-address es la del enlace por donde sale la ruta a la nube: cortá la principal y mirá cómo cambia.",
         "El script no apaga detect-internet: solo avisa. Apagalo vos si tus reglas dependen de las listas LAN y WAN.",
-        "Publicar servicios detrás del nombre es la lección 10 (o la 24), con sus reglas.",
+        "Publicar servicios detrás del nombre es la lección 32 (o la 24), con sus reglas.",
     ],
 )
 

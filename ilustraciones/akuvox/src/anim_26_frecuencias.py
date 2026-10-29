@@ -2,7 +2,7 @@
 """Lección 26 · teoría: tarjetas de 125 kHz y de 13,56 MHz, y qué frecuencia lee cada R20."""
 from _anim_akuvox_15_28 import *
 
-a = new(20, "AKUVOX · LECCIÓN 26", "125 kHz o 13,56 MHz: qué tarjeta lee cada R20")
+a = new(20, "AKUVOX", "125 kHz o 13,56 MHz: qué tarjeta lee cada R20")
 a.steps([
     "125 kHz (tipo EM o HID Prox): la generación vieja, simple y fácil de copiar.",
     "13,56 MHz (ISO 14443, como MIFARE): permite cifrado y más datos.",

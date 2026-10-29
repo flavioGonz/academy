@@ -1,0 +1,183 @@
+# Notes: batch c (lección Troncal SIP de Antel)
+Pages read: 17 (15 nuevas más el manual del UCM630x y la guía de troncales SIP, que ya estaban en raw/). With notes: 16. Skipped: 1 (Cloud PBX de Antel: describe una central en la nube, sirve solo para decir cuándo no aplica una UCM propia).
+Nota de alcance: Antel publica en su web el servicio, los planes y los requisitos, pero ningún dato técnico (servidor, puertos, codecs, formato de numeración). Lo técnico sale de un integrador uruguayo (Simpletech, 2018, actualizado en 2025) y de dos hilos de foro de técnicos que lo instalaron (3CX 2017, FreePBX 2022). Todo eso se enseña como "según lo que te entregue Antel" y se confirma en la planilla y en la primera captura.
+
+## T23 Troncal SIP de Antel: el servicio y lo que entrega
+- c:N1. Antel vende la "Troncal Sip" para empresas con planes por llamadas simultáneas: TSIP8, TSIP15, TSIP30, TSIP45, TSIP60, TSIP90, TSIP120, TSIP150 y TSIP180, sobre FTTH y fibra dedicada. Cada plan incluye una cantidad de números urbanos, los canales sirven para entrar y salir, se elige el número de salida de cada llamada e incluye caller ID.
+  - Source: https://antel.com.uy/empresas/internet-y-fija/planes/troncal-sip  Quote: "Podés elegir los siguientes planes (sobre FTTH y Fibra dedicada)"
+  - Kind: definition
+  - Level: foundation
+  - Bias: página comercial del proveedor
+- c:N2. Requisito de Antel: una central IP instalada en la empresa. Contacto comercial 0800 2030 y empresas@antel.com.uy; reclamos 0800 2599.
+  - Source: https://antel.com.uy/empresas/internet-y-fija/planes/troncal-sip  Quote: "Debe tener una central PBX (IP) instalada en su empresa."
+  - Kind: rule of thumb
+  - Level: foundation
+  - Bias: proveedor
+- c:N3. Las llamadas viajan por una red privada de Antel hasta la red telefónica, no por internet; Simpletech agrega que es la red MPLS de Antel y que la voz va priorizada sobre los datos (their claim).
+  - Source: https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/  Quote: "calls are not transported over the Internet"
+  - Kind: definition
+  - Level: core
+  - Also: T24
+  - Bias: integrador y partner de 3CX, vende asesoramiento
+- c:N4. El servicio se entrega en un puerto RJ45 y Antel da estos datos: IP del servidor SIP, IP del cliente, gateway, máscara, números de la troncal y cantidad de canales. El máximo de llamadas simultáneas depende del medio de acceso.
+  - Source: https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/  Quote: "The service will be provided to the client through an RJ45 port."
+  - Kind: template
+  - Level: foundation
+  - Bias: integrador
+- c:N5. La troncal de Antel no usa registro: no hay usuario ni contraseña. Antel manda OPTIONS como heartbeat y la central contesta sola 200 OK.
+  - Source: https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/  Quote: "ANTEL trunk does not use SIP registration (no username and password are used)"
+  - Kind: definition
+  - Level: foundation
+  - Also: T24
+  - Bias: integrador
+- c:N6. Parámetros que declara: SIP 5060 de origen y destino, codecs G.711 y T.38, DTMF inband o RFC 2833, Session Expire (RFC 4028) de 600 (their claim, artículo de 2018).
+  - Source: https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/  Quote: "Session Expire (RFC4028): 600"
+  - Kind: number
+  - Level: core
+  - Bias: integrador
+- c:N7. Un técnico con 3CX en 2017 recibió de Antel la IP del servidor SIP, una IP propia para la central, un gateway, máscara /30 y el DID, más una IP de prueba para ping. Confirma que no hay registro.
+  - Source: https://www.3cx.com/community/threads/troncal-sip-antel-and-3cx.50040/  Quote: "mask /30 and the DID we got"
+  - Kind: story
+  - Level: core
+  - Also: T24
+  - Bias: none
+- c:N8. Para migrar números existentes, primero se instala la troncal con números nuevos y después se suman los que se migran. El número de servicio de la troncal es una P y cinco dígitos (ejemplo P12345) y es el que se usa para reclamar al 0800 2599; no confundirlo con los números telefónicos.
+  - Source: https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/  Quote: "The service number consists of the letter P followed by 5 digits."
+  - Kind: rule of thumb
+  - Level: foundation
+  - Also: T26
+  - Bias: integrador
+- c:N9. Para que siga andando en un corte de luz, UPS para la central y para el módem de Antel.
+  - Source: https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/  Quote: "add a backup power supply to their IP PBX and to the modem"
+  - Kind: rule of thumb
+  - Level: foundation
+  - Also: T26
+  - Bias: integrador
+
+## T24 La troncal por IP en la UCM: Peer, red Dual y rutas
+- c:N10. Tres topologías: E-SBC que traduce red y SDP; firewall en el medio, donde la central ya tiene que poner en el SIP la IP de Antel porque el firewall no traduce el contenido; y sin equipos, la central conectada directo al equipo de Antel con las IP de Antel en red y en SIP, la más simple cuando no hace falta mezclar la troncal con otras redes.
+  - Source: https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/  Quote: "the client connects the PBX directly via UTP cable to the ANTEL equipment"
+  - Kind: technique
+  - Level: core
+  - Bias: integrador (recomienda su SBC de 3CX para la topología 1)
+- c:N11. No conectar la troncal a un switch compartido con otros equipos, por seguridad y por la tabla MAC del módem de Antel; si no queda otra, VLAN.
+  - Source: https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/  Quote: "It is not recommended to connect the Trunk to a switch shared with other devices"
+  - Kind: mistake
+  - Level: core
+  - Bias: integrador
+- c:N12. El error común con firewall: se traduce la IP de red y no la del contenido SIP. Es el mismo mecanismo del SIP ALG y del audio de un lado (lecciones 9 y 10).
+  - Source: https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/  Quote: "the network IP is translated to the IP provided by ANTEL, but the payload IP is not updated"
+  - Kind: mistake
+  - Level: core
+  - Also: T12
+  - Bias: integrador
+- c:N13. Peer SIP Trunk es la conexión por IP entre la UCM y otro equipo, sin registro: Host Name con la IP del otro lado, transporte UDP por defecto, CallerID Number por defecto del troncal, From Domain, DID Mode (Request-line por defecto o To-header), DTMF Mode, heartbeat por OPTIONS (60 s por defecto, apagado de fábrica) y límites de llamadas concurrentes con respuesta 480, 486 o 503.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "Peer trunk allows to create a peer-to-peer connection between two PBXs"
+  - Kind: definition
+  - Level: core
+  - Bias: fabricante
+- c:N14. El orden con el que la UCM elige el caller ID de una saliente: CID de la llamada entrante (Keep Original CID) → usuario o CallerID del troncal con Keep Trunk CID → DOD → CallerID de la extensión → CallerID del troncal sin Keep Trunk CID → Global Outbound CID.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "the following priority order rule will be used to determine which CallerID will be set"
+  - Kind: rule of thumb
+  - Level: core
+  - Also: T25
+  - Bias: fabricante
+- c:N15. Modo de red Dual: WAN y LAN son dos salidas independientes (LAN2 y LAN1); la que se elige como Default Interface lleva el gateway. Static Routes permite mandar un destino por una interfaz y un gateway; LAN es eth0 y WAN es eth1. De fábrica el modo es Switch.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "Both WAN and LAN ports serve as independent uplink connections, labeled as LAN2 and LAN1 respectively."
+  - Kind: technique
+  - Level: core
+  - Bias: fabricante
+- c:N16. Local Network Address lista las redes que la UCM considera adentro del NAT; External Host es la IP que pone hacia afuera. Si una red no está en la lista, la UCM le habla con la IP externa (lo que conviene revisar si la central ya tiene External Host por internos remotos).
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "Specify a list of network addresses that are considered inside of the NAT network."
+  - Kind: technique
+  - Level: advanced
+  - Also: T11
+  - Bias: fabricante
+- c:N17. En FreePBX, un troncal con registro o autenticación contestaba 401 a los OPTIONS de Antel. La respuesta del foro: troncal sin registro ni autenticación, y si Antel manda desde varias IP, todas en la lista de coincidencia; así contesta 200.
+  - Source: https://community.freepbx.org/t/antel-sip-trunk-only-options/84614  Quote: "our server is returning a 401"
+  - Kind: story
+  - Level: core
+  - Also: T26
+  - Bias: none
+- c:N18. Con un Peer trunk y heartbeat, el Dashboard muestra el estado; Unreachable quiere decir que las dos centrales no se alcanzan. La guía arma la prueba entre dos UCM con ruta saliente, ruta entrante By DID y patrones de internas.
+  - Source: https://documentation.grandstream.com/knowledge-base/how-to-interconnect-multiple-ucm/  Quote: "If the status of the trunk displays “Unreachable”"
+  - Kind: test
+  - Level: core
+  - Bias: fabricante
+- c:N19. Session Timer en la UCM: activado como opcional, Session Expiration 1800 s y Min SE 90 s de fábrica. ToS para SIP y para RTP en None de fábrica.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "Default setting is 1800 seconds (30 minutes)."
+  - Kind: number
+  - Level: advanced
+  - Bias: fabricante
+- c:N20. Los session timers refrescan la sesión con re-INVITE o UPDATE para que los dos lados sepan que la llamada sigue viva.
+  - Source: https://datatracker.ietf.org/doc/html/rfc4028  Quote: "allows for a periodic refresh of SIP sessions through a re-INVITE or UPDATE request"
+  - Kind: definition
+  - Level: advanced
+  - Bias: none
+- c:N21. RouterOS tiene un helper de SIP en /ip/firewall/service-ports, que es el ALG del MikroTik; solo importa si la troncal pasa por el router.
+  - Source: https://manual.mikrotik.com/docs/7.25/firewall-and-quality-of-service/firewall/nat  Quote: "SIP helper"
+  - Kind: technique
+  - Level: core
+  - Also: T12
+  - Bias: fabricante
+
+## T25 Numeración de Uruguay y caller ID con Antel
+- c:N22. Números nacionales de 8 dígitos: 2XXX XXXX Montevideo y área metropolitana, 4XXX XXXX interior, 9XXX XXXX móviles; prefijo 0 para larga distancia nacional y acceso a otras redes, 00 internacional; 0800 sin cargo, 0900 a 0908 valor agregado; cortos 1XY (104 Bomberos, 105 Emergencia Salud Pública, 109 Policía) y 911 Emergencia Nacional como excepción.
+  - Source: https://www.itu.int/dms_pub/itu-t/oth/02/02/T02020000E00001PDFS.pdf  Quote: "Se define como excepción el servicio 911."
+  - Kind: definition
+  - Level: foundation
+  - Bias: none
+- c:N23. Desde un fijo, a un celular se marca 0 más el número (09X XXX XXX); el cambio a 8 cifras fue el 29 de agosto de 2010.
+  - Source: https://en.wikipedia.org/wiki/Telephone_numbers_in_Uruguay  Quote: "Mobile phone numbers began with digits 09"
+  - Kind: definition
+  - Level: foundation
+  - Bias: none
+- c:N24. En el ejemplo de INVITE saliente que publica Simpletech, el número de destino y el del cliente van con 8 cifras (marcadores yxxxxxxx y zvvvvvvv), el From lleva el número de la troncal y hay Remote-Party-ID. Las salientes llevan como caller ID un número de la troncal; si no, se rechazan o salen con el número por defecto del servicio.
+  - Source: https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/  Quote: "Otherwise, the call will be rejected or will go out with the number included by default in the service."
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: integrador
+- c:N25. Respuestas SIP para leer en la captura: 401 pide autenticación; 403 el servidor entiende y se niega; 404 el usuario o dominio del Request-URI no existe; 484 Request-URI incompleto; 408 sin respuesta a tiempo.
+  - Source: https://en.wikipedia.org/wiki/List_of_SIP_response_codes  Quote: "The server understood the request, but is refusing to fulfill it."
+  - Kind: definition
+  - Level: core
+  - Also: T26
+  - Bias: none
+
+## T26 Diagnóstico de la troncal SIP
+- c:N26. Pruebas recomendadas: ping al gateway y a las IP de prueba de Antel (el servidor SIP no contesta ping), entrantes y salientes a fijos, celulares de Antel y de otras compañías e internacionales, varias simultáneas, una de más de 10 minutos, fax, G.711 y DTMF.
+  - Source: https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/  Quote: "Make a call lasting over 10 minutes"
+  - Kind: test
+  - Level: core
+  - Bias: integrador
+- c:N27. El caso de 3CX: el ping a la IP de prueba de Antel solo andaba desde la central y después de agregar las rutas; con señalización andando, las llamadas entraban y salían sin audio, y el técnico perdió el acceso web al poner la IP de Antel como la de la central.
+  - Source: https://www.3cx.com/community/threads/troncal-sip-antel-and-3cx.50040/  Quote: "So I added the nessessary routes and then I had a ping."
+  - Kind: story
+  - Level: core
+  - Bias: none
+- c:N28. OPTIONS sirve para preguntarle a un servidor qué soporta sin establecer una llamada, y por eso se usa como heartbeat.
+  - Source: https://datatracker.ietf.org/doc/html/rfc3261  Quote: "OPTIONS for querying servers about their capabilities"
+  - Kind: definition
+  - Level: foundation
+  - Bias: none
+- c:N29. rport (RFC 3581, 2003) hace que la respuesta vuelva al puerto desde el que salió la petición, para atravesar NAT; los keepalive de RFC 5626 (2009, CRLF o STUN) mantienen abierta la asociación del NAT. Con la troncal de Antel conectada directo no hay NAT en el medio y ninguno de los dos hace falta.
+  - Source: https://datatracker.ietf.org/doc/html/rfc3581  Quote: "allows a client to request that the server send the response back to the source IP address and port"
+  - Kind: definition
+  - Level: advanced
+  - Also: T24
+  - Bias: none
+- c:N30. RFC 4733 (diciembre de 2006) define los eventos de teléfono en RTP y reemplaza a RFC 2833: por eso la UCM dice RFC4733 y Antel, según Simpletech, RFC 2833.
+  - Source: https://datatracker.ietf.org/doc/html/rfc4733  Quote: "It obsoletes RFC 2833"
+  - Kind: definition
+  - Level: core
+  - Bias: none
+
+## Disagreements seen
+- Simpletech dice que Antel da un gateway "por defecto"; con una UCM que también tiene la red del cliente, el manual de Grandstream solo permite un gateway por defecto (Default Interface en Dual) y el resto va por Static Routes. El hilo de 3CX llegó a lo mismo: el ping anduvo recién al agregar rutas (https://www.3cx.com/community/threads/troncal-sip-antel-and-3cx.50040/).
+- Formato del número entrante: ninguna fuente lo dice. El ejemplo saliente de Simpletech usa 8 cifras; la lección 6 enseña a leerlo en el CDR o en la captura.
+- Heartbeat de la central: el manual lo recomienda para ver el estado; ninguna fuente dice si el servidor de Antel contesta OPTIONS de la central. Si no contesta, el troncal queda Unreachable aunque Antel mande los suyos.
+
+## Best stories
+- El FreePBX que contestaba 401 a cada OPTIONS de Antel porque su troncal esperaba autenticación (https://community.freepbx.org/t/antel-sip-trunk-only-options/84614).
+- El técnico de 3CX que solo lograba ping a la IP de prueba de Antel desde la central, después de agregar rutas, y que se dejó afuera de la web al cambiar la IP (https://www.3cx.com/community/threads/troncal-sip-antel-and-3cx.50040/).
+- El número de servicio P más cinco dígitos, que es el que pide el 0800 2599 y no el número de teléfono (https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/).

@@ -1,7 +1,7 @@
 """Lección 25 · Un solo bridge."""
 from _mt import *  # noqa
 
-K = "MikroTik · Lección 25"
+K = "MikroTik"
 
 # ---------------------------------------------------------------- principal
 c = Canvas(K, "Un bridge: el switch que vive dentro del router")

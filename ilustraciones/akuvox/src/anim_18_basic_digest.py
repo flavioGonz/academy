@@ -2,7 +2,7 @@
 """Lección 18 · teoría: Basic manda usuario:clave en Base64; Digest responde 401 con nonce y la clave no viaja."""
 from _anim_akuvox_15_28 import *
 
-a = new(24, "AKUVOX · LECCIÓN 18", "Basic y Digest: el mismo GET, otra forma de probar la clave")
+a = new(24, "AKUVOX", "Basic y Digest: el mismo GET, otra forma de probar la clave")
 a.steps([
     "Basic: usuario:clave va en Base64 dentro del encabezado, en un solo pedido.",
     "Quien captura el tráfico lo decodifica: la clave queda a la vista.",

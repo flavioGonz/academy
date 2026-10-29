@@ -2,7 +2,7 @@
 """Lección 10 · teoría: hairpin NAT, direcciones de origen y destino en cada tramo, sin y con masquerade."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=30, kicker="MIKROTIK · LECCIÓN 10 · HAIRPIN", title="Hairpin: por qué hace falta el masquerade de adentro")
+a = Anim(T=30, kicker="MIKROTIK · HAIRPIN", title="Hairpin: por qué hace falta el masquerade de adentro")
 a.steps([
     "Una PC de la LAN pide a la IP pública: 203.0.113.10:8000.",
     "El dst-nat cambia el destino al NVR, 192.168.88.50.",

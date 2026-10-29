@@ -1,7 +1,7 @@
 from _akv import *
 
 # ---------- 2.svg: leer A.B.C.D
-c = Canvas("Akuvox · Lección 2", "¿Qué dice el número de firmware?")
+c = Canvas("Akuvox", "¿Qué dice el número de firmware?")
 segs = [("216", BLUE), (".", INK3), ("30", CYAN), (".", INK3), ("10", WARN), (".", INK3), ("121", OK)]
 size, k = 72, 72 * 0.6
 total = sum(len(s) for s, _ in segs) * k
@@ -28,7 +28,7 @@ c.add(Note(48, 500, 1104, "Varios modelos tienen dos o tres versiones de hardwar
 save(c, "2.svg")
 
 # ---------- 2-paso1.svg: dónde se lee
-c = Canvas("Akuvox · Lección 2 · Paso 1", "Anotá firmware y hardware antes de tocar nada")
+c = Canvas("Akuvox · Paso 1", "Anotá firmware y hardware antes de tocar nada")
 c.add(Window(48, 140, 560, 250, "Web del portero", path="Status > Basic > Product Information",
              rows=[("Model", "E16"), ("Firmware Version", "216.30.10.121"), ("Hardware Version", "(anotala tal cual)")], hl=1))
 c.add(Step(48, 140, 1))
@@ -41,7 +41,7 @@ c.add(Note(700, 380, 450, "En el R20A la etiqueta engaña: si dudás, mandá lo 
 save(c, "2-paso1.svg")
 
 # ---------- 2-paso5.svg: orden seguro de la actualización
-c = Canvas("Akuvox · Lección 2 · Paso 5", "Backup, archivo correcto, subir y no tocar")
+c = Canvas("Akuvox · Paso 5", "Backup, archivo correcto, subir y no tocar")
 steps = [(3, "Backup", "exportar la config", "info"), (4, "Archivo", ".rom Linux · .zip Android", "info"),
          (5, "Subir", "System > Basic > Upgrade", "warn"), (6, "Verificar", "versión nueva en la ficha", "ok")]
 for i, (n, ttl, sub, kd) in enumerate(steps):

@@ -2,7 +2,7 @@
 """Lección 3 · teoría: available-from deja el puerto visible; drop en input lo descarta antes del servicio."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=22, kicker="MIKROTIK · LECCIÓN 3 · CÓMO FUNCIONA", title="available-from contesta; el drop en input calla")
+a = Anim(T=22, kicker="MIKROTIK · CÓMO FUNCIONA", title="available-from contesta; el drop en input calla")
 a.steps([
     "Un escáner de internet prueba el puerto 8291 del router.",
     "Solo available-from: el servicio contesta y después corta. Se ve abierto.",

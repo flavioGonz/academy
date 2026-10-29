@@ -1,0 +1,239 @@
+{
+ "1": {
+  "anims": [
+   {
+    "file": "1-r1.svg",
+    "alt": "Animación en cuatro tiempos con dos sitios de obra, el UniFi OS Server central de la oficina (10.10.10.5) y Site Manager en unifi.ui.com. 1: en el sitio A, con gateway UXG, el gateway, el switch y el AP mandan su inform al UniFi OS Server central: ese es su único host. 2: en el sitio B, con gateway UCG, el UCG es el controlador; el switch y el AP le informan a él, dentro del sitio. 3: el server central intenta adoptar el UCG y no puede: un UDM o UCG corre su propio Network y no se gestiona desde un server externo; si el plan es un server central, el gateway tiene que ser UXG o de terceros. 4: Site Manager arma una conexión directa con el UniFi OS Server y con el UCG y muestra las dos consolas, pero no guarda configuración: la configuración sigue en cada controlador.",
+    "caption": "Cada equipo tiene un solo host: con UXG, el server central; con UCG, el propio UCG. Site Manager solo es la puerta."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "1-l1.svg",
+    "after": "Al terminar, el instalador indica la dirección de acceso",
+    "alt": "Animación en cuatro tiempos del paso 3 entre la notebook del técnico y la VM Ubuntu 24.04 con UniFi OS Server en 10.10.10.5. 1: el instalador termina y muestra la dirección de acceso: https, la IP de la VM y el puerto que indique. 2: la notebook abre esa dirección por HTTPS, la sesión va cifrada hasta la VM y vuelve la página de UniFi OS. 3: se crea el admin local con usuario propio y la contraseña anotada en la ficha; queda guardado en el server. 4: se abre UniFi Network, se leen la versión de UniFi OS y la de Network y se anotan en la planilla del sitio; Network 11 pide UniFi OS 6.0 o superior.",
+    "caption": "Lo que pasa en la red en este paso: la notebook abre por HTTPS la dirección que dio el instalador, crea el admin local y lee las versiones."
+   }
+  ]
+ },
+ "2": {
+  "anims": [
+   {
+    "file": "2-r1.svg",
+    "alt": "Animación en cuatro tiempos con un AP usado, su controlador viejo de otra obra y el controlador nuevo del sitio. 1: el AP sigue mandando su inform a http://ctrl-viejo:8080/inform y no llega. 2: el controlador nuevo no puede adoptarlo porque el AP todavía tiene otro host: un equipo responde a un solo controlador. 3: se hace Forget en el controlador viejo y reset de fábrica de 10 segundos o set-default; el AP vuelve a http://unifi:8080/inform y a ubnt / ubnt, se anuncia en la red local por UDP 10001 y aparece Pending Adoption (Update Required). 4: con Adopt and Upgrade baja el firmware, lo escribe, reinicia y manda inform por 8080 al controlador nuevo: queda Connected con las claves SSH del sitio. Si no actualiza solo, upgrade con la URL del firmware del modelo por SSH. El desfase de firmware es la falla más común.",
+    "caption": "Un AP de otra obra sigue fiel a su host viejo: borrarlo allá, resetear y adoptar con el firmware al día."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "2-l1.svg",
+    "after": "Buscá la IP que tomó el AP",
+    "alt": "Animación en cuatro tiempos del paso 3 con la notebook, el AP reseteado en 192.168.88.20 y el controlador en la misma red y VLAN. 1: la notebook abre SSH por TCP 22 con el usuario de fábrica ubnt y la clave ubnt, que solo valen en un equipo reseteado. 2: con info, el AP contesta Model, Version (el firmware), IP Address 192.168.88.20 y Status. 3: Status Not Adopted con http://unifi:8080/inform: el equipo espera un controlador; qué mirar en cada línea: si es el equipo, la versión para comparar, si la IP es de la red del controlador y a qué inform apunta. 4: mientras tanto el AP se anuncia en la red local por UDP 10001 y el controlador lo muestra Pending Adoption; si la IP es de otra red, hay dos DHCP o el AP está en otra VLAN y el anuncio no llega.",
+    "caption": "Lo que pasa en la red en este paso: SSH al puerto 22 con ubnt / ubnt, info responde con el estado y el AP se sigue anunciando por UDP 10001."
+   },
+   {
+    "step": 5,
+    "file": "2-l2.svg",
+    "after": "y no actualiza solo, bajá el firmware",
+    "alt": "Animación en cuatro tiempos del paso 5 con la notebook, el AP en 192.168.88.20 y la página de descargas del firmware. 1: el AP figura Pending Adoption (Update Required): el desfase de firmware, la falla más común, deja al equipo más viejo de lo que el controlador acepta. 2: por SSH se escribe upgrade con la URL del firmware del modelo; el AP descarga la imagen él mismo por HTTPS, así que necesita DNS y salida a internet. 3: escribe la imagen y reinicia; la sesión SSH se corta, es lo esperado, y no hay que desenchufarlo. 4: al volver, ssh e info muestran la versión nueva con Status Not Adopted, y Adopt ya funciona.",
+    "caption": "Lo que pasa en la red en este paso: el AP descarga la imagen él mismo por HTTPS, reinicia y vuelve listo para adoptar."
+   }
+  ]
+ },
+ "3": {
+  "anims": [
+   {
+    "file": "3-r1.svg",
+    "alt": "Animación en cuatro tiempos con la cadena AP del sitio remoto (192.168.88.20), router del sitio con NAT (198.51.100.7), internet, router de la oficina (203.0.113.10) que reenvía 8080 y 3478, y el controlador en una VM con NAT (10.10.10.5). 1: el AP tiene como inform http://unifi.example.com:8080/inform, por option 43, DNS o set-inform; el nombre resuelve a 203.0.113.10. 2: el inform sale por TCP 8080, el NAT del sitio cambia el origen a 198.51.100.7 y la oficina lo reenvía a 10.10.10.5:8080; el AP se adopta. El 8080 se abre solo hacia las IP de los sitios o por VPN. 3: sin Override, el controlador le anuncia su IP interna, http://10.10.10.5:8080/inform; esa IP es privada, el inform muere en el router del sitio y el AP queda offline. 4: con Settings > System > Advanced, Inform Host unifi.example.com y Override marcado, el AP recibe el nombre alcanzable y queda Connected: inform por TCP 8080 y STUN por UDP 3478.",
+    "caption": "Detrás de NAT, el controlador conoce su IP interna: con Inform Host y Override anuncia un nombre al que el AP llega."
+   }
+  ],
+  "steps": [
+   {
+    "step": 1,
+    "file": "3-l1.svg",
+    "after": "Opción A, DHCP option 43 en RouterOS 7",
+    "alt": "Animación en cuatro tiempos del paso 1 entre el AP reseteado del sitio remoto, el MikroTik que es el servidor DHCP en 192.168.88.1 y el controlador en 10.10.10.5. 1: el AP manda DHCP Discover por broadcast. 2: el MikroTik contesta Offer con 192.168.88.20 y la opción 43, el AP pide con Request y el Ack trae otra vez la opción 43, porque dhcp-option=unifi-inform está en la red 192.168.88.0/24. 3: el AP lee el valor 0x01040A0A0A05 en seis bytes: 01 subopción 1, 04 largo 4, y 0A 0A 0A 05, que son 10, 10, 10 y 5: la IP del controlador 10.10.10.5. Con 10.10.10.20 sería 0x01040A0A0A14. 4: el AP manda el inform a http://10.10.10.5:8080/inform por la ruta entre el sitio y el controlador y aparece Pending Adoption. Como llega en cada arranque, sobrevive a reinicios y actualizaciones.",
+    "caption": "Lo que pasa en la red en este paso: la opción 43 viaja en el Offer y el Ack del DHCP y el AP la lee como 10.10.10.5."
+   },
+   {
+    "step": 2,
+    "file": "3-l2.svg",
+    "after": "Opción B, DNS.",
+    "alt": "Animación en cuatro tiempos del paso 2 entre el AP reseteado (192.168.88.20), el MikroTik del sitio, que es DHCP y DNS en 192.168.88.1, y el controlador en 10.10.10.5. 1: junto con la IP, el Ack del DHCP le da al AP el DNS del sitio, 192.168.88.1. 2: el AP tiene la URL de fábrica http://unifi:8080/inform y consulta el nombre unifi por UDP 53. 3: la entrada /ip dns static add name=unifi address=10.10.10.5 contesta unifi = 10.10.10.5; para responder consultas de la LAN, el DNS del MikroTik tiene allow-remote-requests=yes. 4: con esa IP el AP manda el inform al puerto 8080 del controlador y aparece Pending Adoption. Si el DNS del sitio es tuyo, el nombre sobrevive a reinicios y actualizaciones, como option 43.",
+    "caption": "Lo que pasa en la red en este paso: el AP consulta el nombre unifi al DNS del MikroTik y la entrada estática contesta 10.10.10.5."
+   }
+  ]
+ },
+ "4": {
+  "anims": [
+   {
+    "file": "4-r1.svg",
+    "alt": "Animación en cuatro tiempos con Site Manager en la cuenta UI de la empresa, dos técnicos y tres consolas: Cliente A con UCG, Cliente B con CloudKey y la oficina con UniFi OS Server. 1: cada consola abre su salida hacia Site Manager por TCP 443 y 8883; salen del sitio y nadie entra, todas en la cuenta de la empresa. 2: los técnicos entran con su rol: el Técnico 1 solo puede ver las tres; el Técnico 2 puede cambiar el sitio B y no entra a los otros. 3: con un Blueprint de la empresa, Drift Inspector (Network 10.6.101) muestra que A y B están iguales a la plantilla y que la oficina se apartó. 4: si la consola del Cliente A está en la cuenta personal de un técnico, el día que se va deja de aparecer para la empresa. Fabrics y MSP Groups ordenan administradores y roles para muchos clientes.",
+    "caption": "Las consolas salen hacia Site Manager y son de la empresa; los técnicos entran con su rol y la plantilla marca al que se apartó."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "4-l1.svg",
+    "after": "Si no aparece en Site Manager, desde una PC de esa red",
+    "alt": "Animación en cuatro tiempos del paso 2 con una PC del sitio en PowerShell, el firewall de salida, un servidor DNS y unifi.ui.com. 1: Resolve-DnsName unifi.ui.com manda la consulta por UDP 53 y vuelve la dirección del nombre. 2: Test-NetConnection unifi.ui.com -Port 443 manda un SYN al puerto 443 y vuelve SYN-ACK: TcpTestSucceeded True, la salida está abierta. 3: si el firewall bloquea la salida 443, el SYN no le llega a unifi.ui.com, no vuelve nada y el resultado es TcpTestSucceeded False; sin esa salida el sitio no aparece en Site Manager. 4: en las reglas de salida del firewall tienen que estar TCP 443 (HTTPS), TCP 8883 (MQTT sobre TLS), UDP 53 (DNS) y UDP 123 (NTP); el orden de revisión es Remote Management, 443 y 8883, DNS y NTP, y la cuenta con la que se entró.",
+    "caption": "Lo que pasa en la red en este paso: la consulta DNS y el SYN al 443 muestran si la salida está abierta o bloqueada."
+   }
+  ]
+ },
+ "5": {
+  "anims": [
+   {
+    "file": "5-r1.svg",
+    "alt": "Animación en cuatro tiempos con un NVR en la red Staff (VLAN 10, 10.10.10.20), un celular en Invitados (VLAN 20, 192.168.20.31) y una cámara en CCTV (VLAN 30, 192.168.30.11), un switch y el gateway UniFi unidos por un uplink troncal. 1: por el uplink viajan las tres redes; cada trama lleva la etiqueta 802.1Q de 4 bytes, con 0x8100 y un VLAN ID de 12 bits, por ejemplo VID 20. 2: el gateway lee la etiqueta; cada VLAN es una subred con su puerta y su DHCP: 10.10.10.1/24, 192.168.20.1/24 y 192.168.30.1/24, y el celular recibe 192.168.20.31. 3: antes, con el firewall clásico, el tráfico entre VLANs se permitía por defecto y el celular del invitado llegaba a la cámara. 4: con el firewall por zonas, al que Network 11 migra todos los sitios, Staff y CCTV están en Internal e Invitados en Hotspot; Hotspot hacia Internal es Allow Return, el invitado no puede iniciar y la conexión se bloquea en el gateway.",
+    "caption": "Tres redes viajan etiquetadas por el mismo cable; quién habla con quién lo decide la zona en el gateway."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "5-l1.svg",
+    "after": "Para CCTV en zona propia, creá una política",
+    "alt": "Animación en cuatro tiempos del paso 4 con el NVR (10.10.10.20) y una PC de Staff (10.10.10.30) en la zona Internal, el gateway con el Policy Engine y una cámara (192.168.30.11) en la zona propia CCTV. 1: las políticas hacia la zona CCTV: Allow con origen 10.10.10.20 hacia las cámaras, y Block para el resto, hacia CCTV y desde CCTV. 2: el NVR abre la conexión hacia la cámara, coincide con la primera regla, pasa y el video llega al NVR. 3: la PC de Staff intenta lo mismo, no es el NVR y cae en el bloqueo: la política mira el origen, no toda la red Staff. 4: la cámara intenta iniciar hacia Staff y también se bloquea: la zona propia no llega a otras zonas sin una política.",
+    "caption": "Lo que pasa en la red en este paso: el NVR pasa por la regla que lo permite; la PC de Staff y la cámara caen en el bloqueo."
+   }
+  ]
+ },
+ "6": {
+  "anims": [
+   {
+    "file": "6-r1.svg",
+    "alt": "Animación en cuatro tiempos con el gateway UniFi, un switch de terceros en el medio y un AP con la gestión sin etiqueta y los SSID en las VLAN 20 y 30. 1: el AP manda la gestión sin etiqueta y las tramas de cada SSID con su etiqueta, VID 20 y VID 30, y todo llega al gateway. 2: si el puerto del switch del medio espera la gestión etiquetada, lo que llega sin etiqueta va a otra VLAN: la gestión no llega, no hay inform y el AP queda offline; es el caso de un lector de LazyAdmin, que no logró que su AP anduviera hasta dejar la gestión sin etiqueta. 3: corregido, el puerto lleva la gestión sin etiqueta y las VLAN 20 y 30 etiquetadas, igual que espera el AP: todo llega y el AP queda Connected. 4: con un switch no administrable en el medio, según UniHosted, las etiquetas se descartan o se pierden y los SSID 20 y 30 no llegan.",
+    "caption": "Con un switch de terceros en el medio, la gestión del AP va sin etiqueta y los SSID etiquetados, de punta a punta."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "6-l1.svg",
+    "after": "Hacé Power Cycle del puerto (PoE)",
+    "alt": "Animación en cuatro tiempos del paso 3 con la cámara, el puerto 5 del switch (Native VLAN CCTV 30, Tagged VLAN Management Block All) y el gateway UniFi con el DHCP de la VLAN 30 (192.168.30.1/24). 1: Power Cycle corta el PoE del puerto y lo devuelve; la cámara se reinicia. 2: la cámara pide IP con un DHCP Discover sin etiqueta; el puerto lo pone en la VLAN 30, su nativa, y por el uplink viaja con la etiqueta 30. 3: el DHCP de la VLAN 30 contesta con el Offer etiquetado 30 y el switch saca la etiqueta antes de entregarlo; lo mismo pasa con Request y Ack. 4: la cámara queda en 192.168.30.11 sin saber nada de VLAN; se verifica en el controlador que tome una IP de 192.168.30.0/24, y con Block All una trama que llegue con etiqueta de otra VLAN se descarta.",
+    "caption": "Lo que pasa en la red en este paso: la cámara pide IP sin etiqueta, el puerto la pone en la VLAN 30 y el DHCP de esa VLAN contesta."
+   }
+  ]
+ },
+ "7": {
+  "anims": [
+   {
+    "file": "7-r1.svg",
+    "alt": "Animación en cuatro tiempos sobre la banda de 2.4 GHz con los canales 1 a 11 en un eje de frecuencia (el canal 1 en 2412 MHz y 5 MHz más por canal). 1: los canales están a 5 MHz uno del otro, pero cada transmisión ocupa unos 20 MHz, así que canales cercanos se pisan. 2: el AP 1 en el canal 1, el AP 2 en el 6 y el AP 3 en el 11 no se superponen: cada uno tiene su aire y los tres transmiten a la vez. 3: un cuarto AP en el canal 6 es co-canal con el AP 2: comparten el mismo aire y se turnan, uno habla y el otro espera. 4: un AP del vecino en el canal 3 se superpone en parte con el 1 y con el 6 y ensucia a los dos. Por eso en 2.4 GHz se usan 1, 6 y 11 en 20 MHz, y se mira el espectro antes de elegir.",
+    "caption": "En 2.4 GHz solo 1, 6 y 11 no se pisan: el mismo canal se comparte por turnos y uno intermedio ensucia a dos."
+   }
+  ],
+  "steps": [
+   {
+    "step": 1,
+    "file": "7-l1.svg",
+    "after": "UniFi Devices > elegí un AP > AirView > Environment",
+    "alt": "Animación en cuatro tiempos del paso 1 con un AP cuya radio de 5 GHz está en el canal 44 a 40 MHz, tres celulares conectados y un gráfico ilustrativo de uso de aire en los canales 36 a 64. 1: antes del escaneo, la radio atiende a sus clientes en su canal y no mide nada. 2: con el Airtime Scan Full la radio deja a sus clientes, que quedan desconectados, y salta de canal en canal escuchando. 3: en cada canal mide cuánto aire ocupan los vecinos; en el ejemplo, 36 a 48 sin DFS saturados y 52 a 64, que son DFS, más limpios, como en el caso de std.rocks. 4: termina el escaneo, la radio vuelve y los clientes reconectan; con ese mapa se fija el ancho y se eligen canales. Si el AP tiene análisis en tiempo real, AirView > Environment lo muestra sin cortar; el escaneo Full se hace fuera de horario.",
+    "caption": "Lo que pasa en la red en este paso: con el escaneo Full la radio deja a sus clientes y recorre los canales midiendo el aire."
+   },
+   {
+    "step": 5,
+    "file": "7-l2.svg",
+    "after": "Si los canales 36 a 48 están saturados y querés probar DFS",
+    "alt": "Animación en cuatro tiempos del paso 5 con un AP y tres celulares, un radar y la franja de canales de 5 GHz según std.rocks: 36 a 48 sin DFS, 52 a 64 y 100 a 140 DFS. 1: con Extended 5 GHz Spectrum (DFS) activado, el AP usa el canal 64, limpio, y los celulares están conectados. 2: aparece un radar meteorológico o militar en el canal 64 y el AP lo detecta. 3: el AP tiene que dejar el canal en el acto y los clientes se cortan. 4: el AP vuelve en otro canal, los clientes reconectan y AirView > Radios > Time Machine anota el cambio de canal por radar. Si esos eventos se repiten, conviene volver a los canales bajos.",
+    "caption": "Lo que pasa en la red en este paso: en un canal DFS, si aparece un radar el AP deja el canal en el acto y los clientes se cortan."
+   }
+  ]
+ },
+ "8": {
+  "anims": [
+   {
+    "file": "8-r1.svg",
+    "alt": "Animación en cuatro tiempos sobre la planta de un local con el AP 1 y el AP 2, los puntos A, B y C de la caminata y un rincón D; a la derecha, lecturas de ejemplo en WiFiman. 1: con potencia alta las dos celdas son enormes y se pisan; en el punto C el celular sigue en el AP 1 con -72 dBm, peor que el mínimo de -70. 2: con 2.4 GHz en Low y 5 GHz en Medium las celdas son más chicas y se solapan en B, la zona de traspaso; en C el celular pasa al AP 2 con -60 dBm. 3: queda el rincón D por debajo de -70 dBm, con -76. 4: subirle la potencia a todos volvería al primer caso; un AP 3 con potencia baja cubre D con -62 dBm. La lección trata -70 dBm como mínimo y busca -65 o mejor.",
+    "caption": "Con menos potencia las celdas se tocan en el borde y cada celular queda en el AP cercano; el rincón débil pide un AP más."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "8-l1.svg",
+    "after": "Repetí la caminata.",
+    "alt": "Animación en cuatro tiempos del paso 4 con el AP 1 y el AP 2 en los extremos de un pasillo, los puntos A, B y C, una tabla antes y después con valores de ejemplo y la escala de señal. 1: la línea de base del paso 1: en A AP 1 con -55 dBm, en B AP 1 con -62 y en C todavía AP 1 con -72, peor que el mínimo. 2: con la potencia nueva y un par de minutos de espera se repite la caminata; en A sigue en el AP 1 con -58. 3: en B el celular pasa del AP 1 al AP 2, con -66: es la zona de traspaso. 4: en C ya está en el AP 2 con -60 dBm, dentro de lo recomendado de -65 o mejor. Escala: de -50 a -65 recomendado, de -65 a -70 hasta el mínimo, peor que -70 candidato a otro AP.",
+    "caption": "Lo que pasa en la red en este paso: en los mismos puntos, el celular cambia de AP en el medio y en C queda en el AP 2 con -65 dBm o mejor."
+   }
+  ]
+ },
+ "9": {
+  "anims": [
+   {
+    "file": "9-r1.svg",
+    "alt": "Animación en cuatro tiempos con un AP, el SSID Prueba-FT en la red Staff (Fast Roaming On, BSS Transition On, WPA2/WPA3), un celular moderno y un lector de códigos con driver viejo. 1: el SSID Prueba-FT anuncia Fast Roaming, 802.11r, junto con su seguridad, y el anuncio les llega a los dos equipos. 2: el celular entiende el anuncio y se conecta; en cada roam usa FT y el cambio se completa en pocas tramas. 3: el lector viejo no sabe leer lo que anuncia un SSID con FT y no se conecta; en el caso de Purple, lectores con firmware viejo dejaron de conectar en 9 tiendas. 4: se crea un SSID de legado en su propia VLAN, con Fast Roaming Off y WPA2 sin PMF obligatorio; el lector entra y no tiene acceso a los sistemas del staff. No se apaga FT para todos.",
+    "caption": "Un equipo viejo que no entiende Fast Roaming no se conecta: va a un SSID de legado en su VLAN, sin apagar FT para todos."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "9-l1.svg",
+    "after": "Con un celular en llamada de voz o video",
+    "alt": "Animación en cuatro tiempos del paso 3 con un celular en llamada, el AP 1 del que se aleja y el AP 2 del mismo SSID. 1: la voz va por el AP 1, la señal baja y el celular decide pasar al AP 2. 2: sin FT, el celular y el AP 2 intercambian Authentication con Open System, Reassociation y el 4-way handshake de cuatro tramas EAPOL: ocho tramas o más, y en redes 802.1X antes hay un intercambio EAP completo con el RADIUS. 3: con FT, Authentication usa el algoritmo 2 y sigue Reassociation con los datos de FT: cuatro tramas, porque las claves para el AP 2 se derivaron por adelantado; en una captura FT se reconoce por ese algoritmo de autenticación 2. 4: con menos tramas en el medio la voz sigue por el AP 2 y el historial del cliente muestra AP 1 → AP 2 como roam; si muestra desconexión y reconexión, no fue un roam.",
+    "caption": "Lo que pasa en la red en este paso: sin FT el roam lleva ocho tramas o más; con FT, cuatro, y la voz sigue."
+   }
+  ]
+ },
+ "10": {
+  "anims": [
+   {
+    "file": "10-r1.svg",
+    "alt": "Animación en cuatro tiempos con un celular en el SSID Invitados, el gateway UniFi con la red Invitados en la zona Hotspot, internet (203.0.113.80) y una impresora de Staff en 10.10.10.50, zona Internal; abajo, el ajuste Show Landing Page del Hotspot Portal y la pantalla del celular. 1: el WiFi es tipo Standard, solo contraseña; el celular entra y toma 192.168.20.31. 2: abre el navegador y, como la zona Hotspot trae la landing page activada, el gateway lo redirige al portal de invitados, que el cliente no pidió. 3: con Show Landing Page desmarcada, la misma página sale directo a internet y vuelve. 4: sin portal la zona sigue aislando: el celular intenta abrir 10.10.10.50 puerto 80 y el gateway lo bloquea, porque Hotspot hacia Internal es Allow Return y el invitado no puede iniciar; en el celular se vence el tiempo. Se prueba siempre desde un celular.",
+    "caption": "Un WiFi solo con contraseña en zona Hotspot muestra un portal hasta desmarcar Show Landing Page; el aislamiento sigue igual."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "10-l1.svg",
+    "after": "Desde un celular: conectate, ingresá el voucher, navegá.",
+    "alt": "Animación en cuatro tiempos del paso 5 con el celular ya autorizado con el voucher, el gateway con la red en zona Hotspot, un servidor de internet (203.0.113.80) y la impresora de Staff en 10.10.10.50. 1: el celular abre una página: manda SYN al puerto TCP 443, vuelve SYN-ACK y navega. 2: abre http://10.10.10.50; el SYN hacia el puerto 80 llega al gateway y se descarta, porque 10.0.0.0/8 está en las Post-Authorization Restrictions y Hotspot hacia Internal es Allow Return. 3: el celular reintenta el SYN dos veces y nadie contesta, ni siquiera un rechazo; a la impresora nunca le llega. 4: en el navegador se agota el tiempo: así se ve un invitado aislado. Si la página de la impresora abre, hay que revisar la zona Hotspot y las restricciones del paso 4.",
+    "caption": "Lo que pasa en la red en este paso: hacia internet vuelve el SYN-ACK; hacia la impresora el SYN se queda en el gateway y se vence el tiempo."
+   }
+  ]
+ },
+ "11": {
+  "anims": [
+   {
+    "file": "11-r1.svg",
+    "alt": "Animación en cuatro tiempos con la consola del sitio piloto en la versión X de Network, una copia en la notebook o un NAS y otra fuera del sitio. 1: antes de actualizar se baja el backup .unf de la versión X a la notebook o al NAS; lleva configuración, dispositivos y clientes, redes, WiFi, reglas y nombres, pero no el video de Protect ni los logs locales. 2: una segunda copia va fuera del sitio; el autobackup queda dentro del equipo y, si la consola muere, se va con ella. 3: se actualiza el piloto a la versión Y y algo falla; por eso antes se leen las notas: Network 11.0 pide UniFi OS 6.0, borra el historial de estadísticas, quita USG y pasa todo a zonas. 4: se vuelve a X con el revert de Network 10.5 y posteriores, o restaurando el backup de antes, que es de X: un backup no se carga en un controlador más viejo que el que lo generó, así que uno hecho después de actualizar ya no sirve para volver.",
+    "caption": "El backup se baja antes de actualizar: es de la versión vieja y es el que sirve para volver."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "11-l1.svg",
+    "after": "porque cambió la IP del controlador, apuntalos al nuevo",
+    "alt": "Animación en cuatro tiempos del paso 5 con la notebook, un AP adoptado, el controlador viejo apagado en 10.10.10.5 y el controlador nuevo en 10.10.10.6, direcciones de ejemplo. 1: restaurado el backup en el controlador nuevo, el AP sigue mandando inform a 10.10.10.5:8080 y no le contesta nadie. 2: en el controlador nuevo el AP figura Disconnected: el backup trajo dispositivos y configuración, pero cada equipo sigue con la URL de inform que tenía guardada. 3: desde la notebook, por SSH con el usuario y la clave del sitio, se ejecuta set-inform http://10.10.10.6:8080/inform. 4: el inform llega al controlador nuevo, vuelve la configuración del sitio y el AP queda Connected. Con option 43 o DNS el cambio se hace una vez en el sitio, no equipo por equipo.",
+    "caption": "Lo que pasa en la red en este paso: los equipos mandan el inform a la IP vieja hasta que set-inform los apunta al controlador nuevo."
+   }
+  ]
+ },
+ "12": {
+  "anims": [
+   {
+    "file": "12-r1.svg",
+    "alt": "Animación en cuatro tiempos con el AP 1 y el AP 2 en los extremos de un local, un celular y abajo el historial de conexión y roaming del cliente. 1: el celular camina, la señal del AP 1 baja y en el borde de la celda pasa al AP 2: el historial muestra un roam, lo esperado. 2: con celdas que no llegan a tocarse, el celular pierde el AP 1 antes de encontrar el AP 2: desconexión y reconexión, un hueco de cobertura o un equipo que no tolera una función. 3: el celular quieto en el medio va y viene entre el AP 1 y el AP 2: ping-pong, los dos le llegan con potencia pareja de más. 4: un solo cambio, la potencia del AP 2 un nivel más baja, y la misma prueba: queda conectado al AP 1; si empeora, se vuelve lo último que se tocó.",
+    "caption": "Roam en el borde, desconexión y reconexión o ping-pong: cada patrón del historial dice qué cambiar primero."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "12-l1.svg",
+    "after": "Port Manager > Time Machine del puerto del AP",
+    "alt": "Animación en cuatro tiempos del paso 4 con el switch, su puerto 3 que va al AP, tres celulares en ese AP y dos líneas de tiempo de 9:00 a 11:00: el Time Machine del puerto 3 y el historial de los clientes. Horas de ejemplo. 1: el enlace del puerto 3 está arriba y los clientes navegan. 2: a las 10:02 el enlace se cae y vuelve, link down y link up, y el AP queda unos segundos sin salida; el Time Machine del puerto lo marca. 3: los tres clientes del AP se desconectan a la misma hora; en su historial aparecen tres desconexiones a las 10:02. 4: la misma hora en las dos líneas, y todos juntos: fue el uplink, no el WiFi. Se revisan cable y puerto antes de tocar canales o potencia.",
+    "caption": "Lo que pasa en la red en este paso: si el uplink se cae, todos los clientes del AP se desconectan a la misma hora que marca el puerto."
+   }
+  ]
+ }
+}

@@ -1,7 +1,7 @@
 """Lección 27 · Rutas estáticas."""
 from _mt import *  # noqa
 
-K = "MikroTik · Lección 27"
+K = "MikroTik"
 
 # ---------------------------------------------------------------- principal
 c = Canvas(K, "¿Por dónde sale el paquete? Decide la tabla")

@@ -2,7 +2,7 @@ import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/akuvox/s
 from _cat import *
 
 # ---------------------------------------------------------------- 26.svg: los cuatro R20
-c = Canvas("Akuvox · Lección 26", "Cuatro R20: cambia cómo se entra a la puerta")
+c = Canvas("Akuvox", "Cuatro R20: cambia cómo se entra a la puerta")
 vs = [("R20A", "boton", [("un botón", "gray"), ("tarjetas 13,56 y 125", "cyan"), ("QR desde 320.30.12.19", "cyan")], ("sin PIN", "alert")),
       ("R20K", "teclado", [("teclado", "gray"), ("PIN", "cyan"), ("tarjetas 13,56 y 125", "cyan")], None),
       ("R20K-L", "teclado", [("teclado + LTE", "gray"), ("PIN", "cyan"), ("solo 13,56 MHz", "cyan")], None),
@@ -21,7 +21,7 @@ c.add(text(600, 605, "Todos: Linux · aluminio · sin pantalla · IP65 · PoE 80
 save(c, "26.svg")
 
 # ---------------------------------------------------------------- 26-paso2: la etiqueta engaña
-c = Canvas("Akuvox · Lección 26 · Paso 2", "La etiqueta engaña: leé el hardware en la web")
+c = Canvas("Akuvox · Paso 2", "La etiqueta engaña: leé el hardware en la web")
 c.add(f'<rect x="60" y="150" width="260" height="120" rx="10" fill="{WHITE}" stroke="{INK3}" stroke-width="2" stroke-dasharray="4 4"/>')
 c.add(text(80, 186, "ETIQUETA", 14, 600, INK3, FM, ls=1.5))
 c.add(text(80, 228, "R20A V3.0", 26, 700, INK, FM))
@@ -39,7 +39,7 @@ c.add(Note(48, 540, 1104, "Cada versión de hardware lleva su propio archivo de 
 save(c, "26-paso2.svg")
 
 # ---------------------------------------------------------------- 26-paso3: decidir la cerradura
-c = Canvas("Akuvox · Lección 26 · Paso 3", "¿Puede el R20 alimentar la cerradura?")
+c = Canvas("Akuvox · Paso 3", "¿Puede el R20 alimentar la cerradura?")
 rows = [("hardware 3 (o R20B V2.0)", "+ fuente 12 V 1,2 A o más", "12 V 500 mA por el relé", "ok"),
         ("hardware 3", "+ PoE + firmware 320.30.11.42 o más", "12 V 500 mA, afectada por el volumen", "warn"),
         ("hardware viejo", "(sin salida de 12 V)", "fuente propia para la cerradura", "alert")]

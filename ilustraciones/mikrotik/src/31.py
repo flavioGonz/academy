@@ -10,7 +10,7 @@ sys.path.insert(0, "/home/claude/ies-training/ilustraciones/mikrotik/src")
 from _mt import *  # noqa
 from _mt import text, wrap
 
-K = "MikroTik · Lección 31"
+K = "MikroTik"
 
 # ------------------------------------------------------------ principal
 c = Canvas(K, "Pregunta a 8.8.8.8 y le contesta el router")

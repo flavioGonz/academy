@@ -2,7 +2,7 @@
 """Lección 7 · teoría: el botón de reset según cuánto tiempo lo mantenés (RouterBOOT de respaldo, reset, CAP, Netinstall)."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=24, kicker="MIKROTIK · LECCIÓN 7 · CÓMO FUNCIONA", title="El botón de reset: depende de cuándo lo soltás")
+a = Anim(T=24, kicker="MIKROTIK · CÓMO FUNCIONA", title="El botón de reset: depende de cuándo lo soltás")
 a.steps([
     "Botón apretado al dar energía: arranca con el RouterBOOT de respaldo.",
     "Unos 5 s, el LED titila: si soltás, se resetea la configuración.",

@@ -1,10 +1,10 @@
 """Lección 43 · Theme del monitor: ilustración principal y pasos 2 y 6.
-Todo sale de card.md de la lección 43 y de research/notes/f.md (guías de pantalla de C319, C313, S567, IT88, S562 y X933;
+Todo sale de card.md de la lección 40 y de research/notes/f.md (guías de pantalla de C319, C313, S567, IT88, S562 y X933;
 fondo por AutoP; especificaciones de protector)."""
 from _theme import *  # noqa
 from _akv import code, panel, pill  # noqa
 
-K = "Akuvox · Lección 43"
+K = "Akuvox"
 
 # ---------------------------------------------------------------- principal
 c = Canvas(K, "Theme y áreas: dos capas de la misma pantalla")

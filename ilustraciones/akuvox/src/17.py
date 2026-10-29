@@ -2,7 +2,7 @@ import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/akuvox/s
 from _cat import *
 
 # ---------------------------------------------------------------- 17.svg: evento -> GET con variables reemplazadas
-c = Canvas("Akuvox · Lección 17", "Cada evento del portero manda un GET a tu servidor")
+c = Canvas("Akuvox", "Cada evento del portero manda un GET a tu servidor")
 c.add(portero(60, 170, "pantalla", 0.85, "Portero", "192.168.88.21"))
 c.add(panel(930, 172, 222, 316, None, "info"))
 c.add(icon(1020, 220, "server", BLUE, 1.5))
@@ -29,7 +29,7 @@ c.add(Note(612, 540, 540, "Lo que abre por HTTP también avisa por HTTP, a un se
 save(c, "17.svg")
 
 # ---------------------------------------------------------------- 17-paso2: campos de Action URL
-c = Canvas("Akuvox · Lección 17 · Paso 2", "Cargá una URL por evento en Action URL")
+c = Canvas("Akuvox · Paso 2", "Cargá una URL por evento en Action URL")
 c.add(Window(48, 128, 1104, 296, "Portero · web", path="Device Management > Setting > Action URL",
              rows=[("Action URL", "Enabled ✓"),
                    ("Relay A Triggered", "http://<IP_SERVIDOR>:8000/relaytrigger=$relay1status"),
@@ -44,7 +44,7 @@ c.add(Note(640, 590, 512, "El menú es el del R20A; los eventos cambian por mode
 save(c, "17-paso2.svg")
 
 # ---------------------------------------------------------------- 17-paso3: lo que se ve en la terminal
-c = Canvas("Akuvox · Lección 17 · Paso 3", "Pasá una tarjeta y mirá llegar las líneas")
+c = Canvas("Akuvox · Paso 3", "Pasá una tarjeta y mirá llegar las líneas")
 dim = "#7FA6C9"
 lines = [("$ python3 -m http.server 8000 --bind 192.168.88.10", "#D9E9F8"),
          ("Serving HTTP on 192.168.88.10 port 8000 ...", dim),

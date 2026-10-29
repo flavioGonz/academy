@@ -2,7 +2,7 @@
 """Lección 9 · teoría: cómo se actualiza el DDNS de IP Cloud y de dónde sale public-address."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=24, kicker="MIKROTIK · LECCIÓN 9 · CÓMO FUNCIONA", title="IP Cloud: el servidor anota la IP desde la que le llegás")
+a = Anim(T=24, kicker="MIKROTIK · CÓMO FUNCIONA", title="IP Cloud: el servidor anota la IP desde la que le llegás")
 a.steps([
     "Con ddns-enabled=yes, el router avisa a cloud2.mikrotik.com por UDP 15252.",
     "El servidor ve desde qué IP llega y actualiza el nombre, con TTL de 60 s.",

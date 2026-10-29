@@ -16,8 +16,8 @@
       {
         "file": "11-paso5.svg",
         "step": 5,
-        "alt": "Una fila de pings desde la notebook: cinco bien por el ISP1, seis perdidos hasta conmutar y cinco bien por el ISP2. Debajo, la tabla de rutas por defecto: las de 1.1.1.1 y 9.9.9.9 activas antes y inactivas con el corte; las de 8.8.8.8 y 208.67.222.222 en espera antes y activas con el corte. Una nota aclara que el corte simulado descarta los pings del router a los testigos y que el módem sigue vivo.",
-        "caption": "Con el corte simulado caen las recursivas del ISP1 y entran las del ISP2; contá los pings perdidos.",
+        "alt": "Una fila de pings desde la notebook: siete bien por el ISP1 aunque el router ya no ve los testigos, uno en el momento de conmutar (cero o uno perdido) y ocho bien por el ISP2. Debajo, la tabla de rutas por defecto: las de 1.1.1.1 y 9.9.9.9 activas antes y inactivas con el corte; las de 8.8.8.8 y 208.67.222.222 en espera antes y activas con el corte. Una nota aclara que el corte simulado descarta los pings del router a los testigos y que el módem sigue vivo.",
+        "caption": "Con el corte simulado caen las recursivas del ISP1 y entran las del ISP2; la notebook casi no pierde pings.",
         "after": "Simulá internet caída con el módem vivo"
       },
       {

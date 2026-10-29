@@ -3,7 +3,7 @@
 import math
 from _anim_akuvox_15_28 import *
 
-a = new(20, "AKUVOX · LECCIÓN 21", "Lazo de inducción: la voz directo al audífono")
+a = new(20, "AKUVOX", "Lazo de inducción: la voz directo al audífono")
 a.steps([
     "El portero recibe la voz de la llamada y la saca por el parlante.",
     "En la vereda, esa voz llega al audífono mezclada con el ruido de la calle.",

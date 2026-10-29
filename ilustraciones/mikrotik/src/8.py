@@ -1,7 +1,7 @@
 """Lección 8 · Túnel de gestión: principal + pasos 2 y 4."""
 from _mt import *
 
-K = "MikroTik · Lección 8"
+K = "MikroTik"
 
 # ------------------------------------------------------------------ 8.svg principal
 c = Canvas(K, "A un cliente se entra por túnel, no por un puerto")

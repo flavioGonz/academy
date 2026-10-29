@@ -1,7 +1,7 @@
 """Lección 12 · Torch y sniffer."""
 from _comun_12_22 import *
 
-K = "MikroTik · Lección 12"
+K = "MikroTik"
 
 # ---------------------------------------------------------------- principal: dónde mirar
 c = Canvas(K, "Torch y sniffer: mirá en la LAN, no en la WAN")

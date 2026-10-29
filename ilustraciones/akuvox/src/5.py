@@ -1,7 +1,7 @@
 from _akv import *
 
 # ---------- 5.svg: el portero es una extensión más
-c = Canvas("Akuvox · Lección 5", "El portero, una extensión más de la central")
+c = Canvas("Akuvox", "El portero, una extensión más de la central")
 pbx = c.add(Generic(400, 140, "Central SIP", "192.168.88.10 · puerto 5060", icon="server", w=400))
 p = c.add(Generic(60, 340, "Portero", "extensión 201", icon="bell", w=250))
 m = c.add(Generic(475, 340, "Monitor", "extensión 202", icon="laptop", w=250))
@@ -18,7 +18,7 @@ c.add(text(640, 568, "si la 1 no registra, pasa a la 2", 15, 500, INK3, FM))
 save(c, "5.svg")
 
 # ---------- 5-paso3.svg: los campos de Account > Basic
-c = Canvas("Akuvox · Lección 5 · Paso 3", "Copiá la extensión de la central al portero")
+c = Canvas("Akuvox · Paso 3", "Copiá la extensión de la central al portero")
 c.add(panel(48, 150, 360, 250, "En la central", "soft"))
 c.add(text(68, 220, "Extensión", 15, 500, INK3))
 c.add(text(68, 250, "201", 26, 600, INK, FM))
@@ -36,7 +36,7 @@ c.add(Note(500, 520, 650, "Server Address es la IP de la central, no la del rout
 save(c, "5-paso3.svg")
 
 # ---------- 5-paso7.svg: síntomas y causas
-c = Canvas("Akuvox · Lección 5 · Paso 7", "Si no registra, el síntoma te dice dónde mirar")
+c = Canvas("Akuvox · Paso 7", "Si no registra, el síntoma te dice dónde mirar")
 rows = [("“Failed to authenticate”", "en el log de la central", "contraseña mal", "revisá la Password"),
         ("El registro cambia de puerto", "a cada refresco", "SIP ALG del router", "desactivá SIP ALG"),
         ("Registra pero no llama", "marcaste *202", "prefijo de más", "marcá 202, sin asterisco")]

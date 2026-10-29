@@ -2,7 +2,7 @@ import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/akuvox/s
 from _cat import *
 
 # ---------------------------------------------------------------- 20.svg: S539 y S538 comparados
-c = Canvas("Akuvox · Lección 20", "S539 y S538: mismas credenciales, otra fuente")
+c = Canvas("Akuvox", "S539 y S538: mismas credenciales, otra fuente")
 c.add(portero(60, 150, "pantalla_grande", 0.9, "S539", "10\" · Android"))
 c.add(portero(240, 150, "pantalla", 0.9, "S538", "Tri-Vision · Android"))
 c.add(pill(212, 470, "acceso principal de edificio", BLUE, SOFT, 15, False))
@@ -20,15 +20,15 @@ c.add(Note(452, 126 + H + 20, W, "S539: la salida de 12 V solo con fuente de 24 
 save(c, "20.svg")
 
 # ---------------------------------------------------------------- 20-paso1: sacar la IP
-c = Canvas("Akuvox · Lección 20 · Paso 1", "Sacá la IP desde la pantalla del portero")
+c = Canvas("Akuvox · Paso 1", "Sacá la IP desde la pantalla del portero")
 c.add(screen_flow(48, 160, [("9999 + Dial", "9999"), ("3888 + OK", "3888"), ("System Info", "System Info"), ("Network (S539)", "IP: 192.168.88.x")], w=240, h=150, gap=48))
 c.add(Note(48, 420, 540, "Después, en la web: Status > Basic > Product Information. El firmware empieza con 539. o 538.", title="Paso 2", kind="info", size=15))
-c.add(Note(612, 420, 540, "Tercer bloque del firmware 10 o más: rama de alta seguridad (afecta la URL de apertura, lección 13).", kind="info", size=15))
+c.add(Note(612, 420, 540, "Tercer bloque del firmware 10 o más: rama de alta seguridad (afecta la URL de apertura, lección 14).", kind="info", size=15))
 c.add(text(48, 580, "Mismo camino en S539, S538, S535, X915, X916 y R29.", 17, 600, INK2, FB))
 save(c, "20-paso1.svg")
 
 # ---------------------------------------------------------------- 20-paso3: PoE o fuente
-c = Canvas("Akuvox · Lección 20 · Paso 3", "¿El puerto del switch da 802.3at?")
+c = Canvas("Akuvox · Paso 3", "¿El puerto del switch da 802.3at?")
 c.add(Router(48, 140, "Switch PoE", "puerto 802.3at (PoE+)", ports=["1", "2", "3", "4"], hl={"1": CYAN, "2": CYAN}))
 c.add(portero(560, 150, "pantalla_grande", 0.72, "S539", None))
 c.add(portero(860, 150, "pantalla", 0.72, "S538", None))
@@ -47,7 +47,7 @@ c.add(Note(360, 140, 180, "Un puerto af no alcanza.", kind="warn", size=15) if F
 save(c, "20-paso3.svg")
 
 # ---------------------------------------------------------------- 20-paso4: 12 V para la cerradura
-c = Canvas("Akuvox · Lección 20 · Paso 4", "¿De dónde saca 12 V la cerradura?")
+c = Canvas("Akuvox · Paso 4", "¿De dónde saca 12 V la cerradura?")
 c.add(panel(48, 126, 540, 420, "S539 · 12 V por el relé", "warn"))
 c.add(portero(80, 186, "pantalla_grande", 0.7, None, None))
 c.add(PSU(80, 400, "Fuente", "24 V 2,5 A o más", w=230))

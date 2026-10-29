@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Antel te mandó la planilla de la troncal: IP de cliente con máscara /30, gateway, IP del servidor SIP, números y 8 canales. No hay usuario ni contraseña. ¿Qué troncal creás en la UCM?",
+  "options": [
+   "Register SIP Trunk con el número principal como usuario",
+   "Peer SIP Trunk con la IP del servidor de Antel en Host Name",
+   "Account SIP Trunk para que Antel se registre en la UCM",
+   "Analog Trunk sobre el FXO1"
+  ],
+  "answer": 1,
+  "why": "La troncal de Antel va por IP y sin registro: en la UCM es un Peer SIP Trunk. Register necesita credenciales, y Account es para que un equipo se registre en tu central."
+ },
+ {
+  "q": "En la captura de la interfaz de la troncal ves los OPTIONS que manda Antel y la UCM les contesta 401. Las entrantes no llegan. ¿Qué revisás primero?",
+  "options": [
+   "Los codecs del troncal: sacar G.729",
+   "El SIP ALG del router del cliente",
+   "Que la IP de origen de esos OPTIONS sea el Host Name del troncal; si Antel usa otras IP, pedirle la lista",
+   "Subir Heartbeat Frequency a 120 segundos"
+  ],
+  "answer": 2,
+  "why": "Si la UCM no reconoce la IP de origen como su troncal peer, no lo trata como Antel y lo rechaza (en el caso de FreePBX, con 401). Con la troncal conectada directo no hay router en el medio, y el heartbeat de la UCM es otro mensaje."
+ },
+ {
+  "q": "Las entrantes andan, pero las salientes de la interna 1003 vuelven rechazadas (403 en la captura) y las de la 1001 salen bien. ¿Qué es lo más probable?",
+  "options": [
+   "La 1003 sale con su número de interna como caller ID, que no es un número de la troncal",
+   "Se pasaron los 8 canales del plan",
+   "La 1003 tiene DTMF en SIP INFO",
+   "Falta la ruta estática hacia Antel"
+  ],
+  "answer": 0,
+  "why": "Antel rechaza las salientes con un caller ID que no es de la troncal. Con canales agotados la UCM corta antes con su propia respuesta, y sin ruta estática tampoco saldría la 1001."
+ }
+]

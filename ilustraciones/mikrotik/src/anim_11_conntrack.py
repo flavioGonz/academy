@@ -2,7 +2,7 @@
 """Lección 11 · teoría: al conmutar, conntrack conserva las conexiones con su traducción vieja."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=26, kicker="MIKROTIK · LECCIÓN 11 · CONNTRACK", title="Al conmutar, las conexiones viejas quedan colgadas")
+a = Anim(T=26, kicker="MIKROTIK · CONNTRACK", title="Al conmutar, las conexiones viejas quedan colgadas")
 a.steps([
     "Una llamada sale por el ISP1: conntrack la guarda traducida a 203.0.113.10.",
     "Cae internet del ISP1, no la interfaz: las rutas pasan al ISP2.",

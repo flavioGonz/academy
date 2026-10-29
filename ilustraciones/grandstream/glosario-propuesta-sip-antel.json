@@ -1,0 +1,154 @@
+{
+ "nota": "Propuesta para la lección 19 Troncal SIP de Antel del curso Grandstream. terms: entradas nuevas completas (term, short, long, cat, y year en las RFC); alias_agregar: alias para entradas existentes. Solo lo que glosario_check.py marcó como faltante o lo que la lección usa sin entrada. No se editó glosario.json; se probó sobre una copia combinada con glosario_check.py.",
+ "terms": [
+  {
+   "id": "rfc4028",
+   "term": "RFC 4028",
+   "aliases": ["RFC4028", "Session-Expires", "session timer", "Session Timer", "Min-SE"],
+   "cat": "RFC",
+   "short": "Session timers de SIP: cada cierto tiempo uno de los dos lados refresca la llamada con un re-INVITE o un UPDATE.",
+   "long": "Sirve para que una llamada colgada de un lado no quede abierta para siempre del otro. Session-Expires dice cuánto dura la sesión sin refresco y Min-SE el mínimo aceptado; se recomienda refrescar a mitad del intervalo. La UCM viene con 1800 segundos y Min SE de 90; para la troncal de Antel se informa 600.",
+   "year": 2005,
+   "case": true
+  },
+  {
+   "id": "rfc5626",
+   "term": "RFC 5626",
+   "aliases": ["RFC5626", "SIP Outbound"],
+   "cat": "RFC",
+   "short": "SIP Outbound: cómo un teléfono detrás de NAT mantiene su conexión con el servidor, con keepalives CRLF o STUN.",
+   "long": "Define flujos de registro que el servidor puede reusar para llegar al equipo y keepalives para que el NAT no olvide la asociación. Con una troncal conectada directo a la central, sin NAT en el medio, no hace falta.",
+   "year": 2009,
+   "case": true
+  },
+  {
+   "id": "options",
+   "term": "OPTIONS",
+   "aliases": ["SIP OPTIONS", "OPTIONS de Antel"],
+   "cat": "Telefonía IP",
+   "short": "Mensaje SIP que pregunta qué soporta el otro equipo sin armar una llamada; se usa como heartbeat.",
+   "long": "Si el otro lado contesta 200 OK, está vivo. La UCM lo manda con Enable Heartbeat Detection; Antel lo manda a la central de sus troncales SIP y espera el 200 OK, que la UCM contesta solo si el mensaje llega desde el Host Name de un troncal.",
+   "case": true
+  },
+  {
+   "id": "bye",
+   "term": "BYE",
+   "aliases": ["SIP BYE"],
+   "cat": "Telefonía IP",
+   "short": "Mensaje SIP que corta una llamada establecida; el otro lado contesta 200 OK.",
+   "long": "Lo manda el primero que cuelga. En una captura, una llamada que se corta sola a un tiempo fijo y sin BYE de nadie suele ser un ACK o un refresco de sesión que no llegó.",
+   "case": true
+  },
+  {
+   "id": "update-sip",
+   "term": "UPDATE",
+   "aliases": ["SIP UPDATE", "re-INVITE"],
+   "cat": "Telefonía IP",
+   "short": "Mensaje SIP que cambia o refresca una llamada en curso sin volver a empezarla.",
+   "long": "Junto con el re-INVITE, es el que se usa para el refresco de sesión de la RFC 4028 y para cambiar parámetros de la media.",
+   "case": true
+  },
+  {
+   "id": "request-uri",
+   "term": "Request-URI",
+   "aliases": ["Request-line", "Request URI"],
+   "cat": "Telefonía IP",
+   "short": "La dirección de la primera línea de un pedido SIP: a quién va el INVITE, con el número llamado.",
+   "long": "En una entrante, el proveedor pone ahí el número marcado (o lo repite en el To). La opción DID Mode de la UCM dice de cuál de los dos lo toma la ruta entrante. Es lo primero que se mira en una captura cuando una entrante no matchea.",
+   "case": true
+  },
+  {
+   "id": "peer-sip-trunk",
+   "term": "Peer SIP Trunk",
+   "aliases": ["troncal peer", "troncal por IP", "Peer Trunk"],
+   "cat": "Telefonía IP",
+   "short": "Troncal de la UCM que se conecta por IP con otro equipo, sin registro ni contraseña.",
+   "long": "Se usa para unir dos centrales y para proveedores que autentican por IP, como la Troncal SIP de Antel. En Host Name va la IP del otro lado; la UCM acepta como de ese troncal lo que llega desde esa IP.",
+   "case": true
+  },
+  {
+   "id": "troncal-sip-antel",
+   "term": "Troncal SIP de Antel",
+   "aliases": ["Troncal Sip Antel", "TSIP8", "TSIP30", "planes TSIP"],
+   "cat": "Telefonía IP",
+   "short": "El servicio de Antel para conectar una central IP de empresa a la red telefónica, con planes de 8 a 180 llamadas simultáneas.",
+   "long": "Se ofrece sobre FTTH y fibra dedicada, incluye números y caller ID y viaja por una red privada de Antel. Según integradores que lo instalaron, llega a un puerto RJ45 con IP fija, sin usuario ni contraseña, y Antel manda OPTIONS para saber si la central vive. Los reclamos se hacen al 0800 2599 con el número de servicio, una P y cinco cifras.",
+   "case": false
+  },
+  {
+   "id": "dod",
+   "term": "DOD",
+   "aliases": ["Direct Outward Dialing"],
+   "cat": "Telefonía IP",
+   "short": "Direct Outward Dialing: el número externo con el que sale una interna por un troncal.",
+   "long": "En la UCM se asigna por troncal a cada interna. Con Keep Trunk CID en Sí, el número del troncal gana sobre el DOD; para que cada interna salga con su número directo, Keep Trunk CID va en No.",
+   "case": true
+  },
+  {
+   "id": "ftth",
+   "term": "FTTH",
+   "aliases": ["fibra hasta el hogar", "Fiber To The Home"],
+   "cat": "Redes",
+   "short": "Fiber To The Home: fibra óptica hasta el local del cliente, terminada en un equipo del proveedor (ONT).",
+   "long": "Es el acceso por el que Antel entrega internet y también servicios como la Troncal SIP; la otra opción para empresas es la fibra dedicada.",
+   "case": true
+  },
+  {
+   "id": "e1",
+   "term": "E1",
+   "aliases": ["enlace E1", "PRI E1"],
+   "cat": "Telefonía IP",
+   "short": "Enlace digital de 2 Mbps con 30 canales de voz, la conexión clásica entre una central grande y el operador.",
+   "long": "Tiene una cantidad fija de canales y necesita una placa en la central. Las troncales SIP lo reemplazan: los canales se contratan por plan y llegan por IP.",
+   "case": true
+  },
+  {
+   "id": "t38",
+   "term": "T.38",
+   "aliases": ["T38", "T.38 UDPTL"],
+   "cat": "Telefonía IP",
+   "short": "Norma de la UIT para mandar fax por redes IP como datos, en lugar de como audio.",
+   "long": "El fax pasado como audio G.711 sufre con cualquier pérdida de paquetes; T.38 lo transporta aparte. En la UCM se activa por troncal con Enable T.38 UDPTL, y Antel lo informa entre los soportados por su troncal.",
+   "case": true
+  },
+  {
+   "id": "sip-403",
+   "term": "403 Forbidden",
+   "aliases": ["403"],
+   "cat": "Telefonía IP",
+   "short": "Respuesta SIP: el servidor entendió el pedido y se niega a cursarlo.",
+   "long": "En una troncal, en una saliente suele ser un caller ID que el proveedor no autoriza o un destino bloqueado. Se lee en la captura junto con el From del INVITE.",
+   "case": true
+  },
+  {
+   "id": "sip-404",
+   "term": "404 Not Found",
+   "aliases": ["404"],
+   "cat": "Telefonía IP",
+   "short": "Respuesta SIP: el usuario o el dominio del Request-URI no existe para el que contesta.",
+   "long": "En una saliente por troncal suele ser un número con un formato que el proveedor no reconoce; en una entrante, un número que no tiene ruta.",
+   "case": true
+  },
+  {
+   "id": "sip-484",
+   "term": "484 Address Incomplete",
+   "aliases": ["484"],
+   "cat": "Telefonía IP",
+   "short": "Respuesta SIP: el número del Request-URI está incompleto.",
+   "long": "Aparece cuando la ruta saliente corta dígitos de más con Strip o el patrón deja salir un número antes de terminar de marcarlo.",
+   "case": true
+  },
+  {
+   "id": "ruta-estatica",
+   "term": "ruta estática",
+   "aliases": ["Static Routes", "static route", "rutas estáticas"],
+   "cat": "Redes",
+   "short": "Ruta cargada a mano: tal red se alcanza por tal gateway y tal interfaz.",
+   "long": "En la UCM630x está en System Settings > Network Settings > Static Routes. Con la Troncal SIP de Antel en modo Dual, lleva las redes de Antel por el puerto de la troncal mientras la ruta por defecto sigue por la red del cliente.",
+   "case": false
+  }
+ ],
+ "alias_agregar": {
+  "troncal": ["troncales SIP"]
+ }
+}

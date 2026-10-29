@@ -1,7 +1,7 @@
 """Lección 14 · Cliente DHCP."""
 from _comun_12_22 import *
 
-K = "MikroTik · Lección 14"
+K = "MikroTik"
 
 # ---------------------------------------------------------------- principal
 c = Canvas(K, "Qué instala el cliente DHCP cuando queda bound")
@@ -56,7 +56,7 @@ c.add(Chip(812, 290, "address del cliente DHCP", "cyan", anchor="middle"))
 c.add(Table(48, 340, ["address del cliente DHCP", "qué significa"], [
     ["igual a public-address", "IP pública directa en ether1"],
     ["10.x · 172.16-31.x · 192.168.x", "doble NAT: módem en modo router"],
-    ["100.64.0.0/10", "CGNAT del proveedor (lección 9)"],
+    ["100.64.0.0/10", "CGNAT del proveedor (lección 27)"],
 ], [470, 634], hl_row=None, row_h=52, mono_cols=(0,)))
 c.add(Terminal(48, 560, 540, ["/ip/dhcp-client/print detail", "/ip/cloud/print"], title="COMPARÁ"))
 c.add(Note(612, 560, 540, "Con doble NAT o CGNAT, no prometas acceso remoto por la IP: hace falta un túnel (lecciones 19 y 20).", kind="warn", size=16))

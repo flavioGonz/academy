@@ -1,4 +1,4 @@
-"""Ayudantes propios de la lección 45 de Akuvox (configuración de botones y tipos de llamada).
+"""Ayudantes propios de la lección 39 de Akuvox (configuración de botones y tipos de llamada).
 No modifica ilus.py, anim.py ni los demás ayudantes: solo dibuja piezas esquemáticas y rotuladas.
 
 mon_mini()   monitor interior chico con estado en la pantalla (sonando, atendida, rechazó, sin respuesta, reposo)

@@ -61,6 +61,22 @@
   "https://www.patton.com/technotes/what-are-fxs-and-fxo/",
   "https://help.yeastar.com/en/p-series/administrator-guide/analog-fxo-trunk-settings.html",
   "https://techdocs.audiocodes.com/multi-service-business-routers/mediant-500-msbr/user-manual/version-720/Content/UM/Debugging%20a%20Caller%20ID%20Detection%20on%20FXO.htm",
-  "https://en.wikipedia.org/wiki/Telephone_numbers_in_Uruguay"
+  "https://en.wikipedia.org/wiki/Telephone_numbers_in_Uruguay",
+  "https://antel.com.uy/empresas/internet-y-fija/planes/troncal-sip",
+  "https://antel.com.uy/empresas/soluciones/cloud-pbx",
+  "https://www.simpletech.uy/en/troncal-sip-empresarial-antel-uruguay/",
+  "https://www.3cx.com/community/threads/troncal-sip-antel-and-3cx.50040/",
+  "https://community.freepbx.org/t/antel-sip-trunk-only-options/84614",
+  "https://www.itu.int/dms_pub/itu-t/oth/02/02/T02020000E00001PDFS.pdf",
+  "https://www.impo.com.uy/bases/resoluciones/765-2015",
+  "https://documentation.grandstream.com/knowledge-base/how-to-interconnect-multiple-ucm/",
+  "https://en.wikipedia.org/wiki/List_of_SIP_response_codes",
+  "https://datatracker.ietf.org/doc/html/rfc3261",
+  "https://datatracker.ietf.org/doc/html/rfc4733",
+  "https://datatracker.ietf.org/doc/html/rfc3581",
+  "https://datatracker.ietf.org/doc/html/rfc5626",
+  "https://datatracker.ietf.org/doc/html/rfc4028",
+  "https://datatracker.ietf.org/doc/html/rfc3264",
+  "https://manual.mikrotik.com/docs/7.25/firewall-and-quality-of-service/firewall/nat"
  ]
 }

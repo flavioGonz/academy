@@ -2,7 +2,7 @@
 """Lección 10 · teoría: el dst-nat decide con el primer paquete y la conexión sigue lo guardado en la tabla."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=26, kicker="MIKROTIK · LECCIÓN 10 · CÓMO FUNCIONA", title="El NAT decide con el primer paquete de cada conexión")
+a = Anim(T=26, kicker="MIKROTIK · CÓMO FUNCIONA", title="El NAT decide con el primer paquete de cada conexión")
 a.steps([
     "El primer paquete de la central pasa por las reglas: el dst-nat le cambia el destino.",
     "Esa decisión queda guardada en la tabla de conexiones.",

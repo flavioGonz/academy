@@ -2,7 +2,7 @@
 """Lección 1 · teoría: Neighbors escucha MNDP; clic en la IP necesita ruteo, clic en la MAC no; la MAC no cruza routers."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=20, kicker="MIKROTIK · LECCIÓN 1 · CÓMO FUNCIONA", title="Por la MAC entrás sin IP, pero solo en tu segmento")
+a = Anim(T=20, kicker="MIKROTIK · CÓMO FUNCIONA", title="Por la MAC entrás sin IP, pero solo en tu segmento")
 a.steps([
     "El router se anuncia por MNDP: MAC, identidad y versión.",
     "Clic en la IP: WinBox abre TCP 8291, y eso necesita ruteo.",

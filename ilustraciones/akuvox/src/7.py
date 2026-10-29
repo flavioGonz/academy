@@ -1,7 +1,7 @@
 from _akv import *
 
 # ---------- 7.svg: público vs por persona
-c = Canvas("Akuvox · Lección 7", "Un código para todos o una credencial por persona")
+c = Canvas("Akuvox", "Un código para todos o una credencial por persona")
 c.add(panel(48, 140, 470, 460, "PIN público", "alert"))
 c.add(text(72, 220, "33333333", 40, 600, ALERT, FM))
 c.add(text(72, 250, "de fábrica, igual para todos", 15, 500, INK3, FM))
@@ -18,7 +18,7 @@ c.add(Note(584, 470, 544, "Se da de baja una persona y el resto sigue igual. Cad
 save(c, "7.svg")
 
 # ---------- 7-paso5.svg: carga masiva
-c = Canvas("Akuvox · Lección 7 · Paso 5", "Carga masiva: exportá, editá el .csv y reimportá")
+c = Canvas("Akuvox · Paso 5", "Carga masiva: exportá, editá el .csv y reimportá")
 st = [("Export", "Directory > User", ".tgz"), ("Descomprimir", "7-Zip en Windows", ".csv adentro"), ("Editar", "una fila por usuario", ".csv"),
       ("Comprimir", "de nuevo en .tgz", ".tgz"), ("Import", "Select File > Import", "listo")]
 for i, (a, b, ch) in enumerate(st):
@@ -36,7 +36,7 @@ c.add(Note(720, 330, 432, "Respetá las columnas que exportó el equipo. Para 20
 save(c, "7-paso5.svg")
 
 # ---------- 7-paso6.svg: horario
-c = Canvas("Akuvox · Lección 7 · Paso 6", "El PIN vale solo dentro de su horario")
+c = Canvas("Akuvox · Paso 6", "El PIN vale solo dentro de su horario")
 x0, x1, y = 120, 1080, 300
 c.add(f'<rect x="{x0}" y="{y}" width="{x1 - x0}" height="40" rx="10" fill="{SOFT}" stroke="{LINE2}"/>')
 hx = lambda h: x0 + (x1 - x0) * h / 24

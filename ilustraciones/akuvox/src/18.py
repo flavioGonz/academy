@@ -2,7 +2,7 @@ import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/akuvox/s
 from _cat import *
 
 # ---------------------------------------------------------------- 18.svg: cuatro clientes, un GET
-c = Canvas("Akuvox · Lección 18", "Un mismo GET, cuatro sistemas, un usuario cada uno")
+c = Canvas("Akuvox", "Un mismo GET, cuatro sistemas, un usuario cada uno")
 cl = [("PC con curl", "curl -u", "curl-lab", "laptop"),
       ("MikroTik", "/tool/fetch", "mk-porton", "server"),
       ("Home Assistant", "rest_command", "ha-porton", "server"),
@@ -23,7 +23,7 @@ c.add(text(48, 640, "Si cambiás la clave de un sistema, los otros tres siguen a
 save(c, "18.svg")
 
 # ---------------------------------------------------------------- 18-paso1: basic o digest
-c = Canvas("Akuvox · Lección 18 · Pasos 1 a 3", "¿Responde 401? Igualá basic o digest")
+c = Canvas("Akuvox · Pasos 1 a 3", "¿Responde 401? Igualá basic o digest")
 c.add(Laptop(48, 140, "curl", "192.168.88.10", w=230))
 c.add(portero(980, 128, "pantalla", 0.62, None, None))
 c.add(text(1026, 314, "Portero", 17, 600, INK, FB, anchor="middle"))
@@ -43,7 +43,7 @@ c.add(Note(48, 590, 1104, "Un usuario distinto por sistema: curl-lab, mk-porton,
 save(c, "18-paso1.svg")
 
 # ---------------------------------------------------------------- 18-paso4: Asterisk abre con la extensión 7001
-c = Canvas("Akuvox · Lección 18 · Paso 4", "El interno marca 7001 y la central abre el portón")
+c = Canvas("Akuvox · Paso 4", "El interno marca 7001 y la central abre el portón")
 c.add(Phone(48, 170, "Interno autorizado", "marca 7001", w=250))
 c.add(Phone(48, 330, "Otro interno", "marca 7001", w=250))
 c.add(Server(410, 230, "Asterisk / FreePBX", "extensión 7001", w=290))

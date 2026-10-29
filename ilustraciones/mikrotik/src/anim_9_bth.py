@@ -2,7 +2,7 @@
 """Lección 9 · teoría: detrás de CGNAT solo funciona lo que abre el router; Back To Home usa un relay que no puede leer el tráfico."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=24, kicker="MIKROTIK · LECCIÓN 9 · BACK TO HOME", title="Detrás de CGNAT, el router es el que llama")
+a = Anim(T=24, kicker="MIKROTIK · BACK TO HOME", title="Detrás de CGNAT, el router es el que llama")
 a.steps([
     "Una conexión entrante no llega: el NAT del proveedor no reenvía nada.",
     "El router abre una conexión hacia el relay de MikroTik más cercano.",

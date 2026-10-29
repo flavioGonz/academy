@@ -2,7 +2,7 @@
 """Lección 22 · teoría: cómo se leen los códigos IP (IEC 60529) e IK (IEC 62262)."""
 from _anim_akuvox_15_28 import *
 
-a = new(24, "AKUVOX · LECCIÓN 22", "IP65, IP66, IK06, IK10: qué dice cada número")
+a = new(24, "AKUVOX", "IP65, IP66, IK06, IK10: qué dice cada número")
 a.steps([
     "IP, primer dígito: sólidos. 6 es hermético al polvo, en IP65 y en IP66.",
     "Segundo dígito: agua. 5 resiste chorros de agua.",

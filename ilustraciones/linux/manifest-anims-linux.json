@@ -1,0 +1,254 @@
+{
+ "1": {
+  "anims": [
+   {
+    "file": "1-r1.svg",
+    "alt": "Animación en cuatro tiempos. A la izquierda, el árbol de carpetas desde la raíz: /, etc, ssh, sshd_config, var, srv, datos, obra y plano.pdf. Las cajas en azul viven en el disco del sistema, /dev/sda2 montado en /; las celestes, en el disco de datos, /dev/sdb1 montado en /srv/datos. 1: un punto recorre /etc/ssh/sshd_config y una línea punteada lo une al disco del sistema. 2: la carpeta datos se marca en ámbar como punto de montaje y una línea la une al disco de datos. 3: el punto recorre /srv/datos/obra/plano.pdf y, al pasar por datos, cambia de color: el archivo se lee del segundo disco y la ruta no lo avisa. 4: una terminal muestra findmnt /srv/datos con TARGET /srv/datos, SOURCE /dev/sdb1 y FSTYPE ext4, como ejemplo.",
+    "caption": "Un solo árbol desde /: el segundo disco es una carpeta más, y findmnt dice cuál es."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "1-l1.svg",
+    "after": "Encontrá los archivos de configuración del servidor SSH:",
+    "alt": "Animación en cuatro tiempos. A la izquierda, cuatro carpetas que find recorre como usuario común: /etc/pam.d y /etc/ssh, que se pueden leer, y /etc/ssl/private y /etc/sudoers.d, que no. En el medio, el proceso find con dos salidas: canal 1, salida, y canal 2, errores. A la derecha, la pantalla y, abajo, /dev/null. 1: los resultados /etc/pam.d/sshd, /etc/ssh/sshd_config y /etc/ssh/sshd_config.d viajan por el canal 1 y aparecen en la pantalla. 2: al llegar a las carpetas protegidas, find: Permission denied viaja por el canal 2. 3: sin redirección, los dos avisos quedan mezclados con los resultados en la pantalla. 4: con 2>/dev/null en el comando, los avisos viajan a /dev/null y la pantalla muestra solo las tres rutas.",
+    "caption": "Lo que pasa en este paso: los resultados salen por el canal 1 y los Permission denied por el canal 2, que 2>/dev/null descarta."
+   }
+  ]
+ },
+ "2": {
+  "anims": [
+   {
+    "file": "2-r1.svg",
+    "alt": "Animación en cuatro tiempos con tres usuarios a la izquierda, tec1 y tec2 del grupo tecnicos y www-data, el servicio web, y la carpeta /srv/obra en el medio. 1: con drwxrwxrwx root root, 777, tec1 crea plano.txt y anda; el panel explica que tec1 no es el dueño ni está en el grupo root y entra por el resto, con rwx. 2: www-data también cae en el resto con rwx y borra plano.txt, porque borrar un archivo pide escritura en la carpeta. 3: la carpeta pasa a root:tecnicos con chmod 2770: grupo rwx con setgid y resto sin nada. 4: tec1 crea plano.txt y tec2 crea fotos.zip, los dos con grupo tecnicos heredado de la carpeta; www-data intenta borrar y recibe Permission denied. Para sumar un técnico, usermod -aG tecnicos.",
+    "caption": "Con 777 el resto también borra; con un grupo y 2770, solo entran los técnicos."
+   }
+  ],
+  "steps": [
+   {
+    "step": 1,
+    "file": "2-l1.svg",
+    "after": "Creá el grupo y dos usuarios de prueba:",
+    "alt": "Animación en cuatro tiempos con la tarjeta de grupos del usuario tecnico a la izquierda, con su grupo principal tecnico y los secundarios, y una terminal a la derecha. 1: id tecnico muestra groups con tecnico y 27(sudo). 2: sudo usermod -G tecnicos tecnico, sin la a, reemplaza la lista: id muestra tecnico y tecnicos, sudo aparece tachado en rojo y ya no se puede administrar. 3: desde el principio, con sudo usermod -aG tecnicos tecnico, tecnicos se suma al final y sudo queda, en verde. 4: en la sesión que ya estaba abierta, id todavía no muestra tecnicos; una línea de tiempo muestra que los grupos se fijan al entrar y que la sesión nueva ya entra con tecnicos. Los números de grupo son de ejemplo.",
+    "caption": "Lo que pasa en este paso: -aG suma el grupo; sin la a, la lista se reemplaza. Y vale desde la próxima sesión."
+   }
+  ]
+ },
+ "4": {
+  "anims": [
+   {
+    "file": "4-r1.svg",
+    "alt": "Animación en cuatro tiempos. A la izquierda, la notebook del técnico con la sesión A abierta, la que funciona; a la derecha, el servidor 192.168.88.50 con sus archivos y sus procesos, y abajo la terminal. 1: cp copia /etc/ssh/sshd_config a sshd_config.original y chmod a-w la deja sin escritura, como punto de vuelta. 2: el cambio va en sshd_config.d/10-ies.conf con Banner /etc/issue.net, y sshd -t lee los archivos sin decir nada: no hay errores. 3: systemctl reload ssh: el servicio corre sshd -t otra vez y le manda HUP al sshd principal, que relee la configuración; el proceso de la sesión A es otro y sigue conectado. 4: desde la sesión B, ssh tecnico@192.168.88.50 abre una conexión nueva al puerto 22, nace el proceso de la sesión B y aparece el Banner: el cambio está aplicado. Recién ahí se cierra la sesión vieja.",
+    "caption": "Copia, snippet, sshd -t, reload y prueba desde una sesión nueva, sin cerrar la que funciona."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "4-l1.svg",
+    "after": "Tu cambio en un archivo propio y validación:",
+    "alt": "Animación en cuatro tiempos con dos carriles, cada uno con sudo sshd -t a la izquierda, una compuerta && en el medio y el comando siguiente a la derecha. Arriba, con la configuración bien: 1: sshd -t no dice nada y su código 0 viaja hasta la compuerta. 2: la compuerta se pone verde y echo \"config OK\" se ejecuta. Abajo, con PasswordAuthentication yess: 3: sshd -t imprime /etc/ssh/sshd_config.d/10-ies.conf line 2: unsupported option \"yess\" y su código distinto de 0 viaja hasta la compuerta. 4: la compuerta se cierra en rojo, sudo systemctl reload ssh queda tachado, no corre, y SSH sigue con la configuración anterior.",
+    "caption": "Lo que pasa en este paso: con &&, lo de la derecha corre solo si sshd -t terminó con código 0."
+   }
+  ]
+ },
+ "5": {
+  "anims": [
+   {
+    "file": "5-r1.svg",
+    "alt": "Animación en cuatro tiempos con una línea de tiempo arriba (start, corte, arranque, enable --now, corte, arranque), el estado del servicio de ejemplo app-obra.service a la izquierda y, a la derecha, la carpeta /etc/systemd/system/multi-user.target.wants/ con los enlaces de ssh.service y cron.service. 1: systemctl start lo deja active (running), pero is-enabled dice disabled. 2: hay un corte de luz; al arrancar, systemd recorre multi-user.target.wants, app-obra.service no está y queda inactive (dead). 3: systemctl enable --now crea el enlace app-obra.service en multi-user.target.wants y lo arranca: active y enabled. 4: en el próximo corte, al arrancar, systemd lo encuentra en la carpeta y lo levanta solo.",
+    "caption": "start levanta ahora; enable deja el enlace para que arranque solo después de un corte."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "5-l1.svg",
+    "after": "Rompé la configuración a propósito y mirá el error",
+    "alt": "Animación en cuatro tiempos en forma de diagrama de secuencia, con cuatro columnas: vos en la consola de la VM, systemd, sshd -t como ExecStartPre y el journal. 1: systemctl restart ssh llega a systemd, que baja el servicio para volver a arrancarlo. 2: antes de arrancar, systemd corre /usr/sbin/sshd -t, que lee 99-roto.conf, encuentra yess, que no es yes ni no, y escribe line 1: unsupported option en el journal. 3: sshd -t sale con status=255/EXCEPTION, systemd no arranca sshd, deja la unidad en failed y anota Failed with result exit-code. 4: una terminal muestra systemctl status ssh con Active: failed (Result: exit-code) y el ExecStartPre con status 255, y journalctl -u ssh con la línea de /etc/ssh/sshd_config.d/99-roto.conf line 1: unsupported option yess.",
+    "caption": "Lo que pasa en este paso: systemd corre sshd -t antes de arrancar, falla con 255 y la unidad queda en failed."
+   },
+   {
+    "step": 4,
+    "file": "5-l2.svg",
+    "after": "Filtros de journalctl para obra:",
+    "alt": "Animación en cuatro tiempos con tres bloques del journal, uno por arranque: -2 el lunes, -1 el martes hasta el corte y 0 el actual; abajo, las prioridades de 0 a 7 y una terminal. 1: journalctl --list-boots muestra los tres arranques y el actual se marca como 0. 2: en el arranque -1 aparecen líneas de ejemplo: ssh arrancado, app-obra conectada, una tarea de cron y, a las 03:12, kernel: Out of memory: Killed process 812; después llega el corte de luz y el bloque termina ahí. El journal está en disco y sobrevive al reinicio. 3: sudo journalctl -b -1 -p err marca solo ese arranque, apaga las líneas informativas y deja la del kernel. 4: en la fila de prioridades se marcan 0 emerg, 1 alert, 2 crit y 3 err como lo que deja -p err; con warning se suma la 4 y sin -p sale todo.",
+    "caption": "Lo que pasa en este paso: -b -1 elige el arranque anterior y -p err deja las prioridades 0 a 3."
+   }
+  ]
+ },
+ "10": {
+  "anims": [
+   {
+    "file": "10-r1.svg",
+    "alt": "Animación en cuatro tiempos con una barra de 7,7 Gi de RAM de ejemplo dividida en used, buff/cache y free, una llave que marca available y la salida de free -h abajo, con la swap. 1: used 2,1 Gi, buff/cache 5,3 Gi y free 312 Mi; available dice 5,4 Gi, que es free más la caché que se puede soltar. 2: se marca buff/cache: archivos que ya se leyeron y se guardan para que la próxima lectura no vaya al disco. 3: un grabador pide 2 GB y entra en la barra: used sube a 4,1 Gi, la caché baja a 3,3 Gi, free casi no cambia y la swap sigue sin usar. 4: otro caso, el que alarma: used 7,2 Gi, available 0,2 Gi y 1,5 Gi de swap en uso: ahí sí falta memoria.",
+    "caption": "La caché de disco se suelta cuando un programa pide: por eso available es la cifra que importa."
+   }
+  ],
+  "steps": [
+   {
+    "step": 1,
+    "file": "10-l1.svg",
+    "after": "Memoria y carga:",
+    "alt": "Animación en cuatro tiempos con cuatro núcleos de CPU a la derecha, una fila de espera a la izquierda, un medidor de carga con una marca en 4, igual a nproc, y una terminal abajo. 1: nproc responde 4 y se marcan los cuatro núcleos. 2: con carga 2,00, nginx y postgres ocupan dos núcleos y los otros dos quedan libres; uptime muestra load average 2.00, 1.90, 1.80. 3: con carga 6,10, cuatro procesos corren y php-fpm y rsync esperan turno en la fila: el medidor pasa la marca de 4 en rojo y es saturación. 4: los tres números de uptime son promedios de 1, 5 y 15 minutos: 6.10, 5.82, 2.31 indica que empezó hace poco; 6.10, 6.04, 5.97 indica carga sostenida y hay que buscar quién consume con top. Cifras de ejemplo.",
+    "caption": "Lo que pasa en este paso: la carga se compara con nproc; lo que pasa de ahí es la fila de espera."
+   },
+   {
+    "step": 4,
+    "file": "10-l2.svg",
+    "after": "Si el que consume es un servicio:",
+    "alt": "Animación en cuatro tiempos en forma de diagrama de secuencia, con cuatro columnas: vos con sudo systemctl, systemd, el servicio de ejemplo grabador.service con PID 1502 y el journal; abajo, journalctl -u grabador. 1: restart grabador llega a systemd, que le manda SIGTERM (15) al proceso, y el journal anota Stopping. 2: el grabador cierra video.mp4, sale, y el journal anota Deactivated successfully. 3: el caso alternativo: si no saliera, systemd espera TimeoutStopSec, 90 segundos por defecto, y manda SIGKILL (9); el journal anotaría State stop-sigterm timed out. Killing. 4: systemd lo arranca de nuevo con el PID 1733 y el journal anota Started grabador.service.",
+    "caption": "Lo que pasa en este paso: systemd manda SIGTERM, espera, recién al vencer el plazo manda SIGKILL, y lo vuelve a arrancar."
+   }
+  ]
+ },
+ "3": {
+  "anims": [
+   {
+    "file": "3-r1.svg",
+    "alt": "Animación en cuatro tiempos en forma de diagrama de secuencia entre el servidor con apt, Debian 13, y el repositorio deb.debian.org; a la izquierda, un panel con lo que comprueba apt y, abajo, una terminal. 1: apt update pide trixie/InRelease y el repositorio devuelve el índice firmado. 2: apt verifica la firma con la llave de Signed-By, debian-archive-keyring.gpg, y se marca en verde el eslabón 1; sin firma válida da error y no sigue. 3: pide Packages.xz y su suma SHA256 coincide con la que figura en InRelease, eslabón 2. 4: apt upgrade pide el .deb de openssl, su SHA256 coincide con la de Packages, eslabón 3, dpkg lo instala y history.log registra el Upgrade de openssl.",
+    "caption": "Firma de InRelease, suma de Packages y suma del .deb: cada eslabón confirma el siguiente."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "3-l1.svg",
+    "after": "Instalá (si falta) y activá las actualizaciones automáticas",
+    "alt": "Animación en cuatro tiempos. A la izquierda, tres actualizaciones pendientes de ejemplo en Ubuntu: openssl de ${distro_codename}-security, nano de ${distro_codename}-updates y app-terceros de un repositorio agregado a mano. En el medio, el archivo 50unattended-upgrades con Allowed-Origins resumido: el pocket del release, -security habilitado y -updates comentado con //. A la derecha, se instala solo y espera a que lo hagas vos. 1: se marcan las tres pendientes. 2: se marcan las líneas de -security y la de -updates comentada; lo comentado no se aplica y lo que no figura tampoco. 3: openssl pasa el filtro y cae en se instala solo; nano y app-terceros caen en espera; un repositorio agregado a mano entra solo si se suma su origen. 4: 20auto-upgrades tiene Update-Package-Lists y Unattended-Upgrade en 1, y el log de unattended-upgrades dice Packages that will be upgraded: openssl.",
+    "caption": "Lo que pasa en este paso: unattended-upgrades aplica solo lo que viene de un origen permitido, como -security."
+   }
+  ]
+ },
+ "6": {
+  "anims": [
+   {
+    "file": "6-r1.svg",
+    "alt": "Animación en cuatro tiempos con el servidor (ens18, 192.168.88.50/24, default via 192.168.88.1), el router 192.168.88.1, que es gateway y DNS, y en internet 1.1.1.1 y deb.debian.org. Abajo, los cinco escalones; el de la interfaz ya está en verde. 1: gateway: una pregunta ARP por 192.168.88.1 y su respuesta con la MAC, y después el echo request y el echo reply del ping. 2: IP pública: el ping a 1.1.1.1 sale por la ruta default, pasa por el router y vuelve. 3: nombre: una consulta DNS por el registro A de debian.org al 192.168.88.1 por UDP 53; el router consulta afuera y responde con una IP de ejemplo. 4: puerto: SYN al 80 de deb.debian.org, SYN-ACK de vuelta y las cabeceras HTTP que recibe curl. Cada escalón se pone en verde cuando termina.",
+    "caption": "ARP, ping, DNS por UDP 53 y saludo TCP: lo que prueba cada escalón en el cable."
+   }
+  ],
+  "steps": [
+   {
+    "step": 1,
+    "file": "6-l1.svg",
+    "after": "Subí la escalera y anotá el resultado de cada escalón:",
+    "alt": "Animación en cuatro tiempos con una LAN 192.168.88.0/24: el servidor .88.50 con MAC 52:54:00:12:34:56, una cámara .88.30 y el router .88.1 con MAC 02:00:00:aa:bb:01, que sale a internet. Debajo, la trama que viaja, con MAC destino, MAC origen y qué lleva, y la salida de ip neigh. 1: ip neigh no tiene al gateway y el servidor manda un ARP request a ff:ff:ff:ff:ff:ff: ¿quién tiene 192.168.88.1? 2: la cámara lo recibe y lo descarta; el router contesta con un ARP reply directo al servidor: 192.168.88.1 está en 02:00:00:aa:bb:01. 3: ip neigh muestra 192.168.88.1 dev ens18 lladdr 02:00:00:aa:bb:01 REACHABLE y sale el echo request con la MAC del router. 4: el ping a 1.1.1.1 lleva IP destino 1.1.1.1, pero la MAC destino sigue siendo la del gateway, que lo reenvía a internet.",
+    "caption": "Lo que pasa en este paso: antes del primer ping, ARP busca la MAC del gateway, y esa MAC sirve también para 1.1.1.1."
+   }
+  ],
+  "teoria_figs": [
+   {
+    "file": "6-t3.svg",
+    "after": "La resolución de nombres sigue el orden de /etc/nsswitch.conf",
+    "alt": "Animación en cuatro tiempos con dos clientes a la izquierda, ping y dig, que buscan el nombre de ejemplo app.obra.lan. En el medio, /etc/nsswitch.conf con hosts: files dns; a la derecha, /etc/hosts y el servidor DNS de /etc/resolv.conf, que tiene app.obra.lan en 192.168.88.45. 1: ping le pide el nombre al sistema, que sigue el orden de nsswitch.conf. 2: files va primero: /etc/hosts tiene una línea vieja, 192.168.88.40 app.obra.lan, que gana; el DNS solo se consultaría si files no lo encontrara, y ping muestra PING app.obra.lan (192.168.88.40). 3: dig no mira /etc/hosts: le pregunta al DNS por UDP 53 y recibe 192.168.88.45. 4: la misma pregunta da dos respuestas: hay que sacar o corregir la línea vieja de /etc/hosts, y getent hosts app.obra.lan muestra lo que ve ping.",
+    "caption": "ping sigue nsswitch y una línea vieja de /etc/hosts le gana al DNS; dig va directo al DNS."
+   }
+  ]
+ },
+ "7": {
+  "anims": [
+   {
+    "file": "7-r1.svg",
+    "alt": "Animación en cuatro tiempos en forma de diagrama de secuencia entre la notebook, que corre ssh tecnico@192.168.88.50, y el servidor con sshd en el puerto 22; abajo, las dos llaves. 1: la conexión TCP al 22 y el intercambio de versiones, SSH-2.0-OpenSSH de cada lado. 2: KEXINIT con mlkem768x25519-sha256; el servidor manda su parte, su llave de host y una firma, y cada lado calcula el mismo secreto, que no viaja. 3: la primera vez, la notebook muestra la huella ED25519 SHA256 del servidor; se compara, con yes queda en ~/.ssh/known_hosts, y con NEWKEYS todo pasa a ir cifrado. 4: la notebook manda publickey ssh-ed25519 con una firma hecha con la llave privada, que no sale de la notebook; el servidor encuentra la pública en authorized_keys, verifica la firma y responde USERAUTH_SUCCESS.",
+    "caption": "La llave de host del servidor va a known_hosts; la tuya, a authorized_keys."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "7-l1.svg",
+    "after": "Copiala y entrá con ella:",
+    "alt": "Animación en cuatro tiempos. A la izquierda, la notebook con ~/.ssh/id_ed25519, la privada, con permisos 600, que no se copia, y ~/.ssh/id_ed25519.pub, la pública. A la derecha, el servidor 192.168.88.50 con /home/tecnico/.ssh en 700 y authorized_keys en 600; abajo, la terminal. 1: ssh-copy-id toma la pública. 2: prueba si la llave ya estaba instalada y, como no, pide una última vez la contraseña del servidor, que viaja cifrada por SSH. 3: la pública viaja y queda como una línea al final de authorized_keys: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA y el comentario tecnico@notebook-2026; la terminal dice Number of key(s) added: 1. 4: ssh tecnico@192.168.88.50 pide la frase de paso de la llave, que es local y no viaja, la privada firma y se entra sin la contraseña del servidor.",
+    "caption": "Lo que pasa en este paso: la contraseña viaja una última vez y la pública queda al final de authorized_keys."
+   },
+   {
+    "step": 4,
+    "file": "7-l2.svg",
+    "after": "Desde OTRA terminal, probá que la contraseña ya no entra:",
+    "alt": "Animación en cuatro tiempos en forma de diagrama de secuencia entre la terminal B, nueva, y el servidor 192.168.88.50; abajo, lo que muestra la terminal. 1: antes del cambio, el cliente pregunta con el método none y el servidor contesta que puede seguir con publickey,password: la contraseña todavía sirve. 2: en la sesión A, el archivo 10-ies-acceso.conf con PasswordAuthentication no, KbdInteractiveAuthentication no y PermitRootLogin no, sshd -t y reload. 3: con ssh -o PubkeyAuthentication=no, el servidor solo ofrece publickey, el cliente no tiene qué ofrecer y sale Permission denied (publickey): sin llave, rechazado. 4: sin el -o, el cliente manda publickey ssh-ed25519 con la firma, el servidor responde SUCCESS y se entra; recién ahí se cierra la sesión A.",
+    "caption": "Lo que pasa en este paso: el servidor ofrece solo publickey; sin llave, Permission denied (publickey)."
+   }
+  ]
+ },
+ "8": {
+  "anims": [
+   {
+    "file": "8-r1.svg",
+    "alt": "Animación en cuatro tiempos con el servidor 192.168.88.50 en el medio, con ufw en deny entrante, la regla 22/tcp ALLOW IN 10.10.10.0/24, el saliente permitido, y tres servicios: sshd en 0.0.0.0:22, apt y postgres en 127.0.0.1:5432. A la izquierda, la notebook de gestión 10.10.10.25 y una PC de la LAN 192.168.88.30; a la derecha, el repositorio. 1: el SYN al 22 desde 10.10.10.25 coincide con la regla, entra a sshd y vuelve el SYN-ACK. 2: el SYN al 22 desde la PC de la LAN no coincide con nada, cae en deny y no vuelve nada: ssh espera hasta el timeout. 3: apt sale al repositorio, el saliente está permitido, y la respuesta vuelve por established porque la pidió el servidor. 4: postgres escucha solo en 127.0.0.1: desde la red no hay nada escuchando en 192.168.88.50:5432, con o sin firewall.",
+    "caption": "SSH desde gestión entra, la PC de la LAN no recibe nada, la respuesta de apt vuelve y postgres no se ve."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "8-l2.svg",
+    "after": "Opción Debian 13 con nftables (equivalente mínimo):",
+    "alt": "Animación en cuatro tiempos. A la izquierda, /etc/nftables.conf en disco, con la tabla inet filter, la cadena input con policy drop y las reglas de la lección, y debajo nftables.service; a la derecha, las reglas activas en el kernel, que muestra nft list ruleset. 1: sudo nft -c -f /etc/nftables.conf valida el archivo sin aplicar nada: válido, y el kernel sigue vacío. 2: sudo systemctl enable nftables deja el servicio en enabled, para que corra al arrancar. 3: sudo systemctl restart nftables carga el archivo en el kernel; además, una regla tcp dport 8080 accept agregada en vivo con nft add rule aparece en ámbar, solo en memoria. 4: al reiniciar la memoria se vacía, nftables.service vuelve a cargar el archivo y las reglas de la lección vuelven, pero la del 8080 ya no está.",
+    "caption": "Lo que pasa en este paso: nft -c valida, enable deja el servicio para el arranque y lo hecho en vivo se pierde al reiniciar."
+   },
+   {
+    "step": 4,
+    "file": "8-l1.svg",
+    "after": "Verificá desde OTRA máquina, no desde el servidor:",
+    "alt": "Animación en cuatro tiempos con otra VM de gestión a la izquierda, que corre nmap -Pn o nc -zv, la cadena input con policy drop en el medio y el servidor 192.168.88.50 a la derecha, con tres puertos de ejemplo. 1: 22/tcp tiene regla accept y sshd escucha: el SYN pasa y vuelve SYN-ACK; nmap dice open y nc succeeded. 2: 8080/tcp está permitido pero nada escucha: el kernel contesta RST; nmap dice closed y nc Connection refused. 3: 443/tcp no tiene regla: el SYN cae en policy drop, no vuelve nada, nmap reintenta y lo marca filtered; nc espera hasta el timeout. 4: se prueba desde otra máquina, porque en el propio servidor el tráfico va por lo, que tiene iif lo accept.",
+    "caption": "Lo que pasa en este paso: SYN-ACK es open, RST es closed y sin respuesta es filtered."
+   }
+  ]
+ },
+ "9": {
+  "anims": [
+   {
+    "file": "9-r1.svg",
+    "alt": "Animación en cuatro tiempos. A la izquierda, el proceso app-obra, PID 812, con el descriptor 3 abierto; en el medio, la carpeta /var/log con el nombre app-obra.log que apunta al inodo 1234; a la derecha, el inodo y sus bloques de datos, 6,5 GB de ejemplo. Abajo, df, du y una terminal. 1: app-obra escribe su log y df -h / marca 30G de 31G. 2: rm borra el nombre, el inodo queda con 0 enlaces, pero el proceso lo sigue teniendo abierto y los bloques siguen ocupados: df sigue lleno. 3: du sobre /var/log ya no lo cuenta porque no tiene nombre; sudo lsof +L1 muestra app-obra, PID 812, descriptor 3w, NLINK 0, /var/log/app-obra.log (deleted). 4: systemctl restart app-obra cierra el archivo, los bloques se liberan y df -h / baja a 23G.",
+    "caption": "rm borra el nombre, pero un archivo abierto sigue ocupando el disco hasta que el proceso lo cierra."
+   }
+  ],
+  "steps": [
+   {
+    "step": 1,
+    "file": "9-l1.svg",
+    "after": "¿Dónde está lleno?",
+    "alt": "Animación en cuatro tiempos. A la izquierda, la carpeta de ejemplo /var/cache/app-obra/miniaturas, que se llena de archivos de 2 KB; a la derecha, dos medidores, bloques con df -h / e inodos con df -i /, y abajo una terminal. 1: df -h muestra 19G de 31G usados y 12G libres. 2: cada archivo usa un inodo aunque pese poco, y en ext4 la cantidad de inodos se fija al formatear; la carpeta empieza a llenarse. 3: el medidor de inodos llega al tope, 2,0 millones de 2,0 millones, mientras el de espacio casi no se mueve, y touch falla con No space left on device con 12G libres. 4: df -i muestra IUse% 100% y du --inodes -xd1 /var ordenado encuentra la carpeta con más archivos.",
+    "caption": "Lo que pasa en este paso: df -h cuenta espacio y df -i cuenta archivos; los inodos se pueden acabar antes."
+   }
+  ]
+ },
+ "11": {
+  "anims": [
+   {
+    "file": "11-r1.svg",
+    "alt": "Animación en cuatro tiempos. A la izquierda, el servidor srv1 con su disco del sistema y las carpetas /etc, /srv/datos y /srv/backup; a la derecha, el equipo de respaldo 10.10.10.20, en otra sala, con /respaldos/srv1/; abajo, una terminal. 1: a las 02:30 el timer corre tar czf y srv1-etc-2026-10-28.tar.gz queda en /srv/backup, en el mismo disco; el journal muestra que corrió. 2: rsync -av copia /srv/backup/ a 10.10.10.20 y solo manda el archivo nuevo: el del 27 ya estaba. 3: la prueba: con el archivo traído de 10.10.10.20, tar xzf con -C /tmp restaura etc/hostname aparte y diff contra el original responde restaurado OK. 4: el disco del servidor se rompe y /etc, /srv/datos y /srv/backup se pierden; la copia de 10.10.10.20 sigue entera y ya está probada.",
+    "caption": "La copia en otro equipo, probada restaurando, es la que queda cuando se rompe el disco."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "11-l1.svg",
+    "after": "Para datos, rsync a otro equipo",
+    "alt": "Animación en cuatro tiempos con el origen /srv/datos/ a la izquierda y el destino 10.10.10.20:/respaldos/servidor1/ a la derecha, con cuatro archivos de ejemplo; abajo, la terminal. 1: rsync compara cada archivo por tamaño y fecha. 2: planos/plano-a.pdf y notas.txt son iguales y se saltean; fotos/obra-01.jpg cambió y informe.docx es nuevo, en ámbar. 3: con rsync -avn, la salida lista fotos/obra-01.jpg e informe.docx con la marca DRY RUN y el destino no cambia. 4: con rsync -av, sin la n, se copian solo esos dos; la barra final de /srv/datos/ copia el contenido de la carpeta, y sin barra crearía servidor1/datos/.",
+    "caption": "Lo que pasa en este paso: rsync compara tamaño y fecha, y con -n solo lista lo que copiaría."
+   }
+  ]
+ },
+ "12": {
+  "anims": [
+   {
+    "file": "12-r1.svg",
+    "alt": "Animación en cuatro tiempos con el host 192.168.88.50 con Docker y, adentro, la red obra, 172.18.0.0/16 de ejemplo; a la izquierda, otra VM de la LAN, 192.168.88.60. 1: con docker network create obra, los contenedores app, en 172.18.0.3 escuchando el 3000, y db, en 172.18.0.4 escuchando el 5432, se conectan a la red sin publicar puertos. 2: app pregunta por db al DNS interno de Docker, recibe 172.18.0.4 y abre una conexión TCP al 5432 dentro de la red. 3: el contenedor proxy, nginx en 172.18.0.2, se suma a la red con -p 443:443: es la única puerta publicada en el host. 4: desde la otra VM, nmap al 443 recibe SYN-ACK y el 5432 no responde: solo aparece abierto lo que se publicó.",
+    "caption": "En una red de Docker los contenedores se hablan por nombre; solo el proxy publica el 443."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "12-l1.svg",
+    "after": "Volumen para datos que sobreviven al contenedor:",
+    "alt": "Animación en cuatro tiempos con el disco del host abajo a la izquierda, un contenedor arriba y la terminal a la derecha. 1: docker volume create datos-prueba crea la carpeta /var/lib/docker/volumes/datos-prueba/_data, que docker volume inspect muestra como Mountpoint. 2: un contenedor de ejemplo con -v datos-prueba:/datos escribe informe.txt en /datos, que baja al volumen del host, y cache.txt en /tmp, que queda en la capa del contenedor. 3: docker rm -f prueba borra el contenedor y su capa, y cache.txt se pierde; docker volume ls muestra que datos-prueba sigue. 4: un contenedor nuevo con el mismo -v lee /datos/informe.txt y encuentra obra: los datos sobrevivieron.",
+    "caption": "Lo que pasa en este paso: docker rm -f borra el contenedor y su capa; el volumen y sus datos quedan."
+   }
+  ]
+ }
+}

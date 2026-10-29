@@ -6,7 +6,7 @@ K = "Akuvox"
 c = Canvas(K, "Escritorio de guardia: el R49G atiende el portero")
 po = c.add(Generic(50, 330, "Portero", "extensión SIP", icon="bell", w=230))
 sw = c.add(Router(360, 130, "Switch PoE", "red de porteros", ports=["1", "2", "3"], hl={"1": CYAN, "2": CYAN}))
-cen = c.add(Server(860, 150, "Central IP", "lección 5", w=260))
+cen = c.add(Server(860, 150, "Central IP", "lección 6", w=260))
 r49 = c.add(Generic(470, 440, "R49G", "teléfono de video · 7\"", icon="phone", w=300))
 pc = c.add(Laptop(870, 440, "PC del guardia", "navega por el R49G", w=270))
 c.add(Wire([po.top(), (po.top()[0], 330 - 20), (sw.port("1")[0], 330 - 20), sw.port("1")], kind="data", dots=True))

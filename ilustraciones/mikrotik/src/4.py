@@ -1,7 +1,7 @@
 """Lección 4 · Input y forward: pasos 1, 2 y 3 (la principal 4.svg está hecha a mano y se mantiene)."""
 from _mt import *
 
-K = "MikroTik · Lección 4"
+K = "MikroTik"
 
 # ------------------------------------------------------------------ 4-paso1.svg
 c = Canvas(K + " · Paso 1", "Ubicá las dos reglas que protegen")
@@ -19,7 +19,7 @@ for i, (ch, sub, col, items) in enumerate(cols):
     c.add(text(x + 20, 222, "defconf:", 14, 500, INK3, FM))
     c.add(rows(x + 20, 236, 500, items, h=38, gap=8, size=15))
 c.add(Note(48, 506, 540, "Si el destino es una IP del router (también 192.168.88.1), el paquete entra por input y llega a esta regla.", kind="info", size=16))
-c.add(Note(612, 506, 540, "Lo que entra por la WAN hacia la LAN se descarta, salvo que tenga un dst-nat (lección 10).", kind="info", size=16))
+c.add(Note(612, 506, 540, "Lo que entra por la WAN hacia la LAN se descarta, salvo que tenga un dst-nat (lección 32).", kind="info", size=16))
 save(c, "4-paso1.svg")
 
 # ------------------------------------------------------------------ 4-paso2.svg

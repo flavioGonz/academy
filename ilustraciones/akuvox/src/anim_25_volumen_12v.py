@@ -3,7 +3,7 @@
 import math
 from _anim_akuvox_15_28 import *
 
-a = new(24, "AKUVOX · LECCIÓN 25", "R25 con PoE: la cerradura no debería depender del volumen")
+a = new(24, "AKUVOX", "R25 con PoE: la cerradura no debería depender del volumen")
 a.steps([
     "R25 con PoE: 12 V por el relé, hasta 400 mA, con firmware 25.30.10.11 o más.",
     "Akuvox avisa que esa salida queda afectada por el ajuste de volumen.",

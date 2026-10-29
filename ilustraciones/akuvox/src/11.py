@@ -1,7 +1,7 @@
 from _akv import *
 
 # ---------- 11.svg: el portero en su VLAN
-c = Canvas("Akuvox · Lección 11", "El portero vive en su VLAN y habla con tres")
+c = Canvas("Akuvox", "El portero vive en su VLAN y habla con tres")
 c.add(Zone(410, 250, 300, 200, "VLAN porteros 10.10.10.0/24", CYAN))
 p = c.add(Generic(440, 310, "Portero", "10.10.10.21", icon="bell", w=250, hl=CYAN))
 dst = [("Central", "10.10.20.10", "server", "UDP 5060 + RTP", 150),
@@ -21,7 +21,7 @@ c.add(text(640, 620, "Cámara, micrófono y relé en la calle no se exponen a in
 save(c, "11.svg")
 
 # ---------- 11-paso2.svg: escanear desde la red de usuarios
-c = Canvas("Akuvox · Lección 11 · Paso 2", "Escaneá el portero desde la red de usuarios")
+c = Canvas("Akuvox · Paso 2", "Escaneá el portero desde la red de usuarios")
 c.add(Terminal(48, 140, 1104, ["nmap -sS -sU -p T:22,23,80,443,554,5060,8080,U:5060,8500 10.10.10.21"], title="PC EN LA RED DE USUARIOS"))
 c.add(Step(48, 140, 2))
 pc = c.add(Generic(48, 300, "PC de usuarios", "escanea", icon="laptop", w=250))
@@ -39,7 +39,7 @@ c.add(Note(48, 540, 1104, "Lo que conteste es un hueco: filtralo en el firewall 
 save(c, "11-paso2.svg")
 
 # ---------- 11-paso5.svg: Prevent SIP Hacking
-c = Canvas("Akuvox · Lección 11 · Paso 5", "Que el portero atienda solo a quien conoce")
+c = Canvas("Akuvox · Paso 5", "Que el portero atienda solo a quien conoce")
 po = c.add(Intercom(540, 150, "Portero", "Prevent SIP Hacking"))
 a = c.add(Generic(60, 170, "Central", "10.10.20.10 · en contactos", icon="server", w=330, hl=OK))
 b = c.add(Generic(60, 390, "IP desconocida", "llamada SIP directa", icon="globe", w=330, hl=ALERT))

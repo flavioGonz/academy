@@ -2,7 +2,7 @@
 """Lección 6 · teoría: qué escribe el export (cambios, por menú, cabecera) y qué deja afuera."""
 from _anim_mikrotik_1_13 import *
 
-a = Anim(T=24, kicker="MIKROTIK · LECCIÓN 6 · CÓMO FUNCIONA", title="Qué escribe el export y qué deja afuera")
+a = Anim(T=24, kicker="MIKROTIK · CÓMO FUNCIONA", title="Qué escribe el export y qué deja afuera")
 a.steps([
     "El export recorre la configuración y escribe comandos, agrupados por menú.",
     "Lo que sigue igual que de fábrica no se escribe: por eso el archivo es corto.",

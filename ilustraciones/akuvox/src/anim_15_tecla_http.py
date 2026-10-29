@@ -2,7 +2,7 @@
 """Lección 15 · teoría: la tecla del monitor abre por HTTP, sin llamada (y el formato que exige la alta seguridad)."""
 from _anim_akuvox_15_28 import *
 
-a = new(20, "AKUVOX · LECCIÓN 15", "La tecla del monitor manda un GET, no un tono")
+a = new(20, "AKUVOX", "La tecla del monitor manda un GET, no un tono")
 a.steps([
     "Tocás la tecla Portón en el monitor. No hace falta una llamada abierta.",
     "El monitor arma un GET con usuario, clave y DoorNum, y va directo al portero.",

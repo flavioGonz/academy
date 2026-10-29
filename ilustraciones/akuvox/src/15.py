@@ -2,7 +2,7 @@ import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/akuvox/s
 from _cat import *
 
 # ---------------------------------------------------------------- 15.svg: el monitor abre un portero que no llamó
-c = Canvas("Akuvox · Lección 15", "¿Cómo abre el monitor un portero que no llamó?")
+c = Canvas("Akuvox", "¿Cómo abre el monitor un portero que no llamó?")
 c.add(Zone(48, 140, 300, 330, "en llamada"))
 c.add(portero(123, 175, "pantalla", 0.85, "Portero hall", "192.168.88.21"))
 c.add(Zone(852, 140, 300, 330, "sin llamada"))
@@ -18,7 +18,7 @@ c.add(f'<g>{check(64, 652, True)}</g>' + text(88, 658, "HTTP: llega a cualquier 
 save(c, "15.svg")
 
 # ---------------------------------------------------------------- 15-paso2: Remote Relay By HTTP or HTTPS
-c = Canvas("Akuvox · Lección 15 · Pasos 1 a 3", "Apuntá el monitor al portero del portón")
+c = Canvas("Akuvox · Pasos 1 a 3", "Apuntá el monitor al portero del portón")
 w = c.add(Window(48, 130, 660, 320, "Monitor · web", path="Phone > Relay > Remote Relay By HTTP or HTTPS",
                  rows=[("IP / número SIP", "192.168.88.22"), ("Formato", "/fcgi/OpenDoor (nuevo)"), ("Usuario", "monitor-porton"),
                        ("Clave", "Ejemplo-Mon-2026"), ("DoorNum", "1")], hl=0))
@@ -28,7 +28,7 @@ c.add(Step(568, 470, 3))
 c.add(portero(860, 140, "pantalla", 0.8, "Portero portón", "192.168.88.22", hl=CYAN))
 c.add(Step(860, 140, 1))
 c.add(panel(800, 418, 352, 110, None, "soft"))
-c.add(text(820, 450, "En el portón (lección 13):", 16, 600, INK, FB))
+c.add(text(820, 450, "En el portón (lección 14):", 16, 600, INK, FB))
 c.add(text(820, 476, "Open Relay via HTTP", 15, 600, BLUE, FM))
 c.add(text(820, 502, "monitor-porton / Ejemplo-Mon-2026", 15, 500, INK2, FM))
 c.add(arrow((710, 220), (850, 220), "flow", "HTTP", label_dy=-12))
@@ -37,7 +37,7 @@ c.add(Note(800, 550, 352, "DoorNum=1 es el relé A del portón; 2 sería el rel�
 save(c, "15-paso2.svg")
 
 # ---------------------------------------------------------------- 15-paso4: las tres pantallas con tecla
-c = Canvas("Akuvox · Lección 15 · Pasos 4 a 6", "La tecla Portón puede ir en tres pantallas")
+c = Canvas("Akuvox · Pasos 4 a 6", "La tecla Portón puede ir en tres pantallas")
 cols = [("Monitoreo", "Softkey In Monitor Page", True, 4, "sin llamada: el cliente mira y abre"),
         ("En llamada", "Softkey in Talking Page", True, 6, "hablando con el hall"),
         ("Vista previa", "Softkey In Call-Preview Page", False, None, "antes de atender")]

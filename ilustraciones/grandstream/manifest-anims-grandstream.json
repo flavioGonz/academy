@@ -1,0 +1,333 @@
+{
+ "1": {
+  "anims": [
+   {
+    "file": "1-r1.svg",
+    "alt": "Animación en cuatro tiempos con el router de la oficina (192.168.88.1, DHCP de 192.168.88.0/24), la UCM6300 con su WAN en 192.168.88.20 y un teléfono GRP conectado a su puerto LAN. 1: con Method en Switch, el teléfono manda DHCP Discover y el pedido cruza la UCM, que hace de puente, hasta el router. 2: contesta el router con Offer y Ack: el teléfono queda con 192.168.88.31 y gateway 192.168.88.1, y la opción 66 no viene; Zero Config solo puede encontrarlo por SIP SUBSCRIBE. 3: con Method en Route, el LAN de la UCM es 192.168.2.1 con su propio DHCP; el Discover llega a la UCM y el router no participa. 4: la UCM responde con una IP de 192.168.2.0/24 y la opción 66 https://192.168.2.1:8089/zccgi/, de donde el teléfono baja su configuración. Route también habilita Dynamic Defense. El modo se decide con la central vacía: cambiarlo en producción corta la web y los teléfonos.",
+    "caption": "Mirá quién contesta el DHCP del teléfono: en Switch el router, en Route la UCM con la opción 66."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "1-l1.svg",
+    "after": "Con el backup guardado, recién ahí actualizá",
+    "alt": "Animación en cuatro tiempos con la notebook del técnico, la UCM6300 en 192.168.88.20 y los teléfonos 1001, 1002 y 1003, con un recuadro de la web de la UCM. 1: en Maintenance > Upgrade se anota la versión actual y con Detect se ve si hay una nueva. 2: en Maintenance > Backup > Backup/Restore la central arma el backup completo y el archivo backup.tar viaja a la notebook: queda fuera de la central. 3: recién ahí se sube el firmware nuevo; la central lo instala y se reinicia, y mientras tanto no hay web y los teléfonos se quedan sin central, por eso se hace en ventana de mantenimiento. 4: si algo no quedó como estaba, Restore con el .tar de la notebook y la configuración vuelve a como estaba; el archivo de restauración va en .tar o .tgz, menos de 100 MB y sin caracteres especiales en el nombre.",
+    "caption": "Lo que pasa en este paso: el .tar sale de la central antes de que entre el firmware, y vuelve con Restore si algo sale mal."
+   }
+  ]
+ },
+ "2": {
+  "anims": [
+   {
+    "file": "2-r1.svg",
+    "alt": "Animación en cuatro tiempos con tres equipos a la izquierda, el GRP del escritorio (192.168.88.31), la app Wave en un celular (198.51.100.7) y un equipo ajeno (203.0.113.66), y a la derecha la extensión 1001 de la UCM con Concurrent Registrations en 2 y la lista de registros activos. 1: el GRP manda REGISTER 1001, la central contesta 200 OK y ocupa el primer registro. 2: la app Wave registra la misma cuenta y ocupa el segundo. 3: un equipo ajeno con la clave filtrada pide registrar la 1001; no hay lugar y la central lo rechaza. 4: con Concurrent Registrations en 3, el valor de fábrica, el mismo pedido recibe 200 OK y ocupa el tercer registro sin que nadie lo note. Nota: cada registro es un equipo que puede llamar con esa cuenta; se deja 1, o 2 si la persona usa Wave, y se anota qué equipo ocupa cada uno.",
+    "caption": "Mirá la lista de registros: el límite frena al equipo de más aunque tenga la clave."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "2-l1.svg",
+    "after": "En cada una, revisá:",
+    "alt": "Animación en cuatro tiempos con la interna 1001 de la oficina (192.168.88.31), la UCM en 192.168.88.20, internet, el router de una casa (198.51.100.7) y la interna remota 1002 detrás de él (192.168.1.50); abajo, el carril del audio RTP. 1: con Enable Direct Media en No, como viene, cada teléfono manda su audio a la UCM y la UCM lo reenvía al otro, en los dos sentidos. 2: con Direct Media en Sí, ya en la llamada, la UCM le manda a cada teléfono un nuevo INVITE con la dirección del otro: la 1001 recibe 192.168.1.50 y la 1002 recibe 192.168.88.31. 3: la 1001 manda el audio a 192.168.1.50, una IP privada de otra red, y se descarta en el camino: la llamada sigue armada y no se escucha. 4: con Direct Media apagado otra vez, la central vuelve a llevar el audio de los dos lados y el NAT no lo corta. Recuadro: en Media de cada extensión, NAT activado y Direct Media desactivado.",
+    "caption": "Lo que pasa en la red en este paso: con Direct Media activado la central les pasa a los teléfonos la dirección del otro y el audio directo no cruza el NAT."
+   }
+  ]
+ },
+ "3": {
+  "anims": [
+   {
+    "file": "3-r1.svg",
+    "alt": "Animación en cuatro tiempos con dos líneas de vida, un GRP26xx reseteado de fábrica y la UCM en modo Route con su LAN en 192.168.2.1, y un panel a la derecha. 1: el teléfono manda DHCP Discover y la UCM contesta Offer con una IP de 192.168.2.0/24 y la opción 66 con la URL https://192.168.2.1:8089/zccgi/; después siguen Request y Ack. 2: el teléfono va a esa URL por HTTPS y recibe su XML: cuenta 1 con la extensión 1001 y la Global Policy con español y hora de Montevideo. 3: aplica el XML, manda REGISTER 1001 con Digest y la UCM responde 200 OK: la 1001 queda registrada sin tocar el teléfono. 4: si la UCM está en Switch, el DHCP es el router de la oficina y la respuesta no trae opción 66; el teléfono encuentra a la central por SIP SUBSCRIBE.",
+    "caption": "Del Discover al 200 OK: la URL de la opción 66 llega junto con la IP del teléfono."
+   }
+  ],
+  "steps": [
+   {
+    "step": 6,
+    "file": "3-l1.svg",
+    "after": "Comprobá en el teléfono que la cuenta registró",
+    "alt": "Animación en cuatro tiempos con la UCM en 192.168.88.20, un GRP26xx ya aprovisionado y el servidor NTP de la Global Policy; abajo, la pantalla del teléfono, la cuenta y la hora. 1: con el XML aplicado, el teléfono manda REGISTER 1001 y la UCM responde 200 OK; la pantalla pasa de sin registrar a 1001 registrada. 2: para la hora, el teléfono le pregunta al servidor NTP y la respuesta viene en hora universal, 13:00 UTC. 3: le aplica la zona de la Global Policy, Montevideo, UTC-3, y la pantalla muestra 10:00. 4: si la hora sale corrida 3 horas, por ejemplo 13:00 con zona GMT, la zona no llegó: hay otra plantilla con más prioridad o alguien la cambió a mano en el teléfono; se resetea de fábrica y se deja que lo tome Zero Config.",
+    "caption": "Lo que pasa en la red en este paso: REGISTER y 200 OK para la cuenta, NTP en hora universal y la zona de la Global Policy para la hora."
+   }
+  ]
+ },
+ "4": {
+  "anims": [
+   {
+    "file": "4-r1.svg",
+    "alt": "Animación en cuatro tiempos con la UCM en 192.168.88.20, el router del cliente con NAT y WAN 203.0.113.10, internet y el proveedor sip.proveedor.example; abajo, la sesión UDP que anota el router. 1: la UCM manda REGISTER al proveedor; el router reemplaza el origen privado 192.168.88.20:5060 por 203.0.113.10 y un puerto propio, por ejemplo 40112, y anota la sesión. 2: el 401 y, después del REGISTER con la clave, el 200 OK vuelven a 203.0.113.10:40112; el router encuentra la sesión y los entrega a la UCM, que queda registrada. 3: entra una llamada: el proveedor manda el INVITE a la dirección del registro y entra por la misma sesión. 4: la UCM renueva el registro antes de que venza y la sesión sigue abierta. Por eso, como dice Simtex, en el 99,9 % de los casos el troncal registrado no necesita reenvío de puertos.",
+    "caption": "Mirá la sesión del router: la abre el REGISTER y por ella vuelven las respuestas y entran las llamadas."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "4-l1.svg",
+    "after": "Guardá, aplicá y entrá a Advanced Settings",
+    "alt": "Animación en cuatro tiempos con dos líneas de vida, la UCM con el troncal Proveedor_Lab y el proveedor sip.proveedor.example, y a la derecha el SDP de cada mensaje. 1: con Codec Preference en PCMA y PCMU, el INVITE ofrece m=audio 10044 RTP/AVP 8 0 101: PCMA (8) primero, PCMU (0) y el evento de teclas telephone-event (101) de RFC 4733. 2: el proveedor contesta 200 OK con m=audio 30000 RTP/AVP 8 101: elige PCMA y el evento de teclas, entre lo que se le ofreció; la UCM confirma con ACK. 3: el audio viaja en PCMA en los dos sentidos, un paquete cada 20 ms, y las teclas como eventos RFC 4733. 4: con la lista sin recortar, el INVITE ofrece más codecs, por ejemplo PCMU, PCMA, G.722 y G.729, y la respuesta puede elegir otro; la negociación puede elegir mal o fallar. Por eso se dejan solo los que pide el proveedor.",
+    "caption": "Lo que pasa en la red en este paso: el INVITE ofrece solo PCMA y PCMU, y la respuesta elige entre esos dos."
+   },
+   {
+    "step": 3,
+    "file": "4-l2.svg",
+    "after": "Revisá el estado en System Status > Dashboard (Trunks)",
+    "alt": "Animación en cuatro tiempos con tres líneas de vida, la UCM con el troncal Proveedor_Lab, el DNS de la red y el proveedor sip.proveedor.example, y a la derecha el estado del troncal en Dashboard, Trunks. 1: la UCM pregunta la IP de sip.proveedor.example y el DNS no contesta: no hay a quién registrarse y el troncal queda Rejected. 2: el DNS responde 198.51.100.20, la UCM manda REGISTER y no vuelve nada, por la salida a internet o un firewall; sigue Rejected. Se prueba desde una PC de la misma red que el host resuelva y responda. 3: el REGISTER 21000000 llega, el proveedor responde 401 con el desafío, la UCM contesta con una respuesta hecha con otro Auth ID y el proveedor la rechaza; sigue Rejected. Se vuelven a pegar usuario, Auth ID y contraseña. 4: con los datos del proveedor copiados y pegados, el proveedor responde 200 OK y el troncal pasa a Registered.",
+    "caption": "Lo que pasa en la red en este paso: Rejected es un REGISTER que no llega a nadie o una respuesta con credenciales que no coinciden."
+   }
+  ]
+ },
+ "5": {
+  "anims": [
+   {
+    "file": "5-r1.svg",
+    "alt": "Animación en cuatro tiempos con tres líneas de vida: la interna 1001 con privilegio International, la UCM con la ruta internacional y el troncal Proveedor_Lab; a la derecha, la ruta: nombre internacional, patrón _00X., privilegio International y contraseña por PIN Groups. 1: la 1001 marca 00 54 11 y el resto del número; coincide con _00X. y su nivel alcanza. 2: antes de cursarla, la central le pide el PIN por el audio de la llamada. 3: la 1001 marca su PIN, que viaja como teclas RFC 4733; está en el PIN Group y recién ahí sale el INVITE al proveedor. 4: con un PIN que no está en el grupo la central corta la llamada y al proveedor no llega nada. Nota: el privilegio frena a la extensión equivocada; el PIN, a la correcta usada por otra persona.",
+    "caption": "Aunque la extensión tenga el nivel, el número no llega al proveedor sin el PIN."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "5-l1.svg",
+    "after": "Revisá cómo prioriza tu central",
+    "alt": "Animación en cuatro tiempos con el número 005411… marcado por la interna 1001, la tabla de Outbound Routes en orden (1, general, patrón _X., privilegio National, sin PIN; 2, internacional, patrón _00X., privilegio International, con PIN) y el ajuste Outgoing Routing Priority. 1: el número coincide con las dos rutas. 2: con List Sorting Priority gana la primera de la lista, la general, y el internacional sale sin PIN ni privilegio International. 3: con Accuracy First gana el patrón más parecido, _00X., y la llamada va por la internacional, con privilegio International y PIN Group. 4: por eso se revisa el botón Outgoing Routing Priority en la página de Outbound Routes y se prueba que un internacional pida el PIN. Nota: la ruta general es un ejemplo de patrón amplio; con List Sorting, una ruta así arriba de la lista les gana a todas las de abajo.",
+    "caption": "Lo que pasa en este paso: con List Sorting gana la primera ruta que coincide, con Accuracy First el patrón más parecido."
+   }
+  ]
+ },
+ "6": {
+  "anims": [
+   {
+    "file": "6-r1.svg",
+    "alt": "Animación en cuatro tiempos con el proveedor del troncal SIP, la ruta entrante del troncal (Pattern _2900XXXX, Destination By DID, Strip 4) con un recuadro del número llamado, y las internas 1007, 1023 y 1050. 1: entra un INVITE a 29001007; coincide con el patrón, Strip 4 tacha 2900, queda 1007 y suena la interna 1007. 2: entra otro a 29001023 y la misma ruta lo lleva a la 1023. 3: entra otro a 29001050 y va a la 1050: una sola ruta alcanza para los números del 29001000 al 29001099. 4: si el proveedor empieza a mandar el número como +59829001007, ya no coincide con _2900XXXX y la llamada no llega a la 1007; ese formato necesita su propio patrón y Strip 8, porque el + también cuenta, y el número real se mira en el CDR, no en la factura.",
+    "caption": "Una ruta, tres llamadas: lo que queda después del Strip es la interna; con otro formato, no coincide."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "6-l1.svg",
+    "after": "Hacé una llamada de prueba y mirá en CDR",
+    "alt": "Animación en cuatro tiempos con tu celular, la red pública, el proveedor del troncal SIP, la UCM y la interna 1007; abajo, la factura del cliente, el CDR y el cálculo del Strip. 1: llamás desde el celular al 2900 1007, como figura en la factura. 2: el proveedor le entrega la llamada a la UCM con un INVITE con el número en su propio formato, en el ejemplo +59829001007. 3: en CDR > CDR la última entrante muestra como número llamado +59829001007, con código de país y el más: 12 caracteres, de los que sobran los 8 primeros; con Strip 4 quedaría 29001007, una interna que no existe. 4: con ese número se calcula: un patrón para ese formato y Strip 8 dejan 1007, y la interna suena. El dato sale del CDR, no de la factura, y se anota en la ficha del troncal.",
+    "caption": "Lo que pasa en la red en este paso: el proveedor manda el número en su formato y el CDR lo muestra tal cual; el Strip se calcula con ese."
+   }
+  ]
+ },
+ "7": {
+  "anims": [
+   {
+    "file": "7-r1.svg",
+    "alt": "Animación en cuatro tiempos con tres líneas de vida: quien llama por el troncal SIP, la UCM con el IVR 7000 y el Ring Group ventas. 1: entra el INVITE por el troncal y la ruta entrante lo manda al IVR 7000, que es una extensión más. 2: el IVR atiende con 200 OK, el otro lado confirma con ACK y la bienvenida, para ventas marque 1, viaja como audio RTP hacia quien llama; desde el 200 OK la llamada está atendida. 3: quien llama marca 1; la tecla llega dentro del RTP como evento RFC 4733 y, como es horario de oficina, la condición Office Time manda la llamada al Ring Group ventas. 4: la UCM manda un INVITE al grupo, atiende un teléfono con 200 OK y el audio pasa de quien llama a la UCM y de la UCM a ventas: la pata del troncal sigue igual y la central une las dos. Fuera de horario, la misma tecla iría al buzón de la 1001.",
+    "caption": "La pata del troncal no cambia: la UCM atiende, recibe la tecla y une la llamada con ventas."
+   }
+  ],
+  "steps": [
+   {
+    "step": 1,
+    "file": "7-l1.svg",
+    "after": "Definí horario de oficina y un feriado de prueba",
+    "alt": "Animación en cuatro tiempos con una línea de un día en la central, con Office Time de 9 a 18, y abajo los dos destinos de la tecla 1 del IVR 7000: Office Time al Ring Group ventas y Out of Office Time al Voicemail 1001. 1: un martes a las 10:00, dentro de Office Time, la tecla 1 va al Ring Group ventas. 2: el mismo martes a las 20:00 es fuera de horario y la tecla 1 va al buzón de la 1001. 3: el 1 de mayo, cargado como Holiday, a las 10:00 también va al buzón. 4: con la zona horaria de la UCM en GMT, a las 16:30 de Montevideo la central cree que son las 19:30 y la tecla 1 va al buzón con la oficina abierta. Se configura en System Settings > Time Settings > Office Time/Holiday, y la zona horaria tiene que ser la de Montevideo, UTC-3. Para probar fuera de horario se cambia el horario de oficina y se vuelve a llamar.",
+    "caption": "Lo que pasa en este paso: la central compara su hora con Office Time/Holiday; con la zona horaria mal, el destino cambia a la hora equivocada."
+   }
+  ]
+ },
+ "8": {
+  "anims": [
+   {
+    "file": "8-r1.svg",
+    "alt": "Animación en cuatro tiempos con tres llamadas, A, B y C, que entran casi juntas, y dos agentes, la 1001 y la 1002; primero contra un grupo y después contra una cola. 1: Ring Group 6000 en Ring Simultaneously: entra A, suenan la 1001 y la 1002 a la vez y atiende la 1001. 2: entra B y, con Skip Busy Agent, suena solo la 1002, que atiende; entra C, no hay nadie libre y, como el grupo no retiene, va al buzón del grupo. 3: Call Queue 6500 con Least Recent y Max Queue Length 5: A y B van a los agentes y C espera en la fila escuchando música. 4: la 1001 corta, descansa los 10 segundos de Agent Rest Time y la cola le entrega C; ninguna llamada fue al buzón. Si la cola se llena o se queda sin agentes, la llamada va al Failover Destination.",
+    "caption": "Con todos ocupados el grupo manda al buzón; la cola retiene y entrega cuando alguien se libera."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "8-l1.svg",
+    "after": "Llamá a la cola desde dos teléfonos a la vez",
+    "alt": "Animación en cuatro tiempos con la cola 6500 en Least Recent y Max Queue Length 5, su fila de cinco lugares, y tres agentes: la 1001 en otra llamada, la 1002 que atendió hace 2 minutos y la 1003 que atendió hace 15. 1: entra la llamada 1; la 1001 está ocupada y, de las libres, la 1003 es la que hace más tiempo que no atiende: le toca a ella. 2: entra la 2 a la vez y ahora la que hace más que no atiende es la 1002, que la recibe. 3: con los tres agentes hablando, las llamadas 3 a 7 esperan en la fila hasta llenarla. 4: la llamada 8, sexta en espera, ya no entra y va al Failover Destination, el Ring Group 6000. Least Recent mira cuánto hace que cada agente libre atendió, no cuántas llamadas atendió (eso es Fewest Calls). Max Queue Length viene en 0, sin límite.",
+    "caption": "Lo que pasa en este paso: Least Recent entrega cada llamada al agente libre que hace más que no atiende; con la fila llena, al desborde."
+   }
+  ]
+ },
+ "9": {
+  "anims": [
+   {
+    "file": "9-r1.svg",
+    "alt": "Animación en cuatro tiempos con la interna 1001 de la oficina (192.168.88.30), la UCM en 192.168.88.20, el router de la oficina con IP pública 203.0.113.10, que reenvía 5060 y el RTP, y un interno remoto en internet; abajo, los ajustes NAT de la UCM y lo que anuncia en el SDP. 1: con External Host 203.0.113.10, la UCM le anuncia al remoto c=IN IP4 203.0.113.10 y su audio llega por el router. 2: con Local Network Address vacío, al teléfono de la oficina también le anuncia c=IN IP4 203.0.113.10. 3: la 1001 manda su audio a 203.0.113.10, hacia el router, y no vuelve a la central: en la oficina no se escucha. 4: con Local Network Address 192.168.88.0/24, a la 1001 le anuncia c=IN IP4 192.168.88.20 y al remoto 203.0.113.10: el audio va en los dos sentidos para los dos. Se cargan todas las redes que tengan teléfonos, VLAN de voz incluida.",
+    "caption": "Mirá la línea c= que recibe cada teléfono: sin Local Network Address, la oficina recibe la pública."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "9-l1.svg",
+    "after": "En la extensión del remoto: Media > NAT activado",
+    "alt": "Animación en cuatro tiempos con el interno remoto, un GRP en una casa con IP privada 192.168.1.50, el router de esa casa con WAN 198.51.100.7, internet y la UCM, a la que llega por 203.0.113.10:5060; abajo, lo que dice adentro el REGISTER y de dónde lo ve llegar la UCM. 1: el remoto manda REGISTER y adentro escribe su IP privada: Via SIP/2.0/UDP 192.168.1.50:5060 y Contact con 192.168.1.50; NAT no cambia lo que va escrito adentro. 2: el router de la casa cambia el origen y anota la sesión; el paquete llega a la UCM desde 198.51.100.7:40312. 3: con Media > NAT apagado, la UCM contestaría a lo que dice el mensaje, 192.168.1.50, una IP privada: la respuesta se pierde y el teléfono no registra. 4: con NAT activado, la UCM contesta 200 OK a 198.51.100.7:40312, el origen real; el router de la casa lo pasa al teléfono y queda registrado.",
+    "caption": "Lo que pasa en la red en este paso: con NAT activado la UCM contesta a la IP y el puerto de donde vino el paquete, no a lo que dice el mensaje."
+   }
+  ]
+ },
+ "10": {
+  "anims": [
+   {
+    "file": "10-r1.svg",
+    "alt": "Animación en cuatro tiempos con la UCM en 192.168.88.20 con External Host 203.0.113.10, el router de la oficina con SIP ALG activo, internet y un remoto en 198.51.100.7; abajo, el SDP que salió de la UCM y el que le llegó al remoto. 1: la UCM atiende y manda el 200 OK con c=IN IP4 203.0.113.10 y m=audio 10044 RTP/AVP 8 0: lo que escribió está bien. 2: el router con SIP ALG cambia la línea c= y al remoto le llega c=IN IP4 192.168.88.20, una IP privada. 3: el remoto manda su audio a 192.168.88.20 por internet y se pierde, mientras el audio de la UCM al remoto sí llega: el remoto escucha a la oficina y la oficina no lo escucha. 4: con el SIP ALG apagado y el router reiniciado, el SDP llega como salió y el audio va y viene; se confirma con otra captura. Nota: el mismo ALG puede romper el ACK y cortar la llamada a los 32 segundos; la RFC 4787 pide que estos ALG vengan apagados.",
+    "caption": "Compará el SDP que salió con el que llegó: el ALG cambió la IP y se perdió un sentido del audio."
+   }
+  ],
+  "steps": [
+   {
+    "step": 2,
+    "file": "10-l1.svg",
+    "after": "Hacé una llamada de 20 segundos entre una interna",
+    "alt": "Animación en cuatro tiempos con la interna 1001 (192.168.88.30), la UCM en 192.168.88.20 con Ethernet Capture y un remoto en 198.51.100.7; abajo, el archivo de captura y la notebook del técnico. 1: con Start en Maintenance > Network Troubleshooting > Ethernet Capture, la UCM empieza a guardar una copia de cada paquete de la interfaz elegida. 2: en la llamada de 20 segundos pasan INVITE, 200 OK y ACK, y el audio, unos 50 paquetes RTP por segundo en cada sentido: alrededor de 1000 por sentido; al cortar, el BYE. 3: Stop y descarga: el archivo va a la notebook para abrirlo en Wireshark con el filtro sip || sdp; solo queda lo que pasó por la interfaz de la UCM, por eso se captura en el equipo que está en el camino. 4: ahí se ve qué IP anunció cada lado y cuántos paquetes de audio hubo en cada sentido; un sentido con 1000 y el otro en 0 es audio de un lado. La captura tiene audio real y no sale del soporte.",
+    "caption": "Lo que pasa en la red en este paso: la captura guarda la señalización y unos 1000 paquetes de audio por sentido en 20 segundos."
+   }
+  ]
+ },
+ "11": {
+  "anims": [
+   {
+    "file": "11-r1.svg",
+    "alt": "Animación en cuatro tiempos con un barrido desde 198.51.100.66, la oficina técnica en 198.51.100.20 y la UCM con Fail2Ban: Banned Duration 600 s, Allowlist con 198.51.100.20, un contador de fallos con su límite y la Blocklist. 1: el barrido manda REGISTER con claves malas, la UCM los rechaza y cada fallo suma en el contador. 2: al llegar al límite de reintentos, 198.51.100.66 entra en la Blocklist por 600 segundos y la UCM deja de contestarle: sus REGISTER quedan sin respuesta. 3: la oficina técnica también falla el ingreso varias veces; está en la Allowlist y nunca se banea. 4: pasados los 600 segundos la IP sale de la Blocklist; si vuelve a insistir, los fallos vuelven a sumar y vuelve a entrar. Nota: SIP Defense mira REGISTER, INVITE y SUBSCRIBE fallidos y Login Attack Defense los ingresos a la web; Banned Duration en 0 es baneo permanente.",
+    "caption": "Seguí el contador: al llegar al límite la IP queda en la Blocklist y la UCM deja de contestarle."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "11-l1.svg",
+    "after": "Geo-IP (si la central recibe remotos por internet)",
+    "alt": "Animación en cuatro tiempos con tres orígenes, el interno remoto de Montevideo (198.51.100.7, Uruguay), un barrido (203.0.113.99, otro país) y vos administrando de viaje (192.0.2.44, otro país), y la UCM con Geo-IP: países permitidos Uruguay y Argentina y listas blancas que pasan igual, con 192.168.88.0/24. 1: el remoto de Montevideo manda REGISTER y recibe 200 OK: está en un país permitido. 2: los REGISTER del barrido vienen de un país que no está en la lista y se cortan en Geo-IP, sin llegar a Fail2ban. 3: vos estás conectado a la web desde otro país; antes de guardar, la UCM avisa con un banner que tu IP de administración pertenece a un país bloqueado y quedarías afuera. 4: agregás tu IP 192.0.2.44 a una lista blanca, que pasa aunque Geo-IP bloquee el país, y recién ahí guardás: seguís adentro. Se configura en System Settings > Security Settings > Geo-IP Access Control.",
+    "caption": "Lo que pasa en la red en este paso: lo que viene de un país no permitido se corta antes de Fail2ban; tu IP va a una lista blanca antes de guardar."
+   }
+  ]
+ },
+ "12": {
+  "anims": [
+   {
+    "file": "12-r1.svg",
+    "alt": "Animación en cuatro tiempos con cuatro líneas de vida: el portero GDS3710 registrado como extensión 8001, la UCM con el Ring Group 6000, recepción con un GRP2614 y seguridad con un GRP2602. 1: tocan el timbre y el GDS3710 manda un INVITE al 6000. 2: la UCM manda un INVITE a cada miembro a la vez y suenan los dos teléfonos. 3: recepción atiende con 200 OK; la central le manda CANCEL a seguridad, que responde 487 y deja de sonar, y la UCM le contesta 200 OK al portero. 4: el audio va del portero a la UCM y de la UCM a recepción; el GRP2614 muestra además la imagen JPEG del portero, y un GRP2602 solo tendría audio. Para abrir se usa el PIN por DTMF durante la llamada o la tecla OpenDoor sin atender.",
+    "caption": "El grupo hace sonar a los dos teléfonos; el que atiende se queda con la llamada y al otro se le cancela."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "12-l1.svg",
+    "after": "Timbre y apertura:",
+    "alt": "Animación en cuatro tiempos con el GRP de recepción en una llamada con el portero, la UCM, el GDS3710 registrado como extensión 8001, con su Remote PIN y su salida de alarma ALMOUT1, y la cerradura conectada a esa salida. 1: durante la llamada, recepción marca 4829#; cada tecla viaja como evento RFC 4733 hasta el GDS. 2: con Enable DTMF Open Door, el GDS compara lo recibido con su Remote PIN to Open the Door, 4829: coincide. 3: ALMOUT1 está en Open Door; el GDS activa la salida, el contacto se cierra y la cerradura se libera. 4: si ALMOUT1 tiene otra función, el PIN se acepta igual y la puerta no se mueve: hay que revisar la función de la salida antes que la cerradura y el cableado. Se prueba con la puerta abierta o con alguien del lado de adentro. 4829 es un PIN de ejemplo.",
+    "caption": "Lo que pasa en este paso: el PIN llega como eventos RFC 4733 y el GDS solo mueve la cerradura si la salida está en Open Door."
+   }
+  ]
+ },
+ "13": {
+  "anims": [
+   {
+    "file": "13-r1.svg",
+    "alt": "Animación en cuatro tiempos con la central de Antel, el par de cobre de la línea 2 que llega al FXO2 de la UCM y un panel de alarma conectado en paralelo; abajo, un cliente que llama y la tensión en el par. 1: en reposo, el par tiene tensión continua, unos 48 V en muchas líneas, y todos los equipos la ven: la línea está libre. 2: la alarma reporta a la empresa de monitoreo: descuelga, cierra el lazo y la tensión cae a pocos voltios; el FXO2 ve la línea tomada. 3: un cliente llama a la línea 2; para Antel está ocupada, le da ocupado y el FXO2 nunca ve el timbre. 4: la alarma corta, vuelve la tensión de reposo y la próxima llamada suena en el FXO2. Antes de conectar se recorre el par y se anota todo lo que cuelga; para probar, una línea con un solo equipo.",
+    "caption": "Mientras la alarma tiene el par, para Antel la línea está ocupada y el FXO2 no ve el timbre."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "13-l1.svg",
+    "after": "Llamá a la línea desde un celular: el teléfono tiene que sonar",
+    "alt": "Animación en cuatro tiempos con tu celular, la red, la central de Antel, que hace de FXS y da tensión y timbre, el par y el teléfono de prueba enchufado en la ficha RJ11, con su pantalla y la ficha de la línea. 1: llamás desde el celular y Antel le manda a la línea el timbre, una alterna de unos 70 V en ráfagas: el teléfono suena, para y vuelve a sonar. 2: mientras suena, del lado del celular se escucha el tono de llamada, que en Uruguay es de 425 Hz con 1 segundo de tono y 4 de silencio. 3: si el teléfono tiene pantalla y la línea tiene el servicio de identificación contratado, aparece el número; si acá no aparece, la UCM tampoco lo va a ver. 4: al descolgar, el lazo se cierra, la tensión cae al valor de descolgado, el timbre se corta y la llamada queda armada. Cuidado: con la línea sonando hay unos 70 V de alterna en los contactos.",
+    "caption": "Lo que pasa en este paso: la línea recibe el timbre en ráfagas, el celular escucha el tono de llamada y, al atender, se cierra el lazo."
+   }
+  ]
+ },
+ "14": {
+  "anims": [
+   {
+    "file": "14-r1.svg",
+    "alt": "Animación en cuatro tiempos con las líneas 1 y 2 de Antel, los puertos FXO1 y FXO2 con los colores del Dashboard, las troncales analógicas Antel_Linea1 y Antel_Linea2 con su estado, las rutas que las usan y, abajo, Active Calls y la leyenda de colores: azul libre, naranja en uso, gris sin línea o sin configurar. 1: con las troncales creadas, el FXO1 y el FXO2 se ven libres y las dos troncales, Available. 2: suena la línea 1, el FXO1 atiende y pasa a naranja; Antel_Linea1 queda Busy, la llamada va a la ruta entrante de esa troncal y Active Calls la muestra como canal DAHDI de Antel_Linea1. 3: la 1002 llama afuera, la ruta saliente usa Antel_Linea2, el FXO2 toma la línea y pasa a naranja. 4: terminada esa llamada, se desconecta el cable del FXO2 y el puerto pasa a gris, sin línea. Las rutas trabajan con el nombre de la troncal; conviene mirar el Dashboard antes y después de cada cambio.",
+    "caption": "Seguí los colores: cada FXO es una troncal con nombre, y el Dashboard muestra qué pasa en cada una."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "14-l1.svg",
+    "after": "Descolgá el teléfono de prueba en paralelo con la línea 1",
+    "alt": "Animación en cuatro tiempos con la línea 1 de Antel, un teléfono de prueba conectado en paralelo sobre el mismo par y el FXO1 de la UCM; a la derecha, el Dashboard con Interface Status y Active Calls, y abajo un renglón de la ficha para anotar. 1: con todo colgado hay tensión de reposo, el FXO1 se ve libre y Active Calls no tiene llamadas. 2: se descuelga el teléfono de prueba en paralelo; cierra el lazo, la tensión cae y para la central de Antel la línea 1 queda ocupada. 3: el Dashboard muestra el FXO1 en uso mientras Active Calls sigue sin llamadas: esa combinación es la marca de algo en paralelo tomando la línea. 4: al colgar vuelve la tensión de reposo y el FXO1 vuelve a libre. Se anota cómo lo muestra la central y en cuánto vuelve a libre: es la referencia para la lección Diagnóstico de línea.",
+    "caption": "Lo que pasa en este paso: el teléfono en paralelo cierra el lazo; un FXO en uso sin llamadas en Active Calls es la marca de algo en paralelo."
+   }
+  ]
+ },
+ "15": {
+  "anims": [
+   {
+    "file": "15-r1.svg",
+    "alt": "Animación en cuatro tiempos con Antel, la otra punta que colgó, el par y el FXO1 de la UCM en llamada; abajo, lo que llega por el par después del corte, y a la derecha los detectores de la troncal. 1: tono: la línea manda ocupado de 425 Hz con 0,5 segundos de tono y 0,5 de silencio; Busy Detection cuenta los tonos que dice Busy Tone Count y la UCM cuelga el FXO1. 2: polaridad: la línea invierte la tensión; con Enable Polarity Reversal la UCM lo toma como corte, salvo en los primeros 600 ms después de atender. 3: corriente: la tensión cae un instante; Current Disconnect, que mira cada 200 ms, lo detecta y corta. 4: en una entrante sin atender, si pasan 8000 ms sin timbre, Ring Timeout la da por cortada. Antel no publica cuál usa cada línea: PSTN Detection lo mide con una llamada real; si el detector no reconoce la señal, la línea queda tomada.",
+    "caption": "Cada señal de corte tiene su detector en la troncal; si ninguno la reconoce, la línea queda tomada."
+   }
+  ],
+  "steps": [
+   {
+    "step": 4,
+    "file": "15-l1.svg",
+    "after": "Probá el corte: llamá desde el celular a una interna",
+    "alt": "Animación en cuatro tiempos con tu celular, la interna 1001 que atiende y el FXO1 en el Dashboard; abajo, una línea de tiempo de 0 a 8 segundos desde el corte con lo que llega por el FXO1. 1: llamás desde el celular a una interna y atendés: el FXO1 está en uso. 2: cortás desde el celular y por la línea empieza a llegar ocupado, medio segundo de tono y medio de silencio; la interna escucha ocupado. 3: la UCM cuenta 4 tonos, lo que dice Busy Tone Count, y cuelga cerca de los 4 segundos: el FXO1 vuelve a libre. 4: se repite con una saliente y se anota el tiempo; si no vuelve a libre, la línea manda otra cosa o el tono no coincide, y se graba con Analog Record Trace para medir tono y silencio en Audacity. Busy Tone Count más alto corta más tarde.",
+    "caption": "Lo que pasa en este paso: después del corte llegan tonos de ocupado; con Busy Tone Count 4 el FXO1 vuelve a libre en unos cuatro segundos."
+   }
+  ]
+ },
+ "16": {
+  "anims": [
+   {
+    "file": "16-r1.svg",
+    "alt": "Animación en cuatro tiempos con lo que llega por el FXO1 en una entrante, dos timbres y lo que viaja entre ellos, y abajo el Caller ID Scheme de la troncal Antel_Linea1 con el número del CDR, un teléfono con pantalla conectado al par y qué hacer. 1: sin el servicio de identificación de Antel entre los timbres no viaja nada; el CDR queda vacío y el teléfono con pantalla tampoco muestra número: se pide el servicio a Antel. 2: con el servicio llegan los datos del número y el teléfono con pantalla muestra 2900 1007, pero con otro esquema en la troncal la UCM no los decodifica, como el Failed to decode CallerID de Asterisk. 3: se prueba Auto-Detect y, si no alcanza, un esquema por vez, mirando el CDR en cada prueba. 4: con el esquema de la línea el número 2900 1007 aparece en el CDR y en el teléfono que atiende; se deja fijo y se anota en la ficha. El número es un ejemplo y Antel no publica qué esquema usa.",
+    "caption": "Primero el teléfono con pantalla: dice si falta el servicio o si falta acertar el esquema."
+   }
+  ],
+  "steps": [
+   {
+    "step": 5,
+    "file": "16-l1.svg",
+    "after": "Con la línea libre, detectá la impedancia",
+    "alt": "Animación en cuatro tiempos con la interna 1001, la UCM con la troncal Antel_Linea1, sus bloques TX Gain y RX Gain y el FXO1, y la línea de Antel; arriba viaja tu voz hacia la línea y abajo vuelve lo que rebota. 1: hablás desde la 1001 y tu voz sale por TX Gain y el FXO1 hacia la línea; escuchás al que llama sin eco. 2: si la impedancia del FXO no coincide con la de la línea, parte de esa voz rebota y vuelve por RX hacia la 1001: te escuchás un instante después, con eco. 3: subir RX Gain, por ejemplo a +6 dB, para escuchar mejor al otro sube también el eco: el problema se agranda. 4: en PBX Settings > Interface Settings > Analog Hardware, opciones del FXO, Detect (ERL o Pr) con la línea libre y Update: la impedancia queda ajustada y el rebote baja; recién ahí, ganancias de a poco con llamadas reales, RX si vos escuchás bajo y TX si te escuchan bajo, de -13,5 a +12 dB.",
+    "caption": "Lo que pasa en este paso: con la impedancia mal, parte de tu voz rebota como eco; ACIM lo baja y recién después se tocan las ganancias."
+   }
+  ]
+ },
+ "17": {
+  "anims": [
+   {
+    "file": "17-r1.svg",
+    "alt": "Animación en cuatro tiempos con dos líneas de Antel, cada una con su FXO, la extensión s donde arranca la llamada y la ruta entrante de su troncal, y tres destinos: el IVR 7000 con horario, el Ring Group 6000 con la 1001 y la 1002, y la extensión del fax; abajo, Active Calls. 1: a las 10:00 suena la línea 1; la llamada entra por el FXO1, arranca en s y la ruta de Antel_Linea1, con patrón _. y en Office Time, la manda al IVR 7000. 2: a las 20:00, la misma línea: fuera de horario la ruta la manda al Ring Group 6000. 3: suena la línea 2; su ruta, con patrón _., la manda directo a la extensión del fax. 4: en Active Calls cada llamada tiene destino, IVR, grupo o fax, y ninguna queda en s; si alguna queda en s, a su troncal le falta ruta o el patrón no coincide.",
+    "caption": "Cada línea entra por su troncal y su ruta: horario para la línea 1, directo al fax para la 2."
+   }
+  ],
+  "steps": [
+   {
+    "step": 6,
+    "file": "17-l1.svg",
+    "after": "Desconectá el cable del FXO1 y repetí",
+    "alt": "Animación en cuatro tiempos con la interna 1001, la ruta saliente Uruguay_Antel (patrón _09XXXXXXX entre otros, Use Trunk Antel_Linea1 y Failover Trunk Antel_Linea2), los puertos FXO1 y FXO2 y un celular de ejemplo, 098 000 000. 1: la 1001 marca el celular, coincide con _09XXXXXXX y la llamada sale por Antel_Linea1: el celular ve el número de la línea 1. 2: se desconecta el cable del FXO1, el puerto queda gris y al repetir la llamada la ruta no puede usar Antel_Linea1. 3: si el failover anda, sale por Antel_Linea2 y el celular ve el número de la línea 2, porque Outbound Route CID no aplica a troncales analógicas. 4: si no sale, la alternativa es una troncal Antel_Grupo con FXO 1 y 2 y DAHDI Out Line Selection en Ascend, que toma la libre; al terminar, cada cable vuelve a su FXO. El 911 no se usa para pruebas.",
+    "caption": "Lo que pasa en este paso: sin la línea 1 la ruta prueba el failover, y el celular ve el número de la línea por la que salió."
+   }
+  ]
+ },
+ "18": {
+  "anims": [
+   {
+    "file": "18-r1.svg",
+    "alt": "Animación en cuatro tiempos con las líneas 1 y 2 de Antel, sus pares A y B, los puertos FXO1 y FXO2 y, a la derecha, la lista de sospechosos: par y Antel, equipo en paralelo, puerto FXO2, y troncal, ruta y detección. Los resultados son un ejemplo de uno de los caminos. 1: el FXO2 se ocupa y se libera solo, un loop de unos 10 segundos; se mide el par B sin la central y se compara con la ficha: en reposo da como siempre. 2: se desconecta todo lo que cuelga del par 2 (alarma, posnet, fax) y la falla sigue: sale de la lista el equipo en paralelo. 3: se cruzan los pares, la línea 2 al FXO1 y la línea 1 al FXO2; la falla pasa al FXO1 y sigue a la línea 2: salen el puerto y la configuración, y queda el par y Antel. Si se hubiera quedado en el FXO2, se seguiría por la central. 4: el reclamo a Antel, al 121, al *121 desde un móvil Antel o al 0800 2599 para empresas, con el número, el síntoma, desde cuándo, la tensión medida y el resultado del cruce. Después, cada par vuelve a su puerto.",
+    "caption": "Cada prueba saca un sospechoso; con el cruce de pares se sabe si llamar a Antel o seguir en la central."
+   }
+  ],
+  "steps": [
+   {
+    "step": 3,
+    "file": "18-l1.svg",
+    "after": "Con el teléfono de prueba: tono, llamada desde un celular, timbre",
+    "alt": "Animación en cuatro tiempos con el teléfono de prueba conectado al par 2, la central de Antel, un cliente que llama a la línea 2 y el otro número de una transferencia; abajo, lo que se escucha al descolgar y los códigos de la transferencia temporal de Antel. 1: al descolgar el teléfono de prueba se escucha el tono normal de invitación a marcar, 425 Hz continuo. 2: si suena distinto, la línea tiene una facilidad activa; con la transferencia temporal, Antel dice que se escucha un tono de libre distinto del normal; el dibujo del tono es esquemático. 3: con la transferencia activa, la central de Antel desvía las entrantes al otro número: la línea 2 no suena y la UCM no ve nada, lo que puede explicar el día en que la línea 2 no recibía. 4: se anota y se habla con el cliente: *#21* seguido del número y # la verifica sin cargo, y #21# la cancela con un cómputo.",
+    "caption": "Lo que pasa en este paso: un tono distinto del normal marca una facilidad activa; con la transferencia, las entrantes nunca llegan a la línea."
+   }
+  ]
+ }
+}

@@ -47,7 +47,7 @@ Un cliente DHCP o PPPoE con su ruta automática en distancia 1 compite con las t
 /ip/firewall/filter/add chain=output dst-address=9.9.9.9 protocol=icmp action=drop comment="lab corte isp1"
 /ip/route/print where dst-address=0.0.0.0/0
 ```
-Desde la notebook, `ping -t 1.0.0.1` y contá los pings perdidos hasta que las rutas del ISP1 quedan inactivas.
+Desde la notebook, dejá corriendo `ping -t 1.0.0.1`: sigue respondiendo por el ISP1 hasta que las rutas conmutan, porque el drop solo frena los pings del router a los testigos. Como mucho se pierde uno al cambiar; los pings perdidos de verdad se cuentan en el paso 8.
 6. Volvé y contá de nuevo: `/ip/firewall/filter/remove [find comment="lab corte isp1"]`. Mirá las conexiones que quedaron armadas por el ISP2 (una llamada SIP, una VPN):
 ```routeros
 /ip/firewall/connection/print where protocol=udp

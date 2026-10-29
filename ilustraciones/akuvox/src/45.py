@@ -1,11 +1,11 @@
 """Lección 45 · Configuración de botones: ilustración principal y pasos 5, 6 y 8.
-Todo sale de card.md de la lección 45 y de research/notes/g.md (Call Settings de E16, E18, E12, R20A/B, R20K,
+Todo sale de card.md de la lección 39 y de research/notes/g.md (Call Settings de E16, E18, E12, R20A/B, R20K,
 R29 y X915; notas Configure Sequence Call y Configure Group Call; contactos de E16 y R29).
 La captura real del paso 2 se arma aparte con 45_captura.py (PIL)."""
 from _botones import *  # noqa
 from _akv import code, panel, pill  # noqa
 
-K = "Akuvox · Lección 45"
+K = "Akuvox"
 
 # ---------------------------------------------------------------- principal
 c = Canvas(K, "Un botón, tres maneras de llamar")

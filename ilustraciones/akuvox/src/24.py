@@ -2,7 +2,7 @@ import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/akuvox/s
 from _cat import *
 
 # ---------------------------------------------------------------- 24.svg: las cuatro versiones del R29
-c = Canvas("Akuvox · Lección 24", "Cuatro R29: la versión decide fuente y credenciales")
+c = Canvas("Akuvox", "Cuatro R29: la versión decide fuente y credenciales")
 vers = [("R29S", 1, [("1 cámara", "gray"), ("sin Bluetooth", "gray")], ("PoE 802.3at", "ok"), "fuente: la tabla no la lista"),
         ("R29C", 2, [("2 cámaras", "gray"), ("Bluetooth", "cyan")], ("PoE at o 12 V 2,5 A", "ok"), ""),
         ("R29C-L", 2, [("2 cámaras", "gray"), ("LTE", "cyan")], ("sin PoE: 12 V 1,5 A", "alert"), "con el switch solo, no arranca"),
@@ -22,7 +22,7 @@ c.add(text(600, 600, "Todas: tarjetas 13,56 y 125 kHz · relé 30 V 3 A · IP65 
 save(c, "24.svg")
 
 # ---------------------------------------------------------------- 24-paso3: R29C-L sin PoE
-c = Canvas("Akuvox · Lección 24 · Paso 3", "El R29C-L con LTE no arranca por PoE")
+c = Canvas("Akuvox · Paso 3", "El R29C-L con LTE no arranca por PoE")
 c.add(panel(48, 126, 540, 400, "Solo switch PoE", "alert"))
 c.add(Router(76, 186, "Switch PoE", "802.3at", ports=["1", "2", "3"], hl={"1": CYAN}))
 c.add(portero(420, 186, "pantalla", 0.62, "R29C-L", None, cams=2))
@@ -38,7 +38,7 @@ c.add(Note(48, 548, 1104, "En la lista de obra, el R29C-L va con fuente de 12 V 
 save(c, "24-paso3.svg")
 
 # ---------------------------------------------------------------- 24-paso4: montaje y accesorios
-c = Canvas("Akuvox · Lección 24 · Paso 4", "Elegí cubierta y soporte según el montaje")
+c = Canvas("Akuvox · Paso 4", "Elegí cubierta y soporte según el montaje")
 
 
 def wall_section(x, y, embutido):

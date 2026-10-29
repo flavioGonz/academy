@@ -1,7 +1,7 @@
 from _akv import *
 
 # ---------- 9.svg: tres accesos al video
-c = Canvas("Akuvox · Lección 9", "Del portero al NVR: qué stream va a dónde")
+c = Canvas("Akuvox", "Del portero al NVR: qué stream va a dónde")
 it = c.add(Intercom(60, 160, "Portero", "192.168.88.21"))
 rows = [("rtsp://IP/live/ch00_0", "principal · 2048 kbps", "NVR: grabar con detalle", "camera", BLUE),
         ("rtsp://IP/live/ch00_1", "secundario · 512 kbps", "NVR: grilla y grabación", "camera", OK),
@@ -19,7 +19,7 @@ c.add(Chip(260, 630, "RTSP, ONVIF y MJPEG: cada uno con usuario propio, ninguno 
 save(c, "9.svg")
 
 # ---------- 9-paso2.svg: RTSP con Digest
-c = Canvas("Akuvox · Lección 9 · Paso 2", "Ponele usuario y clave propios al RTSP")
+c = Canvas("Akuvox · Paso 2", "Ponele usuario y clave propios al RTSP")
 c.add(Window(48, 140, 560, 290, "Web del portero", path="Surveillance > RTSP > RTSP Basic",
              rows=[("RTSP Authorization", "activada"), ("Authorization Mode", "Digest"), ("Username", "nvr-lab"), ("Password", "Ejemplo-Rtsp-2026")], hl=1))
 c.add(Step(48, 140, 2))
@@ -29,7 +29,7 @@ c.add(Note(650, 470, 502, "Si un monitor mira este portero por RTSP, cargale el 
 save(c, "9-paso2.svg")
 
 # ---------- 9-paso5.svg: alta en el NVR
-c = Canvas("Akuvox · Lección 9 · Paso 5", "Sumá el portero al NVR como una cámara más")
+c = Canvas("Akuvox · Paso 5", "Sumá el portero al NVR como una cámara más")
 c.add(panel(48, 140, 520, 250, "Opción A · ONVIF", "info"))
 c.add(code(70, 200, 476, "http://192.168.88.21/onvif/device_service", 15))
 svg, _ = bullet_list(74, 284, ["Discoverable activado en Surveillance > ONVIF", "Usuario ONVIF propio, no admin / admin"], 470, 15)

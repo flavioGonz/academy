@@ -1,7 +1,7 @@
 """Lección 6 · Backup primero: principal + pasos 3 y 5."""
 from _mt import *
 
-K = "MikroTik · Lección 6"
+K = "MikroTik"
 
 # ------------------------------------------------------------------ 6.svg principal
 c = Canvas(K, "¿.backup o export? Cada uno sirve para otra cosa")

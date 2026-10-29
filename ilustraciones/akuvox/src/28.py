@@ -2,7 +2,7 @@ import sys; sys.path.insert(0, "/home/claude/ies-training/ilustraciones/akuvox/s
 from _cat import *
 
 # ---------------------------------------------------------------- 28.svg: E13S y E12
-c = Canvas("Akuvox · Lección 28", "E13S y E12: un botón, tarjeta y fuente aparte")
+c = Canvas("Akuvox", "E13S y E12: un botón, tarjeta y fuente aparte")
 c.add(portero(60, 150, "boton", 0.86, "E13S", "un botón · IP65"))
 c.add(portero(240, 150, "boton", 0.86, "E12", "E12S / E12W"))
 c.add(pill(212, 470, "casa u oficina chica", BLUE, SOFT, 15, False))
@@ -22,7 +22,7 @@ c.add(Note(452, 126 + H + 48, W, "La cerradura va con fuente propia; si tiene qu
 save(c, "28.svg")
 
 # ---------------------------------------------------------------- 28-paso1: IP por voz y clave web
-c = Canvas("Akuvox · Lección 28 · Pasos 1 y 2", "Pedile la IP al botón y cambiá la clave web")
+c = Canvas("Akuvox · Pasos 1 y 2", "Pedile la IP al botón y cambiá la clave web")
 c.add(portero(80, 150, "boton", 0.8))
 c.add(f'<circle cx="140" cy="{150 + 214 * 0.8:.0f}" r="30" fill="none" stroke="{WARN}" stroke-width="3" stroke-dasharray="5 5"/>')
 c.add(pill(140, 400, "mantené 5 s", BLUE, WHITE, 16, False))
@@ -36,7 +36,7 @@ c.add(Note(48, 450, 1104, "12. y 312. son las dos versiones de hardware del E12;
 save(c, "28-paso1.svg")
 
 # ---------------------------------------------------------------- 28-paso4: lo que queda en la ficha
-c = Canvas("Akuvox · Lección 28 · Paso 4", "¿La cerradura tiene que resistir un ataque?")
+c = Canvas("Akuvox · Paso 4", "¿La cerradura tiene que resistir un ataque?")
 c.add(panel(48, 126, 540, 360, "E12 con SR01", "alert"))
 c.add(portero(80, 186, "boton", 0.66))
 c.add(Generic(260, 200, "SR01", "conexión especial", "shield", w=290))

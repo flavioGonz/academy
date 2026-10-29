@@ -1,7 +1,7 @@
 """Lección 34 · Descubrir vecinos: principal (tres protocolos), paso 1 (leer la tabla) y paso 4 (lista de descubrimiento)."""
 from _mt import *
 
-K = "MikroTik · Lección 34"
+K = "MikroTik"
 
 # ------------------------------------------------------------------ 34.svg
 c = Canvas(K, "Tres protocolos, una sola tabla de vecinos")

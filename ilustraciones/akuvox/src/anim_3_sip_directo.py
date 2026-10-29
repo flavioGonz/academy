@@ -53,7 +53,7 @@ panels = [
     ("180 Ringing", ["El monitor está sonando.", "Todavía nadie atendió."], "info"),
     ("200 OK + SDP", ["El monitor responde con sus", "propios codecs y puertos.", "Los dos ya saben a dónde", "mandar el medio."], "ok"),
     ("RTP sobre UDP", ["Audio y video van directo", "entre las dos IP. Misma", "subred: ni router ni NAT", "en el medio."], "info"),
-    ("Abrir", ["El monitor manda el código", "DTMF dentro de la llamada.", "El portero dispara el relé", "configurado (lección 6)."], "amb"),
+    ("Abrir", ["El monitor manda el código", "DTMF dentro de la llamada.", "El portero dispara el relé", "configurado (lección 7)."], "amb"),
 ]
 for i, (t, ls, k) in enumerate(panels):
     s, h = note(a, PX, PY, PW, t, ls, k)

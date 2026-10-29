@@ -3,7 +3,7 @@
   "title": "Telefonía IP Grandstream: UCM y terminales",
   "vendor": "Grandstream",
   "tagline": "De la caja al portero abriendo la puerta: la UCM bien hecha, sin audio de un solo lado ni facturas sorpresa.",
-  "description": "Vas a poner en marcha una central UCM6300 cerrada desde el primer día, aprovisionar teléfonos GRP y WP con Zero Config y registrar un troncal SIP con su ruteo de entrada y salida. Al terminar armás IVR, grupos y colas, conectás internos remotos y porteros GDS, y diagnosticás el audio unidireccional con una captura en lugar de prueba y error. Con líneas de Antel por FXO, llevás cada línea hasta un teléfono, un grupo o un IVR y tenés un método cuando no anda.",
+  "description": "Vas a poner en marcha una central UCM6300 cerrada desde el primer día, aprovisionar teléfonos GRP y WP con Zero Config y registrar un troncal SIP o conectar la Troncal SIP de Antel, con su ruteo de entrada y salida. Al terminar armás IVR, grupos y colas, conectás internos remotos y porteros GDS, y diagnosticás el audio unidireccional con una captura en lugar de prueba y error. Con líneas de Antel por FXO, llevás cada línea hasta un teléfono, un grupo o un IVR y tenés un método cuando no anda.",
   "level": "Inicial a intermedio",
   "audience": "Técnicos instaladores y de soporte con base de redes que instalan o mantienen telefonía IP Grandstream.",
   "prerequisites": [
@@ -17,6 +17,7 @@
     "Poner en marcha una UCM6300 eligiendo el modo de red, cambiando credenciales y dejando backup antes de actualizar firmware",
     "Aprovisionar teléfonos con Zero Config y crear extensiones con contraseña aleatoria",
     "Registrar un troncal SIP y armar rutas salientes con privilegios y PIN, y entrantes por DID con ByDID y Strip",
+    "Conectar la Troncal SIP de Antel por IP con un Peer SIP Trunk, el modo Dual y una ruta estática, con caller ID de la troncal y rutas con el plan de numeración de Uruguay",
     "Configurar IVR con horarios, grupos de llamada, colas con desborde y buzón de voz",
     "Conectar internos remotos y porteros GDS37xx a la central, y cerrarla con Fail2ban, listas blancas y Geo-IP",
     "Diagnosticar audio de un solo lado con Ethernet Capture leyendo el SDP",
@@ -31,7 +32,8 @@
         1,
         2,
         3,
-        4
+        4,
+        19
       ]
     },
     {
@@ -94,7 +96,7 @@
       "decide": "Correr PSTN Detection con la línea real, activar polaridad solo si la detecta y probar colgando del otro lado mirando cuánto tarda el FXO en liberarse."
     }
   ],
-  "sources_count": 48,
+  "sources_count": 64,
   "lessons": [
     {
       "n": 1,
@@ -203,6 +205,12 @@
       "dir": "18-diagnostico-de-linea",
       "handle": "Diagnóstico de línea",
       "summary": "Método para la línea que no entra, no corta o hace loop: medir, cambiar el par de puerto, grabar y reclamar a Antel."
+    },
+    {
+      "n": 19,
+      "dir": "19-troncal-sip-antel",
+      "handle": "Troncal SIP de Antel",
+      "summary": "Peer SIP Trunk por IP, OPTIONS de Antel con 200 OK, modo Dual con ruta estática, caller ID de la troncal y plan de Uruguay."
     }
   ]
 }

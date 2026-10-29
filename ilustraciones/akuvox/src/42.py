@@ -1,7 +1,7 @@
 from _akv import *
 
 # ---------- 42.svg: qué anda siempre en la red local y qué se paga en la nube
-c = Canvas("Akuvox · Lección 42", "¿Qué anda sin licencia y qué se paga?")
+c = Canvas("Akuvox", "¿Qué anda sin licencia y qué se paga?")
 c.add(Zone(48, 140, 540, 372, "Red local · sin licencia", OK))
 p = c.add(Generic(80, 180, "Portero", "SIP · relés · RTSP", icon="bell", w=230))
 m = c.add(Generic(338, 180, "Monitor", "atiende y abre", icon="laptop", w=220))
@@ -28,7 +28,7 @@ c.add(Note(624, 540, 528, "Akuvox no publica precios: cotización escrita del di
 save(c, "42.svg")
 
 # ---------- 42-paso1.svg: dónde se ve si el portero está en la nube
-c = Canvas("Akuvox · Lección 42 · Paso 1", "Mirá la cuenta 1: ¿el portero está en la nube?")
+c = Canvas("Akuvox · Paso 1", "Mirá la cuenta 1: ¿el portero está en la nube?")
 c.add(Window(48, 150, 530, 200, "Portero · Account > Basic · Account 1", rows=[("Uso", "SmartPlus (nube)"), ("Register Name", "número SIP de SmartPlus"), ("Estado", "registrada")], hl=2))
 c.add(Window(622, 150, 530, 200, "Portero · Account > Basic · Account 1", rows=[("Uso", "SmartPlus (nube)"), ("Register Name", "número SIP de SmartPlus"), ("Estado", "Failed")], hl=2))
 c.add(Mark(548, 318, ok=True))
@@ -40,7 +40,7 @@ c.add(Note(48, 440, 1104, "Con SmartPlus, la cuenta 1 queda tomada por la nube y
 save(c, "42-paso1.svg")
 
 # ---------- 42-paso3.svg: la planilla del edificio de ejemplo
-c = Canvas("Akuvox · Lección 42 · Paso 3", "24 apartamentos: qué es local y qué se cobra")
+c = Canvas("Akuvox · Paso 3", "24 apartamentos: qué es local y qué se cobra")
 rows = [["Llamada portero a monitor", "sí", "ninguno"],
         ["Apertura: monitor, PIN, tarjeta", "sí", "ninguno"],
         ["RTSP al NVR, HTTP local, relés", "sí", "ninguno"],
@@ -57,7 +57,7 @@ c.add(Note(48, 556, 1104, "Verde: anda en la red local sin pagar nada. Rojo: dep
 save(c, "42-paso3.svg")
 
 # ---------- 42-paso5.svg: el presupuesto en dos renglones
-c = Canvas("Akuvox · Lección 42 · Paso 5", "El presupuesto: lo que se compra y lo que vence")
+c = Canvas("Akuvox · Paso 5", "El presupuesto: lo que se compra y lo que vence")
 c.add(panel(48, 140, 520, 236, "Una vez: equipos e instalación", "ok"))
 svg, _ = bullet_list(76, 210, [("Portero y monitores", "ok"), ("Fuente o PoE, cableado", "ok"), ("Mano de obra y configuración", "ok"), ("Anda en la LAN sin licencia", "ok")], 470, size=17, gap=14)
 c.add(svg)

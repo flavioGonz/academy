@@ -2,7 +2,7 @@
 import random
 from _comun_12_22 import *
 
-K = "MikroTik · Lección 19"
+K = "MikroTik"
 
 
 def qr(x, y, size=150, n=21, seed=7):

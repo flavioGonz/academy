@@ -18,7 +18,7 @@
 <text x="380.0" y="430.0" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#6E88A1" text-anchor="end">IP del WAN</text>
 <text x="380.0" y="456.0" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#04223D" text-anchor="end">203.0.113.10</text>
 <rect x="64" y="486" width="320" height="104" rx="12" fill="#E3F5EC" stroke="#E3F5EC" stroke-width="0"/>
-<text x="80.0" y="518.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#0E8F5E" text-anchor="start"><tspan x="80.0" dy="0.0">Se puede publicar con cuidado</tspan><tspan x="80.0" dy="21.6">(lección 10).</tspan></text>
+<text x="80.0" y="518.0" font-family="Instrument Sans" font-size="16" font-weight="600" fill="#0E8F5E" text-anchor="start"><tspan x="80.0" dy="0.0">Se puede publicar con cuidado</tspan><tspan x="80.0" dy="21.6">(lección 32).</tspan></text>
 <rect x="424" y="140" width="352" height="470" rx="18" fill="#FFFFFF" stroke="#B45309" stroke-width="2"/>
 <text x="444.0" y="176.0" font-family="Familjen Grotesk" font-size="19" font-weight="600" fill="#04223D" text-anchor="start">NAT del módem</text>
 <rect x="475" y="200.0" width="250" height="40" rx="10" fill="#F7FAFD" stroke="#C2D4E6" stroke-width="1.5"/>

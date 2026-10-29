@@ -60,7 +60,7 @@ M["33"] = {
             {"nombre": "ABRIR_SSH_WAN", "valor": "no", "detalle": "si o no: crear las listas por etapas y abrir SSH desde WAN (solo si un proveedor lo exige)"},
         ],
         "codigo": "\n".join([
-            "# IES Training · MikroTik · Reglas de protección (lección 33)",
+            "# IES Training · MikroTik · Reglas de protección (lección 23)",
             "# Probalo primero en un equipo de banco y en Safe Mode (Ctrl+X).",
             "# Requiere el firewall por defecto (defconf). No borra ni mueve reglas existentes.",
             "{",
@@ -152,7 +152,7 @@ M["34"] = {
             {"nombre": "PROTOCOLOS", "valor": "lldp,mndp", "detalle": "Protocolos a usar; sumá cdp solo si hay equipos Cisco"},
         ],
         "codigo": "\n".join([
-            "# IES Training · MikroTik · Descubrir vecinos (lección 34)",
+            "# IES Training · MikroTik · Descubrir vecinos (lección 17)",
             "# Probalo primero en un equipo de banco y en Safe Mode (Ctrl+X).",
             "{",
             ":local lista \"{{LISTA}}\"",
@@ -250,7 +250,7 @@ M["35"] = {
             {"nombre": "CAM_PUERTO_POE", "valor": "ether5", "detalle": "Puerto PoE out de la cámara"},
         ],
         "codigo": "\n".join([
-            "# IES Training · MikroTik · Vigilar con Netwatch (lección 35)",
+            "# IES Training · MikroTik · Vigilar con Netwatch (lección 16)",
             "# Probalo primero en un equipo de banco. No cambia firewall ni rutas.",
             "{",
             ":local nvr \"{{NVR_IP}}\"; :local puerto [:tonum \"{{NVR_PUERTO}}\"]; :local mail \"{{MAIL_DESTINO}}\"",

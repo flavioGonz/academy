@@ -1,7 +1,7 @@
 from _akv import *
 
 # ---------- 14.svg: los modos de la HTTP API
-c = Canvas("Akuvox · Lección 14", "¿Quién puede hablarle a la HTTP API?")
+c = Canvas("Akuvox", "¿Quién puede hablarle a la HTTP API?")
 c.add(text(48, 146, "Setting > HTTP API · Authorization Mode", 16, 600, BLUE, FM))
 modes = [("None", "alert", "nadie se autentica", "solo mesa de laboratorio"),
          ("Allowlist", "ok", "solo las IP de la lista", "red local: cámara LPR, central"),
@@ -23,7 +23,7 @@ for i, (name, kd, what, when) in enumerate(modes):
 save(c, "14.svg")
 
 # ---------- 14-paso1.svg: Digest con usuario propio
-c = Canvas("Akuvox · Lección 14 · Paso 1", "HTTP API en Digest con un usuario que no es admin")
+c = Canvas("Akuvox · Paso 1", "HTTP API en Digest con un usuario que no es admin")
 c.add(Window(48, 140, 540, 290, "Web del portero", path="Setting > HTTP API",
              rows=[("HTTP API", "Enabled"), ("Authorization Mode", "Digest"), ("Username", "api-lab"), ("Password", "Ejemplo-Api-2026")], hl=1))
 c.add(Step(48, 140, 1))
@@ -33,7 +33,7 @@ c.add(Note(630, 470, 522, "Cambiá la clave del script por una mala: tiene que d
 save(c, "14-paso1.svg")
 
 # ---------- 14-paso4.svg: una credencial por integración
-c = Canvas("Akuvox · Lección 14 · Paso 4", "Un usuario por integración: se cambia de a uno")
+c = Canvas("Akuvox · Paso 4", "Un usuario por integración: se cambia de a uno")
 po = c.add(Intercom(1000, 170, "Portero", "VLAN porteros"))
 ints = [("Home Assistant", "10.10.40.5", "ha-porton", "Open Relay via HTTP", True),
         ("Central", "10.10.20.10", "pbx-porton", "Open Relay via HTTP", False),

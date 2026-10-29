@@ -2,7 +2,7 @@
 """Lección 28 · teoría: clave web perdida en un portero de un botón: SmartPlus, PC Manager en la LAN o llave del equipo a soporte."""
 from _anim_akuvox_15_28 import *
 
-a = new(20, "AKUVOX · LECCIÓN 28", "Clave perdida en un portero de un botón: tres caminos")
+a = new(20, "AKUVOX", "Clave perdida en un portero de un botón: tres caminos")
 a.steps([
     "Sin pantalla y sin la clave web, no hay cómo entrar a configurar el E12 o el E13S.",
     "Caminos 1 y 2: SmartPlus, o PC Manager desde una PC en la misma LAN.",

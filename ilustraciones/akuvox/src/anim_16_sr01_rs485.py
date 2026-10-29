@@ -2,7 +2,7 @@
 """Lección 16 · teoría: el SR01 adentro por RS485; si arrancan el frente, solo encuentran un bus de datos."""
 from _anim_akuvox_15_28 import *
 
-a = new(20, "AKUVOX · LECCIÓN 16", "El frente pide, el SR01 de adentro decide")
+a = new(20, "AKUVOX", "El frente pide, el SR01 de adentro decide")
 a.steps([
     "Llega un pedido de apertura al portero: por HTTP, DoorNum=SB.",
     "El portero manda la orden por RS485. El SR01 cierra su contacto: Hold Delay 5 s.",
