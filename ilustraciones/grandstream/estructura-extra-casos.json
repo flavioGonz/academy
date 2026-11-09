@@ -1,0 +1,71 @@
+{
+ "prioridad": 4,
+ "modulos_nuevos": [
+  {
+   "title": "Casos de estudio",
+   "why": "Tres reclamos que llegan todas las semanas a soporte, contados como los cuenta el cliente y resueltos con un método en orden: síntoma exacto, qué preguntar, qué mirar primero, hipótesis por probabilidad, la prueba que separa cada una, arreglo y verificación. Va al final porque usa todo el curso: la troncal de Antel, los internos remotos, las líneas por FXO, el portero y la captura.",
+   "objetivos": [
+    "Al terminar el módulo vas a poder llevar un reclamo de soporte de telefonía con un método en orden, del síntoma exacto a la verificación y la ficha.",
+    "Al terminar el módulo vas a poder separar con una captura en la UCM el audio o el video que no se manda, el que se pierde en el camino y el que llega y no se usa.",
+    "Al terminar el módulo vas a poder distinguir una llamada que no corta por FXO de una por SIP y dejar puestas y probadas las redes de seguridad."
+   ],
+   "lessons": [
+    "21",
+    "22",
+    "23"
+   ]
+  }
+ ],
+ "lecciones": {
+  "21": {
+   "objetivos": [
+    "Al terminar vas a poder anotar el síntoma exacto de un audio en un sentido y usar el sentido que falta para elegir dónde mirar.",
+    "Al terminar vas a poder confirmar con una captura en LAN1 una c= equivocada hacia la troncal o un audio que sale por otra interfaz.",
+    "Al terminar vas a poder dejar Local Network Address y Static Routes con las redes de Antel y verificar con la misma captura."
+   ],
+   "conecta": "En Audio de un lado el remoto estaba detrás de NAT y la causa era el router. Este caso no tiene router en el medio: es la troncal de Antel en modo Dual, y el error lo trajo un cambio que se hizo para los internos remotos.",
+   "sigue": "El audio ya va y viene. El próximo caso es el video: con el audio andando, uno ve y el otro no.",
+   "requisitos": [
+    "19",
+    "10"
+   ]
+  },
+  "22": {
+   "objetivos": [
+    "Al terminar vas a poder decidir si el equipo que no se ve puede mandar video antes de capturar nada.",
+    "Al terminar vas a poder separar en RTP Streams el video que no se manda, el que llega roto y el que llega entero y no se decodifica.",
+    "Al terminar vas a poder ajustar la resolución y el bit rate de un GXV para la subida real de una sede y leer sendrecv, recvonly y m=video 0."
+   ],
+   "conecta": "En Audio en un sentido el sentido que faltaba decía dónde mirar. Con el video pasa lo mismo, pero el video es otro flujo, con su puerto y su ancho de banda, y el portero de Portero en la central ya mandaba video sin recibirlo.",
+   "sigue": "Audio y video llegan. El último caso es el que más reclamos genera: alguien cuelga y la llamada sigue.",
+   "requisitos": [
+    "21",
+    "12"
+   ]
+  },
+  "23": {
+   "objetivos": [
+    "Al terminar vas a poder separar con el CDR y Active Calls una llamada que no corta por FXO de una por SIP.",
+    "Al terminar vas a poder reconocer en una captura el BYE que no llega y dejar Enable Keep-alive y NAT en la extensión remota.",
+    "Al terminar vas a poder poner y probar RTP Timeout, Session Timer, Maximum Call Duration y el corte del portero después de abrir."
+   ],
+   "conecta": "En los dos casos anteriores el problema era un flujo de audio o video que no llegaba. Acá lo que no llega es el corte: por la línea de Antel, la señal que estudiaste en Tonos y corte; por SIP, un BYE.",
+   "cierre": "Con esto recorriste la central completa: de sacarla de la caja a dejarla atendiendo remotos, cerrada en capas y con un método para los tres reclamos más comunes de soporte. La ficha del cliente, el backup, la tabla de troncales y rutas, la tabla de puertos y las capturas de antes y después son tu kit para la próxima obra.",
+   "requisitos": [
+    "15",
+    "9"
+   ]
+  },
+  "11": {
+   "sigue": "La central queda completa y cerrada. El último módulo la pone a prueba con tres casos de soporte: audio en un sentido, video de un lado y la llamada que no corta.",
+   "cierre": ""
+  }
+ },
+ "avisos": [
+  {
+   "id": "11",
+   "texto": "Lección veinte, la última. Central cerrada.",
+   "sugerencia": "Lección veinte. Central cerrada."
+  }
+ ]
+}

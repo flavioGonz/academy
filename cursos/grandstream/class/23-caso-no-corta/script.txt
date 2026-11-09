@@ -1,0 +1,18 @@
+A: Lección veintitrés. Cuelga y no corta. Último caso de estudio.
+B: El que más reclamos genera.
+A: Y confunde: son dos problemas con el mismo síntoma. Un comercio con dos líneas de Antel por FXO y dos vendedores con teléfono en la casa. La encargada dice: a veces el cliente ya cortó y el teléfono sigue en llamada, en silencio o con un tu tu tu. Y cuando le corta a un vendedor, a él le sigue la llamada un rato.
+B: Y en el CDR, llamadas de cuarenta minutos que nadie hizo.
+A: Primer paso: separar los mundos. ¿Por dónde entró la llamada colgada? Te lo dicen el CDR y Active Calls.
+B: Si entró por la línea analógica…
+A: La central nunca se enteró del corte. En cobre no hay mensaje de corte: hay que detectar el ocupado, la polaridad o la corriente. Eso es Tonos y corte. El tu tu tu de cuatrocientos veinticinco hertz es la firma.
+B: ¿Y el vendedor?
+A: Ese es SIP. Ahí el corte sí se manda: es un BYE. Pero no llega. La central lo repite y nadie contesta. Casi siempre es NAT: el router de la casa ya se olvidó del puerto.
+B: Y el teléfono del vendedor corta solo a los treinta segundos.
+A: Ese es su RTP timeout, la red de seguridad del teléfono. Si siempre corta al mismo tiempo, es un timer el que corta, no el BYE.
+B: ¿Las fuentes coinciden?
+A: Seis de siete: la RFC de session timers nació justo para el BYE perdido. Wazo les dice llamadas fantasma. Y hay una historia de Asterisk: RTP timeout configurado en sesenta y un cliente colgado más de veinticuatro horas.
+B: [suspiro] O sea, la red de seguridad también se prueba.
+A: Siempre. En la UCM, RTP Timeout en sesenta y Session Timer. En la extensión remota, keep alive cada veinte segundos. En analógico, un máximo de llamada y del buzón.
+B: ¿Laboratorio?
+A: Veinticinco minutos. Bloqueás en un MikroTik el BYE hacia un teléfono y mirás la captura. Desenchufás otro en plena llamada y ves cuánto queda viva, con y sin RTP Timeout. Y si tenés línea, colgás desde el celular.
+B: Y la troncal deja de quedar ocupada por fantasmas.

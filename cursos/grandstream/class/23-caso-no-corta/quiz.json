@@ -1,0 +1,35 @@
+[
+ {
+  "q": "El cliente que llamó por una línea de Antel cortó, y la interna sigue escuchando un tono de 425 Hz con cadencia de medio segundo. En Active Calls sigue la troncal analógica. ¿Por dónde seguís?",
+  "options": [
+   "Por el Session Timer de la UCM",
+   "Por la detección de corte del FXO: tonos de Uruguay, Busy Detection y PSTN Detection",
+   "Por el Keep-alive de la extensión",
+   "Por el External Host"
+  ],
+  "answer": 1,
+  "why": "En analógico no hay mensaje de corte: la UCM tiene que reconocer el ocupado, la polaridad o la corriente. Si no lo reconoce, la troncal queda tomada. Es lo de la lección Tonos y corte."
+ },
+ {
+  "q": "Recepción le corta a un vendedor que trabaja desde la casa; el teléfono del vendedor sigue en llamada y se corta solo a los 30 segundos. En la captura ves el BYE de la UCM repetido sin 200 OK. ¿Qué arreglo probás primero?",
+  "options": [
+   "Subir el RTP Timeout del teléfono a 300",
+   "Apagar el Session Timer de la UCM",
+   "Enable Keep-alive en la extensión del vendedor, con NAT prendido, para que el camino por donde vuelve el BYE siga abierto",
+   "Cambiar el codec a G.729"
+  ],
+  "answer": 2,
+  "why": "El BYE se manda y no llega: el router del remoto se olvidó del puerto. Los 30 segundos son el RTP timeout del teléfono actuando como red de seguridad, no el arreglo."
+ },
+ {
+  "q": "Ponés RTP Timeout en 60 en la UCM. ¿Qué conviene hacer antes de irte de la obra?",
+  "options": [
+   "Nada, con eso ya corta",
+   "Probarlo provocando la falla (desenchufar un teléfono en plena llamada) y revisar que mute y espera no corten llamadas buenas",
+   "Ponerlo en 5 para que corte más rápido",
+   "Apagar RTP Hold Timeout"
+  ],
+  "answer": 1,
+  "why": "Una red de seguridad se prueba: hay casos de un RTP timeout configurado que no cortaba. Y un valor bajo corta equipos que dejan de mandar audio en mute; RTP Hold Timeout va más largo para las llamadas en espera."
+ }
+]

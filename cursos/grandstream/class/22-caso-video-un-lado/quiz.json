@@ -1,0 +1,35 @@
+[
+ {
+  "q": "Un portero GDS3710 llama al GXV3350 de recepción: recepción ve al visitante y el visitante no ve a recepción. ¿Qué hacés?",
+  "options": [
+   "Nada que arreglar: el GDS371x manda video pero no recibe video del otro lado",
+   "Sumás H.264 a la extensión del portero",
+   "Bajás el bit rate del GXV3350 a 384 kbps",
+   "Activás SIP Packetization Compatibility Mode en el GDS"
+  ],
+  "answer": 0,
+  "why": "Según la FAQ del GDS371x, el portero no soporta recibir video del otro lado. La primera pregunta del método es si ese equipo puede mandar o mostrar video."
+ },
+ {
+  "q": "En la captura de una videollamada, el flujo de video del GXV remoto llega a la UCM con 35 % de pérdida y el que va hacia él llega sin pérdida. ¿Dónde está el problema?",
+  "options": [
+   "En el decodificador del GXV de recepción",
+   "En el enlace de subida del remoto: se manda y llega roto; bajar H.264 Image Size y Video Bit Rate en ese GXV",
+   "En el Codec Preference de la extensión de recepción",
+   "En el SDP, que tiene recvonly"
+  ],
+  "answer": 1,
+  "why": "Hay flujo, así que se manda; llega con pérdida en un solo sentido, así que es el camino de subida. Grandstream recomienda VGA y 384 kbps cuando 720P es mucho para la red."
+ },
+ {
+  "q": "Sacás H.264 de una de las dos extensiones y ninguno de los dos ve video; en la respuesta aparece m=video 0. ¿Cómo lo leés?",
+  "options": [
+   "Es video de un lado por pérdida",
+   "Es el obturador de privacidad",
+   "Es video rechazado por negociación para los dos: un puerto 0 en la respuesta significa que ese flujo no se usa",
+   "Es un problema de profile-level-id"
+  ],
+  "answer": 2,
+  "why": "Según la RFC 3264, un puerto 0 indica que el flujo no se quiere. Sin H.264 en una pata, la central rechaza el video y no lo ve nadie: no es un caso de un solo lado."
+ }
+]

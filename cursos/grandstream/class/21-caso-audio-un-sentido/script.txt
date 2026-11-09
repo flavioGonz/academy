@@ -1,0 +1,21 @@
+A: Lección veintiuno. Audio en un sentido. Primer caso de estudio, y arranca con un llamado de la recepcionista.
+B: A ver.
+A: "Cuando atiendo por la línea de Antel, el cliente me escucha y yo a él no." Las internas entre sí, perfecto. Los vendedores desde la casa, perfecto.
+B: ¿Y qué cambió?
+A: Esa es la primera pregunta. La semana anterior se sumaron internos remotos, con External Host.
+B: Uf. Ya me lo imagino, pero contalo en orden.
+A: En orden es la gracia. Primero el síntoma exacto: quién no oye a quién, en qué llamadas, desde cuándo. Después una captura en el puerto de la troncal. Recién ahí se toca algo.
+B: ¿Y por qué importa tanto quién no oye a quién?
+A: Porque el sentido que falta te dice dónde mirar. Si la oficina no oye al de afuera, el audio de afuera va a una dirección equivocada: la que anunció la central en la línea c del SDP.
+B: Y la central le anunció a Antel la IP pública.
+A: Exacto. Faltaban las redes de Antel en Local Network Address. Antel manda el audio a una IP que desde su red no existe.
+B: ¿Y si fuera al revés, que el de afuera no oye?
+A: Ahí el audio de la central sale mal. Por ejemplo, Antel te manda audio desde una red que no está en la ruta estática y la UCM le contesta por el router del cliente.
+B: ¿Las fuentes van por ahí?
+A: Cuatro de cinco ponen primero lo que anuncia cada lado y el camino de vuelta. Un hilo de FreePBX lo arregló con el codec. Y hay uno buenísimo: dos GXP que no oían, y en el SDP el teléfono pedía el audio en el puerto cuatro.
+B: [risas] El puerto cuatro.
+A: Sin captura no lo encontrás nunca.
+B: ¿El laboratorio?
+A: Veinticinco minutos con dos centrales, una haciendo de Antel. Mirás la llamada sana, ponés External Host sin las redes de Antel, ves la c equivocada y el flujo sin vuelta, sumás las redes y verificás con la misma captura.
+B: O sea, el reclamo se cierra con una captura y un cambio.
+A: Y sin tocar el router de nadie a ciegas.

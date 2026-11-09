@@ -163,6 +163,33 @@ Por qué este arco: internos remotos, routers ajenos, ataques y porteros son don
 - Laboratorio: Campo, 20 min.
 - Regla: el PIN de apertura no es el de fábrica ni el del buzón.
 
+## Arco agregado (noviembre de 2026). Casos de estudio
+Por qué este arco: tres reclamos que llegan todas las semanas a soporte, contados como los cuenta el cliente y resueltos con un método en orden (síntoma exacto, qué preguntar, qué mirar primero, hipótesis por probabilidad, la prueba que separa cada una, causa, arreglo, verificación y ficha). No repiten las lecciones anteriores: las aplican a casos nuevos y remiten a ellas por su título. Va al final porque usa todo el curso. Notas: research/notes/e.md. Los casos están armados para enseñar, sin datos de clientes.
+
+### Lección 21. Audio en un sentido (caso de estudio)
+- 4 de 5 fuentes ponen primero lo que anuncia cada lado en el SDP y el camino de vuelta (TH58); 2 casos de foro lo resolvieron con el codec y el firmware del teléfono.
+- Caso: troncal de Antel en modo Dual; después de sumar internos remotos con External Host, el que llama oye a recepción y recepción no lo oye. Causa: Local Network Address sin las redes de Antel, la UCM le anuncia su IP pública en la c=.
+- Método: el sentido que falta dice dónde mirar (c= que anunció la UCM o camino de salida); H1 c=, H2 interfaz de salida contra Static Routes, H3 algo en el medio, H4 codec.
+- Historia: el GXP2160 que pedía el audio en el puerto 4 (https://community.freepbx.org/t/one-way-audio-but-its-interoffice/91454); RTP Streams y los flujos sin vuelta (https://www.wireshark.org/docs/wsug_html_chunked/ChTelRTP.html).
+- Laboratorio: Campo, 25 min. Dos centrales (una hace de Antel), llamada sana, External Host sin las redes de Antel, captura, arreglo y verificación; tabla de firmas para VLAN, Direct Media, ALG, rango RTP, teléfono y codec.
+- Regla: primero quién no oye a quién.
+
+### Lección 22. Video de un lado (caso de estudio)
+- 5 de 6 fuentes oficiales en que el video es un flujo aparte, habilitado por extensión y por equipo, con resolución, bit rate y perfil propios (TH59); Grandstream recomienda VGA y 384 kbps cuando no hay video (https://documentation.grandstream.com/knowledge-base/gxv3350-administration-guide/).
+- Caso: un GXV3350 en un depósito detrás de un 4G; él ve a recepción, recepción ve negro o congelado. Causa: 720P a 2048 kbps por una subida chica.
+- Método: tres lugares en orden, no se manda, llega roto, no se decodifica; antes, si ese equipo puede mandar (el GDS371x no recibe video: https://documentation.grandstream.com/knowledge-base/gds371x-gds370x-faq/).
+- Historia: el teléfono sin cámara que ofrecía recvonly (https://issues-archive.asterisk.org/ASTERISK-19830).
+- Laboratorio: Campo, 25 min. Dos videoteléfonos, m=video 0 al sacar H.264, cola de MikroTik que simula el 4G, pérdida en un solo flujo, VGA y 384 kbps, obturador cerrado para el tercer lugar.
+- Regla: primero si puede mandar, después si llega entero, al final el decodificador.
+
+### Lección 23. Cuelga y no corta (caso de estudio)
+- 6 de 7 fuentes en que una llamada SIP queda viva cuando el BYE se pierde y en que la defensa son los timers (TH60); en analógico, el corte depende de la detección (TH38, lección 15).
+- Caso: comercio con FXO y dos remotos; llamadas que siguen después de colgar y CDR con llamadas de 40 minutos. El CDR separa FXO (la UCM no detecta el corte) de SIP (el BYE no llega por NAT).
+- Método: quién colgó y qué quedó vivo, por dónde entró, cuánto dura (un timer corta siempre al mismo tiempo), qué escucha el que quedó.
+- Historia: el celular que se iba sin BYE y el RTP timeout que lo arregló (https://lists.kamailio.org/pipermail/sr-users/2016-January/091262.html); rtptimeout=60 y un cliente colgado más de 24 horas (https://issues-archive.asterisk.org/ASTERISK-27251).
+- Laboratorio: Campo, 25 min. BYE bloqueado en un MikroTik, teléfono desenchufado con y sin RTP Timeout, Keep-alive en la extensión, FXO colgando desde el celular, corte del portero después de abrir.
+- Regla: el CDR dice si es FXO o SIP, y la red de seguridad se prueba provocando la falla.
+
 ## Divisiones
 - VPN o puertos abiertos para internos remotos. VPN primero (https://community.freepbx.org/t/vpn-or-tls/91126); lista blanca por IP para sedes con IP fija (https://community.freepbx.org/t/cloud-hosted-pbx-direct-sip-or-vpn/47641); VPN que se cae y pierde llamadas (https://community.freepbx.org/t/fail2ban-securing-pbx-behind-router-with-port-forwarding/70943). Cómo decidir: pocos remotos con IP fija, lista blanca; muchos móviles y alguien que mantenga certificados, VPN; si no hay ninguna de las dos, puertos no estándar con Fail2ban, Geo-IP y PIN en rutas caras.
 - SIP ALG siempre apagado o depende. Cómo decidir: con UCM y teléfonos Grandstream, que ya manejan NAT, apagado; si no se puede apagar, TLS o cambiar el router (https://didlogic.com/learn/sip-alg-explained/, https://www.plexatalk.co.uk/?p=17613).
@@ -170,6 +197,8 @@ Por qué este arco: internos remotos, routers ajenos, ataques y porteros son don
 - Orden de rutas salientes. Cómo decidir: mirar Outgoing Routing Priority en el equipo y probar con un número que matchee dos rutas.
 
 - Bienvenida y al grupo: IVR o Announcement. La guía de IVR enseña el IVR con menú (https://documentation.grandstream.com/knowledge-base/how-to-use-ivr/); el manual actual suma Announcement, que no se saltea (https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/). Cómo decidir: si el firmware lo tiene y no se piensan opciones, Announcement desde la ruta entrante; si van a venir teclas o el IVR ya existe, IVR sin marcar internos, Timeout al grupo y repeticiones en 1.
+
+- Casos de estudio, RTP Timeout y session timers: Wazo lo recomienda bajo y avisa del mute (https://wazo-platform.org/uc-doc/administration/phantom_calls); en Kamailio lo resolvió en el acto y cuentan que los session timers cuestan (https://lists.kamailio.org/pipermail/sr-users/2016-January/091262.html). Cómo decidir: RTP Timeout de 60 s y RTP Hold Timeout más largo, Timer de fábrica sin forzarlo, y probarlo desenchufando un teléfono.
 
 ## Huecos
 - Lección 20: Grandstream no publica la API del IVR ni los nombres de sus prompts en español; dial_extension, dial_ringgroup, dial_other_extension, iloop, tloop y el aviso "Lo siento, no lo entiendo" salen de la configuración leída en el caso. Ninguna fuente dice qué hace la UCM con un dígito cuando el IVR no tiene teclas ni el mínimo de Response Timeout: el laboratorio lo hace observar en el banco.
@@ -182,6 +211,8 @@ Por qué este arco: internos remotos, routers ajenos, ataques y porteros son don
 - El foro oficial de Grandstream no se pudo leer desde el entorno; los casos de foro vienen de 3CX, FreePBX, Netgate y Wazo.
 
 - Módulo FXO, corte de llamada: Busy Tone Count alto (Grandstream) contra el aviso de que muy alto no detecta (Yeastar) y los falsos cortes de Asterisk. Cómo decidir: PSTN Detection y una prueba colgando del otro lado. Inversión de polaridad: solo si la detección la encuentra (https://community.freepbx.org/t/polarity-switch-causing-false-call-backs/35199).
+
+- Casos de estudio: Grandstream no publica una guía de audio ni de video de un solo lado para la UCM630x; el método sale de juntar el manual con RFC y casos de foro. No se pudo confirmar en una fuente: que la UCM use External Host también en el Contact hacia la troncal (sí en la c= con Use IP address in SDP), qué hace la UCM con el fmtp de H.264 cuando pasa video entre dos equipos (si lo reenvía o lo rearma), qué muestra Call Details en los GXV durante una videollamada, ni si Enable Keep-alive de la extensión alcanza para mantener abierto el NAT de cualquier router: las lecciones lo dicen como "probalo". No apareció una opción "Hang Up After Open Door" con ese nombre en el GDS3710: lo que existe es Enable On Hook After Remote Door Opened.
 
 ## Entrega
 Guion, tarjeta y quiz por lección en class/NN-handle/. El audio lo renderiza el orquestador.

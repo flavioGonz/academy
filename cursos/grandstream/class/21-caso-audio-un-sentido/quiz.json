@@ -1,0 +1,35 @@
+[
+ {
+  "q": "En una central con Troncal SIP de Antel en modo Dual, desde que se sumaron internos remotos con External Host, el que llama por la troncal oye a recepción y recepción no lo oye. ¿Qué mirás primero en la captura del puerto de la troncal?",
+  "options": [
+   "El Session-Expires del INVITE",
+   "La línea c= del SDP que manda la UCM hacia Antel: si trae la IP pública, faltan las redes de Antel en Local Network Address",
+   "El número del From, por si Antel rechaza el caller ID",
+   "Los OPTIONS de Antel y su 200 OK"
+  ],
+  "answer": 1,
+  "why": "La oficina no oye al de afuera: el audio de afuera va adonde dijo la UCM. Con External Host y sin las redes de Antel en Local Network Address, la UCM le anuncia la IP pública, que desde la red de Antel no existe."
+ },
+ {
+  "q": "En RTP Streams de una llamada por la troncal ves un solo flujo, de la UCM a Antel, y nada de vuelta en LAN1. El c= de la UCM está bien. ¿Cuál es la siguiente hipótesis?",
+  "options": [
+   "Que el codec negociado sea G.729",
+   "Que Antel no conteste los OPTIONS",
+   "Que la UCM mande o reciba ese audio por otra interfaz: capturar en LAN2 y revisar Static Routes contra el c= de Antel",
+   "Que el teléfono tenga el volumen bajo"
+  ],
+  "answer": 2,
+  "why": "Descartada la c= de la UCM, sigue el camino: si la red de audio de Antel no está en Static Routes, el RTP sale por la ruta por defecto. Se confirma capturando en la otra interfaz."
+ },
+ {
+  "q": "Dos internas en VLAN distintas se escuchan de un solo lado, pero solo con Direct Media prendido. ¿Qué te dice eso?",
+  "options": [
+   "Que la UCM tiene mal el rango RTP",
+   "Que el audio directo entre teléfonos no tiene camino de vuelta entre esas redes; con Direct Media apagado el audio pasa por la UCM",
+   "Que hay que cambiar el firmware de la UCM",
+   "Que falta External Host"
+  ],
+  "answer": 1,
+  "why": "Con Direct Media la central intenta que los teléfonos se hablen directo, y el manual avisa que no siempre se puede. Entre redes con ruteo o firewall asimétrico, un sentido se pierde."
+ }
+]

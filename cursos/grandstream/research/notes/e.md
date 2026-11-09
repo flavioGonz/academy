@@ -1,0 +1,241 @@
+# Notes: batch e (módulo Casos de estudio: audio en un sentido, video de un lado, cortar y que no corte)
+Pages read: 33 (24 nuevas más 9 que ya estaban en raw/: los manuales del UCM630x y del UCM630xA, RFC 3261, 3264 y 4028, la guía de internos remotos, DIDLogic sobre SIP ALG, el hilo de 3CX del GXP que no es oído y el NAT de MikroTik). With notes: 30. Skipped: 3 (la guía de video de Wave para UCM6200 es de otra familia de centrales y solo sirve para el aviso de volver a llamar después de permitir la cámara; RFC 3550 y RFC 5104 se usan solo para definiciones, sin notas propias de caso).
+Nota de alcance: los tres casos de obra de las lecciones están armados para enseñar y no son de un cliente; cada pieza (síntoma, firma, arreglo) sale de las fuentes de abajo. Grandstream no publica una guía de one-way audio ni de one-way video para la UCM630x: lo que hay es la línea del manual que dice que casi siempre es NAT o firewall, los campos de cada equipo y casos de foro. Lo que no se pudo confirmar va marcado "probalo" en las lecciones.
+
+## T31 Audio en un sentido fuera del interno remoto
+- e:N1. El manual del UCM630x repite en la extensión y en los troncales que el audio de un solo lado casi siempre es NAT o el firewall con los puertos SIP y RTP.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "If there is a one-way audio issue, usually it is related to NAT configuration or the Firewall’s support of SIP and RTP ports."
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: fabricante
+- e:N2. External Host es la IP (y puerto) que la UCM usa en los mensajes SIP que salen cuando está detrás de NAT; con Use IP address in SDP, también va en la línea c= del SDP. Local Network Address es la lista de redes que la UCM considera adentro: para esas no usa External Host. Sin esa lista, la IP externa no se arma bien.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "If enabled, the SDP connection will use the IP address resolved from the external host."
+  - Kind: definition
+  - Level: core
+  - Also: T11, T24
+  - Bias: fabricante
+- e:N3. La guía de internos remotos insiste en lo mismo: si Local Network Address no está, la dirección externa no se pone bien. La lección Troncal SIP de Antel ya pedía sumar las redes de Antel a esa lista cuando hay External Host.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm-remote-extensions-guide/  Quote: "If not configured, the external IP address will not be set correctly."
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: fabricante
+- e:N4. Direct Media apagado (de fábrica) hace que el audio pase por la UCM; prendido, la central intenta que los teléfonos se hablen directo, y el manual avisa que no siempre se puede negociar. Entre teléfonos de redes distintas (VLAN sin ruta de vuelta, una sede remota) ese audio directo es el que se pierde.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "It is not always possible for the PBX to negotiate endpoint-to-endpoint media routing."
+  - Kind: definition
+  - Level: core
+  - Also: T05
+  - Bias: fabricante
+- e:N5. RTP Settings de la UCM: RTP Start 10000 y RTP End 20000 de fábrica; Strict RTP descarta RTP que no venga del origen del flujo (apagado de fábrica). Si el rango cambia en la central y no en el router, el reenvío deja afuera el audio.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/  Quote: "If enabled, RTP packets that do not come from the source of the RTP stream will be dropped."
+  - Kind: number
+  - Level: core
+  - Bias: fabricante
+- e:N6. Ethernet Capture en Maintenance > Network Troubleshooting deja elegir la interfaz (Interface Type) y un filtro de captura (host, src, dst, net, proto). En modo Dual eso permite capturar en el puerto de la troncal y en el de la LAN por separado.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/  Quote: "Select the network interface to monitor."
+  - Kind: how-to
+  - Level: core
+  - Bias: fabricante
+- e:N7. Wireshark, Telephony > RTP > RTP Streams, lista cada flujo con su origen, destino, paquetes y pérdidas, y tiene atajos para separar los que tienen par de vuelta de los que no: Ctrl+R selecciona los flujos sin reverso, la firma del audio en un sentido.
+  - Source: https://www.wireshark.org/docs/wsug_html_chunked/ChTelRTP.html  Quote: "Select all single streams (no reverse stream does exist)."
+  - Kind: how-to
+  - Level: core
+  - Bias: none
+- e:N8. PathSolutions ordena las causas de one-way audio así: firewall o ACL mal puesto (la señalización arma la llamada y el RTP pasa en un solo sentido), NAT, pérdida alta en un solo sentido y ruteo asimétrico (la vuelta toma otro camino).
+  - Source: https://www.pathsolutions.com/resources/what-causes-voip-one-way-audio  Quote: "the RTP packets may only be flowing in one direction."
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: vendedor de monitoreo
+- e:N9. Caso de foro: siete GXP2160 en una red plana, dos no escuchan el audio interno. La respuesta útil fue mirar el SDP del INVITE y del 200 OK; el teléfono anunciaba el puerto de audio 4, fuera de todo rango. Lo arregló volver a un firmware anterior.
+  - Source: https://community.freepbx.org/t/one-way-audio-but-its-interoffice/91454  Quote: "my problematic phone tried to negotiate a media bridge on port 4"
+  - Kind: story
+  - Level: core
+  - Bias: none
+- e:N10. Otro caso de 2026: un softphone escucha al Grandstream y el Grandstream no escucha nada, en la misma subred. Se arregló dejando solo G.711 (PCMU y PCMA) en el teléfono y en la extensión.
+  - Source: https://community.freepbx.org/t/grandstream-phones-one-way-audio/108899  Quote: "try disabling all codecs except ulaw"
+  - Kind: story
+  - Level: core
+  - Bias: none
+- e:N11. El hilo de 3CX con un GXP que oye pero no es oído ya estaba en la lección Audio de un lado: la causa más repetida sigue siendo NAT y ALG; se cita para no volver a contarlo.
+  - Source: https://www.3cx.com/community/threads/grandstream-phone-receiver-cant-hear-me.116955/  Quote: "can't hear me"
+  - Kind: story
+  - Level: core
+  - Bias: none
+
+## T32 Video de un lado
+- e:N12. La UCM630x maneja video H.264, H.263, H.263+ y VP8, y el video se habilita por extensión y por troncal en Codec Preference: si H.264 no está en la lista de esa extensión, la central no lo ofrece en esa pata.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "Select audio and video codec for the extension."
+  - Kind: definition
+  - Level: core
+  - Bias: fabricante
+- e:N13. RFC 3264: cada m= del SDP es un flujo; sendonly, recvonly, sendrecv e inactive dicen quién manda; un puerto 0 en la respuesta rechaza ese flujo. En video: m=video 0 es "sin video" para los dos; sendonly o recvonly de un lado es video en un solo sentido por negociación.
+  - Source: https://datatracker.ietf.org/doc/html/rfc3264  Quote: "a port number of zero indicates that the media stream is not wanted."
+  - Kind: definition
+  - Level: core
+  - Bias: none
+- e:N14. Caso de Asterisk de 2012: un teléfono con video activado y sin cámara conectada ofrecía recvonly (solo recibir); Asterisk contestaba sendrecv, que no es una respuesta válida, y la llamada se cortaba. Se corrigió en el código.
+  - Source: https://issues-archive.asterisk.org/ASTERISK-19830  Quote: "phone is in VIDEO_PASSIVE mode == video-on, no-usb-cam-connected"
+  - Kind: story
+  - Level: advanced
+  - Bias: none
+- e:N15. El GDS371x manda video al que atiende pero no recibe video del otro lado: en una llamada con un portero, "uno ve y el otro no" es lo normal.
+  - Source: https://documentation.grandstream.com/knowledge-base/gds371x-gds370x-faq/  Quote: "it does not support receiving video from the remote party."
+  - Kind: definition
+  - Level: core
+  - Also: T15
+  - Bias: fabricante
+- e:N16. Con GXP21xx el video del GDS es JPEG cuadro por cuadro, no un flujo H.264; con RemoteConnect ese MJPEG no funciona en los GXP21xx y Grandstream recomienda un GXV34xx. GXP16xx y 17xx, solo audio.
+  - Source: https://documentation.grandstream.com/knowledge-base/connecting-gds37xx-with-gxp-phones/  Quote: "GXP21xx series support audio and video (JPEG) when integrated with GDS37xx."
+  - Kind: definition
+  - Level: core
+  - Bias: fabricante
+- e:N17. La guía GDS37xx con GXV33xx arma el video con H.264 entre portero y videoteléfono; el GXV recibe el video del portero mientras suena si está el early media.
+  - Source: https://documentation.grandstream.com/knowledge-base/connecting-gds37xx-with-gxv33xx/  Quote: "Video (H.264)"
+  - Kind: how-to
+  - Level: core
+  - Bias: fabricante
+- e:N18. En el GDS371x: perfil H.264 Baseline, Main (de fábrica) o High; I-frame Interval sugerido de 2 a 3 veces la cantidad de cuadros por segundo; SIP Packetization Compatibility Mode pone packetization-mode=0 en el SDP para videoteléfonos viejos que solo decodifican así.
+  - Source: https://documentation.grandstream.com/knowledge-base/gds3710-gds3712-user-manual/  Quote: "This is required when GDS is interacting with legacy video phones that only accepts this value to decode the RTP."
+  - Kind: definition
+  - Level: advanced
+  - Bias: fabricante
+- e:N19. RFC 6184, H.264 sobre RTP: packetization-mode dice cómo se arman los paquetes (0 es una unidad NAL por paquete; 1 permite partir un cuadro grande en fragmentos) y profile-level-id dice el perfil y el nivel que el receptor puede decodificar. Si un lado manda algo que el otro no sabe armar, llega y no se ve.
+  - Source: https://datatracker.ietf.org/doc/html/rfc6184  Quote: "the capabilities of a receiver implementation"
+  - Kind: definition
+  - Level: advanced
+  - Bias: none
+- e:N20. En el GXV3350: Packetization Mode (Single NAL Unit, Non-Interleaved o Prefer Non-Interleaved), H.264 Profile Type (BP/MP/HP de fábrica), Video Bit Rate de 2048 kbps de fábrica y H.264 Image Size 720P. Grandstream avisa que 720P puede ser mucho para algunas redes y dejar sin video: bajar a VGA o CIF y a 384 kbps o menos.
+  - Source: https://documentation.grandstream.com/knowledge-base/gxv3350-administration-guide/  Quote: "the default setting “720P” might be too high that causes no video or video quality issue during video call."
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: fabricante
+- e:N21. El GXV3350 usa puertos separados para audio y video: con el puerto base 50040, el audio RTP va en el base más 10 por línea y el video RTP dos puertos más arriba. Por eso el video puede fallar con el audio andando: es otro flujo, con otro puerto.
+  - Source: https://documentation.grandstream.com/knowledge-base/gxv3350-administration-guide/  Quote: "Video RTP port: Port_Value+10*N+2"
+  - Kind: number
+  - Level: advanced
+  - Bias: fabricante
+- e:N22. El GXV3350 trae Enable RFC5168 Support (prendido): permite pedirle al que manda que refresque el cuadro de H.264. Y Enable Frame Skipping in Video Decoder: con pérdida, salta cuadros P hasta el siguiente I para no mostrar basura.
+  - Source: https://documentation.grandstream.com/knowledge-base/gxv3350-administration-guide/  Quote: "RFC5168 allows SIP party to request the sender to refresh its video frame in H.264"
+  - Kind: definition
+  - Level: advanced
+  - Bias: fabricante
+- e:N23. RFC 4585 define el PLI: el decodificador le avisa al codificador que perdió parte de la imagen. RFC 5104 suma el FIR, el pedido de un cuadro completo. RFC 5168 hace lo mismo por SIP INFO. Sin cuadro completo nuevo, el que perdió el principio queda con la imagen negra o congelada.
+  - Source: https://datatracker.ietf.org/doc/html/rfc4585  Quote: "With the Picture Loss Indication message, a decoder informs the"
+  - Kind: definition
+  - Level: advanced
+  - Bias: none
+- e:N24. Fast update por SIP INFO (RFC 5168): pensado para entornos controlados, como alternativa al RTCP feedback.
+  - Source: https://datatracker.ietf.org/doc/html/rfc5168  Quote: "video fast update in a tightly controlled environment"
+  - Kind: definition
+  - Level: advanced
+  - Bias: none
+- e:N25. GXV34x0: cámara con obturador de privacidad que tapa el sensor; al atender una videollamada se puede elegir solo audio o audio y video; si el video está deshabilitado en la configuración solo aparece la llamada de audio.
+  - Source: https://documentation.grandstream.com/knowledge-base/gxv34xx-faq/  Quote: "All models include a privacy shutter that physically blocks the camera sensor"
+  - Kind: definition
+  - Level: core
+  - Bias: fabricante
+- e:N26. GXV34x0 Admin Guide: H.264 BP, MP y HP hasta 1080p a 30 cuadros y hasta 4 Mbps en el GXV3480; 720p y 2 Mbps en GXV3450 y GXV3470.
+  - Source: https://documentation.grandstream.com/knowledge-base/gxv34x0-admin-guide/  Quote: "bit rate up to 4Mbps"
+  - Kind: number
+  - Level: core
+  - Bias: fabricante
+- e:N27. Wave para celular pide permisos de cámara y micrófono y hay que elegir Allow para usarlo normal; anuncia tolerancia a 20 % de pérdida de video. Al activar video en una llamada manda una invitación que el otro tiene que aceptar.
+  - Source: https://documentation.grandstream.com/knowledge-base/wave-mobile-application-android-ios-user-guide/  Quote: "When prompted to allow permission, please select Allow"
+  - Kind: how-to
+  - Level: core
+  - Bias: fabricante
+- e:N28. GXV3350: Start Video Automatically decide si el INVITE lleva los atributos de video; Remote Video Request (Prompt, Accept, Deny) decide qué hace el teléfono cuando el otro pide video en medio de una llamada de audio.
+  - Source: https://documentation.grandstream.com/knowledge-base/gxv3350-administration-guide/  Quote: "If set to “Yes”, the video codec attributes will be included in the SIP INVITE message."
+  - Kind: definition
+  - Level: core
+  - Bias: fabricante
+
+## T33 Cortar y que no corte
+- e:N29. RFC 3261: el BYE va al remote target del diálogo, que es la URI del Contact (y sigue el route set del Record-Route). Si el Contact quedó con una IP privada o una IP vieja, el BYE sale hacia un lugar que no existe.
+  - Source: https://datatracker.ietf.org/doc/html/rfc3261  Quote: "The remote target MUST be set to the URI from the Contact header field of the request."
+  - Kind: definition
+  - Level: core
+  - Bias: none
+- e:N30. RFC 4028 nace de ese problema: si el BYE se pierde nadie sabe que la sesión terminó. Los session timers refrescan la sesión con re-INVITE o UPDATE (conviene a mitad del intervalo); sin refresco, la sesión se da por terminada y los dos lados mandan BYE.
+  - Source: https://datatracker.ietf.org/doc/html/rfc4028  Quote: "when the BYE message gets lost due to network problems"
+  - Kind: definition
+  - Level: core
+  - Bias: none
+- e:N31. En la UCM630x, PBX Settings > SIP Settings > Session Timer: Force Timer (siempre pedir y exigir), Timer (usar si el otro lo pide, prendido de fábrica), Session Expiration 1800 s de fábrica y Min SE 90 s. Sin refresco, la UCM corta la llamada.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "If no keep-alive is received, the UCM automatically drops the call. Default setting is 1800 seconds (30 minutes)."
+  - Kind: number
+  - Level: core
+  - Bias: fabricante
+- e:N32. En PBX Settings > SIP Settings > ToS: RTP Timeout corta la llamada si no llega RTP en ese tiempo (sin timeout de fábrica, no aplica en espera) y RTP Hold Timeout hace lo mismo con la llamada en espera (más largo que el anterior).
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "if there is no RTP activity within the timeout (in seconds), the call will be terminated. The default setting is no timeout."
+  - Kind: definition
+  - Level: core
+  - Bias: fabricante
+- e:N33. Call Duration Limit y Maximum Call Duration (s) existen por extensión (Features), por ruta saliente y como valor global en General Settings; 0 es sin límite.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "The maximum allowed duration of a call in seconds. Default value is 0 (no limit)."
+  - Kind: definition
+  - Level: core
+  - Bias: fabricante
+- e:N34. Active Calls pinta las llamadas: gris menos de media hora, naranja entre media hora y una hora, roja más de una hora, "puede ser anormal". Desde ahí se puede colgar una llamada.
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "The red color of the active call means the connection of call time is more than one hour. It means this call could be abnormal."
+  - Kind: number
+  - Level: core
+  - Bias: fabricante
+- e:N35. En la extensión, Enable Keep-alive hace que la UCM mande OPTIONS cada Keep-alive Frequency segundos para saber si el equipo está. El manual no lo dice, pero cada OPTIONS que pasa refresca el mapeo UDP del router del remoto, que es por donde le llegan a ese teléfono los pedidos de la central, como el BYE: se enseña como "probalo".
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/  Quote: "If enabled, the PBX will regularly send SIP OPTIONS to check if host device is online."
+  - Kind: definition
+  - Level: core
+  - Bias: fabricante
+- e:N36. Wazo llama "phantom calls" a las llamadas que quedan vivas sin nadie: un extremo se fue sin mandar BYE. Las redes de seguridad son un tiempo máximo absoluto, timeouts del transporte, timers SIP, RTP timeout y session timers. Avisa que un rtp_timeout bajo corta equipos que dejan de mandar RTP en mute.
+  - Source: https://wazo-platform.org/uc-doc/administration/phantom_calls  Quote: "Some endpoints may stop sending RTP packets in some conditions, such as when put on mute."
+  - Kind: rule of thumb
+  - Level: core
+  - Bias: none
+- e:N37. Kamailio 2016: un celular se iba sin mandar BYE y Asterisk dejaba el canal colgado; bajar el RTP timeout de la cuenta lo resolvió en el acto. Balashov: mandar BYE a una punta que ya colgó no rompe nada, se rechaza.
+  - Source: https://lists.kamailio.org/pipermail/sr-users/2016-January/091262.html  Quote: "I changed the RTP timeout on a test account SIP account and immediately it resolved the issue."
+  - Kind: story
+  - Level: core
+  - Bias: none
+- e:N38. SER 2005: dos teléfonos detrás del mismo NAT, el audio anda, pero el BYE del que llama no llega al llamado; si el que llama cuelga, el otro sigue conectado. Al revés anda.
+  - Source: https://lists.kamailio.org/pipermail/sr-users/2005-May/047380.html  Quote: "if the caller hangs up, the callee remains connected until he hangs up too."
+  - Kind: story
+  - Level: core
+  - Bias: none
+- e:N39. Asterisk 2017: rtptimeout=60 configurado y un cliente que se desconecta de la red sigue en la conferencia más de 24 horas; un cambio del código hacía que el timeout no se aplicara. La red de seguridad también se prueba.
+  - Source: https://issues-archive.asterisk.org/ASTERISK-27251  Quote: "chan_sip doesn't honour rtptimeout setting"
+  - Kind: story
+  - Level: advanced
+  - Bias: none
+- e:N40. En el GXV3350: RTP Timeout Timer de 30 s de fábrica corta la llamada sin RTP; session timer con Enable Session Timer, Session Expiration de 180 s de fábrica, Min-SE de 90, quién refresca (UAC o UAS) y Force Timer apagado. O sea: el teléfono también tiene su propia red de seguridad, con otros números.
+  - Source: https://documentation.grandstream.com/knowledge-base/gxv3350-administration-guide/  Quote: "Disconnects the call automatically when there is no RTP stream for a specific timeout. Default is 30 seconds."
+  - Kind: number
+  - Level: core
+  - Bias: fabricante
+- e:N41. GDS371x: Auto On-Hook Timer (300 s de fábrica) corta la llamada SIP; Enable On Hook After Remote Door Opened y Onhook Timer After Remote Open Door(s) cortan después de abrir a distancia; Enable Doorbell Button to Hang up Call (prendido) deja cortar con el timbre.
+  - Source: https://documentation.grandstream.com/knowledge-base/gds3710-gds3712-user-manual/  Quote: "When checked calls will be disconnected automatically  after the remote open door event."
+  - Kind: definition
+  - Level: core
+  - Bias: fabricante
+- e:N42. FXO en Asterisk: una TDM410 en el Reino Unido no detecta el corte durante el buzón (caída de tensión y tono continuo de 400 Hz); el arreglo de compromiso fue limitar el mensaje a 60 s y pedir una tecla para grabar.
+  - Source: https://community.asterisk.org/t/tdm410-on-uk-pstn-not-detecting-open-loop-disconnect/48751  Quote: "cannot detect if the caller hangs during voicemail."
+  - Kind: story
+  - Level: core
+  - Also: T19
+  - Bias: none
+- e:N43. Busy Detection del troncal analógico detecta el corte del otro lado por el tono de ocupado; Busy Tone Count más alto tarda más pero corta menos por error; PSTN Detection mide ocupado, polaridad y corte de corriente (lección Tonos y corte).
+  - Source: https://documentation.grandstream.com/knowledge-base/ucm630x-audio-series-user-manual/  Quote: "Busy Detection is used to detect far-end Hangup or for detecting busy signal."
+  - Kind: definition
+  - Level: core
+  - Also: T19
+  - Bias: fabricante
+
+## Disagreements seen
+- RTP Timeout global en la UCM: Wazo lo recomienda bajo para detectar muertos rápido pero avisa del mute (e:N36); Kamailio 2016 lo usó como arreglo inmediato (e:N37); el caso de Asterisk 2017 muestra que configurado no alcanza si no se prueba (e:N39). Cómo decidir: un valor que ningún silencio normal alcance (60 s es razonable), RTP Hold Timeout más largo, y una prueba desenchufando un teléfono.
+- Session timers: RFC 4028 los propone como el mecanismo estándar (e:N30); Kamailio 2016 cuenta que mucha gente tiene problemas para hacerlos andar (e:N37). Cómo decidir: dejar Timer prendido (de fábrica) y no forzarlo con troncales que no lo soportan; la red de seguridad práctica es RTP Timeout y el máximo de llamada.
+- Video que no se ve por perfil o empaquetado contra video que no se ve por red: Grandstream sugiere bajar resolución y bit rate (e:N20) y en otro equipo un modo de compatibilidad de empaquetado (e:N18). Cómo decidir: la captura dice cuál: si el video llega entero y no se ve es el decodificador; si llega con pérdida, la red.
+
+## Best stories
+- El puerto de audio 4 en el SDP de un GXP2160 (https://community.freepbx.org/t/one-way-audio-but-its-interoffice/91454).
+- El teléfono sin cámara que ofrecía recvonly (https://issues-archive.asterisk.org/ASTERISK-19830).
+- El celular que se iba sin BYE y el RTP timeout que lo resolvió (https://lists.kamailio.org/pipermail/sr-users/2016-January/091262.html).
+- rtptimeout=60 y un cliente colgado más de 24 horas (https://issues-archive.asterisk.org/ASTERISK-27251).
+- El buzón que graba el tono porque el FXO no detecta el corte (https://community.asterisk.org/t/tdm410-on-uk-pstn-not-detecting-open-loop-disconnect/48751).

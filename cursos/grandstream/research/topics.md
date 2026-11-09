@@ -47,3 +47,9 @@ Cómo se enseña: el manual del UCM630x y del UCM630xA (IVR, Announcement, Custo
 - T28 Marcar internos desde el IVR (Dial Other Extensions) y la alternativa Announcement
 - T29 DTMF falso en líneas analógicas: talk-off, eco, detección en el FXO, inband y RFC 4733
 - T30 Medir y verificar: llamada de prueba, CDR (Action Type, Call Time, Talk Time), Analog Record Trace
+
+## Módulo agregado en noviembre de 2026: Casos de estudio
+Cómo se enseña: los manuales del UCM630x y del UCM630xA (NAT, RTP Settings, Session Timer, RTP Timeout, Active Calls, Call Duration Limit, Ethernet Capture), los del GXV3350, GXV34x0 y GDS3710, la FAQ del GDS371x, la guía de Wave, RFC 3261, 3264, 4028, 6184, 4585, 5104 y 5168, Wireshark (RTP Streams) y casos de foro de FreePBX, Asterisk, Kamailio y Wazo. Notas: research/notes/e.md.
+- T31 Audio en un sentido fuera del interno remoto: troncal en modo Dual, External Host y Local Network Address, rutas estáticas, VLAN y ruteo asimétrico, Direct Media, ALG, rango RTP, codec
+- T32 Video de un lado: Codec Preference, sendonly, recvonly y m=video 0, porteros que no reciben video, perfil y packetization-mode de H.264, ancho de banda y resolución, PLI, FIR y RFC 5168
+- T33 Cortar y que no corte: BYE, Contact y Record-Route, session timers, RTP timeout, máximos de llamada, Active Calls y CDR, FXO que no detecta el corte, portero que no corta

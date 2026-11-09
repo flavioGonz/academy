@@ -1,0 +1,19 @@
+A: Lección veintidós. Video de un lado. Segundo caso de estudio.
+B: ¿Quién llamó esta vez?
+A: El encargado de un depósito. Tiene un GXV3350 conectado a la central por un router 4G. En las videollamadas él ve a recepción perfecto. Recepción ve negro, o la imagen del depósito congelada y a saltos.
+B: ¿Y el audio?
+A: Anda, con algún corte. Pista.
+B: Mi primer impulso sería cambiar el codec.
+A: El de todos. [risas] Pero el video de un lado se separa en tres lugares. Uno: no se manda. Dos: se manda y llega roto. Tres: llega entero y el otro no lo sabe decodificar.
+B: ¿Y cómo sé en cuál estoy?
+A: Con una captura en la UCM, que está en el medio. Si no hay flujo de video del depósito, no se manda: cámara tapada, video apagado, o el SDP dice recvonly. Si hay flujo pero con pérdida, es el camino. Si llega entero y se ve negro, es el decodificador: perfil H.264 o packetization mode.
+B: ¿Hay una pregunta antes de capturar?
+A: Sí: ¿ese equipo puede mandar video? Un portero GDS manda y no recibe. Ahí que uno vea y el otro no es lo normal.
+B: ¿Qué dicen las fuentes?
+A: Cinco de seis oficiales coinciden en que el video es un flujo aparte, que cada equipo tiene que tener habilitado, con su resolución y su bit rate. Y Grandstream lo dice clarito en el manual del GXV3350: setecientos veinte p puede ser demasiado para algunas redes y quedarte sin video. Recomienda VGA y trescientos ochenta y cuatro kilobits.
+B: Y el GXV manda de fábrica a dos megas.
+A: Por un 4G con poca subida. En la captura, el video del depósito llega con pérdida alta; el que va para allá, entero.
+B: ¿Laboratorio?
+A: Veinticinco minutos. Dos videoteléfonos, uno detrás de un MikroTik con una cola que simula el 4G. Primero sacás H.264 de una extensión y ves que nadie tiene video: eso es negociación, no un lado. Después la cola, la pérdida en un solo flujo, VGA y trescientos ochenta y cuatro, y verificás con la misma captura.
+B: Y el obturador cerrado, para ver el tercer lugar.
+A: Flujo entero, pantalla negra. La fuente era la cámara.

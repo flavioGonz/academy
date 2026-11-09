@@ -441,3 +441,28 @@ Base: research/notes/c.md (16 páginas con notas). Evidencia sobre Antel delgada
 - Grandstream no publica la API del IVR ni el nombre de los prompts del sistema en español; los nombres dial_extension, dial_ringgroup, dial_other_extension, iloop y tloop, y el aviso "Lo siento, no lo entiendo", salen de la configuración leída en el caso.
 - Ninguna fuente dice qué hace la UCM por dentro con un dígito cuando el IVR no tiene teclas, ni cuál es el mínimo de Response Timeout.
 - Ninguna fuente pública de Antel o de URSEC sobre eco o ruido en líneas analógicas que generen DTMF falso.
+
+## TH58 Audio en un sentido: primero lo que cada lado anuncia en el SDP y el camino de vuelta
+- Sub-topic: T31 (also T11, T12, T24)
+- Agree: 4 of 5. Notes: e:N1, e:N2, e:N3, e:N8, e:N9. Urls: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/ https://documentation.grandstream.com/knowledge-base/ucm-remote-extensions-guide/ https://www.pathsolutions.com/resources/what-causes-voip-one-way-audio https://community.freepbx.org/t/one-way-audio-but-its-interoffice/91454
+- Disagree: un hilo de FreePBX lo resolvió con el codec (https://community.freepbx.org/t/grandstream-phones-one-way-audio/108899) y otro con el firmware del teléfono; ninguna fuente trae el caso de la troncal de Antel con External Host.
+- Level: core
+- Best story: el GXP2160 que pedía el audio en el puerto 4 (https://community.freepbx.org/t/one-way-audio-but-its-interoffice/91454)
+
+## TH59 Video de un lado: el video es un flujo aparte, con su negociación, su puerto y su ancho de banda
+- Sub-topic: T32 (also T15)
+- Agree: 5 of 6. Notes: e:N12, e:N15, e:N16, e:N18, e:N20, e:N21, e:N25. Urls: https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/ https://documentation.grandstream.com/knowledge-base/gxv3350-administration-guide/ https://documentation.grandstream.com/knowledge-base/gds3710-gds3712-user-manual/ https://documentation.grandstream.com/knowledge-base/gds371x-gds370x-faq/ https://documentation.grandstream.com/knowledge-base/gxv34xx-faq/
+- Disagree: la guía de Wave anuncia tolerancia a 20 % de pérdida de video (e:N27), que no aplica a los GXV; ninguna fuente compara las causas entre sí.
+- Level: core
+- Best story: el teléfono sin cámara que ofrecía recvonly (https://issues-archive.asterisk.org/ASTERISK-19830)
+
+## TH60 Llamada que no corta: en SIP es un BYE que no llega, y la defensa son los timers de sesión y de RTP
+- Sub-topic: T33 (also T19, T22)
+- Agree: 6 of 7. Notes: e:N29, e:N30, e:N31, e:N32, e:N36, e:N37, e:N38. Urls: https://datatracker.ietf.org/doc/html/rfc3261 https://datatracker.ietf.org/doc/html/rfc4028 https://documentation.grandstream.com/knowledge-base/ucm630x-series-user-manual/ https://wazo-platform.org/uc-doc/administration/phantom_calls https://lists.kamailio.org/pipermail/sr-users/2016-January/091262.html https://lists.kamailio.org/pipermail/sr-users/2005-May/047380.html
+- Disagree: un RTP timeout configurado que no cortaba (https://issues-archive.asterisk.org/ASTERISK-27251); Kamailio cuenta que los session timers cuestan.
+- Level: core
+- Best story: el celular que se iba sin BYE (https://lists.kamailio.org/pipermail/sr-users/2016-January/091262.html)
+
+## Huecos del módulo Casos de estudio
+- Grandstream no publica una guía de one-way audio ni de one-way video para la UCM630x.
+- Sin fuente: si la UCM usa External Host en el Contact hacia una troncal; qué hace con el fmtp de H.264 al pasar video; qué muestra Call Details en los GXV; si el Keep-alive de la extensión alcanza con cualquier router.

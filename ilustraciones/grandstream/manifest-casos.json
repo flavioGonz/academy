@@ -1,0 +1,227 @@
+{
+ "21": {
+  "fig": {
+   "file": "21.svg",
+   "alt": "Arriba, en la red privada de Antel, Antel con la red 203.0.113.0/24, conectado por LAN1 a una UCM6300 en modo Dual con External Host 192.0.2.10; por LAN2, el router del cliente hacia los remotos e internet. Debajo, dos flechas: en verde, el RTP de la oficina a Antel llega; en rojo y punteado, el RTP de Antel a 192.0.2.10 se pierde. Abajo a la izquierda, el SDP del INVITE de la UCM hacia Antel: c=IN IP4 192.0.2.10 por External Host, y c=IN IP4 198.51.100.2 con el arreglo. A la derecha, PBX Settings > SIP Settings > NAT: External Host 192.0.2.10, Use IP address in SDP Sí, Local Network Address 192.168.88.0/24 y, resaltadas, las redes de Antel 198.51.100.0/30 y 203.0.113.0/24. Nota: el sentido que falta dice dónde mirar; si la oficina no oye, la c= que anunció la central; si no oye el de afuera, el camino por donde sale su audio. Datos de ejemplo.",
+   "caption": "El de afuera oye a la oficina y la oficina no lo oye: la central le anunció a Antel su IP pública en la c=."
+  },
+  "anims": [
+   {
+    "file": "21-r1.svg",
+    "alt": "Animación en cuatro tiempos. A la izquierda, en la red privada de Antel, Antel en 198.51.100.1; al medio la UCM6300 en modo Dual con LAN1 198.51.100.2 y External Host 192.0.2.10; a la derecha, por LAN2, el router del cliente hacia los remotos e internet. 1: se suman internos remotos con External Host 192.0.2.10 y su audio va y viene bien. 2: entra una llamada por la troncal de Antel y la UCM contesta 200 OK con c=IN IP4 192.0.2.10, porque Local Network Address tiene solo 192.168.88.0/24. 3: el audio de la oficina llega a Antel por LAN1, pero el de Antel va a 192.0.2.10 y se pierde: el de afuera oye a la oficina y la oficina no lo oye. 4: con las redes de Antel sumadas a Local Network Address, el 200 OK lleva c=IN IP4 198.51.100.2 y el audio va y viene por LAN1. Datos de ejemplo.",
+    "caption": "La misma central anuncia bien a los remotos y mal a Antel, hasta que las redes de Antel entran en Local Network Address."
+   }
+  ],
+  "steps": [
+   {
+    "file": "21-paso1.svg",
+    "step": 1,
+    "after": "Antes de tocar nada, anotá el síntoma exacto en la ficha",
+    "alt": "Cuatro tarjetas con las preguntas del síntoma: quién no oye a quién, la oficina al de afuera o al revés; en qué llamadas, troncal, internas o remotos; desde cuándo y qué cambió, firmware, router, External Host o una VLAN nueva; y si es desde el primer segundo, porque si además corta a los 30 y pico es lo de la lección Audio de un lado. Abajo, dos tarjetas. En rojo, la oficina no oye al de afuera: el audio de afuera va adonde dijo la central, se mira la c= del SDP que sale de la UCM; en el caso, External Host sin las redes de Antel. En ámbar, el de afuera no oye a la oficina: el audio de la central sale mal, se mira por qué interfaz sale y hacia qué IP; en la troncal, una red de Antel sin ruta estática.",
+    "caption": "Cuatro preguntas antes de tocar nada; la primera ya dice si mirar la c= de la central o el camino de salida."
+   },
+   {
+    "file": "21-paso5.svg",
+    "step": 5,
+    "after": "Diagnosticá en orden, con la captura en LAN1",
+    "alt": "Tabla con las cuatro hipótesis en orden y la prueba que separa cada una. H1, resaltada: la UCM anuncia otra IP en c=; se mira la c= del INVITE o del 200 OK por LAN1. H2: su audio sale por otra interfaz; captura en LAN2 con RTP hacia Antel. H3: algo en el medio filtra o reescribe; la c= sale bien y llega distinta. H4: codec; Active Calls y la m= de cada lado. Abajo, lo que se ve en Wireshark con sip || sdp: INVITE con c=IN IP4 192.0.2.10, RTP Streams con un solo flujo de 198.51.100.2 a 198.51.100.1 y Ctrl+R que lo marca como flujo sin vuelta. Nota en verde: H1 confirmada con la primera prueba, no hace falta seguir con H2; el orden ahorra tiempo porque va de lo más probable a lo menos.",
+    "caption": "Cuatro hipótesis, cada una con su prueba; la primera ya confirma la causa."
+   },
+   {
+    "file": "21-l1.svg",
+    "step": 5,
+    "after": "H1 confirmada: no hace falta seguir con H2",
+    "alt": "Animación en cuatro tiempos con la captura en LAN1 abierta en Wireshark: la lista de paquetes con el filtro sip || sdp, el SDP del INVITE y la ventana Telephony > RTP > RTP Streams. 1: el INVITE que la UCM, 198.51.100.2, manda a Antel, 198.51.100.1, seguido del 200 OK y el ACK. 2: en su SDP, c=IN IP4 192.0.2.10, la IP pública, y m=audio 10044 RTP/AVP 8 0. 3: RTP Streams muestra un solo flujo, de 198.51.100.2:10044 a 198.51.100.1:10500, unos 1000 paquetes y ningún flujo de vuelta; Ctrl+R lo marca como flujo sin vuelta. 4: con el arreglo, c=IN IP4 198.51.100.2 y dos flujos, uno por sentido. Puertos y cantidades de ejemplo.",
+    "caption": "Lo que pasa en la red en este paso: la c= con la IP pública y un flujo de RTP sin vuelta; con el arreglo, dos flujos."
+   },
+   {
+    "file": "21-l2.svg",
+    "step": 8,
+    "after": "La otra firma de la troncal, para reconocerla en obra",
+    "alt": "Animación en cuatro tiempos. A la izquierda, en la red privada de Antel, el servidor SIP 203.0.113.10 y el audio de Antel en 198.51.100.70; al medio la tabla de rutas de la UCM, con 203.0.113.0/24 por LAN1 y la ruta por defecto a 192.168.88.1 por LAN2; a la derecha el router del cliente. 1: el 200 OK de Antel trae c=IN IP4 198.51.100.70, otra red que la de señalización. 2: la UCM no encuentra esa red en Static Routes y usa la ruta por defecto, por LAN2. 3: su RTP sale por el router del cliente y no llega: la oficina oye al de afuera y el de afuera no oye a la oficina; capturando en LAN2 con udp portrange 10000-20000 se ve el RTP de 192.168.88.20 a 198.51.100.70. 4: con una ruta estática a 198.51.100.64/26 por 198.51.100.1 y LAN1, el audio sale por la troncal. Datos de ejemplo.",
+    "caption": "Lo que pasa en la red en este paso: una red de audio de Antel sin ruta estática hace que la UCM conteste por el router del cliente."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "El sentido que falta",
+    "para_que": "Audio de un solo lado suena a un problema, pero son dos flujos independientes que dependen de cosas distintas. Saber cuál falta corta el diagnóstico a la mitad antes de abrir un menú.",
+    "como": "El audio que entra a la central va adonde la central anunció en su SDP; el que sale va adonde anunció el otro, por la interfaz que elige la tabla de rutas. Si la oficina no oye, se mira la c= que mandó la UCM; si no oye el de afuera, por dónde sale su audio y hacia qué IP. Se confirma en RTP Streams, que muestra cuál de los dos flujos no está.",
+    "ejemplo": "En una ferretería de La Teja la queja era que no se escuchaba a los clientes por la troncal. Con eso solo ya se miró la c= que anunciaba la central hacia Antel, y ahí estaba la IP pública."
+   },
+   {
+    "name": "External Host y Local Network Address",
+    "para_que": "Una central detrás de NAT necesita anunciar su IP pública a los que están afuera y la privada a los de adentro. External Host es lo primero y Local Network Address dice quién cuenta como adentro.",
+    "como": "En PBX Settings > SIP Settings > NAT se cargan External Host, Use IP address in SDP y la lista de redes internas. Para cada destino, si está en la lista va la IP de la interfaz; si no, External Host. Cada red que la central alcanza sin NAT va en la lista: la LAN, la troncal en modo Dual y las redes de Antel, como en la lección Troncal SIP de Antel.",
+    "ejemplo": "Un estudio en Pocitos con troncal de Antel en LAN1 suma dos internos remotos. Además de External Host, la lista queda con 192.168.88.0/24, 198.51.100.0/30 y 203.0.113.0/24 de ejemplo: los remotos reciben la IP pública y Antel la de LAN1."
+   },
+   {
+    "name": "Ruteo asimétrico y Direct Media",
+    "para_que": "Fuera de la troncal, el audio en un sentido aparece cuando la ida y la vuelta toman caminos distintos: una VLAN de voz con un firewall que deja pasar en un sentido, o dos teléfonos de redes distintas hablándose directo.",
+    "como": "Con Direct Media apagado, como viene, todo el audio pasa por la UCM y cada teléfono solo necesita llegar a la central. Prendido, la central intenta que los teléfonos se hablen entre ellos, y el manual avisa que no siempre se puede. Si un sentido falla solo entre ciertas redes, se apaga Direct Media o se revisa la regla y la ruta de vuelta en el router.",
+    "ejemplo": "En una clínica con voz en una VLAN y la sala de espera en otra, las llamadas entre esas dos redes se oían de un lado. Con Direct Media apagado en esas extensiones, el audio pasó por la central y se oyó de los dos."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nSIP, la RFC 3261 de 2002, separa la señalización del audio. Cada lado describe en el SDP a qué IP y puerto quiere recibir, con el modelo de oferta y respuesta de la RFC 3264, del mismo año. El audio viaja por RTP, hoy la RFC 3550 de 2003, y no es una conversación sino dos flujos independientes, uno por sentido, cada uno con su destino. De ahí sale el audio en un sentido: un flujo llega y el otro no.\n\nCuando las centrales quedaron detrás de NAT, sumaron un dato para anunciar su IP pública, que en la UCM se llama External Host, y una lista de redes que se consideran adentro, Local Network Address, para no usar esa IP pública con quien está cerca. Para mirar todo esto, Wireshark agrupa los paquetes RTP por flujo en RTP Streams y tiene un atajo, Ctrl+R, que selecciona los flujos que no tienen vuelta.\n\n### Cómo funciona\n\nEl caso es de los que llegan a soporte. Recepción atiende por la Troncal SIP de Antel, en modo Dual: el que llama la escucha, ella a él no. Las internas y los remotos andan. La semana anterior se sumaron internos remotos con External Host.\n\nCada sentido depende de algo distinto. El audio que entra a la central va adonde la central anunció en la `c=` y la `m=` de su SDP. El audio que sale de la central va adonde anunció el otro, por la interfaz que elige su tabla de rutas. Por eso el sentido que falta orienta: si la oficina no oye, se mira lo que anunció la UCM; si no oye el de afuera, por dónde sale su audio.\n\nCon External Host y Use IP address in SDP, la UCM elige la `c=` según el destino: si está en Local Network Address, pone la IP de su interfaz; si no, External Host. En el caso, las redes de Antel no estaban en la lista: a Antel le anunció `c=IN IP4 192.0.2.10`, Antel mandó su audio a una IP que en su red no existe y se perdió.\n\nLa captura en LAN1, la interfaz de la troncal, lo muestra en dos lugares: la `c=` del INVITE o del 200 OK, y RTP Streams con un solo flujo, sin vuelta. Las demás causas siguen la misma lógica: un firewall o una ruta de vuelta distinta entre VLAN, Direct Media entre redes, un ALG que reescribe la `c=`, un rango RTP sin reenviar, un teléfono que anuncia un puerto raro o un codec que un lado no maneja.",
+  "teoria_figs": [
+   {
+    "file": "21-t1.svg",
+    "after": "si no, External Host. En el caso",
+    "alt": "Animación en cuatro tiempos con Antel en 198.51.100.1, la UCM con LAN1 198.51.100.2 y External Host 192.0.2.10 y un interno remoto por internet; abajo, la pregunta que se hace la central, si el destino está en Local Network Address, y la lista con 192.168.88.0/24. 1: hacia el remoto, que no está en la lista, la c= lleva External Host, 192.0.2.10, y está bien. 2: hacia Antel, que tampoco está, le anuncia la misma IP pública, y Antel manda su audio a una IP que en su red no existe. 3: se suman las redes de Antel, 198.51.100.0/30 y 203.0.113.0/24. 4: hacia Antel la c= lleva 198.51.100.2 y el remoto sigue con External Host: cada destino recibe la IP por la que la central lo alcanza.",
+    "caption": "La central elige la c= por destino: la IP de su interfaz si está en Local Network Address, External Host si no."
+   }
+  ]
+ },
+ "22": {
+  "fig": {
+   "file": "22.svg",
+   "alt": "Arriba, el recorrido del video del depósito: GXV3350 del depósito, extensión 1004, un router 4G con subida chica, la UCM6300, donde se captura, y el GXV3480 de recepción, extensión 1003; entre el router y la UCM la flecha va en rojo y punteada, se pierde. Debajo, tres tarjetas en orden. 1, se manda: cámara, obturador, permiso, video apagado o solo audio, y en el SDP sendonly, recvonly o m=video 0. 2, en rojo, llega entero: RTP Streams y el Lost de ese flujo, un solo sentido con pérdida, subida, puertos o ALG; el caso, 720P a 2048 kbps por un 4G. 3, se decodifica: solo si llega entero, profile-level-id y packetization-mode. Abajo, en ámbar: antes de capturar, si ese equipo puede mandar video; un portero GDS371x manda y no recibe, y muchos GRP muestran solo audio o una foto JPEG.",
+   "caption": "Video de un lado: primero si se manda, después si llega entero y al final si se decodifica."
+  },
+  "anims": [
+   {
+    "file": "22-r1.svg",
+    "alt": "Animación en cuatro tiempos. De izquierda a derecha, el GXV3350 del depósito, un router 4G con poca subida, internet, la UCM y el GXV3480 de recepción; debajo, las pantallas de los dos lados y una barra con la subida del 4G, 768 kbps de ejemplo. 1: el video de recepción baja entero y el depósito la ve bien. 2: el GXV3350 manda de fábrica 720P a 2048 kbps, casi tres veces lo que entra por la subida. 3: en la subida se pierden paquetes: recepción ve negro o la imagen congelada, y en la captura de la UCM hay un solo flujo de video con pérdida. 4: con H.264 Image Size en VGA y Video Bit Rate en 384 kbps, en Account > Codec Settings del GXV del depósito, el video entra y llega entero.",
+    "caption": "El video del depósito no entra por la subida del 4G; con VGA y 384 kbps, sí."
+   }
+  ],
+  "steps": [
+   {
+    "file": "22-paso1.svg",
+    "step": 1,
+    "after": "Anotá el síntoma exacto antes de tocar nada",
+    "alt": "Cuatro tarjetas con la primera pregunta, si ese equipo puede mandar video. Portero GDS371x: manda video al que atiende, no recibe video del otro lado, en ámbar, y que no vea a recepción es lo normal. Teléfono GRP o GXP: GRP2601 a 2604 solo audio, GRP2614 en adelante foto JPEG del portero, y no es un flujo H.264. GXV34x0: obturador de privacidad que tapa el sensor, se puede atender solo con audio y con el video deshabilitado solo hay audio. Wave en el celular: pide permiso de cámara, Allow, el video es una invitación que el otro acepta y sin permiso no hay cámara. Abajo: si el equipo puede mandar y del otro lado no se ve, recién ahí la captura en la UCM.",
+    "caption": "Antes de capturar, si el equipo que no se ve puede mandar video: a veces es lo normal."
+   },
+   {
+    "file": "22-l1.svg",
+    "step": 3,
+    "after": "Provocá una falla de negociación para ver la diferencia",
+    "alt": "Animación en cuatro tiempos, diagrama de secuencia con la 1003, un GXV3480 con H.264, la UCM y la 1004, sin H.264 en Codec Preference; abajo, los SDP. 1: la 1003 llama con video; su INVITE ofrece m=audio 50040 RTP/AVP 8 0 y m=video 50042 RTP/AVP 99, H.264. 2: la extensión 1004 tiene solo PCMA y PCMU: la UCM la llama solo con audio y la 1004 contesta 200 OK con audio. 3: la UCM le contesta a la 1003 con m=video 0, un puerto 0 que rechaza el flujo. 4: nadie ve video; no es un problema de un lado, es negociación, y se vuelve a poner H.264. Puertos de ejemplo.",
+    "caption": "Lo que pasa en la red en este paso: sin H.264 en una extensión, la respuesta trae m=video 0 y no ve nadie."
+   },
+   {
+    "file": "22-l2.svg",
+    "step": 5,
+    "after": "Diagnosticá en los tres lugares con la captura de la UCM",
+    "alt": "Animación en cuatro tiempos con RTP Streams de la pata del depósito en la captura de la UCM: audio PCMA y video H.264 con payload 99, cada uno en los dos sentidos, con su origen, destino, paquetes y pérdida; debajo, tres casillas para los tres lugares. 1: se manda, hay un flujo de video desde 10.10.10.31, la 1004, hacia la UCM. 2: ese flujo tiene Lost de 35 por ciento, calculado con los números de secuencia, y el video de la UCM hacia la 1004 llega sin pérdida. 3: se manda y llega roto, en la subida del depósito: es el enlace y el decodificador no hace falta mirarlo. 4: con VGA y 384 kbps en el GXV3350, el mismo flujo llega con pérdida cercana a cero. Cantidades de ejemplo.",
+    "caption": "Lo que pasa en la red en este paso: de los cuatro flujos, solo el video que sube del depósito llega con pérdida."
+   },
+   {
+    "file": "22-paso6.svg",
+    "step": 6,
+    "after": "Arreglá en el GXV del depósito lo que recomienda Grandstream",
+    "alt": "Tres barras con la misma escala. La subida del 4G, 768 kbps simulada en el banco, con una línea punteada en su límite. De fábrica, 720P: el video a 2048 kbps más el audio G.711 de unos 90 kbps, en rojo, pasan largo el límite. Con el arreglo, VGA: el video a 384 kbps más el audio entran. Abajo, la configuración del GXV3350 del depósito en Account > Codec Settings: H.264 Image Size VGA, 720P de fábrica; Video Bit Rate 384 kbps, 2048 de fábrica, resaltado; H.264 Profile Type BP/MP/HP, igual. Notas: Grandstream lo dice en el manual del GXV3350, en algunas redes 720P es demasiado y conviene VGA o CIF y 384 kbps o menos; y más bit rate mejora la imagen solo si la red lo deja pasar.",
+    "caption": "Lo que manda el GXV tiene que entrar por la subida de la sede: VGA y 384 kbps entran, 720P a 2048 no."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "El video es otro flujo",
+    "para_que": "El video viaja en paquetes RTP propios, por un puerto distinto del audio y negociado en su propia línea del SDP. Por eso puede faltar con el audio andando, y puede faltar en un solo sentido.",
+    "como": "Cada extensión de la UCM tiene que tener H.264 en Codec Preference para que el video se ofrezca en esa pata. En la captura, RTP Streams muestra cuatro flujos en una videollamada sana: audio y video en los dos sentidos. Cuando falta video de un lado, se busca primero si existe el flujo de ese lado.",
+    "ejemplo": "En una inmobiliaria del Cordón, la gerencia veía a la recepción y no al revés. En la captura no había flujo de video desde la gerencia: el GXV tenía el obturador de privacidad cerrado."
+   },
+   {
+    "name": "sendonly, recvonly y puerto 0",
+    "para_que": "La oferta y respuesta de SIP no solo dice qué codec se usa: dice quién manda y quién recibe cada flujo, y permite rechazar uno sin cortar la llamada.",
+    "como": "Con a=sendrecv hay ida y vuelta; a=recvonly es solo recibir y a=sendonly solo mandar, desde el punto de vista del que lo escribe; m=video 0 rechaza el video para los dos. Se leen en el INVITE y el 200 OK filtrando sip || sdp. Un recvonly en la respuesta suele ser un equipo sin cámara o sin permiso; un puerto 0, una extensión sin H.264.",
+    "ejemplo": "Un supervisor atendía con Wave en un celular nuevo y nadie lo veía. Wave no tenía permiso de cámara en el teléfono; con Allow y una llamada nueva, el video volvió."
+   },
+   {
+    "name": "Ancho de banda y cuadros completos",
+    "para_que": "El video pesa decenas de veces más que el audio, y una sede con una subida chica lo rompe en el camino. Cuando se pierde un cuadro completo, la imagen queda negra o congelada hasta el siguiente.",
+    "como": "En el GXV3350, Account > Codec Settings define H.264 Image Size y Video Bit Rate, 720P y 2048 kbps de fábrica; Grandstream recomienda VGA o CIF y 384 kbps o menos si no hay video. Con pérdida, el receptor pide un cuadro completo con PLI o FIR, o por SIP INFO con RFC 5168, y el GDS3710 tiene I-frame Interval para mandarlos más seguido.",
+    "ejemplo": "Una barraca en Colón con un GXV detrás de un router 4G se veía a saltos desde la oficina. Bajando a VGA y 384 kbps, la imagen quedó fluida y el audio dejó de cortarse."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEn SIP el video no es un mundo aparte: es otra línea `m=video` en el mismo SDP, con su puerto, sus codecs y su dirección, según la oferta y respuesta de la RFC 3264 (2002). El codec casi universal es H.264, aprobado por la UIT y la ISO en 2003. Cómo se mete en paquetes RTP lo dijo la RFC 3984 en 2005, reemplazada por la RFC 6184 en 2011: ahí están `profile-level-id`, que dice el perfil y el nivel que el receptor puede decodificar, y `packetization-mode`, que dice cómo se arman los paquetes.\n\nComo el video se pierde distinto que el audio, llegaron los pedidos de ayuda del receptor: el PLI de la RFC 4585 (2006), que avisa que se perdió parte de la imagen, el FIR de la RFC 5104 (2008), que pide un cuadro completo, y la RFC 5168 (2008), que hace lo mismo por SIP INFO.\n\n### Cómo funciona\n\nEl caso: el encargado de un depósito tiene un GXV3350 conectado a la central por un router 4G. En las videollamadas con recepción, que tiene un GXV3480, él la ve perfecto; recepción ve negro o la imagen del depósito congelada y a saltos. El audio anda, con algún corte.\n\nEl video es un flujo aparte, con su propio puerto: en un GXV3350 el video RTP va dos puertos arriba del audio. Por eso puede fallar con el audio andando. Se negocia por su lado: `a=sendrecv` es ida y vuelta, `a=recvonly` o `a=sendonly` dejan un solo sentido, y `m=video 0` lo rechaza para los dos. Hay equipos que por diseño van en un solo sentido: el portero GDS371x manda video y no lo recibe.\n\nLos cuadros tampoco valen lo mismo. Un I-frame es una imagen completa y los que siguen son diferencias. Si se pierden paquetes, el receptor queda con una imagen rota o congelada hasta el próximo cuadro completo, o hasta que lo pide con PLI o FIR y el otro lo manda.\n\nDe ahí los tres lugares, en orden. No se manda: no hay flujo de ese lado, o el SDP lo niega. Se manda y llega roto: hay flujo con pérdida, como en el caso, donde el GXV3350 manda de fábrica 720P a 2048 kbps por una subida que no da. Llega entero y no se ve: perfil o empaquetado que el otro no arma. La captura en la UCM, que está en el medio, dice en cuál estás.",
+  "teoria_figs": [
+   {
+    "file": "22-t1.svg",
+    "after": "y `m=video 0` lo rechaza para los dos",
+    "alt": "Animación en cuatro tiempos con recepción, un GXV3480 que ofrece, y el depósito, un GXV3350 que responde; debajo de cada uno su SDP y entre los dos los flujos de video. 1: oferta y respuesta con a=sendrecv, video en los dos sentidos. 2: la respuesta dice a=recvonly, como un equipo sin cámara: el depósito solo recibe y recepción no lo ve. 3: la respuesta trae m=video 0: el flujo se rechaza y no hay video para nadie, que suele ser H.264 fuera de Codec Preference de una extensión. 4: con el video andando se pierde un paquete; el receptor pide un cuadro completo con PLI o FIR, de las RFC 4585 y 5104, o RFC 5168 por SIP INFO, y el que manda contesta con un I-frame.",
+    "caption": "La respuesta decide quién manda video, y un cuadro perdido se recupera pidiendo uno completo."
+   }
+  ]
+ },
+ "23": {
+  "fig": {
+   "file": "23.svg",
+   "alt": "Dos paneles. A la izquierda, en ámbar, FXO, línea de Antel: el cliente colgó y la UCM, en el FXO1, tiene la troncal tomada; por el par llega ocupado de 425 Hz, polaridad o corte de corriente y la UCM no lo reconoce. La interna queda con el tu tu tu; arreglo: tonos de Uruguay, Busy Detection y PSTN Detection; red de seguridad: Maximum Call Duration y Max Message Length. A la derecha, en rojo, SIP, vendedor en la casa: la UCM manda el BYE, el router de la casa con el NAT vencido lo descarta y el teléfono no cortó; el BYE no llega porque el router se olvidó del puerto o el Contact tiene otra IP. El teléfono corta solo a los 30 segundos, su RTP timeout; arreglo: Enable Keep-alive y NAT en la extensión; red: RTP Timeout y Session Timer en la UCM. Abajo: el CDR y Active Calls dicen por dónde entró la llamada colgada, y eso separa los mundos.",
+   "caption": "El mismo síntoma con dos causas: en FXO la central no se entera; en SIP el BYE no llega."
+  },
+  "anims": [
+   {
+    "file": "23-r1.svg",
+    "alt": "Animación en cuatro tiempos con dos filas. Arriba, FXO: el celular del cliente, la línea de Antel por el FXO1, la UCM con Busy Detection y la interna 1001. Abajo, SIP: recepción, la UCM, el router de la casa del vendedor y su teléfono. 1: el cliente cuelga y la línea manda ocupado de 425 hercios; con los tonos de fábrica la UCM no lo reconoce. 2: la troncal queda tomada y la interna con el tu tu tu; con los tonos de Uruguay la UCM detecta el corte y libera. 3: recepción cuelga y la UCM manda el BYE, pero el router de la casa ya cerró el puerto SIP: el teléfono sigue en llamada hasta su RTP timeout, 30 segundos en un GXV3350. 4: con Enable Keep-alive cada 20 segundos, los OPTIONS mantienen abierto el camino, el BYE llega y el teléfono corta al instante. Datos de ejemplo.",
+    "caption": "Arriba la central no reconoce el corte; abajo el BYE no pasa el router, hasta que el keep-alive mantiene abierto el camino."
+   }
+  ],
+  "steps": [
+   {
+    "file": "23-paso1.svg",
+    "step": 1,
+    "after": "Anotá el síntoma exacto y separá los mundos antes de tocar nada",
+    "alt": "Tabla con tres llamadas colgadas de ejemplo: la 1001 y un celular, que entró por Antel_Linea1 en el FXO1 y se oye ocupado de 425 Hz, mundo FXO; la 1001 y la 1002, por la extensión remota 1002, en silencio, mundo SIP; y el portero 8001 con el grupo 6000, por la extensión del GDS, se oye la calle, portero. Abajo a la izquierda, cuánto dura lo colgado: siempre lo mismo, corta un timer y no el BYE; 30 segundos, el RTP timeout de un GXV3350; 1800 segundos, Session Expiration de la UCM; cualquier cosa, no lo corta nadie. A la derecha, los colores de System Status > Active Calls: gris menos de media hora, naranja de media hora a una hora y roja más de una hora, que puede ser anormal; desde ahí se ve la troncal o la extensión y se puede colgar.",
+    "caption": "El CDR y Active Calls separan la llamada colgada por FXO de la colgada por SIP; la duración dice si corta un timer."
+   },
+   {
+    "file": "23-l1.svg",
+    "step": 2,
+    "after": "SIP, el BYE que no llega.",
+    "alt": "Animación en cuatro tiempos con la UCM 192.168.88.20, el MikroTik del banco con la regla ies-lab-bye y la 1002 en 10.10.10.32; abajo, una línea de tiempo de 0 a 32 segundos con cada envío del BYE y una barra con los segundos sin RTP de la 1002. 1: la 1001 cuelga y la UCM manda BYE a 10.10.10.32 puerto 5060, el Contact de la 1002. 2: la regla descarta el UDP 5060 hacia la 1002, no hay 200 OK y la UCM repite. 3: lo repite a los 0,5, 1,5 y 3,5 segundos y después cada 4, como dice la RFC 3261 por UDP, y a los 32 segundos se rinde; la 1002 queda en llamada en silencio. 4: la 1002 corta sola cuando vence su RTP timeout, 30 segundos en un GXV3350; después se quita la regla.",
+    "caption": "Lo que pasa en la red en este paso: el BYE se repite sin respuesta y el teléfono corta recién con su propio RTP timeout."
+   },
+   {
+    "file": "23-paso4.svg",
+    "step": 4,
+    "after": "SIP, el teléfono que desaparece.",
+    "alt": "Arriba, dos ventanas de la UCM. PBX Settings > SIP Settings > ToS: RTP Timeout 60, resaltado, sin timeout de fábrica, y RTP Hold Timeout 300, más largo. PBX Settings > SIP Settings > Session Timer: Timer Sí, de fábrica, Session Expiration 1800 y Min SE 90. Debajo, dos barras con el teléfono desenchufado en plena llamada, de 0 a 120 segundos: sin RTP Timeout, silencio hasta que alguien cuelga; con RTP Timeout 60, silencio hasta los 60 segundos y la UCM corta. Nota en ámbar: RTP Timeout corta también a los equipos que dejan de mandar audio en mute, se prueba con los teléfonos y la troncal del cliente; Session Timer solo actúa si el otro lado lo negocia.",
+    "caption": "RTP Timeout y Session Timer en la UCM: la red que corta una llamada sin nadie, puesta y probada."
+   },
+   {
+    "file": "23-l2.svg",
+    "step": 4,
+    "after": "A los 60 segundos sin audio, la UCM corta.",
+    "alt": "Animación en cuatro tiempos con la 1001 de recepción, la UCM y la 1002; abajo, Active Calls y un reloj con los segundos sin audio de la 1002. 1: llamada de la 1001 a la 1002 con el audio de ida y vuelta por la UCM. 2: se desenchufa la 1002, deja de llegar su RTP, no manda BYE y la 1001 queda en silencio. 3: sin RTP Timeout, que viene sin timeout de fábrica, la llamada sigue en Active Calls hasta que alguien cuelga. 4: con RTP Timeout en 60 y RTP Hold Timeout en 300, a los 60 segundos sin audio la UCM corta, le manda BYE a la 1001 y la libera. Conviene probarlo con los equipos del cliente.",
+    "caption": "Lo que pasa en la red en este paso: un teléfono que desaparece no manda BYE; la UCM corta con RTP Timeout."
+   }
+  ],
+  "concepts": [
+   {
+    "name": "BYE y Contact",
+    "para_que": "En SIP colgar es un mensaje: el BYE. Va dirigido al Contact que cada lado dio al armar la llamada, así que si esa dirección ya no sirve, el corte no llega aunque se haya mandado.",
+    "como": "En la captura se busca el BYE y su 200 OK. Si el BYE se repite sin respuesta, no llega; si va a una IP privada o a una IP vieja, el Contact quedó mal, que es tema de NAT, External Host y Local Network Address. Con un remoto, la UCM le habla por el mapeo UDP que abrió el router de la casa: si el router lo cierra, el BYE se descarta.",
+    "ejemplo": "Un vendedor que atiende desde su casa en el Prado se quedaba en llamada cada vez que recepción le cortaba una charla larga. Con Enable Keep-alive cada 20 segundos en su extensión, el BYE empezó a llegar."
+   },
+   {
+    "name": "Session Timer",
+    "para_que": "Es el estándar para que una llamada sin BYE no quede viva para siempre: la sesión tiene un vencimiento que se renueva mientras los dos lados estén.",
+    "como": "En PBX Settings > SIP Settings > Session Timer: Timer, prendido de fábrica, lo usa si el otro lo pide; Force Timer lo exige, y si el otro no lo soporta puede rechazar la llamada; Session Expiration es 1800 segundos y Min SE 90. El refresco va con re-INVITE o UPDATE; sin refresco, la UCM corta. Los teléfonos tienen el suyo: un GXV3350 trae 180 segundos.",
+    "ejemplo": "En una central con llamadas colgadas que duraban siempre media hora, el CDR mostraba 1800 segundos: era Session Expiration cortando lo que el BYE no había cortado."
+   },
+   {
+    "name": "RTP Timeout",
+    "para_que": "Un teléfono que se desenchufa o se queda sin red no manda BYE, pero deja de mandar audio. RTP Timeout usa eso para cortar llamadas sin nadie.",
+    "como": "En PBX Settings > SIP Settings > ToS, RTP Timeout corta si no llega RTP en esos segundos y RTP Hold Timeout hace lo mismo en espera, con un valor más largo. Vienen sin timeout de fábrica. Un valor como 60 deja margen, pero algunos equipos dejan de mandar audio en mute: se prueba con los del cliente, desenchufando un teléfono en plena llamada.",
+    "ejemplo": "En un call center chico del Centro, las troncales quedaban ocupadas cuando un agente cerraba Wave sin colgar. Con RTP Timeout en 60, la troncal se liberaba al minuto."
+   },
+   {
+    "name": "Corte en analógico",
+    "para_que": "Por una línea de Antel no llega ningún mensaje de corte: la UCM tiene que reconocer lo que manda la línea cuando el otro cuelga. Si no lo reconoce, la troncal queda tomada.",
+    "como": "Se cargan los tonos de Uruguay, se ajusta Busy Detection y se corre PSTN Detection, como en la lección Tonos y corte. La firma es la troncal analógica en Active Calls después de que el otro colgó y la interna con el ocupado. Como red de seguridad, Maximum Call Duration en la extensión que atiende y Max Message Length en el buzón, para que no se graben minutos de tono.",
+    "ejemplo": "Un taller en Maroñas tenía el buzón lleno de mensajes de un minuto con tu tu tu. Con los tonos de Uruguay cargados, la UCM empezó a cortar al segundo ocupado."
+   }
+  ],
+  "teoria_md": "### Un poco de historia\n\nEn la telefonía de cobre el corte nunca fue un mensaje: la central del otro lado avisaba con la línea, cortando la corriente, invirtiendo la polaridad o mandando un tono, y el equipo de este lado lo tenía que reconocer. Es lo que hace hoy el FXO de la UCM con las líneas de Antel.\n\nSIP, en 2002, lo volvió explícito: colgar es mandar un BYE, que la RFC 3261 dirige al Contact que el otro dio al armar la llamada. Pero un mensaje se puede perder, y entonces nadie se entera de que la llamada terminó. Para eso nació la RFC 4028 en 2005, los session timers: la sesión tiene un vencimiento que se renueva con re-INVITE o UPDATE, y si nadie la renueva se da por terminada. Las centrales sumaron además el RTP timeout: sin audio durante un tiempo, se corta. Wazo les dice llamadas fantasma a las que quedan vivas sin nadie.\n\n### Cómo funciona\n\nEl caso: un comercio con un UCM6304A, dos líneas de Antel por FXO y dos vendedores con teléfono en la casa. La encargada cuenta que a veces el cliente ya cortó y el teléfono sigue en llamada, en silencio o con un tu tu tu, y que cuando le corta a un vendedor, a él le sigue la llamada un rato. En el CDR hay llamadas de 40 minutos que nadie hizo.\n\nSon dos mundos con el mismo síntoma. Por la línea analógica, la UCM tiene que detectar el corte: si los tonos son los de fábrica, no reconoce el ocupado de 425 Hz y la troncal queda tomada. Por SIP, el corte se manda pero no llega: el BYE va al Contact del teléfono, y si el router de la casa ya cerró el mapeo del puerto SIP, el BYE se descarta. Por UDP, la UCM lo repite, cada vez más espaciado, hasta rendirse a los 32 segundos.\n\nLo que termina cortando es una red de seguridad. En la UCM, RTP Timeout corta si no llega audio en ese tiempo, y viene sin timeout de fábrica; Session Expiration, 1800 segundos, corta si el otro lado negoció session timers y no hubo refresco. El teléfono tiene los suyos: un GXV3350 corta solo a los 30 segundos sin RTP. Si lo colgado corta siempre al mismo tiempo, es un timer y no el BYE.\n\nEl arreglo va a la causa: en analógico, los tonos de Uruguay y la detección de corte; en SIP, que el camino del BYE siga abierto, con Enable Keep-alive en la extensión. Los máximos de llamada y los timers quedan como red, y se prueban provocando la falla.",
+  "teoria_figs": [
+   {
+    "file": "23-t1.svg",
+    "after": "Lo que termina cortando es una red de seguridad.",
+    "alt": "Animación en cuatro tiempos, diagrama de secuencia entre un teléfono remoto y la UCM, con los relojes de la UCM a la derecha, Session Expiration y RTP Timeout. 1: el INVITE lleva Session-Expires: 1800 y Min-SE: 90, y el 200 OK acepta con refresher=uac. 2: a mitad del intervalo, a los 900 segundos, el teléfono manda UPDATE, la UCM contesta 200 OK y el reloj de la sesión se reinicia. 3: el teléfono desaparece y no llega más RTP; con RTP Timeout en 60 segundos, la UCM corta y manda BYE. 4: sin RTP Timeout, corta Session Expiration cuando pasa el intervalo sin refresco, si los dos lados lo negociaron.",
+    "caption": "Cuando el BYE no llega, corta RTP Timeout por falta de audio o Session Expiration por falta de refresco."
+   }
+  ]
+ }
+}

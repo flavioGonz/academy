@@ -10290,7 +10290,10 @@
     "Session-Expires",
     "session timer",
     "Session Timer",
-    "Min-SE"
+    "Min-SE",
+    "session timers",
+    "Session Expiration",
+    "Force Timer"
    ],
    "cat": "RFC",
    "short": "Session timers de SIP: cada cierto tiempo uno de los dos lados refresca la llamada con un re-INVITE o un UPDATE.",
@@ -10327,7 +10330,8 @@
    "id": "bye",
    "term": "BYE",
    "aliases": [
-    "SIP BYE"
+    "SIP BYE",
+    "BYE perdido"
    ],
    "cat": "Telefonía IP",
    "short": "Mensaje SIP que corta una llamada establecida; el otro lado contesta 200 OK.",
@@ -10585,6 +10589,237 @@
    "cat": "Telefonía IP",
    "short": "Audios propios de la UCM (bienvenidas, avisos, silencios) que se suben o graban en PBX Settings > Voice Prompt > Custom Prompt.",
    "long": "Acepta mp3, wav, ulaw, alaw y gsm hasta 30 MB; el WAV va PCM de 16 bits, mono, 8000 Hz. Un audio subido aparece en cualquier campo de prompt del IVR, por ejemplo como bienvenida o como Response Timeout Prompt, donde un segundo de silencio sirve para callar el aviso de vencimiento.",
+   "case": true
+  },
+  {
+   "id": "rfc3984",
+   "term": "RFC 3984",
+   "aliases": [
+    "RFC3984"
+   ],
+   "cat": "RFC",
+   "short": "Primera norma de cómo viaja H.264 dentro de RTP; la reemplazó la RFC 6184.",
+   "long": "Definió por primera vez cómo se parten las imágenes de H.264 en paquetes RTP y los parámetros del SDP para negociarlo. Desde 2011 rige la RFC 6184, que la actualiza.",
+   "year": 2005,
+   "case": true
+  },
+  {
+   "id": "rfc6184",
+   "term": "RFC 6184",
+   "aliases": [
+    "RFC6184",
+    "H.264 sobre RTP"
+   ],
+   "cat": "RFC",
+   "short": "Cómo viaja el video H.264 en RTP: profile-level-id, packetization-mode y cómo se parten los cuadros.",
+   "long": "Dice cómo se arman los paquetes RTP de H.264 y qué se negocia en el SDP: profile-level-id, el perfil y el nivel que el receptor puede decodificar, y packetization-mode, la forma de empaquetar. Si un lado manda algo que el otro no sabe armar, el video llega y no se ve.",
+   "year": 2011,
+   "case": true
+  },
+  {
+   "id": "rfc4585",
+   "term": "RFC 4585",
+   "aliases": [
+    "RFC4585",
+    "RTCP feedback",
+    "AVPF"
+   ],
+   "cat": "RFC",
+   "short": "Perfil RTP con realimentación rápida por RTCP; define el PLI, el aviso de imagen perdida.",
+   "long": "Permite que el receptor le avise al que manda, sin esperar el informe periódico de RTCP, que perdió algo. Para video define el PLI: el decodificador perdió parte de la imagen y el que manda responde con un cuadro completo.",
+   "year": 2006,
+   "case": true
+  },
+  {
+   "id": "rfc5104",
+   "term": "RFC 5104",
+   "aliases": [
+    "RFC5104"
+   ],
+   "cat": "RFC",
+   "short": "Mensajes de control para video sobre RTCP, entre ellos el FIR, el pedido de un cuadro completo.",
+   "long": "Suma a la RFC 4585 mensajes para conferencias y videollamadas: FIR, Full Intra Request, para que el que manda envíe ya un cuadro completo, y TMMBR para pedir que baje el bit rate.",
+   "year": 2008,
+   "case": true
+  },
+  {
+   "id": "rfc5168",
+   "term": "RFC 5168",
+   "aliases": [
+    "RFC5168",
+    "video fast update",
+    "picture fast update"
+   ],
+   "cat": "RFC",
+   "short": "Pedido de refresco de video por SIP INFO: el receptor pide un cuadro completo por la señalización.",
+   "long": "Pensada para entornos controlados, hace lo mismo que el PLI o el FIR pero con un mensaje SIP INFO. Los GXV3350 la traen como Enable RFC5168 Support, prendida de fábrica.",
+   "year": 2008,
+   "case": true
+  },
+  {
+   "id": "pli-fir",
+   "term": "PLI y FIR",
+   "aliases": [
+    "PLI",
+    "FIR",
+    "Picture Loss Indication",
+    "Full Intra Request"
+   ],
+   "cat": "Video",
+   "short": "Avisos del receptor de video: PLI dice que perdió parte de la imagen, FIR pide un cuadro completo.",
+   "long": "En una videollamada, si se pierde un paquete de un cuadro completo, la imagen queda negra o congelada hasta el siguiente. Con PLI (RFC 4585) o FIR (RFC 5104) el receptor lo pide y el que manda contesta con un I-frame. En la captura se ven como paquetes RTCP.",
+   "case": true
+  },
+  {
+   "id": "i-frame",
+   "term": "I-frame",
+   "aliases": [
+    "cuadro I",
+    "cuadro completo",
+    "keyframe",
+    "I-frame Interval"
+   ],
+   "cat": "Video",
+   "short": "Cuadro de video completo, que se decodifica solo; los que siguen solo traen las diferencias.",
+   "long": "Si se pierde un I-frame, los cuadros que siguen no tienen de dónde partir y la imagen queda rota o congelada. Por eso se mandan cada tanto (el GDS3710 sugiere un intervalo de 2 a 3 veces los cuadros por segundo) y el receptor los puede pedir con PLI o FIR.",
+   "case": false
+  },
+  {
+   "id": "direccion-de-medios",
+   "term": "sendrecv, sendonly y recvonly",
+   "aliases": [
+    "sendrecv",
+    "sendonly",
+    "recvonly",
+    "inactive",
+    "a=sendonly",
+    "a=recvonly",
+    "m=video 0"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Atributos del SDP que dicen si cada flujo de audio o video se manda, se recibe o las dos cosas.",
+   "long": "Según la RFC 3264, a=sendrecv es ida y vuelta, a=sendonly solo mandar y a=recvonly solo recibir, desde el punto de vista del que lo escribe. Un puerto 0 en la línea m= rechaza el flujo: m=video 0 es una llamada sin video para los dos. Un recvonly en la respuesta suele ser un equipo sin cámara o sin permiso.",
+   "case": true
+  },
+  {
+   "id": "profile-level-id",
+   "term": "profile-level-id",
+   "aliases": [
+    "profile level id",
+    "perfil H.264",
+    "Baseline Profile",
+    "Main Profile",
+    "High Profile"
+   ],
+   "cat": "Video",
+   "short": "Parámetro del SDP de H.264 con el perfil y el nivel que el receptor puede decodificar.",
+   "long": "Va en la línea a=fmtp del video. Los perfiles más comunes son Baseline, Main y High; los GXV negocian BP/MP/HP de fábrica y el GDS3710 sale en Main. Si un lado manda un perfil o un nivel que el otro no maneja, el flujo llega entero y la pantalla queda negra.",
+   "case": true
+  },
+  {
+   "id": "packetization-mode",
+   "term": "packetization-mode",
+   "aliases": [
+    "packetization mode",
+    "Single NAL Unit Mode",
+    "Non-Interleaved Mode",
+    "SIP Packetization Compatibility Mode"
+   ],
+   "cat": "Video",
+   "short": "Parámetro del SDP de H.264 que dice cómo se arman los paquetes RTP del video.",
+   "long": "Con 0, cada paquete lleva una unidad NAL; con 1 (Non-Interleaved) se puede partir un cuadro grande en fragmentos. Algunos videoteléfonos viejos solo decodifican el modo 0: para ellos el GDS3710 tiene SIP Packetization Compatibility Mode, y el GXV3350 deja elegir el modo en Packetization Mode.",
+   "case": true
+  },
+  {
+   "id": "rtp-timeout",
+   "term": "RTP Timeout",
+   "aliases": [
+    "RTP Hold Timeout",
+    "rtptimeout",
+    "rtp_timeout",
+    "RTP Timeout Timer"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Tiempo sin audio después del cual la central o el teléfono cortan la llamada.",
+   "long": "En la UCM está en PBX Settings > SIP Settings > ToS y viene sin timeout de fábrica; RTP Hold Timeout hace lo mismo con la llamada en espera y va más largo. Un GXV3350 trae RTP Timeout Timer de 30 segundos. Es la red de seguridad para un teléfono que se desenchufa sin mandar BYE; algunos equipos dejan de mandar audio en mute, así que se prueba.",
+   "case": true
+  },
+  {
+   "id": "llamada-fantasma",
+   "term": "Llamada fantasma",
+   "aliases": [
+    "phantom call",
+    "dead call",
+    "zombie call",
+    "llamada colgada"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Llamada que queda viva en la central sin nadie del otro lado, porque un extremo se fue sin avisar.",
+   "long": "En SIP pasa cuando el BYE se pierde o un teléfono se queda sin red; en analógico, cuando el FXO no detecta el corte. Ocupa troncales y llena buzones. Se corta con RTP Timeout, session timers y un tiempo máximo de llamada, y se diagnostica en Active Calls y el CDR.",
+   "case": false
+  },
+  {
+   "id": "external-host",
+   "term": "External Host",
+   "aliases": [
+    "Use IP address in SDP",
+    "Local Network Address"
+   ],
+   "cat": "Telefonía IP",
+   "short": "IP pública que la UCM anuncia en SIP y en el SDP cuando está detrás de NAT; Local Network Address dice quién cuenta como adentro.",
+   "long": "En PBX Settings > SIP Settings > NAT. Para cada destino, si está en Local Network Address la UCM anuncia la IP de su interfaz; si no, External Host. Si una red que la central alcanza sin NAT, como la de la troncal de Antel, falta en la lista, a ese destino le anuncia la IP pública y su audio se pierde.",
+   "case": true
+  },
+  {
+   "id": "direct-media",
+   "term": "Direct Media",
+   "aliases": [
+    "Enable Direct Media",
+    "audio directo"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Opción de la extensión de la UCM para que el audio vaya directo entre teléfonos, sin pasar por la central.",
+   "long": "Viene apagada: el audio pasa por la UCM y cada teléfono solo necesita llegar a la central. Prendida, la central intenta que los teléfonos se hablen entre ellos, y el manual avisa que no siempre se puede; entre redes distintas, como dos VLAN o una sede remota, es una causa típica de audio en un sentido.",
+   "case": true
+  },
+  {
+   "id": "rtp-streams",
+   "term": "RTP Streams",
+   "aliases": [
+    "RTP Stream Analysis",
+    "Telephony > RTP > RTP Streams"
+   ],
+   "cat": "Herramientas",
+   "short": "Ventana de Wireshark que lista cada flujo RTP de una captura con origen, destino, paquetes y pérdida.",
+   "long": "Está en Telephony > RTP > RTP Streams. Una llamada sana tiene un flujo de audio por sentido, y dos más si hay video. Ctrl+R selecciona los flujos que no tienen vuelta, la firma del audio en un sentido; la pérdida se calcula con los números de secuencia del RTP.",
+   "case": true
+  },
+  {
+   "id": "vga-cif",
+   "term": "VGA y CIF",
+   "aliases": [
+    "VGA",
+    "CIF",
+    "4CIF",
+    "QVGA",
+    "QCIF",
+    "H.264 Image Size"
+   ],
+   "cat": "Video",
+   "short": "Tamaños de imagen de video más chicos que 720P, que piden menos ancho de banda.",
+   "long": "VGA es 640 por 480 y CIF 352 por 288. En los GXV se eligen en H.264 Image Size; Grandstream recomienda bajar de 720P a VGA o CIF y el bit rate a 384 kbps o menos cuando la red de una sede no da y no hay video.",
+   "case": true
+  },
+  {
+   "id": "keep-alive-extension",
+   "term": "Enable Keep-alive",
+   "aliases": [
+    "Keep-alive Frequency",
+    "keep-alive de la extensión"
+   ],
+   "cat": "Telefonía IP",
+   "short": "Opción de la extensión de la UCM que manda OPTIONS cada tantos segundos para ver si el equipo está.",
+   "long": "Está en la pestaña Advanced Settings de la extensión. Con un interno remoto, cada OPTIONS que pasa por el router de la casa refresca el mapeo UDP del puerto SIP, que es por donde le llegan al teléfono los pedidos de la central, como el BYE. Conviene una frecuencia menor que el tiempo que el router guarda ese mapeo; se prueba en obra.",
    "case": true
   }
  ]
