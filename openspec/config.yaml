@@ -1,0 +1,40 @@
+schema: spec-driven
+
+context: |
+  Language: es
+  All artifacts must be written in es.
+  Keep OpenSpec structural headings and SHALL/MUST keywords in English.
+
+  Proyecto: "academy" — plataforma de formación técnica (IES Training / Infratec
+  Academy). PHP 8 + SQLite (PDO), JavaScript sin frameworks, hash-routing (#/).
+  Cursos como data/*.json leídos por api/course.php; SQLite guarda usuarios,
+  progreso y sesiones (fuera del web root). Portable: corre en Proxmox/nginx y en
+  cPanel. Una sola base de código sirve DOS instancias con distinta marca:
+  IES (entrenamientos.ies.com.uy) e Infratec (entrenamientos.infratec.com.uy).
+  Roles: tecnico (default), editor, admin. La marca Infratec es carmesí #e11d48 +
+  negro; nunca mezclar con la marca IES.
+  Convenciones: escribir archivos grandes con heredoc (las tools truncan >~7KB);
+  nunca versionar api/config.php (secretos); respetar prefers-reduced-motion;
+  el header X-IES de las llamadas a la API es funcional, no se toca.
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always state what is out of scope
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing

@@ -16,3 +16,6 @@ cursos/*/raw/
 cursos/*/audio/
 *.mp3
 *.wav
+
+# OpenSpec: wiring local de AI tools (symlinks; se regenera con openspec init)
+.claude/
